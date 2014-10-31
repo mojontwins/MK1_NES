@@ -8,17 +8,17 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W					7		//
-#define MAP_H					5		// Map dimmensions in screens
-#define SCR_INICIO				28		// Initial screen
-#define PLAYER_INI_X			5		//
-#define PLAYER_INI_Y			6		// Initial tile coordinates
-#define SCR_FIN 				99		// Last screen. 99 = deactivated.
-#define PLAYER_FIN_X			99		//
-#define PLAYER_FIN_Y			99		// Player tile coordinates to finish game
-#define PLAYER_NUM_OBJETOS		20		// Objects to get to finish game
-#define PLAYER_LIFE 			10		// Max and starting life gauge.
-#define PLAYER_REFILL			1		// Life recharge
+#define MAP_W 					4		//
+#define MAP_H					6		// Dimensiones del mapa, en pantallas.
+#define SCR_INICIO				20		// Pantalla de inicio
+#define PLAYER_INI_X			2		//
+#define PLAYER_INI_Y			4		// Coordenadas de inicio del jugador, a nivel de tiles
+#define SCR_FIN					20		// Pantalla del final. 99 si da igual.
+#define PLAYER_FIN_X			0		//
+#define PLAYER_FIN_Y			8		// Posición del jugador para terminar, a nivel de tiles
+#define PLAYER_NUM_OBJETOS		0		// Número de objetos para terminar el juego
+#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL			1		// Recarga de vida.
 //#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
 //#define MAX_LEVELS			2		// # of compressed levels
 //#define REFILL_ME						// If defined, refill player on each level
@@ -43,11 +43,11 @@
 // -------------------
 
 #define PLAYER_AUTO_CHANGE_SCREEN		// Player changes screen automaticly (no need to press direction)
-//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
+#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
 #define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define ONLY_ONE_OBJECT				// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT			1		// Defines which FLAG will be used to store the object count.
 //#define DEACTIVATE_EVIL_TILE			// If defined, no killing tiles (behaviour 1) are detected.
@@ -55,6 +55,7 @@
 //#define DOUBLE_BOUNCE
 //#define PLAYER_BOUNCES				// If defined, collisions make player bounce
 //#define SLOW_DRAIN					// Works with bounces. Drain is 4 times slower
+#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define MAP_BOTTOM_KILLS				// If defined, exiting the map bottomwise kills.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
@@ -62,7 +63,9 @@
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
-//#define ENABLE_CONVEYORS
+#define PERSISTENT_ENEMIES
+#define ENABLE_CONVEYORS
+
 
 // Shooting behaviour
 // ------------------
@@ -91,8 +94,9 @@
 
 // Scripting
 // ---------
-/*
 #define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+#define FIRE_ON_KILL				// run fire script on enemy kill
+/*
 //#define SCRIPTING_DOWN			// Use DOWN as the action key.
 #define SCRIPTING_KEY_M				// Use M as the action key instead.
 //#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
@@ -107,9 +111,9 @@
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
-#define PLAYER_HAS_JETPAC             	// If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
+#define PLAYER_HAS_JUMP               	// If defined, player is able to jump.
+//#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
+#define PLAYER_KILLS_ENEMIES          	// If defined, stepping on enemies kills them
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_BOOTEE                 // Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 //#define PLAYER_STEP_SOUND             // Sound while walking. No effect in the BOOTEE engine.
@@ -124,19 +128,19 @@
 
 #define VIEWPORT_X				1		//
 #define VIEWPORT_Y				1		// Viewport character coordinates
-#define LIFE_X					25		//
+#define LIFE_X					4		//
 #define LIFE_Y					28		// Life gauge counter character coordinates
 #define OBJECTS_X				5		//
 #define OBJECTS_Y				28		// Objects counter character coordinates
 #define OBJECTS_ICON_X			99		// 
 #define OBJECTS_ICON_Y			99		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
-#define KEYS_X					22		//
-#define KEYS_Y					29		// Keys counter character coordinates
-#define KILLED_X				99		//
-#define KILLED_Y				99		// Kills counter character coordinates
+#define KEYS_X					28		//
+#define KEYS_Y					28		// Keys counter character coordinates
+#define KILLED_X				16		//
+#define KILLED_Y				28		// Kills counter character coordinates
 #define AMMO_X					8		// 
 #define AMMO_Y					29		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
+#define PLAYER_SHOW_KILLS
 
 // Text
 #define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
@@ -150,6 +154,7 @@
 //#define UNPACKED_MAP                  // Full, uncompressed maps. Shadows settings are ignored.
 //#define NO_MASKS                      // Sprites are rendered using OR instead of masks.
 //#define PLAYER_ALTERNATE_ANIMATION    // If defined, animation is 1,2,3,1,2,3... 
+#define MAPPED_TILESETS					// If defined, tileset is mapped (Perils, preliminar)
 
 // ============================================================================
 // IV. Player movement configuration
@@ -162,21 +167,21 @@
 
 // IV.1. Vertical movement. Only for side-view.
 
-#define PLAYER_MAX_VY_CAYENDO	64 		// Max falling speed (512/64 = 8 pixels/frame)
-#define PLAYER_G				3	//4	// Gravity acceleration (32/64 = 0.5 píxeles/frame^2)
+#define PLAYER_MAX_VY_CAYENDO	256		// Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
+#define PLAYER_G				16		// Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
 
-#define PLAYER_VY_INICIAL_SALTO 32		// Initial junp velocity (64/64 = 1 píxel/frame)
-#define PLAYER_MAX_VY_SALTANDO	160 	// Max jump velocity (320/64 = 5 píxels/frame)
-#define PLAYER_INCR_SALTO		24		// acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_VY_INICIAL_SALTO	64
+#define PLAYER_MAX_VY_SALTANDO	256		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
+#define PLAYER_INCR_SALTO 		16		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
 
-#define PLAYER_INCR_JETPAC		8	//12	// Vertical jetpac gauge
-#define PLAYER_MAX_VY_JETPAC	64	 	// Max vertical jetpac speed
+#define PLAYER_INCR_JETPAC		32		// Incremento al usar el jetpac
+#define PLAYER_MAX_VY_JETPAC	256		// Máxima velocidad vertical con jetpac
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX			128 	// Max velocity (192/64 = 3 píxels/frame)
-#define PLAYER_AX				16		// Acceleration (24/64 = 0,375 píxels/frame^2)
-#define PLAYER_RX				16		// Friction (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_MAX_VX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
+#define PLAYER_AX				8		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_RX				8		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
 
 // ============================================================================
 // V. Tile behaviour
@@ -192,13 +197,14 @@
 // 8 = Full obstacle (blocks player from all directions)
 // 10 = special obstacle (pushing blocks OR locks!)
 // 16 = Breakable (#ifdef BREAKABLE_WALLS)
+// 32 = Slipper (+0 = left, +1 = right
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 
 #ifndef COMPRESSED_LEVELS
 unsigned char comportamiento_tiles [] = {
-	0, 1, 8, 8, 8, 8, 0, 0, 0, 4, 8, 8, 4, 8, 8, 8,
-	0, 1, 8, 4, 8, 8, 0, 0, 0, 0, 0, 4, 4, 8, 8, 8,
+	0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 1, 4,10,10,
+	0, 0, 0, 0, 8, 8, 8, 8,40,41, 1, 1, 1, 1, 8,10,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 #endif

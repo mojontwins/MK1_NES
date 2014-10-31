@@ -23,12 +23,12 @@ music_instruments:
 @env_vol1:
 	.byte $cf,$cd,$cb,$c9,$c7,$c5,$c3,$c1,$c0,$7f,$08
 @env_vol2:
-	.byte $cd,$7f,$00
+	.byte $cc,$7f,$00
 @env_vol3:
 	.byte $c1,$c3,$c4,$c6,$c7,$c8,$c9,$ca,$ca,$cb,$cc,$cc,$cd,$0c,$cc,$cc
 	.byte $cb,$ca,$c7,$c1,$7f,$13
 @env_vol8:
-	.byte $c9,$07,$c6,$04,$c9,$06,$7f,$05
+	.byte $c9,$06,$c6,$04,$c9,$07,$7f,$05
 @env_vol9:
 	.byte $c8,$7f,$00
 @env_vol13:

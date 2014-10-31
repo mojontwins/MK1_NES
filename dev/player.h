@@ -34,6 +34,7 @@ void __fastcall__ player_init (void) {
 	for (i = 0; i < MAX_BULLETS; i++) bst [i] = 0;
 #endif
 	pstate = EST_NORMAL;
+	pkilled = 0;
 }
 
 void __fastcall__ kill_player (void) {
@@ -43,6 +44,24 @@ void __fastcall__ kill_player (void) {
 	pctstate = 100;	
 #endif
 	sfx_play (4, 0);
+#ifdef DIE_AND_RESPAWN
+	px = px_safe;
+	py = py_safe;
+	n_pant = n_pant_safe;
+#endif	
+
+#ifdef DIE_AND_RESPAWN
+	music_pause (1);
+	gpit = 60;
+	while (gpit --) {
+		ppu_waitnmi ();
+	}
+	px_safe = px;
+	py_safe = py;
+	n_pant_safe = n_pant;
+	pvx = pvy = pj = 0;
+	music_pause (0);
+#endif	
 }
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
@@ -189,7 +208,8 @@ void __fastcall__ bullets_move (void) {
 								en_life [gpjt] = ENEMIES_LIFE_GAUGE;
 							} else
 #endif
-							en_t [gpjt] = 0;														
+							en_t [gpjt] = 0;		
+							pkilled ++;												
 						}
 						break;
 					}
@@ -204,9 +224,6 @@ void __fastcall__ bullets_move (void) {
 	}
 }
 #endif
-
-// v1.0 :: Only 8-direction movement, BOUNDING_BOX_8_BOTTOM.
-// More to come for the next game.
 
 #ifdef PLAYER_MOGGY_STYLE
 const unsigned char player_frames [] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -259,10 +276,12 @@ void __fastcall__ player_move (void) {
 	}
 #else
 	// gravity
-	if (pvy < PLAYER_MAX_VY_CAYENDO) { 
-		pvy += PLAYER_G;
-	} else {
-		pvy = PLAYER_MAX_VY_CAYENDO;
+	if (!pj) {
+		if (pvy < PLAYER_MAX_VY_CAYENDO) { 
+			pvy += PLAYER_G;
+		} else {
+			pvy = PLAYER_MAX_VY_CAYENDO;
+		}
 	}
 	
 #ifdef PLAYER_CUMULATIVE_JUMP
@@ -272,14 +291,17 @@ void __fastcall__ player_move (void) {
 	
 #endif
 
+
 #ifdef PLAYER_HAS_JETPAC
+    // **********************************
 	// thrust! PAD_B, change when needed.
+	// **********************************
 	if (i & PAD_B) {
 		pvy -= PLAYER_INCR_JETPAC;
 		if (pvy < -PLAYER_MAX_VY_JETPAC) pvy = -PLAYER_MAX_VY_JETPAC;
 	}
 #endif
-	
+
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
@@ -322,16 +344,47 @@ void __fastcall__ player_move (void) {
 	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
 #endif
 
+#ifdef PLAYER_HAS_JUMP
+	// *******************************
+	// Jump: PAD_B, change when needed
+	// *******************************
+	if (i & PAD_B) { 
+		if (!pjb) {
+			pjb = 1;
+			if (!pj) {
+				if (pgotten || ppossee || hitv) {
+					pj = 1; 
+					pctj = 0;
+					sfx_play (7, 0);
+					pvy = -PLAYER_VY_INICIAL_SALTO;
+#ifdef DIE_AND_RESPAWN
+					px_safe = px;
+					py_safe = py;
+					n_pant_safe = n_pant;
+#endif	
+				}
+			} 
+		}
+		if (pj) {
+			if (pctj < PLAYER_INCR_SALTO) pvy -= (PLAYER_INCR_SALTO - (pctj));
+			if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
+			pctj ++; if (pctj == 16) pj = 0;	
+		}
+	} else {
+		pj = 0; pjb = 0;
+	}
+#endif
+
 	// **********
 	// Horizontal
 	// **********
-
+	
 #ifdef ENABLE_CONVEYORS	
 	// Conveyors
 	if (ppossee) {
 		pry = py >> 6;
 		ptx1 = (prx + 8) >> 4;
-		pty1 = (pty + 16) >> 4;
+		pty1 = (pry + 16) >> 4;
 		gpit = attr (ptx1, pty1);
 		if (gpit & 32) {
 			pgotten = 1; 
@@ -343,8 +396,8 @@ void __fastcall__ player_move (void) {
 			}
 		}
 	}
-#endif
-		
+#endif	
+	
 	// Poll pad
 	if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
 		pfacingh = 0xff;
@@ -381,10 +434,11 @@ void __fastcall__ player_move (void) {
 	
 	// Move
 	px += pvx;
+	if (px < 0) px = 0;
+	if (px > 15360) px = 15360;
 #ifndef PLAYER_MOGGY_STYLE	
 	if (pgotten) px += pgtmx;
 #endif
-	if (px < 0) px = 0;
 	
 	// Collision
 	prx = px >> 6;

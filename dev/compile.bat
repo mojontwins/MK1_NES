@@ -1,20 +1,26 @@
 @echo off
-path=path;c:\cc65\bin\
+path=%path%;c:\cc65\bin\
 set CC65_HOME=c:\cc65\
 echo Exporting chr
 cd ..\gfx
-..\utils\nescnv tileset-import2.png
+..\utils\nescnv tileset-import.png
 copy tileset.chr ..\dev
+del tileset.chr
+echo Copying enems
+cd ..\enems
+copy enems0.h ..\dev
+copy enems1.h ..\dev
 echo Making map
 cd ..\map
-..\utils\mapcnvnes mapa.map 7 5 16 12 99 mapa0 packed
-..\utils\mapcnvnes mapa2.map 7 5 16 12 99 mapa1 packed
+..\utils\mapcnvnes mapa0.map 4 6 16 12 99 mapa0 packed
+..\utils\mapcnvnes mapa1.map 4 6 16 12 99 mapa1 packed
 copy mapa0.h ..\dev
 copy mapa1.h ..\dev
-rem cd ..\script
-rem ..\utils\mscnes comando-eng.spt 24
-rem copy mscnes.h ..\dev
-rem copy scripts.s ..\dev
+del mapa?.h
+cd ..\script
+..\utils\mscnes script.spt 24
+copy mscnes.h ..\dev
+copy scripts.s ..\dev
 cd ..\dev
 cc65 -Oi game.c --add-source
 ca65 crt0.s

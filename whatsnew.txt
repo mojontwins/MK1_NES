@@ -1,6 +1,15 @@
 Churrera for NES
 ================
 
+v1.2 :: Cheril Perils version!
+
+- Platformer engine
+- Step over enemies engine
+- Enemy count
+- Even better support for several levels
+- Mapped tilesets (build tilesets using 16x16 tiles freely)
+- Improved stuff all around
+
 v1.1 :: Jetpaco version!
 
 - Jetpac engine

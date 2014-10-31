@@ -31,7 +31,7 @@ void __fastcall__ cls (void) {
 	vram_adr(0x2000);
 	vram_fill(251,0x3c0);
 	vram_adr (0x23c0);
-	vram_fill(255,64);
+	vram_fill(0x55,64);
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
@@ -100,7 +100,7 @@ void p_t (unsigned char x, unsigned char y, unsigned char n) {
 
 void __fastcall__ draw_scr (void) {
 	// Clear attribute table
-	for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
+	//for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
 	
 	// Draw current screen
 	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
@@ -117,8 +117,12 @@ void __fastcall__ draw_scr (void) {
 #ifdef BREAKABLE_WALLS
 		brk_buff [rdit] = 1;
 #endif
-		if (alt_bg && rdt == 0 && (rand8 () & 15) == 1) rdt = 32;
+		if (alt_bg && rdt == 0 && (rand8 () & 15) == 1) rdt = alt_bg;
+#ifdef MAPPED_TILESETS
+		draw_tile (rdx, rdy, tsmap [rdt]);
+#else
 		draw_tile (rdx, rdy, ts_offs + rdt);
+#endif		
 		
 		rdx = (rdx + 2) & 31; if (!rdx) rdy +=2;
 	}

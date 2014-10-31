@@ -1,4 +1,4 @@
-// Churrera for NES 1.1
+// Churrera for NES 1.0
 // Copyleft Mojon Twins 2013
 
 // Uses neslib and related tools by Shiru
@@ -28,8 +28,10 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 #include "metasprites.h"
 #include "mapa0.h"
 #include "mapa1.h"
+#include "mapa2.h"
 #include "enems0.h"
 #include "enems1.h"
+#include "enems2.h"
 #include "screens.h"
 #ifdef ACTIVATE_SCRIPTING
 extern const unsigned char *e_scripts [];
@@ -56,7 +58,7 @@ unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc;
 
-unsigned char olife, okeys, oobjs, oammo;
+unsigned char olife, okeys, oobjs, oammo, okilled;
 
 // Enemies
 unsigned char en_x [3], en_y [3];
@@ -73,8 +75,8 @@ unsigned char en_touched [3], en_cttouched [3];
 // Main player
 signed int px, py, pvx, pvy;
 unsigned char pfacing, pfr, pctfr, psprid;
-unsigned char pj, pctj, pgotten, ppossee;
-unsigned char pobjs, plife, pkeys;
+unsigned char pj, pctj, pjb, pgotten, ppossee;
+unsigned char pobjs, plife, pkeys, pkilled;
 unsigned char pammo, pfiring;
 unsigned char pushed_any;
 unsigned char pstate, pctstate;
@@ -106,6 +108,17 @@ unsigned char **spr_enems, **spr_player;
 
 // Level control
 unsigned char ts_offs, alt_bg;
+
+// Current level
+unsigned char *c_map;
+unsigned char *c_locks;
+unsigned char *c_enems;
+unsigned char *c_hotspots;
+
+#ifdef MAPPED_TILESETS
+unsigned char *tileset_pals;
+unsigned char *tsmap;
+#endif
 
 // Everything else on normal RAM
 #pragma bssseg (push,"BSS")
@@ -143,16 +156,35 @@ unsigned char f_zone_ac, fzx1, fzx2, fzy1, fzy2;
 #endif
 #endif
 
-// Current level
-unsigned char *c_map;
-unsigned char *c_locks;
-unsigned char *c_enems;
-unsigned char *c_hotspots;
+// Baddies count. Properly fill this value!
+#ifdef PLAYER_KILLS_ENEMIES
+unsigned char baddies_count;
+#define BADDIES_COUNT baddies_count
+#endif
+
+#ifdef PERSISTENT_ENEMIES
+// Persistent enemies
+unsigned char ep_x [3 * MAP_W * MAP_H];
+unsigned char ep_y [3 * MAP_W * MAP_H];
+signed char ep_mx [3 * MAP_W * MAP_H];
+signed char ep_my [3 * MAP_W * MAP_H];
+unsigned char ep_t [3 * MAP_W * MAP_H];
+unsigned int ep_it;
+#endif
+
+// Die & respawn
+#ifdef DIE_AND_RESPAWN
+unsigned char n_pant_safe;
+signed int px_safe, py_safe;
+#endif
 
 // *************
 // Main includes
 // *************
 
+#ifdef MAPPED_TILESETS
+#include "tsmap.h"
+#endif
 #include "printer.h"
 #include "general.h"
 #ifndef DEACTIVATE_KEYS
@@ -183,8 +215,12 @@ void __fastcall__ prepare_scr (void) {
 	fade_delay = 1;
 	if (!ft) fade_out (); else ft = 0;
 
+#ifdef PERSISTENT_ENEMIES
+	// Preserve enems
+	persistent_update ();
+#endif
+
 	enems_load ();
-	//enems_sprites ();
 
 #ifdef ENABLE_FIRE_ZONE
 	f_zone_ac = 0;
@@ -215,7 +251,7 @@ void __fastcall__ prepare_scr (void) {
 
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
-
+	ppu_waitnmi ();
 	fade_in ();
 
 #ifdef ACTIVATE_SCRIPTING
@@ -232,38 +268,47 @@ void main(void) {
 	bank_spr (1);
 	bank_bg (0);
 
-	pal_spr (mypal_game_fg0);
-	pal_bg (mypal_game_bg0);
-	
-//	credits ();
+	credits ();
 	
 	scroll (0, 8);
 
 	while (1) {
 		// Title here
-		pal_bg (mypal_game_bg0);
-		pal_spr (mypal_game_fg0);
+		pal_bg (mypal_game_bg1);
+		pal_spr (mypal_game_fg1);
 		
 		gpit = title ();
 		
 		if (gpit == 0) {
 			c_map = (unsigned char *) (mapa0);
 			c_locks = (unsigned char *) (locks_mapa0);
-			c_enems = (unsigned char *) (enemies_ROM0);
-			c_hotspots = (unsigned char *) (hotspots_ROM0);
+			c_enems = (unsigned char *) (enemies_ROM_enems0);
+			c_hotspots = (unsigned char *) (hotspots_ROM_enems0);
+			pal_bg (mypal_game_bg0);
+			pal_spr (mypal_game_fg0);
 			spr_enems = (unsigned char **) (spr_enems0);
 			spr_player = (unsigned char **) (spr_player0);
-			ts_offs = 0; alt_bg = 1;
+			//ts_offs = 0; alt_bg = 32;
+			tsmap = (unsigned char *) (tsmap0); alt_bg = 32;
+			tileset_pals = (unsigned char *) (tileset_pals0);
+#ifdef PLAYER_KILLS_ENEMIES			
+			baddies_count = 60;
+#endif
 		} else if (gpit == 1) {
 			c_map = (unsigned char *) (mapa1);
 			c_locks = (unsigned char *) (locks_mapa1);
-			c_enems = (unsigned char *) (enemies_ROM);
-			c_hotspots = (unsigned char *) (hotspots_ROM);
+			c_enems = (unsigned char *) (enemies_ROM_enems1);
+			c_hotspots = (unsigned char *) (hotspots_ROM_enems1);
 			pal_bg (mypal_game_bg1);
 			pal_spr (mypal_game_fg1);
 			spr_enems = (unsigned char **) (spr_enems1);
 			spr_player = (unsigned char **) (spr_player1);
-			ts_offs = 16; alt_bg = 0;
+			//ts_offs = 16; alt_bg = 17;
+			tsmap = (unsigned char *) (tsmap1); alt_bg = 32;
+			tileset_pals = (unsigned char *) (tileset_pals1);
+#ifdef PLAYER_KILLS_ENEMIES			
+			baddies_count = 60;
+#endif			
 		}
 				
 		cls ();
@@ -281,6 +326,9 @@ void main(void) {
 		bolts_load ();
 #endif		
 		player_init ();
+#ifdef PERSISTENT_ENEMIES
+		persistent_enems_load ();
+#endif		
 		
 #ifdef ACTIVATE_SCRIPTING
 		msc_init_all ();
@@ -314,11 +362,7 @@ void main(void) {
 #ifdef BREAKABLE_ANIM
 			if (do_process_breakable) process_breakable ();
 #endif
-			if (pstate == EST_NORMAL || half_life) {
-				oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
-			} else {
-				oam_meta_spr (prx, 240, 128, spr_empty);
-			}
+			render_player ();
 			// Hotspot interaction
 			if (hrt) {
 				if (collide_in (prx + 8, pry + 8, hrx, hry)) {
@@ -396,6 +440,12 @@ void main(void) {
 			}
 
 			// Update frame
+#ifdef PLAYER_SHOW_KILLS
+			if (okilled != pkilled) {
+				okilled = pkilled;
+				p_t (KILLED_X, KILLED_Y, pkilled);
+			}
+#endif
 #ifndef DEACTIVATE_OBJECTS
 			if (oobjs != pobjs) {
 				oobjs = pobjs;
