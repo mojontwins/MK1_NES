@@ -6,7 +6,7 @@ Churrera NES is a framework composed by a modular engine coded in C and a set of
 Resources
 =========
 
-* Latest stable / public version is 1.0 and can be found here. It lacks tons of features found in the Speccy version, but eventually everything will be available in Churrera NES.
+* Latest stable / public version is 1.2 and can be found here. It lacks tons of features found in the Speccy version, but eventually everything will be available in Churrera NES.
 * Learn more about neslib and NES game development in C reading this article by Shiru: http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm
 
 
