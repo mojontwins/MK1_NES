@@ -1,4 +1,4 @@
-// Churrera for NES 1.0
+// Churrera for NES 1.1
 // Copyleft Mojon Twins 2013
 
 // Uses neslib and related tools by Shiru
@@ -7,6 +7,7 @@
 #define LSB(x)		(((x)&0xff))
 #define FIXBITS		6
 #define SPRITE_ADJUST 7
+#define TOP_ADJUST 2
 
 #define MAX_CERROJOS 16 // max 32, make it as small as possible.
 
@@ -72,20 +73,23 @@ unsigned char en_touched [3], en_cttouched [3];
 // Main player
 signed int px, py, pvx, pvy;
 unsigned char pfacing, pfr, pctfr, psprid;
-unsigned char pj, pctj;
+unsigned char pj, pctj, pgotten, ppossee;
 unsigned char pobjs, plife, pkeys;
 unsigned char pammo, pfiring;
 unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
+signed int pgtmx, pgtmy;
 
 // Aux player
 unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
 unsigned char pfacingv, pfacingh, wall, hitv, hith;
 
 // Bullets
+#ifdef PLAYER_CAN_FIRE
 unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS], bmx [MAX_BULLETS], bmy [MAX_BULLETS];
 unsigned char btx, bty;
+#endif
 
 // Hotspots
 unsigned char hrx, hry, hrt;
@@ -96,6 +100,12 @@ unsigned char do_process_breakable;
 #endif
 
 unsigned char ft;
+
+// Gfx sets
+unsigned char **spr_enems, **spr_player;
+
+// Level control
+unsigned char ts_offs, alt_bg;
 
 // Everything else on normal RAM
 #pragma bssseg (push,"BSS")
@@ -161,6 +171,14 @@ unsigned char *c_hotspots;
 // Main functions
 // **************
 
+void __fastcall__ render_player (void) {
+	if (pstate == EST_NORMAL || half_life) {
+		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
+	} else {
+		oam_meta_spr (prx, 240, 128, spr_empty);
+	}
+}
+
 void __fastcall__ prepare_scr (void) {
 	fade_delay = 1;
 	if (!ft) fade_out (); else ft = 0;
@@ -178,16 +196,17 @@ void __fastcall__ prepare_scr (void) {
 
 	draw_scr ();
 	
+	hotspots_create ();
+	
 	// Write attributes
 	vram_write (attr_table, 0x23c0, 64);
-
-	hotspots_create ();
 
 	// Clear line of text
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
 
 	enems_move ();
 	player_move ();
+	render_player ();
 
 #ifdef PLAYER_CAN_FIRE
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) bst [gpit] = 0;
@@ -213,16 +232,17 @@ void main(void) {
 	bank_spr (1);
 	bank_bg (0);
 
-	pal_spr (mypal_game_fg);
+	pal_spr (mypal_game_fg0);
 	pal_bg (mypal_game_bg0);
 	
-	credits ();
+//	credits ();
 	
 	scroll (0, 8);
 
 	while (1) {
 		// Title here
 		pal_bg (mypal_game_bg0);
+		pal_spr (mypal_game_fg0);
 		
 		gpit = title ();
 		
@@ -231,15 +251,21 @@ void main(void) {
 			c_locks = (unsigned char *) (locks_mapa0);
 			c_enems = (unsigned char *) (enemies_ROM0);
 			c_hotspots = (unsigned char *) (hotspots_ROM0);
-			pal_bg (mypal_game_bg0);
+			spr_enems = (unsigned char **) (spr_enems0);
+			spr_player = (unsigned char **) (spr_player0);
+			ts_offs = 0; alt_bg = 1;
 		} else if (gpit == 1) {
 			c_map = (unsigned char *) (mapa1);
 			c_locks = (unsigned char *) (locks_mapa1);
 			c_enems = (unsigned char *) (enemies_ROM);
 			c_hotspots = (unsigned char *) (hotspots_ROM);
 			pal_bg (mypal_game_bg1);
+			pal_spr (mypal_game_fg1);
+			spr_enems = (unsigned char **) (spr_enems1);
+			spr_player = (unsigned char **) (spr_player1);
+			ts_offs = 16; alt_bg = 0;
 		}
-
+				
 		cls ();
 		draw_game_frame ();
 
@@ -251,7 +277,9 @@ void main(void) {
 		on_pant = 99;
 
 		hotspots_load ();
+#ifndef DEACTIVATE_KEYS		
 		bolts_load ();
+#endif		
 		player_init ();
 		
 #ifdef ACTIVATE_SCRIPTING
@@ -286,11 +314,15 @@ void main(void) {
 #ifdef BREAKABLE_ANIM
 			if (do_process_breakable) process_breakable ();
 #endif
-
+			if (pstate == EST_NORMAL || half_life) {
+				oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
+			} else {
+				oam_meta_spr (prx, 240, 128, spr_empty);
+			}
 			// Hotspot interaction
 			if (hrt) {
 				if (collide_in (prx + 8, pry + 8, hrx, hry)) {
-					map_set (hrx >> 4, hry >> 4, 0);
+					map_set (hrx >> 4, hry >> 4, ts_offs);
 					switch (hrt) {
 #ifndef DEACTIVATE_OBJECTS
 						case 1:
@@ -346,12 +378,21 @@ void main(void) {
 			} else if (prx >= 240 && (i & PAD_RIGHT)) {
 				n_pant ++;
 				px = 0;
+#ifdef PLAYER_MOGGY_STYLE				
 			} else if (pry == 0 && (i & PAD_UP)) {
 				n_pant -= MAP_W;
 				py = 176 * 64;
 			} else if (pry >= 176 && (i & PAD_DOWN)) {
 				n_pant += MAP_W;
 				py = 0;
+#else
+			} else if (pry == 0 && (pvy < 0)) {
+				n_pant -= MAP_W;
+				py = 176 * 64;
+			} else if (pry >= 176 && (pvy > 0)) {
+				n_pant += MAP_W;
+				py = 0;
+#endif				
 			}
 
 			// Update frame
@@ -409,7 +450,7 @@ void main(void) {
 #ifdef ACTIVATE_SCRIPTING
 			if (script_result) {
 #else
-			if (pobjs == MAX_OBJS) {
+			if (pobjs == PLAYER_NUM_OBJETOS) {
 #endif
 				game_ending ();
 				break;

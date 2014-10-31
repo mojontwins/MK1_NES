@@ -8,17 +8,17 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W					1		//
-#define MAP_H					24		// Map dimmensions in screens
-#define SCR_INICIO				23		// Initial screen
-#define PLAYER_INI_X			12		//
-#define PLAYER_INI_Y			8		// Initial tile coordinates
+#define MAP_W					7		//
+#define MAP_H					5		// Map dimmensions in screens
+#define SCR_INICIO				28		// Initial screen
+#define PLAYER_INI_X			5		//
+#define PLAYER_INI_Y			6		// Initial tile coordinates
 #define SCR_FIN 				99		// Last screen. 99 = deactivated.
 #define PLAYER_FIN_X			99		//
 #define PLAYER_FIN_Y			99		// Player tile coordinates to finish game
-#define PLAYER_NUM_OBJETOS		15		// Objects to get to finish game
-#define PLAYER_LIFE 			20		// Max and starting life gauge.
-#define PLAYER_REFILL			3		// Life recharge
+#define PLAYER_NUM_OBJETOS		20		// Objects to get to finish game
+#define PLAYER_LIFE 			10		// Max and starting life gauge.
+#define PLAYER_REFILL			1		// Life recharge
 //#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
 //#define MAX_LEVELS			2		// # of compressed levels
 //#define REFILL_ME						// If defined, refill player on each level
@@ -43,28 +43,30 @@
 // -------------------
 
 #define PLAYER_AUTO_CHANGE_SCREEN		// Player changes screen automaticly (no need to press direction)
-#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
-#define FIRE_TO_PUSH
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
+//#define FIRE_TO_PUSH
 #define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define ONLY_ONE_OBJECT				// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT			1		// Defines which FLAG will be used to store the object count.
 //#define DEACTIVATE_EVIL_TILE			// If defined, no killing tiles (behaviour 1) are detected.
 #define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
+//#define DOUBLE_BOUNCE
 //#define PLAYER_BOUNCES				// If defined, collisions make player bounce
 //#define SLOW_DRAIN					// Works with bounces. Drain is 4 times slower
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define MAP_BOTTOM_KILLS				// If defined, exiting the map bottomwise kills.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
-#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
-#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
-#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
-#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+//#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
+//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
+//#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
+//#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
+//#define ENABLE_CONVEYORS
 
 // Shooting behaviour
 // ------------------
-
+/*
 #define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
@@ -81,7 +83,7 @@
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
-
+*/
 //#define ENABLE_RANDOM_RESPAWN           // If defined, automatic flying enemies spawn on killed enemies
 //#define FANTY_MAX_V             256     // Flying enemies max speed.
 //#define FANTY_A                 12      // Flying enemies acceleration.
@@ -89,24 +91,24 @@
 
 // Scripting
 // ---------
-
+/*
 #define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
 //#define SCRIPTING_DOWN			// Use DOWN as the action key.
 #define SCRIPTING_KEY_M				// Use M as the action key instead.
 //#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE			// Allows to define a zone which auto-triggers "FIRE"
-
+*/
 // Top view:
 // ---------
-
+/*
 #define PLAYER_MOGGY_STYLE            // Enable top view.
 #define TOP_OVER_SIDE                 // UP/DOWN has priority over LEFT/RIGHT
-
+*/
 // Side view:
 // ----------
 
 //#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
-//#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
+#define PLAYER_HAS_JETPAC             	// If defined, player can thrust a vertical jetpac
 //#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_BOOTEE                 // Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
@@ -122,10 +124,10 @@
 
 #define VIEWPORT_X				1		//
 #define VIEWPORT_Y				1		// Viewport character coordinates
-#define LIFE_X					3		//
-#define LIFE_Y					29		// Life gauge counter character coordinates
-#define OBJECTS_X				27		//
-#define OBJECTS_Y				29		// Objects counter character coordinates
+#define LIFE_X					25		//
+#define LIFE_Y					28		// Life gauge counter character coordinates
+#define OBJECTS_X				5		//
+#define OBJECTS_Y				28		// Objects counter character coordinates
 #define OBJECTS_ICON_X			99		// 
 #define OBJECTS_ICON_Y			99		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
 #define KEYS_X					22		//
@@ -160,21 +162,21 @@
 
 // IV.1. Vertical movement. Only for side-view.
 
-#define PLAYER_MAX_VY_CAYENDO   512     // Max falling speed (512/64 = 8 pixels/frame)
-#define PLAYER_G                48      // Gravity acceleration (32/64 = 0.5 píxeles/frame^2)
+#define PLAYER_MAX_VY_CAYENDO	64 		// Max falling speed (512/64 = 8 pixels/frame)
+#define PLAYER_G				3	//4	// Gravity acceleration (32/64 = 0.5 píxeles/frame^2)
 
-#define PLAYER_VY_INICIAL_SALTO 96      // Initial junp velocity (64/64 = 1 píxel/frame)
-#define PLAYER_MAX_VY_SALTANDO  312     // Max jump velocity (320/64 = 5 píxels/frame)
-#define PLAYER_INCR_SALTO       48      // acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_VY_INICIAL_SALTO 32		// Initial junp velocity (64/64 = 1 píxel/frame)
+#define PLAYER_MAX_VY_SALTANDO	160 	// Max jump velocity (320/64 = 5 píxels/frame)
+#define PLAYER_INCR_SALTO		24		// acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
 
-#define PLAYER_INCR_JETPAC      32      // Vertical jetpac gauge
-#define PLAYER_MAX_VY_JETPAC    256     // Max vertical jetpac speed
+#define PLAYER_INCR_JETPAC		8	//12	// Vertical jetpac gauge
+#define PLAYER_MAX_VY_JETPAC	64	 	// Max vertical jetpac speed
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX           128     // Max velocity (192/64 = 3 píxels/frame)
-#define PLAYER_AX               24      // Acceleration (24/64 = 0,375 píxels/frame^2)
-#define PLAYER_RX               32      // Friction (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_MAX_VX			128 	// Max velocity (192/64 = 3 píxels/frame)
+#define PLAYER_AX				16		// Acceleration (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_RX				16		// Friction (32/64 = 0,5 píxels/frame^2)
 
 // ============================================================================
 // V. Tile behaviour
@@ -195,8 +197,8 @@
 
 #ifndef COMPRESSED_LEVELS
 unsigned char comportamiento_tiles [] = {
-	0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8, 10, 10,
-	8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+	0, 1, 8, 8, 8, 8, 0, 0, 0, 4, 8, 8, 4, 8, 8, 8,
+	0, 1, 8, 4, 8, 8, 0, 0, 0, 0, 0, 4, 4, 8, 8, 8,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 #endif

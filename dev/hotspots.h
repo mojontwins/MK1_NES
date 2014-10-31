@@ -24,6 +24,6 @@ void __fastcall__ hotspots_create (void) {
 	if (hrt) {
 		hrx = (hxy [n_pant] >> 4) << 4;
 		hry = (hxy [n_pant] & 15) << 4;
-		draw_tile (hrx >> 3, 2 + (hry >> 3), 32 + hrt);
+		draw_tile (hrx >> 3, TOP_ADJUST + (hry >> 3), 32 + hrt);
 	}
 }

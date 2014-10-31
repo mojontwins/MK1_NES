@@ -18,7 +18,7 @@ unsigned char qtile (signed char x, signed char y) {
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	map_buff [x + (y << 4)] = n;
 	map_attr [x + (y << 4)] = comportamiento_tiles [n];
-	update_list_tile (x + x, 2 + y + y, n);
+	update_list_tile (x + x, TOP_ADJUST + y + y, n);
 }
 
 unsigned char collide_in (x0, y0, x1, y1) {

@@ -1,6 +1,12 @@
 Churrera for NES
 ================
 
+v1.1 :: Jetpaco version!
+
+- Jetpac engine
+- Better support for several levels
+- Improved stuff all around.
+
 v1.0 :: First version!
 
 We have ported just the functionality we needed for Sgt. Helmet: Training Day

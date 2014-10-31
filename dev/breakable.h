@@ -9,7 +9,7 @@ void __fastcall__ process_breakable (void) {
 			brkf [gpit] ++;
 			if (brkf [gpit] == MAX_BREAKABLE_FRAMES) {
 				brkf [gpit] = 0;
-				map_set (brkx [gpit], brky [gpit], 0);	
+				map_set (brkx [gpit], brky [gpit], ts_offs);	
 			} else {
 				do_process_breakable = 1;
 			}
@@ -35,7 +35,7 @@ void break_wall (unsigned char x, unsigned char y) {
 			}
 		}
 #else
-		map_set (x, y, 0);
+		map_set (x, y, ts_offs);
 #endif		
 	}
 }

@@ -29,7 +29,7 @@ void __fastcall__ clear_update_list (void) {
 
 void __fastcall__ cls (void) {
 	vram_adr(0x2000);
-	vram_fill(251,0x3bf);
+	vram_fill(251,0x3c0);
 	vram_adr (0x23c0);
 	vram_fill(255,64);
 }
@@ -100,10 +100,10 @@ void p_t (unsigned char x, unsigned char y, unsigned char n) {
 
 void __fastcall__ draw_scr (void) {
 	// Clear attribute table
-	for (rdit = 0; rdit < 64; rdit ++) attr_table [rdit] = 0xff;
+	for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
 	
 	// Draw current screen
-	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = 2;
+	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
 	
 	for (rdit = 0; rdit < 192; rdit ++) {
 		if ((rdit & 1) == 0) {
@@ -112,32 +112,32 @@ void __fastcall__ draw_scr (void) {
 			rdt = gp_gen [rdit >> 1] & 15;
 		}
 		
-		map_attr [rdit] = comportamiento_tiles [rdt];
-		map_buff [rdit] = rdt;
+		map_buff [rdit] = rdt;		
+		map_attr [rdit] = comportamiento_tiles [ts_offs + rdt];		
 #ifdef BREAKABLE_WALLS
 		brk_buff [rdit] = 1;
 #endif
-		
-		if (rdt == 0 && (rand8 () & 15) == 1) rdt = 32;
-		
-		draw_tile (rdx, rdy, rdt);
+		if (alt_bg && rdt == 0 && (rand8 () & 15) == 1) rdt = 32;
+		draw_tile (rdx, rdy, ts_offs + rdt);
 		
 		rdx = (rdx + 2) & 31; if (!rdx) rdy +=2;
 	}
 	
 	// Clear open locks
+#ifndef DEACTIVATE_KEYS	
 	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
 		if (n_pant == lknp [gpit]) {
 			if (!lkact [gpit]) {
 				rdx = (lkxy [gpit] >> 4);
 				rdy = (lkxy [gpit] & 15);
-				draw_tile (rdx << 1, (rdy << 1) + 2, 0);
+				draw_tile (rdx << 1, (rdy << 1) + TOP_ADJUST, 0);
 				rdit = rdx + (rdy << 4);
 				map_attr [rdit] = 0;
 				map_buff [rdit] = 0;
 			}
 		}
 	}	
+#endif
 
 #ifdef BREAKABLE_ANIM
 	do_process_breakable = 0;

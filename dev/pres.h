@@ -35,7 +35,7 @@ void __fastcall__ common_pres_b (void) {
 void __fastcall__ game_over (void) {
 	common_pres_a ();
 	pr_str (10, 12, "GAME OVER!");
-	pr_str (4, 14, "NICE TRY, BUT NO BANANA!");
+	pr_str (4, 14, "BAD ALIENS KICKED YR ASS");
 	pr_str (5, 16, "DO IT BETTER NEXT TIME");
 	pr_str (9, 18, "MISSION FAILED");
 	common_pres_b ();
@@ -44,29 +44,44 @@ void __fastcall__ game_over (void) {
 void __fastcall__ game_ending (void) {
 	common_pres_a ();		
 	pr_str (9, 12, "CONGRATULATIONS!");
-	pr_str (2, 14, "YOU MANAGED TO SET THE BOMBS");
-	pr_str (4, 16, "AND DESTROY THE COMPUTER");
+	pr_str (3, 14, "RECOVERED ALL ENERGY CELLS");
+	pr_str (3, 16, "YOU ARE A REAL SMALL HERO!");
 	pr_str (5, 18	, "MISSION ACCOMPLISHED!!");		
 	common_pres_b ();
 }
 
 const unsigned char gtitle [] = {
-	160,162,164,64,166,168,170,172,168,164,
-	161,163,165,65,167,169,171,173,169,165	
+	0, 0, 0, 0, 224, 226, 224, 228, 228, 226, 224, 228, 228, 226, 0, 224, 228, 228, 226, 224, 228, 228, 226, 224, 228, 228, 226, 224, 228, 228, 226, 0, 
+	0, 0, 0, 0, 225, 227, 225, 227, 0, 0, 0, 225, 227, 0, 0, 225, 227, 225, 227, 225, 227, 225, 227, 225, 227, 0, 0, 225, 227, 225, 227, 0, 
+	0, 0, 0, 224, 226, 224, 228, 228, 226, 0, 224, 226, 224, 226, 224, 228, 228, 226, 224, 228, 228, 226, 224, 226, 0, 0, 224, 226, 224, 226, 0, 0, 
+	0, 0, 0, 225, 227, 225, 227, 0, 0, 0, 225, 227, 0, 0, 225, 227, 0, 0, 225, 227, 225, 227, 225, 227, 0, 0, 225, 227, 225, 227, 0, 0, 
+	0, 225, 228, 226, 224, 228, 228, 226, 0, 224, 226, 0, 0, 224, 226, 0, 0, 224, 226, 224, 226, 224, 228, 228, 226, 224, 228, 228, 226, 0, 0, 0
 };
 unsigned char title (void) {
 	un_rle_screen ((unsigned char *) scr_rle_0);
 	pal_bright (0);
 	gp_gen = (unsigned char *) gtitle;
 	
-	for (rdy = 0; rdy < 2; rdy ++) {
-		gp_addr = 0x218b + (rdy << 5);
-		for (rdx = 11; rdx < 21; rdx ++) {
+	for (rdy = 4; rdy < 14; rdy ++) {
+		gp_addr = 0x2000 + (rdy << 5);
+		for (rdx = 0; rdx < 32; rdx ++) {
+			gpit = rand8 () & 7;
+			if (gpit == 0) gpjt = 229;
+			else if (gpit == 1) gpjt = 230;
+			else gpjt = 0;
 			vram_adr (gp_addr++);
-			vram_put (*gp_gen ++);
+			vram_put (gpjt);
 		}
 	}
-	pr_str (10, 15, "TRAINING_DAY");
+		
+	gp_addr = 0x20a0;
+	for (rdy = 0; rdy < 160; rdy ++) {
+		vram_adr (gp_addr++);
+		gpjt = *gp_gen ++;
+		if (gpjt) vram_put (gpjt);
+	}
+	
+	pr_str (0, 11, "___HYPER_SPECIAL_SPACE_AGENT!___");
 	
 	for (rdy = 21; rdy < 26; rdy ++) pr_str (10, rdy, "            ");
 	pr_str (10, 22, "  MISSION A ");
@@ -80,7 +95,7 @@ unsigned char title (void) {
 	gpit = 0;
 	
 	while (1) {
-		oam_meta_spr (80, 156 + (gpit << 4) + SPRITE_ADJUST, 128, spr_player [0]);
+		oam_meta_spr (80, 156 + (gpit << 4) + SPRITE_ADJUST, 128, spr_pl1_1);
 		ppu_waitnmi ();
 		i = pad_poll (0);
 		if (i & PAD_START) break;

@@ -18,8 +18,10 @@ void __fastcall__ enems_load (void) {
 		
 		en_x [gpit] = en_x1 [gpit];
 		en_y [gpit] = en_y1 [gpit];
-		
+
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
 		en_life [gpit] = ENEMIES_LIFE_GAUGE;
+#endif		
 		en_status [gpit] = 0;
 		
 #ifdef ENABLE_PURSUERS		
@@ -54,11 +56,17 @@ void __fastcall__ enems_sprites (void) {
 }
 */
 void __fastcall__ enems_move (void) {
+#ifndef PLAYER_MOGGY_STYLE	
+	pgotten = 0;
+	pgtmx = 0;
+	pgtmy = 0;
+#endif
+	
 	// Updates sprites
 	touched = 0;
 	for (gpit = 0; gpit < 3; gpit ++) {
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
 		if (en_touched [gpit]) {
-			
 			en_cttouched [gpit] --;
 			if (!en_cttouched [gpit]) {
 				en_touched [gpit] = 0;
@@ -67,8 +75,14 @@ void __fastcall__ enems_move (void) {
 				continue;
 			}
 		}
+#endif
 		
 		if (en_t [gpit]) {
+			
+#ifdef BOUNDING_BOX_8_BOTTOM
+			// Gotten preliminary:
+			gpjt = (prx + 11 >= en_x [gpit] && prx <= en_x [gpit] + 11);
+#endif		
 
 			if (en_mx [gpit] != 0) {
 				en_fr = ((en_x [gpit]) >> 4) & 1;
@@ -231,9 +245,40 @@ void __fastcall__ enems_move (void) {
 					break;
 			}
 
+#ifndef PLAYER_MOGGY_STYLE
+			// My nemesis: movable platforms
+			if (en_t [gpit] == 4 && gpjt && !pgotten) {
+				// Horizontal moving platforms
+				if (en_mx [gpit]) {
+					if (pry + 16 >= en_y [gpit] && pry + 12 <= en_y [gpit]) {
+						pgotten = 1;
+						pgtmx = en_mx [gpit] << (6 - en_status [gpit]);
+						py = (en_y [gpit] - 16) << 6; pry = py >> 6;
+					}
+				}
+				
+				// Vertical moving platforms
+				if (
+					(en_my [gpit] < 0 && pry + 17 >= en_y [gpit] && pry + 12 <= en_y [gpit]) ||
+					(en_my [gpit] > 0 && pry + 16 + en_my [gpit] >= en_y [gpit] && pry + 12 <= en_y [gpit])
+				) {
+					pgotten = 1;
+					pgtmy = en_my [gpit] << (6 - en_status [gpit]);
+					py = (en_y [gpit] - 16) << 6; pry = py >> 6;
+					pvy = 0;
+				}
+			}
+#endif
+
 			// Collide <-> player
 			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit])) {
-				if (en_t [gpit] != 7 || en_alive [gpit] == 2) {
+#ifdef ENABLE_PURSUERS	
+				if (en_t [gpit] != 7 || en_alive [gpit] == 2) 
+#endif
+#ifndef PLAYER_MOGGY_STYE
+				if (en_t [gpit] != 4)
+#endif				
+				{
 					touched = 1;
 					kill_player ();
 				}
