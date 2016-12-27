@@ -74,7 +74,7 @@ While Not Eof (f)
 	' screen number
 	nPant = xx + yy * mapW
 	' Is d a decoration' 
-	If d > 15 Then
+	If d > 16 Then
 		' Write to decos
 		decosXY (nPant, decosI (nPant)) = x * 16 + y
 		decos (nPant, decosI (nPant)) = d

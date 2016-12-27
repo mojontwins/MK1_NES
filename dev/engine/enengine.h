@@ -1,8 +1,27 @@
-// NES MK1 v0.4
+// NES MK1 v0.5
 // Copyleft Mojon Twins 2013, 2015
 
 // enengine.h
 // Enemies Engine & stuff
+
+#ifdef ENABLE_HOMING_FANTY
+// Lame but fast and tiny
+// Before the call: copy fanty's coordinates into rdx, rdy
+unsigned char distance (void) {
+	rda = delta (prx, rdx); // dx
+	rdb = delta (pry, rdy); // dy
+	rdc = min (rda, rdb);
+	return (rda + rdb - (rdc >> 1) - (rdc >> 2) + (rdc >> 4));
+}
+#endif
+
+#ifdef ENABLE_CHAC_CHAC
+void draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
+	map_set (en_x [gpit], en_y [gpit], a1);
+	map_set (en_x [gpit], en_y [gpit] + 1, a2);
+	map_set (en_x [gpit], en_y [gpit] + 2, a3);
+}
+#endif
 
 #ifdef PERSISTENT_ENEMIES
 // Copy to RAM addresses and initialize statuses (alive = 1)
@@ -62,6 +81,11 @@ void __fastcall__ enems_load (void) {
 	rdc = n_pant + n_pant + n_pant;
 #endif	
 	gpit = 3; while (gpit --) {
+		oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
+#if defined (ENABLE_SAW) || defined (ENABLE_PEZONS)	|| defined (ENABLE_GENERATORS)
+		oam_meta_spr (0, 240, (gpit << 4), spr_empty);
+#endif	
+
 #ifdef PERSISTENT_DEATHS	
 		// Fast hack. If enemy is dead, change for type 0 and skip data.
 		if (!ep_flags [rdc + gpit] & 1) {
@@ -100,7 +124,7 @@ void __fastcall__ enems_load (void) {
 
 					// HL conversion
 					en_s [gpit] = en_t [gpit] - 1;
-					if (rda) {
+					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
 						en_status [gpit] = 0;
@@ -122,6 +146,16 @@ void __fastcall__ enems_load (void) {
 					enf_vx [gpit] = enf_vy [gpit] = 0;
 					break;
 	#endif
+	#ifdef ENABLE_HOMING_FANTY				
+				case 6:
+					// Fantys
+					enf_x [gpit] = en_x [gpit] << 6;
+					enf_y [gpit] = en_y [gpit] << 6;
+					enf_vx [gpit] = enf_vy [gpit] = 0;
+					// State idle
+					en_alive [gpit] = 0; 
+					break;
+	#endif					
 	#ifdef ENABLE_PURSUERS		
 				case 7:
 					// Pursuers
@@ -159,15 +193,29 @@ void __fastcall__ enems_load (void) {
 	#ifdef ENABLE_PEZONS
 				case 9:
 					// Pezones
-					en_my [gpit] = PEZON_WAIT + ((rand8 () & 15) << 1);
+
+					// Initialize
+					en_my [gpit] = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
 					en_alive [gpit] = 0;
 					en_mx [gpit] = en_my [gpit];
+					break;
+	#endif
+	#ifdef ENABLE_CHAC_CHAC
+				case 10:
+					// Cuchillas Chac Chac
+
+					en_my [gpit] = (rda << 4);	// IDLE_1
+					en_x [gpit] = en_x1 [gpit] >> 4;
+					en_y [gpit] = en_y1 [gpit] >> 4;
+					en_alive [gpit] = 0;
+					en_mx [gpit] = en_my [gpit];
+
 					break;
 	#endif
 			}
 
 	#if defined(PLAYER_CAN_FIRE)
-	#if defined (ENABLE_FANTY)
+	#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
 	#else
 			en_life [gpit] = ENEMIES_LIFE_GAUGE;
@@ -176,7 +224,7 @@ void __fastcall__ enems_load (void) {
 			en_life [gpit] = 1;
 	#endif		
 			en_status [gpit] = 0;
-			en_cttouched [gpit] = 0;			
+			en_cttouched [gpit] = 0;
 		}
 	}
 }
@@ -224,6 +272,11 @@ void enems_move (void) {
 					#include "engine/enemmods/enem_fanty.h"
 					break;
 #endif
+#ifdef ENABLE_HOMING_FANTY
+				case 6:
+					#include "engine/enemmods/enem_homing_fanty.h"
+					break;
+#endif
 #ifdef ENABLE_PURSUERS					
 				case 7:					
 					#include "engine/enemmods/enem_pursuers.h"
@@ -239,6 +292,11 @@ void enems_move (void) {
 					#include "engine/enemmods/enem_pezon.h"
 					break;
 #endif
+#ifdef ENABLE_CHAC_CHAC
+				case 10:
+					#include "engine/enemmods/enem_chac_chac.h"
+					break;
+#endif				
 			}
 
 #ifndef PLAYER_MOGGY_STYLE
@@ -320,9 +378,9 @@ void enems_move (void) {
 					// Bounce! In each axis, apply enemy's speed as is speed 1 = 128 and so forth
 					pvx = add_sign (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = -en_mx [gpit];
 					pvy = add_sign (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = -en_my [gpit];
-
+					if (!pstate || pctstate < 8) 
 #endif
-
+					
 #ifdef PLAYER_CAN_FIRE
 					en_life [gpjt] --;	
 					if (en_life [gpjt] == 0) {	
@@ -339,15 +397,10 @@ void enems_move (void) {
 						}
 					}
 					
-#endif
-					if (!pstate) kill_player ();
+#endif				
+					kill_player ();
 				}
 			}
-		} else {
-			oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
-#if defined (ENABLE_SAW) || defined (ENABLE_PEZONS)	|| defined (ENABLE_GENERATORS)
-			oam_meta_spr (0, 240, (gpit << 4), spr_empty);
-#endif			
-		}
+		} 
 	}	
 }

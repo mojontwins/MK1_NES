@@ -13,7 +13,7 @@
 								if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 								if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
 								en_ct [gpit] = 50 + (rand8 () & 31);
-								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_en_0A);
+								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_explosion);
 							}
 							break;
 						case 1:
@@ -99,10 +99,3 @@
 							oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_enems [(en_s [gpit] << 1) + en_fr]);
 							break;
 					}					
-#ifdef ENABLE_GENERATORS
-					// Paint generator
-					if (en_generator_life [gpit]) {
-						oam_meta_spr (en_x1 [gpit], en_y1 [gpit] + SPRITE_ADJUST, (gpit << 4), spr_enems [GENERATOR_BASE_SPRITE + (gen_was_hit [gpit] > 0)]);
-						if (gen_was_hit [gpit]) gen_was_hit [gpit] --;
-					}
-#endif

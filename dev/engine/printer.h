@@ -1,12 +1,11 @@
-// NES MK1 v0.4
+// NES MK1 v0.5
 // Copyleft Mojon Twins 2013, 2015
 
 // printer.h
 // Draw map, print text, etcetera.
 
-
 // fade out
-void __fastcall__ fade_out (void) {
+void  fade_out (void) {
 	for (fader = 4; fader > -1; fader --) {
 		pal_bright (fader);
 		delay (fade_delay);
@@ -14,89 +13,34 @@ void __fastcall__ fade_out (void) {
 }
 
 // fade in
-void __fastcall__ fade_in (void) {
+void  fade_in (void) {
 	for (fader = 0; fader < 5; fader ++) {
 		pal_bright (fader);
 		delay (fade_delay);
 	}	
 }
 /*
-void __fastcall__ fade_in_fast (void) {
+void  fade_in_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (4); delay (1);
 }
 
-void __fastcall__ fade_out_fast (void) {
+void  fade_out_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (0); delay (1);
 }
 */
 // Clear update list
-void __fastcall__ clear_update_list (void) {
+void clear_update_list (void) {
 	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
 		update_list [i] = 0;	
 }
 
-void __fastcall__ cls (void) {
+void cls (void) {
 	vram_adr(0x2000);
 	vram_fill(255,0x3c0);
-	//vram_adr (0x23c0);
+	vram_adr (0x23c0);
 	vram_fill(0x00,64);
-}
-
-const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
-unsigned char attr_table [64];
-
-void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	rdc = (x >> 2) + ((y >> 2) << 3);
-	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
-	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (tileset_pals [tl] << (rdb << 1));
-	attr_table [rdc] = rda;
-	
-	gp_tmap = tsmap + (tl << 2);
-	gp_addr = ((y<<5) + x + 0x2000);
-	vram_adr (gp_addr++);
-	vram_put (*gp_tmap++);
-	//vram_adr (gp_addr);
-	vram_put (*gp_tmap++);
-	gp_addr+=31;
-	vram_adr (gp_addr++);
-	vram_put (*gp_tmap++);
-	//vram_adr (gp_addr);
-	vram_put (*gp_tmap);	
-}
-
-void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	// Attribute
-	rdc = (x >> 2) + ((y >> 2) << 3);
-	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
-	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (tileset_pals [tl] << (rdb << 1));
-	attr_table [rdc] = rda;
-	
-	gp_addr = 0x23c0 + rdc;
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr);
-	update_list [update_index++] = rda;
-	
-	// tiles
-	//tl = (16 + tl) << 2;
-	gp_tmap = tsmap + (tl << 2);
-	gp_addr = ((y<<5) + x + 0x2000);
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr++);
-	update_list [update_index++] = *gp_tmap++;
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr);
-	update_list [update_index++] = *gp_tmap++;
-	gp_addr += 31;
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr++);
-	update_list [update_index++] = *gp_tmap++;
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr);
-	update_list [update_index++] = *gp_tmap;
 }
 
 void p_t (unsigned char x, unsigned char y, unsigned char n) {
@@ -109,61 +53,147 @@ void p_t (unsigned char x, unsigned char y, unsigned char n) {
 	update_list [update_index++] = (n % 10) + 16;
 }
 
-void draw_game_tile (unsigned char x, unsigned char y, unsigned char t) {
-	rdit = x + (y << 4);
-	map_buff [rdit] = t;
-	map_attr [rdit] = tbehs [t];
-#ifdef BREAKABLE_WALLS
-	brk_buff [rdit] = 1;
-#endif
-	if (t == 0 && (rand8 () & 15) == 1) t = 16;	// ALT BG
-	draw_tile (x + x, TOP_ADJUST + y + y, t);
+const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
+unsigned char attr_table [64];
+
+void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {
+	rdc = (x >> 2) + ((y >> 2) << 3);
+	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
+	rda = attr_table [rdc];
+	rda = (rda & bitmasks [rdb]) | (tileset_pals [tl] << (rdb << 1));
+	attr_table [rdc] = rda;
 }
 
-void __fastcall__ draw_scr (void) {
-	// Clear attribute table
-	//for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
+void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
+	upd_attr_table (x, y, tl);
 	
-	// Draw current screen
-	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
+	gp_tmap = tsmap + (tl << 2);
+	gp_addr = ((y<<5) + x + 0x2000);
+	vram_adr (gp_addr++);
+	vram_put (*gp_tmap++);
+	vram_put (*gp_tmap++);
+	gp_addr += 31;
+	vram_adr (gp_addr++);
+	vram_put (*gp_tmap++);
+	vram_put (*gp_tmap);	
+}
+
+void wbtul (unsigned char b) {
+	update_list [update_index++] = MSB(gp_addr);
+	update_list [update_index++] = LSB(gp_addr++);
+	update_list [update_index++] = b;
+}
+
+void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
+	upd_attr_table (x, y, tl);
 	
-	for (rdit = 0; rdit < 192; rdit ++) {
-		if ((rdit & 1) == 0) {
-			rdt = gp_gen [rdit >> 1] >> 4;
+	gp_addr = 0x23c0 + rdc;
+	update_list [update_index++] = MSB(gp_addr);
+	update_list [update_index++] = LSB(gp_addr);
+	update_list [update_index++] = rda;
+	
+	// tiles
+	//tl = (16 + tl) << 2;
+	gp_tmap = tsmap + (tl << 2);
+	gp_addr = ((y<<5) + x + 0x2000);
+	wbtul (*gp_tmap++);
+	wbtul (*gp_tmap++);
+	gp_addr += 30;
+	wbtul (*gp_tmap++);
+	wbtul (*gp_tmap);
+}
+
+void map_set (unsigned char x, unsigned char y, unsigned char n) {
+	map_buff [x + (y << 4)] = n;
+	map_attr [x + (y << 4)] = tbehs [n];
+	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
+}
+
+void draw_map_tile (t) {
+	rda = rdx + (rdy << 4);
+	map_buff [rda] = t;		
+	map_attr [rda] = tbehs [t];
+	if (t == 0) {
+		rda = rand8 ();
+		if (level) {
+			t = (rda & 31) == 1 ? t = 45 + (rand8 () & 1) : 44;
 		} else {
-			rdt = gp_gen [rdit >> 1] & 15;
+			if ((rda & 15) < 7) t = 40 + ((n_pant + rdx + rdy + rdy) & 3);
+		}
+	} else if (t == 10) {
+		if (map_buff [rda - 16] != 10) t = 16;
+	}
+	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
+	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+}
+
+unsigned char get_byte (void) {
+	rdit --;
+	return *gp_gen ++;
+}
+
+void draw_scr (void) {
+
+	// What
+	level = (n_pant == 0 || n_pant == 60 || 
+		(n_pant >= 57 && n_pant <= 59) ||
+		(n_pant >= 76 && n_pant <= 79) );
+
+	// Draw current screen
+	set_rand (n_pant + 1);
+	rdx = rdy = 0;
+
+	// Get pointer
+	gp_gen = (unsigned char *) c_map [n_pant];
+
+	// Full or RLE'd?
+	
+	if (rdit = *gp_gen ++) {
+		while (rdit) {
+			rdct = get_byte ();
+			if (rdct & 0xf0) {
+				// String
+				rdct = 1 + (rdct & 0x0f);
+				while (rdct --) {
+					rdt = get_byte ();
+					draw_map_tile (rdt >> 4);
+					if (rdy < 12) draw_map_tile (rdt & 15);
+				}
+			} else {
+				// Counter
+				rdt = rdct & 0x0f;
+				rdct = get_byte ();
+				while (rdct --) draw_map_tile (rdt);
+			}
 		}
 
-		map_buff [rdit] = rdt;
-		map_attr [rdit] = tbehs [rdt];
-#ifdef BREAKABLE_WALLS
-		brk_buff [rdit] = 1;
-#endif
-		draw_tile (rdx, rdy, rdt);
-		
-		rdx = (rdx + 2) & 31; if (!rdx) rdy +=2;
-		
+	} else {
+		rdit = 96; while (rdit --) {
+			rdt = *gp_gen ++;
+			draw_map_tile (rdt >> 4);
+			draw_map_tile (rdt & 15);
+		}
 	}
 
-	// Decorations
-	if (c_map_decos) {
-		if (c_map_decos [n_pant]) {
-			gp_gen = (unsigned char *) c_map_decos [n_pant];
-			while (0xff != (rdx = *gp_gen ++)) {
-				rdt = *gp_gen ++;
-				rdy = rdx & 15;
-				rdx = rdx >> 4;
-#ifdef ENABLE_PROPELLERS
-				if (rdt == 31) {
-					add_propeller (rdx, rdy);
-				} else
-#endif				
-				//draw_tile (rdx << 1, TOP_ADJUST + (rdy << 1), rdt);
-				draw_game_tile (rdx, rdy, rdt);
+	// Draw decorations
+	if (c_decos [n_pant]) {
+		gp_gen = (unsigned char *) c_decos [n_pant];
+	
+		while (rdt = *gp_gen ++) {
+			if (rdt & 0x80) {
+				rdt &= 0x7F;
+				rdct = 1;
+			} else {
+				rdct = *gp_gen ++;
+			}
+			while (rdct --) {
+				rda = *gp_gen ++;
+				rdx = rda >> 4; rdy = rda & 15;
+				draw_map_tile (rdt);
 			}
 		}
 	}
-	
+
 	// Clear open locks
 #ifndef DEACTIVATE_KEYS	
 	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
@@ -171,8 +201,7 @@ void __fastcall__ draw_scr (void) {
 			if (!lkact [gpit]) {
 				rdx = (lkxy [gpit] >> 4);
 				rdy = (lkxy [gpit] & 15);
-				//draw_tile (rdx << 1, (rdy << 1) + TOP_ADJUST, 0);
-				draw_game_tile (rdx, rdy, 0);
+				draw_map_tile (rdct);
 			}
 		}
 	}	
@@ -182,8 +211,9 @@ void __fastcall__ draw_scr (void) {
 	do_process_breakable = 0;
 	for (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) brkf [gpit] = 0;
 #endif
-}
 
+}
+/*
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
 	gp_addr = ((y<<5) + x + 0x2000);
 	vram_adr (gp_addr);
@@ -202,3 +232,4 @@ void pr_str_upd (unsigned char *s) {
 		update_list [update_index++] = gpit - 32;
 	}
 }
+*/

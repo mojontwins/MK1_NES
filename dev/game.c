@@ -1,17 +1,17 @@
-// NES MK1 v0.4
+// NES MK1 v0.5
 // Copyleft Mojon Twins 2013, 2015
 
 // Uses neslib and related tools by Shiru
 
-// Use 0 form ROM1, 2 for ROM2, 4 for ROM3
-#define BASE_LEVEL		2
+// Use 0 form ROM1, 1 for ROM2, 2 for ROM3
+#define BASE_LEVEL		0
 
 // Comment this when you are done
 //#define DEBUG
 #define DEBUG_LEVEL		1
-#define DEBUG_SCR_INI	11
-#define DEBUG_INI_X		11
-#define DEBUG_INI_Y		1
+#define DEBUG_SCR_INI	79
+#define DEBUG_INI_X		13
+#define DEBUG_INI_Y		2
 //
 
 #define MSB(x)			(((x)>>8))
@@ -23,23 +23,15 @@
 
 #define MAX_CERROJOS 16 // max 32, make it as small as possible.
 
-// Update list
-#define UPDATE_LIST_SIZE 32
-unsigned char update_index;
-unsigned char update_list [UPDATE_LIST_SIZE * 3];
-
 #include "neslib.h"
 
 // OAM TABLE
 /*
-	0-11:	enems extra sp 	(OAM bytes  0-47)
-	12-23:	enems sprites 	(OAM bytes	48-95)
-	28-31:	bullets 		(OAM bytes  112-127)
-	32:		player 			(OAM bytes  128-155)
-	39:		Resonator # 	(OAM bytes	156-159)
-	40-43:	NO!				(OAM bytes 	160-175)
-	//44-47: 	hotspot 		(OAM bytes  176-191)
-	44-49:	hotspot (D'V)	(OAM bytes	176-199)
+	0-23:	Sprite enemies	(OAM bytes	0-95)
+	24-27:	Object in inv.	(OAM bytes	96-111)
+	28-31:	NO!				(OAM bytes	112-127)
+	32-37:	player 			(OAM bytes  128-151)
+	44-47: 	hotspot 		(OAM bytes  176-191)
 */
 
 // **************
@@ -48,12 +40,11 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
 #include "definitions.h"
 #include "config.h"
-#include "assets/cuts_texts.h"
 #include "assets/palettes.h"
+#include "assets/pal_arrays.h"
 #include "assets/metasprites.h"
 #include "assets/tiledata1.h"
-#include "assets/cuts1.h"
-#include "assets/mapa0.h"
+#include "assets/mapa.h"
 #include "assets/enems.h"
 
 #ifdef ACTIVATE_SCRIPTING
@@ -63,14 +54,13 @@ extern const unsigned char *f_scripts [];
 
 // Music
 extern const unsigned char m_ingame_1 [];
-extern const unsigned char m_cuts [];
+//extern const unsigned char m_cuts [];
 
 // Push to zero page:
 #pragma bssseg (push,"ZEROPAGE")
 #pragma dataseg(push,"ZEROPAGE")
 
 unsigned char i, gpit, gpjt, gpaux;
-signed char fader;
 unsigned char half_life, frame_counter;
 
 unsigned char n_pant, on_pant;
@@ -79,6 +69,7 @@ unsigned char *gp_gen, *gp_tmap;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc;
+unsigned char rdct;
 
 unsigned char olife, okeys, oobjs, oammo, okilled;
 
@@ -96,18 +87,31 @@ unsigned char en_fr, etx1, etx2, ety1, ety2;
 unsigned char en_collx, en_colly;
 unsigned char touched;
 unsigned char en_cttouched [3];
-#ifdef ENABLE_FANTY
-signed int enf_x [3], enf_y [3], enf_vx [3], enf_vy [3];
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+signed int enf_x [3], enf_vx [3];
+#endif
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+signed int enf_y [3], enf_vy [3];
 #endif
 
 // Main player
 signed int px, py, pvx, pvy;
-unsigned char pfacing, pfr, /*pctfr,*/ psprid;
+unsigned char pfacing, pfr, pctfr, psprid;
 #ifdef PLAYER_MOGGY_STYLE
 unsigned char pfacinghlast;
 #endif
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
-unsigned char pobjs, plife, pcontinues, pkeys, pkilled, pstars;
+//#ifndef DEACTIVATE_OBJECTS
+unsigned char pobjs;
+//#endif
+
+unsigned char plife, pcontinues;
+#ifndef DEACTIVATE_KEYS
+unsigned char pkeys;
+#endif
+#ifdef PLAYER_KILLS_ENEMIES
+unsigned char pkilled;
+#endif
 unsigned char pammo, pfiring;
 #ifdef PLAYER_TURRET
 unsigned char pfixct;
@@ -116,24 +120,28 @@ unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
+#ifdef CARRY_ONE_HS_OBJ
+unsigned char pinv;
+#endif
 
 // Aux player
 unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
-unsigned char pfacingv, pfacingh, wall, hitv, hith;
+#ifdef PLAYER:PLAYER_MOGGY_STYLE
+unsigned char pfacingv, pfacingh;
+#endif
+unsigned char wall, hitv, hith;
 #ifdef ENABLE_PROPELLERS
 unsigned char ppropelled;
 #endif
 
 // Bullets
 #ifdef PLAYER_CAN_FIRE
-unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
-signed char bmx [MAX_BULLETS], bmy [MAX_BULLETS];
+unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS], bmx [MAX_BULLETS], bmy [MAX_BULLETS];
 unsigned char btx, bty;
 #endif
 
 // Hotspots
 unsigned char hrx, hry, hrt;
-unsigned char hrct, hrf;
 
 // Process breakable?
 #ifdef BREAKABLE_ANIM
@@ -147,14 +155,9 @@ unsigned char ft;
 
 // Level control
 
-// Everything else on normal RAM
-#pragma bssseg (push,"BSS")
-#pragma dataseg(push,"BSS")
-
-
 // Current level
-unsigned char *c_map;
-unsigned char **c_map_decos;
+unsigned char **c_map;
+unsigned char **c_decos;
 unsigned char *c_locks;
 unsigned char *c_enems;
 unsigned char *c_hotspots;
@@ -164,6 +167,16 @@ unsigned char *c_pal_fg;
 unsigned char *tileset_pals;
 unsigned char *tsmap;
 
+// Everything else on normal RAM
+#pragma bssseg (push,"BSS")
+#pragma dataseg(push,"BSS")
+
+// Update list
+#define UPDATE_LIST_SIZE 32
+unsigned char update_index;
+unsigned char update_list [UPDATE_LIST_SIZE * 3];
+
+signed char fader;
 unsigned char map_attr [192];
 unsigned char map_buff [192];
 #ifdef BREAKABLE_WALLS
@@ -177,7 +190,7 @@ unsigned char brky [MAX_BREAKABLE];
 #endif
 unsigned char fade_delay;
 #ifndef HOTSPOTS_WONT_CHANGE
-unsigned char hxy [MAP_W * MAP_H];
+
 unsigned char ht [MAP_W * MAP_H];
 #endif
 unsigned char hact [MAP_W * MAP_H];
@@ -214,7 +227,7 @@ unsigned char ep_t [3 * MAP_W * MAP_H];
 unsigned int ep_it;
 #endif
 #ifdef PERSISTENT_DEATHS
-unsigned int ep_flags [3 * MAP_W * MAP_H];
+unsigned char ep_flags [3 * MAP_W * MAP_H];
 #endif
 
 // Die & respawn
@@ -253,7 +266,7 @@ void add_propeller (unsigned char x, unsigned char y);
 // Main functions
 // **************
 
-void __fastcall__ prepare_scr (void) {
+void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
 	oam_spr (0, 240, 0, 0, 156);
 	oam_meta_spr (0, 240, 160, spr_empty);
@@ -266,6 +279,8 @@ void __fastcall__ prepare_scr (void) {
 	persistent_update ();
 #endif
 
+	enems_load ();
+
 #ifdef ENABLE_FIRE_ZONE
 	f_zone_ac = 0;
 	fzx1 = fzx2 = fzy1 = fzy2 = 240;
@@ -274,19 +289,18 @@ void __fastcall__ prepare_scr (void) {
 	// Disable sprites and tiles so we can write to VRAM.
 	ppu_off ();
 
-	// Clear line of text
-	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
-
+	oam_hide_rest (0);
 	draw_scr ();
-	enems_load ();
-	
 	hotspots_create ();
 	
 	// Write attributes
 	vram_write (attr_table, 0x23c0, 64);
-	
-	enems_move ();
+
+	// Clear line of text
+	//pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
+
 	player_move ();
+	enems_move ();
 	render_player ();
 
 #ifdef PLAYER_CAN_FIRE
@@ -337,14 +351,13 @@ void main(void) {
 		}
 
 		// Decoding done
-
-		cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) intro_text);
+	
+		//cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) intro_text);
 	
 		game_over = 0;
 
-		c_map = (unsigned char *) (mapa0);
-		c_map_decos = (unsigned char **) (mapa0_decos);
-		c_locks = (unsigned char *) (locks_mapa0);
+		c_map = (unsigned char **) (map_0);
+		c_decos = (unsigned char **) (map_0_decos);
 		c_enems = (unsigned char *) (enems_0);
 		c_hotspots = (unsigned char *) (hotspots_0);
 		c_pal_bg = (unsigned char *) mypal_game_bg0;
@@ -352,10 +365,9 @@ void main(void) {
 		tsmap = (unsigned char *) (ts1_tmaps);
 		tileset_pals = (unsigned char *) (ts1_pals);
 		
-		pstars = 0;
-
 		pal_bg (c_pal_bg);
-		pal_spr (c_pal_fg);		
+		pal_spr (c_pal_fg);
+
 		cls ();
 
 		draw_game_frame ();
@@ -393,15 +405,16 @@ void main(void) {
 		run_script ();
 #endif
 		ft = 1;	fade_delay = 1;
-		
+
 		// MAIN LOOP
 
 		pal_bright (0);
 		ppu_on_all ();
+		palfx_init ();
 
 		while (1) {
 			half_life = 1 - half_life;
-			frame_counter ++;	
+			frame_counter ++;
 			
 			if (pstate) {
 				pctstate --;
@@ -423,6 +436,10 @@ void main(void) {
 #endif
 			render_player ();
 
+#ifdef CARRY_ONE_HS_OBJ
+			oam_meta_spr (HS_INV_X, HS_INV_Y, 96, spr_hs [pinv - 1]);
+#endif
+
 			//#include "mainloop/resonators.h"
 
 			#include "mainloop/cheat.h"
@@ -442,6 +459,7 @@ void main(void) {
 			}
 
 			// Sync
+			palfx_do ();
 			ppu_waitnmi ();
 			clear_update_list ();
 			update_index = 0;
@@ -464,25 +482,30 @@ void main(void) {
 			}
 #endif
 
+/*
 #ifdef ACTIVATE_SCRIPTING
-			if (script_result)
+			if (script_result) {
 #else
-			if (pobjs == PLAYER_MAX_OBJECTS)
+			if (pobjs == PLAYER_NUM_OBJETOS) {
 #endif
-//			if (pkilled == baddies_count) 
-			{
-				music_stop ();
-				// music zone clear!
-				// Stupid animation
-				break;
+*/
+//			if (pkilled == baddies_count) {
+			if (n_pant == SCR_END) {;
+				if (((prx + 8) >> 4) == PLAYER_END_X) {
+					if (((pry + 8) >> 4) == PLAYER_END_Y) {
+						music_stop ();
+						break;
+					}
+				}
 			}
+				
 		}
 	
 		music_stop ();
 		set_vram_update (0, 0);
 		ppu_off ();
 		oam_clear ();
-		if (!game_over) cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) outtro_text);
+		//if (!game_over) cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) outtro_text);
 		cls ();
 		oam_clear ();	
 		

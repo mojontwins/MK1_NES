@@ -1,4 +1,4 @@
-// NES MK1 v0.4
+// NES MK1 v0.5
 // Copyleft Mojon Twins 2013, 2015
 
 // general.h
@@ -13,12 +13,6 @@ unsigned char attr (signed char x, signed char y) {
 
 unsigned char qtile (signed char x, signed char y) {
 	return map_buff [x + (y << 4)];
-}
-
-void map_set (unsigned char x, unsigned char y, unsigned char n) {
-	map_buff [x + (y << 4)] = n;
-	map_attr [x + (y << 4)] = tbehs [n];
-	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
 unsigned char collide_in (x0, y0, x1, y1) {

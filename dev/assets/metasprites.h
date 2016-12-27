@@ -1,10 +1,11 @@
 // metasprites.h
 // Metaspriteset.
 
-#include "assets/spr_pl.h"
-#include "assets/spr_en.h"
-#include "assets/spr_hs1.h"
-#include "assets/spr_hs2.h"
+#include "assets/spr_pla.h"
+#include "assets/spr_plb.h"
+#include "assets/spr_lin.h"
+#include "assets/spr_enf.h"
+#include "assets/spr_hs.h"
 
 // Extra sprites:
 
@@ -15,33 +16,36 @@ const unsigned char spr_empty [] = {
 const unsigned char spr_pl_empty [] = {
 	0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 128
 };
-
+	
 // Special: coverup low priority sprite to cover up saws and other stuff
 // (Saws have high priority, but are located further on in the OAM than these)
 const char spr_black [] = {
-        0x00, 0x00, 0xFF, 0x23, 0x08, 0x00, 0xFF, 0x23,
-        0x00, 0x08, 0xFF, 0x23, 0x08, 0x08, 0xFF, 0x23,
+        0x00, 0x00, 0xFF, 0x20, 0x08, 0x00, 0xFF, 0x20,
+        0x00, 0x08, 0xFF, 0x20, 0x08, 0x08, 0xFF, 0x20,
         0x80	
 };
 
 // spritesets
 
 const char *spr_player [] = {
-	spr_pl_00, spr_pl_01, spr_pl_02, spr_pl_03, spr_pl_04, spr_pl_05, 
-	spr_pl_06, spr_pl_07, spr_pl_08, spr_pl_09, spr_pl_0A, spr_pl_0B, 
-	spr_pl_0C, spr_pl_0D, spr_pl_0E, spr_pl_0F, spr_pl_10, spr_pl_11,
-	spr_pl_12, spr_pl_13, spr_pl_14, spr_pl_15, spr_pl_16, spr_pl_17,
-	spr_pl_18, spr_pl_19
+	spr_pla_00_a, spr_pla_01_a, spr_pla_02_a, spr_pla_03_a, spr_pla_04_a, spr_pla_05_a, spr_pla_06_a, spr_pla_07_a, 
+	spr_pla_08_a, spr_pla_09_a, spr_pla_0A_a, spr_pla_0B_a, spr_pla_0C_a, spr_pla_0D_a, spr_pla_0E_a, spr_pla_0F_a,
+	spr_pla_00_b, spr_pla_01_b, spr_pla_02_b, spr_pla_03_b, spr_pla_04_b, spr_pla_05_b, spr_pla_06_b, spr_pla_07_b, 
+	spr_pla_08_b, spr_pla_09_b, spr_pla_0A_b, spr_pla_0B_b, spr_pla_0C_b, spr_pla_0D_b, spr_pla_0E_b, spr_pla_0F_b,
+	spr_plb_00, spr_plb_01, spr_plb_02, spr_plb_03, spr_plb_04, spr_plb_05, spr_plb_06, spr_plb_07
 };
 
-// STR WR1 WR2 WR3 WR4 FIR 0
-// STL WL1 WL2 WL3 WL4 FIL 6
-// HTR WD1 WD2 WD3 WD4 FID 12
-// HTL WU1 WU2 WU3 WU4 FIU 18
+const unsigned char rinse_cycle [] = { 5, 6, 7, 6 };
+
+// ID R1 R2 R3 R4 F1 F2 F3
+// U1 U2 U3 U4 U5 U6 HI JP
 
 const char *spr_enems [] = {
-	spr_en_00, spr_en_01, spr_en_02, spr_en_03, spr_en_04, spr_en_05, spr_en_06, spr_en_07, spr_en_08, spr_en_09, spr_en_0A,
-	spr_en_0B, spr_en_0C, spr_en_0D, spr_en_0E
+	spr_lin_00_a, spr_lin_01_a, spr_lin_00_b, spr_lin_01_b,
+	spr_lin_02_a, spr_lin_03_a, spr_lin_02_b, spr_lin_03_b,
+	spr_lin_04_a, spr_lin_05_a, spr_lin_04_b, spr_lin_05_b,
+	spr_lin_06_a, spr_lin_07_a, spr_lin_06_b, spr_lin_07_b,
+	spr_enf_00, spr_enf_01, spr_enf_02, spr_enf_03, spr_enf_04, spr_enf_05
 };
 
 /*
@@ -51,5 +55,5 @@ const char *spr_enems [] = {
 	3 Refill
 */
 const char *spr_hs [] = {
-	spr_hs1_00, spr_hs1_01, spr_hs2_00, spr_hs2_01, spr_hs2_02, spr_hs1_02, spr_hs1_03
+	spr_hs_00, spr_hs_01, spr_hs_02, spr_hs_03, spr_hs_04, spr_hs_05, spr_hs_06, spr_hs_07
 };

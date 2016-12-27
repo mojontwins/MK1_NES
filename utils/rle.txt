@@ -1,0 +1,17 @@
+Diseño de compresión RLE+Packed para mapas de NES
+
+- Contamos con 16 tiles, de 0 a f.
+- Caben dos tiles por bytes en "normal"
+- Basar esto en "cadenas":
+a) Cadena repe: 0x0T 0xNN, NN tiles T.
+b) Cadena misc: 0xFN ..., N número de bytes (max 2*(N+1) tiles) 
+
+Vamos a ver a partir de cuanto detectamos una cadena repe.
+
+Una cadena repe ocupa 2 bytes. Esos dos bytes, formando parte de una cadena MISC, almacenarían 4 tiles.
+
+Veamos: 
+
+- El compresor:
+1. Lee el archivo mal original a un array dividido por pantallas, cada pantalla es una lista de 192 tiles.
+2. Para cada pantalla:

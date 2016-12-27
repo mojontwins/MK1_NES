@@ -6,16 +6,16 @@
 
 sub usage () 
 	Print "** USO **"
-	Print "   MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed]"
+	Print "   MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed|zerostrungpacked]"
 	
 end sub
 
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt
-Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset
+Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset, bx, by, cx, cy, rp0
 Dim As Byte d
 Dim As String o, prefix
 Dim As Integer BigOrigMap (255, 255)
-Dim As uByte decos (255, 31), decosOn (255 - 1)
+Dim As uByte decos (255, 127), decosOn (255 - 1)
 
 
 Type MyBolt
@@ -49,7 +49,9 @@ offset = Val (Command (8))
 
 if lcase(Command (9)) = "packed" Or lcase(Command (8)) = "packed" then
 	packed = 1
-else
+elseif lcase (Command (9)) = "zerostrungpacked" Or lcase (Command (8)) = "zerostrungpacked" Then
+	packed = 2
+Else
 	packed = 0
 end if
 
@@ -77,47 +79,94 @@ print #f, "// Generated with MapCnvNes"
 print #f, "// Copyleft 2013 The Mojon Twins"
 print #f, " "
 
-print #f, "const unsigned char " & prefix & " [] = {"
+if packed < 2 Then print #f, "const unsigned char " & prefix & " [] = {"
 
 i = 0: decosTT = 0
 
 for yy = 0 To map_h - 1
 	for xx = 0 To map_w - 1
 		npant = yy * map_w + xx
+		bx = xx * scr_w
+		by = yy * scr_h
+		
 		o = "	"
 		ac = 0
 		ct = 0
 		iddecos = 0: decosOn (npant) = 0
+		if packed = 2 Then Print #f, "const unsigned char scr_" & prefix & "_" & lcase (hex (npant, 2)) & " [] = {"
 		for y = 0 to scr_h - 1
 			for x = 0 to scr_w - 1
+				cx = bx + x
+				cy = by + y
 				
-				if BigOrigMap (yy * scr_h + y, xx * scr_w + x) = bolt then
+				if BigOrigMap (cy, cx) = bolt then
 					Bolts (i).x = x
 					Bolts (i).y = y
 					Bolts (i).np = yy * map_w + xx
 					i = i + 1
 				end if
 				
+				If BigOrigMap (cy, cx) > 15 Then
+					' Write to decos
+					decos (npant, iddecos) = y + x * 16
+					iddecos = iddecos + 1
+					decos (npant, iddecos) = BigOrigMap (cy, cx)
+					iddecos = iddecos + 1
+					decosOn (npant) = iddecos
+					BigOrigMap (cy, cx) = 0
+					decosTT = decosTT + 1
+				End If
+
 				if packed = 0 then
-					o = o + str (BigOrigMap (yy * scr_h + y, xx * scr_w + x))
+					o = o + str (BigOrigMap (cy, cx))
 					if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h -1 Or x < scr_w -1 then
 						o = o + ", "
 					end if
-				else
-					If BigOrigMap (yy * scr_h + y, xx * scr_w + x) > 15 Then
-						' Write to decos
-						decos (npant, iddecos) = y + x * 16
-						iddecos = iddecos + 1
-						decos (npant, iddecos) = BigOrigMap (yy * scr_h + y, xx * scr_w + x)
-						iddecos = iddecos + 1
-						decosOn (npant) = iddecos
-						BigOrigMap (yy * scr_h + y, xx * scr_w + x) = 0
-						decosTT = decosTT + 1
-					End If	
+				elseif packed = 1 Then
 					If ct = 0 then
-						ac = BigOrigMap (yy * scr_h + y, xx * scr_w + x) * 16
+						ac = BigOrigMap (cy, cx) * 16
 					Else
-						ac = ac + BigOrigMap (yy * scr_h + y, xx * scr_w + x) 
+						ac = ac + BigOrigMap (cy, cx) 
+						o = o + "0x" & Lcase (Hex (ac, 2))
+						
+						if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
+							o = o + ", "
+						end if
+					End if
+					ct = 1 - ct
+				else
+					If ct = 0 then
+						ac = BigOrigMap (cy, cx) * 16
+						' special
+						If ac = 0 Then
+							If x < scr_w - 1 Then
+								If BigOrigMap (cy, cx + 1) = 0 Then
+									rp0 = 0
+									cx = cx + 1
+									While BigOrigMap (cy, cx) = 0
+										rp0 = rp0 + 1
+										cx = cx + 1
+										ct = 1 - ct
+										If cx = scr_w Then Exit While
+									Wend
+									' Write zerocodeds
+									o = o + "0x" + Hex (rp0, 2) ' max = 0f means 1+15 zeroes
+									if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
+										o = o + ", "
+									end if
+									' Where are we?
+									If cx < scr_w Then
+										If ct = 0 then 
+											ac = 16 * BigOrigMap (cy, cx) 
+										Else 
+											ac = BigOrigMap (cy, cx)s
+										End If
+									End If
+								End If
+							End If
+						End If
+					Else
+						ac = ac + BigOrigMap (cy, cx) 
 						o = o + "0x" & Lcase (Hex (ac, 2))
 						
 						if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
@@ -130,6 +179,7 @@ for yy = 0 To map_h - 1
 			next x
 		next y		
 		print #f, o
+		if packed = 2 Then Print #f, "};"
 	next xx
 	if yy < map_h - 1 then print #f, "    "
 next yy

@@ -206,6 +206,10 @@ Function findWhichPal (img As Any Ptr, x0 As Integer, y0 As Integer, pal () As I
 	For y = 0 To vSize - 1
 		For x = 0 To hSize - 1
 			c = Point (x0 + x, y0 + y, img)
+			If c = &HFFFF00FF Then 
+				findWhichPal = &H20
+				Exit Function
+			End If
 			found = 0
 			For i = 0 To idx - 1
 				If whichCols (i) = c Then 

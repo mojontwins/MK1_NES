@@ -245,13 +245,13 @@ For nPant = 0 To mapPants - 1
 				If decoCT = 1 Then
 					' T | 128, XY
 					decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
-					decosO (nPant, decosOI (nPant)) = XY (0) Or 128: decosOI (nPant) = decosOI (nPant) + 1
+					decosO (nPant, decosOI (nPant)) = XY (0): decosOI (nPant) = decosOI (nPant) + 1
 				Else
 					' T N XY XY XY XY...
 					decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
 					decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
 					For j = 0 To decoCT - 1
-						decosO (nPant, decosOI (nPant)) = XY (j) Or 128: decosOI (nPant) = decosOI (nPant) + 1
+						decosO (nPant, decosOI (nPant)) = XY (j): decosOI (nPant) = decosOI (nPant) + 1
 					Next j
 				End If
 			End If
@@ -269,7 +269,7 @@ Print #f, ""
 Print #f, "// Map Size Is " & mapW & "x" & mapH
 Print #f, "// Screen Size Is " & SCR_W & "x" & SCR_H
 Print #f, ""
-Print #f, "#define N_BOLTS " & locksI
+Print #f, "#define N_BOLTS_" & Ucase (prefix) & " " & (locksI \ 2)
 Print #f, ""
 
 mapsize = 0
@@ -362,6 +362,19 @@ Print #f, "};"
 Print #f, ""
 Print #f, "// Total decorations size in bytes is " & decosize
 Print #f, ""
+
+' Write locks
+If locksI Then
+	Print #f, "const unsigned char map_" & prefix & "_locks [] = {"
+	Print #f, "	";
+	For i = 0 To locksI - 1
+		Print #f, "0x" & Lcase (Hex (locks (i), 2));
+		If i < locksI - 1 Then Print #f, ", ";
+	Next i
+	Print #f, ""
+	Print #f, "};"
+	Print #f, ""
+End If
 
 ' Exit cleanly
 Close #f
