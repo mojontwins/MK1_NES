@@ -1,4 +1,4 @@
-// NES MK1 v0.3
+// NES MK1 v0.4
 // Copyleft Mojon Twins 2013, 2015
 
 // general.h
@@ -49,3 +49,10 @@ void __fastcall__ run_fire_script (void) {
 signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
 }
+
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+void kill_enemy (unsigned char gpit) {
+	en_t [gpit] = 0;
+	ep_flags [n_pant + n_pant + n_pant + gpit] &= 0xFE;
+}
+#endif

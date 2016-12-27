@@ -76,8 +76,10 @@ Next i
 ' Read / Write hotspots
 
 For i = 1 To (map_w * map_h)
-	' xx t
+	' xx yy t
 	get #f1, , d ' xx
+	put #f2, , d
+	get #f1, , d ' yy
 	put #f2, , d
 	get #f1, , d ' t
 	put #f2, , d

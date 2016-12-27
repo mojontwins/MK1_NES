@@ -1,4 +1,4 @@
-// NES MK1 v0.3
+// NES MK1 v0.4
 // Copyleft Mojon Twins 2013, 2015
 
 // printer.h
@@ -40,8 +40,8 @@ void __fastcall__ clear_update_list (void) {
 void __fastcall__ cls (void) {
 	vram_adr(0x2000);
 	vram_fill(255,0x3c0);
-	vram_adr (0x23c0);
-	vram_fill(0xff,64);
+	//vram_adr (0x23c0);
+	vram_fill(0x00,64);
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
@@ -58,10 +58,12 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	gp_addr = ((y<<5) + x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
+	//vram_adr (gp_addr);
 	vram_put (*gp_tmap++);
 	gp_addr+=31;
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
+	//vram_adr (gp_addr);
 	vram_put (*gp_tmap);	
 }
 
@@ -114,15 +116,14 @@ void draw_game_tile (unsigned char x, unsigned char y, unsigned char t) {
 #ifdef BREAKABLE_WALLS
 	brk_buff [rdit] = 1;
 #endif
-	//if (t == 0 && (rand8 () & 15) == 1) t = 16;	// ALT BG
+	if (t == 0 && (rand8 () & 15) == 1) t = 16;	// ALT BG
 	draw_tile (x + x, TOP_ADJUST + y + y, t);
 }
 
-void draw_scr (void) {
-// CUSTOM {
-	max_shines = 0;
-	last_shine_ct = 0;
-// } END_OF_CUSTOM
+void __fastcall__ draw_scr (void) {
+	// Clear attribute table
+	//for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
+	
 	// Draw current screen
 	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
 	
@@ -132,58 +133,46 @@ void draw_scr (void) {
 		} else {
 			rdt = gp_gen [rdit >> 1] & 15;
 		}
-		
-		map_buff [rdit] = rdt;		
-		map_attr [rdit] = tbehs [rdt];		
+
+		map_buff [rdit] = rdt;
+		map_attr [rdit] = tbehs [rdt];
 #ifdef BREAKABLE_WALLS
 		brk_buff [rdit] = 1;
 #endif
-// CUSTOM {
-		//if (rdt == 0 && (rand8 () & 15) == 1) rdt = 16;	// ALT BG
-// } END_OF_CUSTOM
-
 		draw_tile (rdx, rdy, rdt);
 		
 		rdx = (rdx + 2) & 31; if (!rdx) rdy +=2;
+		
 	}
 
-	// Draw decorations
-	if (c_decos [n_pant]) {
-		gp_gen = (unsigned char *) c_decos [n_pant];
-	
-		while (rdt = *gp_gen ++) {
-			if (rdt & 0x80) {
-				rdt &= 0x7F;
-				rdct = 1;
-			} else {
-				rdct = *gp_gen ++;
-			}
-			while (rdct --) {
-				rda = *gp_gen ++;
-				rdx = rda >> 4; rdy = rda & 15;
+	// Decorations
+	if (c_map_decos) {
+		if (c_map_decos [n_pant]) {
+			gp_gen = (unsigned char *) c_map_decos [n_pant];
+			while (0xff != (rdx = *gp_gen ++)) {
+				rdt = *gp_gen ++;
+				rdy = rdx & 15;
+				rdx = rdx >> 4;
 #ifdef ENABLE_PROPELLERS
-				if (rdt == PROPELLER_TILE) {
+				if (rdt == 31) {
 					add_propeller (rdx, rdy);
 				} else
-#endif
+#endif				
+				//draw_tile (rdx << 1, TOP_ADJUST + (rdy << 1), rdt);
 				draw_game_tile (rdx, rdy, rdt);
-// CUSTOM {
-				if (rdt == 23 || rdt == 24) {
-					shines_add (rdx, rdy);
-				}
-// } END_OF_CUSTOM				
 			}
 		}
 	}
 	
 	// Clear open locks
 #ifndef DEACTIVATE_KEYS	
-	for (gpit = 0; gpit < c_max_bolts; gpit ++) {
+	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
 		if (n_pant == lknp [gpit]) {
 			if (!lkact [gpit]) {
 				rdx = (lkxy [gpit] >> 4);
 				rdy = (lkxy [gpit] & 15);
-				draw_game_tile (rdx, rdy, rdt);
+				//draw_tile (rdx << 1, (rdy << 1) + TOP_ADJUST, 0);
+				draw_game_tile (rdx, rdy, 0);
 			}
 		}
 	}	

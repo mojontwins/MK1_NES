@@ -1,4 +1,4 @@
-// NES MK1 v0.3
+// NES MK1 v0.4
 // Copyleft Mojon Twins 2013, 2015
 
 // player.h
@@ -13,13 +13,15 @@ void __fastcall__ player_init (void) {
 	pvx = pvy = 0;
 #ifdef PLAYER_MOGGY_STYLE	
 	pfacing = FACING_DOWN;
+	pfacinghlast = FACING_RIGHT;
 #else
 	pfacing = 0;
 #endif	
-	pfr = pctfr = 0;
+	pfr = 0;
 	pj = pctj = 0;
 	psprid = 6;
 	pobjs = pkeys = 0;
+	plife = PLAYER_LIFE;
 	pgotten = 0;
 #ifdef MAX_AMMO
 #ifdef INITIAL_AMMO
@@ -34,10 +36,14 @@ void __fastcall__ player_init (void) {
 #endif
 	pstate = EST_NORMAL;
 	pkilled = 0;
-
+#ifdef DIE_AND_RESPAWN
 	px_safe = px;
 	py_safe = py;
 	n_pant_safe = n_pant;
+#endif
+#ifdef PLAYER_TURRET
+	pfixct = 0;
+#endif
 }
 
 void __fastcall__ kill_player (void) {
@@ -45,6 +51,9 @@ void __fastcall__ kill_player (void) {
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
 	pctstate = 100;	
+#else
+	pstate = EST_REBOUND;
+	pctstate = 16;
 #endif
 	sfx_play (4, 0);
 #ifdef DIE_AND_RESPAWN
@@ -102,11 +111,11 @@ void process_tile (x0, y0, x1, y1) {
 			pkeys --;
 			// Sound
 			sfx_play (1, 1);
-		} else {
+		} /*else {
 			no_on = 1;
 			no_ct = 100;
 			oam_meta_spr ((x0 << 4) + 8, (y0 << 4) - 13 + SPRITE_ADJUST, 160, spr_en_12);	
-		}
+		}*/
 	} 
 #endif
 }
@@ -117,7 +126,7 @@ void __fastcall__ fire_bullet (void) {
 	// Creates a new bullet (if possible);
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
 		if (bst [gpit] == 0) {
-			bst [gpit] = 1;
+			bst [gpit] = 1 + rand8() & 7;
 #ifdef MAX_AMMO
 			if (!pammo) return;
 			pammo --;
@@ -143,7 +152,7 @@ void __fastcall__ fire_bullet (void) {
 					bmx [gpit] = 0;
 					break;
 				case FACING_UP:
-					bx [gpit] = prx + 8 - PLAYER_BULLET_X_OFFSET;
+					bx [gpit] = prx + 9 - PLAYER_BULLET_X_OFFSET;
 					by [gpit] = pry - 4;
 					bmy [gpit] = -PLAYER_BULLET_SPEED;
 					bmx [gpit] = 0;
@@ -206,45 +215,61 @@ void __fastcall__ bullets_move (void) {
 #ifdef ENABLE_PURSUERS
 					if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)
 #endif
-					if (collide_in (bx [gpit] + 3, by [gpit] + 3, en_x [gpjt], en_y [gpjt])) {
-						en_touched [gpjt] = 1;
-						en_cttouched [gpjt] = 8;
-						bst [gpit] = 0;
-						sfx_play (6, 2);
-						en_life [gpjt] --;						
-						if (en_life [gpjt] == 0) {	
+					{
+						if (collide_in (bx [gpit] + 3, by [gpit] + 3, en_x [gpjt], en_y [gpjt])) {
+							en_cttouched [gpjt] = 8;
+							bst [gpit] = 0;
+							sfx_play (6, 2);
+							en_life [gpjt] --;						
+							if (en_life [gpjt] == 0) {	
 #ifdef ENABLE_PURSUERS
-							if (en_t [gpjt] == 7) {
-								en_alive [gpjt] = 0;
-								en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-								en_life [gpjt] = ENEMIES_LIFE_GAUGE;
-							} else
+								if (en_t [gpjt] == 7) {
+									en_alive [gpjt] = 0;
+									en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
+									en_life [gpjt] = ENEMIES_LIFE_GAUGE;
+								} else
 #endif
-							en_t [gpjt] = 0;		
-							pkilled ++;												
+								{
+									kill_enemy (gpjt);
+									pkilled ++;	
+								}
+							}
+							break;
 						}
-						break;
 					}
+
+#ifdef ENABLE_GENERATORS
+					if (en_t [gpjt] == 7) {
+						if (collide_in (bx [gpit] + 3, by [gpit] + 3, en_x1 [gpjt], en_y1 [gpjt])) {
+							bst [gpit] = 0;
+							sfx_play (6, 2);
+							if (en_generator_life [gpjt]) {
+								en_generator_life [gpjt] --;
+								gen_was_hit [gpjt] = 4;
+							} else {
+								kill_enemy (gpjt);
+								pkilled ++;
+								// Fullería:
+								en_alive [gpjt] = 0;
+								en_cttouched [gpjt] = 8;
+								en_x [gpjt] = en_x1 [gpjt]; en_y [gpjt] = en_y1 [gpjt];
+								oam_meta_spr (0, 240, (gpjt << 4), spr_empty);
+							}
+						}
+					}
+#endif					
 				}	
 			}
-						
-			oam_spr (bx [gpit], SPRITE_ADJUST + by [gpit], 152, 1, 112 + (gpit << 2));
+			
+			oam_spr (bx [gpit], SPRITE_ADJUST + by [gpit], 256-bst [gpit], 1, 112 + (gpit << 2));
+		
 		}
+
 		if (!bst [gpit]) {			
-			oam_spr (0, 240, 132, 1, 152 + (gpit << 2));
+			oam_spr (0, 240, 255, 1, 112 + (gpit << 2));
 		}
 	}
 }
-#endif
-
-#ifdef PLAYER_MOGGY_STYLE
-const unsigned char player_frames [] = {0, 1, 2, 3, 4, 5, 6, 7};
-#else
-const unsigned char player_frames [] = {
-	4, 5, 6, 5, 
-	0, 1, 2, 1,
-	7, 3
-};
 #endif
 
 void __fastcall__ player_move (void) {
@@ -260,7 +285,11 @@ void __fastcall__ player_move (void) {
 
 #ifdef PLAYER_MOGGY_STYLE		
 	// Poll pad
-	if (!(i & PAD_UP || i & PAD_DOWN)) {
+	if (!(i & PAD_UP || i & PAD_DOWN)
+#ifdef PLAYER_TURRET
+		|| pfixct
+#endif		
+	) {
 		pfacingv = 0xff;
 		if (pvy > 0) {
 			pvy -= PLAYER_RX;
@@ -275,13 +304,19 @@ void __fastcall__ player_move (void) {
 	
 	if (i & PAD_UP) {
 		pfacingv = FACING_UP;
+#ifdef PLAYER_TURRET
+		if (!pfixct)
+#endif		
 		if (pvy > -PLAYER_VX_MAX) {
 			pvy -= PLAYER_AX;
 		}
 	}
 	
-	if (i & PAD_DOWN) {
+	if (i & PAD_DOWN) {		
 		pfacingv = FACING_DOWN;
+#ifdef PLAYER_TURRET
+		if (!pfixct)
+#endif		
 		if (pvy < PLAYER_VX_MAX) {
 			pvy += PLAYER_AX;
 		}
@@ -323,6 +358,7 @@ void __fastcall__ player_move (void) {
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
+	if (py > 11264) py = 11264;
 	
 	// Collision
 	prx = px >> 6;
@@ -347,13 +383,11 @@ void __fastcall__ player_move (void) {
 #ifdef PLAYER_MOGGY_STYLE			
 	} else if (pvy > 0)
 #else
-	} else if (pvy + pgtmy > 0)
+	} else if (pvy + pgtmy > 0 && ((pry - 1) & 15) < 8)
 #endif		
 	{
 		pty1 = (pry + 15) >> 4;
-#ifndef PLAYER_MOGGY_STYLE
- 		if (((pry - 1) & 15) < 8)		
-#endif		
+		if ((attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1)) hitv = 1;
 		if ((attr (ptx1, pty1) & 12) || (attr (ptx2, pty1) & 12)) {
 			pvy = 0;
 			pry = ((pty1 - 1) << 4);
@@ -362,7 +396,6 @@ void __fastcall__ player_move (void) {
 			pgotten = 0;
 		}
 	}
-	if (pvy != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1);
 	
 	pty1 = (pry + 16) >> 4;
 	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
@@ -408,19 +441,7 @@ void __fastcall__ player_move (void) {
 	// Conveyors
 	if (ppossee) {
 		pry = py >> 6;
-		ptx1 = (prx + 4) >> 4;
-		pty1 = (pry + 16) >> 4;
-		gpit = attr (ptx1, pty1);
-		if (gpit & 32) {
-			pgotten = 1; 
-			pgtmy = 0;
-			if (gpit & 1) {
-				pgtmx = 64;
-			} else {
-				pgtmx = -64;
-			}
-		}
-		ptx1 = (prx + 11) >> 4;
+		ptx1 = (prx + 8) >> 4;
 		pty1 = (pry + 16) >> 4;
 		gpit = attr (ptx1, pty1);
 		if (gpit & 32) {
@@ -436,7 +457,11 @@ void __fastcall__ player_move (void) {
 #endif	
 	
 	// Poll pad
-	if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
+	if (!(i & PAD_LEFT || i & PAD_RIGHT)
+#ifdef PLAYER_TURRET
+		|| pfixct
+#endif		
+	) {
 		pfacingh = 0xff;
 		if (pvx > 0) {
 			pvx -= PLAYER_RX;
@@ -449,38 +474,52 @@ void __fastcall__ player_move (void) {
 		}
 	}
 
+#ifdef ENABLE_SPRINTING
 	psprint = ((i & PAD_B) && ppossee);
 	if (!psprint && ppossee) {
 		if (pvx < -PLAYER_VX_MAX) pvx = -PLAYER_VX_MAX;
 		if (pvx > PLAYER_VX_MAX) pvx = PLAYER_VX_MAX;
 	}
-	
+#endif
+
 	if (i & PAD_LEFT) {
-		pfacingh = FACING_LEFT;
+		pfacinghlast = pfacingh = FACING_LEFT;
+#ifdef ENABLE_SPRINTING
 		if (psprint) {
 			if (pvx > -PLAYER_VX_SPRINT_MAX) {
 				pvx -= PLAYER_AX_SPRINT;
 			}
-		} else if (pvx > -PLAYER_VX_MAX) {
-			pvx -= PLAYER_AX;			
+		} else 
+#endif
+#ifdef PLAYER_TURRET
+		if (!pfixct)
+#endif
+		if (pvx > -PLAYER_VX_MAX) {
+			pvx -= PLAYER_AX;
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 8;
-#endif		
+#endif
 	}
 	
 	if (i & PAD_RIGHT) {
-		pfacingh = FACING_RIGHT;
+		pfacinghlast = pfacingh = FACING_RIGHT;
+#ifdef ENABLE_SPRINGTING
 		if (psprint) {
 			if (pvx < PLAYER_VX_SPRINT_MAX) {
 				pvx += PLAYER_AX_SPRINT;
 			}
-		} else if (pvx < PLAYER_VX_MAX) {
+		} else 
+#endif
+#ifdef PLAYER_TURRET
+		if (!pfixct)
+#endif		
+		if (pvx < PLAYER_VX_MAX) {
 			pvx += PLAYER_AX;
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 0;
-#endif			
+#endif
 	}
 	
 	// Move
@@ -504,6 +543,7 @@ void __fastcall__ player_move (void) {
 	if (pvx + pgtmx < 0) {
 #endif
 		ptx1 = (prx + 4) >> 4;
+		if ((attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1)) hith = 1;
 		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
 			pvx = 0;
 			prx = ((ptx1 + 1) << 4) - 4;
@@ -516,6 +556,7 @@ void __fastcall__ player_move (void) {
 	} else if (pvx + pgtmx > 0) {
 #endif		
 		ptx1 = (prx + 11) >> 4;
+		if ((attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1)) hith = 1;
 		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
 			pvx = 0;
 			prx = ((ptx1 - 1) << 4) + 4;
@@ -523,7 +564,6 @@ void __fastcall__ player_move (void) {
 			wall = WRIGHT;
 		}
 	}
-	if (pvx != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1);
 #endif	
 
 	// Facing
@@ -554,20 +594,11 @@ void __fastcall__ player_move (void) {
 	
 	if (hitv) {
 		phit = 1;
-#ifdef FULL_BOUNCE
-		pvy = add_sign (-pvy, PLAYER_VX_MAX);
-#endif
-#ifdef DOUBLE_BOUNCE
-		pvy = add_sign (-pvy, PLAYER_VX_MAX << 1);
-#endif		
-	} else if (hith) {
+		pvy = add_sign (-pvy, PLAYER_V_REBOUND);
+	}
+	if (hith) {
 		phit = 1;
-#ifdef FULL_BOUNCE
-		pvx = add_sign (-pvx, PLAYER_VX_MAX);
-#endif
-#ifdef DOUBLE_BOUNCE
-		pvx = add_sign (-pvx, PLAYER_VX_MAX << 1);
-#endif		
+		pvx = add_sign (-pvx, PLAYER_V_REBOUND);
 	}
 	if (pstate != EST_PARP) {
 		if (phit) {
@@ -616,6 +647,8 @@ void __fastcall__ player_move (void) {
 	// Fire bullets
 	// ************
 	
+	if (pfixct) pfixct --;
+
 #ifdef PLAYER_CAN_FIRE
 #ifdef FIRE_TO_PUSH
 	if ((i & PAD_A) && !pfiring && !pushed_any) {
@@ -624,6 +657,9 @@ void __fastcall__ player_move (void) {
 #endif
 		pfiring = 1;
 		fire_bullet ();
+#ifdef PLAYER_TURRET		
+		pfixct = TURRET_FRAMES;
+#endif		
 	}
 	
 	if (!(i & PAD_A)) pfiring = 0;
@@ -632,12 +668,22 @@ void __fastcall__ player_move (void) {
 	// Calc frame
 	// Basic, v.1.0
 #ifdef PLAYER_MOGGY_STYLE
-	if (pvx != 0 || pvy != 0) {
-		pctfr ++;
-		if (pctfr == 4) {
-			pctfr = 0;
-			pfr = !pfr;
-			psprid = player_frames [pfacing + pfr];
+	if (pstate == EST_REBOUND) {
+		psprid = pvx >= 0 ? 24 : 25;
+	} else {
+#ifdef PLAYER_TURRET
+		if (pfixct) {
+			psprid = pfacing + 4;
+		} else
+#endif		
+		if (abs(pvx) < 64 && abs(pvy) < 64) {
+			psprid = pfacing - 1;
+		} else {
+			if (pfacing == FACING_LEFT || pfacing == FACING_RIGHT) {
+				psprid = pfacing + ((prx >> 4) & 3);
+			} else {
+				psprid = pfacing + ((pry >> 4) & 3);
+			}
 		}
 	}
 #else
@@ -666,7 +712,7 @@ void __fastcall__ player_move (void) {
 }
 
 void __fastcall__ render_player (void) {
-	if (pstate == EST_NORMAL || half_life) {
+	if (pstate != EST_PARP || half_life) {
 		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
 	} else {
 		oam_meta_spr (0, 240, 128, spr_pl_empty);

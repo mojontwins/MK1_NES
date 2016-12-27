@@ -1,6 +1,4 @@
 
-if (!res_on) {
-
 	// Modify v
 	enf_vx [gpit] = saturate (enf_vx [gpit] + add_sign (prx - en_x [gpit], FANTY_A), FANTY_MAXV);
 	enf_vy [gpit] = saturate (enf_vy [gpit] + add_sign (pry - en_y [gpit], FANTY_A), FANTY_MAXV);
@@ -63,8 +61,6 @@ if (!res_on) {
 		}
 	}
 #endif
-
-}
 
 en_fr = (en_x [gpit] >> 3) & 1;
 en_facing = (en_x [gpit] > prx) ? 0 : 2;

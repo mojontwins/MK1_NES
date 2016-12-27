@@ -1,5 +1,8 @@
 			// Hotspot interaction
 			if (hrt) {
+
+
+/*
 				if (hrt == HOTSPOT_TYPE_RESONATOR) {
 					if (res_on == 0) {
 						if (prx + 12 >= hrx && prx <= hrx + 12 && pry + 15 >= hry && pry + 8 <= hry && pvy >= PLAYER_G << 1) {
@@ -20,11 +23,13 @@
 							sfx_play (1, 1);
 						}
 					}
-				} else if (collide_in (prx + 8, pry + 8, hrx, hry)) {
-					oam_meta_spr (0, 240, 176, spr_empty);
+				} else 
+*/
+
+					oam_meta_spr (0, 240, 176, spr_pl_empty);
 					switch (hrt) {
 #ifndef DEACTIVATE_OBJECTS
-						case HOTSPOT_TYPE_OBJECT:
+						case HOTSPOT_TYPE_OBJECTS:
 							pobjs ++;
 							sfx_play (3, 1);
 							break;
@@ -49,6 +54,19 @@
 								pammo = MAX_AMMO;
 							break;
 #endif
+#ifdef HOTSPOT_TYPE_ENEMRESPWN
+						case HOTSPOT_TYPE_ENEMRESPWN:
+							sfx_play (6, 2);
+							persistent_deaths_load ();
+							enems_load ();
+							pr_str_upd (" ALL ENEMIES RESPAWNED...");
+							// CUSTOM {
+							flash_ct = 32;
+							pal_bg (mypal_redbg);
+							// } END_OF_CUSTOM
+							break;
+#endif
+/*
 						case HOTSPOT_TYPE_STAR:
 							pstars ++;
 							sfx_play (3, 1);
@@ -78,6 +96,7 @@
 							}
 
 							break;
+*/
 					}
 					hry = 240;
 					hact [n_pant] = 0;

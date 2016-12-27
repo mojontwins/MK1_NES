@@ -1,4 +1,4 @@
-// NES MK1 v0.3
+// NES MK1 v0.4
 // Copyleft Mojon Twins 2013, 2015
 
 // frame.h
@@ -16,5 +16,5 @@ const unsigned char game_frame_attrs [] = {
 */
 void __fastcall__ draw_game_frame (void) {
 	vram_write ((unsigned char *) game_frame, 0x2360, 96);
-	for (rdit = 0; rdit < 16; rdit ++) attr_table [48 + rdit] = 0xff;
+	for (rdit = 0; rdit < 16; rdit ++) attr_table [48 + rdit] = 0x00;
 }
