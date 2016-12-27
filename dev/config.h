@@ -1,4 +1,4 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // ============================================================================
@@ -7,16 +7,16 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					4		//
-#define MAP_H					6		// Dimensiones del mapa, en pantallas.
+#define MAP_W 					6		//
+#define MAP_H					4		// Dimensiones del mapa, en pantallas.
 #ifdef DEBUG
 #define SCR_INI DEBUG_SCR_INI
 #define PLAYER_INI_X DEBUG_INI_X
 #define PLAYER_INI_Y DEBUG_INI_Y
 #else
-#define SCR_INI					20		// Pantalla de inicio
-#define PLAYER_INI_X			1		//
-#define PLAYER_INI_Y			4		// Coordenadas de inicio del jugador, a nivel de tiles
+#define SCR_INI					18		// Pantalla de inicio
+#define PLAYER_INI_X			2		//
+#define PLAYER_INI_Y			5		// Coordenadas de inicio del jugador, a nivel de tiles
 #endif
 #define SCR_END					20		// Pantalla del final. 99 si da igual.
 #define PLAYER_END_X			0		//
@@ -66,19 +66,26 @@
 //#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
 
+/*
 #define ENABLE_FANTY
 #define FANTY_BASE_SPRID		16
 #define FANTY_A 				4
 #define FANTY_MAXV 				64
 #define FANTY_COLLIDES
+*/
 
 #define ENABLE_SAW
 #define SAW_BASE_SPRID			20
 #define SAW_V_DISPL				4
-#define SAW_EMERGING_STEPS		10 		// Must be (16  or 8)
+#define SAW_EMERGING_STEPS		10 		
 
 #define PERSISTENT_ENEMIES
-//#define ENABLE_CONVEYORS
+#define ENABLE_CONVEYORS
+
+#define ENABLE_PROPELLERS
+#define PROPELLER_AY			16	
+#define PROPELLER_VY_MAX		256
+#define PROPELLER_TILE			32
 
 
 // Shooting behaviour
@@ -197,6 +204,6 @@
 // Save for 10 (special), but that's obvious, innit?
 
 const unsigned char tbehs [] = {
-	0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 1, 4,10,10,
-	0, 0, 8, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0
+	0, 0, 0, 0, 8, 8, 8, 4, 0, 0, 0, 0, 0, 8, 8,10,
+	0, 0, 0, 0, 0, 0, 0, 1, 1,40,41, 0, 0, 0, 0, 0
 };

@@ -1,4 +1,4 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // enengine.h
@@ -156,7 +156,7 @@ void __fastcall__ enems_move (void) {
 			if (!en_cttouched [gpit]) {
 				en_touched [gpit] = 0;
 			} else {
-				oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_explosion);
+				oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_en_11);
 				continue;
 			}
 		}

@@ -15,7 +15,7 @@ Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, o
 Dim As Byte d
 Dim As String o, prefix
 Dim As Integer BigOrigMap (255, 255)
-Dim As uByte decos (255, 127), decosOn (255 - 1)
+Dim As uByte decos (255, 31), decosOn (255 - 1)
 
 
 Type MyBolt

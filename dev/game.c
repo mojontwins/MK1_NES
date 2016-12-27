@@ -1,10 +1,10 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // Uses neslib and related tools by Shiru
 
-// Use 0 form ROM1, 1 for ROM2, 2 for ROM3
-#define BASE_LEVEL		0
+// Use 0 form ROM1, 2 for ROM2, 4 for ROM3
+#define BASE_LEVEL		2
 
 // Comment this when you are done
 //#define DEBUG
@@ -14,14 +14,14 @@
 #define DEBUG_INI_Y		1
 //
 
+#define MAX_GANCHOS		16 	// Plenty!
+
 #define MSB(x)			(((x)>>8))
 #define LSB(x)			(((x)&0xff))
 #define FIXBITS			6
 #define SPRITE_ADJUST	7
 #define TOP_ADJUST		2
 #define COMM_POOL		((unsigned char*)0x0300)
-
-#define MAX_CERROJOS 16 // max 32, make it as small as possible.
 
 // Update list
 #define UPDATE_LIST_SIZE 32
@@ -32,7 +32,8 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
 // OAM TABLE
 /*
-	0-15:	Sprite enemies	(OAM bytes	0-63)
+	0-23:	Sprite enemies	(OAM bytes	0-47)
+	24: 	Casual shine 	(OAM bytes  96-99)
 	32:		player 			(OAM bytes  128-155)
 	39:		Resonator # 	(OAM bytes	156-159)
 	40-43:	NO!				(OAM bytes 	160-175)
@@ -76,8 +77,7 @@ unsigned char n_pant, on_pant;
 unsigned char *gp_gen, *gp_tmap;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
-unsigned char rda, rdb, rdc;
-unsigned char rdct;
+unsigned char rda, rdb, rdc, rdct;
 
 unsigned char olife, okeys, oobjs, oammo, okilled;
 
@@ -110,6 +110,9 @@ signed int pgtmx, pgtmy;
 // Aux player
 unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
 unsigned char pfacingv, pfacingh, wall, hitv, hith;
+#ifdef ENABLE_PROPELLERS
+unsigned char ppropelled;
+#endif
 
 // Bullets
 #ifdef PLAYER_CAN_FIRE
@@ -150,6 +153,13 @@ unsigned char res_ct, res_subct, res_on;
 // NO!
 unsigned char no_on, no_ct;
 
+// CUSTOM {
+unsigned char shines [MAX_GANCHOS];
+unsigned char max_shines;
+unsigned char last_shine_ct;
+unsigned char shine_active, shine_active_x, shine_active_y;
+// } END_OF_CUSTOM;
+
 // Everything else on normal RAM
 #pragma bssseg (push,"BSS")
 #pragma dataseg(push,"BSS")
@@ -172,7 +182,11 @@ unsigned char ht [MAP_W * MAP_H];
 #endif
 unsigned char hact [MAP_W * MAP_H];
 #ifndef DEACTIVATE_KEYS
-unsigned char lkxy [MAX_CERROJOS], lknp [MAX_CERROJOS], lkact [MAX_CERROJOS];
+#if N_BOLTS_0 >= N_BOLTS_1
+unsigned char lkxy [N_BOLTS_0], lknp [N_BOLTS_0], lkact [N_BOLTS_0];
+#else
+unsigned char lkxy [N_BOLTS_1], lknp [N_BOLTS_1], lkact [N_BOLTS_1];
+#endif
 unsigned char xy;
 #endif
 #ifdef ACTIVATE_SCRIPTING
@@ -211,11 +225,16 @@ signed int px_safe, py_safe;
 #endif
 
 unsigned char level, game_over;
+unsigned char c_max_bolts;
 
 // *************
 // Main includes
 // *************
 
+#ifdef ENABLE_PROPELLERS
+void add_propeller (unsigned char x, unsigned char y);
+#endif
+#include "engine/shines.h"
 #include "engine/printer.h"
 #include "engine/general.h"
 #ifndef DEACTIVATE_KEYS
@@ -225,6 +244,9 @@ unsigned char level, game_over;
 #include "engine/breakable.h"
 #endif
 #include "engine/hotspots.h"
+#ifdef ENABLE_PROPELLERS
+#include "engine/propellers.h"
+#endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
@@ -238,6 +260,7 @@ void __fastcall__ prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
 	oam_spr (0, 240, 0, 0, 156);
 	oam_meta_spr (0, 240, 160, spr_empty);
+	clear_propellers ();
 
 #ifdef PERSISTENT_ENEMIES
 	// Preserve enems
@@ -322,7 +345,12 @@ void main(void) {
 		if (level == 0)  {
 			c_map = (unsigned char *) (map_0_tiles);
 			c_decos = (unsigned char **) (map_0_decos);
+#if N_BOLTS_0 > 0
 			c_locks = (unsigned char *) (map_0_locks);
+#else
+			c_locks = 0;
+#endif		
+			c_max_bolts = N_BOLTS_0;
 			c_enems = (unsigned char *) (enemies_ROM_enems0);
 			c_hotspots = (unsigned char *) (hotspots_ROM_enems0);
 			c_pal_bg = (unsigned char *) mypal_game_bg0;
@@ -333,7 +361,12 @@ void main(void) {
 		} else {
 			c_map = (unsigned char *) (map_1_tiles);
 			c_decos = (unsigned char **) (map_1_decos);
+#if N_BOLTS_1 > 0
 			c_locks = (unsigned char *) (map_1_locks);
+#else
+			c_locks = 0;
+#endif
+			c_max_bolts = N_BOLTS_1;
 			c_enems = (unsigned char *) (enemies_ROM_enems1);
 			c_hotspots = (unsigned char *) (hotspots_ROM_enems1);
 			c_pal_bg = (unsigned char *) mypal_game_bg1;
@@ -406,6 +439,8 @@ void main(void) {
 				}
 			}
 
+			move_propellers ();
+			shines_do ();
 			player_move ();
 	
 			enems_move ();

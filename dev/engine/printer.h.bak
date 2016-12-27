@@ -1,4 +1,4 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // printer.h
@@ -6,7 +6,7 @@
 
 
 // fade out
-void  fade_out (void) {
+void __fastcall__ fade_out (void) {
 	for (fader = 4; fader > -1; fader --) {
 		pal_bright (fader);
 		delay (fade_delay);
@@ -14,30 +14,30 @@ void  fade_out (void) {
 }
 
 // fade in
-void  fade_in (void) {
+void __fastcall__ fade_in (void) {
 	for (fader = 0; fader < 5; fader ++) {
 		pal_bright (fader);
 		delay (fade_delay);
 	}	
 }
 /*
-void  fade_in_fast (void) {
+void __fastcall__ fade_in_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (4); delay (1);
 }
 
-void  fade_out_fast (void) {
+void __fastcall__ fade_out_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (0); delay (1);
 }
 */
 // Clear update list
-void  clear_update_list (void) {
+void __fastcall__ clear_update_list (void) {
 	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
 		update_list [i] = 0;	
 }
 
-void  cls (void) {
+void __fastcall__ cls (void) {
 	vram_adr(0x2000);
 	vram_fill(255,0x3c0);
 	vram_adr (0x23c0);
@@ -58,10 +58,12 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	gp_addr = ((y<<5) + x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
+	//vram_adr (gp_addr);
 	vram_put (*gp_tmap++);
 	gp_addr+=31;
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
+	//vram_adr (gp_addr);
 	vram_put (*gp_tmap);	
 }
 
@@ -107,18 +109,10 @@ void p_t (unsigned char x, unsigned char y, unsigned char n) {
 	update_list [update_index++] = (n % 10) + 16;
 }
 
-void draw_game_tile (unsigned char x, unsigned char y, unsigned char t) {
-	rdit = x + (y << 4);
-	map_buff [rdit] = t;
-	map_attr [rdit] = tbehs [t];
-#ifdef BREAKABLE_WALLS
-	brk_buff [rdit] = 1;
-#endif
-	//if (t == 0 && (rand8 () & 15) == 1) t = 16;	// ALT BG
-	draw_tile (x + x, TOP_ADJUST + y + y, t);
-}
-
-void draw_scr (void) {
+void __fastcall__ draw_scr (void) {
+	// Clear attribute table
+	//for (rdit = 0; rdit < 56; rdit ++) attr_table [rdit] = 0xff;
+	
 	// Draw current screen
 	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
 	
@@ -141,33 +135,35 @@ void draw_scr (void) {
 		rdx = (rdx + 2) & 31; if (!rdx) rdy +=2;
 	}
 
-	// Draw decorations
-	if (c_decos [n_pant]) {
-		gp_gen = (unsigned char *) c_decos [n_pant];
-
-		while (rdt = *gp_gen ++) {
-			if (rdt & 0x80) {
-				rdt &= 0x7F;
-				rdct = 1;
-			} else {
-				rdct = *gp_gen ++;
-			}
-			while (rdct --) {
-				rdau = *gp_gen ++;
-				rdx = rdau >> 4; rdy = rdau & 15;
-				draw_game_tile (rdx, rdy, rdt);
+	// Decorations
+	if (c_map_decos) {
+		if (c_map_decos [n_pant]) {
+			gp_gen = (unsigned char *) c_map_decos [n_pant];
+			while (0xff != (rdx = *gp_gen ++)) {
+				rdt = *gp_gen ++;
+				rdy = rdx & 15;
+				rdx = rdx >> 4;
+#ifdef ENABLE_PROPELLERS
+				if (rdt == PROPELLER_TILE) {
+					add_propeller (rdx, rdy);
+				} else
+#endif				
+				draw_tile (rdx << 1, TOP_ADJUST + (rdy << 1), rdt);
 			}
 		}
 	}
 	
 	// Clear open locks
 #ifndef DEACTIVATE_KEYS	
-	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
+	for (gpit = 0; gpit < c_max_bolts; gpit ++) {
 		if (n_pant == lknp [gpit]) {
 			if (!lkact [gpit]) {
 				rdx = (lkxy [gpit] >> 4);
 				rdy = (lkxy [gpit] & 15);
-				draw_game_tile (rdx, rdy, rdt);
+				draw_tile (rdx << 1, (rdy << 1) + TOP_ADJUST, 0);
+				rdit = rdx + (rdy << 4);
+				map_attr [rdit] = 0;
+				map_buff [rdit] = 0;
 			}
 		}
 	}	

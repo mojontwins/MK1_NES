@@ -13,7 +13,7 @@
 								if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 								if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
 								en_ct [gpit] = 50 + (rand8 () & 31);
-								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_explosion);
+								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_en_11);
 							}
 							break;
 						case 1:

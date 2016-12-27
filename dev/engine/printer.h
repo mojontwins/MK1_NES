@@ -1,4 +1,4 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // printer.h
@@ -6,7 +6,7 @@
 
 
 // fade out
-void  fade_out (void) {
+void __fastcall__ fade_out (void) {
 	for (fader = 4; fader > -1; fader --) {
 		pal_bright (fader);
 		delay (fade_delay);
@@ -14,30 +14,30 @@ void  fade_out (void) {
 }
 
 // fade in
-void  fade_in (void) {
+void __fastcall__ fade_in (void) {
 	for (fader = 0; fader < 5; fader ++) {
 		pal_bright (fader);
 		delay (fade_delay);
 	}	
 }
 /*
-void  fade_in_fast (void) {
+void __fastcall__ fade_in_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (4); delay (1);
 }
 
-void  fade_out_fast (void) {
+void __fastcall__ fade_out_fast (void) {
 	pal_bright (2); delay (1);
 	pal_bright (0); delay (1);
 }
 */
 // Clear update list
-void  clear_update_list (void) {
+void __fastcall__ clear_update_list (void) {
 	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
 		update_list [i] = 0;	
 }
 
-void  cls (void) {
+void __fastcall__ cls (void) {
 	vram_adr(0x2000);
 	vram_fill(255,0x3c0);
 	vram_adr (0x23c0);
@@ -119,6 +119,10 @@ void draw_game_tile (unsigned char x, unsigned char y, unsigned char t) {
 }
 
 void draw_scr (void) {
+// CUSTOM {
+	max_shines = 0;
+	last_shine_ct = 0;
+// } END_OF_CUSTOM
 	// Draw current screen
 	gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
 	
@@ -134,7 +138,9 @@ void draw_scr (void) {
 #ifdef BREAKABLE_WALLS
 		brk_buff [rdit] = 1;
 #endif
-		if (rdt == 0 && (rand8 () & 15) == 1) rdt = 16;	// ALT BG
+// CUSTOM {
+		//if (rdt == 0 && (rand8 () & 15) == 1) rdt = 16;	// ALT BG
+// } END_OF_CUSTOM
 
 		draw_tile (rdx, rdy, rdt);
 		
@@ -144,7 +150,7 @@ void draw_scr (void) {
 	// Draw decorations
 	if (c_decos [n_pant]) {
 		gp_gen = (unsigned char *) c_decos [n_pant];
-
+	
 		while (rdt = *gp_gen ++) {
 			if (rdt & 0x80) {
 				rdt &= 0x7F;
@@ -155,14 +161,24 @@ void draw_scr (void) {
 			while (rdct --) {
 				rda = *gp_gen ++;
 				rdx = rda >> 4; rdy = rda & 15;
+#ifdef ENABLE_PROPELLERS
+				if (rdt == PROPELLER_TILE) {
+					add_propeller (rdx, rdy);
+				} else
+#endif
 				draw_game_tile (rdx, rdy, rdt);
+// CUSTOM {
+				if (rdt == 23 || rdt == 24) {
+					shines_add (rdx, rdy);
+				}
+// } END_OF_CUSTOM				
 			}
 		}
 	}
 	
 	// Clear open locks
 #ifndef DEACTIVATE_KEYS	
-	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
+	for (gpit = 0; gpit < c_max_bolts; gpit ++) {
 		if (n_pant == lknp [gpit]) {
 			if (!lkact [gpit]) {
 				rdx = (lkxy [gpit] >> 4);

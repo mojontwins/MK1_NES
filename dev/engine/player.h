@@ -1,4 +1,4 @@
-// NES MK1 v0.2
+// NES MK1 v0.3
 // Copyleft Mojon Twins 2013, 2015
 
 // player.h
@@ -105,7 +105,7 @@ void process_tile (x0, y0, x1, y1) {
 		} else {
 			no_on = 1;
 			no_ct = 100;
-			oam_meta_spr ((x0 << 4) + 8, (y0 << 4) - 13 + SPRITE_ADJUST, 160, spr_no);	
+			oam_meta_spr ((x0 << 4) + 8, (y0 << 4) - 13 + SPRITE_ADJUST, 160, spr_en_12);	
 		}
 	} 
 #endif
@@ -287,6 +287,12 @@ void __fastcall__ player_move (void) {
 		}
 	}
 #else
+#ifdef ENABLE_PROPELLERS
+	if (ppropelled) {
+		pvy -= PROPELLER_AY;
+		if (pvy < -PROPELLER_VY_MAX) pvy = -PROPELLER_VY_MAX;
+	} else
+#endif
 	// gravity
 	if (!pj) {
 		if (pvy < PLAYER_VY_FALLING_MAX) { 
@@ -402,7 +408,19 @@ void __fastcall__ player_move (void) {
 	// Conveyors
 	if (ppossee) {
 		pry = py >> 6;
-		ptx1 = (prx + 8) >> 4;
+		ptx1 = (prx + 4) >> 4;
+		pty1 = (pry + 16) >> 4;
+		gpit = attr (ptx1, pty1);
+		if (gpit & 32) {
+			pgotten = 1; 
+			pgtmy = 0;
+			if (gpit & 1) {
+				pgtmx = 64;
+			} else {
+				pgtmx = -64;
+			}
+		}
+		ptx1 = (prx + 11) >> 4;
 		pty1 = (pry + 16) >> 4;
 		gpit = attr (ptx1, pty1);
 		if (gpit & 32) {
