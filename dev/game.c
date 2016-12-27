@@ -1,5 +1,5 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // Uses neslib and related tools by Shiru
 
@@ -8,10 +8,10 @@
 
 // Comment this when you are done
 //#define DEBUG
-#define DEBUG_LEVEL		1
-#define DEBUG_SCR_INI	79
-#define DEBUG_INI_X		13
-#define DEBUG_INI_Y		2
+#define DEBUG_LEVEL		0
+#define DEBUG_SCR_INI	20
+#define DEBUG_INI_X		14
+#define DEBUG_INI_Y		5
 //
 
 #define MSB(x)			(((x)>>8))
@@ -27,12 +27,24 @@
 
 // OAM TABLE
 /*
-	0-23:	Sprite enemies	(OAM bytes	0-95)
-	24-27:	Object in inv.	(OAM bytes	96-111)
-	28-31:	NO!				(OAM bytes	112-127)
-	32-37:	player 			(OAM bytes  128-151)
-	44-47: 	hotspot 		(OAM bytes  176-191)
+	00-23 - Enemigos 		(OAM 0-95)
+	24-27 - Objeto Inv.		(OAM 96-111)
+	28-31 - NO!				(OAM 112-127)
+	32-37 - player 			(OAM 128-151)
+	38-41 - hotspot 		(OAM 152-167) <- Mover
+	42-61 - contenedores	(OAM 168-247)
+	62    - resonador cd.	(OAM 248-251)
+	63    - patata patam ?
 */
+
+#define OAM_OCCLU		0
+#define OAM_ENEMS		48
+#define OAM_INVENTORY	96
+#define OAM_NO			112
+#define OAM_PLAYER		128
+#define OAM_HOTSPOTS	152
+#define OAM_CONTAINERS	168
+#define OAM_RESONATOR	248
 
 // **************
 // * const data *
@@ -45,11 +57,6 @@
 #include "assets/tiledata1.h"
 #include "assets/mapa.h"
 #include "assets/enems.h"
-
-#ifdef ACTIVATE_SCRIPTING
-extern const unsigned char *e_scripts [];
-extern const unsigned char *f_scripts [];
-#endif
 
 // Music
 extern const unsigned char m_ingame_1 [];
@@ -107,9 +114,6 @@ unsigned char plife, pcontinues;
 #ifndef DEACTIVATE_KEYS
 unsigned char pkeys;
 #endif
-#ifdef PLAYER_KILLS_ENEMIES
-unsigned char pkilled;
-#endif
 unsigned char pammo, pfiring;
 #ifdef PLAYER_TURRET
 unsigned char pfixct;
@@ -130,6 +134,9 @@ unsigned char pfacingv, pfacingh;
 unsigned char wall, hitv, hith;
 #ifdef ENABLE_PROPELLERS
 unsigned char ppropelled;
+#endif
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+unsigned char pkilled;
 #endif
 
 // Bullets
@@ -207,16 +214,18 @@ unsigned char lkxy [MAX_CERROJOS], lknp [MAX_CERROJOS], lkact [MAX_CERROJOS];
 unsigned char xy;
 #endif
 #ifdef ACTIVATE_SCRIPTING
-void __fastcall__ msc_init_all (void);
-void __fastcall__ run_script (void);
-#define MAX_FLAGS 8
-unsigned char flags [MAX_FLAGS];
-unsigned char script_something_done;
-unsigned char script_result;
-unsigned char *script;
-#ifdef ENABLE_FIRE_ZONE
+void msc_clear_flags (void);
+void run_script (unsigned char whichs);
+#if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)
 unsigned char f_zone_ac, fzx1, fzx2, fzy1, fzy2;
 #endif
+#endif
+#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_CONTAINERS)
+#define MAX_FLAGS 16
+unsigned char flags [MAX_FLAGS];
+#endif
+#ifdef ENABLE_CONTAINERS
+unsigned char upd_cont_index;
 #endif
 
 // Baddies count. Properly fill this value!
@@ -246,6 +255,10 @@ signed int px_safe, py_safe;
 
 unsigned char level, game_over;
 
+#ifdef SCRIPTING_TEXT_BOX
+unsigned char stbl;
+#endif
+
 // *************
 // Main includes
 // *************
@@ -265,10 +278,16 @@ void add_propeller (unsigned char x, unsigned char y);
 #ifdef ENABLE_PROPELLERS
 #include "engine/propellers.h"
 #endif
+#ifdef ENABLE_CONTAINERS
+#include "engine/containers.h"
+#endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
 #include "engine/pres.h"
+#ifdef ACTIVATE_SCRIPTING
+#include "assets/mscnes.h"
+#endif
 
 // **************
 // Main functions
@@ -276,8 +295,9 @@ void add_propeller (unsigned char x, unsigned char y);
 
 void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
-	oam_spr (0, 240, 0, 0, 156);
+	/*oam_spr (0, 240, 0, 0, 156);
 	oam_meta_spr (0, 240, 160, spr_empty);
+	*/
 #ifdef ENABLE_PROPELLERS
 	clear_propellers ();
 #endif
@@ -289,7 +309,7 @@ void prepare_scr (void) {
 
 	enems_load ();
 
-#ifdef ENABLE_FIRE_ZONE
+#if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)
 	f_zone_ac = 0;
 	fzx1 = fzx2 = fzy1 = fzy2 = 240;
 #endif
@@ -321,19 +341,22 @@ void prepare_scr (void) {
 	gargajos_move ();
 #endif
 
+	containers_init ();
+	
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
-	ppu_waitnmi ();
-	fade_in ();
 
 #ifdef ACTIVATE_SCRIPTING
 	// Entering any script
-	script = (unsigned char *) e_scripts [MAP_W * MAP_H + 1];
-	run_script ();
+	run_script (2 * MAP_W * MAP_H + 1);
 	// This room script
-	script = (unsigned char *) e_scripts [n_pant];
-	run_script ();
+	run_script (n_pant + n_pant);
 #endif
+	containers_draw ();
+	//for (gpit = 0; gpit < 8; gpit ++) debug_print_hex_16_dl (gpit << 2, LINE_OF_TEXT, flags [gpit]);
+	//for (gpit = 0; gpit < 5; gpit ++) debug_print_hex_16_dl (gpit << 2, LINE_OF_TEXT, c_f [gpit]);
+	ppu_waitnmi ();
+	fade_in ();
 }
 
 void main(void) {
@@ -384,7 +407,7 @@ void main(void) {
 		cls ();
 
 		draw_game_frame ();
-		clean_gauge ();
+		//clean_gauge ();
 
 		n_pant = SCR_INI;
 		on_pant = 99;
@@ -400,10 +423,11 @@ void main(void) {
 #ifdef PERSISTENT_DEATHS
 		persistent_deaths_load ();
 #endif
-	
-#ifdef ACTIVATE_SCRIPTING
-		msc_init_all ();
+
+#ifdef CLEAR_FLAGS
+		msc_clear_flags ();
 #endif
+		flags [1] = 4;
 		half_life = 0;
 		frame_counter = 0;
 		olife = oammo = oobjs = okeys = 0xff;
@@ -412,12 +436,6 @@ void main(void) {
 		music_play (m_ingame_1);
 		set_vram_update (UPDATE_LIST_SIZE, update_list);
 
-#ifdef ACTIVATE_SCRIPTING
-		script_result = 0;
-		// Entering game script
-		script = (unsigned char *) e_scripts [MAP_W * MAP_H];
-		run_script ();
-#endif
 		ft = 1;	fade_delay = 1;
 
 		// MAIN LOOP
@@ -426,10 +444,16 @@ void main(void) {
 		ppu_on_all ();
 		palfx_init ();
 
+#ifdef ACTIVATE_SCRIPTING
+		script_result = 0;
+		// Entering game script
+		run_script (2 * MAP_W * MAP_H);
+#endif
+
 		while (1) {
 			half_life = 1 - half_life;
 			frame_counter ++;
-						
+			
 			if (pstate) {
 				pctstate --;
 				if (!pctstate) pstate = EST_NORMAL;
@@ -455,17 +479,20 @@ void main(void) {
 			render_player ();
 
 #ifdef CARRY_ONE_HS_OBJ
-			oam_meta_spr (HS_INV_X, HS_INV_Y, 96, spr_hs [pinv - 1]);
+			oam_meta_spr (HS_INV_X, HS_INV_Y, OAM_INVENTORY, spr_hs [pinv]);
+#endif
+#ifdef CARRY_ONE_FLAG_OBJ
+			oam_meta_spr (HS_INV_X, HS_INV_Y, OAM_INVENTORY, spr_hs [flags [HS_INV_FLAG]]);
 #endif
 
 			//#include "mainloop/resonators.h"
 
-			#include "mainloop/cheat.h"
+			//#include "mainloop/cheat.h"
 
 			#include "mainloop/pause.h"
 
 			#include "mainloop/flickscreen.h"
-
+	
 			#include "mainloop/hud.h"
 
 			#include "mainloop/hotspots.h"
@@ -488,17 +515,36 @@ void main(void) {
 				on_pant = n_pant;
 			}
 
+			// Throw fire script
 #ifdef ACTIVATE_SCRIPTING
-			// Run fire script
-#ifdef ENABLE_FIRE_ZONE
-			// with fire zone
-			if (i & PAD_B || (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2))) {
-#else
-			if (i & PAD_B) {
-#endif
+	#ifdef ENABLE_FAST_FIRE_ZONE
+		#ifndef FIRE_SCRIPT_WITH_ANIMATION			
+			i = pad_poll (0);
+			if (i & PAD_B) run_fire_script ();
+		#endif			
+			if (f_zone_ac) 
+				if (pry >= fzy1 && pry <= fzy2)
+					if (prx >= fzx1 && prx <= fzx2)
+						run_script (n_pant + n_pant + 1);
+	#else
+		#ifndef FIRE_SCRIPT_WITH_ANIMATION
+			#ifdef ENABLE_FIRE_ZONE
+			if (i & PAD_B || (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2))) 
+			#else
+			if (i & PAD_B)
+			#endif
 				run_fire_script ();
-			}
+		#else
+			#ifdef ENABLE_FIRE_ZONE
+			if (f_zone_ac) 
+				if (pry >= fzy1 && pry <= fzy2)
+					if (prx >= fzx1 && prx <= fzx2)
+						run_fire_script ();
+			#endif
+		#endif 
+	#endif
 #endif
+
 
 /*
 #ifdef ACTIVATE_SCRIPTING
@@ -556,8 +602,3 @@ void main(void) {
 		__asm__ ("jmp _change_rom");
 	}
 }
-
-#ifdef ACTIVATE_SCRIPTING
-#include "assets/mscnes.h"
-#endif
-

@@ -1,7 +1,7 @@
 	// Set occluding sprite @ origin
 	oam_meta_spr (
 		en_x1 [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
-		(gpit << 4), 
+		OAM_OCCLU + (gpit << 4), 
 		spr_enems [PEZONS_BASE_SPRID + 2]);
 	
 	switch (en_alive [gpit]) {
@@ -31,7 +31,7 @@
 			} else {
 				oam_meta_spr (
 					en_x1 [gpit], en_y [gpit] + SPRITE_ADJUST, 
-					ENEMS_OAM_BASE + (gpit << 4), 
+					OAM_ENEMS + (gpit << 4), 
 					spr_enems [PEZONS_BASE_SPRID + (enf_vy [gpit] >= -64)]);
 			}
 			break;

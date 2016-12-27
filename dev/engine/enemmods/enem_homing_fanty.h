@@ -91,11 +91,11 @@ en_fr = (en_x [gpit] >> 3) & 1;
 /*
 oam_meta_spr (
 	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	ENEMS_OAM_BASE + (gpit << 4), 
+	OAM_ENEMS + (gpit << 4), 
 	spr_enems [FANTY_BASE_SPRID + en_fr + en_facing]);
 */
 
 oam_meta_spr (
 	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	ENEMS_OAM_BASE + (gpit << 4), 
+	OAM_ENEMS + (gpit << 4), 
 	spr_enems [FANTY_BASE_SPRID + en_fr]);

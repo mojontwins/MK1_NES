@@ -21,5 +21,3 @@
 #define FACING_LEFT 2
 #define FACING_UP 4
 #define FACING_DOWN 6
-#define ENEMS_OAM_BASE	48
-

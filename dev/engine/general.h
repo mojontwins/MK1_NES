@@ -1,5 +1,5 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // general.h
 // General functions, vars & buffers
@@ -32,11 +32,9 @@ signed int add_sign (signed int sign, signed int value) {
 }
 
 #ifdef ACTIVATE_SCRIPTING
-void __fastcall__ run_fire_script (void) {
-	script = (unsigned char *) f_scripts [MAP_W * MAP_H];
-	run_script ();
-	script = (unsigned char *) f_scripts [n_pant];
-	run_script ();
+void run_fire_script (void) {
+	run_script (2 * MAP_W * MAP_H + 2);
+	run_script (n_pant + n_pant + 1);
 }
 #endif
 
@@ -44,9 +42,18 @@ signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
 }
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 void kill_enemy (unsigned char gpit) {
 	en_t [gpit] = 0;
+#ifdef PERSISTENT_DEATHS
 	ep_flags [n_pant + n_pant + n_pant + gpit] &= 0xFE;
+#endif
+#ifdef ACTIVATE_SCRIPTING
+	run_script (2 * MAP_W * MAP_H + 5);
+#endif
+	pkilled ++;
+#ifdef COUNT_KILLED_IN_FLAG
+	flags [COUNT_KILLED_IN_FLAG] ++;
+#endif
 }
 #endif

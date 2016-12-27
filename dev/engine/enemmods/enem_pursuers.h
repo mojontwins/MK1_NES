@@ -4,7 +4,7 @@
 							if (en_ct [gpit]) {
 								en_ct [gpit] --;
 								en_y [gpit] = 240;
-								oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
+								oam_meta_spr (0, 240, OAM_ENEMS + (gpit << 4), spr_empty);
 							} else {
 								en_alive [gpit] = 1;
 								en_x [gpit] = en_x1 [gpit];
@@ -13,7 +13,7 @@
 								if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 								if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
 								en_ct [gpit] = 50 + (rand8 () & 31);
-								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_explosion);
+								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, OAM_ENEMS + (gpit << 4), spr_explosion);
 							}
 							break;
 						case 1:
@@ -96,6 +96,6 @@
 #endif
 	
 							}
-							oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_enems [(en_s [gpit] << 1) + en_fr]);
+							oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, OAM_ENEMS + (gpit << 4), spr_enems [(en_s [gpit] << 1) + en_fr]);
 							break;
 					}					

@@ -11,7 +11,7 @@
 						if (hrt >= HS_INV_MIN && hrt <= HS_INV_MAX) {
 							rda = pinv; pinv = hrt; hrt = rda; ht [n_pant] = hrt;
 							sfx_play (3, 1);
-							oam_meta_spr (hrx, hry + SPRITE_ADJUST, 176, spr_hs [hrt - 1]);
+							oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [hrt - 1]);
 						} else if (hrt >= HS_INV_MIN + HS_USE_OFFS && hrt <= HS_INV_MAX + HS_USE_OFFS) {				
 							if (pinv == hrt - HS_USE_OFFS) {
 								if (pinv == 7) {
@@ -20,7 +20,7 @@
 									sfx_play (1, 1);
 									fx_flash ();
 									map_set (7, 8, 0);
-									oam_meta_spr (0, 240, 176, spr_empty);
+									oam_meta_spr (0, 240, OAM_HOTSPOTS, spr_empty);
 									hry = 240;
 								} else {
 									music_stop ();
@@ -54,7 +54,7 @@
 					if (hrt < HS_INV_MIN) 
 #endif					
 					{
-						oam_meta_spr (0, 240, 176, spr_empty);
+						oam_meta_spr (0, 240, OAM_HOTSPOTS, spr_empty);
 						switch (hrt) {
 #ifndef DEACTIVATE_OBJECTS
 							case HOTSPOT_TYPE_OBJECT:
@@ -82,6 +82,7 @@
 									pammo = MAX_AMMO;
 								break;
 #endif
+#ifdef HOTSPOT_TYPE_STAR								
 							case HOTSPOT_TYPE_STAR:
 								//pstars ++;
 								sfx_play (3, 1);
@@ -111,6 +112,7 @@
 								}
 								*/
 								break;
+#endif								
 						}
 						hry = 240;
 						hact [n_pant] = 0;

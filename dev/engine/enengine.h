@@ -1,5 +1,5 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // enengine.h
 // Enemies Engine & stuff
@@ -85,9 +85,9 @@ void enems_load (void) {
 	rdc = n_pant + n_pant + n_pant;// + 3;
 #endif	
 	gpit = 3; while (gpit --) {
-		oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
+		oam_meta_spr (0, 240, OAM_ENEMS + (gpit << 4), spr_empty);
 #if defined (ENABLE_SAW) || defined (ENABLE_PEZONS)	|| defined (ENABLE_GENERATORS)
-		oam_meta_spr (0, 240, (gpit << 4), spr_empty);
+		oam_meta_spr (0, 240, OAM_OCCLU + (gpit << 4), spr_empty);
 #endif	
 /*
 #if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
@@ -150,7 +150,7 @@ void enems_load (void) {
 					// Linear enems.			
 
 					// HL conversion
-					en_s [gpit] = en_t [gpit] - 1;
+					en_s [gpit] = (en_t [gpit] - 1) << 2;
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
@@ -158,7 +158,7 @@ void enems_load (void) {
 						en_mx [gpit] >>= 1;
 						en_my [gpit] >>= 1;
 					}
-					
+
 					break;
 	#ifdef ENABLE_HOMING_FANTY				
 				case 5:
@@ -196,7 +196,7 @@ void enems_load (void) {
 	#endif	
 					break;
 	#endif	
-	#ifdef ENABLE_SAWS		
+	#ifdef ENABLE_SAW
 				case 8:
 					// Saws
 
@@ -205,7 +205,7 @@ void enems_load (void) {
 					rda --;
 
 					// Sense
-					rdb = en_mx [gpit] ? 
+					rdb = (en_x1 [gpit] != en_x2 [gpit]) ? 
 						sgnc (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
 						sgnc (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
 
@@ -268,12 +268,12 @@ void enems_move (void) {
 	// Updates sprites
 	touched = 0;
 	for (gpit = 0; gpit < 3; gpit ++) {
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
-			oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_en_0A);
+			oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, OAM_ENEMS + (gpit << 4), SPRITE_BADDIE_DYING);
 			continue;
-		}
+		} 
 #endif
 		
 		if (en_t [gpit]) {
@@ -284,9 +284,9 @@ void enems_move (void) {
 #endif		
 
 			if (en_mx [gpit] != 0) {
-				en_fr = ((en_x [gpit]) >> 4) & 1;
+				en_fr = ((en_x [gpit] + 8) >> 4) & 1;
 			} else {
-				en_fr = ((en_y [gpit]) >> 4) & 1;
+				en_fr = ((en_y [gpit] + 8) >> 4) & 1;
 			}
 
 			switch (en_t [gpit]) {
@@ -329,7 +329,7 @@ void enems_move (void) {
 			}
 
 #ifndef PLAYER_MOGGY_STYLE
-			// My nemesis: movable platforms
+			// Movable platforms
 			// This time coded in a SMARTER way...!
 			if (en_t [gpit] == 4 && gpjt && !pgotten && !pj) {
 				// Horizontal moving platforms
@@ -388,7 +388,7 @@ void enems_move (void) {
 #ifndef PLAYER_SAFE_LANDING					
 					if (en_life [gpit] == 0) {
 						kill_enemy (gpit);
-						pkilled ++;
+						
 					}
 #endif					
 					touched = 1;		
@@ -398,11 +398,14 @@ void enems_move (void) {
 #endif
 
 			// Collide <-> player
-#ifdef ENABLE_SAW
-			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit]) && en_t [gpit] == 8)
-#else
-			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit])) 
-#endif
+
+			if (
+				!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit])
+#if defined (ENABLE_RESONATORS) && defined (ENABLE_SAW)
+				&& (!res_on || en_t [gpit] == 8)
+#endif				
+			)
+
 			{
 
 #ifdef ENABLE_PURSUERS	
@@ -439,7 +442,6 @@ void enems_move (void) {
 #endif
 						{
 							kill_enemy (gpit);
-							pkilled ++;		
 						}
 					}					
 #endif				
@@ -447,5 +449,11 @@ void enems_move (void) {
 				}
 			}
 		} 
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
+		else {
+			oam_meta_spr (0, 240, OAM_ENEMS + (gpit << 4), spr_empty); 
+			continue;
+		}
+#endif		
 	}	
 }

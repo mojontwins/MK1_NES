@@ -1,6 +1,5 @@
-// Config.h
-// Churrera v.4
-// Copyleft 2010, 2011 The Mojon Twins
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // ============================================================================
 // I. General configuration
@@ -15,23 +14,23 @@
 #define PLAYER_INI_X DEBUG_INI_X
 #define PLAYER_INI_Y DEBUG_INI_Y
 #else
-#define SCR_INI					1		// Pantalla de inicio
-#define PLAYER_INI_X			5		//
-#define PLAYER_INI_Y			1		// Coordenadas de inicio del jugador, a nivel de tiles
+#define SCR_INI					24		// Pantalla de inicio
+#define PLAYER_INI_X			1		//
+#define PLAYER_INI_Y			3		// Coordenadas de inicio del jugador, a nivel de tiles
 #endif
-#define SCR_END					6		// Pantalla del final. 99 si da igual.
-#define PLAYER_END_X			8		//
-#define PLAYER_END_Y			8		// Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_MAX_OBJECTS		25		// Número de objetos para terminar el juego
-#define PLAYER_LIFE				9		// Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL			3		// Recarga de vida.
+#define SCR_END					99		// Pantalla del final. 99 si da igual.
+#define PLAYER_END_X			99		//
+#define PLAYER_END_Y			99		// Posición del jugador para terminar, a nivel de tiles
+#define PLAYER_MAX_OBJECTS		99		// Número de objetos para terminar el juego
+#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL			1		// Recarga de vida.
 
 // Some flexibility
 #define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
-#define HOTSPOT_TYPE_OBJECT		1
-#define HOTSPOT_TYPE_KEYS		2
-#define HOTSPOT_TYPE_REFILL		3
-#define HOTSPOT_TYPE_STAR		4
+#define HOTSPOT_TYPE_KEYS		1
+#define HOTSPOT_TYPE_REFILL		2
+//#define HOTSPOT_TYPE_STAR		4
+//#define HOTSPOT_TYPE_OBJECT	1
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_RESONATOR	3
 
@@ -53,37 +52,38 @@
 // General directives:
 // -------------------
 
+//#define SPRITE_BADDIE_DYING 	spr_en_0A
+#define SPRITE_BADDIE_DYING 	spr_en_0E_a
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-#define PLAYER_BOUNCES
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
-//#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
-//#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
 
-/*
-//#define ENABLE_FANTY
-#define ENABLE_HOMING_FANTY
-#define FANTY_BASE_SPRID		20
+
+#define ENABLE_FANTY
+//#define ENABLE_HOMING_FANTY
+#define FANTY_BASE_SPRID		18
 #define FANTY_A 				4
 #define FANTY_MAXV 				48
-//#define FANTY_COLLIDES
-#define FANTY_DISTANCE			80
-#define FANTY_V_RETREAT			16
-*/
+#define FANTY_COLLIDES
+//#define FANTY_DISTANCE		80
+//#define FANTY_V_RETREAT		16
+#define FANTY_KILLED_BY_TILE
 
-/*
+
 #define ENABLE_SAW
-#define SAW_BASE_SPRID			20
+#define SAW_BASE_SPRID			16
 #define SAW_V_DISPL				4
-#define SAW_EMERGING_STEPS		10 		// Must be (16  or 8)
-*/
+#define SAW_EMERGING_STEPS		10
 
 /*
 #define ENABLE_PEZONS
@@ -112,7 +112,16 @@
 #define HS_USE_OFFS				10
 */
 
-#define PERSISTENT_ENEMIES
+#define CARRY_ONE_FLAG_OBJ
+#define HS_INV_X				136
+#define HS_INV_Y				210
+#define HS_INV_EMPTY			0
+#define HS_INV_FLAG				0
+
+#define ENABLE_CONTAINERS
+#define CONT_EMPTY				0
+
+//#define PERSISTENT_ENEMIES
 //#define ENABLE_CONVEYORS
 //#define PERSISTENT_DEATHS
 
@@ -132,6 +141,7 @@
 //#define INITIAL_AMMO 		0			// If defined, ammo = X when entering game.
 */
 
+/*
 #define PLAYER_GARGAJO					// For bootee.
 #define MAX_GARGAJOS 			2
 #define GARGAJO_L_MIN			8
@@ -144,6 +154,7 @@
 #define GARGAJO_Y_OFFSET		0		// From the player's top
 #define GARGAJO_X_OFFSET		0		// From the player's left/right
 #define GARGAJO_RELOAD			16
+*/
 
 /*
 #define BREAKABLE_WALLS					// Breakable walls
@@ -154,7 +165,12 @@
 
 // Scripting
 // ---------
-//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+#define ENABLE_FAST_FIRE_ZONE		// Fire zone only triggers FIRE n, not FIRE ANY
+#define SCRIPTING_TEXT_BOX
+#define FIRE_SCRIPT_WITH_ANIMATION	// So I don't have to make a custom for something 
+									// I will be reusing, most likely
+
 //#define FIRE_ON_KILL				// run fire script on enemy kill
 /*
 //#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
@@ -169,11 +185,11 @@
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
-#define PLAYER_BOOTEE					// Jump is automatic
+#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_BOOTEE					// Jump is automatic
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
-#define PLAYER_SAFE_LANDING				// Like KILLS_ENEMIES but without the killing.
+//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+//#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 #define NO_HORIZONTAL_EVIL_TILE			// Only check for colisions with evil tiles vertically
 
@@ -214,7 +230,7 @@
 #define PLAYER_VY_FALLING_MAX	256		// Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
 #define PLAYER_G				16		// Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
 
-#define PLAYER_VY_JUMP_INITIAL	96
+#define PLAYER_VY_JUMP_INITIAL	64
 #define PLAYER_VY_JUMP_MAX		256		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
 #define PLAYER_AY_JUMP 			16		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
 
@@ -261,7 +277,8 @@
 // Save for 10 (special), but that's obvious, innit?
 
 const unsigned char tbehs [] = {
-	0, 8, 8, 0, 0, 8, 4, 1, 8, 8, 8, 4, 4, 8, 4,10,
-	0, 8, 8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 8, 8, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 0
+	0, 8, 8, 8, 8, 1, 0, 8, 0, 4, 1, 1, 0, 8, 8, 4,
+	8, 0, 0, 0, 0, 0, 8, 8, 4, 0, 0, 0, 0, 0, 0, 0,
+	8, 8, 0, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 8, 8, 8, 0
 };

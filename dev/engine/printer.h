@@ -1,11 +1,48 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // printer.h
 // Draw map, print text, etcetera.
 
+// Clear update list
+void clear_update_list (void) {
+	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
+		update_list [i] = 0;	
+}
+
+#ifdef DEBUG
+unsigned char get_hex_digit (unsigned char n) {
+	if (n < 10) return n + 16;
+	return n + 23;
+}
+
+void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
+	clear_update_list ();
+	update_index = 0;
+
+	gp_addr = (y << 5) + x + 0x2000;
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = get_hex_digit (n >> 12);
+
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = get_hex_digit ((n >> 8) & 0xf);
+
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = get_hex_digit ((n >> 4) & 0xf);
+
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = get_hex_digit ((n & 0xf));
+
+	ppu_waitnmi ();
+}
+#endif
+
 // fade out
-void  fade_out (void) {
+void fade_out (void) {
 	for (fader = 4; fader > -1; fader --) {
 		pal_bright (fader);
 		delay (fade_delay);
@@ -30,11 +67,6 @@ void  fade_out_fast (void) {
 	pal_bright (0); delay (1);
 }
 */
-// Clear update list
-void clear_update_list (void) {
-	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
-		update_list [i] = 0;	
-}
 
 void cls (void) {
 	vram_adr(0x2000);
@@ -78,24 +110,6 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	vram_put (*gp_tmap);	
 }
 
-
-void draw_tile_shadowed (unsigned char x, unsigned char y, unsigned char tl, unsigned char t2) {
-	// Don't do this at home.
-	upd_attr_table (x, y, tl);
-	
-	gp_tmap = tsmap + (tl << 2);
-	gp_tma2 = tsmap + (t2 << 2);
-	gp_addr = ((y << 5) + x + 0x2000);
-	vram_adr (gp_addr++);
-	rdb = attr (rdx - 1, rdy);
-	rda = (!rdy && rdb) || attr (rdx - 1, rdy - 1) ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tma2 ++; gp_tmap ++;
-	rda = attr (rdx, rdy - 1) ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tma2 ++; gp_tmap ++;
-	gp_addr += 31;
-	vram_adr (gp_addr++);
-	rda = rdb ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tmap ++;
-	vram_put (*gp_tmap);	
-}
-
 void wbtul (unsigned char b) {
 	update_list [update_index++] = MSB(gp_addr);
 	update_list [update_index++] = LSB(gp_addr++);
@@ -131,17 +145,7 @@ void draw_map_tile (t) {
 	rda = rdx + (rdy << 4);
 	map_buff [rda] = t;		
 	map_attr [rda] = tbehs [t];
-	if (t == 0) {
-		rda = rand8 ();
-		t = (rda & 31) == 1 ? 16: 0;
-	} 
-	if (t == 3) {
-		draw_tile_shadowed (rdx + rdx, rdy + rdy + TOP_ADJUST, 3, 32);
-	} else if (t == 28) {
-		draw_tile_shadowed (rdx + rdx, rdy + rdy + TOP_ADJUST, 28, 33);
-	} else {
-		draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
-	}
+	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
 

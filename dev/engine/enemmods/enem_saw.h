@@ -70,16 +70,16 @@ switch (en_alive [gpit]) {
 if (rda) {
 	oam_meta_spr (
 		en_x1 [gpit], en_y [gpit] + SPRITE_ADJUST, 
-		(gpit << 4), 
-		spr_black);
+		OAM_OCCLU + (gpit << 4), 
+		spr_en_0A_a);
 } else {
 	oam_meta_spr (
 		en_x [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
-		(gpit << 4), 
-		spr_black);
+		OAM_OCCLU + (gpit << 4), 
+		spr_en_0A_a);
 }
 
 oam_meta_spr (
 	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	ENEMS_OAM_BASE + (gpit << 4), 
+	OAM_ENEMS + (gpit << 4), 
 	spr_enems [SAW_BASE_SPRID + half_life]);

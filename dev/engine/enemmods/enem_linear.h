@@ -49,5 +49,5 @@
 					en_facing = (en_mx [gpit] > 0 || en_my [gpit] > 0) ? 0 : 2;
 					oam_meta_spr (
 						en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-						ENEMS_OAM_BASE + (gpit << 4), 
-						spr_enems [(en_s [gpit] << 2) + en_fr + en_facing]);
+						OAM_ENEMS + (gpit << 4), 
+						spr_enems [en_s [gpit] + en_fr + en_facing]);

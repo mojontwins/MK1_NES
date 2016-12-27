@@ -1,5 +1,5 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // hotspots.h
 // Hotspot management
@@ -32,7 +32,7 @@ void hotspots_create (void) {
 		hrx = (hxy [n_pant] >> 4) << 4;
 		hry = (hxy [n_pant] & 15) << 4;
 
-		oam_meta_spr (hrx, hry + SPRITE_ADJUST, 176, spr_hs [hrt - 1]);
+		oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [hrt]);
 	}	
 #else
 	gp_gen = (unsigned char *) c_hotspots; gp_gen += (n_pant << 1);
@@ -40,7 +40,7 @@ void hotspots_create (void) {
 	if (rdb && hact [n_pant]) {
 		hrt = rdb;
 		hrx = rda & 0xf0; hry = rda << 4;
-		oam_meta_spr (hrx, hry + SPRITE_ADJUST, 176, spr_hs [hrt - 1]);
-	} else oam_meta_spr (0, 240, 176, spr_empty);
+		oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [hrt]);
+	} else oam_meta_spr (0, 240, OAM_HOTSPOTS, spr_empty);
 #endif
 }

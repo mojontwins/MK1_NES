@@ -1,5 +1,5 @@
-// NES MK1 v0.6
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.7
+// Copyleft Mojon Twins 2013, 2015, 2016
 
 // player.h
 // Player movement & stuff
@@ -54,9 +54,27 @@ void player_init (void) {
 #ifdef CARRY_ONE_HS_OBJ
 	pinv = HS_INV_EMPTY; 
 #endif
+
+#ifdef CARRY_ONE_FLAG_OBJ
+	flags [HS_INV_FLAG] = HS_INV_EMPTY;
+#endif
+
+#ifdef ENABLE_CONTAINERS
+	upd_cont_index = 0;
+#endif
+}
+
+void render_player (void) {
+	if (pstate == EST_NORMAL || half_life) {
+		oam_meta_spr (prx, pry + SPRITE_ADJUST, OAM_PLAYER, spr_player [psprid]);	
+	} else {
+		oam_meta_spr (0, 240, OAM_PLAYER, spr_pl_empty);
+	}
 }
 
 void kill_player (void) {
+	render_player ();
+	
 	plife --;
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
@@ -139,7 +157,6 @@ void process_tile (x0, y0, x1, y1) {
 
 void player_move (void) {
 	i = pad_poll (0);
-
 	wall = 0;
 	hitv = hith = 0;
 	pushed_any = 0;
@@ -373,7 +390,7 @@ void player_move (void) {
 			pvx -= PLAYER_AX;			
 		}
 #ifndef PLAYER_MOGGY_STYLE			
-		pfacing = 9;
+		pfacing = 16;
 #endif		
 	}
 	
@@ -507,24 +524,41 @@ void player_move (void) {
 	}
 #endif	
 
-	// ************
-	// Fire bullets
-	// ************
-	
-#ifdef PLAYER_CAN_FIRE
+	// **************
+	// B Button stuff
+	// **************
+
+	// (fire bullets, run scripting w/animation, do containers)
+
+#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
+	if (i & PAD_B) {
+		if (!pfiring) {
+			pfiring = 1;
 #ifdef FIRE_TO_PUSH
-	if ((i & PAD_B) && !pfiring && !pushed_any)
-#else
-	if ((i & PAD_B) && !pfiring)
+			if (!pushed_any)
 #endif
-	{
-		pfiring = 1;
-		fire_bullet ();
-	}
-	
-	if (!(i & PAD_B)) pfiring = 0;
-#endif	
-	
+			{
+#ifdef PLAYER_CAN_FIRE				
+				fire_bullet ();
+#endif		
+#ifdef ENABLE_CONTAINERS
+				containers_do ();
+#endif
+#if defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)
+				if (ppossee) {
+					pvx = pvy = 0;
+					upd_cont_index = 0;
+					use_ct = 1;
+				}
+#endif
+			}	
+		}
+	} else pfiring = 0;
+#endif
+
+//
+
+
 	// *************
 	// Shoot Gargajo
 	// *************
@@ -616,12 +650,4 @@ void player_move (void) {
 		psprid = pfacing + 15;
 	}
 #endif
-}
-
-void render_player (void) {
-	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
-	} else {
-		oam_meta_spr (0, 240, 128, spr_pl_empty);
-	}
 }
