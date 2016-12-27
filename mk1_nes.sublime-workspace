@@ -1,0 +1,663 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"EOF",
+				"NT_UPD_EOF"
+			],
+			[
+				"EVI",
+				"EVIL_TILE_ON_FLOOR"
+			],
+			[
+				"m113_co",
+				"m113_comm_pool_checksum_calculate"
+			],
+			[
+				"Famito",
+				"FamiToneSfxInit"
+			],
+			[
+				"COMM_",
+				"COMM_DIAMOND_A"
+			],
+			[
+				"my",
+				"mypal_game_cuts0"
+			],
+			[
+				"ENE",
+				"ENEMY_TYPE_FANTY"
+			],
+			[
+				"palcut",
+				"palcuts1"
+			],
+			[
+				"pal",
+				"pal_effect"
+			],
+			[
+				"PL",
+				"PLAYER_VY_JUMP_MAX"
+			],
+			[
+				"n",
+				"n_bolts"
+			],
+			[
+				"HO",
+				"HOTSPOT_TYPE_PLATFORMS"
+			],
+			[
+				"NAME",
+				"NAMETABLE_B"
+			],
+			[
+				"level_p",
+				"level_pal_fg"
+			],
+			[
+				"level_ts",
+				"level_ts_tmaps"
+			],
+			[
+				"NA",
+				"NAMETABLE_B"
+			],
+			[
+				"update_lis",
+				"update_list_tile"
+			],
+			[
+				"update",
+				"update_list"
+			],
+			[
+				"upda",
+				"update_index"
+			],
+			[
+				"gp",
+				"gp_addr"
+			],
+			[
+				"map_",
+				"map_buff"
+			],
+			[
+				"up",
+				"update_index"
+			],
+			[
+				"de",
+				"debug_print_hex_16_dl"
+			],
+			[
+				"clea",
+				"clear_update_list"
+			],
+			[
+				"EN",
+				"ENABLE_CONTAINERS"
+			],
+			[
+				"H",
+				"HOTSPOT_TYPE_STAR"
+			],
+			[
+				"Sprite",
+				"SpriteTable"
+			],
+			[
+				"TAR",
+				"TARGET_SG"
+			],
+			[
+				"ppode",
+				"ppodewwwr_on"
+			],
+			[
+				"ppu",
+				"ppu_waitnmi"
+			],
+			[
+				"fra",
+				"frame_counter"
+			],
+			[
+				"PLAYER_",
+				"PLAYER_GENITAL"
+			],
+			[
+				"PLAYER_HA",
+				"PLAYER_HAS_JUMP"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Cosas/git/MK1_NES"
+	],
+	"file_history":
+	[
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/makerom.bat",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/gfx/cut_tiles.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/gfx/cut_tiles2.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/printer.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/screens.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/strips.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/game.c",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/menudata.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/game.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/diario.txt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/texts.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/enems.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/bullets.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/compile.bat",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/levels.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/palettes.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/enems.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/game.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/behs.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/screens.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/menudata.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/enems.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/player.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_tiles2.spt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/screens.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/game.c",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/game.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/vv_qr_rle.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/vv_qr_rle.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/tiledata2.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_sprites.spt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/hud.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/spritedata.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/testing.txt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/texts.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/special.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/text_scripts.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/ram/zp.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/printer.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/precalcs.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/game.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/labels.txt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/ram/bss.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/enems.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/MSDOS/Progr/QB1AGL0/gfx/convertall.bat",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/MSDOS/Progr/QB1AGL0/util/QB1AGL0imgcnv_all.bas",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/hud.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/MSDOS/Progr/QB1AGL0/util/QB1AGL0pal.bas",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/enems.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/enemmods/enem_linear.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/hud.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/SonicMal/dev/assets/metasprites.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/metasprites.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/game.c",
+		"/D/mp3/Scumm Classic/The Súpermix - Golden Greatest Hits (Jul-1994)/Golden Greatest Hits (1994).txt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/player.h",
+		"/C/Users/na_th_an/Desktop/Adobe Audition 1.5 Multilanguage Serial & Audio Plugins/adobe audition 1.5 serial.txt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/mapper113.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/definitions.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/compile.bat",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/spritedata.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/bolts.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/gfx/cut_sprites3.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/assets/metasprites.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/game.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_sprites.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_tiles.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/ram/bss.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/ram/bss.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/mainloop/flick_screen.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/neslib.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/player.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/definitions.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/compile.bat",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/bolts.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/levelset.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/game.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/game.c",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/metasprites.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/gfx/cut_sprites2.spt",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/game.c",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/definitions.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/screens.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/player.h",
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/gfx/cut_tiles2.spt",
+		"/E/eula.1031.txt",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/diario.txt",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/pantanow/enems/beh1.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/utils/pencompiler.bas",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/utils/mtparser.bas",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/pantanow/enems/beh1.spt",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/Speccy/Vault/Multioption/Hoygan/hoygan.c",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/Speccy/Multiopción/ejemplo.txt",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/maritrini/rom1/dev/gbuffer.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/player.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/maritrini/rom1/dev/scroller.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/SonicMal/dev/definitions.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/ram/zp.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/hotspots.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/game.c",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/definitions.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/spritedata.h",
+		"/C/Users/NaThan/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/metasprites.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/diario.txt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/game.c",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/ram/zp.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/ram/bss.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/simplecoco.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/gfx/cut_sprites.spt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/definitions.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/enems.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/enemmods/enem_steady_shooter.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/precalcs.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/player.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/gfx/cut_tiles.spt",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/metasprites.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/bolts.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/mainloop/flick_screen.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/behs.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/hud.h",
+		"/C/java/massive/queue/200046193#ENVIO_PROGRAMADO#201608031200.msg",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/game.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/general.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/map0.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/bullets.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/printer.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/engine/hotspots.h",
+		"/D/Google Drive/Maritrini/dev/NES/multicart/Monono/dev/assets/enems0.h"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ENS_PURSUING",
+			"241",
+			"http",
+			"URL",
+			"update",
+			"pobject",
+			"texts",
+			"game_res",
+			"texts",
+			"0",
+			"_a",
+			"n_bolts",
+			"player_pro",
+			"sspl_",
+			"hotspots",
+			"rdx",
+			"[4]",
+			"player_hit",
+			"ENABLE_COCO_AIMED",
+			"COCO_FAIR_D",
+			"rds16",
+			"min",
+			"delta",
+			"0xff",
+			"MAX",
+			"MULTI",
+			"player_hit",
+			"locksI",
+			"_attr",
+			"process_tile",
+			"phit",
+			"pregotten",
+			"spr_id",
+			"gpjt",
+			"isplatform",
+			"px +=",
+			"en_status",
+			"en_s",
+			"pfacing",
+			"pfr",
+			"0",
+			"CUMULATIVE",
+			"player",
+			"it1",
+			"pl0",
+			"_a",
+			"en0",
+			"initlib",
+			"start",
+			"cli",
+			"nmi",
+			"plife",
+			"lives",
+			"COMM_INITS",
+			"hact",
+			"w_pant",
+			":",
+			"pals",
+			"zerobss",
+			"roomlocks",
+			"L27DA",
+			"palace",
+			"PAD_B",
+			"timer",
+			"348",
+			"cart.nes",
+			"done",
+			"10x8",
+			"COMM_POOL [3]",
+			"COMM_POOL [0x0e]",
+			"COMM_POOL [0x03]",
+			"COMM_POOL [0x02]",
+			"COMM_POOL [0x01]",
+			"COMM_POOL [0x00]",
+			"COMM_POOL [0x04]",
+			"GNROM",
+			"split_and_wait",
+			"split",
+			"kill",
+			"phit",
+			"];\n",
+			"process",
+			"is_plat",
+			"if (level)",
+			"02",
+			"01",
+			"safe",
+			"while",
+			"get_byte",
+			"pal",
+			"pfacing",
+			"upd_con",
+			"_a",
+			"28",
+			"qaglgpc",
+			"SUB QAGLprint",
+			"QAGLprint",
+			"font",
+			"IMGDIALOGUE",
+			"sve",
+			"parserdoflags",
+			"parse",
+			"QAGLboxY",
+			"OPENBOX",
+			"sleep",
+			"QAGLWT",
+			"DO",
+			"curPal",
+			"qaglloadpal",
+			"qaglaction",
+			"5",
+			"A",
+			"5",
+			"A",
+			"5",
+			"loadPut",
+			"pokestring",
+			"0xf4",
+			"keys",
+			"pkilled",
+			"kill_enemy",
+			"kill_player",
+			"hitv",
+			"clear_update_list ();",
+			"debug",
+			"45",
+			"fire_zone",
+			"mscnes"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"239",
+			"1",
+			"_b",
+			"BOLTS_MAX",
+			"sspl_ninjajar_",
+			"sspl_cheril_",
+			"[N_ENEMS]",
+			"gpsint",
+			"MIN",
+			"DELTA",
+			"0",
+			"_buff",
+			"pregotten",
+			"is_platform",
+			"en_state",
+			"psprid",
+			"\n",
+			"it0",
+			"pl1",
+			"_b",
+			"en1",
+			"gpit",
+			"lala.nes",
+			"cutscene_do",
+			"10x8",
+			"COMM_INITS",
+			"COMM_CHECKSUM",
+			"COMM_INITS",
+			"COMM_LIVES",
+			"COMM_LEVEL",
+			"COMM_REG",
+			"COMM_GS",
+			"09",
+			"08",
+			"_b",
+			"2",
+			"IMGD",
+			"0",
+			"max_pants",
+			"sc_c",
+			"_b",
+			"ROM3",
+			"pl_",
+			"en",
+			"spy",
+			"spx",
+			"gpx",
+			"0",
+			"y",
+			"Colours",
+			"SG_",
+			"spr_pla_",
+			"on_p",
+			"0x20",
+			"_lin_",
+			"rdct",
+			"0x03",
+			"_pl_",
+			"\\n",
+			"\\u",
+			"\\o",
+			"\\i",
+			"\\e",
+			"\\a",
+			"\\n",
+			"\\u",
+			"\\o",
+			"\\i",
+			"\\e",
+			"\\a",
+			"T.A.R.D.I.S.",
+			"8<",
+			"EXTERN_E",
+			"k2t_code",
+			"k2t_i",
+			"k2t_y",
+			"k2t_x",
+			"k2t_i",
+			"000",
+			"6",
+			"5",
+			"55556666O",
+			"TOCINO MARÍN ALBERTITO",
+			"last",
+			"k2t_length",
+			"k2t_last_key",
+			"k2t_selected",
+			"k2t_color",
+			"..\\..\\",
+			"/",
+			"myFileLen",
+			"RXVAL",
+			"AXVAL",
+			"RXVAL",
+			"pixels",
+			"pixel",
+			"defined (",
+			"/",
+			"\\"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mk1_nes.sublime-project",
+	"replace":
+	{
+		"height": 82.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/hokuta/hokuta.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 199.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
