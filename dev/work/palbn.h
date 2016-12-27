@@ -1,4 +1,4 @@
-// Palette data from palbn.png
+// Palette data from ..\gfx\palbn.png
 const unsigned char mypal_bw [] = {
 	0x1D, 0x2D, 0x10, 0x3D, 
 	0x1D, 0x2D, 0x10, 0x3D, 

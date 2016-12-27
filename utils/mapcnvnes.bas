@@ -1,19 +1,22 @@
-' Map converter
+ï»¿' Map converter
 ' Cutrecode by na_th_an
 
 ' Estos programas son tela de optimizables, pero me da igual porque tengo un dual core.
-' ¡OLE!
+' ?OLE!
 
 sub usage () 
 	Print "** USO **"
-	Print "   MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix packed "
+	Print "   MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed]"
 	
 end sub
 
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt
-Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct
+Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset
 Dim As Byte d
 Dim As String o, prefix
+Dim As Integer BigOrigMap (255, 255)
+Dim As uByte decos (255, 127), decosOn (255 - 1)
+
 
 Type MyBolt
 	np As Integer
@@ -42,13 +45,13 @@ bolt = Val (Command (6))
 
 prefix = Command (7)
 
-if lcase(Command (8)) = "packed" then
+offset = Val (Command (8))
+
+if lcase(Command (9)) = "packed" Or lcase(Command (8)) = "packed" then
 	packed = 1
 else
 	packed = 0
 end if
-
-Dim As Integer BigOrigMap (map_h * scr_h - 1, map_w * scr_w - 1)
 
 
 ' Leemos el mapa original
@@ -59,7 +62,7 @@ Open Command (1) for binary as #f
 For y = 0 To (map_h * scr_h - 1)
 	For x = 0 To (map_w * scr_w - 1)
 		get #f , , d
-		BigOrigMap (y, x) = d
+		BigOrigMap (y, x) = d - offset
 	Next x
 Next y
 
@@ -76,13 +79,15 @@ print #f, " "
 
 print #f, "const unsigned char " & prefix & " [] = {"
 
-i = 0
+i = 0: decosTT = 0
 
 for yy = 0 To map_h - 1
 	for xx = 0 To map_w - 1
-		o = "    "
+		npant = yy * map_w + xx
+		o = "	"
 		ac = 0
 		ct = 0
+		iddecos = 0: decosOn (npant) = 0
 		for y = 0 to scr_h - 1
 			for x = 0 to scr_w - 1
 				
@@ -99,16 +104,26 @@ for yy = 0 To map_h - 1
 						o = o + ", "
 					end if
 				else
-					if ct = 0 then
+					If BigOrigMap (yy * scr_h + y, xx * scr_w + x) > 15 Then
+						' Write to decos
+						decos (npant, iddecos) = y + x * 16
+						iddecos = iddecos + 1
+						decos (npant, iddecos) = BigOrigMap (yy * scr_h + y, xx * scr_w + x)
+						iddecos = iddecos + 1
+						decosOn (npant) = iddecos
+						BigOrigMap (yy * scr_h + y, xx * scr_w + x) = 0
+						decosTT = decosTT + 1
+					End If	
+					If ct = 0 then
 						ac = BigOrigMap (yy * scr_h + y, xx * scr_w + x) * 16
-					else
+					Else
 						ac = ac + BigOrigMap (yy * scr_h + y, xx * scr_w + x) 
-						o = o + str (ac)
+						o = o + "0x" & Lcase (Hex (ac, 2))
 						
 						if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
 							o = o + ", "
 						end if
-					end if
+					End if
 					ct = 1 - ct
 				end if
 				
@@ -122,6 +137,38 @@ print #f, "};"
 
 print #f, " "
 
+' Write decos
+If decosTT > 0 Then
+	For i = 0 To (map_h * map_w) - 1
+		If decosOn (i) > 0 Then
+			Print #f, "const unsigned char " & prefix & "_decos_" & Hex (i, 2) & " [] = { ";
+			For j = 0 To decosOn (i) - 1
+				Print #f, "0x" & Lcase (Hex (decos (i, j))) & ", " ;
+			Next j
+			Print #f, "0xff };"
+		End If
+	Next i
+	Print #f, ""
+	Print #f, "const unsigned char *" & prefix & "_decos [] = {"
+	Print #f, "	";
+	j = 0
+	For i = 0 To (map_h * map_w) - 1
+		If j Then Print #f, ", ";
+		j = -1
+		If decosOn (i) > 0 Then
+			Print #f, prefix & "_decos_" & Hex (i, 2);
+		Else
+			Print #f, "0";
+		End If
+	Next i
+	Print #f, ""
+	Print #f, "};"
+	Print #f, ""
+Else
+	Print #f, "const unsigned char **" & prefix & "_decos = 0;"
+	Print #f, ""
+End If
+
 i = 32
 ' Escribimos el array de cerrojos
 print #f, "//#define MAX_CERROJOS " + trim(str(i))
@@ -131,7 +178,7 @@ if i > 0 Then
 	print #f, "const unsigned char locks_" & prefix & " [] = {"
 	
 	for j = 0 to i - 1
-		o = "    " + trim(str(bolts(j).np)) + ", " + trim(str(bolts(j).x * 16 + bolts(j).y))
+		o = "	" + "0x" & Lcase (Hex(bolts(j).np, 2)) + ", " + "0x" & Lcase (Hex(bolts(j).x * 16 + bolts(j).y, 2))
 		if j < i - 1 then o = o + ","
 		print #f, o
 	next j

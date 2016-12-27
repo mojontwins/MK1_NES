@@ -1,0 +1,1178 @@
+Generating pals
+mkts, pals mode. Palettes from ..\gfx\palts1A.png extracted to work\palbg0.h, label = mypal_game_bg0
+mkts, pals mode. Palettes from ..\gfx\palts1B.png extracted to work\palbg1.h, label = mypal_game_bg1
+mkts, pals mode. Palettes from ..\gfx\palbn.png extracted to work\palbn.h, label = mypal_bw
+mkts, pals mode. Palettes from ..\gfx\palss1A.png extracted to work\palfg0.h, label = mypal_game_fg0
+mkts, pals mode. Palettes from ..\gfx\palss1B.png extracted to work\palfg1.h, label = mypal_game_fg1
+mkts, pals mode. Palettes from ..\gfx\palflash.png extracted to work\palf.h, label = mypal_flash
+mkts, pals mode. Palettes from ..\gfx\palblack.png extracted to work\palb.h, label = mypal_black
+Exporting chr
+mkts, chars mode. 64 patterns extracted
+mkts, chars mode. 8 patterns extracted
+mkts, mapped mode. 73 patterns extracted from 32 2x2 tiles. Next = 145
+mkts, mapped mode. 85 patterns extracted from 32 2x2 tiles. Next = 230
+Now tschr.bin is 4096 bytes.
+mkts, tiles mode. 96 patterns extracted from 16 2x3 tiles.
+mkts, tiles mode. 128 patterns extracted from 32 2x2 tiles.
+mkts, chars mode. 32 patterns extracted
+Now sschr.bin is 4096 bytes.
+Copying enems
+Making map
+packmap ... SCREEN *** 0
+deco: 27
+ AT: 11
+ At: 32
+ At: 53
+ At: 65
+deco: 28
+ AT: D1
+ At: A2
+ At: 83
+deco: 25
+ AT: D5
+ At: B6
+ At: D6
+ At: 47
+ At: 67
+ At: 48
+deco: 26
+ AT: 18
+deco: 18
+ AT: 8B
+ At: 9B
+SCREEN *** 1
+deco: 27
+ AT: 41
+ At: 51
+ At: B2
+ At: D3
+ At: F4
+ At: 55
+ At: E9
+deco: 28
+ AT: A2
+ At: 83
+ At: 64
+deco: 25
+ AT: 53
+ At: 44
+ At: 45
+ At: 36
+ At: F8
+ At: D9
+deco: 19
+ AT: A5
+ At: D8
+ At: CB
+ At: EB
+deco: 26
+ AT: 56
+ At: 66
+ At: 87
+ At: 98
+ At: DA
+deco: 18
+ AT: 7B
+ At: 9B
+SCREEN *** 2
+deco: 28
+ AT: E0
+ At: B1
+ At: C1
+ At: 92
+ At: 83
+ At: 58
+ At: 39
+ At: 1A
+ At: 5A
+deco: 19
+ AT: E2
+ At: A5
+ At: D8
+ At: F8
+ At: 3B
+ At: 8B
+deco: 27
+ AT: 15
+ At: 26
+ At: 68
+ At: 79
+ At: 9A
+deco: 26
+ AT: 85
+ At: 97
+ At: B8
+deco: 25
+ AT: 17
+SCREEN *** 3
+deco: 27
+ AT: 20
+ At: 41
+ At: 52
+ At: 64
+deco: 19
+ AT: 12
+ At: 38
+ At: 9A
+ At: BB
+deco: 20
+ AT: 94
+ At: C5
+SCREEN *** 4
+deco: 18
+ AT: C0
+deco: 28
+ AT: 15
+ At: E6
+ At: C7
+ At: A8
+ At: 9A
+deco: 27
+ AT: 37
+ At: 48
+deco: 31
+ AT: 28
+ At: D8
+ At: C9
+ At: EA
+deco: 25
+ AT: 39
+ At: 1B
+ At: 3B
+SCREEN *** 5
+deco: 18
+ AT: 50
+ At: 60
+ At: 80
+ At: 5B
+deco: 31
+ AT: 81
+ At: B2
+deco: 28
+ AT: 62
+deco: 25
+ AT: D2
+ At: C4
+ At: D4
+ At: B6
+ At: C6
+deco: 26
+ AT: E3
+ At: 74
+ At: E5
+ At: F5
+ At: 96
+SCREEN *** 6
+deco: 27
+ AT: B0
+ At: B1
+ At: C2
+ At: D4
+ At: A5
+deco: 19
+ AT: 23
+ At: 76
+ At: A9
+ At: BA
+ At: CA
+deco: 28
+ AT: E3
+ At: B5
+ At: 96
+deco: 25
+ AT: A4
+ At: 86
+deco: 26
+ AT: 06
+ At: 46
+ At: 27
+ At: 57
+ At: 77
+SCREEN *** 7
+deco: 20
+ AT: 33
+ At: D3
+ At: 85
+ At: 69
+deco: 19
+ AT: 19
+ At: 6B
+ At: 7B
+ At: 9B
+ At: AB
+ At: DB
+SCREEN *** 8
+deco: 28
+ AT: 40
+ At: 32
+ At: 27
+deco: 18
+ AT: C0
+ At: AB
+deco: 26
+ AT: 25
+ At: 46
+deco: 27
+ AT: 16
+ At: 37
+ At: 47
+ At: 49
+SCREEN *** 9
+deco: 18
+ AT: 80
+ At: 4B
+deco: 27
+ AT: C0
+ At: F1
+deco: 31
+ AT: C3
+deco: 25
+ AT: F8
+ At: D9
+SCREEN *** 10
+deco: 26
+ AT: 90
+deco: 25
+ AT: C1
+ At: 35
+ At: 27
+deco: 27
+ AT: 12
+ At: 23
+ At: 96
+ At: D6
+deco: 28
+ AT: A6
+ At: 67
+ At: 48
+ At: 3A
+SCREEN *** 11
+deco: 20
+ AT: 62
+ At: 47
+ At: D9
+deco: 19
+ AT: 3A
+ At: 6B
+ At: AB
+ At: EB
+SCREEN *** 12
+deco: 26
+ AT: 10
+ At: A1
+ At: 22
+ At: C2
+ At: E4
+ At: 1B
+deco: 25
+ AT: 41
+deco: 27
+ AT: 47
+ At: 18
+ At: 68
+ At: 79
+deco: 28
+ AT: 28
+SCREEN *** 13
+deco: 18
+ AT: 80
+ At: 6B
+deco: 25
+ AT: 31
+ At: 12
+ At: 04
+ At: E5
+ At: D6
+ At: C8
+ At: B9
+deco: 28
+ AT: 91
+ At: B1
+ At: 62
+ At: 54
+ At: EA
+deco: 27
+ AT: D2
+ At: E4
+deco: 26
+ AT: 46
+ At: 67
+ At: 78
+deco: 30
+ AT: AA
+SCREEN *** 14
+deco: 26
+ AT: 40
+ At: 42
+ At: 52
+ At: 28
+ At: 49
+ At: 5A
+deco: 27
+ AT: 51
+ At: 73
+ At: A5
+ At: B5
+ At: B6
+ At: D9
+ At: 0A
+ At: EA
+deco: 28
+ AT: 63
+ At: 83
+ At: 44
+ At: 16
+ At: BA
+ At: 9B
+deco: 25
+ AT: A4
+ At: D4
+ At: B7
+ At: B8
+ At: 89
+ At: 8A
+SCREEN *** 15
+deco: 20
+ AT: 81
+ At: 35
+ At: B7
+ At: 78
+deco: 19
+ AT: E9
+ At: 2B
+ At: AB
+SCREEN *** 16
+deco: 18
+ AT: 90
+ At: E2
+ At: 6B
+deco: 27
+ AT: 11
+ At: 42
+ At: 39
+ At: 3A
+deco: 28
+ AT: 21
+ At: 19
+deco: 30
+ AT: 52
+ At: 56
+deco: 25
+ AT: 46
+deco: 26
+ AT: 17
+SCREEN *** 17
+deco: 18
+ AT: 90
+ At: 5B
+deco: 28
+ AT: C0
+ At: F9
+ At: CA
+ At: DA
+deco: 26
+ AT: B1
+ At: C6
+ At: D7
+deco: 19
+ AT: E4
+ At: FB
+deco: 30
+ AT: A8
+SCREEN *** 18
+deco: 27
+ AT: 30
+ At: 51
+ At: 72
+ At: 19
+ At: 3A
+deco: 26
+ AT: 92
+ At: 94
+ At: B5
+ At: 17
+deco: 19
+ AT: 14
+ At: B4
+ At: D4
+ At: 68
+ At: 88
+deco: 25
+ AT: 84
+ At: 75
+ At: 46
+ At: 27
+SCREEN *** 19
+deco: 20
+ AT: C2
+ At: 35
+ At: 67
+deco: 19
+ AT: EA
+ At: 3B
+ At: 5B
+ At: CB
+SCREEN *** 20
+deco: 26
+ AT: 11
+ At: 48
+deco: 25
+ AT: 31
+ At: 32
+ At: 38
+deco: 28
+ AT: 34
+ At: 15
+deco: 30
+ AT: 54
+ At: 57
+deco: 18
+ AT: B5
+deco: 19
+ AT: D9
+ At: 1A
+ At: AA
+SCREEN *** 21
+deco: 28
+ AT: C0
+ At: B1
+ At: E7
+deco: 30
+ AT: A2
+ At: A8
+deco: 27
+ AT: B2
+ At: C6
+ At: D7
+ At: E9
+deco: 26
+ AT: B3
+ At: C4
+ At: E5
+deco: 18
+ AT: 75
+deco: 25
+ AT: E8
+deco: 19
+ AT: 39
+ At: 89
+ At: 99
+deco: 20
+ AT: 3A
+ At: AB
+SCREEN *** 22
+deco: 19
+ AT: 00
+ At: 03
+ At: 13
+ At: 1A
+ At: 4A
+ At: 5A
+ At: 7A
+ At: BB
+ At: EB
+deco: 27
+ AT: 40
+ At: 71
+ At: 74
+ At: 49
+deco: 28
+ AT: 41
+ At: 39
+deco: 20
+ AT: B2
+ At: 87
+ At: F8
+deco: 26
+ AT: 35
+ At: 06
+ At: 56
+deco: 25
+ AT: 75
+ At: 26
+SCREEN *** 23
+deco: 20
+ AT: 62
+ At: D5
+ At: 39
+ At: 9A
+deco: 19
+ AT: 4B
+ At: 8B
+ At: CB
+ DONE!
+packmap ... SCREEN *** 0
+deco: 18
+ AT: 50
+deco: 26
+ AT: 71
+ At: 3A
+ At: 7B
+deco: 28
+ AT: 13
+ At: 83
+ At: 86
+ At: A6
+ At: 78
+ At: 69
+deco: 25
+ AT: A3
+ At: 59
+ At: 2A
+deco: 27
+ AT: 34
+ At: 46
+ At: 58
+SCREEN *** 1
+deco: 30
+ AT: E5
+ At: 48
+ At: E9
+deco: 27
+ AT: 28
+deco: 24
+ AT: 59
+ At: 7A
+ At: 8B
+SCREEN *** 2
+deco: 24
+ AT: 90
+ At: D0
+ At: 04
+deco: 25
+ AT: 51
+ At: 33
+ At: 43
+deco: 26
+ AT: C2
+ At: 14
+ At: D4
+deco: 19
+ AT: 26
+ At: AB
+ At: EB
+deco: 27
+ AT: 18
+ At: 88
+ At: AA
+deco: 28
+ AT: 59
+ At: 3A
+SCREEN *** 3
+deco: 24
+ AT: 90
+deco: 25
+ AT: 62
+ At: 54
+ At: 35
+ At: 77
+deco: 27
+ AT: B4
+deco: 26
+ AT: 05
+ At: 88
+ At: 99
+deco: 28
+ AT: 95
+ At: 76
+ At: 9A
+deco: 19
+ AT: 06
+ At: 26
+ At: 96
+SCREEN *** 4
+deco: 26
+ AT: 81
+ At: B3
+deco: 25
+ AT: E2
+ At: D4
+ At: E4
+ At: 78
+ At: 59
+ At: 79
+deco: 27
+ AT: 13
+ At: 34
+ At: 54
+ At: 66
+ At: 87
+ At: 5A
+deco: 24
+ AT: F3
+deco: 28
+ AT: FA
+SCREEN *** 5
+deco: 30
+ AT: 42
+ At: E5
+ At: E9
+deco: 26
+ AT: F2
+deco: 24
+ AT: B3
+ At: 84
+ At: 05
+ At: 75
+ At: 56
+ At: 68
+ At: 7A
+ At: 9B
+deco: 28
+ AT: 19
+ At: F9
+SCREEN *** 6
+deco: 24
+ AT: 20
+ At: 80
+ At: F5
+ At: FA
+ At: 1B
+ At: 4B
+ At: 6B
+ At: EB
+deco: 25
+ AT: D1
+ At: C3
+ At: A4
+ At: 65
+ At: 96
+ At: 57
+deco: 26
+ AT: 03
+ At: 24
+ At: 75
+ At: 36
+deco: 28
+ AT: E6
+ At: D8
+ At: B9
+ At: AA
+deco: 27
+ AT: 18
+ At: 39
+ At: 5A
+deco: 29
+ AT: 7A
+SCREEN *** 7
+deco: 24
+ AT: 30
+ At: 80
+ At: C0
+ At: 08
+ At: 0B
+deco: 28
+ AT: 31
+ At: 18
+ At: C8
+ At: B9
+ At: 9A
+deco: 26
+ AT: 32
+ At: B2
+ At: 43
+ At: C4
+ At: 55
+ At: 76
+deco: 25
+ AT: A4
+ At: 95
+ At: E5
+ At: 97
+deco: 27
+ AT: 48
+ At: E9
+deco: 29
+ AT: 7A
+deco: 19
+ AT: 3B
+ At: 9B
+SCREEN *** 8
+deco: 26
+ AT: 71
+ At: 82
+ At: 86
+ At: 98
+ At: A9
+deco: 25
+ AT: B1
+ At: 73
+ At: 93
+ At: 64
+ At: 45
+ At: C9
+deco: 27
+ AT: 72
+ At: 28
+ At: 68
+ At: 89
+deco: 28
+ AT: B2
+ At: 94
+ At: 75
+ At: 48
+deco: 24
+ AT: F4
+ At: F9
+ At: 5A
+deco: 23
+ AT: 26
+ At: CA
+deco: 22
+ AT: 9A
+SCREEN *** 9
+deco: 24
+ AT: 02
+ At: 07
+ At: FA
+deco: 26
+ AT: 22
+ At: C3
+ At: 34
+ At: 74
+ At: 45
+ At: D5
+ At: E7
+deco: 27
+ AT: 47
+ At: 77
+ At: 28
+ At: 89
+ At: AA
+deco: 28
+ AT: 38
+ At: 58
+deco: 25
+ AT: 88
+SCREEN *** 10
+deco: 24
+ AT: E0
+ At: F2
+ At: F6
+ At: 0B
+deco: 26
+ AT: 81
+ At: 83
+ At: 93
+ At: B4
+ At: C5
+deco: 25
+ AT: 52
+ At: 33
+ At: E4
+ At: E9
+deco: 27
+ AT: 86
+ At: A7
+ At: C8
+deco: 28
+ AT: 57
+ At: 67
+ At: 49
+ At: 3A
+deco: 21
+ AT: AA
+ At: DA
+deco: 19
+ AT: 5B
+ At: BB
+SCREEN *** 11
+deco: 24
+ AT: 30
+ At: 60
+ At: 80
+ At: A0
+ At: 04
+ At: 08
+deco: 25
+ AT: A1
+ At: 92
+ At: 73
+ At: 93
+ At: 54
+ At: 36
+ At: 46
+deco: 26
+ AT: B1
+ At: 15
+ At: 7A
+deco: 27
+ AT: 45
+deco: 28
+ AT: 96
+ At: 88
+ At: 69
+deco: 29
+ AT: 5A
+deco: 21
+ AT: 9A
+ At: DA
+deco: 19
+ AT: 5B
+ At: AB
+SCREEN *** 12
+deco: 24
+ AT: 70
+ At: B0
+ At: D0
+ At: F4
+ At: F7
+deco: 25
+ AT: 71
+ At: 64
+ At: 45
+ At: 36
+deco: 23
+ AT: 84
+deco: 28
+ AT: C4
+ At: A5
+ At: 96
+ At: 88
+deco: 26
+ AT: 15
+ At: 8B
+SCREEN *** 13
+deco: 24
+ AT: 10
+ At: 50
+ At: 90
+ At: C0
+ At: F2
+ At: F4
+ At: 06
+ At: F6
+ At: F7
+ At: F8
+deco: 26
+ AT: 61
+ At: 82
+ At: B4
+deco: 27
+ AT: 52
+deco: 28
+ AT: 43
+ At: B7
+ At: A9
+ At: 9A
+deco: 25
+ AT: 63
+ At: 64
+ At: A4
+deco: 19
+ AT: 19
+ At: 39
+ At: 9B
+ At: EB
+SCREEN *** 14
+deco: 24
+ AT: 50
+ At: 70
+ At: B0
+ At: 06
+ At: 09
+deco: 26
+ AT: 42
+ At: 72
+ At: 53
+ At: 84
+ At: 18
+deco: 25
+ AT: 62
+ At: B2
+ At: 93
+ At: A3
+ At: 37
+ At: 29
+deco: 28
+ AT: E6
+ At: D8
+deco: 19
+ AT: EB
+SCREEN *** 15
+deco: 24
+ AT: 40
+ At: 80
+ At: B0
+deco: 26
+ AT: 61
+ At: 73
+ At: 85
+ At: C5
+deco: 28
+ AT: 52
+ At: 16
+deco: 25
+ AT: 63
+ At: B4
+ At: A6
+ At: E6
+ At: 4A
+deco: 27
+ AT: 38
+ At: 49
+deco: 21
+ AT: 2A
+ At: 5A
+ At: 8A
+ At: BA
+deco: 19
+ AT: 1B
+ At: AB
+SCREEN *** 16
+deco: 26
+ AT: 91
+ At: AB
+deco: 25
+ AT: A1
+deco: 28
+ AT: 62
+ At: 43
+ At: 63
+ At: 44
+ At: 16
+deco: 27
+ AT: 82
+ At: 34
+deco: 23
+ AT: 92
+deco: 20
+ AT: D4
+ At: F7
+SCREEN *** 17
+deco: 20
+ AT: 53
+ At: C4
+ At: 95
+deco: 19
+ AT: 1B
+ At: 9B
+SCREEN *** 18
+deco: 24
+ AT: 80
+ At: C0
+ At: 4B
+ At: CB
+deco: 25
+ AT: 81
+ At: 92
+ At: 73
+ At: 64
+deco: 27
+ AT: 82
+deco: 26
+ AT: 45
+deco: 20
+ AT: 27
+ At: FA
+deco: 19
+ AT: 39
+deco: 29
+ AT: CA
+SCREEN *** 19
+deco: 24
+ AT: 20
+ At: A0
+ At: 55
+ At: 3B
+ At: 9B
+deco: 27
+ AT: A1
+ At: B2
+ At: 39
+ At: 6A
+deco: 26
+ AT: B1
+ At: 64
+ At: AA
+deco: 25
+ AT: A3
+ At: 84
+ At: 75
+ At: 36
+deco: 28
+ AT: B3
+ At: B4
+ At: A7
+deco: 20
+ AT: 08
+deco: 29
+ AT: 7A
+SCREEN *** 20
+deco: 26
+ AT: 60
+ At: 23
+ At: B4
+ At: E4
+ At: C5
+ At: F5
+deco: 25
+ AT: 90
+ At: 51
+ At: 81
+ At: 42
+ At: 13
+ At: E5
+deco: 24
+ AT: D0
+ At: F0
+deco: 22
+ AT: 92
+ At: 59
+ At: 9A
+deco: 23
+ AT: 15
+ At: 27
+ At: 8A
+deco: 29
+ AT: E7
+deco: 21
+ AT: C8
+ At: 49
+ At: 69
+ At: B9
+ At: 7A
+deco: 20
+ AT: FA
+deco: 19
+ AT: 9B
+SCREEN *** 21
+deco: 24
+ AT: 90
+deco: 25
+ AT: 14
+ At: A4
+ At: D4
+ At: B5
+ At: 86
+ At: 78
+deco: 26
+ AT: 34
+ At: 85
+ At: C5
+ At: 46
+ At: 58
+deco: 27
+ AT: 74
+ At: F4
+deco: 28
+ AT: E5
+ At: D7
+deco: 22
+ AT: 17
+ At: B8
+deco: 23
+ AT: 27
+ At: D8
+deco: 21
+ AT: 37
+ At: 48
+ At: 88
+ At: A8
+ At: C8
+ At: 79
+deco: 19
+ AT: 18
+ At: 49
+ At: A9
+deco: 20
+ AT: 3B
+ At: AB
+SCREEN *** 22
+deco: 24
+ AT: 20
+ At: A0
+deco: 26
+ AT: 31
+ At: 44
+ At: B4
+ At: 75
+deco: 25
+ AT: 12
+ At: C3
+ At: A4
+ At: 85
+deco: 28
+ AT: 32
+deco: 19
+ AT: D3
+ At: 67
+ At: 87
+ At: 28
+deco: 27
+ AT: 05
+deco: 22
+ AT: B5
+ At: 66
+ At: 86
+deco: 21
+ AT: 76
+ At: 96
+ At: 17
+ At: 37
+ At: 57
+deco: 23
+ AT: A6
+deco: 20
+ AT: 09
+ At: C9
+ At: 5A
+SCREEN *** 23
+deco: 24
+ AT: C0
+deco: 27
+ AT: 51
+ At: A4
+ At: B6
+ At: C8
+deco: 26
+ AT: 81
+ At: 32
+ At: D2
+ At: B3
+deco: 23
+ AT: 22
+ At: 57
+ At: C9
+ At: E9
+deco: 25
+ AT: 52
+ At: A2
+ At: C2
+deco: 22
+ AT: 34
+ At: 68
+ At: D9
+deco: 19
+ AT: 35
+ At: 79
+ At: CA
+ At: FB
+deco: 28
+ AT: 85
+ At: 77
+deco: 20
+ AT: 06
+ At: 49
+ At: 8A
+ DONE!
+Opened `cart.nes'...
+  Dumping `ZP'
+    Writing `ZEROPAGE'
+  Dumping `HEADER'
+    Writing `HEADER'
+  Dumping `PRG'
+    Writing `STARTUP'
+    Writing `INIT'
+    Writing `CODE'
+    Writing `RODATA'
+    Writing `DATA'
+  Dumping `RJM'
+    Writing `ROMCHGR'
+  Dumping `VECTORS'
+    Writing `VECTORS'
+  Dumping `CHR'
+    Writing `CHARS'
+  Dumping `RAM'
+    Writing `DATA'
+    Writing `BSS'

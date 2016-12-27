@@ -53,6 +53,10 @@ void __fastcall__ run_script (void) {
                      n = read_vbyte ();
                      terminado = (n != level);
                      break;
+                case 0xF0:
+                     // IF TRUE
+                     // Opcode: F0
+                     break;
                 case 0xFF:
                     // THEN
                     // Opcode: FF

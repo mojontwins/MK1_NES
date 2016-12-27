@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // player.h
@@ -13,7 +13,6 @@ void __fastcall__ player_init (void) {
 	pvx = pvy = 0;
 #ifdef PLAYER_MOGGY_STYLE	
 	pfacing = FACING_DOWN;
-	pfacinghlast = FACING_RIGHT;
 #else
 	pfacing = 0;
 #endif	
@@ -21,7 +20,6 @@ void __fastcall__ player_init (void) {
 	pj = pctj = 0;
 	psprid = 6;
 	pobjs = pkeys = 0;
-	plife = PLAYER_LIFE;
 	pgotten = 0;
 #ifdef MAX_AMMO
 #ifdef INITIAL_AMMO
@@ -36,11 +34,10 @@ void __fastcall__ player_init (void) {
 #endif
 	pstate = EST_NORMAL;
 	pkilled = 0;
-#ifdef DIE_AND_RESPAWN
+
 	px_safe = px;
 	py_safe = py;
 	n_pant_safe = n_pant;
-#endif
 }
 
 void __fastcall__ kill_player (void) {
@@ -48,9 +45,6 @@ void __fastcall__ kill_player (void) {
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
 	pctstate = 100;	
-#else
-	pstate = EST_REBOUND;
-	pctstate = 16;
 #endif
 	sfx_play (4, 0);
 #ifdef DIE_AND_RESPAWN
@@ -94,6 +88,8 @@ void process_tile (x0, y0, x1, y1) {
 #ifdef FIRE_TO_PUSH
 	}
 #endif	
+#else
+	y1=x1;//Shutup, compiler!
 #endif
 #ifndef DEACTIVATE_KEYS
 	if (qtile (x0, y0) == 15) {
@@ -106,11 +102,11 @@ void process_tile (x0, y0, x1, y1) {
 			pkeys --;
 			// Sound
 			sfx_play (1, 1);
-		} /*else {
+		} else {
 			no_on = 1;
 			no_ct = 100;
 			oam_meta_spr ((x0 << 4) + 8, (y0 << 4) - 13 + SPRITE_ADJUST, 160, spr_no);	
-		}*/
+		}
 	} 
 #endif
 }
@@ -321,7 +317,6 @@ void __fastcall__ player_move (void) {
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
-	if (py > 11264) py = 11264;
 	
 	// Collision
 	prx = px >> 6;
@@ -329,7 +324,6 @@ void __fastcall__ player_move (void) {
 	
 	ptx1 = (prx + 4) >> 4;
 	ptx2 = (prx + 11) >> 4;
-	
 #ifdef PLAYER_MOGGY_STYLE		
 	if (pvy < 0)
 #else
@@ -337,7 +331,6 @@ void __fastcall__ player_move (void) {
 #endif		
 	{
 		pty1 = (pry + 8) >> 4;
-		if ((attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1)) hitv = 1;
 		if ((attr (ptx1, pty1) & 8) || (attr (ptx2, pty1) & 8)) {
 			pvy = 0;
 			pry = ((pty1 + 1) << 4) - 8;
@@ -348,11 +341,13 @@ void __fastcall__ player_move (void) {
 #ifdef PLAYER_MOGGY_STYLE			
 	} else if (pvy > 0)
 #else
-	} else if (pvy + pgtmy > 0 && ((pry - 1) & 15) < 8)
+	} else if (pvy + pgtmy > 0)
 #endif		
 	{
 		pty1 = (pry + 15) >> 4;
-		if ((attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1)) hitv = 1;
+#ifndef PLAYER_MOGGY_STYLE
+ 		if (((pry - 1) & 15) < 8)		
+#endif		
 		if ((attr (ptx1, pty1) & 12) || (attr (ptx2, pty1) & 12)) {
 			pvy = 0;
 			pry = ((pty1 - 1) << 4);
@@ -361,15 +356,16 @@ void __fastcall__ player_move (void) {
 			pgotten = 0;
 		}
 	}
+	if (pvy != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1);
 	
 	pty1 = (pry + 16) >> 4;
 	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
 
 #ifdef PLAYER_HAS_JUMP
 	// *******************************
-	// Jump: PAD_B, change when needed
+	// Jump: PAD_A, change when needed
 	// *******************************
-	if (i & PAD_B) { 
+	if (i & PAD_A) { 
 		if (!pjb) {
 			pjb = 1;
 			if (!pj) {
@@ -434,25 +430,39 @@ void __fastcall__ player_move (void) {
 				pvx = 0;
 		}
 	}
+
+	psprint = ((i & PAD_B) && ppossee);
+	if (!psprint && ppossee) {
+		if (pvx < -PLAYER_VX_MAX) pvx = -PLAYER_VX_MAX;
+		if (pvx > PLAYER_VX_MAX) pvx = PLAYER_VX_MAX;
+	}
 	
 	if (i & PAD_LEFT) {
-		pfacinghlast = pfacingh = FACING_LEFT;
-		if (pvx > -PLAYER_VX_MAX) {
-			pvx -= PLAYER_AX;
+		pfacingh = FACING_LEFT;
+		if (psprint) {
+			if (pvx > -PLAYER_VX_SPRINT_MAX) {
+				pvx -= PLAYER_AX_SPRINT;
+			}
+		} else if (pvx > -PLAYER_VX_MAX) {
+			pvx -= PLAYER_AX;			
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 8;
-#endif
+#endif		
 	}
 	
 	if (i & PAD_RIGHT) {
-		pfacinghlast = pfacingh = FACING_RIGHT;
-		if (pvx < PLAYER_VX_MAX) {
+		pfacingh = FACING_RIGHT;
+		if (psprint) {
+			if (pvx < PLAYER_VX_SPRINT_MAX) {
+				pvx += PLAYER_AX_SPRINT;
+			}
+		} else if (pvx < PLAYER_VX_MAX) {
 			pvx += PLAYER_AX;
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 0;
-#endif
+#endif			
 	}
 	
 	// Move
@@ -470,14 +480,12 @@ void __fastcall__ player_move (void) {
 #ifdef BOUNDING_BOX_8_BOTTOM
 	pty1 = (pry + 8) >> 4;
 	pty2 = (pry + 15) >> 4;
-
 #ifdef PLAYER_MOGGY_STYLE	
 	if (pvx < 0) {
 #else
 	if (pvx + pgtmx < 0) {
 #endif
 		ptx1 = (prx + 4) >> 4;
-		if ((attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1)) hith = 1;
 		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
 			pvx = 0;
 			prx = ((ptx1 + 1) << 4) - 4;
@@ -490,7 +498,6 @@ void __fastcall__ player_move (void) {
 	} else if (pvx + pgtmx > 0) {
 #endif		
 		ptx1 = (prx + 11) >> 4;
-		if ((attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1)) hith = 1;
 		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
 			pvx = 0;
 			prx = ((ptx1 - 1) << 4) + 4;
@@ -498,6 +505,7 @@ void __fastcall__ player_move (void) {
 			wall = WRIGHT;
 		}
 	}
+	if (pvx != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1);
 #endif	
 
 	// Facing
@@ -525,13 +533,23 @@ void __fastcall__ player_move (void) {
 	// *************
 	
 	phit = 0;
+	
 	if (hitv) {
 		phit = 1;
-		pvy = add_sign (-pvy, PLAYER_V_REBOUND);
-	}
-	if (hith) {
+#ifdef FULL_BOUNCE
+		pvy = add_sign (-pvy, PLAYER_VX_MAX);
+#endif
+#ifdef DOUBLE_BOUNCE
+		pvy = add_sign (-pvy, PLAYER_VX_MAX << 1);
+#endif		
+	} else if (hith) {
 		phit = 1;
-		pvx = add_sign (-pvx, PLAYER_V_REBOUND);
+#ifdef FULL_BOUNCE
+		pvx = add_sign (-pvx, PLAYER_VX_MAX);
+#endif
+#ifdef DOUBLE_BOUNCE
+		pvx = add_sign (-pvx, PLAYER_VX_MAX << 1);
+#endif		
 	}
 	if (pstate != EST_PARP) {
 		if (phit) {
@@ -596,7 +614,6 @@ void __fastcall__ player_move (void) {
 	// Calc frame
 	// Basic, v.1.0
 #ifdef PLAYER_MOGGY_STYLE
-	/*
 	if (pvx != 0 || pvy != 0) {
 		pctfr ++;
 		if (pctfr == 4) {
@@ -604,26 +621,13 @@ void __fastcall__ player_move (void) {
 			pfr = !pfr;
 			psprid = player_frames [pfacing + pfr];
 		}
-	}*/
-	if (pstate == EST_REBOUND) {
-		psprid = pvx >= 0 ? 10 : 15;
-	} else {
-		if (abs(pvx) < 64 && abs(pvy) < 64) {
-			psprid = pfacinghlast - 1;
-		} else {
-			if (pfacing == FACING_LEFT || pfacing == FACING_RIGHT) {
-				psprid = pfacing + ((prx >> 4) & 3);
-			} else {
-				psprid = pfacing + ((pry >> 4) & 3);
-			}
-		}
 	}
 #else
 	// Extended 16, v.2.0
 	// facing = 0 || 8
 	// frame = 0 standing, 1 2 3 4 running, 5 jumping, 6 7 falling
 	if (ppossee || pgotten) {
-		if (pvx > PLAYER_VX_MIN && pvx < -PLAYER_VX_MIN) {
+		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 			psprid = pfacing + 1 + ((prx >> 3) & 3);
 			/*
 			pctfr ++;
@@ -644,7 +648,7 @@ void __fastcall__ player_move (void) {
 }
 
 void __fastcall__ render_player (void) {
-	if (pstate != EST_PARP || half_life) {
+	if (pstate == EST_NORMAL || half_life) {
 		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
 	} else {
 		oam_meta_spr (0, 240, 128, spr_pl_empty);

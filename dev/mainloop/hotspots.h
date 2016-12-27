@@ -1,6 +1,5 @@
 			// Hotspot interaction
 			if (hrt) {
-				/*
 				if (hrt == HOTSPOT_TYPE_RESONATOR) {
 					if (res_on == 0) {
 						if (prx + 12 >= hrx && prx <= hrx + 12 && pry + 15 >= hry && pry + 8 <= hry && pvy >= PLAYER_G << 1) {
@@ -15,15 +14,17 @@
 							//ppu_mask (0x9f);
 							pal_bg (mypal_bw);
 
-							// Change tile to "active"
-							update_list_tile (hrx >> 3, TOP_ADJUST + (hry >> 3), 20);
+							// Change sprite to "active"
+							oam_meta_spr (hrx, hry + SPRITE_ADJUST, 176, spr_hs [3]);
+
+							sfx_play (1, 1);
 						}
 					}
-				} else */if (collide_in (prx + 8, pry + 8, hrx, hry)) {
-					map_set (hrx >> 4, hry >> 4, 0);
+				} else if (collide_in (prx + 8, pry + 8, hrx, hry)) {
+					oam_meta_spr (0, 240, 176, spr_empty);
 					switch (hrt) {
 #ifndef DEACTIVATE_OBJECTS
-						case HOTSPOT_TYPE_OBJECTS:
+						case HOTSPOT_TYPE_OBJECT:
 							pobjs ++;
 							sfx_play (3, 1);
 							break;
@@ -40,7 +41,7 @@
 							sfx_play (3, 1);
 							break;
 #ifdef MAX_AMMO
-						case case HOTSPOT_TYPE_AMMO:
+						case HOTSPOT_TYPE_AMMO:
 							sfx_play (2, 1);
 							if (MAX_AMMO - pammo > AMMO_REFILL)
 								pammo += AMMO_REFILL;
@@ -48,6 +49,35 @@
 								pammo = MAX_AMMO;
 							break;
 #endif
+						case HOTSPOT_TYPE_STAR:
+							pstars ++;
+							sfx_play (3, 1);
+							
+							pal_bg (mypal_flash);
+							pal_spr (mypal_black);
+							
+							clear_update_list ();
+							ppu_waitnmi ();
+							ppu_waitnmi ();
+							ppu_waitnmi ();
+							ppu_waitnmi ();
+							
+							// Fanfare [TODO]
+							
+							pal_bg (c_pal_bg);
+							pal_spr (c_pal_fg);
+							
+							res_on = 0;
+							
+							clear_update_list (); update_index = 0;
+							if (pstars == 3) {
+								pr_str_upd ("       EXTRA CONTINUE!");
+								pcontinues ++;
+							} else {
+								pr_str_upd ("     WOW! IS THIS MAGIC?");
+							}
+
+							break;
 					}
 					hry = 240;
 					hact [n_pant] = 0;

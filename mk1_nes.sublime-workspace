@@ -139,6 +139,33 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 2897,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dev/game.c",
+			"settings":
+			{
+				"buffer_size": 11586,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 138 files for \"custom\"\n\nC:\\Cosas\\git\\MK1_NES\\dev\\config.h:\n   90  */\n   91  /*\n   92: //#define ENABLE_EXTERN_CODE\t\t// Enables custom code to be run from the script using EXTERN n\n   93  #define ENABLE_FIRE_ZONE\t\t\t// Allows to define a zone which auto-triggers \"FIRE\"\n   94  */\n\nC:\\Cosas\\git\\MK1_NES\\dev\\engine\\frame.h:\n    3  \n    4  // frame.h\n    5: // Custom game frame\n    6  \n    7  const unsigned char game_frame [] = {\n\n2 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 463,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -172,7 +199,8 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Cosas/git/MK1_NES"
+		"/C/Cosas/git/MK1_NES",
+		"/C/Cosas/git/MK1_NES/dev"
 	],
 	"file_history":
 	[
@@ -311,9 +339,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 116.0,
 		"where_history":
 		[
+			"C:\\Cosas\\git\\MK1_NES"
 		]
 	},
 	"find_state":
@@ -321,6 +350,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"custom",
 			"ENS_PURSUING",
 			"241",
 			"http",
@@ -447,8 +477,7 @@
 			"clear_update_list ();",
 			"debug",
 			"45",
-			"fire_zone",
-			"mscnes"
+			"fire_zone"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -565,8 +594,116 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "dev/compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2897,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2897,
+								2897
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "dev/game.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 11586,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 463,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										137,
+										143
+									],
+									[
+										366,
+										372
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

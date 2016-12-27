@@ -17,9 +17,8 @@
 						res_ct --;
 					} else {
 						res_on = 0;
-						//ppu_mask (0x1e);
-						pal_bg (mypal_game_bg0);
-						if (hrt == HOTSPOT_TYPE_RESONATOR) update_list_tile (hrx >> 3, TOP_ADJUST + (hry >> 3), 19);
+						pal_bg (c_pal_bg);
+						if (hrt == HOTSPOT_TYPE_RESONATOR) oam_meta_spr (hrx, hry + SPRITE_ADJUST, 176, spr_hs [2]);
 					}
 				}
 			}

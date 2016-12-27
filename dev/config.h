@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // ============================================================================
@@ -7,24 +7,32 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Dimensiones del mapa, en pantallas.
-#define SCR_INI					12		// Pantalla de inicio
-#define PLAYER_INI_X			8		//
-#define PLAYER_INI_Y			5		// Coordenadas de inicio del jugador, a nivel de tiles
-#define SCR_END					99		// Pantalla del final. 99 si da igual.
+#define MAP_W 					4		//
+#define MAP_H					6		// Dimensiones del mapa, en pantallas.
+#ifdef DEBUG
+#define SCR_INI DEBUG_SCR_INI
+#define PLAYER_INI_X DEBUG_INI_X
+#define PLAYER_INI_Y DEBUG_INI_Y
+#else
+#define SCR_INI					20		// Pantalla de inicio
+#define PLAYER_INI_X			1		//
+#define PLAYER_INI_Y			4		// Coordenadas de inicio del jugador, a nivel de tiles
+#endif
+#define SCR_END					20		// Pantalla del final. 99 si da igual.
 #define PLAYER_END_X			0		//
 #define PLAYER_END_Y			8		// Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_MAX_OBJECTS		13		// Número de objetos para terminar el juego
-#define PLAYER_LIFE				50		// Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL			10		// Recarga de vida.
+#define PLAYER_MAX_OBJECTS		0		// Número de objetos para terminar el juego
+#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL			1		// Recarga de vida.
 
 // Some flexibility
-#define HOTSPOT_TYPE_OBJECTS	1
-#define HOTSPOT_TYPE_KEYS		2
-#define HOTSPOT_TYPE_REFILL		3
+#define HOTSPOTS_WONT_CHANGE			// Neither coordinates or types of hotspots will change
+//#define HOTSPOT_TYPE_OBJECTS	1
+#define HOTSPOT_TYPE_KEYS		1
+#define HOTSPOT_TYPE_REFILL		2
 //#define HOTSPOT_TYPE_AMO		4
-//#define HOTSPOT_TYPE_RESONATOR	3
+#define HOTSPOT_TYPE_RESONATOR	3
+#define HOTSPOT_TYPE_STAR		5
 
 // ============================================================================
 // II. Engine type
@@ -44,20 +52,32 @@
 // General directives:
 // -------------------
 
-#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-//#define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
-#define DOUBLE_BOUNCE
-//#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
-//#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-#define PLAYER_BOUNCES
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+#define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
+//#define DOUBLE_BOUNCE
+#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
-//#define PERSISTENT_ENEMIES
+
+#define ENABLE_FANTY
+#define FANTY_BASE_SPRID		16
+#define FANTY_A 				4
+#define FANTY_MAXV 				64
+#define FANTY_COLLIDES
+
+#define ENABLE_SAW
+#define SAW_BASE_SPRID			20
+#define SAW_V_DISPL				4
+#define SAW_EMERGING_STEPS		10 		// Must be (16  or 8)
+
+#define PERSISTENT_ENEMIES
 //#define ENABLE_CONVEYORS
 
 
@@ -84,26 +104,24 @@
 
 // Scripting
 // ---------
-/*
-#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
-#define FIRE_ON_KILL				// run fire script on enemy kill
-*/
+//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+//#define FIRE_ON_KILL				// run fire script on enemy kill
 /*
 //#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE			// Allows to define a zone which auto-triggers "FIRE"
 */
 // Top view:
 // ---------
-
+/*
 #define PLAYER_MOGGY_STYLE            // Enable top view.
-//#define TOP_OVER_SIDE                 // UP/DOWN has priority over LEFT/RIGHT
-
+#define TOP_OVER_SIDE                 // UP/DOWN has priority over LEFT/RIGHT
+*/
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
+#define PLAYER_HAS_JUMP               	// If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
+#define PLAYER_KILLS_ENEMIES          	// If defined, stepping on enemies kills them
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
 // ============================================================================
@@ -114,7 +132,7 @@
 
 #define LIFE_X					4		//
 #define LIFE_Y					28		// Life gauge counter character coordinates
-#define OBJECTS_X				16		//
+#define OBJECTS_X				5		//
 #define OBJECTS_Y				28		// Objects counter character coordinates
 #define KEYS_X					28		//
 #define KEYS_Y					28		// Keys counter character coordinates
@@ -122,12 +140,12 @@
 #define KILLED_Y				28		// Kills counter character coordinates
 #define AMMO_X					8		// 
 #define AMMO_Y					29		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
+#define PLAYER_SHOW_KILLS
 
 // Text
-
 #define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 #define LINE_OF_TEXT_X			1		// X coordinate.
+#define LINE_OF_TEXT_ATTR		71		// Attribute
 
 // ============================================================================
 // IV. Player movement configuration
@@ -153,10 +171,10 @@
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
-#define PLAYER_AX				16		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_VX_SPRINT_MAX	192
+#define PLAYER_AX				8		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_AX_SPRINT		12
 #define PLAYER_RX				8		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
-
-#define PLAYER_V_REBOUND		224
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
@@ -179,6 +197,6 @@
 // Save for 10 (special), but that's obvious, innit?
 
 const unsigned char tbehs [] = {
-	0, 0, 8, 8, 8, 8, 1, 1, 8, 0, 1, 8, 0, 8,10,10,
-	0, 0, 0, 0
+	0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 1, 4,10,10,
+	0, 0, 8, 8, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0
 };

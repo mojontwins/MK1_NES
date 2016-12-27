@@ -8,7 +8,7 @@
 #ifndef DEACTIVATE_OBJECTS
 			if (oobjs != pobjs) {
 				oobjs = pobjs;
-				p_t (OBJECTS_X, OBJECTS_Y, PLAYER_MAX_OBJECTS - pobjs);
+				p_t (OBJECTS_X, OBJECTS_Y, pobjs);
 			}
 #endif
 #ifndef DEACTIVATE_KEYS

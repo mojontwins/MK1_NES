@@ -1,29 +1,43 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // Uses neslib and related tools by Shiru
 
-// Comment when you are done
+// Use 0 form ROM1, 1 for ROM2, 2 for ROM3
+#define BASE_LEVEL		0
+
+// Comment this when you are done
 //#define DEBUG
+#define DEBUG_LEVEL		1
+#define DEBUG_SCR_INI	11
+#define DEBUG_INI_X		11
+#define DEBUG_INI_Y		1
+//
 
 #define MSB(x)			(((x)>>8))
 #define LSB(x)			(((x)&0xff))
 #define FIXBITS			6
-#define SPRITE_ADJUST 	7
+#define SPRITE_ADJUST	7
 #define TOP_ADJUST		2
 #define COMM_POOL		((unsigned char*)0x0300)
 
 #define MAX_CERROJOS 16 // max 32, make it as small as possible.
 
-#define INITIAL_PLIFE 	5
-#define INITIAL_PCONTINUES 1
-
 // Update list
-#define UPDATE_LIST_SIZE 30
+#define UPDATE_LIST_SIZE 32
 unsigned char update_index;
 unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
 #include "neslib.h"
+
+// OAM TABLE
+/*
+	0-15:	Sprite enemies	(OAM bytes	0-63)
+	32:		player 			(OAM bytes  128-155)
+	39:		Resonator # 	(OAM bytes	156-159)
+	40-43:	NO!				(OAM bytes 	160-175)
+	44-47: 	hotspot 		(OAM bytes  176-191)
+*/
 
 // **************
 // * const data *
@@ -31,16 +45,13 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
 #include "definitions.h"
 #include "config.h"
-#include "assets/cuts_texts.h"
 #include "assets/palettes.h"
 #include "assets/metasprites.h"
-#include "assets/tiledatab.h"
-#include "assets/tiledatatitle.h"
-#include "assets/cutsb.h"
-#include "assets/cutsl.h"
-#include "assets/map_b.h"
-#include "assets/enems.h"
-#include "assets/screens.h"
+#include "assets/tiledata1.h"
+#include "assets/mapa0.h"
+#include "assets/enems0.h"
+#include "assets/mapa1.h"
+#include "assets/enems1.h"
 
 #ifdef ACTIVATE_SCRIPTING
 extern const unsigned char *e_scripts [];
@@ -48,10 +59,9 @@ extern const unsigned char *f_scripts [];
 #endif
 
 // Music
-extern const unsigned char m_title [];
-extern const unsigned char m_ingame [];
-extern const unsigned char m_cuts [];
-extern const unsigned char m_gover [];
+extern const unsigned char m_ingame_1 [];
+extern const unsigned char m_ingame_2 [];
+extern const unsigned char m_sclear [];
 
 // Push to zero page:
 #pragma bssseg (push,"ZEROPAGE")
@@ -67,6 +77,7 @@ unsigned char *gp_gen, *gp_tmap;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc;
+unsigned char rdct;
 
 unsigned char olife, okeys, oobjs, oammo, okilled;
 
@@ -81,21 +92,24 @@ unsigned char en_fr, etx1, etx2, ety1, ety2;
 unsigned char en_collx, en_colly;
 unsigned char touched;
 unsigned char en_touched [3], en_cttouched [3];
+#ifdef ENABLE_FANTY
+signed int enf_x [3], enf_y [3], enf_vx [3], enf_vy [3];
+#endif
 
 // Main player
 signed int px, py, pvx, pvy;
 unsigned char pfacing, pfr, pctfr, psprid;
-unsigned char pj, pctj, pjb, pgotten, ppossee;
-unsigned char pobjs, plife, pcontinues, pkeys, pkilled;
+unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
+unsigned char pobjs, plife, pcontinues, pkeys, pkilled, pstars;
 unsigned char pammo, pfiring;
 unsigned char pushed_any;
 unsigned char pstate, pctstate;
-unsigned char phit, phan, phct;
+unsigned char phit;
 signed int pgtmx, pgtmy;
 
 // Aux player
 unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
-unsigned char pfacingv, pfacingh, pfacinghlast, wall, hitv, hith;
+unsigned char pfacingv, pfacingh, wall, hitv, hith;
 
 // Bullets
 #ifdef PLAYER_CAN_FIRE
@@ -120,9 +134,12 @@ unsigned char ft;
 
 // Current level
 unsigned char *c_map;
+unsigned char **c_decos;
 unsigned char *c_locks;
 unsigned char *c_enems;
 unsigned char *c_hotspots;
+unsigned char *c_pal_bg;
+unsigned char *c_pal_fg;
 
 unsigned char *tileset_pals;
 unsigned char *tsmap;
@@ -149,8 +166,10 @@ unsigned char brky [MAX_BREAKABLE];
 #endif
 #endif
 unsigned char fade_delay;
+#ifndef HOTSPOTS_WONT_CHANGE
 unsigned char hxy [MAP_W * MAP_H];
 unsigned char ht [MAP_W * MAP_H];
+#endif
 unsigned char hact [MAP_W * MAP_H];
 #ifndef DEACTIVATE_KEYS
 unsigned char lkxy [MAX_CERROJOS], lknp [MAX_CERROJOS], lkact [MAX_CERROJOS];
@@ -191,7 +210,7 @@ unsigned char n_pant_safe;
 signed int px_safe, py_safe;
 #endif
 
-unsigned char level, game_on, game_over, rom;
+unsigned char level, game_over;
 
 // *************
 // Main includes
@@ -216,7 +235,6 @@ unsigned char level, game_on, game_over, rom;
 // **************
 
 void __fastcall__ prepare_scr (void) {
-	fade_delay = 1;
 	if (!ft) fade_out (); else ft = 0;
 	oam_spr (0, 240, 0, 0, 156);
 	oam_meta_spr (0, 240, 160, spr_empty);
@@ -270,33 +288,6 @@ void __fastcall__ prepare_scr (void) {
 #endif
 }
 
-void jump_to (unsigned char l) {
-	// MCPPPCCC
-
-	COMM_POOL [4] = plife + pcontinues + 7;
-	COMM_POOL [5] = plife;
-	COMM_POOL [6] = pcontinues;
-	COMM_POOL [7] = l & 1;
-	
-	rom = l >> 1;
-	
-	// Show cutscene
-	// First page in CHR ROM #rom, no change in PRG-ROM #rom
-	// PPP = 0, CCCC = rom + 1
-	COMM_POOL [0] = rom + 1;
-	__asm__ ("jsr _change_reg");
-
-	// Now the cutscene
-	pal_bg (mypal_cuts [rom]);
-	cutscene ((unsigned char *) cuts_tmaps [rom], (unsigned char *) cuts_pals [rom], (unsigned char *) cutscene_texts [l]);
-
-	// Now launch level. Page in CHR-ROM #rom, PRG-ROM #rom
-	// PPP = rom + 1, CCCC = rom + 1
-	rom ++;
-	COMM_POOL [0] = (rom << 3) | rom;
-	__asm__ ("jmp _change_rom");
-}
-
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
@@ -304,240 +295,217 @@ void main(void) {
 	scroll (0, 8);
 	ppu_off ();
 
-	// Decode shared RAM
+	while (1) {	// This while(1) is to make this NROM-compatible for testing purposes.
 
-	/*
-		$00 paging control
-		$01 CMD1
-		$02 CMD2
-		$03 CMD3
-		$04 CONTROL
-		$05 PLIFE
-		$06 PCONTINUES
-		$07 CURRENT LEVEL
-	*/
+		// Decode shared RAM
 
-	// Security code: *0x01 + *0x02 + *0x03 = *0x04
-	rda = COMM_POOL [1]; rdb = COMM_POOL [2]; rdc = COMM_POOL [3]; rdt = COMM_POOL [4];
-	plife = COMM_POOL [5];
-	pcontinues = COMM_POOL [6];
-	level = COMM_POOL [7];
+		// Security code: *04 = *05 + *06 + 7
+		rda = COMM_POOL [4];
+		plife = COMM_POOL [5];
+		pcontinues = COMM_POOL [6];
+		level = COMM_POOL [7];
 
+		if (rda != plife + pcontinues + 7) {
+			plife = PLAYER_LIFE;
+			pcontinues = 0;
 #ifdef DEBUG
-	cls ();
-	pal_bg (mypal_title);
-	
-	set_vram_update (UPDATE_LIST_SIZE, update_list);
-	ppu_on_all ();
-	pal_bright (3);
-	
-	for (gpit = 0; gpit < 15; gpit ++) {
-		p_th (1, 2 + gpit, gpit);
-		p_th (4, 2 + gpit, COMM_POOL [gpit]);
-		ppu_waitnmi ();
-		clear_update_list ();
-		update_index = 0;
-	}
-	
-	while (!pad_poll (0)) ppu_waitnmi ();
-
-	ppu_off ();
-	set_vram_update (0, 0);
-#endif
-
-	if (rdt == rda + rdb + rdc) {
-		// Command!
-		if (rda == 6 && rdb == 6 && rdc == 6) {
-			if (game_over_scr ()) {
-				pcontinues --; 
-				plife = INITIAL_PLIFE;
-				jump_to (level);
-			}
-		}
-		if (rda == 1 && rdb == 2 && rdc == 3) {
-			// Level OK! advance to next
-			level ++;
-			if (level < 6)
-				jump_to (level);
-			else {
-				// Game ending
-				cutscene ((unsigned char *) cutsb_tmaps, (unsigned char *) cutsb_pals, (unsigned char *) game_ending_text);
-				// Credits ? TODO
-			}
-		}
-	}
-
-	// Decoding done.
-
-	while (1) {
-		if (title ()) {
-			// Launch first level.
-			plife = INITIAL_PLIFE; 
-			pcontinues = INITIAL_PCONTINUES;
-			jump_to (0);
+			level = DEBUG_LEVEL;
+#else		
+			level = 0;
+#endif			
 		}
 
-		// Cheril of the bosque!
-		cutscene (0, 0, (unsigned char *) bosque_intro_text);
-
-		game_on = 1;
+		// Decoding done
+	
 		game_over = 0;
 
-		while (game_on) {
-			c_map = (unsigned char *) (map_b);
-			c_locks = (unsigned char *) (locks_map_b);
-			c_enems = (unsigned char *) (enemies_ROM_enems);
-			c_hotspots = (unsigned char *) (hotspots_ROM_enems);
-			pal_bg (mypal_game_bg0);
-			pal_spr (mypal_game_fg0);
-			tsmap = (unsigned char *) (tsb_tmaps);
-			tileset_pals = (unsigned char *) (tsb_pals);
-			
-			cls ();
-
-			draw_game_frame ();
-
-			n_pant = SCR_INI;
-			on_pant = 99;
-
-			hotspots_load ();
-#ifndef DEACTIVATE_KEYS		
-			bolts_load ();
-#endif		
-			player_init ();
-#ifdef PERSISTENT_ENEMIES
-			persistent_enems_load ();
-#endif		
+		if (level == 0)  {
+			c_map = (unsigned char *) (map_0_tiles);
+			c_decos = (unsigned char **) (map_0_decos);
+			c_locks = (unsigned char *) (map_0_locks);
+			c_enems = (unsigned char *) (enemies_ROM_enems0);
+			c_hotspots = (unsigned char *) (hotspots_ROM_enems0);
+			c_pal_bg = (unsigned char *) mypal_game_bg0;
+			c_pal_fg = (unsigned char *) mypal_game_fg0;
+			tsmap = (unsigned char *) (ts1_tmaps);
+			tileset_pals = (unsigned char *) (ts1_pals);
+			baddies_count = 36;
+		} else {
+			c_map = (unsigned char *) (map_1_tiles);
+			c_decos = (unsigned char **) (map_1_decos);
+			c_locks = (unsigned char *) (map_1_locks);
+			c_enems = (unsigned char *) (enemies_ROM_enems1);
+			c_hotspots = (unsigned char *) (hotspots_ROM_enems1);
+			c_pal_bg = (unsigned char *) mypal_game_bg1;
+			c_pal_fg = (unsigned char *) mypal_game_fg1;
+			tsmap = (unsigned char *) (ts1_tmaps);
+			tileset_pals = (unsigned char *) (ts1_pals);
+			baddies_count = 37;
+		}
 		
+		level_screen ();
+		pstars = 0;
+
+		pal_bg (c_pal_bg);
+		pal_spr (c_pal_fg);		
+		cls ();
+
+		draw_game_frame ();
+
+		n_pant = SCR_INI;
+		on_pant = 99;
+
+		hotspots_load ();
+#ifndef DEACTIVATE_KEYS		
+		bolts_load ();
+#endif		
+		player_init ();
+#ifdef PERSISTENT_ENEMIES
+		persistent_enems_load ();
+#endif		
+	
 #ifdef ACTIVATE_SCRIPTING
-			msc_init_all ();
+		msc_init_all ();
 #endif
-			half_life = 0;
-			olife = oammo = oobjs = okeys = 0xff;
-			okilled = 0xff;
+		half_life = 0;
+		olife = oammo = oobjs = okeys = 0xff;
+		okilled = 0xff;
 
-			res_on = 0;
+		res_on = 0;
 
-			music_play (m_ingame);
-			set_vram_update (UPDATE_LIST_SIZE, update_list);
+		music_play (level ? m_ingame_2 : m_ingame_1);
+		set_vram_update (UPDATE_LIST_SIZE, update_list);
 
 #ifdef ACTIVATE_SCRIPTING
-			script_result = 0;
-			// Entering game script
-			script = (unsigned char *) e_scripts [MAP_W * MAP_H];
-			run_script ();
+		script_result = 0;
+		// Entering game script
+		script = (unsigned char *) e_scripts [MAP_W * MAP_H];
+		run_script ();
 #endif
-			ft = 1;
+		ft = 1;	fade_delay = 1;
+		
+		// MAIN LOOP
 
-			// MAIN LOOP
+		pal_bright (0);
+		ppu_on_all ();
 
-			pal_bright (0);
-			ppu_on_all ();
+		while (1) {
+			half_life = 1 - half_life;
+			
+			if (pstate == EST_PARP) {
+				pctstate --;
+				if (!pctstate) pstate = EST_NORMAL;
+			}
 
-			while (1) {
-				half_life = 1 - half_life;
-				update_index = 0;
-				if (pstate) {
-					pctstate --;
-					if (!pctstate) pstate = EST_NORMAL;
+			if (no_on) {
+				if (no_ct) {
+					no_ct --;
+				} else {
+					oam_meta_spr (0, 240, 160, spr_empty);
+					no_on = 0;
 				}
+			}
 
-				if (no_on) {
-					if (no_ct) {
-						no_ct --;
-					} else {
-						oam_meta_spr (0, 240, 160, spr_empty);
-						no_on = 0;
-					}
-				}
-
-				player_move ();
-				enems_move ();
+			player_move ();
+	
+			enems_move ();
 #ifdef PLAYER_CAN_FIRE
-				bullets_move ();
+			bullets_move ();
 #endif
 
 #ifdef BREAKABLE_ANIM
-				if (do_process_breakable) process_breakable ();
+			if (do_process_breakable) process_breakable ();
 #endif
-				render_player ();
+			render_player ();
 
-				#include "mainloop/hotspots.h"
+			#include "mainloop/resonators.h"
 
-				#include "mainloop/pause.h"
+			#include "mainloop/cheat.h"
 
-				#include "mainloop/flickscreen.h"
+			#include "mainloop/pause.h"
 
-				#include "mainloop/hud.h"
+			#include "mainloop/flickscreen.h"
 
-				#include "mainloop/cheat.h"
+			#include "mainloop/hud.h"
 
-				// Sync
-				ppu_waitnmi ();
-				clear_update_list ();
+			#include "mainloop/hotspots.h"
 
-				// Change screen
-				if (on_pant != n_pant) {
-					prepare_scr ();
-					on_pant = n_pant;
-				}
-
-#ifdef ACTIVATE_SCRIPTING
-				// Run fire script
-#ifdef ENABLE_FIRE_ZONE
-				// with fire zone
-				if (i & PAD_B || (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2))) {
-#else
-				if (i & PAD_B) {
-#endif
-					run_fire_script ();
-				}
-#endif
-
-				// Conditions
-				if (plife == 0) {					
-					game_on = 0;
-					game_over = 1;
-					break;
-				}
-
-#ifdef ACTIVATE_SCRIPTING
-				if (script_result) {
-#else
-				if (pobjs == PLAYER_MAX_OBJECTS) {
-#endif
-					game_on = 0;
-					break;
-				}
-
+			// Conditions
+			if (plife == 0) {					
+				game_over = 1;
+				break;
 			}
 
-			music_stop ();
-			set_vram_update (0, 0);
-			ppu_off ();
-			oam_clear ();
-		}
+			// Sync
+			ppu_waitnmi ();
+			clear_update_list ();
+			update_index = 0;
+			
+			// Change screen
+			if (on_pant != n_pant) {
+				prepare_scr ();
+				on_pant = n_pant;
+			}
 
+#ifdef ACTIVATE_SCRIPTING
+			// Run fire script
+#ifdef ENABLE_FIRE_ZONE
+			// with fire zone
+			if (i & PAD_B || (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2))) {
+#else
+			if (i & PAD_B) {
+#endif
+				run_fire_script ();
+			}
+#endif
+
+/*
+#ifdef ACTIVATE_SCRIPTING
+			if (script_result) {
+#else
+			if (pobjs == PLAYER_NUM_OBJETOS) {
+#endif
+*/
+			if (pkilled == baddies_count) {
+				music_stop ();
+				// music zone clear!
+				// Stupid animation
+				stupid_animation ();
+				break;
+			}
+		}
+	
+		music_stop ();
+		set_vram_update (0, 0);
+		ppu_off ();
+		cls ();
+		oam_clear ();	
+		
+		ppu_on_all (); // Why? Shall I remove this, the game hangs.
+		
 		// HERE
+		// When the game is finished, set flags and jump ROMs upon the value of game_over
 
 		if (game_over) {
-			pcontinues = 0;
-			game_over_scr ();
+			// Write 6 6 6 18 to $301 on, launch ROM0
+			COMM_POOL [1] = 6;
+			COMM_POOL [2] = 6;
+			COMM_POOL [3] = 6;
+			COMM_POOL [4] = 18;
 		} else {
-			// WIN screen for cheril of the bosque
-			// Change CHR ROM to 1, PRG ROM stays 0. $300 = MCPPPCCCC = 000000001
-			COMM_POOL [0] = 0x01;
-			__asm__ ("jsr _change_reg");
-
-			pal_bg (mypal_cutscene);	// Wrong palette chosen deliberately.
-			cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) bosque_ending_text);
-
-			// Back to 0:
-			// Change CHR BANK to 0, PRG BANK stays 0. $300 = 0000
-			COMM_POOL [0] = 0x00;
-			__asm__ ("jsr _change_reg");
+			// Write 1 2 3 6 to $301 on, launch ROM0
+			COMM_POOL [1] = 1;
+			COMM_POOL [2] = 2;
+			COMM_POOL [3] = 3;
+			COMM_POOL [4] = 6;
 		}
 		//
+		COMM_POOL [5] = plife;
+		COMM_POOL [6] = pcontinues;
+		COMM_POOL [7] = BASE_LEVEL + level; 
+		// PRG-ROM 0, CHR-ROM 0; $300 = 0b0000 (0x00)
+		COMM_POOL [0] = 0x00;
+		__asm__ ("jmp _change_rom");
 	}
 }
 

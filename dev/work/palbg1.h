@@ -1,4 +1,4 @@
-// Palette data from ..\gfx\palts2B.png
+// Palette data from ..\gfx\palts1B.png
 const unsigned char mypal_game_bg1 [] = {
 	0x08, 0x05, 0x00, 0x10, 
 	0x08, 0x07, 0x26, 0x35, 

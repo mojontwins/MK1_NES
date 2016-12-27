@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // general.h
@@ -18,7 +18,7 @@ unsigned char qtile (signed char x, signed char y) {
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	map_buff [x + (y << 4)] = n;
 	map_attr [x + (y << 4)] = tbehs [n];
-	update_list_tile (x + x, TOP_ADJUST + y + y, n);
+	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
 unsigned char collide_in (x0, y0, x1, y1) {
@@ -45,3 +45,7 @@ void __fastcall__ run_fire_script (void) {
 	run_script ();
 }
 #endif
+
+signed int saturate (signed int v, signed int max) {
+	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
+}

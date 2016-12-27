@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // enengine.h
@@ -41,27 +41,68 @@ void __fastcall__ enems_load (void) {
 #endif
 	gp_gen = (unsigned char *) (c_enems) + n_pant * 21;
 	for (gpit = 0; gpit < 3; gpit ++) {
+		oam_meta_spr (
+			0, 240, 
+			(gpit << 4), 
+			spr_empty
+		);
+
 		en_x1 [gpit] = *gp_gen ++;
 		en_y1 [gpit] = *gp_gen ++;
 		en_x2 [gpit] = *gp_gen ++;
 		en_y2 [gpit] = *gp_gen ++;
 
-#ifdef PERSISTENT_ENEMIES
-		gp_gen += 3;
-		en_mx [gpit] = ep_mx [ep_it];
-		en_my [gpit] = ep_my [ep_it];
 		en_t [gpit] = ep_t [ep_it];
-		en_x [gpit] = ep_x [ep_it];
-		en_y [gpit] = ep_y [ep_it];
+		
+#ifdef ENABLE_SAW
+		if (en_t [gpit] == 8) {
+
+			en_mx [gpit] = (*gp_gen ++) - 8;
+			en_my [gpit] = (*gp_gen ++) - 8;
+			en_x [gpit] = en_x1 [gpit];
+			en_y [gpit] = en_y1 [gpit];
+
+			// emerging sense
+			rda = abs (en_mx [gpit]); if (!rda) rda = abs (en_my [gpit]);
+			rda --;
+			//rda = add_sign (rda, SAW_V_EM);
+
+			// Sense
+			if (en_x1 [gpit] == en_x2 [gpit]) {
+				rdb = sgnc (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
+			} else {
+				rdb = sgnc (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL);
+			}
+
+			// Store:
+			en_my [gpit] = rda; // EMERGING SENSE
+			en_mx [gpit] = rdb; // MOVING SENSE
+			
+			en_alive [gpit] = 1;
+			en_ct [gpit] = SAW_EMERGING_STEPS;
+
+			gp_gen ++;
+		} else
+#endif
+		{
+			en_mx [gpit] = ep_mx [ep_it];
+			en_my [gpit] = ep_my [ep_it];
+
+#ifdef ENABLE_FANTY
+			if (en_t [gpit] == 6) {
+				en_x [gpit] = en_x1 [gpit];
+				en_y [gpit] = en_y1 [gpit];
+			} else
+#endif		
+			{
+				en_x [gpit] = ep_x [ep_it];
+				en_y [gpit] = ep_y [ep_it];
+			}
+
+			gp_gen += 3;
+		}
 		
 		ep_it ++;
-#else			
-		en_mx [gpit] = (*gp_gen ++) - 8;
-		en_my [gpit] = (*gp_gen ++) - 8;
-		en_t [gpit] = *gp_gen ++;		
-		en_x [gpit] = en_x1 [gpit];
-		en_y [gpit] = en_y1 [gpit];
-#endif
 
 #if defined(PLAYER_CAN_FIRE)
 		en_life [gpit] = ENEMIES_LIFE_GAUGE;
@@ -76,7 +117,14 @@ void __fastcall__ enems_load (void) {
 			en_alive [gpit] = 0;
 			en_ct [gpit] = DEATH_COUNT_EXPRESSION;
 		} else 
-#endif		
+#endif
+#ifdef ENABLE_FANTY
+		if (en_t [gpit] == 6) {
+			enf_x [gpit] = en_x [gpit] << 6;
+			enf_y [gpit] = en_y [gpit] << 6;
+			enf_vx [gpit] = enf_vy [gpit] = 0;
+		} else
+#endif
 		{
 			en_s [gpit] = en_t [gpit] - 1;
 			if (en_mx [gpit] == 1 || en_my [gpit] == 1) {
@@ -108,14 +156,14 @@ void __fastcall__ enems_move (void) {
 			if (!en_cttouched [gpit]) {
 				en_touched [gpit] = 0;
 			} else {
-				oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, gpit << 4, spr_explosion);
+				oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_explosion);
 				continue;
 			}
 		}
 #endif
 		
 		if (en_t [gpit]) {
-			
+
 #ifdef BOUNDING_BOX_8_BOTTOM
 			// Gotten preliminary:
 			gpjt = (prx + 11 >= en_x [gpit] && prx <= en_x [gpit] + 11);
@@ -132,156 +180,23 @@ void __fastcall__ enems_move (void) {
 				case 2:
 				case 3:
 				case 4:
-					if ((!res_on || en_t [gpit] == 4) && (!en_status [gpit] || half_life)) {
-#ifdef WALLS_STOP_ENEMIES
-						// Collision. Acts as "everything is a wall". Refine if needed for future games!
-						
-						en_colly = 0;
-						if (en_my [gpit] != 0) {
-							etx1 = en_x [gpit] >> 4;
-							etx2 = (en_x [gpit] + 15) >> 4;
-							if (en_my [gpit] < 0) {
-								ety1 = (en_y [gpit] - 1) >> 4;	
-							} else if (en_my [gpit] > 0) {
-								ety1 = (en_y [gpit] + 16) >> 4;
-							}						
-							if (attr (etx1, ety1) || attr (etx2, ety1)) {
-								en_colly = 1;
-							}				
-						}
-						
-						en_collx = 0;
-						if (en_mx [gpit] != 0) {
-							ety1 = en_y [gpit] >> 4;
-							ety2 = (en_y [gpit] + 15) >> 4;
-							if (en_mx [gpit] < 0) {
-								etx1 = (en_x [gpit] - 1) >> 4;
-							} else if (en_mx [gpit] > 0) {
-								etx1 = (en_x [gpit] + 16) >> 4;
-							}
-							if (attr (etx1, ety1) || attr (etx1, ety2)) {
-								en_collx = 1;
-							}
-						}
-#endif
-						
-						en_x [gpit] += en_mx [gpit];
-						en_y [gpit] += en_my [gpit];
-#ifdef WALLS_STOP_ENEMIES
-						if (en_x [gpit] == en_x1 [gpit] || en_x [gpit] == en_x2 [gpit] || en_collx) en_mx [gpit] = -en_mx [gpit];
-						if (en_y [gpit] == en_y1 [gpit] || en_y [gpit] == en_y2 [gpit] || en_colly) en_my [gpit] = -en_my [gpit];
-#else
-						if (en_x [gpit] == en_x1 [gpit] || en_x [gpit] == en_x2 [gpit]) en_mx [gpit] = -en_mx [gpit];
-						if (en_y [gpit] == en_y1 [gpit] || en_y [gpit] == en_y2 [gpit]) en_my [gpit] = -en_my [gpit];						
-#endif						
-					}
-					oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, gpit << 4, spr_enems [(en_s [gpit] << 1) + en_fr]);
+					#include "engine/enemmods/enem_linear.h"
 					break;
-#ifdef ENABLE_PURSUERS
+#ifdef ENABLE_FANTY					
+				case 6:
+					#include "engine/enemmods/enem_fanty.h"
+					break;
+#endif
+#ifdef ENABLE_PURSUERS					
 				case 7:					
-					switch (en_alive [gpit]) {
-						case 0:
-							// IDLE
-							if (en_ct [gpit]) {
-								en_ct [gpit] --;
-								en_y [gpit] = 240;
-								oam_meta_spr (0, 240, gpit << 4, spr_empty);
-							} else {
-								en_alive [gpit] = 1;
-								en_x [gpit] = en_x1 [gpit];
-								en_y [gpit] = en_y1 [gpit];
-								en_rawv [gpit] = 1 << (rand8 () % 5);
-								if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
-								if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
-								en_ct [gpit] = 50 + (rand8 () & 31);
-								oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, gpit << 4, spr_explosion);
-							}
-							break;
-						case 1:
-							// Appearing
-							if (en_ct [gpit]) {
-								en_ct [gpit] --;
-							} else {
-								en_alive [gpit] = 2;
-							}
-							break;
-						case 2:
-							// Pursuing
-							if (pstate == EST_NORMAL && (!en_status [gpit] || half_life)) {
-								en_mx [gpit] = add_sign (((prx >> 2) << 2) - en_x [gpit], en_rawv [gpit]);
-								en_my [gpit] = add_sign (((pry >> 2) << 2) - en_y [gpit], en_rawv [gpit]);
-
-								en_y [gpit] += en_my [gpit];
-#ifdef WALLS_STOP_ENEMIES
-								// Collision detection
-#ifdef BOUNDING_BOX_8_BOTTOM
-								etx1 = (en_x [gpit] + 4) >> 4;
-								etx2 = (en_x [gpit] + 11) >> 4;
-#else
-								etx1 = en_x [gpit] >> 4;
-								etx2 = (en_x [gpit] + 15) >> 4;
-#endif								
-								if (en_my [gpit] < 0) {
-#ifdef BOUNDING_BOX_8_BOTTOM
-									ety1 = (en_y [gpit] + 8) >> 4;
-#else																		
-									ety1 = en_y [gpit] >> 4;
-#endif									
-									if (attr (etx1, ety1) || attr (etx2, ety1)) 
-#ifdef BOUNDING_BOX_8_BOTTOM
-										en_y [gpit] = ((ety1 + 1) << 4) - 8;
-#else									
-										en_y [gpit] = (ety1 + 1) << 4;
-#endif										
-								} else if (en_my [gpit] > 0) {
-									ety1 = (en_y [gpit] + 15) >> 4;
-									if (attr (etx1, ety1) || attr (etx2, ety1))
-										en_y [gpit] = (ety1 - 1) << 4;
-								}
-#endif							
-								en_x [gpit] += en_mx [gpit];
-#ifdef WALLS_STOP_ENEMIES
-								// Collision detection
-#ifdef BOUNDING_BOX_8_BOTTOM
-								ety1 = (en_y [gpit] + 8) >> 4;
-								ety2 = (en_y [gpit] + 15) >> 4;
-#else								
-								ety1 = en_y [gpit] >> 4;
-								ety2 = (en_y [gpit] + 15) >> 4;
-#endif								
-								if (en_mx [gpit] < 0) {
-#ifdef BOUNDING_BOX_8_BOTTOM									
-									etx1 = (en_x [gpit] + 4) >> 4;
-#else
-									etx1 = en_x [gpit] >> 4;
-#endif									
-									if (attr (etx1, ety1) || attr (etx1, ety2))
-#ifdef BOUNDING_BOX_8_BOTTOM
-										en_x [gpit] = ((etx1 + 1) << 4) - 4;
-#else									
-										en_x [gpit] = (etx1 + 1) << 4;	
-#endif										
-								} else if (en_mx [gpit] > 0) {
-#ifdef BOUNDING_BOX_8_BOTTOM
-									etx1 = (en_x [gpit] + 11) >> 4;
-#else									
-									etx1 = (en_x [gpit] + 15) >> 4;
-#endif									
-									if (attr (etx1, ety1) || attr (etx1, ety2))
-#ifdef BOUNDING_BOX_8_BOTTOM
-										en_x [gpit] = ((etx1 - 1) << 4) + 4;
-#else									
-										en_x [gpit] = (etx1 - 1) << 4;
-#endif										
-								}
-#endif
-	
-							}
-							oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, gpit << 4, spr_enems [(en_s [gpit] << 1) + en_fr]);
-							break;
-					}					
+					#include "engine/enemmods/enem_pursuers.h"
 					break;
 #endif
+#ifdef ENABLE_SAW					
+				case 8:
+					#include "engine/enemmods/enem_saw.h"
+					break;
+#endif					
 			}
 
 #ifndef PLAYER_MOGGY_STYLE
@@ -312,9 +227,9 @@ void __fastcall__ enems_move (void) {
 
 #ifdef PLAYER_KILLS_ENEMIES
 #ifdef PLAYER_MIN_KILLABLE
-			if (en_t [gpit] >= PLAYER_MIN_KILLABLE && en_t [gpit] != 4) {
+			if (en_t [gpit] >= PLAYER_MIN_KILLABLE && en_t [gpit] != 8 && en_t [gpit] != 4) {
 #else
-			if (en_t [gpit] != 4 && res_on) {
+			if (en_t [gpit] != 8 && en_t [gpit] != 4 && res_on) {
 #endif			
 				// Step over enemy
 				if (collide (prx, pry, en_x [gpit], en_y [gpit] - 4) && pry + 2 < en_y [gpit] && pvy > 0 && !pgotten && !ppossee) {
@@ -322,7 +237,14 @@ void __fastcall__ enems_move (void) {
 					en_cttouched [gpit] = 8;
 					sfx_play (6, 2);
 					en_life [gpit] --;
-					pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+					if (!pad_poll (0) & PAD_B) {
+						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+					} else {
+						pj = 1; 
+						pctj = 0;
+						sfx_play (7, 0);
+						pvy = -PLAYER_VY_JUMP_INITIAL;
+					}
 					if (en_life [gpit] == 0) {
 						en_t [gpit] = 0;
 						pkilled ++;
@@ -334,28 +256,29 @@ void __fastcall__ enems_move (void) {
 #endif
 
 			// Collide <-> player
-			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit]) && !res_on) {
+#ifdef ENABLE_SAW
+			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit]) && (!res_on || en_t [gpit] == 8)) 
+#else
+			if (!touched && pstate == EST_NORMAL && collide (prx, pry, en_x [gpit], en_y [gpit]) && !res_on) 
+#endif
+			{
+
 #ifdef ENABLE_PURSUERS	
 				if (en_t [gpit] != 7 || en_alive [gpit] == 2) 
 #endif
-#ifndef PLAYER_MOGGY_STYLE
+#ifndef PLAYER_MOGGY_STYE
 				if (en_t [gpit] != 4)
+#endif				
+#ifdef ENABLE_SAW
+				if (en_t [gpit] != 8 || en_alive [gpit])
 #endif				
 				{
 					touched = 1;
-
-#ifdef PLAYER_BOUNCES
-					// Bounce! In each axis, apply enemy's speed as is speed 1 = 128 and so forth
-					pvx = add_sign (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = -en_mx [gpit];
-					pvy = add_sign (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = -en_my [gpit];
-					if (!pstate || pctstate < 8) 
-#endif
-					
-						kill_player ();
+					kill_player ();
 				}
 			}
 		} else {
-			oam_meta_spr (0, 240, gpit << 4, spr_empty);
+			oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
 		}
 	}	
 }

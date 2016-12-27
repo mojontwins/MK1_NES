@@ -1,199 +1,84 @@
 // Cutscene
 
-unsigned char cutsi, cutc, cutf, cutff;
-unsigned char *cuts_text;
+unsigned char cutsi, cutc;
+unsigned int frc;
 
-void cutscene (unsigned char *cuts_tsmap, unsigned char *cuts_pals, unsigned char *cuts_text) {
-	cls ();
-	
-	for (cutsi = 0; cutsi < 64; cutsi ++) attr_table [cutsi] = 0xff;
-	if (cuts_tsmap && cuts_pals) {
-		// Draw cutscene graphics
-		rdx = 8; rdy = 6;
-		tsmap = cuts_tsmap;
-		tileset_pals = cuts_pals;
-		for (cutsi = 0; cutsi < 32; cutsi ++) {
-			draw_tile (rdx, rdy, cutsi);
-			rdx += 2; if (rdx == 24) { rdx = 8; rdy += 2; }
-		}
-	}
-	vram_write (attr_table, 0x23c0, 64);
+const unsigned char zone_clear [] = {
+	0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x5a, 0x4f, 0x4e, 0x45, 0x20, 0x43,
+	0x4c, 0x45, 0x41, 0x52, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0xee
+};
+void stupid_animation (void) {
+	// Play this when you kill all the baddies
+	pal_bg (mypal_bw);
 
-	pal_bright (0);
-	ppu_on_all ();
-	while (pad_poll (0));
-
-	fade_delay = 4;
-	fade_in ();
-
-	// do
-	gp_tmap = cuts_text;
-	cutf = 1;
-	update_index = 0;
+	// Print text
 	clear_update_list ();
-	rdx = 1; rdy = 16; cutff = 0;
-	
-	set_vram_update (UPDATE_LIST_SIZE, update_list);
-	music_play (m_cuts);
+	update_index = 0;
+	pr_str_upd ((unsigned char *) zone_clear);
+	ppu_waitnmi ();
+	clear_update_list ();
+	update_index = 0;
 
-	while (cutc = *gp_tmap ++) {
-		if (cutc == '*') {
-			rdy += 2;
-			rdx = 1;
-			if (rdy == 16 + 10) {
-				while (1) {
-					ppu_waitnmi ();
-					
-					clear_update_list ();	
-					
-					i = pad_poll (0);
-					if (i & PAD_A || i & PAD_B) break;
-					if (i & PAD_START) {
-						cutf = 0;
-						break;
-					}
-				}
-				while (1) {
-					ppu_waitnmi ();
-					i = pad_poll (0);	
-					if (!(i & PAD_A || i & PAD_B || i & PAD_START)) break;	
-				}
-				for (cutsi = 0; cutsi < 5; cutsi ++) {
-					update_index = 0;
-					gp_addr = 0x2000 + ((cutsi + cutsi + 16) << 5) + 1;
-					for (rdx = 0; rdx < 30; rdx ++) {
-						update_list [update_index ++] = MSB (gp_addr);
-						update_list [update_index ++] = LSB (gp_addr ++);
-						update_list [update_index ++] = 0;
-					}
-					ppu_waitnmi ();
-				}
-				rdy = 16;
-				rdx = 1;
-				cutff = 0;
-				update_index = 0; 
-				clear_update_list ();				
-			}
-		} else {
-			gp_addr = 0x2000 + (rdy << 5) + rdx;
-			update_list [update_index++] = MSB(gp_addr);		
-			update_list [update_index++] = LSB(gp_addr);
-			update_list [update_index++] = cutc - 32;
-			rdx = rdx + 1;
+	music_play (m_sclear);
 
-			if (cutff) {
-				if (update_index == 30) {
-					ppu_waitnmi ();
-					update_index = 0;
-					clear_update_list ();
-				}
-			} else {
-				for (cutsi = 0; cutsi < 4; cutsi ++) ppu_waitnmi ();
-				update_index = 0;
-				clear_update_list ();		
-			}
-		}
+	// Float jill a while
+	cutsi = 60; cutc = 0;
+	while (cutsi --) {
+		if (!(cutsi & 0x0f)) cutc = 1 - cutc;
+		psprid = 6 + cutc;
+		render_player ();
+		enems_move ();
+		ppu_waitnmi ();
+	}	
 
-		i = pad_poll (0);
-		if (i & PAD_A || i & PAD_B) cutff = 1;
-		if (i & PAD_START || !cutf) { 
-			cutf = 0;
-			break;	
-		}
-	}
-	ppu_waitnmi (); // Show rogue chars
-
-	set_vram_update (0, 0);
-
-	// Wait button
-	while (cutf) {
-		i = pad_poll (0);
-		if (i & PAD_A || i & PAD_B || i & PAD_START) break;
+	// Fly jill out of here
+	cutsi = 0;
+	frc = 0;
+	while (pry) {
+		frc ++;
+		cutsi ++;
+		if (!(cutsi & 0x0f)) cutc = 1 - cutc;
+		psprid = 6 + cutc;
+		pry --;
+		prx += ((rand8 () & 1) << 1) - 1;
+		render_player ();
 		ppu_waitnmi ();
 	}
 
-	music_stop ();
-	fade_out ();
-	ppu_off ();
-}
+	oam_meta_spr (0, 240, 128, spr_pl_empty);
 
-unsigned char title (void) {
-	// Shows title screen.
-	// Returns 1 = normal, 0 = hidden game
-	cls ();
-	pal_bg (mypal_title);
-	tsmap = (unsigned char *) (tstitle_tmaps);
-	tileset_pals = (unsigned char *) (tstitle_pals);
-	un_rle_screen ((unsigned char *) scr_rle_0);
-	pr_str (10, 18, "PRESS START!");
-	pr_str (4, 27, "(C) 2015 THE MOJON TWINS");
-	pr_str (8, 28 , "MUSIC BY DAVIDIAN");
-
-	pal_bright (0);
-	ppu_on_all ();
-	while (pad_poll (0));
-
-	fade_delay = 4;
-	fade_in ();
-
-	music_play (m_title);
-	while (1) {
-		i = pad_poll (0);
-		if (i & PAD_START) { gpit = 1; break; }
-		if ((i & PAD_A) && (i & PAD_SELECT) && (i & PAD_UP)) { gpit = 0; break; }
-	}
-	music_stop ();
-
-	fade_out ();
-	ppu_off ();
-
-	return gpit;
-}
-
-unsigned char game_over_scr (void) {
-	cls ();
-	pal_bg (mypal_title);
-	pal_spr (mypal_game_fg0);
-	
-	rda = 0;
-	
-	if (pcontinues) {
-		pr_str (11, 13, "GAME OVER!");
-		pr_str (11, 15, "CREDITS ");
-		vram_put (16 + (pcontinues / 10));
-		vram_put (16 + (pcontinues % 10));
-		pr_str (7, 17, "CONTINUE?  YES  NO"); 
-		// Horz: NO = 12*8, YES = 17*8
-	} else pr_str (11, 15, "GAME OVER!");
-
-	pal_bright (0);
-	ppu_on_all ();
-	while (pad_poll (0));
-	
-	fade_delay = 4;
-	fade_in ();
-
-	music_play (m_gover);
-	if (pcontinues) {
-		while (1) {
-			i = pad_poll (0);
-			if ((i & PAD_LEFT) && !rda) rda = 1;
-			if ((i & PAD_RIGHT) && rda) rda = 0;
-			if (i & PAD_SELECT) rda = 1 - rda;
-			if ((i & PAD_A) || (i & PAD_B) || (i & PAD_START)) break;
-
-			rdb = 1 - rda;
-			oam_spr ((17 + (rdb << 2) + rdb) << 3, 126, 164, 0, 0);
-			ppu_waitnmi ();
-		}
-	} else {
-		while (0 == pad_poll (0));
+	while (frc ++ < 400) {
+		ppu_waitnmi ();
+		if (pad_poll (0)) break;
 	}
 
 	music_stop ();
+}
+
+const unsigned char level_str [] = {
+	0x4c, 0x45, 0x56, 0x45, 0x4c, 0x20, 0x30, 0
+};
+const unsigned char dalefran_str [] = {
+	0x44, 0x41, 0x4c, 0x45, 0x20, 0x46, 0x52, 0x41, 0x4e, 0x21, 0
+};
+void level_screen (void) {
+	cls ();
+	pal_bg (mypal_bw);
+
+	pr_str (12, 13, (unsigned char *) level_str);
+	vram_put (BASE_LEVEL + level + 1 + 16);
+	pr_str (11, 15, (unsigned char *) dalefran_str);
+
+	pal_bright (0);
+	ppu_on_all ();
+	fade_delay = 4;
+	fade_in ();
+
+	cutsi = 100;
+	while (cutsi -- && !pad_poll (0)) {
+		ppu_waitnmi ();
+	}
 
 	fade_out ();
 	ppu_off ();
-
-	return rda;
 }

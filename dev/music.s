@@ -1,11 +1,9 @@
-	.export _m_title
-	.export _m_ingame
-	.export _m_cuts
-	.export _m_gover
+	.export _m_ingame_1
+	.export _m_ingame_2
+	.export _m_sclear
 
 	.include "m_instruments.s"
 	
-_m_title:		.include "m_title.s"
-_m_ingame:		.include "m_bosque.s"
-_m_cuts:		.include "m_cut_1.s"
-_m_gover:		.include "m_gover.s"
+_m_ingame_1:		.include "m_fase_1.s"
+_m_ingame_2:		.include "m_fase_2.s"
+_m_sclear:			.include "m_sclear.s"
