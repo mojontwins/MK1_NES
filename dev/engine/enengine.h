@@ -1,4 +1,4 @@
-// NES MK1 v0.5
+// NES MK1 v0.6
 // Copyleft Mojon Twins 2013, 2015
 
 // enengine.h
@@ -24,37 +24,40 @@ void draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
 #endif
 
 #ifdef PERSISTENT_ENEMIES
-// Copy to RAM addresses and initialize statuses (alive = 1)
-void __fastcall__ persistent_enems_load (void) {
-	/*
+void persistent_enems_load (void) {
 	gp_gen = (unsigned char *) (c_enems);
 	for (ep_it = 0; ep_it < 3 * MAP_W * MAP_H; ep_it ++) {
-		ep_x [ep_it] = *gp_gen ++;
-		ep_y [ep_it] = *gp_gen;
-		gp_gen += 3;
-		ep_mx [ep_it] = (*gp_gen ++) - 8;
-		ep_my [ep_it] = (*gp_gen ++) - 8;
-		ep_t [ep_it] = (*gp_gen ++);
+		// Skip t
+		gp_gen ++;
+
+		// XY1
+		rda = *gp_gen ++;
+		ep_x [ep_it] = rda & 0xf0;
+		ep_y [ep_it] = rda << 4;
+
+		// XY2
+		rda = *gp_gen ++;
+		rdb = rda & 0xf0;
+		rdc = rda << 4;
+
+		// P, here used for speed
+		rda = *gp_gen ++;
+		ep_mx [ep_it] = add_sign (rdb - ep_x [ep_it], rda);
+		ep_my [ep_it] = add_sign (rdc - ep_y [ep_it], rda);		
 	}
-	*/
-	// TODO! Rewrite when needed again.
 }
 
-void __fastcall__ persistent_update (void) {
-	/*
+void persistent_update (void) {
 	if (on_pant != 99) {
-		ep_it = on_pant * 3;
-		for (gpit = 0; gpit < 3; gpit ++) {
+		ep_it = on_pant + on_pant + on_pant;
+		gpit = 3; while (gpit --) {
 			ep_x [ep_it] = en_x [gpit];
 			ep_y [ep_it] = en_y [gpit];
-			ep_mx [ep_it] = en_mx [gpit] << (!en_status [gpit]);
-			ep_my [ep_it] = en_my [gpit] << (!en_status [gpit]);			
-			ep_t [ep_it] = en_t [gpit];
-			ep_it ++;
+			ep_mx [ep_it] = en_mx [gpit] << (1 - en_status [gpit]);
+			ep_my [ep_it] = en_my [gpit] << (1 - en_status [gpit]);	
+			ep_it ++;		
 		}	
 	}
-	*/
-	// TODO! Rewrite when needed again.
 }
 #endif
 
@@ -66,29 +69,34 @@ void persistent_deaths_load (void) {
 }
 #endif
 
-void __fastcall__ enems_load (void) {
+void enems_load (void) {
 	// Loads enems from n_pant
-	// TODO: Rewrite for PERSISTENT_ENEMIES when needed.
 
 	// Read 3 enemies from enems ROM pool and populate my arrays properly.
+	// If persistent enemies on: x, y, mx, my read from RAM pool.
+	// If persistent deaths on: read ep_flags and modify en_t accordingly.
 
 	// Each screen holds 3 * 4 bytes of enemies, that's 12 bytes per screen.
 	// 12 = 4 + 8 so you know the drill...
 	gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
 
-	// Notice that enemies are write backwards. Take in account in the future
-#ifdef PERSISTENT_DEATHS	
-	rdc = n_pant + n_pant + n_pant;
+	// Notice that enemies are writen backwards. Take in account in the future
+#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
+	rdc = n_pant + n_pant + n_pant;// + 3;
 #endif	
 	gpit = 3; while (gpit --) {
 		oam_meta_spr (0, 240, ENEMS_OAM_BASE + (gpit << 4), spr_empty);
 #if defined (ENABLE_SAW) || defined (ENABLE_PEZONS)	|| defined (ENABLE_GENERATORS)
 		oam_meta_spr (0, 240, (gpit << 4), spr_empty);
 #endif	
-
+/*
+#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
+		-- rdc;
+#endif
+*/
 #ifdef PERSISTENT_DEATHS	
 		// Fast hack. If enemy is dead, change for type 0 and skip data.
-		if (!ep_flags [rdc + gpit] & 1) {
+		if (!ep_flags [rdc] & 1) {
 			en_t [gpit] = 0;
 			gp_gen += 4;
 		} else 
@@ -98,7 +106,26 @@ void __fastcall__ enems_load (void) {
 			en_t [gpit] = *gp_gen ++;
 
 			// General...
+#ifdef PERSISTENT_ENEMIES
+			// XY1
+			rda = *gp_gen ++;
+			en_x1 [gpit] = rda & 0xf0;
+			en_y1 [gpit] = rda << 4;
 
+			// XY2
+			rda = *gp_gen ++;
+			en_x2 [gpit] = rda & 0xf0;
+			en_y2 [gpit] = rda << 4;
+		
+			// P, here used for speed
+			rda = *gp_gen ++;
+
+			// But...
+			en_x [gpit] = ep_x [rdc];
+			en_y [gpit] = ep_y [rdc];
+			en_mx [gpit] = ep_mx [rdc];
+			en_my [gpit] = ep_my [rdc];
+#else
 			// XY1
 			rda = *gp_gen ++;
 			en_x [gpit] = en_x1 [gpit] = rda & 0xf0;
@@ -113,7 +140,7 @@ void __fastcall__ enems_load (void) {
 			rda = *gp_gen ++;
 			en_mx [gpit] = add_sign (en_x2 [gpit] - en_x1 [gpit], rda);
 			en_my [gpit] = add_sign (en_y2 [gpit] - en_y1 [gpit], rda);
-
+#endif
 
 			switch (en_t [gpit]) {
 				case 1:
@@ -131,7 +158,7 @@ void __fastcall__ enems_load (void) {
 						en_mx [gpit] >>= 1;
 						en_my [gpit] >>= 1;
 					}
-
+					
 					break;
 	#ifdef ENABLE_HOMING_FANTY				
 				case 5:
@@ -223,9 +250,11 @@ void __fastcall__ enems_load (void) {
 	#elif defined(PLAYER_KILLS_ENEMIES)
 			en_life [gpit] = 1;
 	#endif		
-			en_status [gpit] = 0;
 			en_cttouched [gpit] = 0;
 		}
+#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
+		rdc ++;
+#endif
 	}
 }
 
@@ -325,7 +354,7 @@ void enems_move (void) {
 			}
 #endif
 
-#ifdef PLAYER_KILLS_ENEMIES
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING)
 #ifdef PLAYER_MIN_KILLABLE
 			if (en_t [gpit] >= PLAYER_MIN_KILLABLE && en_t [gpit] != 8 && en_t [gpit] != 4) {
 #else
@@ -333,9 +362,20 @@ void enems_move (void) {
 #endif			
 				// Step over enemy
 				if (collide (prx, pry, en_x [gpit], en_y [gpit] - 4) && pry + 2 < en_y [gpit] && pvy > 0 && !pgotten && !ppossee) {
+#ifdef PLAYER_SAFE_LANDING
+					if (en_my [gpit] < 0) en_my [gpit] = -en_my [gpit];					
+#else
 					en_cttouched [gpit] = 8;
 					sfx_play (6, 2);
 					en_life [gpit] --;
+#endif					
+
+#ifdef PLAYER_BOOTEE
+					pj = 1; 
+					pctj = 0;
+					sfx_play (7, 0);
+					pvy = -PLAYER_VY_JUMP_INITIAL;
+#else					
 					if (!pad_poll (0) & PAD_B) {
 						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
 					} else {
@@ -344,11 +384,14 @@ void enems_move (void) {
 						sfx_play (7, 0);
 						pvy = -PLAYER_VY_JUMP_INITIAL;
 					}
+#endif					
+#ifndef PLAYER_SAFE_LANDING					
 					if (en_life [gpit] == 0) {
 						kill_enemy (gpit);
 						pkilled ++;
 					}
-					touched = 1;
+#endif					
+					touched = 1;		
 					continue;
 				}
 			}
@@ -375,28 +418,30 @@ void enems_move (void) {
 					touched = 1;
 
 #ifdef PLAYER_BOUNCES
-					// Bounce! In each axis, apply enemy's speed as is speed 1 = 128 and so forth
+					// Bounce! In each axis, apply enemy's speed as is speed sign over the constant
+					/*
 					pvx = add_sign (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = -en_mx [gpit];
 					pvy = add_sign (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = -en_my [gpit];
-					if (!pstate || pctstate < 8) 
+					*/
+					pvx = add_sign (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = add_sign (en_x [gpit] - prx, abs (en_mx [gpit]));
+					pvy = add_sign (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = add_sign (en_y [gpit] - pry, abs (en_my [gpit]));
 #endif
 					
 #ifdef PLAYER_CAN_FIRE
-					en_life [gpjt] --;	
-					if (en_life [gpjt] == 0) {	
+					en_life [gpit] --;	
+					if (en_life [gpit] == 0) {	
 #ifdef ENABLE_PURSUERS
 						if (en_t [gpit] == 7) {
-							en_alive [gpjt] = 0;
-							en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-							en_life [gpjt] = ENEMIES_LIFE_GAUGE;
+							en_alive [gpit] = 0;
+							en_ct [gpit] = DEATH_COUNT_EXPRESSION;
+							en_life [gpit] = ENEMIES_LIFE_GAUGE;
 						} else 
 #endif
 						{
-							kill_enemy (gpjt);
+							kill_enemy (gpit);
 							pkilled ++;		
 						}
-					}
-					
+					}					
 #endif				
 					kill_player ();
 				}

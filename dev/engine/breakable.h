@@ -1,3 +1,6 @@
+// NES MK1 v0.6
+// Copyleft Mojon Twins 2013, 2015
+
 // breakable.h
 // Manages breakable blocks and animations
 

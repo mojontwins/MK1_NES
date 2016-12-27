@@ -1,5 +1,4 @@
-// NES MK1 v0.5
-// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v0.6// Copyleft Mojon Twins 2013, 2015
 
 // definitions.h
 // Main definitions
@@ -7,6 +6,7 @@
 #define EST_NORMAL 		0
 #define EST_PARP 		2
 #define EST_MUR 		4
+#define EST_REBOUND		8
 #define sgni(n)			(n < 0 ? -1 : 1)
 #define sgnc(a,b,c)		(a < b ? -c : c)
 #define saturate_z(n)	(n < 0 ? 0 : n)

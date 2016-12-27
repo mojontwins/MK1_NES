@@ -1,4 +1,4 @@
-// NES MK1 v0.5
+// NES MK1 v0.6
 // Copyleft Mojon Twins 2013, 2015
 
 // printer.h
@@ -78,6 +78,24 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	vram_put (*gp_tmap);	
 }
 
+
+void draw_tile_shadowed (unsigned char x, unsigned char y, unsigned char tl, unsigned char t2) {
+	// Don't do this at home.
+	upd_attr_table (x, y, tl);
+	
+	gp_tmap = tsmap + (tl << 2);
+	gp_tma2 = tsmap + (t2 << 2);
+	gp_addr = ((y << 5) + x + 0x2000);
+	vram_adr (gp_addr++);
+	rdb = attr (rdx - 1, rdy);
+	rda = (!rdy && rdb) || attr (rdx - 1, rdy - 1) ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tma2 ++; gp_tmap ++;
+	rda = attr (rdx, rdy - 1) ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tma2 ++; gp_tmap ++;
+	gp_addr += 31;
+	vram_adr (gp_addr++);
+	rda = rdb ? *gp_tma2 : *gp_tmap; vram_put (rda); gp_tmap ++;
+	vram_put (*gp_tmap);	
+}
+
 void wbtul (unsigned char b) {
 	update_list [update_index++] = MSB(gp_addr);
 	update_list [update_index++] = LSB(gp_addr++);
@@ -115,15 +133,15 @@ void draw_map_tile (t) {
 	map_attr [rda] = tbehs [t];
 	if (t == 0) {
 		rda = rand8 ();
-		if (level) {
-			t = (rda & 31) == 1 ? t = 45 + (rand8 () & 1) : 44;
-		} else {
-			if ((rda & 15) < 7) t = 40 + ((n_pant + rdx + rdy + rdy) & 3);
-		}
-	} else if (t == 10) {
-		if (map_buff [rda - 16] != 10) t = 16;
+		t = (rda & 31) == 1 ? 16: 0;
+	} 
+	if (t == 3) {
+		draw_tile_shadowed (rdx + rdx, rdy + rdy + TOP_ADJUST, 3, 32);
+	} else if (t == 28) {
+		draw_tile_shadowed (rdx + rdx, rdy + rdy + TOP_ADJUST, 28, 33);
+	} else {
+		draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
 	}
-	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
 

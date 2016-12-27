@@ -1,4 +1,4 @@
-// NES MK1 v0.5
+// NES MK1 v0.6
 // Copyleft Mojon Twins 2013, 2015
 
 // Uses neslib and related tools by Shiru
@@ -41,7 +41,6 @@
 #include "definitions.h"
 #include "config.h"
 #include "assets/palettes.h"
-#include "assets/pal_arrays.h"
 #include "assets/metasprites.h"
 #include "assets/tiledata1.h"
 #include "assets/mapa.h"
@@ -54,7 +53,7 @@ extern const unsigned char *f_scripts [];
 
 // Music
 extern const unsigned char m_ingame_1 [];
-//extern const unsigned char m_cuts [];
+extern const unsigned char m_cuts [];
 
 // Push to zero page:
 #pragma bssseg (push,"ZEROPAGE")
@@ -65,7 +64,7 @@ unsigned char half_life, frame_counter;
 
 unsigned char n_pant, on_pant;
 
-unsigned char *gp_gen, *gp_tmap;
+unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc;
@@ -104,7 +103,6 @@ unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
 //#ifndef DEACTIVATE_OBJECTS
 unsigned char pobjs;
 //#endif
-
 unsigned char plife, pcontinues;
 #ifndef DEACTIVATE_KEYS
 unsigned char pkeys;
@@ -126,7 +124,7 @@ unsigned char pinv;
 
 // Aux player
 unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
-#ifdef PLAYER:PLAYER_MOGGY_STYLE
+#ifdef PLAYER_MOGGY_STYLE
 unsigned char pfacingv, pfacingh;
 #endif
 unsigned char wall, hitv, hith;
@@ -136,8 +134,18 @@ unsigned char ppropelled;
 
 // Bullets
 #ifdef PLAYER_CAN_FIRE
-unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS], bmx [MAX_BULLETS], bmy [MAX_BULLETS];
+unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
+signed char bmx [MAX_BULLETS];
+#ifdef PLAYER_MOGGY_STYLE
+signed char bmy [MAX_BULLETS];
+#endif
 unsigned char btx, bty;
+#endif
+
+#ifdef PLAYER_GARGAJO
+unsigned char gst [MAX_GARGAJOS], gx [MAX_GARGAJOS], gy [MAX_GARGAJOS];
+signed char gmx [MAX_GARGAJOS];
+unsigned char ghsx, ghsy, pgargajocounter;
 #endif
 
 // Hotspots
@@ -190,7 +198,7 @@ unsigned char brky [MAX_BREAKABLE];
 #endif
 unsigned char fade_delay;
 #ifndef HOTSPOTS_WONT_CHANGE
-
+unsigned char hxy [MAP_W * MAP_H];
 unsigned char ht [MAP_W * MAP_H];
 #endif
 unsigned char hact [MAP_W * MAP_H];
@@ -223,7 +231,7 @@ unsigned char ep_x [3 * MAP_W * MAP_H];
 unsigned char ep_y [3 * MAP_W * MAP_H];
 signed char ep_mx [3 * MAP_W * MAP_H];
 signed char ep_my [3 * MAP_W * MAP_H];
-unsigned char ep_t [3 * MAP_W * MAP_H];
+//unsigned char ep_t [3 * MAP_W * MAP_H];
 unsigned int ep_it;
 #endif
 #ifdef PERSISTENT_DEATHS
@@ -245,8 +253,8 @@ unsigned char level, game_over;
 #ifdef ENABLE_PROPELLERS
 void add_propeller (unsigned char x, unsigned char y);
 #endif
-#include "engine/printer.h"
 #include "engine/general.h"
+#include "engine/printer.h"
 #ifndef DEACTIVATE_KEYS
 #include "engine/bolts.h"
 #endif
@@ -306,6 +314,11 @@ void prepare_scr (void) {
 #ifdef PLAYER_CAN_FIRE
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) bst [gpit] = 0;
 	bullets_move ();
+#endif
+
+#ifdef PLAYER_GARGAJO
+	gpit = MAX_GARGAJOS; while (gpit --) gst [gpit] = 0;
+	gargajos_move ();
 #endif
 
 	// Reenable sprites and tiles now we are finished.
@@ -371,6 +384,7 @@ void main(void) {
 		cls ();
 
 		draw_game_frame ();
+		clean_gauge ();
 
 		n_pant = SCR_INI;
 		on_pant = 99;
@@ -415,7 +429,7 @@ void main(void) {
 		while (1) {
 			half_life = 1 - half_life;
 			frame_counter ++;
-			
+						
 			if (pstate) {
 				pctstate --;
 				if (!pctstate) pstate = EST_NORMAL;
@@ -429,6 +443,10 @@ void main(void) {
 			enems_move ();
 #ifdef PLAYER_CAN_FIRE
 			bullets_move ();
+#endif
+
+#ifdef PLAYER_GARGAJO
+			gargajos_move ();
 #endif
 
 #ifdef BREAKABLE_ANIM
@@ -494,6 +512,8 @@ void main(void) {
 				if (((prx + 8) >> 4) == PLAYER_END_X) {
 					if (((pry + 8) >> 4) == PLAYER_END_Y) {
 						music_stop ();
+						delay (50);
+						fade_out ();
 						break;
 					}
 				}

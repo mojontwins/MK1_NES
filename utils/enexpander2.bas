@@ -14,7 +14,7 @@ Sub strToArr128 (mstr As String, arr () As uByte)
 	Next i
 End Sub
 
-Dim as Integer x, y, f1, f2, i, j
+Dim as Integer x, y, t, f1, f2, i, j
 Dim as uByte d, arr (127), map_w, map_h, nenems
 
 ' enexpander.bas
@@ -86,19 +86,17 @@ Next i
 ' Read / Write hotspots
 
 For i = 1 To (map_w * map_h)
-	' xy t
-	get #f1, , d ' xy
-	x = d \ 16
-	y = d Mod 16
-	Print "(" & i & "), " & x & ", " & y & " => ";
+	get #f1, , d: x = d
+	get #f1, , d: y = d
+	get #f1, , d: t = d
+	print Hex (x, 2) & " " & hex (y, 2) & " " & hex (t, 2) & ".. ";
+	Print "[" & Hex (i - 1, 2) & "]: (" & x & ", " & y & ") -> ";
 	If x > 6 Then x = x + 1
 	If y > 5 Then y = y + 2
-	Print x & ", " & y  & ".";
-	d = (x Mod 16) * 16 + (y Mod 16)
-	put #f2, , d
-	get #f1, , d ' t
-	? d 	
-	put #f2, , d
+	Print "(" & x & ", " & y  & ")."
+	d = x: put #f2, , d
+	d = y: put #f2, , d
+	d = t: put #f2, , d
 Next i
 
 Close

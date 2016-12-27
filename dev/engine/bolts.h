@@ -1,4 +1,4 @@
-// NES MK1 v0.5
+// NES MK1 v0.6
 // Copyleft Mojon Twins 2013, 2015
 
 // bolts.h

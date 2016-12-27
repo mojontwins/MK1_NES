@@ -82,11 +82,10 @@
 									pammo = MAX_AMMO;
 								break;
 #endif
-/*
 							case HOTSPOT_TYPE_STAR:
-								pstars ++;
+								//pstars ++;
 								sfx_play (3, 1);
-								
+								/*
 								pal_bg (mypal_flash);
 								pal_spr (mypal_black);
 								
@@ -110,9 +109,8 @@
 								} else {
 									pr_str_upd ("     WOW! IS THIS MAGIC?");
 								}
-
+								*/
 								break;
-*/
 						}
 						hry = 240;
 						hact [n_pant] = 0;

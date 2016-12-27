@@ -1,4 +1,4 @@
-// NES MK1 v0.5
+// NES MK1 v0.6
 // Copyleft Mojon Twins 2013, 2015
 
 // player.h
@@ -34,6 +34,9 @@ void player_init (void) {
 #endif
 #endif	
 	pfiring = 0;
+#ifdef PLAYER_GARGAJO
+	pgargajocounter = 0;
+#endif	
 #ifdef PLAYER_CAN_FIRE
 	for (i = 0; i < MAX_BULLETS; i++) bst [i] = 0;
 #endif
@@ -53,11 +56,14 @@ void player_init (void) {
 #endif
 }
 
-void __fastcall__ kill_player (void) {
+void kill_player (void) {
 	plife --;
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
 	pctstate = 100;	
+#else
+	pstate = EST_REBOUND;
+	pctstate = 16;	
 #endif
 	sfx_play (4, 0);
 #ifdef DIE_AND_RESPAWN
@@ -116,9 +122,7 @@ void process_tile (x0, y0, x1, y1) {
 			// Sound
 			sfx_play (1, 1);
 		} else {
-			no_on = 1;
 			no_ct = 100;
-			oam_meta_spr ((x0 << 4) + 8, (y0 << 4) - 13 + SPRITE_ADJUST, 160, spr_no);	
 		}
 	} 
 #endif
@@ -126,128 +130,11 @@ void process_tile (x0, y0, x1, y1) {
 #endif
 
 #ifdef PLAYER_CAN_FIRE
-void fire_bullet (void) {
-	// Creates a new bullet (if possible);
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		if (bst [gpit] == 0) {
-			bst [gpit] = 1;
-#ifdef MAX_AMMO
-			if (!pammo) return;
-			pammo --;
+#include "engine/playermods/bullets.h"
 #endif
-#ifdef PLAYER_MOGGY_STYLE
-			switch (pfacing) {
-				case FACING_LEFT:
-					bx [gpit] = prx - 4;
-					bmx [gpit] = -PLAYER_BULLET_SPEED;
-					by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
-					bmy [gpit] = 0;
-					break;	
-				case FACING_RIGHT:
-					bx [gpit] = prx + 12;
-					bmx [gpit] = PLAYER_BULLET_SPEED;
-					by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
-					bmy [gpit] = 0;
-					break;
-				case FACING_DOWN:
-					bx [gpit] = prx + PLAYER_BULLET_X_OFFSET;
-					by [gpit] = pry + 12;
-					bmy [gpit] = PLAYER_BULLET_SPEED;
-					bmx [gpit] = 0;
-					break;
-				case FACING_UP:
-					bx [gpit] = prx + 8 - PLAYER_BULLET_X_OFFSET;
-					by [gpit] = pry - 4;
-					bmy [gpit] = -PLAYER_BULLET_SPEED;
-					bmx [gpit] = 0;
-					break;
-			}
-#endif		
-			// sound
-			sfx_play (5, 0);
-			// done
-			break;
-		}
-	}
-}
 
-void bullets_move (void) {
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		if (bst [gpit]) {
-			if (bmx [gpit] != 0) {
-				bx [gpit] += bmx [gpit];
-				if (
-					bx [gpit] < PLAYER_BULLET_SPEED ||
-					bx [gpit] > 255 - PLAYER_BULLET_SPEED
-				) {
-					bst [gpit] = 0; 
-				}
-			}
-			if (bmy [gpit] != 0) {
-				by [gpit] += bmy [gpit];
-				if (
-					by [gpit] < PLAYER_BULLET_SPEED ||
-					by [gpit] > 191 - PLAYER_BULLET_SPEED
-				) {
-					bst [gpit] = 0; 
-				}
-			}
-			
-			btx = (bx [gpit] + 3) >> 4; bty = (by [gpit] + 3) >> 4;
-
-#ifdef BREAKABLE_WALLS
-			// Break wall
-			if (attr (btx, bty) & 16) {
-				break_wall (btx, bty);
-				bst [gpit] = 0;
-				sfx_play (6, 2);
-			}
-#endif			
-			
-			if (attr (btx, bty) > 7) {
-				bst [gpit] = 0;
-				sfx_play (6, 2);
-			}
-			
-			// Collide with enemies?			
-			for (gpjt = 0; gpjt < 3; gpjt ++) {
-#ifdef FIRE_MIN_KILLABLE
-				if (en_t [gpjt] >= FIRE_MIN_KILLABLE) {
-#else
-				if (en_t [gpjt]) {
-#endif
-#ifdef ENABLE_PURSUERS
-					if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)
-#endif
-					if (collide_in (bx [gpit] + 3, by [gpit] + 3, en_x [gpjt], en_y [gpjt])) {
-						en_touched [gpjt] = 1;
-						en_cttouched [gpjt] = 8;
-						bst [gpit] = 0;
-						sfx_play (6, 2);
-						en_life [gpjt] --;						
-						if (en_life [gpjt] == 0) {	
-#ifdef ENABLE_PURSUERS
-							if (en_t [gpjt] == 7) {
-								en_alive [gpjt] = 0;
-								en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-								en_life [gpjt] = ENEMIES_LIFE_GAUGE;
-							} else
-#endif
-							en_t [gpjt] = 0;		
-							pkilled ++;												
-						}
-						break;
-					}
-				}	
-			}
-						
-			oam_spr (bx [gpit], SPRITE_ADJUST + by [gpit], 152, 1, 112 + (gpit << 2));
-		}
-		if (!bst [gpit]) {			
-			oam_spr (0, 240, 152, 1, 112 + (gpit << 2));
-		}
-	}
-}
+#ifdef PLAYER_GARGAJO
+#include "engine/playermods/gargajo.h"
 #endif
 
 void player_move (void) {
@@ -262,7 +149,7 @@ void player_move (void) {
 	// Vertical
 	// ********
 
-#ifdef PLAYER_MOGGY_STYLE
+#ifdef PLAYER_MOGGY_STYLE		
 	// Poll pad
 	if (!(i & PAD_UP || i & PAD_DOWN)) {
 		//pfacingv = 0xff;
@@ -279,16 +166,16 @@ void player_move (void) {
 	
 	if (i & PAD_UP) {
 		//pfacingv = FACING_UP;
-		// if (pvy > -PLAYER_VX_MAX) {
-		if (pvy > -player_vx_max) {
+		if (pvy > -PLAYER_VX_MAX) {
+		//if (pvy > -player_vx_max) {
 			pvy -= PLAYER_AX;
 		}
 	}
 	
 	if (i & PAD_DOWN) {
 		//pfacingv = FACING_DOWN;
-		//if (pvy < PLAYER_VX_MAX) {
-		if (pvy < player_vx_max) {
+		if (pvy < PLAYER_VX_MAX) {
+		//if (pvy < player_vx_max) {
 			pvy += PLAYER_AX;
 		}
 	}
@@ -366,39 +253,65 @@ void player_move (void) {
 	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
 
 #ifdef PLAYER_HAS_JUMP
-	if (0 == ppodewwwr_on) {
-		// *******************************
-		// Jump: PAD_A, change when needed
-		// *******************************
-		if (i & PAD_A) { 
-			if (!pjb) {
-				pjb = 1;
-				if (!pj) {
-					if (pgotten || ppossee || hitv) {
-						pj = 1; 
-						pctj = 0;
-						sfx_play (7, 0);
-						pvy = -PLAYER_VY_JUMP_INITIAL;
+	// *******************************
+	// Jump: PAD_A, change when needed
+	// *******************************
+	if (i & PAD_A) {
+		if (!pjb) {
+			pjb = 1;
+			if (!pj) {
+				if (pgotten || ppossee || hitv) {
+					pj = 1; 
+					pctj = 0;
+					sfx_play (7, 0);
+					pvy = -PLAYER_VY_JUMP_INITIAL;
 #ifdef DIE_AND_RESPAWN
-						if (!(pgotten || hitv)) {
-							px_safe = px;
-							py_safe = py;
-							n_pant_safe = n_pant;
-						}
-#endif	
+					if (!(pgotten || hitv)) {
+						px_safe = px;
+						py_safe = py;
+						n_pant_safe = n_pant;
 					}
-				} 
-			}
-			if (pj) {
-				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-				pctj ++; if (pctj == 16) pj = 0;	
-			}
-		} else {
-			pj = 0; pjb = 0;
+#endif	
+				}
+			} 
 		}
-#endif
+		if (pj) {
+			if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+			if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+			pctj ++; if (pctj == 16) pj = 0;	
+		}
+	} else {
+		pj = 0; pjb = 0;
 	}
+#endif
+
+#ifdef PLAYER_BOOTEE
+	if (!pj) {
+		if (pgotten || ppossee || hitv) {
+			pj = 1; 
+			pctj = 0;
+			sfx_play (7, 0);
+			pvy = -PLAYER_VY_JUMP_INITIAL;
+#ifdef DIE_AND_RESPAWN
+			if (!(pgotten || hitv)) {
+				px_safe = px;
+				py_safe = py;
+				n_pant_safe = n_pant;
+			}
+#endif	
+		}
+	} 	
+
+	if (pj) {
+		if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+		if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+		pctj ++; if (pctj == 16) pj = 0;	
+	}
+
+	if (i & PAD_DOWN) {
+		if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+	}
+#endif
 
 	// **********
 	// Horizontal
@@ -441,10 +354,10 @@ void player_move (void) {
 
 	psprint = ((i & PAD_B) && ppossee);
 	if (!psprint && ppossee) {
-		//if (pvx < -PLAYER_VX_MAX) pvx = -PLAYER_VX_MAX;
-		if (pvx < -player_vx_max) pvx = -player_vx_max;
-		//if (pvx > PLAYER_VX_MAX) pvx = PLAYER_VX_MAX;
-		if (pvx < -player_vx_max) pvx = -player_vx_max;
+		if (pvx < -PLAYER_VX_MAX) pvx = -PLAYER_VX_MAX;
+		//if (pvx < -player_vx_max) pvx = -player_vx_max;
+		if (pvx > PLAYER_VX_MAX) pvx = PLAYER_VX_MAX;
+		//if (pvx < -player_vx_max) pvx = -player_vx_max;
 	}
 	
 	if (i & PAD_LEFT) {
@@ -455,12 +368,12 @@ void player_move (void) {
 			if (pvx > -PLAYER_VX_SPRINT_MAX) {
 				pvx -= PLAYER_AX_SPRINT;
 			}
-		//} else if (pvx > -PLAYER_VX_MAX) {
-		} else if (pvx > -player_vx_max) {
+		} else if (pvx > -PLAYER_VX_MAX) {
+		//} else if (pvx > -player_vx_max) {
 			pvx -= PLAYER_AX;			
 		}
 #ifndef PLAYER_MOGGY_STYLE			
-		pfacing = 16;
+		pfacing = 9;
 #endif		
 	}
 	
@@ -472,8 +385,8 @@ void player_move (void) {
 			if (pvx < PLAYER_VX_SPRINT_MAX) {
 				pvx += PLAYER_AX_SPRINT;
 			}
-		//} else if (pvx < PLAYER_VX_MAX) {
-		} else if (pvx < player_vx_max) {
+		} else if (pvx < PLAYER_VX_MAX) {
+		//} else if (pvx < player_vx_max) {
 			pvx += PLAYER_AX;
 		}
 #ifndef PLAYER_MOGGY_STYLE			
@@ -521,7 +434,9 @@ void player_move (void) {
 			wall = WRIGHT;
 		}
 	}
+#ifndef NO_HORIZONTAL_EVIL_TILE		
 	if (pvx != 0) hith = (attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1);
+#endif	
 #endif	
 
 	// Facing
@@ -549,30 +464,11 @@ void player_move (void) {
 	// *************
 	
 	phit = 0;
-/*	
-	if (hitv) {
-		phit = 1;
-#ifdef FULL_BOUNCE
-		pvy = add_sign (-pvy, PLAYER_VX_MAX);
-#endif
-#ifdef DOUBLE_BOUNCE
-		pvy = add_sign (-pvy, PLAYER_VX_MAX << 1);
-#endif		
-	} else if (hith) {
-		phit = 1;
-#ifdef FULL_BOUNCE
-		pvx = add_sign (-pvx, PLAYER_VX_MAX);
-#endif
-#ifdef DOUBLE_BOUNCE
-		pvx = add_sign (-pvx, PLAYER_VX_MAX << 1);
-#endif		
-	}
-	if (pstate != EST_PARP) {
-		if (phit) {
-			kill_player ();
-		}
-	}
-*/
+	if (hitv) { phit = 1; pvy = add_sign (-pvy, PLAYER_V_REBOUND); } 
+#ifndef NO_HORIZONTAL_EVIL_TILE	
+	if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
+#endif	
+	if (pstate != EST_PARP) if (phit) kill_player ();
 
 	// ************************************************
 	// Tile type 10 operations (push boxes, open locks)
@@ -617,10 +513,11 @@ void player_move (void) {
 	
 #ifdef PLAYER_CAN_FIRE
 #ifdef FIRE_TO_PUSH
-	if ((i & PAD_B) && !pfiring && !pushed_any) {
+	if ((i & PAD_B) && !pfiring && !pushed_any)
 #else
-	if ((i & PAD_B) && !pfiring) {
+	if ((i & PAD_B) && !pfiring)
 #endif
+	{
 		pfiring = 1;
 		fire_bullet ();
 	}
@@ -628,7 +525,39 @@ void player_move (void) {
 	if (!(i & PAD_B)) pfiring = 0;
 #endif	
 	
+	// *************
+	// Shoot Gargajo
+	// *************
+
+#ifdef PLAYER_GARGAJO
+
+	if ((i & PAD_B) && !pgargajocounter) {
+		if (pfiring < GARGAJO_L_MAX) {
+			gp_addr = 0x2004 + (LINE_OF_TEXT << 5) + (pfiring >> 1);
+			update_list [update_index ++] = MSB (gp_addr);
+			update_list [update_index ++] = LSB (gp_addr ++);
+			update_list [update_index ++] = 9;
+			pfiring ++;
+		}
+	}
+
+	if (!(i & PAD_B)) {
+		// Have we just stopped pressing fire?
+		if (pfiring) {
+			// Shoot new gargajo
+			if (pfiring < GARGAJO_L_MIN) pfiring = GARGAJO_L_MIN;
+			fire_gargajo (pfiring);
+			pfiring = 0;
+			pgargajocounter = GARGAJO_RELOAD;
+			clean_gauge ();
+		}
+	}
+#endif
+
+	// **********
 	// Calc frame
+	// **********
+
 	// Basic, v.1.0
 #ifdef PLAYER_MOGGY_STYLE
 	if (pvx != 0 || pvy != 0) {
@@ -639,14 +568,44 @@ void player_move (void) {
 			psprid = player_frames [pfacing + pfr];
 		}
 	}
+#elif defined (PLAYER_BOOTEE)
+#ifdef PLAYER_BOUNCES	
+	if (pstate == EST_REBOUND) {
+		psprid = 8;
+	} else 
+#endif	
+	{
+#ifdef PLAYER_GARGAJO
+		if (pfiring) {
+			psprid = 6;
+		} else if (pgargajocounter) {
+			psprid = 7;
+			pgargajocounter --;
+		} else
+#endif
+		{
+			if (i & PAD_DOWN) 
+				psprid = 5;
+			else if (pvy < PLAYER_VY_AN1)
+				psprid = 2;
+			else if (pvy < PLAYER_VY_AN2)
+				psprid = 1;
+			else if (pvy < PLAYER_VY_AN3)
+				psprid = 0;
+			else if (pvy < PLAYER_VY_AN4)
+				psprid = 3;
+			else
+				psprid = 4;
+		}
+	}
+
+	psprid += pfacing;
+	// TODO: Extend
 #else
 	// Extended 16, v.2.0
 	// facing = 0 || 8
 	// frame = 0 standing, 1 2 3 4 running, 5 jumping, 6 7 falling
-	if (ppodewwwr_on) {
-		pctfr = (pctfr + 1) & 15; if (0 == pctfr) pfr = (pfr + 1) & 3;
-		psprid = pfacing + rinse_cycle [pfr];
-	} else if (ppossee || pgotten) {
+	if (ppossee || pgotten) {
 		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 			psprid = pfacing + 1 + ((prx >> 3) & 3);
 		} else {

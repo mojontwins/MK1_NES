@@ -263,7 +263,7 @@ Function findWhichPal (img As Any Ptr, x0 As Integer, y0 As Integer, pal () As I
 		End If
 	Next pi
 	
-	filteredPuts ("** WARNING ** 16x16 tile #" & tn & " with a WRONG palette")
+	filteredPuts ("** WARNING ** " & hSize & "x" & vSize & " tile #" & tn & " with a WRONG palette")
 	findWhichPal = 0
 End Function
 
@@ -595,7 +595,9 @@ Sub doSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integ
 			For yy = 1 To hMeta
 				xa = x
 				For xx = 1 To wMeta
-					wp = findWhichPal (img, x, y, pal (), ctt, 8, 8)
+					''ctt = (xa \ 8) + (ya \ 8) * (x1 + 1) \ 8
+					ctt = (x \ hSize) + (y \ vSize) * wProc
+					wp = findWhichPal (img, xa, ya, pal (), ctt, 8, 8)
 					extractPatternFrom img, xa, ya, pal (), pattern ()
 					patternS = patternToString (pattern ())
 					ct = findPatternInPoolAndAdd (patternS, wasnew)
