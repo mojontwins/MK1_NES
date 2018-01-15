@@ -107,6 +107,7 @@ unsigned char pobjs;
 // CUSTOM {
 unsigned char ppodewwwr;
 unsigned char ppodewwwr_on;
+unsigned char ppodewwwr_ct;
 signed int player_vx_max;
 // } END_OF_CUSTOM
 unsigned char plife, pcontinues;
@@ -518,6 +519,7 @@ void main(void) {
 		}
 	
 		music_stop ();
+		fade_out ();
 		set_vram_update (0, 0);
 		ppu_off ();
 		oam_clear ();
@@ -525,7 +527,7 @@ void main(void) {
 		if (game_over) {
 			game_over_scr ();
 		} else {
-
+			
 		}
 		
 	}

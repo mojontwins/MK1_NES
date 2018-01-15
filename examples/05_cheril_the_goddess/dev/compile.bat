@@ -35,7 +35,7 @@ del tschr4.bin > nul
 ..\..\..\src\utils\mkts.exe in=ss.png pals=palss.png out=sschr1b.bin mode=sprites tsmap=..\dev\assets\spr_plb.h offset=0,6 size=8,1 metasize=2,3 sprorg=0,-8 label=spr_plb tmapoffset=83 silent
 ..\..\..\src\utils\mkts.exe in=ss.png pals=palss.png out=sschr2.bin mode=sprites tsmap=..\dev\assets\spr_lin.h offset=0,9 size=8,1 metasize=2,2 sprorg=0,0 label=spr_lin tmapoffset=128 genflipped silent 
 ..\..\..\src\utils\mkts.exe in=ss.png pals=palss.png out=sschr3.bin mode=sprites tsmap=..\dev\assets\spr_enf.h offset=0,11 size=8,1 metasize=2,2 sprorg=0,0 label=spr_enf tmapoffset=158 silent
-..\..\..\src\utils\mkts.exe in=ss.png pals=palss.png out=sschr4.bin mode=sprites tsmap=..\dev\assets\spr_hs.h offset=0,13 size=8,1 metasize=2,2 sprorg=0,0 label=spr_hs tmapoffset=180 silent
+..\..\..\src\utils\mkts.exe in=ss.png pals=palss.png out=sschr4.bin mode=sprites tsmap=..\dev\assets\spr_hs.h offset=0,13 size=8,1 metasize=2,2 sprorg=0,0 label=spr_hs tmapoffset=181 silent
 
 copy /b sschr1a.bin + sschr1b.bin + sschr2.bin + sschr3.bin + sschr4.bin sschra.bin > nul
 del sschr1a.bin > nul

@@ -332,9 +332,11 @@ void short_cutscene (unsigned char s) {
 	prepare_scr ();
 }
 
+void draw_game_frame ();
 void show_minimap () {
 	batout ();
 	cls ();
+	pal_bg (mypal_cuts);
 	gpit = 0;
 	for (rdy = 0; rdy < 4; rdy ++) {
 		vram_adr (0x2006 + ((rdy + 13) << 5));
@@ -347,6 +349,10 @@ void show_minimap () {
 	while (pad_poll (0));
 	while (!pad_poll (0));
 	on_pant = 99;
+	ft = 1;
+	batout ();
+	draw_game_frame ();
+	pal_bg (c_pal_bg);
 }
 
 // } END_OF_CUSTOM

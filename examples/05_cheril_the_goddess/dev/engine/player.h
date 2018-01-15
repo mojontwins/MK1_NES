@@ -45,6 +45,7 @@ void player_init (void) {
 // CUSTOM {
 	ppodewwwr = 0;
 	ppodewwwr_on = 0;
+	ppodewwwr_ct = 0;
 	player_vx_max = PLAYER_VX_MAX;
 	no_ct = 0;
 	use_ct = 0;
@@ -60,7 +61,18 @@ void player_init (void) {
 #endif
 }
 
+void render_player (void) {
+	if (pstate == EST_NORMAL || half_life) {
+		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
+	} else {
+		oam_meta_spr (0, 240, 128, spr_pl_empty);
+	}
+}
+
 void __fastcall__ kill_player (void) {
+	render_player ();
+	ppu_waitnmi ();
+
 	plife --;
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
@@ -325,14 +337,18 @@ void player_move (void) {
 
 // CUSTOM {
 //#ifdef PLAYER_MOGGY_STYLE		
-	if (ppodewwwr_on) {
+	if (ppodewwwr_ct) ppodewwwr_ct --;
 
-		ppodewwwr_on --;
-		if (0 == ppodewwwr_on) {
+	if (ppodewwwr_on) {
+		if (0 == ppodewwwr_ct ||
+			(ppodewwwr_ct <200 && ((i & (PAD_B|PAD_UP)) == (PAD_B|PAD_UP)))
+		) {
 			c_pal_fg = (unsigned char *) mypal_game_fg0;
 			sfx_play (6, 0);
 			fx_flash ();
 			player_vx_max = PLAYER_VX_MAX;
+			ppodewwwr_on = 0;
+			ppodewwwr_ct = 60;
 		}
 
 		// Poll pad
@@ -625,8 +641,9 @@ void player_move (void) {
 	if (i & PAD_B) {
 		if (i & PAD_UP) {
 			if (ppodewwwr) {
-				if (ppodewwwr_on == 0) {
-					ppodewwwr_on = 250;
+				if (ppodewwwr_ct == 0 && ppodewwwr_on == 0) {
+					ppodewwwr_on = 1;
+					ppodewwwr_ct = 250;
 					player_vx_max = PLAYER_VX_MAX_PODEWWWR;
 					ppodewwwr --;
 					c_pal_fg = (unsigned char *) mypal_game_fg1;
@@ -764,12 +781,4 @@ void player_move (void) {
 		psprid = pfacing + 15;
 	}
 #endif
-}
-
-void render_player (void) {
-	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, 128, spr_player [psprid]);	
-	} else {
-		oam_meta_spr (0, 240, 128, spr_pl_empty);
-	}
 }
