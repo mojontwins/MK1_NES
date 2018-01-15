@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // frame.h

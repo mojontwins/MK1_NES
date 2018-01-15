@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // Uses neslib and related tools by Shiru
@@ -37,7 +37,6 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 #include "assets/tiledatab.h"
 #include "assets/tiledatatitle.h"
 #include "assets/cutsb.h"
-#include "assets/cutsl.h"
 #include "assets/map_b.h"
 #include "assets/enems.h"
 #include "assets/screens.h"
@@ -270,58 +269,15 @@ void __fastcall__ prepare_scr (void) {
 #endif
 }
 
-void jump_to (unsigned char l) {
-	// MCPPPCCC
-
-	COMM_POOL [4] = plife + pcontinues + 7;
-	COMM_POOL [5] = plife;
-	COMM_POOL [6] = pcontinues;
-	COMM_POOL [7] = l & 1;
-	
-	rom = l >> 1;
-	
-	// Show cutscene
-	// First page in CHR ROM #rom, no change in PRG-ROM #rom
-	// PPP = 0, CCCC = rom + 1
-	COMM_POOL [0] = rom + 1;
-	__asm__ ("jsr _change_reg");
-
-	// Now the cutscene
-	pal_bg (mypal_cuts [rom]);
-	cutscene ((unsigned char *) cuts_tmaps [rom], (unsigned char *) cuts_pals [rom], (unsigned char *) cutscene_texts [l]);
-
-	// Now launch level. Page in CHR-ROM #rom, PRG-ROM #rom
-	// PPP = rom + 1, CCCC = rom + 1
-	rom ++;
-	COMM_POOL [0] = (rom << 3) | rom;
-	__asm__ ("jmp _change_rom");
-}
-
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
 
-	scroll (0, 8);
 	ppu_off ();
 
-	// Decode shared RAM
+	credits ();
 
-	/*
-		$00 paging control
-		$01 CMD1
-		$02 CMD2
-		$03 CMD3
-		$04 CONTROL
-		$05 PLIFE
-		$06 PCONTINUES
-		$07 CURRENT LEVEL
-	*/
-
-	// Security code: *0x01 + *0x02 + *0x03 = *0x04
-	rda = COMM_POOL [1]; rdb = COMM_POOL [2]; rdc = COMM_POOL [3]; rdt = COMM_POOL [4];
-	plife = COMM_POOL [5];
-	pcontinues = COMM_POOL [6];
-	level = COMM_POOL [7];
+	scroll (0, 8);
 
 #ifdef DEBUG
 	cls ();
@@ -345,37 +301,8 @@ void main(void) {
 	set_vram_update (0, 0);
 #endif
 
-	if (rdt == rda + rdb + rdc) {
-		// Command!
-		if (rda == 6 && rdb == 6 && rdc == 6) {
-			if (game_over_scr ()) {
-				pcontinues --; 
-				plife = INITIAL_PLIFE;
-				jump_to (level);
-			}
-		}
-		if (rda == 1 && rdb == 2 && rdc == 3) {
-			// Level OK! advance to next
-			level ++;
-			if (level < 6)
-				jump_to (level);
-			else {
-				// Game ending
-				cutscene ((unsigned char *) cutsb_tmaps, (unsigned char *) cutsb_pals, (unsigned char *) game_ending_text);
-				// Credits ? TODO
-			}
-		}
-	}
-
-	// Decoding done.
-
 	while (1) {
-		if (title ()) {
-			// Launch first level.
-			plife = INITIAL_PLIFE; 
-			pcontinues = INITIAL_PCONTINUES;
-			jump_to (0);
-		}
+		title ();
 
 		// Cheril of the bosque!
 		cutscene (0, 0, (unsigned char *) bosque_intro_text);
@@ -386,8 +313,8 @@ void main(void) {
 		while (game_on) {
 			c_map = (unsigned char *) (map_b);
 			c_locks = (unsigned char *) (locks_map_b);
-			c_enems = (unsigned char *) (enemies_ROM_enems);
-			c_hotspots = (unsigned char *) (hotspots_ROM_enems);
+			c_enems = (unsigned char *) (enems_ROM0);
+			c_hotspots = (unsigned char *) (hotspots_ROM0);
 			pal_bg (mypal_game_bg0);
 			pal_spr (mypal_game_fg0);
 			tsmap = (unsigned char *) (tsb_tmaps);
@@ -500,12 +427,14 @@ void main(void) {
 					game_over = 1;
 					break;
 				}
-
+				if (
 #ifdef ACTIVATE_SCRIPTING
-				if (script_result) {
+					script_result
 #else
-				if (pobjs == PLAYER_MAX_OBJECTS) {
+					(pobjs == MAX_HOTSPOTS_TYPE_1_ROM0)
 #endif
+					|| ((i & (PAD_B|PAD_SELECT|PAD_UP)) == (PAD_B|PAD_SELECT|PAD_UP))
+				) {
 					game_on = 0;
 					break;
 				}
@@ -524,18 +453,8 @@ void main(void) {
 			pcontinues = 0;
 			game_over_scr ();
 		} else {
-			// WIN screen for cheril of the bosque
-			// Change CHR ROM to 1, PRG ROM stays 0. $300 = MCPPPCCCC = 000000001
-			COMM_POOL [0] = 0x01;
-			__asm__ ("jsr _change_reg");
-
 			pal_bg (mypal_cutscene);	// Wrong palette chosen deliberately.
-			cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) bosque_ending_text);
-
-			// Back to 0:
-			// Change CHR BANK to 0, PRG BANK stays 0. $300 = 0000
-			COMM_POOL [0] = 0x00;
-			__asm__ ("jsr _change_reg");
+			cutscene ((unsigned char *) cutsb_tmaps, (unsigned char *) cutsb_pals, (unsigned char *) bosque_ending_text);
 		}
 		//
 	}

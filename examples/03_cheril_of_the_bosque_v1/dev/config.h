@@ -1,4 +1,4 @@
-// NES MK1 v0.1b
+// NES MK1 v0.2
 // Copyleft Mojon Twins 2013, 2015
 
 // ============================================================================
@@ -15,7 +15,7 @@
 #define SCR_END					99		// Pantalla del final. 99 si da igual.
 #define PLAYER_END_X			0		//
 #define PLAYER_END_Y			8		// Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_MAX_OBJECTS		13		// Número de objetos para terminar el juego
+#define PLAYER_MAX_OBJECTS		14		// Número de objetos para terminar el juego
 #define PLAYER_LIFE				50		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			10		// Recarga de vida.
 
