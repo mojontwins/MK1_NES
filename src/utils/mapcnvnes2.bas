@@ -217,7 +217,7 @@ if i > 0 Then
 	
 	print #f, "};"
 else
-	print #f, "const unsigned char *cerrojos;"
+	print #f, "const unsigned char *locks_" & prefix & ";"
 end if
 print #f, " "
 close f

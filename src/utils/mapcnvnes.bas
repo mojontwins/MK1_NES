@@ -159,7 +159,7 @@ for yy = 0 To map_h - 1
 										If ct = 0 then 
 											ac = 16 * BigOrigMap (cy, cx) 
 										Else 
-											ac = BigOrigMap (cy, cx)s
+											ac = BigOrigMap (cy, cx)
 										End If
 									End If
 								End If
@@ -235,7 +235,7 @@ if i > 0 Then
 	
 	print #f, "};"
 else
-	print #f, "const unsigned char *cerrojos;"
+	print #f, "const unsigned char *locks_" & prefix & ";"
 end if
 print #f, " "
 close f

@@ -1,19 +1,21 @@
 @echo off
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\nescnv.exe tileset-import.png
+..\..\..\src\utils\nescnv.exe tileset-import2.png
 copy tileset.chr ..\dev > nul
 echo Making map
 cd ..\map
-..\..\..\src\utils\mapcnvnes_old.exe mapa.map 1 24 16 12 15 mapa0 packed
-..\..\..\src\utils\mapcnvnes_old.exe night.map 1 24 16 12 15 mapa1 packed
+..\..\..\src\utils\mapcnvnes_old.exe mapa.map 7 5 16 12 99 mapa0 packed
+..\..\..\src\utils\mapcnvnes_old.exe mapa2.map 7 5 16 12 99 mapa1 packed
+..\..\..\src\utils\mapcnvnes_old.exe mapa3.map 7 5 16 12 99 mapa2 packed
 copy mapa0.h ..\dev > nul
 copy mapa1.h ..\dev > nul
-echo Making script
-cd ..\script
-..\..\..\src\utils\mscnes.exe comando-eng.spt 24
-copy mscnes.h ..\dev > nul
-copy scripts.s ..\dev > nul
+copy mapa2.h ..\dev > nul
+rem echo Making script
+rem cd ..\script
+rem ..\..\..\src\utils\mscnes.exe script.spt 35
+rem copy mscnes.h ..\dev > nul
+rem copy scripts.s ..\dev > nul
 cd ..\dev
 echo Making enems
 ..\..\..\src\utils\eneexp.exe ..\enems\enems0.ene enems0.h ROM0
@@ -25,7 +27,7 @@ ca65 crt0.s
 ca65 game.s
 ca65 scripts.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o scripts.o runtime.lib
-del *.o > nul
-del game.s > nul
+del *.o
+del game.s
 copy cart.nes ..\jet_paco.nes > nul
 echo Done!
