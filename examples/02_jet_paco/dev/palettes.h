@@ -1,3 +1,6 @@
+// NES MK1 v0.1
+// Copyleft Mojon Twins 2013
+
 // palettes.h 
 // Pallete definitions for background tiles and foreground sprites
 

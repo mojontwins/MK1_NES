@@ -1,4 +1,4 @@
-// Churrera for NES 1.0
+// NES MK1 v0.1
 // Copyleft Mojon Twins 2013
 
 // bolts.h

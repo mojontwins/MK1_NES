@@ -1,3 +1,6 @@
+// NES MK1 v0.1
+// Copyleft Mojon Twins 2013
+
 // Config.h
 // Churrera v.4
 // Copyleft 2010, 2011 The Mojon Twins

@@ -47,29 +47,11 @@ void __fastcall__ run_script (void) {
                     n = read_vbyte ();
                     terminado = (flags [x] != n);
                     break;
-                case 0x21:
-                    // IF PLAYER_IN_X x1, x2
-                    // Opcode: 21 x1 x2
-                    x = read_byte ();
-                    y = read_byte ();
-                    terminado = (!((px >> 6) >= x && (px >> 6) <= y));
-                    break;
-                case 0x22:
-                    // IF PLAYER_IN_Y y1, y2
-                    // Opcode: 22 y1 y2
-                    x = read_byte ();
-                    y = read_byte ();
-                    terminado = (!((py >> 6) >= x && (py >> 6) <= y));
-                    break;
-                case 0x41:
-                     // IF OBJECT_COUNT = n
-                     // Opcode: 41 n
+                case 0x80:
+                     // IF LEVEL = n
+                     // Opcode: 80 n
                      n = read_vbyte ();
-                     terminado = (pobjs != n);
-                     break;
-                case 0xF0:
-                     // IF TRUE
-                     // Opcode: F0
+                     terminado = (n != level);
                      break;
                 case 0xFF:
                     // THEN
@@ -92,37 +74,6 @@ void __fastcall__ run_script (void) {
                         n = read_vbyte ();
                         flags [x] = n;
                         break;
-                    case 0x20:
-                        // SET TILE (x, y) = n
-                        // Opcode: 20 x y n
-                        x = read_vbyte ();
-                        y = read_vbyte ();
-                        n = read_vbyte ();
-                        //clear_update_list ();
-                        //update_index = 0;
-                        map_set (x, y, n);
-                        break;
-                    case 0x51:
-                        // SET_FIRE_ZONE x1, y1, x2, y2
-                        // Opcode: 51 x1 y1 x2 y2
-                        fzx1 = read_byte ();
-                        fzy1 = read_byte ();
-                        fzx2 = read_byte ();
-                        fzy2 = read_byte ();
-                        f_zone_ac = 1;
-                        break;
-                    case 0xE0:
-                        // SOUND n
-                        // Opcode: E0 n
-                        n = read_vbyte ();
-                        sfx_play (n, 1);
-                        break;
-                    case 0xE1:
-                        // SHOW
-                        // Opcode: E1
-                        ppu_waitnmi ();
-                        update_index = 0;
-                        break;
                     case 0xE3:
                         x = 0;
                         gp_addr = 0x2000 + (LINE_OF_TEXT << 5) + LINE_OF_TEXT_X;
@@ -139,10 +90,6 @@ void __fastcall__ run_script (void) {
                         ppu_waitnmi ();
                         clear_update_list ();
                         update_index = 0;
-                        break;
-                    case 0xF1:
-                        script_result = 1;
-                        terminado = 1;
                         break;
                     case 0xFF:
                         terminado = 1;

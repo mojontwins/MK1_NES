@@ -16,9 +16,8 @@ copy mscnes.h ..\dev > nul
 copy scripts.s ..\dev > nul
 cd ..\dev
 echo Making enems
-..\..\..\src\utils\eneexp.exe ..\enems\enems0.ene enems0.h ROM0
-..\..\..\src\utils\eneexp.exe ..\enems\enems1.ene enems1.h ROM1
-..\..\..\src\utils\eneexp.exe ..\enems\enems2.ene enems2.h ROM2
+..\..\..\src\utils\eneexp.exe ..\enems\enems.ene enems0.h ROM0
+..\..\..\src\utils\eneexp.exe ..\enems\night.ene enems1.h ROM1
 echo Compiling
 cc65 -Oi game.c --add-source
 ca65 crt0.s
@@ -27,5 +26,5 @@ ca65 scripts.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o scripts.o runtime.lib
 del *.o > nul
 del game.s > nul
-copy cart.nes ..\jet_paco.nes > nul
+copy cart.nes ..\sgt_helmet_training_day.nes > nul
 echo Done!
