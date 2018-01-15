@@ -15,7 +15,7 @@ cd ..\gfx
 ..\..\..\src\utils\mkts.exe in=font.png pals=paltsb.png out=tschr1.bin mode=chars offset=0,0 size=32,2 silent
 ..\..\..\src\utils\mkts.exe in=tsb.png pals=paltsb.png out=tschr3.bin mode=mapped offset=0,0 size=16,2 tsmap=..\dev\assets\tiledata1.h label=ts1 tmapoffset=64 max=24 silent
 ..\..\..\src\utils\mkts.exe in=cuts.png pals=palcuts.png out=tschr4.bin mode=mapped offset=0,0 size=8,4 tsmap=..\dev\assets\cuts1.h label=cuts1 tmapoffset=144 max=32 silent
-..\..\..\src\utils\mkts.exe in=tstitle.png pals=palcuts.png out=tschr5.bin mode=mapped offset=0,0 size=9,1 tsmap=..\dev\assets\cuts1.h label=cuts1 tmapoffset=216 silent
+..\..\..\src\utils\mkts.exe in=tstitle.png pals=palcuts.png out=tschr5.bin mode=mapped offset=0,0 size=9,1 tsmap=..\dev\assets\tiledata_title.h label=title tmapoffset=216 silent
 
 copy /b tschr1.bin + tschr2.bin + tschr3.bin + tschr4.bin + tschr5.bin tschr.bin > nul
 ..\..\..\src\utils\fillto.exe tschr.bin 4096
@@ -32,12 +32,14 @@ rem main sprite (16x24)x16, enemy sprite frames (16x16)x32, small charset (8x8)x
 ..\..\..\src\utils\mkts.exe in=ssb-enems.png pals=palssb.png out=sschr2.bin mode=sprites tsmap=..\dev\assets\spr_en.h offset=0,0 size=11,2 metasize=2,2 sprorg=0,0 label=spr_en max=15 tmapoffset=129 silent
 ..\..\..\src\utils\mkts.exe in=hostage.png pals=palssb.png out=sschr3.bin mode=sprites tsmap=..\dev\assets\spr_hs1.h offset=0,0 size=4,1 metasize=2,3 sprorg=0,-8 label=spr_hs1 max=4 tmapoffset=184 silent
 ..\..\..\src\utils\mkts.exe in=items.png pals=palssb.png out=sschr4.bin mode=sprites tsmap=..\dev\assets\spr_hs2.h offset=0,0 size=3,1 metasize=2,2 sprorg=0,0 label=spr_hs2 max=3 tmapoffset=208 silent
+..\..\..\src\utils\mkts.exe in=logo.png pals=palcuts.png out=sschr5.bin mode=chars offset=0,0 size=6,2 silent
 
-copy /b sschr1.bin + sschr2.bin + sschr3.bin + sschr4.bin sschra.bin > nul
+copy /b sschr1.bin + sschr2.bin + sschr3.bin + sschr4.bin + sschr5.bin sschra.bin > nul
 del sschr1.bin > nul
 del sschr2.bin > nul
 del sschr3.bin > nul
 del sschr4.bin > nul
+del sschr5.bin > nul
 
 ..\..\..\src\utils\fillto sschra.bin 3968
 

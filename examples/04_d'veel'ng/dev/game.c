@@ -52,6 +52,7 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 #include "assets/palettes.h"
 #include "assets/metasprites.h"
 #include "assets/tiledata1.h"
+#include "assets/tiledata_title.h"
 #include "assets/cuts1.h"
 #include "assets/mapa0.h"
 #include "assets/enems.h"
@@ -320,30 +321,14 @@ void main(void) {
 	bank_spr (1);
 	bank_bg (0);
 
-	scroll (0, 8);
 	ppu_off ();
+	credits ();
+	scroll (0, 8);
 
-	while (1) {	// This while(1) is to make this NROM-compatible for testing purposes.
+	while (1) {	
 
-		// Decode shared RAM
-
-		// Security code: *04 = *05 + *06 + 7
-		rda = COMM_POOL [4];
-		plife = COMM_POOL [5];
-		pcontinues = COMM_POOL [6];
-		level = COMM_POOL [7];
-
-		if (rda != plife + pcontinues + 7) {
-			plife = PLAYER_LIFE;
-			pcontinues = 0;
-#ifdef DEBUG
-			level = DEBUG_LEVEL;
-#else		
-			level = 0;
-#endif			
-		}
-
-		// Decoding done
+		for (rdit = 0; rdit < 64; rdit ++) attr_table [rdit] = 0xff;
+		title ();	
 
 		cutscene ((unsigned char *) cuts1_tmaps, (unsigned char *) cuts1_pals, (unsigned char *) intro_text);
 	
@@ -500,7 +485,7 @@ void main(void) {
 #ifdef ACTIVATE_SCRIPTING
 			if (script_result)
 #else
-			if (pobjs == PLAYER_MAX_OBJECTS)
+			if (pobjs == MAX_HOTSPOTS_TYPE_1)
 #endif
 //			if (pkilled == baddies_count) 
 			{
@@ -520,35 +505,7 @@ void main(void) {
 		} else {
 			game_over_scr ();
 		}
-		cls ();
-		oam_clear ();	
-/*		
-		ppu_on_all (); // Why? Shall I remove this, the game hangs.
-		
-		// HERE
-		// When the game is finished, set flags and jump ROMs upon the value of game_over
 
-		if (game_over) {
-			// Write 6 6 6 18 to $301 on, launch ROM0
-			COMM_POOL [1] = 6;
-			COMM_POOL [2] = 6;
-			COMM_POOL [3] = 6;
-			COMM_POOL [4] = 18;
-		} else {
-			// Write 1 2 3 6 to $301 on, launch ROM0
-			COMM_POOL [1] = 1;
-			COMM_POOL [2] = 2;
-			COMM_POOL [3] = 3;
-			COMM_POOL [4] = 6;
-		}
-		//
-		COMM_POOL [5] = plife;
-		COMM_POOL [6] = pcontinues;
-		COMM_POOL [7] = BASE_LEVEL + level; 
-		// PRG-ROM 0, CHR-ROM 0; $300 = 0b0000 (0x00)
-		COMM_POOL [0] = 0x00;
-		__asm__ ("jmp _change_rom");
-*/
 	}
 }
 
