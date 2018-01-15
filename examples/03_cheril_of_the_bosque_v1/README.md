@@ -11,4 +11,4 @@ This early version of Cheril of the Bosque (never released) was intented to be a
 
 In 2016, the assets of this game (map, graphics, music) were used to test the top-down routines in the new MK2 engine. The finished game got into '31-in-1' and other multicarts.
 
-This is the original, MK1 0.2 version from early 2015.
+This is the original, MK1 v0.2 version from early 2015.

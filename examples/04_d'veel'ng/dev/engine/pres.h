@@ -6,6 +6,8 @@ unsigned char *cuts_text;
 void cutscene (unsigned char *cuts_tsmap, unsigned char *cuts_pals, unsigned char *cuts_text) {
 	cls ();
 	
+	pal_bg (mypal_cuts);
+
 	for (cutsi = 0; cutsi < 64; cutsi ++) attr_table [cutsi] = 0xff;
 	if (cuts_tsmap && cuts_pals) {
 		// Draw cutscene graphics
@@ -117,40 +119,9 @@ void cutscene (unsigned char *cuts_tsmap, unsigned char *cuts_pals, unsigned cha
 	ppu_off ();
 }
 
-void title (void) {
-	// Shows title screen.
-	// Returns 1 = normal, 0 = hidden game
-	cls ();
-	pal_bg (mypal_title);
-	tsmap = (unsigned char *) (tstitle_tmaps);
-	tileset_pals = (unsigned char *) (tstitle_pals);
-	un_rle_screen ((unsigned char *) scr_rle_0);
-	pr_str (10, 18, "PRESS START!");
-	pr_str (4, 27, "(C) 2015 THE MOJON TWINS");
-	pr_str (8, 28 , "MUSIC BY DAVIDIAN");
-
-	pal_bright (0);
-	ppu_on_all ();
-	while (pad_poll (0));
-
-	fade_delay = 4;
-	fade_in ();
-
-	music_play (m_title);
-	while (1) {
-		i = pad_poll (0);
-		if (i & PAD_START) { gpit = 1; break; }
-	}
-	music_stop ();
-
-	fade_out ();
-	ppu_off ();
-}
-
 unsigned char game_over_scr (void) {
 	cls ();
-	pal_bg (mypal_title);
-	pal_spr (mypal_game_fg0);
+	pal_bg (mypal_cuts);
 	
 	rda = 0;
 	
@@ -172,43 +143,4 @@ unsigned char game_over_scr (void) {
 	ppu_off ();
 
 	return rda;
-}
-
-
-// Mojontwins logo
-const unsigned char spr_mt_logo [] = {
-	0, 0, 152, 3, 8, 0, 153, 3, 16, 0, 154, 2, 24, 0, 155, 2, 32, 0, 156, 3, 40, 0, 157, 3,
-	0, 8, 158, 3, 8, 8, 159, 3, 16, 8, 160, 2, 24, 8, 161, 2, 32, 8, 162, 3, 40, 8, 163, 3,
-	128	
-};
-signed int lower_end;
-void __fastcall__ credits (void) {
-	pal_bg (mypal_title);
-	pal_spr (mypal_title);
-	cls ();
-	oam_clear (); scroll (0, 0);
-	
-	lower_end = 0; rdy = 240;
-
-	pr_str (6, 22, "CHERIL OF THE BOSQUE");
-	pr_str (0, 24, "COPYLEFT 2015 BY THE MOJON TWINS");
-	pr_str (0, 25, "DESIGN & PORT BY THE MOJON TWINS");
-	pr_str (3, 26, "NESLIB & SFX CODE BY SHIRU");
-	pr_str (7, 27, "NES OGT BY DAVIDIAN");
-	
-	pal_bright (0);
-	ppu_on_all ();
-	fade_delay = 4;
-	fade_in ();
-	while (!(pad_poll (0) & PAD_START) && lower_end < 300) {
-		oam_meta_spr (102, rdy, 0, spr_mt_logo);
-		if (rdy > 112) rdy --;
-		ppu_waitnmi ();
-		lower_end ++;
-	};
-	fade_out ();
-	
-	ppu_off ();
-	oam_clear ();
-	cls ();
 }
