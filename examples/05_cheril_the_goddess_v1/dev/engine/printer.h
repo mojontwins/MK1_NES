@@ -321,17 +321,22 @@ void batin (void) {
 	while (pad_poll (0));
 	fade_delay = 4;
 	ppu_on_all ();
-	scroll (0, 0);
 	fade_in ();
 }
 
 void prepare_scr (void);
 void short_cutscene (unsigned char s) {
-	if (s != 99) { if (s == 0) s = 2; else s --; }
+	if (s != 99) { 
+		if (s == 0) s = 2; else s --; 
+		fade_out ();
+	}
 	on_pant = n_pant;
 	n_pant = 19;
 
-	batout ();
+	ppu_off ();
+	oam_hide_rest (0);
+	clear_update_list ();
+	
 	draw_scr ();
 	vram_write (attr_table, 0x23c0, 64);
 	batin ();

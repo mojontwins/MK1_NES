@@ -374,6 +374,9 @@ void enems_move (void) {
 #ifdef ENABLE_SAW
 				if (en_t [gpit] != 8 || en_alive [gpit])
 #endif				
+#ifdef ENABLE_CHAC_CHAC
+				if (en_t [gpit] != 10)
+#endif					
 				{
 					touched = 1;
 

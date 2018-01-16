@@ -29,8 +29,10 @@ void title (void) {
 
 	unrle_vram (title_rle, 0x2000);
 
-	pr_str (10, 21, "PRESS START!");
-	if (game_on) pr_str (4, 22, "PRESS SELECT TO CONTINUE");
+	if (game_on) {
+		pr_str (4, 21, "PRESS START  TO RESTART");
+		pr_str (4, 22, "PRESS SELECT TO CONTINUE");
+	} else pr_str (10, 21, "PRESS START!");
 	pr_str (4, 27, "(C) 2015 THE MOJON TWINS");
 
 	batin ();

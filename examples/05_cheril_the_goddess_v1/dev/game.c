@@ -101,6 +101,9 @@ void add_propeller (unsigned char x, unsigned char y);
 
 void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
+
+	fade_delay = 1;
+
 	oam_spr (0, 240, 0, 0, 156);
 	oam_meta_spr (0, 240, 160, spr_empty);
 #ifdef ENABLE_PROPELLERS
@@ -164,23 +167,24 @@ void main(void) {
 	pal_bright (0);
 
 	credits ();
+	game_on = 0;
+
+	c_map = (unsigned char **) (map_0);
+	c_decos = (unsigned char **) (map_0_decos);
+	c_enems = (unsigned char *) (enems_0);
+	c_hotspots = (unsigned char *) (hotspots_0);
+	c_pal_bg = (unsigned char *) mypal_game_bg0;
+	c_pal_fg = (unsigned char *) mypal_game_fg0;
+	tsmap = (unsigned char *) (ts1_tmaps);
+	tileset_pals = (unsigned char *) (ts1_pals);	
 
 	while (1) {
 		title ();
 		
-		plife = 10;
-		level = 0;
+		plife = 5;
 		game_over = 0;
+		game_on = 1;
 
-		c_map = (unsigned char **) (map_0);
-		c_decos = (unsigned char **) (map_0_decos);
-		c_enems = (unsigned char *) (enems_0);
-		c_hotspots = (unsigned char *) (hotspots_0);
-		c_pal_bg = (unsigned char *) mypal_game_bg0;
-		c_pal_fg = (unsigned char *) mypal_game_fg0;
-		tsmap = (unsigned char *) (ts1_tmaps);
-		tileset_pals = (unsigned char *) (ts1_pals);
-		
 		n_pant = SCR_INI;
 		on_pant = 99;
 
@@ -310,7 +314,8 @@ void main(void) {
 			
 			// Change screen
 			if (ft && !reset_all) {
-				short_cutscene (99);
+				ft = 0;
+				short_cutscene (99);				
 			} else if (on_pant != n_pant) {
 				prepare_scr ();
 				on_pant = n_pant;
@@ -351,6 +356,8 @@ void main(void) {
 		set_vram_update (0, 0);
 		ppu_off ();
 		oam_clear ();
+
+		scroll (0, 0);
 		
 		if (game_over) {
 			game_over_scr ();
@@ -358,6 +365,7 @@ void main(void) {
 			bankswitch (1);
 			cutscene (ending_text, cuts_rle);
 			bankswitch (1);
+			game_on = 0;
 		}
 		
 	}
