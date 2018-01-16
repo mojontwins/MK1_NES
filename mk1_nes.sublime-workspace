@@ -190,23 +190,34 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess",
+		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1",
+		"/D/git/MK1_NES/examples/04_d'veel'ng",
 		"/D/git/MK1_NES/src"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/README.md",
+		"/D/git/MK1_NES/examples/04_d'veel'ng/README.md",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/game.c",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/cheat.h",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/pres.h",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/printer.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset2.spt",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/m_instruments.s",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/music.s",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset1.spt",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/cuts_text.h",
+		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/player.h",
 		"/D/git/nes_work/vault/CherilsR/bootee/utils/text2carray.bas",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/compile.bat",
 		"/D/git/nes_work/vault/CherilsR/ROM2/utils/text2carray.bas",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/game.c",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/palettes.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/printer.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/pres.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/neslib-CNROM.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/neslib-CNROM.s",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/nes-CNROM.cfg",
@@ -217,7 +228,6 @@
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/ram/zp.h",
 		"/D/git/nes_work/D'Veel'NgR/dev/neslib-CNROM.s",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset1.spt",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset0.spt",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/tiledata.h",
 		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/compile.bat",
@@ -239,7 +249,6 @@
 		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/assets/palettes.h",
 		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/assets/tiledata1.h",
 		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/README.md",
 		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/README.md",
 		"/D/git/MK1_NES/examples/02_jet_paco/dev/compile.bat",
 		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/enems.h",
@@ -314,15 +323,7 @@
 		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_sprites.spt",
 		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/hud.h",
 		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/spritedata.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/testing.txt",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/texts.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/special.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/text_scripts.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/ram/zp.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/printer.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/assets/precalcs.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/engine/game.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Bosque/dev/labels.txt"
+		"/D/Google Drive/Maritrini/dev/NES/multicart/testing.txt"
 	],
 	"find":
 	{
@@ -348,6 +349,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"env_pitch",
+			"pfr",
+			"plife",
+			"psprid",
+			"pfr",
 			"clear_",
 			"clear_update_list",
 			"wbtul",
@@ -470,12 +476,7 @@
 			"while",
 			"get_byte",
 			"pal",
-			"pfacing",
-			"upd_con",
-			"_a",
-			"28",
-			"qaglgpc",
-			"SUB QAGLprint"
+			"pfacing"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -663,7 +664,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 79.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -697,7 +698,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -705,7 +706,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 199.0,
+	"side_bar_width": 198.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
