@@ -767,7 +767,7 @@ void player_move (void) {
 		psprid = pfacing + rinse_cycle [pfr];
 	} else if (ppossee || pgotten) {
 		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-			psprid = pfacing + 1 + ((prx >> 3) & 3);
+			psprid = pfacing + 1 + ((prx >> 4) & 3);
 		} else {
 			psprid = pfacing;
 		}
