@@ -56,9 +56,11 @@ void player_init (void) {
 	n_pant_safe = n_pant;
 #endif
 
-#ifdef CARRY_ONE_HS_OBJ
-	pinv = HS_INV_EMPTY; 
-#endif
+	if (reset_all) {
+	#ifdef CARRY_ONE_HS_OBJ
+		pinv = HS_INV_EMPTY; 
+	#endif
+	}
 }
 
 void render_player (void) {
@@ -87,16 +89,9 @@ void __fastcall__ kill_player (void) {
 
 #ifdef DIE_AND_RESPAWN
 	music_pause (1);
-	gpit = 60;
-	while (gpit --) {
-		ppu_waitnmi ();
-	}
-	/*px_safe = px;
-	py_safe = py;
-	n_pant_safe = n_pant;
-	*/
-	pvx = pvy = pj = 0;
+	delay (60);
 	music_pause (0);
+	pvx = pvy = pj = 0;
 #endif	
 }
 

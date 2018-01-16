@@ -1,0 +1,38 @@
+# Tileset 0, bank 0
+
+OPEN font.png
+PALS palts.png
+CHARSET 0, 0, 32, 2
+
+OPEN frame.png
+PALS palts.png
+CHARSET 0, 0, 8, 1
+
+OPEN ts.png
+PALS palts.png
+LABEL ts1
+MAPFILE ..\dev\assets\tiledata.h
+MAPPED 0, 0, 2, 2, 16, 4
+
+FILL 4096
+RESETPOOL
+
+# Tileset 0, bank 1
+
+NOSKIPEMPTY
+MAPFILE ..\dev\assets\spritedata.h
+OPEN ss.png
+PALS palss.png
+
+LABEL spr_pla
+METASPRITESET 0, 0, 2, 3, 8, 2, 0, -8 FLIPPED
+LABEL spr_plb
+METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8
+LABEL spr_lin
+METASPRITESET 0, 9, 2, 2, 8, 1, 0, 0 FLIPPED
+LABEL spr_enf
+METASPRITESET 0, 11, 2, 2, 8, 1, 0, 0
+LABEL spr_hs
+METASPRITESET 0, 13, 2, 2, 8, 1, 0, 0
+
+FILL 8192

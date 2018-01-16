@@ -34,23 +34,31 @@ void  fade_out_fast (void) {
 void clear_update_list (void) {
 	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
 		update_list [i] = 0;	
+	update_index = 0;
 }
 
 void cls (void) {
-	vram_adr(0x2000);
-	vram_fill(255,0x3c0);
-	vram_adr (0x23c0);
-	vram_fill(0x00,64);
+	vram_adr(0x2000); vram_fill(0x00,0x400);
+}
+
+void ul_putc (unsigned char n) {
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = n;
 }
 
 void p_t (unsigned char x, unsigned char y, unsigned char n) {
 	gp_addr = (y << 5) + x + 0x2000;
+/*
 	update_list [update_index++] = MSB (gp_addr);
 	update_list [update_index++] = LSB (gp_addr++);
 	update_list [update_index++] = (n / 10) + 16;
 	update_list [update_index++] = MSB (gp_addr);
 	update_list [update_index++] = LSB (gp_addr);
 	update_list [update_index++] = (n % 10) + 16;
+*/
+	ul_putc ((n/10)+16);
+	ul_putc ((n%10)+16);
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
@@ -78,29 +86,42 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	vram_put (*gp_tmap);	
 }
 
+/*
 void wbtul (unsigned char b) {
 	update_list [update_index++] = MSB(gp_addr);
 	update_list [update_index++] = LSB(gp_addr++);
 	update_list [update_index++] = b;
 }
+*/
 
 void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	upd_attr_table (x, y, tl);
 	
 	gp_addr = 0x23c0 + rdc;
+	/*
 	update_list [update_index++] = MSB(gp_addr);
 	update_list [update_index++] = LSB(gp_addr);
 	update_list [update_index++] = rda;
+	*/
+	ul_putc (rda);
 	
 	// tiles
 	//tl = (16 + tl) << 2;
 	gp_tmap = tsmap + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
+	/*
 	wbtul (*gp_tmap++);
 	wbtul (*gp_tmap++);
+	*/
+	ul_putc (*gp_tmap ++);
+	ul_putc (*gp_tmap ++);
 	gp_addr += 30;
+	/*
 	wbtul (*gp_tmap++);
 	wbtul (*gp_tmap);
+	*/
+	ul_putc (*gp_tmap ++);
+	ul_putc (*gp_tmap);
 }
 
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
@@ -293,17 +314,20 @@ void batout (void) {
 	fade_out ();
 	ppu_off ();
 	oam_hide_rest (0);
-	update_index = 0;
 	clear_update_list ();
 }
+
 void batin (void) {
+	while (pad_poll (0));
+	fade_delay = 4;
 	ppu_on_all ();
+	scroll (0, 0);
 	fade_in ();
 }
 
 void prepare_scr (void);
 void short_cutscene (unsigned char s) {
-	if (s == 0) s = 2; else s --;
+	if (s != 99) { if (s == 0) s = 2; else s --; }
 	on_pant = n_pant;
 	n_pant = 19;
 
@@ -314,20 +338,20 @@ void short_cutscene (unsigned char s) {
 
 	sleep_cycles (50);
 
-	for (gpit = 0; gpit < 3; gpit ++) {
-		update_index = 0;
-		clear_update_list ();
-		draw_gate (8 + s + s, 3, gpit);
-		sfx_play (6, 2);
-		fx_flash ();
-		sleep_cycles (25);
-	}
+	if (s != 99) {
+		for (gpit = 0; gpit < 3; gpit ++) {
+			clear_update_list ();
+			draw_gate (8 + s + s, 3, gpit);
+			sfx_play (6, 2);
+			fx_flash ();
+			sleep_cycles (25);
+		}
+	} else sleep_cycles (50);
 
 	sleep_cycles (50);
 
 	n_pant = on_pant;
 	//on_pant = 99;		// Force reenter
-	update_index = 0;
 	clear_update_list ();
 	prepare_scr ();
 }

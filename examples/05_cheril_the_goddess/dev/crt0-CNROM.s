@@ -1,10 +1,11 @@
 ; Startup code for cc65 and Shiru's NES library
 ; based on code by Groepaz/Hitmen <groepaz@gmx.net>, Ullrich von Bassewitz <uz@cc65.org>
 
+; CNROM (4 CHR BANKS)
 
-NES_MAPPER				=0	;mapper number
+NES_MAPPER				=3	;mapper number
 NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
-NES_CHR_BANKS			=1	;number of 8K CHR banks
+NES_CHR_BANKS			=4	;number of 8K CHR banks
 NES_MIRRORING			=0	;0 horizontal, 1 vertical, 8 four screen
 
 FT_DPCM_OFF				=$ffc0	;samples offset, $c000 or higher, 64-byte steps
@@ -231,7 +232,7 @@ detectNTSC:
 
 	jmp _main			;no parameters
 
-	.include "neslib.s"
+	.include "neslib-CNROM.s"
 
 .segment "RODATA"
 
@@ -255,4 +256,7 @@ sounds_data:
 
 .segment "CHARS"
 
-	.incbin "tileset.chr"
+	.incbin "tileset0.chr"
+	.incbin "tileset1.chr"
+	.incbin "tileset2.chr"
+	.incbin "tileset3.chr"

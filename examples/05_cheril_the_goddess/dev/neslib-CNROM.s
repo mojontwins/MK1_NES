@@ -20,7 +20,6 @@
 	.export _bankswitch
 
 
-
 ;NMI handler
 
 nmi:
@@ -928,8 +927,13 @@ _delay:
 ; void __fastcall__ bankswitch(unsigned char bank);
 
 _bankswitch:
-   sta $8000
+
+   tax
+   sta bankBytes,x
    rts
+
+bankBytes:
+  .byte $00,$01,$02,$03
 	
 	
 palBrightTableL:

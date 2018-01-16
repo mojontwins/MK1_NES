@@ -193,7 +193,7 @@ void __fastcall__ memfill(void *dst,unsigned char value,unsigned int len);
 
 void __fastcall__ delay(unsigned char frames);
 
-// CNROM Bankswitch
+// Bankswitch
 
 void __fastcall__ bankswitch(unsigned char bank);
 

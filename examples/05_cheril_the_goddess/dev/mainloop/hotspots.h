@@ -82,37 +82,6 @@
 									pammo = MAX_AMMO;
 								break;
 #endif
-/*
-							case HOTSPOT_TYPE_STAR:
-								pstars ++;
-								sfx_play (3, 1);
-								
-								pal_bg (mypal_flash);
-								pal_spr (mypal_black);
-								
-								clear_update_list ();
-								ppu_waitnmi ();
-								ppu_waitnmi ();
-								ppu_waitnmi ();
-								ppu_waitnmi ();
-								
-								// Fanfare [TODO]
-								
-								pal_bg (c_pal_bg);
-								pal_spr (c_pal_fg);
-								
-								res_on = 0;
-								
-								clear_update_list (); update_index = 0;
-								if (pstars == 3) {
-									pr_str_upd ("       EXTRA CONTINUE!");
-									pcontinues ++;
-								} else {
-									pr_str_upd ("     WOW! IS THIS MAGIC?");
-								}
-
-								break;
-*/
 						}
 						hry = 240;
 						hact [n_pant] = 0;

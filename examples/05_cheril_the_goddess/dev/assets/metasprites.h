@@ -1,11 +1,10 @@
+// NES MK1 v0.5
+// Copyleft Mojon Twins 2013, 2015
+
 // metasprites.h
 // Metaspriteset.
 
-#include "assets/spr_pla.h"
-#include "assets/spr_plb.h"
-#include "assets/spr_lin.h"
-#include "assets/spr_enf.h"
-#include "assets/spr_hs.h"
+#include "assets/spritedata.h"
 
 // Extra sprites:
 
