@@ -9,10 +9,10 @@ Sub strToArr128 (mstr As String, arr () As uByte)
 End Sub
 
 Dim as Integer x, y, f1, f2, i, j
-Dim as uByte d, arr (127), map_w, map_h, nenems
+Dim as uByte d, arr (127), map_w, map_h, nenems, xa
 
 ' enexpander.bas
-If Len(command (1)) = 0 or Len(command (2)) = 0 Then ?"enexpander enems.ene output.ene":?:End
+If Len(command (1)) = 0 or Len(command (2)) = 0 Then ?"enexpander enems.ene output.ene [3bytes|expbytes]":?:End
 
 ' read / write header
 
@@ -75,13 +75,37 @@ Next i
 
 ' Read / Write hotspots
 
-For i = 1 To (map_w * map_h)
-	' xx t
-	get #f1, , d ' xx
-	put #f2, , d
-	get #f1, , d ' t
-	put #f2, , d
-Next i
+
+If Command (3) = "expbytes" Then
+	For i = 1 To (map_w * map_h)
+		' xx t
+		get #f1, , d ' xx
+		xa = d Shr 4
+		put #f2, , xa
+		xa = d And 15
+		put #f2, , xa
+		get #f1, , d ' t
+		put #f2, , d
+	Next i
+ElseIf Command (3) = "3bytes" Then
+	For i = 1 To (map_w * map_h)
+		' xx t
+		get #f1, , d ' xx
+		put #f2, , d
+		get #f1, , d ' xx
+		put #f2, , d
+		get #f1, , d ' t
+		put #f2, , d
+	Next i
+Else
+	For i = 1 To (map_w * map_h)
+		' xx t
+		get #f1, , d ' xx
+		put #f2, , d
+		get #f1, , d ' t
+		put #f2, , d
+	Next i
+End If	
 
 Close
 
