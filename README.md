@@ -1,22 +1,34 @@
-Churrera NES
-============
+MT Engine MK1 NES
+=================
 
-Churrera NES is a framework composed by a modular engine coded in C and a set of tools to create simple games for the NES platform. Churrera NES needs the CC65 compiler and uses Shiru's excelent Neslib. Churrera NES is a rewrite of Churrera, a simmilar package for the ZX Spectrum.
+**MT Engine MK1 NES** is a framework composed by a modular engine coded in C and a set of tools to create simple games for the NES platform. 
 
-Resources
-=========
+This engine was built as an excercise to learn to write simple games for the NES. It compiles using a fairly old version of cc65 (2.13.2), and uses the original neslib by **Shiru**.
 
-* Latest stable / public version is 1.2 and can be found here. It lacks tons of features found in the Speccy version, but eventually everything will be available in Churrera NES.
-* Learn more about neslib and NES game development in C reading this article by Shiru: http://shiru.untergrund.net/articles/programming_nes_games_in_c.htm
+The library was used in early 2014 and during 2015 to create several games, some of them released. You can find those games (cleaned up and ready to be compiled) in the `examples` folder.
 
+The library was discontinued in early 2015 and was superseeded by the new **MT Engine MK2** which is currently non stable and in continuous development. It's not hard to get hold if you follow our releases ;-)
+
+I've decided to clean **MT Engine MK1 NES** and make it useable. I *might even write a tutorial*. This is old code, but it might be useful for somebody.
 
 Credits
 =======
 
-Churrera NES was written by na_th_an and uses:
+**MT Engine MK1 NES** was designed and developed by **The Mojon Twins** and relies on:
 
-* neslib, written by Shiru.
-* Some sound effects and instruments by Shiru.
-* Some tools written by the Mojon Twins.
+* **neslib** and **famitone**, written by Shiru.
+* Some tools written by the **Mojon Twins**.
+* The old **cc65 v2.13.2**
 
-Churrera NES is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 licence.
+**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 licence.
+
+License
+=======
+
+**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 licence.
+
+**But** if you make a game with the engine we understand you'll want to make it into a cart. **In such case, just tell us!** Write to mojontwins@gmail.com
+
+The **games** included in te `examples` folder are now free to produce, which means **you can put them into carts and sell them, as long as you tell us first and send us a couple of copies**. 
+
+Have fun.
