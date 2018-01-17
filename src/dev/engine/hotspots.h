@@ -10,7 +10,7 @@ void hotspots_load (void) {
 	for (gpit = 0; gpit < MAP_W * MAP_H; gpit ++) {
 #ifndef HOTSPOTS_WONT_CHANGE
 		ht [gpit] = *gp_gen ++;
-		hxy [gpit] = *gp_gen ++;
+		hyx [gpit] = *gp_gen ++;
 		gp_gen ++;
 #endif
 		hact [gpit] = 1;
@@ -29,10 +29,14 @@ void hotspots_create (void) {
 	}
 
 	if (hrt) {
-		hrx = (hxy [n_pant] >> 4) << 4;
-		hry = (hxy [n_pant] & 15) << 4;
-
-		oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [hrt]);
+		hrx = hyx [n_pant] >> 4;
+		hry = hyx [n_pant] & 0xf0;
+		
+		oam_index = oam_meta_spr (
+			hrx, hry + SPRITE_ADJUST, 
+			oam_index, 
+			spr_hs [hrt]
+		);
 	}	
 #else
 	gp_gen = (unsigned char *) c_hotspots; gp_gen += (n_pant << 1);
@@ -40,7 +44,11 @@ void hotspots_create (void) {
 	if (rdb && hact [n_pant]) {
 		hrt = rdb;
 		hrx = rda & 0xf0; hry = rda << 4;
-		oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [hrt]);
-	} else oam_meta_spr (0, 240, OAM_HOTSPOTS, spr_empty);
+		oam_index = oam_meta_spr (
+			hrx, hry + SPRITE_ADJUST, 
+			oam_index, 
+			spr_hs [hrt]
+		);
+	} 
 #endif
 }

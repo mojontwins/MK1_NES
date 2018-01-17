@@ -11,39 +11,46 @@ void player_init (void) {
 	py = (signed int) (PLAYER_INI_Y << 4) << 6;
 	
 	pvx = pvy = 0;
+
 #ifdef PLAYER_MOGGY_STYLE	
 	pfacing = FACING_DOWN;
 #else
 	pfacing = 0;
 #endif	
+
 	pfr = pctfr = 0;
 	pj = pctj = 0;
 	psprid = 6;
+
 #ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
 #endif
+
 #ifndef DEACTIVATE_KEYS
 	pkeys = 0;
 #endif
+
 	pgotten = 0;
-#ifdef MAX_AMMO
-#ifdef INITIAL_AMMO
-	pammo = INITIAL_AMMO
-#else
-	pammo = MAX_AMMO;
-#endif
-#endif	
 	pfiring = 0;
+
 #ifdef PLAYER_GARGAJO
 	pgargajocounter = 0;
 #endif	
+
 #ifdef PLAYER_CAN_FIRE
-	for (i = 0; i < MAX_BULLETS; i++) bst [i] = 0;
-#endif
-	pstate = EST_NORMAL;
-#ifdef PLAYER_CAN_FIRE
+	gpit = MAX_BULLETS; while (gpit --) bst [gpit] = 0;
 	pkilled = 0;
+
+	#ifdef MAX_AMMO
+		#ifdef INITIAL_AMMO
+			pammo = INITIAL_AMMO
+		#else
+			pammo = MAX_AMMO;
+		#endif
+	#endif	
 #endif
+
+	pstate = EST_NORMAL;
 
 #ifdef DIE_AND_RESPAWN
 	px_safe = px;
@@ -66,16 +73,18 @@ void player_init (void) {
 
 void render_player (void) {
 	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, OAM_PLAYER, spr_player [psprid]);	
+		oam_meta_spr (prx, pry + SPRITE_ADJUST, 4, spr_player [psprid]);	
 	} else {
-		oam_meta_spr (0, 240, OAM_PLAYER, spr_pl_empty);
+		oam_meta_spr (0, 240, 4, spr_pl_empty);
 	}
 }
 
 void kill_player (void) {
 	render_player ();
+	sfx_play (4, 0);
 	
 	plife --;
+
 #ifdef PLAYER_FLICKERS
 	pstate = EST_PARP;
 	pctstate = 100;	
@@ -83,76 +92,81 @@ void kill_player (void) {
 	pstate = EST_REBOUND;
 	pctstate = 16;	
 #endif
-	sfx_play (4, 0);
+
 #ifdef DIE_AND_RESPAWN
 	px = px_safe;
 	py = py_safe;
 	n_pant = n_pant_safe;
-#endif	
-
-#ifdef DIE_AND_RESPAWN
 	music_pause (1);
-	gpit = 60;
-	while (gpit --) {
-		ppu_waitnmi ();
-	}
-	/*px_safe = px;
-	py_safe = py;
-	n_pant_safe = n_pant;
-	*/
+	delay (60);
 	pvx = pvy = pj = 0;
 	music_pause (0);
 #endif	
+
 }
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
-void process_tile (x0, y0, x1, y1) {
-#ifdef PLAYER_PUSH_BOXES
-#ifdef FIRE_TO_PUSH
-	if (i & PAD_A) {
-		pfiring = 1;
-#endif
-		if (x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11) {
-			if (qtile (x0, y0) == 14 && attr (x1, y1) == 0) {
-				pushed_any = 1;
-				// Move & paint
+	void process_tile (x0, y0, x1, y1) {
+	
+		// Boxes
+
+	#ifdef PLAYER_PUSH_BOXES
+		#ifdef FIRE_TO_PUSH
+			if (i & PAD_A) {
+				pfiring = 1;
+		#endif
+				if (x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11) {
+					if (qtile (x0, y0) == 14 && attr (x1, y1) == 0) {
+						pushed_any = 1;
+						// Move & paint
+						map_set (x0, y0, 0);
+						map_set (x1, y1, 14);			
+						// Sound
+						sfx_play (1, 1);
+					}
+				}
+		#ifdef FIRE_TO_PUSH
+			}
+		#endif	
+	#else
+		y1=x1;//Shutup, compiler!
+	#endif
+
+		// Bolts
+
+	#ifndef DEACTIVATE_KEYS
+		if (qtile (x0, y0) == 15) {
+			if (pkeys) {
+				// Update screen
 				map_set (x0, y0, 0);
-				map_set (x1, y1, 14);			
+				// Clear lock in RAM
+				clear_cerrojo ((y0 << 4) | x0);
+				// Decrease keys 
+				pkeys --;
 				// Sound
 				sfx_play (1, 1);
+			} else {
+				no_ct = 100;
 			}
-		}
-#ifdef FIRE_TO_PUSH
+		} 
+	#endif
+
 	}
-#endif	
-#else
-	y1=x1;//Shutup, compiler!
-#endif
-#ifndef DEACTIVATE_KEYS
-	if (qtile (x0, y0) == 15) {
-		if (pkeys) {
-			// Update screen
-			map_set (x0, y0, 0);
-			// Clear lock in RAM
-			clear_cerrojo ((x0 << 4) + (y0 & 15));
-			// Decrease keys 
-			pkeys --;
-			// Sound
-			sfx_play (1, 1);
-		} else {
-			no_ct = 100;
-		}
-	} 
-#endif
-}
 #endif
 
 #ifdef PLAYER_CAN_FIRE
-#include "engine/playermods/bullets.h"
+	#include "engine/playermods/bullets.h"
 #endif
 
 #ifdef PLAYER_GARGAJO
-#include "engine/playermods/gargajo.h"
+	#include "engine/playermods/gargajo.h"
+#endif
+
+#ifndef PLAYER_MOGGY_STYLE
+	void player_points_beneath (void) {
+		cy1 = cy2 = (pry + 16) >> 4;
+		cm_two_points ();
+	}
 #endif
 
 void player_move (void) {
@@ -198,19 +212,20 @@ void player_move (void) {
 	}
 #else
 	// gravity
+
 	if (!pj) {
-		if (pvy < PLAYER_VY_FALLING_MAX) { 
-			pvy += PLAYER_G;
-		} else {
-			pvy = PLAYER_VY_FALLING_MAX;
-		}
+		pvy += PLAYER_G;
+		if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 	}
 
-#ifdef PLAYER_CUMULATIVE_JUMP
-	if (!pj)
-#endif
+	#ifdef PLAYER_CUMULATIVE_JUMP
+		if (!pj)
+	#endif
 		if (pgotten) pvy = 0;			
 #endif
+
+	cx1 = (prx + 4) >> 4;
+	cx2 = (prx + 11) >> 4;
 
 #ifdef PLAYER_HAS_JETPAC
     // **********************************
@@ -229,45 +244,66 @@ void player_move (void) {
 	// Collision
 	prx = px >> 6;
 	pry = py >> 6;
-	
-	ptx1 = (prx + 4) >> 4;
-	ptx2 = (prx + 11) >> 4;
+		
 #ifdef PLAYER_MOGGY_STYLE		
 	if (pvy < 0)
 #else
-	if (pvy + pgtmy < 0)
+	rds16 = pvy + pgtmy;
+	if (rds16 < 0)
 #endif		
 	{
-		pty1 = (pry + 8) >> 4;
-		if ((attr (ptx1, pty1) & 8) || (attr (ptx2, pty1) & 8)) {
-			pvy = 0;
-			pry = ((pty1 + 1) << 4) - 8;
-			py = pry << 6;
-			wall = WTOP;
+		cy1 = cy2 = (pry + 8) >> 4;
+		cm_two_points ();
+		if ((at1 & 8) || (at2 & 8)) {
+			pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << 6;
 			pgotten = 0;
-		} 
+			wall = WTOP;
+		} else if ((at1 & 1) || (at2 & 1)) {
+			hitv = 1;
+		}
+#ifdef ENABLE_QUICKSANDS
+		else if ((at1 & 2) || (at2 & 2)) {
+			if (pctj > 2) pj = 0;
+		}
+#endif		
+
 #ifdef PLAYER_MOGGY_STYLE			
 	} else if (pvy > 0)
 #else
-	} else if (pvy + pgtmy > 0)
+	} else if (rds16 > 0)
 #endif		
 	{
-		pty1 = (pry + 15) >> 4;
-#ifndef PLAYER_MOGGY_STYLE
- 		if (((pry - 1) & 15) < 8)		
-#endif		
-		if ((attr (ptx1, pty1) & 12) || (attr (ptx2, pty1) & 12)) {
-			pvy = 0;
-			pry = ((pty1 - 1) << 4);
-			py = pry << 6;
-			wall = WBOTTOM;
+
+		cy1 = cy2 = (pry + 15) >> 4; 
+		cm_two_points (); 
+ 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
+			pvy = 0; pry = ((cy1 - 1) << 4);py = pry << 6;
 			pgotten = 0;
+			wall = WBOTTOM;
+		} else if ((at1 & 1) || (at2 & 1)) {
+			hitv = 1;
 		}
+#ifdef ENABLE_QUICKSANDS		
+		else {
+			if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
+		}
+#endif
 	}
-	if (pvy != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1);
 	
-	pty1 = (pry + 16) >> 4;
-	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
+	player_points_beneath ();
+	ppossee = ((at1 & 14) || (at2 & 14));
+#ifdef ENABLE_SLIPPERY
+	pice = (ppossee && ((at1 & 64) || (at2 & 64)));
+#endif	
+
+	// Conveyors
+#ifdef ENABLE_CONVEYORS	
+	if (ppossee) {
+		pconvd1 = at1 & 1; pconvd2 = at2 & 1; 
+		if (at1 & 32) { if (pconvd1) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
+		if (at2 & 32) { if (pconvd2) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
+	}
+#endif
 
 #ifdef PLAYER_HAS_JUMP
 	// *******************************
@@ -278,10 +314,8 @@ void player_move (void) {
 			pjb = 1;
 			if (!pj) {
 				if (pgotten || ppossee || hitv) {
-					pj = 1; 
-					pctj = 0;
 					sfx_play (7, 0);
-					pvy = -PLAYER_VY_JUMP_INITIAL;
+					pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
 #ifdef DIE_AND_RESPAWN
 					if (!(pgotten || hitv)) {
 						px_safe = px;
@@ -305,10 +339,8 @@ void player_move (void) {
 #ifdef PLAYER_BOOTEE
 	if (!pj) {
 		if (pgotten || ppossee || hitv) {
-			pj = 1; 
-			pctj = 0;
 			sfx_play (7, 0);
-			pvy = -PLAYER_VY_JUMP_INITIAL;
+			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
 #ifdef DIE_AND_RESPAWN
 			if (!(pgotten || hitv)) {
 				px_safe = px;
@@ -334,60 +366,40 @@ void player_move (void) {
 	// Horizontal
 	// **********
 	
-#ifdef ENABLE_CONVEYORS	
-	// Conveyors
-	if (ppossee) {
-		pry = py >> 6;
-		ptx1 = (prx + 8) >> 4;
-		pty1 = (pry + 16) >> 4;
-		gpit = attr (ptx1, pty1);
-		if (gpit & 32) {
-			pgotten = 1; 
-			pgtmy = 0;
-			if (gpit & 1) {
-				pgtmx = 64;
-			} else {
-				pgtmx = -64;
-			}
-		}
-	}
-#endif	
-	
 	// Poll pad
 	if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
 #ifdef PLAYER_MOGGY_STYLE		
 		pfacingh = 0xff;
 #endif
 		if (pvx > 0) {
+#ifdef ENABLE_SLIPPERY
+			pvx -= pice ? ICE_RX : PLAYER_RX;
+#else			
 			pvx -= PLAYER_RX;
+#endif			
 			if (pvx < 0)
 				pvx = 0;
 		} else if (pvx < 0) {
+#ifdef ENABLE_SLIPPERY
+			pvx += pice ? ICE_RX : PLAYER_RX;
+#else
 			pvx += PLAYER_RX;
+#endif
 			if (pvx > 0)
 				pvx = 0;
 		}
 	}
 
-	psprint = ((i & PAD_B) && ppossee);
-	if (!psprint && ppossee) {
-		if (pvx < -PLAYER_VX_MAX) pvx = -PLAYER_VX_MAX;
-		//if (pvx < -player_vx_max) pvx = -player_vx_max;
-		if (pvx > PLAYER_VX_MAX) pvx = PLAYER_VX_MAX;
-		//if (pvx < -player_vx_max) pvx = -player_vx_max;
-	}
-	
 	if (i & PAD_LEFT) {
 #ifdef PLAYER_MOGGY_STYLE		
 		pfacingh = FACING_LEFT;
 #endif
-		if (psprint) {
-			if (pvx > -PLAYER_VX_SPRINT_MAX) {
-				pvx -= PLAYER_AX_SPRINT;
-			}
-		} else if (pvx > -PLAYER_VX_MAX) {
-		//} else if (pvx > -player_vx_max) {
-			pvx -= PLAYER_AX;			
+		if (pvx > -PLAYER_VX_MAX) {
+#ifdef ENABLE_SLIPPERY
+			pvx -= pice ? ICE_AX : PLAYER_AX;
+#else			
+			pvx -= PLAYER_AX;
+#endif
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 16;
@@ -398,13 +410,12 @@ void player_move (void) {
 #ifdef PLAYER_MOGGY_STYLE		
 		pfacingh = FACING_RIGHT;
 #endif		
-		if (psprint) {
-			if (pvx < PLAYER_VX_SPRINT_MAX) {
-				pvx += PLAYER_AX_SPRINT;
-			}
-		} else if (pvx < PLAYER_VX_MAX) {
-		//} else if (pvx < player_vx_max) {
+		if (pvx < PLAYER_VX_MAX) {
+#ifdef ENABLE_SLIPPERY
+			pvx += pice ? ICE_AX : PLAYER_AX;
+#else
 			pvx += PLAYER_AX;
+#endif
 		}
 #ifndef PLAYER_MOGGY_STYLE			
 		pfacing = 0;
@@ -421,40 +432,30 @@ void player_move (void) {
 	
 	// Collision
 	prx = px >> 6;
-	//pry = py >> 6;
 
-#ifdef BOUNDING_BOX_8_BOTTOM
-	pty1 = (pry + 8) >> 4;
-	pty2 = (pry + 15) >> 4;
-#ifdef PLAYER_MOGGY_STYLE	
-	if (pvx < 0) {
-#else
-	if (pvx + pgtmx < 0) {
-#endif
-		ptx1 = (prx + 4) >> 4;
-		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
-			pvx = 0;
-			prx = ((ptx1 + 1) << 4) - 4;
-			px = prx << 6;
-			wall = WLEFT;
-		}
-#ifdef PLAYER_MOGGY_STYLE	
-	} else if (pvx > 0) {
-#else
-	} else if (pvx + pgtmx > 0) {
-#endif		
-		ptx1 = (prx + 11) >> 4;
-		if ((attr (ptx1, pty1) & 8) || (attr (ptx1, pty2) & 8)) {
-			pvx = 0;
-			prx = ((ptx1 - 1) << 4) + 4;
-			px = prx << 6;
+	cy1 = (pry + 8) >> 4;
+	cy2 = (pry + 15) >> 4;
+
+	rds16 = pvx + pgtmx;
+	if (rds16) 	{
+		if (rds16 < 0) {
+			cx1 = cx2 = (prx + 4) >> 4;
+			rda = ((cx1 + 1) << 4) - 4;
+			wall = LEFT;
+		} else {
+			cx1 = cx2 = (prx + 11) >> 4;
+			rda = ((cx1 - 1) << 4) + 4;
 			wall = WRIGHT;
 		}
+		cm_two_points ();
+		if ((at1 & 8) || (at2 & 8)) {
+			pvx = 0; prx = rda; px = prx << 6;
+			if (at1 == 10) player_process_tile (cx1, cy1);
+		} else {
+			wall = 0;
+			hith = ((at1 & 1) || (at2 & 1));
+		}
 	}
-#ifndef NO_HORIZONTAL_EVIL_TILE		
-	if (pvx != 0) hith = (attr (ptx1, pty1) & 1) || (attr (ptx1, pty2) & 1);
-#endif	
-#endif	
 
 	// Facing
 #ifdef PLAYER_MOGGY_STYLE	

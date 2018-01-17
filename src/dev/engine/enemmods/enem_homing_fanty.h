@@ -1,6 +1,6 @@
 
-// Precalc distance
-rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = distance ();
+// Precalc enems_distance
+rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = enems_distance ();
 
 // Modify v - always upon state
 switch (en_alive [gpit]) {
@@ -82,20 +82,6 @@ if (enf_vy [gpit]) {
 }
 #endif
 
-
-
 en_fr = (en_x [gpit] >> 3) & 1;
 //en_facing = (en_x [gpit] > prx) ? 0 : 2;
-
-// Draw
-/*
-oam_meta_spr (
-	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	OAM_ENEMS + (gpit << 4), 
-	spr_enems [FANTY_BASE_SPRID + en_fr + en_facing]);
-*/
-
-oam_meta_spr (
-	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	OAM_ENEMS + (gpit << 4), 
-	spr_enems [FANTY_BASE_SPRID + en_fr]);
+en_spr = FANTY_BASE_SPRID + en_fr /* + en_facing */;

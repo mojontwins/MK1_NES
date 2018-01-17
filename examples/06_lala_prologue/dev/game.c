@@ -25,27 +25,6 @@
 
 #include "neslib.h"
 
-// OAM TABLE
-/*
-	00-23 - Enemigos 		(OAM 0-95)
-	24-27 - Objeto Inv.		(OAM 96-111)
-	28-31 - NO!				(OAM 112-127)
-	32-37 - player 			(OAM 128-151)
-	38-41 - hotspot 		(OAM 152-167) <- Mover
-	42-61 - contenedores	(OAM 168-247)
-	62    - resonador cd.	(OAM 248-251)
-	63    - patata patam ?
-*/
-
-#define OAM_OCCLU		0
-#define OAM_ENEMS		48
-#define OAM_INVENTORY	96
-#define OAM_NO			112
-#define OAM_PLAYER		128
-#define OAM_HOTSPOTS	152
-#define OAM_CONTAINERS	168
-#define OAM_RESONATOR	248
-
 // **************
 // * const data *
 // **************

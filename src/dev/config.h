@@ -52,8 +52,7 @@
 // General directives:
 // -------------------
 
-//#define SPRITE_BADDIE_DYING 	spr_en_0A
-#define SPRITE_BADDIE_DYING 	spr_en_0E_a
+#define SPRITE_BADDIE_DYING 			8
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
 #define DEACTIVATE_KEYS					// If defined, keys are not present.
@@ -84,6 +83,23 @@
 #define SAW_BASE_SPRID			16
 #define SAW_V_DISPL				4
 #define SAW_EMERGING_STEPS		10
+
+//#define ENABLE_MONOCOCO
+#define MONOCOCO_BASE_TIME_HIDDEN		150
+#define MONOCOCO_BASE_TIME_APPEARING	50
+#define MONOCOCO_BASE_TIME_ONBOARD		50
+#define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
+// Make code more readable:
+#define MONOCOCO_X 						en_x
+#define MONOCOCO_Y						en_y
+#define MONOCOCO_COUNTER 				en_my
+#define MONOCOCO_STATE 					en_mx
+
+#define ENABLE_COCOS
+#define COCOS_MAX						3
+#define COCO_V							192
+#define COCO_PATTERN					34
+#define COCO_FAIR_D						32
 
 /*
 #define ENABLE_PEZONS
@@ -191,7 +207,6 @@
 //#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
-#define NO_HORIZONTAL_EVIL_TILE			// Only check for colisions with evil tiles vertically
 
 // ============================================================================
 // III. Screen configuration

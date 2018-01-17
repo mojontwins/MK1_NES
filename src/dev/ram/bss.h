@@ -34,7 +34,7 @@ unsigned char fade_delay;
 // Hotspots
 
 #ifndef HOTSPOTS_WONT_CHANGE
-	unsigned char hxy [MAP_W * MAP_H];
+	unsigned char hyx [MAP_W * MAP_H];
 	unsigned char ht [MAP_W * MAP_H];
 #endif
 
@@ -43,7 +43,7 @@ unsigned char hact [MAP_W * MAP_H];
 // Bolts
 
 #ifndef DEACTIVATE_KEYS
-	unsigned char lkxy [MAX_CERROJOS], lknp [MAX_CERROJOS], lkact [MAX_CERROJOS];
+	unsigned char lkyx [MAX_BOLTS], lknp [MAX_BOLTS], lkact [MAX_BOLTS];
 	unsigned char xy;
 #endif
 

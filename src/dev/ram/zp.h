@@ -3,7 +3,8 @@
 
 // zp
 
-unsigned char i, gpit, gpjt, gpaux;
+unsigned char i, gpit, gpjt, gpitu, gpaux;
+signed int rds16;
 unsigned char half_life, frame_counter;
 
 unsigned char n_pant, on_pant;
@@ -16,8 +17,11 @@ unsigned char rdct;
 
 unsigned char olife, okeys, oobjs, oammo, okilled;
 
+unsigned char oam_index;
+
 // Enemies
 
+unsigned char en_offs;
 unsigned char en_x [3], en_y [3];
 unsigned char en_x1 [3], en_y1 [3];
 unsigned char en_x2 [3], en_y2 [3];
@@ -31,6 +35,7 @@ unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
 unsigned char en_fr, etx1, etx2, ety1, ety2;
 unsigned char en_collx, en_colly;
+unsigned char en_spr;
 unsigned char touched;
 unsigned char en_cttouched [3];
 
@@ -131,6 +136,7 @@ unsigned char *c_enems;
 unsigned char *c_hotspots;
 unsigned char *c_pal_bg;
 unsigned char *c_pal_fg;
+unsigned char c_max_bolts;
 
 unsigned char *tileset_pals;
 unsigned char *tsmap;

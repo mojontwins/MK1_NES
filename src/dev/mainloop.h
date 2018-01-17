@@ -12,6 +12,7 @@ void game_init (void) {
 	c_hotspots = (unsigned char *) (hotspots_0);
 	c_pal_bg = (unsigned char *) mypal_game_bg0;
 	c_pal_fg = (unsigned char *) mypal_game_fg0;
+	c_max_bolts = MAX_BOLTS;
 	tsmap = (unsigned char *) (ts1_tmaps);
 	tileset_pals = (unsigned char *) (ts1_pals);
 	
@@ -32,10 +33,10 @@ void game_init (void) {
 #endif		
 	player_init ();
 #ifdef PERSISTENT_ENEMIES
-	persistent_enems_load ();
+	enems_persistent_load ();
 #endif		
 #ifdef PERSISTENT_DEATHS
-	persistent_deaths_load ();
+	enems_persistent_deaths_load ();
 #endif
 
 #ifdef CLEAR_FLAGS
@@ -56,7 +57,7 @@ void prepare_scr (void) {
 
 #ifdef PERSISTENT_ENEMIES
 	// Preserve enems
-	persistent_update ();
+	enems_persistent_update ();
 #endif
 
 	enems_load ();
@@ -68,6 +69,8 @@ void prepare_scr (void) {
 
 	// Disable sprites and tiles so we can write to VRAM.
 	ppu_off ();
+
+	oam_index = 4+24; // 4 + what the player takes.
 
 	oam_hide_rest (0);
 	draw_scr ();
@@ -106,6 +109,7 @@ void prepare_scr (void) {
 	run_script (n_pant + n_pant);
 #endif
 	containers_draw ();
+	oam_hide_rest (oam_index);
 	ppu_waitnmi ();
 	fade_in ();
 }
@@ -132,6 +136,8 @@ void game_loop (void) {
 	while (1) {
 		half_life = 1 - half_life;
 		frame_counter ++;
+
+		oam_index = 4+24; // 4 + what the player takes.
 		
 		if (pstate) {
 			pctstate --;
@@ -158,10 +164,10 @@ void game_loop (void) {
 		render_player ();
 
 #ifdef CARRY_ONE_HS_OBJ
-		oam_meta_spr (HS_INV_X, HS_INV_Y, OAM_INVENTORY, spr_hs [pinv]);
+		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [pinv]);
 #endif
 #ifdef CARRY_ONE_FLAG_OBJ
-		oam_meta_spr (HS_INV_X, HS_INV_Y, OAM_INVENTORY, spr_hs [flags [HS_INV_FLAG]]);
+		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
 #endif
 
 		//#include "mainloop/resonators.h"
@@ -184,10 +190,10 @@ void game_loop (void) {
 
 		// Sync
 		palfx_do ();
+		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
-		update_index = 0;
-		
+
 		// Change screen
 		if (on_pant != n_pant) {
 			prepare_scr ();

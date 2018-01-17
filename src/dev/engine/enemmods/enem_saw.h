@@ -67,19 +67,17 @@ switch (en_alive [gpit]) {
 		break;
 }
 
+// Occlusion
 if (rda) {
-	oam_meta_spr (
+	oam_index = oam_meta_spr (
 		en_x1 [gpit], en_y [gpit] + SPRITE_ADJUST, 
-		OAM_OCCLU + (gpit << 4), 
+		oam_index, 
 		spr_en_0A_a);
 } else {
-	oam_meta_spr (
+	oam_index = oam_meta_spr (
 		en_x [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
-		OAM_OCCLU + (gpit << 4), 
+		oam_index, 
 		spr_en_0A_a);
 }
 
-oam_meta_spr (
-	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	OAM_ENEMS + (gpit << 4), 
-	spr_enems [SAW_BASE_SPRID + half_life]);
+en_spr = SAW_BASE_SPRID + half_life;

@@ -7,7 +7,7 @@
 #ifdef BREAKABLE_ANIM
 void __fastcall__ process_breakable (void) {
 	do_process_breakable = 0;
-	for (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) {
+	gpit = MAX_BREAKABLE; while (gpit --) {
 		if (brkf [gpit]) {
 			brkf [gpit] ++;
 			if (brkf [gpit] == MAX_BREAKABLE_FRAMES) {
@@ -28,7 +28,7 @@ void break_wall (unsigned char x, unsigned char y) {
 	} else {
 #ifdef BREAKABLE_ANIM
 		// Unsafe but short & fast. Adjust MAX_BREAKABLE if this breaks your game
-		for (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) {
+		gpit = MAX_BREAKABLE; while (gpit --) {
 			if (!brkf [gpit]) {
 				do_process_breakable = 1;
 				brkf [gpit] = 1;

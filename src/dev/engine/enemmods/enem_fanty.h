@@ -69,15 +69,10 @@ if (enf_vy [gpit]) {
 #ifdef FANTY_KILLED_BY_TILE
 if (attr ((en_x [gpit] + 8) >> 4, (en_y [gpit] + 8) >> 4) & 1) {
 	en_cttouched [gpit] = 8;
-	kill_enemy (gpit);
+	enems_kill (gpit);
 }
 #endif
 
 en_fr = (en_x [gpit] >> 3) & 1;
 //en_facing = (en_x [gpit] > prx) ? 0 : 2;
-
-// Draw
-oam_meta_spr (
-	en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-	OAM_ENEMS + (gpit << 4), 
-	spr_enems [FANTY_BASE_SPRID + en_fr /* + en_facing */ ]);
+en_spr = FANTY_BASE_SPRID + en_fr /* + en_facing */;

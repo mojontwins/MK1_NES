@@ -2,7 +2,7 @@
 		case 0:
 			// Wait for idle.
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
 				en_mx [gpit] = CHAC_CHAC_IDLE_2;
 				en_alive [gpit] = 1;
 			}
@@ -10,7 +10,7 @@
 		case 1:
 			// Show yer teeth
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
 				en_mx [gpit] = CHAC_CHAC_IDLE_3;
 				en_alive [gpit] = 2;
 			}
@@ -18,7 +18,7 @@
 		case 2:
 			// Closing!
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 5);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 5);
 				en_mx [gpit] = CHAC_CHAC_IDLE_4;
 				en_alive [gpit] = 3;
 			}
@@ -26,7 +26,7 @@
 		case 3:
 			// Shut!
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
 				en_mx [gpit] = CHAC_CHAC_IDLE_3;
 				en_alive [gpit] = 4;
 			}
@@ -34,7 +34,7 @@
 		case 4:
 			// Backoff 1
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
 				en_mx [gpit] = CHAC_CHAC_IDLE_3;
 				en_alive [gpit] = 5;
 			}
@@ -42,7 +42,7 @@
 		case 5:
 			// Backoff 2
 			if (en_mx [gpit]) en_mx [gpit] --; else {
-				draw_chac_chac (CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6);
+				enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6);
 				en_mx [gpit] = en_my [gpit];
 				en_alive [gpit] = 0;
 			}

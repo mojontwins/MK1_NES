@@ -33,10 +33,10 @@ del empty.bin > nul
 
 echo Exporting enems
 cd ..\enems
-..\..\..\src\utils\eneexp2.exe enems.ene ..\dev\assets\enems.h 0
+..\..\..\src\utils\legacy\eneexp2.exe enems.ene ..\dev\assets\enems.h 0
 echo Making map
 cd ..\map
-..\..\..\src\utils\rlemap.exe mapa.map ..\dev\assets\mapa.h 20 4 99 0
+..\..\..\src\utils\legacy\rlemap.exe mapa.map ..\dev\assets\mapa.h 20 4 99 0
 rem cd ..\script
 rem ..\..\..\src\utils\mscnes script.spt 24
 rem copy mscnes.h ..\dev\assets\ > nul

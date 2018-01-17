@@ -4,18 +4,18 @@
 // bolts.h
 // Lock management
 
-void __fastcall__ bolts_load (void) {
+void bolts_load (void) {
 	gp_gen = (unsigned char *) (c_locks);
-	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
+	gpit = c_max_bolts; while (gpit --) {
 		lknp [gpit] = *gp_gen++;
-		lkxy [gpit] = *gp_gen++;
+		lkyx [gpit] = *gp_gen++;
 		lkact [gpit] = 1;
 	}	
 }
 
-void clear_cerrojo (unsigned char xy) {
-	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
-		if (n_pant == lknp [gpit] && xy == lkxy [gpit]) {
+void clear_cerrojo (unsigned char yx) {
+	gpit = c_max_bolts; while (gpit --) {
+		if (n_pant == lknp [gpit] && yx == lkyx [gpit]) {
 			lkact [gpit] = 0;
 		}
 	}

@@ -18,7 +18,11 @@
 					} else {
 						res_on = 0;
 						pal_bg (c_pal_bg);
-						if (hrt == HOTSPOT_TYPE_RESONATOR) oam_meta_spr (hrx, hry + SPRITE_ADJUST, OAM_HOTSPOTS, spr_hs [2]);
+						if (hrt == HOTSPOT_TYPE_RESONATOR) oam_index = oam_meta_spr (
+							hrx, hry + SPRITE_ADJUST, 
+							oam_index, 
+							spr_hs [2]
+						);
 					}
 				}
 			}

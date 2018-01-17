@@ -4,43 +4,6 @@
 // printer.h
 // Draw map, print text, etcetera.
 
-// Clear update list
-void clear_update_list (void) {
-	for (i = 0; i < UPDATE_LIST_SIZE * 3; i ++)
-		update_list [i] = 0;	
-}
-
-#ifdef DEBUG
-unsigned char get_hex_digit (unsigned char n) {
-	if (n < 10) return n + 16;
-	return n + 23;
-}
-
-void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
-	clear_update_list ();
-	update_index = 0;
-
-	gp_addr = (y << 5) + x + 0x2000;
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = get_hex_digit (n >> 12);
-
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = get_hex_digit ((n >> 8) & 0xf);
-
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = get_hex_digit ((n >> 4) & 0xf);
-
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = get_hex_digit ((n & 0xf));
-
-	ppu_waitnmi ();
-}
-#endif
-
 // fade out
 void fade_out (void) {
 	for (fader = 4; fader > -1; fader --) {
@@ -68,21 +31,26 @@ void  fade_out_fast (void) {
 }
 */
 
+// Clear update list
+void clear_update_list (void) {
+	gpitu = UPDATE_LIST_SIZE * 3; while (gpitu --) update_list [gpitu] = 0;
+	update_index = 0;
+}
+
 void cls (void) {
-	vram_adr(0x2000);
-	vram_fill(255,0x3c0);
-	vram_adr (0x23c0);
-	vram_fill(0x00,64);
+	vram_adr(0x2000); vram_fill(0x00,0x400);
+}
+
+void ul_putc (unsigned char n) {
+	update_list [update_index++] = MSB (gp_addr);
+	update_list [update_index++] = LSB (gp_addr++);
+	update_list [update_index++] = n;
 }
 
 void p_t (unsigned char x, unsigned char y, unsigned char n) {
 	gp_addr = (y << 5) + x + 0x2000;
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = (n / 10) + 16;
-	update_list [update_index++] = MSB (gp_addr);
-	update_list [update_index++] = LSB (gp_addr);
-	update_list [update_index++] = (n % 10) + 16;
+	ul_putc ((n/10)+16);
+	ul_putc ((n%10)+16);
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
@@ -110,29 +78,21 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	vram_put (*gp_tmap);	
 }
 
-void wbtul (unsigned char b) {
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr++);
-	update_list [update_index++] = b;
-}
-
 void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	upd_attr_table (x, y, tl);
 	
 	gp_addr = 0x23c0 + rdc;
-	update_list [update_index++] = MSB(gp_addr);
-	update_list [update_index++] = LSB(gp_addr);
-	update_list [update_index++] = rda;
+	ul_putc (rda);
 	
 	// tiles
 	//tl = (16 + tl) << 2;
 	gp_tmap = tsmap + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
-	wbtul (*gp_tmap++);
-	wbtul (*gp_tmap++);
+	ul_putc (*gp_tmap ++);
+	ul_putc (*gp_tmap ++);
 	gp_addr += 30;
-	wbtul (*gp_tmap++);
-	wbtul (*gp_tmap);
+	ul_putc (*gp_tmap ++);
+	ul_putc (*gp_tmap);
 }
 
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
@@ -141,7 +101,7 @@ void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
-void draw_map_tile (t) {
+void draw_map_tile (unsigned char t) {
 	rda = rdx + (rdy << 4);
 	map_buff [rda] = t;		
 	map_attr [rda] = tbehs [t];
@@ -150,8 +110,7 @@ void draw_map_tile (t) {
 }
 
 unsigned char get_byte (void) {
-	rdit --;
-	return *gp_gen ++;
+	rdit --; return *gp_gen ++;
 }
 
 void draw_scr (void) {
@@ -218,11 +177,11 @@ void draw_scr (void) {
 
 	// Clear open locks
 #ifndef DEACTIVATE_KEYS	
-	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
+	gpit = c_max_bolts; while (gpit --) {
 		if (n_pant == lknp [gpit]) {
 			if (!lkact [gpit]) {
-				rdx = (lkxy [gpit] >> 4);
-				rdy = (lkxy [gpit] & 15);
+				rdy = (lkyx [gpit] >> 4);
+				rdx = (lkyx [gpit] & 15);
 				draw_map_tile (rdct);
 			}
 		}
@@ -231,7 +190,7 @@ void draw_scr (void) {
 
 #ifdef BREAKABLE_ANIM
 	do_process_breakable = 0;
-	for (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) brkf [gpit] = 0;
+	gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
 #endif
 
 }
@@ -255,3 +214,23 @@ void pr_str_upd (unsigned char *s) {
 	}
 }
 */
+
+
+#ifdef DEBUG
+unsigned char get_hex_digit (unsigned char n) {
+	if (n < 10) return n + 16;
+	return n + 23;
+}
+
+void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
+	clear_update_list ();
+
+	gp_addr = (y << 5) + x + 0x2000;
+	ul_putc (get_hex_digit (n >> 12));
+	ul_putc (get_hex_digit ((n >> 8) & 0xf));
+	ul_putc (get_hex_digit ((n >> 4) & 0xf));
+	ul_putc (get_hex_digit ((n & 0xf)));
+
+	ppu_waitnmi ();
+}
+#endif

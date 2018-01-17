@@ -28,8 +28,8 @@ void containers_do (void) {
 
 void containers_draw (void) {
 	gpit = last_container; while (gpit --) {
-		oam_meta_spr (c_x [gpit] << 4, (c_y [gpit] << 4) + SPRITE_ADJUST, 
-			OAM_CONTAINERS + (gpit << 4),
+		oam_index = oam_meta_spr (c_x [gpit] << 4, (c_y [gpit] << 4) + SPRITE_ADJUST, 
+			oam_index,
 			spr_hs [flags [c_f [gpit]]]);
 	}
 }

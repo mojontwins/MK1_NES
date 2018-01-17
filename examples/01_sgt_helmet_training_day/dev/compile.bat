@@ -1,12 +1,12 @@
 @echo off
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\nescnv.exe tileset-import.png
+..\..\..\src\utils\legacy\legacy\nescnv.exe tileset-import.png
 copy tileset.chr ..\dev > nul
 echo Making map
 cd ..\map
-..\..\..\src\utils\mapcnvnes_old.exe mapa.map 1 24 16 12 15 mapa0 packed
-..\..\..\src\utils\mapcnvnes_old.exe night.map 1 24 16 12 15 mapa1 packed
+..\..\..\src\utils\legacy\mapcnvnes_old.exe mapa.map 1 24 16 12 15 mapa0 packed
+..\..\..\src\utils\legacy\mapcnvnes_old.exe night.map 1 24 16 12 15 mapa1 packed
 copy mapa0.h ..\dev > nul
 copy mapa1.h ..\dev > nul
 echo Making script
@@ -16,8 +16,8 @@ copy mscnes.h ..\dev > nul
 copy scripts.s ..\dev > nul
 cd ..\dev
 echo Making enems
-..\..\..\src\utils\eneexp.exe ..\enems\enems.ene enems0.h ROM0
-..\..\..\src\utils\eneexp.exe ..\enems\night.ene enems1.h ROM1
+..\..\..\src\utils\legacy\eneexp.exe ..\enems\enems.ene enems0.h ROM0
+..\..\..\src\utils\legacy\eneexp.exe ..\enems\night.ene enems1.h ROM1
 echo Compiling
 cc65 -Oi game.c --add-source
 ca65 crt0.s

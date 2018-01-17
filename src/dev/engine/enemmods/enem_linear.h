@@ -46,8 +46,6 @@
 						if (en_y [gpit] == en_y1 [gpit] || en_y [gpit] == en_y2 [gpit]) en_my [gpit] = -en_my [gpit];						
 #endif						
 					}
+
 					en_facing = (en_mx [gpit] > 0 || en_my [gpit] > 0) ? 0 : 2;
-					oam_meta_spr (
-						en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-						OAM_ENEMS + (gpit << 4), 
-						spr_enems [en_s [gpit] + en_fr + en_facing]);
+					en_spr = en_s [gpit] + en_fr + en_facing;

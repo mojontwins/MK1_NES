@@ -23,13 +23,14 @@ void move_propellers () {
 				ppropelled = 1;
 			}
 		}
-		oam_meta_spr (prp_x [prp_it], prp_y2 [prp_it] + SPRITE_ADJUST, 192 + (prp_it << 4), spr_enems [22 + half_life]);
+		oam_index = oam_meta_spr (
+			prp_x [prp_it], prp_y2 [prp_it] + SPRITE_ADJUST, 
+			oam_index, 
+			spr_enems [22 + half_life]
+		);
 	}
 }
 
 void clear_propellers () {
-	prp_it = MAX_PROPELLERS; while (prp_it --) {
-		oam_meta_spr (0, 240, 192 + (prp_it << 4), spr_empty);
-	}
 	prp_idx = 0;
 }

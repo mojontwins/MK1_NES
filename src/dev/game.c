@@ -21,7 +21,7 @@
 #define TOP_ADJUST		2
 #define COMM_POOL		((unsigned char*)0x0300)
 
-#define MAX_CERROJOS 16 // max 32, make it as small as possible.
+#define MAX_BOLTS 16 // max 32, make it as small as possible.
 
 #include "neslib.h"
 

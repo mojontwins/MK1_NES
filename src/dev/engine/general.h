@@ -4,15 +4,21 @@
 // general.h
 // General functions, vars & buffers
 
-#define COORDS(x,y) (x+(y<<4))
+#define COORDS(x,y) ((x)|((y)<<4))
+
+void cm_two_points (void) {
+	// Calculates at1 & at2 from cx1, cy1 & cx2, cy2
+	at1 = cy1 > 11 ? 0 : map_attr [cx1 + (cy1 << 4)];
+	at2 = cy2 > 11 ? 0 : map_attr [cx2 + (cy2 << 4)];
+}
 
 unsigned char attr (signed char x, signed char y) {
 	if (x < 0 || x > 15 || y < 0 || y > 11) return 0;
-	return map_attr [x + (y << 4)];
+	return map_attr [COORDS (x, y)];
 }
 
 unsigned char qtile (signed char x, signed char y) {
-	return map_buff [x + (y << 4)];
+	return map_buff [COORDS (x, y)];
 }
 
 unsigned char collide_in (x0, y0, x1, y1) {
@@ -41,19 +47,3 @@ void run_fire_script (void) {
 signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
 }
-
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
-void kill_enemy (unsigned char gpit) {
-	en_t [gpit] = 0;
-#ifdef PERSISTENT_DEATHS
-	ep_flags [n_pant + n_pant + n_pant + gpit] &= 0xFE;
-#endif
-#ifdef ACTIVATE_SCRIPTING
-	run_script (2 * MAP_W * MAP_H + 5);
-#endif
-	pkilled ++;
-#ifdef COUNT_KILLED_IN_FLAG
-	flags [COUNT_KILLED_IN_FLAG] ++;
-#endif
-}
-#endif

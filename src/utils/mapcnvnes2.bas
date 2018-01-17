@@ -1,14 +1,14 @@
-﻿' Map converter
-' Cutrecode by na_th_an
+' Map converter
+' convertes raw headerles .MAP into useable code
 
 sub usage () 
-	Print "** USO **"
-	Print "   MapCnvNes2 mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed]"
-	
+	Print "Usage:"
+	Print 
+	Print "$ MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed|zerostrungpacked]"
 end sub
 
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt
-Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset, mapPants
+Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset, bx, by, cx, cy, rp0, bytecnt
 Dim As Byte d
 Dim As String o, prefix
 Dim As Integer BigOrigMap (255, 255)
@@ -22,6 +22,8 @@ Type MyBolt
 End Type
 
 Dim As MyBolt Bolts (100)
+
+Print "MK1 v1.0 mapcnvnes2 ~ ";
 
 if 	Command (1) = "" Or _
 	Val (Command (2)) <= 0 Or _
@@ -39,7 +41,6 @@ map_h = Val (Command (3))
 scr_w = Val (Command (4))
 scr_h = Val (Command (5))
 bolt = Val (Command (6))
-mapPants = (map_h * map_w)
 
 prefix = Command (7)
 
@@ -47,12 +48,16 @@ offset = Val (Command (8))
 
 if lcase(Command (9)) = "packed" Or lcase(Command (8)) = "packed" then
 	packed = 1
-else
+elseif lcase (Command (9)) = "zerostrungpacked" Or lcase (Command (8)) = "zerostrungpacked" Then
+	packed = 2
+Else
 	packed = 0
 end if
 
 
 ' Leemos el mapa original
+
+Print "Reading MAP (" & (map_h*scr_h*map_w*scr_w) & " bytes) ~ ";
 
 f = FreeFile
 Open Command (1) for binary as #f
@@ -75,48 +80,100 @@ print #f, "// Generated with MapCnvNes"
 print #f, "// Copyleft 2013 The Mojon Twins"
 print #f, " "
 
-print #f, "const unsigned char " & prefix & " [] = {"
+if packed < 2 Then print #f, "const unsigned char " & prefix & " [] = {"
 
 i = 0: decosTT = 0
+bytecnt = 0
 
 for yy = 0 To map_h - 1
 	for xx = 0 To map_w - 1
 		npant = yy * map_w + xx
+		bx = xx * scr_w
+		by = yy * scr_h
+		
 		o = "	"
 		ac = 0
 		ct = 0
 		iddecos = 0: decosOn (npant) = 0
+		if packed = 2 Then Print #f, "const unsigned char scr_" & prefix & "_" & lcase (hex (npant, 2)) & " [] = {"
 		for y = 0 to scr_h - 1
 			for x = 0 to scr_w - 1
+				cx = bx + x
+				cy = by + y
 				
-				if BigOrigMap (yy * scr_h + y, xx * scr_w + x) = bolt then
+				if BigOrigMap (cy, cx) = bolt then
 					Bolts (i).x = x
 					Bolts (i).y = y
 					Bolts (i).np = yy * map_w + xx
 					i = i + 1
 				end if
 				
+				If BigOrigMap (cy, cx) > 15 Then
+					' Write to decos
+					decos (npant, iddecos) = y + x * 16
+					iddecos = iddecos + 1
+					decos (npant, iddecos) = BigOrigMap (cy, cx)
+					iddecos = iddecos + 1
+					decosOn (npant) = iddecos
+					BigOrigMap (cy, cx) = 0
+					decosTT = decosTT + 1
+				End If
+
 				if packed = 0 then
-					o = o + str (BigOrigMap (yy * scr_h + y, xx * scr_w + x))
+					o = o + str (BigOrigMap (cy, cx))
+					bytecnt = bytecnt + 1
 					if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h -1 Or x < scr_w -1 then
 						o = o + ", "
 					end if
-				else
-					If BigOrigMap (yy * scr_h + y, xx * scr_w + x) > 15 Then
-						' Write to decos
-						decos (npant, iddecos) = y + x * 16
-						iddecos = iddecos + 1
-						decos (npant, iddecos) = BigOrigMap (yy * scr_h + y, xx * scr_w + x)
-						iddecos = iddecos + 1
-						decosOn (npant) = iddecos
-						BigOrigMap (yy * scr_h + y, xx * scr_w + x) = 0
-						decosTT = decosTT + 1
-					End If	
+				elseif packed = 1 Then
 					If ct = 0 then
-						ac = BigOrigMap (yy * scr_h + y, xx * scr_w + x) * 16
+						ac = BigOrigMap (cy, cx) * 16
 					Else
-						ac = ac + BigOrigMap (yy * scr_h + y, xx * scr_w + x) 
+						ac = ac + BigOrigMap (cy, cx) 
 						o = o + "0x" & Lcase (Hex (ac, 2))
+						bytecnt = bytecnt + 1
+						
+						if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
+							o = o + ", "
+						end if
+					End if
+					ct = 1 - ct
+				else
+					If ct = 0 then
+						ac = BigOrigMap (cy, cx) * 16
+						' special
+						If ac = 0 Then
+							If x < scr_w - 1 Then
+								If BigOrigMap (cy, cx + 1) = 0 Then
+									rp0 = 0
+									cx = cx + 1
+									While BigOrigMap (cy, cx) = 0
+										rp0 = rp0 + 1
+										cx = cx + 1
+										ct = 1 - ct
+										If cx = scr_w Then Exit While
+									Wend
+									' Write zerocodeds
+									o = o + "0x" + Hex (rp0, 2) ' max = 0f means 1+15 zeroes
+									bytecnt = bytecnt + 1
+									if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
+										o = o + ", "
+									end if
+									' Where are we?
+									If cx < scr_w Then
+										If ct = 0 then 
+											ac = 16 * BigOrigMap (cy, cx) 
+										Else 
+											ac = BigOrigMap (cy, cx)
+										End If
+									End If
+								End If
+							End If
+						End If
+					Else
+						ac = ac + BigOrigMap (cy, cx) 
+						o = o + "0x" & Lcase (Hex (ac, 2))
+						bytecnt = bytecnt + 1
 						
 						if yy < map_h - 1 Or xx < map_w - 1 Or y < scr_h - 1 Or x < scr_w - 1 then
 							o = o + ", "
@@ -128,6 +185,7 @@ for yy = 0 To map_h - 1
 			next x
 		next y		
 		print #f, o
+		if packed = 2 Then Print #f, "};"
 	next xx
 	if yy < map_h - 1 then print #f, "    "
 next yy
@@ -135,47 +193,20 @@ print #f, "};"
 
 print #f, " "
 
-' Process decos
-For nPant = 0 To mapPants - 1
-	If decosI (nPant) Then
-		For i = 0 To decosI (nPant) - 1
-			decoT = decos (nPant, i)
-			If decoT <> &Hff Then
-				decoCT = 1
-				XY (0) = decosXY (nPant, i)
-				' Find more:
-				For j = i + 1 To decosI (nPant) - 1
-					If decos (nPant, i) = decos (nPant, j) Then
-						' Found! DESTROY!
-						XY (decoCT) = decosXY (nPant, j)
-						decoCT = decoCT + 1
-						decos (nPant, j) = &Hff
-					End If
-				Next j
-				If decoCT = 1 Then
-					' T | 128, XY
-					decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
-					decosO (nPant, decosOI (nPant)) = XY (0) Or 128: decosOI (nPant) = decosOI (nPant) + 1
-				Else
-					' T N XY XY XY XY...
-					decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
-					decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
-					For j = 0 To decoCT - 1
-						decosO (nPant, decosOI (nPant)) = XY (j) Or 128: decosOI (nPant) = decosOI (nPant) + 1
-					Next j
-				End If
-			End If
-		Next i
-	End If
-Next nPant
+Print " Wrote ";
+If packed = 1 Then Print "packed ";
+If packed = 2 Then Print "zerostrungpacked ";
+Print "map data (" & bytecnt & " bytes) ~ ";
 
 ' Write decos
 If decosTT > 0 Then
-	For i = 0 To mapPants - 1
+	bytecnt = 0
+	For i = 0 To (map_h * map_w) - 1
 		If decosOn (i) > 0 Then
 			Print #f, "const unsigned char " & prefix & "_decos_" & Hex (i, 2) & " [] = { ";
 			For j = 0 To decosOn (i) - 1
 				Print #f, "0x" & Lcase (Hex (decos (i, j))) & ", " ;
+				bytecnt = bytecnt + 1
 			Next j
 			Print #f, "0xff };"
 		End If
@@ -184,7 +215,7 @@ If decosTT > 0 Then
 	Print #f, "const unsigned char *" & prefix & "_decos [] = {"
 	Print #f, "	";
 	j = 0
-	For i = 0 To mapPants - 1
+	For i = 0 To (map_h * map_w) - 1
 		If j Then Print #f, ", ";
 		j = -1
 		If decosOn (i) > 0 Then
@@ -192,10 +223,13 @@ If decosTT > 0 Then
 		Else
 			Print #f, "0";
 		End If
+		bytecnt = bytecnt + 2
 	Next i
 	Print #f, ""
 	Print #f, "};"
 	Print #f, ""
+
+	Print " Wrote decos (" & bytecnt & " bytes) ~ ";
 Else
 	Print #f, "const unsigned char **" & prefix & "_decos = 0;"
 	Print #f, ""
@@ -205,12 +239,12 @@ i = 32
 ' Escribimos el array de cerrojos
 print #f, "//#define MAX_CERROJOS " + trim(str(i))
 print #f, " "
-print #f, "// np, xy"
+print #f, "// np, yx"
 if i > 0 Then
 	print #f, "const unsigned char locks_" & prefix & " [] = {"
 	
 	for j = 0 to i - 1
-		o = "	" + "0x" & Lcase (Hex(bolts(j).np, 2)) + ", " + "0x" & Lcase (Hex(bolts(j).x * 16 + bolts(j).y, 2))
+		o = "	" + "0x" & Lcase (Hex(bolts(j).np, 2)) + ", " + "0x" & Lcase (Hex(bolts(j).y * 16 + bolts(j).x, 2))
 		if j < i - 1 then o = o + ","
 		print #f, o
 	next j
@@ -222,8 +256,6 @@ end if
 print #f, " "
 close f
 
-if packed = 0 then 
-	Print "mapcnvnes, unpacked mode, " + trim(str(map_h*map_w)) + " screens (" + trim(str(map_h*map_w*scr_h*scr_w)) + " bytes) written."
-else
-	Print "mapcnvnes, packed mode, " + trim(str(map_h*map_w)) + " screens (" + trim(str(map_h*map_w*scr_h*scr_w / 2)) + " bytes) written."
-end if
+Print " Wrote bolts (64 bytes) ~ ";
+
+Print "DONE!"
