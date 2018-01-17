@@ -20,12 +20,10 @@ Credits
 * Some tools written by the **Mojon Twins**.
 * The old **cc65 v2.13.2**
 
-**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 licence.
-
 License
 =======
 
-**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 licence.
+**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 license.
 
 **But** if you make a game with the engine we understand you'll want to make it into a cart. **In such case, just tell us!** Write to mojontwins@gmail.com
 
