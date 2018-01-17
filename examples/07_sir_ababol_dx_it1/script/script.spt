@@ -1,0 +1,644 @@
+# Script for Cheril Perils, level 5
+# Copyleft 2016 The Mojon Twins
+# Compile with msc3nes
+
+DEFALIAS
+	$PINV 			0
+	$CONT_ENGINE_1	1
+	$CONT_ENGINE_2	2
+	$CONT_ENGINE_3	3
+	$CONT_WEIGHT	4
+	$CONT_LEVER		5
+	$CONT_KEY		6
+	$_A				15
+	$_B				14
+	$_C				13
+	$_D				12
+	$_DIRECTION		11
+END
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET $PINV 			= 0
+		SET $CONT_ENGINE_1	= 3
+		SET $CONT_ENGINE_2	= 4
+		SET $CONT_ENGINE_3	= 5
+		SET $CONT_WEIGHT	= 6
+		SET $CONT_LEVER		= 7
+		SET $CONT_KEY 		= 8
+
+#debug
+#		SET $PINV = 7
+#		WARP_TO 9, 13, 6
+#endif		
+	END IF
+END
+
+# First piece
+ENTERING SCREEN 4
+	IF TRUE
+	THEN
+		ADD_CONTAINER $CONT_ENGINE_1, 2, 9
+	END IF
+END
+
+# Rotary columns puzzle
+ENTERING SCREEN 5
+	IF TRUE
+	THEN
+		SET $_A = 2
+		SET $_B = 4
+		SET $_C = 3
+	END
+END
+
+PRESS_FIRE AT SCREEN 5
+	# Column A moves 1 + 3 UP
+	IF PLAYER_TOUCHES 5, 9
+	THEN
+		SET TILE (5, #$_A) = 13
+		DECRANGE $_A, 1, 5
+		SET TILE (5, #$_A) = 0
+		SET TILE (9, #$_C) = 13
+		DECRANGE $_C, 1, 5
+		SET TILE (9, #$_C) = 0
+		SOUND 6
+	END
+
+	# Column A moves 2 + 3 DOWN
+	IF PLAYER_TOUCHES 7, 9
+	THEN
+		SET TILE (7, #$_B) = 13
+		INCRANGE $_B, 1, 5
+		SET TILE (7, #$_B) = 0
+		SET TILE (9, #$_C) = 13
+		INCRANGE $_C, 1, 5
+		SET TILE (9, #$_C) = 0
+		SOUND 6
+	END
+
+	# Column C moves 1 + 2 UP
+	IF PLAYER_TOUCHES 9, 9
+	THEN
+		SET TILE (5, #$_A) = 13
+		DECRANGE $_A, 1, 5
+		SET TILE (5, #$_A) = 0
+		SET TILE (7, #$_B) = 13
+		DECRANGE $_B, 1, 5
+		SET TILE (7, #$_B) = 0
+		SOUND 6
+	END
+END
+
+# Two skulls and a heart
+
+ENTERING SCREEN 9
+	IF TRUE
+	THEN
+		SET $_A = 0
+		SET $_B = 0
+		SET $_C = 0
+		SET $_D = 0
+		SET_FIRE_ZONE_TILES 9, 4, 9, 6
+	END
+END
+
+PRESS_FIRE AT SCREEN 9
+	IF PLAYER_TOUCHES 12, 6
+	THEN
+		OPENTEXT
+		    #XXXXXXXXXXXXXX
+		TEXT SIGN_SAYS
+		TEXT _STICK_TO_THE
+		TEXT _HEART_._._.
+		CLOSETEXT	
+	END
+
+	IF PLAYER_TOUCHES 13, 10
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		DECORATIONS
+			1, 5, 0
+			1, 6, 0
+		END
+		SOUND 6
+		BREAK
+	END
+
+	IF PLAYER_IN_X_TILES 9, 9
+	IF $_B = 0
+	THEN
+		SET $_B = 1
+		SET TILE (9, 6) = 11
+		SOUND 6
+		SET_FIRE_ZONE_TILES 6, 4, 6, 6
+		BREAK
+	END
+
+	# You will only trigger this zone if you are jumping!
+	IF PLAYER_IN_X_TILES 6, 6
+	IF PLAYER_IN_Y_TILES 4, 5
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		DECORATIONS
+			6, 4, 10
+			6, 5, 10
+			6, 6, 10
+		END
+		SOUND 6
+		SET_FIRE_ZONE_TILES 3, 4, 3, 6
+		BREAK
+	END
+
+	IF PLAYER_IN_X_TILES 6, 6
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		DECORATIONS
+		END
+		SOUND 5
+		SET_FIRE_ZONE_TILES 3, 4, 3, 6
+		BREAK
+	END
+
+	IF PLAYER_IN_TILES 3, 3
+	IF $_D = 0
+	THEN
+		SET $_D = 1
+		SET TILE (3, 6) = 11
+		SOUND 6
+		BREAK
+	END
+END
+
+# Be quick or be dead!
+
+ENTERING SCREEN 10
+	IF TRUE
+	THEN
+		SET $_A = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 10
+	IF PLAYER_TOUCHES 10, 2
+	IF $_A = 0
+	THEN
+		$_A = 1
+		DECORATIONS
+			1, 2, 0
+			1, 3, 0
+		END
+		SOUND 6
+		BREAK
+	END
+END
+
+# Screen with key and trap
+ENTERING SCREEN 14
+	IF TRUE
+	THEN
+		ADD_CONTAINER $CONT_KEY, 13, 6
+		SET $_A = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 14
+	IF PLAYER_TOUCHES 4, 2
+	IF $_A = 0
+	THEN
+		DECORATIONS
+			6, 4, 14
+			6, 5, 13
+			4, 2, 49
+		END
+		SET $_A = 1
+		SOUND 6
+		BREAK
+	END
+
+	IF PLAYER_TOUCHES 4, 2
+	IF $_A = 1
+	THEN
+		DECORATIONS
+			6, 4, 0
+			6, 5, 0
+			4, 2, 48
+		END
+		SET $_A = 0
+		SOUND 6
+		BREAK
+	END
+END
+
+# Screen with big compuerta
+ENTERING SCREEN 15
+	IF TRUE
+	THEN
+		SET $_A = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 15
+	IF PLAYER_TOUCHES 8, 10
+	IF $_A = 0
+	THEN
+		DECORATIONS
+			12, 2, 7
+			12, 3, 8
+			12, 4, 7
+			12, 5, 8
+			12, 6, 7
+			12, 7, 0
+			8, 10, 49
+		END
+		SET $_A = 1
+		SOUND 6
+		BREAK
+	END
+
+	IF PLAYER_TOUCHES 8, 10
+	IF $_A = 1
+	THEN
+		DECORATIONS
+			12, 2, 8
+			12, 3, 7
+			12, 4, 8
+			12, 5, 7
+			12, 6, 8
+			12, 7, 7
+			8, 10, 48
+		END
+		SET $_A = 0
+		SOUND 6
+	END
+END
+
+# Screen with switch to trap door and trap for baddies
+# Switches are one way here, sorry.
+
+ENTERING SCREEN 16
+	IF TRUE
+	THEN
+		$_A = 0
+		$_B = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 16
+	IF PLAYER_TOUCHES 9, 2
+	IF $_A = 0
+	THEN
+		DECORATIONS
+			9, 2, 49
+			3, 0, 0
+			4, 0, 0
+			5, 0, 0
+		END
+		SOUND 6
+		$_A = 1
+		BREAK
+	END
+
+	IF PLAYER_TOUCHES 3, 10
+	IF $_B = 0
+	THEN
+		DECORATIONS
+			3, 10, 49
+			5, 10, 0
+			6, 10, 0
+			7, 10, 0
+			8, 10, 0
+			9, 10, 0
+			10, 10, 0
+			11, 10, 0
+		END
+		SOUND 6
+		PAUSE 25
+		DECORATIONS
+			5, 9, 10
+			5, 10, 10
+		END
+		SOUND 6
+		PAUSE 10
+		DECORATIONS
+			7, 9, 10
+			7, 10, 10
+		END
+		SOUND 6
+		PAUSE 10
+		DECORATIONS
+			9, 9, 10
+			9, 10, 10
+		END
+		SOUND 6
+		PAUSE 10
+		DECORATIONS
+			2, 6, 0
+			2, 7, 0
+		END
+		SOUND 6
+		$_B = 1
+	END
+END
+
+
+# Trap for baddies
+ENTERING SCREEN 17
+	IF TRUE
+	THEN
+		SET $_A = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 17
+	IF PLAYER_TOUCHES 1, 10
+	IF $_A = 1
+	THEN
+		OPENTEXT
+		    #XXXXXXXXXXXXXX
+		TEXT I_HAVE_ALREADY
+		TEXT ACTIVATED_THIS
+		TEXT TRAP_._._.
+		CLOSETEXT
+		BREAK
+	END
+
+	IF PLAYER_TOUCHES 1, 10
+	IF $PINV = 7
+	THEN
+		# Do trap
+		DECORATIONS
+			1, 5, 0
+			2, 5, 0
+			3, 5, 0
+			4, 5, 0
+			5, 5, 0
+			6, 5, 0
+			7, 5, 0
+			8, 5, 0
+			9, 5, 0
+			10, 5, 0
+			11, 5, 0
+		END
+		SET $_A = 1
+		SOUND 6
+		BREAK
+	END
+
+	IF PLAYER_TOUCHES 1, 10
+	THEN
+		OPENTEXT
+		    #XXXXXXXXXXXXXX
+		TEXT THIS_ACTIVATES
+		TEXT SOMETHING/_BUT
+		TEXT I_NEED_A_LEVER
+		TEXT TO_FIT_IN_THIS
+		TEXT HOLE_._._.____
+		CLOSETEXT
+	END
+END
+
+ENTERING SCREEN 19
+	IF TRUE
+	THEN
+		ADD_CONTAINER $CONT_LEVER, 13, 3
+		SET $_A = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 19
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		DECORATIONS
+			8, 6, 0
+			9, 6, 0
+			8, 7, 7
+			9, 7, 21
+			1, 10, 49
+		END
+		SOUND 6
+	END
+END
+
+# Some triggered traps
+ENTERING SCREEN 21
+	IF TRUE
+	THEN
+		SET $_A = 0
+		SET $_B = 0
+		SET $_C = 0
+		SET $_D = 0
+	END IF
+
+	# Depending on where you enter the screen, 
+	# A different order for fire zones is used
+	# in order to save some cycles.
+
+	IF PLAYER_IN_X_TILES 0, 1
+	THEN
+		SET_FIRE_ZONE_TILES 3, 2, 3, 5
+		SET $_DIRECTION = 0
+	END
+
+	IF PLAYER_IN_X_TILES 14, 15
+	THEN
+		SET_FIRE_ZONE_TILES 11, 2, 11, 5
+		SET $_DIRECTION = 1
+	END
+END
+
+PRESS_FIRE AT SCREEN 21
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 3, 3
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		SET_FIRE_ZONE_TILES 6, 2, 6, 5
+		SET TILE (3, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 6, 6
+	IF $_B = 0
+	THEN
+		SET $_B = 1
+		SET_FIRE_ZONE_TILES 8, 2, 8, 5
+		SET TILE (6, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 8, 8
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		SET_FIRE_ZONE_TILES 11, 2, 11, 5
+		SET TILE (8, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 11, 11
+	IF $_D = 0
+	THEN
+		SET $_D = 1
+		SET_FIRE_ZONE_TILES 16, 16, 16, 16
+		SET TILE (11, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 11, 11
+	IF $_D = 0
+	THEN
+		SET $_D = 1
+		SET_FIRE_ZONE_TILES 8, 2, 8, 5
+		SET TILE (11, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 8, 8
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		SET_FIRE_ZONE_TILES 6, 2, 6, 5
+		SET TILE (8, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 6, 6
+	IF $_B = 0
+	THEN
+		SET $_B = 1
+		SET_FIRE_ZONE_TILES 3, 2, 3, 5
+		SET TILE (6, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 3, 3
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		SET_FIRE_ZONE_TILES 16, 16, 16, 16
+		SET TILE (3, 5) = 11
+		SOUND 6
+	END
+END
+
+# Some more triggered traps
+ENTERING SCREEN 22
+	IF TRUE
+	THEN
+		SET $_A = 0
+		SET $_B = 0
+		SET $_C = 0
+		SET $_D = 0
+	END IF
+
+	# Depending on where you enter the screen, 
+	# A different order for fire zones is used
+	# in order to save some cycles.
+
+	IF PLAYER_IN_X_TILES 0, 1
+	THEN
+		SET_FIRE_ZONE_TILES 3, 2, 3, 5
+		SET $_DIRECTION = 0
+	END
+
+	IF PLAYER_IN_X_TILES 14, 15
+	THEN
+		SET_FIRE_ZONE_TILES 12, 2, 12, 5
+		SET $_DIRECTION = 1
+	END
+END
+
+PRESS_FIRE AT SCREEN 22
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 3, 3
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		SET_FIRE_ZONE_TILES 6, 2, 6, 5
+		SET TILE (3, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 6, 6
+	IF $_B = 0
+	THEN
+		SET $_B = 1
+		SET_FIRE_ZONE_TILES 9, 2, 9, 5
+		SET TILE (6, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 9, 9
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		SET_FIRE_ZONE_TILES 12, 2, 12, 5
+		SET TILE (9, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 0
+	IF PLAYER_IN_X_TILES 12, 12
+	IF $_D = 0
+	THEN
+		SET $_D = 1
+		SET_FIRE_ZONE_TILES 16, 16, 16, 16
+		SET TILE (12, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 12, 12
+	IF $_D = 0
+	THEN
+		SET $_D = 1
+		SET_FIRE_ZONE_TILES 9, 2, 9, 5
+		SET TILE (12, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 9, 9
+	IF $_C = 0
+	THEN
+		SET $_C = 1
+		SET_FIRE_ZONE_TILES 6, 2, 6, 5
+		SET TILE (9, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 6, 6
+	IF $_B = 0
+	THEN
+		SET $_B = 1
+		SET_FIRE_ZONE_TILES 3, 2, 3, 5
+		SET TILE (6, 5) = 11
+		SOUND 6
+	END
+
+	IF $_DIRECTION = 1
+	IF PLAYER_IN_X_TILES 3, 3
+	IF $_A = 0
+	THEN
+		SET $_A = 1
+		SET_FIRE_ZONE_TILES 16, 16, 16, 16
+		SET TILE (3, 5) = 11
+		SOUND 6
+	END
+END
