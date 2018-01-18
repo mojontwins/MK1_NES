@@ -2,7 +2,7 @@
 ; based on code by Groepaz/Hitmen <groepaz@gmx.net>, Ullrich von Bassewitz <uz@cc65.org>
 
 
-NES_MAPPER				=0	;mapper number, 3 = CNROM, 66 = GNROM
+NES_MAPPER				=0	;mapper number
 NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
 NES_CHR_BANKS			=1	;number of 8K CHR banks
 NES_MIRRORING			=0	;0 horizontal, 1 vertical, 8 four screen
@@ -15,7 +15,7 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 
 .define SPEED_FIX		1	;zero if you want to handle PAL/NTSC speed difference by yourself
 
-	.export _change_rom,_change_reg
+
     .export _exit,__STARTUP__:absolute=1
 	.import initlib,push0,popa,popax,_main,zerobss,copydata
 
@@ -94,14 +94,16 @@ FT_DPCM_PTR		=(FT_DPCM_OFF&$3fff)>>6
     .byte $4e,$45,$53,$1a
 	.byte NES_PRG_BANKS
 	.byte NES_CHR_BANKS
-	.byte NES_MIRRORING|((NES_MAPPER&$0f)<<4)
+	.byte NES_MIRRORING|(NES_MAPPER<<4)
 	.byte NES_MAPPER&$f0
 	.res 8,0
 
 
 .segment "STARTUP"
+
 start:
 _exit:
+
     sei
     ldx #$ff
     txs
@@ -149,7 +151,7 @@ clearRAM:
     sta $000,x
     sta $100,x
     sta $200,x
-    ;sta $300,x	; Preserve this page!
+    sta $300,x
     sta $400,x
     sta $500,x
     sta $600,x
@@ -230,7 +232,7 @@ detectNTSC:
 	jmp _main			;no parameters
 
 	.include "neslib.s"
-	
+
 .segment "RODATA"
 
 	.include "music.s"
@@ -240,28 +242,9 @@ sounds_data:
 	.include "sounds.s"
 	.endif
 
-.segment "ROMCHGR"
-_change_rom:
-	lda #0
-	sta PPU_MASK
-	sta PPU_CTRL
+.segment "SAMPLES"
 
-	ldx $0300
-	lda bus_conflict_tbl,X
-	sta bus_conflict_tbl,X
-	jmp start
-	
-_change_reg:
-	ldx $0300
-	lda bus_conflict_tbl,X
-	sta bus_conflict_tbl,X
-	rts
-
-bus_conflict_tbl:
-     .byte $00, $01, $02, $03    ; 1st PRG Bank $00-$03
-     .byte $10, $11, $12, $13    ; 2nd PRG Bank $04-$07
-     .byte $20, $21, $22, $23    ; 3rd PRG Bank $08-$0b
-     .byte $30, $31, $32, $33    ; 4th PRG Bank $0c-$0f
+	;.incbin "music_dpcm.bin"
 
 .segment "VECTORS"
 
@@ -272,4 +255,4 @@ bus_conflict_tbl:
 
 .segment "CHARS"
 
-	.incbin "tileset0.chr"
+	.incbin "tileset.chr"

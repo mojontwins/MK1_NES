@@ -7,14 +7,15 @@ Const STATE_STRING = 2
 Sub usage
 	Print "Usage:"
 	Print 
-	Print "$ rlemap.exe in.map out.h w h tlock prefix [scrsizes]"
+	Print "$ rlemap.exe in.map out.h w h tlock prefix [scrsizes] [nodecos]"
 End Sub
 
 Function even (i As Integer) As Integer 
 	Return ((i And 1) = 0)
 End Function
 
-Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, mapsize, decosize, scrsize
+Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, mapsize, decosize, scrsize, founddecos
+Dim As Integer scrsizes, nodecos
 Dim As Integer mapWtiles, mapPants, tLock, locksI, state, tileStrI, decoT, decoCt, XYct
 Dim As Integer counter
 Dim As String o, prefix
@@ -45,6 +46,9 @@ mapPants = mapW * mapH
 tLock = Val (Command (5))
 prefix = Command (6)
 
+scrsizes = (Command (7) = "scrsizes" Or Command (8) = "scrsizes")
+nodecos = (Command (7) = "nodecos" Or Command (8) = "nodecos")
+
 ' Read map to big array
 'Redim m (mapPants - 1, SCR_W * SCR_H - 1)
 ' Max 64 decos as per screen
@@ -66,6 +70,8 @@ Print "Reading MAP (" & (maph*SCR_H*mapw*SCR_W) & " bytes) ~ ";
 f = Freefile
 Open Command (1) For Binary as #f
 i = 0: dp = 0
+
+founddecos = 0
 While Not Eof (f)
 	' Read from file
 	Get #f, , d
@@ -80,6 +86,8 @@ While Not Eof (f)
 	' Is d a decoration' 
 	If d >= 16 Then
 		' Write to decos
+		founddecos = -1
+		Print "Found decos ~ ";
 		decosXY (nPant, decosI (nPant)) = x * 16 + y
 		decos (nPant, decosI (nPant)) = d
 		decosI (nPant) = decosI (nPant) + 1
@@ -101,6 +109,7 @@ Wend
 Close #f
 
 ' Process screens
+
 For nPant = 0 To mapPants - 1
 	state = STATE_REP
 	dp = 99: i = 0: counter = 0: tileStrI = 0
@@ -230,38 +239,40 @@ For nPant = 0 To mapPants - 1
 Next nPant
 
 ' Process decos
-For nPant = 0 To mapPants - 1
-	If decosI (nPant) Then
-		For i = 0 To decosI (nPant) - 1
-			decoT = decos (nPant, i)
-			If decoT <> &Hff Then
-				decoCT = 1
-				XY (0) = decosXY (nPant, i)
-				' Find more:
-				For j = i + 1 To decosI (nPant) - 1
-					If decos (nPant, i) = decos (nPant, j) Then
-						' Found! DESTROY!
-						XY (decoCT) = decosXY (nPant, j)
-						decoCT = decoCT + 1
-						decos (nPant, j) = &Hff
-					End If
-				Next j
-				If decoCT = 1 Then
-					' T | 128, XY
-					decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
-					decosO (nPant, decosOI (nPant)) = XY (0): decosOI (nPant) = decosOI (nPant) + 1
-				Else
-					' T N XY XY XY XY...
-					decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
-					decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
-					For j = 0 To decoCT - 1
-						decosO (nPant, decosOI (nPant)) = XY (j): decosOI (nPant) = decosOI (nPant) + 1
+If founddecos And Not nodecos Then 
+	For nPant = 0 To mapPants - 1
+		If decosI (nPant) Then
+			For i = 0 To decosI (nPant) - 1
+				decoT = decos (nPant, i)
+				If decoT <> &Hff Then
+					decoCT = 1
+					XY (0) = decosXY (nPant, i)
+					' Find more:
+					For j = i + 1 To decosI (nPant) - 1
+						If decos (nPant, i) = decos (nPant, j) Then
+							' Found! DESTROY!
+							XY (decoCT) = decosXY (nPant, j)
+							decoCT = decoCT + 1
+							decos (nPant, j) = &Hff
+						End If
 					Next j
+					If decoCT = 1 Then
+						' T | 128, XY
+						decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
+						decosO (nPant, decosOI (nPant)) = XY (0): decosOI (nPant) = decosOI (nPant) + 1
+					Else
+						' T N XY XY XY XY...
+						decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
+						decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
+						For j = 0 To decoCT - 1
+							decosO (nPant, decosOI (nPant)) = XY (j): decosOI (nPant) = decosOI (nPant) + 1
+						Next j
+					End If
 				End If
-			End If
-		Next i
-	End If
-Next nPant
+			Next i
+		End If
+	Next nPant
+End If
 
 ' Write output
 f = Freefile
@@ -304,7 +315,7 @@ For nPant = 0 To mapPants - 1
 		Next j
 		Print #f, " };"
 	End If
-	If Command (7) = "scrsizes" Then Print #f, "// Screen size = " & scrsize & " bytes."
+	If scrsizes Then Print #f, "// Screen size = " & scrsize & " bytes."
 Next nPant
 Print #f, ""
 
@@ -334,42 +345,44 @@ Print #f, ""
 Print "Wrote MAP (" & mapsize & " bytes) ~ ";
 
 ' Write decos
-decosize = 0
-Print #f, "// Decorations"
-Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
-Print #f, ""
-For nPant = 0 To mapPants - 1
-	If decosOI (nPant) Then
-		Print #f, "const unsigned char map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2)) & " [] = { ";
-		For i = 0 To decosOI (nPant) - 1
-			Print #f, "0x" & Lcase (Hex (decosO (nPant, i), 2)) & ", " ;
-			decosize = decosize + 1
-		Next i
-		Print #f, "0x00 }; "
-	End If
-Next nPant
-Print #f, ""
-Print #f, "const unsigned char *map_" & prefix & "_decos [] = {"
-For y = 0 To mapH - 1
-	Print #f, "	";
-	For x = 0 To mapW - 1
-		nPant = x + y * mapW
-		If decosOI (nPant) Then
-			Print #f, "map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2));
-		Else 
-			Print #f, "0";
-		End If
-		decosize = decosize + 2
-		If x < mapW - 1 Or y < mapH - 1 Then Print #f, ", ";
-	Next x
+If founddecos And Not nodecos Then 
+	decosize = 0
+	Print #f, "// Decorations"
+	Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
 	Print #f, ""
-Next y
-Print #f, "};"
-Print #f, ""
-Print #f, "// Total decorations size in bytes is " & decosize
-Print #f, ""
+	For nPant = 0 To mapPants - 1
+		If decosOI (nPant) Then
+			Print #f, "const unsigned char map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2)) & " [] = { ";
+			For i = 0 To decosOI (nPant) - 1
+				Print #f, "0x" & Lcase (Hex (decosO (nPant, i), 2)) & ", " ;
+				decosize = decosize + 1
+			Next i
+			Print #f, "0x00 }; "
+		End If
+	Next nPant
+	Print #f, ""
+	Print #f, "const unsigned char *map_" & prefix & "_decos [] = {"
+	For y = 0 To mapH - 1
+		Print #f, "	";
+		For x = 0 To mapW - 1
+			nPant = x + y * mapW
+			If decosOI (nPant) Then
+				Print #f, "map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2));
+			Else 
+				Print #f, "0";
+			End If
+			decosize = decosize + 2
+			If x < mapW - 1 Or y < mapH - 1 Then Print #f, ", ";
+		Next x
+		Print #f, ""
+	Next y
+	Print #f, "};"
+	Print #f, ""
+	Print #f, "// Total decorations size in bytes is " & decosize
+	Print #f, ""
 
-Print "Wrote decos (" & decosize & " bytes) ~ ";
+	Print "Wrote decos (" & decosize & " bytes) ~ ";
+End If
 
 ' Write locks
 If locksI Then

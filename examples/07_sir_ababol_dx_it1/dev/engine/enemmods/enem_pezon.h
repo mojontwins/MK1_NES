@@ -2,8 +2,9 @@
 	oam_index = oam_meta_spr (
 		en_x1 [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
 		oam_index, 
-		spr_enems [PEZONS_BASE_SPRID + 2]);
-	
+		spr_enems [ENEMS_OCCLUDING_FRAME]
+	);
+
 	switch (en_alive [gpit]) {
 		case 0:	// Idling
 			if (en_mx [gpit]) {

@@ -3,21 +3,31 @@
 
 // zp
 
+// General, all-purpose variables
+
 unsigned char i, gpit, gpjt, gpitu, gpaux;
 signed int rds16;
-unsigned char half_life, frame_counter;
-
-unsigned char n_pant, on_pant;
 
 unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
-unsigned char rda, rdb, rdc;
+unsigned char rda, rdb, rdc, rdm;
 unsigned char rdct;
 
-unsigned char olife, okeys, oobjs, oammo, okilled;
+// Used for two-points collision
+
+unsigned char at1, at2, cx1, cx2, cy1, cy2;
+
+// Sprite related
 
 unsigned char oam_index;
+
+// Game flow
+
+unsigned char half_life, frame_counter;
+unsigned char n_pant, on_pant;
+unsigned char olife, okeys, oobjs, oammo, okilled;
+unsigned char use_ct, no_ct;
 
 // Enemies
 
@@ -122,11 +132,6 @@ unsigned char hrx, hry, hrt;
 #endif
 
 unsigned char ft;
-
-// Gfx sets
-//char **spr_enems, **spr_player;
-
-// Level control
 
 // Current level
 unsigned char **c_map;

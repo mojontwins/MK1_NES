@@ -151,6 +151,59 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
+			"settings":
+			{
+				"buffer_size": 1189,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/dev/assets/spritedata.h",
+			"settings":
+			{
+				"buffer_size": 7200,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/dev/definitions.h",
+			"settings":
+			{
+				"buffer_size": 1011,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 12352,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/diario.md",
+			"settings":
+			{
+				"buffer_size": 20030,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/dev/ram/zp.h",
+			"settings":
+			{
+				"buffer_size": 3162,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -159,16 +212,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 162.0,
-		"last_filter": "instal",
+		"height": 145.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 405.0
+		"width": 462.0
 	},
 	"console":
 	{
@@ -188,14 +245,49 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1",
-		"/D/git/MK1_NES/examples/04_d'veel'ng",
-		"/D/git/MK1_NES/src"
+		"/C/Users/na_th/Desktop/git/MK1_NES",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/06_lala_prologue",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/06_lala_prologue/dev",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/06_lala_prologue/dev/assets",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/enems",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/map",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/script",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils"
 	],
 	"file_history":
 	[
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/eneexp3.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/bullets.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/gargajo.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/enems/updr.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/legacy/enemscutter.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/rlemap2.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/mapcnvnes2.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/spritedata.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/script/script.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/compile.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/legacy/enexpander2.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/enexpander.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/enexpander2.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/enemscutter.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/eneexp2.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/hotspots.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/pres.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/05_cheril_the_goddess/README.md",
 		"/D/git/MK1_NES/examples/04_d'veel'ng/README.md",
@@ -298,42 +390,20 @@
 		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/strips.h",
 		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/game.c",
 		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/menudata.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/game.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/diario.txt",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/texts.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/enems.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/bullets.h",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/compile.bat",
-		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/levels.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/palettes.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/enems.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/game.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/assets/behs.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/tontis/dev/engine/screens.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/menudata.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/enems.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/player.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_tiles2.spt",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/screens.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/game.c",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/game.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/vv_qr_rle.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/vv_qr_rle.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/tiledata2.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/gfx/cut_sprites.spt",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/engine/hud.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/Menu/dev/assets/spritedata.h",
-		"/D/Google Drive/Maritrini/dev/NES/multicart/testing.txt"
+		"/C/Users/na_th_an/Google Drive/Maritrini/dev/NES/multicart/pantanow/dev/engine/game.h"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 49.0
 	},
 	"find_in_files":
 	{
-		"height": 116.0,
+		"height": 135.0,
 		"where_history":
 		[
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
@@ -349,6 +419,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CELL_FACING",
+			"FACING_",
+			"_a",
+			"eneexp2",
+			"decos",
+			"scrsizes",
+			"nodecos",
+			"?",
+			"print",
+			"kill_player",
+			"level",
+			"scroll",
 			"env_pitch",
 			"pfr",
 			"plife",
@@ -464,19 +546,7 @@
 			"GNROM",
 			"split_and_wait",
 			"split",
-			"kill",
-			"phit",
-			"];\n",
-			"process",
-			"is_plat",
-			"if (level)",
-			"02",
-			"01",
-			"safe",
-			"while",
-			"get_byte",
-			"pal",
-			"pfacing"
+			"kill"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -484,6 +554,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"CELL_FACING_",
+			"_b",
+			"eneexp3",
 			"mkts_old",
 			"..\\..\\..\\src\\utils\\",
 			"11",
@@ -600,13 +673,187 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1053,
+								1189
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/07_sir_ababol_dx_it1/dev/assets/spritedata.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6513,
+								6520
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2730.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/07_sir_ababol_dx_it1/dev/definitions.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1011,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								677,
+								677
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/07_sir_ababol_dx_it1/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11889,
+								11889
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7821.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 4,
+					"file": "examples/07_sir_ababol_dx_it1/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20030,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20029,
+								20029
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5757.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "examples/07_sir_ababol_dx_it1/dev/ram/zp.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3162,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								389,
+								389
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -664,7 +911,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 79.0
+		"height": 92.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -698,7 +945,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

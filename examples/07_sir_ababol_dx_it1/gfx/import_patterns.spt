@@ -1,0 +1,79 @@
+# import_patterns.spt
+# Imports patterns for Sir Ababol DX NES
+
+# This is a mkts.exe script file
+# Needs mkts v0.7.0 20170725
+
+# Bank 0 (patterns for bg)
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+# Tilesets are generated as tilemaps. They will be stored in this file:
+MAPFILE ..\dev\assets\tiledata.h
+
+# ts0
+OPEN ts0.png
+PALS palts0.png
+LABEL ts0
+MAPPED 0, 0, 2, 2, 16, 2, 20
+
+# ts1
+OPEN ts1.png
+PALS palts1.png
+LABEL ts1
+MAPPED 0, 0, 2, 2, 16, 1
+
+# Done with patterns for bg. Reset and fill with zeroes:
+RESETPOOL
+FILL 4096
+
+# Bank 1 (patterns for spr)
+
+# All sprites are in the same file, and use the same palette
+OPEN ss.png
+PALS palss0.png
+
+# Metasprites will be stored in this file:
+MAPFILE ..\dev\assets\spritedata.h
+
+# Main player, 9 frames, 2x3 patterns, generate flipped versions
+# hot point (where oam_meta_spr places its origin) is (-4, -8).
+# (player active rectangle is 8x16, centered bottom).
+LABEL sspl
+METASPRITESET 1, 1, 2, 3, 9, 1, -4, -8 FLIPPED
+
+# Enemies, 
+# Tall enemies, 4 frames, 2x3 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, -8).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssena
+METASPRITESET 1, 4, 2, 3, 4, 1, 0, -8
+
+# Wide enemies, 2 frames, 3x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) (is -4, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssenb
+METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
+
+# Platforms, 2 frames, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssplat
+METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
+
+# Explosion frame, 2x2 patterns. No need for flipped version
+# Hot point (where oam_meta_spr places its origin) is (0, 0)
+LABEL ssexpl
+METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
+
+# Items, 4 faces, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) (is 0, 0).
+# (items rectangle is 16x16, centered bottom).
+LABEL ssit
+METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+
+# Done with patterns for spr. Fill with zeroes:
+FILL 8192

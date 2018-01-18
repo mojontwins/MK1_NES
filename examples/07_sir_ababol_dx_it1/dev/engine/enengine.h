@@ -13,7 +13,7 @@ void enems_kill (unsigned char gpit) {
 	#endif
 
 	#ifdef ACTIVATE_SCRIPTING
-		run_script (2 * MAP_W * MAP_H + 5);
+		run_script (2 * MAP_SIZE + 5);
 	#endif
 
 		pkilled ++;
@@ -46,7 +46,7 @@ void enems_kill (unsigned char gpit) {
 #ifdef PERSISTENT_ENEMIES
 	void enems_persistent_load (void) {
 		gp_gen = (unsigned char *) (c_enems);
-		for (ep_it = 0; ep_it < 3 * MAP_W * MAP_H; ep_it ++) {
+		for (ep_it = 0; ep_it < 3 * MAP_SIZE; ep_it ++) {
 			// Skip t
 			rdt = *gp_gen ++; if (rdt && rdt != 4) BADDIES_COUNT ++;
 
@@ -83,7 +83,7 @@ void enems_kill (unsigned char gpit) {
 
 #ifdef PERSISTENT_DEATHS
 	void enems_persistent_deaths_load (void) {
-		gpit = MAP_W * MAP_H * 3; while (gpit --) {
+		gpit = MAP_SIZE * 3; while (gpit --) {
 			ep_flags [gpit] |= 0x01;
 		}
 	}
@@ -440,7 +440,7 @@ void enems_move (void) {
 					} else 
 #endif
 					{
-						j = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
 						sfx_play (7, 0);
 					}
 

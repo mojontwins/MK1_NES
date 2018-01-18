@@ -12,25 +12,25 @@ void fire_bullet (void) {
 #endif
 #ifdef PLAYER_MOGGY_STYLE
 			switch (pfacing) {
-				case FACING_LEFT:
+				case CELL_FACING_LEFT:
 					bx [gpit] = prx - 4;
 					bmx [gpit] = -PLAYER_BULLET_SPEED;
 					by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
 					bmy [gpit] = 0;
 					break;	
-				case FACING_RIGHT:
+				case CELL_FACING_RIGHT:
 					bx [gpit] = prx + 12;
 					bmx [gpit] = PLAYER_BULLET_SPEED;
 					by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
 					bmy [gpit] = 0;
 					break;
-				case FACING_DOWN:
+				case CELL_FACING_DOWN:
 					bx [gpit] = prx + PLAYER_BULLET_X_OFFSET;
 					by [gpit] = pry + 12;
 					bmy [gpit] = PLAYER_BULLET_SPEED;
 					bmx [gpit] = 0;
 					break;
-				case FACING_UP:
+				case CELL_FACING_UP:
 					bx [gpit] = prx + 8 - PLAYER_BULLET_X_OFFSET;
 					by [gpit] = pry - 4;
 					bmy [gpit] = -PLAYER_BULLET_SPEED;

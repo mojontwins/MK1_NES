@@ -7,32 +7,32 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					6		//
-#define MAP_H					5		// Dimensiones del mapa, en pantallas.
-#ifdef DEBUG
-#define SCR_INI DEBUG_SCR_INI
-#define PLAYER_INI_X DEBUG_INI_X
-#define PLAYER_INI_Y DEBUG_INI_Y
-#else
-#define SCR_INI					24		// Pantalla de inicio
-#define PLAYER_INI_X			1		//
-#define PLAYER_INI_Y			3		// Coordenadas de inicio del jugador, a nivel de tiles
-#endif
-#define SCR_END					99		// Pantalla del final. 99 si da igual.
+#define MAP_W 					20		//
+#define MAP_H					2		// Map dimmensions in screens
+#define MAP_SIZE				MAP_W*MAP_H
+
+#define SCR_INI					0		// Initial screen
+#define PLAYER_INI_X			3		//
+#define PLAYER_INI_Y			3		// Initial position
+//#define SCR_END				99		// Final screen, undefine if N/A
 #define PLAYER_END_X			99		//
-#define PLAYER_END_Y			99		// Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_MAX_OBJECTS		99		// Número de objetos para terminar el juego
+#define PLAYER_END_Y			99		// Ending position
+#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
 // Some flexibility
 #define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
-#define HOTSPOT_TYPE_KEYS		1
-#define HOTSPOT_TYPE_REFILL		2
-//#define HOTSPOT_TYPE_STAR		4
-//#define HOTSPOT_TYPE_OBJECT	1
+#define HOTSPOT_TYPE_OBJECT		1
+#define HOTSPOT_TYPE_KEYS		2
+#define HOTSPOT_TYPE_REFILL		3
+#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+
 //#define HOTSPOT_TYPE_AMMO		4
-//#define HOTSPOT_TYPE_RESONATOR	3
+
+//#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
+#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+//#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // ============================================================================
 // II. Engine type
@@ -52,11 +52,10 @@
 // General directives:
 // -------------------
 
-#define SPRITE_BADDIE_DYING 			8
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
-#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
@@ -67,22 +66,35 @@
 //#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
 
+// Enemy types and definitions
+// ---------------------------
 
-#define ENABLE_FANTY
+//#define PERSISTENT_ENEMIES
+//#define PERSISTENT_DEATHS
+
+#define SPRITE_BADDIE_DYING 			16
+//#define ENEMS_OCCLUDING_FRAME			16 // If you use pezons or saws you need a flame for occlusion
+
+// Fanties / Homing fanties
+
+//#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
-#define FANTY_BASE_SPRID		18
-#define FANTY_A 				4
-#define FANTY_MAXV 				48
+#define FANTY_BASE_SPRID				18
+#define FANTY_A 						4
+#define FANTY_MAXV 						48
 #define FANTY_COLLIDES
-//#define FANTY_DISTANCE		80
-//#define FANTY_V_RETREAT		16
+//#define FANTY_DISTANCE				80
+//#define FANTY_V_RETREAT				16
 #define FANTY_KILLED_BY_TILE
 
+// Saws
 
-#define ENABLE_SAW
-#define SAW_BASE_SPRID			16
-#define SAW_V_DISPL				4
-#define SAW_EMERGING_STEPS		10
+//#define ENABLE_SAW
+#define SAW_BASE_SPRID					16
+#define SAW_V_DISPL						4
+#define SAW_EMERGING_STEPS				10
+
+// Monococos
 
 //#define ENABLE_MONOCOCO
 #define MONOCOCO_BASE_TIME_HIDDEN		150
@@ -95,28 +107,32 @@
 #define MONOCOCO_COUNTER 				en_my
 #define MONOCOCO_STATE 					en_mx
 
-#define ENABLE_COCOS
+// If you enable monococos, I think you should enable cocos:
+
+//#define ENABLE_COCOS
 #define COCOS_MAX						3
 #define COCO_V							192
 #define COCO_PATTERN					34
 #define COCO_FAIR_D						32
 
-/*
-#define ENABLE_PEZONS
+// Pezons
+
+//#define ENABLE_PEZONS
 #define PEZONS_BASE_SPRID		16
 #define PEZON_WAIT				50
 #define PEZON_THRUST			384
 #define PEZON_VY_FALLING_MAX	256
 #define PEZON_G					16
-*/
 
-/*
-#define ENABLE_CHAC_CHAC
+// Chac chacs
+
+//#define ENABLE_CHAC_CHAC
 #define CHAC_CHAC_BASE_TILE		48
 #define CHAC_CHAC_IDLE_2		16
 #define CHAC_CHAC_IDLE_3		1
 #define CHAC_CHAC_IDLE_4		50
-*/
+
+// Carry directives
 
 /*
 #define CARRY_ONE_HS_OBJ
@@ -128,18 +144,13 @@
 #define HS_USE_OFFS				10
 */
 
+/*
 #define CARRY_ONE_FLAG_OBJ
 #define HS_INV_X				136
 #define HS_INV_Y				210
 #define HS_INV_EMPTY			0
 #define HS_INV_FLAG				0
-
-#define ENABLE_CONTAINERS
-#define CONT_EMPTY				0
-
-//#define PERSISTENT_ENEMIES
-//#define ENABLE_CONVEYORS
-//#define PERSISTENT_DEATHS
+*/
 
 // Shooting behaviour
 // ------------------
@@ -181,11 +192,13 @@
 
 // Scripting
 // ---------
+/*
 #define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
 #define ENABLE_FAST_FIRE_ZONE		// Fire zone only triggers FIRE n, not FIRE ANY
 #define SCRIPTING_TEXT_BOX
 #define FIRE_SCRIPT_WITH_ANIMATION	// So I don't have to make a custom for something 
 									// I will be reusing, most likely
+*/
 
 //#define FIRE_ON_KILL				// run fire script on enemy kill
 /*
@@ -202,9 +215,9 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-//#define PLAYER_BOOTEE					// Jump is automatic
+//#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
@@ -214,16 +227,18 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
+#define SCR_Y					4		// 0, 2 or 4.
+
 #define LIFE_X					4		//
-#define LIFE_Y					28		// Life gauge counter character coordinates
-#define OBJECTS_X				16		//
-#define OBJECTS_Y				28		// Objects counter character coordinates
-#define KEYS_X					28		//
-#define KEYS_Y					28		// Keys counter character coordinates
-#define KILLED_X				16		//
-#define KILLED_Y				28		// Kills counter character coordinates
-#define AMMO_X					8		// 
-#define AMMO_Y					29		// Ammo counter character coordinates
+#define LIFE_Y					2		// Life gauge counter character coordinates
+#define OBJECTS_X				7		//
+#define OBJECTS_Y				2		// Objects counter character coordinates
+#define KEYS_X					10		//
+#define KEYS_Y					2		// Keys counter character coordinates
+//#define KILLED_X				16		//
+//#define KILLED_Y				2		// Kills counter character coordinates
+//#define AMMO_X				8		// 
+//#define AMMO_Y				2		// Ammo counter character coordinates
 //#define PLAYER_SHOW_KILLS
 
 // Text
@@ -292,8 +307,5 @@
 // Save for 10 (special), but that's obvious, innit?
 
 const unsigned char tbehs [] = {
-	0, 8, 8, 8, 8, 1, 0, 8, 0, 4, 1, 1, 0, 8, 8, 4,
-	8, 0, 0, 0, 0, 0, 8, 8, 4, 0, 0, 0, 0, 0, 0, 0,
-	8, 8, 0, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 8, 8, 8, 0
+	0, 8, 8, 8, 0, 0, 0, 8, 0, 0, 8, 4, 8, 1, 8, 10
 };

@@ -123,6 +123,7 @@
 
 /*
 #define ENABLE_CONTAINERS
+#define MAX_CONTAINERS 			5
 #define CONT_EMPTY				0
 */
 

@@ -14,11 +14,16 @@ Sub strToArr128 (mstr As String, arr () As uByte)
 	Next i
 End Sub
 
-Dim as Integer x, y, t, f1, f2, i, j
+Dim as Integer xy, x, y, t, f1, f2, i, j, debug, bytes2
 Dim as uByte d, arr (127), map_w, map_h, nenems
 
+? "v0.2 20160729"
+
 ' enexpander.bas
-If Command (4) = "" Then ?"enexpander enems.ene output.ene mappy.bmp mapa.map":?:End
+If Command (4) = "" Then ?"enexpander enems.ene output.ene mappy.bmp mapa.map [2bytes] [debug]":?:End
+
+debug = Command (5) = "debug" Or Command (6) = "debug"
+bytes2 = Command (5) = "2bytes" Or Command (6) = "2bytes"
 
 ' read / write header
 
@@ -57,47 +62,83 @@ d = 12: put #f2, , d
 get #f1, , nenems
 put #f2, , nenems
 
+Print "map size (" & map_w & ", " & map_h & ")"
+
 ' Read / Modify / Write enems
 
 For i = 1 To (nenems * map_w * map_h)
 	' t x y xx yy n s1 s2
 	get #f1, , d ' t
 	put #f2, , d
+	
 	get #f1, , d ' x
 	If d > 6 Then d = d + 1
 	put #f2, , d
+	
 	get #f1, , d ' y
 	If d > 5 Then d = d + 2
 	put #f2, , d
+	
 	get #f1, , d ' xx
 	If d > 6 Then d = d + 1
 	put #f2, , d
+	
 	get #f1, , d ' yy
 	If d > 5 Then d = d + 2
 	put #f2, , d
+	
 	get #f1, , d ' n
 	put #f2, , d
 	get #f1, , d ' s1
 	put #f2, , d
 	get #f1, , d ' s2
 	put #f2, , d
+	
 Next i
 
 ' Read / Write hotspots
 
-For i = 1 To (map_w * map_h)
-	get #f1, , d: x = d
-	get #f1, , d: y = d
-	get #f1, , d: t = d
-	print Hex (x, 2) & " " & hex (y, 2) & " " & hex (t, 2) & ".. ";
-	Print "[" & Hex (i - 1, 2) & "]: (" & x & ", " & y & ") -> ";
-	If x > 6 Then x = x + 1
-	If y > 5 Then y = y + 2
-	Print "(" & x & ", " & y  & ")."
-	d = x: put #f2, , d
-	d = y: put #f2, , d
-	d = t: put #f2, , d
-Next i
+If bytes2 Then
+	For i = 1 To (map_w * map_h)
+		get #f1, , d: xy = d
+		x = xy Shr 4
+		y = xy And 15
+		get #f1, , d: t = d
+		if debug then
+			print Hex (x, 2) & " " & hex (y, 2) & " " & hex (t, 2) & ".. ";
+			Print "[" & Hex (i - 1, 2) & "]: (" & x & ", " & y & ") -> ";
+		end if
+		If x > 6 Then x = x + 1
+		If y > 5 Then y = y + 2
+		if debug then Print "(" & x & ", " & y  & ")."
+		xy = (x Shl 4) Or (y And 15)
+		'd = xy: put #f2, , d
+		d = x: put #f2, , d
+		d = y: put #f2, , d
+		d = t: put #f2, , d
+	Next i
+Else
+	For i = 1 To (map_w * map_h)
+		'get #f1, , d: xy = d
+		'x = xy Shr 4
+		'y = xy And 15
+		get #f1, , d: x = d
+		get #f1, , d: y = d
+		get #f1, , d: t = d
+		if debug then 
+			print Hex (x, 2) & " " & hex (y, 2) & " " & hex (t, 2) & ".. ";
+			Print "[" & Hex (i - 1, 2) & "]: (" & x & ", " & y & ") -> ";
+		end if
+		If x > 6 Then x = x + 1
+		If y > 5 Then y = y + 2
+		if debug then  Print "(" & x & ", " & y  & ")."
+		xy = (x Shl 4) Or (y And 15)
+		'd = xy: put #f2, , d
+		d = x: put #f2, , d
+		d = y: put #f2, , d
+		d = t: put #f2, , d
+	Next i
+End If
 
 Close
 

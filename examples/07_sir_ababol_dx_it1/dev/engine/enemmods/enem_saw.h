@@ -69,15 +69,17 @@ switch (en_alive [gpit]) {
 
 // Occlusion
 if (rda) {
-	oam_index = oam_meta_spr (
-		en_x1 [gpit], en_y [gpit] + SPRITE_ADJUST, 
-		oam_index, 
-		spr_en_0A_a);
+	rdx = en_x1 [gpit]; rdy = en_y [gpit];
 } else {
-	oam_index = oam_meta_spr (
-		en_x [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
-		oam_index, 
-		spr_en_0A_a);
+	rdx = en_x [gpit]; rdy = en_y1 [gpit];
 }
+
+oam_index = oam_meta_spr (
+	rdx, rdy,
+	oam_index,
+	spr_enems [ENEMS_OCCLUDING_FRAME]
+);
+
+// Frame selection
 
 en_spr = SAW_BASE_SPRID + half_life;

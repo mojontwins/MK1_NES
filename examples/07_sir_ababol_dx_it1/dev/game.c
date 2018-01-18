@@ -14,13 +14,6 @@
 #define DEBUG_INI_Y		5
 //
 
-#define MSB(x)			(((x)>>8))
-#define LSB(x)			(((x)&0xff))
-#define FIXBITS			6
-#define SPRITE_ADJUST	7
-#define TOP_ADJUST		2
-#define COMM_POOL		((unsigned char*)0x0300)
-
 #define MAX_BOLTS 16 // max 32, make it as small as possible.
 
 #include "neslib.h"
@@ -53,14 +46,19 @@
 #include "definitions.h"
 #include "config.h"
 #include "assets/palettes.h"
+#include "assets/map0.h"
+#include "assets/map1.h"
+#include "assets/enems0.h"
+#include "assets/enems1.h"
+#include "assets/spritedata.h"
+#include "assets/tiledata.h"
 #include "assets/metasprites.h"
-#include "assets/tiledata1.h"
-#include "assets/mapa.h"
-#include "assets/enems.h"
 
 // Music
-extern const unsigned char m_ingame_1 [];
-extern const unsigned char m_cuts [];
+extern const unsigned char m_title [];
+extern const unsigned char m_ingame [];
+extern const unsigned char m_gameover [];
+extern const unsigned char m_ending [];
 
 // Push to zero page:
 #pragma bssseg (push,"ZEROPAGE")
@@ -119,7 +117,7 @@ void main(void) {
 	while (1) {	// This while(1) is to make this NROM-compatible for testing purposes.
 
 		//title ();
-		game_init ();
+		game_init (); 
 		game_loop ();
 
 		if (game_over) {

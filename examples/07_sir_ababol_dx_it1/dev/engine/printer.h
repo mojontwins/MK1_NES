@@ -102,9 +102,12 @@ void map_set (unsigned char x, unsigned char y, unsigned char n) {
 }
 
 void draw_map_tile (unsigned char t) {
-	rda = rdx + (rdy << 4);
-	map_buff [rda] = t;		
-	map_attr [rda] = tbehs [t];
+	map_buff [rdm] = t;		
+	map_attr [rdm] = tbehs [t];
+	#ifdef BREAKABLE_WALLS
+		brk_buff [rdm] = 1;
+	#endif
+	rdm ++;
 	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
@@ -115,84 +118,95 @@ unsigned char get_byte (void) {
 
 void draw_scr (void) {
 
-	// What
-	level = (n_pant == 0 || n_pant == 60 || 
-		(n_pant >= 57 && n_pant <= 59) ||
-		(n_pant >= 76 && n_pant <= 79) );
-
 	// Draw current screen
 	set_rand (n_pant + 1);
-	rdx = rdy = 0;
+	rdx = 0; rdy = 0; rdm = 0;
 
-	// Get pointer
-	gp_gen = (unsigned char *) c_map [n_pant];
-
-	// Full or RLE'd?
-	
-	if (rdit = *gp_gen ++) {
-		while (rdit) {
-			rdct = get_byte ();
-			if (rdct & 0xf0) {
-				// String
-				rdct = 1 + (rdct & 0x0f);
-				while (rdct --) {
-					rdt = get_byte ();
-					draw_map_tile (rdt >> 4);
-					if (rdy < 12) draw_map_tile (rdt & 15);
-				}
-			} else {
-				// Counter
-				rdt = rdct & 0x0f;
-				rdct = get_byte ();
-				while (rdct --) draw_map_tile (rdt);
-			}
-		}
-
-	} else {
+	#ifdef MAP_FORMAT_PACKED
+		// Get pointer
+		gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
+		
+		// Draw packed
 		rdit = 96; while (rdit --) {
 			rdt = *gp_gen ++;
 			draw_map_tile (rdt >> 4);
 			draw_map_tile (rdt & 15);
 		}
-	}
+	#endif
 
-	// Draw decorations
-	if (c_decos [n_pant]) {
-		gp_gen = (unsigned char *) c_decos [n_pant];
-	
-		while (rdt = *gp_gen ++) {
-			if (rdt & 0x80) {
-				rdt &= 0x7F;
-				rdct = 1;
-			} else {
-				rdct = *gp_gen ++;
+	#ifdef MAP_FORMAT_RLE16
+		// Get pointer
+		gp_gen = (unsigned char *) c_map [n_pant];
+
+		// Packed or RLE'd?
+		if (rdit = *gp_gen ++) {
+			while (rdit) {
+				rdct = get_byte ();
+				if (rdct & 0xf0) {
+					// String
+					rdct = 1 + (rdct & 0x0f);
+					while (rdct --) {
+						rdt = get_byte ();
+						draw_map_tile (rdt >> 4);
+						if (rdy < 12) draw_map_tile (rdt & 15);
+					}
+				} else {
+					// Counter
+					rdt = rdct & 0x0f;
+					rdct = get_byte ();
+					while (rdct --) draw_map_tile (rdt);
+				}
 			}
-			while (rdct --) {
-				rda = *gp_gen ++;
-				rdx = rda >> 4; rdy = rda & 15;
-				draw_map_tile (rdt);
+		} else {
+			rdit = 96; while (rdit --) {
+				rdt = *gp_gen ++;
+				draw_map_tile (rdt >> 4);
+				draw_map_tile (rdt & 15);
 			}
 		}
-	}
+	#endif	
+
+	#ifdef MAP_WITH_DECORATIONS
+		// Draw decorations
+		if (c_decos) {
+			if (c_decos [n_pant]) {
+				gp_gen = (unsigned char *) c_decos [n_pant];
+			
+				while (rdt = *gp_gen ++) {
+					if (rdt & 0x80) {
+						rdt &= 0x7F;
+						rdct = 1;
+					} else {
+						rdct = *gp_gen ++;
+					}
+					while (rdct --) {
+						rda = *gp_gen ++;
+						rdx = rda >> 4; rdy = rda & 15;
+						draw_map_tile (rdt);
+					}
+				}
+			}
+		}
+	#endif
 
 	// Clear open locks
-#ifndef DEACTIVATE_KEYS	
-	gpit = c_max_bolts; while (gpit --) {
-		if (n_pant == lknp [gpit]) {
-			if (!lkact [gpit]) {
-				rdy = (lkyx [gpit] >> 4);
-				rdx = (lkyx [gpit] & 15);
-				draw_map_tile (rdct);
+	#ifndef DEACTIVATE_KEYS	
+		gpit = c_max_bolts; while (gpit --) {
+			if (n_pant == lknp [gpit]) {
+				if (!lkact [gpit]) {
+					rdy = (lkyx [gpit] >> 4);
+					rdx = (lkyx [gpit] & 15);
+					rdm = lkyx [gpit];
+					draw_map_tile (rdct);
+				}
 			}
-		}
-	}	
-#endif
+		}	
+	#endif
 
-#ifdef BREAKABLE_ANIM
-	do_process_breakable = 0;
-	gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
-#endif
-
+	#ifdef BREAKABLE_ANIM
+		do_process_breakable = 0;
+		gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
+	#endif
 }
 /*
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {

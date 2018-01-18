@@ -1,10 +1,6 @@
 // NES MK1 v0.7
 // Copyleft Mojon Twins 2013, 2015, 2016
 
-#define MAX_CONTAINERS 		5
-
-unsigned char c_x [MAX_CONTAINERS], c_y [MAX_CONTAINERS], c_f [MAX_CONTAINERS], last_container;
-
 void containers_init (void) {
 	last_container = 0;
 }
