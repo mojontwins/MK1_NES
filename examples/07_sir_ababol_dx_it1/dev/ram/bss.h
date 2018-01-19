@@ -43,8 +43,7 @@ unsigned char hact [MAP_SIZE];
 // Bolts
 
 #ifndef DEACTIVATE_KEYS
-	unsigned char lkyx [MAX_BOLTS], lknp [MAX_BOLTS], lkact [MAX_BOLTS];
-	unsigned char xy;
+	unsigned char lkact [MAX_BOLTS];
 #endif
 
 // Scripting

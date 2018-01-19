@@ -11,6 +11,7 @@ void game_init (void) {
 		c_decos = (unsigned char **) (map_0_decos);
 	#endif
 	c_enems = (unsigned char *) (enems_0);
+	c_locks = (unsigned char *) (map_0_locks);
 	c_hotspots = (unsigned char *) (hotspots_0);
 	c_pal_bg = (unsigned char *) palts0;
 	c_pal_fg = (unsigned char *) palss0;
@@ -52,6 +53,8 @@ void game_init (void) {
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
+
+	// n_pant = 2; pkeys = 1;
 }
 
 void prepare_scr (void) {
@@ -81,8 +84,7 @@ void prepare_scr (void) {
 
 	oam_hide_rest (0);
 	draw_scr ();
-	hotspots_create ();
-	
+	hotspots_create ();	
 	// Write attributes
 	vram_write (attr_table, 0x23c0, 64);
 
@@ -217,7 +219,7 @@ void game_loop (void) {
 		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
 #endif
 
-		//#include "mainloop/resonators.h"
+		#include "mainloop/hotspots.h"
 
 		//#include "mainloop/cheat.h"
 
@@ -226,8 +228,6 @@ void game_loop (void) {
 		#include "mainloop/flickscreen.h"
 
 		#include "mainloop/hud.h"
-
-		#include "mainloop/hotspots.h"
 
 		// Conditions
 		if (plife == 0) {					

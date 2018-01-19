@@ -710,3 +710,9 @@ Funcionan muchas cosas (tras apañar un par de olvidos garas). Voy a ver si van 
 Tengo que ajusta a Sir Ababol para que solo salte 2 espacios.
 
 De entrada los hotspots no funcionan - bueno, al menos no se muestran.
+
+~~
+
+Ya funcionan. Ahora toca comprobar los cerrojos.
+
+

@@ -1,10 +1,11 @@
 
 
 void player_process_tile (at, x0, y0, x1, y1) {
-
+	if (y0) y0 --;
 	// Boxes
 
 	#ifdef PLAYER_PUSH_BOXES
+		if (y1) y1 --;
 		if (
 			at == 11 &&
 			x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11

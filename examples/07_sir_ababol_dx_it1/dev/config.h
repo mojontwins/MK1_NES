@@ -263,8 +263,8 @@
 #define PLAYER_G				16		// Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		256		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
-#define PLAYER_AY_JUMP 			16		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_VY_JUMP_MAX		192		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
+#define PLAYER_AY_JUMP 			12		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
 
 #define PLAYER_AY_JETPAC		32		// Incremento al usar el jetpac
 #define PLAYER_VY_JETPAC_MAX	256		// Máxima velocidad vertical con jetpac

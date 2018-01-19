@@ -191,13 +191,13 @@ void draw_scr (void) {
 
 	// Clear open locks
 	#ifndef DEACTIVATE_KEYS	
+		gp_gen = (unsigned char *) c_locks;
 		gpit = c_max_bolts; while (gpit --) {
-			if (n_pant == lknp [gpit]) {
+			rda = *gp_gen ++; rdm = *gp_gen ++;
+			if (n_pant == rda) {
 				if (!lkact [gpit]) {
-					rdy = (lkyx [gpit] >> 4);
-					rdx = (lkyx [gpit] & 15);
-					rdm = lkyx [gpit];
-					draw_map_tile (rdct);
+					rdy = (rdm >> 4); rdx = (rdm & 15);
+					draw_map_tile (0);
 				}
 			}
 		}	

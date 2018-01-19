@@ -7,8 +7,8 @@
 void player_init (void) {
 	// Init player data
 	
-	px = (signed int) (PLAYER_INI_X << 4) << 6;
-	py = (signed int) (PLAYER_INI_Y << 4) << 6;
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
 	
 	pvx = pvy = 0;
 
@@ -188,8 +188,8 @@ void player_move (void) {
 	
 	// Collision
 	rdy = pry;
-	prx = px >> 6;
-	pry = py >> 6;
+	prx = px >> FIXBITS;
+	pry = py >> FIXBITS;
 		
 	if (rdy != pry) {
 		#ifdef PLAYER_MOGGY_STYLE		
@@ -202,7 +202,7 @@ void player_move (void) {
 				cy1 = cy2 = (pry + 8) >> 4;
 				cm_two_points ();
 				if ((at1 & 8) || (at2 & 8)) {
-					pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << 6;
+					pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << FIXBITS;
 					pgotten = 0;
 					
 					// Special obstacles
@@ -226,7 +226,7 @@ void player_move (void) {
 				cy1 = cy2 = (pry + 15) >> 4; 
 				cm_two_points (); 
 		 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
-					pvy = 0; pry = ((cy1 - 1) << 4);py = pry << 6;
+					pvy = 0; pry = ((cy1 - 1) << 4);py = pry << FIXBITS;
 					pgotten = 0;
 					
 					// Special obstacles
@@ -357,16 +357,17 @@ void player_move (void) {
 	
 	// Move
 	px += pvx;
-	if (px < 0) px = 0;
-	if (px > 15360) px = 15360;
+	rdx = prx;
+	
+	if (px < (4<<FIXBITS)) prx = 4;
+	else if (px > (244<<FIXBITS)) prx = 244; 
+	else prx = px >> FIXBITS;
 
 	#ifndef PLAYER_MOGGY_STYLE	
 		if (pgotten) px += pgtmx;
 	#endif
 	
 	// Collision
-	rdx = prx;
-	prx = px >> 6;
 
 	if (rdx != prx) {
 		cy1 = (pry + 8) >> 4;
@@ -385,7 +386,7 @@ void player_move (void) {
 			}
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = rda; px = prx << 6;
+				pvx = 0; prx = rda; px = prx << FIXBITS;
 
 				// Special obstacles
 				if (at1 & 2) player_process_tile (at1, cx1, cy1, rdb, cy1);

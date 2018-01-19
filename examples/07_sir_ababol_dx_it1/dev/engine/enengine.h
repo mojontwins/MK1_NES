@@ -304,7 +304,7 @@ void enems_move (void) {
 		if (en_t [gpit]) {
 
 			// Gotten preliminary:
-			gpjt = (prx + 11 >= en_x [gpit] && prx <= en_x [gpit] + 11);
+			gpjt = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
 			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
@@ -407,13 +407,16 @@ void enems_move (void) {
 			if (
 	#ifdef PLAYER_MIN_KILLABLE
 				(en_t [gpit] >= PLAYER_MIN_KILLABLE) &&
-	#endif				
-				en_t [gpit] != 8 && 
+	#endif
+	#ifdef ENABLE_SAW
+				en_t [gpit] != 8 &&
+	#endif 
 				en_t [gpit] != 4
 			) {
 				if (
-					collide (prx, pry, en_x [gpit], en_y [gpit] - 4) && 
-					pry + 2 < en_y [gpit] && 
+					gpjt &&
+					pry + 15 >= en_y [gpit] && 
+					pry + 8 < en_y [gpit] && 
 					pvy > 0 && 
 					!pgotten && 
 					!ppossee
