@@ -6,7 +6,7 @@ unsigned char prp_x [MAX_PROPELLERS], prp_y1 [MAX_PROPELLERS], prp_y2 [MAX_PROPE
 void add_propeller (unsigned char x, unsigned char y) {
 	// Has to calculate teh real area.
 	prp_it = y; while (prp_it --) {
-		if (attr (x, prp_it)) break;
+		if (map_attr [COORDS (x, prp_it)]) break;
 	}
 
 	// Storage is in pixel coordinates.

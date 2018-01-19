@@ -4,21 +4,13 @@
 // general.h
 // General functions, vars & buffers
 
-#define COORDS(x,y) ((x)|((y)<<4))
-
 void cm_two_points (void) {
 	// Calculates at1 & at2 from cx1, cy1 & cx2, cy2
-	at1 = cy1 > 11 ? 0 : map_attr [cx1 + (cy1 << 4)];
-	at2 = cy2 > 11 ? 0 : map_attr [cx2 + (cy2 << 4)];
-}
-
-unsigned char attr (signed char x, signed char y) {
-	if (x < 0 || x > 15 || y < 0 || y > 11) return 0;
-	return map_attr [COORDS (x, y)];
-}
-
-unsigned char qtile (signed char x, signed char y) {
-	return map_buff [COORDS (x, y)];
+	if (cy1 > 12 || cy2 > 12) { at1 = at2 = 0; return; }
+	caux = cy1 ? cy1 - 1 : 0;
+	at1 = map_attr [COORDS (cx1, caux)];
+	caux = cy2 ? cy2 - 1 : 0;
+	at2 = map_attr [COORDS (cx2, caux)];
 }
 
 unsigned char collide_in (x0, y0, x1, y1) {

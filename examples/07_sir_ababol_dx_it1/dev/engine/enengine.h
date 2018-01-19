@@ -126,38 +126,30 @@ void enems_load (void) {
 			en_t [gpit] = *gp_gen ++;
 
 			// General...
-#ifdef PERSISTENT_ENEMIES
-			// XY1
-			rda = *gp_gen ++;
-			en_x1 [gpit] = rda & 0xf0;
-			en_y1 [gpit] = rda << 4;
 
-			// XY2
+			// YX1
 			rda = *gp_gen ++;
-			en_x2 [gpit] = rda & 0xf0;
-			en_y2 [gpit] = rda << 4;
+			en_y1 [gpit] = rda & 0xf0;
+			en_x1 [gpit] = rda << 4;
+
+			// YX2
+			rda = *gp_gen ++;
+			en_y2 [gpit] = rda & 0xf0;
+			en_x2 [gpit] = rda << 4;
 		
 			// P, here used for speed
 			rda = *gp_gen ++;
 
-			// But...
+#ifdef PERSISTENT_ENEMIES
+			// Copy position & direction from ep_*
 			en_x [gpit] = ep_x [rdc];
 			en_y [gpit] = ep_y [rdc];
 			en_mx [gpit] = ep_mx [rdc];
 			en_my [gpit] = ep_my [rdc];
 #else
-			// XY1
-			rda = *gp_gen ++;
-			en_x [gpit] = en_x1 [gpit] = rda & 0xf0;
-			en_y [gpit] = en_y1 [gpit] = rda << 4;
-
-			// XY2
-			rda = *gp_gen ++;
-			en_x2 [gpit] = rda & 0xf0;
-			en_y2 [gpit] = rda << 4;
-
-			// P, here used for speed
-			rda = *gp_gen ++;
+			// Initialize position & direction from ROM
+			en_x [gpit] = en_x1 [gpit];
+			en_y [gpit] = en_y1 [gpit];
 			en_mx [gpit] = add_sign (en_x2 [gpit] - en_x1 [gpit], rda);
 			en_my [gpit] = add_sign (en_y2 [gpit] - en_y1 [gpit], rda);
 #endif

@@ -4,7 +4,7 @@
 // Main definitions
 
 #define FIXBITS					6
-#define SPRITE_ADJUST			23
+#define SPRITE_ADJUST			32 - 8 - 16 + 1
 #define TOP_ADJUST				4
 
 // Player states
@@ -16,8 +16,9 @@
 
 // Macros
 
-#define MSB(x)					(((x)>>8))
-#define LSB(x)					(((x)&0xff))
+#define COORDS(x,y) 			((x) | ((y) << 4))
+#define MSB(x)					(((x) >> 8))
+#define LSB(x)					(((x) & 0xff))
 #define sgni(n)					((n) < 0 ? -1 : 1)
 #define sgnc(a,b,c)				((a) < (b) ? -(c) : (c))
 #define saturate_z(n)			((n) < 0 ? 0 : (n))

@@ -296,7 +296,7 @@ Y en compile.bat...
 	..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset0.chr silent
 ```
 
-Los dos sets de enemigos...
+Los dos sets de enemigos... Explicar el parámetro yadjust y por qué se pone a 1.
 
 ```
 	echo Exporting enems
@@ -642,9 +642,71 @@ OK
 
 [X] Tengo que revisar las coordenadas de colisión teniendo en cuenta que el muñeco se pinta en -4,-8 y que tiene 8x16. 
 [ ] Arreglar las posiciones de los enemigos, que convertí sin mirar.
-[ ] Ver que creo que el intercambio de x1/x2 y y1/y2 para que *1 < *2 siempre está peío.
 
 Pero esto mañana.
 
+20180119
+========
 
+Cosas que he visto: 
 
+[X] Los enemigos a la virulé es que creo que estoy exportando como YX (moderno) y esta peste espera XY. Esto es fácil de arreglar.
+[ ] Remember que los enemigos y hotspots llevan yadjust = 1, ahora tengo que bajar todo el jugador también para yadjust = 1, y esto implica toda la colisión y todas las conversiones de coordenadas.
+
+Lo primero es poner el SPRITE_ADJUST correctamente (restando 15).
+
+Para ello tengo que revisar y cambiar o modificar los accessos a attr y qtile.
+
+Se accede a attr:
+
+- Para la colisión en `enem_fanty.h`, `enem_homing_fanty.h`, `enem_linear.h` y `enem_pursuers`. Tengo que revisar Yun y MK2 para buscar fixes sin pensar. Nah, Yun no, que no implementa nada de esto y no usa attr. [X]
+- En `player.h`, concretamente en lo relacionado con `player_process_tile`. Aquí habrá que ver de qué forma lo resuelvo más indolora e incoloramente.
+- En `playermods/bullets.h` para interactuar con las `BREAKABLE_WALLS`. Aquí puedo hacer el fix de coordenadas in situ, como en D'Veel'Ng.
+- En `gargajo.h`, pero ya va siendo hora de que elimine esto, que era super custom para Bootee.
+- En `propellers.h`, pero como no se utiliza desde una entidad con sprites, no hay que tocar.
+
+Se accede a qtile:
+
+- En `player.h` -> `player_process_tile`. Es para ver si el tile de tipo 10 con el que interactuamos es el 14 o el 15.
+
+Voy a ello.
+
+**Nota para luego**: ¿Y si me fumo todo esto de detectar primero beh=10 y luego decidir si es tile = 14 o 15 y detectarlo todo del tirón? Si pongo beh=11 para las cajas, con & 10 se detecta igual y ya lo tengo para luego. Bueh, cuando me ponga.
+
+~~
+
+Ya he adaptado todo menos `player_process_tile`, que es algo que tengo que replantear un poco. Cuando quite eso, me podré fumar `attr` y `qtile`.
+
+Ahora voy a hacer un poco de limpieza: en el proceso me he librado de variables temporales por un tubo: `pt??`, `et??` y `bt?`. 
+
+Las `pt??` se utilizan ya sólamente en `player_process_tile`. ¡Seeh! XD. Las demás están ya erradicadas.
+
+~~
+
+Diseñemos esto.
+
+Veamos, esto parece que cuando te chocas con un obstáculo te pone una variable `wall` con la dirección en la que te has chocado. Esto no es del todo perfecto pero funciona y no se nota, **que es la clave cuando desarrollas en 8 bits, que puedas poner toda tu mierda asquerosa e inexacta y que no se note**.
+
+Si se detecta `wall`, mira que el atributo SEA 10, y luego llama a `player_process_tile` con el tile donde está el centro del jugador y el tile siguiente, dependiendo de la dirección. Como digo, esto es un poco inexacto pero fucking funciona. 
+
+Lo que quiero es dejarlo más chico y sin attr o qtile. Bien.
+
+En vez de tener una detección en el choque que escribe `wall` con el valor correcto y luego otro bloque más abajo que mira `wall`, vuelve a calcular cosas, y llama a `player_process_tile` podría integrarlo todo en la detección de choque y aprovechar que las variables son globales para hacer fullerías en `player_process_tile`. 
+
+Seh, es lo que haré.
+
+~~
+
+Si pongo 10 -> cerrojo y 11 -> empujable, ambas cumplen (& 10) y además ambas son "sinsentidos" (8+2, 8+2+1). 
+
+~~
+
+Se ha quedao todo mucho más chiquilino. Voy a compilar, batallar errores, y ver qué tal va de funcional.
+
+Funcionan muchas cosas (tras apañar un par de olvidos garas). Voy a ver si van los hotspots y los cerrojos, voy a ver si todo lo básico funciona, y luego sigo con el tutorial.
+
+~~
+
+Tengo que ajusta a Sir Ababol para que solo salte 2 espacios.
+
+De entrada los hotspots no funcionan - bueno, al menos no se muestran.

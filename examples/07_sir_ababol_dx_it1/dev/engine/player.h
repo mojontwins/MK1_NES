@@ -33,10 +33,6 @@ void player_init (void) {
 	pgotten = 0;
 	pfiring = 0;
 
-	#ifdef PLAYER_GARGAJO
-		pgargajocounter = 0;
-	#endif	
-
 	#ifdef PLAYER_CAN_FIRE
 		gpit = MAX_BULLETS; while (gpit --) bst [gpit] = 0;
 		pkilled = 0;
@@ -105,60 +101,11 @@ void kill_player (void) {
 }
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
-	void player_process_tile (x0, y0, x1, y1) {
-	
-		// Boxes
-
-		#ifdef PLAYER_PUSH_BOXES
-			#ifdef FIRE_TO_PUSH
-				if (i & PAD_A) {
-					pfiring = 1;
-			#endif
-					if (x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11) {
-						if (qtile (x0, y0) == 14 && attr (x1, y1) == 0) {
-							pushed_any = 1;
-							// Move & paint
-							map_set (x0, y0, 0);
-							map_set (x1, y1, 14);			
-							// Sound
-							sfx_play (1, 1);
-						}
-					}
-			#ifdef FIRE_TO_PUSH
-				}
-			#endif	
-		#else
-			y1=x1;//Shutup, compiler!
-		#endif
-
-			// Bolts
-
-		#ifndef DEACTIVATE_KEYS
-			if (qtile (x0, y0) == 15) {
-				if (pkeys) {
-					// Update screen
-					map_set (x0, y0, 0);
-					// Clear lock in RAM
-					clear_cerrojo ((y0 << 4) | x0);
-					// Decrease keys 
-					pkeys --;
-					// Sound
-					sfx_play (1, 1);
-				} else {
-					no_ct = 100;
-				}
-			} 
-		#endif
-
-	}
+	#include "engine/playermods/process_tile.h"
 #endif
 
 #ifdef PLAYER_CAN_FIRE
 	#include "engine/playermods/bullets.h"
-#endif
-
-#ifdef PLAYER_GARGAJO
-	#include "engine/playermods/gargajo.h"
 #endif
 
 #ifndef PLAYER_MOGGY_STYLE
@@ -170,7 +117,6 @@ void kill_player (void) {
 
 void player_move (void) {
 	i = pad_poll (0);
-	wall = 0;
 	hitv = hith = 0;
 	pushed_any = 0;
 	//ppossee = 0;
@@ -241,52 +187,61 @@ void player_move (void) {
 	if (py < 0) py = 0;
 	
 	// Collision
+	rdy = pry;
 	prx = px >> 6;
 	pry = py >> 6;
 		
-	#ifdef PLAYER_MOGGY_STYLE		
-		if (pvy < 0)
-	#else
-		rds16 = pvy + pgtmy;
-		if (rds16 < 0)
-	#endif		
-		{
-			cy1 = cy2 = (pry + 8) >> 4;
-			cm_two_points ();
-			if ((at1 & 8) || (at2 & 8)) {
-				pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << 6;
-				pgotten = 0;
-				wall = WTOP;
-			} else if ((at1 & 1) || (at2 & 1)) {
-				hitv = 1;
-			}
-	#ifdef ENABLE_QUICKSANDS
-			else if ((at1 & 2) || (at2 & 2)) {
-				if (pctj > 2) pj = 0;
-			}
-	#endif		
+	if (rdy != pry) {
+		#ifdef PLAYER_MOGGY_STYLE		
+			if (pvy < 0)
+		#else
+			rds16 = pvy + pgtmy;
+			if (rds16 < 0)
+		#endif		
+			{
+				cy1 = cy2 = (pry + 8) >> 4;
+				cm_two_points ();
+				if ((at1 & 8) || (at2 & 8)) {
+					pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << 6;
+					pgotten = 0;
+					
+					// Special obstacles
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
+					if (at2 & 2) player_process_tile (at1, cx2, cy2, cx2, cy2 - 1);
+				} else if ((at1 & 1) || (at2 & 1)) {
+					hitv = 1;
+				}
+		#ifdef ENABLE_QUICKSANDS
+				else if ((at1 & 2) || (at2 & 2)) {
+					if (pctj > 2) pj = 0;
+				}
+		#endif		
 
-	#ifdef PLAYER_MOGGY_STYLE			
-		} else if (pvy > 0)
-	#else
-		} else if (rds16 > 0)
-	#endif		
-		{
-			cy1 = cy2 = (pry + 15) >> 4; 
-			cm_two_points (); 
-	 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
-				pvy = 0; pry = ((cy1 - 1) << 4);py = pry << 6;
-				pgotten = 0;
-				wall = WBOTTOM;
-			} else if ((at1 & 1) || (at2 & 1)) {
-				hitv = 1;
+		#ifdef PLAYER_MOGGY_STYLE			
+			} else if (pvy > 0)
+		#else
+			} else if (rds16 > 0)
+		#endif		
+			{
+				cy1 = cy2 = (pry + 15) >> 4; 
+				cm_two_points (); 
+		 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
+					pvy = 0; pry = ((cy1 - 1) << 4);py = pry << 6;
+					pgotten = 0;
+					
+					// Special obstacles
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
+					if (at2 & 2) player_process_tile (at1, cx2, cy2, cx2, cy2 + 1);
+				} else if ((at1 & 1) || (at2 & 1)) {
+					hitv = 1;
+				}
+		#ifdef ENABLE_QUICKSANDS		
+				else {
+					if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
+				}
+		#endif
 			}
-	#ifdef ENABLE_QUICKSANDS		
-			else {
-				if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
-			}
-	#endif
-		}
+	}
 	
 	player_points_beneath ();
 	ppossee = ((at1 & 14) || (at2 & 14));
@@ -410,28 +365,34 @@ void player_move (void) {
 	#endif
 	
 	// Collision
+	rdx = prx;
 	prx = px >> 6;
 
-	cy1 = (pry + 8) >> 4;
-	cy2 = (pry + 15) >> 4;
+	if (rdx != prx) {
+		cy1 = (pry + 8) >> 4;
+		cy2 = (pry + 15) >> 4;
 
-	rds16 = pvx + pgtmx;
-	if (rds16) 	{
-		if (rds16 < 0) {
-			cx1 = cx2 = prx >> 4;
-			rda = (cx1 + 1) << 4;
-			wall = WLEFT;
-		} else {
-			cx1 = cx2 = (prx + 7) >> 4;
-			rda = ((cx1 - 1) << 4) + 8;
-			wall = WRIGHT;
-		}
-		cm_two_points ();
-		if ((at1 & 8) || (at2 & 8)) {
-			pvx = 0; prx = rda; px = prx << 6;
-		} else {
-			wall = 0;
-			hith = ((at1 & 1) || (at2 & 1));
+		rds16 = pvx + pgtmx;
+		if (rds16) 	{
+			if (rds16 < 0) {
+				cx1 = cx2 = prx >> 4; 
+				rda = (cx1 + 1) << 4;
+				rdb = cx1 - 1;
+			} else {
+				cx1 = cx2 = (prx + 7) >> 4;
+				rda = ((cx1 - 1) << 4) + 8;
+				rdb = cx1 + 1;
+			}
+			cm_two_points ();
+			if ((at1 & 8) || (at2 & 8)) {
+				pvx = 0; prx = rda; px = prx << 6;
+
+				// Special obstacles
+				if (at1 & 2) player_process_tile (at1, cx1, cy1, rdb, cy1);
+				if (at2 & 2) player_process_tile (at1, cx1, cy2, rdb, cy2);
+			} else {
+				hith = ((at1 & 1) || (at2 & 1));
+			}
 		}
 	}
 
@@ -452,9 +413,6 @@ void player_move (void) {
 		#endif
 	#endif
 
-	prx = px >> 6;
-	pry = py >> 6;
-	
 	// *************
 	// Killing tiles
 	// *************
@@ -465,53 +423,6 @@ void player_move (void) {
 		if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
 	#endif	
 	if (pstate != EST_PARP) if (phit) kill_player ();
-
-	// ************************************************
-	// Tile type 10 operations (push boxes, open locks)
-	// ************************************************
-	
-	#if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
-		ptx1 = (prx + 8) >> 4;
-		pty1 = (pry + 8) >> 4;
-		
-		#ifdef PLAYER_MOGGY_STYLE
-			if (wall == WTOP) {
-				// interact up			
-
-				#ifdef BOUNDING_BOX_8_BOTTOM
-					pty1 = (pry + 7) >> 4;
-				#endif
-
-				if (attr (ptx1, pty1) == 10) player_process_tile (ptx1, pty1, ptx1, pty1 - 1);
-			} else if (wall == WBOTTOM) {
-				// interact down
-
-				#ifdef BOUNDING_BOX_8_BOTTOM
-					pty1 = (pry + 16) >> 4;
-				#endif		
-				
-				if (attr (ptx1, pty1) == 10) player_process_tile (ptx1, pty1, ptx1, pty1 + 1);
-			} else
-		#endif	
-		
-		if (wall == WLEFT) {		
-			// interact left
-			
-			#ifdef BOUNDING_BOX_8_BOTTOM
-				ptx1 = (prx + 3) >> 4;
-			#endif		
-			
-			if (attr (ptx1, pty1) == 10) player_process_tile (ptx1, pty1, ptx1 - 1, pty1);
-		} else if (wall == WRIGHT) {
-			// interact right
-	
-			#ifdef BOUNDING_BOX_8_BOTTOM
-				ptx1 = (prx + 12) >> 4;
-			#endif		
-			
-			if (attr (ptx1, pty1) == 10) player_process_tile (ptx1, pty1, ptx1 + 1, pty1);
-		}
-	#endif	
 
 	// **************
 	// B Button stuff
@@ -547,35 +458,6 @@ void player_move (void) {
 				}	
 			}
 		} else pfiring = 0;
-	#endif
-
-	// *************
-	// Shoot Gargajo
-	// *************
-
-	#ifdef PLAYER_GARGAJO
-
-		if ((i & PAD_B) && !pgargajocounter) {
-			if (pfiring < GARGAJO_L_MAX) {
-				gp_addr = 0x2004 + (LINE_OF_TEXT << 5) + (pfiring >> 1);
-				update_list [update_index ++] = MSB (gp_addr);
-				update_list [update_index ++] = LSB (gp_addr ++);
-				update_list [update_index ++] = 9;
-				pfiring ++;
-			}
-		}
-
-		if (!(i & PAD_B)) {
-			// Have we just stopped pressing fire?
-			if (pfiring) {
-				// Shoot new gargajo
-				if (pfiring < GARGAJO_L_MIN) pfiring = GARGAJO_L_MIN;
-				fire_gargajo (pfiring);
-				pfiring = 0;
-				pgargajocounter = GARGAJO_RELOAD;
-				clean_gauge ();
-			}
-		}
 	#endif
 
 	// **********

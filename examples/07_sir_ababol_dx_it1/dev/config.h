@@ -166,6 +166,8 @@
 #define MAX_AMMO				99		// If defined, ammo is not infinite!
 #define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
 //#define INITIAL_AMMO 		0			// If defined, ammo = X when entering game.
+#define BULLET_PALETTE			1
+#define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
 */
 
 /*
