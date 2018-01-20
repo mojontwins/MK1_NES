@@ -29,6 +29,7 @@
 							} else gpjt = 1;
 						} else if (hrt == 18 && !tt_ct) {
 							if (ppodewwwr) {
+								ppodewwwr --;
 								tt_ct = 1;
 								music_stop ();
 								sfx_play (2, 1);

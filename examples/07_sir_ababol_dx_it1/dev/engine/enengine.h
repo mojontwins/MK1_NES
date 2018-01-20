@@ -288,7 +288,10 @@ void enems_move (void) {
 	
 	// Updates sprites
 	touched = 0;
-	for (gpit = 0; gpit < 3; gpit ++) {
+	en_initial ++; if (en_initial >= 3) en_initial = 0;
+	gpit = en_initial;
+	gpjt = 3; while (gpjt --) {
+		gpit += 2; if (gpit > 2) gpit -=3;
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
@@ -304,7 +307,7 @@ void enems_move (void) {
 		if (en_t [gpit]) {
 
 			// Gotten preliminary:
-			gpjt = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
+			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
 			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
@@ -375,7 +378,7 @@ void enems_move (void) {
 #ifndef PLAYER_MOGGY_STYLE
 			// Movable platforms
 
-			if (en_t [gpit] == 4 && gpjt && !pgotten && !pj) {
+			if (en_t [gpit] == 4 && pregotten && !pgotten && !pj) {
 				
 				// Horizontal moving platforms
 				
@@ -414,7 +417,7 @@ void enems_move (void) {
 				en_t [gpit] != 4
 			) {
 				if (
-					gpjt &&
+					pregotten &&
 					pry + 15 >= en_y [gpit] && 
 					pry + 8 < en_y [gpit] && 
 					pvy > 0 && 

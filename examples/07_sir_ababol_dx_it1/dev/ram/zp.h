@@ -32,6 +32,7 @@ unsigned char use_ct, no_ct;
 
 // Enemies
 
+unsigned char en_initial;
 unsigned char en_offs;
 unsigned char en_x [3], en_y [3];
 unsigned char en_x1 [3], en_y1 [3];
@@ -49,6 +50,7 @@ unsigned char en_collx, en_colly;
 unsigned char en_spr;
 unsigned char touched;
 unsigned char en_cttouched [3];
+unsigned char pregotten;
 
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 	signed int enf_x [3], enf_vx [3];

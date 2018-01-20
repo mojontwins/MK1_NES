@@ -4,7 +4,7 @@
 // Main definitions
 
 #define FIXBITS					6
-#define SPRITE_ADJUST			32 - 8 - 16 + 1
+#define SPRITE_ADJUST			32 - 8 - 16 - 1
 #define TOP_ADJUST				4
 
 // Player states

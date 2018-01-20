@@ -244,7 +244,7 @@ void player_move (void) {
 	}
 	
 	player_points_beneath ();
-	ppossee = ((at1 & 14) || (at2 & 14));
+	ppossee = pvy >= 0 && ((at1 & 14) || (at2 & 14));
 	#ifdef ENABLE_SLIPPERY
 		pice = (ppossee && ((at1 & 64) || (at2 & 64)));
 	#endif	

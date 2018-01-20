@@ -449,7 +449,7 @@ void player_move (void) {
 	if (pvy != 0) hitv = (attr (ptx1, pty1) & 1) || (attr (ptx2, pty1) & 1);
 	
 	pty1 = (pry + 16) >> 4;
-	ppossee = (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
+	ppossee = pvy >= 0 && (attr (ptx1, pty1) & 12 || attr (ptx2, pty1) & 12);
 
 // CUSTOM {
 //#ifdef PLAYER_HAS_JUMP

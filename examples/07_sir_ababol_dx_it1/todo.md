@@ -5,4 +5,4 @@
 [X] Revisar la detección de cambio de pantalla ahora que el player es 8x16
 [X] Cuando coges un item o en la pantalla no hay hotspot (revisar mejor) aparece una llave donde le da la gana. O algo así.
 [ ] No hay vida 0 y es rawro.
-[ ] Ver de enviar los enemigos a la OAM al final y cambiando el orden cada frame.
+[X] Ver de enviar los enemigos a la OAM al final y cambiando el orden cada frame.

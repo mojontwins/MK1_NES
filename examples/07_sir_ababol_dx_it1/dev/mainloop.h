@@ -101,11 +101,6 @@ void prepare_scr (void) {
 	bullets_move ();
 #endif
 
-#ifdef PLAYER_GARGAJO
-	gpit = MAX_GARGAJOS; while (gpit --) gst [gpit] = 0;
-	gargajos_move ();
-#endif
-
 #ifdef ENABLE_CONTAINERS
 	containers_init ();
 #endif
@@ -198,14 +193,13 @@ void game_loop (void) {
 #endif
 		player_move ();
 
-		enems_move ();
+		#include "mainloop/hotspots.h"
+
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
 #endif
 
-#ifdef PLAYER_GARGAJO
-		gargajos_move ();
-#endif
+		enems_move ();
 
 #ifdef BREAKABLE_ANIM
 		if (do_process_breakable) process_breakable ();
@@ -218,8 +212,6 @@ void game_loop (void) {
 #ifdef CARRY_ONE_FLAG_OBJ
 		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
 #endif
-
-		#include "mainloop/hotspots.h"
 
 		//#include "mainloop/cheat.h"
 
