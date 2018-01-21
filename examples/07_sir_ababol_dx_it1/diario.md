@@ -715,4 +715,24 @@ De entrada los hotspots no funcionan - bueno, al menos no se muestran.
 
 Ya funcionan. Ahora toca comprobar los cerrojos.
 
+20180121
+========
+
+Me he tirado este tiempo haciendo fixes para que todo funcione. Esto incluye el core (con todos los cambios y mejoras) y los elementos activos en el juego. Habría que probar mil cosas aún, pero me apetece seguir un poco con el tuto.
+
+Por ejemplo, lo siguiente que haré será:
+
+- Construir el marco y adaptar `hud.h`. Le acabo de preguntar a Anjuel (pero parece que no está disponible), porque el juego original era muy minimalista (una linea de texto con los tres marcadores arriba y una linea de texto con `SIR ABABOL - THE MOJON TWINS` debajo).
+- Discutir las customizaciones al renderer de la pantalla.
+
+Luego, para seguir, tendría que dejar listo la parte de multilevel. Quiero incluir esto en MK1 de una forma estándar:
+
+- SINGLE_LEVEL coge todos los valores de config.h (constantes).
+- MULTI_LEVEL hace que los `#define` resuelvan a variables, y se crea un array para darles valores a todas.
+
+En el tutorial se puede mencionar (y aplicar al juego) que está bien comentar algunos arrays del multi level para ahorrar espacio y tiempo.
+
+Otra cosa que tendré que tener lista para cuando toque el custom es el módulo de textos. El que usé en `in another forest` (en MK2) se puede simplificar y usar, y creo que vendría muy bien.
+
+Pero hoy estoy exhausto, dudo que haga nada. Además, tengo que hacer un TODO del juego de la compo de nesdev para tener claro qué queda por hacer y distribuírmelo en el tiempo, que quedan 10 días.
 

@@ -208,16 +208,13 @@ void draw_scr (void) {
 		gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
 	#endif
 }
-/*
+
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
-	gp_addr = ((y<<5) + x + 0x2000);
-	vram_adr (gp_addr);
-	while (gpit = *s++) {
-		//vram_adr (gp_addr++);
-		if (gpit != '_') vram_put (gpit - 32); else vram_put (0);
-	}
+	vram_adr (((y << 5) | x) + 0x2000);
+	while (gpit = *s++) vram_put (gpit - 32); 
 }
 
+/*
 void pr_str_upd (unsigned char *s) {
 	gp_addr = 0x2000 + (LINE_OF_TEXT << 5) + LINE_OF_TEXT_X;
 	while (1) {
@@ -228,7 +225,6 @@ void pr_str_upd (unsigned char *s) {
 	}
 }
 */
-
 
 #ifdef DEBUG
 unsigned char get_hex_digit (unsigned char n) {

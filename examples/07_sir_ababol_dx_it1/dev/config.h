@@ -231,12 +231,12 @@
 
 #define SCR_Y					4		// 0, 2 or 4.
 
-#define LIFE_X					4		//
-#define LIFE_Y					2		// Life gauge counter character coordinates
-#define OBJECTS_X				7		//
-#define OBJECTS_Y				2		// Objects counter character coordinates
-#define KEYS_X					10		//
-#define KEYS_Y					2		// Keys counter character coordinates
+#define LIFE_X					7		//
+#define LIFE_Y					3		// Life gauge counter character coordinates
+#define OBJECTS_X				18		//
+#define OBJECTS_Y				3		// Objects counter character coordinates
+#define KEYS_X					28		//
+#define KEYS_Y					3		// Keys counter character coordinates
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
 //#define AMMO_X				8		// 
