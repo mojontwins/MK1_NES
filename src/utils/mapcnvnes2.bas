@@ -4,8 +4,18 @@
 sub usage () 
 	Print "Usage:"
 	Print 
-	Print "$ MapCnvNes mapa.map map_w map_h scr_w scr_h bolt prefix [offset] [packed|zerostrungpacked]"
+	Print "$ MapCnvNes in.map out.h w h tlock prefix [offset] [packed|zerostrungpacked]"
 end sub
+
+Function inCommand (a As String) As Integer
+	Dim As Integer i
+	i = 1
+	While (Command (i) <> "")
+		If Command (i) = a Then Return -1
+		i = i + 1
+	Wend
+	Return 0
+End Function
 
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt, locksI
 Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset, bx, by, cx, cy, rp0, bytecnt
@@ -29,22 +39,16 @@ Dim As MyBolt Bolts (100)
 
 Print "MK1 v1.0 mapcnvnes2 ~ ";
 
-if 	Command (1) = "" Or _
-	Val (Command (2)) <= 0 Or _
-	Val (Command (3)) <= 0 Or _
-	Val (Command (4)) <= 0 Or _
-	Val (Command (5)) <= 0 Or _
-	Val (Command (6)) <= 0 Then
-	
+if Command (6) = "" THen
 	usage ()
 	end
 End If
 
-map_w = Val (Command (2))
-map_h = Val (Command (3))
-scr_w = Val (Command (4))
-scr_h = Val (Command (5))
-bolt = Val (Command (6))
+map_w = Val (Command (3))
+map_h = Val (Command (4))
+scr_w = 16
+scr_h = 12
+bolt = Val (Command (5))
 
 mapPants = map_w * map_h
 
@@ -54,18 +58,20 @@ For i = 0 To mapPants - 1
 Next i
 locksI = 0
 
-prefix = Command (7)
+prefix = Command (6)
 
-offset = Val (Command (8))
+For i = 7 To 8
+	If Val (Command (i)) Then offset = Val (Command (i))
+Next i
+If offset Then Print "Offset " & offset & " ~ ";
 
-if lcase(Command (9)) = "packed" Or lcase(Command (8)) = "packed" then
+If inCommand ("packed") Then
 	packed = 1
-elseif lcase (Command (9)) = "zerostrungpacked" Or lcase (Command (8)) = "zerostrungpacked" Then
+ElseIf inCommand ("zerostrungpacked")  Then
 	packed = 2
 Else
 	packed = 0
-end if
-
+End If
 
 ' Leemos el mapa original
 
@@ -85,7 +91,7 @@ close f
 
 ' Construimos el nuevo mapa mientras rellenamos el array de cerrojos
 
-open prefix & ".h" for output as #f
+open Command (2) for output as #f
 
 print #f, "// " & prefix & ".h"
 print #f, "// Generated with mapcnvnes2.exe"
@@ -93,6 +99,7 @@ print #f, "// Copyleft 2013, 2017 The Mojon Twins"
 print #f, ""
 Print #f, "// Map Size Is " & map_w & "x" & map_h
 Print #f, "// Screen Size Is " & scr_w & "x" & scr_h
+print #f, ""
 
 if packed < 2 Then print #f, "const unsigned char " & prefix & " [] = {"
 
@@ -121,15 +128,19 @@ for yy = 0 To map_h - 1
 					locksI = locksI + 1
 				end if
 				
-				If BigOrigMap (cy, cx) > 15 Then
-					' Write to decos
-					founddecos = -1
-					Print "Found decos ~ ";
-					decosXY (nPant, decosI (nPant)) = x * 16 + y
-					decos (nPant, decosI (nPant)) = d
-					decosI (nPant) = decosI (nPant) + 1
-					' Reset to previous (so there's more repetitions)
-					BigOrigMap (cy, cx) = dp
+				If packed <> 0 Then
+					If BigOrigMap (cy, cx) > 15 Then
+						' Write to decos
+						If Not founddecos Then
+							founddecos = -1
+							Print "Found decos ~ ";
+						End If
+						decosXY (nPant, decosI (nPant)) = cx * 16 + cy
+						decos (nPant, decosI (nPant)) = BigOrigMap (cy, cx)
+						decosI (nPant) = decosI (nPant) + 1
+						' Reset to previous (so there's more repetitions)
+						BigOrigMap (cy, cx) = dp
+					End If
 				End If
 
 				if packed = 0 then
@@ -210,7 +221,7 @@ print #f, " "
 Print " Wrote ";
 If packed = 1 Then Print "packed ";
 If packed = 2 Then Print "zerostrungpacked ";
-Print "map data (" & bytecnt & " bytes) ~ ";
+Print "MAP (" & bytecnt & " bytes) ~ ";
 
 ' Process decos
 If founddecos Then 

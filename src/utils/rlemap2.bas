@@ -7,15 +7,25 @@ Const STATE_STRING = 2
 Sub usage
 	Print "Usage:"
 	Print 
-	Print "$ rlemap.exe in.map out.h w h tlock prefix [scrsizes] [nodecos]"
+	Print "$ rlemap.exe in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos]"
 End Sub
 
 Function even (i As Integer) As Integer 
 	Return ((i And 1) = 0)
 End Function
 
+Function inCommand (a As String) As Integer
+	Dim As Integer i
+	i = 1
+	While (Command (i) <> "")
+		If Command (i) = a Then Return -1
+		i = i + 1
+	Wend
+	Return 0
+End Function
+
 Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, mapsize, decosize, scrsize, founddecos
-Dim As Integer scrsizes, nodecos
+Dim As Integer scrsizes, nodecos, offset
 Dim As Integer mapWtiles, mapPants, tLock, locksI, state, tileStrI, decoT, decoCt, XYct
 Dim As Integer counter
 Dim As String o, prefix
@@ -46,8 +56,15 @@ mapPants = mapW * mapH
 tLock = Val (Command (5))
 prefix = Command (6)
 
-scrsizes = (Command (7) = "scrsizes" Or Command (8) = "scrsizes")
-nodecos = (Command (7) = "nodecos" Or Command (8) = "nodecos")
+'scrsizes = (Command (7) = "scrsizes" Or Command (8) = "scrsizes")
+'nodecos = (Command (7) = "nodecos" Or Command (8) = "nodecos")
+scrsizes = inCommand ("scrsizes")
+nodecos = inCommand ("nodecos")
+
+For i = 7 To 9
+	If Val (Command (i)) Then offset = Val (Command (i))
+Next i
+If offset Then Print "Offset " & offset & " ~ ";
 
 ' Read map to big array
 'Redim m (mapPants - 1, SCR_W * SCR_H - 1)
@@ -75,6 +92,8 @@ founddecos = 0
 While Not Eof (f)
 	' Read from file
 	Get #f, , d
+	' Offset
+	d = d - offset
 	' Screen coordinates
 	xx = (i \ SCR_W) Mod  mapW
 	yy = i \ (SCR_W * SCR_H * mapW)
@@ -86,8 +105,10 @@ While Not Eof (f)
 	' Is d a decoration' 
 	If d >= 16 Then
 		' Write to decos
-		founddecos = -1
-		Print "Found decos ~ ";
+		If Not founddecos Then 
+			founddecos = -1
+			Print "Found decos ~ ";
+		End If
 		decosXY (nPant, decosI (nPant)) = x * 16 + y
 		decos (nPant, decosI (nPant)) = d
 		decosI (nPant) = decosI (nPant) + 1
