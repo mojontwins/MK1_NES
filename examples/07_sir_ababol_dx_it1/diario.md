@@ -872,3 +872,7 @@ Lo próximo es:
 
 Ojo como todo eso de arriba es muy compatible con meter más niveles independientes (game B, anyone?).
 
+~~
+
+Voy a intentar hacer funcionar Sgt. Helmet's Training Day con esta versión de MK1. A ver qué tal. Sigo en un diario.md en su propia carpeta.
+

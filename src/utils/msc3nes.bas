@@ -1818,7 +1818,7 @@ If actionsUsed (&HE1) Then
 	print #f2, "					case 0xE1:"
 	print #f2, "						// SHOW"
 	print #f2, "						// Opcode: E1"
-	print #f2, "						sp_UpdateNow ();"
+	print #f2, "						ppu_waitnmi ();"
 	print #f2, "						break;"
 End If
 

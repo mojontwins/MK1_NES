@@ -21,7 +21,7 @@ Dim As Integer map_w, map_h, scr_w, scr_h, bolt, locksI
 Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, npant, iddecos, decosTT, offset, bx, by, cx, cy, rp0, bytecnt
 Dim As Byte d, dp
 Dim As String o, prefix
-Dim As Integer BigOrigMap (255, 255)
+Dim Shared As Integer BigOrigMap (1024, 1024)
 Dim As uByte decos (127, 127)
 Dim As uByte decosXY (127, 127), XY (127)
 Dim As uByte decosO (127, 127)
@@ -83,6 +83,7 @@ Open Command (1) for binary as #f
 For y = 0 To (map_h * scr_h - 1)
 	For x = 0 To (map_w * scr_w - 1)
 		get #f , , d
+		'?x, y, d, offset
 		BigOrigMap (y, x) = d - offset
 	Next x
 Next y
@@ -101,7 +102,7 @@ Print #f, "// Map Size Is " & map_w & "x" & map_h
 Print #f, "// Screen Size Is " & scr_w & "x" & scr_h
 print #f, ""
 
-if packed < 2 Then print #f, "const unsigned char " & prefix & " [] = {"
+if packed < 2 Then print #f, "const unsigned char map_" & prefix & " [] = {"
 
 locksI = 0: decosTT = 0
 bytecnt = 0
@@ -212,7 +213,7 @@ for yy = 0 To map_h - 1
 		print #f, o
 		if packed = 2 Then Print #f, "};"
 	next xx
-	if yy < map_h - 1 then print #f, "    "
+	if map_w <> 1 And yy < map_h - 1 then print #f, "    "
 next yy
 print #f, "};"
 
@@ -301,20 +302,19 @@ if locksI > 0 Then
 	Print #f, "// Locks"
 	Print #f, "// Format: NP YX ..."
 	print #f, ""
-	print #f, "#define MAX_LOCKS_" & prefix & " " & locksI
+	print #f, "#define N_BOLTS_" & prefix & " " & locksI
 	print #f, ""
 	print #f, "const unsigned char map_" & prefix & "_locks [] = {"
-	
-	for j = 0 to i - 1
-		o = "	" + "0x" & Lcase (Hex(bolts(j).np, 2)) + ", " + "0x" & Lcase (Hex(bolts(j).y * 16 + bolts(j).x, 2))
-		if j < i - 1 then o = o + ","
-		print #f, o
+	Print #f, "	";
+	for j = 0 to locksI - 1
+		Print #f, "0x" & Lcase (Hex(bolts(j).np, 2)) + ", " + "0x" & Lcase (Hex(bolts(j).y * 16 + bolts(j).x, 2));
+		if j < locksI - 1 then Print #f, ", ";
 	next j
-	
+	Print #f, ""
 	print #f, "};"
 else
 	print #f, ""
-	print #f, "#define MAX_LOCKS_" & prefix & " " & locksI
+	print #f, "#define N_BOLTS_" & prefix & " " & locksI
 end if
 print #f, " "
 close f

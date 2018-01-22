@@ -1,0 +1,70 @@
+# import_patterns.spt
+# Imports patterns for Sgt. Helmet's Training Day (test)
+
+# This is a mkts.exe script file
+# Needs mkts v0.7.0 20170725
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+# Dummy cut as metatiles new patterns found in frame.png.
+# this is a workaround which works so good ...
+OPEN frame.png
+PALS palts0.png
+MAPFILE ..\dev\work\dummy0.h
+LABEL dummy0
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Tilesets are generated as tilemaps. They will be stored in this file:
+MAPFILE ..\dev\assets\tiledata.h
+
+# ts0
+OPEN ts0.png
+PALS palts0.png
+LABEL ts0
+MAPPED 0, 0, 2, 2, 16, 2
+
+# Done with patterns for bg. Reset and fill with zeroes:
+RESETPOOL
+FILL 4096
+
+# Bank 1 (patterns for spr)
+
+# All sprites are in the same file, and use the same palette
+OPEN ss.png
+PALS palss0.png
+
+# Bits: just the bullet, will be pattern 0 and use palette 3
+CHARSET 2, 4, 1, 1
+
+# Metasprites will be stored in this file:
+MAPFILE ..\dev\assets\spritedata.h
+
+# Main player, 8 frames, 2x2 patterns. No need for flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, -8).
+# (player active rectangle is 8x16, centered bottom).
+LABEL sspl
+METASPRITESET 0, 0, 2, 2, 8, 1, 0, -8
+
+# Enemies, 8 frames, 2x2 patterns. No need for flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssen
+METASPRITESET 0, 2, 2, 2, 8, 1, 0, -8
+
+# Explosion, 1 frame, 2x2 patterns. No need for flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssexpl
+METASPRITESET 0, 4, 2, 2, 1, 1, 0, 0
+
+# Items, 4 faces, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) (is 0, 0).
+# (items rectangle is 16x16, centered bottom).
+LABEL ssit
+METASPRITESET 3, 4, 2, 2, 4, 1, 0, 0
+
+# Done with patterns for spr. Fill with zeroes:
+FILL 8192
