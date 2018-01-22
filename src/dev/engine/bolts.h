@@ -7,15 +7,15 @@
 void bolts_load (void) {
 	gp_gen = (unsigned char *) (c_locks);
 	gpit = c_max_bolts; while (gpit --) {
-		lknp [gpit] = *gp_gen++;
-		lkyx [gpit] = *gp_gen++;
 		lkact [gpit] = 1;
 	}	
 }
 
 void clear_cerrojo (unsigned char yx) {
+	gp_gen = (unsigned char *) c_locks;
 	gpit = c_max_bolts; while (gpit --) {
-		if (n_pant == lknp [gpit] && yx == lkyx [gpit]) {
+		rda = *gp_gen ++; rdb = *gp_gen ++;
+		if (n_pant == rda && yx == rdb) {
 			lkact [gpit] = 0;
 		}
 	}

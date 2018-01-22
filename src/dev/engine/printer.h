@@ -60,14 +60,14 @@ void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {
 	rdc = (x >> 2) + ((y >> 2) << 3);
 	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
 	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (tileset_pals [tl] << (rdb << 1));
+	rda = (rda & bitmasks [rdb]) | (c_ts_pals [tl] << (rdb << 1));
 	attr_table [rdc] = rda;
 }
 
 void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	upd_attr_table (x, y, tl);
 	
-	gp_tmap = tsmap + (tl << 2);
+	gp_tmap = c_ts_tmaps + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
@@ -86,7 +86,7 @@ void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	
 	// tiles
 	//tl = (16 + tl) << 2;
-	gp_tmap = tsmap + (tl << 2);
+	gp_tmap = c_ts_tmaps + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
 	ul_putc (*gp_tmap ++);
 	ul_putc (*gp_tmap ++);
@@ -97,14 +97,17 @@ void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	map_buff [x + (y << 4)] = n;
-	map_attr [x + (y << 4)] = tbehs [n];
+	map_attr [x + (y << 4)] = c_behs [n];
 	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
 void draw_map_tile (unsigned char t) {
-	rda = rdx + (rdy << 4);
-	map_buff [rda] = t;		
-	map_attr [rda] = tbehs [t];
+	map_buff [rdm] = t;		
+	map_attr [rdm] = c_behs [t];
+	#ifdef BREAKABLE_WALLS
+		brk_buff [rdm] = 1;
+	#endif
+	rdm ++;
 	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
@@ -115,95 +118,103 @@ unsigned char get_byte (void) {
 
 void draw_scr (void) {
 
-	// What
-	level = (n_pant == 0 || n_pant == 60 || 
-		(n_pant >= 57 && n_pant <= 59) ||
-		(n_pant >= 76 && n_pant <= 79) );
-
 	// Draw current screen
 	set_rand (n_pant + 1);
-	rdx = rdy = 0;
+	rdx = 0; rdy = 0; rdm = 0;
 
-	// Get pointer
-	gp_gen = (unsigned char *) c_map [n_pant];
-
-	// Full or RLE'd?
-	
-	if (rdit = *gp_gen ++) {
-		while (rdit) {
-			rdct = get_byte ();
-			if (rdct & 0xf0) {
-				// String
-				rdct = 1 + (rdct & 0x0f);
-				while (rdct --) {
-					rdt = get_byte ();
-					draw_map_tile (rdt >> 4);
-					if (rdy < 12) draw_map_tile (rdt & 15);
-				}
-			} else {
-				// Counter
-				rdt = rdct & 0x0f;
-				rdct = get_byte ();
-				while (rdct --) draw_map_tile (rdt);
-			}
-		}
-
-	} else {
+	#ifdef MAP_FORMAT_PACKED
+		// Get pointer
+		gp_gen = c_map + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
+		
+		// Draw packed
 		rdit = 96; while (rdit --) {
 			rdt = *gp_gen ++;
 			draw_map_tile (rdt >> 4);
 			draw_map_tile (rdt & 15);
 		}
-	}
+	#endif
 
-	// Draw decorations
-	if (c_decos [n_pant]) {
-		gp_gen = (unsigned char *) c_decos [n_pant];
-	
-		while (rdt = *gp_gen ++) {
-			if (rdt & 0x80) {
-				rdt &= 0x7F;
-				rdct = 1;
-			} else {
-				rdct = *gp_gen ++;
+	#ifdef MAP_FORMAT_RLE16
+		// Get pointer
+		gp_gen = c_map [n_pant];
+
+		// Packed or RLE'd?
+		if (rdit = *gp_gen ++) {
+			while (rdit) {
+				rdct = get_byte ();
+				if (rdct & 0xf0) {
+					// String
+					rdct = 1 + (rdct & 0x0f);
+					while (rdct --) {
+						rdt = get_byte ();
+						draw_map_tile (rdt >> 4);
+						if (rdy < 12) draw_map_tile (rdt & 15);
+					}
+				} else {
+					// Counter
+					rdt = rdct & 0x0f;
+					rdct = get_byte ();
+					while (rdct --) draw_map_tile (rdt);
+				}
 			}
-			while (rdct --) {
-				rda = *gp_gen ++;
-				rdx = rda >> 4; rdy = rda & 15;
-				draw_map_tile (rdt);
+		} else {
+			rdit = 96; while (rdit --) {
+				rdt = *gp_gen ++;
+				draw_map_tile (rdt >> 4);
+				draw_map_tile (rdt & 15);
 			}
 		}
-	}
+	#endif	
+
+	#ifdef MAP_WITH_DECORATIONS
+		// Draw decorations
+		if (c_decos) {
+			if (c_decos [n_pant]) {
+				gp_gen = (unsigned char *) c_decos [n_pant];
+			
+				while (rdt = *gp_gen ++) {
+					if (rdt & 0x80) {
+						rdt &= 0x7F;
+						rdct = 1;
+					} else {
+						rdct = *gp_gen ++;
+					}
+					while (rdct --) {
+						rda = *gp_gen ++;
+						rdx = rda >> 4; rdy = rda & 15;
+						draw_map_tile (rdt);
+					}
+				}
+			}
+		}
+	#endif
 
 	// Clear open locks
-#ifndef DEACTIVATE_KEYS	
-	gpit = c_max_bolts; while (gpit --) {
-		if (n_pant == lknp [gpit]) {
-			if (!lkact [gpit]) {
-				rdy = (lkyx [gpit] >> 4);
-				rdx = (lkyx [gpit] & 15);
-				draw_map_tile (rdct);
+	#ifndef DEACTIVATE_KEYS	
+		gp_gen = (unsigned char *) c_locks;
+		gpit = c_max_bolts; while (gpit --) {
+			rda = *gp_gen ++; rdm = *gp_gen ++;
+			if (n_pant == rda) {
+				if (!lkact [gpit]) {
+					rdy = (rdm >> 4); rdx = (rdm & 15);
+					draw_map_tile (0);
+				}
 			}
-		}
-	}	
-#endif
+		}	
+	#endif
 
-#ifdef BREAKABLE_ANIM
-	do_process_breakable = 0;
-	gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
-#endif
-
+	#ifdef BREAKABLE_ANIM
+		do_process_breakable = 0;
+		gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
+	#endif
 }
-/*
+
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
-	gp_addr = ((y<<5) + x + 0x2000);
-	vram_adr (gp_addr);
-	while (gpit = *s++) {
-		//vram_adr (gp_addr++);
-		if (gpit != '_') vram_put (gpit - 32); else vram_put (0);
-	}
+	vram_adr (((y << 5) | x) + 0x2000);
+	while (gpit = *s++) vram_put (gpit - 32); 
 }
 
+/*
 void pr_str_upd (unsigned char *s) {
 	gp_addr = 0x2000 + (LINE_OF_TEXT << 5) + LINE_OF_TEXT_X;
 	while (1) {
@@ -214,7 +225,6 @@ void pr_str_upd (unsigned char *s) {
 	}
 }
 */
-
 
 #ifdef DEBUG
 unsigned char get_hex_digit (unsigned char n) {

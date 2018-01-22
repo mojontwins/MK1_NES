@@ -18,11 +18,11 @@
 				n_pant += MAP_W;
 				py = 0;
 #else
-			} else if (pry == 0 && (pvy < 0) && n_pant >= MAP_W) {
+			} else if (pry == 0 && pvy < 0 && n_pant >= MAP_W) {
 				n_pant -= MAP_W;
 				py = 192 << FIXBITS;
 				if (pvy > -192) pvy = -192;
-			} else if (pry >= 192 && (pvy > 0)) {
+			} else if (pry >= 192 && pvy > 0) {
 				n_pant += MAP_W;
 				py = 0;
 #endif				

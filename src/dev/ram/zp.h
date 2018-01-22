@@ -3,24 +3,36 @@
 
 // zp
 
+// General, all-purpose variables
+
 unsigned char i, gpit, gpjt, gpitu, gpaux;
 signed int rds16;
-unsigned char half_life, frame_counter;
 
-unsigned char n_pant, on_pant;
-
-unsigned char *gp_gen, *gp_tmap, *gp_tma2;
+const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
-unsigned char rda, rdb, rdc;
+unsigned char rda, rdb, rdc, rdm;
+unsigned char rds;
 unsigned char rdct;
 
-unsigned char olife, okeys, oobjs, oammo, okilled;
+// Used for two-points collision
+
+unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
+
+// Sprite related
 
 unsigned char oam_index;
 
+// Game flow
+
+unsigned char half_life, frame_counter;
+unsigned char n_pant, on_pant;
+unsigned char olife, okeys, oobjs, oammo, okilled;
+unsigned char use_ct, no_ct;
+
 // Enemies
 
+unsigned char en_initial;
 unsigned char en_offs;
 unsigned char en_x [3], en_y [3];
 unsigned char en_x1 [3], en_y1 [3];
@@ -33,11 +45,12 @@ unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 	unsigned char en_generator_life [3], gen_was_hit [3];
 #endif
 
-unsigned char en_fr, etx1, etx2, ety1, ety2;
+unsigned char en_fr;
 unsigned char en_collx, en_colly;
 unsigned char en_spr;
 unsigned char touched;
 unsigned char en_cttouched [3];
+unsigned char pregotten;
 
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 	signed int enf_x [3], enf_vx [3];
@@ -49,6 +62,7 @@ unsigned char en_cttouched [3];
 // Main player
 
 signed int px, py, pvx, pvy;
+unsigned char prx, pry;
 unsigned char pfacing, pfr, pctfr, psprid;
 
 #ifdef PLAYER_MOGGY_STYLE
@@ -76,10 +90,6 @@ signed int pgtmx, pgtmy;
 unsigned char pinv;
 #endif
 
-// Aux player
-
-unsigned char prx, pry, ptx1, ptx2, pty1, pty2;
-
 #ifdef PLAYER_MOGGY_STYLE
 	unsigned char pfacingv, pfacingh;
 #endif
@@ -99,12 +109,9 @@ unsigned char wall, hitv, hith;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
 	signed char bmx [MAX_BULLETS];
-#ifdef PLAYER_MOGGY_STYLE
-
-signed char bmy [MAX_BULLETS];
-
-#endif
-	unsigned char btx, bty;
+	#ifdef PLAYER_MOGGY_STYLE
+		signed char bmy [MAX_BULLETS];
+	#endif
 #endif
 
 #ifdef PLAYER_GARGAJO
@@ -123,21 +130,28 @@ unsigned char hrx, hry, hrt;
 
 unsigned char ft;
 
-// Gfx sets
-//char **spr_enems, **spr_player;
-
-// Level control
-
 // Current level
-unsigned char **c_map;
-unsigned char **c_decos;
-unsigned char *c_locks;
-unsigned char *c_enems;
-unsigned char *c_hotspots;
-unsigned char *c_pal_bg;
-unsigned char *c_pal_fg;
+
+const unsigned char *c_pal_bg;
+const unsigned char *c_pal_fg;
+const unsigned char *c_ts_pals;
+const unsigned char *c_ts_tmaps;
+const unsigned char *c_behs;
+
+const unsigned char * const *spr_enems;
+
+#ifdef MAP_FORMAT_PACKED
+	const unsigned char *c_map;
+#else
+	const unsigned char * const *c_map;
+#endif
+	
+#ifdef MAP_WITH_DECORATIONS
+	const unsigned char * const *c_decos;
+#endif
+
+const unsigned char *c_locks;
+const unsigned char *c_enems;
+const unsigned char *c_hotspots;
+
 unsigned char c_max_bolts;
-
-unsigned char *tileset_pals;
-unsigned char *tsmap;
-

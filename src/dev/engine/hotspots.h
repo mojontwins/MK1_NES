@@ -17,11 +17,29 @@ void hotspots_load (void) {
 	}	
 }
 
-// v1.0: Simple. Modify/expand when needed.
+void hotspots_paint (void) {
+	oam_index = oam_meta_spr (
+		hrx, hry + SPRITE_ADJUST, 
+		oam_index, 
+		spr_hs [hrt]
+	);
+}
+
 void hotspots_create (void) {
+	
+#ifdef HOTSPOTS_WONT_CHANGE
+
+	gp_gen = (unsigned char *) (c_hotspots + (n_pant << 1));
+	hrt = *gp_gen ++; rda = *gp_gen; 
+	if (hrt && hact [n_pant]) {
+		hry = rda & 0xf0; hrx = rda << 4;
+		hotspots_paint ();
+	} else hrt = 0;
+
+#else
+
 	hrt = 0;
 
-#ifndef HOTSPOTS_WONT_CHANGE
 	if (ht [n_pant] && hact [n_pant]) {
 		if (hact [n_pant]) {
 			hrt = ht [n_pant];
@@ -31,24 +49,8 @@ void hotspots_create (void) {
 	if (hrt) {
 		hrx = hyx [n_pant] >> 4;
 		hry = hyx [n_pant] & 0xf0;
-		
-		oam_index = oam_meta_spr (
-			hrx, hry + SPRITE_ADJUST, 
-			oam_index, 
-			spr_hs [hrt]
-		);
+		hotspots_paint ();
 	}	
-#else
-	gp_gen = (unsigned char *) c_hotspots; gp_gen += (n_pant << 1);
-	rdb = *gp_gen ++; rda = *gp_gen; 
-	if (rdb && hact [n_pant]) {
-		hrt = rdb;
-		hrx = rda & 0xf0; hry = rda << 4;
-		oam_index = oam_meta_spr (
-			hrx, hry + SPRITE_ADJUST, 
-			oam_index, 
-			spr_hs [hrt]
-		);
-	} 
+
 #endif
 }

@@ -13,7 +13,7 @@ void enems_kill (unsigned char gpit) {
 	#endif
 
 	#ifdef ACTIVATE_SCRIPTING
-		run_script (2 * MAP_W * MAP_H + 5);
+		run_script (2 * MAP_SIZE + 5);
 	#endif
 
 		pkilled ++;
@@ -46,7 +46,7 @@ void enems_kill (unsigned char gpit) {
 #ifdef PERSISTENT_ENEMIES
 	void enems_persistent_load (void) {
 		gp_gen = (unsigned char *) (c_enems);
-		for (ep_it = 0; ep_it < 3 * MAP_W * MAP_H; ep_it ++) {
+		for (ep_it = 0; ep_it < 3 * MAP_SIZE; ep_it ++) {
 			// Skip t
 			rdt = *gp_gen ++; if (rdt && rdt != 4) BADDIES_COUNT ++;
 
@@ -83,7 +83,7 @@ void enems_kill (unsigned char gpit) {
 
 #ifdef PERSISTENT_DEATHS
 	void enems_persistent_deaths_load (void) {
-		gpit = MAP_W * MAP_H * 3; while (gpit --) {
+		gpit = MAP_SIZE * 3; while (gpit --) {
 			ep_flags [gpit] |= 0x01;
 		}
 	}
@@ -126,38 +126,30 @@ void enems_load (void) {
 			en_t [gpit] = *gp_gen ++;
 
 			// General...
-#ifdef PERSISTENT_ENEMIES
-			// XY1
-			rda = *gp_gen ++;
-			en_x1 [gpit] = rda & 0xf0;
-			en_y1 [gpit] = rda << 4;
 
-			// XY2
+			// YX1
 			rda = *gp_gen ++;
-			en_x2 [gpit] = rda & 0xf0;
-			en_y2 [gpit] = rda << 4;
+			en_y1 [gpit] = rda & 0xf0;
+			en_x1 [gpit] = rda << 4;
+
+			// YX2
+			rda = *gp_gen ++;
+			en_y2 [gpit] = rda & 0xf0;
+			en_x2 [gpit] = rda << 4;
 		
 			// P, here used for speed
 			rda = *gp_gen ++;
 
-			// But...
+#ifdef PERSISTENT_ENEMIES
+			// Copy position & direction from ep_*
 			en_x [gpit] = ep_x [rdc];
 			en_y [gpit] = ep_y [rdc];
 			en_mx [gpit] = ep_mx [rdc];
 			en_my [gpit] = ep_my [rdc];
 #else
-			// XY1
-			rda = *gp_gen ++;
-			en_x [gpit] = en_x1 [gpit] = rda & 0xf0;
-			en_y [gpit] = en_y1 [gpit] = rda << 4;
-
-			// XY2
-			rda = *gp_gen ++;
-			en_x2 [gpit] = rda & 0xf0;
-			en_y2 [gpit] = rda << 4;
-
-			// P, here used for speed
-			rda = *gp_gen ++;
+			// Initialize position & direction from ROM
+			en_x [gpit] = en_x1 [gpit];
+			en_y [gpit] = en_y1 [gpit];
 			en_mx [gpit] = add_sign (en_x2 [gpit] - en_x1 [gpit], rda);
 			en_my [gpit] = add_sign (en_y2 [gpit] - en_y1 [gpit], rda);
 #endif
@@ -296,7 +288,10 @@ void enems_move (void) {
 	
 	// Updates sprites
 	touched = 0;
-	for (gpit = 0; gpit < 3; gpit ++) {
+	en_initial ++; if (en_initial >= 3) en_initial = 0;
+	gpit = en_initial;
+	gpjt = 3; while (gpjt --) {
+		gpit += 2; if (gpit > 2) gpit -=3;
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
@@ -312,7 +307,7 @@ void enems_move (void) {
 		if (en_t [gpit]) {
 
 			// Gotten preliminary:
-			gpjt = (prx + 11 >= en_x [gpit] && prx <= en_x [gpit] + 11);
+			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
 			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
@@ -383,7 +378,7 @@ void enems_move (void) {
 #ifndef PLAYER_MOGGY_STYLE
 			// Movable platforms
 
-			if (en_t [gpit] == 4 && gpjt && !pgotten && !pj) {
+			if (en_t [gpit] == 4 && pregotten && !pgotten && !pj) {
 				
 				// Horizontal moving platforms
 				
@@ -411,17 +406,20 @@ void enems_move (void) {
 
 			// Step over enemy
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING)
+#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
 			if (
 	#ifdef PLAYER_MIN_KILLABLE
 				(en_t [gpit] >= PLAYER_MIN_KILLABLE) &&
-	#endif				
-				en_t [gpit] != 8 && 
+	#endif
+	#ifdef ENABLE_SAW
+				en_t [gpit] != 8 &&
+	#endif 
 				en_t [gpit] != 4
 			) {
 				if (
-					collide (prx, pry, en_x [gpit], en_y [gpit] - 4) && 
-					pry + 2 < en_y [gpit] && 
+					pregotten &&
+					pry + 15 >= en_y [gpit] && 
+					pry + 8 < en_y [gpit] && 
 					pvy > 0 && 
 					!pgotten && 
 					!ppossee
@@ -440,7 +438,7 @@ void enems_move (void) {
 					} else 
 #endif
 					{
-						j = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
 						sfx_play (7, 0);
 					}
 

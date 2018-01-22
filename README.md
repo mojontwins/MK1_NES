@@ -11,7 +11,7 @@ The library was discontinued in early 2015 and was superseeded by the new **MT E
 
 I've decided to clean **MT Engine MK1 NES** and make it useable. I *might even write a tutorial*. This is old code, but it might be useful for somebody.
 
-**Notice: current code in /src won't work as it is being revised for a final v1.0. Use releases->tags for old working code. Watch for this notice to be removed**
+**Notice: current code in /src may not work as it is being revised for a final v1.0. Use releases->tags for old working code. Watch for this notice to be removed**
 
 Credits
 =======

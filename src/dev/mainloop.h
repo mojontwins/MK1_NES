@@ -6,16 +6,9 @@
 void game_init (void) {
 	game_over = 0;
 
-	c_map = (unsigned char **) (map_0);
-	c_decos = (unsigned char **) (map_0_decos);
-	c_enems = (unsigned char *) (enems_0);
-	c_hotspots = (unsigned char *) (hotspots_0);
-	c_pal_bg = (unsigned char *) mypal_game_bg0;
-	c_pal_fg = (unsigned char *) mypal_game_fg0;
-	c_max_bolts = MAX_BOLTS;
-	tsmap = (unsigned char *) (ts1_tmaps);
-	tileset_pals = (unsigned char *) (ts1_pals);
-	
+	// Assets setup. Selects tileset, map, palettes, etc.
+	#include "mainloop/asset_setup.h"
+
 	pal_bg (c_pal_bg);
 	pal_spr (c_pal_fg);
 
@@ -25,8 +18,7 @@ void game_init (void) {
 	//clean_gauge ();
 
 	n_pant = SCR_INI;
-	on_pant = 99;
-
+	
 	hotspots_load ();
 #ifndef DEACTIVATE_KEYS		
 	bolts_load ();
@@ -42,13 +34,20 @@ void game_init (void) {
 #ifdef CLEAR_FLAGS
 	msc_clear_flags ();
 #endif
+
+	pobjs = 0;
+	pkeys = 0;
+
 	half_life = 0;
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
+
+	// n_pant = 2; pkeys = 1;
 }
 
 void prepare_scr (void) {
+	clear_update_list ();
 	if (!ft) fade_out (); else ft = 0;
 	
 #ifdef ENABLE_PROPELLERS
@@ -73,14 +72,18 @@ void prepare_scr (void) {
 	oam_index = 4+24; // 4 + what the player takes.
 
 	oam_hide_rest (0);
+	clear_update_list ();
 	draw_scr ();
-	hotspots_create ();
-	
+	hotspots_create ();	
 	// Write attributes
 	vram_write (attr_table, 0x23c0, 64);
 
 #ifdef LINE_OF_TEXT
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
+#endif
+
+#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_MOGGY_STYLE))
+	player_register_safe_spot ();
 #endif
 
 	player_move ();
@@ -92,50 +95,87 @@ void prepare_scr (void) {
 	bullets_move ();
 #endif
 
-#ifdef PLAYER_GARGAJO
-	gpit = MAX_GARGAJOS; while (gpit --) gst [gpit] = 0;
-	gargajos_move ();
-#endif
-
+#ifdef ENABLE_CONTAINERS
 	containers_init ();
+#endif
 	
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
 #ifdef ACTIVATE_SCRIPTING
 	// Entering any script
-	run_script (2 * MAP_W * MAP_H + 1);
+	run_script (2 * MAP_SIZE + 1);
 	// This room script
 	run_script (n_pant + n_pant);
 #endif
+
+#ifdef ENABLE_CONTAINERS	
 	containers_draw ();
+#endif
+
 	oam_hide_rest (oam_index);
+	hud_update ();
 	ppu_waitnmi ();
+	clear_update_list ();
 	fade_in ();
 }
 
 void game_loop (void) {
+	music_play (m_ingame);
 
-	music_play (m_ingame_1);
+	clear_update_list ();
 	set_vram_update (UPDATE_LIST_SIZE, update_list);
 
-	ft = 1;	fade_delay = 1;
+	on_pant = 99; ft = 1; fade_delay = 1;
 
 	// MAIN LOOP
 
 	pal_bright (0);
 	ppu_on_all ();
-	palfx_init ();
-
+	
 #ifdef ACTIVATE_SCRIPTING
 	script_result = 0;
 	// Entering game script
-	run_script (2 * MAP_W * MAP_H);
+	run_script (2 * MAP_SIZE);
 #endif
 
+	oam_index = 0;
 	while (1) {
 		half_life = 1 - half_life;
 		frame_counter ++;
+
+		// Change screen
+		if (on_pant != n_pant) {
+			prepare_scr ();
+			on_pant = n_pant;
+		}
+
+		// Sync
+		oam_hide_rest (oam_index);
+		ppu_waitnmi ();
+		clear_update_list ();
+
+#ifdef ACTIVATE_SCRIPTING
+		#include "mainloop/scripting.h"
+#endif
+
+#ifdef ACTIVATE_SCRIPTING
+		if (script_result) 
+#elif defined (PLAYER_MAX_OBJECTS)
+		if (pobjs == PLAYER_MAX_OBJECTS) 
+#elif defined (SCR_END)
+		if (
+			n_pant == SCR_END && 
+			((prx + 8) >> 4) == PLAYER_END_X &&
+			((pry + 8) >> 4) == PLAYER_END_Y
+		) 
+#endif
+		{
+			music_stop ();
+			delay (50);
+			fade_out ();
+			break;
+		}
 
 		oam_index = 4+24; // 4 + what the player takes.
 		
@@ -149,14 +189,13 @@ void game_loop (void) {
 #endif
 		player_move ();
 
-		enems_move ();
+		#include "mainloop/hotspots.h"
+
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
 #endif
 
-#ifdef PLAYER_GARGAJO
-		gargajos_move ();
-#endif
+		enems_move ();
 
 #ifdef BREAKABLE_ANIM
 		if (do_process_breakable) process_breakable ();
@@ -170,84 +209,18 @@ void game_loop (void) {
 		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
 #endif
 
-		//#include "mainloop/resonators.h"
-
 		//#include "mainloop/cheat.h"
 
 		#include "mainloop/pause.h"
 
 		#include "mainloop/flickscreen.h"
 
-		#include "mainloop/hud.h"
-
-		#include "mainloop/hotspots.h"
+		hud_update ();
 
 		// Conditions
 		if (plife == 0) {					
 			game_over = 1;
 			break;
-		}
-
-		// Sync
-		palfx_do ();
-		oam_hide_rest (oam_index);
-		ppu_waitnmi ();
-		clear_update_list ();
-
-		// Change screen
-		if (on_pant != n_pant) {
-			prepare_scr ();
-			on_pant = n_pant;
-		}
-
-		// Throw fire script
-#ifdef ACTIVATE_SCRIPTING
-#ifdef ENABLE_FAST_FIRE_ZONE
-	#ifndef FIRE_SCRIPT_WITH_ANIMATION			
-		i = pad_poll (0);
-		if (i & PAD_B) run_fire_script ();
-	#endif			
-		if (f_zone_ac) 
-			if (pry >= fzy1 && pry <= fzy2)
-				if (prx >= fzx1 && prx <= fzx2)
-					run_script (n_pant + n_pant + 1);
-#else
-	#ifndef FIRE_SCRIPT_WITH_ANIMATION
-		#ifdef ENABLE_FIRE_ZONE
-		if (i & PAD_B || (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2))) 
-		#else
-		if (i & PAD_B)
-		#endif
-			run_fire_script ();
-	#else
-		#ifdef ENABLE_FIRE_ZONE
-		if (f_zone_ac) 
-			if (pry >= fzy1 && pry <= fzy2)
-				if (prx >= fzx1 && prx <= fzx2)
-					run_fire_script ();
-		#endif
-	#endif 
-#endif
-#endif
-
-
-/*
-#ifdef ACTIVATE_SCRIPTING
-		if (script_result) {
-#else
-		if (pobjs == PLAYER_NUM_OBJETOS) {
-#endif
-*/
-//			if (pkilled == baddies_count) {
-		if (n_pant == SCR_END) {;
-			if (((prx + 8) >> 4) == PLAYER_END_X) {
-				if (((pry + 8) >> 4) == PLAYER_END_Y) {
-					music_stop ();
-					delay (50);
-					fade_out ();
-					break;
-				}
-			}
 		}
 			
 	}

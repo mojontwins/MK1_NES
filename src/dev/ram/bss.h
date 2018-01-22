@@ -34,17 +34,16 @@ unsigned char fade_delay;
 // Hotspots
 
 #ifndef HOTSPOTS_WONT_CHANGE
-	unsigned char hyx [MAP_W * MAP_H];
-	unsigned char ht [MAP_W * MAP_H];
+	unsigned char hyx [MAP_SIZE];
+	unsigned char ht [MAP_SIZE];
 #endif
 
-unsigned char hact [MAP_W * MAP_H];
+unsigned char hact [MAP_SIZE];
 
 // Bolts
 
 #ifndef DEACTIVATE_KEYS
-	unsigned char lkyx [MAX_BOLTS], lknp [MAX_BOLTS], lkact [MAX_BOLTS];
-	unsigned char xy;
+	unsigned char lkact [MAX_BOLTS];
 #endif
 
 // Scripting
@@ -66,6 +65,7 @@ unsigned char hact [MAP_W * MAP_H];
 
 #ifdef ENABLE_CONTAINERS
 	unsigned char upd_cont_index;
+	unsigned char c_x [MAX_CONTAINERS], c_y [MAX_CONTAINERS], c_f [MAX_CONTAINERS], last_container;
 #endif
 
 // Baddies count. Properly fill this value!
@@ -79,16 +79,16 @@ unsigned char hact [MAP_W * MAP_H];
 
 #ifdef PERSISTENT_ENEMIES
 	// Persistent enemies
-	unsigned char ep_x [3 * MAP_W * MAP_H];
-	unsigned char ep_y [3 * MAP_W * MAP_H];
-	signed char ep_mx [3 * MAP_W * MAP_H];
-	signed char ep_my [3 * MAP_W * MAP_H];
+	unsigned char ep_x [3 * MAP_SIZE];
+	unsigned char ep_y [3 * MAP_SIZE];
+	signed char ep_mx [3 * MAP_SIZE];
+	signed char ep_my [3 * MAP_SIZE];
 	//unsigned char ep_t [3 * MAP_W * MAP_H];
 	unsigned int ep_it;
 #endif
 
 #ifdef PERSISTENT_DEATHS
-	unsigned char ep_flags [3 * MAP_W * MAP_H];
+	unsigned char ep_flags [3 * MAP_SIZE];
 #endif
 
 // Die & respawn
