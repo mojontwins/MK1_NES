@@ -32,6 +32,7 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+#include "assets/frame_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];

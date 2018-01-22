@@ -721,7 +721,7 @@ Function procesaClausulas (f As integer) As String
 					Case "TEXT":
 						clausula = clausula + Chr (&HE3)
 						For ai = 1 To Len (lP (1))
-							If ai = 15 Then Exit For
+							'If ai = 15 Then Exit For
 							If Mid (lP (1), ai, 1) = "_" Then
 								clausula = clausula + Chr (0)
 							Else

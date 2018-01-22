@@ -21,9 +21,9 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			3		//
-	#define PLAYER_INI_Y			3		// Initial position
+	#define SCR_INI					23		// Initial screen
+	#define PLAYER_INI_X			7		//
+	#define PLAYER_INI_Y			7		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -75,7 +75,7 @@
 // -------------------
 	
 #define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
-//#define FIRE_TO_PUSH
+#define FIRE_TO_PUSH
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 #define PLAYER_BOUNCES
@@ -252,16 +252,20 @@
 
 #define SCR_Y					0		// 0, 2 or 4.
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				27		// Objects counter character coordinates
-#define KEYS_X					22		//
-#define KEYS_Y					27		// Keys counter character coordinates
+#define LIFE_X					3		//
+#define LIFE_Y					29		// Life gauge counter character coordinates
+
+#define OBJECTS_X				22		//
+#define OBJECTS_Y				29		// Objects counter character coordinates
+
+#define KEYS_X					27		//
+#define KEYS_Y					29		// Keys counter character coordinates
+
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
+
 #define AMMO_X					8		// 
-#define AMMO_Y					27		// Ammo counter character coordinates
+#define AMMO_Y					29		// Ammo counter character coordinates
 //#define PLAYER_SHOW_KILLS
 
 // Text

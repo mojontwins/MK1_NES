@@ -12,13 +12,11 @@ switch (en_alive [gpit]) {
 			if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 			if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
 			en_ct [gpit] = 50 + (rand8 () & 31);
-			
-			en_spr = SPRITE_BADDIE_DYING;
 		}
 		break;
 	case 1:
 		// Appearing
-
+		en_spr = SPRITE_BADDIE_DYING;
 		if (en_ct [gpit]) en_ct [gpit] --; else en_alive [gpit] = 2;
 		break;
 	case 2:
@@ -82,6 +80,6 @@ switch (en_alive [gpit]) {
 
 		}
 		
-		en_spr = (en_s [gpit] << 1) + en_fr;
+		en_spr = en_s [gpit] + en_fr;
 		break;
 }					

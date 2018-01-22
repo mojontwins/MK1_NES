@@ -107,6 +107,7 @@ unsigned char wall, hitv, hith;
 // Bullets
 
 #ifdef PLAYER_CAN_FIRE
+	unsigned char bi;
 	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
 	signed char bmx [MAX_BULLETS];
 	#ifdef PLAYER_MOGGY_STYLE

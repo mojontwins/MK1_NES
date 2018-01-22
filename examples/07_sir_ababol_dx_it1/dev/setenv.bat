@@ -1,4 +1,3 @@
 @echo off
-path=%path%;c:\cc65\bin\
-set CC65_HOME=c:\cc65\
+set path=..\..\..\cc65_2.13.2\bin\;%path%
 cc65 --version

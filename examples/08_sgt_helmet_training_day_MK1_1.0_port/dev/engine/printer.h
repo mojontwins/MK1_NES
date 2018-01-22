@@ -124,7 +124,7 @@ void draw_scr (void) {
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer
-		gp_gen = c_map + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
+		gp_gen = c_map + (n_pant << 6) + (n_pant << 5); 
 		
 		// Draw packed
 		rdit = 96; while (rdit --) {

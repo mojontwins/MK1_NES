@@ -43,16 +43,16 @@ CHARSET 2, 4, 1, 1
 MAPFILE ..\dev\assets\spritedata.h
 
 # Main player, 8 frames, 2x2 patterns. No need for flipped versions
-# hot point (where oam_meta_spr places its origin) is (0, -8).
+# hot point (where oam_meta_spr places its origin) is (-4, 0).
 # (player active rectangle is 8x16, centered bottom).
 LABEL sspl
-METASPRITESET 0, 0, 2, 2, 8, 1, 0, -8
+METASPRITESET 0, 0, 2, 2, 8, 1, -4, 0
 
 # Enemies, 8 frames, 2x2 patterns. No need for flipped versions
 # hot point (where oam_meta_spr places its origin) is (0, 0).
 # (enems rectangle is 16x16, centered bottom).
 LABEL ssen
-METASPRITESET 0, 2, 2, 2, 8, 1, 0, -8
+METASPRITESET 0, 2, 2, 2, 8, 1, 0, 0
 
 # Explosion, 1 frame, 2x2 patterns. No need for flipped versions
 # hot point (where oam_meta_spr places its origin) is (0, 0).

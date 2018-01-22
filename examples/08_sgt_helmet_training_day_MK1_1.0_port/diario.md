@@ -120,3 +120,42 @@ Ya compila. Otra cosa es que ahora se cuelgue de colores.
 
 Sí, el mapa se ve peo total. Pero algo es algo XD. Pronto más.
 
+~~
+
+Algunas cosas más:
+
+- La inicialización del código que pinta las pantallas PACKED estaba mal y además usaba una multiplicación.
+- He generalizado el cálculo de `SPRITES_ADJUST` en base a `TOP_ADJUST` y al hecho de que la pantalla se ajusta a `scroll (0, 8)`. Lo próximo es parametrizar también ese scroll, pero luego.
+- La precarga de enemigos con `PERSISTENT_ENEMIES` aún tenía XY en vez de YX.
+- Los tipo 7 no disparan el tipo correcto de enemigo. Mentira; lo que pasa es que no pintaban el frame correcto.
+- El estado "apareciendo" no es persistente. En el motor original los espacios de los sprites eran fijos y bastaba con crear las cosas (y luego había que borrarlas). Ahora la OAM es dinámica. Hay que acomodar esto.
+- El disparo está roto. Nuevos disparos invalidan a anteriores. No se pinta con el patrón correcto. Seguramente me hayan bailado los parámetros. Eso era. Además, usaba gpit y algunos de los calls también. Meto bi como en MK2.
+- Los breakables no van nada finos. En primer lugar la detección es un tile más abajo: Hay que ajustar la y - 16. Luego parece no ser persistente la rotura, o se está modificando lo que no es. Veamos . . .  Arreglado.
+
+Veamos el checklist, a falta del scripting:
+
+[X] Basic genital y `TOP_OVER_SIDE`
+[X] `PLAYER_PUSH_BOXES` y `FIRE_TO_PUSH`.
+[X] `PLAYER_BOUNCES` y `PLAYER_FLICKERS`.
+[X] `WALLS_STOP_ENEMIES` (en lineales).
+[X] `ENABLE_PURSUERS` 
+[X] `PERSISTENT ENEMIES`
+[X] `PLAYER_CAN_FIRE`
+[X] `MAX_AMMO`
+[X] `BREAKABLE_WALLS`
+[~] `SCRIPTING`
+
+Qué bien :-)
+
+~~
+
+Con el scripting activo, parece que `TEXT_BOX` glitchea un poco (solo aparecen 16 letras). Seguramente habrá que ver en qué estado está el buffer al llamar y cosas así.
+
+No, los textos están truncados en mscnes.h. Me suena a compilador pasándose de listo. Esta es la radio bingow. BINGOW.
+
+Tiene toda la pinta de que va a funcionar, pero ahora no tengo muchas ganas de probar esto. Quizá en otro momento.
+
+Pero guay todo.
+
+~~
+

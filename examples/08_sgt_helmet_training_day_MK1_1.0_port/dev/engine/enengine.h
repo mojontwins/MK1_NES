@@ -53,15 +53,15 @@ void enems_kill (unsigned char gpit) {
 				if (rdt && rdt != 4) BADDIES_COUNT ++;
 			#endif
 
-			// XY1
+			// YX1
 			rda = *gp_gen ++;
-			ep_x [ep_it] = rda & 0xf0;
-			ep_y [ep_it] = rda << 4;
+			ep_y [ep_it] = rda & 0xf0;
+			ep_x [ep_it] = rda << 4;
 
-			// XY2
+			// YX2
 			rda = *gp_gen ++;
-			rdb = rda & 0xf0;
-			rdc = rda << 4;
+			rdc = rda & 0xf0;
+			rdb = rda << 4;
 
 			// P, here used for speed
 			rda = *gp_gen ++;
@@ -203,7 +203,7 @@ void enems_load (void) {
 				case 7:
 					// Pursuers
 
-					en_s [gpit] = TYPE_7_FIXED_SPRITE - 1;
+					en_s [gpit] = (TYPE_7_FIXED_SPRITE - 1) << 2;
 					en_alive [gpit] = 0;
 					en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
 		#ifdef ENABLE_GENERATORS

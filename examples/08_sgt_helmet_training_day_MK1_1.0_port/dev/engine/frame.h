@@ -18,8 +18,8 @@ void __fastcall__ draw_game_frame (void) {
 	for (rdit = 0; rdit < 16; rdit ++) attr_table [48 + rdit] = 0x00;
 	*/
 
-	pr_str (2, 3, "LIFE:00   ITEMS:00   KEYS:00");
-	pr_str (2, 28, "SIR ABABOL - THE MOJON TWINS");
+	unrle_vram (frame_rle, 0x2000);
+	memfill (attr_table, 0xff, 64);
 }
 
 void hud_update (void) {
