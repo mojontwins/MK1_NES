@@ -204,7 +204,7 @@ Primero hacemos las paletas. Sólo hay tres, con mkts.exe:
 	copy /b work\palts0.h + work\palts1.h + work\palss0.h assets\palettes.h > nul
 ```
 
-Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que vaya explicando cada orden, qué hace, y tal, empezando con que tenemos que rellenar 8192 bytes, 4096 para tiles de fondo y 4096 para los sprites, en dos secciones.
+Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que vaya explicando cada orden, qué hace, y tal, empezando con que tenemos que rellenar 8192 bytes, 4096 para tiles de fondo y 4096 para los sprites, en dos secciones. Mencionar por qué el recorte de los frames de nadal está centrado diferente y tal.
 
 ```
 	# import_patterns.spt
@@ -248,11 +248,17 @@ Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que
 	# Metasprites will be stored in this file:
 	MAPFILE ..\dev\assets\spritedata.h
 
-	# Main player, 9 frames, 2x3 patterns, generate flipped versions
+	# Main player, 6 frames, 2x3 patterns, generate flipped versions
 	# hot point (where oam_meta_spr places its origin) is (-4, -8).
 	# (player active rectangle is 8x16, centered bottom).
 	LABEL sspl
-	METASPRITESET 1, 1, 2, 3, 9, 1, -4, -8 FLIPPED
+	METASPRITESET 1, 1, 2, 3, 6, 1, -4, -8 FLIPPED
+
+	# Main player swim, 3 frames, 2x3 patterns, generate flipped versions
+	# hot point (where oam_meta_spr places its origin) is (-4, -4).
+	# (player active rectangle is 8x16, centered).
+	LABEL sspl2
+	METASPRITESET 13, 1, 2, 3, 3, 1, -4, -4 FLIPPED
 
 	# Enemies, 
 	# Tall enemies, 4 frames, 2x3 patterns. No need for flipped versions
@@ -262,7 +268,7 @@ Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que
 	METASPRITESET 1, 4, 2, 3, 4, 1, 0, -8
 
 	# Wide enemies, 2 frames, 3x2 patterns. No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) is (-4, 0).
+	# Hot point (where oam_meta_spr places its origin) (is -4, 0).
 	# (enems rectangle is 16x16, centered bottom).
 	LABEL ssenb
 	METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
@@ -273,6 +279,18 @@ Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que
 	LABEL ssplat
 	METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
 
+	# Water enems 1, 4 frames, 2x2 patterns, No need for flipped versions
+	# Hot point (where oam_meta_spr places its origin) is (0, 0).
+	# (enems rectangle is 16x16, centered bottom).
+	LABEL ssenc
+	METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+
+	# Water enems 2, 2 frames, 2x2 patterns, generate flipped versions
+	# Hot point (where oam_meta_spr places its origin) is (0, 0).
+	# (enems rectangle is 16x16, centered bottom).
+	LABEL ssend
+	METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
+
 	# Explosion frame, 2x2 patterns. No need for flipped version
 	# Hot point (where oam_meta_spr places its origin) is (0, 0)
 	LABEL ssexpl
@@ -282,10 +300,11 @@ Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que
 	# Hot point (where oam_meta_spr places its origin) (is 0, 0).
 	# (items rectangle is 16x16, centered bottom).
 	LABEL ssit
-	METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+	METASPRITESET 1, 9, 2, 2, 4, 1, 0, 0
 
 	# Done with patterns for spr. Fill with zeroes:
 	FILL 8192
+
 ```
 
 Y en compile.bat...
@@ -373,9 +392,8 @@ Lo siguiente es meter todos estos assets como includes en game.c:
 	// * const data *
 	// **************
 
-	#include "definitions.h"
-	#include "config.h"
 	#include "assets/palettes.h"
+	#include "assets/behs.h"
 	#include "assets/map0.h"
 	#include "assets/map1.h"
 	#include "assets/enems0.h"
@@ -383,6 +401,9 @@ Lo siguiente es meter todos estos assets como includes en game.c:
 	#include "assets/spritedata.h"
 	#include "assets/tiledata.h"
 	#include "assets/metasprites.h"
+	#ifdef MULTI_LEVEL
+		#include "assets/levelset.h"
+	#endif
 ```
 
 Ese metasprites.h hay que hacerlo, con los arrays de los sprites. Vamos al lío:
@@ -417,13 +438,13 @@ Para el ciclo de nadar repetiremos el cell 7, Swim1, para que sean 4 y alternen 
 
 Anotaremos todos los offsets para luego crearlos como defines.
 
-Ahora creamos el array para los enemigos. El motor espera 4 cells por enemigo, con dos frames de animación para cada dirección (derecha, izquierda). Nosotros tenemos los mismos cells para ambas direcciones, por lo que los duplicaremos. Si estuviésemos muy jodidos de memoria modificaríamos el renderer, pero por ahora eso no es necesario.
+Ahora creamos el array para los enemigos. El motor espera 4 cells por enemigo, con dos frames de animación para cada dirección (derecha, izquierda). Nosotros tenemos los mismos cells para ambas direcciones, por lo que los duplicaremos, excepto el pez, que sí los duplica
 
-Después ponemos la explosión (ssexpl), que debe estar en el array de los metasprites de los enemigos.
+Después ponemos la explosión (ssexpl), que debe estar en el array de los metasprites de los enemigos. Habrá uno por nivel.
 
 ```c
 	// Enemy metasprites
-	const unsigned char *spr_enems [] = {
+	const unsigned char * const spr_enems0 [] = {
 		// Linear enems and platforms (ids 1-4)
 		ssena_00, ssena_01, ssena_00, ssena_01,			// Enem id 1, right, left, two cells (duplicated)
 		ssena_02, ssena_03, ssena_02, ssena_03,			// Enem id 2, right, left, two cells (duplicated)
@@ -433,6 +454,18 @@ Después ponemos la explosión (ssexpl), que debe estar en el array de los metas
 		// Explosion (offset 16)
 		ssexpl
 	};
+
+	
+	const unsigned char * const spr_enems1 [] = {
+		// Linear enems and platforms (ids 1-4)
+		ssenc_00, ssenc_01, ssenc_00, ssenc_01,			// Enem id 1, right, left, two cells (duplicated)
+		ssenc_02, ssenc_03, ssenc_02, ssenc_03,			// Enem id 2, right, left, two cells (duplicated)
+		ssend_00_a, ssend_01_a, ssend_00_b, ssend_01_b,	// Enem id 3, right, left, two cells 
+		ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+
+		// Explosion (offset 16)
+		ssexpl
+	};	
 ```
 
 Por último, el array de metasprites de los items (hotspots). Dejaremos el id 0 vacío, porque el primer hotspot es el 1, y así ahorramos código. Se podría haber hecho con los enemigos pero meh.
@@ -602,6 +635,18 @@ Parece ser que MK1 exigía el HUD abajo del todo ?! Voy a cambiar esto. Por ahor
 
 Por ahora voy a dejar los tiestos tal y como están en el movimiento, y los behs en config.h. Luego me pienso la mejor forma de hacer el multilevel y quitar mierda de aquí. Probablemente como MK2, o parecido.
 
+Behs
+----
+
+Tendremos que editar assets/behs.h y añadir comportamientos para los dos sets de tiles (`behs0`, `behs1`).
+
+Levelset
+--------
+
+Activamos `#ifndef MULTI_LEVEL` en config.h. Explicamos por qué comentamos `#define SCR_END`.
+
+Abrimos levelset.h y rellenamos todos los valores (aunquen os valen los que hay por defecto; en el código que al final distribuya vendrá el mínimo de multilevel, que son DOS niveles.)
+
 ~~
 
 Esto compila y se inicia y a veces funciona, pero empieza con la pantalla en negro y un TUT TUT de morirse y a veces se cuelga. WTF? Me falla algo de la inicialización champión.
@@ -736,3 +781,72 @@ Otra cosa que tendré que tener lista para cuando toque el custom es el módulo 
 
 Pero hoy estoy exhausto, dudo que haga nada. Además, tengo que hacer un TODO del juego de la compo de nesdev para tener claro qué queda por hacer y distribuírmelo en el tiempo, que quedan 10 días.
 
+20180122
+========
+
+Cosas que tengo que tener en cuenta para un multilevel:
+
+```
+c_pal_bg,
+c_pal_fg,
+c_ts_tmaps,
+c_ts_pals,
+c_map,
+c_decos,
+c_locks,
+c_enems,
+c_hotspots,
+c_max_bolts,
+
+SCR_INI
+PLAYER_INI_X, PLAYER_INI_Y
+
+SCR_END
+PLAYER_END_X, PLAYER_END_Y
+
+PLAYER_MAX_OBJECTS
+
+```
+
+Estoy, por un lado, haciendo que los `#define` de siempre resuelvan a accesos a arrays `l_*` en modo `PLAYER_MULTI_LEVEL`.
+
+Luego modificaré la inicialización, de hecho la voy a encapsular para no seguir fuyiendo la mangustia.
+
+~~
+
+OK, multilevel bien. Ahora tengo que revisar todos los apuntes para el tutorial porque creo que faltan cosas o hay que cambiar cosas, sobre todo de listados y hostias.
+
+~~
+
+Voy a programar el nadal y tal. Lo suyo es que el tío que siga el tutorial pueda saltar al nivel 0 o 1, configurando 'a mano' el motor, porque aquí es cuando empiezan las modificaciones custom.
+
+Veamos como era el swim de Ninjajar!:
+
+- Desactiva la gravedad!
+- Misteriosamente, pone `pgotten = 1`.
+- Si No se pulsa ARRIBA o ABAJO, le resta `PLAYER_ASWIM >> 1` a `pvy`.
+- Si se pulsa ABAJO, le suma `PLAYER_ASWIM` a `pvy`.
+- Si se pulsa ARRIBA o SALTO, le resta `PLAYER_ASWIM` a `pvy`.
+
+Los valores son:
+
+	PLAYER_G 				48
+	PLAYER_VY_FALLING_MAX	512
+	PLAYER_AY_SWIM 			32
+	PLAYER_VY_SWIM_MAX 		128
+
+Con esto se consigue que, efectivamente, si no se pulsa nada vy reciba una aceleración de 48-16 = 32, o sea, caiga más despacio que en gravedad. Además, la velocidad máxima de caer será 128, no 512.
+
+Parece un poco enrevesado pero veo que está muy preparado para poder aprovechar la gravedad que existe, simplemente modificándola a posteriori. 
+
+El pequeño bloque de código se coloca tras el maneje de la G. Vamos a probarlo.
+
+Para probar se pone level = 1 en game.c, remember! Además, este nivel no tiene objetos. Para probarlo y tal, le vamos a poner a manaca 1 objeto (que no existe), para que no salga automáticamente, en levelset.h:
+
+```c
+const unsigned char l_player_max_objects [] =	{ MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_HOTSPOTS_TYPE_1_1*/ };
+```
+
+~~
+
+Bueno, con esto funcionando voy a hacer un "snapshot", para no perderme. El proyecto en este punto, para el tutorial, debe estar como snapshot-1--20180122.7z

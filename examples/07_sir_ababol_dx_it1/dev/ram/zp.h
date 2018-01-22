@@ -8,7 +8,7 @@
 unsigned char i, gpit, gpjt, gpitu, gpaux;
 signed int rds16;
 
-unsigned char *gp_gen, *gp_tmap, *gp_tma2;
+const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc, rdm;
@@ -131,15 +131,27 @@ unsigned char hrx, hry, hrt;
 unsigned char ft;
 
 // Current level
-unsigned char **c_map;
-unsigned char **c_decos;
-unsigned char *c_locks;
-unsigned char *c_enems;
-unsigned char *c_hotspots;
-unsigned char *c_pal_bg;
-unsigned char *c_pal_fg;
+
+const unsigned char *c_pal_bg;
+const unsigned char *c_pal_fg;
+const unsigned char *c_ts_pals;
+const unsigned char *c_ts_tmaps;
+const unsigned char *c_behs;
+
+const unsigned char * const *spr_enems;
+
+#ifdef MAP_FORMAT_PACKED
+	const unsigned char *c_map;
+#else
+	const unsigned char * const *c_map;
+#endif
+	
+#ifdef MAP_WITH_DECORATIONS
+	const unsigned char * const *c_decos;
+#endif
+
+const unsigned char *c_locks;
+const unsigned char *c_enems;
+const unsigned char *c_hotspots;
+
 unsigned char c_max_bolts;
-
-unsigned char *tileset_pals;
-unsigned char *tsmap;
-

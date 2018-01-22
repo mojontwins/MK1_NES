@@ -4,6 +4,12 @@
 // player.h
 // Player movement & stuff
 
+void player_register_safe_spot (void) {
+	px_safe = px;
+	py_safe = py;
+	n_pant_safe = n_pant;
+}
+
 void player_init (void) {
 	// Init player data
 	
@@ -49,9 +55,7 @@ void player_init (void) {
 	pstate = EST_NORMAL;
 
 	#ifdef DIE_AND_RESPAWN
-		px_safe = px;
-		py_safe = py;
-		n_pant_safe = n_pant;
+		player_register_safe_spot ();
 	#endif
 
 	#ifdef CARRY_ONE_HS_OBJ
@@ -126,7 +130,8 @@ void player_move (void) {
 	// ********
 
 	#ifdef PLAYER_MOGGY_STYLE		
-		// Poll pad
+		// Controller 
+
 		if (!(i & PAD_UP || i & PAD_DOWN)) {
 			pfacingv = 0xff;
 			if (pvy > 0) {
@@ -155,13 +160,18 @@ void player_move (void) {
 				pvy += PLAYER_AX;
 			}
 		}
-	#else
-		// gravity
 
-		if (!pj) {
-			pvy += PLAYER_G;
-			if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
-		}
+	#else
+		// Gravity
+
+		#ifndef PLAYER_SWIMS
+			if (!pj) {
+				pvy += PLAYER_G;
+				if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
+			}
+		#endif
+
+		// Moving platforms invalidate pvy
 
 		#ifdef PLAYER_CUMULATIVE_JUMP
 			if (!pj)
@@ -173,12 +183,34 @@ void player_move (void) {
 	cx2 = (prx + 7) >> 4;
 
 	#ifdef PLAYER_HAS_JETPAC
-	    // **********************************
-		// thrust! PAD_B, change when needed.
-		// **********************************
+	    // Controller 
+
 		if (i & PAD_B) {
 			pvy -= PLAYER_AY_JETPAC;
 			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
+		}
+	#endif
+
+	#ifdef PLAYER_SWIMS
+		// Controller 
+
+		if (!(i & (PAD_DOWN|PAD_UP))) {
+			pvy -= PLAYER_AY_SWIM >> 1;
+		}
+
+		if (i & PAD_DOWN) {
+			pvy += PLAYER_AY_SWIM;
+		}
+
+		if (i & PAD_UP) {
+			pvy -= PLAYER_AY_SWIM;
+		}
+
+		// Limit
+		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
+			pvy = -PLAYER_VY_SWIM_MAX;
+		} else if (pvy > PLAYER_VY_SWIM_MAX) {
+			pvy = PLAYER_VY_SWIM_MAX;
 		}
 	#endif
 
@@ -199,10 +231,10 @@ void player_move (void) {
 			if (rds16 < 0)
 		#endif		
 			{
-				cy1 = cy2 = (pry + 8) >> 4;
+				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
 				cm_two_points ();
 				if ((at1 & 8) || (at2 & 8)) {
-					pvy = 0; pry = ((cy1 + 1) << 4) - 8; py = pry << FIXBITS;
+					pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
 					pgotten = 0;
 					
 					// Special obstacles
@@ -272,9 +304,7 @@ void player_move (void) {
 						
 						#ifdef DIE_AND_RESPAWN
 							if (!(pgotten || hitv)) {
-								px_safe = px;
-								py_safe = py;
-								n_pant_safe = n_pant;
+								player_register_safe_spot ();
 							}
 						#endif	
 					}
@@ -370,7 +400,7 @@ void player_move (void) {
 	// Collision
 
 	if (rdx != prx) {
-		cy1 = (pry + 8) >> 4;
+		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
 		cy2 = (pry + 15) >> 4;
 
 		rds16 = pvx + pgtmx;
@@ -484,18 +514,28 @@ void player_move (void) {
 
 		// Frame selection for side view games
 
-		if (ppossee || pgotten) {
+		#ifdef PLAYER_SWIMS
+			if (i && (rdx != prx || rdy != pry)) {
+				if (pvx) {
+					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
+				} else {
+					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
+				}
+			} else psprid = CELL_SWIM_CYCLE + 1;
+		#else
+			if (ppossee || pgotten) {
 
-			// On floor
+				// On floor
 
-			if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-				psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+				if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+					psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+				} else {
+					psprid = CELL_IDLE;
+				}
 			} else {
-				psprid = CELL_IDLE;
+				psprid = CELL_AIRBORNE;
 			}
-		} else {
-			psprid = CELL_AIRBORNE;
-		}
+		#endif
 
 		psprid += pfacing;
 	#endif

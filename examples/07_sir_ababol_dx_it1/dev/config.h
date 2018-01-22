@@ -11,15 +11,39 @@
 #define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define SCR_INI					0		// Initial screen
-#define PLAYER_INI_X			3		//
-#define PLAYER_INI_Y			3		// Initial position
-//#define SCR_END				99		// Final screen, undefine if N/A
-#define PLAYER_END_X			99		//
-#define PLAYER_END_Y			99		// Ending position
-#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
+
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				2
+
+#ifndef MULTI_LEVEL
+
+	// If you aim for a single level ROM, fill in those:
+
+	#define SCR_INI					0		// Initial screen
+	#define PLAYER_INI_X			3		//
+	#define PLAYER_INI_Y			3		// Initial position
+	//#define SCR_END				99		// Final screen, undefine if N/A
+	#define PLAYER_END_X			99		//
+	#define PLAYER_END_Y			99		// Ending position
+	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
+
+#else
+
+	// If you want multiple levels, please don't touch this much. 
+	// Just comment SCR_END and / or PLAYER_MAX_OBJECTS if N/A.
+	// You should be fiddling with assets/levelset.h
+
+	#define SCR_INI 				(l_scr_ini [level])
+	#define PLAYER_INI_X			(l_ini_x [level])
+	#define PLAYER_INI_Y			(l_ini_y [level])
+	//#define SCR_END				(l_scr_end [level])
+	#define PLAYER_END_X			(l_end_x [level])
+	#define PLAYER_END_Y			(l_end_y [level])
+	#define PLAYER_MAX_OBJECTS		(l_player_max_objects [level])
+
+#endif
 
 // Some flexibility
 #define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
@@ -46,7 +70,7 @@
 // Bounding box size
 // -----------------
                                         // Comment both for normal 16x16 bounding box
-#define BOUNDING_BOX_8_BOTTOM           // 8x8 aligned to bottom center in 16x16
+#define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
 #define SMALL_COLLISION               	// 8x8 centered collision instead of 12x12
 
 // General directives:
@@ -195,28 +219,29 @@
 // Scripting
 // ---------
 /*
-#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
-#define ENABLE_FAST_FIRE_ZONE		// Fire zone only triggers FIRE n, not FIRE ANY
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
 #define SCRIPTING_TEXT_BOX
-#define FIRE_SCRIPT_WITH_ANIMATION	// So I don't have to make a custom for something 
-									// I will be reusing, most likely
+#define FIRE_SCRIPT_WITH_ANIMATION		// So I don't have to make a custom for something 
+										// I will be reusing, most likely
 */
 
-//#define FIRE_ON_KILL				// run fire script on enemy kill
+//#define FIRE_ON_KILL					// run fire script on enemy kill
 /*
-//#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE			// Allows to define a zone which auto-triggers "FIRE"
+//#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
+#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
 */
 // Top view:
 // ---------
 /*
-#define PLAYER_MOGGY_STYLE            // Enable top view.
-#define TOP_OVER_SIDE                 // UP/DOWN has priority over LEFT/RIGHT
+#define PLAYER_MOGGY_STYLE            	// Enable top view.
+#define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
 */
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
+#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
@@ -259,23 +284,18 @@
 
 // IV.1. Vertical movement. Only for side-view.
 
-#define PLAYER_VY_FALLING_MAX	256		// Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
-#define PLAYER_G				16		// Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
+#define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
+#define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
-#define PLAYER_AY_JUMP 			12		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
 
-#define PLAYER_AY_JETPAC		32		// Incremento al usar el jetpac
-#define PLAYER_VY_JETPAC_MAX	256		// Máxima velocidad vertical con jetpac
+#define PLAYER_AY_JETPAC		32		// Jetpac increment
+#define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
 
-//a 128 b 64 X 64 c 128 d
-#define PLAYER_VY_AN1 			-128
-#define PLAYER_VY_AN2 			-64
-#define PLAYER_VY_AN3 			64
-#define PLAYER_VY_AN4 			128
-
-#define PLAYER_AY_UNTHRUST 		8 		// Used in the Bootee engine.
+#define PLAYER_AY_SWIM			8		// Swimming acceleration.
+#define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
@@ -289,25 +309,3 @@
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
-
-// ============================================================================
-// V. Tile behaviour
-// ============================================================================
-
-// Defines the behaviour for each tile. Remember that if keys are activated, tile #15 is a bolt
-// and, therefore, it should be made a full obstacle!
-
-// 0 = Walkable (no action)
-// 1 = Walkable and kills.
-// 2 = Walkable and hides.
-// 4 = Platform (only stops player if falling on it)
-// 8 = Full obstacle (blocks player from all directions)
-// 10 = special obstacle (pushing blocks OR locks!)
-// 16 = Breakable (#ifdef BREAKABLE_WALLS)
-// 32 = Slipper (+0 = left, +1 = right
-// You can add the numbers to get combined behaviours
-// Save for 10 (special), but that's obvious, innit?
-
-const unsigned char tbehs [] = {
-	0, 8, 8, 8, 0, 0, 0, 8, 0, 0, 8, 4, 8, 1, 8, 10
-};

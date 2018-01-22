@@ -6,19 +6,9 @@
 void game_init (void) {
 	game_over = 0;
 
-	c_map = (unsigned char **) (map_0);
-	#ifdef MAP_WITH_DECORATIONS
-		c_decos = (unsigned char **) (map_0_decos);
-	#endif
-	c_enems = (unsigned char *) (enems_0);
-	c_locks = (unsigned char *) (map_0_locks);
-	c_hotspots = (unsigned char *) (hotspots_0);
-	c_pal_bg = (unsigned char *) palts0;
-	c_pal_fg = (unsigned char *) palss0;
-	c_max_bolts = MAX_BOLTS;
-	tsmap = (unsigned char *) (ts0_tmaps);
-	tileset_pals = (unsigned char *) (ts0_pals);
-	
+	// Assets setup. Selects tileset, map, palettes, etc.
+	#include "mainloop/asset_setup.h"
+
 	pal_bg (c_pal_bg);
 	pal_spr (c_pal_fg);
 
@@ -45,7 +35,6 @@ void game_init (void) {
 	msc_clear_flags ();
 #endif
 
-	plife = PLAYER_LIFE;
 	pobjs = 0;
 	pkeys = 0;
 
@@ -83,6 +72,7 @@ void prepare_scr (void) {
 	oam_index = 4+24; // 4 + what the player takes.
 
 	oam_hide_rest (0);
+	clear_update_list ();
 	draw_scr ();
 	hotspots_create ();	
 	// Write attributes
@@ -90,6 +80,10 @@ void prepare_scr (void) {
 
 #ifdef LINE_OF_TEXT
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
+#endif
+
+#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_MOGGY_STYLE))
+	player_register_safe_spot ();
 #endif
 
 	player_move ();
@@ -120,7 +114,9 @@ void prepare_scr (void) {
 #endif
 
 	oam_hide_rest (oam_index);
+	hud_update ();
 	ppu_waitnmi ();
+	clear_update_list ();
 	fade_in ();
 }
 
@@ -219,7 +215,7 @@ void game_loop (void) {
 
 		#include "mainloop/flickscreen.h"
 
-		#include "mainloop/hud.h"
+		hud_update ();
 
 		// Conditions
 		if (plife == 0) {					

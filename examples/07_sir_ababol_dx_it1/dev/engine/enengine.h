@@ -406,7 +406,7 @@ void enems_move (void) {
 
 			// Step over enemy
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING)
+#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
 			if (
 	#ifdef PLAYER_MIN_KILLABLE
 				(en_t [gpit] >= PLAYER_MIN_KILLABLE) &&

@@ -100,7 +100,7 @@ If Not noHotspots Then
 	Print #fOut, ""
 	
 	For i = 0 To 255
-		If typeCounters (i) <> 0 then
+		If typeCounters (i) <> 0 Or i = 1 then
 			' Print #fOut, "// Wrote " & typecounters (i) & " hotspots of type " & i
 			Print #fOut, "#define MAX_HOTSPOTS_TYPE_" & i & "_" & prefix & "	" & typeCounters (i)	
 		End If

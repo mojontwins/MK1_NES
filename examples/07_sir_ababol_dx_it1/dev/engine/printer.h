@@ -60,14 +60,14 @@ void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {
 	rdc = (x >> 2) + ((y >> 2) << 3);
 	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
 	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (tileset_pals [tl] << (rdb << 1));
+	rda = (rda & bitmasks [rdb]) | (c_ts_pals [tl] << (rdb << 1));
 	attr_table [rdc] = rda;
 }
 
 void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	upd_attr_table (x, y, tl);
 	
-	gp_tmap = tsmap + (tl << 2);
+	gp_tmap = c_ts_tmaps + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
@@ -86,7 +86,7 @@ void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	
 	// tiles
 	//tl = (16 + tl) << 2;
-	gp_tmap = tsmap + (tl << 2);
+	gp_tmap = c_ts_tmaps + (tl << 2);
 	gp_addr = ((y<<5) + x + 0x2000);
 	ul_putc (*gp_tmap ++);
 	ul_putc (*gp_tmap ++);
@@ -97,13 +97,13 @@ void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	map_buff [x + (y << 4)] = n;
-	map_attr [x + (y << 4)] = tbehs [n];
+	map_attr [x + (y << 4)] = c_behs [n];
 	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
 void draw_map_tile (unsigned char t) {
 	map_buff [rdm] = t;		
-	map_attr [rdm] = tbehs [t];
+	map_attr [rdm] = c_behs [t];
 	#ifdef BREAKABLE_WALLS
 		brk_buff [rdm] = 1;
 	#endif
@@ -124,7 +124,7 @@ void draw_scr (void) {
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer
-		gp_gen = (unsigned char *) (c_map) + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
+		gp_gen = c_map + n_pant * 96; rdx = 0; rdy = TOP_ADJUST;
 		
 		// Draw packed
 		rdit = 96; while (rdit --) {
@@ -136,7 +136,7 @@ void draw_scr (void) {
 
 	#ifdef MAP_FORMAT_RLE16
 		// Get pointer
-		gp_gen = (unsigned char *) c_map [n_pant];
+		gp_gen = c_map [n_pant];
 
 		// Packed or RLE'd?
 		if (rdit = *gp_gen ++) {

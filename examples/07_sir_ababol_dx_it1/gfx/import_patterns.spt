@@ -39,11 +39,17 @@ PALS palss0.png
 # Metasprites will be stored in this file:
 MAPFILE ..\dev\assets\spritedata.h
 
-# Main player, 9 frames, 2x3 patterns, generate flipped versions
+# Main player, 6 frames, 2x3 patterns, generate flipped versions
 # hot point (where oam_meta_spr places its origin) is (-4, -8).
 # (player active rectangle is 8x16, centered bottom).
 LABEL sspl
-METASPRITESET 1, 1, 2, 3, 9, 1, -4, -8 FLIPPED
+METASPRITESET 1, 1, 2, 3, 6, 1, -4, -8 FLIPPED
+
+# Main player swim, 3 frames, 2x3 patterns, generate flipped versions
+# hot point (where oam_meta_spr places its origin) is (-4, -4).
+# (player active rectangle is 8x16, centered).
+LABEL sspl2
+METASPRITESET 13, 1, 2, 3, 3, 1, -4, -4 FLIPPED
 
 # Enemies, 
 # Tall enemies, 4 frames, 2x3 patterns. No need for flipped versions
@@ -64,6 +70,18 @@ METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
 LABEL ssplat
 METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
 
+# Water enems 1, 4 frames, 2x2 patterns, No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssenc
+METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+
+# Water enems 2, 2 frames, 2x2 patterns, generate flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssend
+METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
+
 # Explosion frame, 2x2 patterns. No need for flipped version
 # Hot point (where oam_meta_spr places its origin) is (0, 0)
 LABEL ssexpl
@@ -73,7 +91,7 @@ METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
 # Hot point (where oam_meta_spr places its origin) (is 0, 0).
 # (items rectangle is 16x16, centered bottom).
 LABEL ssit
-METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+METASPRITESET 1, 9, 2, 2, 4, 1, 0, 0
 
 # Done with patterns for spr. Fill with zeroes:
 FILL 8192

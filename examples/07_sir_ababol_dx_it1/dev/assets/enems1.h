@@ -47,4 +47,5 @@ const unsigned char hotspots_1 [] = {
 };
 
 #define MAX_HOTSPOTS_TYPE_0_1	12
+#define MAX_HOTSPOTS_TYPE_1_1	0
 #define MAX_HOTSPOTS_TYPE_3_1	8
