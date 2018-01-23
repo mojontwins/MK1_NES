@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // breakable.h
 // Manages breakable blocks and animations
@@ -12,7 +12,7 @@ void __fastcall__ process_breakable (void) {
 			brkf [gpit] ++;
 			if (brkf [gpit] == MAX_BREAKABLE_FRAMES) {
 				brkf [gpit] = 0;
-				map_set (brkx [gpit], brky [gpit], ts_offs);	
+				map_set (brkx [gpit], brky [gpit], BREAKABLE_ERASE);	
 			} else {
 				do_process_breakable = 1;
 			}
@@ -34,11 +34,11 @@ void break_wall (unsigned char x, unsigned char y) {
 				brkf [gpit] = 1;
 				brkx [gpit] = x;
 				brky [gpit] = y;
-				map_set (x, y, 47);	// Break tile!
+				map_set (x, y, BREAKABLE_BREAKING);	// Break tile!
 			}
 		}
 #else
-		map_set (x, y, ts_offs);
+		map_set (x, y, BREAKABLE_ERASE);
 #endif		
 	}
 }

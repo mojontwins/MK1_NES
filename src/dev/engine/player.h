@@ -4,11 +4,13 @@
 // player.h
 // Player movement & stuff
 
-void player_register_safe_spot (void) {
-	px_safe = px;
-	py_safe = py;
-	n_pant_safe = n_pant;
-}
+#ifdef DIE_AND_RESPAWN
+	void player_register_safe_spot (void) {
+		px_safe = px;
+		py_safe = py;
+		n_pant_safe = n_pant;
+	}
+#endif
 
 void player_init (void) {
 	// Init player data
@@ -18,7 +20,7 @@ void player_init (void) {
 	
 	pvx = pvy = 0;
 
-	#ifdef PLAYER_MOGGY_STYLE	
+	#ifdef PLAYER_TOP_DOWN	
 		pfacing = CELL_FACING_DOWN;
 	#else
 		pfacing = 0;
@@ -112,7 +114,7 @@ void kill_player (void) {
 	#include "engine/playermods/bullets.h"
 #endif
 
-#ifndef PLAYER_MOGGY_STYLE
+#ifndef PLAYER_TOP_DOWN
 	void player_points_beneath (void) {
 		cy1 = cy2 = (pry + 16) >> 4;
 		cm_two_points ();
@@ -129,7 +131,7 @@ void player_move (void) {
 	// Vertical
 	// ********
 
-	#ifdef PLAYER_MOGGY_STYLE		
+	#ifdef PLAYER_TOP_DOWN		
 		// Controller 
 
 		if (!(i & PAD_UP || i & PAD_DOWN)) {
@@ -148,7 +150,6 @@ void player_move (void) {
 		if (i & PAD_UP) {
 			pfacingv = CELL_FACING_UP;
 			if (pvy > -PLAYER_VX_MAX) {
-			if (pvy > -player_vx_max) {
 				pvy -= PLAYER_AX;
 			}
 		}
@@ -156,7 +157,6 @@ void player_move (void) {
 		if (i & PAD_DOWN) {
 			pfacingv = CELL_FACING_DOWN;
 			if (pvy < PLAYER_VX_MAX) {
-			if (pvy < player_vx_max) {
 				pvy += PLAYER_AX;
 			}
 		}
@@ -224,7 +224,7 @@ void player_move (void) {
 	pry = py >> FIXBITS;
 		
 	if (rdy != pry) {
-		#ifdef PLAYER_MOGGY_STYLE		
+		#ifdef PLAYER_TOP_DOWN		
 			if (pvy < 0)
 		#else
 			rds16 = pvy + pgtmy;
@@ -249,7 +249,7 @@ void player_move (void) {
 				}
 		#endif		
 
-		#ifdef PLAYER_MOGGY_STYLE			
+		#ifdef PLAYER_TOP_DOWN			
 			} else if (pvy > 0)
 		#else
 			} else if (rds16 > 0)
@@ -275,11 +275,13 @@ void player_move (void) {
 			}
 	}
 	
-	player_points_beneath ();
-	ppossee = pvy >= 0 && ((at1 & 14) || (at2 & 14));
-	#ifdef ENABLE_SLIPPERY
-		pice = (ppossee && ((at1 & 64) || (at2 & 64)));
-	#endif	
+	#ifndef PLAYER_TOP_DOWN	
+		player_points_beneath ();
+		ppossee = pvy >= 0 && ((at1 & 14) || (at2 & 14));
+		#ifdef ENABLE_SLIPPERY
+			pice = (ppossee && ((at1 & 64) || (at2 & 64)));
+		#endif	
+	#endif		
 
 	// Conveyors
 	#ifdef ENABLE_CONVEYORS	
@@ -326,7 +328,7 @@ void player_move (void) {
 	
 	// Poll pad
 	if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
-		#ifdef PLAYER_MOGGY_STYLE		
+		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = 0xff;
 		#endif
 		
@@ -352,7 +354,7 @@ void player_move (void) {
 	}
 
 	if (i & PAD_LEFT) {
-		#ifdef PLAYER_MOGGY_STYLE		
+		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = CELL_FACING_LEFT;
 		#else
 			pfacing = CELL_FACING_LEFT;		
@@ -369,7 +371,7 @@ void player_move (void) {
 	}
 	
 	if (i & PAD_RIGHT) {
-		#ifdef PLAYER_MOGGY_STYLE		
+		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = CELL_FACING_RIGHT;
 		#else
 			pfacing = CELL_FACING_RIGHT;
@@ -393,7 +395,7 @@ void player_move (void) {
 	else if (px > (244<<FIXBITS)) prx = 244; 
 	else prx = px >> FIXBITS;
 
-	#ifndef PLAYER_MOGGY_STYLE	
+	#ifndef PLAYER_TOP_DOWN	
 		if (pgotten) px += pgtmx;
 	#endif
 	
@@ -428,7 +430,7 @@ void player_move (void) {
 	}
 
 	// Facing
-	#ifdef PLAYER_MOGGY_STYLE	
+	#ifdef PLAYER_TOP_DOWN	
 		#ifdef TOP_OVER_SIDE
 			if (pfacingv != 0xff) {
 				pfacing = pfacingv; 
@@ -497,7 +499,7 @@ void player_move (void) {
 
 	// You may (will) need to tinker with this for your game.
 
-	#ifdef PLAYER_MOGGY_STYLE
+	#ifdef PLAYER_TOP_DOWN
 
 		// Frame selection for top-down view games
 
@@ -506,7 +508,7 @@ void player_move (void) {
 			if (pctfr == 4) {
 				pctfr = 0;
 				pfr = !pfr;
-				psprid = player_frames [pfacing + pfr];
+				psprid = pfacing + pfr;
 			}
 		}
 

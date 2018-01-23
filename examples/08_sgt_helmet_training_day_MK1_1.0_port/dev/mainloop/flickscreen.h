@@ -8,7 +8,7 @@
 			} else if (prx == 244 && pvx > 0) {
 				n_pant ++;
 				px = 4 << FIXBITS;
-#ifdef PLAYER_MOGGY_STYLE				
+#ifdef PLAYER_TOP_DOWN				
 			//} else if (pry == 0 && (i & PAD_UP)) {
 			} else if (pry <= 16 && pvy < 0) {
 				n_pant -= MAP_W;

@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // Uses neslib and related tools by Shiru
 
@@ -92,7 +92,6 @@ void main(void) {
 	bank_spr (1);
 	bank_bg (0);
 
-	scroll (0, 8);
 	ppu_off ();
 
 	// Main loop
@@ -109,6 +108,7 @@ void main(void) {
 		// Game loop
 
 		while (1) {
+			scroll (0, 8);
 			game_init (); 
 			game_loop ();
 

@@ -1,11 +1,12 @@
-// NES MK1 v0.6// Copyleft Mojon Twins 2013, 2015
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // definitions.h
 // Main definitions
 
 #define FIXBITS					6
-#define SPRITE_ADJUST			32 - 8 - 16 - 1
 #define TOP_ADJUST				4
+#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
 
 // Player states
 
@@ -35,16 +36,13 @@
 
 // Animation cells 
 
-#ifdef PLAYER_MOGGY_STYLE
-
 	// Cell definitions for top-down view
-
+/*
 	#define CELL_FACING_RIGHT 	0
 	#define CELL_FACING_LEFT 	2
 	#define CELL_FACING_UP 		4
 	#define CELL_FACING_DOWN 	6
-#else
-
+*/
 	// Cell definitions for side view
 	
 	#define CELL_FACING_RIGHT	0
@@ -54,6 +52,5 @@
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
 	#define CELL_SWIM_CYCLE		6
-#endif
 
 

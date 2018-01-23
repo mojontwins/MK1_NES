@@ -82,7 +82,7 @@ void prepare_scr (void) {
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
 #endif
 
-#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_MOGGY_STYLE))
+#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
 	player_register_safe_spot ();
 #endif
 

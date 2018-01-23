@@ -29,6 +29,6 @@ License
 
 **But** if you make a game with the engine we understand you'll want to make it into a cart. **In such case, just tell us!** Write to mojontwins@gmail.com **We will, most likely, say yes**. 
 
-The **games** included in te `examples` folder are now free to produce, which means **you can put them into carts and sell them, as long as you tell us first and send us a couple of copies**. You will eventually find assets (stickers and possibly cover art) alongside the game ROM in each game folder.
+The **games** included in the `examples` folder are now free to produce, which means **you can put them into carts and sell them, as long as you tell us first and send us a couple of copies**. You will eventually find assets (stickers and possibly cover art) alongside the game ROM in each game folder.
 
 Have fun.

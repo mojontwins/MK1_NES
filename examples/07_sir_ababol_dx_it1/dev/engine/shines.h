@@ -1,9 +1,14 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
 // Make stuff shine
 
 void shines_add (unsigned char x, unsigned char y) {
 	shines [max_shines ++] = (x << 4) | y;
 }
+
 void p_t (unsigned char, unsigned char, unsigned char);
+
 void shines_do (void) {
 
 	if (last_shine_ct) {

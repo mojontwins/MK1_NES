@@ -61,7 +61,7 @@ void prepare_scr (void) {
 
 	enems_load ();
 
-#if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)
+#if defined (ACTIVATE_SCRIPTING) && (defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE))
 	f_zone_ac = 0;
 	fzx1 = fzx2 = fzy1 = fzy2 = 240;
 #endif
@@ -82,7 +82,7 @@ void prepare_scr (void) {
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
 #endif
 
-#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_MOGGY_STYLE))
+#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
 	player_register_safe_spot ();
 #endif
 

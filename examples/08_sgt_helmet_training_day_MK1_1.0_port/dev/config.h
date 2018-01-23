@@ -230,7 +230,7 @@
 // Top view:
 // ---------
 
-#define PLAYER_MOGGY_STYLE            	// Enable top view.
+#define PLAYER_TOP_DOWN            	// Enable top view.
 #define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
@@ -249,8 +249,6 @@
 // ============================================================================
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
-
-#define SCR_Y					0		// 0, 2 or 4.
 
 #define LIFE_X					3		//
 #define LIFE_Y					29		// Life gauge counter character coordinates

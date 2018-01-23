@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 void fire_bullet (void) {
 	#ifdef MAX_AMMO
@@ -7,48 +7,48 @@ void fire_bullet (void) {
 		pammo --;
 	#endif
 	// Creates a new bullet (if possible);
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		if (bst [gpit] == 0) {
-			bst [gpit] = 1;
+	for (bi = 0; bi < MAX_BULLETS; bi ++) {
+		if (bst [bi] == 0) {
+			bst [bi] = 1;
 
-			#ifdef PLAYER_MOGGY_STYLE
+			#ifdef PLAYER_TOP_DOWN
 				switch (pfacing) {
 					case CELL_FACING_LEFT:
-						bx [gpit] = prx - 4;
-						bmx [gpit] = -PLAYER_BULLET_SPEED;
-						by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
-						bmy [gpit] = 0;
+						bx [bi] = prx - 4;
+						bmx [bi] = -PLAYER_BULLET_SPEED;
+						by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
+						bmy [bi] = 0;
 						break;	
 					case CELL_FACING_RIGHT:
-						bx [gpit] = prx + 12;
-						bmx [gpit] = PLAYER_BULLET_SPEED;
-						by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
-						bmy [gpit] = 0;
+						bx [bi] = prx + 12;
+						bmx [bi] = PLAYER_BULLET_SPEED;
+						by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
+						bmy [bi] = 0;
 						break;
 					case CELL_FACING_DOWN:
-						bx [gpit] = prx + PLAYER_BULLET_X_OFFSET;
-						by [gpit] = pry + 12;
-						bmy [gpit] = PLAYER_BULLET_SPEED;
-						bmx [gpit] = 0;
+						bx [bi] = prx + PLAYER_BULLET_X_OFFSET;
+						by [bi] = pry + 12;
+						bmy [bi] = PLAYER_BULLET_SPEED;
+						bmx [bi] = 0;
 						break;
 					case CELL_FACING_UP:
-						bx [gpit] = prx + 8 - PLAYER_BULLET_X_OFFSET;
-						by [gpit] = pry - 4;
-						bmy [gpit] = -PLAYER_BULLET_SPEED;
-						bmx [gpit] = 0;
+						bx [bi] = prx + 8 - PLAYER_BULLET_X_OFFSET;
+						by [bi] = pry - 4;
+						bmy [bi] = -PLAYER_BULLET_SPEED;
+						bmx [bi] = 0;
 						break;
 				}
 			#else
-				by [gpit] = pry + PLAYER_BULLET_Y_OFFSET;
+				by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 				
 				if (pfacing) {
 					// Left
-					bx [gpit] = prx - 4;
-					bmx [gpit] = -PLAYER_BULLET_SPEED;
+					bx [bi] = prx - 4;
+					bmx [bi] = -PLAYER_BULLET_SPEED;
 				} else {
 					// Right
-					bx [gpit] = prx + 12;
-					bmx [gpit] = PLAYER_BULLET_SPEED;
+					bx [bi] = prx + 12;
+					bmx [bi] = PLAYER_BULLET_SPEED;
 				}
 			#endif		
 			
@@ -61,38 +61,42 @@ void fire_bullet (void) {
 }
 
 void bullets_move (void) {
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		if (bst [gpit]) {
-			if (bmx [gpit]) {
-				bx [gpit] += bmx [gpit];
+	for (bi = 0; bi < MAX_BULLETS; bi ++) {
+		if (bst [bi]) {
+			if (bmx [bi]) {
+				bx [bi] += bmx [bi];
 
 				if (
-					bx [gpit] < PLAYER_BULLET_SPEED ||
-					bx [gpit] > 255 - PLAYER_BULLET_SPEED
-				) bst [gpit] = 0; 
+					bx [bi] < PLAYER_BULLET_SPEED ||
+					bx [bi] > 255 - PLAYER_BULLET_SPEED
+				) bst [bi] = 0; 
 			
 			}
 
-			#ifdef PLAYER_MOGGY_STYLE		
-				if (bmy [gpit]) {
-					by [gpit] += bmy [gpit];
+			#ifdef PLAYER_TOP_DOWN		
+				if (bmy [bi]) {
+					by [bi] += bmy [bi];
 					if (
-						by [gpit] < PLAYER_BULLET_SPEED ||
-						by [gpit] > 191 - PLAYER_BULLET_SPEED
-					) bst [gpit] = 0; 
+						by [bi] < PLAYER_BULLET_SPEED ||
+						by [bi] > 191 - PLAYER_BULLET_SPEED
+					) bst [bi] = 0; 
 				}
 			#endif
 			
-			cx1 = (bx [gpit] + 3) >> 4; 
-			cy1 = (by [gpit] + 3) >> 4;
+			cx1 = (bx [bi] + 3) >> 4; 
+			cy1 = (by [bi] + 3) >> 4;
 			cm_two_points ();
 
 			#ifdef BREAKABLE_WALLS
-				if (at1 & 16) break_wall (cx1, cy1);
+				if (at1 & 16) {
+					bst [bi] = 0;
+					sfx_play (6, 2);
+					break_wall (cx1, cy1 - 1);
+				} else 
 			#endif			
 			
 			if (at1 & 8) {
-				bst [gpit] = 0;
+				bst [bi] = 0;
 				sfx_play (6, 2);
 			}
 			
@@ -108,11 +112,10 @@ void bullets_move (void) {
 						if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)
 					#endif
 					
-					if (collide_in (bx [gpit] + 3, by [gpit] + 3, en_x [gpjt], en_y [gpjt])) {
+					if (collide_in (bx [bi] + 3, by [bi] + 3, en_x [gpjt], en_y [gpjt])) {
 						
-						en_touched [gpjt] = 1;
 						en_cttouched [gpjt] = 8;
-						bst [gpit] = 0;
+						bst [bi] = 0;
 						sfx_play (6, 2);
 						en_life [gpjt] --;						
 
@@ -134,7 +137,11 @@ void bullets_move (void) {
 				}	
 			}
 						
-			oam_index = oam_spr (bx [gpit], SPRITE_ADJUST + by [gpit], oam_index, BULLET_PALETTE, BULLET_PATTERN);
+			oam_index = oam_spr (
+				bx [bi], SPRITE_ADJUST + by [bi], 
+				BULLET_PATTERN, BULLET_PALETTE,
+				oam_index
+			);
 		}
 	}
 }

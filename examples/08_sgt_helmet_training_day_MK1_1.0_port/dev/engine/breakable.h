@@ -38,7 +38,7 @@ void break_wall (unsigned char x, unsigned char y) {
 			}
 		}
 #else
-		map_set (x, y, 0);
+		map_set (x, y, BREAKABLE_ERASE);
 #endif		
 	}
 }

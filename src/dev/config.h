@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // ============================================================================
 // I. General configuration
@@ -253,8 +253,6 @@
 // ============================================================================
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
-
-#define SCR_Y					4		// 0, 2 or 4.
 
 #define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates

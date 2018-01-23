@@ -65,7 +65,7 @@ signed int px, py, pvx, pvy;
 unsigned char prx, pry;
 unsigned char pfacing, pfr, pctfr, psprid;
 
-#ifdef PLAYER_MOGGY_STYLE
+#ifdef PLAYER_TOP_DOWN
 	unsigned char pfacinghlast;
 #endif
 
@@ -90,7 +90,7 @@ signed int pgtmx, pgtmy;
 unsigned char pinv;
 #endif
 
-#ifdef PLAYER_MOGGY_STYLE
+#ifdef PLAYER_TOP_DOWN
 	unsigned char pfacingv, pfacingh;
 #endif
 
@@ -110,7 +110,7 @@ unsigned char wall, hitv, hith;
 	unsigned char bi;
 	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
 	signed char bmx [MAX_BULLETS];
-	#ifdef PLAYER_MOGGY_STYLE
+	#ifdef PLAYER_TOP_DOWN
 		signed char bmy [MAX_BULLETS];
 	#endif
 #endif

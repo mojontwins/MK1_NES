@@ -143,7 +143,7 @@ Veamos el checklist, a falta del scripting:
 [X] `PLAYER_CAN_FIRE`
 [X] `MAX_AMMO`
 [X] `BREAKABLE_WALLS`
-[~] `SCRIPTING`
+[X] `SCRIPTING`
 
 Qué bien :-)
 
@@ -159,3 +159,4 @@ Pero guay todo.
 
 ~~
 
+En realidad es tontería que me ponga a acabarlo, picha. Pero es codebase con la versión... Bue, por el momento tengo que echar un rato trasladando los cambios a la carpeta src y a la de Sir Ababol.

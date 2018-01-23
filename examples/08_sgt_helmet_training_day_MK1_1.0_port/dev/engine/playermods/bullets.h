@@ -11,7 +11,7 @@ void fire_bullet (void) {
 		if (bst [bi] == 0) {
 			bst [bi] = 1;
 
-			#ifdef PLAYER_MOGGY_STYLE
+			#ifdef PLAYER_TOP_DOWN
 				switch (pfacing) {
 					case CELL_FACING_LEFT:
 						bx [bi] = prx - 4;
@@ -73,7 +73,7 @@ void bullets_move (void) {
 			
 			}
 
-			#ifdef PLAYER_MOGGY_STYLE		
+			#ifdef PLAYER_TOP_DOWN		
 				if (bmy [bi]) {
 					by [bi] += bmy [bi];
 					if (

@@ -285,7 +285,7 @@ void enems_load (void) {
 }
 
 void enems_move (void) {
-#ifndef PLAYER_MOGGY_STYLE	
+#ifndef PLAYER_TOP_DOWN	
 	pgotten = pgtmx = pgtmy = 0;
 #endif
 	
@@ -378,7 +378,7 @@ void enems_move (void) {
 				);
 			}
 
-#ifndef PLAYER_MOGGY_STYLE
+#ifndef PLAYER_TOP_DOWN
 			// Movable platforms
 
 			if (en_t [gpit] == 4 && pregotten && !pgotten && !pj) {

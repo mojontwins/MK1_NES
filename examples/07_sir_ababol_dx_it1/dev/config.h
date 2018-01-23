@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // ============================================================================
 // I. General configuration
@@ -234,7 +234,7 @@
 // Top view:
 // ---------
 /*
-#define PLAYER_MOGGY_STYLE            	// Enable top view.
+#define PLAYER_TOP_DOWN            	// Enable top view.
 #define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
 */
 // Side view:
@@ -253,8 +253,6 @@
 // ============================================================================
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
-
-#define SCR_Y					4		// 0, 2 or 4.
 
 #define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates

@@ -8,15 +8,15 @@
 			} else if (prx == 244 && pvx > 0) {
 				n_pant ++;
 				px = 4 << FIXBITS;
-#ifdef PLAYER_MOGGY_STYLE				
+#ifdef PLAYER_TOP_DOWN				
 			//} else if (pry == 0 && (i & PAD_UP)) {
-			} else if (pry == 0 && pvy < 0) {
+			} else if (pry <= 16 && pvy < 0) {
 				n_pant -= MAP_W;
 				py = 192 << FIXBITS;
 			//} else if (pry >= 176 && (i & PAD_DOWN)) {
 			} else if (pry >= 192 && pvy > 0) {
 				n_pant += MAP_W;
-				py = 0;
+				py = 16 << FIXBITS;
 #else
 			} else if (pry == 0 && pvy < 0 && n_pant >= MAP_W) {
 				n_pant -= MAP_W;

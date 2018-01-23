@@ -1,3 +1,8 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
+// Pursuing enemies
+
 switch (en_alive [gpit]) {
 	case 0:
 		// IDLE
@@ -12,13 +17,11 @@ switch (en_alive [gpit]) {
 			if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 			if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
 			en_ct [gpit] = 50 + (rand8 () & 31);
-			
-			en_spr = SPRITE_BADDIE_DYING;
 		}
 		break;
 	case 1:
 		// Appearing
-
+		en_spr = SPRITE_BADDIE_DYING;
 		if (en_ct [gpit]) en_ct [gpit] --; else en_alive [gpit] = 2;
 		break;
 	case 2:
@@ -44,13 +47,14 @@ switch (en_alive [gpit]) {
 					rda = ((cy1 + 1) << 4) - 8;
 				} else {
 					cy1 = cy2 = (en_y [gpit] + 15) >> 4;
-					rda = (cy - 1) << 4;
+					rda = (cy1 - 1) << 4;
 				}
 
 				cm_two_points ();
 				if (at1 || at2) {
 					en_y [gpit] = rda;
 				}
+			}
 #endif
 
 			// Horizontal
@@ -81,6 +85,6 @@ switch (en_alive [gpit]) {
 
 		}
 		
-		en_spr = (en_s [gpit] << 1) + en_fr;
+		en_spr = en_s [gpit] + en_fr;
 		break;
 }					
