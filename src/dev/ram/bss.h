@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // bss
 
@@ -102,3 +102,24 @@ unsigned char level, game_over;
 #ifdef SCRIPTING_TEXT_BOX
 	unsigned char stbl;
 #endif
+
+// Current level
+
+const unsigned char *c_pal_bg;
+const unsigned char *c_pal_fg;
+
+#ifdef MAP_FORMAT_PACKED
+	const unsigned char *c_map;
+#else
+	const unsigned char * const *c_map;
+#endif
+	
+#ifdef MAP_WITH_DECORATIONS
+	const unsigned char * const *c_decos;
+#endif
+
+const unsigned char *c_locks;
+const unsigned char *c_enems;
+const unsigned char *c_hotspots;
+
+unsigned char c_max_bolts;

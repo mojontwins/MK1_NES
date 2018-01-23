@@ -1,3 +1,8 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
+// Fanties
+
 #ifdef FANTY_KILLED_BY_TILE
 	#define FANTY_OBSTACLE(a) ((a)>1)
 #else

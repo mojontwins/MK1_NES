@@ -73,7 +73,6 @@ void prepare_scr (void) {
 
 	oam_hide_rest (0);
 	clear_update_list ();
-	set_rand (n_pant + 1);
 	draw_scr ();
 
 #ifdef BREAKABLE_ANIM
@@ -233,12 +232,8 @@ void game_loop (void) {
 	}
 
 	music_stop ();
+	fade_out ();
 	set_vram_update (0, 0);
 	ppu_off ();
 	oam_clear ();
-	
-	cls ();
-	oam_clear ();	
-	
-		
 }

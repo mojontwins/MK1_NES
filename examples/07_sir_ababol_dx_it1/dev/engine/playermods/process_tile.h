@@ -8,16 +8,21 @@ void player_process_tile (at, x0, y0, x1, y1) {
 	#ifdef PLAYER_PUSH_BOXES
 		if (y1) y1 --;
 		if (
-			at == 11 &&
-			x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11
+			at == 11 
 			#ifdef FIRE_TO_PUSH
-				&& (i & PAD_B)
+				&& (pad_this_frame & PAD_B)
 			#endif
 		) {
-			pfiring = pushed_any = 1;
-			map_set (x0, y0, 0);
-			map_set (x1, y1, 14);
+			pushed_any = 1;
 			sfx_play (1, 1);
+			
+			if (
+				x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11 &&
+				map_attr [COORDS (x1, y1)] == 0
+			) {
+				map_set (x0, y0, 0);
+				map_set (x1, y1, 14);
+			}	
 		}
 	#else
 		y1=x1;//Shutup, compiler!

@@ -233,12 +233,8 @@ void game_loop (void) {
 	}
 
 	music_stop ();
+	fade_out ();
 	set_vram_update (0, 0);
 	ppu_off ();
 	oam_clear ();
-	
-	cls ();
-	oam_clear ();	
-	
-		
 }

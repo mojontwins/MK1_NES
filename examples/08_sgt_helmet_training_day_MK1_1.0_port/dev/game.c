@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // Uses neslib and related tools by Shiru
 
@@ -35,9 +35,13 @@
 	#include "assets/levelset.h"
 #endif
 #include "assets/frame_rle.h"
+#include "assets/title_rle.h"
+#include "assets/cuts_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];
+extern const unsigned char m_title [];
+extern const unsigned char m_gameover [];
 
 // Push to zero page:
 #pragma bssseg (push,"ZEROPAGE")
@@ -92,6 +96,10 @@ void main(void) {
 
 	ppu_off ();
 
+	credits ();
+
+	scroll (0, 8);
+	
 	// Main loop
 
 	while (1) {	
@@ -99,19 +107,18 @@ void main(void) {
 		//title ();
 
 #ifdef MULTI_LEVEL		
-		level = 1;
+		level = pres_title ();
 #endif
 		plife = PLAYER_LIFE;
 
 		// Game loop
 
 		while (1) {
-			scroll (0, 8);
 			game_init (); 
 			game_loop ();
 
 			if (game_over) {
-				// game_over ();
+				pres_game_over ();
 				break;
 			} else {
 #ifdef MULTI_LEVEL
@@ -119,7 +126,7 @@ void main(void) {
 				if (level == MAX_LEVELS) 
 #endif
 				{
-					// game_ending ();
+					pres_ending ();
 					break;
 				}
 			}

@@ -18,7 +18,7 @@ void draw_scr (void) {
 
 	// Draw Map
 
-	rdx = 0; rdy = 0; rdm = 0;
+	rdx = rdy = rdm = 0;
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer

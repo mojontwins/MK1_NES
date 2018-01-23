@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // Main loop & helpers
 
@@ -73,7 +73,14 @@ void prepare_scr (void) {
 
 	oam_hide_rest (0);
 	clear_update_list ();
+	set_rand (n_pant + 1);
 	draw_scr ();
+
+#ifdef BREAKABLE_ANIM
+	do_process_breakable = 0;
+	gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
+#endif
+
 	hotspots_create ();	
 	// Write attributes
 	vram_write (attr_table, 0x23c0, 64);
@@ -226,12 +233,8 @@ void game_loop (void) {
 	}
 
 	music_stop ();
+	fade_out ();
 	set_vram_update (0, 0);
 	ppu_off ();
 	oam_clear ();
-	
-	cls ();
-	oam_clear ();	
-	
-		
 }

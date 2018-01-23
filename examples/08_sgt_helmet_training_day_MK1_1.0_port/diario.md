@@ -162,3 +162,11 @@ Pero guay todo.
 En realidad es tontería que me ponga a acabarlo, picha. Pero es codebase con la versión... Bue, por el momento tengo que echar un rato trasladando los cambios a la carpeta src y a la de Sir Ababol.
 
 No pudiendo probar si va el scripting, de todos modos, voy a ver si sigo un poco con el Sir Ababol.
+
+20180123
+========
+
+He seguido completando el juego y tal, y he tenido que arreglar un montón de cosas con los pushables... Pero sigue sin ir fino, en la dirección hacia abajo pierde muchos empujones, y tengo que ver por qué es.
+
+De todos modos voy a unificar y a chapar por hoy.
+

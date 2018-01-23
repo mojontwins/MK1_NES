@@ -245,8 +245,8 @@
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
-#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them

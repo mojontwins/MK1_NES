@@ -3,7 +3,7 @@
 
 const unsigned char l_scr_ini [] = 				{ 23, 23 };
 const unsigned char l_ini_x [] = 				{ 12, 12 };
-const unsigned char l_ini_y [] = 				{ 8, 8 };
+const unsigned char l_ini_y [] = 				{ 9, 9 };
 
 // Ending screen & position, per level (comment if N/A)
 

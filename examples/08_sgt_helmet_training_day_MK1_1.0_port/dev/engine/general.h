@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // general.h
 // General functions, vars & buffers
@@ -38,4 +38,12 @@ void run_fire_script (void) {
 
 signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
+}
+
+void pad_read (void) {
+	// Thanks for this, Nicole & nesdev!
+	// https://forums.nesdev.com/viewtopic.php?p=179315#p179315
+	pad_this_frame = i;
+	i = pad_poll (0);			// Read pads here.
+	pad_this_frame = (pad_this_frame ^ i) & i;
 }

@@ -17,6 +17,22 @@ MAPFILE ..\dev\work\dummy0.h
 LABEL dummy0
 MAPPED 0, 0, 2, 2, 16, 15
 
+# Dummy cut as metatiles new patterns found in title.png
+# this is a workaround which works so good ...
+OPEN title.png
+PALS palts0.png
+MAPFILE ..\dev\work\dummy1.h
+LABEL dummy1
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Dummy cut as metatiles new patterns found in cuts.png
+# this is a workaround which works so good ...
+OPEN cuts.png
+PALS palts0.png
+MAPFILE ..\dev\work\dummy2.h
+LABEL dummy2
+MAPPED 0, 0, 2, 2, 16, 15
+
 # Tilesets are generated as tilemaps. They will be stored in this file:
 MAPFILE ..\dev\assets\tiledata.h
 
@@ -65,6 +81,12 @@ METASPRITESET 0, 4, 2, 2, 1, 1, 0, 0
 # (items rectangle is 16x16, centered bottom).
 LABEL ssit
 METASPRITESET 3, 4, 2, 2, 4, 1, 0, 0
+
+# MT logo
+OPEN logo.png
+PALS palss0.png
+LABEL spr_logo
+METASPRITE 0, 0, 6, 2, 0, 0
 
 # Done with patterns for spr. Fill with zeroes:
 FILL 8192

@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // ============================================================================
 // I. General configuration
@@ -11,7 +11,7 @@
 #define MAP_H					24		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_LIFE				10		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
 #define MULTI_LEVEL						// Comment for single level

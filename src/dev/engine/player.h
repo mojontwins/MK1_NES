@@ -122,7 +122,7 @@ void kill_player (void) {
 #endif
 
 void player_move (void) {
-	i = pad_poll (0);
+	pad_read ();
 	hitv = hith = 0;
 	pushed_any = 0;
 	//ppossee = 0;
@@ -222,8 +222,11 @@ void player_move (void) {
 	rdy = pry;
 	prx = px >> FIXBITS;
 	pry = py >> FIXBITS;
-		
-	if (rdy != pry) {
+	
+	#ifndef PLAYER_TOP_DOWN	
+	if (rdy != pry) 
+	#endif
+	{
 		#ifdef PLAYER_TOP_DOWN		
 			if (pvy < 0)
 		#else
@@ -236,10 +239,12 @@ void player_move (void) {
 				if ((at1 & 8) || (at2 & 8)) {
 					pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
 					pgotten = 0;
-					
-					// Special obstacles
-					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
-					if (at2 & 2) player_process_tile (at1, cx2, cy2, cx2, cy2 - 1);
+					pfiring = 1;
+					#ifdef PLAYER_TOP_DOWN
+						// Special obstacles
+						if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
+						if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
+					#endif
 				} else if ((at1 & 1) || (at2 & 1)) {
 					hitv = 1;
 				}
@@ -257,21 +262,31 @@ void player_move (void) {
 			{
 				cy1 = cy2 = (pry + 15) >> 4; 
 				cm_two_points (); 
+				#ifdef PLAYER_TOP_DOWN
+				if ((at1 & 8) || (at2 & 8)) {
+				#else
 		 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
+		 		#endif
 					pvy = 0; pry = ((cy1 - 1) << 4);py = pry << FIXBITS;
 					pgotten = 0;
+					pfiring = 1;
 					
-					// Special obstacles
-					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
-					if (at2 & 2) player_process_tile (at1, cx2, cy2, cx2, cy2 + 1);
+					
 				} else if ((at1 & 1) || (at2 & 1)) {
 					hitv = 1;
 				}
-		#ifdef ENABLE_QUICKSANDS		
-				else {
-					if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
-				}
-		#endif
+				#ifdef ENABLE_QUICKSANDS		
+					else {
+						if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
+					}
+				#endif
+		
+				#ifdef PLAYER_TOP_DOWN
+					cy1 = cy2 = (pry + 16) >> 4; cm_two_points ();
+					// Special obstacles
+					if (at1 & 10) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
+					if (at2 & 10) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);
+				#endif
 			}
 	}
 	
@@ -410,19 +425,19 @@ void player_move (void) {
 			if (rds16 < 0) {
 				cx1 = cx2 = prx >> 4; 
 				rda = (cx1 + 1) << 4;
-				rdb = cx1 - 1;
+				rdm = cx1 - 1;
 			} else {
 				cx1 = cx2 = (prx + 7) >> 4;
 				rda = ((cx1 - 1) << 4) + 8;
-				rdb = cx1 + 1;
+				rdm = cx1 + 1;
 			}
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS;
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
-				if (at1 & 2) player_process_tile (at1, cx1, cy1, rdb, cy1);
-				if (at2 & 2) player_process_tile (at1, cx1, cy2, rdb, cy2);
+				if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
+				if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 			} else {
 				hith = ((at1 & 1) || (at2 & 1));
 			}
@@ -464,12 +479,14 @@ void player_move (void) {
 	// (fire bullets, run scripting w/animation, do containers)
 
 	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
-		if (i & PAD_B) {
-			if (!pfiring) {
-				pfiring = 1;
+		if (pad_this_frame & PAD_B) {
+			if (
+				!pfiring
 				#ifdef FIRE_TO_PUSH
-					if (!pushed_any)
+				&& !pushed_any
 				#endif
+			) {
+				pfiring = 1;
 				{
 					#ifdef PLAYER_CAN_FIRE				
 						fire_bullet ();
@@ -490,7 +507,7 @@ void player_move (void) {
 					#endif
 				}	
 			}
-		} else pfiring = 0;
+		} else pfiring = pushed_any = 0;
 	#endif
 
 	// **********

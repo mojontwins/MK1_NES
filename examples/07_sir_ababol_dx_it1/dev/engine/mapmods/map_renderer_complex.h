@@ -11,13 +11,15 @@
 void add_tile (void) {
 	map_buff [rdm] = rda;
 	rdm ++;
+	// Need to do this to keep track of where I am
+	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
 
 void draw_scr (void) {
 
 	// Draw Map
 
-	rdm = 0;
+	rdx = rdy = rdm = 0;
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer
@@ -45,8 +47,7 @@ void draw_scr (void) {
 					while (rdct --) {
 						rdt = get_byte ();
 						rda = rdt >> 4; add_tile ();
-						rda = rdt & 15;
-						if (rdy < 12) add_tile ();
+						if (rdy < 12) { rda = rdt & 15;	 add_tile (); }
 					}
 				} else {
 					// Counter

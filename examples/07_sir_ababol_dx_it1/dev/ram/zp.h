@@ -5,7 +5,7 @@
 
 // General, all-purpose variables
 
-unsigned char i, gpit, gpjt, gpitu, gpaux;
+unsigned char i, pad_this_frame, gpit, gpjt, gpitu, gpaux;
 signed int rds16;
 
 const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
@@ -134,26 +134,8 @@ unsigned char ft;
 
 // Current level
 
-const unsigned char *c_pal_bg;
-const unsigned char *c_pal_fg;
 const unsigned char *c_ts_pals;
 const unsigned char *c_ts_tmaps;
 const unsigned char *c_behs;
 
 const unsigned char * const *spr_enems;
-
-#ifdef MAP_FORMAT_PACKED
-	const unsigned char *c_map;
-#else
-	const unsigned char * const *c_map;
-#endif
-	
-#ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const *c_decos;
-#endif
-
-const unsigned char *c_locks;
-const unsigned char *c_enems;
-const unsigned char *c_hotspots;
-
-unsigned char c_max_bolts;

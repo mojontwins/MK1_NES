@@ -109,7 +109,7 @@ unsigned char get_byte (void) {
 	#include "engine/mapmods/map_renderer_complex.h"
 #else
 	#include "engine/mapmods/map_renderer_fast.h"
-	#endif	
+#endif
 
 
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
