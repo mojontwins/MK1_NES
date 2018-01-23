@@ -58,6 +58,11 @@
 #define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
+// Use the complex renderer if you need to post-process the map buffer before
+// printing.
+
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+
 // ============================================================================
 // II. Engine type
 // ============================================================================
@@ -234,7 +239,7 @@
 // Top view:
 // ---------
 /*
-#define PLAYER_MOGGY_STYLE            	// Enable top view.
+#define PLAYER_TOP_DOWN            		// Enable top view.
 #define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
 */
 // Side view:

@@ -9,6 +9,7 @@ unsigned char i, gpit, gpjt, gpitu, gpaux;
 signed int rds16;
 
 const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
+unsigned char *gp_ram;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc, rdm;

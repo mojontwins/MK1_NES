@@ -1,4 +1,5 @@
-
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 void player_process_tile (at, x0, y0, x1, y1) {
 	if (y0) y0 --;

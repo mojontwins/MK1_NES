@@ -1,12 +1,11 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // frame.h
 // Custom game frame
 
 void __fastcall__ draw_game_frame (void) {
-	unrle_vram (frame_rle, 0x2000);
-	memfill (attr_table, 0xff, 64);
+	// Add code
 }
 
 void hud_update (void) {

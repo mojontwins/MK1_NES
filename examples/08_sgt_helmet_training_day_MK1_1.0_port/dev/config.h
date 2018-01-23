@@ -14,16 +14,16 @@
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				1
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				2
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
 	#define SCR_INI					23		// Initial screen
-	#define PLAYER_INI_X			7		//
-	#define PLAYER_INI_Y			7		// Initial position
+	#define PLAYER_INI_X			12		//
+	#define PLAYER_INI_Y			8		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position

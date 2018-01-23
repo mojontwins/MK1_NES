@@ -1,5 +1,5 @@
-// NES MK1 v0.7
-// Copyleft Mojon Twins 2013, 2015, 2016
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // printer.h
 // Draw map, print text, etcetera.
@@ -101,113 +101,16 @@ void map_set (unsigned char x, unsigned char y, unsigned char n) {
 	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 
-void draw_map_tile (unsigned char t) {
-	map_buff [rdm] = t;		
-	map_attr [rdm] = c_behs [t];
-	#ifdef BREAKABLE_WALLS
-		brk_buff [rdm] = 1;
-	#endif
-	rdm ++;
-	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
-	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
-}
-
 unsigned char get_byte (void) {
 	rdit --; return *gp_gen ++;
 }
 
-void draw_scr (void) {
-
-	// Draw current screen
-	set_rand (n_pant + 1);
-	rdx = 0; rdy = 0; rdm = 0;
-
-	#ifdef MAP_FORMAT_PACKED
-		// Get pointer
-		gp_gen = c_map + (n_pant << 6) + (n_pant << 5); 
-		
-		// Draw packed
-		rdit = 96; while (rdit --) {
-			rdt = *gp_gen ++;
-			draw_map_tile (rdt >> 4);
-			draw_map_tile (rdt & 15);
-		}
-	#endif
-
-	#ifdef MAP_FORMAT_RLE16
-		// Get pointer
-		gp_gen = c_map [n_pant];
-
-		// Packed or RLE'd?
-		if (rdit = *gp_gen ++) {
-			while (rdit) {
-				rdct = get_byte ();
-				if (rdct & 0xf0) {
-					// String
-					rdct = 1 + (rdct & 0x0f);
-					while (rdct --) {
-						rdt = get_byte ();
-						draw_map_tile (rdt >> 4);
-						if (rdy < 12) draw_map_tile (rdt & 15);
-					}
-				} else {
-					// Counter
-					rdt = rdct & 0x0f;
-					rdct = get_byte ();
-					while (rdct --) draw_map_tile (rdt);
-				}
-			}
-		} else {
-			rdit = 96; while (rdit --) {
-				rdt = *gp_gen ++;
-				draw_map_tile (rdt >> 4);
-				draw_map_tile (rdt & 15);
-			}
-		}
+#ifdef MAP_RENDERER_COMPLEX
+	#include "engine/mapmods/map_renderer_complex.h"
+#else
+	#include "engine/mapmods/map_renderer_fast.h"
 	#endif	
 
-	#ifdef MAP_WITH_DECORATIONS
-		// Draw decorations
-		if (c_decos) {
-			if (c_decos [n_pant]) {
-				gp_gen = (unsigned char *) c_decos [n_pant];
-			
-				while (rdt = *gp_gen ++) {
-					if (rdt & 0x80) {
-						rdt &= 0x7F;
-						rdct = 1;
-					} else {
-						rdct = *gp_gen ++;
-					}
-					while (rdct --) {
-						rda = *gp_gen ++;
-						rdx = rda >> 4; rdy = rda & 15;
-						draw_map_tile (rdt);
-					}
-				}
-			}
-		}
-	#endif
-
-	// Clear open locks
-	#ifndef DEACTIVATE_KEYS	
-		gp_gen = (unsigned char *) c_locks;
-		gpit = c_max_bolts; while (gpit --) {
-			rda = *gp_gen ++; rdm = *gp_gen ++;
-			if (n_pant == rda) {
-				if (!lkact [gpit]) {
-					rdy = (rdm >> 4); rdx = (rdm & 15);
-					draw_map_tile (0);
-				}
-			}
-		}	
-	#endif
-
-	#ifdef BREAKABLE_ANIM
-		do_process_breakable = 0;
-		gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
-	#endif
-}
 
 void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
 	vram_adr (((y << 5) | x) + 0x2000);

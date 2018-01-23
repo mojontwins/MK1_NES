@@ -852,6 +852,7 @@ const unsigned char l_player_max_objects [] =	{ MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_H
 Bueno, con esto funcionando voy a hacer un "snapshot", para no perderme. El proyecto en este punto, para el tutorial, debe estar como snapshot-1--20180122.7z
 
 Lo próximo es:
+--------------
 
 1.- Añadir customs al renderer en level 0 con `n_pant < 20` y en level 1.
 2.- Añadir cambio de fase custom:
@@ -875,4 +876,85 @@ Ojo como todo eso de arriba es muy compatible con meter más niveles independien
 ~~
 
 Voy a intentar hacer funcionar Sgt. Helmet's Training Day con esta versión de MK1. A ver qué tal. Sigo en un diario.md en su propia carpeta.
+
+20180123
+========
+
+Medio portar Helmet me ha ayudado a corregir un montonaco de cambios. Ahora no sé si seguir con este juego o intentar ir activando las cosas que quedan para dejarlo ya pulido del todo...
+
+Básicamente queda probar todos los tipos de enemigos, chac-chacs incluidos, más las cosas de escenario (propellers), implementar bien slippery, etc. 
+
+Para hacer eso lo suyo es que montara un proyecto específico para ir activándolo todo, con una sola pantalla donde ir probando cada cosa.
+
+~~
+
+Ahora lo que toca de todos modos, en este juego, es añadir las cosas custom: renderer y cambio de fases.
+
+Creo que la clave para montar un buen renderer en condiciones si vas a tener que dar varias pasadas es modificarlo para que solo se rellenen los buffers `map_attr` y `map_buff`, y luego hacer un dummy copier que pinte cada tile del buffer.
+
+Creo que lo voy a hacer así y lo voy a fijar como definitivo, ¿no? Porque luego hacer modificaciones y tocheces es mucho más sencillo si es sobre el buffer.
+
+~~
+
+Voy a crear mapmods, y la forma actual de escribir el mapa será un `renderer_fast` y la nueva un `renderer_complex`. Pero antes tengo que resolver muy bien el tema de las dependencias.
+
+- `draw_tile (x, y, tl)` pinta el tile tl en (x, y) absolutas.
+- `map_set (x, y, n)` establece el tile n en (x, y) del area de juego, incluyendo buffers.
+- `draw_map_tile (t)` pinta el tile t en (rdx, rdy) del area de juego. Necesita rdm = rdx | (rdy << 4) definido.
+
+Ahora mismo, `draw_scr` delega en `draw_map_tile`. Recuerdo que había dependencias de `draw_map_tile` que podría, quizá, deshacer... Veamos.
+
+Eu - pues no ! Sólo se usa desde draw_scr. Pero se usa en el pintado de decos y abriendo cerrojos.
+
+Por tanto, `draw_map_tile` se queda aún en `renderer_complex`. Sólo voy a enramar la parte que pinta el tilemap y rellena los buffers.
+
+~~
+
+Eu no. En el renderer complex todo se hará sobre el buffer y luego se pintará en una pasada. Duplico draw_scr COMPLETA.
+
+~~
+
+Jur, esto ya está funcionando. Puedo hacerlo todo incluso mucho más limpio si meto toda la modificación en un archivo aparte para el caso más concreto: modificar antes de los decos.
+
+~~
+
+Lo he hecho muy guay. Hay un archivo *vacío* en /src/ que tienes que rellenar si vas a usar `MAP_RENDERER_COMPLEX`: `map_renderer_customization.h`. Es código que se incluye justo después de haber rellenado `map_buff` con la pantalla actual, antes de los decos y antes de borrar los cerrojos.
+
+```c
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
+// Use this alongisde map_renderer_complex.h
+// (#define MAP_RENDERER_COMPLEX)
+
+// Reaching this point, map_buff has the decompressed map screen.
+// You can write as many modifications as you like here:
+
+// Modifications for Sir Ababol DX
+
+for (gpit = 0; gpit < 192; gpit ++) {
+	rdt = map_buff [gpit];
+
+	// Precalc this random which will be used all around
+	rda = ((rand8 () & 15) == 1);
+
+	// Level 0, top row has many features
+	if (level == 0 && n_pant < 20 && gpit < 112) {
+		if (rdt == 0 && gpit == 68) { 
+			rdt = 17;
+		} else if (rdt == 0 && gpit >= 96) {
+			rdt = 16;
+		} else if (rda) {
+			if (rdt == 0) rdt = 19;
+			else if (rdt == 6) rdt = 18;
+		}
+	}
+
+	// Level 1, random bubbles
+	if (level == 1 && rdt == 10 && rda) rdt = 4;
+
+	map_buff [gpit] = rdt;
+}
+```
+
 
