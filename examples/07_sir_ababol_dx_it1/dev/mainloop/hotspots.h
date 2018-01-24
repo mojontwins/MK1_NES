@@ -67,10 +67,34 @@ if (hrt) {
 							pammo = MAX_AMMO;
 						break;
 				#endif
+				// CUSTOM {
+					case HOTSPOT_TYPE_BOOT:
+						gp_gen = text_boots;
+						textbox_do ();
+						has_boots = 1;
+						break;
+
+					case HOTSPOT_TYPE_SIGN:
+						gp_gen = text_intro;
+						textbox_do ();
+						break;
+				// } END_OF_CUSTOM
 			}
-			sfx_play (rda, 1);
-			hrt = 0;
-			hact [n_pant] = 0;
+
+			// CUSTOM {
+				/*
+				sfx_play (rda, 1);
+				hrt = 0;
+				hact [n_pant] = 0;
+				*/
+				if (hrt != HOTSPOT_TYPE_SIGN) {
+					hry = 240;
+				} else {
+					sfx_play (rda, 1);
+					hrt = 0;
+					hact [n_pant] = 0;	
+				}
+			// } END_OF_CUSTOM
 		}
 	}
 }

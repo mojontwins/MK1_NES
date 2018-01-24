@@ -996,7 +996,7 @@ Y añadir este bloque en game.c, justo donde inicializamos `level` (por ejemplo)
 
 Sirve para acordarse de la pantalla donde se estaba. Lo definimos en ram/bss.h, por ejemplo al final:
 
-```
+```c
 // CUSTOM {
 	unsigned char remember_pant [MAX_LEVELS];
 // } END_OF_CUSTOM
@@ -1221,4 +1221,137 @@ Jandero. Hay que tener en cuenta un problema con que te maten nada más entrar a
 
 ~~
 
- 
+Lo siguiente que quiero meter es la caja de texto y la interacción con las botas. Aunque esté activado `PLAYER_KILLS_ENEMIES`, sólo se debe poder matar enemigos tras coger las botas. Esta modificación es muy sencilla y sólo necesitaremos una variable como flag, por ejemplo `has_boots`, en ram/bss.
+
+Pero antes pensemos en los recuadros de texto. Puedo hacer una reimplementación hiper pulida y sencilla de los de **Cheril in another Forest** e incluirla en el paquete estándar por si se quiere usar.
+
+Esta solución se basa en incluir un "custom tapestry" creado a base de un tilemap. Hay que añadir 9 tiles al tileset con los bordes de la caja y esta se imprime directamente con las funciones de actualizar el buffer, con mucho ojal porque con esta neslib el ancho de banda para actualizar es bastante menor que en la nueva.
+
+El tema es que esto implica editar el tileset y ahora mismo eso está fuera de cuestión por temas de mirones.
+
+Meh, hecho.
+
+~~
+
+Hum - es pequeño y sexy, pero lo he programado demasiado rápido. Tengo que probarlo pero ahora no va a poder ser.
+
+Vamos añadiendo textos para intro y para coger las botas. Lo haremos en un archivo nuevo `assets/custom_texts.h` que incluiremos en game.c, al final de todos los assets...
+
+```c
+	#include "assets/custom_texts.h"
+```
+
+En custom_texts.h crearemos ambos textos así:
+
+```c
+	// Custom texts
+
+	const unsigned char text_intro [] = 
+		"THE RARE ABABOL%"
+		"FLOWER GROWS AROUND%"
+		"HERE. AN UNDERGROUND%"
+		"RIVER, THERE IS. AND%"
+		"THE LEGENDARY POWER%"
+		"BOOTS YOU MAY FIND!";
+
+	const unsigned char text_boots [] =
+		"AND HERE THEY ARE!%"
+		"NOW I'M INVINCIBLE.%"
+		"WITH THOSE BOOTS,%"
+		"CRUSH THE BADDIES I%"
+		"CAN. FEAR ME, YOU%"
+		"WIMPY MONSTERS!"
+	;
+```
+
+~~ 
+
+Definimos `has_boots` en nuestra zona custom de ram/bss.h:
+
+```c
+	// CUSTOM {
+		unsigned char remember_pant [MAX_LEVELS];
+		unsigned char level_switching;
+		unsigned char has_boots;
+	// } END_OF_CUSTOM
+```
+
+La inicializamos al empezar el juego, justo después de asignar `level`, por ejemplo, en la zona custom que ya tenemos:
+
+```c
+	// CUSTOM {
+		px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+		py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+		level_switching = 0;
+		has_boots = 0;
+	// } END_OF_CUSTOM
+```
+
+en config.h tenemos hotspots de tipo custom
+
+```c
+	#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+	#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
+```
+
+Añadimos soporte para el tipo de hotspot custom (que ya tenemos definido en config.h con el valor 4, por poner), en mainloop/hotspots.h @ ~70:
+
+```c
+	// CUSTOM {
+		case HOTSPOT_TYPE_BOOT:
+			has_boots = 1;
+			break;
+	// } END_OF_CUSTOM
+```
+
+~~
+
+Va a quedar más mejor si para presentar los textos iniciales hay que leer un cartelito que pondré como hotspot custom (igual que en Ninjajar de MK3 de Spectrum XD).
+
+Eso significa que tendré que mover el ababol de la primera pantalla a otro sitio. O poner el cartel en la segunda pantalla.
+
+Este hotspot solo se debe activar si al tocarlo se pulsa FIRE. 
+
+Tocamos mainloop/hotspots.h en ~75. Fijaos que para "desactivarlo sin hacerlo" ponemos hry a 240, haciendo que la colisión sea imposible hasta que se vuelva a entrar en pantalla.
+
+```c
+	// CUSTOM {
+		case HOTSPOT_TYPE_BOOT:
+			gp_ram = text_boots;
+			textbox_do ();
+			has_boots = 1;
+			break;
+
+		case HOTSPOT_TYPE_SIGN:
+			gp_ram = text_intro;
+			textbox_do ();
+			break;
+	// } END_OF_CUSTOM
+
+	}
+
+	// CUSTOM {
+		/*
+		sfx_play (rda, 1);
+		hrt = 0;
+		hact [n_pant] = 0;
+		*/
+		if (hrt != HOTSPOT_TYPE_SIGN) {
+			hry = 240;
+		} else {
+			sfx_play (rda, 1);
+			hrt = 0;
+			hact [n_pant] = 0;	
+		}
+	// } END_OF_CUSTOM		
+```
+
+~~
+
+Obviamente no funfuña XD
+
+- No se muestra el cartel.
+- El recuadro sale mal.
+- Coco-crash!
+
+

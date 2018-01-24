@@ -51,6 +51,8 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 #define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
+
 //#define HOTSPOT_TYPE_AMMO		4
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.

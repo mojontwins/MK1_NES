@@ -143,4 +143,5 @@ unsigned char c_max_bolts;
 // CUSTOM {
 	unsigned char remember_pant [MAX_LEVELS];
 	unsigned char level_switching;
+	unsigned char has_boots;
 // } END_OF_CUSTOM

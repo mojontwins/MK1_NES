@@ -33,7 +33,8 @@ void  fade_out_fast (void) {
 
 // Clear update list
 void clear_update_list (void) {
-	gpitu = UPDATE_LIST_SIZE * 3; while (gpitu --) update_list [gpitu] = 0;
+	//gpitu = UPDATE_LIST_SIZE * 3; while (gpitu --) update_list [gpitu] = 0;
+	memfill (update_list, 0, UPDATE_LIST_SIZE*3);
 	update_index = 0;
 }
 
