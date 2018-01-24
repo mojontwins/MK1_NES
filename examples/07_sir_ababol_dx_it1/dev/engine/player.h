@@ -219,12 +219,11 @@ void player_move (void) {
 	if (py < 0) py = 0;
 	
 	// Collision
-	rdy = pry;
 	prx = px >> FIXBITS;
 	pry = py >> FIXBITS;
 	
 	#ifndef PLAYER_TOP_DOWN	
-	if (rdy != pry) 
+	if (pry_old != pry) 
 	#endif
 	{
 		#ifdef PLAYER_TOP_DOWN		
@@ -404,19 +403,17 @@ void player_move (void) {
 	
 	// Move
 	px += pvx;
-	rdx = prx;
-	
-	if (px < (4<<FIXBITS)) prx = 4;
-	else if (px > (244<<FIXBITS)) prx = 244; 
-	else prx = px >> FIXBITS;
-
 	#ifndef PLAYER_TOP_DOWN	
 		if (pgotten) px += pgtmx;
 	#endif
+		
+	if (px < (4<<FIXBITS)) prx = 4;
+	else if (px > (244<<FIXBITS)) prx = 244; 
+	else prx = px >> FIXBITS;
 	
 	// Collision
 
-	if (rdx != prx) {
+	if (prx_old != prx) {
 		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
 		cy2 = (pry + 15) >> 4;
 
@@ -558,4 +555,7 @@ void player_move (void) {
 
 		psprid += pfacing;
 	#endif
+
+	prx_old = prx;
+	pry_old = pry;
 }

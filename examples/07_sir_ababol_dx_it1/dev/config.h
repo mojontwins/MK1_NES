@@ -312,3 +312,28 @@
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
+
+// Animation cells 
+
+#ifdef PLAYER_TOP_DOWN
+
+	// Cell definitions for top-down view
+
+	#define CELL_FACING_RIGHT 	0
+	#define CELL_FACING_LEFT 	2
+	#define CELL_FACING_UP 		4
+	#define CELL_FACING_DOWN 	6
+
+#else
+
+	// Cell definitions for side view
+
+	#define CELL_FACING_RIGHT	0
+	#define CELL_FACING_LEFT	10
+
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_AIRBORNE		5
+	#define CELL_SWIM_CYCLE		6
+
+#endif

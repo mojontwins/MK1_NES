@@ -103,6 +103,22 @@ unsigned char level, game_over;
 	unsigned char stbl;
 #endif
 
+// Player
+
+unsigned char prx_old, pry_old;
+unsigned char pobjs;
+unsigned char plife, pcontinues;
+
+#ifndef DEACTIVATE_KEYS
+	unsigned char pkeys;
+#endif
+
+unsigned char pammo, pfiring;
+
+#ifdef PLAYER_TURRET
+	unsigned char pfixct;
+#endif
+
 // Current level
 
 const unsigned char *c_pal_bg;

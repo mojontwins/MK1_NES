@@ -71,18 +71,6 @@ unsigned char pfacing, pfr, pctfr, psprid;
 #endif
 
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
-unsigned char pobjs;
-unsigned char plife, pcontinues;
-
-#ifndef DEACTIVATE_KEYS
-	unsigned char pkeys;
-#endif
-
-unsigned char pammo, pfiring;
-
-#ifdef PLAYER_TURRET
-	unsigned char pfixct;
-#endif
 unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
