@@ -3,9 +3,9 @@
 	.export _m_gameover
 	.export _m_ending
 	
-	.include "m_instruments.s"
+	.include "music/m_instruments.s"
 	
-_m_title:			.include "m_title.s"
-_m_ingame:			.include "m_ingame.s"
-_m_gameover:		.include "m_gameover.s"
-_m_ending:			.include "m_ending.s"
+_m_title:			.include "music/m_title.s"
+_m_ingame:			.include "music/m_ingame.s"
+_m_gameover:		.include "music/m_gameover.s"
+_m_ending:			.include "music/m_ending.s"

@@ -9,6 +9,8 @@
 
 // Modifications for Sir Ababol DX
 
+if (level) set_rand (n_pant + 1); else set_rand (1);
+
 for (gpit = 0; gpit < 192; gpit ++) {
 	rdt = map_buff [gpit];
 

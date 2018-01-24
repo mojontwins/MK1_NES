@@ -5,7 +5,8 @@
 // Custom game frame
 
 void __fastcall__ draw_game_frame (void) {
-	// Add code
+	pr_str (2, 3, "LIFE:00   ITEMS:00   KEYS:00");
+	pr_str (2, 28, "SIR ABABOL - THE MOJON TWINS");
 }
 
 void hud_update (void) {

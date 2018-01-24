@@ -1,5 +1,5 @@
 	.export _m_ingame
 	
-	.include "m_instruments.s"
+	.include "music/m_instruments.s"
 	
-_m_ingame:			.include "m_ingame.s"
+_m_ingame:			.include "music/m_ingame.s"
