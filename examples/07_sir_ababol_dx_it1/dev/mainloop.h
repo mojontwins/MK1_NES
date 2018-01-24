@@ -19,9 +19,7 @@ void game_init (void) {
 
 	// CUSTOM {
 	if (level_switching) {
-		n_pant = remember_pant [level]; 
-		pstate = EST_PARP;
-		pctstate = 100;	
+		n_pant = n_pant_switch; 
 	} else
 	// } END_OF_CUSTOM
 	n_pant = SCR_INI;
@@ -45,7 +43,7 @@ void game_init (void) {
 			break;
 		case 1:
 			pvy = PLAYER_VY_SWIM_MAX << 1;
-			py = 32 << FIXBITS;
+			py = 16 << FIXBITS;
 			break;
 	}
 	// } END_OF_CUSTOM
@@ -178,6 +176,11 @@ void game_loop (void) {
 #endif
 
 	oam_index = 0;
+
+	// CUSTOM {
+	level_switching = 0;
+	// } END_OF_CUSTOM
+
 	while (1) {
 		half_life = 1 - half_life;
 		frame_counter ++;
@@ -188,10 +191,14 @@ void game_loop (void) {
 			on_pant = n_pant;
 		}
 
-		// Sync
+		hud_update ();
+
+		// Finish frame and wait for NMI
 		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
+
+		if (pkill) player_kill ();
 
 #ifdef ACTIVATE_SCRIPTING
 		#include "mainloop/scripting.h"
@@ -253,19 +260,8 @@ void game_loop (void) {
 
 		#include "mainloop/flickscreen.h"
 
-		hud_update ();
-
-		// Conditions
-		if (plife == 0) {					
-			game_over = 1;
-			break;
-		}
-			
+		if (game_over) break;			
 	}
-
-	// CUSTOM {
-	remember_pant [level] = n_pant;
-	// } END_OF_CUSTOM
 
 	music_stop ();
 	fade_out ();

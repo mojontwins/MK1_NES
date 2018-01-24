@@ -110,6 +110,7 @@ void main(void) {
 		// CUSTOM {
 			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
 			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+			pfacing = 0;
 			level_switching = 0;
 			has_boots = 0;
 		// } END_OF_CUSTOM

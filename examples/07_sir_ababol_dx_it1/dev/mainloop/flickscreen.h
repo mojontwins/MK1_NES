@@ -42,6 +42,7 @@ if (prx == 4 && pvx < 0) {
 	px = 4 << FIXBITS;
 } else if (pry == 0 && pvy < 0) {
 	if (level == 1 && n_pant < MAP_W) {
+		n_pant_switch = n_pant + MAP_W;
 		level_switching = 1; break;
 	} else {
 		n_pant -= MAP_W;
@@ -50,6 +51,7 @@ if (prx == 4 && pvx < 0) {
 	}
 } else if (pry >= 192 && pvy > 0) {
 	if (level == 0 && n_pant >= MAP_W) {
+		n_pant_switch = n_pant - MAP_W;
 		level_switching = 1; break;
 	} else {
 		n_pant += MAP_W;

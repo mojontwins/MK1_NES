@@ -75,8 +75,10 @@ if (hrt) {
 						break;
 
 					case HOTSPOT_TYPE_SIGN:
-						gp_gen = text_intro;
-						textbox_do ();
+						if (pad_this_frame & (PAD_B|PAD_DOWN)) {
+							gp_gen = text_intro;
+							textbox_do ();
+						}
 						break;
 				// } END_OF_CUSTOM
 			}
@@ -88,8 +90,6 @@ if (hrt) {
 				hact [n_pant] = 0;
 				*/
 				if (hrt != HOTSPOT_TYPE_SIGN) {
-					hry = 240;
-				} else {
 					sfx_play (rda, 1);
 					hrt = 0;
 					hact [n_pant] = 0;	

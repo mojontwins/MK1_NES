@@ -15,14 +15,14 @@ const unsigned char box_buff [] = {
 
 void textbox_frame (void) {
 	// Draws or clears the frame upon the value of rdm
-	gp_ram = rdm ? (unsigned char *) box_buff : map_buff + 192;
 	rdct = 0; rdx = 0; rdy = 12;
+	gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((rdy - TOP_ADJUST) >> 1) << 4));
 	gpit = 64; while (gpit --) {
 		rdt = *gp_ram ++;
 		if (rdct == 0) clear_update_list ();
 		if (rdt != 0xff) update_list_tile (rdx, rdy, rdt);
 		rdx = (rdx + 2) & 0x1f; if (rdx == 0) rdy = rdy + 2;
-		rdct ++; if (rdct == 4) ppu_waitnmi ();
+		rdct ++; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
 	}
 }
 
@@ -34,9 +34,9 @@ void textbox_draw_text (void) {
 	// Max is 6 lines.
 
 	rda = 1; // New line marker!
-	rdy = 14;
+	rdy = 13;
 	while (rdt = *gp_gen ++) {
-		if (rda) { clear_update_list (); rda = 0; gp_addr = 6 + (rdy << 5); }
+		if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + 6 + (rdy << 5); }
 		if (rdt == '%') rda = 1; else ul_putc (rdt - 32);
 		if (rda) { ppu_waitnmi (); rdy ++; }
 	}	

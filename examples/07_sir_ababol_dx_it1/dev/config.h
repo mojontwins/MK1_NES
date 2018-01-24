@@ -303,7 +303,7 @@
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
 
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
-#define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
+#define PLAYER_VY_SWIM_MAX		48		// Swimming max. speed
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 

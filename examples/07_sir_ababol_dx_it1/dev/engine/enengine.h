@@ -411,6 +411,10 @@ void enems_move (void) {
 
 #if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
 			if (
+				// CUSTOM {
+				level != 1 && 
+				has_boots &&
+				// } END_OF_CUSTOM			
 	#ifdef PLAYER_MIN_KILLABLE
 				(en_t [gpit] >= PLAYER_MIN_KILLABLE) &&
 	#endif
@@ -504,7 +508,7 @@ void enems_move (void) {
 						}
 					}					
 #endif				
-					kill_player ();
+					pkill = 1;
 				}
 			}
 		} 

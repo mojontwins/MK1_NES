@@ -992,42 +992,31 @@ Y añadir este bloque en game.c, justo donde inicializamos `level` (por ejemplo)
 	#endif
 ```
 
-2.- **Añadir un array `remember_pant [MAX_LEVELS]`**
+2.- **Añadir adónde cambiar**
 
-Sirve para acordarse de la pantalla donde se estaba. Lo definimos en ram/bss.h, por ejemplo al final:
+Sirve para que el inicializador del nivel sepa en qué pantalla hay que empezar. Cuando pasemos de la fila de abajo del nivel 0 (n_pant >= 20) a la fila del nivel 1, restaremos 20. Cuando pasemos del nivel 1 al nivel 0, restaremos 20.
 
 ```c
 // CUSTOM {
-	unsigned char remember_pant [MAX_LEVELS];
+	unsigned char n_pant_switch;
 // } END_OF_CUSTOM
 ```
 
-Al final de la función `game_loop`, en mainloop.h ~241, se hace:
+Añadimos una variable `level_switching` (en ram/bss.h) y la ponermos a 0 antes del bucle de juego, en mainloop.h:
 
 ```c
+	oam_index = 0;
+
 	// CUSTOM {
-	remember_pant [level] = n_pant;
+	level_switching = 0;
 	// } END_OF_CUSTOM
 ```
 
-Añadimos una variable `level_switching` (en ram/bss.h) y la ponermos a 0 al principio del todo, por ejemplo en el mismo bloque donde movimos el posicionamiento inicial del jugador, en `game.c`:
-
-```c
-	#ifdef MULTI_LEVEL
-			level = 0;
-			// CUSTOM {
-			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-			level_switching = 0;
-			// } END_OF_CUSTOM
-	#endif
-```
-
-Al asignar n_pant en `game_init` (mainloop.h, ~20) se asigna el valor de `remember_pant [level]`, si `level_switching` no es 0.
+Al asignar n_pant en `game_init` (mainloop.h, ~20) se asigna el valor de `n_pant_switch`, si `level_switching` no es 0.
 
 ```c
 	// CUSTOM {
-	if (level_switching) n_pant = remember_pant [level]; else
+	if (level_switching) n_pant = n_pant_switch; else
 	// } END_OF_CUSTOM
 	n_pant = SCR_INI;
 ```
@@ -1054,19 +1043,48 @@ Además, si `level = 0 && n_pant >= 20`, `py = 192 << FIXBITS`; y si `level == 1
 			break;
 		case 1:
 			pvy = PLAYER_VY_SWIM_MAX << 1;
-			py = 32 << FIXBITS;
+			py = 16 << FIXBITS;
 			break;
 	}
 	// } END_OF_CUSTOM
 ```
 
-** Detección de cambios de nivel **
+En el propio player.h, en `player_init`, tenemos que quitar `pfacing` y moverlo fuera, con los otros, para que al cambiar de nivel siga mirando en la misma dirección. 
 
-Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `level == 1`, hacer `level_switching = 1; break;`. Si `pvy >= 192 && pvy > 0` con `n_pant >= MAP_W` en `level == 0`, lo mismo:
+player_init.h:
 
 ```c
-	// Custom screen / level switcher for Sir Ababol DX
+	// CUSTOM {
+	/*
+	#ifdef PLAYER_TOP_DOWN	
+		pfacing = CELL_FACING_DOWN;
+	#else
+		pfacing = 0;
+	#endif	
+	*/
+	// } END_OF_CUSTOM
+```
 
+game.c:
+
+```c
+	#ifdef MULTI_LEVEL
+		level = 0;
+		// CUSTOM {
+			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+			pfacing = 0;
+			level_switching = 0;
+			has_boots = 0;
+		// } END_OF_CUSTOM
+	#endif
+```
+
+** Detección de cambios de nivel **
+
+Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `level == 1`, hacer `level_switching = 1; break;` y calculamos a qué pantalla vamos con `n_pant_switch`. Si `pvy >= 192 && pvy > 0` con `n_pant >= MAP_W` en `level == 0`, lo mismo:
+
+```c
 	if (prx == 4 && pvx < 0) {
 		n_pant --;
 		px = 244 << FIXBITS;
@@ -1075,6 +1093,7 @@ Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `
 		px = 4 << FIXBITS;
 	} else if (pry == 0 && pvy < 0) {
 		if (level == 1 && n_pant < MAP_W) {
+			n_pant_switch = n_pant + MAP_W;
 			level_switching = 1; break;
 		} else {
 			n_pant -= MAP_W;
@@ -1083,7 +1102,8 @@ Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `
 		}
 	} else if (pry >= 192 && pvy > 0) {
 		if (level == 0 && n_pant >= MAP_W) {
-			level_switching = -1; break;
+			n_pant_switch = n_pant - MAP_W;
+			level_switching = 1; break;
 		} else {
 			n_pant += MAP_W;
 			py = 0;
@@ -1213,6 +1233,14 @@ No se olviden de la selección de frame!
 	// } END_OF_CUSTOM
 ```
 
+No se debería poder pisar a los enemigos, en enengine.h, en el if de "step over enemy", linea ~413:
+
+```c
+	// CUSTOM {
+	level != 1 && 
+	// } END_OF_CUSTOM		
+```
+
 ~~
 
 Eso de arriba debería dejarme ambos niveles enlazados. Voy a ver si va, si no, corregir, y actualizar el texto que acabo de escribir.
@@ -1312,22 +1340,22 @@ Eso significa que tendré que mover el ababol de la primera pantalla a otro siti
 
 Este hotspot solo se debe activar si al tocarlo se pulsa FIRE. 
 
-Tocamos mainloop/hotspots.h en ~75. Fijaos que para "desactivarlo sin hacerlo" ponemos hry a 240, haciendo que la colisión sea imposible hasta que se vuelva a entrar en pantalla.
 
 ```c
-	// CUSTOM {
-		case HOTSPOT_TYPE_BOOT:
-			gp_ram = text_boots;
-			textbox_do ();
-			has_boots = 1;
-			break;
+		// CUSTOM {
+			case HOTSPOT_TYPE_BOOT:
+				gp_gen = text_boots;
+				textbox_do ();
+				has_boots = 1;
+				break;
 
-		case HOTSPOT_TYPE_SIGN:
-			gp_ram = text_intro;
-			textbox_do ();
-			break;
-	// } END_OF_CUSTOM
-
+			case HOTSPOT_TYPE_SIGN:
+				if (pad_this_frame & (PAD_B|PAD_DOWN)) {
+					gp_gen = text_intro;
+					textbox_do ();
+				}
+				break;
+		// } END_OF_CUSTOM
 	}
 
 	// CUSTOM {
@@ -1337,13 +1365,11 @@ Tocamos mainloop/hotspots.h en ~75. Fijaos que para "desactivarlo sin hacerlo" p
 		hact [n_pant] = 0;
 		*/
 		if (hrt != HOTSPOT_TYPE_SIGN) {
-			hry = 240;
-		} else {
 			sfx_play (rda, 1);
 			hrt = 0;
 			hact [n_pant] = 0;	
 		}
-	// } END_OF_CUSTOM		
+	// } END_OF_CUSTOM	
 ```
 
 ~~
@@ -1354,4 +1380,19 @@ Obviamente no funfuña XD
 - El recuadro sale mal.
 - Coco-crash!
 
+~~
 
+Fixed esto y otras cosas más. Fala añadir que sólo se pueda matar a los enemigos cuando tienes las botas. En el mismo bloque custom de enengine.h, en ~414, añadimos para que quede:
+
+```c
+	// CUSTOM {
+	level != 1 && 
+	has_boots &&
+	// } END_OF_CUSTOM	
+```
+
+Y con esto, si mal no me equivoco, ¡tendríamos listo el juego! Nada más que lo pruebe pongo un nuevo snapshot. Ahora hay que:
+
+- Plantearse si meter una fase más con chac-chacks.
+- Convertir en CNROM.
+- Título / Ending / Game Over.

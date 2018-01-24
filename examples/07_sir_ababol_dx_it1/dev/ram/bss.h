@@ -108,6 +108,7 @@ unsigned char level, game_over;
 unsigned char prx_old, pry_old;
 unsigned char pobjs;
 unsigned char plife, pcontinues;
+unsigned char pkill;
 
 #ifndef DEACTIVATE_KEYS
 	unsigned char pkeys;
@@ -141,7 +142,7 @@ const unsigned char *c_hotspots;
 unsigned char c_max_bolts;
 
 // CUSTOM {
-	unsigned char remember_pant [MAX_LEVELS];
+	unsigned char n_pant_switch;
 	unsigned char level_switching;
 	unsigned char has_boots;
 // } END_OF_CUSTOM

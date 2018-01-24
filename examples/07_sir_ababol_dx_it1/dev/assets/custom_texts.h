@@ -10,7 +10,7 @@ const unsigned char text_intro [] =
 
 const unsigned char text_boots [] =
 	"AND HERE THEY ARE!%"
-	"NOW I'M INVINCIBLE.%"
+	"NOW I AM INVINCIBLE.%"
 	"WITH THOSE BOOTS,%"
 	"CRUSH THE BADDIES I%"
 	"CAN. FEAR ME, YOU%"
