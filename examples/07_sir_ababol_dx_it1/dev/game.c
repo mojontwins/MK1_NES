@@ -100,8 +100,13 @@ void main(void) {
 
 		//title ();
 
-#ifdef MULTI_LEVEL		
+#ifdef MULTI_LEVEL
 		level = 0;
+		// CUSTOM {
+		px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+		py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+		level_switching = 0;
+		// } END_OF_CUSTOM
 #endif
 		plife = PLAYER_LIFE;
 
@@ -112,6 +117,11 @@ void main(void) {
 			game_init (); 
 			game_loop ();
 
+			// CUSTOM {
+			if (level_switching) {
+				level = 1 - level;
+			} else
+			// } END_OF_CUSTOM
 			if (game_over) {
 				// game_over ();
 				break;

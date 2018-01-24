@@ -73,7 +73,6 @@ void prepare_scr (void) {
 
 	oam_hide_rest (0);
 	clear_update_list ();
-	set_rand (n_pant + 1);
 	draw_scr ();
 
 #ifdef BREAKABLE_ANIM

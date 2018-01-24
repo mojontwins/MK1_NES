@@ -24,6 +24,9 @@ void game_init (void) {
 	bolts_load ();
 #endif		
 	player_init ();
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		

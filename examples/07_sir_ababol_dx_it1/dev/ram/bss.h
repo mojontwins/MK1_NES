@@ -139,3 +139,8 @@ const unsigned char *c_enems;
 const unsigned char *c_hotspots;
 
 unsigned char c_max_bolts;
+
+// CUSTOM {
+	unsigned char remember_pant [MAX_LEVELS];
+	unsigned char level_switching;
+// } END_OF_CUSTOM

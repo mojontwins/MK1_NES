@@ -14,10 +14,7 @@
 
 void player_init (void) {
 	// Init player data
-	
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-	
+
 	pvx = pvy = 0;
 
 	#ifdef PLAYER_TOP_DOWN	
@@ -164,12 +161,18 @@ void player_move (void) {
 	#else
 		// Gravity
 
-		#ifndef PLAYER_SWIMS
+		// CUSTOM {
+		//#ifndef PLAYER_SWIMS
+		if (level != 1) {
+		// } END_OF_CUSTOM
 			if (!pj) {
 				pvy += PLAYER_G;
 				if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 			}
-		#endif
+		// CUSTOM {
+		}
+		//#endif
+		// } END_OF_CUSTOM
 
 		// Moving platforms invalidate pvy
 
@@ -191,28 +194,34 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef PLAYER_SWIMS
+	// CUSTOM {
+	//#ifdef PLAYER_SWIMS
+	if (level == 1) {
+	// } END_OF_CUSTOM	
 		// Controller 
 
 		if (!(i & (PAD_DOWN|PAD_UP))) {
 			pvy -= PLAYER_AY_SWIM >> 1;
-		}
+		} else {
+			if (i & PAD_DOWN) {
+				pvy += PLAYER_AY_SWIM;
+			}
 
-		if (i & PAD_DOWN) {
-			pvy += PLAYER_AY_SWIM;
-		}
+			if (i & PAD_UP) {
+				pvy -= PLAYER_AY_SWIM;
+			}
 
-		if (i & PAD_UP) {
-			pvy -= PLAYER_AY_SWIM;
+			// Limit
+			if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
+				pvy = -PLAYER_VY_SWIM_MAX;
+			} else if (pvy > PLAYER_VY_SWIM_MAX) {
+				pvy = PLAYER_VY_SWIM_MAX;
+			}
 		}
-
-		// Limit
-		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
-			pvy = -PLAYER_VY_SWIM_MAX;
-		} else if (pvy > PLAYER_VY_SWIM_MAX) {
-			pvy = PLAYER_VY_SWIM_MAX;
-		}
-	#endif
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// Move
 	py += pvy;
@@ -306,7 +315,10 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef PLAYER_HAS_JUMP
+	// CUSTOM {
+	//#ifdef PLAYER_HAS_JUMP
+	if (level != 1) {
+	// } END_OF_CUSTOM
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
@@ -334,7 +346,10 @@ void player_move (void) {
 		} else {
 			pj = 0; pjb = 0;
 		}
-	#endif
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// **********
 	// Horizontal
@@ -530,7 +545,10 @@ void player_move (void) {
 
 		// Frame selection for side view games
 
-		#ifdef PLAYER_SWIMS
+		// CUSTOM {
+		//#ifdef PLAYER_SWIMS
+		if (level == 1) {
+		// } END_OF_CUSTOM 
 			if (i && (rdx != prx || rdy != pry)) {
 				if (pvx) {
 					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
@@ -538,7 +556,10 @@ void player_move (void) {
 					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
 				}
 			} else psprid = CELL_SWIM_CYCLE + 1;
-		#else
+		// CUSTOM {
+		//#else
+		} else {
+		// } END_OF_CUSTOM 
 			if (ppossee || pgotten) {
 
 				// On floor
@@ -551,7 +572,10 @@ void player_move (void) {
 			} else {
 				psprid = CELL_AIRBORNE;
 			}
-		#endif
+		// CUSTOM {
+		//#endif
+		}
+		// } END_OF_CUSTOM 
 
 		psprid += pfacing;
 	#endif

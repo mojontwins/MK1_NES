@@ -219,6 +219,8 @@
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			29		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		30		// Tile to display while breaking
 */
 
 // Scripting

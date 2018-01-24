@@ -958,3 +958,267 @@ for (gpit = 0; gpit < 192; gpit ++) {
 ```
 
 
+20180124
+========
+
+Estaba pensando en cómo hacer las modificaciones necesarias para el enganche de los dos niveles sin guarrear demasiado, pero va a ser que no hay forma.
+
+Voy a grabar un snapshot "snapshot-2--20180124.7z".
+
+Sigamos el método (completándolo un poco):
+
+1. **La posición del jugador no se inicializa con la fase, sino al principio del juego**
+
+Esto, básicamente, comentar esto en mainloop.h, linea ~27:
+
+```c
+	// CUSTOM {
+	/*
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	*/
+	// } END_OF_CUSTOM
+```
+
+Y añadir este bloque en game.c, justo donde inicializamos `level` (por ejemplo) (el bloque `#ifdef` que empieza en ~103):
+
+```c
+	#ifdef MULTI_LEVEL
+			level = 0;
+			// CUSTOM {
+			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+			// } END_OF_CUSTOM
+	#endif
+```
+
+2.- **Añadir un array `remember_pant [MAX_LEVELS]`**
+
+Sirve para acordarse de la pantalla donde se estaba. Lo definimos en ram/bss.h, por ejemplo al final:
+
+```
+// CUSTOM {
+	unsigned char remember_pant [MAX_LEVELS];
+// } END_OF_CUSTOM
+```
+
+Al final de la función `game_loop`, en mainloop.h ~241, se hace:
+
+```c
+	// CUSTOM {
+	remember_pant [level] = n_pant;
+	// } END_OF_CUSTOM
+```
+
+Añadimos una variable `level_switching` (en ram/bss.h) y la ponermos a 0 al principio del todo, por ejemplo en el mismo bloque donde movimos el posicionamiento inicial del jugador, en `game.c`:
+
+```c
+	#ifdef MULTI_LEVEL
+			level = 0;
+			// CUSTOM {
+			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+			level_switching = 0;
+			// } END_OF_CUSTOM
+	#endif
+```
+
+Al asignar n_pant en `game_init` (mainloop.h, ~20) se asigna el valor de `remember_pant [level]`, si `level_switching` no es 0.
+
+```c
+	// CUSTOM {
+	if (level_switching) n_pant = remember_pant [level]; else
+	// } END_OF_CUSTOM
+	n_pant = SCR_INI;
+```
+
+** Modificaciones al movimiento si venimos de otro nivel **
+
+Tras inicializar al jugador, si `level = 0 && n_pant >= 20` hay que dar a pvy el valor máximo de salto; si level = 1 hay que dar un empujón hacia abajo.
+
+Además, si `level = 0 && n_pant >= 20`, `py = 192 << FIXBITS`; y si `level == 1`, `py = 16 >> FIX_BITS`;
+
+```c
+	player_init ();
+	// CUSTOM {
+	/*
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	*/
+	switch (level) {
+		case 0:
+			if (n_pant >= 20) {
+				pvy = -PLAYER_VY_JUMP_MAX;
+				py = 176 << FIXBITS;
+			}
+			break;
+		case 1:
+			pvy = PLAYER_VY_SWIM_MAX << 1;
+			py = 32 << FIXBITS;
+			break;
+	}
+	// } END_OF_CUSTOM
+```
+
+** Detección de cambios de nivel **
+
+Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `level == 1`, hacer `level_switching = 1; break;`. Si `pvy >= 192 && pvy > 0` con `n_pant >= MAP_W` en `level == 0`, lo mismo:
+
+```c
+	// Custom screen / level switcher for Sir Ababol DX
+
+	if (prx == 4 && pvx < 0) {
+		n_pant --;
+		px = 244 << FIXBITS;
+	} else if (prx == 244 && pvx > 0) {
+		n_pant ++;
+		px = 4 << FIXBITS;
+	} else if (pry == 0 && pvy < 0) {
+		if (level == 1 && n_pant < MAP_W) {
+			level_switching = 1; break;
+		} else {
+			n_pant -= MAP_W;
+			py = 192 << FIXBITS;
+			if (pvy > -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;		
+		}
+	} else if (pry >= 192 && pvy > 0) {
+		if (level == 0 && n_pant >= MAP_W) {
+			level_switching = -1; break;
+		} else {
+			n_pant += MAP_W;
+			py = 0;
+		}
+	}
+```
+
+En game.c, controlar `level_switching == 1` tras salir de `game_loop ()`, en ~118. Si está a 1, hacer `level = 1 - level` y seguir el loop:
+
+```c
+	game_loop ();
+
+	// CUSTOM {
+	if (level_switching) {
+		level = 1 - level;
+	} else
+	// } END_OF_CUSTOM
+```
+
+** Selección del tipo de motor (vertical) **
+
+Activar *a la vez* `PLAYER_HAS_JUMP` y `PLAYER_SWIMS`. En `player.h`, guardamos el bloque `#ifdef PLAYER_SWIMS` con un if normal, pero con `if (level == 1)`, y lo contrario con la gravedad y el salto:
+
+```c
+	// Gravity
+
+	// CUSTOM {
+	//#ifndef PLAYER_SWIMS
+	if (level != 1) {
+	// } END_OF_CUSTOM
+		if (!pj) {
+			pvy += PLAYER_G;
+			if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
+		}
+	// CUSTOM {
+	}
+	//#endif
+	// } END_OF_CUSTOM
+
+	[...]
+
+	// CUSTOM {
+	//#ifdef PLAYER_SWIMS
+	if (level == 1) {
+	// } END_OF_CUSTOM	
+		// Controller 
+
+		if (!(i & (PAD_DOWN|PAD_UP))) {
+			pvy -= PLAYER_AY_SWIM >> 1;
+		}
+
+		if (i & PAD_DOWN) {
+			pvy += PLAYER_AY_SWIM;
+		}
+
+		if (i & PAD_UP) {
+			pvy -= PLAYER_AY_SWIM;
+		}
+
+		// Limit
+		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
+			pvy = -PLAYER_VY_SWIM_MAX;
+		} else if (pvy > PLAYER_VY_SWIM_MAX) {
+			pvy = PLAYER_VY_SWIM_MAX;
+		}
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
+
+	[...]
+
+```
+
+No se olviden de la selección de frame!
+
+```c
+		// Frame selection for side view games
+
+		// CUSTOM {
+		//#ifdef PLAYER_SWIMS
+		if (level == 1) {
+		// } END_OF_CUSTOM 
+			if (i && (rdx != prx || rdy != pry)) {
+				if (pvx) {
+					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
+				} else {
+					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
+				}
+			} else psprid = CELL_SWIM_CYCLE + 1;
+		// CUSTOM {
+		//#else
+		} else {
+		// } END_OF_CUSTOM 
+			if (ppossee || pgotten) {
+
+				// On floor
+
+				if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+					psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+				} else {
+					psprid = CELL_IDLE;
+				}
+			} else {
+				psprid = CELL_AIRBORNE;
+			}
+		// CUSTOM {
+		//#endif
+		}
+		// } END_OF_CUSTOM 
+
+		psprid += pfacing;
+	#endif
+```
+
+¡Y este rollo en mainloop.h ~113 sobre registrar el safe spot, importante!
+
+```c
+	// CUSTOM {
+	//#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
+	if (level == 1) {
+		// } END_OF_CUSTOM
+		player_register_safe_spot ();
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
+```
+
+~~
+
+Eso de arriba debería dejarme ambos niveles enlazados. Voy a ver si va, si no, corregir, y actualizar el texto que acabo de escribir.
+
+Jandero. Hay que tener en cuenta un problema con que te maten nada más entrar al nivel. Solución fácil: eliminar la posibilidad con el diseño del nivel, en concreto de la parte superior: eliminar los enemigos y obligar a saltar antes de encontrarse alguno. Esto se llama diseñar para timar, como siempre, engañar al chamán: circunnavegar debilidades de tu motor con el diseño de niveles porque, a fin de cuentas ¿quién se va a andar fijando?
+
+~~
+
+ 

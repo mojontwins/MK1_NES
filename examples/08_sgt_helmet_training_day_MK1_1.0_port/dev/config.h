@@ -56,6 +56,11 @@
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
+// Use the complex renderer if you need to post-process the map buffer before
+// printing.
+
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+
 // ============================================================================
 // II. Engine type
 // ============================================================================
@@ -264,7 +269,6 @@
 
 #define AMMO_X					8		// 
 #define AMMO_Y					29		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
 
 // Text
 #define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
@@ -306,3 +310,28 @@
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
+
+// Animation cells 
+
+#ifdef PLAYER_TOP_DOWN
+
+	// Cell definitions for top-down view
+
+	#define CELL_FACING_RIGHT 	0
+	#define CELL_FACING_LEFT 	2
+	#define CELL_FACING_UP 		4
+	#define CELL_FACING_DOWN 	6
+
+#else
+
+	// Cell definitions for side view
+
+	#define CELL_FACING_RIGHT	0
+	#define CELL_FACING_LEFT	10
+
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_AIRBORNE		5
+	#define CELL_SWIM_CYCLE		6
+
+#endif

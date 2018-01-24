@@ -1,3 +1,6 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
 			// Pause?
 			if (i & PAD_START) {
 				while (pad_poll (0) & PAD_START);

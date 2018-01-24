@@ -1,3 +1,6 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
+
 // Throw fire script
 
 #ifdef ENABLE_FAST_FIRE_ZONE

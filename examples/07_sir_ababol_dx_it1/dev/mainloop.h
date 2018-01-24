@@ -17,6 +17,13 @@ void game_init (void) {
 	draw_game_frame ();
 	//clean_gauge ();
 
+	// CUSTOM {
+	if (level_switching) {
+		n_pant = remember_pant [level]; 
+		pstate = EST_PARP;
+		pctstate = 100;	
+	} else
+	// } END_OF_CUSTOM
 	n_pant = SCR_INI;
 	
 	hotspots_load ();
@@ -24,6 +31,25 @@ void game_init (void) {
 	bolts_load ();
 #endif		
 	player_init ();
+	// CUSTOM {
+	/*
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	*/
+	switch (level) {
+		case 0:
+			if (n_pant >= 20) {
+				pvy = -PLAYER_VY_FALLING_MAX;
+				py = 176 << FIXBITS;
+			}
+			break;
+		case 1:
+			pvy = PLAYER_VY_SWIM_MAX << 1;
+			py = 32 << FIXBITS;
+			break;
+	}
+	// } END_OF_CUSTOM
+
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
@@ -88,9 +114,15 @@ void prepare_scr (void) {
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
 #endif
 
-#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
-	player_register_safe_spot ();
-#endif
+	// CUSTOM {
+	//#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
+	if (level == 1) {
+		// } END_OF_CUSTOM
+		player_register_safe_spot ();
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	player_move ();
 	enems_move ();
@@ -230,6 +262,10 @@ void game_loop (void) {
 		}
 			
 	}
+
+	// CUSTOM {
+	remember_pant [level] = n_pant;
+	// } END_OF_CUSTOM
 
 	music_stop ();
 	fade_out ();

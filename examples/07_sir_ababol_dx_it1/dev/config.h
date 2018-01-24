@@ -51,7 +51,6 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 #define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
-
 //#define HOTSPOT_TYPE_AMMO		4
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
@@ -219,6 +218,8 @@
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			29		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		30		// Tile to display while breaking
 */
 
 // Scripting
@@ -246,7 +247,7 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
@@ -261,20 +262,22 @@
 
 #define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
+
 #define OBJECTS_X				18		//
 #define OBJECTS_Y				3		// Objects counter character coordinates
+
 #define KEYS_X					28		//
 #define KEYS_Y					3		// Keys counter character coordinates
+
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
+
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
 
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
-//#define LINE_OF_TEXT_ATTR		71		// Attribute
 
 // ============================================================================
 // IV. Player movement configuration

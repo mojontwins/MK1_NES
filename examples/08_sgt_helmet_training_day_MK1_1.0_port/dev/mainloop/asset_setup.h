@@ -1,3 +1,5 @@
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
 // Rule of thumb: if you make a single level cart, all your assets
 // are level 0.
