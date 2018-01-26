@@ -43,7 +43,6 @@ void player_init (void) {
 	pfiring = 0;
 
 	#ifdef PLAYER_CAN_FIRE
-		gpit = MAX_BULLETS; while (gpit --) bst [gpit] = 0;
 		pkilled = 0;
 
 		#ifdef MAX_AMMO
@@ -125,6 +124,7 @@ void player_kill (void) {
 
 void player_move (void) {
 	pad_read ();
+	b_button = (pad_this_frame & PAD_B);
 	hitv = hith = 0;
 	pushed_any = 0;
 	//ppossee = 0;
@@ -312,8 +312,8 @@ void player_move (void) {
 	#ifdef ENABLE_CONVEYORS	
 		if (ppossee) {
 			pconvd1 = at1 & 1; pconvd2 = at2 & 1; 
-			if (at1 & 32) { if (pconvd1) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
-			if (at2 & 32) { if (pconvd2) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
+			if (at1 & 32) { if (pconvd1) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
+			if (at2 & 32) { if (pconvd2) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
 		}
 	#endif
 
@@ -366,7 +366,7 @@ void player_move (void) {
 		if (pvx > 0) {
 
 			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? ICE_RX : PLAYER_RX;
+				pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
 			#else			
 				pvx -= PLAYER_RX;
 			#endif			
@@ -375,7 +375,7 @@ void player_move (void) {
 		} else if (pvx < 0) {
 
 			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? ICE_RX : PLAYER_RX;
+				pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
 			#else
 				pvx += PLAYER_RX;
 			#endif
@@ -394,7 +394,7 @@ void player_move (void) {
 		if (pvx > -PLAYER_VX_MAX) {
 			
 			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? ICE_AX : PLAYER_AX;
+				pvx -= pice ? PLAYER_AX_ICE : PLAYER_AX;
 			#else
 				pvx -= PLAYER_AX;
 			#endif
@@ -411,7 +411,7 @@ void player_move (void) {
 		if (pvx < PLAYER_VX_MAX) {
 		
 			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? ICE_AX : PLAYER_AX;
+				pvx += pice ? PLAYER_AX_ICE : PLAYER_AX;
 			#else
 				pvx += PLAYER_AX;
 			#endif
@@ -430,7 +430,6 @@ void player_move (void) {
 	
 	// Collision
 
-	if (prx_old != prx) {
 		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
 		cy2 = (pry + 15) >> 4;
 
@@ -456,7 +455,6 @@ void player_move (void) {
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		}
-	}
 
 	// Facing
 	#ifdef PLAYER_TOP_DOWN	
@@ -493,15 +491,7 @@ void player_move (void) {
 	// (fire bullets, run scripting w/animation, do containers)
 
 	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
-		if (pad_this_frame & PAD_B) {
-			if (
-				!pfiring
-				#ifdef FIRE_TO_PUSH
-				&& !pushed_any
-				#endif
-			) {
-				pfiring = 1;
-				{
+		if (b_button) {
 					#ifdef PLAYER_CAN_FIRE				
 						fire_bullet ();
 					#endif		
@@ -520,8 +510,6 @@ void player_move (void) {
 						}
 					#endif
 				}	
-			}
-		} else pfiring = pushed_any = 0;
 	#endif
 
 	// **********

@@ -10,16 +10,16 @@ void player_process_tile (at, x0, y0, x1, y1) {
 		if (
 			at == 11 
 			#ifdef FIRE_TO_PUSH
-				&& (pad_this_frame & PAD_B)
+				&& b_button
 			#endif
 		) {
-			pushed_any = 1;
-			sfx_play (1, 1);
+			b_button = 0;
 			
 			if (
 				x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11 &&
 				map_attr [COORDS (x1, y1)] == 0
 			) {
+				sfx_play (1, 1);
 				map_set (x0, y0, 0);
 				map_set (x1, y1, 14);
 			}	

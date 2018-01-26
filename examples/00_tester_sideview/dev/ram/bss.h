@@ -22,6 +22,15 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 unsigned char map_attr [192];
 unsigned char map_buff [192];
 
+// Bullets
+
+#ifdef PLAYER_CAN_FIRE
+	unsigned char b_slots [MAX_BULLETS], b_slots_i;
+	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
+	signed char bmx [MAX_BULLETS];
+	signed char bmy [MAX_BULLETS];
+#endif
+
 // Breakable walls
 
 #ifdef BREAKABLE_WALLS

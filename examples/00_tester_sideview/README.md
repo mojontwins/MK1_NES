@@ -9,7 +9,13 @@ Things, so far:
 - Slippery platforms/obstacles
 - Conveyor platforms/obstacles
 - Pushable boxes
+- Can fire/breakable
 
 Next
 
-- Can fire/breakable
+- Enemy type fanty
+- Enemy type homing fanty
+- Enemy type saw
+- Enemy type pezon
+- Enemy type chac chac
+- Enemy type monococo (add)

@@ -213,30 +213,16 @@
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
 #define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define FIRE_MIN_KILLABLE 		3		// If defined, only enemies >= N can be killed.
+#define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
+
 #define MAX_AMMO				99		// If defined, ammo is not infinite!
 #define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
 //#define INITIAL_AMMO 		0			// If defined, ammo = X when entering game.
+
 #define BULLET_PALETTE			1
 #define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
 */
 
-/*
-#define PLAYER_GARGAJO					// For bootee.
-#define MAX_GARGAJOS 			2
-#define GARGAJO_L_MIN			8
-#define GARGAJO_L_MAX			48
-//#define GARGAJO_L_DIVIDER		1  		// Number of SHL to # of frames when calculating L, if defined.
-#define GARGAJO_V 				4
-#define GARGAJO_BASE_PATTERN	248
-#define GARGAJO_CELL_MOD		1 		// 1 = 2 frames, 3 = 4 frames, 7 = 8 frames... (will be AND'd)
-#define GARGAJO_FACING_OFFSET	2
-#define GARGAJO_Y_OFFSET		0		// From the player's top
-#define GARGAJO_X_OFFSET		0		// From the player's left/right
-#define GARGAJO_RELOAD			16
-*/
-
-/*
 #define BREAKABLE_WALLS					// Breakable walls
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking

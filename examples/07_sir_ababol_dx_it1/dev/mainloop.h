@@ -31,8 +31,8 @@ void game_init (void) {
 	player_init ();
 	// CUSTOM {
 	/*
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
+	py = (PLAYER_INI_Y << 4) << FIXBITS;
 	*/
 	switch (level) {
 		case 0:
@@ -127,8 +127,10 @@ void prepare_scr (void) {
 	render_player ();
 
 #ifdef PLAYER_CAN_FIRE
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) bst [gpit] = 0;
-	bullets_move ();
+	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
+		b_slots [gpit] = gpit; bst [gpit] = 0;
+	}
+	b_slots_i = MAX_BULLETS;
 #endif
 
 #ifdef ENABLE_CONTAINERS

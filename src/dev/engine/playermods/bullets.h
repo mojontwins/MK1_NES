@@ -6,12 +6,14 @@ void fire_bullet (void) {
 		if (!pammo) return;
 		pammo --;
 	#endif
-	// Creates a new bullet (if possible);
-	for (bi = 0; bi < MAX_BULLETS; bi ++) {
-		if (bst [bi] == 0) {
+
+	// Creates a new bullet (if possible):
+
+	if (b_slots_i == 0) return;
+	b_slots_i --; bi = b_slots [b_slots_i];
+
 			bst [bi] = 1;
 
-			#ifdef PLAYER_TOP_DOWN
 				switch (pfacing) {
 					case CELL_FACING_LEFT:
 						bx [bi] = prx - 4;
@@ -25,6 +27,7 @@ void fire_bullet (void) {
 						by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 						bmy [bi] = 0;
 						break;
+		#ifdef PLAYER_TOP_DOWN
 					case CELL_FACING_DOWN:
 						bx [bi] = prx + PLAYER_BULLET_X_OFFSET;
 						by [bi] = pry + 12;
@@ -37,86 +40,69 @@ void fire_bullet (void) {
 						bmy [bi] = -PLAYER_BULLET_SPEED;
 						bmx [bi] = 0;
 						break;
+		#endif
 				}
-			#else
-				by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
-				
-				if (pfacing) {
-					// Left
-					bx [bi] = prx - 4;
-					bmx [bi] = -PLAYER_BULLET_SPEED;
-				} else {
-					// Right
-					bx [bi] = prx + 12;
-					bmx [bi] = PLAYER_BULLET_SPEED;
 				}
-			#endif		
 			
-			// sound
-			sfx_play (5, 0);
-			// done
-			break;
-		}
-	}
+void bullets_destroy (void) {
+	bst [bi] = 0;
+	b_slots [b_slots_i] = bi; b_slots_i ++;
 }
 
 void bullets_move (void) {
 	for (bi = 0; bi < MAX_BULLETS; bi ++) {
 		if (bst [bi]) {
-			if (bmx [bi]) {
 				bx [bi] += bmx [bi];
+			by [bi] += bmy [bi];
 
-				if (
-					bx [bi] < PLAYER_BULLET_SPEED ||
-					bx [bi] > 255 - PLAYER_BULLET_SPEED
-				) bst [bi] = 0; 
+			oam_index = oam_spr (
+				bx [bi], SPRITE_ADJUST + by [bi], 
+				BULLET_PATTERN, BULLET_PALETTE,
+				oam_index
+			);
 			
-			}
-
-			#ifdef PLAYER_TOP_DOWN		
-				if (bmy [bi]) {
-					by [bi] += bmy [bi];
-					if (
-						by [bi] < PLAYER_BULLET_SPEED ||
-						by [bi] > 191 - PLAYER_BULLET_SPEED
-					) bst [bi] = 0; 
-				}
-			#endif
-			
-			cx1 = (bx [bi] + 3) >> 4; 
-			cy1 = (by [bi] + 3) >> 4;
-			cm_two_points ();
+			cx1 = ((bx [bi] + 4) >> 4);
+			cy1 = ((by [bi] + 4 - 16) >> 4);
+			rdm = map_attr [COORDS (cx1, cy1)];
 
 			#ifdef BREAKABLE_WALLS
-				if (at1 & 16) {
-					bst [bi] = 0;
-					sfx_play (6, 2);
-					break_wall (cx1, cy1 - 1);
+				if (rdm & 16) {
+					break_wall (cx1, cy1);
+					bullets_destroy ();
 				} else 
 			#endif			
-			
-			if (at1 & 8) {
-				bst [bi] = 0;
-				sfx_play (6, 2);
-			}
+			if (
+				bx [bi] < PLAYER_BULLET_SPEED ||
+				bx [bi] > 255 - PLAYER_BULLET_SPEED ||
+				by [bi] < PLAYER_BULLET_SPEED ||
+				by [bi] > 191 - PLAYER_BULLET_SPEED ||
+				(rdm & 8)
+			) bullets_destroy (); 
 			
 			// Collide with enemies?			
 			for (gpjt = 0; gpjt < 3; gpjt ++) {
+				if (
 				#ifdef FIRE_MIN_KILLABLE
-					if (en_t [gpjt] >= FIRE_MIN_KILLABLE)
+					en_t [gpjt] >= FIRE_MIN_KILLABLE
 				#else
-					if (en_t [gpjt])
+					en_t [gpjt]
 				#endif
-				{
+				#ifndef PLAYER_TOP_DOWN
+					&& en_t [gpjt] != 4
+				#endif
+				#ifdef ENABLE_SAW
+					&& en_t [gpjt] != 8
+				#endif
+				) {
 					#ifdef ENABLE_PURSUERS
 						if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)
 					#endif
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, en_x [gpjt], en_y [gpjt])) {
+						sfx_play (6, 2);
+						bullets_destroy ();
 						
 						en_cttouched [gpjt] = 8;
-						bst [bi] = 0;
-						sfx_play (6, 2);
 						en_life [gpjt] --;						
 
 						if (en_life [gpjt] == 0) {	
@@ -137,11 +123,6 @@ void bullets_move (void) {
 				}	
 			}
 						
-			oam_index = oam_spr (
-				bx [bi], SPRITE_ADJUST + by [bi], 
-				BULLET_PATTERN, BULLET_PALETTE,
-				oam_index
-			);
 		}
 	}
 }

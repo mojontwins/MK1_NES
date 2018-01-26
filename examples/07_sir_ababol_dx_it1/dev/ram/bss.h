@@ -3,6 +3,14 @@
 
 // bss
 
+// Game flow
+
+unsigned char half_life, frame_counter;
+unsigned char n_pant, on_pant;
+unsigned char olife, okeys, oobjs, oammo, okilled;
+unsigned char use_ct, no_ct;
+unsigned char level, game_over;
+
 // Update list
 
 #define UPDATE_LIST_SIZE 32
@@ -13,6 +21,15 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
 unsigned char map_attr [192];
 unsigned char map_buff [192];
+
+// Bullets
+
+#ifdef PLAYER_CAN_FIRE
+	unsigned char b_slots [MAX_BULLETS], b_slots_i;
+	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
+	signed char bmx [MAX_BULLETS];
+	signed char bmy [MAX_BULLETS];
+#endif
 
 // Breakable walls
 
@@ -91,14 +108,6 @@ unsigned char hact [MAP_SIZE];
 	unsigned char ep_flags [3 * MAP_SIZE];
 #endif
 
-// Die & respawn
-#ifdef DIE_AND_RESPAWN
-	unsigned char n_pant_safe;
-	signed int px_safe, py_safe;
-#endif
-
-unsigned char level, game_over;
-
 #ifdef SCRIPTING_TEXT_BOX
 	unsigned char stbl;
 #endif
@@ -109,6 +118,7 @@ unsigned char prx_old, pry_old;
 unsigned char pobjs;
 unsigned char plife, pcontinues;
 unsigned char pkill;
+unsigned char pice;
 
 #ifndef DEACTIVATE_KEYS
 	unsigned char pkeys;
@@ -118,6 +128,15 @@ unsigned char pammo, pfiring;
 
 #ifdef PLAYER_TURRET
 	unsigned char pfixct;
+#endif
+
+#ifdef DIE_AND_RESPAWN
+	unsigned char n_pant_safe;
+	signed int px_safe, py_safe;
+#endif
+
+#ifdef ENABLE_CONVEYORS
+	unsigned char pconvd1, pconvd2;
 #endif
 
 // Current level

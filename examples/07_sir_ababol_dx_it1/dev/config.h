@@ -92,9 +92,25 @@
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
-//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
-//#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
-//#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
+// Extra special tiles
+// -------------------
+
+// Quicksands, beh = 2.
+
+//#define ENABLE_QUICKSANDS
+#define QUICKSANDS_SINK_VY				2
+
+// Conveyors, beh = 32 [+1]
+// For player movement values, see section 4
+// (PLAYER_VX_CONVEYORS)
+
+//#define ENABLE_CONVEYORS
+
+// Slippery, beh = 64. 
+// For player movement values, see section 4
+// (PLAYER_AX_ICE & PLAYER_RX_ICE)
+
+//#define ENABLE_SLIPPERY
 
 // Enemy types and definitions
 // ---------------------------
@@ -116,6 +132,12 @@
 //#define FANTY_DISTANCE				80
 //#define FANTY_V_RETREAT				16
 #define FANTY_KILLED_BY_TILE
+
+// Pursuers (for top-down)
+
+//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
+#define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
+#define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
 
 // Saws
 
@@ -188,31 +210,18 @@
 #define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
+#define PLAYER_BULLET_Y_OFFSET	0		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
 #define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define FIRE_MIN_KILLABLE 		3		// If defined, only enemies >= N can be killed.
+#define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
+
 #define MAX_AMMO				99		// If defined, ammo is not infinite!
 #define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
 //#define INITIAL_AMMO 		0			// If defined, ammo = X when entering game.
+
 #define BULLET_PALETTE			1
 #define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
-*/
-
-/*
-#define PLAYER_GARGAJO					// For bootee.
-#define MAX_GARGAJOS 			2
-#define GARGAJO_L_MIN			8
-#define GARGAJO_L_MAX			48
-//#define GARGAJO_L_DIVIDER		1  		// Number of SHL to # of frames when calculating L, if defined.
-#define GARGAJO_V 				4
-#define GARGAJO_BASE_PATTERN	248
-#define GARGAJO_CELL_MOD		1 		// 1 = 2 frames, 3 = 4 frames, 7 = 8 frames... (will be AND'd)
-#define GARGAJO_FACING_OFFSET	2
-#define GARGAJO_Y_OFFSET		0		// From the player's top
-#define GARGAJO_X_OFFSET		0		// From the player's left/right
-#define GARGAJO_RELOAD			16
 */
 
 /*
@@ -220,8 +229,8 @@
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			29		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		30		// Tile to display while breaking
+#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		8		// Tile to display while breaking
 */
 
 // Scripting
@@ -293,6 +302,7 @@
 // IV.1. Vertical movement. Only for side-view.
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
+#define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
@@ -307,12 +317,15 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
+#define PLAYER_VX_MAX			128		// Max. horizontal speed
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
+#define PLAYER_VX_CONVEYORS 	64
 #define PLAYER_AX				8		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
 #define PLAYER_RX				8		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
@@ -340,5 +353,8 @@
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
 	#define CELL_SWIM_CYCLE		6
+	
+	//#define CELL_ASCENDING		5
+	//#define CELL_DESCENDING		6
 
 #endif

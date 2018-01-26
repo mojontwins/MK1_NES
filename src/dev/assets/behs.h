@@ -20,4 +20,4 @@ const unsigned char behs0 [] = {
 
 // 68 = 4 + 64, slippery platform
 // 24 = 8 + 16, breakable obstacle
-// 36 = 4 + 32, conveyor platform, pushes left.
+// 40 = 8 + 32, conveyor platform, pushes left.

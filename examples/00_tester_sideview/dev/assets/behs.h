@@ -13,9 +13,9 @@
 // 11 pushable
 
 const unsigned char behs0 [] = {
-	0, 8, 8, 1,68, 2, 4,24, 8,36,37, 0, 0, 0,11,10
+	0, 8, 8, 1,68, 2, 4,24, 8,40,41, 0, 0, 0,11,10
 };
 
 // 68 = 4 + 64, slippery platform
 // 24 = 8 + 16, breakable obstacle
-// 36 = 4 + 32, conveyor platform, pushes left.
+// 40 = 8 + 32, conveyor platform, pushes left.

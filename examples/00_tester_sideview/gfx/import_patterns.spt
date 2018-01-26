@@ -29,6 +29,9 @@ FILL 4096
 OPEN ss.png
 PALS palss0.png
 
+# Fire pattern
+CHARSET 0, 15, 1, 1
+
 # Metasprites will be stored in this file:
 MAPFILE ..\dev\assets\spritedata.h
 
