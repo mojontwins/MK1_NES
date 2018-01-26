@@ -504,7 +504,7 @@ void enems_move (void) {
 						}
 					}					
 #endif				
-					kill_player ();
+					pkill = 1;
 				}
 			}
 		} 

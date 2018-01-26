@@ -61,7 +61,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -91,9 +91,25 @@
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
-//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
-//#define DEATH_COUNT_EXPRESSION	50+(rand8()&63)
-//#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
+// Extra special tiles
+// -------------------
+
+// Quicksands, beh = 2.
+
+#define ENABLE_QUICKSANDS
+#define QUICKSANDS_SINK_VY			2
+
+// Conveyors, beh = 32 [+1]
+// For player movement values, see section 4
+// (PLAYER_VX_CONVEYORS)
+
+#define ENABLE_CONVEYORS
+
+// Slippery, beh = 64. 
+// For player movement values, see section 4
+// (PLAYER_AX_ICE & PLAYER_RX_ICE)
+
+#define ENABLE_SLIPPERY
 
 // Enemy types and definitions
 // ---------------------------
@@ -115,6 +131,12 @@
 //#define FANTY_DISTANCE				80
 //#define FANTY_V_RETREAT				16
 #define FANTY_KILLED_BY_TILE
+
+// Pursuers (for top-down)
+
+//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
+#define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
+#define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
 
 // Saws
 
@@ -219,6 +241,8 @@
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			29		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		30		// Tile to display while breaking
 */
 
 // Scripting
@@ -261,20 +285,22 @@
 
 #define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
+
 #define OBJECTS_X				18		//
 #define OBJECTS_Y				3		// Objects counter character coordinates
+
 #define KEYS_X					28		//
 #define KEYS_Y					3		// Keys counter character coordinates
+
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
+
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
 
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
-//#define LINE_OF_TEXT_ATTR		71		// Attribute
 
 // ============================================================================
 // IV. Player movement configuration
@@ -288,6 +314,7 @@
 // IV.1. Vertical movement. Only for side-view.
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
+#define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
@@ -302,13 +329,43 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
+#define PLAYER_VX_MAX			128		// Max. horizontal speed
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
-#define PLAYER_AX				8		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_VX_CONVEYORS 	64
+#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				8		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
+
+// Animation cells 
+
+#ifdef PLAYER_TOP_DOWN
+
+	// Cell definitions for top-down view
+
+	#define CELL_FACING_RIGHT 	0
+	#define CELL_FACING_LEFT 	2
+	#define CELL_FACING_UP 		4
+	#define CELL_FACING_DOWN 	6
+
+#else
+
+	// Cell definitions for side view
+
+	#define CELL_FACING_RIGHT	0
+	#define CELL_FACING_LEFT	8
+
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_AIRBORNE		5
+
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
+
+#endif

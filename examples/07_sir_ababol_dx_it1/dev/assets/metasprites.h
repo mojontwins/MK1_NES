@@ -42,9 +42,9 @@ const unsigned char * const spr_enems1 [] = {
 };
 
 // Item metasprites
-// nothing, object, key, refill, boots
+// nothing, object, key, refill, boots, sign
 const unsigned char * const spr_hs [] = {
-	0, ssit_00, ssit_01, ssit_02, ssit_03
+	0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
 };
 
 // Fixed stuff

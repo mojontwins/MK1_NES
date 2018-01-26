@@ -5,7 +5,7 @@
 // Custom game frame
 
 void __fastcall__ draw_game_frame (void) {
-	// Add code
+
 }
 
 void hud_update (void) {

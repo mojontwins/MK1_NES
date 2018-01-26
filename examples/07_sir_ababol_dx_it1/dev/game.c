@@ -35,6 +35,8 @@
 	#include "assets/levelset.h"
 #endif
 
+#include "assets/custom_texts.h"
+
 // Music
 extern const unsigned char m_title [];
 extern const unsigned char m_ingame [];
@@ -82,6 +84,9 @@ void add_propeller (unsigned char x, unsigned char y);
 #ifdef ACTIVATE_SCRIPTING
 #include "assets/mscnes.h"
 #endif
+// CUSTOM {
+	#include "engine/textbox.h"
+// } END_OF_CUSTOM
 #include "mainloop.h"
 
 // *************
@@ -100,8 +105,15 @@ void main(void) {
 
 		//title ();
 
-#ifdef MULTI_LEVEL		
+#ifdef MULTI_LEVEL
 		level = 0;
+		// CUSTOM {
+			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+			pfacing = 0;
+			level_switching = 0;
+			has_boots = 0;
+		// } END_OF_CUSTOM
 #endif
 		plife = PLAYER_LIFE;
 
@@ -112,6 +124,11 @@ void main(void) {
 			game_init (); 
 			game_loop ();
 
+			// CUSTOM {
+			if (level_switching) {
+				level = 1 - level;
+			} else
+			// } END_OF_CUSTOM
 			if (game_over) {
 				// game_over ();
 				break;

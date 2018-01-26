@@ -4,8 +4,60 @@
 		"selected_items":
 		[
 			[
-				"BULLET_P",
-				"BULLET_PALETTE"
+				"HOTP",
+				"HOTSPOT_TYPE_SIGN"
+			],
+			[
+				"HOTS",
+				"HOTSPOT_TYPE_BOOT\t(diario.md)"
+			],
+			[
+				"textb",
+				"textbox_draw_text"
+			],
+			[
+				"textbo",
+				"textbox_frame"
+			],
+			[
+				"remember",
+				"remember_pant"
+			],
+			[
+				"TOP",
+				"TOP_OVER_SIDE"
+			],
+			[
+				"remem",
+				"remember_pant"
+			],
+			[
+				"N_BO",
+				"N_BOLTS_0"
+			],
+			[
+				"N_B",
+				"N_BOLTS_0\t(asset_setup.h)"
+			],
+			[
+				"MAP",
+				"MAP_FORMAT_RLE16\t(diario.md)"
+			],
+			[
+				"main",
+				"mainloop"
+			],
+			[
+				"PLAYER",
+				"PLAYER_BULLET_Y_OFFSET"
+			],
+			[
+				"SPRI",
+				"SPRITE_BADDIE_DYING\t(config.h)"
+			],
+			[
+				"decosi",
+				"decosize"
 			],
 			[
 				"draw",
@@ -156,143 +208,99 @@
 	"buffers":
 	[
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enengine.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
 			"settings":
 			{
-				"buffer_size": 11826,
+				"buffer_size": 2794,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enemmods/enem_pursuers.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/game.c",
 			"settings":
 			{
-				"buffer_size": 1808,
+				"buffer_size": 2667,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods/bullets.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
 			"settings":
 			{
-				"buffer_size": 3054,
+				"buffer_size": 1893,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/engine/textbox.h",
 			"settings":
 			{
-				"buffer_size": 10979,
+				"buffer_size": 1824,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/game.c",
+			"file": "examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
 			"settings":
 			{
-				"buffer_size": 2153,
+				"buffer_size": 3447,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/frame.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/neslib.s",
 			"settings":
 			{
-				"buffer_size": 1545,
+				"buffer_size": 12083,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
+			"settings":
+			{
+				"buffer_size": 2838,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/script/script.spt",
+			"file": "examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
 			"settings":
 			{
-				"buffer_size": 3482,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/script/mscnes.h",
-			"settings":
-			{
-				"buffer_size": 6947,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/engine/printer.h",
-			"settings":
-			{
-				"buffer_size": 5340,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 86 files for \"attr_table\"\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port\\dev\\engine\\frame.h:\n   16  \t/*\n   17  \tvram_write ((unsigned char *) game_frame, 0x2360, 96);\n   18: \tfor (rdit = 0; rdit < 16; rdit ++) attr_table [48 + rdit] = 0x00;\n   19  \t*/\n   20  \n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port\\dev\\engine\\printer.h:\n   55  \n   56  const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};\n   57: unsigned char attr_table [64];\n   58  \n   59: void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {\n   60  \trdc = (x >> 2) + ((y >> 2) << 3);\n   61  \trdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);\n   62: \trda = attr_table [rdc];\n   63  \trda = (rda & bitmasks [rdb]) | (c_ts_pals [tl] << (rdb << 1));\n   64: \tattr_table [rdc] = rda;\n   65  }\n   66  \n   67  void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {\n   68: \tupd_attr_table (x, y, tl);\n   69  \t\n   70  \tgp_tmap = c_ts_tmaps + (tl << 2);\n   ..\n   80  \n   81  void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {\n   82: \tupd_attr_table (x, y, tl);\n   83  \t\n   84  \tgp_addr = 0x23c0 + rdc;\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port\\dev\\mainloop.h:\n   77  \thotspots_create ();\t\n   78  \t// Write attributes\n   79: \tvram_write (attr_table, 0x23c0, 64);\n   80  \n   81  #ifdef LINE_OF_TEXT\n\n8 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 1467,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/breakable.h",
-			"settings":
-			{
-				"buffer_size": 999,
+				"buffer_size": 1888,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop/flickscreen.h",
+			"file": "examples/07_sir_ababol_dx_it1/diario.md",
 			"settings":
 			{
-				"buffer_size": 811,
+				"buffer_size": 48791,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/enems0.h",
+			"file": "examples/07_sir_ababol_dx_it1/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 2559,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/diario.md",
-			"settings":
-			{
-				"buffer_size": 6321,
+				"buffer_size": 11628,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/utils/msc3nes.bas",
+			"file": "examples/07_sir_ababol_dx_it1/dev/assets/custom_texts.h",
 			"settings":
 			{
-				"buffer_size": 60629,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram/zp.h",
-			"settings":
-			{
-				"buffer_size": 3393,
+				"buffer_size": 369,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -305,20 +313,16 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 145.0,
-		"last_filter": "install",
+		"height": 191.0,
+		"last_filter": "instal",
 		"selected_items":
 		[
-			[
-				"install",
-				"Package Control: Install Package"
-			],
 			[
 				"instal",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 462.0
+		"width": 406.0
 	},
 	"console":
 	{
@@ -338,171 +342,194 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enemmods",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/gfx",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/script",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils"
+		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx"
 	],
 	"file_history":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/behs.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/gfx/import_patterns.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/definitions.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/printer.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/definitions.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/flickscreen.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/zp.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/diario.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/frame.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/map1.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/compile.bat",
-		"/H/emus/InMG_SSF_TestVer - 10-01-2018/Readme.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/printer.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/labels.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/printer.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/music.s",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hud.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/general.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pezon.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_saw.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/spritedata.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/06_lala_prologue/dev/engine/containers.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/06_lala_prologue/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/eneexp3.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/bullets.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/gargajo.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/enems/updr.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/legacy/enemscutter.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/rlemap2.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/mapcnvnes2.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/script/script.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/legacy/enexpander2.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/enexpander.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/enexpander2.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/enemscutter.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/legacy/eneexp2.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/README.md",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/README.md",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/game.c",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/cheat.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/printer.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset2.spt",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/m_instruments.s",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/music.s",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset1.spt",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/cuts_text.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/player.h",
-		"/D/git/nes_work/vault/CherilsR/bootee/utils/text2carray.bas",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/compile.bat",
-		"/D/git/nes_work/vault/CherilsR/ROM2/utils/text2carray.bas",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/palettes.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/ram/bss.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/neslib-CNROM.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/neslib-CNROM.s",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/nes-CNROM.cfg",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/crt0-CNROM.s",
-		"/D/git/MK1_NES/src/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/setenv.bat",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/hotspots.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/ram/zp.h",
-		"/D/git/nes_work/D'Veel'NgR/dev/neslib-CNROM.s",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/gfx/cut_tileset0.spt",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/tiledata.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/compile.bat",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/compile.bat",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/assets/spr_hs.h",
-		"/D/git/MK1_NES/src/utils/mkts.bas",
-		"/C/git/MK1_NES/examples/05_cheril_the_goddess/dev/engine/player.h",
-		"/C/git/MK1_NES/examples/05_cheril_the_goddess/dev/crt0.s",
-		"/D/git/MK1_NES/src/dev/engine/hotspots.h",
-		"/D/git/MK1_NES/src/dev/engine/bolts.h",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess/dev/nes.cfg",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/game.c",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/printer.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/assets/enems.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/music.s",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/assets/palettes.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/assets/tiledata1.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/README.md",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/textbox.h",
+		"/D/git/MK1_NES/src/dev/ram/bss.h",
+		"/D/git/MK1_NES/src/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
+		"/D/git/MK1_NES/src/dev/game.c",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/music.s",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/diario.md",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/src/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/mainloop.h",
+		"/D/git/MK1_NES/src/dev/music.s",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/zp.h",
+		"/D/git/MK1_NES/src/updating.md",
+		"/D/git/MK1_NES/src/dev/definitions.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/music.s",
+		"/D/git/MK1_NES/src/dev/compile.bat",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/definitions.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_customization.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_fast.h",
+		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/config.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/diario.md",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/levelset.h",
+		"/D/git/MK1_NES/src/dev/mainloop/resonators.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_chac_chac.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_fanty.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_homing_fanty.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_linear.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_saw.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pursuers.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pezon.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/process_tile.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/frame.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/general.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/pres.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/propellers.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/shines.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/asset_setup.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/cheat.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/pause.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/resonators.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/scripting.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enemmods/enem_pursuers.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/definitions.h",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/src/utils/msc3nes.bas",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/game.c",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/printer.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/breakable.h",
+		"/D/git/MK1_NES/src/utils/mapcnvnes2.bas",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/compile.bat",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/map0.h",
+		"/D/git/MK1_NES/src/utils/rlemap2.bas",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/palettes.h",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_MK1_1.0_port/diario.md",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/README.md",
+		"/D/git/MK1_NES/examples/08_sgt_helmet_MK1_1.0_port/README.md",
+		"/D/git/MK1_NES/src/script/script.spt",
+		"/D/git/MK1_NES/examples/00_misc_tests/map/map0_pack.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/behs.h",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Ninjajar/dev/engine/playermove.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hud.h",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Ninjajar/dev/config.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/enems1.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/map1.h",
+		"/D/git/MK1_NES/src/utils/eneexp3.bas",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/map0.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/enems0.h",
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/utils/legacy/mkts_old.bas",
+		"/D/git/nes_work/D'Veel'NgR/dev/engine/enemmods/enem_linear.h",
+		"/D/git/nes_work/yun/dev/engine/general.h",
+		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/engine/general.h",
+		"/D/git/MK1_NES/src/todo.md",
+		"/D/git/MK1_NES/src/dev/engine/general.h",
+		"/D/git/nes_work/yun/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/engine/enengine.h",
+		"/D/git/nes_work/yun/dev/engine/enengine.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_pursuers.h",
+		"/D/git/nes_work/yun/dev/config.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_pezon.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_saw.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_homing_fanty.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_fanty.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_linear.h",
+		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_chac_chac.h",
+		"/D/git/MK1_NES/src/utils/packmap.bas",
+		"/D/git/MK1_NES/src/utils/rlemap.bas",
 		"/D/git/MK1_NES/examples/02_jet_paco/dev/compile.bat",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/enems.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/game.c",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/cutsb.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/cuts_texts.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/screens.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/assets/palettes.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/config.h",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/map/screens.h",
-		"/D/git/nes_work/vault/CherilsR/ROM1/dev/game.c",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/breakable.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/config.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/hotspots.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/metasprites.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/neslib.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/palettes.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/screens.h",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/README.md",
-		"/D/git/MK1_NES/examples/02_jet_paco/README.md"
+		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/compile.bat",
+		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/compile.bat",
+		"/D/git/MK1_NES/examples/06_lala_prologue/dev/compile.bat",
+		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/compile.bat",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/compile.bat",
+		"/D/git/MK1_NES/src/utils/legacy/mapcnvnes2.bas",
+		"/D/git/MK1_NES/src/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/src/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/src/dev/engine/bolts.h",
+		"/D/git/MK1_NES/src/dev/engine/printer.h",
+		"/D/git/MK1_NES/src/utils/mapcnvnes.bas",
+		"/D/git/MK1_NES/src/utils/genEmpty.bas",
+		"/D/git/MK1_NES/src/utils/eneexp2.bas",
+		"/D/git/nes_work/D'Veel'NgR/utils/eneexp3.bas",
+		"/D/git/MK1_NES/src/dev/engine/shines.h",
+		"/D/git/MK1_NES/src/dev/engine/propellers.h",
+		"/D/git/MK1_NES/src/dev/engine/containers.h"
 	],
 	"find":
 	{
-		"height": 49.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
-		"height": 135.0,
+		"height": 116.0,
 		"where_history":
 		[
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev\\ram",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev\\engine",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1",
+			"D:\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\04_d'veel'ng",
+			"D:\\git\\MK1_NES\\examples\\03_cheril_of_the_bosque_v1",
+			"D:\\git\\MK1_NES\\examples\\04_d'veel'ng",
+			"D:\\git\\MK1_NES\\examples\\02_jet_paco",
+			"D:\\git\\MK1_NES\\examples\\01_sgt_helmet_training_day\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"D:\\git\\MK1_NES\\src\\dev\\ram",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\src\\dev\\ram",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src\\dev\\engine",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\examples\\",
+			"D:\\git\\MK1_NES\\examples\\01_sgt_helmet_training_day",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"lkyx",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\examples\\06_lala_prologue",
+			"D:\\git\\MK1_NES\\examples\\06_lala_prologue\\dev",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
@@ -518,41 +545,119 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"0xe3",
-			"attr_table",
-			"gpit",
-			"brk_buff",
-			"en_s",
-			"rdm",
-			"ENABLE_FIRE_ZONE",
-			"cx1",
-			"plife",
-			"TOP_ADJUST",
+			"mem_fill",
+			"player_init",
+			"SWIM",
+			"alt",
+			"rand",
+			"alt",
+			"rdx",
 			"draw_map_tile",
-			"gpit",
-			"fade_delay",
-			"no_ct",
-			"MAP_W",
-			"music_play",
-			"m_",
-			"level",
-			"bootee",
-			"player_process_tile",
-			"process_tile",
-			"player_process_tile",
-			"last_container",
-			"CELL_FACING",
-			"FACING_",
+			"PLAYER_MOGGY_STYLE",
+			"PURSUERS",
+			"PURSU",
+			"pursuers",
+			"BADDIES_COUNT",
+			"player_points_be",
+			"player_points_beneath",
+			"en_cttouched",
+			"en_touched",
+			"ts_offs",
+			"MAX_LOCKS_",
+			"ssena",
+			"Hx",
+			"Command",
+			"map",
+			"map data",
+			"offset",
+			"safe",
+			"PLAYER_KILLS",
+			"PLAYER_KILSL",
+			"BOUNDING_BOX_8_BOTTOM",
+			"+ 8",
 			"_a",
-			"eneexp2",
-			"decos",
-			"scrsizes",
-			"nodecos",
-			"?",
+			"do_gravity",
+			"PAD_DO",
+			"SWIM",
+			"behs",
+			"tbehs",
+			"(unsigned char **)\t",
+			"(unsigned char *)\t",
+			"MAX_BOLTS",
+			"mouti",
+			"bolts",
+			"ini",
+			"tileset_pals",
+			"tsmap",
+			"COORDS",
+			"wall",
+			"attr",
+			"ptx",
+			"pt",
+			"et",
+			"bmy",
+			"bt",
+			"etx1",
+			"ptx2",
+			"ptx1",
+			"bt",
+			"btx",
+			"bst",
+			"gargajo",
+			"en_collx",
+			"attr",
+			"en_collx",
+			"qtile",
+			"attr",
+			"CONVEYORS",
+			"player_points_beneath",
+			"wall",
+			"rds16",
+			"touched",
+			"BOUNDING_BOX_8_BOTTOM",
+			"baddies_count",
+			"n_pant + n_",
+			"n_pant + N",
+			"enoffs",
+			"n_pant + n_pant + n_pant",
+			"MONOCOCOS",
+			"oam",
+			"spr_explosion",
+			"oam_",
+			"persistent_deaths_load",
+			"persistent_update",
+			"persistent_enems_load",
+			"draw_chac_chac",
+			"distance",
+			"kill_enemy",
 			"print",
-			"kill_player",
-			"level",
-			"scroll",
+			"locksI",
+			"packmap",
+			"mkts_old",
+			"nescnv",
+			"bytecnt = byte",
+			"packed = 2",
+			"zerostrungpacked",
+			"hyx",
+			"hxy",
+			"MAX_CERROJOS",
+			"c_",
+			"clear_cerrojo",
+			"lkxy",
+			"mapcnvnes",
+			"genempty",
+			"eneexp",
+			"for",
+			"oam_meta",
+			"oam_index",
+			"oam_meta_spr",
+			"update_index = 0",
+			"update_index",
+			"mainloop",
+			"change_rom",
+			"music",
+			"..\\utils\\",
+			"mkts",
 			"env_pitch",
 			"pfr",
 			"plife",
@@ -567,85 +672,7 @@
 			"oam_spr",
 			"mkts",
 			"next = ",
-			"next",
-			"ppo",
-			"º",
-			"ppodewwwr_",
-			"ppodewwwr",
-			"p_t",
-			"..\\utils\\",
-			"attr_table",
-			"m_",
-			"69",
-			"70",
-			"68",
-			"64",
-			"&",
-			"\"",
-			"..\\utils\\",
-			"scroll",
-			"jump_to",
-			"..\\utils\\",
-			"cerrojos",
-			"..\\utils",
-			"enexp2",
-			"custom",
-			"ENS_PURSUING",
-			"241",
-			"http",
-			"URL",
-			"update",
-			"pobject",
-			"texts",
-			"game_res",
-			"texts",
-			"0",
-			"_a",
-			"n_bolts",
-			"player_pro",
-			"sspl_",
-			"hotspots",
-			"rdx",
-			"[4]",
-			"player_hit",
-			"ENABLE_COCO_AIMED",
-			"COCO_FAIR_D",
-			"rds16",
-			"min",
-			"delta",
-			"0xff",
-			"MAX",
-			"MULTI",
-			"player_hit",
-			"locksI",
-			"_attr",
-			"process_tile",
-			"phit",
-			"pregotten",
-			"spr_id",
-			"gpjt",
-			"isplatform",
-			"px +=",
-			"en_status",
-			"en_s",
-			"pfacing",
-			"pfr",
-			"0",
-			"CUMULATIVE",
-			"player",
-			"it1",
-			"pl0",
-			"_a",
-			"en0",
-			"initlib",
-			"start",
-			"cli",
-			"nmi",
-			"plife",
-			"lives",
-			"COMM_INITS",
-			"hact",
-			"w_pant"
+			"next"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -653,11 +680,28 @@
 		"regex": false,
 		"replace_history":
 		[
-			"bi",
-			"player_process_tile",
-			"CELL_FACING_",
+			"PLAYER_TOP_DOWN",
+			"N_BOLTS_",
+			"ssen",
 			"_b",
-			"eneexp3",
+			"",
+			"end",
+			"c_ts_pals",
+			"c_ts_tmaps",
+			"MONOCOCO",
+			"enems_persistent_deaths_load",
+			"enems_persistent_update",
+			"enems_persistent_load",
+			"enems_draw_chac_chac",
+			"enems_distance",
+			"enems_kill",
+			"legacy\\mkts_old",
+			"legacy\\nescnv",
+			"hyx",
+			"MAX_BOLTS",
+			"lkyx",
+			"legacy\\eneexp",
+			"..\\..\\..\\src\\utils\\",
 			"mkts_old",
 			"..\\..\\..\\src\\utils\\",
 			"11",
@@ -774,231 +818,127 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enengine.h",
+					"file": "examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11826,
+						"buffer_size": 2794,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5006,
-								5006
+								2418,
+								2418
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1928.0,
+						"translation.y": 1361.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enemmods/enem_pursuers.h",
+					"file": "examples/07_sir_ababol_dx_it1/dev/game.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1808,
+						"buffer_size": 2667,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1262,
-								1269
+								1885,
+								1885
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 220.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods/bullets.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3054,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1370,
-								1372
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 312.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10979,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9189,
-								9189
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3106.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/game.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2153,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								706,
-								715
-							]
-						],
-						"settings":
-						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C Improved/C Improved.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/frame.h",
+					"buffer": 2,
+					"file": "examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1545,
+						"buffer_size": 1893,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1179,
-								1179
+								1562,
+								1562
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 117.0,
+						"translation.y": 624.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/script/script.spt",
+					"buffer": 3,
+					"file": "examples/07_sir_ababol_dx_it1/dev/engine/textbox.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3482,
+						"buffer_size": 1824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1064,
+								1075
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/script/mscnes.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6947,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2625,
-								2629
-							]
-						],
-						"settings":
-						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -1010,29 +950,165 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "src/dev/engine/printer.h",
+					"buffer": 4,
+					"file": "examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5340,
+						"buffer_size": 3447,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1135,
-								1145
+								57,
+								57
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 649.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "examples/07_sir_ababol_dx_it1/dev/neslib.s",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 12083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10101,
+								10108
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/R/R.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 11041.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2838,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2769,
+								2769
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 819.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1888,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1631,
+								1631
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 8,
+					"file": "examples/07_sir_ababol_dx_it1/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 48791,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								48788,
+								48788
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 21683.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -1040,256 +1116,63 @@
 				},
 				{
 					"buffer": 9,
+					"file": "examples/07_sir_ababol_dx_it1/dev/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1467,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										258,
-										268
-									],
-									[
-										511,
-										521
-									],
-									[
-										552,
-										562
-									],
-									[
-										728,
-										738
-									],
-									[
-										825,
-										835
-									],
-									[
-										955,
-										965
-									],
-									[
-										1139,
-										1149
-									],
-									[
-										1381,
-										1391
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								263,
-								263
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/breakable.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 999,
+						"buffer_size": 11628,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								562,
-								570
+								1718,
+								1827
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 8,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 11,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop/flickscreen.h",
+					"buffer": 10,
+					"file": "examples/07_sir_ababol_dx_it1/dev/assets/custom_texts.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 811,
+						"buffer_size": 369,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								811,
-								811
+								16,
+								16
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"incomplete_sync": null,
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/enems0.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2559,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1135,
-								1135
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/diario.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6321,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6013,
-								6013
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1456.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "src/utils/msc3nes.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 60629,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								23629,
-								23629
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 14616.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram/zp.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3393,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2366,
-								2366
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 935.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1349,7 +1232,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 92.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1383,7 +1266,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1391,7 +1274,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 198.0,
+	"side_bar_width": 196.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

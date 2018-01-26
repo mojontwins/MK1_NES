@@ -14,10 +14,7 @@
 
 void player_init (void) {
 	// Init player data
-	
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-	
+
 	pvx = pvy = 0;
 
 	#ifdef PLAYER_TOP_DOWN	
@@ -81,11 +78,11 @@ void render_player (void) {
 	}
 }
 
-void kill_player (void) {
-	render_player ();
+void player_kill (void) {
+	pkill = 0;
 	sfx_play (4, 0);
 	
-	plife --;
+	if (plife) plife --; else game_over = 1;
 
 	#ifdef PLAYER_FLICKERS
 		pstate = EST_PARP;
@@ -194,24 +191,22 @@ void player_move (void) {
 	#ifdef PLAYER_SWIMS
 		// Controller 
 
-		if (!(i & (PAD_DOWN|PAD_UP))) {
+		if (!(i & (PAD_DOWN|PAD_A))) {
 			pvy -= PLAYER_AY_SWIM >> 1;
+		} else {
+			if (i & (PAD_DOWN|PAD_A)) {
+				pvy += PLAYER_AY_SWIM;
+			}
+	
+			// Limit
+			if (pvy > PLAYER_VY_SWIM_MAX) {
+				pvy = PLAYER_VY_SWIM_MAX;
+			}
+		}
+		if (pvy < -PLAYER_VY_SWIM_MAX) {
+				pvy = -PLAYER_VY_SWIM_MAX;
 		}
 
-		if (i & PAD_DOWN) {
-			pvy += PLAYER_AY_SWIM;
-		}
-
-		if (i & PAD_UP) {
-			pvy -= PLAYER_AY_SWIM;
-		}
-
-		// Limit
-		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
-			pvy = -PLAYER_VY_SWIM_MAX;
-		} else if (pvy > PLAYER_VY_SWIM_MAX) {
-			pvy = PLAYER_VY_SWIM_MAX;
-		}
 	#endif
 
 	// Move
@@ -219,12 +214,11 @@ void player_move (void) {
 	if (py < 0) py = 0;
 	
 	// Collision
-	rdy = pry;
 	prx = px >> FIXBITS;
 	pry = py >> FIXBITS;
 	
 	#ifndef PLAYER_TOP_DOWN	
-	if (rdy != pry) 
+	if (pry_old != pry) 
 	#endif
 	{
 		#ifdef PLAYER_TOP_DOWN		
@@ -404,19 +398,17 @@ void player_move (void) {
 	
 	// Move
 	px += pvx;
-	rdx = prx;
+	#ifndef PLAYER_TOP_DOWN	
+		if (pgotten) px += pgtmx;
+	#endif
 	
 	if (px < (4<<FIXBITS)) prx = 4;
 	else if (px > (244<<FIXBITS)) prx = 244; 
 	else prx = px >> FIXBITS;
 
-	#ifndef PLAYER_TOP_DOWN	
-		if (pgotten) px += pgtmx;
-	#endif
-	
 	// Collision
 
-	if (rdx != prx) {
+	if (prx_old != prx) {
 		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
 		cy2 = (pry + 15) >> 4;
 
@@ -470,7 +462,7 @@ void player_move (void) {
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
 		if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
 	#endif	
-	if (pstate != EST_PARP) if (phit) kill_player ();
+	if (pstate != EST_PARP) if (phit) pkill = 1;
 
 	// **************
 	// B Button stuff
@@ -558,4 +550,7 @@ void player_move (void) {
 
 		psprid += pfacing;
 	#endif
+
+	prx_old = prx;
+	pry_old = pry;
 }

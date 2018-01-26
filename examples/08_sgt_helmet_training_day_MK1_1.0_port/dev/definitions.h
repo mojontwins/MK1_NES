@@ -33,25 +33,3 @@
 #define WBOTTOM 				2
 #define WLEFT 					3
 #define WRIGHT 					4
-
-// Animation cells 
-
-// Cell definitions for top-down view
-
-#define CELL_FACING_RIGHT 	0
-#define CELL_FACING_LEFT 	2
-#define CELL_FACING_UP 		4
-#define CELL_FACING_DOWN 	6
-
-// Cell definitions for side view
-
-/*	
-#define CELL_FACING_RIGHT	0
-#define CELL_FACING_LEFT	10
-
-#define CELL_IDLE			0
-#define CELL_WALK_CYCLE		1
-#define CELL_AIRBORNE		5
-#define CELL_SWIM_CYCLE		6
-*/
-

@@ -56,6 +56,11 @@
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
+// Use the complex renderer if you need to post-process the map buffer before
+// printing.
+
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+
 // ============================================================================
 // II. Engine type
 // ============================================================================
@@ -264,7 +269,6 @@
 
 #define AMMO_X					8		// 
 #define AMMO_Y					29		// Ammo counter character coordinates
-//#define PLAYER_SHOW_KILLS
 
 // Text
 #define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
@@ -299,10 +303,37 @@
 #define PLAYER_VX_MAX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
-#define PLAYER_AX				24 		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_AX				24 		// Horizontal acceleration
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				32		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_RX				32		// Horizontal friction
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
+
+// Animation cells 
+
+#ifdef PLAYER_TOP_DOWN
+
+	// Cell definitions for top-down view
+
+	#define CELL_FACING_RIGHT 	0
+	#define CELL_FACING_LEFT 	2
+	#define CELL_FACING_UP 		4
+	#define CELL_FACING_DOWN 	6
+
+#else
+
+	// Cell definitions for side view
+
+	#define CELL_FACING_RIGHT	0
+	#define CELL_FACING_LEFT	8
+
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_AIRBORNE		5
+
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
+
+#endif

@@ -14,18 +14,19 @@
 
 void player_init (void) {
 	// Init player data
-	
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-	
+
 	pvx = pvy = 0;
 
+	// CUSTOM {
+	/*
 	#ifdef PLAYER_TOP_DOWN	
 		pfacing = CELL_FACING_DOWN;
 	#else
 		pfacing = 0;
 	#endif	
-
+	*/
+	// } END_OF_CUSTOM
+	
 	pfr = pctfr = 0;
 	pj = pctj = 0;
 	psprid = 6;
@@ -81,11 +82,12 @@ void render_player (void) {
 	}
 }
 
-void kill_player (void) {
-	render_player ();
+void player_kill (void) {
+	pkill = 0;
+
 	sfx_play (4, 0);
 	
-	plife --;
+	if (plife) plife --; else game_over = 1;
 
 	#ifdef PLAYER_FLICKERS
 		pstate = EST_PARP;
@@ -164,12 +166,18 @@ void player_move (void) {
 	#else
 		// Gravity
 
-		#ifndef PLAYER_SWIMS
+		// CUSTOM {
+		//#ifndef PLAYER_SWIMS
+		if (level != 1) {
+		// } END_OF_CUSTOM
 			if (!pj) {
 				pvy += PLAYER_G;
 				if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 			}
-		#endif
+		// CUSTOM {
+		}
+		//#endif
+		// } END_OF_CUSTOM
 
 		// Moving platforms invalidate pvy
 
@@ -191,40 +199,42 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef PLAYER_SWIMS
+	// CUSTOM {
+	//#ifdef PLAYER_SWIMS
+	if (level == 1) {
+	// } END_OF_CUSTOM	
 		// Controller 
 
-		if (!(i & (PAD_DOWN|PAD_UP))) {
+		if (!(i & (PAD_DOWN|PAD_A))) {
 			pvy -= PLAYER_AY_SWIM >> 1;
-		}
+		} else {
+			if (i & (PAD_DOWN|PAD_A)) {
+				pvy += PLAYER_AY_SWIM;
+			}
 
-		if (i & PAD_DOWN) {
-			pvy += PLAYER_AY_SWIM;
+			// Limit
+			if (pvy > PLAYER_VY_SWIM_MAX) {
+				pvy = PLAYER_VY_SWIM_MAX;
+			}
 		}
-
-		if (i & PAD_UP) {
-			pvy -= PLAYER_AY_SWIM;
-		}
-
-		// Limit
-		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
+		if (pvy < -PLAYER_VY_SWIM_MAX) {
 			pvy = -PLAYER_VY_SWIM_MAX;
-		} else if (pvy > PLAYER_VY_SWIM_MAX) {
-			pvy = PLAYER_VY_SWIM_MAX;
-		}
-	#endif
+		} 
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
 	
 	// Collision
-	rdy = pry;
 	prx = px >> FIXBITS;
 	pry = py >> FIXBITS;
 	
 	#ifndef PLAYER_TOP_DOWN	
-	if (rdy != pry) 
+	if (pry_old != pry) 
 	#endif
 	{
 		#ifdef PLAYER_TOP_DOWN		
@@ -307,7 +317,10 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef PLAYER_HAS_JUMP
+	// CUSTOM {
+	//#ifdef PLAYER_HAS_JUMP
+	if (level != 1) {
+	// } END_OF_CUSTOM
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
@@ -335,7 +348,10 @@ void player_move (void) {
 		} else {
 			pj = 0; pjb = 0;
 		}
-	#endif
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// **********
 	// Horizontal
@@ -404,19 +420,17 @@ void player_move (void) {
 	
 	// Move
 	px += pvx;
-	rdx = prx;
-	
-	if (px < (4<<FIXBITS)) prx = 4;
-	else if (px > (244<<FIXBITS)) prx = 244; 
-	else prx = px >> FIXBITS;
-
 	#ifndef PLAYER_TOP_DOWN	
 		if (pgotten) px += pgtmx;
 	#endif
+		
+	if (px < (4<<FIXBITS)) prx = 4;
+	else if (px > (244<<FIXBITS)) prx = 244; 
+	else prx = px >> FIXBITS;
 	
 	// Collision
 
-	if (rdx != prx) {
+	if (prx_old != prx) {
 		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
 		cy2 = (pry + 15) >> 4;
 
@@ -470,7 +484,7 @@ void player_move (void) {
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
 		if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
 	#endif	
-	if (pstate != EST_PARP) if (phit) kill_player ();
+	if (pstate != EST_PARP) if (phit) pkill = 1;
 
 	// **************
 	// B Button stuff
@@ -533,7 +547,10 @@ void player_move (void) {
 
 		// Frame selection for side view games
 
-		#ifdef PLAYER_SWIMS
+		// CUSTOM {
+		//#ifdef PLAYER_SWIMS
+		if (level == 1) {
+		// } END_OF_CUSTOM 
 			if (i && (rdx != prx || rdy != pry)) {
 				if (pvx) {
 					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
@@ -541,7 +558,10 @@ void player_move (void) {
 					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
 				}
 			} else psprid = CELL_SWIM_CYCLE + 1;
-		#else
+		// CUSTOM {
+		//#else
+		} else {
+		// } END_OF_CUSTOM 
 			if (ppossee || pgotten) {
 
 				// On floor
@@ -554,8 +574,14 @@ void player_move (void) {
 			} else {
 				psprid = CELL_AIRBORNE;
 			}
-		#endif
+		// CUSTOM {
+		//#endif
+		}
+		// } END_OF_CUSTOM 
 
 		psprid += pfacing;
 	#endif
+
+	prx_old = prx;
+	pry_old = pry;
 }
