@@ -303,9 +303,9 @@
 #define PLAYER_VX_MAX			128		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
-#define PLAYER_AX				24 		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_AX				24 		// Horizontal acceleration
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				32		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_RX				32		// Horizontal friction
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
 
@@ -327,11 +327,13 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	10
+	#define CELL_FACING_LEFT	8
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-	#define CELL_SWIM_CYCLE		6
+
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
 
 #endif

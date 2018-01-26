@@ -87,7 +87,7 @@ METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
 LABEL ssexpl
 METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
 
-# Items, 4 faces, 2x2 patterns. No need for flipped versions
+# Items, 5 faces, 2x2 patterns. No need for flipped versions
 # Hot point (where oam_meta_spr places its origin) (is 0, 0).
 # (items rectangle is 16x16, centered bottom).
 LABEL ssit

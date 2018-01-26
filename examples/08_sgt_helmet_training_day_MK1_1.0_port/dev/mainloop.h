@@ -24,6 +24,9 @@ void game_init (void) {
 	bolts_load ();
 #endif		
 	player_init ();
+	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+	
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
@@ -156,10 +159,14 @@ void game_loop (void) {
 			on_pant = n_pant;
 		}
 
-		// Sync
+		hud_update ();
+
+		// Finish frame and wait for NMI
 		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
+
+		if (pkill) player_kill ();
 
 #ifdef ACTIVATE_SCRIPTING
 		#include "mainloop/scripting.h"
@@ -221,14 +228,7 @@ void game_loop (void) {
 
 		#include "mainloop/flickscreen.h"
 
-		hud_update ();
-
-		// Conditions
-		if (plife == 0) {					
-			game_over = 1;
-			break;
-		}
-			
+		if (game_over) break;			
 	}
 
 	music_stop ();

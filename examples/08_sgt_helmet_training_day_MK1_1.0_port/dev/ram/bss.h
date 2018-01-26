@@ -108,6 +108,7 @@ unsigned char level, game_over;
 unsigned char prx_old, pry_old;
 unsigned char pobjs;
 unsigned char plife, pcontinues;
+unsigned char pkill;
 
 #ifndef DEACTIVATE_KEYS
 	unsigned char pkeys;

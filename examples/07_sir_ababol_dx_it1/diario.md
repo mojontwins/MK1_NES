@@ -1396,3 +1396,21 @@ Y con esto, si mal no me equivoco, ¡tendríamos listo el juego! Nada más que l
 - Plantearse si meter una fase más con chac-chacks.
 - Convertir en CNROM.
 - Título / Ending / Game Over.
+
+~~ 
+
+Antes de seguir voy a hacer un tester de sideview para probar un montón de cosas:
+
+- Tipos de enemigos.
+- Slippery (que tengo que meter, está incompleto).X
+- Quicksands (idem).X
+- Empujables en vista lateral.
+- Disparos en vista lateral.
+- Breakables en vista lateral.
+- ?????
+- Profit
+
+Luego tendré que hacer patch al main y a los ejemplos, claro.
+
+~~
+

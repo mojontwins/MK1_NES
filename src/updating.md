@@ -8,3 +8,5 @@
 
 - Basic compile.bat builds one ts pal, one ss pal, builds tileset.chr for import_patterns.spt @ /gfx, builds one set of enems and one map, and attempts to compile a script.
 - config.h should ideally contain basic configuration for a non feature rich side view platformer.
+
+upd_res.tar contains backups of `/engine/frame.h`, `/engine/mapmods/map_renderer_customization.h` and `/assets/spriteset.h` for my convenience.
