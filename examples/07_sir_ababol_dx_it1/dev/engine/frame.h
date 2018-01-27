@@ -4,7 +4,7 @@
 // frame.h
 // Custom game frame
 
-void __fastcall__ draw_game_frame (void) {
+void draw_game_frame (void) {
 	pr_str (2, 3, "LIFE:00   ITEMS:00   KEYS:00");
 	pr_str (2, 28, "SIR ABABOL - THE MOJON TWINS");
 }

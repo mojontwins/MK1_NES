@@ -4,7 +4,7 @@
 // frame.h
 // Custom game frame
 
-void __fastcall__ draw_game_frame (void) {
+void draw_game_frame (void) {
 
 }
 

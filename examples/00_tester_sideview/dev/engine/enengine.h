@@ -252,7 +252,7 @@ void enems_load (void) {
 
 					en_my [gpit] = (rda << 4);	// IDLE_1
 					en_x [gpit] = en_x1 [gpit] >> 4;
-					en_y [gpit] = en_y1 [gpit] >> 4;
+					en_y [gpit] = (en_y1 [gpit] >> 4) - 1;
 					en_alive [gpit] = 0;
 					en_mx [gpit] = en_my [gpit];
 
@@ -490,19 +490,27 @@ void enems_move (void) {
 #endif
 					
 #ifdef PLAYER_CAN_FIRE
-					en_life [gpit] --; if (en_life [gpit] == 0)
-					{
-	#ifdef ENABLE_PURSUERS
-						if (en_t [gpit] == 7) {
-							en_alive [gpit] = 0;
-							en_ct [gpit] = DEATH_COUNT_EXPRESSION;
-							en_life [gpit] = ENEMIES_LIFE_GAUGE;
-						} else 
+						en_life [gpit] --; 
+						if (
+							en_life [gpit] == 0
+	#ifdef ENABLE_SAW
+							&& en_t [gpit] != 8
 	#endif
-						{
-							enems_kill (gpit);
-						}
-					}					
+	#ifdef PLAYER_MIN_KILLABLE
+							&& en_t [gpit] >= PLAYER_MIN_KILLABLE
+	#endif
+						) {
+	#ifdef ENABLE_PURSUERS
+							if (en_t [gpit] == 7) {
+								en_alive [gpit] = 0;
+								en_ct [gpit] = DEATH_COUNT_EXPRESSION;
+								en_life [gpit] = ENEMIES_LIFE_GAUGE;
+							} else 
+	#endif
+							{
+								enems_kill (gpit);
+							}
+						}					
 #endif				
 					pkill = 1;
 				}

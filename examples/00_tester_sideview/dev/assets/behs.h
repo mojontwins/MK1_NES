@@ -9,11 +9,13 @@
 // +64 slippery
 
 // Special values (= nonsensical combinations):
+//  9 not safe block (safe spot not saved when jumping off this)
 // 10 lock
 // 11 pushable
 
 const unsigned char behs0 [] = {
-	0, 8, 8, 1,68, 2, 4,24, 8,40,41, 0, 0, 0,11,10
+	0, 8, 8, 1,68, 2, 4,24, 9,40,41, 0, 0, 0,11,10,
+	0, 0, 1, 1, 1, 1, 0
 };
 
 // 68 = 4 + 64, slippery platform

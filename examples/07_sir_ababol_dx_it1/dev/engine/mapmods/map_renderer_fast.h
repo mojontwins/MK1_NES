@@ -6,7 +6,7 @@
 void draw_map_tile (unsigned char t) {
 	map_buff [rdm] = t;		
 	map_attr [rdm] = c_behs [t];
-	#ifdef BREAKABLE_WALLS
+	#ifdef ENABLE_BREAKABLE
 		brk_buff [rdm] = 1;
 	#endif
 	rdm ++;
@@ -102,4 +102,6 @@ void draw_scr (void) {
 			}
 		}	
 	#endif
+
+	vram_write (attr_table, 0x23c0, 64);
 }

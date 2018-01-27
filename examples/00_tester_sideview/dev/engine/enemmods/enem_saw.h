@@ -77,7 +77,7 @@ if (rda) {
 }
 
 oam_index = oam_meta_spr (
-	rdx, rdy,
+	rdx, rdy + SPRITE_ADJUST,
 	oam_index,
 	spr_enems [ENEMS_OCCLUDING_FRAME]
 );

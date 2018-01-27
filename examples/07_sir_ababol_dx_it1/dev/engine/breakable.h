@@ -5,30 +5,30 @@
 // Manages breakable blocks and animations
 
 #ifdef BREAKABLE_ANIM
-void __fastcall__ process_breakable (void) {
-	do_process_breakable = 0;
-	gpit = MAX_BREAKABLE; while (gpit --) {
-		if (brkf [gpit]) {
-			brkf [gpit] ++;
-			if (brkf [gpit] == MAX_BREAKABLE_FRAMES) {
-				brkf [gpit] = 0;
-				map_set (brkx [gpit], brky [gpit], BREAKABLE_ERASE);	
-			} else {
-				do_process_breakable = 1;
+	void breakable_do_anim (void) {
+		do_process_breakable = 0;
+		gpit = BREAKABLE_MAX; while (gpit --) {
+			if (brkf [gpit]) {
+				brkf [gpit] ++;
+				if (brkf [gpit] == BREAKABLE_MAX_FRAMES) {
+					brkf [gpit] = 0;
+					map_set (brkx [gpit], brky [gpit], BREAKABLE_ERASE);	
+				} else {
+					do_process_breakable = 1;
+				}
 			}
 		}
 	}
-}
 #endif
 
-void break_wall (unsigned char x, unsigned char y) {
+void breakable_break (unsigned char x, unsigned char y) {
 	gpaux = x + (y << 4);
-	if (brk_buff [gpaux] < BREAKABLE_WALLS_LIFE) {
+	if (brk_buff [gpaux] < BREAKABLE_LIFE) {
 		brk_buff [gpaux] ++;
 	} else {
 #ifdef BREAKABLE_ANIM
-		// Unsafe but short & fast. Adjust MAX_BREAKABLE if this breaks your game
-		gpit = MAX_BREAKABLE; while (gpit --) {
+		// Unsafe but short & fast. Adjust BREAKABLE_MAX if this breaks your game
+		gpit = BREAKABLE_MAX; while (gpit --) {
 			if (!brkf [gpit]) {
 				do_process_breakable = 1;
 				brkf [gpit] = 1;

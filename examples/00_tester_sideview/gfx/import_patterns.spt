@@ -17,7 +17,7 @@ MAPFILE ..\dev\assets\tiledata.h
 OPEN ts0.png
 PALS palts0.png
 LABEL ts0
-MAPPED 0, 0, 2, 2, 16, 1
+MAPPED 0, 0, 2, 2, 16, 2, 23
 
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
@@ -54,16 +54,40 @@ METASPRITESET 4, 6, 2, 3, 6, 1, 0, -8 FLIPPED
 LABEL ssplat
 METASPRITESET 12, 13, 2, 2, 2, 1, 0, 0
 
+# Fanty, 2 frames, 2x2 patterns, generate flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssfanty
+METASPRITESET 0, 9, 2, 2, 2, 1, 0, 0 FLIPPED
+
+# Pezon, 2 frames, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL sspezon
+METASPRITESET 0, 11, 2, 2, 2, 1, 0, 0
+
+# Saw, 2 frames, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL sssaw
+METASPRITESET 12, 11, 2, 2, 2, 1, 0, 0
+
+# Occlusion, 1 frame, 2x2 patterns. No need for flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssexpl
+METASPRITESET 8, 13, 2, 2, 1, 1, 0, 0
+
+# Explosion, 1 frame, 2x2 patterns. No need for flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL sseocc
+METASPRITESET 10, 13, 2, 2, 1, 1, 0, 0
+
 # Items, 4 faces, 2x2 patterns. No need for flipped versions
 # Hot point (where oam_meta_spr places its origin) (is 0, 0).
 # (items rectangle is 16x16, centered bottom).
 LABEL ssit
 METASPRITESET 0, 13, 2, 2, 4, 1, 0, 0
-
-# Explosion, 1 frame, 2x2 patterns. No need for flipped versions
-# hot point (where oam_meta_spr places its origin) is (0, 0).
-# (enems rectangle is 16x16, centered bottom).
-LABEL ssexpl
-METASPRITESET 8, 13, 2, 2, 1, 1, 0, 0
 
 FILL 8192

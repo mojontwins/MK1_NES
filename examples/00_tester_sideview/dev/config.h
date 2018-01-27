@@ -88,6 +88,7 @@
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+#define DIE_AND_REENTER					// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -95,9 +96,20 @@
 // -------------------
 
 // Quicksands, beh = 2.
+// For player movement values, see section 4
+// (PLAYER_VY_SINKING)
 
 #define ENABLE_QUICKSANDS
-#define QUICKSANDS_SINK_VY				2
+
+// Breakable, beh = 16
+#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define BREAKABLE_ANIM					// Show explosion when breaking
+#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh = 32 [+1]
 // For player movement values, see section 4
@@ -117,20 +129,25 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			16
-//#define ENEMS_OCCLUDING_FRAME			16 // If you use pezons or saws you need a flame for occlusion
+#define SPRITE_BADDIE_DYING 			25
+#define ENEMS_OCCLUDING_FRAME			24 // If you use pezons or saws you need a flame for occlusion
 
 // Fanties / Homing fanties
 
 //#define ENABLE_FANTY
-//#define ENABLE_HOMING_FANTY
-#define FANTY_BASE_SPRID				18
+#define ENABLE_HOMING_FANTY
+
+#define FANTY_BASE_SPRID				16
+#define FANTY_WITH_FACING
+#define FANTY_COLLIDES
+#define FANTY_KILLED_BY_TILE
+#define FANTY_LIFE_GAUGE				5
+
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
-#define FANTY_COLLIDES
-//#define FANTY_DISTANCE				80
-//#define FANTY_V_RETREAT				16
-#define FANTY_KILLED_BY_TILE
+
+#define FANTY_DISTANCE					80
+#define FANTY_V_RETREAT					16
 
 // Pursuers (for top-down)
 
@@ -140,8 +157,8 @@
 
 // Saws
 
-//#define ENABLE_SAW
-#define SAW_BASE_SPRID					16
+#define ENABLE_SAW
+#define SAW_BASE_SPRID					22
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
 
@@ -168,8 +185,8 @@
 
 // Pezons
 
-//#define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID		16
+#define ENABLE_PEZONS
+#define PEZONS_BASE_SPRID		20
 #define PEZON_WAIT				50
 #define PEZON_THRUST			384
 #define PEZON_VY_FALLING_MAX	256
@@ -177,8 +194,8 @@
 
 // Chac chacs
 
-//#define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE		48
+#define ENABLE_CHAC_CHAC
+#define CHAC_CHAC_BASE_TILE		16
 #define CHAC_CHAC_IDLE_2		16
 #define CHAC_CHAC_IDLE_3		1
 #define CHAC_CHAC_IDLE_4		50
@@ -220,13 +237,6 @@
 
 #define BULLET_PALETTE			3
 #define BULLET_PATTERN			0		// To paint the bullet. Can be an expresion.
-
-#define BREAKABLE_WALLS					// Breakable walls
-#define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
-#define BREAKABLE_ANIM					// Show explosion when breaking
-#define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
 
 // Scripting
 // ---------
@@ -298,6 +308,7 @@
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
 #define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
+#define PLAYER_VY_SINKING		2
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64

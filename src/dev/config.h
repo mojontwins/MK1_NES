@@ -88,6 +88,7 @@
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+#define DIE_AND_REENTER					// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -95,21 +96,32 @@
 // -------------------
 
 // Quicksands, beh = 2.
+// For player movement values, see section 4
+// (PLAYER_VY_SINKING)
 
-#define ENABLE_QUICKSANDS
-#define QUICKSANDS_SINK_VY			2
+//#define ENABLE_QUICKSANDS
+
+// Breakable, beh = 16
+//#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define BREAKABLE_ANIM					// Show explosion when breaking
+#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh = 32 [+1]
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
-#define ENABLE_CONVEYORS
+//#define ENABLE_CONVEYORS
 
 // Slippery, beh = 64. 
 // For player movement values, see section 4
 // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
-#define ENABLE_SLIPPERY
+//#define ENABLE_SLIPPERY
 
 // Enemy types and definitions
 // ---------------------------
@@ -124,13 +136,18 @@
 
 //#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
-#define FANTY_BASE_SPRID				18
+
+#define FANTY_BASE_SPRID				16
+#define FANTY_WITH_FACING
+#define FANTY_COLLIDES
+#define FANTY_KILLED_BY_TILE
+#define FANTY_LIFE_GAUGE				5
+
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
-#define FANTY_COLLIDES
-//#define FANTY_DISTANCE				80
-//#define FANTY_V_RETREAT				16
-#define FANTY_KILLED_BY_TILE
+
+#define FANTY_DISTANCE					80
+#define FANTY_V_RETREAT					16
 
 // Pursuers (for top-down)
 
@@ -223,6 +240,7 @@
 #define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
 */
 
+/*
 #define BREAKABLE_WALLS					// Breakable walls
 #define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
@@ -301,6 +319,7 @@
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
 #define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
+#define PLAYER_VY_SINKING		2
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
@@ -350,8 +369,9 @@
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
+	//#define CELL_SWIM_CYCLE		6
 
-	#define CELL_ASCENDING		5
-	#define CELL_DESCENDING		6
+	//#define CELL_ASCENDING		5
+	//#define CELL_DESCENDING		6
 
 #endif

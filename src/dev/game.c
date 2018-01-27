@@ -60,7 +60,7 @@ void add_propeller (unsigned char x, unsigned char y);
 #ifndef DEACTIVATE_KEYS
 #include "engine/bolts.h"
 #endif
-#ifdef BREAKABLE_WALLS
+#ifdef ENABLE_BREAKABLE
 #include "engine/breakable.h"
 #endif
 #include "engine/hotspots.h"

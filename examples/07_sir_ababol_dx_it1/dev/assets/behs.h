@@ -9,6 +9,7 @@
 // +64 slippery
 
 // Special values (= nonsensical combinations):
+//  9 not safe block (safe spot not saved when jumping off this)
 // 10 lock
 // 11 pushable
 

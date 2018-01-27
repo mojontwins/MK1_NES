@@ -1,4 +1,4 @@
-
+	
 // Add these:
 // + 1 kills      (useless if + 8 obstacle)
 // + 2 quicksands ( " , needs ENABLE_QUICKSANDS)
@@ -9,6 +9,7 @@
 // +64 slippery
 
 // Special values (= nonsensical combinations):
+//  9 not safe block (safe spot not saved when jumping off this)
 // 10 lock
 // 11 pushable
 

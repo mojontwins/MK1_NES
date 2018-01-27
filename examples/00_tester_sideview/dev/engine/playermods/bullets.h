@@ -65,9 +65,9 @@ void bullets_move (void) {
 			cy1 = ((by [bi] + 4 - 16) >> 4);
 			rdm = map_attr [COORDS (cx1, cy1)];
 
-			#ifdef BREAKABLE_WALLS
+			#ifdef ENABLE_BREAKABLE
 				if (rdm & 16) {
-					break_wall (cx1, cy1);
+					breakable_break (cx1, cy1);
 					bullets_destroy ();
 				} else
 			#endif

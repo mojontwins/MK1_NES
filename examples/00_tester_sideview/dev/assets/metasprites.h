@@ -26,9 +26,21 @@ const unsigned char * const spr_enems0 [] = {
 	ssen_00_a, ssen_01_a, ssen_00_b, ssen_01_b,			// Enem id 1, right, left, two cells (duplicated)
 	ssen_02_a, ssen_03_a, ssen_02_b, ssen_03_b,			// Enem id 2, right, left, two cells (duplicated)
 	ssen_04_a, ssen_05_a, ssen_04_b, ssen_05_b,			// Enem id 3, right, left, two cells (duplicated)
-	ssplat_00, ssplat_01, ssplat_00, ssplat_01,				// Platform, right, left, two cells (duplicated)
+	ssplat_00, ssplat_01, ssplat_00, ssplat_01,			// Platform, right, left, two cells (duplicated)
 
-	// Explosion (offset 16)
+	// Fanty (offset 16) Right (0, 1), Left (0, 1).
+	ssfanty_00_a, ssfanty_01_a, ssfanty_00_b, ssfanty_01_b, 
+
+	// Pezon (offset 20), 0, 1
+	sspezon_00, sspezon_01,
+
+	// Saw (offset 22), 0, 1
+	sssaw_00, sssaw_01,
+
+	// Occluding cell (offset 24) (for pezon, saw)
+	sseocc,
+
+	// Explosion (offset 25)
 	ssexpl
 };
 

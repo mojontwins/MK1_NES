@@ -71,7 +71,6 @@ void game_init (void) {
 }
 
 void prepare_scr (void) {
-	clear_update_list ();
 	if (!ft) fade_out (); else ft = 0;
 	
 #ifdef ENABLE_PROPELLERS
@@ -84,6 +83,7 @@ void prepare_scr (void) {
 #endif
 
 	enems_load ();
+	hotspots_create ();	
 
 #if defined (ACTIVATE_SCRIPTING) && (defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE))
 	f_zone_ac = 0;
@@ -93,20 +93,12 @@ void prepare_scr (void) {
 	// Disable sprites and tiles so we can write to VRAM.
 	ppu_off ();
 
-	oam_index = 4+24; // 4 + what the player takes.
-
-	oam_hide_rest (0);
-	clear_update_list ();
 	draw_scr ();
 
-#ifdef BREAKABLE_ANIM
+#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 	do_process_breakable = 0;
-	gpit = MAX_BREAKABLE; while (gpit --) brkf [gpit] = 0;
+	gpit = BREAKABLE_MAX; while (gpit --) brkf [gpit] = 0;
 #endif
-
-	hotspots_create ();	
-	// Write attributes
-	vram_write (attr_table, 0x23c0, 64);
 
 #ifdef LINE_OF_TEXT
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
@@ -122,10 +114,6 @@ void prepare_scr (void) {
 	}
 	// } END_OF_CUSTOM
 
-	player_move ();
-	enems_move ();
-	render_player ();
-
 #ifdef PLAYER_CAN_FIRE
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
 		b_slots [gpit] = gpit; bst [gpit] = 0;
@@ -139,6 +127,13 @@ void prepare_scr (void) {
 	
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
+
+	oam_index = 4+24; // 4 + what the player takes.
+	prx = px >> FIXBITS; pry = py >> FIXBITS;
+	player_render ();
+	enems_move ();
+	if (hrt) hotspots_paint ();
+	player_render ();
 
 #ifdef ACTIVATE_SCRIPTING
 	// Entering any script
@@ -200,7 +195,16 @@ void game_loop (void) {
 		ppu_waitnmi ();
 		clear_update_list ();
 
+		#include "mainloop/flickscreen.h"
+
 		if (pkill) player_kill ();
+		if (game_over) break;			
+
+		// Change screen
+		if (on_pant != n_pant) {
+			prepare_scr ();
+			on_pant = n_pant;
+		}
 
 #ifdef ACTIVATE_SCRIPTING
 		#include "mainloop/scripting.h"
@@ -244,10 +248,10 @@ void game_loop (void) {
 
 		enems_move ();
 
-#ifdef BREAKABLE_ANIM
-		if (do_process_breakable) process_breakable ();
+#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
+		if (do_process_breakable) breakable_do_anim ();
 #endif
-		render_player ();
+		player_render ();
 
 #ifdef CARRY_ONE_HS_OBJ
 		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [pinv]);
@@ -259,10 +263,6 @@ void game_loop (void) {
 		//#include "mainloop/cheat.h"
 
 		#include "mainloop/pause.h"
-
-		#include "mainloop/flickscreen.h"
-
-		if (game_over) break;			
 	}
 
 	music_stop ();

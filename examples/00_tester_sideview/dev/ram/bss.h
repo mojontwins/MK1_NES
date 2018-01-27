@@ -33,13 +33,12 @@ unsigned char map_buff [192];
 
 // Breakable walls
 
-#ifdef BREAKABLE_WALLS
+#ifdef ENABLE_BREAKABLE
 	unsigned char brk_buff [192];
 	#ifdef BREAKABLE_ANIM
-		#define MAX_BREAKABLE 4
-		unsigned char brkf [MAX_BREAKABLE];
-		unsigned char brkx [MAX_BREAKABLE];
-		unsigned char brky [MAX_BREAKABLE];
+		unsigned char brkf [BREAKABLE_MAX];
+		unsigned char brkx [BREAKABLE_MAX];
+		unsigned char brky [BREAKABLE_MAX];
 	#endif
 #endif
 
@@ -119,6 +118,7 @@ unsigned char pobjs;
 unsigned char plife, pcontinues;
 unsigned char pkill;
 unsigned char pice;
+unsigned char pnotsafe;
 
 #ifndef DEACTIVATE_KEYS
 	unsigned char pkeys;
@@ -133,10 +133,6 @@ unsigned char pammo, pfiring;
 #ifdef DIE_AND_RESPAWN
 	unsigned char n_pant_safe;
 	signed int px_safe, py_safe;
-#endif
-
-#ifdef ENABLE_CONVEYORS
-	unsigned char pconvd1, pconvd2;
 #endif
 
 // Current level

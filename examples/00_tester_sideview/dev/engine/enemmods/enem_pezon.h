@@ -32,7 +32,7 @@ switch (en_alive [gpit]) {
 			en_mx [gpit] = en_my [gpit];
 			
 		} else {
-			en_spr = PEZONS_BASE_SPRID + (enf_vy [gpit] >= -64)];
+			en_spr = PEZONS_BASE_SPRID + (enf_vy [gpit] >= -64);
 		}
 		break;
 }

@@ -33,7 +33,6 @@ void hotspots_create (void) {
 	hrt = *gp_gen ++; rda = *gp_gen; 
 	if (hrt && hact [n_pant]) {
 		hry = rda & 0xf0; hrx = rda << 4;
-		hotspots_paint ();
 	} else hrt = 0;
 
 #else
@@ -49,7 +48,6 @@ void hotspots_create (void) {
 	if (hrt) {
 		hrx = hyx [n_pant] >> 4;
 		hry = hyx [n_pant] & 0xf0;
-		hotspots_paint ();
 	}	
 
 #endif

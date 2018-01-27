@@ -89,6 +89,7 @@
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+//#define DIE_AND_REENTER				// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -96,9 +97,20 @@
 // -------------------
 
 // Quicksands, beh = 2.
+// For player movement values, see section 4
+// (PLAYER_VY_SINKING)
 
 //#define ENABLE_QUICKSANDS
-#define QUICKSANDS_SINK_VY				2
+
+// Breakable, beh = 16
+//#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define BREAKABLE_ANIM					// Show explosion when breaking
+#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh = 32 [+1]
 // For player movement values, see section 4
@@ -125,13 +137,18 @@
 
 //#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
-#define FANTY_BASE_SPRID				18
+
+#define FANTY_BASE_SPRID				16
+#define FANTY_WITH_FACING
+#define FANTY_COLLIDES
+#define FANTY_KILLED_BY_TILE
+#define FANTY_LIFE_GAUGE				5
+
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
-#define FANTY_COLLIDES
-//#define FANTY_DISTANCE				80
-//#define FANTY_V_RETREAT				16
-#define FANTY_KILLED_BY_TILE
+
+#define FANTY_DISTANCE					80
+#define FANTY_V_RETREAT					16
 
 // Pursuers (for top-down)
 
@@ -251,7 +268,7 @@
 // Top view:
 // ---------
 /*
-#define PLAYER_TOP_DOWN            	// Enable top view.
+#define PLAYER_TOP_DOWN            		// Enable top view.
 #define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
 */
 // Side view:
@@ -303,6 +320,7 @@
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
 #define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
+#define PLAYER_VY_SINKING		2
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
@@ -321,10 +339,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				8		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				8		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
