@@ -78,6 +78,12 @@ METASPRITESET 12, 11, 2, 2, 2, 1, 0, 0
 LABEL ssexpl
 METASPRITESET 8, 13, 2, 2, 1, 1, 0, 0
 
+# Monococo, 4 frames, 2x2 patterns, generate flipped versions
+# hot point (where oam_meta_spr places its origin) is (0, 0).
+# (enems rectangle is 16x16, centered bottom).
+LABEL ssmono
+METASPRITESET 4, 4, 2, 2, 4, 1, 0, 0 FLIPPED
+
 # Explosion, 1 frame, 2x2 patterns. No need for flipped versions
 # hot point (where oam_meta_spr places its origin) is (0, 0).
 # (enems rectangle is 16x16, centered bottom).

@@ -37,10 +37,14 @@ const unsigned char * const spr_enems0 [] = {
 	// Saw (offset 22), 0, 1
 	sssaw_00, sssaw_01,
 
-	// Occluding cell (offset 24) (for pezon, saw)
+	// Monococo, full (offset 24) Right (0, 1), Left (0, 1), Right (A, H), Left (A, H)
+	ssmono_00_a, ssmono_01_a, ssmono_00_b, ssmono_01_b,
+	ssmono_02_a, ssmono_03_a, ssmono_02_b, ssmono_03_b,
+
+	// Occluding cell (offset 32) (for pezon, saw)
 	sseocc,
 
-	// Explosion (offset 25)
+	// Explosion (offset 33)
 	ssexpl
 };
 

@@ -31,6 +31,15 @@ unsigned char map_buff [192];
 	signed char bmy [MAX_BULLETS];
 #endif
 
+// Cocos
+
+#ifdef ENABLE_COCOS
+	signed int coco_x [COCOS_MAX], coco_y [COCOS_MAX];
+	signed int coco_vx [COCOS_MAX], coco_vy [COCOS_MAX];
+	unsigned char coco_on [COCOS_MAX];
+	unsigned char coco_slots [COCOS_MAX], coco_slots_i;
+#endif	
+
 // Breakable walls
 
 #ifdef ENABLE_BREAKABLE

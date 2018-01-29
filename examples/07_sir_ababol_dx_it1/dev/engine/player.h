@@ -480,9 +480,9 @@ void player_move (void) {
 	// *************
 	
 	phit = 0;
-	if (hitv) { phit = 1; pvy = add_sign (-pvy, PLAYER_V_REBOUND); } 
+	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
-		if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
+		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 	#endif	
 	if (pstate != EST_PARP) if (phit) pkill = 1;
 

@@ -93,10 +93,10 @@ unsigned char wall, hitv, hith;
 	unsigned char bi;
 #endif
 
-#ifdef PLAYER_GARGAJO
-	unsigned char gst [MAX_GARGAJOS], gx [MAX_GARGAJOS], gy [MAX_GARGAJOS];
-	signed char gmx [MAX_GARGAJOS];
-	unsigned char ghsx, ghsy, pgargajocounter;
+// Cocos
+
+#ifdef ENABLE_COCOS
+	unsigned char coco_it;
 #endif
 
 // Hotspots

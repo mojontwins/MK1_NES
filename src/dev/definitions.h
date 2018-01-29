@@ -20,12 +20,13 @@
 #define COORDS(x,y) 			((x) | ((y) << 4))
 #define MSB(x)					(((x) >> 8))
 #define LSB(x)					(((x) & 0xff))
-#define sgni(n)					((n) < 0 ? -1 : 1)
-#define sgnc(a,b,c)				((a) < (b) ? -(c) : (c))
-#define saturate_z(n)			((n) < 0 ? 0 : (n))
-#define abs(n)					((n) < 0 ? -(n) : (n))
-#define delta(a,b)				((a) < (b) ? (b) - (a) : (a) - (b))
-#define min(a,b)				((a) < (b) ? (a) : (b))
+#define SGNI(n)					((n) < 0 ? -1 : 1)
+#define SGNC(a,b,c)				((a) < (b) ? -(c) : (c))
+#define SATURATE_Z(n)			((n) < 0 ? 0 : (n))
+#define ABS(n)					((n) < 0 ? -(n) : (n))
+#define ADD_SIGN2(a,b,v)		((a)==(b))?(0):(((a)>(b))?(v):(-(v)))
+#define ADD_SIGN(a,v) 			((a)?(((a)>0)?(v):(-(v))):(0))
+#define DELTA(a,b)				((a) < (b) ? (b) - (a) : (a) - (b))
 
 // Wall hits
 

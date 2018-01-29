@@ -93,6 +93,9 @@ void bullets_move (void) {
 				#ifdef ENABLE_SAW
 					&& en_t [gpjt] != 8
 				#endif
+				#ifdef ENABLE_MONOCOCOS
+					&& (en_t [gpit] != 11 || en_mx [gpit] == 2)
+				#endif
 				) {
 					#ifdef ENABLE_PURSUERS
 						if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)

@@ -163,25 +163,13 @@
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
 
-// Monococos
-
-//#define ENABLE_MONOCOCO
-#define MONOCOCO_BASE_TIME_HIDDEN		150
-#define MONOCOCO_BASE_TIME_APPEARING	50
-#define MONOCOCO_BASE_TIME_ONBOARD		50
-#define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
-// Make code more readable:
-#define MONOCOCO_X 						en_x
-#define MONOCOCO_Y						en_y
-#define MONOCOCO_COUNTER 				en_my
-#define MONOCOCO_STATE 					en_mx
-
 // If you enable monococos, I think you should enable cocos:
 
 //#define ENABLE_COCOS
 #define COCOS_MAX						3
 #define COCO_V							192
-#define COCO_PATTERN					34
+#define COCO_PATTERN					0
+#define COCO_PALETTE 					3
 #define COCO_FAIR_D						32
 
 // Pezons
@@ -200,6 +188,16 @@
 #define CHAC_CHAC_IDLE_2		16
 #define CHAC_CHAC_IDLE_3		1
 #define CHAC_CHAC_IDLE_4		50
+
+// Monococos
+
+//#define ENABLE_MONOCOCOS
+//#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
+#define MONOCOCO_BASE_SPRID				24
+#define MONOCOCO_BASE_TIME_HIDDEN		150
+#define MONOCOCO_BASE_TIME_APPEARING	50
+#define MONOCOCO_BASE_TIME_ONBOARD		50
+#define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
 
 // Carry directives
 
@@ -239,15 +237,6 @@
 
 #define BULLET_PALETTE			1
 #define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
-*/
-
-/*
-#define BREAKABLE_WALLS					// Breakable walls
-#define BREAKABLE_WALLS_LIFE	2		// Amount of hits to break wall
-#define BREAKABLE_ANIM					// Show explosion when breaking
-#define MAX_BREAKABLE_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
 */
 
 // Scripting
@@ -374,5 +363,14 @@
 	
 	//#define CELL_ASCENDING		5
 	//#define CELL_DESCENDING		6
+#endif
+// Inner workings. Don't touch.
 
+#define MONOCOCO_X 				en_x
+#define MONOCOCO_Y				en_y
+#define MONOCOCO_COUNTER 		en_my
+#define MONOCOCO_STATE 			en_mx
+
+#ifdef ENABLE_MONOCOCOS
+#define ENABLE_COCOS
 #endif

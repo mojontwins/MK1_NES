@@ -22,6 +22,7 @@
 // * const data *
 // **************
 
+#include "assets/precalcs.h"
 #include "assets/palettes.h"
 #include "assets/behs.h"
 #include "assets/map0.h"
@@ -69,6 +70,9 @@ void add_propeller (unsigned char x, unsigned char y);
 #endif
 #ifdef ENABLE_CONTAINERS
 #include "engine/containers.h"
+#endif
+#ifdef ENABLE_COCOS
+#include "engine/cocos.h"
 #endif
 #include "engine/player.h"
 #include "engine/enengine.h"

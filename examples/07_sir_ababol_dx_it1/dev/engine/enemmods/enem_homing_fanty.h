@@ -9,8 +9,8 @@
 	#define FANTY_OBSTACLE(a) (a)
 #endif
 
-// Precalc enems_distance
-rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = enems_distance ();
+// Precalc distance
+rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = distance ();
 
 // Modify v - always upon state
 

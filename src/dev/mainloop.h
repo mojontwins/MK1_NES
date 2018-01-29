@@ -64,6 +64,10 @@ void prepare_scr (void) {
 	enems_load ();
 	hotspots_create ();	
 
+#ifdef ENABLE_COCOS
+	cocos_init ();
+#endif	
+
 #if defined (ACTIVATE_SCRIPTING) && (defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE))
 	f_zone_ac = 0;
 	fzx1 = fzx2 = fzy1 = fzy2 = 240;
@@ -214,6 +218,10 @@ void game_loop (void) {
 		bullets_move ();
 #endif
 
+#ifdef ENABLE_COCOS
+		cocos_do ();
+#endif
+	
 		enems_move ();
 
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)

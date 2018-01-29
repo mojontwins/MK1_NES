@@ -47,3 +47,14 @@ void pad_read (void) {
 	i = pad_poll (0);			// Read pads here.
 	pad_this_frame = (pad_this_frame ^ i) & i;
 }
+
+#if defined (ENABLE_HOMING_FANTY) || defined (ENABLE_COCOS)
+	// Lame but fast and tiny
+	// Before the call: copy fanty's coordinates into rdx, rdy
+	unsigned char distance (void) {
+		rda = DELTA (prx, rdx); // dx
+		rdb = DELTA (pry, rdy); // dy
+		rdc = MIN (rda, rdb);
+		return (rda + rdb - (rdc >> 1) - (rdc >> 2) + (rdc >> 4));
+	}
+#endif

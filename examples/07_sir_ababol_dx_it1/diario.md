@@ -1414,3 +1414,26 @@ Luego tendré que hacer patch al main y a los ejemplos, claro.
 
 ~~
 
+20180129
+========
+
+Entre que descanso de Miedow voy poniendo cosas. En el tester todo está programado y funcionando, y estoy ahora a vueltas con el tema de los inventarios y las hostias.
+
+Hay dos cosas implementadas (obviamente, incompletas y sin funcionar, porque hice un batiburrillo bestial al ir pasando las versiones):
+
+- Si estás usando scripting, el objeto que llevas debería ir a un flag y los contenedores deberían gestionarse con containers.h
+
+- Si no estás usando scripting, el objeto que llevas va a pinv, y debería haber un rango de contenidos de hotspots que se consideren "objetos". Cuando tocas un hotspot (con posible interacción de PAD_B), tu pinv y el objeto del hotspot te intercambian. Para ello es necesario desactivar `HOTSPOTS_WONT_CHANGE`. Pero debería poder blindar este submotor y tenerlo todo junto.
+
+De entrada voy a quitar `HOTSPOTS_WONT_CHANGE`, invertir la lógica, e introducir `HOTSPOTS_DYNAMIC`, implicando que pueden cambiar.
+
+```c
+#define ENABLE_EASY_OBJECTS
+```
+
+Eso debería activar, entre bambalinas, `CARRY_ONE_HS_OBJ` y `HOTSPOTS_DYNAMIC`, además de precisar un `(HS_INV_X, HS_INV_Y)`, un id de "no llevo nada" (`HS_INV_EMPTY`), y el rango de valores de hotspots que se consideran "objetos".
+
+El problema de este tipo de juegos es que ya nos metemos en un rollo místico-custom, pero bueno, ahí está. Por ejemplo, lo más sencillo es acabar el juego cuando se comprueba que todos los objetos están en su sitio.
+
+Todas esas cosas se pueden comprobar en mil sitios y tal, pero bueno, yo lo que voy a dar es la infraestructura básica.
+

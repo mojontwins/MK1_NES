@@ -21,7 +21,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
+	#define SCR_INI					1		// Initial screen
 	#define PLAYER_INI_X			1		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -129,8 +129,8 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			25
-#define ENEMS_OCCLUDING_FRAME			24 // If you use pezons or saws you need a flame for occlusion
+#define SPRITE_BADDIE_DYING 			33
+#define ENEMS_OCCLUDING_FRAME			32 // If you use pezons or saws you need a flame for occlusion
 
 // Fanties / Homing fanties
 
@@ -162,43 +162,41 @@
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
 
-// Monococos
-
-//#define ENABLE_MONOCOCO
-#define MONOCOCO_BASE_TIME_HIDDEN		150
-#define MONOCOCO_BASE_TIME_APPEARING	50
-#define MONOCOCO_BASE_TIME_ONBOARD		50
-#define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
-// Make code more readable:
-#define MONOCOCO_X 						en_x
-#define MONOCOCO_Y						en_y
-#define MONOCOCO_COUNTER 				en_my
-#define MONOCOCO_STATE 					en_mx
-
 // If you enable monococos, I think you should enable cocos:
 
-//#define ENABLE_COCOS
+#define ENABLE_COCOS
 #define COCOS_MAX						3
 #define COCO_V							192
-#define COCO_PATTERN					34
+#define COCO_PATTERN					0
+#define COCO_PALETTE 					3
 #define COCO_FAIR_D						32
 
 // Pezons
 
 #define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID		20
-#define PEZON_WAIT				50
-#define PEZON_THRUST			384
-#define PEZON_VY_FALLING_MAX	256
-#define PEZON_G					16
+#define PEZONS_BASE_SPRID				20
+#define PEZON_WAIT						50
+#define PEZON_THRUST					384
+#define PEZON_VY_FALLING_MAX			256
+#define PEZON_G							16
 
 // Chac chacs
 
 #define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE		16
-#define CHAC_CHAC_IDLE_2		16
-#define CHAC_CHAC_IDLE_3		1
-#define CHAC_CHAC_IDLE_4		50
+#define CHAC_CHAC_BASE_TILE				16
+#define CHAC_CHAC_IDLE_2				16
+#define CHAC_CHAC_IDLE_3				1
+#define CHAC_CHAC_IDLE_4				50
+
+// Monococos
+
+#define ENABLE_MONOCOCOS
+//#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
+#define MONOCOCO_BASE_SPRID				24
+#define MONOCOCO_BASE_TIME_HIDDEN		150
+#define MONOCOCO_BASE_TIME_APPEARING	50
+#define MONOCOCO_BASE_TIME_ONBOARD		50
+#define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
 
 // Carry directives
 
@@ -362,4 +360,15 @@
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
 
+#endif
+
+// Inner workings. Don't touch.
+
+#define MONOCOCO_X 				en_x
+#define MONOCOCO_Y				en_y
+#define MONOCOCO_COUNTER 		en_my
+#define MONOCOCO_STATE 			en_mx
+
+#ifdef ENABLE_MONOCOCOS
+#define ENABLE_COCOS
 #endif
