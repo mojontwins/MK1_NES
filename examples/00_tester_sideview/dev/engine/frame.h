@@ -45,4 +45,13 @@ void hud_update (void) {
 		p_t (AMMO_X, AMMO_Y, pammo);
 	}
 #endif
+
+#if defined (ENABLE_EASY_OBJECTS) && defined (HS_INV_X)
+	oam_index = oam_meta_spr (
+		HS_INV_X, HS_INV_Y,
+		oam_index,
+		spr_hs [pinv]
+	);
+#endif
+
 }

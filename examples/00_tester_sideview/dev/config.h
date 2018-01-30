@@ -46,7 +46,6 @@
 #endif
 
 // Some flexibility
-#define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
@@ -200,21 +199,25 @@
 
 // Carry directives
 
-/*
-#define CARRY_ONE_HS_OBJ
-#define HS_INV_X				136
-#define HS_INV_Y				210
-#define HS_INV_EMPTY			3
-#define HS_INV_MIN				3
-#define HS_INV_MAX				7
+// Easy objects mode: A range of hotspot id's are considered
+// 'objects'. The user can carry one of those. Contents of hotspots
+// can change in this mode.
+
+#define ENABLE_EASY_OBJECTS
+
+#define HS_OBJ_EMPTY			3
+#define HS_OBJ_MIN				3
+#define HS_OBJ_MAX				7
 #define HS_USE_OFFS				10
-*/
+
+#define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+								// Otherwise, use its own graphics.
 
 /*
 #define CARRY_ONE_FLAG_OBJ
 #define HS_INV_X				136
 #define HS_INV_Y				210
-#define HS_INV_EMPTY			0
+#define HS_OBJ_EMPTY			0
 #define HS_INV_FLAG				0
 */
 
@@ -292,6 +295,9 @@
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
+
+#define HS_INV_X				136		//
+#define HS_INV_Y				210		// Object you are carrying
 
 // ============================================================================
 // IV. Player movement configuration
@@ -371,4 +377,9 @@
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS
+#endif
+
+#ifdef ENABLE_EASY_OBJECTS
+#define HOTSPOTS_DYNAMIC
+#define CARRY_ONE_HS_OBJECT
 #endif

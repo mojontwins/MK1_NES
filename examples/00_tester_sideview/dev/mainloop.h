@@ -166,16 +166,28 @@ void game_loop (void) {
 		hud_update ();
 
 		// Finish frame and wait for NMI
+
 		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
 
+		// Poll pads
+
+		pad_read ();
+		a_button = (pad_this_frame & PAD_A);
+		b_button = (pad_this_frame & PAD_B);
+
+		// Flick the screen
+
 		#include "mainloop/flickscreen.h"
+
+		// Finish him
 
 		if (pkill) player_kill ();
 		if (game_over) break;			
 
 		// Change screen
+		
 		if (on_pant != n_pant) {
 			prepare_scr ();
 			on_pant = n_pant;
@@ -213,9 +225,10 @@ void game_loop (void) {
 #ifdef ENABLE_PROPELLERS
 		move_propellers ();
 #endif
-		player_move ();
 
 		#include "mainloop/hotspots.h"
+
+		player_move ();
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
@@ -232,7 +245,7 @@ void game_loop (void) {
 #endif
 		player_render ();
 
-#ifdef CARRY_ONE_HS_OBJ
+#ifdef CARRY_ONE_HS_OBJECT
 		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [pinv]);
 #endif
 #ifdef CARRY_ONE_FLAG_OBJ

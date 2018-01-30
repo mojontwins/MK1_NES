@@ -7,36 +7,55 @@ if (hrt) {
 	hotspots_paint ();
 
 	if (collide_in (prx + 4, pry + 8, hrx, hry)) {
-#ifdef CARRY_ONE_HS_OBJ
-		// This was custom code used in Goddess and is not
-		// very general, plus it is incomplete. So off
-		/*
-		if (!(i & PAD_B)) pfiring = 0;
+		#ifdef CARRY_ONE_HS_OBJECT
+			if (hrt == HS_OBJ_EMPTY) {
+				// Empty hotspot. Drop object
 
-		if ((i & PAD_B) && !pfiring && ppossee ) {
-			gpjt = 0;
-			pfiring = 1;
-			
-			if (hrt >= HS_INV_MIN && hrt <= HS_INV_MAX) {
-				rda = pinv; pinv = hrt; hrt = rda; ht [n_pant] = hrt;
-				sfx_play (3, 1);
-				oam_index = oam_meta_spr (
-					hrx, hry + SPRITE_ADJUST, 
-					oam_index, 
-					spr_hs [hrt - 1]
-				);
-			}
+				hrt = ht [n_pant] = pinv;
+				pinv = HS_OBJ_EMPTY;
 
-			if (gpjt) {
-				// Show NO.
-				no_ct = 50;
-				sfx_play (4, 0);
-			}
-		}
+				b_button = 0;
+				sfx_play (1, 1);
 
-		if (hrt < HS_INV_MIN) 
-		*/
-#endif					
+			} if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX && b_button) {
+				// Object
+
+				// Interchange pinv and hrt, and register in array.
+				rda = hrt;
+				hrt = ht [n_pant] = pinv;
+				pinv = rda;
+
+				// Object has been got. You may complete here
+				#include "mainloop/on_object_got.h"
+
+				b_button = 0;
+				sfx_play (2, 1);
+
+			} else if (hrt >= HS_OBJ_MIN + HS_USE_OFFS && hrt <= HS_OBJ_MAX + HS_USE_OFFS && b_button) {
+				// Where to use object
+
+				if (pinv == hrt - HS_USE_OFFS) {
+					// Save them
+					rda = pinv;
+					rdb = hrt;
+
+					// Update hotspot
+					hrt = ht [n_pant] = pinv;
+
+					// Clear carried object
+					pinv = HS_OBJ_EMPTY;
+
+					// Object has been used. You may complete here
+					#include "mainloop/on_object_used.h"
+
+					b_button = 0;
+					sfx_play (1, 1);
+
+				}			
+			} else if (hrt >= HS_OBJ_MIN + 2*HS_USE_OFFS && hrt <= HS_OBJ_MAX + 2*HS_USE_OFFS && b_button) {
+				// Already used object. do nothing.
+			} else
+		#endif
 		{
 			switch (hrt) {
 				#ifndef DEACTIVATE_OBJECTS

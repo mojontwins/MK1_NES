@@ -58,7 +58,7 @@ unsigned char fade_delay;
 
 // Hotspots
 
-#ifndef HOTSPOTS_WONT_CHANGE
+#ifdef HOTSPOTS_DYNAMIC
 	unsigned char hyx [MAP_SIZE];
 	unsigned char ht [MAP_SIZE];
 #endif

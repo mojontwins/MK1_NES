@@ -97,3 +97,28 @@ Cocos frames are (order may be off, but helps with saving bytes)
 (RIGHT)  `FRAME_A`, `FRAME_B`, (LEFT)   `FRAME_A`, `FRAME_B`,
 [(RIGHT) `APPEARING`, `HIDDEN`, (LEFT) `APPEARING`, `HIDDEN`]
 
+Easy objects
+============
+
+Provides infraestructure to place N objects in hotspots, N places to use such objects, and places to add custom code that is executed everytime you get an object and everytime you use an object.
+
+Objects and places to use such objects are represented by hotspots, so just 1 per screen. 
+
+hotspot values representing objects must fit in a range, defined by `HS_OBJ_MIN` and `HS_OBJ_MAX`.
+
+hotspot values representing where to use each object must fit in the range defined by `HS_OBJ_MIN + HS_USE_OFFS` and `HS_OBJ_MAX + HS_USE_OFFS`.
+
+So if you get object `N` you have to use it in the hotspot with value `N + HS_USE_OFFS`.
+
+Every time you get an object, code included in `mainloop/on_object_got.h` (empty by default) is executed.
+
+Every time you use an object successfully, code included in `mainloop/on_object_used.h` (empty by default) is executed.
+
+There are two types of behaviour: Type A and Type B. If you define `HS_TYPE_A`, you enable Type A. If you undefine it, you enable Type B.
+
+With type A, hotposts where you use objects are represented by the empty item, that is, `HS_OBJ_EMPTY`. When you use an object, the hotspot will use the objects's graphic.
+
+With type B, everything must have its own graphic: objects, place to use them, and objects used on places.
+
+Man, my English sucks.
+
