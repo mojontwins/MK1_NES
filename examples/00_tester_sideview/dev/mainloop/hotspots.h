@@ -4,43 +4,50 @@
 // Hotspot interaction
 
 if (hrt) {
-	hotspots_paint ();
-
 	if (collide_in (prx + 4, pry + 8, hrx, hry)) {
 		#ifdef CARRY_ONE_HS_OBJECT
 			if (hrt == HS_OBJ_EMPTY) {
 				// Empty hotspot. Drop object
 
-				hrt = ht [n_pant] = pinv;
-				pinv = HS_OBJ_EMPTY;
+				if (b_button) {
 
-				b_button = 0;
-				sfx_play (1, 1);
+					hrt = ht [n_pant] = pinv;
+					pinv = HS_OBJ_EMPTY;
 
-			} if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX && b_button) {
+					b_button = 0;
+					sfx_play (1, 1);
+				}
+
+			} if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX) {
 				// Object
 
-				// Interchange pinv and hrt, and register in array.
-				rda = hrt;
-				hrt = ht [n_pant] = pinv;
-				pinv = rda;
+				if (b_button) {
+					// Interchange pinv and hrt, and register in array.
+					rda = hrt;
+					hrt = ht [n_pant] = pinv;
+					pinv = rda;
 
-				// Object has been got. You may complete here
-				#include "mainloop/on_object_got.h"
+					// Object has been got. You may complete here
+					#include "mainloop/on_object_got.h"
 
-				b_button = 0;
-				sfx_play (2, 1);
+					b_button = 0;
+					sfx_play (2, 1);
+				}
 
 			} else if (hrt >= HS_OBJ_MIN + HS_USE_OFFS && hrt <= HS_OBJ_MAX + HS_USE_OFFS && b_button) {
 				// Where to use object
 
-				if (pinv == hrt - HS_USE_OFFS) {
+				if (b_button && pinv == hrt - HS_USE_OFFS) {
 					// Save them
 					rda = pinv;
 					rdb = hrt;
 
 					// Update hotspot
-					hrt = ht [n_pant] = pinv;
+					#ifdef HS_FIX_ON_USE
+						hrt = ht [n_pant] = pinv + 2*HS_USE_OFFS;
+					#else
+						hrt = ht [n_pant] = pinv;
+					#endif
 
 					// Clear carried object
 					pinv = HS_OBJ_EMPTY;
@@ -52,11 +59,16 @@ if (hrt) {
 					sfx_play (1, 1);
 
 				}			
-			} else if (hrt >= HS_OBJ_MIN + 2*HS_USE_OFFS && hrt <= HS_OBJ_MAX + 2*HS_USE_OFFS && b_button) {
-				// Already used object. do nothing.
-			} else
+			}
+			#ifdef HS_FIX_ON_USE				
+			else if (hrt >= HS_OBJ_MIN + 2*HS_USE_OFFS && hrt <= HS_OBJ_MAX + 2*HS_USE_OFFS && b_button) {
+					// Already used object. do nothing.
+			}
+			#endif			
+			else
 		#endif
 		{
+			rda = 0;
 			switch (hrt) {
 				#ifndef DEACTIVATE_OBJECTS
 					case HOTSPOT_TYPE_OBJECT:
@@ -87,9 +99,13 @@ if (hrt) {
 						break;
 				#endif
 			}
-			sfx_play (rda, 1);
-			hrt = 0;
-			hact [n_pant] = 0;
+			if (rda) {
+				sfx_play (rda, 1);
+				hrt = 0;
+				hact [n_pant] = 0;
+			}
 		}
 	}
+
+	if (hrt) hotspots_paint ();
 }

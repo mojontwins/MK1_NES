@@ -5,7 +5,7 @@
 
 void game_init (void) {
 
-	game_over = 0;
+	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.
 	#include "mainloop/asset_setup.h"
@@ -197,7 +197,12 @@ void game_loop (void) {
 		#include "mainloop/scripting.h"
 #endif
 
-#ifdef ACTIVATE_SCRIPTING
+		// Extra checks
+		#include "mainloop/extra_checks.h"
+
+#if defined (WIN_LEVEL_CUSTOM)
+		if (win_level)
+#elif defined (ACTIVATE_SCRIPTING)
 		if (script_result) 
 #elif defined (PLAYER_MAX_OBJECTS)
 		if (pobjs == PLAYER_MAX_OBJECTS) 
@@ -211,7 +216,6 @@ void game_loop (void) {
 		{
 			music_stop ();
 			delay (50);
-			fade_out ();
 			break;
 		}
 
@@ -244,13 +248,6 @@ void game_loop (void) {
 		if (do_process_breakable) breakable_do_anim ();
 #endif
 		player_render ();
-
-#ifdef CARRY_ONE_HS_OBJECT
-		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [pinv]);
-#endif
-#ifdef CARRY_ONE_FLAG_OBJ
-		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
-#endif
 
 		//#include "mainloop/cheat.h"
 

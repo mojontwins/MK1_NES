@@ -4,7 +4,8 @@
 // Main loop & helpers
 
 void game_init (void) {
-	game_over = 0;
+
+	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.
 	#include "mainloop/asset_setup.h"
@@ -167,12 +168,23 @@ void game_loop (void) {
 		ppu_waitnmi ();
 		clear_update_list ();
 
+		// Poll pads
+
+		pad_read ();
+		a_button = (pad_this_frame & PAD_A);
+		b_button = (pad_this_frame & PAD_B);
+
+		// Flick the screen
+
 		#include "mainloop/flickscreen.h"
+
+		// Finish him
 
 		if (pkill) player_kill ();
 		if (game_over) break;			
 
 		// Change screen
+		
 		if (on_pant != n_pant) {
 			prepare_scr ();
 			on_pant = n_pant;
@@ -182,7 +194,12 @@ void game_loop (void) {
 		#include "mainloop/scripting.h"
 #endif
 
-#ifdef ACTIVATE_SCRIPTING
+		// Extra checks
+		#include "mainloop/extra_checks.h"
+
+#if defined (WIN_LEVEL_CUSTOM)
+		if (win_level)
+#elif defined (ACTIVATE_SCRIPTING)
 		if (script_result) 
 #elif defined (PLAYER_MAX_OBJECTS)
 		if (pobjs == PLAYER_MAX_OBJECTS) 
@@ -196,7 +213,6 @@ void game_loop (void) {
 		{
 			music_stop ();
 			delay (50);
-			fade_out ();
 			break;
 		}
 
@@ -210,9 +226,10 @@ void game_loop (void) {
 #ifdef ENABLE_PROPELLERS
 		move_propellers ();
 #endif
-		player_move ();
 
 		#include "mainloop/hotspots.h"
+
+		player_move ();
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
@@ -228,13 +245,6 @@ void game_loop (void) {
 		if (do_process_breakable) breakable_do_anim ();
 #endif
 		player_render ();
-
-#ifdef CARRY_ONE_HS_OBJ
-		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [pinv]);
-#endif
-#ifdef CARRY_ONE_FLAG_OBJ
-		oam_index = oam_meta_spr (HS_INV_X, HS_INV_Y, oam_index, spr_hs [flags [HS_INV_FLAG]]);
-#endif
 
 		//#include "mainloop/cheat.h"
 

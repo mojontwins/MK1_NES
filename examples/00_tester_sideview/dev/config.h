@@ -8,7 +8,7 @@
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W 					3		//
-#define MAP_H					1		// Map dimmensions in screens
+#define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
@@ -52,6 +52,9 @@
 #define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
+
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 #define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
@@ -205,13 +208,14 @@
 
 #define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY			3
-#define HS_OBJ_MIN				3
-#define HS_OBJ_MAX				7
-#define HS_USE_OFFS				10
+#define HS_OBJ_EMPTY			4
+#define HS_OBJ_MIN				5
+#define HS_OBJ_MAX				6
+#define HS_USE_OFFS				2
 
 #define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 								// Otherwise, use its own graphics.
+#define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
 /*
 #define CARRY_ONE_FLAG_OBJ
@@ -280,7 +284,7 @@
 #define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
+//#define OBJECTS_X				18		//
 #define OBJECTS_Y				3		// Objects counter character coordinates
 
 #define KEYS_X					28		//
@@ -297,7 +301,7 @@
 //#define LINE_OF_TEXT_X		1		// X coordinate.
 
 #define HS_INV_X				136		//
-#define HS_INV_Y				210		// Object you are carrying
+#define HS_INV_Y				11		// Object you are carrying
 
 // ============================================================================
 // IV. Player movement configuration
@@ -362,6 +366,7 @@
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
+	//#define CELL_SWIM_CYCLE		6
 
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6

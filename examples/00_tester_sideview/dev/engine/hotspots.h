@@ -46,7 +46,7 @@ void hotspots_create (void) {
 
 	if (ht [n_pant] && hact [n_pant]) {
 		hrt = ht [n_pant];
-		hrx = hyx [n_pant] >> 4;
+		hrx = hyx [n_pant] << 4;
 		hry = hyx [n_pant] & 0xf0;
 	} else hrt = 0;
 

@@ -120,5 +120,7 @@ With type A, hotposts where you use objects are represented by the empty item, t
 
 With type B, everything must have its own graphic: objects, place to use them, and objects used on places.
 
-Man, my English sucks.
+Combine this with `WIN_LEVEL_CUSTOM`! if you define `WIN_LEVEL_CUSTOM`, the level with end as soon as you make `win_level = 1`.
+
+You can check the ending condition at  `mainloop/on_object_got.h` or `mainloop/on_object_used.h`, for instance, and raise `win_level`. You can use the `level` variable in multilevel games for different conditions.
 

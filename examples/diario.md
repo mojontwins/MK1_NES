@@ -1148,14 +1148,28 @@ Esto, básicamente, comentar esto en mainloop.h, linea ~27:
 	// } END_OF_CUSTOM
 ```
 
+y linea ~63
+
+```c
+	// CUSTOM {
+	/*
+	pobjs = 0;
+	pkeys = 0;
+	*/
+	// } END_OF_CUSTOM
+```
+
 Y añadir este bloque en game.c, justo donde inicializamos `level` (por ejemplo) (el bloque `#ifdef` que empieza en ~103):
 
 ```c
 	#ifdef MULTI_LEVEL
 			level = 0;
 			// CUSTOM {
-			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+				pobjs = 0;
+				pkeys = 0;
+
+				px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+				py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
 			// } END_OF_CUSTOM
 	#endif
 ```
@@ -1170,14 +1184,19 @@ Sirve para que el inicializador del nivel sepa en qué pantalla hay que empezar.
 // } END_OF_CUSTOM
 ```
 
-Añadimos una variable `level_switching` (en ram/bss.h) y la ponermos a 0 antes del bucle de juego, en mainloop.h:
+Añadimos una variable `level_switching` (en ram/bss.h) y la ponemos a cero en la inicialización del juego que empezamos antes eb game.c:
 
 ```c
-	oam_index = 0;
+		level = 0;
+		// CUSTOM {
+			pobjs = 0;
+			pkeys = 0;
 
-	// CUSTOM {
-	level_switching = 0;
-	// } END_OF_CUSTOM
+			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+
+			level_switching = 0;
+		// } END_OF_CUSTOM
 ```
 
 Al asignar n_pant en `game_init` (mainloop.h, ~20) se asigna el valor de `n_pant_switch`, si `level_switching` no es 0.
@@ -1205,7 +1224,7 @@ Además, si `level = 0 && n_pant >= 20`, `py = 192 << FIXBITS`; y si `level == 1
 	switch (level) {
 		case 0:
 			if (n_pant >= 20) {
-				pvy = -PLAYER_VY_JUMP_MAX;
+				pvy = -PLAYER_VY_FALLING_MAX;
 				py = 176 << FIXBITS;
 			}
 			break;
@@ -1239,9 +1258,13 @@ game.c:
 	#ifdef MULTI_LEVEL
 		level = 0;
 		// CUSTOM {
+			pobjs = 0;
+			pkeys = 0;
+
 			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
 			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
 			pfacing = 0;
+
 			level_switching = 0;
 			has_boots = 0;
 		// } END_OF_CUSTOM
@@ -1279,13 +1302,14 @@ Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `
 	}
 ```
 
-En game.c, controlar `level_switching == 1` tras salir de `game_loop ()`, en ~118. Si está a 1, hacer `level = 1 - level` y seguir el loop:
+En game.c, controlar `level_switching == 1` tras salir de `game_loop ()`, en ~118. Si está a 1, reset, hacer `level = 1 - level` y seguir el loop:
 
 ```c
 	game_loop ();
 
 	// CUSTOM {
 	if (level_switching) {
+		level_switching = 0;
 		level = 1 - level;
 	} else
 	// } END_OF_CUSTOM

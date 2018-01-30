@@ -9,7 +9,7 @@ unsigned char half_life, frame_counter;
 unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;
 unsigned char use_ct, no_ct;
-unsigned char level, game_over;
+unsigned char level, game_over, win_level;
 
 // Update list
 

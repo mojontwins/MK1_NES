@@ -112,9 +112,13 @@ void main(void) {
 #ifdef MULTI_LEVEL
 		level = 0;
 		// CUSTOM {
+			pobjs = 0;
+			pkeys = 0;
+
 			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
 			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
 			pfacing = 0;
+
 			level_switching = 0;
 			has_boots = 0;
 		// } END_OF_CUSTOM
@@ -130,6 +134,7 @@ void main(void) {
 
 			// CUSTOM {
 			if (level_switching) {
+				level_switching = 0;
 				level = 1 - level;
 			} else
 			// } END_OF_CUSTOM

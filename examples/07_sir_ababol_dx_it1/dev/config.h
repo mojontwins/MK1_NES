@@ -46,7 +46,6 @@
 #endif
 
 // Some flexibility
-#define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
@@ -54,6 +53,9 @@
 #define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
+
+//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 #define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
@@ -131,7 +133,7 @@
 //#define PERSISTENT_DEATHS
 
 #define SPRITE_BADDIE_DYING 			16
-//#define ENEMS_OCCLUDING_FRAME			16 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
 
 // Fanties / Homing fanties
 
@@ -201,21 +203,26 @@
 
 // Carry directives
 
-/*
-#define CARRY_ONE_HS_OBJ
-#define HS_INV_X				136
-#define HS_INV_Y				210
-#define HS_INV_EMPTY			3
-#define HS_INV_MIN				3
-#define HS_INV_MAX				7
-#define HS_USE_OFFS				10
-*/
+// Easy objects mode: A range of hotspot id's are considered
+// 'objects'. The user can carry one of those. Contents of hotspots
+// can change in this mode.
+
+//#define ENABLE_EASY_OBJECTS
+
+#define HS_OBJ_EMPTY			4
+#define HS_OBJ_MIN				5
+#define HS_OBJ_MAX				6
+#define HS_USE_OFFS				2
+
+#define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+								// Otherwise, use its own graphics.
+#define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
 /*
 #define CARRY_ONE_FLAG_OBJ
 #define HS_INV_X				136
 #define HS_INV_Y				210
-#define HS_INV_EMPTY			0
+#define HS_OBJ_EMPTY			0
 #define HS_INV_FLAG				0
 */
 
@@ -225,7 +232,7 @@
 #define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET	0		// vertical offset from the player's top.
+#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
 #define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
@@ -233,10 +240,10 @@
 
 #define MAX_AMMO				99		// If defined, ammo is not infinite!
 #define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
-//#define INITIAL_AMMO 		0			// If defined, ammo = X when entering game.
+//#define INITIAL_AMMO 			0		// If defined, ammo = X when entering game.
 
-#define BULLET_PALETTE			1
-#define BULLET_PATTERN			1		// To paint the bullet. Can be an expresion.
+#define BULLET_PALETTE			3
+#define BULLET_PATTERN			0		// To paint the bullet. Can be an expresion.
 */
 
 // Scripting
@@ -295,6 +302,9 @@
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
+
+//#define HS_INV_X				136		//
+//#define HS_INV_Y				11		// Object you are carrying
 
 // ============================================================================
 // IV. Player movement configuration
@@ -373,4 +383,9 @@
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS
+#endif
+
+#ifdef ENABLE_EASY_OBJECTS
+#define HOTSPOTS_DYNAMIC
+#define CARRY_ONE_HS_OBJECT
 #endif

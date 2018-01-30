@@ -90,10 +90,16 @@ METASPRITESET 4, 4, 2, 2, 4, 1, 0, 0 FLIPPED
 LABEL sseocc
 METASPRITESET 10, 13, 2, 2, 1, 1, 0, 0
 
-# Items, 4 faces, 2x2 patterns. No need for flipped versions
+# Items, 3 faces, 2x2 patterns. No need for flipped versions
 # Hot point (where oam_meta_spr places its origin) (is 0, 0).
 # (items rectangle is 16x16, centered bottom).
 LABEL ssit
-METASPRITESET 0, 13, 2, 2, 4, 1, 0, 0
+METASPRITESET 0, 13, 2, 2, 3, 1, 0, 0
+
+# Objects, 3 faces, 2x2 patterns. No need for flipped versions
+# Hot point (where oam_meta_spr places its origin) (is 0, 0).
+# (items rectangle is 16x16, centered bottom).
+LABEL ssobjs
+METASPRITESET 4, 11, 2, 2, 3, 1, 0, 0
 
 FILL 8192

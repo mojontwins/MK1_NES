@@ -17,7 +17,7 @@ cd ..\enems
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 3 1 15 0
+..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 3 2 15 0
 
 cd ..\dev
 
@@ -26,7 +26,7 @@ if [%2]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
-..\..\..\src\utils\msc3nes.exe script.spt 3
+..\..\..\src\utils\msc3nes.exe script.spt 6
 copy mscnes.h ..\dev\assets\ > nul
 cd ..\dev
 

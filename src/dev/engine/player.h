@@ -56,12 +56,12 @@ void player_init (void) {
 		player_register_safe_spot ();
 	#endif
 
-	#ifdef CARRY_ONE_HS_OBJ
-		pinv = HS_INV_EMPTY; 
+	#ifdef CARRY_ONE_HS_OBJECT
+		pinv = HS_OBJ_EMPTY; 
 	#endif
 
 	#ifdef CARRY_ONE_FLAG_OBJ
-		flags [HS_INV_FLAG] = HS_INV_EMPTY;
+		flags [HS_INV_FLAG] = HS_OBJ_EMPTY;
 	#endif
 
 	#ifdef ENABLE_CONTAINERS
@@ -116,9 +116,6 @@ void player_kill (void) {
 
 void player_move (void) {
 
-	pad_read ();
-	b_button = (pad_this_frame & PAD_B);
-	
 	hitv = hith = 0;
 	pushed_any = 0;
 	pnotsafe = 0;
@@ -533,11 +530,13 @@ void player_move (void) {
 					psprid = CELL_IDLE;
 				}
 			} else {
-				//psprid = CELL_AIRBORNE;
+				psprid = CELL_AIRBORNE;
+				/*
 				if (pvy < PLAYER_VY_FALLING_MIN)
 					psprid = CELL_ASCENDING;
 				else
 					psprid = CELL_DESCENDING;	
+				*/
 			}
 		#endif
 

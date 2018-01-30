@@ -58,7 +58,7 @@ unsigned char pregotten;
 signed int px, py, pvx, pvy;
 unsigned char prx, pry;
 unsigned char pfacing, pfr, pctfr, psprid;
-unsigned char b_button;
+unsigned char a_button, b_button;
 
 #ifdef PLAYER_TOP_DOWN
 	unsigned char pfacinghlast;
@@ -69,7 +69,7 @@ unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
-#ifdef CARRY_ONE_HS_OBJ
+#if defined (ENABLE_EASY_OBJECTS)
 unsigned char pinv;
 #endif
 
