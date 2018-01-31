@@ -182,7 +182,7 @@ void player_move (void) {
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (i & PAD_B) {
+		if (i & PAD_A) {
 			pvy -= PLAYER_AY_JETPAC;
 			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
 		}
@@ -304,29 +304,29 @@ void player_move (void) {
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
+		if (
+			a_button 
+			&& !pj
+			&& (pgotten || ppossee || hitv)
+		) {
+			sfx_play (7, 0);
+			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+			
+			#ifdef DIE_AND_RESPAWN
+				if (!(pgotten || hitv || pnotsafe)) {
+					player_register_safe_spot ();
+				}
+			#endif	
+		}
+		
 		if (i & PAD_A) {
-			if (!pjb) {
-				pjb = 1;
-				if (!pj) {
-					if (pgotten || ppossee || hitv) {
-						sfx_play (7, 0);
-						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-						
-						#ifdef DIE_AND_RESPAWN
-							if (!(pgotten || hitv || pnotsafe)) {
-								player_register_safe_spot ();
-							}
-						#endif	
-					}
-				} 
-			}
 			if (pj) {
 				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
 				pctj ++; if (pctj == 16) pj = 0;	
 			}
 		} else {
-			pj = 0; pjb = 0;
+			pj = 0; 
 		}
 	#endif
 

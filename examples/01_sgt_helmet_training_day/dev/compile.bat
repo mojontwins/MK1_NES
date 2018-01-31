@@ -11,7 +11,7 @@ copy mapa0.h ..\dev > nul
 copy mapa1.h ..\dev > nul
 echo Making script
 cd ..\script
-..\..\..\src\utils\mscnes.exe comando-eng.spt 24
+..\..\..\src\utils\legacy\mscnes.exe comando-eng.spt 24
 copy mscnes.h ..\dev > nul
 copy scripts.s ..\dev > nul
 cd ..\dev
