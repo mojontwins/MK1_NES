@@ -53,4 +53,4 @@ ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib
 del *.o
 del game.s
 
-copy cart.nes ..\cheril_the_goddess.nes > nul
+copy cart.nes ..\..\cheril_the_goddess.nes > nul

@@ -364,25 +364,8 @@
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE		6
 
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
 
-#endif
-
-// Inner workings. Don't touch.
-
-#define MONOCOCO_X 				en_x
-#define MONOCOCO_Y				en_y
-#define MONOCOCO_COUNTER 		en_my
-#define MONOCOCO_STATE 			en_mx
-
-#ifdef ENABLE_MONOCOCOS
-#define ENABLE_COCOS
-#endif
-
-#ifdef ENABLE_EASY_OBJECTS
-#define HOTSPOTS_DYNAMIC
-#define CARRY_ONE_HS_OBJECT
 #endif

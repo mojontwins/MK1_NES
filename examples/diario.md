@@ -1662,5 +1662,30 @@ Incluso he apañado dos includes, `mainloop/on_object_got.h` y `mainloop/on_obje
 
 Ya está todo. Voy a compilar, luego ya haré cosas para probar que no la he liao.
 
+20180202
+========
+
+Lo dejé funcionando. Ahora que se ha acabado la compo y estoy menos agobiao, voy a pensar en los próximos pasos, pero probablemente serán:
+
+1.- Comprobar de una vez por todas que el scripting funciona bien. Para eso sólo tengo que echar una buena partida a Sgt. Helmet: Training Day remaster.
+
+2.- Hacer unos enemigos tipo 7 para vista lateral: lo mismo, pero que sean capaz de avanzar y caer. Básicamente los tengo en MK2, son los que introduje para Vesta Vaal (tenían un nombre especialmente estúpido ¿Generatonis?).
+
+3.- Introducir un hitter, no tanto como Ninjajar de ZX sino más parecido a Alex Kidd (como lo tengo implementado en el Maritrini).
+
+4.- Con eso funcionando, pensar en un hitter volador (patada voladora), que se activable de forma separada.
+
+Y después de esto ya he terminado.
+
+Ayer pensé más seriamente en ampliar Sir Ababol DX con una fase que tenga:
+
+- Lava.
+- Chac-Chacs.
+- Pezones (en realidad, gotas de lava).
+- Fantis (sin homing)
+- Suelos que se derrumban.
+
+Hago un tileset de tonos rojizos reaprovechando gráficos y una fase lineal de 20x2. Ahora mismo hay 9728 bytes libres, cabe de sobra
+
 ~~
 

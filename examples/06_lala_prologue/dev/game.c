@@ -12,6 +12,7 @@
 #define DEBUG_SCR_INI	20
 #define DEBUG_INI_X		14
 #define DEBUG_INI_Y		5
+
 //
 
 #define MSB(x)			(((x)>>8))
@@ -22,6 +23,19 @@
 #define COMM_POOL		((unsigned char*)0x0300)
 
 #define MAX_CERROJOS 16 // max 32, make it as small as possible.
+
+//
+
+#define OAM_OCCLU		0
+#define OAM_ENEMS		48
+#define OAM_INVENTORY	96
+#define OAM_NO			112
+#define OAM_PLAYER		128
+#define OAM_HOTSPOTS	152
+#define OAM_CONTAINERS	168
+#define OAM_RESONATOR	248
+
+//
 
 #include "neslib.h"
 

@@ -1,7 +1,7 @@
 @echo off
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\legacy\legacy\nescnv.exe tileset-import.png
+..\..\..\src\utils\legacy\nescnv.exe tileset-import.png
 copy tileset.chr ..\dev > nul
 echo Making map
 cd ..\map
@@ -26,5 +26,5 @@ ca65 scripts.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o scripts.o runtime.lib
 del *.o > nul
 del game.s > nul
-copy cart.nes ..\sgt_helmet_training_day.nes > nul
+copy cart.nes ..\..\sgt_helmet_training_day_R0.1.nes > nul
 echo Done!

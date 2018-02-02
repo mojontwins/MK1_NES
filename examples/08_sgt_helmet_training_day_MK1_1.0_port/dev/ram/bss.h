@@ -3,6 +3,14 @@
 
 // bss
 
+// Game flow
+
+unsigned char half_life, frame_counter;
+unsigned char n_pant, on_pant;
+unsigned char olife, okeys, oobjs, oammo, okilled;
+unsigned char use_ct, no_ct;
+unsigned char level, game_over, win_level;
+
 // Update list
 
 #define UPDATE_LIST_SIZE 32
@@ -14,15 +22,32 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 unsigned char map_attr [192];
 unsigned char map_buff [192];
 
+// Bullets
+
+#ifdef PLAYER_CAN_FIRE
+	unsigned char b_slots [MAX_BULLETS], b_slots_i;
+	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
+	signed char bmx [MAX_BULLETS];
+	signed char bmy [MAX_BULLETS];
+#endif
+
+// Cocos
+
+#ifdef ENABLE_COCOS
+	signed int coco_x [COCOS_MAX], coco_y [COCOS_MAX];
+	signed int coco_vx [COCOS_MAX], coco_vy [COCOS_MAX];
+	unsigned char coco_on [COCOS_MAX];
+	unsigned char coco_slots [COCOS_MAX], coco_slots_i;
+#endif	
+
 // Breakable walls
 
-#ifdef BREAKABLE_WALLS
+#ifdef ENABLE_BREAKABLE
 	unsigned char brk_buff [192];
 	#ifdef BREAKABLE_ANIM
-		#define MAX_BREAKABLE 4
-		unsigned char brkf [MAX_BREAKABLE];
-		unsigned char brkx [MAX_BREAKABLE];
-		unsigned char brky [MAX_BREAKABLE];
+		unsigned char brkf [BREAKABLE_MAX];
+		unsigned char brkx [BREAKABLE_MAX];
+		unsigned char brky [BREAKABLE_MAX];
 	#endif
 #endif
 
@@ -33,7 +58,7 @@ unsigned char fade_delay;
 
 // Hotspots
 
-#ifndef HOTSPOTS_WONT_CHANGE
+#ifdef HOTSPOTS_DYNAMIC
 	unsigned char hyx [MAP_SIZE];
 	unsigned char ht [MAP_SIZE];
 #endif
@@ -91,14 +116,6 @@ unsigned char hact [MAP_SIZE];
 	unsigned char ep_flags [3 * MAP_SIZE];
 #endif
 
-// Die & respawn
-#ifdef DIE_AND_RESPAWN
-	unsigned char n_pant_safe;
-	signed int px_safe, py_safe;
-#endif
-
-unsigned char level, game_over;
-
 #ifdef SCRIPTING_TEXT_BOX
 	unsigned char stbl;
 #endif
@@ -109,6 +126,8 @@ unsigned char prx_old, pry_old;
 unsigned char pobjs;
 unsigned char plife, pcontinues;
 unsigned char pkill;
+unsigned char pice;
+unsigned char pnotsafe;
 
 #ifndef DEACTIVATE_KEYS
 	unsigned char pkeys;
@@ -118,6 +137,11 @@ unsigned char pammo, pfiring;
 
 #ifdef PLAYER_TURRET
 	unsigned char pfixct;
+#endif
+
+#ifdef DIE_AND_RESPAWN
+	unsigned char n_pant_safe;
+	signed int px_safe, py_safe;
 #endif
 
 // Current level

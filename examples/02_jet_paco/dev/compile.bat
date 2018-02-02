@@ -29,5 +29,5 @@ ca65 scripts.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o scripts.o runtime.lib
 del *.o
 del game.s
-copy cart.nes ..\jet_paco.nes > nul
+copy cart.nes ..\..\jet_paco.nes > nul
 echo Done!

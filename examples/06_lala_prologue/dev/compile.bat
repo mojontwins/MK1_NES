@@ -35,10 +35,8 @@ del sschr2.bin > nul
 del sschr3.bin > nul
 ..\..\..\src\utils\fillto.exe sschra.bin 4096
 
-rem ..\..\..\src\utils\legacy\mkts_old.exe in=ssbits.png pals=palss.png out=sschrb.bin mode=chars size=8,1 silent
-copy /b sschra.bin + sschrb.bin sschr.bin > nul
+copy /b sschra.bin  sschr.bin > nul
 del sschra.bin > nul
-del sschrb.bin > nul
 
 copy /b tschr.bin + sschr.bin ..\dev\tileset.chr > nul
 
@@ -72,5 +70,5 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib
 del *.o
 del game.s
 
-copy cart.nes ..\lala_prologue.nes
+copy cart.nes ..\..\lala_prologue.nes
 echo DONE!

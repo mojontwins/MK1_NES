@@ -9,8 +9,8 @@
 	#define FANTY_OBSTACLE(a) (a)
 #endif
 
-// Precalc enems_distance
-rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = enems_distance ();
+// Precalc distance
+rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = distance ();
 
 // Modify v - always upon state
 
@@ -97,7 +97,7 @@ en_y [gpit] = enf_y [gpit] >> 6;
 
 #ifdef FANTY_KILLED_BY_TILE
 	cx1 = (en_x [gpit] + 8) >> 4;
-	cxy = (en_y [gpit] + 8) >> 4;
+	cy1 = (en_y [gpit] + 8) >> 4;
 	cm_two_points ();
 	if (at1 & 1) {
 		en_cttouched [gpit] = 8;
@@ -106,5 +106,10 @@ en_y [gpit] = enf_y [gpit] >> 6;
 #endif
 
 en_fr = (en_x [gpit] >> 3) & 1;
-//en_facing = (en_x [gpit] > prx) ? 0 : 2;
-en_spr = FANTY_BASE_SPRID + en_fr /* + en_facing */;
+
+#ifdef FANTY_WITH_FACING
+	en_spr = FANTY_BASE_SPRID + en_fr + ((en_x [gpit] < prx) ? 0 : 2);
+#else
+	en_spr = FANTY_BASE_SPRID + en_fr;
+#endif
+

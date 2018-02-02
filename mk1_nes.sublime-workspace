@@ -232,10 +232,20 @@
 	"buffers":
 	[
 		{
-			"file": "examples/04_d'veel'ng/dev/mainloop/hotspots.h",
+			"file": "examples/00_tester_sideview/dev/engine/player.h",
 			"settings":
 			{
-				"buffer_size": 2736,
+				"buffer_size": 10372,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/01_sgt_helmet_training_day/dev/config.h",
+			"settings":
+			{
+				"buffer_size": 10291,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		}
@@ -278,13 +288,11 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/04_d'veel'ng",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/mainloop",
 		"/D/git/MK1_NES/src"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/compile.bat",
 		"/D/git/MK1_NES/examples/diario.md",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
@@ -411,8 +419,7 @@
 		"/D/git/MK1_NES/src/script/script.spt",
 		"/D/git/MK1_NES/examples/00_misc_tests/map/map0_pack.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/levelset.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/behs.h",
-		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Ninjajar/dev/engine/playermove.h"
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/behs.h"
 	],
 	"find":
 	{
@@ -484,6 +491,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pad_a",
 			"level_switching",
 			"DEACTIVATE_OBJECTS",
 			"OBJECTECT",
@@ -610,8 +618,7 @@
 			"bytecnt = byte",
 			"packed = 2",
 			"zerostrungpacked",
-			"hyx",
-			"hxy"
+			"hyx"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -757,29 +764,24 @@
 	"groups":
 	[
 		{
-			"sheets":
-			[
-			]
-		},
-		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/04_d'veel'ng/dev/mainloop/hotspots.h",
-					"semi_transient": true,
+					"file": "examples/00_tester_sideview/dev/engine/player.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2736,
+						"buffer_size": 10372,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1922,
-								1825
+								5986,
+								5991
 							]
 						],
 						"settings":
@@ -790,13 +792,49 @@
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 7.0,
-						"translation.y": 741.0,
+						"translation.x": 0.0,
+						"translation.y": 1473.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/01_sgt_helmet_training_day/dev/config.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 10291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -888,7 +926,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

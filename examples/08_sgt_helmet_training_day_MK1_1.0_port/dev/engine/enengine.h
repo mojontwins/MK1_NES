@@ -24,17 +24,6 @@ void enems_kill (unsigned char gpit) {
 }
 #endif
 
-#ifdef ENABLE_HOMING_FANTY
-	// Lame but fast and tiny
-	// Before the call: copy fanty's coordinates into rdx, rdy
-	unsigned char enems_distance (void) {
-		rda = delta (prx, rdx); // dx
-		rdb = delta (pry, rdy); // dy
-		rdc = min (rda, rdb);
-		return (rda + rdb - (rdc >> 1) - (rdc >> 2) + (rdc >> 4));
-	}
-#endif
-
 #ifdef ENABLE_CHAC_CHAC
 	void enems_draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
 		map_set (en_x [gpit], en_y [gpit], a1);
@@ -65,8 +54,8 @@ void enems_kill (unsigned char gpit) {
 
 			// P, here used for speed
 			rda = *gp_gen ++;
-			ep_mx [ep_it] = add_sign (rdb - ep_x [ep_it], rda);
-			ep_my [ep_it] = add_sign (rdc - ep_y [ep_it], rda);		
+			ep_mx [ep_it] = ADD_SIGN2 (rdb, ep_x [ep_it], rda);
+			ep_my [ep_it] = ADD_SIGN2 (rdc, ep_y [ep_it], rda);		
 		}
 	}
 
@@ -153,8 +142,8 @@ void enems_load (void) {
 			// Initialize position & direction from ROM
 			en_x [gpit] = en_x1 [gpit];
 			en_y [gpit] = en_y1 [gpit];
-			en_mx [gpit] = add_sign (en_x2 [gpit] - en_x1 [gpit], rda);
-			en_my [gpit] = add_sign (en_y2 [gpit] - en_y1 [gpit], rda);
+			en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
+			en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
 #endif
 
 			switch (en_t [gpit]) {
@@ -218,13 +207,13 @@ void enems_load (void) {
 					// Saws
 
 					// emerging sense
-					rda = abs (en_mx [gpit]); if (!rda) rda = abs (en_my [gpit]);
+					rda = ABS (en_mx [gpit]); if (!rda) rda = ABS (en_my [gpit]);
 					rda --;
 
 					// Sense
 					rdb = (en_x1 [gpit] != en_x2 [gpit]) ? 
-						sgnc (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
-						sgnc (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
+						SGNC (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
+						SGNC (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
 
 					// Store:
 					en_my [gpit] = rda; // EMERGING SENSE
@@ -252,14 +241,14 @@ void enems_load (void) {
 
 					en_my [gpit] = (rda << 4);	// IDLE_1
 					en_x [gpit] = en_x1 [gpit] >> 4;
-					en_y [gpit] = en_y1 [gpit] >> 4;
+					en_y [gpit] = (en_y1 [gpit] >> 4) - 1;
 					en_alive [gpit] = 0;
 					en_mx [gpit] = en_my [gpit];
 
 					break;
 	#endif
 
-	#ifdef ENABLE_MONOCOCO
+	#ifdef ENABLE_MONOCOCOS
 				case 11:
 					// Monococos
 					en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
@@ -485,24 +474,32 @@ void enems_move (void) {
 					touched = 1;
 
 #ifdef PLAYER_BOUNCES
-					pvx = add_sign (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = add_sign (en_x [gpit] - prx, abs (en_mx [gpit]));
-					pvy = add_sign (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = add_sign (en_y [gpit] - pry, abs (en_my [gpit]));
+					pvx = ADD_SIGN (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = ADD_SIGN (en_x [gpit] - prx, ABS (en_mx [gpit]));
+					pvy = ADD_SIGN (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = ADD_SIGN (en_y [gpit] - pry, ABS (en_my [gpit]));
 #endif
 					
 #ifdef PLAYER_CAN_FIRE
-					en_life [gpit] --; if (en_life [gpit] == 0)
-					{
-	#ifdef ENABLE_PURSUERS
-						if (en_t [gpit] == 7) {
-							en_alive [gpit] = 0;
-							en_ct [gpit] = DEATH_COUNT_EXPRESSION;
-							en_life [gpit] = ENEMIES_LIFE_GAUGE;
-						} else 
+						en_life [gpit] --; 
+						if (
+							en_life [gpit] == 0
+	#ifdef ENABLE_SAW
+							&& en_t [gpit] != 8
 	#endif
-						{
-							enems_kill (gpit);
-						}
-					}					
+	#ifdef PLAYER_MIN_KILLABLE
+							&& en_t [gpit] >= PLAYER_MIN_KILLABLE
+	#endif
+						) {
+	#ifdef ENABLE_PURSUERS
+							if (en_t [gpit] == 7) {
+								en_alive [gpit] = 0;
+								en_ct [gpit] = DEATH_COUNT_EXPRESSION;
+								en_life [gpit] = ENEMIES_LIFE_GAUGE;
+							} else 
+	#endif
+							{
+								enems_kill (gpit);
+							}
+						}					
 #endif				
 					pkill = 1;
 				}

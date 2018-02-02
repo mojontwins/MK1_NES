@@ -74,5 +74,5 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib
 del *.o > nul
 del game.s > nul
 
-copy cart.nes ..\cheril_of_the_bosque.nes > nul
+copy cart.nes ..\..\cheril_of_the_bosque.nes > nul
 echo DONE!

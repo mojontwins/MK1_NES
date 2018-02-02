@@ -25,7 +25,7 @@ void player_init (void) {
 
 	pfr = pctfr = 0;
 	pj = pctj = 0;
-	psprid = 6;
+	psprid = 0;
 
 	#ifndef DEACTIVATE_OBJECTS
 		pobjs = 0;
@@ -39,7 +39,6 @@ void player_init (void) {
 	pfiring = 0;
 
 	#ifdef PLAYER_CAN_FIRE
-		gpit = MAX_BULLETS; while (gpit --) bst [gpit] = 0;
 		pkilled = 0;
 
 		#ifdef MAX_AMMO
@@ -57,12 +56,12 @@ void player_init (void) {
 		player_register_safe_spot ();
 	#endif
 
-	#ifdef CARRY_ONE_HS_OBJ
-		pinv = HS_INV_EMPTY; 
+	#ifdef CARRY_ONE_HS_OBJECT
+		pinv = HS_OBJ_EMPTY; 
 	#endif
 
 	#ifdef CARRY_ONE_FLAG_OBJ
-		flags [HS_INV_FLAG] = HS_INV_EMPTY;
+		flags [HS_INV_FLAG] = HS_OBJ_EMPTY;
 	#endif
 
 	#ifdef ENABLE_CONTAINERS
@@ -70,7 +69,7 @@ void player_init (void) {
 	#endif
 }
 
-void render_player (void) {
+void player_render (void) {
 	if (pstate == EST_NORMAL || half_life) {
 		oam_meta_spr (prx, pry + SPRITE_ADJUST, 4, spr_player [psprid]);	
 	} else {
@@ -101,6 +100,10 @@ void player_kill (void) {
 		pvx = pvy = pj = 0;
 		music_pause (0);
 	#endif	
+
+	#ifdef DIE_AND_REENTER
+		on_pant = 0xff;
+	#endif
 }
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
@@ -111,18 +114,15 @@ void player_kill (void) {
 	#include "engine/playermods/bullets.h"
 #endif
 
-#ifndef PLAYER_TOP_DOWN
-	void player_points_beneath (void) {
-		cy1 = cy2 = (pry + 16) >> 4;
-		cm_two_points ();
-	}
-#endif
-
 void player_move (void) {
-	pad_read ();
+
 	hitv = hith = 0;
 	pushed_any = 0;
-	//ppossee = 0;
+	pnotsafe = 0;
+	ppossee = 0;
+	#ifdef ENABLE_SLIPPERY
+		pice = 0;
+	#endif
 
 	// ********
 	// Vertical
@@ -182,7 +182,7 @@ void player_move (void) {
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (i & PAD_B) {
+		if (i & PAD_A) {
 			pvy -= PLAYER_AY_JETPAC;
 			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
 		}
@@ -204,7 +204,7 @@ void player_move (void) {
 			}
 		}
 		if (pvy < -PLAYER_VY_SWIM_MAX) {
-				pvy = -PLAYER_VY_SWIM_MAX;
+			pvy = -PLAYER_VY_SWIM_MAX;
 		}
 
 	#endif
@@ -216,118 +216,117 @@ void player_move (void) {
 	// Collision
 	prx = px >> FIXBITS;
 	pry = py >> FIXBITS;
-	
-	#ifndef PLAYER_TOP_DOWN	
-	if (pry_old != pry) 
-	#endif
-	{
-		#ifdef PLAYER_TOP_DOWN		
-			if (pvy < 0)
-		#else
-			rds16 = pvy + pgtmy;
-			if (rds16 < 0)
-		#endif		
-			{
-				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
-				cm_two_points ();
-				if ((at1 & 8) || (at2 & 8)) {
-					pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
-					pgotten = 0;
-					pfiring = 1;
-					#ifdef PLAYER_TOP_DOWN
-						// Special obstacles
-						if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
-						if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
-					#endif
-				} else if ((at1 & 1) || (at2 & 1)) {
-					hitv = 1;
-				}
-		#ifdef ENABLE_QUICKSANDS
-				else if ((at1 & 2) || (at2 & 2)) {
-					if (pctj > 2) pj = 0;
-				}
-		#endif		
 
-		#ifdef PLAYER_TOP_DOWN			
-			} else if (pvy > 0)
-		#else
-			} else if (rds16 > 0)
-		#endif		
-			{
-				cy1 = cy2 = (pry + 15) >> 4; 
-				cm_two_points (); 
+	#ifdef PLAYER_TOP_DOWN		
+		if (pvy < 0)
+	#else
+		rds16 = pvy + pgtmy;
+		if (rds16 < 0)
+	#endif		
+		{
+			cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
+			cm_two_points ();
+			if ((at1 & 8) || (at2 & 8)) {
+				pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
+				pgotten = 0;
+				pfiring = 1;
 				#ifdef PLAYER_TOP_DOWN
-				if ((at1 & 8) || (at2 & 8)) {
-				#else
-		 		if (((pry - 1) & 15) < 8 && ((at1 & 12) || (at2 & 12))) {
-		 		#endif
-					pvy = 0; pry = ((cy1 - 1) << 4);py = pry << FIXBITS;
-					pgotten = 0;
-					pfiring = 1;
-					
-					
-				} else if ((at1 & 1) || (at2 & 1)) {
-					hitv = 1;
-				}
-				#ifdef ENABLE_QUICKSANDS		
-					else {
-						if ((at1 & 2) || (at2 & 2)) pvy = QUICKSANDS_SINK_VY;
-					}
-				#endif
-		
-				#ifdef PLAYER_TOP_DOWN
-					cy1 = cy2 = (pry + 16) >> 4; cm_two_points ();
 					// Special obstacles
-					if (at1 & 10) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
-					if (at2 & 10) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
+					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
 				#endif
+			} else if ((at1 & 1) || (at2 & 1)) {
+				hitv = 1;
 			}
-	}
-	
-	#ifndef PLAYER_TOP_DOWN	
-		player_points_beneath ();
-		ppossee = pvy >= 0 && ((at1 & 14) || (at2 & 14));
-		#ifdef ENABLE_SLIPPERY
-			pice = (ppossee && ((at1 & 64) || (at2 & 64)));
-		#endif	
+	#ifdef ENABLE_QUICKSANDS
+			else if ((at1 & 2) || (at2 & 2)) {
+				if (pctj > 2) pj = 0;
+			}
 	#endif		
 
-	// Conveyors
-	#ifdef ENABLE_CONVEYORS	
-		if (ppossee) {
-			pconvd1 = at1 & 1; pconvd2 = at2 & 1; 
-			if (at1 & 32) { if (pconvd1) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
-			if (at2 & 32) { if (pconvd2) pgtmx = 64; else pgtmx = -64; pgotten = 1; }
-		}
-	#endif
+	#ifdef PLAYER_TOP_DOWN			
+		} else if (pvy > 0)
+	#else
+		} else if (rds16 > 0)
+	#endif		
+		{
+			cy1 = cy2 = (pry + 16) >> 4; 
+			cm_two_points (); 
 
+			#ifdef PLAYER_TOP_DOWN
+			if ((at1 & 8) || (at2 & 8)) 
+			#else
+	 		if (
+				pry + 4 < (cy1 << 4) &&
+				((at1 & 12) || (at2 & 12))
+			)
+	 		#endif
+			{
+				pvy = 0; pry = ((cy1 - 1) << 4);py = pry << FIXBITS;
+				pgotten = 0;
+				pfiring = 1;
+				ppossee = 1;
+				
+				#ifdef PLAYER_TOP_DOWN
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
+					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
+				#endif
+
+				#ifdef ENABLE_SLIPPERY
+					pice = (at1 & 64) || (at2 & 64);
+				#endif
+
+				#ifdef ENABLE_CONVEYORS
+					if (at1 & 32) { if (at1 & 1) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
+					if (at2 & 32) { if (at2 & 1) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
+				#endif
+
+				#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_WALKABLE)
+					if (at1 & 16) { breakable_break (cx1, cy1 - 1); pnotsafe = 1; }
+					if (cx1 != cx2 && (at2 & 16)) { breakable_break (cx2, cy1 - 1); pnotsafe = 1; }
+				#endif
+
+				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
+			} else if ((at1 & 1) || (at2 & 1)) {
+				hitv = 1;
+			}
+			#ifdef ENABLE_QUICKSANDS		
+				else {
+					if ((at1 & 2) || (at2 & 2)) {
+						pvy = PLAYER_VY_SINKING;
+						ppossee = 1;
+					}
+				}
+			#endif
+		}
+	
 	#ifdef PLAYER_HAS_JUMP
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
+		if (
+			a_button 
+			&& !pj
+			&& (pgotten || ppossee || hitv)
+		) {
+			sfx_play (7, 0);
+			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+			
+			#ifdef DIE_AND_RESPAWN
+				if (!(pgotten || hitv || pnotsafe)) {
+					player_register_safe_spot ();
+				}
+			#endif	
+		}
+		
 		if (i & PAD_A) {
-			if (!pjb) {
-				pjb = 1;
-				if (!pj) {
-					if (pgotten || ppossee || hitv) {
-						sfx_play (7, 0);
-						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-						
-						#ifdef DIE_AND_RESPAWN
-							if (!(pgotten || hitv)) {
-								player_register_safe_spot ();
-							}
-						#endif	
-					}
-				} 
-			}
 			if (pj) {
 				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
 				pctj ++; if (pctj == 16) pj = 0;	
 			}
 		} else {
-			pj = 0; pjb = 0;
+			pj = 0; 
 		}
 	#endif
 
@@ -344,7 +343,7 @@ void player_move (void) {
 		if (pvx > 0) {
 
 			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? ICE_RX : PLAYER_RX;
+				pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
 			#else			
 				pvx -= PLAYER_RX;
 			#endif			
@@ -353,7 +352,7 @@ void player_move (void) {
 		} else if (pvx < 0) {
 
 			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? ICE_RX : PLAYER_RX;
+				pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
 			#else
 				pvx += PLAYER_RX;
 			#endif
@@ -372,7 +371,7 @@ void player_move (void) {
 		if (pvx > -PLAYER_VX_MAX) {
 			
 			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? ICE_AX : PLAYER_AX;
+				pvx -= pice ? PLAYER_AX_ICE : PLAYER_AX;
 			#else
 				pvx -= PLAYER_AX;
 			#endif
@@ -389,7 +388,7 @@ void player_move (void) {
 		if (pvx < PLAYER_VX_MAX) {
 		
 			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? ICE_AX : PLAYER_AX;
+				pvx += pice ? PLAYER_AX_ICE : PLAYER_AX;
 			#else
 				pvx += PLAYER_AX;
 			#endif
@@ -401,38 +400,36 @@ void player_move (void) {
 	#ifndef PLAYER_TOP_DOWN	
 		if (pgotten) px += pgtmx;
 	#endif
-	
+		
 	if (px < (4<<FIXBITS)) prx = 4;
 	else if (px > (244<<FIXBITS)) prx = 244; 
 	else prx = px >> FIXBITS;
-
+	
 	// Collision
 
-	if (prx_old != prx) {
-		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
-		cy2 = (pry + 15) >> 4;
+	cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
+	cy2 = (pry + 15) >> 4;
 
-		rds16 = pvx + pgtmx;
-		if (rds16) 	{
-			if (rds16 < 0) {
-				cx1 = cx2 = prx >> 4; 
-				rda = (cx1 + 1) << 4;
-				rdm = cx1 - 1;
-			} else {
-				cx1 = cx2 = (prx + 7) >> 4;
-				rda = ((cx1 - 1) << 4) + 8;
-				rdm = cx1 + 1;
-			}
-			cm_two_points ();
-			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+	rds16 = pvx + pgtmx;
+	if (rds16) 	{
+		if (rds16 < 0) {
+			cx1 = cx2 = prx >> 4; 
+			rda = (cx1 + 1) << 4;
+			rdm = cx1 - 1;
+		} else {
+			cx1 = cx2 = (prx + 8) >> 4;
+			rda = ((cx1 - 1) << 4) + 8;
+			rdm = cx1 + 1;
+		}
+		cm_two_points ();
+		if ((at1 & 8) || (at2 & 8)) {
+			pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
-				// Special obstacles
-				if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
-				if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
-			} else {
-				hith = ((at1 & 1) || (at2 & 1));
-			}
+			// Special obstacles
+			if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
+			if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
+		} else {
+			hith = ((at1 & 1) || (at2 & 1));
 		}
 	}
 
@@ -458,9 +455,9 @@ void player_move (void) {
 	// *************
 	
 	phit = 0;
-	if (hitv) { phit = 1; pvy = add_sign (-pvy, PLAYER_V_REBOUND); } 
+	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
-		if (hith) { phit = 1; pvx = add_sign (-pvx, PLAYER_V_REBOUND); }
+		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 	#endif	
 	if (pstate != EST_PARP) if (phit) pkill = 1;
 
@@ -471,35 +468,25 @@ void player_move (void) {
 	// (fire bullets, run scripting w/animation, do containers)
 
 	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
-		if (pad_this_frame & PAD_B) {
-			if (
-				!pfiring
-				#ifdef FIRE_TO_PUSH
-				&& !pushed_any
-				#endif
-			) {
-				pfiring = 1;
-				{
-					#ifdef PLAYER_CAN_FIRE				
-						fire_bullet ();
-					#endif		
-					
+		if (b_button) {
+			#ifdef PLAYER_CAN_FIRE				
+				fire_bullet ();
+			#endif		
+			
+			#ifdef ENABLE_CONTAINERS
+				containers_do ();
+			#endif
+			
+			#if defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)
+				if (ppossee) {
+					pvx = pvy = 0;
 					#ifdef ENABLE_CONTAINERS
-						containers_do ();
-					#endif
-					
-					#if defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)
-						if (ppossee) {
-							pvx = pvy = 0;
-							#ifdef ENABLE_CONTAINERS
-								upd_cont_index = 0;
-							#endif								
-							use_ct = 1;
-						}
-					#endif
-				}	
-			}
-		} else pfiring = pushed_any = 0;
+						upd_cont_index = 0;
+					#endif								
+					use_ct = 1;
+				}
+			#endif
+		} 
 	#endif
 
 	// **********
@@ -544,7 +531,11 @@ void player_move (void) {
 					psprid = CELL_IDLE;
 				}
 			} else {
-				psprid = CELL_AIRBORNE;
+				//psprid = CELL_AIRBORNE;
+				if (pvy < PLAYER_VY_FALLING_MIN)
+					psprid = CELL_ASCENDING;
+				else
+					psprid = CELL_DESCENDING;	
 			}
 		#endif
 

@@ -4,40 +4,71 @@
 // Hotspot interaction
 
 if (hrt) {
-	hotspots_paint ();
-
 	if (collide_in (prx + 4, pry + 8, hrx, hry)) {
-#ifdef CARRY_ONE_HS_OBJ
-		// This was custom code used in Goddess and is not
-		// very general, plus it is incomplete. So off
-		/*
-		if (!(i & PAD_B)) pfiring = 0;
+		#ifdef CARRY_ONE_HS_OBJECT
+			if (hrt == HS_OBJ_EMPTY) {
+				// Empty hotspot. Drop object
 
-		if ((i & PAD_B) && !pfiring && ppossee ) {
-			gpjt = 0;
-			pfiring = 1;
-			
-			if (hrt >= HS_INV_MIN && hrt <= HS_INV_MAX) {
-				rda = pinv; pinv = hrt; hrt = rda; ht [n_pant] = hrt;
-				sfx_play (3, 1);
-				oam_index = oam_meta_spr (
-					hrx, hry + SPRITE_ADJUST, 
-					oam_index, 
-					spr_hs [hrt - 1]
-				);
+				if (b_button) {
+
+					hrt = ht [n_pant] = pinv;
+					pinv = HS_OBJ_EMPTY;
+
+					b_button = 0;
+					sfx_play (1, 1);
+				}
+
+			} if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX) {
+				// Object
+
+				if (b_button) {
+					// Interchange pinv and hrt, and register in array.
+					rda = hrt;
+					hrt = ht [n_pant] = pinv;
+					pinv = rda;
+
+					// Object has been got. You may complete here
+					#include "mainloop/on_object_got.h"
+
+					b_button = 0;
+					sfx_play (2, 1);
+				}
+
+			} else if (hrt >= HS_OBJ_MIN + HS_USE_OFFS && hrt <= HS_OBJ_MAX + HS_USE_OFFS && b_button) {
+				// Where to use object
+
+				if (b_button && pinv == hrt - HS_USE_OFFS) {
+					// Save them
+					rda = pinv;
+					rdb = hrt;
+
+					// Update hotspot
+					#ifdef HS_FIX_ON_USE
+						hrt = ht [n_pant] = pinv + 2*HS_USE_OFFS;
+					#else
+						hrt = ht [n_pant] = pinv;
+					#endif
+
+					// Clear carried object
+					pinv = HS_OBJ_EMPTY;
+
+					// Object has been used. You may complete here
+					#include "mainloop/on_object_used.h"
+
+					b_button = 0;
+					sfx_play (1, 1);
+
+				}			
 			}
-
-			if (gpjt) {
-				// Show NO.
-				no_ct = 50;
-				sfx_play (4, 0);
+			#ifdef HS_FIX_ON_USE				
+			else if (hrt >= HS_OBJ_MIN + 2*HS_USE_OFFS && hrt <= HS_OBJ_MAX + 2*HS_USE_OFFS && b_button) {
+					// Already used object. do nothing.
 			}
-		}
-
-		if (hrt < HS_INV_MIN) 
-		*/
-#endif					
+			#endif			
+			else
+		#endif
 		{
+			rda = 0;
 			switch (hrt) {
 				#ifndef DEACTIVATE_OBJECTS
 					case HOTSPOT_TYPE_OBJECT:
@@ -68,9 +99,13 @@ if (hrt) {
 						break;
 				#endif
 			}
-			sfx_play (rda, 1);
-			hrt = 0;
-			hact [n_pant] = 0;
+			if (rda) {
+				sfx_play (rda, 1);
+				hrt = 0;
+				hact [n_pant] = 0;
+			}
 		}
 	}
+
+	if (hrt) hotspots_paint ();
 }

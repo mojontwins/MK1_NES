@@ -4,9 +4,9 @@
 // frame.h
 // Custom game frame
 
-void __fastcall__ draw_game_frame (void) {
-	unrle_vram (frame_rle, 0x2000);
-	memfill (attr_table, 0xff, 64);
+void draw_game_frame (void) {
+	pr_str (2, 3, "LIFE:00   ITEM:      KEYS:00");
+	pr_str (2, 28, "SUPPATESTR - THE MOJON TWINS");
 }
 
 void hud_update (void) {
@@ -45,4 +45,13 @@ void hud_update (void) {
 		p_t (AMMO_X, AMMO_Y, pammo);
 	}
 #endif
+
+#if defined (ENABLE_EASY_OBJECTS) && defined (HS_INV_X)
+	oam_index = oam_meta_spr (
+		HS_INV_X, HS_INV_Y,
+		oam_index,
+		spr_hs [pinv]
+	);
+#endif
+
 }

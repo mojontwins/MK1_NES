@@ -111,11 +111,13 @@ void draw_scr (void) {
 		rdt = *gp_ram ++;
 		map_attr [rdm] = c_behs [rdt];
 
-		#ifdef BREAKABLE_WALLS
+		#ifdef ENABLE_BREAKABLE
 			brk_buff [rdm] = 1;
 		#endif
 
 		draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);
 		rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 	}
+
+	vram_write (attr_table, 0x23c0, 64);
 }

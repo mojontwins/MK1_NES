@@ -1,18 +1,21 @@
-	
-	// Defines the behaviour for each tile. Remember that if keys are activated, tile #15 is a bolt
-	// and, therefore, it should be made a full obstacle!
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017
 
-	// 0 = Walkable (no action)
-	// 1 = Walkable and kills.
-	// 2 = Walkable and hides.
-	// 4 = Platform (only stops player if falling on it)
-	// 8 = Full obstacle (blocks player from all directions)
-	// 10 = locks
-	// 11 = pushable
-	// 16 = Breakable (#ifdef BREAKABLE_WALLS)
-	// 32 = Conveyro (+0 = left, +1 = right
-	// You can add the numbers to get combined behaviours
-	// Save for 10 (special), but that's obvious, innit?
+// Tile behaviours
+
+// Add these:
+// + 1 kills      (useless if + 8 obstacle)
+// + 2 quicksands ( " , needs ENABLE_QUICKSANDS)
+// + 4 platform   (side view)
+// + 8 obstacle   (nullifies + 1 & + 2, see bellow)
+// +16 breakable
+// +32 conveyor   (pushes left, + 1 pushes right)
+// +64 slippery
+
+// Special values (= nonsensical combinations):
+//  9 not safe block (safe spot not saved when jumping off this)
+// 10 lock
+// 11 pushable
 
 const unsigned char behs0 [] = {
 	0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8, 11, 10,
@@ -20,3 +23,6 @@ const unsigned char behs0 [] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
 };
 
+// 68 = 4 + 64, slippery platform
+// 24 = 8 + 16, breakable obstacle
+// 40 = 8 + 32, conveyor platform, pushes left.

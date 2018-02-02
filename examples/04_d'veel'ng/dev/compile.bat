@@ -17,11 +17,10 @@ cd ..\gfx
 ..\..\..\src\utils\legacy\mkts_old.exe in=cuts.png pals=palcuts.png out=tschr4.bin mode=mapped offset=0,0 size=8,4 tsmap=..\dev\assets\cuts1.h label=cuts1 tmapoffset=144 max=32 silent
 ..\..\..\src\utils\legacy\mkts_old.exe in=tstitle.png pals=palcuts.png out=tschr5.bin mode=mapped offset=0,0 size=9,1 tsmap=..\dev\assets\tiledata_title.h label=title tmapoffset=216 silent
 
-copy /b tschr1.bin + tschr2.bin + tschr3.bin + tschr4.bin + tschr5.bin tschr.bin > nul
+copy /b tschr1.bin + tschr3.bin + tschr4.bin + tschr5.bin tschr.bin > nul
 ..\..\..\src\utils\fillto.exe tschr.bin 4096
 
 del tschr1.bin > nul
-del tschr2.bin > nul
 del tschr3.bin > nul
 del tschr4.bin > nul
 del tschr5.bin > nul
@@ -79,5 +78,5 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib
 del *.o
 del game.s
 
-copy cart.nes ..\d'veel'ng.nes > nul
+copy cart.nes ..\..\d'veel'ng.nes > nul
 echo DONE!
