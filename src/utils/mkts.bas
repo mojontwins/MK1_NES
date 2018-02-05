@@ -1,5 +1,5 @@
-' mkts v 0.7.0 - Converts several kinds of tilesets
-' Copyleft 2015, 2017, 2017 The Mojon Twins
+' mkts v0.8.0 20180205 - Converts several kinds of tilesets
+' Copyleft 2015 - 2018 The Mojon Twins
 
 ' fbc mkts.bas cmdlineparser.bas mtparser.bas
 
@@ -23,6 +23,7 @@ Const PLATFORM_SMS 		= 3
 
 Dim Shared As Integer verbose, silent, mainIdx, cPoolIndex, tMapsIndex, flipped, upsideDown, clrIdx, outputPalList, patternsLimit, outputPatterns
 Dim Shared As Integer blackiszero, columns, nextPattern, mirrored, simplemeta, supersimplemeta, aseprite, noskipempty, allbg, deinterlaced, debug
+Dim Shared As Integer metalogicalwidth
 Dim Shared As Integer succesfullyAddedPatternToPool, ignoreMapFile
 Dim Shared As Integer metaSpriteCounter
 Dim Shared As uByte mainBin (65535), clrBin (65535)
@@ -694,7 +695,13 @@ Function nesFindWhichPal (img As Any Ptr, x0 As Integer, y0 As Integer, pal () A
 	Dim As Integer whichCols (3)
 	Dim As Integer idx, said
 	Dim As Integer addTrans
+
+	Dim As String coloursDetected
+	Dim As String coloursInPal
 	
+	coloursDetected = "   "
+	coloursInPal = ""
+
 	For i = 0 To 3: whichCols (i) = &HFF: Next i
 	
 	idx = 0
@@ -729,10 +736,20 @@ Function nesFindWhichPal (img As Any Ptr, x0 As Integer, y0 As Integer, pal () A
 			End If
 		Next x
 	Next y
+
+
+	For i = 0 To 3
+		coloursDetected = coloursDetected & Hex (whichCols (i), 8) & " "
+		coloursInPal = coloursInPal & "P" & i & " "
+		For j = 0 To 3
+			coloursInPal = coloursInPal & Hex (pal(i*4+j), 8) & " "
+		Next j
+	Next i
+
 	
 	'puts ("TILE " & tn)
 	' All four palettes
-	For pi = 0 To 3
+	For pi = 0 To 3		
 		' Is whichCols === current palete #pi?
 		different = 0
 		For i = 0 To 3
@@ -763,6 +780,8 @@ Function nesFindWhichPal (img As Any Ptr, x0 As Integer, y0 As Integer, pal () A
 	Next pi
 	
 	filteredPuts ("** WARNING ** " & hSize & "x" & vSize & " tile #" & tn & " with a WRONG palette")
+	filteredPuts (coloursInPal)
+	filteredPuts (coloursDetected)
 	nesFindWhichPal = addTrans
 End Function
 
@@ -2671,7 +2690,7 @@ Sub nesDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As In
 					If flipped Then
 						xa = sprOrgX
 					Else
-						xa = -hSize - sprOrgX
+						xa = -hSize - sprOrgX + metalogicalwidth
 					End If
 					Print #fOut, "	";
 					For xx = 1 To wMeta
@@ -2878,7 +2897,7 @@ Sub gbDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Int
 					If flipped Then
 						xa = sprOrgX
 					Else
-						xa = -hSize - sprOrgX
+						xa = -hSize - sprOrgX + metalogicalwidth
 					End If
 					Print #fOut, "	";
 					For xx = 1 To wMeta
@@ -3127,7 +3146,7 @@ Sub smsDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As In
 					If flipped Then
 						xa = sprOrgX
 					Else
-						xa = -hSize - sprOrgX
+						xa = -hSize - sprOrgX + metalogicalwidth
 					End If
 					Print #fOut, "	";
 					For xx = 1 To wMeta
@@ -3366,7 +3385,7 @@ Sub nesDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As 
 					If flipped Then
 						xa = sprOrgX
 					Else
-						xa = -hSize - sprOrgX
+						xa = -hSize - sprOrgX + metalogicalwidth
 					End If
 					Print #fOut, "	";
 					For xx = 1 To wMeta
@@ -3525,7 +3544,11 @@ Sub gbDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As I
 				End If
 				ya = sprOrgY
 				For yy = 1 To hMeta
-					xa = sprOrgX
+					If flipped then
+						xa = sprOrgX
+					Else
+						xa = -hSize - sprOrgX + metalogicalwidth
+					End If
 					Print #fOut, "	";
 					For xx = 1 To wMeta
 						' Flip horz order, don't forget!
@@ -3682,7 +3705,12 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 
 				' Modifier
 				If parserFindTokenInTokens ("FLIPPED", tokens (), "ucase") Then flipped = -1 Else flipped = 0
-				If parserFindTokenInTokens ("MIRRORED", tokens (), "ucase") Then mirrored = -1 Else mirrored = 0
+				If parserFindTokenInTokens ("MIRRORED", tokens (), "ucase") Then 
+					mirrored = -1 
+					metalogicalwidth = Val (tokens (parserGetTokenIndex ("MIRRORED", tokens (), "ucase") + 1))
+				Else 
+					mirrored = 0
+				End If
 				If parserFindTokenInTokens ("UPSIDEDOWN", tokens (), "ucase") Then upsideDown = -1 Else upsideDown = 0
 
 				Select Case platform
@@ -3770,7 +3798,12 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 
 				' Modifier
 				If parserFindTokenInTokens ("FLIPPED", tokens (), "ucase") Then flipped = -1 Else flipped = 0
-				If parserFindTokenInTokens ("MIRRORED", tokens (), "ucase") Then mirrored = -1 Else mirrored = 0
+				If parserFindTokenInTokens ("MIRRORED", tokens (), "ucase") Then 
+					mirrored = -1 
+					metalogicalwidth = Val (tokens (parserGetTokenIndex ("MIRRORED", tokens (), "ucase") + 1))
+				Else 
+					mirrored = 0
+				End If
 				If parserFindTokenInTokens ("UPSIDEDOWN", tokens (), "ucase") Then upsideDown = -1 Else upsideDown = 0
 
 				Select Case platform
@@ -3847,9 +3880,9 @@ Else
 	silent = 0
 End If
 
-filteredPuts "mkts v0.7.0 20170725"
+filteredPuts "mkts v0.8.0 20180205"
 filteredPuts "Cuts & imports tilesets from a png."
-filteredPuts "Copyleft 2015, 2016, 2017 The Mojon Twins"
+filteredPuts "Copyleft 2015 - 2018 The Mojon Twins"
 filteredPuts ""
 
 ' Setup screen

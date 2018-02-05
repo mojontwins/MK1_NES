@@ -1,0 +1,39 @@
+# import_patterns.spt
+# Imports patterns for Tester Punchy
+
+# This is a mkts.exe script file
+# Needs mkts v0.8.0 20180205
+
+# Bank 0 (patterns for bg)
+
+# Font
+
+# ts0
+
+# Done with patterns for bg. Reset and fill with zeroes:
+RESETPOOL
+FILL 4096
+
+# Bank 1 (patterns for spr)
+
+# All sprites are in the same file, and use the same palette
+OPEN ss.png
+PALS palss0.png
+
+# Bits
+CHARSET 0, 15, 4, 1
+
+# Metasprites will be stored in this file:
+MAPFILE ..\dev\assets\spritedata.h
+
+# Main player
+LABEL sspl
+
+# First batch of player cells, 16x32. Box is 8x24 centered bottom:
+METASPRITESET 1, 1, 2, 4, 7, 1, -4, -8 MIRRORED 8
+
+# Cut these individually
+METASPRITE 15, 1, 3, 4, -2, -8 MIRRORED 8
+METASPRITE 18, 1, 3, 4, -6, -8 MIRRORED 8
+
+FILL 8192

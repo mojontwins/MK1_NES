@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2010.12.02 10:13:39.515.cpp,C:\Documents and Settings\Alex\Мои документы\Borland Studio Projects\Unit1.cpp=E:\nesst\Unit1.cpp</Transaction>
+    <Transaction>2010.12.02 10:13:39.515.h,C:\Documents and Settings\Alex\Мои документы\Borland Studio Projects\Unit1.h=E:\nesst\Unit1.h</Transaction>
+    <Transaction>2010.12.02 10:13:39.515.dfm,C:\Documents and Settings\Alex\Мои документы\Borland Studio Projects\Unit1.dfm=E:\nesst\Unit1.dfm</Transaction>
+    <Transaction>2010.12.02 10:13:44.828.bdsproj,C:\Documents and Settings\Alex\Мои документы\Borland Studio Projects\Project1.bdsproj=E:\nesst\Project1.bdsproj</Transaction>
+    <Transaction>2010.12.04 07:39:39.014.bdsproj,E:\nesst\Project1.bdsproj=E:\nesst\NESst.bdsproj</Transaction>
+    <Transaction>2011.06.26 22:49:51.953.cpp,G:\nesst\Unit1.cpp=G:\nesst\UnitMain.cpp</Transaction>
+    <Transaction>2011.06.26 22:49:51.968.h,G:\nesst\Unit1.h=G:\nesst\UnitMain.h</Transaction>
+    <Transaction>2011.06.26 22:49:51.968.dfm,G:\nesst\Unit1.dfm=G:\nesst\UnitMain.dfm</Transaction>
+    <Transaction>2011.06.26 22:50:03.796.cpp,G:\nesst\Unit2.cpp=G:\nesst\UnitCHREditor.cpp</Transaction>
+    <Transaction>2011.06.26 22:50:03.796.h,G:\nesst\Unit2.h=G:\nesst\UnitCHREditor.h</Transaction>
+    <Transaction>2011.06.26 22:50:03.796.dfm,G:\nesst\Unit2.dfm=G:\nesst\UnitCHREditor.dfm</Transaction>
+    <Transaction>2011.06.26 22:50:12.468.cpp,G:\nesst\Unit3.cpp=G:\nesst\UnitSwapColors.cpp</Transaction>
+    <Transaction>2011.06.26 22:50:12.468.h,G:\nesst\Unit3.h=G:\nesst\UnitSwapColors.h</Transaction>
+    <Transaction>2011.06.26 22:50:12.468.dfm,G:\nesst\Unit3.dfm=G:\nesst\UnitSwapColors.dfm</Transaction>
+    <Transaction>2011.06.26 22:50:35.296.cpp,G:\nesst\Unit4.cpp=G:\nesst\UnitNametableOffset.cpp</Transaction>
+    <Transaction>2011.06.26 22:50:35.296.h,G:\nesst\Unit4.h=G:\nesst\UnitNametableOffset.h</Transaction>
+    <Transaction>2011.06.26 22:50:35.296.dfm,G:\nesst\Unit4.dfm=G:\nesst\UnitNametableOffset.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
