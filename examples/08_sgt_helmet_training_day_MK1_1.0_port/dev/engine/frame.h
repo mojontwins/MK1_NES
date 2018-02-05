@@ -5,8 +5,8 @@
 // Custom game frame
 
 void draw_game_frame (void) {
-	pr_str (2, 3, "LIFE:00   ITEM:      KEYS:00");
-	pr_str (2, 28, "SUPPATESTR - THE MOJON TWINS");
+	unrle_vram (frame_rle, 0x2000);
+	memfill (attr_table, 0xff, 64);
 }
 
 void hud_update (void) {

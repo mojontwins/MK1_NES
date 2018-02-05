@@ -66,7 +66,7 @@ void draw_scr (void) {
 	#endif
 
 	// Edit this file to alter map_buff the way you need:
-	#include "engine/mapmods/map_renderer_customization.h"
+	#include "my/map_renderer_customization.h"
 
 	// Draw decorations
 

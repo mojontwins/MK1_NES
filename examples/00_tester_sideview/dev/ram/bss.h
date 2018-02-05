@@ -164,3 +164,5 @@ const unsigned char *c_enems;
 const unsigned char *c_hotspots;
 
 unsigned char c_max_bolts;
+
+#include "my/extra_vars.h"

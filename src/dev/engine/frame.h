@@ -4,9 +4,7 @@
 // frame.h
 // Custom game frame
 
-void draw_game_frame (void) {
-
-}
+#include "my/game_frame.h"
 
 void hud_update (void) {
 	// Update frame

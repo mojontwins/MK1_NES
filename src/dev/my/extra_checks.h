@@ -7,3 +7,5 @@
 
 // Do whatever you need. Everything you add here gets executed
 // each frame!
+
+// Whenever you want to WIN the game just set win_level = 1

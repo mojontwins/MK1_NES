@@ -1687,5 +1687,30 @@ Ayer pensé más seriamente en ampliar Sir Ababol DX con una fase que tenga:
 
 Hago un tileset de tonos rojizos reaprovechando gráficos y una fase lineal de 20x2. Ahora mismo hay 9728 bytes libres, cabe de sobra
 
+20180205
+========
+
+Estuve el fin de semana juntando tileset y haciendo la fase extra de Helmet (a falta de poner enemigos). Habrá que buscar dos llaves para poner en el extremo final, todo muy lineal. Pero creo que en vez de ponerme con esto o a seguir ampliando el motor debería mirar un poco el tema del scripting, porque creo que no va fino (jugando rápido y mal el otro día no vi la moto seminueva avanzando bastantes pantallas, y creo que aparecía bastante temprano en el juego).
+
+Me pongo con eso en los ratos muertos.
+
+Otra cosa que me gustaría hacer (y me di cuenta de la necesidad al actualizar el motor de Helmet el otro día) es sacar completamente las cosas custom de engine, como por ejemplo todo pres.h o el dibujo del marco del juego de frame.h. Quizá debería incluir todo lo custom en una carpeta /dev/my: condiciones de los hotspots extendidos, selección del frame del personaje principal, customs en el renderer del escenario, variables extra... todo ahí. De esa forma la actualización será coger y soltar /engine, /ram y /mainloop (siempre que no hayamos hecho muchos custom, como en Ababol).
+
+Voy examinando lo del script.
+
+~~
+
+Tengo que sacar los tiestos de `SCRIPTING_TEXT_BOX` de msc. No lo voy a volver a usar, mejor un extern o un TEXTBOX que llame a unas funciones que tengas que definir (como las de `textbox.h`).
+
+~~
+
+Ok - El amoto es en la pantalla 21, en el ENTERING. Voy a verlo primero en modo offline. Seguramente se ejecute el script fuera de ciclo de update. Um no, porque si no el texto no se imprimiría. Voy a fijarme mejor, quizá no exista el bug!
+
+~~
+
+Si que sale, joder XD.
+
+Pues ya que estoy voy a apañar lo del textbox. Que sea TEXTBOX n y que n sea el índice de un array `ingame_texts` que tenga que estar definido, al igual que `textbox.h` activado.
+
 ~~
 

@@ -4,10 +4,7 @@
 // frame.h
 // Custom game frame
 
-void draw_game_frame (void) {
-	pr_str (2, 3, "LIFE:00   ITEMS:00   KEYS:00");
-	pr_str (2, 28, "SIR ABABOL - THE MOJON TWINS");
-}
+#include "my/game_frame.h"
 
 void hud_update (void) {
 	// Update frame

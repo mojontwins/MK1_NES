@@ -77,7 +77,7 @@ void add_propeller (unsigned char x, unsigned char y);
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
-#include "engine/pres.h"
+#include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
 #include "assets/mscnes.h"
 #endif

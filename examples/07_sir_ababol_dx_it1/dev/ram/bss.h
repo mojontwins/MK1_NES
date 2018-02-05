@@ -165,8 +165,4 @@ const unsigned char *c_hotspots;
 
 unsigned char c_max_bolts;
 
-// CUSTOM {
-	unsigned char n_pant_switch;
-	unsigned char level_switching;
-	unsigned char has_boots;
-// } END_OF_CUSTOM
+#include "my/extra_vars.h"

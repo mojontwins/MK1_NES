@@ -28,7 +28,7 @@ if (hrt) {
 					pinv = rda;
 
 					// Object has been got. You may complete here
-					#include "mainloop/on_object_got.h"
+					#include "my/on_object_got.h"
 
 					b_button = 0;
 					sfx_play (2, 1);
@@ -53,7 +53,7 @@ if (hrt) {
 					pinv = HS_OBJ_EMPTY;
 
 					// Object has been used. You may complete here
-					#include "mainloop/on_object_used.h"
+					#include "my/on_object_used.h"
 
 					b_button = 0;
 					sfx_play (1, 1);

@@ -198,7 +198,7 @@ void game_loop (void) {
 #endif
 
 		// Extra checks
-		#include "mainloop/extra_checks.h"
+		#include "my/extra_checks.h"
 
 #if defined (WIN_LEVEL_CUSTOM)
 		if (win_level)
