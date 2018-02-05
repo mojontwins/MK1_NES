@@ -191,8 +191,6 @@ void enems_load (void) {
 	#ifdef ENABLE_PURSUERS		
 				case 7:
 					// Pursuers
-
-					en_s [gpit] = (TYPE_7_FIXED_SPRITE - 1) << 2;
 					en_alive [gpit] = 0;
 					en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
 		#ifdef ENABLE_GENERATORS

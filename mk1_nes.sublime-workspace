@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"colours",
+				"coloursDetected"
+			],
+			[
 				"HS_OBJ_",
 				"HS_OBJ_EMPTY\t(config.h)"
 			],
@@ -231,6 +235,24 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/00_tester_punchy/dev/engine/enengine.h",
+			"settings":
+			{
+				"buffer_size": 11619,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/00_tester_punchy/dev/engine/enemmods/enem_pursuers.h",
+			"settings":
+			{
+				"buffer_size": 1908,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -270,16 +292,31 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/00_tester_punchy",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods",
+		"/D/git/MK1_NES/examples/00_tester_punchy/gfx",
 		"/D/git/MK1_NES/examples/00_tester_sideview",
+		"/D/git/MK1_NES/examples/00_tester_sideview/gfx",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/my",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram",
-		"/D/git/MK1_NES/src"
+		"/D/git/MK1_NES/src",
+		"/D/git/MK1_NES/src/utils"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/ext_utils/nesst1.43/readme.txt",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/src/utils/mkts.bas",
+		"/D/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/src/utils/mtparser.bas",
+		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/src/utils/mtparser.bi",
 		"/D/git/MK2/src/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/my/game_frame.h",
@@ -322,7 +359,6 @@
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/README.md",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/extra_checks.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/on_object_got.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/on_object_used.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/hotspots.h",
@@ -401,13 +437,7 @@
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_saw.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pursuers.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pezon.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/process_tile.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/hotspots.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/propellers.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/shines.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/asset_setup.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/cheat.h"
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/process_tile.h"
 	],
 	"find":
 	{
@@ -479,9 +509,15 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"en_s",
+			"mirrored",
+			"flipped",
+			"MIRRORED",
+			"mkts",
+			"mirrored",
 			"OAM_ENEMS",
 			"OAM_HOTSPOTS",
 			"OAM_",
@@ -603,13 +639,7 @@
 			"persistent_update",
 			"persistent_enems_load",
 			"draw_chac_chac",
-			"distance",
-			"kill_enemy",
-			"print",
-			"locksI",
-			"packmap",
-			"mkts_old",
-			"nescnv"
+			"distance"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -755,13 +785,79 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/00_tester_punchy/dev/engine/enengine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11619,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4642,
+								4642
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2123.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "examples/00_tester_punchy/dev/engine/enemmods/enem_pursuers.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1881,
+								1881
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 719.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -819,7 +915,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
