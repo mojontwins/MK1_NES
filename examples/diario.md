@@ -1789,3 +1789,11 @@ He metido el tema y medio funciona, pero es tosco, sobre todo en la gestión de 
 
 Pero ahora ya no.
 
+¿Qué debería hacer primero? ¿Adecentar el módulo de enemigos? ¿Intentarlo con las escaleras?
+
+Ahora no tengo tiempo de ninguna de las dos cosas, pero puedo divagar sobre las escaleras.
+
+Un problema muy grande es que no me quedan bits libres. Siempre puedo reaprovechar otro, vaya. 
+
+[Otra cosa que tengo que hacer es integrar las hostias y patadas con los bloques que se rompen]
+
