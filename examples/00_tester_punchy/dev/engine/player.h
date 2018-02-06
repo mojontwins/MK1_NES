@@ -540,6 +540,7 @@ void player_move (void) {
 
 	#ifdef PLAYER_KICKS
 		if (pkicking) {
+			pkicking --;
 			pkickx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
 			pkicky = pry + PLAYER_KICK_OFFS_Y;
 			if (ppossee) pkicking = 0;

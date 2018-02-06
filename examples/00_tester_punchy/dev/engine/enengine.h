@@ -543,7 +543,6 @@ void enems_move (void) {
 #endif					
 					pkicky <= en_y [gpit] + 7
 				) {
-					pkicking = 0;
 					enems_hit ();
 				}
 			}
