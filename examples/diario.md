@@ -1776,4 +1776,16 @@ Los punchies básicos serán añadidos a los patrollers que soltarán un sopapo 
 
 La colisión sopapal debe poder detectarse. Será sobre un cuadrado de 8x8 que colisionará como una bala sobre el jugador.
 
+Bueno...
+
+Player que hostia
+-----------------
+
+Ambos estados deberían durar N tiles, como hago en Maritrini. Aquí el rollo es que también hay una patada voladora que debería durar hasta que se registre un ppossee.
+
+~~
+
+He metido el tema y medio funciona, pero es tosco, sobre todo en la gestión de lo que le pasa a los enemigos cuando les das. Además, he tocado muchas partes y me he dado cuenta de que quizá haya que retocar un tanto el módulo de los enemigos, en especial la gestión de cómo se actualizan, qué frame muestran, etc.
+
+Pero ahora ya no.
 

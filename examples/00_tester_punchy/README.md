@@ -38,7 +38,7 @@ Shooties
 - 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
 - Type 12, 13, 14, 15, place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
 - Imply linear cocos.
-- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot. Notice bullets are 8 pixels wide (top-left centered), and enemies are always 16 pixels wide (top-left centered).
+- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot when looking RIGHT. Notice bullets are 8 pixels wide (top-left origin), and enemies are always 16 pixels wide (top-left origin).
 - Shoot when player is "in range" using `PUNCH_FREQ` (en expresion which will produce a coco when evaluates to true).
 
 Punchies
@@ -47,5 +47,24 @@ Punchies
 - `#define ENABLE_PUNCHIES`.
 - 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
 - Type 16, 17, 18, 19, place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
-- ` PUNCHIES_PUNCH_OFFS_X` and `PUNCHIES_PUNCH_OFFS_Y`, offset from top-left of sprite bounding box to punch. Notice punching hitbox is 8x8, top-left centered, and enemies are always 16 pixels wide (top-left centered).
+- ` PUNCHIES_PUNCH_OFFS_X` and `PUNCHIES_PUNCH_OFFS_Y`, offset from top-left of sprite bounding box to punch when looking RIGHT. Notice punching hitbox is 8x8, top-left origin, and enemies are always 16 pixels wide (top-left origin).
 - Punch when player is "in range" using `PUNCH_FREQ` (an expresion which will produce a punch when evaluates to true).
+
+Player punches, player kicks
+----------------------------
+
+```c
+	// Silly Brawlers
+	// --------------
+	#define PLAYER_PUNCHES					// When on floor
+	#define PLAYER_PUNCH_OFFS_X				15
+	#define PLAYER_PUNCH_OFFS_Y				-7
+
+	#define PLAYER_KICKS					// While airborne
+	#define PLAYER_KICK_OFFS_X				12
+	#define PLAYER_KICK_OFFS_Y				-3
+```
+
+- Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
+
+

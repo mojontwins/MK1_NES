@@ -70,11 +70,16 @@ void player_init (void) {
 }
 
 void player_render (void) {
-	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, 4, spr_player [psprid]);	
-	} else {
-		oam_meta_spr (0, 240, 4, spr_pl_empty);
-	}
+	if (pstate == EST_NORMAL || half_life) 
+		oam_index = oam_meta_spr (
+			prx, pry + SPRITE_ADJUST, 
+			oam_index, 
+			spr_player [psprid]
+		);
+	/*
+	if (ppunching) oam_index = oam_spr (ppunchx, ppunchy + SPRITE_ADJUST, 0, 0, oam_index);
+	if (pkicking) oam_index = oam_spr (pkickx, pkicky + SPRITE_ADJUST, 0, 0, oam_index);
+	*/
 }
 
 void player_kill (void) {
@@ -495,7 +500,7 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do containers)
 
-	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
+	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
 		if (b_button) {
 			#ifdef PLAYER_CAN_FIRE				
 				fire_bullet ();
@@ -514,7 +519,31 @@ void player_move (void) {
 					use_ct = 1;
 				}
 			#endif
+
+			#ifdef PLAYER_PUNCHES
+				if (ppossee && ppunching == 0) ppunching = 16;				
+			#endif
+
+			#ifdef PLAYER_KICKS
+				if (!ppossee && pkicking == 0) pkicking = 16;				
+			#endif
 		} 
+	#endif
+
+	#ifdef PLAYER_PUNCHES
+		if (ppunching) {
+			ppunching --;
+			ppunchx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
+			ppunchy = pry + PLAYER_PUNCH_OFFS_Y;
+		} else ppunchy = 0xff;
+	#endif
+
+	#ifdef PLAYER_KICKS
+		if (pkicking) {
+			pkickx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
+			pkicky = pry + PLAYER_KICK_OFFS_Y;
+			if (ppossee) pkicking = 0;
+		} else pkicky = 0xff;
 	#endif
 
 	// **********

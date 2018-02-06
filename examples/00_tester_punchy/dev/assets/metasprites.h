@@ -39,9 +39,6 @@ const unsigned char * const spr_enems0 [] = {
 	ssensh_00_a, ssensh_01_a, ssensh_02_a,			// W1, W2, SHOOT (right)
 	ssensh_00_b, ssensh_01_b, ssensh_02_b,			// W1, W2, SHOOT (left)
 
-	// Explosion (offset 28)
-	ssexpl
-
 };
 
 

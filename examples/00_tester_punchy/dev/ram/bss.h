@@ -93,6 +93,10 @@ unsigned char hact [MAP_SIZE];
 	unsigned char c_x [MAX_CONTAINERS], c_y [MAX_CONTAINERS], c_f [MAX_CONTAINERS], last_container;
 #endif
 
+// More baddies
+
+unsigned char en_spr_id [3];
+
 // Baddies count. Properly fill this value!
 
 #ifdef PLAYER_KILLS_ENEMIES
@@ -142,6 +146,14 @@ unsigned char pammo, pfiring;
 #ifdef DIE_AND_RESPAWN
 	unsigned char n_pant_safe;
 	signed int px_safe, py_safe;
+#endif
+
+#ifdef PLAYER_PUNCHES
+	unsigned char ppunching, ppunchx, ppunchy;
+#endif
+
+#ifdef PLAYER_KICKS
+	unsigned char pkicking, pkickx, pkicky;
 #endif
 
 // Current level

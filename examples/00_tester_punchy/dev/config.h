@@ -133,6 +133,9 @@
 // Enemy types and definitions
 // ---------------------------
 
+#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_FLICKER
+
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
@@ -229,22 +232,24 @@
 
 //#define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY			4
-#define HS_OBJ_MIN				5
-#define HS_OBJ_MAX				6
-#define HS_USE_OFFS				2
+#define HS_OBJ_EMPTY					4
+#define HS_OBJ_MIN						5
+#define HS_OBJ_MAX						6
+#define HS_USE_OFFS						2
 
 #define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 								// Otherwise, use its own graphics.
 #define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
-/*
-#define CARRY_ONE_FLAG_OBJ
-#define HS_INV_X				136
-#define HS_INV_Y				210
-#define HS_OBJ_EMPTY			0
-#define HS_INV_FLAG				0
-*/
+// Silly Brawlers
+// --------------
+#define PLAYER_PUNCHES					// When on floor
+#define PLAYER_PUNCH_OFFS_X				15
+#define PLAYER_PUNCH_OFFS_Y				-7
+
+#define PLAYER_KICKS					// While airborne
+#define PLAYER_KICK_OFFS_X				12
+#define PLAYER_KICK_OFFS_Y				-3
 
 // Shooting behaviour
 // ------------------
@@ -254,7 +259,6 @@
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-#define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
 #define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
 
@@ -422,7 +426,7 @@
 #endif
 
 #ifdef TALL_PLAYER
-#define PLAYER_SPRITE_SIZE 32
+#define PLAYER_SPRITE_SIZE 40
 #else
 #define PLAYER_SPRITE_SIZE 24
 #endif
