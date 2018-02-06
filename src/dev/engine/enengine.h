@@ -153,10 +153,36 @@ void enems_load (void) {
 				case 4:
 	#ifdef ENABLE_SHOOTIES
 				case 12:
-					en_ct [gpit] = 0;
+				case 13:
+				case 14:
+				case 15:
 	#endif
+	#ifdef ENABLE_PUNCHIES
+				case 16:
+				case 17:
+				case 18:
+				case 19:
+	#endif
+					en_ct [gpit] = 0;
+	
 					// Linear enems.
-					en_s [gpit] = (en_t [gpit] - 1) << 2;
+	#ifdef ENABLE_PUNCHIES
+					if (en_t [gpit] >= 16) {
+						en_rawv [gpit] = 2;
+						rda = en_t [gpit] - 16;
+						en_s [gpit] = PUNCHIES_BASE_SPRID + (rda << 2) + (rda << 1);
+					} else
+	#endif					
+	#ifdef ENABLE_SHOOTIES
+					if (en_t [gpit] >= 12) {
+						en_rawv [gpit] = 1;
+						rda = en_t [gpit] - 12;
+						en_s [gpit] = SHOOTIES_BASE_SPRID + (rda << 2) + (rda << 1);
+					} else {
+	#endif
+						en_rawv [gpit] = 0;
+						en_s [gpit] = (en_t [gpit] - 1) << 2;
+					}
 
 					// HL conversion		
 					if (rda == 1) {
@@ -314,13 +340,25 @@ void enems_move (void) {
 				case 2:
 				case 3:
 				case 4:
-#ifdef ENABLE_SHOOTIES
+	#ifdef ENABLE_SHOOTIES
 				case 12:
-#endif
+				case 13:
+				case 14:
+				case 15:
+	#endif
+	#ifdef ENABLE_PUNCHIES
+				case 16:
+				case 17:
+				case 18:
+				case 19:
+	#endif
 					#include "engine/enemmods/enem_linear.h"
 #ifdef ENABLE_SHOOTIES
 					#include "engine/enemmods/enem_shooty.h"
 #endif				
+#ifdef ENABLE_PUNCHIES
+					#include "engine/enemmods/enem_punchy.h"
+#endif
 					break;
 
 #ifdef ENABLE_FANTY					

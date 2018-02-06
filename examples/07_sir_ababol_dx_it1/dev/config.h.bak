@@ -209,14 +209,6 @@
 #define SHOOTIES_SHOOT_OFFS_Y			-2
 #define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
-// Punchies
-
-//#define ENABLE_PUNCHIES
-#define PUNCHIES_BASE_SPRID				16
-#define PUNCHIES_PUNCH_OFFS_X			16
-#define PUNCHIES_PUNCH_OFFS_Y			-7
-#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit])<12)
-
 // Carry directives
 
 // Easy objects mode: A range of hotspot id's are considered

@@ -1769,5 +1769,11 @@ Todo guay. Ya he propagado a master y me pongo con los shooties.
 
 Los shooties parecen funcionar perfectamente, y además están documentados. Voy a propagar y subo al gitano.
 
-~~
+Patrollers que hostian
+----------------------
+
+Los punchies básicos serán añadidos a los patrollers que soltarán un sopapo cuando te tengan a tiro.
+
+La colisión sopapal debe poder detectarse. Será sobre un cuadrado de 8x8 que colisionará como una bala sobre el jugador.
+
 
