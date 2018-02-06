@@ -1712,5 +1712,62 @@ Si que sale, joder XD.
 
 Pues ya que estoy voy a apañar lo del textbox. Que sea TEXTBOX n y que n sea el índice de un array `ingame_texts` que tenga que estar definido, al igual que `textbox.h` activado.
 
+20180206
+========
+
+Los juegos de hostias necesitan enemigos que hostien igualmente. Necesito ocupar un slot custom con enemigos que hagan esto:
+
+1.- Patrollers que disparen cocos.
+2.- Generadores de enemigos hostiadores.
+
+Veamos cómo apañaríamos todo esto:
+
+Patrollers que disparan cocos
+-----------------------------
+
+El principal problema de esto es que tengo frame de disparar coco, y ahora mismo el cálculo de frame de los patrollers de tipo 1-4 (incluye plataformas) implica que en_s = 4*(tipo-1), y ahí no me cabe el frame extra (dos frames en cada dirección).
+
+La codificación mierder no me deja mucho margen, y no la quiero complicar porque, recuerden amigos, este era el motor fácil.
+
+Aunque lo gestione como lineal, tendré que hacer algún maneje:
+
+a) Inicialización: detectar el nuevo tipo (le asigno el siguiente libre, el tipo 12) junto con los lineales, y hacer todo igual menos la asignación de en_s, que irá sobre una constante de Sprite base.
+
+b) Ejecución: ejecutar el tipo lineal normalmente, pero cambiar el cálculo de frame y además disparar un proyectil horizontal si el jugador está en un rango vertical alcanzable por el proyectil.
+
+Debo definir a qué altura sale el proyectil y con qué offset horizontal. Además, tengo que crear cocos lineales. Pueden compartir todas las estructuras. Creo que así lo hice en Yun o en algún otro, no sé.
+
+Voy a tocar los cocos y luego meto este tipo básico, aunque lo haga sin probar por ahora.
+
+~~
+
+La putanez va a ser modificar los bounding boxes, sobre todo si son más grandes de 16! - esto tengo que replantearlo, macho.
+
+~~
+
+Creo que lo primero es apañar un "big collision" para colisiones de hasta 24 pixels de alto. Ahora mismo hay una que puede variar de 1 a 16 pixels de alto, es necesario otra hasta 32 (porque necesita TRES puntos de colisión).
+
+```c
+#define TALL_PLAYER
+```
+
+Voy a montarme el tester en modo barebones para esto. Voy a crear enemigos lineales mierder aunque sean siempre el mismo con diferentes colores, necesito fillers y placeholders.
+
+Por lo pronto, tall player. Los enemigos siempre van a ser de 16x16, pero modificaré las colisiones.
+
+Tengo que repensar como voy a manejar las colisiones player<->enemigos.
+
+~~
+
+He metido `TALL_COLLISION` por ahora para los enemigos. Voy a meter algún enemigo y pruebo.
+
+~~
+
+Todo guay. Ya he propagado a master y me pongo con los shooties.
+
+~~
+
+Los shooties parecen funcionar perfectamente, y además están documentados. Voy a propagar y subo al gitano.
+
 ~~
 

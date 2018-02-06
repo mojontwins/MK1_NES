@@ -34,6 +34,10 @@
 	#include "assets/levelset.h"
 #endif
 
+// Custom bgs
+#include "assets/bg0.h"
+#include "my/bgs.h"
+
 // Music
 extern const unsigned char m_ingame [];
 

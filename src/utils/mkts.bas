@@ -2764,6 +2764,8 @@ Sub nesDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As In
 	
 	If silent Then Puts ("mkts [" & sclpGetValue ("platform") & "], sprites mode. " & (cPoolIndex-firstPoolIndex) & " patterns extracted from " & tMapsIndex & " " & wMeta & "x" & hMeta & " metasprites. Next = " & cPoolIndex + offset)
 	nextPattern = cPoolIndex + offset
+
+	metaSpriteCounter = tMapsIndex
 End Sub
 
 Sub gbDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integer, wProc As Integer, hProc As Integer, wMeta As Integer, hMeta As Integer, tsMapFn As String, label As String, offset As Integer, max As Integer, sprOrgX As Integer, sprOrgY As Integer, fOut As Integer)
@@ -2971,6 +2973,8 @@ Sub gbDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Int
 	
 	If silent Then Puts ("mkts [" & sclpGetValue ("platform") & "], sprites mode. " & cPoolIndex & " patterns extracted from " & tMapsIndex & " " & wMeta & "x" & hMeta & " metasprites. Next = " & cPoolIndex + offset)
 	nextPattern = cPoolIndex + offset
+
+	metaSpriteCounter = tMapsIndex
 End Sub
 
 Sub smsDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integer, wProc As Integer, hProc As Integer, wMeta As Integer, hMeta As Integer, tsMapFn As String, label As String, offset As Integer, max As Integer, sprOrgX As Integer, sprOrgY As Integer, fOut As Integer)
@@ -3263,7 +3267,9 @@ Sub smsDoSprites (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As In
 	If shouldClose Then Close #fOut
 	
 	If silent Then Puts ("mkts [" & sclpGetValue ("platform") & "], sprites mode. " & cPoolIndex & " patterns extracted from " & tMapsIndex & " " & wMeta & "x" & hMeta & " metasprites. Next = " & cPoolIndex + offset)
-	nextPattern = cPoolIndex + offset			
+	nextPattern = cPoolIndex + offset	
+
+	metaSpriteCounter = tMapsIndex		
 End Sub
 
 Sub nesDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integer, wProc As Integer, hProc As Integer, wMeta As Integer, hMeta As Integer, tsMapFn As String, label As String, offset As Integer, max As Integer, sprOrgX As Integer, sprOrgY As Integer, fOut As Integer)
@@ -3423,6 +3429,8 @@ Sub nesDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As 
 	
 	If silent Then Puts ("mkts [" & sclpGetValue ("platform") & "], sprites16 mode. " & cPoolIndex & " patterns extracted from " & tMapsIndex & " " & wMeta & "x" & hMeta & " metasprites. Next = " & cPoolIndex + offset)
 	nextPattern = cPoolIndex + offset
+
+	metaSpriteCounter = tMapsIndex
 End Sub
 
 Sub gbDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integer, wProc As Integer, hProc As Integer, wMeta As Integer, hMeta As Integer, tsMapFn As String, label As String, offset As Integer, max As Integer, sprOrgX As Integer, sprOrgY As Integer, fOut As Integer)
@@ -3585,6 +3593,8 @@ Sub gbDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As I
 	
 	If silent Then Puts ("mkts [" & sclpGetValue ("platform") & "], sprites16 mode. " & cPoolIndex & " patterns extracted from " & tMapsIndex & " " & wMeta & "x" & hMeta & " metasprites. Next = " & cPoolIndex + offset)
 	nextPattern = cPoolIndex + offset
+
+	metaSpriteCounter = tMapsIndex
 End Sub
 
 Sub smsDoSprites16 (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Integer, wProc As Integer, hProc As Integer, wMeta As Integer, hMeta As Integer, tsMapFn As String, label As String, offset As Integer, max As Integer, sprOrgX As Integer, sprOrgY As Integer, fOut As Integer)
@@ -3668,7 +3678,7 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 				ignoreMapFile = 0
 			Case "LABEL":
 				label = tokens (1)
-				If tokens (2) = "RESET" THEN metaSpriteCounter = 0
+				If tokens (2) <> "NORESET" THEN metaSpriteCounter = 0
 			Case "CHAROFFSET":
 				charOffset = Val (tokens (1))
 			Case "OPEN":
@@ -3721,8 +3731,7 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 					Case PLATFORM_SMS:
 						smsDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" & Lcase (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile						
 				End Select
-				metaSpriteCounter = metaSpriteCounter + 1
-
+				
 			Case "CHARSET":
 				outputPatterns = 0
 
@@ -3842,6 +3851,8 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 	Wend
 	If fMapFile <> -1 Then Close fMapFile
 	Close #fIn
+
+	metaSpriteCounter = tMapsIndex
 End Sub
 
 Dim As Integer xOrg, yOrg, w, h, wMeta, hMeta, wProc, hProc, coords (8), sprxorg, spryorg

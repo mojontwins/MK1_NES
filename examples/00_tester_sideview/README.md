@@ -15,17 +15,13 @@ Things, so far:
 - Enemy type saw
 - Enemy type pezon
 - Enemy type chac chac
-- Enemy type monococo (add)
-
-Next
-
-- Inventory system & Containers
+- Enemy type monococo
+- Easy objects (Inventory system & hotspot based Containers)
 
 To Fix
 ======
 
-[X] Strange behaviour when jumping between laterally connected screens.
-[X] Glitches when respawning in a different screen (player gets repositioned too early - easy to fix?)
+All fixed.
 
 Things to note for possible documentation
 =========================================

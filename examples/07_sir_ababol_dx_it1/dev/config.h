@@ -201,6 +201,14 @@
 #define MONOCOCO_BASE_TIME_ONBOARD		50
 #define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
 
+// Shooties
+
+//#define ENABLE_SHOOTIES
+#define SHOOTIES_BASE_SPRID				16
+#define SHOOTIES_SHOOT_OFFS_X			16
+#define SHOOTIES_SHOOT_OFFS_Y			6
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&(rand8()&0x1f)==0)
+
 // Carry directives
 
 // Easy objects mode: A range of hotspot id's are considered
@@ -373,6 +381,8 @@
 	
 	//#define CELL_ASCENDING		5
 	//#define CELL_DESCENDING		6
+	//#define CELL_PUNCHING		8
+	//#define CELL_KICKING		9
 #endif
 // Inner workings. Don't touch.
 
@@ -388,4 +398,10 @@
 #ifdef ENABLE_EASY_OBJECTS
 #define HOTSPOTS_DYNAMIC
 #define CARRY_ONE_HS_OBJECT
+#endif
+
+#ifdef TALL_PLAYER
+#define PLAYER_SPRITE_SIZE 32
+#else
+#define PLAYER_SPRITE_SIZE 24
 #endif

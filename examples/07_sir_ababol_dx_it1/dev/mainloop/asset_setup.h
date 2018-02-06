@@ -14,12 +14,7 @@
 	c_behs = 		l_behs [level];
 	spr_enems = 	l_spr_enems [level];
 
-	#ifdef MAP_FORMAT_RLE16
 	c_map = 		l_map [level];
-	#endif
-	#ifdef MAP_FORMAT_PACKED
-	c_map = 		l_map [level];
-	#endif
 	#ifdef MAP_WITH_DECORATIONS
 		c_decos = 	l_decos [level];
 	#endif
@@ -46,8 +41,10 @@
 	#ifdef MAP_WITH_DECORATIONS
 		c_decos = 	map_0_decos;
 	#endif
-	c_locks = 		map_0_locks;
-	c_max_bolts = 	N_BOLTS_0;
+	#ifndef DEACTIVATE_KEYS
+		c_locks = 		map_0_locks;
+		c_max_bolts = 	N_BOLTS_0;
+	#endif
 	
 	c_enems = 		enems_0;
 	c_hotspots = 	hotspots_0;

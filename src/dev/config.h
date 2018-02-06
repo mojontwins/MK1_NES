@@ -76,9 +76,14 @@
 
 // Bounding box size
 // -----------------
-                                        // Comment both for normal 16x16 bounding box
+
+#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
-#define SMALL_COLLISION               	// 8x8 centered collision instead of 12x12
+
+// This defines how the player will collide with enemies. Needs rehash.
+#define SMALL_COLLISION            		// 8x8 centered collision instead of 12x12
+//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
+// (Comment both for ol' good unforgiving collision)
 
 // General directives:
 // -------------------
@@ -199,6 +204,14 @@
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
 #define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
+
+// Shooties
+
+#define ENABLE_SHOOTIES
+#define SHOOTIES_BASE_SPRID				16
+#define SHOOTIES_SHOOT_OFFS_X			16
+#define SHOOTIES_SHOOT_OFFS_Y			6
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&(rand8()&0x1f)==0)
 
 // Carry directives
 
@@ -367,11 +380,13 @@
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
-	#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE		6
+	//#define CELL_AIRBORNE		5
+	//#define CELL_SWIM_CYCLE	6
 
-	//#define CELL_ASCENDING		5
-	//#define CELL_DESCENDING		6
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
+	#define CELL_PUNCHING		8
+	#define CELL_KICKING		9
 
 #endif
 
@@ -389,4 +404,10 @@
 #ifdef ENABLE_EASY_OBJECTS
 #define HOTSPOTS_DYNAMIC
 #define CARRY_ONE_HS_OBJECT
+#endif
+
+#ifdef TALL_PLAYER
+#define PLAYER_SPRITE_SIZE 32
+#else
+#define PLAYER_SPRITE_SIZE 24
 #endif

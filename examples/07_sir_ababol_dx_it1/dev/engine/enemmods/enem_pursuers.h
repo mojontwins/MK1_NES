@@ -85,6 +85,6 @@ switch (en_alive [gpit]) {
 
 		}
 		
-		en_spr = en_s [gpit] + en_fr;
+		en_spr = ((TYPE_7_FIXED_SPRITE - 1) << 2) + en_fr;
 		break;
 }					

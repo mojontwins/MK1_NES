@@ -40,6 +40,8 @@
 
 			if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 				psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+			} else if (pvx) {
+				psprid = CELL_WALK_INIT;
 			} else {
 				psprid = CELL_IDLE;
 			}

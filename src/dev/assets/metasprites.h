@@ -12,7 +12,7 @@ const unsigned char * const spr_player [] = {
 	0,												// I like powers of two
 	
 
-	// Facing left (offset 10)
+	// Facing left (offset 8)
 	sspl_00_b,										// Standing (offset 0)
 	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
 	sspl_05_b, sspl_06_b,							// Airborne, up/down (offset 5, 6)
@@ -40,8 +40,11 @@ const unsigned char * const spr_hs [] = {
 
 // Fixed stuff
 const unsigned char spr_pl_empty [] = {
+#ifdef TALL_PLAYER
+	-4, -16, 0xff, 0, 4, -16, 0xff, 0,
+#endif	
 	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, -8, 0xff, 0,
+	-4, 0, 0xff, 0, 4, 0, 0xff, 0,
 	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
 	128
 };

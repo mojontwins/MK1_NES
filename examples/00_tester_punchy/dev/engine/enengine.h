@@ -151,10 +151,14 @@ void enems_load (void) {
 				case 2:
 				case 3:
 				case 4:
-					// Linear enems.			
-
-					// HL conversion
+	#ifdef ENABLE_SHOOTIES
+				case 12:
+					en_ct [gpit] = 0;
+	#endif
+					// Linear enems.		
 					en_s [gpit] = (en_t [gpit] - 1) << 2;
+
+					// HL conversion		
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
@@ -300,7 +304,7 @@ void enems_move (void) {
 			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
-			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
+			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit])+4) >> 3) & 1;
 
 			// Means don't render (can/will be overwritten):
 			en_spr = 0xff;	
@@ -310,7 +314,13 @@ void enems_move (void) {
 				case 2:
 				case 3:
 				case 4:
+#ifdef ENABLE_SHOOTIES
+				case 12:
+#endif
 					#include "engine/enemmods/enem_linear.h"
+#ifdef ENABLE_SHOOTIES
+					#include "engine/enemmods/enem_shooty.h"
+#endif				
 					break;
 
 #ifdef ENABLE_FANTY					

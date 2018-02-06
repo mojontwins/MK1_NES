@@ -10,7 +10,7 @@ MONOCOCO_COUNTER [gpit] --; if (!MONOCOCO_COUNTER [gpit]) {
 
 // Shoot
 if (MONOCOCO_STATE [gpit] == 2 && MONOCOCO_COUNTER [gpit] == MONOCOCO_FIRE_COCO_AT) {
-	rdx = MONOCOCO_X [gpit] + 4; rdy = MONOCOCO_Y [gpit] + 4; cocos_shoot ();
+	rdx = MONOCOCO_X [gpit] + 4; rdy = MONOCOCO_Y [gpit] + 4; cocos_shoot_aimed ();
 }
 
 // Sprite

@@ -224,13 +224,22 @@ void player_move (void) {
 		if (rds16 < 0)
 	#endif		
 		{
-			cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
+			#ifdef TALL_PLAYER
+				cy1 = cy2 = (pry + (PLAYER_COLLISION_TOP - 16)) >> 4;
+			#else
+				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
+			#endif
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
+				#ifdef TALL_PLAYER
+					pry = ((cy1 + 1) << 4) + 16 - PLAYER_COLLISION_TOP;
+				#else
+					pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP;
+				#endif
+				pvy = 0; py = pry << FIXBITS;
 				pgotten = 0;
 				pfiring = 1;
-				#ifdef PLAYER_TOP_DOWN
+				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					// Special obstacles
 					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
 					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
@@ -266,7 +275,7 @@ void player_move (void) {
 				pfiring = 1;
 				ppossee = 1;
 				
-				#ifdef PLAYER_TOP_DOWN
+				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
 					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
 				#endif
@@ -406,8 +415,10 @@ void player_move (void) {
 	
 	// Collision
 
-	cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
-	cy2 = (pry + 15) >> 4;
+	#ifndef TALL_PLAYER
+		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
+		cy2 = (pry + 15) >> 4;
+	#endif
 
 	rds16 = pvx + pgtmx;
 	if (rds16) 	{
@@ -420,16 +431,34 @@ void player_move (void) {
 			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
-		cm_two_points ();
-		if ((at1 & 8) || (at2 & 8)) {
-			pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+		#ifdef TALL_PLAYER
+			cm_three_points ();
+			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
-			// Special obstacles
-			if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
-			if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
-		} else {
-			hith = ((at1 & 1) || (at2 & 1));
-		}
+				// Special obstacles
+				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
+					if (at1 & 2) player_process_tile (at1, cx1, (PLAYER_COLLISION_TOP - 16)) >> 4, rdm, cy1);
+					if (at2 & 2) player_process_tile (at2, cx1, pry >> 4, rdm, cy2);
+					if (at3 & 2) player_process_tile (at2, cx1, (pry + 15) >> 4, rdm, cy2);
+				#endif				
+			} else {
+				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));
+			}
+		#else
+			cm_two_points ();
+			if ((at1 & 8) || (at2 & 8)) {
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+
+				// Special obstacles
+				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
+					if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
+				#endif				
+			} else {
+				hith = ((at1 & 1) || (at2 & 1));
+			}
+		#endif
 	}
 
 	// Facing

@@ -19,6 +19,9 @@ unsigned char rdct;
 // Used for two-points collision
 
 unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
+#ifdef TALL_PLAYER
+	unsigned char at3;
+#endif
 
 // Sprite related
 

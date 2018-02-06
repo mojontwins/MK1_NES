@@ -49,8 +49,11 @@ const unsigned char * const spr_hs [] = {
 
 // Fixed stuff
 const unsigned char spr_pl_empty [] = {
+#ifdef TALL_PLAYER
+	-4, -16, 0xff, 0, 4, -16, 0xff, 0,
+#endif	
 	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, -8, 0xff, 0,
+	-4, 0, 0xff, 0, 4, 0, 0xff, 0,
 	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
 	128
 };

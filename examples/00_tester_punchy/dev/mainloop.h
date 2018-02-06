@@ -39,8 +39,12 @@ void game_init (void) {
 	msc_clear_flags ();
 #endif
 
+#ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
+#endif
+#ifndef DEACTIVATE_KEYS	
 	pkeys = 0;
+#endif
 
 	half_life = 0;
 	frame_counter = 0;
@@ -106,7 +110,7 @@ void prepare_scr (void) {
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
-	oam_index = 4+24; // 4 + what the player takes.
+	oam_index = 4+PLAYER_SPRITE_SIZE; // 4 + what the player takes.
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
 	player_render ();
 	enems_move ();
@@ -216,7 +220,7 @@ void game_loop (void) {
 			break;
 		}
 
-		oam_index = 4+24; // 4 + what the player takes.
+		oam_index = 4+PLAYER_SPRITE_SIZE; // 4 + what the player takes.
 		
 		if (pstate) {
 			pctstate --;

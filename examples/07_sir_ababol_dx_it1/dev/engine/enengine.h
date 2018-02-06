@@ -151,10 +151,13 @@ void enems_load (void) {
 				case 2:
 				case 3:
 				case 4:
+	#ifdef ENABLE_SHOOTIES
+				case 12:
+	#endif
 					// Linear enems.			
-
-					// HL conversion
 					en_s [gpit] = (en_t [gpit] - 1) << 2;
+
+					// HL conversion		
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
@@ -191,8 +194,6 @@ void enems_load (void) {
 	#ifdef ENABLE_PURSUERS		
 				case 7:
 					// Pursuers
-
-					en_s [gpit] = (TYPE_7_FIXED_SPRITE - 1) << 2;
 					en_alive [gpit] = 0;
 					en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
 		#ifdef ENABLE_GENERATORS
@@ -302,7 +303,7 @@ void enems_move (void) {
 			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
-			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
+			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit])+4) >> 3) & 1;
 
 			// Means don't render (can/will be overwritten):
 			en_spr = 0xff;	

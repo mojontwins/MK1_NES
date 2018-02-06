@@ -15,7 +15,7 @@
 #define PLAYER_REFILL			1		// Recarga de vida.
 
 //#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				2
+#define MAX_LEVELS				1
 
 #ifndef MULTI_LEVEL
 
@@ -63,7 +63,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -76,16 +76,21 @@
 
 // Bounding box size
 // -----------------
-                                        // Comment both for normal 16x16 bounding box
+
+#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
-#define SMALL_COLLISION               	// 8x8 centered collision instead of 12x12
+
+// This defines how the player will collide with enemies. Needs rehash.
+//#define SMALL_COLLISION               // 8x8 centered collision instead of 12x12
+#define TALL_COLLISION					// 8x12 bottom collision instead of 12x12
+// (Comment both for ol' good unforgiving collision)
 
 // General directives:
 // -------------------
 
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
@@ -131,7 +136,7 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			16
+#define SPRITE_BADDIE_DYING 			28
 #define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
 
 // Fanties / Homing fanties
@@ -167,10 +172,10 @@
 // If you enable monococos, I think you should enable cocos:
 
 //#define ENABLE_COCOS
-#define COCOS_MAX						3
-#define COCO_V							192
+#define COCOS_MAX						4
+#define COCO_V							128
 #define COCO_PATTERN					0
-#define COCO_PALETTE 					3
+#define COCO_PALETTE 					0
 #define COCO_FAIR_D						32
 
 // Pezons
@@ -199,6 +204,14 @@
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
 #define MONOCOCO_FIRE_COCO_AT			MONOCOCO_BASE_TIME_ONBOARD/2
+
+// Shooties
+
+#define ENABLE_SHOOTIES
+#define SHOOTIES_BASE_SPRID				22
+#define SHOOTIES_SHOOT_OFFS_X			16
+#define SHOOTIES_SHOOT_OFFS_Y			-2
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Carry directives
 
@@ -363,15 +376,18 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	10
 
 	#define CELL_IDLE			0
-	#define CELL_WALK_CYCLE		1
-	#define CELL_AIRBORNE		5
+	#define CELL_WALK_INIT		1
+	#define CELL_WALK_CYCLE		2
+	//#define CELL_AIRBORNE		5
 	//#define CELL_SWIM_CYCLE		6
 
-	//#define CELL_ASCENDING		5
-	//#define CELL_DESCENDING		6
+	#define CELL_ASCENDING		6
+	#define CELL_DESCENDING		7
+	#define CELL_PUNCHING		8
+	#define CELL_KICKING		9
 
 #endif
 
@@ -384,9 +400,21 @@
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS
+#define COCOS_ENABLE_AIMED
+#endif
+
+#ifdef ENABLE_SHOOTIES
+#define ENABLE_COCOS
+#define COCOS_ENABLE_LINEAR
 #endif
 
 #ifdef ENABLE_EASY_OBJECTS
 #define HOTSPOTS_DYNAMIC
 #define CARRY_ONE_HS_OBJECT
+#endif
+
+#ifdef TALL_PLAYER
+#define PLAYER_SPRITE_SIZE 32
+#else
+#define PLAYER_SPRITE_SIZE 24
 #endif

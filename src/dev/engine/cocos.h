@@ -11,7 +11,8 @@ void cocos_init (void) {
 	coco_slots_i = COCOS_MAX;
 }
 
-void cocos_shoot (void) {
+#ifdef COCOS_ENABLE_AIMED
+void cocos_shoot_aimed (void) {
 	// Create a coco @ (rdx, rdy)
 	
 	// Shoot towards player
@@ -30,6 +31,7 @@ void cocos_shoot (void) {
 		coco_on [coco_it] = 1;
 	}	
 }
+#endif
 
 void cocos_destroy (void) {
 	coco_on [coco_it] = 0;
