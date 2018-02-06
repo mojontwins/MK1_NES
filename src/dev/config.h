@@ -207,11 +207,11 @@
 
 // Shooties
 
-#define ENABLE_SHOOTIES
-#define SHOOTIES_BASE_SPRID				16
+//#define ENABLE_SHOOTIES
+#define SHOOTIES_BASE_SPRID				22
 #define SHOOTIES_SHOOT_OFFS_X			16
-#define SHOOTIES_SHOOT_OFFS_Y			6
-#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&(rand8()&0x1f)==0)
+#define SHOOTIES_SHOOT_OFFS_Y			-2
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Carry directives
 
@@ -399,6 +399,12 @@
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS
+#define COCOS_ENABLE_AIMED
+#endif
+
+#ifdef ENABLE_SHOOTIES
+#define ENABLE_COCOS
+#define COCOS_ENABLE_LINEAR
 #endif
 
 #ifdef ENABLE_EASY_OBJECTS

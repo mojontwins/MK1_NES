@@ -153,8 +153,9 @@ void enems_load (void) {
 				case 4:
 	#ifdef ENABLE_SHOOTIES
 				case 12:
+					en_ct [gpit] = 0;
 	#endif
-					// Linear enems.			
+					// Linear enems.
 					en_s [gpit] = (en_t [gpit] - 1) << 2;
 
 					// HL conversion		
@@ -313,7 +314,13 @@ void enems_move (void) {
 				case 2:
 				case 3:
 				case 4:
+#ifdef ENABLE_SHOOTIES
+				case 12:
+#endif
 					#include "engine/enemmods/enem_linear.h"
+#ifdef ENABLE_SHOOTIES
+					#include "engine/enemmods/enem_shooty.h"
+#endif				
 					break;
 
 #ifdef ENABLE_FANTY					

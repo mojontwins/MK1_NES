@@ -193,7 +193,7 @@ void player_move (void) {
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (i & PAD_B) {
+		if (i & PAD_A) {
 			pvy -= PLAYER_AY_JETPAC;
 			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
 		}

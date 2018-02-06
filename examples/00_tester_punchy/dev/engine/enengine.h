@@ -155,7 +155,7 @@ void enems_load (void) {
 				case 12:
 					en_ct [gpit] = 0;
 	#endif
-					// Linear enems.		
+					// Linear enems.
 					en_s [gpit] = (en_t [gpit] - 1) << 2;
 
 					// HL conversion		
