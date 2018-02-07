@@ -516,37 +516,22 @@ void enems_move (void) {
 #endif
 
 			// kick / punch
-#ifdef PLAYER_PUNCHES
-			if (ppunching) {
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+			if (phitteract) {
 				if (
-					en_x [gpit] + 7 >= ppunchx && en_x [gpit] <= ppunchx + 7 &&
+					en_x [gpit] + 7 >= phitterx && en_x [gpit] <= phitterx + 7 &&
 #ifdef TALL_COLLISION
-					ppunchy + 15 >= en_y [gpit] &&
+					phittery + 15 >= en_y [gpit] &&
 #else
-					ppunchy + 7 >= en_y [gpit] &&
+					phittery + 7 >= en_y [gpit] &&
 #endif					
-					ppunchy <= en_y [gpit] + 7
+					phittery <= en_y [gpit] + 7
 				) {
 					enems_hit ();
+					phitteract = 0;
 				}
 			} 
 #endif
-
-#ifdef PLAYER_KICKS
-			if (pkicking) {
-				if (
-					en_x [gpit] + 7 >= pkickx && en_x [gpit] <= pkickx + 7 &&
-#ifdef TALL_COLLISION
-					pkicky + 15 >= en_y [gpit] &&
-#else
-					pkicky + 7 >= en_y [gpit] &&
-#endif					
-					pkicky <= en_y [gpit] + 7
-				) {
-					enems_hit ();
-				}
-			}
-#endif			
 
 			// Collide <-> player
 			if (

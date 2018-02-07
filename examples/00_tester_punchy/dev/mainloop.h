@@ -113,7 +113,7 @@ void prepare_scr (void) {
 	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
 #ifdef PLAYER_PUNCHES
-	ppunchy = 240; ppunching = 0;
+	phittery = 240; ppunching = 0;
 #endif	
 
 	player_render ();

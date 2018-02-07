@@ -7,8 +7,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Map dimmensions in screens
+#define MAP_W 					16		//
+#define MAP_H					1		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
@@ -22,7 +22,7 @@
 	// If you aim for a single level ROM, fill in those:
 
 	#define SCR_INI					1		// Initial screen
-	#define PLAYER_INI_X			3		//
+	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
@@ -109,14 +109,14 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE			1		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_MAX_FRAMES	16		// Frames to show explosion
 #define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
-#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+#define BREAKABLE_BREAKING		31		// Tile to display while breaking
+//#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4

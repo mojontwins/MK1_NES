@@ -22,7 +22,7 @@ const unsigned char * const spr_player [] = {
 	sspl_09_b,										// Kick (airborne)	
 	
 	// offset 20
-	sspl_0A_a, sspl_0B_a, sspl_0A_b, sspl_0B_b 		// Climbing
+	sspl_0A, sspl_0B, sspl_0C, sspl_0B 		 		// Climbing
 };
 
 // Enemy metasprites

@@ -149,11 +149,16 @@ unsigned char pammo, pfiring;
 #endif
 
 #ifdef PLAYER_PUNCHES
-	unsigned char ppunching, ppunchx, ppunchy;
+	unsigned char ppunching;
 #endif
 
 #ifdef PLAYER_KICKS
-	unsigned char pkicking, pkickx, pkicky;
+	unsigned char pkicking;
+#endif
+
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	unsigned char phitterx, phittery;
+	unsigned char phitteract;
 #endif
 
 // Current level

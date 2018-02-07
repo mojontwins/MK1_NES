@@ -77,8 +77,8 @@ void player_render (void) {
 			spr_player [psprid]
 		);
 	/*
-	if (ppunching) oam_index = oam_spr (ppunchx, ppunchy + SPRITE_ADJUST, 0, 0, oam_index);
-	if (pkicking) oam_index = oam_spr (pkickx, pkicky + SPRITE_ADJUST, 0, 0, oam_index);
+	if (ppunching) oam_index = oam_spr (phitterx, phittery + SPRITE_ADJUST, 0, 0, oam_index);
+	if (pkicking) oam_index = oam_spr (phitterx, phittery + SPRITE_ADJUST, 0, 0, oam_index);
 	*/
 }
 
@@ -134,7 +134,12 @@ void player_move (void) {
 	// ******************
 
 	#ifdef ENABLE_LADDERS
-		ponladder = (!pj && (ATTR((prx + 4) >> 4, (pry - 1) >> 4) == 32));
+		//ponladder = (!pj && (ATTR((prx + 4) >> 4, (pry - 1) >> 4) == 32));
+		cx1 = prx >> 4;
+		cx2 = (prx + 7) >> 4;
+		cy1 = cy2 = (pry + 15) >> 4;
+		cm_two_points ();
+		ponladder = (!pj && at1 == 32 && at2 == 32);
 	#endif
 
 	// ********
@@ -549,30 +554,41 @@ void player_move (void) {
 			#endif
 
 			#ifdef PLAYER_PUNCHES
-				if (ppossee && ppunching == 0) ppunching = 16;				
+				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; }				
 			#endif
 
 			#ifdef PLAYER_KICKS
-				if (!ppossee && pkicking == 0) pkicking = 16;				
+				if (!ppossee && pkicking == 0) { pkicking = 16; phitteract = 1; }
 			#endif
 		} 
 	#endif
 
 	#ifdef PLAYER_PUNCHES
 		if (ppunching) {
-			ppunching --;
-			ppunchx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
-			ppunchy = pry + PLAYER_PUNCH_OFFS_Y;
-		} else ppunchy = 0xff;
+			ppunching --; if (ppunching == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
+			phittery = pry + PLAYER_PUNCH_OFFS_Y;
+		} 
 	#endif
 
 	#ifdef PLAYER_KICKS
 		if (pkicking) {
-			pkicking --;
-			pkickx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
-			pkicky = pry + PLAYER_KICK_OFFS_Y;
+			pkicking --; if (pkicking == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
+			phittery = pry + PLAYER_KICK_OFFS_Y;
 			if (ppossee) pkicking = 0;
-		} else pkicky = 0xff;
+		} 
+	#endif
+
+	#if defined (ENABLE_BREAKABLE) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+		if (phitteract) {
+			cx1 = (phitterx + 4) >> 4;
+			cy1 = (phittery + 4 - 16) >> 4;
+			if (ATTR(cx1, cy1) & 16) {
+				breakable_break (cx1, cy1);
+				phitteract = 0;
+			}
+		}
 	#endif
 
 	// **********

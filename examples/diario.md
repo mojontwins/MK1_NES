@@ -1847,3 +1847,13 @@ Los conveyors sólo se detectan al colisionar hacia abajo, al igual que los slip
 
 Creo que puedo detectar bien las escaleras con un simple `== 32` al principio de todo, ya que en este punto estaré bien posicionado al pixel sin colisionar. Voy a probarlo estableciendo un indicador de paleta.
 
+~~
+
+Hostia, lo he hecho entero y no he escrito nada. Hay que dejarlo fino. Ahora detecto la escalera con el pixel central inferior, pero a lo mejor debería detectar dos pixeles (y hacer un AND).
+
+Además, no debo mostrar los frames de escalera si estoy caminando sobre suelo.
+
+~~
+
+Hecho, e integrados los breakable. Necesito efectos de sonido. Y necesito algún tipo de efecto de hostiazo, me refiero a cuando le damos a los enemigos que retrocedan algunos pixeles o algo. Pero tengo que pensar la forma de hacerlo y antes quiero dejar el modulo de enemigos más limpio.
+

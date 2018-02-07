@@ -8,7 +8,8 @@
 // Use player variables p* and end up with a correct value
 // in psprid.
 
-if (ponladder) {
+rda = (ATTR((prx + 4) >> 4, pry >> 4) & 12);
+if (ponladder && !rda) {
 	if (pvy) ponladderctr ++;
 	psprid = CELL_CLIMB_CYCLE + ((ponladderctr >> 2) & 3);
 } else {
@@ -16,7 +17,7 @@ if (ponladder) {
 		psprid = CELL_PUNCHING;
 	} else if (pkicking) {
 		psprid = CELL_KICKING;
-	} else if (ppossee || pgotten) {
+	} else if (rda || ppossee || pgotten) {
 		// On floor
 		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
