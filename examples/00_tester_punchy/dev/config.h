@@ -21,7 +21,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
+	#define SCR_INI					1		// Initial screen
 	#define PLAYER_INI_X			3		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -102,13 +102,13 @@
 // Extra special tiles
 // -------------------
 
-// Quicksands, beh = 2.
+// Quicksands, beh == 2.
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
 
 //#define ENABLE_QUICKSANDS
 
-// Breakable, beh = 16
+// Breakable, beh & 16
 //#define ENABLE_BREAKABLE				// Breakable walls
 #define BREAKABLE_LIFE	2				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
@@ -118,17 +118,21 @@
 #define BREAKABLE_BREAKING		8		// Tile to display while breaking
 #define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
-// Conveyors, beh = 32 [+1]
+// Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
 //#define ENABLE_CONVEYORS
 
-// Slippery, beh = 64. 
+// Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4
 // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
 //#define ENABLE_SLIPPERY
+
+// Ladders, beh == 32
+
+#define ENABLE_LADDERS
 
 // Enemy types and definitions
 // ---------------------------
@@ -356,6 +360,8 @@
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
 #define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
 
+#define PLAYER_VY_LADDERS		96
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -401,6 +407,7 @@
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 
+	#define CELL_CLIMB_CYCLE	20
 #endif
 
 // Inner workings. Don't touch.

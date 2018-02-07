@@ -8,26 +8,30 @@
 // Use player variables p* and end up with a correct value
 // in psprid.
 
-if (ppunching) {
-	psprid = CELL_PUNCHING;
-} else if (pkicking) {
-	psprid = CELL_KICKING;
-} else if (ppossee || pgotten) {
-	// On floor
-	if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-		psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-	} else if (pvx) {
-		psprid = CELL_WALK_INIT;
-	} else {
-		psprid = CELL_IDLE;
-	}
+if (ponladder) {
+	if (pvy) ponladderctr ++;
+	psprid = CELL_CLIMB_CYCLE + ((ponladderctr >> 2) & 3);
 } else {
-	//psprid = CELL_AIRBORNE;
-	if (pvy < PLAYER_VY_FALLING_MIN)
-		psprid = CELL_ASCENDING;
-	else
-		psprid = CELL_DESCENDING;	
+	if (ppunching) {
+		psprid = CELL_PUNCHING;
+	} else if (pkicking) {
+		psprid = CELL_KICKING;
+	} else if (ppossee || pgotten) {
+		// On floor
+		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+		} else if (pvx) {
+			psprid = CELL_WALK_INIT;
+		} else {
+			psprid = CELL_IDLE;
+		}
+	} else {
+		//psprid = CELL_AIRBORNE;
+		if (pvy < PLAYER_VY_FALLING_MIN)
+			psprid = CELL_ASCENDING;
+		else
+			psprid = CELL_DESCENDING;	
+	}
+
+	psprid += pfacing;
 }
-
-psprid += pfacing;
-

@@ -3793,7 +3793,7 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 
 			Case "METASPRITESET"
 				outputPatterns = 0
-				metaSpriteCounter = 0
+				'metaSpriteCounter = 0
 
 				xOrg = Val (tokens (1))
 				yOrg = Val (tokens (2))

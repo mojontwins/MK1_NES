@@ -1797,3 +1797,53 @@ Un problema muy grande es que no me quedan bits libres. Siempre puedo reaprovech
 
 [Otra cosa que tengo que hacer es integrar las hostias y patadas con los bloques que se rompen]
 
+20180207
+--------
+
+Tareas asín:
+
+[ ] Adecentar el módulo de enemigos, con pies de plomo. De todos modos, tengo testers bien montados y sólo sería tocar el módulo de enemigos.
+[ ] Integrar hostias con bloques que se strozan.
+[ ] Implementar las escaleras.
+
+Más divagaciones escaleras: Las escaleras pueden complicarse ad infinitum pero no es mi intención hacerlo en MK1. Vamos a hacer las escaleras más sencillas posibles: las que no tienen principio o fin "en el aire", sino en obstáculos:
+
+```
+	XXXXXXXXXXXX
+	    H
+	    H
+	XXXXH  XXXXX
+	    H
+	    H
+	XXXXXXXXXXXX
+```
+
+Aquí no hay casos límites, y todo se reduce a una detección de lo que pasa en el centro inferior del rectángulo de colisión del muñaco. Si este pixel está dentro de un tile escalera (que debe ser walkable!), se pasa al modo escalera:
+
+- Se puede andar a izquierda y derecha y saltar, of course. Si saltamos, NO estamos en modo escalera, ojal.
+- Se puede andar arriba y abajo.
+- En IDLE se conserva el frame anterior.
+- La animación es la de escaleras.
+- No aplica la gravedad.
+- No se puede pegar.
+
+Es parecido a la detección de Nadar en MK2: se debe hacer antes de nada y modificar el comportamiento del motor.
+
+El tema ahora es cómo codificarlo. Lo bueno es que *no tiene sentido que los tiles escalera sean otra cosa*, por lo que se puede dar un valor concreto y detectar con `==`. Pero debe elegirse de forma que no colisione.
+
+Si por ejemplo hago, digamos, conveyor+2, y ajusto conveyor para que si el bit 1 está ON no se detecte, podría encasquetarlo y compatibilizarlo, por poner un ejemplo. Lo malo es que esto me complica los quicksands. Pero los quicksands tampoco deberían combinar, con lo que puedo detectar los quicksands con `== 2` en lugar de con `& 2`.
+
+~~
+
+Creo que voy a empezar limitando bien los estados exclusivos en el motor, para luego integrar los bloques que se rompen con las hostias.
+
+Creo que quizá empiece a ser buena idea que las hostias sean "proyectiles especiales", o algo así, para no tener que integrar tanto. Hum...
+
+Esto me dejaría fumarme la detección de colisión con los enemigos, que es código redundante, y simplificar un poco los enemigos... Pero antes me gustaría que estuviesen algo más "limpitos". Y con los arrays sacados a variables y todo.
+
+~~
+
+Los conveyors sólo se detectan al colisionar hacia abajo, al igual que los slippery. Esto me está liberando `& 32` y `& 64` para tiles caminables, creo. De todos modos, ya he exclusivizado `== 2` los quicksands.
+
+Creo que puedo detectar bien las escaleras con un simple `== 32` al principio de todo, ya que en este punto estaré bien posicionado al pixel sin colisionar. Voy a probarlo estableciendo un indicador de paleta.
+

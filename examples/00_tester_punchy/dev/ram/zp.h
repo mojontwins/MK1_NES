@@ -72,8 +72,14 @@ unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
+
 #if defined (ENABLE_EASY_OBJECTS)
-unsigned char pinv;
+	unsigned char pinv;
+#endif
+
+#ifdef ENABLE_LADDERS
+	unsigned char ponladder;
+	unsigned char ponladderctr;
 #endif
 
 #ifdef PLAYER_TOP_DOWN

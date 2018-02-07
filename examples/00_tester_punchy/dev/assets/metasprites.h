@@ -19,8 +19,10 @@ const unsigned char * const spr_player [] = {
 	sspl_02_b, sspl_03_b, sspl_04_b, sspl_05_b,		// Walk cycle (offset 1)
 	sspl_06_b, sspl_07_b,							// Airborne, up/down (offset 5, 6)
 	sspl_08_b,										// Punch (standing)
-	sspl_09_b										// Kick (airborne)	
+	sspl_09_b,										// Kick (airborne)	
 	
+	// offset 20
+	sspl_0A_a, sspl_0B_a, sspl_0A_b, sspl_0B_b 		// Climbing
 };
 
 // Enemy metasprites
