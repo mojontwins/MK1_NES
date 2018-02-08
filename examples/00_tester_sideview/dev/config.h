@@ -150,6 +150,8 @@
 #define ENEMS_EXPLODING_CELL 			73 // If not defined ENEMS_FLICKER, show this explosion frame
 #define ENEMS_OCCLUDING_CELL			72 // If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			16 // # frames to stay frozen after hit
+// Beware: only activate this if enemies are killable by any means:
+//#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
 
 // Fanties / Homing fanties
 
@@ -271,7 +273,7 @@
 #define PLAYER_BULLET_Y_OFFSET	0		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
+#define PLAYER_MIN_KILLABLE 	1		// If defined, only enemies >= N can be killed.
 
 //#define MAX_AMMO				99		// If defined, ammo is not infinite!
 #define AMMO_REFILL				50		// use hotspots refill this amount of ammo
@@ -418,10 +420,8 @@
 
 // Inner workings. Don't touch.
 
-#define MONOCOCO_X 				en_x
-#define MONOCOCO_Y				en_y
-#define MONOCOCO_COUNTER 		en_my
-#define MONOCOCO_STATE 			en_mx
+#define MONOCOCO_COUNTER 		_en_my
+#define MONOCOCO_STATE 			_en_mx
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS

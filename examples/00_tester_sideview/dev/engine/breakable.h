@@ -22,7 +22,7 @@
 #endif
 
 void breakable_break (unsigned char x, unsigned char y) {
-	gpaux = x + (y << 4);
+	gpaux = COORDS (x, y);
 	if (brk_buff [gpaux] < BREAKABLE_LIFE) {
 		brk_buff [gpaux] ++;
 	} else {
@@ -35,6 +35,7 @@ void breakable_break (unsigned char x, unsigned char y) {
 				brkx [gpit] = x;
 				brky [gpit] = y;
 				map_set (x, y, BREAKABLE_BREAKING);	// Break tile!
+				break;								// HA HA HA
 			}
 		}
 #else

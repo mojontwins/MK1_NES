@@ -6,32 +6,32 @@
 // my => emerging sense. 
 // mx => moving sense.
 
-rda = (en_x1 [gpit] == en_x2 [gpit]);
+rda = (_en_x1 == _en_x2);
 
 switch (en_alive [gpit]) {
 	case 0: // Idling. Goes from 2->1 (backwards).
 		if (rda) {
-			en_y [gpit] -= en_mx [gpit];
-			if (en_y [gpit] == en_y1 [gpit]) {
+			_en_y -= _en_mx;
+			if (_en_y == _en_y1) {
 				en_alive [gpit] = 1;
-				en_ct [gpit] = SAW_EMERGING_STEPS;
+				_en_ct = SAW_EMERGING_STEPS;
 			}
 		} else {
-			en_x [gpit] -= en_mx [gpit];
-			if (en_x [gpit] == en_x1 [gpit]) {
+			_en_x -= _en_mx;
+			if (_en_x == _en_x1) {
 				en_alive [gpit] = 1;
-				en_ct [gpit] = SAW_EMERGING_STEPS;
+				_en_ct = SAW_EMERGING_STEPS;
 			}
 		}
 		break;
 	case 1: // Emerging.
 		if (half_life) {
-			if (en_ct [gpit] --) {
+			if (_en_ct --) {
 				if (rda) {
 					// Vertical
-					en_x [gpit] += en_my [gpit];
+					_en_x += _en_my;
 				} else {
-					en_y [gpit] += en_my [gpit];
+					_en_y += _en_my;
 				}
 			} else {
 				en_alive [gpit] = 2;
@@ -40,27 +40,27 @@ switch (en_alive [gpit]) {
 		break;
 	case 2: // Moving 1->2 (onwards)
 		if (rda) {
-			en_y [gpit] += en_mx [gpit];
-			if (en_y [gpit] == en_y2 [gpit]) {
+			_en_y += _en_mx;
+			if (_en_y == _en_y2) {
 				en_alive [gpit] = 3;
-				en_ct [gpit] = SAW_EMERGING_STEPS;
+				_en_ct = SAW_EMERGING_STEPS;
 			}
 		} else {
-			en_x [gpit] += en_mx [gpit];
-			if (en_x [gpit] == en_x2 [gpit]) {
+			_en_x += _en_mx;
+			if (_en_x == _en_x2) {
 				en_alive [gpit] = 3;
-				en_ct [gpit] = SAW_EMERGING_STEPS;
+				_en_ct = SAW_EMERGING_STEPS;
 			}
 		}
 		break;
 	case 3: // Sinking
 		if (half_life) {
-			if (en_ct [gpit] --) {
+			if (_en_ct --) {
 				if (rda) {
 					// Vertical
-					en_x [gpit] -= en_my [gpit];
+					_en_x -= _en_my;
 				} else {
-					en_y [gpit] -= en_my [gpit];
+					_en_y -= _en_my;
 				}
 			} else {
 				en_alive [gpit] = 0;
@@ -71,9 +71,9 @@ switch (en_alive [gpit]) {
 
 // Occlusion
 if (rda) {
-	rdx = en_x1 [gpit]; rdy = en_y [gpit];
+	rdx = _en_x1; rdy = _en_y;
 } else {
-	rdx = en_x [gpit]; rdy = en_y1 [gpit];
+	rdx = _en_x; rdy = _en_y1;
 }
 
 oam_index = oam_meta_spr (
@@ -85,4 +85,4 @@ oam_index = oam_meta_spr (
 // Frame selection
 
 en_spr = SAW_BASE_SPRID + half_life;
-en_facing [gpit] = 0;
+_en_facing = 0;

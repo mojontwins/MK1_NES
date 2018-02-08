@@ -1908,14 +1908,13 @@ Para todos los enemigos
 	- en_spr = 0xff;
 	- Gestión de "tocado". Esto está bien.
 	- Si en_t y no está tocado,
-		- Cálculo de pregotten y `en_fr` común. (revisar `en_fr` redundantes)
+		- Cálculo de pregotten y `en_fr` común. **(revisar `en_fr` redundantes)**
 		- Mover según en_t.
 		- `en_spr_id [gpit] = en_spr;`.
 		- Detectar plataformas móviles.
 		- Si el enemigo no es colisionable, salir
-		- Colisionar con el player.
+		- Colisionar con el player / Pisar enemigo
 		- Si el enemigo no es matable, salir
-		- Pisar enemigo
 		- Golpear enemigo
 		- Balear enemigo
 
@@ -1926,4 +1925,12 @@ Esto asume que si no es colisionable, no es matable, lo cual es cierto.
 Antes del remodelado, tho', voy a hacer lo de extraer las variables, porque así el código es más claro y me equivocaré menos.
 
 ~~
+
+Funcionando en `tester_punchy`, que tiene pocos tipos de enemigos. Aquí el ahorro es de **256 bytes**. 
+
+Funcionando en `tester_top_down`, con chicha diferente. Aquí el ahorro es de **1088 bytes**. Joé con los tipo 7.
+
+OJAL: 
+[ ] Hay algo peío con los tiles destructibles que da la cara en `tester_top_down`.
+[ ] Homing fanties don't seem to work!
 

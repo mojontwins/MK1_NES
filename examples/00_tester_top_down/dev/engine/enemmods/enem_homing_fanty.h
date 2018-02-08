@@ -10,25 +10,25 @@
 #endif
 
 // Precalc distance
-rdx = en_x [gpit]; rdy = en_y [gpit]; rdt = distance ();
+rdx = _en_x; rdy = _en_y; rdt = distance ();
 
 // Modify v - always upon state
 
 switch (en_alive [gpit]) {
 	case 0:
 		// Retreating
-		enf_vx [gpit] = add_sign (en_x1 [gpit] - en_x [gpit], FANTY_V_RETREAT);
-		enf_vy [gpit] = add_sign (en_y1 [gpit] - en_y [gpit], FANTY_V_RETREAT);
+		_enf_vx = add_sign (_en_x1 - _en_x, FANTY_V_RETREAT);
+		_enf_vy = add_sign (_en_y1 - _en_y, FANTY_V_RETREAT);
 		if (rdt < FANTY_DISTANCE) en_alive [gpit] = 1;
 		break;
 	case 1:
 		// Pursuing
-		enf_vx [gpit] = saturate (enf_vx [gpit] + add_sign (prx - en_x [gpit], FANTY_A), FANTY_MAXV);
-		enf_vy [gpit] = saturate (enf_vy [gpit] + add_sign (pry - en_y [gpit], FANTY_A), FANTY_MAXV);
+		_enf_vx = saturate (_enf_vx + add_sign (prx - _en_x, FANTY_A), FANTY_MAXV);
+		_enf_vy = saturate (_enf_vy + add_sign (pry - _en_y, FANTY_A), FANTY_MAXV);
 		if (rdt > FANTY_DISTANCE) {
 			// Adjust to pixel
-			enf_x [gpit] = en_x [gpit] << 6;
-			enf_y [gpit] = en_y [gpit] << 6;
+			_enf_x = _en_x << 6;
+			_enf_y = _en_y << 6;
 			en_alive [gpit] = 0;
 		}
 		break;
@@ -36,29 +36,29 @@ switch (en_alive [gpit]) {
 
 // Horizontal
 
-enf_x [gpit] += enf_vx [gpit]; 
-if (enf_x [gpit] < 0) enf_x [gpit] = 0;
-if (enf_x [gpit] > 15360) enf_x [gpit] = 15360;
-en_x [gpit] = enf_x [gpit] >> 6;
+_enf_x += _enf_vx; 
+if (_enf_x < 0) _enf_x = 0;
+if (_enf_x > 15360) _enf_x = 15360;
+_en_x = _enf_x >> 6;
 
 #ifdef FANTY_COLLIDES
 
-	if (enf_vx [gpit]) {
-		cy1 = (en_y [gpit] + 4) >> 4;
-		cy2 = (en_y [gpit] + 11) >> 4;
+	if (_enf_vx) {
+		cy1 = (_en_y + 4) >> 4;
+		cy2 = (_en_y + 11) >> 4;
 
-	if (enf_vx [gpit] > 0) {
-			cx1 = cx2 = (en_x [gpit] + 11) >> 4;
+	if (_enf_vx > 0) {
+			cx1 = cx2 = (_en_x + 11) >> 4;
 			rda = ((cx2 - 1) << 4) + 4;
 		} else {
-			cx1 = cx2 = (en_x [gpit] + 4) >> 4;
+			cx1 = cx2 = (_en_x + 4) >> 4;
 			rda = ((cx1 + 1) << 4) - 4;
 		}
 		cm_two_points ();
 		if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
-			enf_vx [gpit] = -enf_vx [gpit];
-			en_x [gpit] = rda; 
-			enf_x [gpit] = rda << 6;
+			_enf_vx = -_enf_vx;
+			_en_x = rda; 
+			_enf_x = rda << 6;
 		}
 	}
 	
@@ -66,38 +66,38 @@ en_x [gpit] = enf_x [gpit] >> 6;
 
 // Vertical
 
-enf_y [gpit] += enf_vy [gpit]; 
-if (enf_y [gpit] < 0) enf_y [gpit] = 0;
-if (enf_y [gpit] > 11264) enf_y [gpit] = 11264;
-en_y [gpit] = enf_y [gpit] >> 6;
+_enf_y += _enf_vy; 
+if (_enf_y < 0) _enf_y = 0;
+if (_enf_y > 11264) _enf_y = 11264;
+_en_y = _enf_y >> 6;
 
 #ifdef FANTY_COLLIDES
 
-	if (enf_vy [gpit]) {
-		cx1 = (en_x [gpit] + 4) >> 4;
-		cx2 = (en_x [gpit] + 11) >> 4;
+	if (_enf_vy) {
+		cx1 = (_en_x + 4) >> 4;
+		cx2 = (_en_x + 11) >> 4;
 
-	if (enf_vy [gpit] > 0) {	
-			cy1 = cy2 = (en_y [gpit] + 11) >> 4;
+	if (_enf_vy > 0) {	
+			cy1 = cy2 = (_en_y + 11) >> 4;
 			rda = ((cy2 - 1) << 4) + 4;
 		} else {
-			cy1 = cy2 = (en_y [gpit] + 4) >> 4;
+			cy1 = cy2 = (_en_y + 4) >> 4;
 			rda = ((cy1 + 1) << 4) - 4;
 		}
 
 		cm_two_points ();
 		if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
-			enf_vy [gpit] = -enf_vy [gpit];
-			en_y [gpit] = rda;
-			enf_y [gpit] = rda << 6;
+			_enf_vy = -_enf_vy;
+			_en_y = rda;
+			_enf_y = rda << 6;
 		}
 	}
 
 #endif
 
 #ifdef FANTY_KILLED_BY_TILE
-	cx1 = (en_x [gpit] + 8) >> 4;
-	cy1 = (en_y [gpit] + 8) >> 4;
+	cx1 = (_en_x + 8) >> 4;
+	cy1 = (_en_y + 8) >> 4;
 	cm_two_points ();
 	if (at1 & 1) {
 		en_cttouched [gpit] = 8;
@@ -105,11 +105,11 @@ en_y [gpit] = enf_y [gpit] >> 6;
 	}
 #endif
 
-en_fr = (en_x [gpit] >> 3) & 1;
+en_fr = (_en_x >> 3) & 1;
 
 #ifdef FANTY_WITH_FACING
-	en_facing [gpit] = ((en_x [gpit] < prx) ? 0 : 4);
-	en_spr = FANTY_BASE_SPRID + en_fr + en_facing [gpit];
+	_en_facing = ((_en_x < prx) ? 0 : 4);
+	en_spr = FANTY_BASE_SPRID + en_fr + _en_facing;
 #else
 	en_spr = FANTY_BASE_SPRID + en_fr;
 #endif

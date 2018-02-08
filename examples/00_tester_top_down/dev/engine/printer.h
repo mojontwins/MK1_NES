@@ -96,8 +96,8 @@ void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
 }
 
 void map_set (unsigned char x, unsigned char y, unsigned char n) {
-	map_buff [x + (y << 4)] = n;
-	map_attr [x + (y << 4)] = c_behs [n];
+	map_buff [COORDS (x, y)] = n;
+	map_attr [COORDS (x, y)] = c_behs [n];
 	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
 }
 

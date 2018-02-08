@@ -149,6 +149,9 @@
 //#define ENEMS_OCCLUDING_FRAME			16	// If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
 
+// Beware: only activate this if enemies are killable by any means:
+//#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
+
 // Fanties / Homing fanties
 
 //#define ENABLE_FANTY
@@ -264,20 +267,20 @@
 // Shooting behaviour
 // ------------------
 
-#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
-#define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
-#define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
-#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-#define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define FIRE_MIN_KILLABLE 		3		// If defined, only enemies >= N can be killed.
+#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+#define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
+#define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
+#define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
+#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
+#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 
-#define MAX_AMMO				99		// If defined, ammo is not infinite!
-#define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
-//#define INITIAL_AMMO 			0		// If defined, ammo = X when entering game.
+#define MAX_AMMO						99	// If defined, ammo is not infinite!
+#define AMMO_REFILL						50	// type 3 hotspots refill amo, using tile 20
+//#define INITIAL_AMMO 					0	// If defined, ammo = X when entering game.
 
-#define BULLET_PALETTE			3
-#define BULLET_PATTERN			0		// To paint the bullet. Can be an expresion.
+#define BULLET_PALETTE					3
+#define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
 
 // Scripting
 // ---------
@@ -416,10 +419,8 @@
 
 // Inner workings. Don't touch.
 
-#define MONOCOCO_X 				en_x
-#define MONOCOCO_Y				en_y
-#define MONOCOCO_COUNTER 		en_my
-#define MONOCOCO_STATE 			en_mx
+#define MONOCOCO_COUNTER 		_en_my
+#define MONOCOCO_STATE 			_en_mx
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS

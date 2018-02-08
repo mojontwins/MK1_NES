@@ -125,14 +125,8 @@ void main(void) {
 				pres_game_over ();
 				break;
 			} else {
-#ifdef MULTI_LEVEL
-				level ++;
-				if (level == MAX_LEVELS) 
-#endif
-				{
-					pres_ending ();
-					break;
-				}
+				pres_ending ();
+				break;
 			}
 		}
 	}

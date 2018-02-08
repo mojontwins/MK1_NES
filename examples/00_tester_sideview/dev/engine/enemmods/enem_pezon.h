@@ -5,36 +5,36 @@
 
 // Set occluding sprite @ origin
 oam_index = oam_meta_spr (
-	en_x1 [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
+	_en_x1, _en_y1 + SPRITE_ADJUST, 
 	oam_index, 
 	spr_enems [ENEMS_OCCLUDING_CELL]
 );
 
 switch (en_alive [gpit]) {
 	case 0:	// Idling
-		if (en_mx [gpit]) {
-			en_mx [gpit] --;
+		if (_en_mx) {
+			_en_mx --;
 		} else {
 			en_alive [gpit] = 1;
-			enf_y [gpit] = en_y1 [gpit] << 6;
-			enf_vy [gpit] = -PEZON_THRUST;
+			_enf_y = _en_y1 << 6;
+			_enf_vy = -PEZON_THRUST;
 		}
 		break;
 
 	case 1: // on air
-		enf_vy [gpit] += PEZON_G;
-		if (enf_vy [gpit] > PEZON_VY_FALLING_MAX) enf_vy [gpit] = PEZON_VY_FALLING_MAX;
-		enf_y [gpit] += enf_vy [gpit];
-		en_y [gpit] = enf_y [gpit] >> 6;
+		_enf_vy += PEZON_G;
+		if (_enf_vy > PEZON_VY_FALLING_MAX) _enf_vy = PEZON_VY_FALLING_MAX;
+		_enf_y += _enf_vy;
+		_en_y = _enf_y >> 6;
 
-		if (en_y [gpit] >= en_y1 [gpit]) {
+		if (_en_y >= _en_y1) {
 			en_alive [gpit] = 0;
-			en_mx [gpit] = en_my [gpit];
+			_en_mx = _en_my;
 			
 		} else {
-			en_spr = PEZONS_BASE_SPRID + (enf_vy [gpit] >= -64);
+			en_spr = PEZONS_BASE_SPRID + (_enf_vy >= -64);
 		}
 		break;
 }
 
-en_facing [gpit] = 0;
+_en_facing = 0;
