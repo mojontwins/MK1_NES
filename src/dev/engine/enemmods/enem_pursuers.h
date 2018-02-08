@@ -7,78 +7,78 @@ switch (en_alive [gpit]) {
 	case 0:
 		// IDLE
 
-		if (en_ct [gpit]) {
-			en_ct [gpit] --; en_y [gpit] = 240;
+		if (_en_ct) {
+			_en_ct --; _en_y = 240;
 		} else {
 			en_alive [gpit] = 1;
-			en_x [gpit] = en_x1 [gpit];
-			en_y [gpit] = en_y1 [gpit];
+			_en_x = _en_x1;
+			_en_y = _en_y1;
 			en_rawv [gpit] = 1 << (rand8 () % 5);
 			if (en_rawv [gpit] > 4) en_rawv [gpit] = 1;
 			if (en_rawv [gpit] == 1) en_status [gpit] = 1; else en_rawv [gpit] >>= 1;
-			en_ct [gpit] = 50 + (rand8 () & 31);
+			_en_ct = 50 + (rand8 () & 31);
 		}
 		break;
 	case 1:
 		// Appearing
 		en_spr = ENEMS_EXPLODING_CELL;
-		if (en_ct [gpit]) en_ct [gpit] --; else en_alive [gpit] = 2;
+		if (_en_ct) _en_ct --; else en_alive [gpit] = 2;
 		break;
 	case 2:
 		// Pursuing
 
 		if (pstate == EST_NORMAL && (!en_status [gpit] || half_life)) {
-			en_mx [gpit] = add_sign (((prx >> 2) << 2) - en_x [gpit], en_rawv [gpit]);
-			en_my [gpit] = add_sign (((pry >> 2) << 2) - en_y [gpit], en_rawv [gpit]);
+			_en_mx = add_sign (((prx >> 2) << 2) - _en_x, en_rawv [gpit]);
+			_en_my = add_sign (((pry >> 2) << 2) - _en_y, en_rawv [gpit]);
 
 			// Vertical
 
-			en_y [gpit] += en_my [gpit];
+			_en_y += _en_my;
 
 #ifdef WALLS_STOP_ENEMIES
 			// Collision detection
 
-			if (en_my [gpit]) {
-				cx1 = (en_x [gpit] + 4) >> 4;
-				cx2 = (en_x [gpit] + 11) >> 4;
+			if (_en_my) {
+				cx1 = (_en_x + 4) >> 4;
+				cx2 = (_en_x + 11) >> 4;
 
-				if (en_my [gpit] < 0) {
-					cy1 = cy2 = (en_y [gpit] + 8) >> 4;
+				if (_en_my < 0) {
+					cy1 = cy2 = (_en_y + 8) >> 4;
 					rda = ((cy1 + 1) << 4) - 8;
 				} else {
-					cy1 = cy2 = (en_y [gpit] + 15) >> 4;
+					cy1 = cy2 = (_en_y + 15) >> 4;
 					rda = (cy1 - 1) << 4;
 				}
 
 				cm_two_points ();
 				if (at1 || at2) {
-					en_y [gpit] = rda;
+					_en_y = rda;
 				}
 			}
 #endif
 
 			// Horizontal
 
-			en_x [gpit] += en_mx [gpit];
+			_en_x += _en_mx;
 
 #ifdef WALLS_STOP_ENEMIES
 			// Collision detection
 
-			if (en_mx [gpit]) {
-				cy1 = (en_y [gpit] + 8) >> 4;
-				cy2 = (en_y [gpit] + 15) >> 4;
+			if (_en_mx) {
+				cy1 = (_en_y + 8) >> 4;
+				cy2 = (_en_y + 15) >> 4;
 	
-				if (en_mx [gpit] < 0) {
-					cx1 = cx2 = (en_x [gpit] + 4) >> 4;
+				if (_en_mx < 0) {
+					cx1 = cx2 = (_en_x + 4) >> 4;
 					rda = ((cx1 + 1) << 4) - 4;
 				} else {
-					cx1 = cx2 = (en_x [gpit] + 11) >> 4;
+					cx1 = cx2 = (_en_x + 11) >> 4;
 					rda = ((cx1 - 1) << 4) + 4;
 				}
 
 				cm_two_points ();
 				if (at1 || at2) {
-					en_x [gpit] = rda;
+					_en_x = rda;
 				}
 			}
 #endif
@@ -89,4 +89,4 @@ switch (en_alive [gpit]) {
 		break;
 }					
 
-en_facing [gpit] = 0;
+_en_facing = 0;

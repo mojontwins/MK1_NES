@@ -11,8 +11,17 @@
 
 // Modify v
 
-_enf_vx = saturate (_enf_vx + add_sign (prx - _en_x, FANTY_A), FANTY_MAXV);
-_enf_vy = saturate (_enf_vy + add_sign (pry - _en_y, FANTY_A), FANTY_MAXV);
+if (px < _enf_x) {
+	_enf_vx -= FANTY_A; if (_enf_vx < -FANTY_MAXV) _enf_vx = -FANTY_MAXV;
+} else {
+	_enf_vx += FANTY_A; if (_enf_vx > FANTY_MAXV) _enf_vx = FANTY_MAXV;
+}
+
+if (py < _enf_y) {
+	_enf_vy -= FANTY_A; if (_enf_vy < -FANTY_MAXV) _enf_vy = -FANTY_MAXV;
+} else {
+	_enf_vy += FANTY_A; if (_enf_vy > FANTY_MAXV) _enf_vy = FANTY_MAXV;
+}
 
 // Horizontal
 
@@ -81,7 +90,7 @@ _en_y = _enf_y >> 6;
 	cm_two_points ();
 	if (at1 & 1) {
 		en_cttouched [gpit] = 8;
-		enems_kill (gpit);
+		enems_kill ();
 	}
 #endif
 

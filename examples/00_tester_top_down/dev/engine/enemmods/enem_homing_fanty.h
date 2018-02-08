@@ -17,18 +17,28 @@ rdx = _en_x; rdy = _en_y; rdt = distance ();
 switch (en_alive [gpit]) {
 	case 0:
 		// Retreating
-		_enf_vx = add_sign (_en_x1 - _en_x, FANTY_V_RETREAT);
-		_enf_vy = add_sign (_en_y1 - _en_y, FANTY_V_RETREAT);
+		_enf_vx = ADD_SIGN2 (_en_x1, _en_x, FANTY_V_RETREAT);
+		_enf_vy = ADD_SIGN2 (_en_y1, _en_y, FANTY_V_RETREAT);
 		if (rdt < FANTY_DISTANCE) en_alive [gpit] = 1;
 		break;
 	case 1:
 		// Pursuing
-		_enf_vx = saturate (_enf_vx + add_sign (prx - _en_x, FANTY_A), FANTY_MAXV);
-		_enf_vy = saturate (_enf_vy + add_sign (pry - _en_y, FANTY_A), FANTY_MAXV);
+		if (px < _enf_x) {
+			_enf_vx -= FANTY_A; if (_enf_vx < -FANTY_MAXV) _enf_vx = -FANTY_MAXV;
+		} else {
+			_enf_vx += FANTY_A; if (_enf_vx > FANTY_MAXV) _enf_vx = FANTY_MAXV;
+		}
+
+		if (py < _enf_y) {
+			_enf_vy -= FANTY_A; if (_enf_vy < -FANTY_MAXV) _enf_vy = -FANTY_MAXV;
+		} else {
+			_enf_vy += FANTY_A; if (_enf_vy > FANTY_MAXV) _enf_vy = FANTY_MAXV;
+		}
+
 		if (rdt > FANTY_DISTANCE) {
 			// Adjust to pixel
-			_enf_x = _en_x << 6;
-			_enf_y = _en_y << 6;
+			_enf_x = _en_x << FIXBITS;
+			_enf_y = _en_y << FIXBITS;
 			en_alive [gpit] = 0;
 		}
 		break;
@@ -58,7 +68,7 @@ _en_x = _enf_x >> 6;
 		if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
 			_enf_vx = -_enf_vx;
 			_en_x = rda; 
-			_enf_x = rda << 6;
+			_enf_x = rda << FIXBITS;
 		}
 	}
 	
@@ -89,7 +99,7 @@ _en_y = _enf_y >> 6;
 		if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
 			_enf_vy = -_enf_vy;
 			_en_y = rda;
-			_enf_y = rda << 6;
+			_enf_y = rda << FIXBITS;
 		}
 	}
 
@@ -101,7 +111,7 @@ _en_y = _enf_y >> 6;
 	cm_two_points ();
 	if (at1 & 1) {
 		en_cttouched [gpit] = 8;
-		enems_kill (gpit);
+		enems_kill ();
 	}
 #endif
 

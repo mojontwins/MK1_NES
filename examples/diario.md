@@ -1930,7 +1930,9 @@ Funcionando en `tester_punchy`, que tiene pocos tipos de enemigos. Aquí el ahor
 
 Funcionando en `tester_top_down`, con chicha diferente. Aquí el ahorro es de **1088 bytes**. Joé con los tipo 7.
 
+Funcionando en `tester_sideview`, con un montón de enemigos. Aquí el ahorro es de **2176 bytes**. Cágate lorito.
+
 OJAL: 
 [ ] Hay algo peío con los tiles destructibles que da la cara en `tester_top_down`.
-[ ] Homing fanties don't seem to work!
+[X] Homing fanties don't seem to work!
 

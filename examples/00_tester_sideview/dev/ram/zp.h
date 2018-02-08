@@ -172,3 +172,11 @@ const unsigned char *c_enems;
 const unsigned char *c_hotspots;
 
 unsigned char c_max_bolts;
+
+#ifdef ACTIVATE_SCRIPTING
+	unsigned char sc_x, sc_y, sc_n, sc_c;
+	unsigned char *next_script;
+	unsigned char *script;
+	unsigned char script_result, sc_terminado, sc_continuar;
+#endif
+	

@@ -26,6 +26,7 @@ cd ..\dev
 
 :justcompile
 if [%2]==[noscript] goto :noscript
+if [%1]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
