@@ -76,10 +76,6 @@ void player_render (void) {
 			oam_index, 
 			spr_player [psprid]
 		);
-	/*
-	if (ppunching) oam_index = oam_spr (phitterx, phittery + SPRITE_ADJUST, 0, 0, oam_index);
-	if (pkicking) oam_index = oam_spr (phitterx, phittery + SPRITE_ADJUST, 0, 0, oam_index);
-	*/
 }
 
 void player_kill (void) {
@@ -120,6 +116,20 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
+
+	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+		if (pfrozen) {
+			pfrozen --; 
+			if (pfrozen == 0) {
+			#ifdef PLAYER_PUNCHES
+				ppunching = 0;
+			#endif
+			#ifdef PLAYER_KICKS
+				pkicking = 0;
+			#endif
+			} else return;
+		}
+	#endif
 
 	hitv = hith = 0;
 	pushed_any = 0;
@@ -586,6 +596,7 @@ void player_move (void) {
 			cy1 = (phittery + 4 - 16) >> 4;
 			if (ATTR(cx1, cy1) & 16) {
 				breakable_break (cx1, cy1);
+				pfrozen = PLAYER_FROZEN_FRAMES;
 				phitteract = 0;
 			}
 		}

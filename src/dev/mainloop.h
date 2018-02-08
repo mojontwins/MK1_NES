@@ -110,8 +110,12 @@ void prepare_scr (void) {
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
-	oam_index = 4+PLAYER_SPRITE_SIZE; // 4 + what the player takes.
+	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	phitteract = 0;
+#endif	
+
 	player_render ();
 	enems_move ();
 	if (hrt) hotspots_paint ();
@@ -220,7 +224,7 @@ void game_loop (void) {
 			break;
 		}
 
-		oam_index = 4+PLAYER_SPRITE_SIZE; // 4 + what the player takes.
+		oam_index = 4;
 		
 		if (pstate) {
 			pctstate --;
@@ -234,6 +238,7 @@ void game_loop (void) {
 		#include "mainloop/hotspots.h"
 
 		player_move ();
+		player_render ();
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
@@ -248,7 +253,6 @@ void game_loop (void) {
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();
 #endif
-		player_render ();
 
 		//#include "mainloop/cheat.h"
 

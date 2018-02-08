@@ -7,96 +7,98 @@ crt0.o:
     VECTORS           Offs = 000000   Size = 000006
     CHARS             Offs = 000000   Size = 002000
 game.o:
-    CODE              Offs = 000000   Size = 003A51
-    RODATA            Offs = 00031C   Size = 000788
-    BSS               Offs = 000000   Size = 00037A
-    ZEROPAGE          Offs = 000000   Size = 0000A9
+    CODE              Offs = 000000   Size = 003AB1
+    RODATA            Offs = 00031C   Size = 0007BF
+    BSS               Offs = 000000   Size = 000377
+    ZEROPAGE          Offs = 000000   Size = 0000AB
 runtime.lib(add.o):
-    CODE              Offs = 003A51   Size = 00001A
+    CODE              Offs = 003AB1   Size = 00001A
 runtime.lib(addysp.o):
-    CODE              Offs = 003A6B   Size = 00000E
+    CODE              Offs = 003ACB   Size = 00000E
 runtime.lib(aslax2.o):
-    CODE              Offs = 003A79   Size = 00000B
+    CODE              Offs = 003AD9   Size = 00000B
 runtime.lib(aslax3.o):
-    CODE              Offs = 003A84   Size = 00000E
+    CODE              Offs = 003AE4   Size = 00000E
 runtime.lib(aslax4.o):
-    CODE              Offs = 003A92   Size = 000011
+    CODE              Offs = 003AF2   Size = 000011
 runtime.lib(asrax1.o):
-    CODE              Offs = 003AA3   Size = 00000A
+    CODE              Offs = 003B03   Size = 00000A
 runtime.lib(asrax2.o):
-    CODE              Offs = 003AAD   Size = 00000F
+    CODE              Offs = 003B0D   Size = 00000F
 runtime.lib(asrax3.o):
-    CODE              Offs = 003ABC   Size = 000014
+    CODE              Offs = 003B1C   Size = 000014
 runtime.lib(asrax4.o):
-    CODE              Offs = 003AD0   Size = 000019
+    CODE              Offs = 003B30   Size = 000019
 runtime.lib(bneg.o):
-    CODE              Offs = 003AE9   Size = 00000E
+    CODE              Offs = 003B49   Size = 00000E
 runtime.lib(condes.o):
-    CODE              Offs = 003AF7   Size = 00000C
+    CODE              Offs = 003B57   Size = 00000C
     DATA              Offs = 000000   Size = 000025
     INIT              Offs = 000000   Size = 00000C
 runtime.lib(copydata.o):
-    CODE              Offs = 003B03   Size = 00002D
+    CODE              Offs = 003B63   Size = 00002D
 runtime.lib(decsp2.o):
-    CODE              Offs = 003B30   Size = 00000D
+    CODE              Offs = 003B90   Size = 00000D
 runtime.lib(decsp3.o):
-    CODE              Offs = 003B3D   Size = 00000D
+    CODE              Offs = 003B9D   Size = 00000D
 runtime.lib(decsp4.o):
-    CODE              Offs = 003B4A   Size = 00000D
+    CODE              Offs = 003BAA   Size = 00000D
 runtime.lib(decsp8.o):
-    CODE              Offs = 003B57   Size = 00000D
+    CODE              Offs = 003BB7   Size = 00000D
 runtime.lib(icmp.o):
-    CODE              Offs = 003B64   Size = 00002E
+    CODE              Offs = 003BC4   Size = 00002E
 runtime.lib(incsp1.o):
-    CODE              Offs = 003B92   Size = 000007
+    CODE              Offs = 003BF2   Size = 000007
 runtime.lib(incsp2.o):
-    CODE              Offs = 003B99   Size = 000016
+    CODE              Offs = 003BF9   Size = 000016
 runtime.lib(incsp3.o):
-    CODE              Offs = 003BAF   Size = 000005
+    CODE              Offs = 003C0F   Size = 000005
 runtime.lib(incsp4.o):
-    CODE              Offs = 003BB4   Size = 000005
+    CODE              Offs = 003C14   Size = 000005
 runtime.lib(incsp8.o):
-    CODE              Offs = 003BB9   Size = 000005
+    CODE              Offs = 003C19   Size = 000005
 runtime.lib(ldai.o):
-    CODE              Offs = 003BBE   Size = 00000C
+    CODE              Offs = 003C1E   Size = 00000C
 runtime.lib(makebool.o):
-    CODE              Offs = 003BCA   Size = 000031
+    CODE              Offs = 003C2A   Size = 000031
 runtime.lib(mul8.o):
-    CODE              Offs = 003BFB   Size = 00003A
+    CODE              Offs = 003C5B   Size = 00003A
 runtime.lib(neg.o):
-    CODE              Offs = 003C35   Size = 00000E
+    CODE              Offs = 003C95   Size = 00000E
 runtime.lib(or.o):
-    CODE              Offs = 003C43   Size = 000012
+    CODE              Offs = 003CA3   Size = 000012
 runtime.lib(popa.o):
-    CODE              Offs = 003C55   Size = 00000C
+    CODE              Offs = 003CB5   Size = 00000C
 runtime.lib(popsreg.o):
-    CODE              Offs = 003C61   Size = 000010
+    CODE              Offs = 003CC1   Size = 000010
 runtime.lib(pusha.o):
-    CODE              Offs = 003C71   Size = 000016
+    CODE              Offs = 003CD1   Size = 000016
 runtime.lib(pushax.o):
-    CODE              Offs = 003C87   Size = 00001A
+    CODE              Offs = 003CE7   Size = 00001A
 runtime.lib(shl.o):
-    CODE              Offs = 003CA1   Size = 00002B
+    CODE              Offs = 003D01   Size = 00002B
+runtime.lib(shrax3.o):
+    CODE              Offs = 003D2C   Size = 00000E
 runtime.lib(shrax4.o):
-    CODE              Offs = 003CCC   Size = 000011
+    CODE              Offs = 003D3A   Size = 000011
 runtime.lib(staspidx.o):
-    CODE              Offs = 003CDD   Size = 000016
+    CODE              Offs = 003D4B   Size = 000016
 runtime.lib(staxsp.o):
-    CODE              Offs = 003CF3   Size = 00000B
+    CODE              Offs = 003D61   Size = 00000B
 runtime.lib(staxspi.o):
-    CODE              Offs = 003CFE   Size = 00001B
+    CODE              Offs = 003D6C   Size = 00001B
 runtime.lib(sub.o):
-    CODE              Offs = 003D19   Size = 000015
+    CODE              Offs = 003D87   Size = 000015
 runtime.lib(subysp.o):
-    CODE              Offs = 003D2E   Size = 00000D
+    CODE              Offs = 003D9C   Size = 00000D
 runtime.lib(udiv.o):
-    CODE              Offs = 003D3B   Size = 00004F
+    CODE              Offs = 003DA9   Size = 00004F
 runtime.lib(umod.o):
-    CODE              Offs = 003D8A   Size = 000011
+    CODE              Offs = 003DF8   Size = 000011
 runtime.lib(zerobss.o):
     INIT              Offs = 00000C   Size = 000023
 runtime.lib(zeropage.o):
-    ZEROPAGE          Offs = 0000A9   Size = 00001A
+    ZEROPAGE          Offs = 0000AB   Size = 00001A
 
 
 Segment list:
@@ -105,27 +107,27 @@ Name                  Start   End     Size
 --------------------------------------------
 CHARS                 000000  001FFF  002000
 HEADER                000000  00000F  000010
-ZEROPAGE              000028  0000EA  0000C3
+ZEROPAGE              000028  0000EC  0000C5
 DATA                  000300  000324  000025
-BSS                   000325  00069E  00037A
+BSS                   000325  00069B  000377
 STARTUP               008000  008BCE  000BCF
 INIT                  008BCF  008BFE  000030
-CODE                  008BFF  00C999  003D9B
-RODATA                00C99A  00D43D  000AA4
+CODE                  008BFF  00CA07  003E09
+RODATA                00CA08  00D4E3  000ADC
 VECTORS               00FFFA  00FFFF  000006
 
 
 Exports list:
 -------------
-__BSS_RUN__               000325 RLA    __BSS_SIZE__              00037A REA    
+__BSS_RUN__               000325 RLA    __BSS_SIZE__              000377 REA    
 __CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     008BFF RLA    
-__DATA_LOAD__             00D43E RLA    __DATA_RUN__              000300 RLA    
+__DATA_LOAD__             00D4E4 RLA    __DATA_RUN__              000300 RLA    
 __DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
-__DESTRUCTOR_TABLE__      00D43E RLA    __RAM_SIZE__              000500 REA    
+__DESTRUCTOR_TABLE__      00D4E4 RLA    __RAM_SIZE__              000500 REA    
 __RAM_START__             000300 RLA    __STARTUP__               000001 REA    
 _bank_bg                  0083E2 RLA    _bank_spr                 0083D2 RLA    
-_delay                    00858F RLA    _m_ingame                 00CA4B RLA    
-_main                     00C628 RLA    _memfill                  008560 RLA    
+_delay                    00858F RLA    _m_ingame                 00CAB9 RLA    
+_main                     00C688 RLA    _memfill                  008560 RLA    
 _music_pause              008747 REA    _music_play               008456 RLA    
 _music_stop               0086A0 REA    _oam_clear                0082A7 RLA    
 _oam_hide_rest            008339 RLA    _oam_meta_spr             0082F1 RLA    
@@ -137,35 +139,35 @@ _rand8                    0084CE RLA    _scroll                   00839F RLA
 _set_vram_update          0084E4 RLA    _sfx_play                 00845E RLA    
 _vram_adr                 0084EE RLA    _vram_fill                0084F9 RLA    
 _vram_put                 0084F5 RLA    _vram_write               008426 RLA    
-addysp                    00C66B RLA    addysp1                   00C66A RLA    
-aslax2                    00C678 RLA    aslax3                    00C683 RLA    
-aslax4                    00C691 RLA    asrax1                    00C6A2 RLA    
-asrax2                    00C6AC RLA    asrax3                    00C6BB RLA    
-asrax4                    00C6CF RLA    bnega                     00C6EC RLA    
-booleq                    00C7CF RLA    boolult                   00C7E7 RLA    
-copydata                  00C702 RLA    decsp2                    00C72F RLA    
-decsp3                    00C73C RLA    decsp4                    00C749 RLA    
-decsp8                    00C756 RLA    incsp1                    00C791 RLA    
-incsp2                    00C7A0 RLA    incsp3                    00C7AE RLA    
-incsp4                    00C7B3 RLA    incsp8                    00C7B8 RLA    
-initlib                   008BCF RLA    ldaidx                    00C7BD RLA    
-negax                     00C834 RLA    popa                      00C854 RLA    
-popax                     00C798 RLA    popsreg                   00C860 RLA    
-ptr1                      0000D9 RLZ    ptr2                      0000DB RLZ    
-ptr4                      0000DF RLZ    push0                     00C886 RLA    
-pusha                     00C874 RLA    pusha0                    00C888 RLA    
-pushax                    00C88A RLA    regsave                   0000D5 RLZ    
-shlax2                    00C678 RLA    shlax4                    00C691 RLA    
-shrax4                    00C8CB RLA    sp                        0000D1 RLZ    
-sreg                      0000D3 RLZ    staspidx                  00C8DC RLA    
-stax0sp                   00C8F2 RLA    staxspidx                 00C8FD RLA    
-staxysp                   00C8F4 RLA    subysp                    00C92D RLA    
-tmp1                      0000E1 RLZ    tosaddax                  00C652 RLA    
-tosaslax                  00C8A0 RLA    tosicmp                   00C765 RLA    
-tosicmp0                  00C763 RLA    tosorax                   00C844 RLA    
-tossuba0                  00C918 RLA    tossubax                  00C91A RLA    
-tosudiva0                 00C93A RLA    tosumoda0                 00C989 RLA    
-tosumula0                 00C7FA RLA    udiv16                    00C94B RLA    
+addysp                    00C6CB RLA    addysp1                   00C6CA RLA    
+aslax2                    00C6D8 RLA    aslax3                    00C6E3 RLA    
+aslax4                    00C6F1 RLA    asrax1                    00C702 RLA    
+asrax2                    00C70C RLA    asrax3                    00C71B RLA    
+asrax4                    00C72F RLA    bnega                     00C74C RLA    
+booleq                    00C82F RLA    copydata                  00C762 RLA    
+decsp2                    00C78F RLA    decsp3                    00C79C RLA    
+decsp4                    00C7A9 RLA    decsp8                    00C7B6 RLA    
+incsp1                    00C7F1 RLA    incsp2                    00C800 RLA    
+incsp3                    00C80E RLA    incsp4                    00C813 RLA    
+incsp8                    00C818 RLA    initlib                   008BCF RLA    
+ldaidx                    00C81D RLA    negax                     00C894 RLA    
+popa                      00C8B4 RLA    popax                     00C7F8 RLA    
+popsreg                   00C8C0 RLA    ptr1                      0000DB RLZ    
+ptr2                      0000DD RLZ    ptr4                      0000E1 RLZ    
+push0                     00C8E6 RLA    pusha                     00C8D4 RLA    
+pusha0                    00C8E8 RLA    pushax                    00C8EA RLA    
+regsave                   0000D7 RLZ    shlax2                    00C6D8 RLA    
+shlax4                    00C6F1 RLA    shrax3                    00C92B RLA    
+shrax4                    00C939 RLA    sp                        0000D3 RLZ    
+sreg                      0000D5 RLZ    staspidx                  00C94A RLA    
+stax0sp                   00C960 RLA    staxspidx                 00C96B RLA    
+staxysp                   00C962 RLA    subysp                    00C99B RLA    
+tmp1                      0000E3 RLZ    tosaddax                  00C6B2 RLA    
+tosaslax                  00C900 RLA    tosicmp                   00C7C5 RLA    
+tosicmp0                  00C7C3 RLA    tosorax                   00C8A4 RLA    
+tossuba0                  00C986 RLA    tossubax                  00C988 RLA    
+tosudiva0                 00C9A8 RLA    tosumoda0                 00C9F7 RLA    
+tosumula0                 00C85A RLA    udiv16                    00C9B9 RLA    
 zerobss                   008BDB RLA    
 
 
@@ -202,7 +204,7 @@ _bank_spr (crt0.o):
 _delay (crt0.o):
     game.o                    game.s(38)
 _m_ingame (crt0.o):
-    game.o                    game.s(111)
+    game.o                    game.s(110)
 _main (game.o):
     crt0.o                    crt0.s(20)
 _memfill (crt0.o):
@@ -255,128 +257,126 @@ addysp (addysp.o):
     incsp8.o                  incsp8.s(8)
     incsp4.o                  incsp4.s(8)
     incsp3.o                  incsp3.s(8)
-    game.o                    game.s(6148)
+    game.o                    game.s(6168)
 addysp1 (addysp.o):
     sub.o                     sub.s(8)
     or.o                      or.s(8)
 aslax2 (aslax2.o):
-    game.o                    game.s(3451)
-    game.o                    game.s(3636)
-    game.o                    game.s(5036)
-    game.o                    game.s(6846)
-    game.o                    game.s(7952)
-    game.o                    game.s(9500)
+    game.o                    game.s(3453)
+    game.o                    game.s(3638)
+    game.o                    game.s(5038)
+    game.o                    game.s(6715)
+    game.o                    game.s(7912)
+    game.o                    game.s(9506)
 aslax3 (aslax3.o):
-    game.o                    game.s(3354)
-    game.o                    game.s(7961)
+    game.o                    game.s(3356)
+    game.o                    game.s(7921)
 aslax4 (aslax4.o):
-    game.o                    game.s(2607)
-    game.o                    game.s(3283)
-    game.o                    game.s(3464)
-    game.o                    game.s(3649)
-    game.o                    game.s(3760)
-    game.o                    game.s(4278)
-    game.o                    game.s(4564)
-    game.o                    game.s(5035)
-    game.o                    game.s(6017)
-    game.o                    game.s(6433)
-    game.o                    game.s(6845)
-    game.o                    game.s(8396)
-    game.o                    game.s(9499)
+    game.o                    game.s(2609)
+    game.o                    game.s(3285)
+    game.o                    game.s(3466)
+    game.o                    game.s(3651)
+    game.o                    game.s(3762)
+    game.o                    game.s(4280)
+    game.o                    game.s(4566)
+    game.o                    game.s(5037)
+    game.o                    game.s(6037)
+    game.o                    game.s(6453)
+    game.o                    game.s(6714)
+    game.o                    game.s(8368)
+    game.o                    game.s(9505)
 asrax1 (asrax1.o):
-    game.o                    game.s(3013)
-    game.o                    game.s(3366)
-    game.o                    game.s(8301)
-    game.o                    game.s(11749)
+    game.o                    game.s(3015)
+    game.o                    game.s(3368)
+    game.o                    game.s(8273)
+    game.o                    game.s(11797)
 asrax2 (asrax2.o):
-    game.o                    game.s(3018)
-    game.o                    game.s(3347)
-    game.o                    game.s(5493)
-    game.o                    game.s(6776)
-    game.o                    game.s(9682)
-    game.o                    game.s(12615)
+    game.o                    game.s(3020)
+    game.o                    game.s(3349)
+    game.o                    game.s(5495)
+    game.o                    game.s(6642)
+    game.o                    game.s(9688)
+    game.o                    game.s(12747)
 asrax3 (asrax3.o):
-    game.o                    game.s(7763)
-    game.o                    game.s(10282)
+    game.o                    game.s(7637)
+    game.o                    game.s(10288)
 asrax4 (asrax4.o):
-    game.o                    game.s(3024)
-    game.o                    game.s(4070)
-    game.o                    game.s(5492)
-    game.o                    game.s(6738)
-    game.o                    game.s(8704)
-    game.o                    game.s(9681)
-    game.o                    game.s(12614)
+    game.o                    game.s(3026)
+    game.o                    game.s(4072)
+    game.o                    game.s(5494)
+    game.o                    game.s(6604)
+    game.o                    game.s(8689)
+    game.o                    game.s(9687)
+    game.o                    game.s(12746)
 bnega (bneg.o):
-    game.o                    game.s(7157)
+    game.o                    game.s(7031)
 booleq (makebool.o):
-    game.o                    game.s(10318)
-boolult (makebool.o):
-    game.o                    game.s(11695)
+    game.o                    game.s(10339)
 copydata (copydata.o):
     crt0.o                    crt0.s(20)
 decsp2 (decsp2.o):
-    game.o                    game.s(6451)
-    game.o                    game.s(7029)
+    game.o                    game.s(6471)
+    game.o                    game.s(6898)
 decsp3 (decsp3.o):
-    game.o                    game.s(3137)
-    game.o                    game.s(3432)
-    game.o                    game.s(3601)
-    game.o                    game.s(3808)
-    game.o                    game.s(3933)
-    game.o                    game.s(4516)
-    game.o                    game.s(4658)
-    game.o                    game.s(4820)
-    game.o                    game.s(5738)
-    game.o                    game.s(6042)
-    game.o                    game.s(7878)
-    game.o                    game.s(8903)
-    game.o                    game.s(12247)
+    game.o                    game.s(3139)
+    game.o                    game.s(3434)
+    game.o                    game.s(3603)
+    game.o                    game.s(3810)
+    game.o                    game.s(3935)
+    game.o                    game.s(4518)
+    game.o                    game.s(4660)
+    game.o                    game.s(4822)
+    game.o                    game.s(5754)
+    game.o                    game.s(6062)
+    game.o                    game.s(7838)
+    game.o                    game.s(8900)
+    game.o                    game.s(12379)
 decsp4 (decsp4.o):
-    game.o                    game.s(4244)
-    game.o                    game.s(5520)
-    game.o                    game.s(6374)
-    game.o                    game.s(9272)
-    game.o                    game.s(12189)
+    game.o                    game.s(4246)
+    game.o                    game.s(5522)
+    game.o                    game.s(6394)
+    game.o                    game.s(9278)
+    game.o                    game.s(12321)
 decsp8 (decsp8.o):
-    game.o                    game.s(6549)
-    game.o                    game.s(12969)
+    game.o                    game.s(12091)
+    game.o                    game.s(13101)
 incsp1 (incsp1.o):
-    game.o                    game.s(3263)
-    game.o                    game.s(3961)
-    game.o                    game.s(4397)
-    game.o                    game.s(7861)
+    game.o                    game.s(3265)
+    game.o                    game.s(3963)
+    game.o                    game.s(4399)
+    game.o                    game.s(7735)
 incsp2 (incsp2.o):
     staxspi.o                 staxspi.s(8)
     staspidx.o                staspidx.s(8)
     popsreg.o                 popsreg.s(8)
-    game.o                    game.s(4597)
+    game.o                    game.s(4599)
 incsp3 (incsp3.o):
-    game.o                    game.s(3327)
-    game.o                    game.s(3415)
-    game.o                    game.s(3584)
-    game.o                    game.s(3740)
-    game.o                    game.s(3833)
-    game.o                    game.s(7933)
+    game.o                    game.s(3329)
+    game.o                    game.s(3417)
+    game.o                    game.s(3586)
+    game.o                    game.s(3742)
+    game.o                    game.s(3835)
+    game.o                    game.s(7893)
 incsp4 (incsp4.o):
-    game.o                    game.s(2798)
-    game.o                    game.s(2829)
-    game.o                    game.s(2904)
-    game.o                    game.s(4312)
+    game.o                    game.s(2800)
+    game.o                    game.s(2831)
+    game.o                    game.s(2906)
+    game.o                    game.s(4314)
 incsp8 (incsp8.o):
-    game.o                    game.s(2725)
+    game.o                    game.s(2727)
 initlib (condes.o):
     crt0.o                    crt0.s(20)
 ldaidx (ldai.o):
-    game.o                    game.s(6341)
-    game.o                    game.s(8300)
-    game.o                    game.s(9000)
+    game.o                    game.s(6361)
+    game.o                    game.s(8272)
+    game.o                    game.s(9002)
 negax (neg.o):
-    game.o                    game.s(2840)
-    game.o                    game.s(2895)
-    game.o                    game.s(5141)
-    game.o                    game.s(7662)
-    game.o                    game.s(8181)
-    game.o                    game.s(9145)
+    game.o                    game.s(2842)
+    game.o                    game.s(2897)
+    game.o                    game.s(5143)
+    game.o                    game.s(7536)
+    game.o                    game.s(8141)
+    game.o                    game.s(9142)
 popa (popa.o):
     crt0.o                    crt0.s(20)
 popax (incsp2.o):
@@ -402,52 +402,54 @@ ptr4 (zeropage.o):
     udiv.o                    udiv.s(9)
     mul8.o                    mul8.s(10)
 push0 (pushax.o):
-    game.o                    game.s(13421)
+    game.o                    game.s(13553)
 pusha (pusha.o):
-    game.o                    game.s(3179)
-    game.o                    game.s(3310)
-    game.o                    game.s(3629)
-    game.o                    game.s(4071)
-    game.o                    game.s(5813)
-    game.o                    game.s(6037)
-    game.o                    game.s(6595)
-    game.o                    game.s(7133)
-    game.o                    game.s(10274)
-    game.o                    game.s(12688)
+    game.o                    game.s(3181)
+    game.o                    game.s(3312)
+    game.o                    game.s(3631)
+    game.o                    game.s(4073)
+    game.o                    game.s(5833)
+    game.o                    game.s(6057)
+    game.o                    game.s(7007)
+    game.o                    game.s(7816)
+    game.o                    game.s(10280)
+    game.o                    game.s(12820)
 pusha0 (pushax.o):
-    game.o                    game.s(2762)
-    game.o                    game.s(3305)
-    game.o                    game.s(3391)
-    game.o                    game.s(5069)
-    game.o                    game.s(5552)
-    game.o                    game.s(6333)
-    game.o                    game.s(8171)
-    game.o                    game.s(8976)
+    game.o                    game.s(2764)
+    game.o                    game.s(3307)
+    game.o                    game.s(3393)
+    game.o                    game.s(5071)
+    game.o                    game.s(5567)
+    game.o                    game.s(6353)
+    game.o                    game.s(8131)
+    game.o                    game.s(8978)
 pushax (pushax.o):
-    game.o                    game.s(2666)
-    game.o                    game.s(2874)
-    game.o                    game.s(3010)
-    game.o                    game.s(3229)
-    game.o                    game.s(3794)
-    game.o                    game.s(3906)
-    game.o                    game.s(4711)
-    game.o                    game.s(5072)
-    game.o                    game.s(5317)
-    game.o                    game.s(6328)
-    game.o                    game.s(6928)
-    game.o                    game.s(7994)
-    game.o                    game.s(8970)
+    game.o                    game.s(2668)
+    game.o                    game.s(2876)
+    game.o                    game.s(3012)
+    game.o                    game.s(3231)
+    game.o                    game.s(3796)
+    game.o                    game.s(3908)
+    game.o                    game.s(4713)
+    game.o                    game.s(5074)
+    game.o                    game.s(5319)
+    game.o                    game.s(6348)
+    game.o                    game.s(6797)
+    game.o                    game.s(7954)
+    game.o                    game.s(8972)
 regsave (zeropage.o):
     game.o                    game.s(10)
 shlax2 (aslax2.o):
-    game.o                    game.s(11905)
+    game.o                    game.s(11895)
 shlax4 (aslax4.o):
-    game.o                    game.s(6839)
-    game.o                    game.s(9773)
+    game.o                    game.s(6702)
+    game.o                    game.s(9779)
+shrax3 (shrax3.o):
+    game.o                    game.s(9014)
 shrax4 (shrax4.o):
-    game.o                    game.s(6410)
-    game.o                    game.s(6749)
-    game.o                    game.s(9012)
+    game.o                    game.s(6430)
+    game.o                    game.s(6615)
+    game.o                    game.s(9718)
 sp (zeropage.o):
     subysp.o                  subysp.s(9)
     sub.o                     sub.s(9)
@@ -477,29 +479,30 @@ sreg (zeropage.o):
     icmp.o                    icmp.s(9)
     game.o                    game.s(10)
 staspidx (staspidx.o):
-    game.o                    game.s(3241)
-    game.o                    game.s(3804)
-    game.o                    game.s(3916)
-    game.o                    game.s(4724)
-    game.o                    game.s(6344)
-    game.o                    game.s(8007)
-    game.o                    game.s(9080)
+    game.o                    game.s(3243)
+    game.o                    game.s(3806)
+    game.o                    game.s(3918)
+    game.o                    game.s(4726)
+    game.o                    game.s(6364)
+    game.o                    game.s(7967)
+    game.o                    game.s(9077)
 stax0sp (staxsp.o):
-    game.o                    game.s(4307)
-    game.o                    game.s(5937)
+    game.o                    game.s(4309)
+    game.o                    game.s(5957)
 staxspidx (staxspi.o):
-    game.o                    game.s(5143)
-    game.o                    game.s(5344)
-    game.o                    game.s(8459)
-    game.o                    game.s(9292)
+    game.o                    game.s(5145)
+    game.o                    game.s(5346)
+    game.o                    game.s(8431)
+    game.o                    game.s(9298)
 staxysp (staxsp.o):
-    game.o                    game.s(5919)
+    game.o                    game.s(5939)
 subysp (subysp.o):
-    game.o                    game.s(7561)
+    game.o                    game.s(7435)
 tmp1 (zeropage.o):
     staxspi.o                 staxspi.s(9)
     staspidx.o                staspidx.s(9)
     shrax4.o                  shrax4.s(8)
+    shrax3.o                  shrax3.s(8)
     shl.o                     shl.s(16)
     or.o                      or.s(9)
     copydata.o                copydata.s(9)
@@ -512,38 +515,38 @@ tmp1 (zeropage.o):
     aslax2.o                  aslax2.s(8)
     game.o                    game.s(10)
 tosaddax (add.o):
-    game.o                    game.s(5342)
-    game.o                    game.s(6342)
-    game.o                    game.s(9078)
+    game.o                    game.s(5344)
+    game.o                    game.s(6362)
+    game.o                    game.s(9075)
 tosaslax (shl.o):
-    game.o                    game.s(3403)
-    game.o                    game.s(11891)
+    game.o                    game.s(3405)
+    game.o                    game.s(11881)
 tosicmp (icmp.o):
-    game.o                    game.s(2672)
-    game.o                    game.s(2769)
-    game.o                    game.s(2880)
-    game.o                    game.s(5109)
-    game.o                    game.s(5558)
-    game.o                    game.s(6932)
-    game.o                    game.s(8983)
+    game.o                    game.s(2674)
+    game.o                    game.s(2771)
+    game.o                    game.s(2882)
+    game.o                    game.s(5111)
+    game.o                    game.s(5573)
+    game.o                    game.s(6801)
+    game.o                    game.s(8985)
 tosicmp0 (icmp.o):
-    game.o                    game.s(8174)
-    game.o                    game.s(8973)
+    game.o                    game.s(8134)
+    game.o                    game.s(8975)
 tosorax (or.o):
-    game.o                    game.s(3404)
+    game.o                    game.s(3406)
 tossuba0 (sub.o):
-    game.o                    game.s(8771)
-    game.o                    game.s(9278)
+    game.o                    game.s(8757)
+    game.o                    game.s(9284)
 tossubax (sub.o):
-    game.o                    game.s(3014)
-    game.o                    game.s(10364)
+    game.o                    game.s(3016)
+    game.o                    game.s(10385)
 tosudiva0 (udiv.o):
-    game.o                    game.s(3307)
-    game.o                    game.s(5074)
+    game.o                    game.s(3309)
+    game.o                    game.s(5076)
 tosumoda0 (umod.o):
-    game.o                    game.s(3319)
+    game.o                    game.s(3321)
 tosumula0 (mul8.o):
-    game.o                    game.s(5071)
+    game.o                    game.s(5073)
 udiv16 (udiv.o):
     umod.o                    umod.s(8)
 zerobss (zerobss.o):

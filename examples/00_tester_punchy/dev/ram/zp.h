@@ -35,7 +35,7 @@ unsigned char en_x [3], en_y [3];
 unsigned char en_x1 [3], en_y1 [3];
 unsigned char en_x2 [3], en_y2 [3];
 signed char en_mx [3], en_my [3];
-unsigned char en_t [3], en_s [3], en_facing;
+unsigned char en_t [3], en_s [3], en_facing [3];
 unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
 #ifdef ENABLE_GENERATORS

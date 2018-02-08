@@ -7,7 +7,7 @@
 oam_index = oam_meta_spr (
 	en_x1 [gpit], en_y1 [gpit] + SPRITE_ADJUST, 
 	oam_index, 
-	spr_enems [ENEMS_OCCLUDING_FRAME]
+	spr_enems [ENEMS_OCCLUDING_CELL]
 );
 
 switch (en_alive [gpit]) {
@@ -36,3 +36,5 @@ switch (en_alive [gpit]) {
 		}
 		break;
 }
+
+en_facing [gpit] = 0;

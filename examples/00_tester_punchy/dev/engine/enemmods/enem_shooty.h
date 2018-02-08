@@ -5,17 +5,15 @@
 // right after that of the patrollers, overriding some stuff.
 
 if (en_rawv [gpit] & 1) {
-	if (en_facing == 2) en_facing = 3;
-
 	if (en_ct [gpit]) {
 		// Is in shooting animation
 		en_x [gpit] = rdx; en_y [gpit] = rdy;
-		en_spr = en_s [gpit] + en_facing + 2;
+		en_spr = en_s [gpit] + en_facing [gpit] + 2;
 		en_ct [gpit] --;
 	} else {
 		// Attempt to shoot
 		if (SHOOT_FREQ) {
-			if (en_facing) 
+			if (en_facing [gpit]) 
 				rdx = en_x [gpit] + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
 			else 
 				rdx = en_x [gpit] + SHOOTIES_SHOOT_OFFS_X;
@@ -24,6 +22,6 @@ if (en_rawv [gpit] & 1) {
 			en_ct [gpit] = 16;
 		}
 
-		en_spr = en_s [gpit] + en_facing + en_fr;
+		en_spr = en_s [gpit] + en_facing [gpit] + en_fr;
 	}
 }

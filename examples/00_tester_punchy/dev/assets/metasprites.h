@@ -26,20 +26,22 @@ const unsigned char * const spr_player [] = {
 };
 
 // Enemy metasprites
+// Framesets are right {anim1, anim2, attacking, dying}, right {anim1, anim2, attacking, dying}.
+// Not every kind of enemy has every cell, just use 0 when N/A. dying cell will be used only if ENEMS_ENABLE_DYING_FRAME
 const unsigned char * const spr_enems0 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssena_00_a, ssena_01_a, ssena_00_b, ssena_01_b, // Linear 1
-	ssena_00_a, ssena_01_a, ssena_00_b, ssena_01_b, // Linear 1
-	ssena_00_a, ssena_01_a, ssena_00_b, ssena_01_b, // Linear 1 (won't use)
-	ssplat_00, ssplat_00, ssplat_00, ssplat_00, 	// Platform
+	ssena_00_a, ssena_01_a, 0, 0, ssena_00_b, ssena_01_b, 0, 0, // 1
+	ssena_00_a, ssena_01_a, 0, 0, ssena_00_b, ssena_01_b, 0, 0, // won't use; failsafe copy of 1
+	ssena_00_a, ssena_01_a, 0, 0, ssena_00_b, ssena_01_b, 0, 0, // won't use; failsafe copy of 1
+	ssplat_00, ssplat_00, 0, 0, ssplat_00, ssplat_00, 0, 0,  	// Platform (4)
 
-	// Punchy (offset 16), 6 frames
-	ssenpu_00_a, ssenpu_01_a, ssenpu_02_a,			// W1, W2, PUNCH (right)
-	ssenpu_00_b, ssenpu_01_b, ssenpu_02_b,			// W1, W2, PUNCH (left)
+	// Punchy (offset 32)
+	ssenpu_00_a, ssenpu_01_a, ssenpu_03_a, ssenpu_02_a,
+	ssenpu_00_b, ssenpu_01_b, ssenpu_03_b, ssenpu_02_b,
 
-	// Shooty (offset 22), 6 frames
-	ssensh_00_a, ssensh_01_a, ssensh_02_a,			// W1, W2, SHOOT (right)
-	ssensh_00_b, ssensh_01_b, ssensh_02_b,			// W1, W2, SHOOT (left)
+	// Shooty (offset 40)
+	ssensh_00_a, ssensh_01_a, ssensh_02_a, ssensh_03_a,
+	ssensh_00_b, ssensh_01_b, ssensh_02_b, ssensh_03_b
 
 };
 
@@ -51,13 +53,3 @@ const unsigned char * const spr_hs [] = {
 	0, ssit_00, 0, ssit_01
 };
 
-// Fixed stuff
-const unsigned char spr_pl_empty [] = {
-#ifdef TALL_PLAYER
-	-4, -16, 0xff, 0, 4, -16, 0xff, 0,
-#endif	
-	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, 0, 0xff, 0,
-	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
-	128
-};

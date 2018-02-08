@@ -21,14 +21,16 @@ const unsigned char * const spr_player [] = {
 };
 
 // Enemy metasprites
+// Framesets are right {anim1, anim2, attacking, dying}, right {anim1, anim2, attacking, dying}.
+// Not every kind of enemy has every cell, just use 0 when N/A. dying cell will be used only if ENEMS_ENABLE_DYING_FRAME
 const unsigned char * const spr_enems0 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssen_00_a, ssen_01_a, ssen_00_b, ssen_01_b,			// Enem id 1, right, left, two cells (duplicated)
-	ssen_02_a, ssen_03_a, ssen_02_b, ssen_03_b,			// Enem id 2, right, left, two cells (duplicated)
-	ssen_04_a, ssen_05_a, ssen_04_b, ssen_05_b,			// Enem id 3, right, left, two cells (duplicated)
-	ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
+	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
+	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0,	// Platform (4)
 
-	// Explosion (offset 16)
+	// Explosion (offset 32)
 	ssexpl
 };
 
@@ -38,13 +40,3 @@ const unsigned char * const spr_hs [] = {
 	0, ssit_00, ssit_01, ssit_02
 };
 
-// Fixed stuff
-const unsigned char spr_pl_empty [] = {
-#ifdef TALL_PLAYER
-	-4, -16, 0xff, 0, 4, -16, 0xff, 0,
-#endif	
-	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, 0, 0xff, 0,
-	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
-	128
-};

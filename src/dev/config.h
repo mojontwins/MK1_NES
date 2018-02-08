@@ -1,6 +1,9 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017
 
+#define TOP_ADJUST				4
+#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -102,13 +105,13 @@
 // Extra special tiles
 // -------------------
 
-// Quicksands, beh = 2.
+// Quicksands, beh == 2.
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
 
 //#define ENABLE_QUICKSANDS
 
-// Breakable, beh = 16
+// Breakable, beh & 16
 //#define ENABLE_BREAKABLE				// Breakable walls
 #define BREAKABLE_LIFE	2				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
@@ -116,35 +119,44 @@
 #define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
 #define BREAKABLE_ERASE			0		// Tile to erase broken tiles
 #define BREAKABLE_BREAKING		8		// Tile to display while breaking
-#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+//#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
-// Conveyors, beh = 32 [+1]
+// Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
 //#define ENABLE_CONVEYORS
 
-// Slippery, beh = 64. 
+// Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4
 // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
 //#define ENABLE_SLIPPERY
 
+// Ladders, beh == 32
+
+#define ENABLE_LADDERS
+
 // Enemy types and definitions
 // ---------------------------
+
+#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			16
-#define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
+//#define ENEMS_ENABLE_DYING_FRAME
+#define ENEMS_EXPLODING_CELL 			32
+#define ENEMS_OCCLUDING_FRAME			33 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_TOUCHED_FRAMES			16 // # frames to stay frozen after hit
 
 // Fanties / Homing fanties
 
 //#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
 
-#define FANTY_BASE_SPRID				16
+#define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
@@ -165,41 +177,32 @@
 // Saws
 
 //#define ENABLE_SAW
-#define SAW_BASE_SPRID					16
+#define SAW_BASE_SPRID					48
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
-
-// If you enable monococos, I think you should enable cocos:
-
-//#define ENABLE_COCOS
-#define COCOS_MAX						3
-#define COCO_V							192
-#define COCO_PATTERN					0
-#define COCO_PALETTE 					3
-#define COCO_FAIR_D						32
 
 // Pezons
 
 //#define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID		16
-#define PEZON_WAIT				50
-#define PEZON_THRUST			384
-#define PEZON_VY_FALLING_MAX	256
-#define PEZON_G					16
+#define PEZONS_BASE_SPRID				40
+#define PEZON_WAIT						50
+#define PEZON_THRUST					384
+#define PEZON_VY_FALLING_MAX			256
+#define PEZON_G							16
 
 // Chac chacs
 
 //#define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE		48
-#define CHAC_CHAC_IDLE_2		16
-#define CHAC_CHAC_IDLE_3		1
-#define CHAC_CHAC_IDLE_4		50
+#define CHAC_CHAC_BASE_TILE				16
+#define CHAC_CHAC_IDLE_2				16
+#define CHAC_CHAC_IDLE_3				1
+#define CHAC_CHAC_IDLE_4				50
 
 // Monococos
 
 //#define ENABLE_MONOCOCOS
 //#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				24
+#define MONOCOCO_BASE_SPRID				56
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -208,18 +211,28 @@
 // Shooties
 
 //#define ENABLE_SHOOTIES
-#define SHOOTIES_BASE_SPRID				22
+#define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
-#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Punchies
 
 //#define ENABLE_PUNCHIES
-#define PUNCHIES_BASE_SPRID				16
+#define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
-#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit])<12)
+#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
+
+// Cocos will get enabled automaticly on choosing monococos or shooties.
+
+//#define ENABLE_COCOS
+#define COCOS_MAX						4
+#define COCO_V							128
+
+#define COCO_PATTERN					0
+#define COCO_PALETTE 					0
+#define COCO_FAIR_D						32
 
 // Carry directives
 
@@ -229,22 +242,26 @@
 
 //#define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY			4
-#define HS_OBJ_MIN				5
-#define HS_OBJ_MAX				6
-#define HS_USE_OFFS				2
+#define HS_OBJ_EMPTY					4
+#define HS_OBJ_MIN						5
+#define HS_OBJ_MAX						6
+#define HS_USE_OFFS						2
 
-#define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
-								// Otherwise, use its own graphics.
-#define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
+#define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+										// Otherwise, use its own graphics.
+#define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
-/*
-#define CARRY_ONE_FLAG_OBJ
-#define HS_INV_X				136
-#define HS_INV_Y				210
-#define HS_OBJ_EMPTY			0
-#define HS_INV_FLAG				0
-*/
+// Silly Brawlers
+// --------------
+//#define PLAYER_PUNCHES				// When on floor
+#define PLAYER_PUNCH_OFFS_X				15
+#define PLAYER_PUNCH_OFFS_Y				-7
+
+//#define PLAYER_KICKS					// While airborne
+#define PLAYER_KICK_OFFS_X				12
+#define PLAYER_KICK_OFFS_Y				-3
+
+#define PLAYER_FROZEN_FRAMES			16	// Frames to be frozen when hit landed
 
 // Shooting behaviour
 // ------------------
@@ -254,7 +271,6 @@
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-#define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
 #define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
 
@@ -352,6 +368,8 @@
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
 #define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
 
+#define PLAYER_VY_LADDERS		96
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -396,6 +414,7 @@
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 
+	#define CELL_CLIMB_CYCLE	20
 #endif
 
 // Inner workings. Don't touch.
@@ -420,8 +439,3 @@
 #define CARRY_ONE_HS_OBJECT
 #endif
 
-#ifdef TALL_PLAYER
-#define PLAYER_SPRITE_SIZE 32
-#else
-#define PLAYER_SPRITE_SIZE 24
-#endif

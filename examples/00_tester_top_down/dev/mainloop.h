@@ -39,8 +39,12 @@ void game_init (void) {
 	msc_clear_flags ();
 #endif
 
+#ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
+#endif
+#ifndef DEACTIVATE_KEYS	
 	pkeys = 0;
+#endif
 
 	half_life = 0;
 	frame_counter = 0;
@@ -106,10 +110,13 @@ void prepare_scr (void) {
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
-	oam_index = 4+24; // 4 + what the player takes.
+	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
-	player_render ();
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	phitteract = 0;
+#endif	
 
+	player_render ();
 	enems_move ();
 	if (hrt) hotspots_paint ();
 	player_render ();
@@ -130,7 +137,6 @@ void prepare_scr (void) {
 	ppu_waitnmi ();
 	clear_update_list ();
 	fade_in ();
-
 }
 
 void game_loop (void) {
@@ -166,7 +172,6 @@ void game_loop (void) {
 		hud_update ();
 
 		// Finish frame and wait for NMI
-
 		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
@@ -198,7 +203,7 @@ void game_loop (void) {
 #endif
 
 		// Extra checks
-		#include "mainloop/extra_checks.h"
+		#include "my/extra_checks.h"
 
 #if defined (WIN_LEVEL_CUSTOM)
 		if (win_level)
@@ -219,7 +224,7 @@ void game_loop (void) {
 			break;
 		}
 
-		oam_index = 4+24; // 4 + what the player takes.
+		oam_index = 4;
 		
 		if (pstate) {
 			pctstate --;
@@ -233,6 +238,7 @@ void game_loop (void) {
 		#include "mainloop/hotspots.h"
 
 		player_move ();
+		player_render ();
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
@@ -247,7 +253,6 @@ void game_loop (void) {
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();
 #endif
-		player_render ();
 
 		//#include "mainloop/cheat.h"
 

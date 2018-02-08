@@ -14,12 +14,12 @@ const unsigned char * const spr_player [] = {
 // Enemy metasprites
 const unsigned char * const spr_enems0 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssen_00, ssen_01, ssen_00, ssen_01, 			// Enem id 1, right, left, two cells (duplicated)
-	ssen_02, ssen_03, ssen_02, ssen_03,				// Enem id 2, right, left, two cells (duplicated)
-	ssen_04, ssen_05, ssen_04, ssen_05, 			// Enem id 3, right, left, two cells (duplicated)
-	ssen_06, ssen_07, ssen_06, ssen_07,				// Enem id 4, right, left, two cells (duplicated)
+	ssen_00, ssen_01, 0, 0, ssen_00, ssen_01, 0, 0, // 1
+	ssen_02, ssen_03, 0, 0, ssen_02, ssen_03, 0, 0, // 2
+	ssen_04, ssen_05, 0, 0, ssen_04, ssen_05, 0, 0, // 3
+	ssen_06, ssen_07, 0, 0, ssen_06, ssen_07, 0, 0,	// 4
 
-	// Explosion (offset 16)
+	// Explosion (offset 32)
 	ssexpl
 };
 
@@ -29,10 +29,3 @@ const unsigned char * const spr_hs [] = {
 	0, ssit_00, ssit_01, ssit_02, ssit_03
 };
 
-// Fixed stuff
-const unsigned char spr_pl_empty [] = {
-	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
-	128
-};

@@ -88,7 +88,8 @@ en_y [gpit] = enf_y [gpit] >> 6;
 en_fr = (en_x [gpit] >> 3) & 1;
 
 #ifdef FANTY_WITH_FACING
-	en_spr = FANTY_BASE_SPRID + en_fr + ((en_x [gpit] < prx) ? 0 : 2);
+	en_facing [gpit] = ((en_x [gpit] < prx) ? 0 : 4);
+	en_spr = FANTY_BASE_SPRID + en_fr + en_facing [gpit];
 #else
 	en_spr = FANTY_BASE_SPRID + en_fr;
 #endif

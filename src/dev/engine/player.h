@@ -70,11 +70,12 @@ void player_init (void) {
 }
 
 void player_render (void) {
-	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, 4, spr_player [psprid]);	
-	} else {
-		oam_meta_spr (0, 240, 4, spr_pl_empty);
-	}
+	if (pstate == EST_NORMAL || half_life) 
+		oam_index = oam_meta_spr (
+			prx, pry + SPRITE_ADJUST, 
+			oam_index, 
+			spr_player [psprid]
+		);
 }
 
 void player_kill (void) {
@@ -116,12 +117,39 @@ void player_kill (void) {
 
 void player_move (void) {
 
+	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+		if (pfrozen) {
+			pfrozen --; 
+			if (pfrozen == 0) {
+			#ifdef PLAYER_PUNCHES
+				ppunching = 0;
+			#endif
+			#ifdef PLAYER_KICKS
+				pkicking = 0;
+			#endif
+			} else return;
+		}
+	#endif
+
 	hitv = hith = 0;
 	pushed_any = 0;
 	pnotsafe = 0;
 	ppossee = 0;
 	#ifdef ENABLE_SLIPPERY
 		pice = 0;
+	#endif
+
+	// ******************
+	// Initial detections
+	// ******************
+
+	#ifdef ENABLE_LADDERS
+		//ponladder = (!pj && (ATTR((prx + 4) >> 4, (pry - 1) >> 4) == 32));
+		cx1 = prx >> 4;
+		cx2 = (prx + 7) >> 4;
+		cy1 = cy2 = (pry + 15) >> 4;
+		cm_two_points ();
+		ponladder = (!pj && at1 == 32 && at2 == 32);
 	#endif
 
 	// ********
@@ -160,6 +188,16 @@ void player_move (void) {
 
 	#else
 		// Gravity
+
+		#ifdef ENABLE_LADDERS
+			if (ponladder) {
+				if (i & PAD_UP) {
+					pvy = -PLAYER_VY_LADDERS;
+				} else if (i & PAD_DOWN) {
+					pvy = PLAYER_VY_LADDERS;
+				} else pvy = 0;
+			} else
+		#endif
 
 		#ifndef PLAYER_SWIMS
 			if (!pj) {
@@ -248,7 +286,7 @@ void player_move (void) {
 				hitv = 1;
 			}
 	#ifdef ENABLE_QUICKSANDS
-			else if ((at1 & 2) || (at2 & 2)) {
+			else if ((at1 == 2) || (at2 == 2)) {
 				if (pctj > 2) pj = 0;
 			}
 	#endif		
@@ -300,7 +338,7 @@ void player_move (void) {
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
-					if ((at1 & 2) || (at2 & 2)) {
+					if ((at1 == 2) || (at2 == 2)) {
 						pvy = PLAYER_VY_SINKING;
 						ppossee = 1;
 					}
@@ -315,7 +353,12 @@ void player_move (void) {
 		if (
 			a_button 
 			&& !pj
-			&& (pgotten || ppossee || hitv)
+			&& (
+				pgotten || ppossee || hitv
+				#ifdef ENABLE_LADDERS
+					|| ponladder
+				#endif
+			)
 		) {
 			sfx_play (7, 0);
 			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
@@ -495,8 +538,13 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do containers)
 
-	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
-		if (b_button) {
+	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
+		if (
+			b_button
+			#ifdef ENABLE_LADDERS
+				&& !ponladder
+			#endif
+		) {
 			#ifdef PLAYER_CAN_FIRE				
 				fire_bullet ();
 			#endif		
@@ -514,7 +562,44 @@ void player_move (void) {
 					use_ct = 1;
 				}
 			#endif
+
+			#ifdef PLAYER_PUNCHES
+				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; }				
+			#endif
+
+			#ifdef PLAYER_KICKS
+				if (!ppossee && pkicking == 0) { pkicking = 16; phitteract = 1; }
+			#endif
 		} 
+	#endif
+
+	#ifdef PLAYER_PUNCHES
+		if (ppunching) {
+			ppunching --; if (ppunching == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
+			phittery = pry + PLAYER_PUNCH_OFFS_Y;
+		} 
+	#endif
+
+	#ifdef PLAYER_KICKS
+		if (pkicking) {
+			pkicking --; if (pkicking == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
+			phittery = pry + PLAYER_KICK_OFFS_Y;
+			if (ppossee) pkicking = 0;
+		} 
+	#endif
+
+	#if defined (ENABLE_BREAKABLE) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+		if (phitteract) {
+			cx1 = (phitterx + 4) >> 4;
+			cy1 = (phittery + 4 - 16) >> 4;
+			if (ATTR(cx1, cy1) & 16) {
+				breakable_break (cx1, cy1);
+				pfrozen = PLAYER_FROZEN_FRAMES;
+				phitteract = 0;
+			}
+		}
 	#endif
 
 	// **********

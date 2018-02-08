@@ -16,6 +16,7 @@
 //  9 not safe block (safe spot not saved when jumping off this)
 // 10 lock
 // 11 pushable
+// 32 ladder (== 32, no obstacle!)
 
 const unsigned char behs0 [] = {
 	0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8, 11, 10,

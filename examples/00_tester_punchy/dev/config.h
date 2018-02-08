@@ -1,6 +1,9 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017
 
+#define TOP_ADJUST				4
+#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -143,15 +146,17 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			28
+#define ENEMS_ENABLE_DYING_FRAME
+//#define ENEMS_EXPLODING_CELL 			16
 #define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_TOUCHED_FRAMES			32 // # frames to stay frozen after hit
 
 // Fanties / Homing fanties
 
 //#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
 
-#define FANTY_BASE_SPRID				16
+#define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
@@ -172,41 +177,32 @@
 // Saws
 
 //#define ENABLE_SAW
-#define SAW_BASE_SPRID					16
+#define SAW_BASE_SPRID					48
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
-
-// If you enable monococos, I think you should enable cocos:
-
-//#define ENABLE_COCOS
-#define COCOS_MAX						4
-#define COCO_V							128
-#define COCO_PATTERN					0
-#define COCO_PALETTE 					0
-#define COCO_FAIR_D						32
 
 // Pezons
 
 //#define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID		16
-#define PEZON_WAIT				50
-#define PEZON_THRUST			384
-#define PEZON_VY_FALLING_MAX	256
-#define PEZON_G					16
+#define PEZONS_BASE_SPRID				40
+#define PEZON_WAIT						50
+#define PEZON_THRUST					384
+#define PEZON_VY_FALLING_MAX			256
+#define PEZON_G							16
 
 // Chac chacs
 
 //#define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE		48
-#define CHAC_CHAC_IDLE_2		16
-#define CHAC_CHAC_IDLE_3		1
-#define CHAC_CHAC_IDLE_4		50
+#define CHAC_CHAC_BASE_TILE				16
+#define CHAC_CHAC_IDLE_2				16
+#define CHAC_CHAC_IDLE_3				1
+#define CHAC_CHAC_IDLE_4				50
 
 // Monococos
 
 //#define ENABLE_MONOCOCOS
 //#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				24
+#define MONOCOCO_BASE_SPRID				56
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -215,18 +211,28 @@
 // Shooties
 
 #define ENABLE_SHOOTIES
-#define SHOOTIES_BASE_SPRID				22
+#define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
-#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Punchies
 
 #define ENABLE_PUNCHIES
-#define PUNCHIES_BASE_SPRID				16
+#define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
-#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit])<12)
+#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
+
+// Cocos will get enabled automaticly on choosing monococos or shooties.
+
+//#define ENABLE_COCOS
+#define COCOS_MAX						4
+#define COCO_V							128
+
+#define COCO_PATTERN					0
+#define COCO_PALETTE 					0
+#define COCO_FAIR_D						32
 
 // Carry directives
 
@@ -241,9 +247,9 @@
 #define HS_OBJ_MAX						6
 #define HS_USE_OFFS						2
 
-#define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
-								// Otherwise, use its own graphics.
-#define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
+#define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+										// Otherwise, use its own graphics.
+#define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
 // Silly Brawlers
 // --------------
@@ -254,6 +260,8 @@
 #define PLAYER_KICKS					// While airborne
 #define PLAYER_KICK_OFFS_X				12
 #define PLAYER_KICK_OFFS_Y				-3
+
+#define PLAYER_FROZEN_FRAMES			16	// Frames to be frozen when hit landed
 
 // Shooting behaviour
 // ------------------
@@ -400,7 +408,7 @@
 	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		2
 	//#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE		6
+	//#define CELL_SWIM_CYCLE	6
 
 	#define CELL_ASCENDING		6
 	#define CELL_DESCENDING		7
@@ -432,8 +440,3 @@
 #define CARRY_ONE_HS_OBJECT
 #endif
 
-#ifdef TALL_PLAYER
-#define PLAYER_SPRITE_SIZE 40
-#else
-#define PLAYER_SPRITE_SIZE 24
-#endif

@@ -79,9 +79,10 @@ if (rda) {
 oam_index = oam_meta_spr (
 	rdx, rdy + SPRITE_ADJUST,
 	oam_index,
-	spr_enems [ENEMS_OCCLUDING_FRAME]
+	spr_enems [ENEMS_OCCLUDING_CELL]
 );
 
 // Frame selection
 
 en_spr = SAW_BASE_SPRID + half_life;
+en_facing [gpit] = 0;

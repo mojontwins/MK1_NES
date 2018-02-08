@@ -78,54 +78,6 @@ void bullets_move (void) {
 				by [bi] > 191 - PLAYER_BULLET_SPEED ||
 				(rdm & 8)
 			) bullets_destroy (); 
-			
-			// Collide with enemies?			
-			for (gpjt = 0; gpjt < 3; gpjt ++) {
-				if (
-				#ifdef FIRE_MIN_KILLABLE
-					en_t [gpjt] >= FIRE_MIN_KILLABLE
-				#else
-					en_t [gpjt]
-				#endif
-				#ifndef PLAYER_TOP_DOWN
-					&& en_t [gpjt] != 4
-				#endif
-				#ifdef ENABLE_SAW
-					&& en_t [gpjt] != 8
-				#endif
-				#ifdef ENABLE_MONOCOCOS
-					&& (en_t [gpit] != 11 || en_mx [gpit] == 2)
-				#endif
-				) {
-					#ifdef ENABLE_PURSUERS
-						if (en_t [gpjt] != 7 || en_alive [gpjt] == 2)
-					#endif
-					
-					if (collide_in (bx [bi] + 3, by [bi] + 3, en_x [gpjt], en_y [gpjt])) {
-						sfx_play (6, 2);
-						bullets_destroy ();
-
-						en_cttouched [gpjt] = 8;
-						en_life [gpjt] --;						
-
-						if (en_life [gpjt] == 0) {	
-
-							#ifdef ENABLE_PURSUERS
-								if (en_t [gpjt] == 7) {
-									en_alive [gpjt] = 0;
-									en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-									en_life [gpjt] = ENEMIES_LIFE_GAUGE;
-								} else
-							#endif
-							en_t [gpjt] = 0;		
-
-							pkilled ++;												
-						}
-						break;
-					}
-				}	
-			}						
-			
 		}
 	}
 }

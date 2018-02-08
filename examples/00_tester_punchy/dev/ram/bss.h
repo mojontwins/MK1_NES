@@ -159,6 +159,7 @@ unsigned char pammo, pfiring;
 #if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 	unsigned char phitterx, phittery;
 	unsigned char phitteract;
+	unsigned char pfrozen;
 #endif
 
 // Current level

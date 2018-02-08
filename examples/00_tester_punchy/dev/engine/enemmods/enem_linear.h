@@ -55,5 +55,5 @@ if (!en_status [gpit] || half_life) {
 	#endif						
 }
 
-en_facing = (en_mx [gpit] > 0 || en_my [gpit] > 0) ? 0 : 2;
-en_spr = en_s [gpit] + en_fr + en_facing;
+en_facing [gpit] = (en_mx [gpit] > 0 || en_my [gpit] > 0) ? 0 : 4;
+en_spr = en_s [gpit] + en_fr + en_facing [gpit];

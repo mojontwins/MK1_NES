@@ -19,6 +19,9 @@ unsigned char rdct;
 // Used for two-points collision
 
 unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
+#ifdef TALL_PLAYER
+	unsigned char at3;
+#endif
 
 // Sprite related
 
@@ -32,7 +35,7 @@ unsigned char en_x [3], en_y [3];
 unsigned char en_x1 [3], en_y1 [3];
 unsigned char en_x2 [3], en_y2 [3];
 signed char en_mx [3], en_my [3];
-unsigned char en_t [3], en_s [3], en_facing;
+unsigned char en_t [3], en_s [3], en_facing [3];
 unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
 #ifdef ENABLE_GENERATORS
@@ -69,8 +72,14 @@ unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
+
 #if defined (ENABLE_EASY_OBJECTS)
-unsigned char pinv;
+	unsigned char pinv;
+#endif
+
+#ifdef ENABLE_LADDERS
+	unsigned char ponladder;
+	unsigned char ponladderctr;
 #endif
 
 #ifdef PLAYER_TOP_DOWN
@@ -100,11 +109,9 @@ unsigned char wall, hitv, hith;
 #endif
 
 // Hotspots
-
 unsigned char hrx, hry, hrt;
 
 // Process breakable?
-
 #ifdef BREAKABLE_ANIM
 	unsigned char do_process_breakable;
 #endif

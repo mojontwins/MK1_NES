@@ -24,6 +24,35 @@ void enems_kill (unsigned char gpit) {
 }
 #endif
 
+#if defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	void enems_hit (void) {
+		#ifdef ENABLE_SAW
+			if (en_t [gpit] == 8) return;
+		#endif
+		#ifdef PLAYER_MIN_KILLABLE
+			if (en_t [gpit] < PLAYER_MIN_KILLABLE) return;
+		#endif
+		if (en_cttouched [gpit]) return;
+
+		en_facing [gpit] = ((en_x [gpit] < prx) ? 0 : 4);
+		en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
+		en_life [gpit] --; 
+
+		if (en_life [gpit] == 0) {
+	#ifdef ENABLE_PURSUERS
+			if (en_t [gpit] == 7) {
+				en_alive [gpit] = 0;
+				en_ct [gpit] = DEATH_COUNT_EXPRESSION;
+				en_life [gpit] = ENEMIES_LIFE_GAUGE;
+			} else 
+	#endif
+			{
+				enems_kill (gpit);
+			}
+		}
+	}
+#endif
+
 #ifdef ENABLE_CHAC_CHAC
 	void enems_draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
 		map_set (en_x [gpit], en_y [gpit], a1);
@@ -151,10 +180,39 @@ void enems_load (void) {
 				case 2:
 				case 3:
 				case 4:
-					// Linear enems.			
+	#ifdef ENABLE_SHOOTIES
+				case 12:
+				case 13:
+				case 14:
+				case 15:
+	#endif
+	#ifdef ENABLE_PUNCHIES
+				case 16:
+				case 17:
+				case 18:
+				case 19:
+	#endif
+					en_ct [gpit] = 0;
+	
+					// Linear enems.
+	#ifdef ENABLE_PUNCHIES
+					if (en_t [gpit] >= 16) {
+						en_rawv [gpit] = 2;
+						en_s [gpit] = PUNCHIES_BASE_SPRID + ((en_t [gpit] - 16) << 3);
+					} else
+	#endif					
+	#ifdef ENABLE_SHOOTIES
+					if (en_t [gpit] >= 12) {
+						en_rawv [gpit] = 1;
+						en_s [gpit] = SHOOTIES_BASE_SPRID + ((en_t [gpit] - 12) << 3);
+					} else
+	#endif
+					{
+						en_rawv [gpit] = 0;
+						en_s [gpit] = (en_t [gpit] - 1) << 3;
+					}
 
-					// HL conversion
-					en_s [gpit] = (en_t [gpit] - 1) << 2;
+					// HL conversion		
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
@@ -174,6 +232,7 @@ void enems_load (void) {
 					enf_x [gpit] = en_x [gpit] << 6;
 					enf_y [gpit] = en_y [gpit] << 6;
 					enf_vx [gpit] = enf_vy [gpit] = 0;
+					en_s [gpit] = FANTY_BASE_SPRID;
 					break;
 	#endif
 
@@ -183,6 +242,7 @@ void enems_load (void) {
 					enf_x [gpit] = en_x [gpit] << 6;
 					enf_y [gpit] = en_y [gpit] << 6;
 					enf_vx [gpit] = enf_vy [gpit] = 0;
+					en_s [gpit] = FANTY_BASE_SPRID;
 					// State idle
 					en_alive [gpit] = 0; 
 					break;
@@ -191,14 +251,13 @@ void enems_load (void) {
 	#ifdef ENABLE_PURSUERS		
 				case 7:
 					// Pursuers
-
-					en_s [gpit] = (TYPE_7_FIXED_SPRITE - 1) << 2;
 					en_alive [gpit] = 0;
 					en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
 		#ifdef ENABLE_GENERATORS
 						en_generator_life [gpit] = GENERATOR_LIFE_GAUGE;
 						gen_was_hit [gpit] = 0;
 		#endif	
+					en_s [gpit] = ((TYPE_7_FIXED_SPRITE - 1) << 3);
 					break;
 	#endif	
 
@@ -221,6 +280,7 @@ void enems_load (void) {
 
 					en_alive [gpit] = 1;
 					en_ct [gpit] = SAW_EMERGING_STEPS;
+
 					break;
 	#endif		
 
@@ -232,6 +292,8 @@ void enems_load (void) {
 					en_my [gpit] = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
 					en_alive [gpit] = 0;
 					en_mx [gpit] = en_my [gpit];
+
+					en_s [gpit] = PEZONS_BASE_SPRID;
 					break;
 	#endif
 
@@ -252,11 +314,12 @@ void enems_load (void) {
 				case 11:
 					// Monococos
 					en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
+					en_s [gpit] = MONOCOCO_BASE_SPRID;
 					break;
 	#endif					
 			}
 
-	#if defined(PLAYER_CAN_FIRE)
+	#if defined(PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 				en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
 		#else
@@ -284,35 +347,65 @@ void enems_move (void) {
 	gpit = en_initial;
 	gpjt = 3; while (gpjt --) {
 		gpit += 2; if (gpit > 2) gpit -=3;
+		en_spr = 0xff;
+
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
-			oam_index = oam_meta_spr (
-				en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-				oam_index, 
-				spr_enems [SPRITE_BADDIE_DYING]
-			);
-			continue;
+			#ifdef ENEMS_FLICKER
+				if (half_life) {
+					#ifdef ENEMS_ENABLE_DYING_FRAME
+						rda = en_s [gpit] + en_facing [gpit] + 3;
+						if (spr_enems [rda]) en_spr = rda; 
+						else
+					#endif
+					en_spr = en_spr_id [gpit];	
+				} 
+			#else
+				oam_index = oam_meta_spr (
+					en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
+					oam_index, 
+					spr_enems [ENEMS_EXPLODING_CELL]
+				);
+				en_spr = en_spr_id [gpit];
+			#endif
 		} 
 #endif
 		
-		if (en_t [gpit]) {
+		if (en_t [gpit] && en_cttouched [gpit] == 0) {
 
 			// Gotten preliminary:
 			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
 
 			// Select frame upon screen position:
-			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit]) + 8) >> 4) & 1;
+			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit])+4) >> 3) & 1;
 
 			// Means don't render (can/will be overwritten):
-			en_spr = 0xff;	
-
+			
 			switch (en_t [gpit]) {
 				case 1:
 				case 2:
 				case 3:
 				case 4:
+	#ifdef ENABLE_SHOOTIES
+				case 12:
+				case 13:
+				case 14:
+				case 15:
+	#endif
+	#ifdef ENABLE_PUNCHIES
+				case 16:
+				case 17:
+				case 18:
+				case 19:
+	#endif
 					#include "engine/enemmods/enem_linear.h"
+#ifdef ENABLE_SHOOTIES
+					#include "engine/enemmods/enem_shooty.h"
+#endif				
+#ifdef ENABLE_PUNCHIES
+					#include "engine/enemmods/enem_punchy.h"
+#endif
 					break;
 
 #ifdef ENABLE_FANTY					
@@ -357,15 +450,7 @@ void enems_move (void) {
 					break;
 #endif					
 			}
-
-			// Render enemy metasprite en_spr
-			if (en_spr != 0xff) {
-				oam_index = oam_meta_spr (
-					en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-					oam_index, 
-					spr_enems [en_spr]
-				);
-			}
+			en_spr_id [gpit] = en_spr;
 
 #ifndef PLAYER_TOP_DOWN
 			// Movable platforms
@@ -444,8 +529,59 @@ void enems_move (void) {
 			}
 #endif
 
-			// Collide <-> player
+			// kick / punch
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+			if (phitteract) {
+				if (
+					en_x [gpit] + 7 >= phitterx && en_x [gpit] <= phitterx + 7 &&
+#ifdef TALL_COLLISION
+					phittery + 15 >= en_y [gpit] &&
+#else
+					phittery + 7 >= en_y [gpit] &&
+#endif					
+					phittery <= en_y [gpit] + 7
+				) {
+					enems_hit ();
+					phitteract = 0;
+					pfrozen = PLAYER_FROZEN_FRAMES;
+				}
+			} 
+#endif
 
+#ifdef PLAYER_CAN_FIRE
+			// Bullets
+			bi = MAX_BULLETS; while (bi --) if (bst [bi]) {
+				if (
+				#ifdef FIRE_MIN_KILLABLE
+					en_t [gpit] >= FIRE_MIN_KILLABLE
+				#else
+					en_t [gpit]
+				#endif
+				#ifndef PLAYER_TOP_DOWN
+					&& en_t [gpit] != 4
+				#endif
+				#ifdef ENABLE_SAW
+					&& en_t [gpit] != 8
+				#endif
+				#ifdef ENABLE_MONOCOCOS
+					&& (en_t [gpit] != 11 || en_mx [gpit] == 2)
+				#endif
+				) {
+					#ifdef ENABLE_PURSUERS
+						if (en_t [gpit] != 7 || en_alive [gpit] == 2)
+					#endif
+					
+					if (collide_in (bx [bi] + 3, by [bi] + 3, en_x [gpit], en_y [gpit])) {
+						sfx_play (6, 2);
+						bullets_destroy ();
+						enems_hit ();
+						break;
+					}
+				}				
+			}
+#endif
+
+			// Collide <-> player
 			if (
 #if defined (ENABLE_RESONATORS) && defined (ENABLE_SAW)
 				(!res_on || en_t [gpit] == 8) &&
@@ -477,33 +613,23 @@ void enems_move (void) {
 					pvx = ADD_SIGN (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = ADD_SIGN (en_x [gpit] - prx, ABS (en_mx [gpit]));
 					pvy = ADD_SIGN (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = ADD_SIGN (en_y [gpit] - pry, ABS (en_my [gpit]));
 #endif
-					
-#ifdef PLAYER_CAN_FIRE
-						en_life [gpit] --; 
-						if (
-							en_life [gpit] == 0
-	#ifdef ENABLE_SAW
-							&& en_t [gpit] != 8
-	#endif
-	#ifdef PLAYER_MIN_KILLABLE
-							&& en_t [gpit] >= PLAYER_MIN_KILLABLE
-	#endif
-						) {
-	#ifdef ENABLE_PURSUERS
-							if (en_t [gpit] == 7) {
-								en_alive [gpit] = 0;
-								en_ct [gpit] = DEATH_COUNT_EXPRESSION;
-								en_life [gpit] = ENEMIES_LIFE_GAUGE;
-							} else 
-	#endif
-							{
-								enems_kill (gpit);
-							}
-						}					
-#endif				
+
+#if defined (PLAYER_CAN_FIRE) 					
+					enems_hit ();
+#endif
+
 					pkill = 1;
 				}
 			}
 		} 
+
+		// Render enemy metasprite en_spr
+		if (en_spr != 0xff) {
+			oam_index = oam_meta_spr (
+				en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
+				oam_index, 
+				spr_enems [en_spr]
+			);
+		}
 	}	
 }

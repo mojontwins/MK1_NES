@@ -4,10 +4,7 @@
 // frame.h
 // Custom game frame
 
-void draw_game_frame (void) {
-	unrle_vram (frame_rle, 0x2000);
-	memfill (attr_table, 0xff, 64);
-}
+#include "my/game_frame.h"
 
 void hud_update (void) {
 	// Update frame

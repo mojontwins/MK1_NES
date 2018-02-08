@@ -70,11 +70,12 @@ void player_init (void) {
 }
 
 void player_render (void) {
-	if (pstate == EST_NORMAL || half_life) {
-		oam_meta_spr (prx, pry + SPRITE_ADJUST, 4, spr_player [psprid]);	
-	} else {
-		oam_meta_spr (0, 240, 4, spr_pl_empty);
-	}
+	if (pstate == EST_NORMAL || half_life) 
+		oam_index = oam_meta_spr (
+			prx, pry + SPRITE_ADJUST, 
+			oam_index, 
+			spr_player [psprid]
+		);
 }
 
 void player_kill (void) {
@@ -116,12 +117,39 @@ void player_kill (void) {
 
 void player_move (void) {
 
+	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+		if (pfrozen) {
+			pfrozen --; 
+			if (pfrozen == 0) {
+			#ifdef PLAYER_PUNCHES
+				ppunching = 0;
+			#endif
+			#ifdef PLAYER_KICKS
+				pkicking = 0;
+			#endif
+			} else return;
+		}
+	#endif
+
 	hitv = hith = 0;
 	pushed_any = 0;
 	pnotsafe = 0;
 	ppossee = 0;
 	#ifdef ENABLE_SLIPPERY
 		pice = 0;
+	#endif
+
+	// ******************
+	// Initial detections
+	// ******************
+
+	#ifdef ENABLE_LADDERS
+		//ponladder = (!pj && (ATTR((prx + 4) >> 4, (pry - 1) >> 4) == 32));
+		cx1 = prx >> 4;
+		cx2 = (prx + 7) >> 4;
+		cy1 = cy2 = (pry + 15) >> 4;
+		cm_two_points ();
+		ponladder = (!pj && at1 == 32 && at2 == 32);
 	#endif
 
 	// ********
@@ -160,6 +188,16 @@ void player_move (void) {
 
 	#else
 		// Gravity
+
+		#ifdef ENABLE_LADDERS
+			if (ponladder) {
+				if (i & PAD_UP) {
+					pvy = -PLAYER_VY_LADDERS;
+				} else if (i & PAD_DOWN) {
+					pvy = PLAYER_VY_LADDERS;
+				} else pvy = 0;
+			} else
+		#endif
 
 		#ifndef PLAYER_SWIMS
 			if (!pj) {
@@ -224,13 +262,22 @@ void player_move (void) {
 		if (rds16 < 0)
 	#endif		
 		{
-			cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
+			#ifdef TALL_PLAYER
+				cy1 = cy2 = (pry + (PLAYER_COLLISION_TOP - 16)) >> 4;
+			#else
+				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
+			#endif
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvy = 0; pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP; py = pry << FIXBITS;
+				#ifdef TALL_PLAYER
+					pry = ((cy1 + 1) << 4) + 16 - PLAYER_COLLISION_TOP;
+				#else
+					pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP;
+				#endif
+				pvy = 0; py = pry << FIXBITS;
 				pgotten = 0;
 				pfiring = 1;
-				#ifdef PLAYER_TOP_DOWN
+				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					// Special obstacles
 					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
 					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
@@ -239,7 +286,7 @@ void player_move (void) {
 				hitv = 1;
 			}
 	#ifdef ENABLE_QUICKSANDS
-			else if ((at1 & 2) || (at2 & 2)) {
+			else if ((at1 == 2) || (at2 == 2)) {
 				if (pctj > 2) pj = 0;
 			}
 	#endif		
@@ -252,7 +299,6 @@ void player_move (void) {
 		{
 			cy1 = cy2 = (pry + 16) >> 4; 
 			cm_two_points (); 
-
 			#ifdef PLAYER_TOP_DOWN
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
@@ -267,7 +313,7 @@ void player_move (void) {
 				pfiring = 1;
 				ppossee = 1;
 				
-				#ifdef PLAYER_TOP_DOWN
+				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
 					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
 				#endif
@@ -292,7 +338,7 @@ void player_move (void) {
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
-					if ((at1 & 2) || (at2 & 2)) {
+					if ((at1 == 2) || (at2 == 2)) {
 						pvy = PLAYER_VY_SINKING;
 						ppossee = 1;
 					}
@@ -307,7 +353,12 @@ void player_move (void) {
 		if (
 			a_button 
 			&& !pj
-			&& (pgotten || ppossee || hitv)
+			&& (
+				pgotten || ppossee || hitv
+				#ifdef ENABLE_LADDERS
+					|| ponladder
+				#endif
+			)
 		) {
 			sfx_play (7, 0);
 			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
@@ -407,8 +458,10 @@ void player_move (void) {
 	
 	// Collision
 
-	cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
-	cy2 = (pry + 15) >> 4;
+	#ifndef TALL_PLAYER
+		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
+		cy2 = (pry + 15) >> 4;
+	#endif
 
 	rds16 = pvx + pgtmx;
 	if (rds16) 	{
@@ -421,16 +474,34 @@ void player_move (void) {
 			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
-		cm_two_points ();
-		if ((at1 & 8) || (at2 & 8)) {
-			pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+		#ifdef TALL_PLAYER
+			cm_three_points ();
+			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
-			// Special obstacles
-			if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
-			if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
-		} else {
-			hith = ((at1 & 1) || (at2 & 1));
-		}
+				// Special obstacles
+				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
+					if (at1 & 2) player_process_tile (at1, cx1, (PLAYER_COLLISION_TOP - 16)) >> 4, rdm, cy1);
+					if (at2 & 2) player_process_tile (at2, cx1, pry >> 4, rdm, cy2);
+					if (at3 & 2) player_process_tile (at2, cx1, (pry + 15) >> 4, rdm, cy2);
+				#endif				
+			} else {
+				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));
+			}
+		#else
+			cm_two_points ();
+			if ((at1 & 8) || (at2 & 8)) {
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+
+				// Special obstacles
+				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
+					if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
+					if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
+				#endif				
+			} else {
+				hith = ((at1 & 1) || (at2 & 1));
+			}
+		#endif
 	}
 
 	// Facing
@@ -467,8 +538,13 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do containers)
 
-	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE)
-		if (b_button) {
+	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
+		if (
+			b_button
+			#ifdef ENABLE_LADDERS
+				&& !ponladder
+			#endif
+		) {
 			#ifdef PLAYER_CAN_FIRE				
 				fire_bullet ();
 			#endif		
@@ -486,61 +562,51 @@ void player_move (void) {
 					use_ct = 1;
 				}
 			#endif
+
+			#ifdef PLAYER_PUNCHES
+				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; }				
+			#endif
+
+			#ifdef PLAYER_KICKS
+				if (!ppossee && pkicking == 0) { pkicking = 16; phitteract = 1; }
+			#endif
 		} 
+	#endif
+
+	#ifdef PLAYER_PUNCHES
+		if (ppunching) {
+			ppunching --; if (ppunching == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
+			phittery = pry + PLAYER_PUNCH_OFFS_Y;
+		} 
+	#endif
+
+	#ifdef PLAYER_KICKS
+		if (pkicking) {
+			pkicking --; if (pkicking == 0) phitteract = 0;
+			phitterx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
+			phittery = pry + PLAYER_KICK_OFFS_Y;
+			if (ppossee) pkicking = 0;
+		} 
+	#endif
+
+	#if defined (ENABLE_BREAKABLE) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+		if (phitteract) {
+			cx1 = (phitterx + 4) >> 4;
+			cy1 = (phittery + 4 - 16) >> 4;
+			if (ATTR(cx1, cy1) & 16) {
+				breakable_break (cx1, cy1);
+				pfrozen = PLAYER_FROZEN_FRAMES;
+				phitteract = 0;
+			}
+		}
 	#endif
 
 	// **********
 	// Calc frame
 	// **********
 
-	// You may (will) need to tinker with this for your game.
-
-	#ifdef PLAYER_TOP_DOWN
-
-		// Frame selection for top-down view games
-
-		if (pvx != 0 || pvy != 0) {
-			pctfr ++;
-			if (pctfr == 4) {
-				pctfr = 0;
-				pfr = !pfr;
-				psprid = pfacing + pfr;
-			}
-		}
-
-	#else
-
-		// Frame selection for side view games
-
-		#ifdef PLAYER_SWIMS
-			if (i && (rdx != prx || rdy != pry)) {
-				if (pvx) {
-					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
-				} else {
-					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
-				}
-			} else psprid = CELL_SWIM_CYCLE + 1;
-		#else
-			if (ppossee || pgotten) {
-
-				// On floor
-
-				if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-					psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-				} else {
-					psprid = CELL_IDLE;
-				}
-			} else {
-				//psprid = CELL_AIRBORNE;
-				if (pvy < PLAYER_VY_FALLING_MIN)
-					psprid = CELL_ASCENDING;
-				else
-					psprid = CELL_DESCENDING;	
-			}
-		#endif
-
-		psprid += pfacing;
-	#endif
+	#include "my/player_frame_selector.h"
 
 	prx_old = prx;
 	pry_old = pry;

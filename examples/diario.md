@@ -1857,3 +1857,43 @@ Además, no debo mostrar los frames de escalera si estoy caminando sobre suelo.
 
 Hecho, e integrados los breakable. Necesito efectos de sonido. Y necesito algún tipo de efecto de hostiazo, me refiero a cuando le damos a los enemigos que retrocedan algunos pixeles o algo. Pero tengo que pensar la forma de hacerlo y antes quiero dejar el modulo de enemigos más limpio.
 
+20180208
+========
+
+Voy a empezar a remodelar los enemigos que es una basura desordenada. Lo primero que voy a hacer es mover las colisiones con las balas ahí, y ahorro vueltas (no se comprobarán los enemigos inactivos y tal).
+
+~~
+
+Hecho.
+
+Pensando pensando, lo que necesitan los enemigos hostiados es un frame de punched. A ver como carajo integro esto con los slots de la animacion, que son automáticos para los tipos lineales.
+
+Mira, tampoco son tantos bytes si hago la extensión de forma universal: siempre tengo 8 frames por tipo de enemigo.
+
+Right { Walk1, Walk2, Attacking, Dying }, Left { ... }.
+
+Walk1 y Walk2 son obligatorias. Attacking = 0 en lineales puros. Dying = 0 si no activas `ENEMS_DYING_FRAME`.
+
+Esto lo tengo que madurar porque cada tipo de enemigo tiene sus historias con los frames y tal. Mejor me encargo antes de dejar el manejador de enemigos más organizado y luego me pongo a trabajarme de verdad los sets de sprites para unificarlo todo.
+
+~~
+
+Pero, por ahora, estos son los requerimientos de frames de todos los tipos:
+
+- Fanty: 4 frames R1 R2 L1 L2
+- Pezon: 2 frames C A
+- Saw: 2 frames animación
+- Monococo, hay modo full y no full. Ful: R1 R2 L1 L2 RA RH LA LH, no full solo R1 R2 L1 L2
+
+La idea sería dejarlo todo unificado en 8, podría ser así:
+
+Right (anim1, anim2, attack, dying) Left (anim1, anim2, attack, dying), Extra frames (custom).
+
+Así, dying siempre es `facing + 3`, y solo se muestra si está definido `ENEMS_DYING_FRAME`.  En el caso de los monococos, los frames extra para el tipo B son a partir de +8.
+
+¿Qué hago antes, esto o lo otro? XD Lo tengo que hacer sobre `tester_sideview` primero, que es donde hay más tipos de enemigos. Luego lo traslado a `tester_punchy` para comprobar.
+
+~~
+
+Para que funcione bien el frame hostiado, necesito guardar el facing. Ar.
+
