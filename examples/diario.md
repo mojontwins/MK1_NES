@@ -1933,6 +1933,19 @@ Funcionando en `tester_top_down`, con chicha diferente. Aquí el ahorro es de **
 Funcionando en `tester_sideview`, con un montón de enemigos. Aquí el ahorro es de **2176 bytes**. Cágate lorito.
 
 OJAL: 
-[ ] Hay algo peío con los tiles destructibles que da la cara en `tester_top_down`.
+[X] Hay algo peío con los tiles destructibles que da la cara en `tester_top_down`.
 [X] Homing fanties don't seem to work!
 
+~~
+
+Next
+
+- Añadir sonidos.
+- Pasar los cambios a Sir Ababol (AY!).
+- Poner que los puñetazos solo sean activos durante sus primeros 3 o 4 frames, que ahora queda raro cuando le das al puño y el muñeco se colisiona con tu puño ya echao por su movimiento.
+- Examinar los contenedores y ver como funcionan con el script. Pero esto necesita otro tester.
+- Probar los propellers.
+
+Veo que los containers están muy integrados con las animaciones custom de cave. Tengo que hacerlos más sencillos y generales, simplemente contenedores de objetos que intercambien el objeto que llevas, operaciones entre flags, vaya. O mejor me los fumo. O no sé, vienen muy bien para el script...
+
+Los terminaré haciendo.
