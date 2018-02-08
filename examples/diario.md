@@ -1897,3 +1897,33 @@ Así, dying siempre es `facing + 3`, y solo se muestra si está definido `ENEMS_
 
 Para que funcione bien el frame hostiado, necesito guardar el facing. Ar.
 
+~~
+
+Todo funcionando.
+
+Vamos a hacer un esqueleto de lo que tendría que ser el módulo de enemigos (la estructura). Además, sacaré a variables normales los arrays principales y tal, y luego miraré cuanto ahorro. Así que antes de empezar vendría bien capturar de nessc.exe
+
+Para todos los enemigos
+	- Elegir uno fuera de orden.
+	- en_spr = 0xff;
+	- Gestión de "tocado". Esto está bien.
+	- Si en_t y no está tocado,
+		- Cálculo de pregotten y `en_fr` común. (revisar `en_fr` redundantes)
+		- Mover según en_t.
+		- `en_spr_id [gpit] = en_spr;`.
+		- Detectar plataformas móviles.
+		- Si el enemigo no es colisionable, salir
+		- Colisionar con el player.
+		- Si el enemigo no es matable, salir
+		- Pisar enemigo
+		- Golpear enemigo
+		- Balear enemigo
+
+	- Si en_spr != 0xff, pintar frame en_spr.
+
+Esto asume que si no es colisionable, no es matable, lo cual es cierto.
+
+Antes del remodelado, tho', voy a hacer lo de extraer las variables, porque así el código es más claro y me equivocaré menos.
+
+~~
+
