@@ -2031,3 +2031,12 @@ Ya estoy reimplementando cosas otra vez. Me cago en mi estampa. Pero ¿y lo bien
 
 ~~
 
+¿Y como especificar el tile en el conversor? Tendré que modificar los demás .bat si no quiero romper compatibilidad. Pero eso es lo de menos.
+
+~~
+
+Después de estar toda la tarde jugando con el churum a que es "la bestia bestial" me he dado cuenta de la gilipollez que es pegarse un curro para mejorar una concepción ya de por si poco eficiente, así que lo que voy a hacer es implementar los propellers (y los springs) de MK2 y a tomar por culario.
+
+Pero ahora ya no.
+
+
