@@ -1949,3 +1949,85 @@ Next
 Veo que los containers están muy integrados con las animaciones custom de cave. Tengo que hacerlos más sencillos y generales, simplemente contenedores de objetos que intercambien el objeto que llevas, operaciones entre flags, vaya. O mejor me los fumo. O no sé, vienen muy bien para el script...
 
 Los terminaré haciendo.
+
+20180209
+========
+
+Los propellers
+--------------
+
+Los propellers están hechos de puta madre en MK2 y en Yun había una versión que los colocaba en hotspots, porque fueron un añadido a posteriori para poder meter el juego de Limite.
+
+Originalmente los introduje en 2015 en MK1 para la fase de la fábrica de Cheril Perils que Anjuel iba a hacer y que se quedó en tres pantallas (una lástima, qué gráficos más bonitos).
+
+Voy a descifrar como funcionaban - el código hay que limpiarlo de todos modos.
+
+De forma old (ortopédica lol dioni), se mantienen unos arrays de propellers. Esto es porque hay cierta animación incorporada. Esta se está haciendo con sprites - creo que en MK2 se hace con tiles pero claro, en MK2 es mucho más barato rellenar la estructura de actualización porque es neslib moderno.
+
+Cada vez que se añade un propeller es de forma meramente incremental y se usa un `prp_idx` que controla cuantos hay y sirve para limitar el bucle de las animaciones.
+
+Cuando se crea, examina el buffer de atributos desde la casilla donde se define hacia arriba y almacena un rectángulo con x, x+16, y1 e y2. O sea, que la detección es aparte del sistema de atributos.
+
+HUM. En MK2 se pintan los tiles de bit propeller y la propulsión se hace directamente detectando si estamos allí. Es más eficiente pero yo ya no tengo bits. Y creo que esto puede funcionar. 
+
+Vale, lo voy a apañar mejor y lo hago así, total. Es MK1.
+
+La cosa es que esto parece que (aparte del archivo en la carpeta engine) está totalmente vanished. Voy a mirar en los fuentes viejos de Cheril Perils a ver cómo se integraba, aunque me imagino cómo.
+
+En config.h tenía esto:
+
+```c
+	#define ENABLE_PROPELLERS
+	#define PROPELLER_AY			16	
+	#define PROPELLER_VY_MAX		256
+	#define PROPELLER_TILE			32
+```
+
+En player.h, dentro de la parte donde hay gravedad, y justo antes de la gravedad, esto:
+
+```c
+	#ifdef ENABLE_PROPELLERS
+		if (ppropelled) {
+			pvy -= PROPELLER_AY;
+			if (pvy < -PROPELLER_VY_MAX) pvy = -PROPELLER_VY_MAX;
+		} else
+	#endif
+```
+
+O sea, que cancela la gravedad.
+
+Y en printer.h, durante el render de la pantalla, la detección:
+
+```c
+	#ifdef ENABLE_PROPELLERS
+		if (rdt == PROPELLER_TILE) {
+			add_propeller (rdx, rdy);
+		} else
+	#endif
+```
+
+Joder, es justo como yo pensaba. Si es que me conozco como si me hubiera parío.
+
+~~
+
+Espera, mano, que en vez de gastar espacio en RAM y tener que precalcularlo todo, puedo meterlo en ROM junto con la info del mapa, no?
+
+```c
+	unsigned char propellers_scr_XX [] = {
+		x1, y1, y2, ...
+		0x0ff
+	};
+
+	...
+
+	unsigned char propellers_map_0 [] = {
+		0, 0, propellers_scr_02, 0, 0, ...
+	}
+```
+
+Eso lo detecto al convertir el mapa y listo, menos ram, menos código, menos ejecución. 
+
+Ya estoy reimplementando cosas otra vez. Me cago en mi estampa. Pero ¿y lo bien que me lo paso?
+
+~~
+

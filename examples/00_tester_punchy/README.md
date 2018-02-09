@@ -7,6 +7,10 @@ Things, so far:
 
 - Tall player
 - Shooties
+- Punchies
+- Player punches and kicks
+- Ladders
+- Propellers
 
 To Fix
 ======
@@ -67,4 +71,29 @@ Player punches, player kicks
 
 - Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
 
+Ladders
+-------
 
+- Full ladders. must start and end on obstacle.
+- beh == 32, strict.
+
+Propellers
+----------
+
+Enable and configure.
+
+```c
+	#define ENABLE_PROPELLERS
+	#define PROPELLERS_MAX 					4
+	#define PROPELLERS_BASE_SPRID			64
+	#define PROPELLER_TILE					14
+```
+
+Place in your map using tile `PROPELLER_TILE`. Add two frames to the enemy metasprites with base index `PROPELLERS_BASE_SPRID`. Place as much as `PROPELLERS_MAX` per screen.
+
+Vertical movement is then controlled by these:
+
+```c
+	#define PLAYER_AY_FLOAT			16	
+	#define PLAYER_VY_FLOAT_MAX		256
+```

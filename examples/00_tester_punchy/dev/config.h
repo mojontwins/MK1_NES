@@ -137,6 +137,16 @@
 
 #define ENABLE_LADDERS
 
+// Extra special stuff
+// -------------------
+
+// Propellers
+
+#define ENABLE_PROPELLERS
+#define PROPELLERS_MAX 					4
+#define PROPELLERS_BASE_SPRID			64
+#define PROPELLER_TILE					14
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -372,6 +382,9 @@
 #define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
 
 #define PLAYER_VY_LADDERS		96
+
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
