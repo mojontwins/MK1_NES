@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"breaka",
+				"breakable_break"
+			],
+			[
 				"DEACTI",
 				"DEACTIVATE_OBJECTS\t(config.h)"
 			],
@@ -244,28 +248,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/diario.md",
+			"file": "examples/00_tester_punchy/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 76795,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/00_tester_punchy/README.md",
-			"settings":
-			{
-				"buffer_size": 3341,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/00_tester_punchy/dev/ram/bss.h",
-			"settings":
-			{
-				"buffer_size": 3283,
+				"buffer_size": 15080,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -274,16 +260,52 @@
 			"file": "examples/00_tester_punchy/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 14602,
+				"buffer_size": 14916,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/00_tester_punchy/dev/engine/propellers.h",
+			"file": "examples/00_tester_punchy/dev/assets/behs.h",
 			"settings":
 			{
-				"buffer_size": 923,
+				"buffer_size": 811,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/00_tester_punchy/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 12606,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/00_tester_punchy/dev/ram/bss.h",
+			"settings":
+			{
+				"buffer_size": 3226,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/diario.md",
+			"settings":
+			{
+				"buffer_size": 77805,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/00_tester_punchy/dev/engine/playermods/bullets.h",
+			"settings":
+			{
+				"buffer_size": 1758,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -324,35 +346,43 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/00_tester_punchy",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram"
+		"/C/Cosas/git/MK1_NES",
+		"/C/Cosas/git/MK1_NES/examples",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/assets",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/mapmods",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/playermods",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/my",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/ram",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/gfx"
 	],
 	"file_history":
 	[
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/ram/bss.h",
+		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/my/player_frame_selector.h",
 		"/D/git/MK1_NES/examples/diario.md",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/definitions.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/utils/mkts.bas",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/player_frame_selector.h",
-		"/D/git/MK2/src/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
-		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Key To Time/tech/1/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/behs.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/player_frame_selector.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/README.md",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/general.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/definitions.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_shooty.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_punchy.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/cocos.h",
@@ -364,8 +394,12 @@
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/game.c",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/bgs.h",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/mainloop/asset_setup.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/spritedata.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/ss.png",
 		"/D/git/MK1_NES/examples/00_tester_punchy/gfx/ss.png",
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/behs.h",
+		"/D/git/MK1_NES/src/utils/mkts.bas",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_monococo.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/README.md",
 		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_pursuers.h",
@@ -453,24 +487,18 @@
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/ss0.png",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
-		"/D/git/MK1_NES/src/dev/ram/bss.h",
-		"/D/git/MK1_NES/src/dev/ram/zp.h",
-		"/D/git/MK1_NES/src/dev/game.c",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/music.s",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
-		"/D/git/MK1_NES/src/dev/mainloop/flickscreen.h"
+		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/printer.h"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
-		"height": 116.0,
+		"height": 120.0,
 		"where_history":
 		[
+			"C:\\Cosas\\git\\MK1_NES\\examples\\00_tester_punchy",
 			"D:\\git\\MK1_NES\\examples\\00_tester_punchy\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\examples\\00_tester_punchy",
 			"D:\\git\\MK1_NES\\examples\\06_lala_prologue",
@@ -534,9 +562,13 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"pkicky",
+			"pkickx",
+			"ppunchy",
+			"ppunchx",
 			"en_cttouched",
 			"en_life",
 			"enems_hit",
@@ -660,10 +692,6 @@
 			"pt",
 			"et",
 			"bmy",
-			"bt",
-			"etx1",
-			"ptx2",
-			"ptx1",
 			"bt"
 		],
 		"highlight": true,
@@ -672,6 +700,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"phittery",
+			"phitterx",
+			"phittery",
+			"phitterx",
 			"kick",
 			"KICK",
 			"kick",
@@ -795,11 +827,7 @@
 			"\\n",
 			"\\u",
 			"\\o",
-			"\\i",
-			"\\e",
-			"\\a",
-			"T.A.R.D.I.S.",
-			"8<"
+			"\\i"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -810,24 +838,174 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/diario.md",
+					"file": "examples/00_tester_punchy/dev/engine/enengine.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 76795,
+						"buffer_size": 15080,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								76795,
-								76795
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6663.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/00_tester_punchy/dev/config.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1363.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/00_tester_punchy/dev/assets/behs.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 811,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/00_tester_punchy/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12606,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7176.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "examples/00_tester_punchy/dev/ram/bss.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1779.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "examples/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 77805,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -839,143 +1017,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 34774.0,
+						"translation.y": 31159.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "examples/00_tester_punchy/README.md",
+					"buffer": 6,
+					"file": "examples/00_tester_punchy/dev/engine/playermods/bullets.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3341,
+						"buffer_size": 1758,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3341,
-								3341
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1091.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/00_tester_punchy/dev/ram/bss.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3283,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3248,
-								3248
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1088.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "examples/00_tester_punchy/dev/config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14602,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5106,
-								4986
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1434.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 4,
-					"file": "examples/00_tester_punchy/dev/engine/propellers.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 923,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								573,
-								573
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1035,7 +1109,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1069,7 +1143,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
