@@ -115,6 +115,8 @@ void draw_scr (void) {
 			brk_buff [rdm] = 1;
 		#endif
 
+		#include "engine/mapmods/map_detectors.h"
+
 		draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);
 		rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 	}

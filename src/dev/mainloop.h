@@ -58,7 +58,8 @@ void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
 	
 #ifdef ENABLE_PROPELLERS
-	clear_propellers ();
+	// Clear propellers
+	prp_idx = 0;
 #endif
 
 #ifdef PERSISTENT_ENEMIES
@@ -232,7 +233,7 @@ void game_loop (void) {
 		}
 
 #ifdef ENABLE_PROPELLERS
-		move_propellers ();
+		propellers_do ();
 #endif
 
 		#include "mainloop/hotspots.h"

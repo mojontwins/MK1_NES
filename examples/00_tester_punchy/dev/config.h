@@ -144,8 +144,9 @@
 
 #define ENABLE_PROPELLERS
 #define PROPELLERS_MAX 					4
-#define PROPELLERS_BASE_SPRID			64
-#define PROPELLER_TILE					14
+#define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
+#define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
+#define PROPELLER_TILE					14	// Tile # in map to detect a propeller
 
 // Enemy types and definitions
 // ---------------------------
@@ -454,3 +455,10 @@
 #define CARRY_ONE_HS_OBJECT
 #endif
 
+#ifdef ENABLE_PROPELLERS
+#define PLAYER_CAN_FLOAT
+#endif
+
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
+#define NEEDS_INITIAL_DETECTION
+#endif

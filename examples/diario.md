@@ -2039,4 +2039,16 @@ Después de estar toda la tarde jugando con el churum a que es "la bestia bestia
 
 Pero ahora ya no.
 
+20180210
+========
 
+Al igual que hicimos con las escaleras, tenemos el beh == 64 que significa "flotar", obviamente no es obstáculo.
+
+Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
+
+[ ] Sacar defines automáticos fuera de config.h y ponerlos aparte para poder sobrescribirlo con las actualizaciones.
+[ ] Mover config.h a /my
+[ ] Pasar a ASM las asignaciones arrays->variables y variables->arrays en el manejador de enemigos
+[ ] Springs
+[ ] Containers
+[ ] Hacer de sorpresi la ROM2 de Perils con los gráficos de Anjuel.

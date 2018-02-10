@@ -1,39 +1,23 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017
 
-#define MAX_PROPELLERS 4
+// Simple propellers
 
-unsigned char prp_idx, prp_it;
-unsigned char prp_x [MAX_PROPELLERS], prp_y1 [MAX_PROPELLERS], prp_y2 [MAX_PROPELLERS];
-
-void add_propeller (unsigned char x, unsigned char y) {
-	// Has to calculate teh real area.
-	prp_it = y; while (prp_it --) {
-		if (map_attr [COORDS (x, prp_it)]) break;
-	}
-
-	// Storage is in pixel coordinates.
-	prp_x [prp_idx] = x << 4;
-	prp_y1 [prp_idx] = prp_it << 4;
-	prp_y2 [prp_idx ++] = y << 4;
+void propellers_add (void) {
+	// Store YX for animation
+	prp_yx [prp_idx ++] = rdm;
 }
 
-void move_propellers () {
-	ppropelled = 0;
-	prp_it = prp_idx; while (prp_it --) {
-		if (pry >= prp_y1 [prp_it] && pry <= prp_y2 [prp_it]) {
-			if (prx + 8 >= prp_x [prp_it] && prx <= prp_x [prp_it] + 7) {
-				ppropelled = 1;
-			}
-		}
-		oam_index = oam_meta_spr (
-			prp_x [prp_it], prp_y2 [prp_it] + SPRITE_ADJUST, 
-			oam_index, 
-			spr_enems [22 + half_life]
+void propellers_do (void) {
+	rdb = half_life << 1;
+	gpit = prp_idx; while (gpit --) {
+		rda = prp_yx [gpit];
+		gp_addr = 0x2000 + (
+			((rda & 0xf) << 1) | 
+			((((rda >> 3) & 0xfe) + TOP_ADJUST) << 5)
 		);
+		ul_putc (rdb + PROPELLERS_BASE_PATTERN);
+		ul_putc (rdb + PROPELLERS_BASE_PATTERN + 1);
 	}
 }
 
-void clear_propellers () {
-	prp_idx = 0;
-}

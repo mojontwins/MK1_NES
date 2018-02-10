@@ -137,6 +137,17 @@
 
 //#define ENABLE_LADDERS
 
+// Extra special stuff
+// -------------------
+
+// Propellers
+
+//#define ENABLE_PROPELLERS
+#define PROPELLERS_MAX 					4
+#define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
+#define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
+#define PROPELLER_TILE					14	// Tile # in map to detect a propeller
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -370,6 +381,9 @@
 
 #define PLAYER_VY_LADDERS		96
 
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -438,3 +452,10 @@
 #define CARRY_ONE_HS_OBJECT
 #endif
 
+#ifdef ENABLE_PROPELLERS
+#define PLAYER_CAN_FLOAT
+#endif
+
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
+#define NEEDS_INITIAL_DETECTION
+#endif

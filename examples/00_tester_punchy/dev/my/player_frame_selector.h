@@ -12,6 +12,8 @@ rda = (ATTR((prx + 4) >> 4, pry >> 4) & 12);
 if (ponladder && !rda) {
 	if (pvy) ponladderctr ++;
 	psprid = CELL_CLIMB_CYCLE + ((ponladderctr >> 2) & 3);
+} else if (pfloating) {
+	psprid = CELL_DESCENDING;
 } else {
 	if (ppunching) {
 		psprid = CELL_PUNCHING;

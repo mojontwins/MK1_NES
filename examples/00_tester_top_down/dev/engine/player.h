@@ -143,13 +143,18 @@ void player_move (void) {
 	// Initial detections
 	// ******************
 
-	#ifdef ENABLE_LADDERS
-		//ponladder = (!pj && (ATTR((prx + 4) >> 4, (pry - 1) >> 4) == 32));
-		cx1 = prx >> 4;
-		cx2 = (prx + 7) >> 4;
+	#ifdef NEEDS_INITIAL_DETECTION
+		cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
 		cy1 = cy2 = (pry + 15) >> 4;
 		cm_two_points ();
+	#endif
+
+	#ifdef ENABLE_LADDERS
 		ponladder = (!pj && at1 == 32 && at2 == 32);
+	#endif
+
+	#ifdef ENABLE_PROPELLERS
+		pfloating = (at1 == 64 || at2 == 64);
 	#endif
 
 	// ********
@@ -196,6 +201,13 @@ void player_move (void) {
 				} else if (i & PAD_DOWN) {
 					pvy = PLAYER_VY_LADDERS;
 				} else pvy = 0;
+			} else
+		#endif
+
+		#ifdef PLAYER_CAN_FLOAT 
+			if (pfloating) {
+				pvy -= PLAYER_AY_FLOAT; 
+				if (pvy < -PLAYER_VY_FLOAT_MAX) pvy = -PLAYER_VY_FLOAT_MAX;
 			} else
 		#endif
 

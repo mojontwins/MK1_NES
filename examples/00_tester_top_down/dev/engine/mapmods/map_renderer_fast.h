@@ -3,14 +3,17 @@
 
 // Map renderer fast (original)
 
-void draw_map_tile (unsigned char t) {
-	map_buff [rdm] = t;		
-	map_attr [rdm] = c_behs [t];
+void draw_map_tile (void) {
+	map_buff [rdm] = rdt;		
+	map_attr [rdm] = c_behs [rdt];
 	#ifdef ENABLE_BREAKABLE
 		brk_buff [rdm] = 1;
 	#endif
+
+	#include "engine/mapmods/map_detectors.h"
+
 	rdm ++;
-	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, t);
+	draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 }
 
@@ -26,9 +29,9 @@ void draw_scr (void) {
 		
 		// Draw packed
 		rdit = 96; while (rdit --) {
-			rdt = *gp_gen ++;
-			draw_map_tile (rdt >> 4);
-			draw_map_tile (rdt & 15);
+			rdd = *gp_gen ++;
+			rdt = rdd >> 4; draw_map_tile ();
+			rdt = rdd & 15; draw_map_tile ();
 		}
 	#endif
 
@@ -44,22 +47,22 @@ void draw_scr (void) {
 					// String
 					rdct = 1 + (rdct & 0x0f);
 					while (rdct --) {
-						rdt = get_byte ();
-						draw_map_tile (rdt >> 4);
-						if (rdy < 12) draw_map_tile (rdt & 15);
+						rdd = get_byte ();
+						rdt = rdd >> 4; draw_map_tile ();
+						if (rdy < 12) { rdt = rdd & 15; draw_map_tile (); }
 					}
 				} else {
 					// Counter
 					rdt = rdct & 0x0f;
 					rdct = get_byte ();
-					while (rdct --) draw_map_tile (rdt);
+					while (rdct --) draw_map_tile ();
 				}
 			}
 		} else {
 			rdit = 96; while (rdit --) {
-				rdt = *gp_gen ++;
-				draw_map_tile (rdt >> 4);
-				draw_map_tile (rdt & 15);
+				rdd = *gp_gen ++;
+				rdt = rdd >> 4; draw_map_tile ();
+				rdt = rdd & 15; draw_map_tile ();
 			}
 		}
 	#endif	
@@ -71,9 +74,9 @@ void draw_scr (void) {
 			if (c_decos [n_pant]) {
 				gp_gen = c_decos [n_pant];
 			
-				while (rdt = *gp_gen ++) {
-					if (rdt & 0x80) {
-						rdt &= 0x7F;
+				while (rdd = *gp_gen ++) {
+					if (rdd & 0x80) {
+						rdd &= 0x7F;
 						rdct = 1;
 					} else {
 						rdct = *gp_gen ++;
@@ -81,7 +84,7 @@ void draw_scr (void) {
 					while (rdct --) {
 						rdm = *gp_gen ++;
 						rdx = rdm >> 4; rdy = rdm & 15;
-						draw_map_tile (rdt);
+						rdt = rdd; draw_map_tile ();
 					}
 				}
 			}
@@ -92,12 +95,13 @@ void draw_scr (void) {
 
 	#ifndef DEACTIVATE_KEYS	
 		gp_gen = c_locks;
+		rdt = 0;
 		gpit = c_max_bolts; while (gpit --) {
 			rda = *gp_gen ++; rdm = *gp_gen ++;
 			if (n_pant == rda) {
 				if (!lkact [gpit]) {
 					rdy = (rdm >> 4); rdx = (rdm & 15);
-					draw_map_tile (0);
+					draw_map_tile ();
 				}
 			}
 		}	

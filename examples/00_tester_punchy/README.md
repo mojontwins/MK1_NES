@@ -85,11 +85,14 @@ Enable and configure.
 ```c
 	#define ENABLE_PROPELLERS
 	#define PROPELLERS_MAX 					4
-	#define PROPELLERS_BASE_SPRID			64
+	#define PROPELLERS_BASE_PATTERN			64
+	#define PROPELLERS_MAX_LENGTH			6
 	#define PROPELLER_TILE					14
 ```
 
-Place in your map using tile `PROPELLER_TILE`. Add two frames to the enemy metasprites with base index `PROPELLERS_BASE_SPRID`. Place as much as `PROPELLERS_MAX` per screen.
+Place in your map using tile `PROPELLER_TILE`. Propeller animation will alternate two 2x1 patterns cells defined in the bg tileset from pattern `PROPELLERS_BASE_PATTERN`. Place as much as `PROPELLERS_MAX` per screen.
+
+If you define `PROPELLERS_MAX_LENGTH` the propeller will affect an area max N tiles high, otherwise it will reach the top of the game area.
 
 Vertical movement is then controlled by these:
 

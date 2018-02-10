@@ -57,33 +57,31 @@ extern const unsigned char m_ingame [];
 // Main includes
 // *************
 
-#ifdef ENABLE_PROPELLERS
-void add_propeller (unsigned char x, unsigned char y);
-#endif
+#include "engine/prototypes.h"
 #include "engine/general.h"
 #include "engine/printer.h"
 #ifndef DEACTIVATE_KEYS
-#include "engine/bolts.h"
+	#include "engine/bolts.h"
 #endif
 #ifdef ENABLE_BREAKABLE
 #include "engine/breakable.h"
 #endif
 #include "engine/hotspots.h"
 #ifdef ENABLE_PROPELLERS
-#include "engine/propellers.h"
+	#include "engine/propellers.h"
 #endif
 #ifdef ENABLE_CONTAINERS
-#include "engine/containers.h"
+	#include "engine/containers.h"
 #endif
 #ifdef ENABLE_COCOS
-#include "engine/cocos.h"
+	#include "engine/cocos.h"
 #endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
 #include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
-#include "assets/mscnes.h"
+	#include "assets/mscnes.h"
 #endif
 #include "mainloop.h"
 

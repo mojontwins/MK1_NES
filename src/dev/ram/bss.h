@@ -142,4 +142,9 @@ unsigned char en_spr_id [3];
 	unsigned char stbl;
 #endif
 
+#ifdef ENABLE_PROPELLERS
+	unsigned char prp_idx;
+	unsigned char prp_yx [PROPELLERS_MAX];
+#endif
+
 #include "my/extra_vars.h"

@@ -12,7 +12,7 @@ const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned char *gp_ram, *gp_ram_aux;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
-unsigned char rda, rdb, rdc, rdm;
+unsigned char rda, rdb, rdc, rdd, rdm;
 unsigned char rds;
 unsigned char rdct;
 
@@ -80,8 +80,8 @@ signed int pgtmx, pgtmy;
 
 unsigned char wall, hitv, hith;
 
-#ifdef ENABLE_PROPELLERS
-	unsigned char ppropelled;
+#ifdef PLAYER_CAN_FLOAT
+	unsigned char pfloating;
 #endif
 
 #if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)

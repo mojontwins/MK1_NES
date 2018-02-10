@@ -11,6 +11,11 @@ OPEN font.png
 PALS palts0.png
 CHARSET 0, 0, 32, 2
 
+# Propellers
+OPEN propellers.png
+PALS palts0.png
+CHARSET 0, 0, 4, 1
+
 # Tilesets are generated as tilemaps. They will be stored in this file:
 MAPFILE ..\dev\assets\tiledata.h
 
