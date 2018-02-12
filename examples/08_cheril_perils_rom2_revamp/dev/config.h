@@ -388,6 +388,11 @@
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
 
+#define PLAYER_VY_LADDERS		96
+
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed

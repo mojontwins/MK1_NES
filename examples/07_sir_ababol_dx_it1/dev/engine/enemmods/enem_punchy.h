@@ -5,23 +5,21 @@
 // right after that of the patrollers, overriding some stuff.
 
 if (en_rawv [gpit] & 2) {
-	if (en_facing == 2) en_facing = 3;
-
-	if (en_ct [gpit]) {
+	if (_en_ct) {
 		// Is in shooting animation
-		en_x [gpit] = rdx; en_y [gpit] = rdy;
-		en_spr = en_s [gpit] + en_facing + 2;
-		en_ct [gpit] --;
+		_en_x = rdx; _en_y = rdy;
+		en_spr = _en_s + _en_facing + 2;
+		_en_ct --;
 	} else {
 		// Attempt to shoot
 		if (PUNCH_FREQ) {
-			if (en_facing) 
-				rdx = en_x [gpit] + 16 - PUNCHIES_PUNCH_OFFS_X - 8;
+			if (_en_facing) 
+				rdx = _en_x + 16 - PUNCHIES_PUNCH_OFFS_X - 8;
 			else 
-				rdx = en_x [gpit] + PUNCHIES_PUNCH_OFFS_X;
-			rdy = en_y [gpit] + PUNCHIES_PUNCH_OFFS_Y;
+				rdx = _en_x + PUNCHIES_PUNCH_OFFS_X;
+			rdy = _en_y + PUNCHIES_PUNCH_OFFS_Y;
 			
-			en_ct [gpit] = 16;
+			_en_ct = 16;
 
 			// Collide w/player
 			if (pstate == EST_NORMAL && 
@@ -34,8 +32,8 @@ if (en_rawv [gpit] & 2) {
 				rdy <= pry + 12
 			) {
 				pkill = 1;
-				en_spr = en_s [gpit] + en_facing + 2;
+				en_spr = _en_s + _en_facing + 2;
 			}
-		} else en_spr = en_s [gpit] + en_facing + en_fr;
+		} else en_spr = _en_s + _en_facing + en_fr;
 	}
 }

@@ -43,7 +43,7 @@ void cocos_init (void) {
 		coco_x [coco_it] = rdx << 6;
 		coco_y [coco_it] = rdy << 6;
 
-		coco_vx [coco_it] = en_facing ? -COCO_V : COCO_V;
+		coco_vx [coco_it] = en_facing [gpit] ? -COCO_V : COCO_V;
 	#ifdef COCOS_ENABLE_AIMED	
 		coco_vy [coco_it] = 0;
 	#endif	

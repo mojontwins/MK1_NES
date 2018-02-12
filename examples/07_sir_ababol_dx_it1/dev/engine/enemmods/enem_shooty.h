@@ -5,25 +5,23 @@
 // right after that of the patrollers, overriding some stuff.
 
 if (en_rawv [gpit] & 1) {
-	if (en_facing == 2) en_facing = 3;
-
-	if (en_ct [gpit]) {
+	if (_en_ct) {
 		// Is in shooting animation
-		en_x [gpit] = rdx; en_y [gpit] = rdy;
-		en_spr = en_s [gpit] + en_facing + 2;
-		en_ct [gpit] --;
+		_en_x = rdx; _en_y = rdy;
+		en_spr = _en_s + _en_facing + 2;
+		_en_ct --;
 	} else {
 		// Attempt to shoot
 		if (SHOOT_FREQ) {
-			if (en_facing) 
-				rdx = en_x [gpit] + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
+			if (_en_facing) 
+				rdx = _en_x + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
 			else 
-				rdx = en_x [gpit] + SHOOTIES_SHOOT_OFFS_X;
-			rdy = en_y [gpit] + SHOOTIES_SHOOT_OFFS_Y;
+				rdx = _en_x + SHOOTIES_SHOOT_OFFS_X;
+			rdy = _en_y + SHOOTIES_SHOOT_OFFS_Y;
 			cocos_shoot_linear ();
-			en_ct [gpit] = 16;
+			_en_ct = 16;
 		}
 
-		en_spr = en_s [gpit] + en_facing + en_fr;
+		en_spr = _en_s + _en_facing + en_fr;
 	}
 }

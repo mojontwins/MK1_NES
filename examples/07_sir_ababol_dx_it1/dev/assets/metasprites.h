@@ -21,23 +21,23 @@ const unsigned char * const spr_player [] = {
 // Enemy metasprites
 const unsigned char * const spr_enems0 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssena_00, ssena_01, ssena_00, ssena_01,			// Enem id 1, right, left, two cells (duplicated)
-	ssena_02, ssena_03, ssena_02, ssena_03,			// Enem id 2, right, left, two cells (duplicated)
-	ssenb_00, ssenb_01, ssenb_00, ssenb_01,			// Enem id 3, right, left, two cells (duplicated)
-	ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+	ssena_00, ssena_01, 0, 0, ssena_00, ssena_01, 0, 0,			// 1
+	ssena_02, ssena_03, 0, 0, ssena_02, ssena_03, 0, 0,			// 2
+	ssenb_00, ssenb_01, 0, 0, ssenb_00, ssenb_01, 0, 0,			// 3
+	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0,		// Platform (4)
 
-	// Explosion (offset 16)
+	// Explosion (offset 32)
 	ssexpl
 };
 
 const unsigned char * const spr_enems1 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssenc_00, ssenc_01, ssenc_00, ssenc_01,			// Enem id 1, right, left, two cells (duplicated)
-	ssenc_02, ssenc_03, ssenc_02, ssenc_03,			// Enem id 2, right, left, two cells (duplicated)
-	ssend_00_a, ssend_01_a, ssend_00_b, ssend_01_b,	// Enem id 3, right, left, two cells 
-	ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+	ssenc_00, ssenc_01, 0, 0, ssenc_00, ssenc_01, 0, 0,			// 1
+	ssenc_02, ssenc_03, 0, 0, ssenc_02, ssenc_03, 0, 0,			// 2
+	ssend_00_a, ssend_01_a, 0, 0, ssend_00_b, ssend_01_b, 0, 0,	// 3
+	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0,		// Platform (4)
 
-	// Explosion (offset 16)
+	// Explosion (offset 32)
 	ssexpl
 };
 
@@ -47,13 +47,3 @@ const unsigned char * const spr_hs [] = {
 	0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
 };
 
-// Fixed stuff
-const unsigned char spr_pl_empty [] = {
-#ifdef TALL_PLAYER
-	-4, -16, 0xff, 0, 4, -16, 0xff, 0,
-#endif	
-	-4, -8, 0xff, 0, 4, -8, 0xff, 0,
-	-4, 0, 0xff, 0, 4, 0, 0xff, 0,
-	-4, 8, 0xff, 0, 4, 8, 0xff, 0,
-	128
-};

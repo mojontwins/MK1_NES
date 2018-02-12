@@ -5,8 +5,6 @@
 // Main definitions
 
 #define FIXBITS					6
-#define TOP_ADJUST				4
-#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
 
 // Player states
 
@@ -27,6 +25,8 @@
 #define ADD_SIGN2(a,b,v)		((a)==(b))?(0):(((a)>(b))?(v):(-(v)))
 #define ADD_SIGN(a,v) 			((a)?(((a)>0)?(v):(-(v))):(0))
 #define DELTA(a,b)				((a) < (b) ? (b) - (a) : (a) - (b))
+#define ATTR(x,y)				(map_attr [COORDS((x),(y))])
+#define QTILE(x,y)				(map_buff [COORDS((x),(y))])
 
 // Wall hits
 

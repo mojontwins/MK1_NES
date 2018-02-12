@@ -4,26 +4,6 @@
 // enengine.h
 // Enemies Engine & stuff
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
-void enems_kill (unsigned char gpit) {
-	en_t [gpit] = 0;
-
-	#ifdef PERSISTENT_DEATHS
-		ep_flags [en_offs + gpit] &= 0xFE;
-	#endif
-
-	#ifdef ACTIVATE_SCRIPTING
-		run_script (2 * MAP_SIZE + 5);
-	#endif
-
-		pkilled ++;
-
-	#ifdef COUNT_KILLED_IN_FLAG
-		flags [COUNT_KILLED_IN_FLAG] ++;
-	#endif
-}
-#endif
-
 #ifdef ENABLE_CHAC_CHAC
 	void enems_draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
 		map_set (en_x [gpit], en_y [gpit], a1);
@@ -95,24 +75,19 @@ void enems_load (void) {
 
 	// Notice that enemies are writen backwards. Take in account in the future
 
-#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-	en_offs = rdc = n_pant + n_pant + n_pant;// + 3;
-#endif	
+	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
+		en_offs = rdc = n_pant + n_pant + n_pant;// + 3;
+	#endif
 
 	gpit = 3; while (gpit --) {
 		
-/*
-#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		-- rdc;
-#endif
-*/
-#ifdef PERSISTENT_DEATHS	
-		// Fast hack. If enemy is dead, change for type 0 and skip data.
-		if (!ep_flags [rdc] & 1) {
-			en_t [gpit] = 0;
-			gp_gen += 4;
-		} else 
-#endif
+		#ifdef PERSISTENT_DEATHS	
+			// Fast hack. If enemy is dead, change for type 0 and skip data.
+			if (!ep_flags [rdc] & 1) {
+				en_t [gpit] = 0;
+				gp_gen += 4;
+			} else 
+		#endif
 		{
 			// First get T, then do whatever I need
 			en_t [gpit] = *gp_gen ++;
@@ -132,56 +107,55 @@ void enems_load (void) {
 			// P, here used for speed
 			rda = *gp_gen ++;
 
-#ifdef PERSISTENT_ENEMIES
-			// Copy position & direction from ep_*
-			en_x [gpit] = ep_x [rdc];
-			en_y [gpit] = ep_y [rdc];
-			en_mx [gpit] = ep_mx [rdc];
-			en_my [gpit] = ep_my [rdc];
-#else
-			// Initialize position & direction from ROM
-			en_x [gpit] = en_x1 [gpit];
-			en_y [gpit] = en_y1 [gpit];
-			en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
-			en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
-#endif
+			#ifdef PERSISTENT_ENEMIES
+				// Copy position & direction from ep_*
+				en_x [gpit] = ep_x [rdc];
+				en_y [gpit] = ep_y [rdc];
+				en_mx [gpit] = ep_mx [rdc];
+				en_my [gpit] = ep_my [rdc];
+			#else
+				// Initialize position & direction from ROM
+				en_x [gpit] = en_x1 [gpit];
+				en_y [gpit] = en_y1 [gpit];
+				en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
+				en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+			#endif
 
 			switch (en_t [gpit]) {
 				case 1:
 				case 2:
 				case 3:
 				case 4:
-	#ifdef ENABLE_SHOOTIES
-				case 12:
-				case 13:
-				case 14:
-				case 15:
-	#endif
-	#ifdef ENABLE_PUNCHIES
-				case 16:
-				case 17:
-				case 18:
-				case 19:
-	#endif
+				#ifdef ENABLE_SHOOTIES
+					case 12:
+					case 13:
+					case 14:
+					case 15:
+				#endif
+				#ifdef ENABLE_PUNCHIES
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+				#endif
 					en_ct [gpit] = 0;
 	
 					// Linear enems.
-	#ifdef ENABLE_PUNCHIES
-					if (en_t [gpit] >= 16) {
-						en_rawv [gpit] = 2;
-						rda = en_t [gpit] - 16;
-						en_s [gpit] = PUNCHIES_BASE_SPRID + (rda << 2) + (rda << 1);
-					} else
-	#endif					
-	#ifdef ENABLE_SHOOTIES
-					if (en_t [gpit] >= 12) {
-						en_rawv [gpit] = 1;
-						rda = en_t [gpit] - 12;
-						en_s [gpit] = SHOOTIES_BASE_SPRID + (rda << 2) + (rda << 1);
-					} else {
-	#endif
+					#ifdef ENABLE_PUNCHIES
+						if (en_t [gpit] >= 16) {
+							en_rawv [gpit] = 2;
+							en_s [gpit] = PUNCHIES_BASE_SPRID + ((en_t [gpit] - 16) << 3);
+						} else
+					#endif					
+					#ifdef ENABLE_SHOOTIES
+						if (en_t [gpit] >= 12) {
+							en_rawv [gpit] = 1;
+							en_s [gpit] = SHOOTIES_BASE_SPRID + ((en_t [gpit] - 12) << 3);
+						} else
+					#endif
+					{
 						en_rawv [gpit] = 0;
-						en_s [gpit] = (en_t [gpit] - 1) << 2;
+						en_s [gpit] = (en_t [gpit] - 1) << 3;
 					}
 
 					// HL conversion		
@@ -198,108 +172,154 @@ void enems_load (void) {
 					if (en_y1 [gpit] > en_y2 [gpit]) { rda = en_y1 [gpit]; en_y1 [gpit] = en_y2 [gpit]; en_y2 [gpit] = rda; }
 					
 					break;
-	#ifdef ENABLE_FANTY				
-				case 6:
-					// Fantys
-					enf_x [gpit] = en_x [gpit] << 6;
-					enf_y [gpit] = en_y [gpit] << 6;
-					enf_vx [gpit] = enf_vy [gpit] = 0;
-					break;
-	#endif
 
-	#ifdef ENABLE_HOMING_FANTY				
-				case 6:
-					// Fantys
-					enf_x [gpit] = en_x [gpit] << 6;
-					enf_y [gpit] = en_y [gpit] << 6;
-					enf_vx [gpit] = enf_vy [gpit] = 0;
-					// State idle
-					en_alive [gpit] = 0; 
-					break;
-	#endif	
+				#ifdef ENABLE_FANTY				
+					case 6:
+						// Fantys
+						enf_x [gpit] = en_x [gpit] << 6;
+						enf_y [gpit] = en_y [gpit] << 6;
+						enf_vx [gpit] = enf_vy [gpit] = 0;
+						en_s [gpit] = FANTY_BASE_SPRID;
+						break;
+				#endif
 
-	#ifdef ENABLE_PURSUERS		
-				case 7:
-					// Pursuers
-					en_alive [gpit] = 0;
-					en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
-		#ifdef ENABLE_GENERATORS
-						en_generator_life [gpit] = GENERATOR_LIFE_GAUGE;
-						gen_was_hit [gpit] = 0;
-		#endif	
-					break;
-	#endif	
+				#ifdef ENABLE_HOMING_FANTY				
+					case 6:
+						// Fantys
+						enf_x [gpit] = en_x [gpit] << 6;
+						enf_y [gpit] = en_y [gpit] << 6;
+						enf_vx [gpit] = enf_vy [gpit] = 0;
+						en_s [gpit] = FANTY_BASE_SPRID;
+						// State idle
+						en_alive [gpit] = 0; 
+						break;
+				#endif	
 
-	#ifdef ENABLE_SAW
-				case 8:
-					// Saws
+				#ifdef ENABLE_PURSUERS		
+					case 7:
+						// Pursuers
+						en_alive [gpit] = 0;
+						en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
+						#ifdef ENABLE_GENERATORS
+							en_generator_life [gpit] = GENERATOR_LIFE_GAUGE;
+							gen_was_hit [gpit] = 0;
+						#endif	
+						en_s [gpit] = ((TYPE_7_FIXED_SPRITE - 1) << 3);
+						break;
+				#endif	
 
-					// emerging sense
-					rda = ABS (en_mx [gpit]); if (!rda) rda = ABS (en_my [gpit]);
-					rda --;
+				#ifdef ENABLE_SAW
+					case 8:
+						// Saws
 
-					// Sense
-					rdb = (en_x1 [gpit] != en_x2 [gpit]) ? 
-						SGNC (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
-						SGNC (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
+						// emerging sense
+						rda = ABS (en_mx [gpit]); if (!rda) rda = ABS (en_my [gpit]);
+						rda --;
 
-					// Store:
-					en_my [gpit] = rda; // EMERGING SENSE
-					en_mx [gpit] = rdb; // MOVING SENSE
+						// Sense
+						rdb = (en_x1 [gpit] != en_x2 [gpit]) ? 
+							SGNC (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
+							SGNC (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
 
-					en_alive [gpit] = 1;
-					en_ct [gpit] = SAW_EMERGING_STEPS;
-					break;
-	#endif		
+						// Store:
+						en_my [gpit] = rda; // EMERGING SENSE
+						en_mx [gpit] = rdb; // MOVING SENSE
 
-	#ifdef ENABLE_PEZONS
-				case 9:
-					// Pezones
+						en_alive [gpit] = 1;
+						en_ct [gpit] = SAW_EMERGING_STEPS;
 
-					// Initialize
-					en_my [gpit] = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
-					en_alive [gpit] = 0;
-					en_mx [gpit] = en_my [gpit];
-					break;
-	#endif
+						break;
+				#endif		
 
-	#ifdef ENABLE_CHAC_CHAC
-				case 10:
-					// Cuchillas Chac Chac
+				#ifdef ENABLE_PEZONS
+					case 9:
+						// Pezones
 
-					en_my [gpit] = (rda << 4);	// IDLE_1
-					en_x [gpit] = en_x1 [gpit] >> 4;
-					en_y [gpit] = (en_y1 [gpit] >> 4) - 1;
-					en_alive [gpit] = 0;
-					en_mx [gpit] = en_my [gpit];
+						// Initialize
+						en_my [gpit] = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
+						en_alive [gpit] = 0;
+						en_mx [gpit] = en_my [gpit];
 
-					break;
-	#endif
+						en_s [gpit] = PEZONS_BASE_SPRID;
+						break;
+				#endif
 
-	#ifdef ENABLE_MONOCOCOS
-				case 11:
-					// Monococos
-					en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
-					break;
-	#endif					
+				#ifdef ENABLE_CHAC_CHAC
+					case 10:
+						// Cuchillas Chac Chac
+
+						en_my [gpit] = (rda << 4);	// IDLE_1
+						en_x [gpit] = en_x1 [gpit] >> 4;
+						en_y [gpit] = (en_y1 [gpit] >> 4) - 1;
+						en_alive [gpit] = 0;
+						en_mx [gpit] = en_my [gpit];
+
+						break;
+				#endif
+
+				#ifdef ENABLE_MONOCOCOS
+					case 11:
+						// Monococos
+						en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
+						en_s [gpit] = MONOCOCO_BASE_SPRID;
+						break;
+				#endif					
 			}
 
-	#if defined(PLAYER_CAN_FIRE)
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+			#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 				en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
-		#else
+			#else
 				en_life [gpit] = ENEMIES_LIFE_GAUGE;
-		#endif
-	#elif defined(PLAYER_KILLS_ENEMIES)
-			en_life [gpit] = 1;
-	#endif		
+			#endif
+			
 			en_cttouched [gpit] = 0;
 		}
-#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		rdc ++;
-#endif
+		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
+			rdc ++;
+		#endif
 	}
 }
+
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+	void enems_kill () {
+		_en_t = 0;
+
+		#ifdef PERSISTENT_DEATHS
+			ep_flags [en_offs + gpit] &= 0xFE;
+		#endif
+
+		#ifdef ACTIVATE_SCRIPTING
+			run_script (2 * MAP_SIZE + 5);
+		#endif
+
+			pkilled ++;
+
+		#ifdef COUNT_KILLED_IN_FLAG
+			flags [COUNT_KILLED_IN_FLAG] ++;
+		#endif
+	}
+#endif
+
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	void enems_hit (void) {
+		_en_facing = ((_en_x < prx) ? 0 : 4);
+		en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
+		en_life [gpit] --; 
+
+		if (en_life [gpit] == 0) {
+			#ifdef ENABLE_PURSUERS
+				if (_en_t == 7) {
+					en_alive [gpit] = 0;
+					_en_ct = DEATH_COUNT_EXPRESSION;
+					en_life [gpit] = ENEMIES_LIFE_GAUGE;
+				} else 
+			#endif
+			{
+				enems_kill ();
+			}
+		}
+	}
+#endif
 
 void enems_move (void) {
 #ifndef PLAYER_TOP_DOWN	
@@ -312,248 +332,311 @@ void enems_move (void) {
 	gpit = en_initial;
 	gpjt = 3; while (gpjt --) {
 		gpit += 2; if (gpit > 2) gpit -=3;
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
-		if (en_cttouched [gpit]) {
-			en_cttouched [gpit] --;
-			oam_index = oam_meta_spr (
-				en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-				oam_index, 
-				spr_enems [SPRITE_BADDIE_DYING]
-			);
-			continue;
-		} 
-#endif
 		
-		if (en_t [gpit]) {
+		_en_t = en_t [gpit]; _en_s = en_s [gpit];
+		_en_x = en_x [gpit]; _en_y = en_y [gpit];
+		_en_x1 = en_x1 [gpit]; _en_y1 = en_y1 [gpit];
+		_en_x2 = en_x2 [gpit]; _en_y2 = en_y2 [gpit];
+		_en_mx = en_mx [gpit]; _en_my = en_my [gpit];
+		_en_ct = en_ct [gpit]; _en_facing = en_facing [gpit];
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
+		#endif
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
+		#endif		
+
+		// Clear selected sprite
+
+		en_spr = 0xff;
+
+		// "touched" state control
+
+		#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
+			if (en_cttouched [gpit]) {
+				en_cttouched [gpit] --;
+				#ifdef ENEMS_FLICKER
+					if (half_life) {
+						#ifdef ENEMS_ENABLE_DYING_FRAME
+							rda = _en_s + _en_facing + 3;
+							if (spr_enems [rda]) en_spr = rda; 
+							else
+						#endif
+						en_spr = en_spr_id [gpit];	
+					} 
+				#else
+					oam_index = oam_meta_spr (
+						_en_x, _en_y + SPRITE_ADJUST, 
+						oam_index, 
+						spr_enems [ENEMS_EXPLODING_CELL]
+					);
+					en_spr = en_spr_id [gpit];
+				#endif
+			} 
+		#endif
+		
+		// Enemy is considered active if...
+
+		if (_en_t && en_cttouched [gpit] == 0) {
 
 			// Gotten preliminary:
-			pregotten = (prx + 7 >= en_x [gpit] && prx <= en_x [gpit] + 15);
+			pregotten = (prx + 7 >= _en_x && prx <= _en_x + 15);
 
 			// Select frame upon screen position:
-			en_fr = ((((en_mx [gpit]) ? en_x [gpit] : en_y [gpit])+4) >> 3) & 1;
+			en_fr = ((((_en_mx) ? _en_x : _en_y)+4) >> 3) & 1;
 
 			// Means don't render (can/will be overwritten):
-			en_spr = 0xff;	
-
-			switch (en_t [gpit]) {
+			
+			switch (_en_t) {
 				case 1:
 				case 2:
 				case 3:
 				case 4:
-	#ifdef ENABLE_SHOOTIES
-				case 12:
-				case 13:
-				case 14:
-				case 15:
-	#endif
-	#ifdef ENABLE_PUNCHIES
-				case 16:
-				case 17:
-				case 18:
-				case 19:
-	#endif
+				#ifdef ENABLE_SHOOTIES
+					case 12:
+					case 13:
+					case 14:
+					case 15:
+				#endif
+				#ifdef ENABLE_PUNCHIES
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+				#endif
 					#include "engine/enemmods/enem_linear.h"
-#ifdef ENABLE_SHOOTIES
-					#include "engine/enemmods/enem_shooty.h"
-#endif				
-#ifdef ENABLE_PUNCHIES
-					#include "engine/enemmods/enem_punchy.h"
-#endif
+					#ifdef ENABLE_SHOOTIES
+						#include "engine/enemmods/enem_shooty.h"
+					#endif				
+					#ifdef ENABLE_PUNCHIES
+						#include "engine/enemmods/enem_punchy.h"
+					#endif
 					break;
 
-#ifdef ENABLE_FANTY					
-				case 6:
-					#include "engine/enemmods/enem_fanty.h"
-					break;
-#endif
+				#ifdef ENABLE_FANTY					
+					case 6:
+						#include "engine/enemmods/enem_fanty.h"
+						break;
+				#endif
 
-#ifdef ENABLE_HOMING_FANTY
-				case 6:
-					#include "engine/enemmods/enem_homing_fanty.h"
-					break;
-#endif
+				#ifdef ENABLE_HOMING_FANTY
+					case 6:
+						#include "engine/enemmods/enem_homing_fanty.h"
+						break;
+				#endif
 
-#ifdef ENABLE_PURSUERS					
-				case 7:					
-					#include "engine/enemmods/enem_pursuers.h"
-					break;
-#endif
+				#ifdef ENABLE_PURSUERS					
+					case 7:					
+						#include "engine/enemmods/enem_pursuers.h"
+						break;
+				#endif
 
-#ifdef ENABLE_SAW					
-				case 8:
-					#include "engine/enemmods/enem_saw.h"
-					break;
-#endif		
+				#ifdef ENABLE_SAW					
+					case 8:
+						#include "engine/enemmods/enem_saw.h"
+						break;
+				#endif		
 
-#ifdef ENABLE_PEZONS
-				case 9:
-					#include "engine/enemmods/enem_pezon.h"
-					break;
-#endif
+				#ifdef ENABLE_PEZONS
+					case 9:
+						#include "engine/enemmods/enem_pezon.h"
+						break;
+				#endif
 
-#ifdef ENABLE_CHAC_CHAC
-				case 10:
-					#include "engine/enemmods/enem_chac_chac.h"
-					break;
-#endif
+				#ifdef ENABLE_CHAC_CHAC
+					case 10:
+						#include "engine/enemmods/enem_chac_chac.h"
+						break;
+				#endif
 
-#ifdef ENABLE_MONOCOCOS
-				case 11:
-					#include "engine/enemmods/enem_monococo.h"
-					break;
-#endif					
+				#ifdef ENABLE_MONOCOCOS
+					case 11:
+						#include "engine/enemmods/enem_monococo.h"
+						break;
+				#endif					
 			}
 
-			// Render enemy metasprite en_spr
-			if (en_spr != 0xff) {
-				oam_index = oam_meta_spr (
-					en_x [gpit], en_y [gpit] + SPRITE_ADJUST, 
-					oam_index, 
-					spr_enems [en_spr]
-				);
-			}
+			// Store corrent sprite frame as calculated
+			
+			en_spr_id [gpit] = en_spr;
 
-#ifndef PLAYER_TOP_DOWN
-			// Movable platforms
+			// Moving platforms
 
-			if (en_t [gpit] == 4 && pregotten && !pgotten && !pj) {
-				
-				// Horizontal moving platforms
-				
-				if (en_mx [gpit]) {
-					if (pry + 16 >= en_y [gpit] && pry + 12 <= en_y [gpit]) {
-						pgotten = 1;
-						pgtmx = en_mx [gpit] << (6 - en_status [gpit]);
-						py = (en_y [gpit] - 16) << 6; pry = py >> 6;
-					}
-				}
-				
-				// Vertical moving platforms
-				
-				if (
-					(en_my [gpit] < 0 && pry + 17 >= en_y [gpit] && pry + 12 <= en_y [gpit]) ||
-					(en_my [gpit] > 0 && pry + 16 + en_my [gpit] >= en_y [gpit] && pry + 12 <= en_y [gpit])
-				) {
-					pgotten = 1;
-					pgtmy = en_my [gpit] << (6 - en_status [gpit]);
-					py = (en_y [gpit] - 16) << 6; pry = py >> 6;
-					pvy = 0;
-				}
-			}
-#endif
-
-			// Step over enemy
-
-#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
-			if (
-				// CUSTOM {
-				level != 1 && 
-				has_boots &&
-				// } END_OF_CUSTOM			
-	#ifdef PLAYER_MIN_KILLABLE
-				(en_t [gpit] >= PLAYER_MIN_KILLABLE) &&
-	#endif
-	#ifdef ENABLE_SAW
-				en_t [gpit] != 8 &&
-	#endif 
-				en_t [gpit] != 4
-			) {
-				if (
-					pregotten &&
-					pry + 15 >= en_y [gpit] && 
-					pry + 8 < en_y [gpit] && 
-					pvy > 0 && 
-					!pgotten && 
-					!ppossee
-				) {
-#ifdef PLAYER_SAFE_LANDING
-					if (en_my [gpit] < 0) en_my [gpit] = -en_my [gpit];					
-#else
-					en_cttouched [gpit] = 8;
-					sfx_play (6, 2);
-					en_life [gpit] --;
-#endif					
-
-#ifndef PLAYER_BOOTEE
-					if (!(pad_poll (0) & PAD_B)) {
-						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-					} else 
-#endif
-					{
-						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-						sfx_play (7, 0);
-					}
-
-
-#ifndef PLAYER_SAFE_LANDING					
-					if (en_life [gpit] == 0) enems_kill (gpit);
-#endif					
-					touched = 1;
-					continue;
-				}
-			}
-#endif
-
-			// Collide <-> player
-
-			if (
-#if defined (ENABLE_RESONATORS) && defined (ENABLE_SAW)
-				(!res_on || en_t [gpit] == 8) &&
-#endif				
-				!touched &&
-				pstate == EST_NORMAL && 
-				collide (prx, pry, en_x [gpit], en_y [gpit])
-			) {
-
-#ifdef ENABLE_PURSUERS	
-				if (en_t [gpit] != 7 || en_alive [gpit] == 2) 
-#endif
-#ifndef PLAYER_MOGGY_STYE
-				if (en_t [gpit] != 4)
-#endif				
-#ifdef ENABLE_SAW
-				if (en_t [gpit] != 8 || en_alive [gpit])
-#endif
-#ifdef ENABLE_CHAC_CHAC
-				if (en_t [gpit] != 10)
-#endif
-#ifdef ENABLE_MONOCOCOS
-				if (en_t [gpit] != 11 || en_mx [gpit] == 2)
-#endif
-				{
-					touched = 1;
-
-#ifdef PLAYER_BOUNCES
-					pvx = ADD_SIGN (en_mx [gpit], PLAYER_V_REBOUND); en_mx [gpit] = ADD_SIGN (en_x [gpit] - prx, ABS (en_mx [gpit]));
-					pvy = ADD_SIGN (en_my [gpit], PLAYER_V_REBOUND); if (!en_mx [gpit]) en_my [gpit] = ADD_SIGN (en_y [gpit] - pry, ABS (en_my [gpit]));
-#endif
+			#ifndef PLAYER_TOP_DOWN
+				if (_en_t == 4 && pregotten && !pgotten && !pj) {
 					
-#ifdef PLAYER_CAN_FIRE
-						en_life [gpit] --; 
-						if (
-							en_life [gpit] == 0
-	#ifdef ENABLE_SAW
-							&& en_t [gpit] != 8
-	#endif
-	#ifdef PLAYER_MIN_KILLABLE
-							&& en_t [gpit] >= PLAYER_MIN_KILLABLE
-	#endif
-						) {
-	#ifdef ENABLE_PURSUERS
-							if (en_t [gpit] == 7) {
-								en_alive [gpit] = 0;
-								en_ct [gpit] = DEATH_COUNT_EXPRESSION;
-								en_life [gpit] = ENEMIES_LIFE_GAUGE;
-							} else 
-	#endif
-							{
-								enems_kill (gpit);
-							}
-						}					
-#endif				
+					// Horizontal moving platforms
+					
+					if (_en_mx) {
+						if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
+							pgotten = 1;
+							pgtmx = _en_mx << (6 - en_status [gpit]);
+							py = (_en_y - 16) << 6; pry = py >> 6;
+						}
+					}
+					
+					// Vertical moving platforms
+					
+					if (
+						(_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
+						(_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
+					) {
+						pgotten = 1;
+						pgtmy = _en_my << (6 - en_status [gpit]);
+						py = (_en_y - 16) << 6; pry = py >> 6;
+						pvy = 0;
+					}
+				}
+			#endif
+
+			// Is enemy collidable? If not, exit
+
+			if (
+					_en_t == 0	// General condition.
+				#ifndef PLAYER_TOP_DOWN				
+					|| _en_t == 4
+				#endif
+				#ifdef ENABLE_SAW
+					|| (_en_t == 8 && en_alive [gpit] == 0)
+				#endif
+				#ifdef ENABLE_PEZONS
+					|| (_en_t == 9 && en_alive [gpit] == 0)
+				#endif
+				#ifdef ENABLE_CHAC_CHAC
+					|| _en_t == 10
+				#endif
+				#ifdef ENABLE_MONOCOCOS
+					|| (_en_t == 11 && _en_mx != 2)
+				#endif
+			) goto skipdo;
+
+			// Collide with player (includes step over enemy)
+
+			if (
+				touched == 0 &&
+				pstate == EST_NORMAL &&
+				collide (prx, pry, _en_x, _en_y)
+			) {
+				// Step over enemy?
+				#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
+					if (
+						pregotten && pry < _en_y && pvy > 0 && 
+						pgotten == 0 &&	ppossee == 0
+						#ifdef PLAYER_MIN_KILLABLE
+							&& _en_t >= PLAYER_MIN_KILLABLE
+						#endif
+						#ifdef ENABLE_SAW
+							&& _en_t != 8
+						#endif
+						// CUSTOM {
+							&& has_boots
+						// } END_OF_CUSTOM
+					) {
+						#ifdef PLAYER_SAFE_LANDING
+							if (_en_my < 0) _en_my = -_en_my;
+						#else
+							enems_hit ();
+						#endif
+
+						if (a_button) {
+							pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+							sfx_play (7, 0);
+						} else {
+							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+						}
+
+						touched = 1;
+					} else
+				#endif
+				{
+					#ifdef PLAYER_BOUNCES
+						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+					#endif
+
+					#if defined ENEMIES_SUFFER_ON_PLAYER_COLLISION
+						enems_hit ();
+					#endif
+
 					pkill = 1;
+					touched = 1;
 				}
 			}
+
+			// Is enemy killable? If not, exit
+
+			if (
+				touched
+				#ifdef PLAYER_MIN_KILLABLE
+					|| _en_t < PLAYER_MIN_KILLABLE
+				#endif
+				#ifdef ENABLE_SAW
+					|| _en_t == 8
+				#endif
+			) goto skipdo;
+
+			// Hit enemy
+
+			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+				if (phitteract) {
+					if (
+						_en_x + 7 >= phitterx && _en_x <= phitterx + 7 &&
+						#ifdef TALL_COLLISION
+							phittery + 15 >= _en_y &&
+						#else
+							phittery + 7 >= _en_y &&
+						#endif					
+						phittery <= _en_y + 7
+					) {
+						enems_hit ();
+						phitteract = 0;
+						pfrozen = PLAYER_FROZEN_FRAMES;
+					}
+				} 
+			#endif
+
+			#ifdef PLAYER_CAN_FIRE
+				// Bullets
+				bi = MAX_BULLETS; while (bi --) if (bst [bi]) {
+					#ifdef ENABLE_PURSUERS
+						if (_en_t != 7 || en_alive [gpit] == 2)
+					#endif
+					
+					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
+						sfx_play (6, 2);
+						bullets_destroy ();
+						enems_hit ();
+						break;
+					}
+				}
+			#endif
 		} 
+
+skipdo: 
+		// Render enemy metasprite en_spr
+
+		if (en_spr != 0xff) {
+			oam_index = oam_meta_spr (
+				_en_x, _en_y + SPRITE_ADJUST, 
+				oam_index, 
+				spr_enems [en_spr]
+			);
+		}
+
+		// Update arrays
+
+		en_t [gpit] = _en_t;
+		en_x [gpit] = _en_x; en_y [gpit] = _en_y;
+		en_x1 [gpit] = _en_x1; en_y1 [gpit] = _en_y1;
+		en_x2 [gpit] = _en_x2; en_y2 [gpit] = _en_y2;
+		en_mx [gpit] = _en_mx; en_my [gpit] = _en_my;
+		en_ct [gpit] = _en_ct; en_facing [gpit] = _en_facing;
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
+		#endif
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+			enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
+		#endif
+
 	}	
 }
