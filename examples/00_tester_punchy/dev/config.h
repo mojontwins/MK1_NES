@@ -159,7 +159,7 @@
 
 #define ENEMS_ENABLE_DYING_FRAME
 //#define ENEMS_EXPLODING_CELL 			16
-#define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_OCCLUDING_CELL			17 // If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			32 // # frames to stay frozen after hit
 
 // Beware: only activate this if enemies are killable by any means:
@@ -461,4 +461,8 @@
 
 #if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
 #define NEEDS_INITIAL_DETECTION
+#endif
+
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
+#define ENEMIES_MAY_DIE
 #endif

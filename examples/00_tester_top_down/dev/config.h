@@ -157,7 +157,7 @@
 
 #define ENEMS_ENABLE_DYING_FRAME
 #define ENEMS_EXPLODING_CELL 			32
-//#define ENEMS_OCCLUDING_FRAME			16	// If you use pezons or saws you need a flame for occlusion
+//#define ENEMS_OCCLUDING_CELL			16	// If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
 
 // Beware: only activate this if enemies are killable by any means:

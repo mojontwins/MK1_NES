@@ -53,9 +53,7 @@ extern const unsigned char m_ingame [];
 // Main includes
 // *************
 
-#ifdef ENABLE_PROPELLERS
-void add_propeller (unsigned char x, unsigned char y);
-#endif
+#include "engine/prototypes.h"
 #include "engine/general.h"
 #include "engine/printer.h"
 #ifndef DEACTIVATE_KEYS

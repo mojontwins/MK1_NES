@@ -1,28 +1,31 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017
 
+#define TOP_ADJUST				4
+#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					20		//
-#define MAP_H					2		// Map dimmensions in screens
+#define MAP_W 					6		//
+#define MAP_H					4		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
-#define MULTI_LEVEL						// Comment for single level
+//#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				2
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			3		//
+	#define SCR_INI					18		// Initial screen
+	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
@@ -49,8 +52,8 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
-#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
+
+#define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
 
@@ -64,7 +67,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -77,9 +80,14 @@
 
 // Bounding box size
 // -----------------
-                                        // Comment both for normal 16x16 bounding box
+
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
-#define SMALL_COLLISION               	// 8x8 centered collision instead of 12x12
+
+// This defines how the player will collide with enemies. Needs rehash.
+#define SMALL_COLLISION            		// 8x8 centered collision instead of 12x12
+//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
+// (Comment both for ol' good unforgiving collision)
 
 // General directives:
 // -------------------
@@ -87,7 +95,7 @@
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
@@ -98,13 +106,13 @@
 // Extra special tiles
 // -------------------
 
-// Quicksands, beh = 2.
+// Quicksands, beh == 2.
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
 
 //#define ENABLE_QUICKSANDS
 
-// Breakable, beh = 16
+// Breakable, beh & 16
 //#define ENABLE_BREAKABLE				// Breakable walls
 #define BREAKABLE_LIFE	2				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
@@ -112,35 +120,58 @@
 #define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
 #define BREAKABLE_ERASE			0		// Tile to erase broken tiles
 #define BREAKABLE_BREAKING		8		// Tile to display while breaking
-#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+//#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
-// Conveyors, beh = 32 [+1]
+// Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
-//#define ENABLE_CONVEYORS
+#define ENABLE_CONVEYORS
 
-// Slippery, beh = 64. 
+// Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4
 // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
 //#define ENABLE_SLIPPERY
 
+// Ladders, beh == 32
+
+//#define ENABLE_LADDERS
+
+// Extra special stuff
+// -------------------
+
+// Propellers
+
+#define ENABLE_PROPELLERS
+#define PROPELLERS_MAX 					4
+#define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
+#define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
+#define PROPELLER_TILE					14	// Tile # in map to detect a propeller
+
 // Enemy types and definitions
 // ---------------------------
+
+#define ENEMIES_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define SPRITE_BADDIE_DYING 			16
-#define ENEMS_OCCLUDING_FRAME			17 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_ENABLE_DYING_FRAME
+#define ENEMS_EXPLODING_CELL 			43
+#define ENEMS_OCCLUDING_CELL			42 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_TOUCHED_FRAMES			8  // # frames to stay frozen after hit
+
+// Beware: only activate this if enemies are killable by any means:
+//#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
 
 // Fanties / Homing fanties
 
-//#define ENABLE_FANTY
+#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
 
-#define FANTY_BASE_SPRID				16
+#define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
@@ -160,42 +191,33 @@
 
 // Saws
 
-//#define ENABLE_SAW
-#define SAW_BASE_SPRID					16
+#define ENABLE_SAW
+#define SAW_BASE_SPRID					40
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
-
-// If you enable monococos, I think you should enable cocos:
-
-//#define ENABLE_COCOS
-#define COCOS_MAX						3
-#define COCO_V							192
-#define COCO_PATTERN					0
-#define COCO_PALETTE 					3
-#define COCO_FAIR_D						32
 
 // Pezons
 
 //#define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID		16
-#define PEZON_WAIT				50
-#define PEZON_THRUST			384
-#define PEZON_VY_FALLING_MAX	256
-#define PEZON_G					16
+#define PEZONS_BASE_SPRID				40
+#define PEZON_WAIT						50
+#define PEZON_THRUST					384
+#define PEZON_VY_FALLING_MAX			256
+#define PEZON_G							16
 
 // Chac chacs
 
 //#define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE		48
-#define CHAC_CHAC_IDLE_2		16
-#define CHAC_CHAC_IDLE_3		1
-#define CHAC_CHAC_IDLE_4		50
+#define CHAC_CHAC_BASE_TILE				16
+#define CHAC_CHAC_IDLE_2				16
+#define CHAC_CHAC_IDLE_3				1
+#define CHAC_CHAC_IDLE_4				50
 
 // Monococos
 
 //#define ENABLE_MONOCOCOS
 //#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				24
+#define MONOCOCO_BASE_SPRID				56
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -204,18 +226,28 @@
 // Shooties
 
 //#define ENABLE_SHOOTIES
-#define SHOOTIES_BASE_SPRID				22
+#define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
-#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Punchies
 
 //#define ENABLE_PUNCHIES
-#define PUNCHIES_BASE_SPRID				16
+#define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
-#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit])<12)
+#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
+
+// Cocos will get enabled automaticly on choosing monococos or shooties.
+
+//#define ENABLE_COCOS
+#define COCOS_MAX						4
+#define COCO_V							128
+
+#define COCO_PATTERN					0
+#define COCO_PALETTE 					0
+#define COCO_FAIR_D						32
 
 // Carry directives
 
@@ -225,41 +257,44 @@
 
 //#define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY			4
-#define HS_OBJ_MIN				5
-#define HS_OBJ_MAX				6
-#define HS_USE_OFFS				2
+#define HS_OBJ_EMPTY					4
+#define HS_OBJ_MIN						5
+#define HS_OBJ_MAX						6
+#define HS_USE_OFFS						2
 
-#define HS_TYPE_A 				// If defined, render receptors = HS_OBJ_EMPTY, object used = object
-								// Otherwise, use its own graphics.
-#define HS_FIX_ON_USE			// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
+#define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+										// Otherwise, use its own graphics.
+#define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
-/*
-#define CARRY_ONE_FLAG_OBJ
-#define HS_INV_X				136
-#define HS_INV_Y				210
-#define HS_OBJ_EMPTY			0
-#define HS_INV_FLAG				0
-*/
+// Silly Brawlers
+// --------------
+//#define PLAYER_PUNCHES				// When on floor
+#define PLAYER_PUNCH_OFFS_X				15
+#define PLAYER_PUNCH_OFFS_Y				-7
+
+//#define PLAYER_KICKS					// While airborne
+#define PLAYER_KICK_OFFS_X				12
+#define PLAYER_KICK_OFFS_Y				-3
+
+#define PLAYER_FROZEN_FRAMES			16	// Frames to be frozen when hit landed
 
 // Shooting behaviour
 // ------------------
 /*
-#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
-#define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
-#define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
-#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-#define ENEMIES_LIFE_GAUGE		2		// Amount of shots needed to kill enemies.
-#define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define FIRE_MIN_KILLABLE 		1		// If defined, only enemies >= N can be killed.
+#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+#define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
+#define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
+#define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
+#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
+#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 
-#define MAX_AMMO				99		// If defined, ammo is not infinite!
-#define AMMO_REFILL				50		// type 3 hotspots refill amo, using tile 20
-//#define INITIAL_AMMO 			0		// If defined, ammo = X when entering game.
+#define MAX_AMMO						99	// If defined, ammo is not infinite!
+#define AMMO_REFILL						50	// type 3 hotspots refill amo, using tile 20
+//#define INITIAL_AMMO 					0	// If defined, ammo = X when entering game.
 
-#define BULLET_PALETTE			3
-#define BULLET_PATTERN			0		// To paint the bullet. Can be an expresion.
+#define BULLET_PALETTE					3
+#define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
 */
 
 // Scripting
@@ -287,7 +322,7 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
@@ -300,17 +335,17 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+#define LIFE_X					5		//
+#define LIFE_Y					2		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+//#define OBJECTS_X				18		//
+//#define OBJECTS_Y				3		// Objects counter character coordinates
 
-#define KEYS_X					28		//
-#define KEYS_Y					3		// Keys counter character coordinates
+#define KEYS_X					16		//
+#define KEYS_Y					2		// Keys counter character coordinates
 
-//#define KILLED_X				16		//
-//#define KILLED_Y				2		// Kills counter character coordinates
+#define KILLED_X				27		//
+#define KILLED_Y				2		// Kills counter character coordinates
 
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
@@ -339,14 +374,19 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
 
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
-#define PLAYER_VY_SWIM_MAX		48		// Swimming max. speed
+#define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
+
+#define PLAYER_VY_LADDERS		96
+
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
@@ -380,24 +420,28 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	10
+	#define CELL_FACING_LEFT	6
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
+
+	#define CELL_USE			6
+
+	/*
 	#define CELL_SWIM_CYCLE		6
-	
-	//#define CELL_ASCENDING		5
-	//#define CELL_DESCENDING		6
-	//#define CELL_PUNCHING		8
-	//#define CELL_KICKING		9
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
+	#define CELL_PUNCHING		8
+	#define CELL_KICKING		9
+	#define CELL_CLIMB_CYCLE	20
+	*/
 #endif
+
 // Inner workings. Don't touch.
 
-#define MONOCOCO_X 				en_x
-#define MONOCOCO_Y				en_y
-#define MONOCOCO_COUNTER 		en_my
-#define MONOCOCO_STATE 			en_mx
+#define MONOCOCO_COUNTER 		_en_my
+#define MONOCOCO_STATE 			_en_mx
 
 #ifdef ENABLE_MONOCOCOS
 #define ENABLE_COCOS
@@ -414,8 +458,10 @@
 #define CARRY_ONE_HS_OBJECT
 #endif
 
-#ifdef TALL_PLAYER
-#define PLAYER_SPRITE_SIZE 32
-#else
-#define PLAYER_SPRITE_SIZE 24
+#ifdef ENABLE_PROPELLERS
+#define PLAYER_CAN_FLOAT
+#endif
+
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
+#define NEEDS_INITIAL_DETECTION
 #endif

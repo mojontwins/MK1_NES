@@ -280,7 +280,7 @@ void enems_load (void) {
 	}
 }
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#ifdef ENEMIES_MAY_DIE
 	void enems_kill () {
 		_en_t = 0;
 
@@ -298,9 +298,7 @@ void enems_load (void) {
 			flags [COUNT_KILLED_IN_FLAG] ++;
 		#endif
 	}
-#endif
 
-#if defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 	void enems_hit (void) {
 		_en_facing = ((_en_x < prx) ? 0 : 4);
 		en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;

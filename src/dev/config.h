@@ -52,7 +52,6 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
 
@@ -80,7 +79,7 @@
 // Bounding box size
 // -----------------
 
-#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
@@ -159,7 +158,7 @@
 
 //#define ENEMS_ENABLE_DYING_FRAME
 #define ENEMS_EXPLODING_CELL 			32
-#define ENEMS_OCCLUDING_FRAME			33 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			16 // # frames to stay frozen after hit
 
 // Beware: only activate this if enemies are killable by any means:
