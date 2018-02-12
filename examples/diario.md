@@ -2047,8 +2047,19 @@ Al igual que hicimos con las escaleras, tenemos el beh == 64 que significa "flot
 Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
 [ ] Sacar defines automáticos fuera de config.h y ponerlos aparte para poder sobrescribirlo con las actualizaciones.
+
 [ ] Mover config.h a /my
+
 [ ] Pasar a ASM las asignaciones arrays->variables y variables->arrays en el manejador de enemigos
+
 [ ] Springs
+
 [ ] Containers
+
 [ ] Hacer de sorpresi la ROM2 de Perils con los gráficos de Anjuel.
+
+~~
+
+[ ] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
+
+[ ] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).

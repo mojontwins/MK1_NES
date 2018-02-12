@@ -121,5 +121,6 @@ if (hrt) {
 			}
 		}
 	}
+
 	if (hrt) hotspots_paint ();
 }

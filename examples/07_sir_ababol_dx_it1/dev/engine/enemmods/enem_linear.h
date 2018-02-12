@@ -4,24 +4,24 @@
 // Good ol' patrollers
 
 #if defined (ENABLE_SHOOTIES)
-	rdx = en_x [gpit];
-	rdy = en_y [gpit];
+	rdx = _en_x;
+	rdy = _en_y;
 #endif
 
 if (!en_status [gpit] || half_life) {
 
 	// Horizontal
 
-	en_x [gpit] += en_mx [gpit];
+	_en_x += _en_mx;
 
 	#ifdef WALLS_STOP_ENEMIES
-		cy1 = en_y [gpit] >> 4;
-		cy2 = (en_y [gpit] + 15) >> 4;
+		cy1 = _en_y >> 4;
+		cy2 = (_en_y + 15) >> 4;
 
-		if (en_mx [gpit] < 0) {
-			cx1 = cx2 = en_x [gpit] >> 4;
+		if (_en_mx < 0) {
+			cx1 = cx2 = _en_x >> 4;
 		} else {
-			cx1 = cx2 = (en_x [gpit] + 15) >> 4;
+			cx1 = cx2 = (_en_x + 15) >> 4;
 		}
 		cm_two_points ();
 		en_collx = at1 | at2;
@@ -29,16 +29,16 @@ if (!en_status [gpit] || half_life) {
 
 	// Vertical
 
-	en_y [gpit] += en_my [gpit];
+	_en_y += _en_my;
 
 	#ifdef WALLS_STOP_ENEMIES
-		cx1 = en_x [gpit] >> 4;
-		cx2 = (en_x [gpit] + 15) >> 4;
+		cx1 = _en_x >> 4;
+		cx2 = (_en_x + 15) >> 4;
 
-		if (en_my [gpit] < 0) {
-			cy1 = cy2 = en_y [gpit] >> 4;
+		if (_en_my < 0) {
+			cy1 = cy2 = _en_y >> 4;
 		} else {
-			cy1 = cy2 = (en_y [gpit] + 15) >> 4;
+			cy1 = cy2 = (_en_y + 15) >> 4;
 		}
 		cm_two_points ();
 		en_colly = at1 | at2;
@@ -47,13 +47,13 @@ if (!en_status [gpit] || half_life) {
 	// Change direction ?
 	
 	#ifdef WALLS_STOP_ENEMIES
-		if (en_x [gpit] == en_x1 [gpit] || en_x [gpit] == en_x2 [gpit] || en_collx) en_mx [gpit] = -en_mx [gpit];
-		if (en_y [gpit] == en_y1 [gpit] || en_y [gpit] == en_y2 [gpit] || en_colly) en_my [gpit] = -en_my [gpit];
+		if (_en_x == _en_x1 || _en_x == _en_x2 || en_collx) _en_mx = -_en_mx;
+		if (_en_y == _en_y1 || _en_y == _en_y2 || en_colly) _en_my = -_en_my;
 	#else	
-		if (en_x [gpit] == en_x1 [gpit] || en_x [gpit] == en_x2 [gpit]) en_mx [gpit] = -en_mx [gpit];
-		if (en_y [gpit] == en_y1 [gpit] || en_y [gpit] == en_y2 [gpit]) en_my [gpit] = -en_my [gpit];						
+		if (_en_x == _en_x1 || _en_x == _en_x2) _en_mx = -_en_mx;
+		if (_en_y == _en_y1 || _en_y == _en_y2) _en_my = -_en_my;						
 	#endif						
 }
 
-en_facing = (en_mx [gpit] > 0 || en_my [gpit] > 0) ? 0 : 2;
-en_spr = en_s [gpit] + en_fr + en_facing;
+_en_facing = (_en_mx > 0 || _en_my > 0) ? 0 : 4;
+en_spr = _en_s + en_fr + _en_facing;

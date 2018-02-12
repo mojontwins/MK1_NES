@@ -12,13 +12,16 @@ const unsigned char *gp_gen, *gp_tmap, *gp_tma2;
 unsigned char *gp_ram, *gp_ram_aux;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
-unsigned char rda, rdb, rdc, rdm;
+unsigned char rda, rdb, rdc, rdd, rdm;
 unsigned char rds;
 unsigned char rdct;
 
 // Used for two-points collision
 
 unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
+#ifdef TALL_PLAYER
+	unsigned char at3;
+#endif
 
 // Sprite related
 
@@ -28,16 +31,6 @@ unsigned char oam_index;
 
 unsigned char en_initial;
 unsigned char en_offs;
-unsigned char en_x [3], en_y [3];
-unsigned char en_x1 [3], en_y1 [3];
-unsigned char en_x2 [3], en_y2 [3];
-signed char en_mx [3], en_my [3];
-unsigned char en_t [3], en_s [3], en_facing;
-unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
-
-#ifdef ENABLE_GENERATORS
-	unsigned char en_generator_life [3], gen_was_hit [3];
-#endif
 
 unsigned char en_fr;
 unsigned char en_collx, en_colly;
@@ -46,12 +39,14 @@ unsigned char touched;
 unsigned char en_cttouched [3];
 unsigned char pregotten;
 
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
-	signed int enf_x [3], enf_vx [3];
-#endif
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
-	signed int enf_y [3], enf_vy [3];
-#endif
+unsigned char _en_t, _en_s;
+unsigned char _en_x, _en_y;
+unsigned char _en_x1, _en_y1, _en_x2, _en_y2;
+signed char _en_mx, _en_my;
+unsigned char _en_ct, _en_facing;
+signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
+
+unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
 // Main player
 
@@ -69,8 +64,14 @@ unsigned char pushed_any;
 unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
+
 #if defined (ENABLE_EASY_OBJECTS)
-unsigned char pinv;
+	unsigned char pinv;
+#endif
+
+#ifdef ENABLE_LADDERS
+	unsigned char ponladder;
+	unsigned char ponladderctr;
 #endif
 
 #ifdef PLAYER_TOP_DOWN
@@ -79,12 +80,48 @@ unsigned char pinv;
 
 unsigned char wall, hitv, hith;
 
-#ifdef ENABLE_PROPELLERS
-	unsigned char ppropelled;
+#ifdef PLAYER_CAN_FLOAT
+	unsigned char pfloating;
 #endif
 
 #if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 	unsigned char pkilled;
+#endif
+
+unsigned char prx_old, pry_old;
+unsigned char pobjs;
+unsigned char plife, pcontinues;
+unsigned char pkill;
+unsigned char pice;
+unsigned char pnotsafe;
+
+#ifndef DEACTIVATE_KEYS
+	unsigned char pkeys;
+#endif
+
+unsigned char pammo, pfiring;
+
+#ifdef PLAYER_TURRET
+	unsigned char pfixct;
+#endif
+
+#ifdef DIE_AND_RESPAWN
+	unsigned char n_pant_safe;
+	signed int px_safe, py_safe;
+#endif
+
+#ifdef PLAYER_PUNCHES
+	unsigned char ppunching;
+#endif
+
+#ifdef PLAYER_KICKS
+	unsigned char pkicking;
+#endif
+
+#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+	unsigned char phitterx, phittery;
+	unsigned char phitteract;
+	unsigned char pfrozen;
 #endif
 
 // Bullets
@@ -116,3 +153,30 @@ const unsigned char *c_ts_tmaps;
 const unsigned char *c_behs;
 
 const unsigned char * const *spr_enems;
+
+const unsigned char *c_pal_bg;
+const unsigned char *c_pal_fg;
+
+#ifdef MAP_FORMAT_PACKED
+	const unsigned char *c_map;
+#else
+	const unsigned char * const *c_map;
+#endif
+	
+#ifdef MAP_WITH_DECORATIONS
+	const unsigned char * const *c_decos;
+#endif
+
+const unsigned char *c_locks;
+const unsigned char *c_enems;
+const unsigned char *c_hotspots;
+
+unsigned char c_max_bolts;
+
+#ifdef ACTIVATE_SCRIPTING
+	unsigned char sc_x, sc_y, sc_n, sc_c;
+	unsigned char *next_script;
+	unsigned char *script;
+	unsigned char script_result, sc_terminado, sc_continuar;
+#endif
+	

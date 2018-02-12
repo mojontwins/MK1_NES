@@ -93,6 +93,28 @@ unsigned char hact [MAP_SIZE];
 	unsigned char c_x [MAX_CONTAINERS], c_y [MAX_CONTAINERS], c_f [MAX_CONTAINERS], last_container;
 #endif
 
+// More baddies
+
+unsigned char en_x [3], en_y [3];
+unsigned char en_x1 [3], en_y1 [3];
+unsigned char en_x2 [3], en_y2 [3];
+signed char en_mx [3], en_my [3];
+unsigned char en_t [3], en_s [3], en_facing [3];
+
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+	signed int enf_x [3], enf_vx [3];
+#endif
+	
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+	signed int enf_y [3], enf_vy [3];
+#endif
+
+#ifdef ENABLE_GENERATORS
+	unsigned char en_generator_life [3], gen_was_hit [3];
+#endif
+
+unsigned char en_spr_id [3];
+
 // Baddies count. Properly fill this value!
 
 #ifdef PLAYER_KILLS_ENEMIES
@@ -120,49 +142,9 @@ unsigned char hact [MAP_SIZE];
 	unsigned char stbl;
 #endif
 
-// Player
-
-unsigned char prx_old, pry_old;
-unsigned char pobjs;
-unsigned char plife, pcontinues;
-unsigned char pkill;
-unsigned char pice;
-unsigned char pnotsafe;
-
-#ifndef DEACTIVATE_KEYS
-	unsigned char pkeys;
+#ifdef ENABLE_PROPELLERS
+	unsigned char prp_idx;
+	unsigned char prp_yx [PROPELLERS_MAX];
 #endif
-
-unsigned char pammo, pfiring;
-
-#ifdef PLAYER_TURRET
-	unsigned char pfixct;
-#endif
-
-#ifdef DIE_AND_RESPAWN
-	unsigned char n_pant_safe;
-	signed int px_safe, py_safe;
-#endif
-
-// Current level
-
-const unsigned char *c_pal_bg;
-const unsigned char *c_pal_fg;
-
-#ifdef MAP_FORMAT_PACKED
-	const unsigned char *c_map;
-#else
-	const unsigned char * const *c_map;
-#endif
-	
-#ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const *c_decos;
-#endif
-
-const unsigned char *c_locks;
-const unsigned char *c_enems;
-const unsigned char *c_hotspots;
-
-unsigned char c_max_bolts;
 
 #include "my/extra_vars.h"
