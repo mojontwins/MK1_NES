@@ -4,100 +4,56 @@
 		"selected_items":
 		[
 			[
-				"breaka",
-				"breakable_break"
+				"KILLED",
+				"FANTY_KILLED_BY_TILE"
 			],
 			[
-				"DEACTI",
-				"DEACTIVATE_OBJECTS\t(config.h)"
+				"PLAYER_FI",
+				"PLAYER_CAN_FIRE"
 			],
 			[
-				"SHOOTIES_SHOOT_OF",
-				"SHOOTIES_SHOOT_OFFS_X\t(README.md)"
+				"PLAYER_KI",
+				"PLAYER_KILLS_ENEMIES"
 			],
 			[
-				"colours",
-				"coloursDetected"
+				"ssfant",
+				"ssfanty_00_b\t(spritedata.h)"
 			],
 			[
-				"HS_OBJ_",
-				"HS_OBJ_EMPTY\t(config.h)"
+				"sspl",
+				"ssplat_01"
 			],
 			[
-				"HS",
-				"HS_USE_OFFS\t(diario.md)"
+				"ssplat",
+				"ssplat_00"
 			],
 			[
-				"HS_OBJ",
-				"HS_OBJ_MAX\t(config.h)"
+				"sspla",
+				"ssplat_01\t(spritedata.h)"
 			],
 			[
-				"HS_OB",
-				"HS_OBJ_MIN\t(config.h)"
+				"update",
+				"enems_update_values"
 			],
 			[
-				"CARRY_OB",
-				"CARRY_ONE_HS_OBJECTECT\t(frame.h)"
+				"MONOCOCO",
+				"MONOCOCO_BASE_SPRID\t(config.h)"
 			],
 			[
-				"CARRY",
-				"CARRY_ONE_HS_OBJ\t(diario.md)"
+				"PEZON_",
+				"PEZONS_BASE_SPRID\t(config.h)"
 			],
 			[
-				"HOTP",
-				"HOTSPOT_TYPE_SIGN"
+				"FANTI",
+				"FANTY_BASE_SPRID\t(config.h)"
 			],
 			[
-				"HOTS",
-				"HOTSPOT_TYPE_BOOT\t(diario.md)"
+				"m_",
+				"m_title\t(pres.h)"
 			],
 			[
-				"textb",
-				"textbox_draw_text"
-			],
-			[
-				"textbo",
-				"textbox_frame"
-			],
-			[
-				"remember",
-				"remember_pant"
-			],
-			[
-				"TOP",
-				"TOP_OVER_SIDE"
-			],
-			[
-				"remem",
-				"remember_pant"
-			],
-			[
-				"N_BO",
-				"N_BOLTS_0"
-			],
-			[
-				"N_B",
-				"N_BOLTS_0\t(asset_setup.h)"
-			],
-			[
-				"MAP",
-				"MAP_FORMAT_RLE16\t(diario.md)"
-			],
-			[
-				"main",
-				"mainloop"
-			],
-			[
-				"PLAYER",
-				"PLAYER_BULLET_Y_OFFSET"
-			],
-			[
-				"SPRI",
-				"SPRITE_BADDIE_DYING\t(config.h)"
-			],
-			[
-				"decosi",
-				"decosize"
+				"BULLET_P",
+				"BULLET_PALETTE"
 			],
 			[
 				"draw",
@@ -180,10 +136,6 @@
 				"update_list_tile"
 			],
 			[
-				"update",
-				"update_list"
-			],
-			[
 				"upda",
 				"update_index"
 			],
@@ -248,29 +200,47 @@
 	"buffers":
 	[
 		{
-			"file": "examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 2533,
+				"buffer_size": 14914,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 1030,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 99 files for \"TOP_ADJUST\"\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\config.h:\n    2  // Copyleft Mojon Twins 2013, 2015, 2017\n    3  \n    4: #define TOP_ADJUST\t\t\t\t4\n    5: #define SPRITE_ADJUST\t\t\t8*TOP_ADJUST - 8 - 16 - 1\n    6  \n    7  // ============================================================================\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\mapmods\\map_renderer_complex.h:\n  118  \t\t#include \"engine/mapmods/map_detectors.h\"\n  119  \n  120: \t\tdraw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);\n  121  \t\trdx = (rdx + 1) & 15; if (!rdx) rdy ++;\n  122  \t}\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\mapmods\\map_renderer_fast.h:\n   14  \n   15  \trdm ++;\n   16: \tdraw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);\n   17  \trdx = (rdx + 1) & 15; if (!rdx) rdy ++;\n   18  }\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\printer.h:\n   99  \tmap_buff [COORDS (x, y)] = n;\n  100  \tmap_attr [COORDS (x, y)] = c_behs [n];\n  101: \tupdate_list_tile (x + x, TOP_ADJUST + y + y, n); \n  102  }\n  103  \n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\propellers.h:\n   15  \t\tgp_addr = 0x2000 + (\n   16  \t\t\t((rda & 0xf) << 1) | \n   17: \t\t\t((((rda >> 3) & 0xfe) + TOP_ADJUST) << 5)\n   18  \t\t);\n   19  \t\tul_putc (rdb + PROPELLERS_BASE_PATTERN);\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\textbox.h:\n   17  \t// Draws or clears the frame upon the value of rdm\n   18  \trdct = 0; rdx = 0; rdy = 12;\n   19: \tgp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((rdy - TOP_ADJUST) >> 1) << 4));\n   20  \tgpit = 64; while (gpit --) {\n   21  \t\trdt = *gp_ram ++;\n\n7 matches across 6 files\n",
+			"settings":
+			{
+				"buffer_size": 1828,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
 			"file": "examples/diario.md",
 			"settings":
 			{
-				"buffer_size": 77934,
+				"buffer_size": 78217,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/07_sir_ababol_dx_it1/dev/engine/enengine.h",
+			"file": "examples/00_tester_punchy/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 15177,
-				"encoding": "UTF-8",
+				"buffer_size": 14914,
 				"line_ending": "Windows"
 			}
 		}
@@ -282,16 +252,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 191.0,
-		"last_filter": "instal",
+		"height": 145.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 406.0
+		"width": 462.0
 	},
 	"console":
 	{
@@ -316,196 +290,173 @@
 	],
 	"file_history":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/diario.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/playermods/bullets.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/compile.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enengine.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_pezon.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/enemmods/enem_saw.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/ss.png",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/spritedata.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/game_frame.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/on_object_used.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/player_frame_selector.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/my/on_object_used.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/chrview.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/diario.md",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/propellers.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/assets/mscnes.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/ram/zp.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/msc3nes.bas",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/mainloop/scripting.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/mainloop.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/compile.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_homing_fanty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/general.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/definitions.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_fanty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/general.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/playermods/bullets.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/breakable.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/ram/bss.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/game.c",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/ram/bss.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/ram/bss.h",
-		"/C/Cosas/git/MK1_NES/examples/00_tester_punchy/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/examples/diario.md",
-		"/D/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram/bss.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enengine.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/ram/bss.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
-		"/D/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/README.md",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/general.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/definitions.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_shooty.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_punchy.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/cocos.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_linear.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/enems0.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/map_renderer_customization.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/bg0.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/compile.bat",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/game.c",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/my/bgs.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/mainloop/asset_setup.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/ss.png",
-		"/D/git/MK1_NES/examples/00_tester_punchy/gfx/ss.png",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/assets/behs.h",
-		"/D/git/MK1_NES/src/utils/mkts.bas",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_monococo.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/README.md",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_pursuers.h",
-		"/D/git/MK1_NES/ext_utils/nesst1.43/readme.txt",
-		"/D/git/MK1_NES/src/utils/mtparser.bas",
-		"/D/git/MK1_NES/examples/00_tester_sideview/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/utils/mtparser.bi",
-		"/D/git/MK2/src/dev/mainloop.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/my/game_frame.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/my/extra_vars.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/my/extra_vars.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/game.c",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/pres.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/my/extra_checks.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/my/game_frame.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/mapmods/map_renderer_complex.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/asset_setup.h",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/06_lala_prologue/dev/compile.bat",
-		"/D/git/MK1_NES/examples/06_lala_prologue/dev/game.c",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/definitions.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/definitions.h",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/compile.bat",
-		"/D/git/MK1_NES/examples/make-examples.bat",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/compile.bat",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/compile.bat",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/compile.bat",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/compile.bat",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/compile.bat",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/compile.bat",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/cheril_of_the_bosque.nes",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/compile.bat",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/config.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/extra_checks.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/on_object_got.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/mainloop/on_object_used.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/hotspots.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/behs.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/ram/zp.h",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/diario.md",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/diario.md",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/enengine.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/cocos.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/precalcs.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_monococo.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/game.s",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_homing_fanty.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_fanty.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/definitions.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/general.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/general.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_pursuers.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/neslib.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/crt0.s",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/famitone.s",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/map0.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/engine/mapmods/map_renderer_customization.h",
-		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_customization.h",
-		"/D/git/MK1_NES/src/updating.md",
-		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/src/dev/assets/behs.h",
-		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
-		"/D/git/MK1_NES/src/dev/engine/frame.h",
-		"/D/git/MK1_NES/examples/00_tester_sideview/enems/ponedor.bat",
-		"/D/git/MK1_NES/examples/00_tester_sideview/enems/p.bat"
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_monococo.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_fanty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_homing_fanty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_pezon.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_chac_chac.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_linear.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_punchy.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_pursuers.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_saw.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_shooty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/ram/zp.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/assets/spritedata.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/assets/metasprites.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/frame.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/my/game_frame.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/my/player_frame_selector.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/compile.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/cocos.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/assets/metasprites.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_monococo.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_punchy.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_pursuers.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_shooty.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_linear.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_pezon.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_saw.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/playermods/bullets.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram/zp.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_complex.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/ram/bss.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_fast.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/mapmods/map_renderer_customization.h",
+		"/C/Users/na_th/AppData/Local/Temp/Temp1_famitone2.zip/readme.txt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/map0.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/gfx/import_patterns.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/pres.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/diario.md",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/levelset.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods/process_tile.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/general.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/engine/playermods/process_tile.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/pres.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/mainloop/flickscreen.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/enems0.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/enemmods/enem_pursuers.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/playermods/bullets.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/frame.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/script/script.spt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/script/mscnes.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/breakable.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/assets/behs.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/definitions.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/definitions.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/flickscreen.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/zp.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/ram/bss.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/diario.md",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/frame.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/map1.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/compile.bat",
+		"/H/emus/InMG_SSF_TestVer - 10-01-2018/Readme.txt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/labels.txt",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/scripting.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/music.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop/hud.h"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 49.0
 	},
 	"find_in_files":
 	{
-		"height": 120.0,
+		"height": 135.0,
 		"where_history":
 		[
-			"C:\\Cosas\\git\\MK1_NES\\examples\\00_tester_punchy",
-			"D:\\git\\MK1_NES\\examples\\00_tester_punchy\\dev\\engine\\enemmods",
-			"D:\\git\\MK1_NES\\examples\\00_tester_punchy",
-			"D:\\git\\MK1_NES\\examples\\06_lala_prologue",
-			"D:\\git\\MK1_NES\\examples\\04_d'veel'ng",
-			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview\\dev",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview\\dev",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview\\dev\\engine",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview",
-			"D:\\git\\MK1_NES\\examples\\00_tester_sideview\\dev",
-			"D:\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\04_d'veel'ng",
-			"D:\\git\\MK1_NES\\examples\\03_cheril_of_the_bosque_v1",
-			"D:\\git\\MK1_NES\\examples\\04_d'veel'ng",
-			"D:\\git\\MK1_NES\\examples\\02_jet_paco",
-			"D:\\git\\MK1_NES\\examples\\01_sgt_helmet_training_day\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
-			"D:\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
-			"D:\\git\\MK1_NES\\src\\dev\\ram",
-			"D:\\git\\MK1_NES\\src",
-			"D:\\git\\MK1_NES\\src\\dev\\ram",
-			"D:\\git\\MK1_NES\\src\\dev",
-			"D:\\git\\MK1_NES\\src\\dev\\engine",
-			"D:\\git\\MK1_NES\\src\\dev",
-			"D:\\git\\MK1_NES\\examples",
-			"D:\\git\\MK1_NES\\examples\\",
-			"D:\\git\\MK1_NES\\examples\\01_sgt_helmet_training_day",
-			"D:\\git\\MK1_NES\\src",
-			"D:\\git\\MK1_NES\\src\\dev",
-			"D:\\git\\MK1_NES\\src",
-			"lkyx",
-			"D:\\git\\MK1_NES\\examples",
-			"D:\\git\\MK1_NES\\src\\dev",
-			"D:\\git\\MK1_NES\\examples\\06_lala_prologue",
-			"D:\\git\\MK1_NES\\examples\\06_lala_prologue\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\src",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_top_down",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_sideview",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_top_down\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_top_down",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy\\dev\\engine\\enemmods",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\src",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_sideview",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_top_down\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy\\dev\\engine",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_sideview",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\08_sgt_helmet_training_day_MK1_1.0_port",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev\\ram",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev\\engine",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_sir_ababol_dx_it1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess",
 			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess\\dev",
@@ -518,137 +469,137 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
-			"custom",
-			"pkicky",
-			"pkickx",
-			"ppunchy",
-			"ppunchx",
-			"en_cttouched",
-			"en_life",
+			"TOP_ADJUST",
+			"conflict",
 			"enems_hit",
-			"oam_index",
-			"punch",
-			"PUNCH",
-			"punch",
-			"PUNCH",
-			"_SHOOT_",
-			"SHOOTIES",
-			"PUNCHIES",
-			"cocos",
-			"en_ct",
-			"shootie",
-			"shooties",
-			"shoo",
-			"rdx",
-			"en_ct",
-			"en_status",
-			"packed",
-			"oam_index =",
-			"oam_spr = ",
-			"player_process_tile",
-			"enpu",
-			"_b",
-			"_a",
-			"metaSpriteCounter",
-			"cocos_shoot",
+			"ENEMS_OCCLUDING_FRAME",
+			"msc3nes.exe",
+			"msc3nes",
+			"x",
+			"<< 6",
+			"FIRE_MIN_KILLABLE",
+			"MONOCOCO_COUNTER [gpit]",
+			"MONOCOCO_STATE [gpit]",
+			"state",
+			"MONOCOCO_Y [gpit]",
+			"MONOCOCO_X [gpit]",
+			"en_fr",
+			"enf_(x|y|vx|vy) \\[gpit\\]",
+			"en_(t|s|x\\d?|y\\d?|mx|my|ct|facing) \\[gpit\\]",
+			"enf",
+			"en_facing [gpit]",
+			"en_ct [gpit]",
+			"en_my [gpit]",
+			"en_mx [gpit]",
+			"en_y2 [gpit]",
+			"en_y1 [gpit]",
+			"en_x2 [gpit]",
+			"en_x1 [gpit]",
+			"en_y [gpit]",
+			"en_x [gpit]",
+			"en_s [gpit]",
+			"en_t [gpit]",
+			"SPRITE_BADDIE_DYING",
+			"_[ab]",
+			"facing",
+			"phitteract",
+			"en_s [gpit]",
+			"en_facing",
+			"ENEMS_OCCLUDING_FRAME",
+			"SPRITE_BADDIE_DYING",
+			"enems_hit",
+			"gpjt",
+			"spr_pl_empty",
+			"phitter",
+			"sprite_size",
+			"rdb",
+			"pad_this",
+			"bullets",
+			"0xe3",
+			"attr_table",
+			"gpit",
+			"brk_buff",
 			"en_s",
-			"mirrored",
-			"flipped",
-			"MIRRORED",
-			"mkts",
-			"mirrored",
-			"OAM_ENEMS",
-			"OAM_HOTSPOTS",
-			"OAM_",
-			"make",
-			"pad_a",
-			"level_switching",
-			"DEACTIVATE_OBJECTS",
-			"OBJECTECT",
-			"CARRY_ONE_HS_OBJ",
-			"23",
-			"oam_meta",
-			"HS_INV_EMPTY",
-			"HS_INV_MAX",
-			"HS_INV_MIN",
-			"WONT_CHANGE",
-			"flags",
-			"CARRY_ONE_FLAG_OBJ",
-			"cocos_do",
-			"ENABLE_MONOCOCO",
-			"ADD_SIGN",
-			"MONOCOCO",
-			"monococo",
-			"min",
-			"delta",
-			"saturate",
-			"add_sign",
-			"abs",
-			"saturate_z",
-			"sgnc",
-			"sgni",
-			"enems_distance",
-			"AX_ICE",
-			"pice",
-			"ICE_RX",
-			"ICE_AX",
-			"SLIP",
-			"QUICKSANDS",
-			"_a",
-			"mem_fill",
-			"player_init",
-			"SWIM",
-			"alt",
-			"rand",
-			"alt",
-			"rdx",
+			"rdm",
+			"ENABLE_FIRE_ZONE",
+			"cx1",
+			"plife",
+			"TOP_ADJUST",
 			"draw_map_tile",
-			"PLAYER_MOGGY_STYLE",
-			"PURSUERS",
-			"PURSU",
-			"pursuers",
-			"BADDIES_COUNT",
-			"player_points_be",
-			"player_points_beneath",
-			"en_cttouched",
-			"en_touched",
-			"ts_offs",
-			"MAX_LOCKS_",
-			"ssena",
-			"Hx",
-			"Command",
-			"map",
-			"map data",
-			"offset",
-			"safe",
-			"PLAYER_KILLS",
-			"PLAYER_KILSL",
-			"BOUNDING_BOX_8_BOTTOM",
-			"+ 8",
+			"gpit",
+			"fade_delay",
+			"no_ct",
+			"MAP_W",
+			"music_play",
+			"m_",
+			"level",
+			"bootee",
+			"player_process_tile",
+			"process_tile",
+			"player_process_tile",
+			"last_container",
+			"CELL_FACING",
+			"FACING_",
 			"_a",
-			"do_gravity",
-			"PAD_DO",
-			"SWIM",
-			"behs",
-			"tbehs",
-			"(unsigned char **)\t",
-			"(unsigned char *)\t",
-			"MAX_BOLTS",
-			"mouti",
-			"bolts",
-			"ini",
-			"tileset_pals",
-			"tsmap",
-			"COORDS",
-			"wall",
-			"attr",
-			"ptx",
-			"pt",
-			"et",
-			"bmy"
+			"eneexp2",
+			"decos",
+			"scrsizes",
+			"nodecos",
+			"?",
+			"print",
+			"kill_player",
+			"level",
+			"scroll",
+			"env_pitch",
+			"pfr",
+			"plife",
+			"psprid",
+			"pfr",
+			"clear_",
+			"clear_update_list",
+			"wbtul",
+			"update_list",
+			"batin",
+			"cls",
+			"oam_spr",
+			"mkts",
+			"next = ",
+			"next",
+			"ppo",
+			"º",
+			"ppodewwwr_",
+			"ppodewwwr",
+			"p_t",
+			"..\\utils\\",
+			"attr_table",
+			"m_",
+			"69",
+			"70",
+			"68",
+			"64",
+			"&",
+			"\"",
+			"..\\utils\\",
+			"scroll",
+			"jump_to",
+			"..\\utils\\",
+			"cerrojos",
+			"..\\utils",
+			"enexp2",
+			"custom",
+			"ENS_PURSUING",
+			"241",
+			"http",
+			"URL",
+			"update",
+			"pobject",
+			"texts",
+			"game_res",
+			"texts",
+			"0"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -656,59 +607,41 @@
 		"regex": false,
 		"replace_history":
 		[
-			"phittery",
-			"phitterx",
-			"phittery",
-			"phitterx",
-			"kick",
-			"KICK",
-			"kick",
-			"_PUNCH_",
-			"PUNCHIES",
-			"ensh",
-			"_a",
-			"_b",
-			"compile",
-			"OBJECT",
-			"CARRY_ONE_HS_OBJECT",
-			"HS_OBJ_EMPTY",
-			"HS_OBJ_MAX",
-			"HS_OBJ_MIN",
-			"ENABLE_MONOCOCOS",
-			"MIN",
-			"DELTA",
-			"SATURATE",
-			"ADD_SIGN",
-			"ABS",
-			"SATURATE_Z",
-			"SGNC",
-			"SGNI",
-			"distance",
-			"PLAYER_RX_ICE",
-			"PLAYER_AX_ICE",
-			"_b",
-			"PLAYER_TOP_DOWN",
-			"N_BOLTS_",
-			"ssen",
-			"_b",
+			"ENEMS_OCCLUDING_CELL",
+			"y",
+			"<< FIXBITS",
+			"PLAYER_MIN_KILLABLE",
+			"MONOCOCO_COUNTER",
+			"MONOCOCO_STATE",
+			"MONOCOCO_STATE [gpit]",
+			"_en_y",
+			"_en_x",
+			"_enf_\\1",
+			"_en_\\1",
+			"_en_facing",
+			"_en_ct",
+			"_en_my",
+			"_en_mx",
+			"_en_y2",
+			"_en_y1",
+			"_en_x2",
+			"_en_x1",
+			"_en_y",
+			"_en_x",
+			"_en_s",
+			"_en_t",
+			"ENEMS_EXPLODING_CELL",
 			"",
-			"end",
-			"c_ts_pals",
-			"c_ts_tmaps",
-			"MONOCOCO",
-			"enems_persistent_deaths_load",
-			"enems_persistent_update",
-			"enems_persistent_load",
-			"enems_draw_chac_chac",
-			"enems_distance",
-			"enems_kill",
-			"legacy\\mkts_old",
-			"legacy\\nescnv",
-			"hyx",
-			"MAX_BOLTS",
-			"lkyx",
-			"legacy\\eneexp",
-			"..\\..\\..\\src\\utils\\",
+			"en_facing [gpit]",
+			"ENEMS_OCCLUDING_CELL",
+			"ENEMS_EXPLODING_CELL",
+			"gpit",
+			"rdm",
+			"bi",
+			"player_process_tile",
+			"CELL_FACING_",
+			"_b",
+			"eneexp3",
 			"mkts_old",
 			"..\\..\\..\\src\\utils\\",
 			"11",
@@ -783,7 +716,25 @@
 			"\\n",
 			"\\u",
 			"\\o",
-			"\\i"
+			"\\i",
+			"\\e",
+			"\\a",
+			"T.A.R.D.I.S.",
+			"8<",
+			"EXTERN_E",
+			"k2t_code",
+			"k2t_i",
+			"k2t_y",
+			"k2t_x",
+			"k2t_i",
+			"000",
+			"6",
+			"5",
+			"55556666O",
+			"TOCINO MARÍN ALBERTITO",
+			"last",
+			"k2t_length",
+			"k2t_last_key"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -794,24 +745,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/07_sir_ababol_dx_it1/dev/mainloop/hotspots.h",
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2533,
+						"buffer_size": 14914,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2350,
-								2350
+								7168,
+								7168
 							]
 						],
 						"settings":
@@ -820,27 +771,125 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1241.0,
+						"translation.y": 3432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "examples/diario.md",
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 77934,
+						"buffer_size": 1030,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								77905,
-								77905
+								662,
+								662
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1828,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										195,
+										205
+									],
+									[
+										244,
+										254
+									],
+									[
+										582,
+										592
+									],
+									[
+										839,
+										849
+									],
+									[
+										1128,
+										1138
+									],
+									[
+										1365,
+										1375
+									],
+									[
+										1712,
+										1722
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 78217,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								78217,
+								78217
 							]
 						],
 						"settings":
@@ -849,10 +898,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 37734.0,
+						"translation.y": 29580.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -862,20 +911,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 2,
-					"file": "examples/07_sir_ababol_dx_it1/dev/engine/enengine.h",
-					"semi_transient": false,
+					"buffer": 4,
+					"file": "examples/00_tester_punchy/dev/engine/enengine.h",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 15177,
+						"buffer_size": 14914,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7002,
-								7002
+								6869,
+								7551
 							]
 						],
 						"settings":
@@ -884,10 +933,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3549.0,
+						"translation.y": 3588.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -899,7 +948,7 @@
 	},
 	"input":
 	{
-		"height": 36.0
+		"height": 42.0
 	},
 	"layout":
 	{
@@ -947,7 +996,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 92.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -981,7 +1030,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -989,7 +1038,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 113.0,
+	"side_bar_width": 198.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -2063,3 +2063,9 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 [ ] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
 
 [ ] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
+
+[ ] Portar RLE53.
+ 
+[ ] Encontrar una forma de poder poner el marcador arriba.
+    Idea: 3 presets: game area arriba, game area abajo, game area centrada. <- esto.
+    

@@ -17,7 +17,7 @@ cd ..\enems
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 20 2 15 0
+..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 6 4 15 0
 
 cd ..\dev
 

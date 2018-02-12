@@ -460,3 +460,7 @@
 #if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
 #define NEEDS_INITIAL_DETECTION
 #endif
+
+#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
+#define ENEMIES_MAY_DIE
+#endif
