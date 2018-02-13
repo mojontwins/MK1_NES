@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Main loop & helpers
 
@@ -24,10 +24,10 @@ void game_init (void) {
 #ifndef DEACTIVATE_KEYS		
 	bolts_load ();
 #endif		
-	player_init ();
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
 	py = (PLAYER_INI_Y << 4) << FIXBITS;
-	
+	player_init ();
+		
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
@@ -42,8 +42,13 @@ void game_init (void) {
 #ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
 #endif
+
 #ifndef DEACTIVATE_KEYS	
 	pkeys = 0;
+#endif
+
+#ifdef ENABLE_RESONATORS
+	res_on = 0;
 #endif
 
 	half_life = 0;
@@ -81,6 +86,11 @@ void prepare_scr (void) {
 
 	// Disable sprites and tiles so we can write to VRAM.
 	ppu_off ();
+
+#ifdef ENABLE_SHINES
+	shine_active_ct = 0;
+	max_shines = 0;
+#endif
 
 	draw_scr ();
 
@@ -236,6 +246,10 @@ void game_loop (void) {
 		propellers_do ();
 #endif
 
+#ifdef ENABLE_RESONATORS
+		#include "mainloop/resonators.h"
+#endif
+
 		#include "mainloop/hotspots.h"
 
 		player_move ();
@@ -253,6 +267,10 @@ void game_loop (void) {
 
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();
+#endif
+
+#ifdef ENABLE_SHINES
+		shines_do ();
 #endif
 
 		//#include "mainloop/cheat.h"

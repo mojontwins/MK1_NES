@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Uses neslib and related tools by Shiru
 
@@ -17,6 +17,7 @@
 
 #include "definitions.h"
 #include "config.h"
+#include "autodefs.h"
 
 // **************
 // * const data *
@@ -59,27 +60,30 @@ extern const unsigned char m_ingame [];
 #include "engine/general.h"
 #include "engine/printer.h"
 #ifndef DEACTIVATE_KEYS
-#include "engine/bolts.h"
+	#include "engine/bolts.h"
 #endif
 #ifdef ENABLE_BREAKABLE
-#include "engine/breakable.h"
+	#include "engine/breakable.h"
 #endif
 #include "engine/hotspots.h"
 #ifdef ENABLE_PROPELLERS
-#include "engine/propellers.h"
+	#include "engine/propellers.h"
+#endif
+#ifdef ENABLE_SHINES
+	#include "engine/shines.h"
 #endif
 #ifdef ENABLE_CONTAINERS
-#include "engine/containers.h"
+	#include "engine/containers.h"
 #endif
 #ifdef ENABLE_COCOS
-#include "engine/cocos.h"
+	#include "engine/cocos.h"
 #endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
 #include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
-#include "assets/mscnes.h"
+	#include "assets/mscnes.h"
 #endif
 #include "mainloop.h"
 
@@ -107,7 +111,7 @@ void main(void) {
 		// Game loop
 
 		while (1) {
-			scroll (0, 8);
+			scroll (0, SCROLL_Y);
 			game_init (); 
 			game_loop ();
 

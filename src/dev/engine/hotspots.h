@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // hotspots.h
 // Hotspot management
@@ -27,11 +27,15 @@ void hotspots_paint (void) {
 		rda = hrt;
 #endif
 
+#ifdef ENABLE_RESONATORS
+	rda = hrt + (hrt == HOTSPOT_TYPE_RESONATOR && res_on);
+#endif
+
 	oam_index = oam_meta_spr (
 		hrx, hry + SPRITE_ADJUST, 
 		oam_index, 
 		spr_hs [
-#if defined (CARRY_ONE_HS_OBJECT) && defined (HS_TYPE_A)
+#if (defined (CARRY_ONE_HS_OBJECT) && defined (HS_TYPE_A)) || defined (ENABLE_RESONATORS)
 			rda
 #else
 			hrt

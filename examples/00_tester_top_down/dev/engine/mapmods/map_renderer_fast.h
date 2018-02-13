@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Map renderer fast (original)
 
@@ -64,6 +64,18 @@ void draw_scr (void) {
 				rdt = rdd >> 4; draw_map_tile ();
 				rdt = rdd & 15; draw_map_tile ();
 			}
+		}
+	#endif
+
+	#ifdef MAP_FORMAT_RLE53
+		// Get pointer
+		gp_gen = c_map [n_pant];
+
+		while (rdm < 192) {
+			rdd = *gp_gen ++;
+			rdct = 1 + (rdd >> 5);
+			rdt = rdd & 0x1f;
+			while (rdct --) draw_map_tile (); 
 		}
 	#endif	
 

@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // frame.h
 // Custom game frame
@@ -11,7 +11,7 @@ void hud_update (void) {
 #ifdef KILLED_X
 	if (okilled != pkilled) {
 		okilled = pkilled;
-		p_t (KILLED_X, KILLED_Y, baddies_count - pkilled);
+		p_t (KILLED_X, KILLED_Y, c_max_enems - pkilled);
 	}
 #endif
 

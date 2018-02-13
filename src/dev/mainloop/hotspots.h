@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Hotspot interaction
 
@@ -67,6 +67,19 @@ if (hrt) {
 			#endif			
 			else
 		#endif
+
+		#ifdef ENABLE_RESONATORS
+			if (hrt == HOTSPOT_TYPE_RESONATOR) {
+				if (pvy > 0 && pry < hry) {
+					if (res_on == 0) {
+						res_on = 1; res_ct = 9; res_subct = 50;
+						// Sound 
+					} else sfx_play (7, 0);
+					pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+				}
+			} else
+		#endif
+
 		{
 			rda = 0;
 			switch (hrt) {

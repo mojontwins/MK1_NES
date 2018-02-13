@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // bss
 
@@ -138,13 +138,26 @@ unsigned char en_spr_id [3];
 	unsigned char ep_flags [3 * MAP_SIZE];
 #endif
 
+// Text box
+
 #ifdef SCRIPTING_TEXT_BOX
 	unsigned char stbl;
 #endif
 
+// Propellers
+
 #ifdef ENABLE_PROPELLERS
 	unsigned char prp_idx;
 	unsigned char prp_yx [PROPELLERS_MAX];
+#endif
+
+// Shines
+
+#ifdef ENABLE_SHINES
+	unsigned char max_shines;
+	unsigned char shine_active_x, shine_active_y;
+	unsigned char shines [SHINES_MAX];
+	unsigned char shine_active_ct;
 #endif
 
 #include "my/extra_vars.h"

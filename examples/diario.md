@@ -1090,7 +1090,7 @@ Lo he hecho muy guay. Hay un archivo *vacío* en /src/ que tienes que rellenar s
 
 ```c
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Use this alongisde map_renderer_complex.h
 // (#define MAP_RENDERER_COMPLEX)
@@ -2046,7 +2046,7 @@ Al igual que hicimos con las escaleras, tenemos el beh == 64 que significa "flot
 
 Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
-[ ] Sacar defines automáticos fuera de config.h y ponerlos aparte para poder sobrescribirlo con las actualizaciones.
+[X] Sacar defines automáticos fuera de config.h y ponerlos aparte para poder sobrescribirlos con las actualizaciones.
 
 [ ] Mover config.h a /my
 
@@ -2056,16 +2056,41 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
 [ ] Containers
 
-[ ] Hacer de sorpresi la ROM2 de Perils con los gráficos de Anjuel.
+20180212
+========
 
-~~
-
-[ ] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
+[X] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
 
 [ ] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
 
-[ ] Portar RLE53.
+[X] Portar RLE53.
  
-[ ] Encontrar una forma de poder poner el marcador arriba.
+[X] Encontrar una forma de poder poner el marcador arriba.
     Idea: 3 presets: game area arriba, game area abajo, game area centrada. <- esto.
     
+20180213
+========
+[X] Hacer funcionar shines.
+
+[X] Hacer funcionar resonadores.
+
+[ ] Hacer funcionar NO!.
+
+[ ] Hacer "animación de activar hotspot"
+
+**Tengo que actualiar todos los ejemplos a partir de src**
+
+```
+	Overwrite 
+		/mainloop.h
+		/mainloop/
+		/engine/
+		/ram/
+
+	Compare
+		/game.c
+		/config.h
+		/assets/levelset.h
+```
+
+

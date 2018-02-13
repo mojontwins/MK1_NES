@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // bss
 
@@ -10,6 +10,8 @@ unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;
 unsigned char use_ct, no_ct;
 unsigned char level, game_over, win_level;
+
+unsigned char c_max_enems;
 
 // Update list
 
@@ -115,13 +117,6 @@ unsigned char en_t [3], en_s [3], en_facing [3];
 
 unsigned char en_spr_id [3];
 
-// Baddies count. Properly fill this value!
-
-#ifdef PLAYER_KILLS_ENEMIES
-	unsigned char baddies_count;
-	#define BADDIES_COUNT baddies_count
-#endif
-
 // Make enemies persistent
 
 #ifdef PERSISTENT_ENEMIES
@@ -138,13 +133,32 @@ unsigned char en_spr_id [3];
 	unsigned char ep_flags [3 * MAP_SIZE];
 #endif
 
+// Text box
+
 #ifdef SCRIPTING_TEXT_BOX
 	unsigned char stbl;
 #endif
 
+// Propellers
+
 #ifdef ENABLE_PROPELLERS
 	unsigned char prp_idx;
 	unsigned char prp_yx [PROPELLERS_MAX];
+#endif
+
+// Shines
+
+#ifdef ENABLE_SHINES
+	unsigned char max_shines;
+	unsigned char shine_active_x, shine_active_y;
+	unsigned char shines [SHINES_MAX];
+	unsigned char shine_active_ct;
+#endif
+
+// Resonators
+
+#ifdef ENABLE_RESONATORS
+	unsigned char res_on, res_ct, res_subct;
 #endif
 
 #include "my/extra_vars.h"

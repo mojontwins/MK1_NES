@@ -1,8 +1,10 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
-#define TOP_ADJUST				4
-#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
+//#define GAME_AREA_TOP
+#define GAME_AREA_MIDDLE
+//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -60,6 +62,8 @@
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 #define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // Use the complex renderer if you need to post-process the map buffer before
@@ -97,7 +101,7 @@
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-#define DIE_AND_REENTER					// Reenter screen on death
+//#define DIE_AND_REENTER					// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -147,19 +151,40 @@
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
 #define PROPELLER_TILE					14	// Tile # in map to detect a propeller
 
+// Killing tiles shine, beware!
+
+//#define ENABLE_SHINES
+#define SHINES_MAX 						8
+#define SHINES_BASE_PATTERN				10	// In the sprite bank, two patterns needed
+#define SHINES_PALETTE					3
+#define SHINING_TILE					23	// Tile # in map to add shines
+
+// Resonators. Not sure if you need this, but.
+
+#define ENABLE_RESONATORS
+#define RESONATOR_BASE_PATTERN			0
+#define RESONATOR_PALETTE				3
+#define RESONATOR_COUNTER_OFFS_X		4
+#define RESONATOR_COUNTER_OFFS_Y		7
+
 // Enemy types and definitions
 // ---------------------------
 
 #define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
-#define ENEMS_FLICKER
+//#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
+#define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+
 //#define ENEMS_ENABLE_DYING_FRAME
+
 #define ENEMS_EXPLODING_CELL 			32
+#define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
+
 #define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
-#define ENEMS_TOUCHED_FRAMES			16 // # frames to stay frozen after hit
+
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
@@ -173,7 +198,7 @@
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
-#define FANTY_LIFE_GAUGE				5
+//#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
@@ -386,6 +411,11 @@
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
 
+#define PLAYER_VY_LADDERS		96
+
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -422,8 +452,11 @@
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
-	//#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE	6
+	#define CELL_AIRBORNE		5
+
+	#define CELL_USE			6
+
+	#define CELL_SWIM_CYCLE		6
 
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
@@ -431,36 +464,4 @@
 	#define CELL_KICKING		9
 
 	#define CELL_CLIMB_CYCLE	20
-#endif
-
-// Inner workings. Don't touch.
-
-#define MONOCOCO_COUNTER 		_en_my
-#define MONOCOCO_STATE 			_en_mx
-
-#ifdef ENABLE_MONOCOCOS
-#define ENABLE_COCOS
-#define COCOS_ENABLE_AIMED
-#endif
-
-#ifdef ENABLE_SHOOTIES
-#define ENABLE_COCOS
-#define COCOS_ENABLE_LINEAR
-#endif
-
-#ifdef ENABLE_EASY_OBJECTS
-#define HOTSPOTS_DYNAMIC
-#define CARRY_ONE_HS_OBJECT
-#endif
-
-#ifdef ENABLE_PROPELLERS
-#define PLAYER_CAN_FLOAT
-#endif
-
-#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
-#define NEEDS_INITIAL_DETECTION
-#endif
-
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
-#define ENEMIES_MAY_DIE
 #endif

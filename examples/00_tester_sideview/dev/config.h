@@ -1,8 +1,10 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
-#define TOP_ADJUST				4
-#define SPRITE_ADJUST			8*TOP_ADJUST - 8 - 16 - 1
+//#define GAME_AREA_TOP
+#define GAME_AREA_MIDDLE
+//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -61,6 +63,8 @@
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 #define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // Use the complex renderer if you need to post-process the map buffer before
@@ -147,6 +151,14 @@
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
 #define PROPELLER_TILE					14	// Tile # in map to detect a propeller
+
+// Killing tiles shine, beware!
+
+//#define ENABLE_SHINES
+#define SHINES_MAX 						8
+#define SHINES_BASE_PATTERN				10	// In the sprite bank, two patterns needed
+#define SHINES_PALETTE					3
+#define SHINING_TILE					23	// Tile # in map to add shines
 
 // Enemy types and definitions
 // ---------------------------
@@ -430,36 +442,4 @@
 	#define CELL_KICKING		9
 
 	#define CELL_CLIMB_CYCLE	20
-#endif
-
-// Inner workings. Don't touch.
-
-#define MONOCOCO_COUNTER 		_en_my
-#define MONOCOCO_STATE 			_en_mx
-
-#ifdef ENABLE_MONOCOCOS
-#define ENABLE_COCOS
-#define COCOS_ENABLE_AIMED
-#endif
-
-#ifdef ENABLE_SHOOTIES
-#define ENABLE_COCOS
-#define COCOS_ENABLE_LINEAR
-#endif
-
-#ifdef ENABLE_EASY_OBJECTS
-#define HOTSPOTS_DYNAMIC
-#define CARRY_ONE_HS_OBJECT
-#endif
-
-#ifdef ENABLE_PROPELLERS
-#define PLAYER_CAN_FLOAT
-#endif
-
-#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
-#define NEEDS_INITIAL_DETECTION
-#endif
-
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
-#define ENEMIES_MAY_DIE
 #endif

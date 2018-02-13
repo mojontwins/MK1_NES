@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Uses neslib and related tools by Shiru
 
@@ -17,6 +17,7 @@
 
 #include "definitions.h"
 #include "config.h"
+#include "autodefs.h"
 
 // **************
 // * const data *
@@ -67,11 +68,14 @@ extern const unsigned char m_gameover [];
 	#include "engine/bolts.h"
 #endif
 #ifdef ENABLE_BREAKABLE
-#include "engine/breakable.h"
+	#include "engine/breakable.h"
 #endif
 #include "engine/hotspots.h"
 #ifdef ENABLE_PROPELLERS
 	#include "engine/propellers.h"
+#endif
+#ifdef ENABLE_SHINES
+	#include "engine/shines.h"
 #endif
 #ifdef ENABLE_CONTAINERS
 	#include "engine/containers.h"
@@ -100,7 +104,7 @@ void main(void) {
 
 	credits ();
 
-	scroll (0, 8);
+	scroll (0, SCROLL_Y);
 	
 	// Main loop
 

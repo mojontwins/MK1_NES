@@ -4,8 +4,18 @@
 sub usage
 	Print "Usage:"
 	Print 
-	Print "$ eneexp3 enems.ene out.h prefix [yadjust] [nohotspots]"
+	Print "$ eneexp3 enems.ene out.h prefix [yadjust] [nohotspots] [gencounter] [genallcounters]"
 End Sub
+
+Function inCommand (a As String) As Integer
+	Dim As Integer i
+	i = 1
+	While (Command (i) <> "")
+		If Command (i) = a Then Return -1
+		i = i + 1
+	Wend
+	Return 0
+End Function
 
 Dim As Integer fIn, fOut
 Dim As uByte d, a, b
@@ -13,19 +23,23 @@ Dim As String Dummy, prefix
 Dim As Integer mapW, mapH, nEnems, mapPants, nPant, i, j, hl, yadjust, noHotspots
 Dim As uByte t, xy1, xy2, mn
 Dim As Integer typeCounters (255)
+Dim As Integer enemTypeCounters (255)
+Dim As Integer genCounter, genAllCounters
 
 Print "MK1 v1.0 eneexp3 ~ ";
 
 If Command (3) = "" Then usage: End
 prefix = Command (3)
 
-If (Command (4) <> "" And Command (4) <> "nohotspots") Or (Command (4) <> "" And Command (4) <> "nohotspots") Then yadjust = Val (Command (4)) Else yadjust = 0
-Print "yadjust = " & yadjust & " ~ ";
-If Command (4) = "nohotspots" Or Command (5) = "nohotspots" Then 
+yadjust = Val (Command (4))
+Print "yadjust: " & yadjust & " ~ ";
+If inCommand ("noHotspots") Then 
 	noHotspots = -1 : Print "No hotspots ~ "; 
 Else 
 	noHotspots = 0
 End If
+genCounter = inCommand ("gencounter")
+genAllCounters = inCommand ("genallcounters")
 
 ' Outputs 4 bytes per entry
 ' T for type
@@ -63,6 +77,7 @@ Print #fOut, "const unsigned char enems_" & prefix & " [] = {"
 hl = 0
 For i = 1 To (mapPants * nEnems)
 	Get #fIn, , t
+	enemTypeCounters (t) = enemTypeCounters (t) + 1
 	Get #fIn, , a: Get #fIn, , b: b = b + yadjust
 	xy1 = (b Shl 4) Or (a And 15)
 	Get #fIn, , a: Get #fIn, , b: b = b + yadjust
@@ -77,6 +92,18 @@ For i = 1 To (mapPants * nEnems)
 Next i
 Print #fOut, "};"
 Print #fOut, ""
+
+For i = 1 To 255
+	If enemTypeCounters (i) Or (i < 32 And genAllCounters) Then
+		print #fOut, "#define MAX_ENEMS_TYPE_" & i & "_" & prefix & " " & enemTypeCounters (i)
+	End If
+Next i
+Print #fOut, ""
+
+If genCounter Then
+	print #fOut, "#define KILLABLE_ENEMS_" & prefix & " " & (enemTypeCounters (1) + enemTypeCounters (2) + enemTypeCounters (3) + enemTypeCounters (12) + enemTypeCounters (13) +enemTypeCounters (14) + enemTypeCounters (15) + enemTypeCounters (16) + enemTypeCounters (17) + enemTypeCounters (18)  + enemTypeCounters (19) + enemTypeCounters (6) + enemTypeCounters (9) + enemTypeCounters (11) )
+	Print #fOut, ""
+End If
 
 Print " Enems: " & (mapPants * nEnems) & " (" & (mapPants * nEnems * 4) & " bytes) ~ ";
 

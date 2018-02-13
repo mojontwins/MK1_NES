@@ -1,10 +1,10 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Map detectors.
 // Detect tiles and modify map.
 
-// Intex in buffer is rdm. Current tile index is rdt
+// Index in buffer is rdm. Current tile index is rdt
 
 #ifdef ENABLE_PROPELLERS
 	// Detect propeller tile and make tiles above "floaty"
@@ -24,4 +24,8 @@
 			if (map_attr [rda]) break; else map_attr [rda] = 64;
 		}
 	}
+#endif
+
+#ifdef ENABLE_SHINES
+	if (rdt == SHINING_TILE) shines_add ();
 #endif

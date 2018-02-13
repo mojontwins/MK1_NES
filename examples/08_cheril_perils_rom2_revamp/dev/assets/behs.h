@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Tile behaviours
 
@@ -21,7 +21,7 @@
 
 const unsigned char behs0 [] = {
 	0, 0, 0, 0, 8, 8, 4, 8, 0, 0, 0, 0, 0, 8, 8,10,
-	0, 0, 0, 0, 0, 0, 0, 1, 8,48,49, 0, 0, 0, 0, 0
+	0, 0, 0, 0, 0, 0, 0, 1, 8,40,41, 0, 0, 0, 0, 0
 };
 
 // 68 = 4 + 64, slippery platform

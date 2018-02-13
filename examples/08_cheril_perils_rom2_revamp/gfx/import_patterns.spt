@@ -42,8 +42,8 @@ FILL 4096
 OPEN ss.png
 PALS palss0.png
 
-# Bits (numbers for countdown in resonators)
-CHARSET 0, 9, 10, 1
+# Bits (numbers for countdown in resonators and shines)
+CHARSET 0, 9, 12, 1
 
 # Metasprites will be stored in this file:
 MAPFILE ..\dev\assets\spritedata.h

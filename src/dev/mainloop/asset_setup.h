@@ -1,5 +1,5 @@
 // NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Rule of thumb: if you make a single level cart, all your assets
 // are level 0.
@@ -27,6 +27,8 @@
 	c_enems = 		l_enems [level];
 	c_hotspots = 	l_hotspots [level];	
 
+	c_max_enems = 	l_player_max_enems [level];
+	
 #else
 
 	c_pal_bg = 		palts0;
@@ -49,4 +51,10 @@
 	c_enems = 		enems_0;
 	c_hotspots = 	hotspots_0;
 	
+	#ifdef KILLABLE_ENEMS_0
+		c_max_enems = 	KILLABLE_ENEMS_0;
+	#else
+		c_max_enems = 	99;
+	#endif
+
 #endif
