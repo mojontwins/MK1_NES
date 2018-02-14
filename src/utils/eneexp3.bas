@@ -21,7 +21,7 @@ Dim As Integer fIn, fOut
 Dim As uByte d, a, b
 Dim As String Dummy, prefix
 Dim As Integer mapW, mapH, nEnems, mapPants, nPant, i, j, hl, yadjust, noHotspots
-Dim As uByte t, xy1, xy2, mn
+Dim As uByte t, xy1, xy2, mn, s1, s2
 Dim As Integer typeCounters (255)
 Dim As Integer enemTypeCounters (255)
 Dim As Integer genCounter, genAllCounters
@@ -77,13 +77,22 @@ Print #fOut, "const unsigned char enems_" & prefix & " [] = {"
 hl = 0
 For i = 1 To (mapPants * nEnems)
 	Get #fIn, , t
+
 	enemTypeCounters (t) = enemTypeCounters (t) + 1
 	Get #fIn, , a: Get #fIn, , b: b = b + yadjust
 	xy1 = (b Shl 4) Or (a And 15)
 	Get #fIn, , a: Get #fIn, , b: b = b + yadjust
 	xy2 = (b Shl 4) Or (a And 15)
 	Get #fIn, , mn
-	Get #fIn, , d: Get #fIn, , d
+	Get #fIn, , s1: Get #fIn, , s2
+
+	'' Watch out for special cases
+	If t = &HFF Then
+		' Warpers.
+		' xy2 should be subst. by s1
+		xy2 = s1
+	End If
+
 	If hl = 0 Then Print #fOut, "	";
 	Print #fOut, "0x" & Hex (t, 2) & ", 0x" & Hex (xy1, 2) & ", 0x" & Hex (xy2, 2) & ", 0x" & Hex (mn, 2);
 	If i < (mapPants * nEnems) Then Print #fOut, ", ";
