@@ -11,6 +11,8 @@ unsigned char olife, okeys, oobjs, oammo, okilled;
 unsigned char use_ct, no_ct;
 unsigned char level, game_over, win_level;
 
+unsigned char c_max_enems;
+
 // Update list
 
 #define UPDATE_LIST_SIZE 32
@@ -115,13 +117,6 @@ unsigned char en_t [3], en_s [3], en_facing [3];
 
 unsigned char en_spr_id [3];
 
-// Baddies count. Properly fill this value!
-
-#ifdef PLAYER_KILLS_ENEMIES
-	unsigned char baddies_count;
-	#define BADDIES_COUNT baddies_count
-#endif
-
 // Make enemies persistent
 
 #ifdef PERSISTENT_ENEMIES
@@ -158,6 +153,12 @@ unsigned char en_spr_id [3];
 	unsigned char shine_active_x, shine_active_y;
 	unsigned char shines [SHINES_MAX];
 	unsigned char shine_active_ct;
+#endif
+
+// Resonators
+
+#ifdef ENABLE_RESONATORS
+	unsigned char res_on, res_ct, res_subct;
 #endif
 
 #include "my/extra_vars.h"

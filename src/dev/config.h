@@ -161,7 +161,7 @@
 
 // Resonators. Not sure if you need this, but.
 
-#define ENABLE_RESONATORS
+//#define ENABLE_RESONATORS
 #define RESONATOR_BASE_PATTERN			0
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4

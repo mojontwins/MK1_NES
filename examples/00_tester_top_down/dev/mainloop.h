@@ -24,10 +24,10 @@ void game_init (void) {
 #ifndef DEACTIVATE_KEYS		
 	bolts_load ();
 #endif		
-	player_init ();
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
 	py = (PLAYER_INI_Y << 4) << FIXBITS;
-	
+	player_init ();
+		
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
@@ -42,8 +42,13 @@ void game_init (void) {
 #ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
 #endif
+
 #ifndef DEACTIVATE_KEYS	
 	pkeys = 0;
+#endif
+
+#ifdef ENABLE_RESONATORS
+	res_on = 0;
 #endif
 
 	half_life = 0;
@@ -239,6 +244,10 @@ void game_loop (void) {
 
 #ifdef ENABLE_PROPELLERS
 		propellers_do ();
+#endif
+
+#ifdef ENABLE_RESONATORS
+		#include "mainloop/resonators.h"
 #endif
 
 		#include "mainloop/hotspots.h"

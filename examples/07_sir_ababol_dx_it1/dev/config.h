@@ -161,6 +161,14 @@
 #define SHINES_PALETTE					3
 #define SHINING_TILE					23	// Tile # in map to add shines
 
+// Resonators. Not sure if you need this, but.
+
+//#define ENABLE_RESONATORS
+#define RESONATOR_BASE_PATTERN			0
+#define RESONATOR_PALETTE				3
+#define RESONATOR_COUNTER_OFFS_X		4
+#define RESONATOR_COUNTER_OFFS_Y		7
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -170,10 +178,15 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
+#define ENEMS_TOUCHED_FRAMES			16	// # frames to stay frozen after hit
+
 //#define ENEMS_ENABLE_DYING_FRAME
+
 #define ENEMS_EXPLODING_CELL 			32
-#define ENEMS_OCCLUDING_FRAME			16 // If you use pezons or saws you need a flame for occlusion
-#define ENEMS_TOUCHED_FRAMES			16 // # frames to stay frozen after hit
+#define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
+
+#define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
+
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
@@ -400,6 +413,11 @@
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
 
+#define PLAYER_VY_LADDERS		96
+
+#define PLAYER_AY_FLOAT			16	
+#define PLAYER_VY_FLOAT_MAX		256
+
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -437,6 +455,9 @@
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
+
+	#define CELL_USE			6
+
 	#define CELL_SWIM_CYCLE		6
 
 	#define CELL_ASCENDING		5

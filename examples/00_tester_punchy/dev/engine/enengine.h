@@ -18,9 +18,6 @@
 		for (ep_it = 0; ep_it < 3 * MAP_SIZE; ep_it ++) {
 			// Skip t
 			rdt = *gp_gen ++; 
-			#ifdef BADDIES_COUNT
-				if (rdt && rdt != 4) BADDIES_COUNT ++;
-			#endif
 
 			// YX1
 			rda = *gp_gen ++;
@@ -211,6 +208,13 @@ void enems_load (void) {
 				#ifdef ENABLE_SAW
 					case 8:
 						// Saws
+						#ifdef PERSISTENT_ENEMIES
+							// Initialize position & direction from ROM
+							en_x [gpit] = en_x1 [gpit];
+							en_y [gpit] = en_y1 [gpit];
+							en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
+							en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+						#endif
 
 						// emerging sense
 						rda = ABS (en_mx [gpit]); if (!rda) rda = ABS (en_my [gpit]);
@@ -266,13 +270,14 @@ void enems_load (void) {
 				#endif					
 			}
 
-			#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
 				en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
 			#else
 				en_life [gpit] = ENEMIES_LIFE_GAUGE;
 			#endif
 			
 			en_cttouched [gpit] = 0;
+			en_spr_id [gpit] = en_s [gpit];
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			rdc ++;
@@ -368,7 +373,9 @@ void enems_move (void) {
 						oam_index, 
 						spr_enems [ENEMS_EXPLODING_CELL]
 					);
-					en_spr = en_spr_id [gpit];
+					#ifndef ENEMS_EXPLODING_CELLS_HIDES
+						en_spr = en_spr_id [gpit];
+					#endif
 				#endif
 			} 
 		#endif
@@ -385,78 +392,92 @@ void enems_move (void) {
 
 			// Means don't render (can/will be overwritten):
 			
-			switch (_en_t) {
-				case 1:
-				case 2:
-				case 3:
-				case 4:
-				#ifdef ENABLE_SHOOTIES
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-				#endif
-				#ifdef ENABLE_PUNCHIES
-					case 16:
-					case 17:
-					case 18:
-					case 19:
-				#endif
-					#include "engine/enemmods/enem_linear.h"
-					#ifdef ENABLE_SHOOTIES
-						#include "engine/enemmods/enem_shooty.h"
-					#endif				
-					#ifdef ENABLE_PUNCHIES
-						#include "engine/enemmods/enem_punchy.h"
+			#ifdef ENABLE_RESONATORS
+				if (res_on 
+					#ifdef ENABLE_SAW
+						&& _en_t != 8 
 					#endif
-					break;
-
-				#ifdef ENABLE_FANTY					
-					case 6:
-						#include "engine/enemmods/enem_fanty.h"
+					#ifdef ENABLE_CHAC_CHAC
+						&& _en_t != 10
+					#endif
+				) {
+					en_spr = en_spr_id [gpit];
+				} else
+			#endif
+			{
+				switch (_en_t) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					#ifdef ENABLE_SHOOTIES
+						case 12:
+						case 13:
+						case 14:
+						case 15:
+					#endif
+					#ifdef ENABLE_PUNCHIES
+						case 16:
+						case 17:
+						case 18:
+						case 19:
+					#endif
+						#include "engine/enemmods/enem_linear.h"
+						#ifdef ENABLE_SHOOTIES
+							#include "engine/enemmods/enem_shooty.h"
+						#endif				
+						#ifdef ENABLE_PUNCHIES
+							#include "engine/enemmods/enem_punchy.h"
+						#endif
 						break;
-				#endif
 
-				#ifdef ENABLE_HOMING_FANTY
-					case 6:
-						#include "engine/enemmods/enem_homing_fanty.h"
-						break;
-				#endif
+					#ifdef ENABLE_FANTY					
+						case 6:
+							#include "engine/enemmods/enem_fanty.h"
+							break;
+					#endif
 
-				#ifdef ENABLE_PURSUERS					
-					case 7:					
-						#include "engine/enemmods/enem_pursuers.h"
-						break;
-				#endif
+					#ifdef ENABLE_HOMING_FANTY
+						case 6:
+							#include "engine/enemmods/enem_homing_fanty.h"
+							break;
+					#endif
 
-				#ifdef ENABLE_SAW					
-					case 8:
-						#include "engine/enemmods/enem_saw.h"
-						break;
-				#endif		
+					#ifdef ENABLE_PURSUERS					
+						case 7:					
+							#include "engine/enemmods/enem_pursuers.h"
+							break;
+					#endif
 
-				#ifdef ENABLE_PEZONS
-					case 9:
-						#include "engine/enemmods/enem_pezon.h"
-						break;
-				#endif
+					#ifdef ENABLE_SAW					
+						case 8:
+							#include "engine/enemmods/enem_saw.h"
+							break;
+					#endif		
 
-				#ifdef ENABLE_CHAC_CHAC
-					case 10:
-						#include "engine/enemmods/enem_chac_chac.h"
-						break;
-				#endif
+					#ifdef ENABLE_PEZONS
+						case 9:
+							#include "engine/enemmods/enem_pezon.h"
+							break;
+					#endif
 
-				#ifdef ENABLE_MONOCOCOS
-					case 11:
-						#include "engine/enemmods/enem_monococo.h"
-						break;
-				#endif					
+					#ifdef ENABLE_CHAC_CHAC
+						case 10:
+							#include "engine/enemmods/enem_chac_chac.h"
+							break;
+					#endif
+
+					#ifdef ENABLE_MONOCOCOS
+						case 11:
+							#include "engine/enemmods/enem_monococo.h"
+							break;
+					#endif					
+				}
+
+				// Store corrent sprite frame as calculated
+				
+				en_spr_id [gpit] = en_spr;
 			}
-
-			// Store corrent sprite frame as calculated
-			
-			en_spr_id [gpit] = en_spr;
 
 			// Moving platforms
 
@@ -530,6 +551,9 @@ void enems_move (void) {
 						#ifdef PLAYER_SAFE_LANDING
 							if (_en_my < 0) _en_my = -_en_my;
 						#else
+							#ifdef ENABLE_RESONATORS
+								if (res_on)
+							#endif
 							enems_hit ();
 						#endif
 

@@ -272,6 +272,10 @@ void game_loop (void) {
 		propellers_do ();
 #endif
 
+#ifdef ENABLE_RESONATORS
+		#include "mainloop/resonators.h"
+#endif
+
 		#include "mainloop/hotspots.h"
 
 		player_move ();
@@ -290,6 +294,7 @@ void game_loop (void) {
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();
 #endif
+
 #ifdef ENABLE_SHINES
 		shines_do ();
 #endif

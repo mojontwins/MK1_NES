@@ -27,6 +27,8 @@
 	c_enems = 		l_enems [level];
 	c_hotspots = 	l_hotspots [level];	
 
+	c_max_enems = 	l_player_max_enems [level];
+	
 #else
 
 	c_pal_bg = 		palts0;
@@ -49,4 +51,10 @@
 	c_enems = 		enems_0;
 	c_hotspots = 	hotspots_0;
 	
+	#ifdef KILLABLE_ENEMS_0
+		c_max_enems = 	KILLABLE_ENEMS_0;
+	#else
+		c_max_enems = 	99;
+	#endif
+
 #endif

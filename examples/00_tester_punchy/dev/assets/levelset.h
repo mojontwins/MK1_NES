@@ -13,9 +13,13 @@ const unsigned char l_end_x [] = 				{ 3, 3 };
 const unsigned char l_end_y [] = 				{ 3, 3 };
 */
 
-// # of objects. (Comment if N/A)
+// # of objects. 
 
 const unsigned char l_player_max_objects [] =	{ MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_HOTSPOTS_TYPE_1_1*/ };
+
+// # of killable enemies 
+
+const unsigned char l_player_max_enems [] = 	{ KILLABLE_ENEMS_0, KILLABLE_ENEMS_1 };
 
 // Palettes
 

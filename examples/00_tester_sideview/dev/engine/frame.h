@@ -11,7 +11,7 @@ void hud_update (void) {
 #ifdef KILLED_X
 	if (okilled != pkilled) {
 		okilled = pkilled;
-		p_t (KILLED_X, KILLED_Y, baddies_count - pkilled);
+		p_t (KILLED_X, KILLED_Y, c_max_enems - pkilled);
 	}
 #endif
 

@@ -158,6 +158,14 @@
 #define SHINES_PALETTE					3
 #define SHINING_TILE					23	// Tile # in map to add shines
 
+// Resonators. Not sure if you need this, but.
+
+//#define ENABLE_RESONATORS
+#define RESONATOR_BASE_PATTERN			0
+#define RESONATOR_PALETTE				3
+#define RESONATOR_COUNTER_OFFS_X		4
+#define RESONATOR_COUNTER_OFFS_Y		7
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -167,10 +175,15 @@
 #define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_ENABLE_DYING_FRAME
-#define ENEMS_EXPLODING_CELL 			32
-//#define ENEMS_OCCLUDING_CELL			16	// If you use pezons or saws you need a flame for occlusion
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+
+//#define ENEMS_ENABLE_DYING_FRAME
+
+#define ENEMS_EXPLODING_CELL 			32
+#define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
+
+#define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
+
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
