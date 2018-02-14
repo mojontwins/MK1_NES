@@ -85,11 +85,11 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
-#define SMALL_COLLISION            		// 8x8 centered collision instead of 12x12
+#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
 //#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
 // (Comment both for ol' good unforgiving collision)
 
@@ -168,6 +168,12 @@
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
+
+// Simple warpers. Put as 0xff type enemies.
+// Destination is attr:s1 (n_pant:YX).
+//#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID
+#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // Enemy types and definitions
 // ---------------------------
@@ -413,11 +419,6 @@
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
 
-#define PLAYER_VY_LADDERS		96
-
-#define PLAYER_AY_FLOAT			16	
-#define PLAYER_VY_FLOAT_MAX		256
-
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
@@ -453,15 +454,16 @@
 	#define CELL_FACING_LEFT	10
 
 	#define CELL_IDLE			0
+	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-
-	#define CELL_USE			6
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
 
 	#define CELL_SWIM_CYCLE		6
 
-	#define CELL_ASCENDING		5
-	#define CELL_DESCENDING		6
+	#define CELL_USE			6
+
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 

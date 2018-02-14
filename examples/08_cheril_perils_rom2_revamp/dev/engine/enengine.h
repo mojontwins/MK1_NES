@@ -267,7 +267,13 @@ void enems_load (void) {
 						en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
 						en_s [gpit] = MONOCOCO_BASE_SPRID;
 						break;
-				#endif					
+				#endif	
+
+				#ifdef ENABLE_SIMPLE_WARPERS
+					case 0xff:
+						en_mx [gpit] = rda;
+						break;
+				#endif				
 			}
 
 			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
@@ -471,13 +477,36 @@ void enems_move (void) {
 						case 11:
 							#include "engine/enemmods/enem_monococo.h"
 							break;
-					#endif					
+					#endif	
+
+					#ifdef ENABLE_SIMPLE_WARPERS
+						case 0xff:
+							en_spr = SIMPLE_WARPERS_BASE_SPRID;
+							break;
+					#endif
 				}
 
 				// Store corrent sprite frame as calculated
 				
 				en_spr_id [gpit] = en_spr;
 			}
+
+			// Warp player?
+
+			#ifdef ENABLE_SIMPLE_WARPERS
+				if (
+					_en_t == 0xff && 
+					collide (prx, pry, _en_x, _en_y)
+					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
+						&& (pad_this_frame & PAD_B)
+					#endif
+				) {
+					n_pant = _en_mx;
+					prx = (_en_y2 << 4); px = prx << FIXBITS;
+					pry = (_en_y2 & 0xf0); py = pry << FIXBITS;
+					break;
+				}
+			#endif
 
 			// Moving platforms
 

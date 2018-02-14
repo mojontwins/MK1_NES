@@ -54,7 +54,6 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
 
@@ -84,12 +83,12 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
-#define PLAYER_COLLISION_TOP		4   	// Player is 8x16, but this can make him "shorter" for collision
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
+#define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
-#define SMALL_COLLISION             	  	// 8x8 centered collision instead of 12x12
-//#define TALL_COLLISION					// 8x12 bottom collision instead of 12x12
+#define SMALL_COLLISION            		// 8x8 centered collision instead of 12x12
+//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
 // (Comment both for ol' good unforgiving collision)
 
 // General directives:
@@ -168,6 +167,12 @@
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
 
+// Simple warpers. Put as 0xff type enemies.
+// Destination is attr:s1 (n_pant:YX).
+//#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID
+#define SIMPLE_WARPERS_FIRE_BUTTON
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -199,7 +204,7 @@
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
-#define FANTY_LIFE_GAUGE				5
+#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
@@ -304,20 +309,21 @@
 
 // Shooting behaviour
 // ------------------
-#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
-#define PLAYER_BULLET_SPEED 	4		// Pixels/frame. 
-#define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET	0		// vertical offset from the player's top.
-#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-#define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
-#define PLAYER_MIN_KILLABLE 	1		// If defined, only enemies >= N can be killed.
 
-//#define MAX_AMMO				99		// If defined, ammo is not infinite!
-#define AMMO_REFILL				50		// use hotspots refill this amount of ammo
-//#define INITIAL_AMMO 			0		// If defined, ammo = X when entering game.
+#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+#define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
+#define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET			0	// vertical offset from the player's top.
+#define PLAYER_BULLET_X_OFFSET			0	// vertical offset from the player's left/right.
+#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
+#define PLAYER_MIN_KILLABLE 			1	// If defined, only enemies >= N can be killed.
 
-#define BULLET_PALETTE			3
-#define BULLET_PATTERN			0		// To paint the bullet. Can be an expresion.
+//#define MAX_AMMO						99	// If defined, ammo is not infinite!
+#define AMMO_REFILL						50	// use hotspots refill this amount of ammo
+//#define INITIAL_AMMO 					0	// If defined, ammo = X when entering game.
+
+#define BULLET_PALETTE					3
+#define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
 
 // Scripting
 // ---------
@@ -445,13 +451,16 @@
 	#define CELL_FACING_LEFT	8
 
 	#define CELL_IDLE			0
-	//#define CELL_WALK_INIT	1
+	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE		6
-
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
+
+	#define CELL_SWIM_CYCLE		6
+
+	#define CELL_USE			6
+
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 

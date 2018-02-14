@@ -13,7 +13,7 @@ const unsigned char l_end_x [] = 				{ 3, 3 };
 const unsigned char l_end_y [] = 				{ 3, 3 };
 */
 
-// # of objects. (Comment if N/A)
+// # of objects. 
 
 const unsigned char l_player_max_objects [] =	{ MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_HOTSPOTS_TYPE_1_1*/ };
 

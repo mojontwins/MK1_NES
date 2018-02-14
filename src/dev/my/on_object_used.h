@@ -4,4 +4,4 @@
 // Add here your code. An object has just been used.
 // You may add checks and set variables and stuff.
 
-// Player used object rba on hotspot rdb.
+// Player used object rda on hotspot rdb.

@@ -4,4 +4,4 @@
 // Add here your code. An object has just been got.
 // You may add checks and set variables and stuff.
 
-// Player got object rba.
+// Player got object rda.

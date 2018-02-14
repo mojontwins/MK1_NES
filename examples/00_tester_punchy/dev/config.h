@@ -54,7 +54,6 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
 
@@ -159,6 +158,20 @@
 #define SHINES_BASE_PATTERN				10	// In the sprite bank, two patterns needed
 #define SHINES_PALETTE					3
 #define SHINING_TILE					23	// Tile # in map to add shines
+
+// Resonators. Not sure if you need this, but.
+
+//#define ENABLE_RESONATORS
+#define RESONATOR_BASE_PATTERN			0
+#define RESONATOR_PALETTE				3
+#define RESONATOR_COUNTER_OFFS_X		4
+#define RESONATOR_COUNTER_OFFS_Y		7
+
+// Simple warpers. Put as 0xff type enemies.
+// Destination is attr:s1 (n_pant:YX).
+//#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID
+#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // Enemy types and definitions
 // ---------------------------
@@ -441,11 +454,14 @@
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		2
-	//#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE	6
-
+	#define CELL_AIRBORNE		5
 	#define CELL_ASCENDING		6
 	#define CELL_DESCENDING		7
+
+	#define CELL_SWIM_CYCLE		6
+
+	#define CELL_USE			6
+
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 

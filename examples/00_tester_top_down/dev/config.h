@@ -54,6 +54,7 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
+
 #define HOTSPOT_TYPE_AMMO		4
 
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
@@ -86,7 +87,7 @@
 #define PLAYER_COLLISION_TOP		8   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
-#define SMALL_COLLISION               	// 8x8 centered collision instead of 12x12
+#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
 //#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
 // (Comment both for ol' good unforgiving collision)
 
@@ -100,7 +101,7 @@
 #define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 //#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER					// Reenter screen on death
+//#define DIE_AND_REENTER				// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 #define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
@@ -166,6 +167,12 @@
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
 
+// Simple warpers. Put as 0xff type enemies.
+// Destination is attr:s1 (n_pant:YX).
+//#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID
+#define SIMPLE_WARPERS_FIRE_BUTTON
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -197,7 +204,7 @@
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
-#define FANTY_LIFE_GAUGE				5
+//#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
@@ -237,7 +244,7 @@
 
 // Monococos
 
-#define ENABLE_MONOCOCOS
+//#define ENABLE_MONOCOCOS
 //#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
 #define MONOCOCO_BASE_SPRID				56
 #define MONOCOCO_BASE_TIME_HIDDEN		150
@@ -446,10 +453,13 @@
 	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-	//#define CELL_SWIM_CYCLE		6
-
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
+
+	#define CELL_SWIM_CYCLE		6
+
+	#define CELL_USE			6
+
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 
