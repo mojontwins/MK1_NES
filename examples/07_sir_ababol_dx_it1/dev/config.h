@@ -175,6 +175,13 @@
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
 
+// No!
+
+//#define ENABLE_NO 
+#define NO_METASPRITE					ssit_06
+#define NO_OFFS_X						0
+#define NO_OFFS_Y						-24
+
 // Enemy types and definitions
 // ---------------------------
 

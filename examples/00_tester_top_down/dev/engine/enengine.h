@@ -606,8 +606,13 @@ void enems_move (void) {
 						enems_hit ();
 					#endif
 
-					pkill = 1;
-					touched = 1;
+					#ifdef ENABLE_RESONATORS
+						if (res_on == 0)
+					#endif
+					{
+						pkill = 1;
+						touched = 1;
+					}
 				}
 			}
 

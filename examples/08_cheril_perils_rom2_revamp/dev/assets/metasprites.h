@@ -15,9 +15,12 @@ const unsigned char * const spr_player [] = {
 	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
 	sspl_05_b,										// Airborne (offset 5)
 		
-	// Use animation
-	sspl_06_a, sspl_07_a, sspl_08_a, sspl_09_a,
-	sspl_0A_a, sspl_0B_a, sspl_0C_a
+	// Use animation (offset 12)
+	sspl_06_a, sspl_07_a, sspl_08_a, sspl_09_a,		// Up to down
+	sspl_0A_a, sspl_0B_a, 							// After this, *interact*
+	sspl_0B_a, sspl_0A_a, sspl_09_a, sspl_08_a,		// Down to up
+	sspl_07_a, sspl_06_a,
+	sspl_0C_a										// Final frame
 };
 
 // Enemy metasprites
@@ -45,6 +48,11 @@ const unsigned char * const spr_enems0 [] = {
 
 // Item metasprites
 // nothing, empty, key, refill, res_off, res_on
+// 6 onwards:
+// item 1, item 2, place 1, place 2, used 1, used 2
 const unsigned char * const spr_hs [] = {
-	0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
+	0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04,
+	sssit_00, sssit_03, 		// N
+	sssit_01, sssit_04, 		// N + HS_USE_OFFS
+	sssit_02, sssit_05			// N + 2*HS_USE_OFFS
 };

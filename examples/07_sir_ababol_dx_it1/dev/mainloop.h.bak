@@ -18,20 +18,40 @@ void game_init (void) {
 	draw_game_frame ();
 	//clean_gauge ();
 
+	// CUSTOM {
+	if (level_switching) {
+		n_pant = n_pant_switch; 
+	} else
+	// } END_OF_CUSTOM
 	n_pant = SCR_INI;
 	
 	hotspots_load ();
 #ifndef DEACTIVATE_KEYS		
 	bolts_load ();
 #endif		
+	player_init ();
+	// CUSTOM {
+	/*
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
 	py = (PLAYER_INI_Y << 4) << FIXBITS;
-	player_init ();
-		
+	*/
+	switch (level) {
+		case 0:
+			if (n_pant >= 20) {
+				pvy = -PLAYER_VY_FALLING_MAX;
+				py = 176 << FIXBITS;
+			}
+			break;
+		case 1:
+			pvy = PLAYER_VY_SWIM_MAX << 1;
+			py = 16 << FIXBITS;
+			break;
+	}
+	// } END_OF_CUSTOM
+
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
-
 #ifdef PERSISTENT_DEATHS
 	enems_persistent_deaths_load ();
 #endif
@@ -40,31 +60,16 @@ void game_init (void) {
 	msc_clear_flags ();
 #endif
 
+	// CUSTOM {
+	/*
 #ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
 #endif
-
 #ifndef DEACTIVATE_KEYS	
 	pkeys = 0;
 #endif
-
-#ifdef ENABLE_RESONATORS
-	res_on = 0;
-#endif
-
-#ifdef ENABLE_USE_ANIM
-	use_ct = 0;
-#endif
-
-#ifdef ENABLE_NO
-	no_ct = 0;
-#endif	
-
-#ifdef PROPELLERS_ON_BY_DEFAULT
-	propellers_on = 1;
-#else
-	propellers_on = 0;
-#endif
+	*/
+	// } END_OF_CUSTOM
 
 	half_life = 0;
 	frame_counter = 0;
@@ -118,9 +123,15 @@ void prepare_scr (void) {
 	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
 #endif
 
-#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
-	player_register_safe_spot ();
-#endif
+	// CUSTOM {
+	//#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
+	if (level == 1) {
+		// } END_OF_CUSTOM
+		player_register_safe_spot ();
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 #ifdef PLAYER_CAN_FIRE
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
@@ -258,7 +269,7 @@ void game_loop (void) {
 		}
 
 #ifdef ENABLE_PROPELLERS
-		if (propellers_on) propellers_do ();
+		propellers_do ();
 #endif
 
 #ifdef ENABLE_RESONATORS
@@ -270,7 +281,6 @@ void game_loop (void) {
 		player_move ();
 		player_render ();
 
-
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
 #endif
@@ -281,27 +291,12 @@ void game_loop (void) {
 	
 		enems_move ();
 
-		// Moved this here so they appear BEHIND the actors
-
-		if (hrt) hotspots_paint ();
-
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();
 #endif
 
 #ifdef ENABLE_SHINES
 		shines_do ();
-#endif
-
-#ifdef ENABLE_NO
-		if (no_ct) {
-			no_ct --;
-			oam_index = oam_meta_spr (
-				prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
-				oam_index,
-				NO_METASPRITE
-			);
-		}
 #endif
 
 		//#include "mainloop/cheat.h"

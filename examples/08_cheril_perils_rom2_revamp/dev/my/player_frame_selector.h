@@ -10,14 +10,18 @@
 
 // Todo: USE
 
-if (ppossee || pgotten) {
-	if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-		psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-	} else {
-		psprid = CELL_IDLE;
-	}
+if (use_ct) {
+	psprid = CELL_USE + use_ct - 1;
 } else {
-	psprid = CELL_AIRBORNE;
-}
+	if (ppossee || pgotten) {
+		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+		} else {
+			psprid = CELL_IDLE;
+		}
+	} else {
+		psprid = CELL_AIRBORNE;
+	}
 
-psprid += pfacing;
+	psprid += pfacing;
+}

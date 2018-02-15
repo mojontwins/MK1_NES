@@ -114,7 +114,7 @@ There are two types of behaviour: Type A and Type B. If you define `HS_TYPE_A`, 
 
 With type A, hotposts where you use objects are represented by the empty item, that is, `HS_OBJ_EMPTY`. When you use an object, the hotspot will use the objects's graphic.
 
-With type B, everything must have its own graphic: objects, place to use them, and objects used on places.
+With type B, everything must have its own graphic: objects, place to use them, and objects used on places. If object is item `N`, then where to use is `N + HS_USE_OFFS` and object used = `N + 2*HS_USE_OFFS`. Very important when define the `spr_it` array.
 
 Combine this with `WIN_LEVEL_CUSTOM`! if you define `WIN_LEVEL_CUSTOM`, the level with end as soon as you make `win_level = 1`.
 

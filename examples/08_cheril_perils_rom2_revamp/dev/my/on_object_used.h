@@ -6,3 +6,6 @@
 
 // Player used object rda on hotspot rdb.
 
+// If object 6 is placed on screen 9 -> enable propellers
+
+if (ht [9] == 6 + 2*HS_USE_OFFS) propellers_on = 1;

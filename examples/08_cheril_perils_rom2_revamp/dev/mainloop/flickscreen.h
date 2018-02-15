@@ -4,10 +4,22 @@
 // Change screen
 // Very basic. Extend when needed.
 
-if (prx == 4 && pvx < 0) {
+if (prx == 4 && 
+	#ifdef PLAYER_TOP_DOWN
+		pvx < 0
+	#else
+		(cfx + pvx) < 0
+	#endif
+) {
 	n_pant --;
 	px = 244 << FIXBITS;
-} else if (prx == 244 && pvx > 0) {
+} else if (prx == 244 && 
+	#ifdef PLAYER_TOP_DOWN
+		pvx > 0
+	#else
+		(cfx + pvx) > 0
+	#endif
+) {
 	n_pant ++;
 	px = 4 << FIXBITS;
 #ifdef PLAYER_TOP_DOWN				

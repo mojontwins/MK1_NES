@@ -84,7 +84,7 @@ unsigned char wall, hitv, hith;
 	unsigned char pfloating;
 #endif
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 	unsigned char pkilled;
 #endif
 

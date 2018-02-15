@@ -2074,7 +2074,7 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
 [X] Hacer funcionar resonadores.
 
-[ ] Hacer funcionar NO!.
+[X] Hacer funcionar NO!.
 
 [ ] Hacer "animación de activar hotspot"
 
@@ -2221,3 +2221,73 @@ Todo lo de arriba integra muy bien en el motor de Commandow porque los enemigos 
 
 Voy a empezar una implementación tentativa que luego ya revisaré si eso.
 
+20180215
+========
+
+Algo sencillo para empezar: "NO!" encima del personaje. Modificamos:
+
+- config.h 
+- mainloop.h
+
+Documentación en el README.md de Cheril Perils ROM2 Revamp.
+
+He corregido un bug, actualizar tambien enengine.h.
+
+La otra cosa es la "animación para activar hotspots", en otras palabras, es hacer estándar la animación de Goddess / Cave / etc en la que se interactúa con un container (todavía no) o con un hotspot pulsando FIRE y al final de una animación.
+
+Habría que modificar la interacción con los hotspots en mainloop.h y además introducir el ciclo de animación en player.h.
+
+Lo suyo es que:
+
+- Se detecta la colisión con el hotspot y se pulsa FIRE. Ojal, que esto mola porque si uso `b_button` ya desactivo un posible disparo en `player_move` que se llama después. Esto debería poner al jugador en modo animación.
+- Cuando se termina la animación y se muestra el último frame durante X tiempo, es cuando el hotspot debería funcionar!
+
+¿Cómo hago esto?
+
+La forma más fácil es así: 
+
+- La animación se controla con use_ct, un contador.
+- La colisión con el hotspot que hay ahora para interactuar con él se refuerza con una guarda: no funciona el hotspot a menos que use_ct tenga el valor que coincide con el último frame de animación (o un valor del "config").
+- Al detectar colisión con el hotspot con `use_ct == 0` y `b_button` se inicia la animación.
+
+lo suyo es lograr hacer todo esto configurable. Si uso un `use_sub_ct` como contador de frames antes del cambio de cada cell, guay. Si hago que el último frame sea configurable, guay. Y si hago que podamos configurar qué frame será el que dispare la interacción con el hotspot, más guay aún.
+
+El metasprite que se dibujará se calculará sumando `use_ct` a la constante que sea, eso ya es tarea del programador.
+
+La animación será lineal y por diseño el último frame se quedará 1 segundo.
+
+Mi animación es (el primer cell es con use_ct = 1, cuidado con esto!): 
+
+```
+	1 2 3 4 5 6 7 8 9 A B C D <- use_ct
+	0 1 2 3 4 5 5 4 3 2 1 0 6 <- frame
+```
+
+En mi caso la interacción es cuando `(use_ct == 7 && use_sub_ct == USE_ANIM_FRAMES)`. El número de frames es 0xD, de forma que al incrementar use_ct, cuando valga este valor, `use_sub_ct = 50`, y si al incrementarlo es mayor que ese valor, `use_ct = 0`. 
+
+Además, `use_ct` debe bloquear los controles, y la detección debe hacerse solo si ppossee (en el caso de vista lateral).
+
+~~
+
+Toco:
+
+- autodefs.h
+- config.h
+- mainloop.h
+- ram/bss.h
+- ram/zp.h
+- mainloop/hotspots.h
+- mainloop/flickscreen.h
+- mainloop/resonators.h
+- engine/player.h
+- engine/mapmods/map_detectors.h
+
+Otro ajuste, así que también:
+
+- engine/enengine.h
+
+Tengo que probar esto con los `SIMPLE_OBJECTS`. Debería funcionar pero mejor asegurarse. Se me ocurre que lo primero que tengamos que hacer sea encender los propellers, y para eso haya que llevar la llave de encendido a la máquina. Eso mola. 
+
+Cuando tenga esto hecho y probado, ya propago los cambios y sigo con lo siguiente.
+
+También he cambiado las constantes `ENEMIES_MAY_DIE` por `ENEMS_MAY_DIE` y `PLAYER_KILLS` por `PLAYER_STEPS_ON_ENEMS`, que son más claritas.

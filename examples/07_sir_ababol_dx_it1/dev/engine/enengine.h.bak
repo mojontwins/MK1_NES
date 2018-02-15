@@ -576,6 +576,9 @@ void enems_move (void) {
 						#ifdef ENABLE_SAW
 							&& _en_t != 8
 						#endif
+						// CUSTOM {
+							&& has_boots
+						// } END_OF_CUSTOM
 					) {
 						#ifdef PLAYER_SAFE_LANDING
 							if (_en_my < 0) _en_my = -_en_my;
@@ -606,13 +609,8 @@ void enems_move (void) {
 						enems_hit ();
 					#endif
 
-					#ifdef ENABLE_RESONATORS
-						if (res_on == 0)
-					#endif
-					{
-						pkill = 1;
-						touched = 1;
-					}
+					pkill = 1;
+					touched = 1;
 				}
 			}
 

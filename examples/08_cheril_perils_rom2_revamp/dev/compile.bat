@@ -5,7 +5,10 @@ if [%1]==[justcompile] goto :justcompile
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
-copy /b work\palts0.h + work\palss0.h assets\palettes.h > nul
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltsgrey.png out=work\paltsgrey.h label=paltsgrey silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palssgrey.png out=work\palssgrey.h label=palssgrey silent
+
+copy /b work\palts0.h + work\palss0.h + work\paltsgrey.h + work\palssgrey.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
@@ -37,5 +40,7 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 del *.o
 del game.s
+
+copy cart.nes ..\..\cheril_perils_revamp.nes
 
 echo DONE!

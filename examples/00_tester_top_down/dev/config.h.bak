@@ -1,8 +1,8 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
-//#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
+#define GAME_AREA_TOP
+//#define GAME_AREA_MIDDLE
 //#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
@@ -12,23 +12,23 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Map dimmensions in screens
+#define MAP_W 					1		//
+#define MAP_H					24		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_LIFE				10		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
+#define MULTI_LEVEL						// Comment for single level
 #define MAX_LEVELS				2
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			3		//
-	#define PLAYER_INI_Y			3		// Initial position
+	#define SCR_INI					23		// Initial screen
+	#define PLAYER_INI_X			12		//
+	#define PLAYER_INI_Y			8		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -55,13 +55,13 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 
-//#define HOTSPOT_TYPE_AMMO		4
+#define HOTSPOT_TYPE_AMMO		4
 
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
-//#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
+//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
@@ -84,7 +84,7 @@
 // -----------------
 
 //#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
-#define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
+#define PLAYER_COLLISION_TOP		8   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
 #define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
@@ -94,16 +94,16 @@
 // General directives:
 // -------------------
 
-//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
-//#define FIRE_TO_PUSH
+#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+#define FIRE_TO_PUSH
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-//#define PLAYER_BOUNCES
+#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
-#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+//#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
 //#define DIE_AND_REENTER				// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
@@ -115,20 +115,20 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE				// Breakable walls
+#define ENABLE_BREAKABLE				// Breakable walls
 #define BREAKABLE_LIFE	2				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
 #define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+#define BREAKABLE_ERASE			29		// Tile to erase broken tiles
+#define BREAKABLE_BREAKING		30		// Tile to display while breaking
 //#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
-//#define ENABLE_CONVEYORS
+#define ENABLE_CONVEYORS
 
 // Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4
@@ -173,20 +173,13 @@
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
 
-// No!
-
-//#define ENABLE_NO 
-#define NO_METASPRITE					ssit_06
-#define NO_OFFS_X						0
-#define NO_OFFS_Y						-24
-
 // Enemy types and definitions
 // ---------------------------
 
 #define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
-//#define ENEMS_FLICKER
+#define ENEMS_FLICKER
 
-//#define PERSISTENT_ENEMIES
+#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
@@ -221,7 +214,7 @@
 
 // Pursuers (for top-down)
 
-//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
+#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
 
@@ -316,7 +309,7 @@
 
 // Shooting behaviour
 // ------------------
-/*
+
 #define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
@@ -331,33 +324,31 @@
 
 #define BULLET_PALETTE					3
 #define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
-*/
 
 // Scripting
 // ---------
-/*
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
-#define SCRIPTING_TEXT_BOX
-#define FIRE_SCRIPT_WITH_ANIMATION		// So I don't have to make a custom for something 
+//#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
+//#define SCRIPTING_TEXT_BOX
+//#define FIRE_SCRIPT_WITH_ANIMATION	// So I don't have to make a custom for something 
 										// I will be reusing, most likely
-*/
+
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
-/*
+
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
-*/
+
 // Top view:
 // ---------
-/*
+
 #define PLAYER_TOP_DOWN            		// Enable top view.
 #define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
-*/
+
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -371,24 +362,24 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+#define LIFE_X					3		//
+#define LIFE_Y					29		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+#define OBJECTS_X				27		//
+#define OBJECTS_Y				29		// Objects counter character coordinates
 
-#define KEYS_X					28		//
-#define KEYS_Y					3		// Keys counter character coordinates
+#define KEYS_X					22		//
+#define KEYS_Y					29		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
 
-//#define AMMO_X				8		// 
-//#define AMMO_Y				2		// Ammo counter character coordinates
+#define AMMO_X					8		// 
+#define AMMO_Y					29		// Ammo counter character coordinates
 
 // Text
-//#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
-//#define LINE_OF_TEXT_X		1		// X coordinate.
+#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT_X			1		// X coordinate.
 
 //#define HS_INV_X				136		//
 //#define HS_INV_Y				11		// Object you are carrying
@@ -430,10 +421,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				24		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				32		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)

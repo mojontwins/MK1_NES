@@ -8,7 +8,12 @@
 unsigned char half_life, frame_counter;
 unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;
-unsigned char use_ct, no_ct;
+#ifdef ENABLE_USE_ANIM
+	unsigned char use_ct, use_sub_ct;
+#endif
+#ifdef ENABLE_NO
+	unsigned char no_ct;
+#endif
 unsigned char level, game_over, win_level;
 
 unsigned char c_max_enems;
@@ -144,6 +149,7 @@ unsigned char en_spr_id [3];
 #ifdef ENABLE_PROPELLERS
 	unsigned char prp_idx;
 	unsigned char prp_yx [PROPELLERS_MAX];
+	unsigned char propellers_on;
 #endif
 
 // Shines
@@ -159,6 +165,12 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_RESONATORS
 	unsigned char res_on, res_ct, res_subct;
+#endif
+
+// More conveyors
+
+#ifdef ENABLE_CONVEYORS
+	signed char cfx;
 #endif
 
 #include "my/extra_vars.h"

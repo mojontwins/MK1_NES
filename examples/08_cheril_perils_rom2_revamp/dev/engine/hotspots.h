@@ -18,29 +18,24 @@ void hotspots_load (void) {
 
 void hotspots_paint (void) {
 
-#if defined (CARRY_ONE_HS_OBJECT) && defined (HS_TYPE_A)
+#if defined (ENABLE_EASY_OBJECTS) && defined (HS_TYPE_A)
 	if (hrt >= HS_OBJ_MIN + 2*HS_USE_OFFS && hrt <= HS_OBJ_MAX + 2*HS_USE_OFFS) 
 		rda = hrt - 2*HS_USE_OFFS;
 	else if (hrt >= HS_OBJ_MIN + HS_USE_OFFS && hrt <= HS_OBJ_MAX + HS_USE_OFFS) 
 		rda = HS_OBJ_EMPTY;
 	else
-		rda = hrt;
 #endif
 
+	rda = hrt;
+
 #ifdef ENABLE_RESONATORS
-	rda = hrt + (hrt == HOTSPOT_TYPE_RESONATOR && res_on);
+	if (hrt == HOTSPOT_TYPE_RESONATOR && res_on) rda ++;
 #endif
 
 	oam_index = oam_meta_spr (
 		hrx, hry + SPRITE_ADJUST, 
 		oam_index, 
-		spr_hs [
-#if (defined (CARRY_ONE_HS_OBJECT) && defined (HS_TYPE_A)) || defined (ENABLE_RESONATORS)
-			rda
-#else
-			hrt
-#endif
-		]
+		spr_hs [rda]
 	);
 }
 

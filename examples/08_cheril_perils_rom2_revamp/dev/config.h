@@ -26,7 +26,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					20		// Initial screen
+	#define SCR_INI					18		// Initial screen
 	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -152,6 +152,7 @@
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
 #define PROPELLER_TILE					24	// Tile # in map to detect a propeller
+//#define PROPELLERS_ON_BY_DEFAULT			// Define so propellers are on by default
 
 // Killing tiles shine, beware!
 
@@ -168,12 +169,30 @@
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
+//#define RESONATOR_CHANGE_BG_PAL		paltsgrey	// Define to change pal for this palette
+#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
 
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
+
 //#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
+
+// No!
+
+#define ENABLE_NO 
+#define NO_METASPRITE					ssit_06
+#define NO_OFFS_X						0
+#define NO_OFFS_Y						-24
+
+// Use animation.
+// Note: When activated hotspots need b_button press and, in side view, possee.
+
+#define ENABLE_USE_ANIM
+#define USE_ANIM_MAX_FRAMES				13
+#define USE_ANIM_INTERACT_ON			7
+#define USE_ANIM_FRAMES_PER_STEP		4
 
 // Enemy types and definitions
 // ---------------------------
@@ -285,14 +304,14 @@
 // 'objects'. The user can carry one of those. Contents of hotspots
 // can change in this mode.
 
-//#define ENABLE_EASY_OBJECTS
+#define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY					4
-#define HS_OBJ_MIN						5
-#define HS_OBJ_MAX						6
+#define HS_OBJ_EMPTY					1
+#define HS_OBJ_MIN						6
+#define HS_OBJ_MAX						7
 #define HS_USE_OFFS						2
 
-#define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+//#define HS_TYPE_A 					// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 										// Otherwise, use its own graphics.
 #define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
@@ -355,7 +374,7 @@
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
@@ -365,16 +384,16 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					5		//
+#define LIFE_X					4		//
 #define LIFE_Y					4		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
 
-#define KEYS_X					16		//
+#define KEYS_X					12		//
 #define KEYS_Y					4		// Keys counter character coordinates
 
-#define KILLED_X				27		//
+#define KILLED_X				28		//
 #define KILLED_Y				4		// Kills counter character coordinates
 
 //#define AMMO_X				8		// 
@@ -384,8 +403,8 @@
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
 
-//#define HS_INV_X				136		//
-//#define HS_INV_Y				11		// Object you are carrying
+#define HS_INV_X				160		//
+#define HS_INV_Y				15		// Object you are carrying
 
 // ============================================================================
 // IV. Player movement configuration
@@ -430,7 +449,7 @@
 #define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
-#define PLAYER_VX_MIN (PLAYER_AX << 2)
+#define PLAYER_VX_MIN (PLAYER_AX << 3)
 
 #define PLAYER_V_REBOUND		224
 
@@ -461,7 +480,7 @@
 
 	#define CELL_SWIM_CYCLE		6
 
-	#define CELL_USE			6
+	#define CELL_USE			12
 
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9

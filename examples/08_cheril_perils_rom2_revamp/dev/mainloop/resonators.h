@@ -17,6 +17,16 @@ if (res_on) {
 	// Resonator logic
 	if (res_subct) res_subct --; else {
 		res_subct = 50;
-		if (res_ct) res_ct --; else res_on = 0;
+		if (res_ct) res_ct --; else {
+			res_on = 0;
+
+			#ifdef RESONATOR_CHANGE_BG_PAL
+				pal_bg (c_pal_bg);
+			#endif
+
+			#ifdef RESONATOR_CHANGE_SPR_PAL
+				pal_spr (c_pal_fg);
+			#endif
+		}
 	}
 }

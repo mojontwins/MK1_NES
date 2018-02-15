@@ -12,14 +12,14 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Map dimmensions in screens
+#define MAP_W 					20		//
+#define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
+#define MULTI_LEVEL						// Comment for single level
 #define MAX_LEVELS				2
 
 #ifndef MULTI_LEVEL
@@ -54,6 +54,8 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
+#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
 
 //#define HOTSPOT_TYPE_AMMO		4
 
@@ -69,7 +71,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -173,23 +175,16 @@
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
 
-// No!
-
-//#define ENABLE_NO 
-#define NO_METASPRITE					ssit_06
-#define NO_OFFS_X						0
-#define NO_OFFS_Y						-24
-
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMIES_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+#define ENEMS_TOUCHED_FRAMES			16	// # frames to stay frozen after hit
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
@@ -211,7 +206,7 @@
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
-//#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
+#define FANTY_LIFE_GAUGE				5
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
@@ -358,10 +353,10 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
@@ -417,7 +412,7 @@
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
 
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
-#define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
+#define PLAYER_VY_SWIM_MAX		48		// Swimming max. speed
 
 #define PLAYER_VY_LADDERS		96
 
@@ -430,10 +425,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
@@ -456,7 +451,7 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	10
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1

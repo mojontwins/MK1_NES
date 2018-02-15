@@ -12,22 +12,22 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Map dimmensions in screens
+#define MAP_W 					16		//
+#define MAP_H					1		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
 //#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				2
+#define MAX_LEVELS				1
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			3		//
+	#define SCR_INI					1		// Initial screen
+	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
@@ -69,7 +69,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -83,12 +83,12 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
+#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
 #define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
-#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
-//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
+//#define SMALL_COLLISION               // 8x8 centered collision instead of 12x12
+#define TALL_COLLISION					// 8x12 bottom collision instead of 12x12
 // (Comment both for ol' good unforgiving collision)
 
 // General directives:
@@ -96,12 +96,12 @@
 
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				// Reenter screen on death
+#define DIE_AND_REENTER					// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -115,13 +115,13 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE			1		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+#define BREAKABLE_MAX_FRAMES	16		// Frames to show explosion
 #define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+#define BREAKABLE_BREAKING		31		// Tile to display while breaking
 //#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
@@ -138,14 +138,14 @@
 
 // Ladders, beh == 32
 
-//#define ENABLE_LADDERS
+#define ENABLE_LADDERS
 
 // Extra special stuff
 // -------------------
 
 // Propellers
 
-//#define ENABLE_PROPELLERS
+#define ENABLE_PROPELLERS
 #define PROPELLERS_MAX 					4
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
@@ -173,23 +173,16 @@
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
 
-// No!
-
-//#define ENABLE_NO 
-#define NO_METASPRITE					ssit_06
-#define NO_OFFS_X						0
-#define NO_OFFS_Y						-24
-
 // Enemy types and definitions
 // ---------------------------
 
 #define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
-//#define ENEMS_FLICKER
+#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+#define ENEMS_TOUCHED_FRAMES			32	// # frames to stay frozen after hit
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
@@ -211,7 +204,7 @@
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
-//#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
+#define FANTY_LIFE_GAUGE				5
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
@@ -261,7 +254,7 @@
 
 // Shooties
 
-//#define ENABLE_SHOOTIES
+#define ENABLE_SHOOTIES
 #define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
@@ -269,7 +262,7 @@
 
 // Punchies
 
-//#define ENABLE_PUNCHIES
+#define ENABLE_PUNCHIES
 #define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
@@ -304,11 +297,11 @@
 
 // Silly Brawlers
 // --------------
-//#define PLAYER_PUNCHES				// When on floor
+#define PLAYER_PUNCHES					// When on floor
 #define PLAYER_PUNCH_OFFS_X				15
 #define PLAYER_PUNCH_OFFS_Y				-7
 
-//#define PLAYER_KICKS					// While airborne
+#define PLAYER_KICKS					// While airborne
 #define PLAYER_KICK_OFFS_X				12
 #define PLAYER_KICK_OFFS_Y				-3
 
@@ -456,14 +449,14 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	10
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
-	#define CELL_WALK_CYCLE		1
+	#define CELL_WALK_CYCLE		2
 	#define CELL_AIRBORNE		5
-	#define CELL_ASCENDING		5
-	#define CELL_DESCENDING		6
+	#define CELL_ASCENDING		6
+	#define CELL_DESCENDING		7
 
 	#define CELL_SWIM_CYCLE		6
 

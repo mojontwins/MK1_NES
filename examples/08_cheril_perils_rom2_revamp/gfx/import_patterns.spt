@@ -81,6 +81,11 @@ METASPRITE 8, 10, 2, 2, 0, 0
 LABEL ssit
 METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
 
+# Simple items
+# item 1, place 1, used 1, item 2, place 2, used 2
+LABEL sssit
+METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
+
 FILL 8192
 
 
