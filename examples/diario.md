@@ -2061,7 +2061,7 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
 [X] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
 
-[ ] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
+[/] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
 
 [X] Portar RLE53.
  
@@ -2076,7 +2076,7 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 
 [X] Hacer funcionar NO!.
 
-[ ] Hacer "animación de activar hotspot"
+[X] Hacer "animación de activar hotspot"
 
 **Tengo que actualiar todos los ejemplos a partir de src**
 
@@ -2291,3 +2291,39 @@ Tengo que probar esto con los `SIMPLE_OBJECTS`. Debería funcionar pero mejor as
 Cuando tenga esto hecho y probado, ya propago los cambios y sigo con lo siguiente.
 
 También he cambiado las constantes `ENEMIES_MAY_DIE` por `ENEMS_MAY_DIE` y `PLAYER_KILLS` por `PLAYER_STEPS_ON_ENEMS`, que son más claritas.
+
+20180216
+========
+
+Aún tengo que actualizar todos los cambios - pero antes tengo que ver porque creo que el caso de "tengo algo y lo quiero dejar en un sitio vacío" no parece funcionar. También debería probar el "tengo algo y lo quiero poner en un sitio donde hay algo - ¡se intercambia!", aunque eso irá *en este mismo juego*, así que puedo seguir y ya.
+
+Porque la fábrica será la fase 2. Para la fase 1 expandiré el nivel de Goddess de Spectrum, que no se ha usado nunca, y pondré los tres templos para abrir la parte donde están los últimos enemigos. Los templos tendrán cada uno un objeto mal puesto y habrá que reubicarlos. Pero tengo que pensar en un puzzle.
+
+¿Luna->Roca, Estrella->Luz, Mar->Pez? Nah. Es mierda. Ya se me ocurrirá.
+
+Ahora quiero meter algo que necesitaré: un `my/after_scr_draw.h` donde hacer modificaciones sobre la pantalla recién dibujada perow...
+
+Hum. 
+
+Esto se puede hacer ya en el tipo complejo dentro de `map_renderer_customization.h`.
+
+No sé muy bien qué hacer. Lo podría poner como requerimiento. Si quieres modificar la pantalla recién dibujada de forma manual como resultado de alguna acción, deberías usar el `map_renderer_customization.h`.
+
+También estaría bien probar / documentar que si en `on_object_got.h` u `on_object_used.h` necesitas recargar la pantalla no hay más que hacer `on_pant = 0xff`.
+
+Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplío:
+
+[ ] Mover config.h a /my
+
+[ ] Pasar a ASM las asignaciones arrays->variables y variables->arrays en el manejador de enemigos
+
+[ ] Springs
+
+[ ] Containers
+
+[/] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
+
+[ ] Revisar el funcionamiento de los hotspots en modo easy objects en el caso de "tengo fullería" y "hotspot vacío" -> "tengo nada" y "hotspot fullería".
+
+~~
+
