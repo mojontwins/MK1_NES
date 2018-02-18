@@ -561,7 +561,7 @@ void player_move (void) {
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
 		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 	#endif	
-	if (pstate != EST_PARP) if (phit) pkill = 1;
+	if (pstate != EST_PARP) if (phit) { prx = px >> FIXBITS; pry = py >> FIXBITS; pkill = 1; }
 
 	// **************
 	// B Button stuff
