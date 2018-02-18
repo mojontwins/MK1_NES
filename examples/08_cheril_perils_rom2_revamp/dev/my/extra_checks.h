@@ -11,3 +11,12 @@
 // Whenever you want to WIN the game just set win_level = 1
 
 win_level = (c_max_enems == pkilled);
+
+// Some palete cycling
+
+if (level == 0 && (frame_counter & 7) == 0 ) {
+	rda = pal_cycle [2];
+	pal_cycle [2] = pal_cycle [1];	pal_col (13, pal_cycle [2]);
+	pal_cycle [1] = pal_cycle [0];	pal_col (14, pal_cycle [1]);
+	pal_cycle [0] = rda;			pal_col (15, pal_cycle [0]);
+}

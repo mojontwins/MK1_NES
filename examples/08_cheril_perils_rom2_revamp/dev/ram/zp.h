@@ -66,7 +66,7 @@ unsigned char phit;
 signed int pgtmx, pgtmy;
 
 #if defined (ENABLE_EASY_OBJECTS)
-	unsigned char pinv;
+	unsigned char pinv, opinv;
 #endif
 
 #ifdef ENABLE_LADDERS
@@ -147,6 +147,8 @@ unsigned char hrx, hry, hrt;
 unsigned char ft;
 
 // Current level
+
+unsigned char c_map_w;
 
 const unsigned char *c_ts_pals;
 const unsigned char *c_ts_tmaps;

@@ -46,13 +46,51 @@ const unsigned char * const spr_enems0 [] = {
 	ssit_05
 };
 
+const unsigned char * const spr_enems1 [] = {
+	// Linear enems and platforms (ids 1-4)
+	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 1
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0, // 2
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0, // 3 (duplicated 2, won't use)
+	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0,	// Platform (4)
+
+	// Fanty (offset 32)
+	ssfanty_00_a, ssfanty_01_a, 0, 0, ssfanty_00_b, ssfanty_01_b, 0, 0,
+
+	// Saw (offset 40)
+	sssaw_00, sssaw_01,
+
+	// Occlusion (offset 42)
+	ssocl_00,
+
+	// Explosion (offset 43)
+	ssit_05
+};
+
+
 // Item metasprites
-// nothing, empty, key, refill, res_off, res_on
-// 6 onwards:
-// item 1, item 2, place 1, place 2, used 1, used 2
 const unsigned char * const spr_hs [] = {
+
+	// nothing, empty, key, refill, res_off, res_on	
 	0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04,
-	sssit_00, sssit_03, 		// N
-	sssit_01, sssit_04, 		// N + HS_USE_OFFS
-	sssit_02, sssit_05			// N + 2*HS_USE_OFFS
+
+	// 6 onwards:
+	// 	item 1,  item 2,  item 3,  item 4,  item 5,  0, 0, 0,
+	// 	place 1, place 2, 0,       0,       0,       0, 0, 0, 
+	// 	used 1,	 used 2,  0,       0,       0,       0, 0, 0
+	sssit_00, sssit_03, sssit_06, sssit_07, sssit_08, 0, 0, 0,	// N (total = 8)
+	sssit_01, sssit_04, 0, 0, 0, 0, 0, 0, 						// N + HS_USE_OFFS (N+8)
+	sssit_02, sssit_05, 0, 0, 0, 0, 0, 0 						// N + 2*HS_USE_OFFS (N+16)
+
+	//  6 = crank/key
+	//  7 = ?
+	//  8 = fork
+	//  9 = zurully
+	// 10 = key
+	// 11 = ?
+	// 12 = ?
+	// 13 = ?
+	// 14 = propellers starter
+	// 15 = ?
+	// 22 = propellers started + crank (used)
+	// 23 = ? + ? (used)
 };

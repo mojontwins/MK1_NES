@@ -30,7 +30,13 @@ MAPFILE ..\dev\assets\tiledata.h
 OPEN ts0.png
 PALS palts0.png
 LABEL ts0
-MAPPED 0, 0, 2, 2, 16, 2
+MAPPED 0, 0, 2, 2, 16, 3, 41
+
+# ts1
+OPEN ts1.png
+PALS palts1.png
+LABEL ts1
+MAPPED 0, 0, 2, 2, 16, 3, 41
 
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
@@ -55,10 +61,10 @@ LABEL sspl
 METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
 METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8 FLIPPED
 
-# Enemies. Linear enemies, only 2 kinds, 2x3.
+# Enemies. Linear enemies, only 2+2 kinds, 2x3.
 # Box is 16x16 centered bottom
 LABEL ssen
-METASPRITESET 0, 6, 2, 3, 4, 1, 0, -8 FLIPPED
+METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
 
 # Platforms. Two cells
 LABEL ssplat
@@ -85,6 +91,9 @@ METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
 # item 1, place 1, used 1, item 2, place 2, used 2
 LABEL sssit
 METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
+
+# item 3, item 4, item 5
+METASPRITESET 0, 16, 2, 2, 3, 1, 0, 0
 
 FILL 8192
 

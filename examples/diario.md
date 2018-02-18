@@ -2327,3 +2327,19 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 
 ~~
 
+20180118
+========
+
+Voy apuntando sonidos que necesitaría. Además  habría que mover a `#define SFX_*` los que hay.
+
+- Salto nuevo.
+- !floaty -> floaty (ffff).
+- pisar enemigo
+- activar resonador
+- cuenta atrás.
+- golpear con hitter.
+- golpear breakable.
+- breakable se rompe (al pisar o disparar).
+- enemigo lanza coco.
+- 
+

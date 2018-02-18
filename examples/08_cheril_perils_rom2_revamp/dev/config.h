@@ -19,7 +19,7 @@
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
+#define MULTI_LEVEL						// Comment for single level
 #define MAX_LEVELS				2
 
 #ifndef MULTI_LEVEL
@@ -114,7 +114,7 @@
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
 
-//#define ENABLE_QUICKSANDS
+#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
 //#define ENABLE_BREAKABLE				// Breakable walls
@@ -193,6 +193,10 @@
 #define USE_ANIM_MAX_FRAMES				13
 #define USE_ANIM_INTERACT_ON			7
 #define USE_ANIM_FRAMES_PER_STEP		4
+
+// Text boxes. If you need them, you call them
+
+#define ENABLE_TEXT_BOX
 
 // Enemy types and definitions
 // ---------------------------
@@ -308,8 +312,8 @@
 
 #define HS_OBJ_EMPTY					1
 #define HS_OBJ_MIN						6
-#define HS_OBJ_MAX						7
-#define HS_USE_OFFS						2
+#define HS_OBJ_MAX						13
+#define HS_USE_OFFS						8
 
 //#define HS_TYPE_A 					// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 										// Otherwise, use its own graphics.

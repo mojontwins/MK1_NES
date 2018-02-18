@@ -41,6 +41,8 @@ if (hrt) {
 			#endif
 			{
 				#ifdef CARRY_ONE_HS_OBJECT
+					opinv = pinv;
+
 					if (hrt == HS_OBJ_EMPTY) {
 						// Empty hotspot. Drop object
 
@@ -55,7 +57,7 @@ if (hrt) {
 							sfx_play (1, 1);
 						}
 
-					} if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX) {
+					} else if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX) {
 						// Object
 
 						#ifndef ENABLE_USE_ANIM
@@ -66,9 +68,6 @@ if (hrt) {
 							rda = hrt;
 							hrt = ht [n_pant] = pinv;
 							pinv = rda;
-
-							// Object has been got. You may complete here
-							#include "my/on_object_got.h"
 
 							b_button = 0;
 							sfx_play (2, 1);
@@ -162,7 +161,14 @@ if (hrt) {
 						hact [n_pant] = 0;
 					}
 				}
-			}
+
+				#ifdef CARRY_ONE_HS_OBJECT
+					if (opinv != pinv) {
+						// Object has been got. You may complete here
+						#include "my/on_object_got.h"
+					}
+				#endif
+			}		
 		}
 	}
 }

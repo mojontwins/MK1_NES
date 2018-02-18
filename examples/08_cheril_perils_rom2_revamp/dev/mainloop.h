@@ -72,6 +72,7 @@ void game_init (void) {
 	okilled = 0xff;
 
 	// n_pant = 2; pkeys = 1;
+	#include "my/extra_inits.h"
 }
 
 void prepare_scr (void) {
