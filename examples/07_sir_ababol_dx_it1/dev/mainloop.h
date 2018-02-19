@@ -85,10 +85,12 @@ void game_init (void) {
 	no_ct = 0;
 #endif	
 
-#ifdef PROPELLERS_ON_BY_DEFAULT
-	propellers_on = 1;
-#else
-	propellers_on = 0;
+#ifdef ENABLE_PROPELLERS
+	#ifdef PROPELLERS_ON_BY_DEFAULT
+		propellers_on = 1;
+	#else
+		propellers_on = 0;
+	#endif
 #endif
 
 	half_life = 0;

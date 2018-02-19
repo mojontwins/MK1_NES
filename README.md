@@ -9,7 +9,7 @@ The library was used in early 2014 and during 2015 to create several games, some
 
 The library was discontinued in early 2015 and was superseeded by the new **MT Engine MK2** which is currently non stable and in continuous development. It's not hard to get hold if you follow our releases ;-)
 
-I've decided to clean **MT Engine MK1 NES** and make it useable. I *might even write a tutorial*. This is old code, but it might be useful for somebody.
+I've decided to clean **MT Engine MK1 NES** up and make it useable - I've ended rewriting most of it, as always. I *might even write a tutorial*. This engine is easy and ready to use, and might be useful for somebody.
 
 **Notice: current code in /src may not work as it is being revised for a final v1.0. Use releases->tags for old working code. Watch for this notice to be removed**
 

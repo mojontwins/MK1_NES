@@ -2325,9 +2325,9 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 
 [/] Simple warpers.
 
-[ ] Revisar el funcionamiento de los hotspots en modo easy objects en el caso de "tengo fullería" y "hotspot vacío" -> "tengo nada" y "hotspot fullería".
+[X] Revisar el funcionamiento de los hotspots en modo easy objects en el caso de "tengo fullería" y "hotspot vacío" -> "tengo nada" y "hotspot fullería".
 
-[ ] Hacer que el contenido del array con los tiles del cuadro de texto sean offsets a un valor inicial #define en vez de ser valores fijos 0x20 a 0x28.
+[X] Hacer que el contenido del array con los tiles del cuadro de texto sean offsets a un valor inicial #define en vez de ser valores fijos 0x20 a 0x28.
 
 ~~
 
@@ -2352,3 +2352,10 @@ Voy apuntando sonidos que necesitaría. Además  habría que mover a `#define SF
 
 Creo que va siendo hora de que propague los cambios a /dev/src y los otros motores. Debería ser fácil porque con mi infraestructura sólo tengo que, en la mayoría de los casos, copiar carpetas enteras. Pero remember que tenemos archiva nueva en la oficina, que se llama Farala y es divina.
 
+~~
+
+Bueno, todo propagado. Voy a ver si puedo avanzar un poco en el "todo" dentro del proyecto de Cheril y tal.
+
+Tocando:
+config.h
+engine/textbox.h

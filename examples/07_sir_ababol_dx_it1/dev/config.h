@@ -195,7 +195,7 @@
 
 // Text boxes. If you need them, you call them
 
-//#define ENABLE_TEXT_BOX
+#define ENABLE_TEXT_BOX
 
 // Enemy types and definitions
 // ---------------------------
