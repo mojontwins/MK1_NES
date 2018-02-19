@@ -2315,7 +2315,7 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 
 [ ] Mover config.h a /my
 
-[ ] Pasar a ASM las asignaciones arrays->variables y variables->arrays en el manejador de enemigos
+[X] Pasar a ASM las asignaciones arrays->variables y variables->arrays en el manejador de enemigos
 
 [ ] Springs
 
@@ -2328,6 +2328,8 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 [X] Revisar el funcionamiento de los hotspots en modo easy objects en el caso de "tengo fullería" y "hotspot vacío" -> "tengo nada" y "hotspot fullería".
 
 [X] Hacer que el contenido del array con los tiles del cuadro de texto sean offsets a un valor inicial #define en vez de ser valores fijos 0x20 a 0x28.
+
+[ ] Quitar parámetros de las funciones de `printer.h`
 
 ~~
 
@@ -2360,6 +2362,8 @@ Tocando:
 config.h
 engine/textbox.h
 engine/enengine.h
+engine/printer.h
+engine/enemmods/enem_linear.h
 
 ~~
 
@@ -2376,7 +2380,7 @@ Es por el tema del 0.5, que lo tengo implementado de una forma muy de primero. S
 
 Nah, es muy parecido, pero permitía codificar enemigos de velocidades de medio, cuarto, octavo de pixel por frame.
 
-A ver, si levanto el bit 7, tendría el valor 129: 10000001. Ahora tengo:
+A ver, si levanto el bit 4, tendría el valor 17: 00010001. (el bit 7 es el que lleva el signo, por eso me voy a otro que "no moleste"). Ahora tengo:
 
 ```c
 	if (!en_status [gpit] || half_life) { }
@@ -2385,10 +2389,127 @@ A ver, si levanto el bit 7, tendría el valor 129: 10000001. Ahora tengo:
 Podría poner algo así como:
 
 ```c
-	if (!(_en_mx & 0x80) || half_life) {
-		_en_x += (_en_mx & 0x7f);
+	if (!(_en_mx & 0x10) || half_life) {
+		_en_x += (_en_mx & 0xef);
 	}
 ```
 
 Y eso luego me ahorra un montón de manejes ¿no? Puedo almacenar y recuparar siempre el valor de `_en_mx` directamente. ¡Voy a probar!
+
+AAAh - amigo, tengo problemos porque cuando se va a negativo es complemento a 2 y se me jode el bit. Estamos complicando las cosas por uno sitio para descomplicarlas en otro sitio. Eso no mola.
+
+Bah, lo dejo como estaba.
+
+~~
+
+Pero voy a intentar simplificarlo de otra manera, a ver si sale ...
+
+Sí sale. Ahora es todo menos cumbersome, y no se está continuamente haciendo y deshaciendo cálculos, al menos para los persistentes. Esto significa que puedo cambiar el almacenamiento de los enemigos para la persistencia a ensamblador y ahorrar unos ciclos. 
+
+El código origina que voy a cambiar es este:
+
+```s
+;
+; ep_x [ep_it] = en_x [gpit];
+;
+L268C:	lda     #<(_ep_x)
+	clc
+	adc     _ep_it
+	sta     ptr1
+	lda     #>(_ep_x)
+	adc     _ep_it+1
+	sta     ptr1+1
+	ldy     _gpit
+	lda     _en_x,y
+	ldy     #$00
+	sta     (ptr1),y
+;
+; ep_y [ep_it] = en_y [gpit];
+;
+	lda     #<(_ep_y)
+	clc
+	adc     _ep_it
+	sta     ptr1
+	lda     #>(_ep_y)
+	adc     _ep_it+1
+	sta     ptr1+1
+	ldy     _gpit
+	lda     _en_y,y
+	ldy     #$00
+	sta     (ptr1),y
+;
+; ep_mx [ep_it] = en_mx [gpit];// << (1 - en_status [gpit]);
+;
+	lda     #<(_ep_mx)
+	clc
+	adc     _ep_it
+	tay
+	lda     #>(_ep_mx)
+	adc     _ep_it+1
+	tax
+	tya
+	jsr     pushax
+	lda     #<(_en_mx)
+	ldx     #>(_en_mx)
+	clc
+	adc     _gpit
+	bcc     L1FA8
+	inx
+L1FA8:	ldy     #$00
+	jsr     ldaidx
+	jsr     staspidx
+;
+; ep_my [ep_it] = en_my [gpit];// << (1 - en_status [gpit]); 
+;
+	lda     #<(_ep_my)
+	clc
+	adc     _ep_it
+	tay
+	lda     #>(_ep_my)
+	adc     _ep_it+1
+	tax
+	tya
+	jsr     pushax
+	lda     #<(_en_my)
+	ldx     #>(_en_my)
+	clc
+	adc     _gpit
+	bcc     L1FAD
+	inx
+L1FAD:	ldy     #$00
+	jsr     ldaidx
+	jsr     staspidx
+```
+
+Sinceramente, no tengo ni idea de por qué la lía tan parda cuando tiene que hacer el cambio de signo. O por qué hace todas esas sumas. ¡Si los arrays son todos `unsigned char`!
+
+Aaah, ya sé. Es que ep_it es de 16 bits. Esto seguro que es por el tema de que con muchas pantallas me voy al carajo. Seguro que fue un cambio de por ahí en medio para un mapa grande, llámase el de Goddess...
+
+Veamos, si ep_it fuera de 8 bits, tendríamos que podría señalar 256/3 = 85 pantallas. ¿De verdad que no es suficiente? Hay algo que se me escapa. Voy a tirar de hemeroteca a ver... ¡Es que parece que siempre ha sido unsigned int!
+
+Hay algo que se me escapa. ¿De verdad no tenía bastante con 85 pantallas?
+
+¡No sé qué hacewr! Creo que 85 pantallas por nivel es más que suficiente.
+
+Voy a hacerlo unsigned char, qué hostias. O voy a mirar por si hay suerte y escribí algo en el diario de hace tres años... No hay nada. Pues lo pongo unsigned char a ver.
+
+Según miro, `ep_it` valdrá como máximo `3 * MAP_SIZE`. O sea, con `MAP_SIZE` <= 85, nos vale unsigned char.
+
+De hecho me fumo `ep_it` y lo cambio por `gpj`. Leo en el diario que antes había un conato de persistencia mierder cuando los enemigos llevaban el "formato antiguo", que no es más que el que tenían en Spectrum los juegos de Churrera (diseñado para RAM, con las cosas precalculadas). En ese caso sí que hacía falta un `ep_it` tocho, ya que creo que había hasta 8 bytes por enemigo y sabe dios como usaba el tema.
+
+~~
+
+Cambiado, y la actualización pasada a ASM. Con estos últimos cambios he ganado 150 bytes más. Joder, esto es un no parar. Antes de irme, sigo con cosas fáciles. Voy a ver alguna inicialización que sea copia lineal de memoria o fill de memoria y lo cambio por llamadas a neslib.
+
+~~
+
+Estoy viendo que si desintercalara algunos formatos de datos todo sería más fácil para mí. Enemigos, hotspots... todo. Pero bueno, ponerse a hacer esos cambios de formato a estas alturas es complicado. Dejémoslo estar.
+
+Lo que sí podría hacer es tener unas variables en zp `_x, _y, _n` y fumarme un montón de parámetros de las funciones de `printer.h`. Lo meto en todo.
+
+~~ 
+
+Iremos poco a poco. La marca de espacio libre para empezar es de 146*64+42 = 9386 bytes en la ROM de Cherils. Voy a desparametrizar `upd_attr_table`, por ejemplo.
+
+Sólo con esa, que son DOS llamadas, he ahorrado más de 50 bytes. Haré las demás. Sólo puede ser WIN. Pero ahora no time.
 

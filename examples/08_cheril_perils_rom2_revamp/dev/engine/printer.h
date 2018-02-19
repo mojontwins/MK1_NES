@@ -19,17 +19,6 @@ void  fade_in (void) {
 		delay (fade_delay);
 	}	
 }
-/*
-void  fade_in_fast (void) {
-	pal_bright (2); delay (1);
-	pal_bright (4); delay (1);
-}
-
-void  fade_out_fast (void) {
-	pal_bright (2); delay (1);
-	pal_bright (0); delay (1);
-}
-*/
 
 // Clear update list
 void clear_update_list (void) {
@@ -56,19 +45,20 @@ void p_t (unsigned char x, unsigned char y, unsigned char n) {
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
 unsigned char attr_table [64];
 
-void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {
-	rdc = (x >> 2) + ((y >> 2) << 3);
-	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
+void upd_attr_table (void) {
+	rdc = (_x >> 2) + ((_y >> 2) << 3);
+	rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
 	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (c_ts_pals [tl] << (rdb << 1));
+	rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
 	attr_table [rdc] = rda;
 }
 
 void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	upd_attr_table (x, y, tl);
+	_x = x; _y = y; _t = tl;
+	upd_attr_table ();
 	
 	gp_tmap = c_ts_tmaps + (tl << 2);
-	gp_addr = ((y<<5) + x + 0x2000);
+	gp_addr = ((y << 5) + x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap++);
@@ -79,7 +69,8 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 }
 
 void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	upd_attr_table (x, y, tl);
+	_x = x; _y = y; _t = tl;
+	upd_attr_table ();
 	
 	gp_addr = 0x23c0 + rdc;
 	ul_putc (rda);

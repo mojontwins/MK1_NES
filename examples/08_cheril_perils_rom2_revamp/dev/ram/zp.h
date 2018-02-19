@@ -3,6 +3,10 @@
 
 // zp
 
+// Avoid parameters using these in critical functions.
+
+unsigned char _x, _y, _n, _t;
+
 // General, all-purpose variables
 
 unsigned char i, pad_this_frame, gpit, gpjt, gpitu, gpaux;

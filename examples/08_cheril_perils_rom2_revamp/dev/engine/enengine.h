@@ -15,14 +15,14 @@
 #ifdef PERSISTENT_ENEMIES
 	void enems_persistent_load (void) {
 		gp_gen = (unsigned char *) (c_enems);
-		for (ep_it = 0; ep_it < 3 * MAP_SIZE; ep_it ++) {
+		for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
 			// Skip t
 			rdt = *gp_gen ++; 
 
 			// YX1
 			rda = *gp_gen ++;
-			ep_y [ep_it] = rda & 0xf0;
-			ep_x [ep_it] = rda << 4;
+			ep_y [gpjt] = rda & 0xf0;
+			ep_x [gpjt] = rda << 4;
 
 			// YX2
 			rda = *gp_gen ++;
@@ -31,20 +31,32 @@
 
 			// P, here used for speed
 			rda = *gp_gen ++;
-			ep_mx [ep_it] = ADD_SIGN2 (rdb, ep_x [ep_it], rda);
-			ep_my [ep_it] = ADD_SIGN2 (rdc, ep_y [ep_it], rda);		
+			if (rda > 1) rda >>= 1;	// Store converted!
+			ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
+			ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
 		}
 	}
 
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
-			ep_it = on_pant + on_pant + on_pant;
+			gpjt = on_pant + on_pant + on_pant;
 			for (gpit = 0; gpit < 3; gpit ++) {
-				ep_x [ep_it] = en_x [gpit];
-				ep_y [ep_it] = en_y [gpit];
-				ep_mx [ep_it] = en_mx [gpit] << (1 - en_status [gpit]);
-				ep_my [ep_it] = en_my [gpit] << (1 - en_status [gpit]);	
-				ep_it ++;		
+				__asm__ ("ldx %v", gpit);
+				__asm__ ("ldy %v", gpjt);
+
+				__asm__ ("lda %v,x", en_x);
+				__asm__ ("sta %v,y", ep_x);
+
+				__asm__ ("lda %v,x", en_y);
+				__asm__ ("sta %v,y", ep_y);
+
+				__asm__ ("lda %v,x", en_mx);
+				__asm__ ("sta %v,y", ep_mx);
+
+				__asm__ ("lda %v,x", en_my);
+				__asm__ ("sta %v,y", ep_my);
+
+				gpjt ++;		
 			}	
 		}
 	}
@@ -107,14 +119,10 @@ void enems_load (void) {
 				// Copy position & direction from ep_*
 				en_x [gpit] = ep_x [rdc];
 				en_y [gpit] = ep_y [rdc];
-				en_mx [gpit] = ep_mx [rdc];
-				en_my [gpit] = ep_my [rdc];
 			#else
 				// Initialize position & direction from ROM
 				en_x [gpit] = en_x1 [gpit];
 				en_y [gpit] = en_y1 [gpit];
-				en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
-				en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
 			#endif
 
 			switch (en_t [gpit]) {
@@ -154,13 +162,24 @@ void enems_load (void) {
 						en_s [gpit] = (en_t [gpit] - 1) << 3;
 					}
 
+					#ifdef PERSISTENT_ENEMIES
+						en_mx [gpit] = ep_mx [rdc];
+						en_my [gpit] = ep_my [rdc];
+					#else
+						en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
+						en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+					#endif
+
 					// HL conversion		
+
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
 						en_status [gpit] = 0;
-						en_mx [gpit] >>= 1;
-						en_my [gpit] >>= 1;
+						#ifndef PERSISTENT_ENEMIES
+							en_mx [gpit] >>= 1;
+							en_my [gpit] >>= 1;
+						#endif
 					}
 
 					// Fix limits so 1 < 2 always.

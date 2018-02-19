@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"PERSISTEN",
+				"PERSISTENT_ENEMIES"
+			],
+			[
+				"PERSISTE",
+				"PERSISTENT_ENEMIES"
+			],
+			[
 				"l_max",
 				"l_player_max_enems\t(levelset.h)"
 			],
@@ -224,10 +232,55 @@
 	"buffers":
 	[
 		{
-			"file": "README.md",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 2089,
+				"buffer_size": 17687,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/printer.h",
+			"settings":
+			{
+				"buffer_size": 3196,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
+			"settings":
+			{
+				"buffer_size": 3529,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_linear.h",
+			"settings":
+			{
+				"buffer_size": 1142,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/diario.md",
+			"settings":
+			{
+				"buffer_size": 93963,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
+			"settings":
+			{
+				"buffer_size": 3627,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -242,10 +295,19 @@
 			}
 		},
 		{
-			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/textbox.h",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 			"settings":
 			{
-				"buffer_size": 1922,
+				"buffer_size": 1794,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 1744,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -297,21 +359,21 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/assets",
-		"/D/git/MK1_NES/src/dev/engine",
-		"/D/git/MK1_NES/src/dev/engine/enemmods",
-		"/D/git/MK1_NES/src/utils"
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/cocos.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/textbox.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/examples/diario.md",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/config.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/engine/playermods/process_tile.h",
-		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/src/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/00_tester_top_down/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/00_tester_sideview/dev/assets/levelset.h",
@@ -327,7 +389,6 @@
 		"/D/git/MK1_NES/src/utils/eneexp3.bas",
 		"/D/git/MK1_NES/src/dev/engine/enemmods/enem_pursuers.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/asset_setup.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
@@ -335,7 +396,6 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/frame.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/enems0.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/hotspots.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/resonators.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
@@ -430,10 +490,7 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/my/game_frame.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/my/player_frame_selector.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/compile.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/cocos.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/gfx/import_patterns.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/assets/metasprites.h"
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/player.h"
 	],
 	"find":
 	{
@@ -444,6 +501,8 @@
 		"height": 135.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev",
 			"D:\\git\\MK1_NES\\src\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
 			"D:\\git\\MK1_NES\\examples",
@@ -492,6 +551,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_tl",
+			"(x|y|tl)",
+			"upd_attr_table",
+			"engine/printer.h",
+			"init",
+			"gpj",
+			"ep_it",
+			"enems_persistent_update",
+			"(%v)",
 			"0x2",
 			"en_y",
 			"_enx",
@@ -610,23 +678,18 @@
 			"mkts",
 			"next = ",
 			"next",
-			"ppo",
-			"º",
-			"ppodewwwr_",
-			"ppodewwwr",
-			"p_t",
-			"..\\utils\\",
-			"attr_table",
-			"m_",
-			"69",
-			"70"
+			"ppo"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"_\\1",
+			"gpjt",
+			"gpj",
+			"%v",
 			"0x0",
 			"_en_y",
 			"_en_x",
@@ -750,11 +813,7 @@
 			"\\a",
 			"T.A.R.D.I.S.",
 			"8<",
-			"EXTERN_E",
-			"k2t_code",
-			"k2t_i",
-			"k2t_y",
-			"k2t_x"
+			"EXTERN_E"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -765,24 +824,57 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "README.md",
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2089,
+						"buffer_size": 17687,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								874,
-								874
+								939,
+								939
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sftp_duplicate_views": 0,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/printer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1637,
+								1637
 							]
 						],
 						"settings":
@@ -790,23 +882,185 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 273.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2869,
+								2869
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1252.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_linear.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								191,
+								154
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 39.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 0,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16684,
+								16684
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"sftp_duplicate_views": 0,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9654.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "examples/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 93963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								93963,
+								93963
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 41858.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3627,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								155,
+								155
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "examples/08_cheril_perils_rom2_revamp/dev/config.h",
 					"semi_transient": false,
 					"settings":
@@ -818,8 +1072,8 @@
 						"selection":
 						[
 							[
-								6672,
-								6672
+								6994,
+								6994
 							]
 						],
 						"settings":
@@ -831,27 +1085,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1958.0,
+						"translation.y": 2279.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/textbox.h",
+					"buffer": 7,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1922,
+						"buffer_size": 1794,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1606,
-								1606
+								83,
+								83
 							]
 						],
 						"settings":
@@ -859,14 +1113,44 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1744,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1426,
+								1426
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -960,7 +1244,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
