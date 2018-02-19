@@ -36,6 +36,10 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+#ifdef ENABLE_TEXT_BOX
+	#include "assets/custom_texts.h"
+#endif
+
 #include "assets/frame_rle.h"
 #include "assets/title_rle.h"
 #include "assets/cuts_rle.h"
@@ -64,6 +68,9 @@ extern const unsigned char m_gameover [];
 #include "engine/prototypes.h"
 #include "engine/general.h"
 #include "engine/printer.h"
+#ifdef ENABLE_TEXT_BOX
+	#include "engine/textbox.h"
+#endif
 #ifndef DEACTIVATE_KEYS
 	#include "engine/bolts.h"
 #endif

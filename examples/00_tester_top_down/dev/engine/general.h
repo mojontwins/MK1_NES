@@ -40,7 +40,7 @@ unsigned char collide_in (x0, y0, x1, y1) {
 
 unsigned char collide (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {
 #ifdef SMALL_COLLISION
-	return (x1 + 5 >= x2 && x1 <= x2 + 13 && y1 + 13 >= y2 && y1 <= y2 + 13);
+	return (x1 + 5 >= x2 && x1 <= x2 + 13 && y1 + 13 >= y2 && y1 <= y2 + 13 + PLAYER_COLLISION_TOP);
 #elif defined (TALL_COLLISION)
 	return (x1 + 3 >= x2 && x1 <= x2 + 11 && y1 + 23 >= y2 && y1 <= y2 + 13);
 #else

@@ -96,6 +96,10 @@ void player_kill (void) {
 		pctstate = 16;	
 	#endif
 
+	#ifdef ENABLE_USE_ANIM
+		use_ct = 0;
+	#endif
+
 	#ifdef DIE_AND_RESPAWN
 		px = px_safe;
 		py = py_safe;
@@ -132,6 +136,19 @@ void player_move (void) {
 				pkicking = 0;
 			#endif
 			} else return;
+		}
+	#endif
+
+	#ifdef ENABLE_USE_ANIM
+		if (use_ct) {
+			if (use_sub_ct) use_sub_ct --; else {
+				if (use_ct < USE_ANIM_MAX_FRAMES) {
+					use_ct ++;
+					use_sub_ct = (use_ct == USE_ANIM_MAX_FRAMES) ? 50 : USE_ANIM_FRAMES_PER_STEP;
+				} else use_ct = 0;
+			}
+			// Invalidate pad input
+			i = 0;
 		}
 	#endif
 
@@ -330,7 +347,8 @@ void player_move (void) {
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
 	 		if (
-				pry + 4 < (cy1 << 4) &&
+				//pry + 4 < (cy1 << 4) &&
+				pry < ((cy1 - 1) << 4) + 4 && 
 				((at1 & 12) || (at2 & 12))
 			)
 	 		#endif
@@ -350,8 +368,9 @@ void player_move (void) {
 				#endif
 
 				#ifdef ENABLE_CONVEYORS
-					if (at1 & 32) { if (at1 & 1) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
-					if (at2 & 32) { if (at2 & 1) pgtmx = PLAYER_VX_CONVEYORS; else pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; }
+					cfx = 0;
+					if (at1 & 32) { if (at1 & 1) cfx = pgtmx = PLAYER_VX_CONVEYORS; else cfx = pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; } 
+					if (at2 & 32) { if (at2 & 1) cfx = pgtmx = PLAYER_VX_CONVEYORS; else cfx = pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; } 
 				#endif
 
 				#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_WALKABLE)
@@ -564,7 +583,7 @@ void player_move (void) {
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
 		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 	#endif	
-	if (pstate != EST_PARP) if (phit) pkill = 1;
+	if (pstate != EST_PARP) if (phit) { prx = px >> FIXBITS; pry = py >> FIXBITS; pkill = 1; }
 
 	// **************
 	// B Button stuff

@@ -31,6 +31,7 @@ void game_init (void) {
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
+
 #ifdef PERSISTENT_DEATHS
 	enems_persistent_deaths_load ();
 #endif
@@ -51,12 +52,29 @@ void game_init (void) {
 	res_on = 0;
 #endif
 
+#ifdef ENABLE_USE_ANIM
+	use_ct = 0;
+#endif
+
+#ifdef ENABLE_NO
+	no_ct = 0;
+#endif	
+
+#ifdef ENABLE_PROPELLERS
+	#ifdef PROPELLERS_ON_BY_DEFAULT
+		propellers_on = 1;
+	#else
+		propellers_on = 0;
+	#endif
+#endif
+
 	half_life = 0;
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
 	// n_pant = 2; pkeys = 1;
+	#include "my/extra_inits.h"
 }
 
 void prepare_scr (void) {
@@ -243,7 +261,7 @@ void game_loop (void) {
 		}
 
 #ifdef ENABLE_PROPELLERS
-		propellers_do ();
+		if (propellers_on) propellers_do ();
 #endif
 
 #ifdef ENABLE_RESONATORS
@@ -255,6 +273,7 @@ void game_loop (void) {
 		player_move ();
 		player_render ();
 
+
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();
 #endif
@@ -264,6 +283,10 @@ void game_loop (void) {
 #endif
 	
 		enems_move ();
+
+		// Moved this here so they appear BEHIND the actors
+
+		if (hrt) hotspots_paint ();
 
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();

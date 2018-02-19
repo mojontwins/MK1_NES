@@ -34,6 +34,9 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+#ifdef ENABLE_TEXT_BOX
+	#include "assets/custom_texts.h"
+#endif
 
 // Custom bgs
 #include "assets/bg0.h"
@@ -61,6 +64,9 @@ extern const unsigned char m_ingame [];
 #include "engine/prototypes.h"
 #include "engine/general.h"
 #include "engine/printer.h"
+#ifdef ENABLE_TEXT_BOX
+	#include "engine/textbox.h"
+#endif
 #ifndef DEACTIVATE_KEYS
 	#include "engine/bolts.h"
 #endif
@@ -106,7 +112,7 @@ void main(void) {
 		//title ();
 
 #ifdef MULTI_LEVEL		
-		level = 1;
+		level = 0;
 #endif
 		plife = PLAYER_LIFE;
 

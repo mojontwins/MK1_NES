@@ -40,7 +40,9 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			pkeys --;
 			sfx_play (1, 1);
 		} else {
-			no_ct = 100;
+			#ifdef ENABLE_NO
+				no_ct = 100;
+			#endif
 		}
 	#endif
 

@@ -10,7 +10,7 @@
 	// Detect propeller tile and make tiles above "floaty"
 	// stops on obstacles.
 
-	if (rdt == PROPELLER_TILE) {
+	if (rdt == PROPELLER_TILE && propellers_on) {
 		propellers_add ();
 		rda = rdm; 
 		#ifdef PROPELLERS_MAX_LENGTH

@@ -28,6 +28,8 @@
 	c_hotspots = 	l_hotspots [level];	
 
 	c_max_enems = 	l_player_max_enems [level];
+
+	c_map_w = 		l_map_w [level];
 	
 #else
 
@@ -56,5 +58,7 @@
 	#else
 		c_max_enems = 	99;
 	#endif
+
+	c_map_w = MAP_W;
 
 #endif

@@ -36,8 +36,9 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
-
-#include "assets/custom_texts.h"
+#ifdef ENABLE_TEXT_BOX
+	#include "assets/custom_texts.h"
+#endif
 
 // Music
 extern const unsigned char m_title [];
@@ -64,6 +65,9 @@ extern const unsigned char m_ending [];
 #include "engine/prototypes.h"
 #include "engine/general.h"
 #include "engine/printer.h"
+#ifdef ENABLE_TEXT_BOX
+	#include "engine/textbox.h"
+#endif
 #ifndef DEACTIVATE_KEYS
 	#include "engine/bolts.h"
 #endif
@@ -90,9 +94,6 @@ extern const unsigned char m_ending [];
 #ifdef ACTIVATE_SCRIPTING
 	#include "assets/mscnes.h"
 #endif
-// CUSTOM {
-	#include "engine/textbox.h"
-// } END_OF_CUSTOM
 #include "mainloop.h"
 
 // *************

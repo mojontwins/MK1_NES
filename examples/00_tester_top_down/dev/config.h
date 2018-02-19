@@ -13,11 +13,11 @@
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W 					1		//
-#define MAP_H					24		// Map dimmensions in screens
+#define MAP_H					24		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				10		// Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL			1		// Recarga de vida.
+#define PLAYER_LIFE				10		// Max / Initial life
+#define PLAYER_REFILL			1		// Life refill
 
 #define MULTI_LEVEL						// Comment for single level
 #define MAX_LEVELS				2
@@ -150,6 +150,7 @@
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
 #define PROPELLER_TILE					14	// Tile # in map to detect a propeller
+#define PROPELLERS_ON_BY_DEFAULT			// Define so propellers are on by default
 
 // Killing tiles shine, beware!
 
@@ -166,6 +167,8 @@
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
+//#define RESONATOR_CHANGE_BG_PAL		paltsgrey	// Define to change pal for this palette
+//#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
 
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
@@ -179,6 +182,18 @@
 #define NO_METASPRITE					ssit_06
 #define NO_OFFS_X						0
 #define NO_OFFS_Y						-24
+
+// Use animation.
+// Note: When activated hotspots need b_button press and, in side view, possee.
+
+//#define ENABLE_USE_ANIM
+#define USE_ANIM_MAX_FRAMES				13
+#define USE_ANIM_INTERACT_ON			7
+#define USE_ANIM_FRAMES_PER_STEP		4
+
+// Text boxes. If you need them, you call them
+
+//#define ENABLE_TEXT_BOX
 
 // Enemy types and definitions
 // ---------------------------

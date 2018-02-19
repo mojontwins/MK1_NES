@@ -29,8 +29,8 @@
 #define NEEDS_INITIAL_DETECTION
 #endif
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
-#define ENEMIES_MAY_DIE
+#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
+#define ENEMS_MAY_DIE
 #endif
 
 #ifdef GAME_AREA_TOP
@@ -54,3 +54,11 @@
 #endif
 
 #define SPRITE_ADJUST			8*TOP_ADJUST - SCROLL_Y - 16 - 1
+
+#if defined (SMALL_COLLISION) 
+	#define ENEMS_UPPER_COLLISION_BOUND 14
+#elif defined (TALL_COLLISION)
+	#define ENEMS_UPPER_COLLISION_BOUND 24
+#else
+	#define ENEMS_UPPER_COLLISION_BOUND 12
+#endif

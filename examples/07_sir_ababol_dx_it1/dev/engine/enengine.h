@@ -39,7 +39,7 @@
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
 			ep_it = on_pant + on_pant + on_pant;
-			gpit = 3; while (gpit --) {
+			for (gpit = 0; gpit < 3; gpit ++) {
 				ep_x [ep_it] = en_x [gpit];
 				ep_y [ep_it] = en_y [gpit];
 				ep_mx [ep_it] = en_mx [gpit] << (1 - en_status [gpit]);
@@ -70,17 +70,16 @@ void enems_load (void) {
 	
 	gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
 
-	// Notice that enemies are writen backwards. Take in account in the future
-
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 		en_offs = rdc = n_pant + n_pant + n_pant;// + 3;
 	#endif
 
-	gpit = 3; while (gpit --) {
+	//gpit = 3; while (gpit --) {
+	for (gpit = 0; gpit < 3; gpit ++) {
 		
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
-			if (!ep_flags [rdc] & 1) {
+			if (!(ep_flags [rdc] & 1)) {
 				en_t [gpit] = 0;
 				gp_gen += 4;
 			} else 
@@ -291,7 +290,7 @@ void enems_load (void) {
 	}
 }
 
-#ifdef ENEMIES_MAY_DIE
+#ifdef ENEMS_MAY_DIE
 	void enems_kill () {
 		_en_t = 0;
 
@@ -361,7 +360,7 @@ void enems_move (void) {
 
 		// "touched" state control
 
-		#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
+		#ifdef ENEMS_MAY_DIE
 			if (en_cttouched [gpit]) {
 				en_cttouched [gpit] --;
 				#ifdef ENEMS_FLICKER
@@ -405,6 +404,9 @@ void enems_move (void) {
 					#endif
 					#ifdef ENABLE_CHAC_CHAC
 						&& _en_t != 10
+					#endif
+					#ifndef PLAYER_TOP_DOWN
+						&& _en_t != 4
 					#endif
 				) {
 					en_spr = en_spr_id [gpit];
@@ -560,62 +562,68 @@ void enems_move (void) {
 
 			// Collide with player (includes step over enemy)
 
+			// Step over enemy?
+			#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_SAFE_LANDING))
+				if (
+					pregotten && pry < _en_y && pry + 15 > _en_y && pvy > 0 &&
+					pgotten == 0 &&	ppossee == 0
+					#ifdef PLAYER_MIN_KILLABLE
+						&& _en_t >= PLAYER_MIN_KILLABLE
+					#endif
+					#ifdef ENABLE_SAW
+						&& _en_t != 8
+					#endif
+					// CUSTOM {
+						&& has_boots
+					// } END_OF_CUSTOM
+				) {
+					#ifdef PLAYER_SAFE_LANDING
+						if (_en_my < 0) _en_my = -_en_my;
+					#else
+						#ifdef ENABLE_RESONATORS
+							if (res_on)
+						#endif
+						enems_hit ();
+					#endif
+
+					if (i & PAD_A) {
+						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+						sfx_play (7, 0);
+					} else {
+						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+					}
+
+					if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
+
+					touched = 1;
+				} else
+			#endif
+
 			if (
 				touched == 0 &&
 				pstate == EST_NORMAL &&
 				collide (prx, pry, _en_x, _en_y)
 			) {
-				// Step over enemy?
-				#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING))
+				#ifdef PLAYER_BOUNCES
+					pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+					pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+				#endif
+
+				#if defined ENEMIES_SUFFER_ON_PLAYER_COLLISION
+					enems_hit ();
+				#endif
+
+				#ifdef ENABLE_RESONATORS
 					if (
-						pregotten && pry < _en_y && pvy > 0 && 
-						pgotten == 0 &&	ppossee == 0
-						#ifdef PLAYER_MIN_KILLABLE
-							&& _en_t >= PLAYER_MIN_KILLABLE
-						#endif
+						res_on == 0 
 						#ifdef ENABLE_SAW
-							&& _en_t != 8
+						|| _en_t == 8
 						#endif
-						// CUSTOM {
-							&& has_boots
-						// } END_OF_CUSTOM
-					) {
-						#ifdef PLAYER_SAFE_LANDING
-							if (_en_my < 0) _en_my = -_en_my;
-						#else
-							#ifdef ENABLE_RESONATORS
-								if (res_on)
-							#endif
-							enems_hit ();
-						#endif
-
-						if (a_button) {
-							pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-							sfx_play (7, 0);
-						} else {
-							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-						}
-
-						touched = 1;
-					} else
+					)
 				#endif
 				{
-					#ifdef PLAYER_BOUNCES
-						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
-					#endif
-
-					#if defined ENEMIES_SUFFER_ON_PLAYER_COLLISION
-						enems_hit ();
-					#endif
-
-					#ifdef ENABLE_RESONATORS
-						if (res_on == 0)
-					#endif
-					{
-						pkill = 1;
-						touched = 1;
-					}
+					pkill = 1;
+					touched = 1;
 				}
 			}
 

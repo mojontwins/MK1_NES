@@ -29,12 +29,13 @@ void game_init (void) {
 #ifndef DEACTIVATE_KEYS		
 	bolts_load ();
 #endif		
-	player_init ();
 	// CUSTOM {
 	/*
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
 	py = (PLAYER_INI_Y << 4) << FIXBITS;
 	*/
+	player_init ();
+
 	switch (level) {
 		case 0:
 			if (n_pant >= 20) {
@@ -52,6 +53,7 @@ void game_init (void) {
 #ifdef PERSISTENT_ENEMIES
 	enems_persistent_load ();
 #endif		
+
 #ifdef PERSISTENT_DEATHS
 	enems_persistent_deaths_load ();
 #endif
@@ -71,12 +73,31 @@ void game_init (void) {
 	*/
 	// } END_OF_CUSTOM
 
+#ifdef ENABLE_RESONATORS
+	res_on = 0;
+#endif
+
+#ifdef ENABLE_USE_ANIM
+	use_ct = 0;
+#endif
+
+#ifdef ENABLE_NO
+	no_ct = 0;
+#endif	
+
+#ifdef PROPELLERS_ON_BY_DEFAULT
+	propellers_on = 1;
+#else
+	propellers_on = 0;
+#endif
+
 	half_life = 0;
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
 	// n_pant = 2; pkeys = 1;
+	#include "my/extra_inits.h"
 }
 
 void prepare_scr (void) {
@@ -126,8 +147,8 @@ void prepare_scr (void) {
 	// CUSTOM {
 	//#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
 	if (level == 1) {
-		// } END_OF_CUSTOM
-		player_register_safe_spot ();
+	// } END_OF_CUSTOM
+	player_register_safe_spot ();
 	// CUSTOM {
 	//#endif
 	}
@@ -269,7 +290,7 @@ void game_loop (void) {
 		}
 
 #ifdef ENABLE_PROPELLERS
-		propellers_do ();
+		if (propellers_on) propellers_do ();
 #endif
 
 #ifdef ENABLE_RESONATORS
@@ -290,6 +311,10 @@ void game_loop (void) {
 #endif
 	
 		enems_move ();
+
+		// Moved this here so they appear BEHIND the actors
+
+		if (hrt) hotspots_paint ();
 
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();

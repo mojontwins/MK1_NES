@@ -18,7 +18,7 @@ MAPFILE ..\dev\assets\tiledata.h
 OPEN ts0.png
 PALS palts0.png
 LABEL ts0
-MAPPED 0, 0, 2, 2, 16, 2, 29
+MAPPED 0, 0, 2, 2, 16, 3, 41
 
 # ts1
 OPEN ts1.png

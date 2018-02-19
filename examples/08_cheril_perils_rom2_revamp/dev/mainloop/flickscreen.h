@@ -5,7 +5,7 @@
 // Very basic. Extend when needed.
 
 if (prx == 4 && 
-	#ifdef PLAYER_TOP_DOWN
+	#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)
 		pvx < 0
 	#else
 		(cfx + pvx) < 0
@@ -14,7 +14,7 @@ if (prx == 4 &&
 	n_pant --;
 	px = 244 << FIXBITS;
 } else if (prx == 244 && 
-	#ifdef PLAYER_TOP_DOWN
+	#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)
 		pvx > 0
 	#else
 		(cfx + pvx) > 0

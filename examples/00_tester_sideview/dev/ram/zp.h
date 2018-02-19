@@ -66,7 +66,7 @@ unsigned char phit;
 signed int pgtmx, pgtmy;
 
 #if defined (ENABLE_EASY_OBJECTS)
-	unsigned char pinv;
+	unsigned char pinv, opinv;
 #endif
 
 #ifdef ENABLE_LADDERS
@@ -84,7 +84,7 @@ unsigned char wall, hitv, hith;
 	unsigned char pfloating;
 #endif
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 	unsigned char pkilled;
 #endif
 
@@ -147,6 +147,8 @@ unsigned char hrx, hry, hrt;
 unsigned char ft;
 
 // Current level
+
+unsigned char c_map_w;
 
 const unsigned char *c_ts_pals;
 const unsigned char *c_ts_tmaps;

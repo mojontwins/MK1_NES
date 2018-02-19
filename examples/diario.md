@@ -2323,11 +2323,15 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 
 [/] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
 
+[/] Simple warpers.
+
 [ ] Revisar el funcionamiento de los hotspots en modo easy objects en el caso de "tengo fullería" y "hotspot vacío" -> "tengo nada" y "hotspot fullería".
+
+[ ] Hacer que el contenido del array con los tiles del cuadro de texto sean offsets a un valor inicial #define en vez de ser valores fijos 0x20 a 0x28.
 
 ~~
 
-20180118
+20180218
 ========
 
 Voy apuntando sonidos que necesitaría. Además  habría que mover a `#define SFX_*` los que hay.
@@ -2342,4 +2346,9 @@ Voy apuntando sonidos que necesitaría. Además  habría que mover a `#define SF
 - breakable se rompe (al pisar o disparar).
 - enemigo lanza coco.
 - 
+
+20180219
+========
+
+Creo que va siendo hora de que propague los cambios a /dev/src y los otros motores. Debería ser fácil porque con mi infraestructura sólo tengo que, en la mayoría de los casos, copiar carpetas enteras. Pero remember que tenemos archiva nueva en la oficina, que se llama Farala y es divina.
 

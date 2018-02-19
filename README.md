@@ -13,6 +13,8 @@ I've decided to clean **MT Engine MK1 NES** and make it useable. I *might even w
 
 **Notice: current code in /src may not work as it is being revised for a final v1.0. Use releases->tags for old working code. Watch for this notice to be removed**
 
+Update 20180219: **v0.99 released, almost there, but there's still some stuff missing**
+
 Credits
 =======
 
