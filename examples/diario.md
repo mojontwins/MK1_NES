@@ -2359,3 +2359,36 @@ Bueno, todo propagado. Voy a ver si puedo avanzar un poco en el "todo" dentro de
 Tocando:
 config.h
 engine/textbox.h
+engine/enengine.h
+
+~~
+
+Textbox ajustado.
+
+Moviendo ahora a asm las asingaciones arrays->ZP y ZP->arrays del manejador de enemigos. Ciclos sé que ahorro, voy a ver cuantos bytes. Tampoco va a ser mucho, pero ahorrar una instrucción por asignación parace guay ¿no?
+
+Antes->   140*64+49 = 9009 bytes left
+Despues-> ha liberado 14+64+6 = 84 bytes. Joer, ¿srsly?
+
+Voy a probar suerte ahora con el persistent_update, por ejemplo... Va a ser que no, hay una paranoia de hacer y deshacer una cuenta que sinceramente no entiendo ¿no se podría hacer mejor? Creo que es para ahorrar algo.
+
+Es por el tema del 0.5, que lo tengo implementado de una forma muy de primero. Si es 0.5, `en_status = 1` y las velocidades son 1.  ¿De verdad esta es la mejor forma? Seguro que no. Creo que en pongpong tenía una forma mejor, voy a mirarla un momento.
+
+Nah, es muy parecido, pero permitía codificar enemigos de velocidades de medio, cuarto, octavo de pixel por frame.
+
+A ver, si levanto el bit 7, tendría el valor 129: 10000001. Ahora tengo:
+
+```c
+	if (!en_status [gpit] || half_life) { }
+```
+
+Podría poner algo así como:
+
+```c
+	if (!(_en_mx & 0x80) || half_life) {
+		_en_x += (_en_mx & 0x7f);
+	}
+```
+
+Y eso luego me ahorra un montón de manejes ¿no? Puedo almacenar y recuparar siempre el valor de `_en_mx` directamente. ¡Voy a probar!
+

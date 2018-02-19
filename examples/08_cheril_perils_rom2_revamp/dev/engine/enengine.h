@@ -341,19 +341,53 @@ void enems_move (void) {
 	gpjt = 3; while (gpjt --) {
 		gpit += 2; if (gpit > 2) gpit -=3;
 		
-		_en_t = en_t [gpit]; _en_s = en_s [gpit];
-		_en_x = en_x [gpit]; _en_y = en_y [gpit];
-		_en_x1 = en_x1 [gpit]; _en_y1 = en_y1 [gpit];
-		_en_x2 = en_x2 [gpit]; _en_y2 = en_y2 [gpit];
-		_en_mx = en_mx [gpit]; _en_my = en_my [gpit];
-		_en_ct = en_ct [gpit]; _en_facing = en_facing [gpit];
+		// Copy arrays -> temporal vars in ZP
+
+		__asm__ ("ldy %v", gpit);
+
+		__asm__ ("lda %v, y", en_t);
+		__asm__ ("sta %v", _en_t);
+
+		__asm__ ("lda %v, y", en_s);
+		__asm__ ("sta %v", _en_s);
+
+		__asm__ ("lda %v, y", en_x);
+		__asm__ ("sta %v", _en_x);
+
+		__asm__ ("lda %v, y", en_y);
+		__asm__ ("sta %v", _en_y);
+
+		__asm__ ("lda %v, y", en_x1);
+		__asm__ ("sta %v", _en_x1);
+
+		__asm__ ("lda %v, y", en_x2);
+		__asm__ ("sta %v", _en_x2);
+
+		__asm__ ("lda %v, y", en_y1);
+		__asm__ ("sta %v", _en_y1);
+
+		__asm__ ("lda %v, y", en_y2);
+		__asm__ ("sta %v", _en_y2);
+
+		__asm__ ("lda %v, y", en_mx);
+		__asm__ ("sta %v", _en_mx);
+
+		__asm__ ("lda %v, y", en_my);
+		__asm__ ("sta %v", _en_my);
+
+		__asm__ ("lda %v, y", en_ct);
+		__asm__ ("sta %v", _en_ct);
+
+		__asm__ ("lda %v, y", en_facing);
+		__asm__ ("sta %v", _en_facing);
+
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
 		#endif
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
-
+		
 		// Clear selected sprite
 
 		en_spr = 0xff;
@@ -686,12 +720,41 @@ skipdo:
 
 		// Update arrays
 
-		en_t [gpit] = _en_t;
-		en_x [gpit] = _en_x; en_y [gpit] = _en_y;
-		en_x1 [gpit] = _en_x1; en_y1 [gpit] = _en_y1;
-		en_x2 [gpit] = _en_x2; en_y2 [gpit] = _en_y2;
-		en_mx [gpit] = _en_mx; en_my [gpit] = _en_my;
-		en_ct [gpit] = _en_ct; en_facing [gpit] = _en_facing;
+		__asm__ ("ldy %v", gpit);
+
+		__asm__ ("lda %v", _en_t);
+		__asm__ ("sta %v, y", en_t);
+
+		__asm__ ("lda %v", _en_x);
+		__asm__ ("sta %v, y", en_x);
+
+		__asm__ ("lda %v", _en_y);
+		__asm__ ("sta %v, y", en_y);
+
+		__asm__ ("lda %v", _en_x1);
+		__asm__ ("sta %v, y", en_x1);
+
+		__asm__ ("lda %v", _en_x2);
+		__asm__ ("sta %v, y", en_x2);
+
+		__asm__ ("lda %v", _en_y1);
+		__asm__ ("sta %v, y", en_y1);
+
+		__asm__ ("lda %v", _en_y2);
+		__asm__ ("sta %v, y", en_y2);
+
+		__asm__ ("lda %v", _en_mx);
+		__asm__ ("sta %v, y", en_mx);
+
+		__asm__ ("lda %v", _en_my);
+		__asm__ ("sta %v, y", en_my);
+
+		__asm__ ("lda %v", _en_ct);
+		__asm__ ("sta %v, y", en_ct);
+
+		__asm__ ("lda %v", _en_facing);
+		__asm__ ("sta %v, y", en_facing);
+
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
 		#endif
