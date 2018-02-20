@@ -22,6 +22,8 @@
 #define MULTI_LEVEL						// Comment for single level
 #define MAX_LEVELS				2
 
+#define MAX_FLAGS 				2		// Keep it low if you don't need flags
+
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
@@ -57,7 +59,8 @@
 
 #define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
 
-//#define HOTSPOT_TYPE_AMMO		4
+//#define HOTSPOT_TYPE_AMMO		4		// For ammo refills
+#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -198,6 +201,16 @@
 
 #define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
+
+// Timer. 
+
+//#define ENABLE_TIMER
+#define TIMER_INITIAL					5
+//#define TIMER_START_ON
+#define TIMER_REFILL					0
+#define TIMER_RESET_ON_ENTER
+//#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
+//#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 
 // Enemy types and definitions
 // ---------------------------
@@ -404,12 +417,15 @@
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
+#define HS_INV_X				160		//
+#define HS_INV_Y				15		// Object you are carrying
+
+//#define TIMER_X				0		//
+//#define TIMER_Y				5		// Current timer value
+
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
-
-#define HS_INV_X				160		//
-#define HS_INV_Y				15		// Object you are carrying
 
 // ============================================================================
 // IV. Player movement configuration

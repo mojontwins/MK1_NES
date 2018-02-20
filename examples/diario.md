@@ -2144,7 +2144,7 @@ Justo antes de las plataformas, por ejemplo, hacemos la detección. Así podemos
 				&& (pad_this_frame & PAD_B)
 			#endif
 		) {
-			n_pant = _en_mx;
+			n_pant = _en_mx; on_pant = 0xff;
 			prx = (_en_y2 << 4); px = prx << FIXBITS;
 			pry = (_en_y2 & 0xf0); py = pry << FIXBITS;
 			break;
@@ -2329,7 +2329,7 @@ Así que nada, no voy a hacer nada. Bueno, sigo con el todo, lo recopio y amplí
 
 [X] Hacer que el contenido del array con los tiles del cuadro de texto sean offsets a un valor inicial #define en vez de ser valores fijos 0x20 a 0x28.
 
-[ ] Quitar parámetros de las funciones de `printer.h`
+[X] Quitar parámetros de las funciones de `printer.h`
 
 ~~
 
@@ -2567,3 +2567,65 @@ Veamos las ganancias totales (además de la velocidad):
 Está muy bien, en el caso peor (sideview incluye muchas cosas) ganar más de 1/3K nos da para muchas otras cosas, o incluso para lo ganado por lo servido (frente a la versión anterior, meter estas cosas sale "gratis"... ¡ah, la relatividad!).
 
 Y ahora es cuando debería empezar a hacer cosas más importantes como completar lo que falta o acabar los ejemplos.
+
+[ ] Mover config.h a /my <- esto lo dejo para el final, cuando deje de añadir cosas.
+
+[ ] Springs
+
+[ ] Containers
+
+[/] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
+
+[X] Simple warpers.
+
+Voy a probar el warper rápidamente y luego me pongo a integrar bien los enemigos programados.
+
+Tocando:
+
+```
+	mainloop.h
+	engine/enengine.h
+	engine/player.h
+	ram/bss.h
+```
+
+Se me olvidaba por completo que MK1/MK2 tenían un timer. Quizá sea el momento de integrarlo también :-S.
+
+```c 
+	#define ENABLE_TIMER
+	#define TIMER_INITIAL
+	#define TIMER_START_ON
+	#define TIMER_REFILL		10
+	#define TIMER_TIME_FLAG		0
+	#define TIMER_ZERO_FLAG 	1
+	#define TIMER_RESET_ON_ENTER
+	#define HOTSPOT_TYPE_TIME	5
+```
+
+Deberían ser más sencillos que en la churrera:
+
+- `timer` se establece a `TIMER_INITIAL` al empezar.
+- `timer` se decrementa cada segundo si `timer_on`.
+- `timer_on` vale 1 al principio si `TIMER_START_ON`.
+- Cuando `timer == 0` se levanta `timer_zero`, y entonces ya haces tú lo que necesites en `my/extra_checks`.
+- Si hay `HOTSPOT_TYPE_TIME`, se contempla este tipo de hotspots. Al coger un objeto time destos, se incrementa `timer` con `TIMER_REFILL`, o se establece a `TIMER_INITIAL` si `TIMER_REFILL` vale 0.
+
+[ ] Mover config.h a /my <- esto lo dejo para el final, cuando deje de añadir cosas.
+
+[ ] Springs
+
+[ ] Containers
+
+[ ] Terminar de integrar los enemigos programados de pantanow engine.
+
+[ ] Timers
+
+```
+	config.h
+	mainloop.h
+	mainloop/hotspots.h
+	mainloop/timer.h
+	engine/frame.h
+	ram/bss.h
+```
+

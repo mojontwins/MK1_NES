@@ -549,17 +549,30 @@ void enems_move (void) {
 			// Warp player?
 
 			#ifdef ENABLE_SIMPLE_WARPERS
-				if (
-					_en_t == 0xff && 
-					collide (prx, pry, _en_x, _en_y)
+				if (_en_t == 0xff) {
+					if (collide (prx, pry, _en_x, _en_y)
 					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
 						&& (pad_this_frame & PAD_B)
 					#endif
-				) {
-					n_pant = _en_mx;
-					prx = (_en_y2 << 4); px = prx << FIXBITS;
-					pry = (_en_y2 & 0xf0); py = pry << FIXBITS;
-					break;
+					) {
+						n_pant = _en_mx; on_pant = 0xff;
+						prx = _en_x2; px = prx << FIXBITS;
+						pry = _en_y2; py = pry << FIXBITS;
+
+						#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+							phitteract = 0;
+							#ifdef PLAYER_PUNCHES
+								ppunching = 0;
+							#endif
+							#ifdef PLAYER_KICKS
+								pkicking = 0;
+							#endif
+						#endif
+
+						b_button = 0;
+						break;
+					}
+					goto skipdo;
 				}
 			#endif
 

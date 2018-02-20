@@ -120,7 +120,8 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
-
+	if (pskip) { pskip = 0; goto player_justframe; }
+	
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
 			pfrozen --; 
@@ -636,7 +637,7 @@ void player_move (void) {
 	// **********
 	// Calc frame
 	// **********
-
+player_justframe:
 	#include "my/player_frame_selector.h"
 
 	prx_old = prx;

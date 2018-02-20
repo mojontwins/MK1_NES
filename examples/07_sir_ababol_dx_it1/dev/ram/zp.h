@@ -3,6 +3,10 @@
 
 // zp
 
+// Avoid parameters using these in critical functions.
+
+unsigned char _x, _y, _n, _t;
+
 // General, all-purpose variables
 
 unsigned char i, pad_this_frame, gpit, gpjt, gpitu, gpaux;
@@ -61,7 +65,7 @@ unsigned char a_button, b_button;
 
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
 unsigned char pushed_any;
-unsigned char pstate, pctstate;
+unsigned char pstate, pctstate, pskip;
 unsigned char phit;
 signed int pgtmx, pgtmy;
 

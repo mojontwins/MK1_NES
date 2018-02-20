@@ -65,7 +65,7 @@ unsigned char a_button, b_button;
 
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
 unsigned char pushed_any;
-unsigned char pstate, pctstate;
+unsigned char pstate, pctstate, pskip;
 unsigned char phit;
 signed int pgtmx, pgtmy;
 

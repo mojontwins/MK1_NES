@@ -154,6 +154,19 @@ if (hrt) {
 									pammo = MAX_AMMO;
 								break;
 						#endif
+						#if defined (ENABLE_TIMER) && defined (HOTSPOT_TYPE_TIME)
+							case HOTSPOT_TYPE_TIME:
+								rda = 2;
+								#if TIMER_REFILL == 0
+									timer = TIMER_INITIAL;
+								#else
+									if (TIMER_INITIAL - timer > TIMER_REFILL)
+										timer += TIMER_REFILL;
+									else
+										timer = TIMER_INITIAL;
+								#endif
+								break;
+						#endif
 					}
 					if (rda) {
 						sfx_play (rda, 1);

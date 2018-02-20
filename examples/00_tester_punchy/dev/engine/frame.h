@@ -51,4 +51,10 @@ void hud_update (void) {
 	);
 #endif
 
+#if defined (ENABLE_TIMER) && defined (TIMER_X)
+	if (otimer != timer) {
+		otimer = timer;
+		_x = TIMER_X; _y = TIMER_Y; _n = timer; p_t ();
+	}
+#endif
 }

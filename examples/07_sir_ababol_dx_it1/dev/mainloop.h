@@ -93,6 +93,20 @@ void game_init (void) {
 	#endif
 #endif
 
+#ifdef ENABLE_TIMER
+	#ifndef TIMER_RESET_ON_ENTER
+		timer = TIMER_INITIAL;
+		timer_frames = 50;
+		timer_zero = 0;
+		otimer = 0xff;
+	#endif
+	#ifdef TIMER_START_ON
+		timer_on = 1;
+	#else
+		timer_on = 0;
+	#endif
+#endif
+
 	half_life = 0;
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
@@ -177,6 +191,7 @@ void prepare_scr (void) {
 	phitteract = 0;
 #endif	
 
+	player_move ();
 	player_render ();
 	enems_move ();
 	if (hrt) hotspots_paint ();
@@ -191,6 +206,15 @@ void prepare_scr (void) {
 
 #ifdef ENABLE_CONTAINERS	
 	containers_draw ();
+#endif
+
+#ifdef ENABLE_TIMER
+	#ifdef TIMER_RESET_ON_ENTER
+		timer = TIMER_INITIAL;
+		timer_frames = 50;
+		timer_zero = 0;
+		otimer = 0xff;
+	#endif
 #endif
 
 	oam_hide_rest (oam_index);
@@ -229,6 +253,10 @@ void game_loop (void) {
 			prepare_scr ();
 			on_pant = n_pant;
 		}
+
+		#ifdef ENABLE_TIMER
+			#include "mainloop/timer.h"
+		#endif
 
 		hud_update ();
 
@@ -304,6 +332,7 @@ void game_loop (void) {
 
 		player_move ();
 		player_render ();
+
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();

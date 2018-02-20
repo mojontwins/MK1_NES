@@ -35,7 +35,7 @@ void fire_bullet (void) {
 				bmx [bi] = 0;
 				break;
 			case CELL_FACING_UP:
-				bx [bi] = prx + 8 - PLAYER_BULLET_X_OFFSET;
+				bx [bi] = prx - PLAYER_BULLET_X_OFFSET;
 				by [bi] = pry - 4;
 				bmy [bi] = -PLAYER_BULLET_SPEED;
 				bmx [bi] = 0;

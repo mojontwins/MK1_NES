@@ -90,10 +90,7 @@ unsigned char hact [MAP_SIZE];
 
 // Flags
 
-#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_CONTAINERS)
-	#define MAX_FLAGS 16
-	unsigned char flags [MAX_FLAGS];
-#endif
+unsigned char flags [MAX_FLAGS];
 
 #ifdef ENABLE_CONTAINERS
 	unsigned char upd_cont_index;
@@ -169,6 +166,12 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_CONVEYORS
 	signed char cfx;
+#endif
+
+// Timer
+
+#ifdef ENABLE_TIMER
+	unsigned char timer, otimer, timer_frames, timer_zero, timer_on;
 #endif
 
 #include "my/extra_vars.h"

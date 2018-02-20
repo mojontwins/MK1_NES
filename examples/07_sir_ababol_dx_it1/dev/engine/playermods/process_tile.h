@@ -20,8 +20,8 @@ void player_process_tile (at, x0, y0, x1, y1) {
 				map_attr [COORDS (x1, y1)] == 0
 			) {
 				sfx_play (1, 1);
-				map_set (x0, y0, 0);
-				map_set (x1, y1, 14);
+				_x = x0; _y = y0; _t = 0;  map_set ();
+				_x = x1; _y = y1; _t = 14; map_set ();
 			}	
 		}
 	#else
@@ -35,7 +35,7 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			at == 10 &&
 			pkeys
 		) {
-			map_set (x0, y0, 0);
+			_x = x0; _y = y0; _t = 0; map_set ();
 			clear_cerrojo (COORDS(x0, y0));
 			pkeys --;
 			sfx_play (1, 1);

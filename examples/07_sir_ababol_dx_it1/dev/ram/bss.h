@@ -90,10 +90,7 @@ unsigned char hact [MAP_SIZE];
 
 // Flags
 
-#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_CONTAINERS)
-	#define MAX_FLAGS 16
-	unsigned char flags [MAX_FLAGS];
-#endif
+unsigned char flags [MAX_FLAGS];
 
 #ifdef ENABLE_CONTAINERS
 	unsigned char upd_cont_index;
@@ -130,8 +127,6 @@ unsigned char en_spr_id [3];
 	unsigned char ep_y [3 * MAP_SIZE];
 	signed char ep_mx [3 * MAP_SIZE];
 	signed char ep_my [3 * MAP_SIZE];
-	//unsigned char ep_t [3 * MAP_W * MAP_H];
-	unsigned int ep_it;
 #endif
 
 #ifdef PERSISTENT_DEATHS
@@ -171,6 +166,12 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_CONVEYORS
 	signed char cfx;
+#endif
+
+// Timer
+
+#ifdef ENABLE_TIMER
+	unsigned char timer, otimer, timer_frames, timer_zero, timer_on;
 #endif
 
 #include "my/extra_vars.h"

@@ -11,6 +11,7 @@ Things, so far:
 - Player punches and kicks
 - Ladders
 - Propellers
+- Warpers
 
 To Fix
 ======
@@ -100,3 +101,21 @@ Vertical movement is then controlled by these:
 	#define PLAYER_AY_FLOAT			16	
 	#define PLAYER_VY_FLOAT_MAX		256
 ```
+
+Simple Warpers
+--------------
+
+Simple warpers are portal which take you from where they are placed to an arbitrary position (screen, Y, X).
+
+```c
+	#define ENABLE_SIMPLE_WARPERS
+	#define SIMPLE_WARPERS_BASE_SPRID	56
+	#define SIMPLE_WARPERS_FIRE_BUTTON
+```
+
+They are placed *as enemies*, type = 0xff. Use `attr` for the destination screen number and `s1` for the YX coordinate (high nibble Y, low nibble X).
+
+`SIMPLE_WARPERS_BASE_SPRID` must be defined as the base sprite id (in the enemy metasprites array) for warpers to display. Of course, you can use an expression depending on `half_life` or `frame_counter` if you want animation.
+
+If `SIMPLE_WARPERS_FIRE_BUTTON` is defined, you have to press B to activate the portal.
+

@@ -41,8 +41,10 @@ const unsigned char * const spr_enems0 [] = {
 
 	// Shooty (offset 40)
 	ssensh_00_a, ssensh_01_a, ssensh_02_a, ssensh_03_a,
-	ssensh_00_b, ssensh_01_b, ssensh_02_b, ssensh_03_b
+	ssensh_00_b, ssensh_01_b, ssensh_02_b, ssensh_03_b,
 
+	// Portals (warpers) (offset 48)
+	ssport_00, ssport_01, ssport_02, ssport_03
 };
 
 
