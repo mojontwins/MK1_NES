@@ -195,7 +195,8 @@
 
 // Text boxes. If you need them, you call them
 
-#define ENABLE_TEXT_BOX
+//#define ENABLE_TEXT_BOX
+#define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
 
 // Enemy types and definitions
 // ---------------------------

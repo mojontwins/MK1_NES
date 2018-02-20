@@ -130,8 +130,6 @@ unsigned char en_spr_id [3];
 	unsigned char ep_y [3 * MAP_SIZE];
 	signed char ep_mx [3 * MAP_SIZE];
 	signed char ep_my [3 * MAP_SIZE];
-	//unsigned char ep_t [3 * MAP_W * MAP_H];
-	unsigned int ep_it;
 #endif
 
 #ifdef PERSISTENT_DEATHS

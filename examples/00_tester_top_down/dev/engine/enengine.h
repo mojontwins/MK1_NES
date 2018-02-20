@@ -6,23 +6,23 @@
 
 #ifdef ENABLE_CHAC_CHAC
 	void enems_draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
-		map_set (en_x [gpit], en_y [gpit], a1);
-		map_set (en_x [gpit], en_y [gpit] + 1, a2);
-		map_set (en_x [gpit], en_y [gpit] + 2, a3);
+		_x = en_x [gpit]; _y = en_y [gpit]    ; _t = a1; map_set ();
+		_x = en_x [gpit]; _y = en_y [gpit] + 1; _t = a2; map_set ();
+		_x = en_x [gpit]; _y = en_y [gpit] + 2; _t = a3; map_set ();
 	}
 #endif
 
 #ifdef PERSISTENT_ENEMIES
 	void enems_persistent_load (void) {
 		gp_gen = (unsigned char *) (c_enems);
-		for (ep_it = 0; ep_it < 3 * MAP_SIZE; ep_it ++) {
+		for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
 			// Skip t
 			rdt = *gp_gen ++; 
 
 			// YX1
 			rda = *gp_gen ++;
-			ep_y [ep_it] = rda & 0xf0;
-			ep_x [ep_it] = rda << 4;
+			ep_y [gpjt] = rda & 0xf0;
+			ep_x [gpjt] = rda << 4;
 
 			// YX2
 			rda = *gp_gen ++;
@@ -31,20 +31,32 @@
 
 			// P, here used for speed
 			rda = *gp_gen ++;
-			ep_mx [ep_it] = ADD_SIGN2 (rdb, ep_x [ep_it], rda);
-			ep_my [ep_it] = ADD_SIGN2 (rdc, ep_y [ep_it], rda);		
+			if (rda > 1) rda >>= 1;	// Store converted!
+			ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
+			ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
 		}
 	}
 
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
-			ep_it = on_pant + on_pant + on_pant;
+			gpjt = on_pant + on_pant + on_pant;
 			for (gpit = 0; gpit < 3; gpit ++) {
-				ep_x [ep_it] = en_x [gpit];
-				ep_y [ep_it] = en_y [gpit];
-				ep_mx [ep_it] = en_mx [gpit] << (1 - en_status [gpit]);
-				ep_my [ep_it] = en_my [gpit] << (1 - en_status [gpit]);	
-				ep_it ++;		
+				__asm__ ("ldx %v", gpit);
+				__asm__ ("ldy %v", gpjt);
+
+				__asm__ ("lda %v,x", en_x);
+				__asm__ ("sta %v,y", ep_x);
+
+				__asm__ ("lda %v,x", en_y);
+				__asm__ ("sta %v,y", ep_y);
+
+				__asm__ ("lda %v,x", en_mx);
+				__asm__ ("sta %v,y", ep_mx);
+
+				__asm__ ("lda %v,x", en_my);
+				__asm__ ("sta %v,y", ep_my);
+
+				gpjt ++;		
 			}	
 		}
 	}
@@ -107,14 +119,10 @@ void enems_load (void) {
 				// Copy position & direction from ep_*
 				en_x [gpit] = ep_x [rdc];
 				en_y [gpit] = ep_y [rdc];
-				en_mx [gpit] = ep_mx [rdc];
-				en_my [gpit] = ep_my [rdc];
 			#else
 				// Initialize position & direction from ROM
 				en_x [gpit] = en_x1 [gpit];
 				en_y [gpit] = en_y1 [gpit];
-				en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
-				en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
 			#endif
 
 			switch (en_t [gpit]) {
@@ -154,13 +162,24 @@ void enems_load (void) {
 						en_s [gpit] = (en_t [gpit] - 1) << 3;
 					}
 
+					#ifdef PERSISTENT_ENEMIES
+						en_mx [gpit] = ep_mx [rdc];
+						en_my [gpit] = ep_my [rdc];
+					#else
+						en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
+						en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+					#endif
+
 					// HL conversion		
+
 					if (rda == 1) {
 						en_status [gpit] = 1; 
 					} else {
 						en_status [gpit] = 0;
-						en_mx [gpit] >>= 1;
-						en_my [gpit] >>= 1;
+						#ifndef PERSISTENT_ENEMIES
+							en_mx [gpit] >>= 1;
+							en_my [gpit] >>= 1;
+						#endif
 					}
 
 					// Fix limits so 1 < 2 always.
@@ -341,19 +360,53 @@ void enems_move (void) {
 	gpjt = 3; while (gpjt --) {
 		gpit += 2; if (gpit > 2) gpit -=3;
 		
-		_en_t = en_t [gpit]; _en_s = en_s [gpit];
-		_en_x = en_x [gpit]; _en_y = en_y [gpit];
-		_en_x1 = en_x1 [gpit]; _en_y1 = en_y1 [gpit];
-		_en_x2 = en_x2 [gpit]; _en_y2 = en_y2 [gpit];
-		_en_mx = en_mx [gpit]; _en_my = en_my [gpit];
-		_en_ct = en_ct [gpit]; _en_facing = en_facing [gpit];
+		// Copy arrays -> temporal vars in ZP
+
+		__asm__ ("ldy %v", gpit);
+
+		__asm__ ("lda %v, y", en_t);
+		__asm__ ("sta %v", _en_t);
+
+		__asm__ ("lda %v, y", en_s);
+		__asm__ ("sta %v", _en_s);
+
+		__asm__ ("lda %v, y", en_x);
+		__asm__ ("sta %v", _en_x);
+
+		__asm__ ("lda %v, y", en_y);
+		__asm__ ("sta %v", _en_y);
+
+		__asm__ ("lda %v, y", en_x1);
+		__asm__ ("sta %v", _en_x1);
+
+		__asm__ ("lda %v, y", en_x2);
+		__asm__ ("sta %v", _en_x2);
+
+		__asm__ ("lda %v, y", en_y1);
+		__asm__ ("sta %v", _en_y1);
+
+		__asm__ ("lda %v, y", en_y2);
+		__asm__ ("sta %v", _en_y2);
+
+		__asm__ ("lda %v, y", en_mx);
+		__asm__ ("sta %v", _en_mx);
+
+		__asm__ ("lda %v, y", en_my);
+		__asm__ ("sta %v", _en_my);
+
+		__asm__ ("lda %v, y", en_ct);
+		__asm__ ("sta %v", _en_ct);
+
+		__asm__ ("lda %v, y", en_facing);
+		__asm__ ("sta %v", _en_facing);
+
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
 		#endif
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
-
+		
 		// Clear selected sprite
 
 		en_spr = 0xff;
@@ -686,12 +739,41 @@ skipdo:
 
 		// Update arrays
 
-		en_t [gpit] = _en_t;
-		en_x [gpit] = _en_x; en_y [gpit] = _en_y;
-		en_x1 [gpit] = _en_x1; en_y1 [gpit] = _en_y1;
-		en_x2 [gpit] = _en_x2; en_y2 [gpit] = _en_y2;
-		en_mx [gpit] = _en_mx; en_my [gpit] = _en_my;
-		en_ct [gpit] = _en_ct; en_facing [gpit] = _en_facing;
+		__asm__ ("ldy %v", gpit);
+
+		__asm__ ("lda %v", _en_t);
+		__asm__ ("sta %v, y", en_t);
+
+		__asm__ ("lda %v", _en_x);
+		__asm__ ("sta %v, y", en_x);
+
+		__asm__ ("lda %v", _en_y);
+		__asm__ ("sta %v, y", en_y);
+
+		__asm__ ("lda %v", _en_x1);
+		__asm__ ("sta %v, y", en_x1);
+
+		__asm__ ("lda %v", _en_x2);
+		__asm__ ("sta %v, y", en_x2);
+
+		__asm__ ("lda %v", _en_y1);
+		__asm__ ("sta %v, y", en_y1);
+
+		__asm__ ("lda %v", _en_y2);
+		__asm__ ("sta %v, y", en_y2);
+
+		__asm__ ("lda %v", _en_mx);
+		__asm__ ("sta %v, y", en_mx);
+
+		__asm__ ("lda %v", _en_my);
+		__asm__ ("sta %v, y", en_my);
+
+		__asm__ ("lda %v", _en_ct);
+		__asm__ ("sta %v, y", en_ct);
+
+		__asm__ ("lda %v", _en_facing);
+		__asm__ ("sta %v, y", en_facing);
+
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
 		#endif

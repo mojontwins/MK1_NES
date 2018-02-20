@@ -9,8 +9,6 @@ Const LIST_ALIAS_SIZE = 255
 Const MACRO_SIZE = 32
 Const MAX_MACROS = 31
 
-Dim Shared As Integer rampage
-
 Redim Shared As String script (0)
 Redim Shared As Integer addresses (0)
 Dim Shared As Integer clausulasUsed (255)
@@ -815,16 +813,15 @@ Dim As String thisLevelConstantName
 inFileName = command (1)
 maxidx = 2 * pval (command (2))
 maxScr = val (Command (2)) - 1
-If command (3) = "rampage" then rampage = -1 Else rampage = 0
 
 if command (1) = "" or	maxidx = 0 then
 	print "MojonTwins Scripts Compiler 3.95 [NES]"
 	print "MT Engine NES MK1 1.0+"
 	Print
-	print "uso: msc3nes input n_pants [rampage]"
+	print "usage: msc3nes input n_pants"
 	print ""
-	print "input   - archivo de script"
-	print "n_pants - num. de pantallas"
+	print "input   - script file"
+	print "n_pants - # of screens"
 	print
 	system
 end if
@@ -832,6 +829,8 @@ end if
 redim script (maxidx + 5)
 redim addresses (maxidx + 5)
 resetScript (maxidx + 5)
+
+Print "MK1 v1.0 msc3nes 3.95 ~ ";
 
 'Kill "scripts.bin"
 
@@ -882,8 +881,7 @@ offsPt = 0
 nSections = 0
 killing = 0
 
-Print "Parsing " & inFileName
-Print
+Print "Parsing " & inFileName & " ~ ";
 
 keepGoing = -1
 sDone = 0
@@ -908,10 +906,12 @@ While keepGoing
 	Select Case lP (0)
 		Case "LEVELID":
 			thisLevelConstantName = lP (1)
-			? "Level " & scriptcount & "'s name is " & thisLevelConstantName
+			? "L" & scriptcount & " = " & thisLevelConstantName & " ~ ";
+			' ? "Level " & scriptcount & "'s name is " & thisLevelConstantName
 		Case "INC_DECORATIONS":
 			decoInclude = lP (1)
-			? "Extra decorations file for current level is " & decoInclude
+			? "L" & scriptcount & " decos @ " & decoInclude & " ~ ";
+			' ? "Extra decorations file for current level is " & decoInclude
 			For i = 0 To maxScr: decorated (i) = 0: Next i
 		Case "ITEMSET":
 			procesaItems f
@@ -986,13 +986,14 @@ While keepGoing
 			End If
 
 			If killing Then
-				Print "End Of Script reached."
-				If nSections Then Print "Sections for the game: " & nSections
+				'Print "End Of Script reached."
+				'If nSections Then Print "Sections for the game: " & nSections
+				? "Finished. Total sections: " & nSections & " ~ ";
 			Else
-				Print "End Of Level reached."
-				Print "Sections in this level: " & nSections
+				'Print "End Of Level reached."
+				'Print "Sections in this level: " & nSections
+				? "Level finished. Sections: " & nSections & " ~ ";
 			End If
-			Print
 
 			If sDone Then
 				' write and reset
@@ -1516,7 +1517,7 @@ if actionsUsed (&H20) Then
 	print #f2, "						// SET TILE (sc_x, sc_y) = sc_n"
 	print #f2, "						// Opcode: 20 sc_x sc_y sc_n"
 	print #f2, "						readxy ();"
-	print #f2, "						map_set (sc_x, sc_y, read_vbyte ());"
+	print #f2, "						_x = sc_x; _y = sc_y; _t = read_vbyte (); map_set ();"
 	print #f2, "						break;"
 End If
 
@@ -1566,7 +1567,7 @@ if actionsUsed (&H50) then
 	print #f2, "						// PRINT_TILE_AT (sc_x, sc_y) = sc_n"
 	print #f2, "						// Opcode: 50 sc_x sc_y sc_n"
 	print #f2, "						readxy ();"
-	print #f2, "						update_list_tile (sc_x, sc_y, read_vbyte ());"
+	print #f2, "						_x = sc_x; _y = sc_y; _t = read_vbyte (); update_list_tile ();"
 	print #f2, "						break;"
 end if
 
@@ -1963,8 +1964,8 @@ if actionsUsed (&HF4) Then
 	print #f2, "					case 0xF4:"
 	print #f2, "						// DECORATIONS"
 	print #f2, "						while (0xff != (sc_x = read_byte ())) {"
-	print #f2, "							sc_n = read_byte ();"
-	print #f2, "							map_set (sc_x >> 4, sc_x & 15, sc_n);"
+	print #f2, "							_x = sc_x >> 4; _y = sc_x & 15; _t = read_byte ();"
+	print #f2, "							map_set ();"
 	print #f2, "							ppu_waitnmi (); clear_update_list (); update_index = 0;"
 	print #f2, "						}"
 	print #f2, "						break;"

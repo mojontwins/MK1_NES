@@ -2359,11 +2359,14 @@ Creo que va siendo hora de que propague los cambios a /dev/src y los otros motor
 Bueno, todo propagado. Voy a ver si puedo avanzar un poco en el "todo" dentro del proyecto de Cheril y tal.
 
 Tocando:
-config.h
-engine/textbox.h
-engine/enengine.h
-engine/printer.h
-engine/enemmods/enem_linear.h
+
+```
+	config.h
+	engine/textbox.h
+	engine/enengine.h
+	engine/printer.h
+	engine/enemmods/enem_linear.h
+```
 
 ~~
 
@@ -2371,8 +2374,8 @@ Textbox ajustado.
 
 Moviendo ahora a asm las asingaciones arrays->ZP y ZP->arrays del manejador de enemigos. Ciclos sé que ahorro, voy a ver cuantos bytes. Tampoco va a ser mucho, pero ahorrar una instrucción por asignación parace guay ¿no?
 
-Antes->   140*64+49 = 9009 bytes left
-Despues-> ha liberado 14+64+6 = 84 bytes. Joer, ¿srsly?
+Antes:   `140*64+49 = 9009` bytes left
+Despues: ha liberado `14+64+6 = 84` bytes. Joer, ¿srsly?
 
 Voy a probar suerte ahora con el persistent_update, por ejemplo... Va a ser que no, hay una paranoia de hacer y deshacer una cuenta que sinceramente no entiendo ¿no se podría hacer mejor? Creo que es para ahorrar algo.
 
@@ -2509,7 +2512,58 @@ Lo que sí podría hacer es tener unas variables en zp `_x, _y, _n` y fumarme un
 
 ~~ 
 
-Iremos poco a poco. La marca de espacio libre para empezar es de 146*64+42 = 9386 bytes en la ROM de Cherils. Voy a desparametrizar `upd_attr_table`, por ejemplo.
+Iremos poco a poco. La marca de espacio libre para empezar es de `146*64+42 = 9386` bytes en la ROM de Cherils. Voy a desparametrizar `upd_attr_table`, por ejemplo.
 
 Sólo con esa, que son DOS llamadas, he ahorrado más de 50 bytes. Haré las demás. Sólo puede ser WIN. Pero ahora no time.
 
+20170220
+========
+
+Voy a intentar deshacer más llamadas con parámetros. Las siguientes tienen cascada por lo que aún ahorraré más, pero hay que ir con cuidado.
+
+Tocando:
+
+```
+	config.h
+	mainloop.h
+	engine/textbox.h
+	engine/breakable.h
+	engine/enengine.h
+	engine/frame.h
+	engine/printer.h
+	engine/textbox.h
+	engine/propellers.h
+	engine/enemmods/enem_linear.h
+	engine/playermods/process_tile.h
+	engine/mapmods/*
+```
+
+`draw_tile` lo primero que hace es llamar a upd_attr_table, por lo que puedo traspasar `_x, _y, _t` directamente. Probando -> ok.
+
+`update_list_tile`, lo mismo. Además, sólo se usa desde `map_set` además de desde las rutinas de text_box, así que creo que voy a cambiar las dos a la vez. 
+
+`map_set` Se llama en breakable, chac_chac, empujar un tile, abrir un cerrojo. Es difícil de probar en este juego, mierda. Pero puedo hacer una actualización parcial en `tester_sideview` cuando lo tenga para ver.
+
+Probados. Estos cambios, por ahora, llevan 320 bytes menos en `tester_sideview`.
+
+Más cosas: `ul_putc` no es destructivo y se usa muchas veces. Probado y guay todo.
+
+`p_t` ya es bastante mierder porque emplea división y resto. Esto es algo que debería intentar solucionar más adelante (obtener la división entre 10 y el resto con una rutina específica en asm) y ahorrar tener que meter mierda del runtime para esto. Por ahora me voy a fumar el paso de parámetros. 
+
+Va quedando poco. Ahora toca `pr_str`, que se usa sobre todo en pantallas fijas (tendré que tocarlo a mano en `tester_top_down`). El string que recibe sí lo dejo como parámetro. Si no, será cumbersome de utilizar y prefiero comodidad aquí.
+
+Ahora tengo que revisar `msc3nes.exe` para el código generado. Coolio.
+
+~~
+
+Veamos las ganancias totales (además de la velocidad):
+
+```
+- Cheril:            9386 a  9595 = 209 bytes.
+- Tester sideview:  13032 a 13382 = 350 bytes!
+- Tester topdown:   Se me ha olvidao mirar antes XD
+```
+
+Está muy bien, en el caso peor (sideview incluye muchas cosas) ganar más de 1/3K nos da para muchas otras cosas, o incluso para lo ganado por lo servido (frente a la versión anterior, meter estas cosas sale "gratis"... ¡ah, la relatividad!).
+
+Y ahora es cuando debería empezar a hacer cosas más importantes como completar lo que falta o acabar los ejemplos.

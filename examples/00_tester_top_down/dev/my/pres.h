@@ -49,18 +49,18 @@ void pres_common (void) {
 
 void pres_game_over (void) {
 	unrle_vram (cuts_rle, 0x2000);
-	pr_str (10, 12, "GAME OVER!");
-	pr_str (4, 14, "NICE TRY, BUT NO BANANA!");
-	pr_str (5, 16, "DO IT BETTER NEXT TIME");
-	pr_str (9, 18, "MISSION FAILED");
+	_x = 10; _y = 12; pr_str ("GAME OVER!");
+	_x =  4; _y = 14; pr_str ("NICE TRY, BUT NO BANANA!");
+	_x =  5; _y = 16; pr_str ("DO IT BETTER NEXT TIME");
+	_x =  9; _y = 18; pr_str ("MISSION FAILED");
 }
 
 void pres_ending (void) {
 	unrle_vram (cuts_rle, 0x2000);
-	pr_str (9, 12, "CONGRATULATIONS!");
-	pr_str (2, 14, "YOU MANAGED TO SET THE BOMBS");
-	pr_str (4, 16, "AND DESTROY THE COMPUTER");
-	pr_str (5, 18, "MISSION ACCOMPLISHED!!");	
+	_x = 9; _y = 12; pr_str ("CONGRATULATIONS!");
+	_x = 2; _y = 14; pr_str ("YOU MANAGED TO SET THE BOMBS");
+	_x = 4; _y = 16; pr_str ("AND DESTROY THE COMPUTER");
+	_x = 5; _y = 18; pr_str ("MISSION ACCOMPLISHED!!");	
 }
 
 signed int lower_end;
@@ -72,11 +72,12 @@ void credits (void) {
 	
 	lower_end = 0; rdy = 240;
 
-	pr_str (3, 22, "SGT. HELMET - TRAINING DAY");
-	pr_str (0, 24, "COPYLEFT 2013 BY THE MOJON TWINS");
-	pr_str (0, 25, "DESIGN:ANJUEL  NES PORT:NA-TH-AN");
-	pr_str (3, 26, "NESLIB & SFX CODE BY SHIRU");
-	pr_str (3, 27, "TITLE TUNE ARR BY DAVIDIAN");
+	_x = 3; _y = 22; pr_str ("SGT. HELMET - TRAINING DAY");
+	        _y = 26; pr_str ("NESLIB & SFX CODE BY SHIRU");
+	        _y = 27; pr_str ("TITLE TUNE ARR BY DAVIDIAN");
+	_x = 0; _y = 24; pr_str ("COPYLEFT 2013 BY THE MOJON TWINS");
+	        _y = 25; pr_str ("DESIGN:ANJUEL  NES PORT:NA-TH-AN");
+	
 	
 	pal_bright (0);
 	bat_in ();

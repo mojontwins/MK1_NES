@@ -129,7 +129,8 @@ void draw_scr (void) {
 
 		#include "engine/mapmods/map_detectors.h"
 
-		draw_tile (rdx + rdx, rdy + rdy + TOP_ADJUST, rdt);
+		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
+		draw_tile ();
 		rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
 	}
 

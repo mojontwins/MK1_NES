@@ -15,13 +15,16 @@ const unsigned char box_buff [] = {
 
 void textbox_frame (void) {
 	// Draws or clears the frame upon the value of rdm
-	rdct = 0; rdx = 0; rdy = 12;
-	gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((rdy - TOP_ADJUST) >> 1) << 4));
+	rdct = 0; _x = 0; _y = 12;
+	gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
 	gpit = 64; while (gpit --) {
 		rdt = *gp_ram ++; 
 		if (rdct == 0) clear_update_list ();
-		if (rdt != 0xff) { update_list_tile (rdx, rdy, rdt + rdm); }
-		rdx = (rdx + 2) & 0x1f; if (rdx == 0) rdy = rdy + 2;
+		if (rdt != 0xff) { 
+			_t = rdt + rdm;
+			update_list_tile (); 
+		}
+		_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
 		rdct ++; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
 	}
 }
@@ -37,7 +40,7 @@ void textbox_draw_text (void) {
 	rdy = 13;
 	while (rdt = *gp_gen ++) {
 		if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + 6 + (rdy << 5); }
-		if (rdt == '%') rda = 1; else ul_putc (rdt - 32);
+		if (rdt == '%') rda = 1; else { _n = rdt - 32; ul_putc (); }
 		if (rda) { ppu_waitnmi (); rdy ++; }
 	}	
 }

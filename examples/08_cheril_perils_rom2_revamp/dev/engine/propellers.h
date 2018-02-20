@@ -16,8 +16,8 @@ void propellers_do (void) {
 			((rda & 0xf) << 1) | 
 			((((rda >> 3) & 0xfe) + TOP_ADJUST) << 5)
 		);
-		ul_putc (rdb + PROPELLERS_BASE_PATTERN);
-		ul_putc (rdb + PROPELLERS_BASE_PATTERN + 1);
+		_n = rdb + PROPELLERS_BASE_PATTERN; ul_putc ();
+		_n ++; ul_putc ();
 	}
 }
 

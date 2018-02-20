@@ -6,9 +6,9 @@
 
 #ifdef ENABLE_CHAC_CHAC
 	void enems_draw_chac_chac (unsigned char a1, unsigned char a2, unsigned char a3) {
-		map_set (en_x [gpit], en_y [gpit], a1);
-		map_set (en_x [gpit], en_y [gpit] + 1, a2);
-		map_set (en_x [gpit], en_y [gpit] + 2, a3);
+		_x = en_x [gpit]; _y = en_y [gpit]    ; _t = a1; map_set ();
+		_x = en_x [gpit]; _y = en_y [gpit] + 1; _t = a2; map_set ();
+		_x = en_x [gpit]; _y = en_y [gpit] + 2; _t = a3; map_set ();
 	}
 #endif
 

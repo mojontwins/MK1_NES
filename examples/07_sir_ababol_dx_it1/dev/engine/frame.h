@@ -11,35 +11,35 @@ void hud_update (void) {
 #ifdef KILLED_X
 	if (okilled != pkilled) {
 		okilled = pkilled;
-		p_t (KILLED_X, KILLED_Y, c_max_enems - pkilled);
+		_x = KILLED_X; _y = KILLED_Y; _n = c_max_enems - pkilled; p_t ();
 	}
 #endif
 
 #if !defined (DEACTIVATE_OBJECTS) && defined (OBJECTS_X)
 	if (oobjs != pobjs) {
 		oobjs = pobjs;
-		p_t (OBJECTS_X, OBJECTS_Y, pobjs);
+		_x = OBJECTS_X; _y = OBJECTS_Y; _n = pobjs; p_t ();
 	}
 #endif
 
 #if !defined (DEACTIVATE_KEYS) && defined (KEYS_X)
 	if (okeys != pkeys) {
 		okeys = pkeys;
-		p_t (KEYS_X, KEYS_Y, pkeys);
+		_x = KEYS_X; _y = KEYS_Y; _n = pkeys; p_t ();
 	}
 #endif
 
 #if defined (LIFE_X)			
 	if (olife != plife) {
 		olife = plife;
-		p_t (LIFE_X, LIFE_Y, plife);
+		_x = LIFE_X; _y = LIFE_Y; _n = plife; p_t ();
 	}
 #endif
 
 #if defined (MAX_AMMO) && defined (AMMO_X)
 	if (oammo != pammo) {
 		oammo = pammo;
-		p_t (AMMO_X, AMMO_Y, pammo);
+		_x = AMMO_X; _y = AMMO_Y; _n = pammo; p_t ();
 	}
 #endif
 

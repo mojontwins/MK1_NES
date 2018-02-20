@@ -143,7 +143,8 @@ void prepare_scr (void) {
 #endif
 
 #ifdef LINE_OF_TEXT
-	pr_str (LINE_OF_TEXT_X, LINE_OF_TEXT, "                              ");
+	_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT;
+	pr_str ("                              ");
 #endif
 
 	// CUSTOM {

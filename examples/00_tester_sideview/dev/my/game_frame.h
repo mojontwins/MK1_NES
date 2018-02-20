@@ -5,6 +5,6 @@
 // Custom code to draw your HUD.
 
 void draw_game_frame (void) {
-	pr_str (2, 3, "LIFE:00   ITEM:      KEYS:00");
-	pr_str (2, 28, "SUPPATESTR - THE MOJON TWINS");
+	_x = 2; _y = 3;	 pr_str ("LIFE:00   ITEM:      KEYS:00");
+	        _y = 28; pr_str ("SUPPATESTR - THE MOJON TWINS");
 }

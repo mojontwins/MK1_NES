@@ -12,7 +12,8 @@
 				brkf [gpit] ++;
 				if (brkf [gpit] == BREAKABLE_MAX_FRAMES) {
 					brkf [gpit] = 0;
-					map_set (brkx [gpit], brky [gpit], BREAKABLE_ERASE);	
+					_x = brkx [gpit]; _y = brky [gpit]; _t = BREAKABLE_ERASE;
+					map_set ();
 				} else {
 					do_process_breakable = 1;
 				}
@@ -32,14 +33,16 @@ void breakable_break (unsigned char x, unsigned char y) {
 			if (!brkf [gpit]) {
 				do_process_breakable = 1;
 				brkf [gpit] = 1;
-				brkx [gpit] = x;
-				brky [gpit] = y;
-				map_set (x, y, BREAKABLE_BREAKING);	// Break tile!
-				break;								// HA HA HA
+				_x = brkx [gpit] = x;
+				_y = brky [gpit] = y;
+				_t = BREAKABLE_BREAKING;
+				map_set ();					// Break tile!
+				break;						// HA HA HA
 			}
 		}
 #else
-		map_set (x, y, BREAKABLE_ERASE);
+		_x = x; _y = y; _t = BREAKABLE_ERASE;
+		map_set ();
 #endif		
 	}
 }

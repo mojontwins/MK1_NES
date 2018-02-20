@@ -129,7 +129,7 @@ void run_script (unsigned char whichs) {
 						// SET TILE (sc_x, sc_y) = sc_n
 						// Opcode: 20 sc_x sc_y sc_n
 						readxy ();
-						map_set (sc_x, sc_y, read_vbyte ());
+						_x = sc_x; _y = sc_y; _t = read_vbyte (); map_set ();
 						break;
 					case 0x51:
 						// SET_FIRE_ZONE x1, y1, x2, y2

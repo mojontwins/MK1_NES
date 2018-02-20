@@ -19,17 +19,6 @@ void  fade_in (void) {
 		delay (fade_delay);
 	}	
 }
-/*
-void  fade_in_fast (void) {
-	pal_bright (2); delay (1);
-	pal_bright (4); delay (1);
-}
-
-void  fade_out_fast (void) {
-	pal_bright (2); delay (1);
-	pal_bright (0); delay (1);
-}
-*/
 
 // Clear update list
 void clear_update_list (void) {
@@ -41,34 +30,39 @@ void cls (void) {
 	vram_adr(0x2000); vram_fill(0x00,0x400);
 }
 
-void ul_putc (unsigned char n) {
+// Needs gp_addr, _n set.
+void ul_putc (void) {
 	update_list [update_index++] = MSB (gp_addr);
 	update_list [update_index++] = LSB (gp_addr++);
-	update_list [update_index++] = n;
+	update_list [update_index++] = _n;
 }
 
-void p_t (unsigned char x, unsigned char y, unsigned char n) {
-	gp_addr = (y << 5) + x + 0x2000;
-	ul_putc ((n/10)+16);
-	ul_putc ((n%10)+16);
+// Needs _x, _y, _n set.
+void p_t (void) {
+	rda = _n; gp_addr = (_y << 5) + _x + 0x2000;
+	_n = ((rda/10)+16); ul_putc ();
+	_n = ((rda%10)+16); ul_putc ();
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
 unsigned char attr_table [64];
 
-void upd_attr_table (unsigned char x, unsigned char y, unsigned char tl) {
-	rdc = (x >> 2) + ((y >> 2) << 3);
-	rdb = ((x >> 1) & 1) + (((y >> 1) & 1) << 1);
+// Needs _x, _y, _t set.
+void upd_attr_table (void) {
+	rdc = (_x >> 2) + ((_y >> 2) << 3);
+	rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
 	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (c_ts_pals [tl] << (rdb << 1));
+	rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
 	attr_table [rdc] = rda;
 }
 
-void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	upd_attr_table (x, y, tl);
+// Needs _x, _y, _t set.
+void draw_tile (void) {
+	// Pass _x, _y, _t directly.
+	upd_attr_table ();
 	
-	gp_tmap = c_ts_tmaps + (tl << 2);
-	gp_addr = ((y<<5) + x + 0x2000);
+	gp_tmap = c_ts_tmaps + (_t << 2);
+	gp_addr = ((_y << 5) + _x + 0x2000);
 	vram_adr (gp_addr++);
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap++);
@@ -78,27 +72,34 @@ void draw_tile (unsigned char x, unsigned char y, unsigned char tl) {
 	vram_put (*gp_tmap);	
 }
 
-void update_list_tile (unsigned char x, unsigned char y, unsigned char tl) {
-	upd_attr_table (x, y, tl);
+// Needs _x, _y, _t set.
+void update_list_tile (void) {
+	// Pass _x, _y, _t directly.
+	upd_attr_table ();
+	// rda contains the attribute byte.
+	// rdc contains the offset in the attribute nametable.
 	
 	gp_addr = 0x23c0 + rdc;
-	ul_putc (rda);
+	_n = rda; ul_putc ();
 	
 	// tiles
 	//tl = (16 + tl) << 2;
-	gp_tmap = c_ts_tmaps + (tl << 2);
-	gp_addr = ((y<<5) + x + 0x2000);
-	ul_putc (*gp_tmap ++);
-	ul_putc (*gp_tmap ++);
+	gp_tmap = c_ts_tmaps + (_t << 2);
+	gp_addr = ((_y << 5) + _x + 0x2000);
+	_n = *gp_tmap ++; ul_putc ();
+	_n = *gp_tmap ++; ul_putc ();
 	gp_addr += 30;
-	ul_putc (*gp_tmap ++);
-	ul_putc (*gp_tmap);
+	_n = *gp_tmap ++; ul_putc ();
+	_n = *gp_tmap   ; ul_putc ();
 }
 
-void map_set (unsigned char x, unsigned char y, unsigned char n) {
-	map_buff [COORDS (x, y)] = n;
-	map_attr [COORDS (x, y)] = c_behs [n];
-	update_list_tile (x + x, TOP_ADJUST + y + y, n); 
+// Needs _x, _y, _t set.
+// Destroys _x, _y!.
+void map_set (void) {
+	map_buff [COORDS (_x, _y)] = _t;
+	map_attr [COORDS (_x, _y)] = c_behs [_t];
+	_x = _x << 1; _y = TOP_ADJUST + (_y << 1);
+	update_list_tile (); 
 }
 
 unsigned char get_byte (void) {
@@ -111,23 +112,11 @@ unsigned char get_byte (void) {
 	#include "engine/mapmods/map_renderer_fast.h"
 #endif
 
-
-void pr_str (unsigned char x, unsigned char y, unsigned char *s) {
-	vram_adr (((y << 5) | x) + 0x2000);
+// Neefs _x, _y set.
+void pr_str (unsigned char *s) {
+	vram_adr (((_y << 5) | _x) + 0x2000);
 	while (gpit = *s++) vram_put (gpit - 32); 
 }
-
-/*
-void pr_str_upd (unsigned char *s) {
-	gp_addr = 0x2000 + (LINE_OF_TEXT << 5) + LINE_OF_TEXT_X;
-	while (1) {
-		if ( (gpit = *s ++) == 0x0) break;
-		update_list [update_index++] = MSB (gp_addr);
-		update_list [update_index++] = LSB (gp_addr ++);
-		update_list [update_index++] = gpit - 32;
-	}
-}
-*/
 
 #ifdef DEBUG
 unsigned char get_hex_digit (unsigned char n) {
@@ -139,10 +128,10 @@ void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
 	clear_update_list ();
 
 	gp_addr = (y << 5) + x + 0x2000;
-	ul_putc (get_hex_digit (n >> 12));
-	ul_putc (get_hex_digit ((n >> 8) & 0xf));
-	ul_putc (get_hex_digit ((n >> 4) & 0xf));
-	ul_putc (get_hex_digit ((n & 0xf)));
+	_n = get_hex_digit (n >> 12); 			ul_putc ();
+	_n = get_hex_digit ((n >> 8) & 0xf); 	ul_putc ();
+	_n = get_hex_digit ((n >> 4) & 0xf); 	ul_putc ();
+	_n = get_hex_digit ((n & 0xf)); 		ul_putc ();
 
 	ppu_waitnmi ();
 }
