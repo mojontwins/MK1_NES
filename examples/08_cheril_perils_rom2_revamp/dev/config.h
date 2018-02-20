@@ -319,8 +319,8 @@
 #define COCOS_MAX						4
 #define COCO_V							128
 
-#define COCO_PATTERN					0
-#define COCO_PALETTE 					0
+#define COCO_PATTERN					12
+#define COCO_PALETTE 					3
 #define COCO_FAIR_D						32
 
 // Carry directives

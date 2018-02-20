@@ -11,6 +11,6 @@
 
 #ifdef ENABLE_STEADY_SHOOTERS
 	// left, up, right, down
-	const unsigned char coco_dx [] = { -COCO_V, 0, COCO_V, 0 };
-	const unsigned char coco_dy [] = { 0, -COCO_V, 0, COCO_V };
+	const signed int coco_dx [] = { -COCO_V, 0, COCO_V, 0 };
+	const signed int coco_dy [] = { 0, -COCO_V, 0, COCO_V };
 #endif

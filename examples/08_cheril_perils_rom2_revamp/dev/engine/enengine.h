@@ -191,9 +191,10 @@ void enems_load (void) {
 				#ifdef ENABLE_STEADY_SHOOTERS
 					case 5:
 						// en_my [gpit] = direction (LEFT UP RIGHT DOWN)
-						rds = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], 1);
-						if (rds != 0) en_my [gpit] = rds + 1;
-						else en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], 1) + 2;
+						if (en_x2 [gpit] > en_x1 [gpit]) en_my [gpit] = 2;
+						else if (en_x2 [gpit] < en_x1 [gpit]) en_my [gpit] = 0;
+						else if (en_y2 [gpit] > en_y1 [gpit]) en_my [gpit] = 3;
+						else en_my [gpit] = 1;
 						en_s [gpit] = STEADY_SHOOTERS_BASE_SPRID + en_my [gpit];
 
 						// en_mx [gpit] = frequency from the attr

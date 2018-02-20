@@ -2638,9 +2638,12 @@ Piensa en steady shooters. No pienses mucho, cópialos de MK2.
 	mainloop.h
 	assets/precalcs.h
 	engine/enems.h
+	engine/cocos.h
 	ram/zp.h
 ```
 
-[ ] Probar steady shooters
+[X] Probar steady shooters
 
 [ ] Probar que no he roto los shooties
+
+[ ] `COCOS_COLLIDE`

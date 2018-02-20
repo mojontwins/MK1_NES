@@ -62,7 +62,7 @@ void cocos_do (void) {
 		coco_y [coco_it] += coco_vy [coco_it];
 
 		// Out of bounds
-		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 256<<6 || coco_y [coco_it] < 0 || coco_y [coco_it] > 192<<6) {
+		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 248<<FIXBITS || coco_y [coco_it] < 16<<FIXBITS || coco_y [coco_it] > 200<<FIXBITS) {
 			cocos_destroy ();
 			continue;
 		}
