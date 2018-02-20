@@ -24,8 +24,9 @@ if (level == 0) {
 
 	// Clear gate if all objects in place
 	if (n_pant == 6) {
-		if (ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8)
+		if (ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8) {
 			map_buff [14+16*4] = 22;
 			map_buff [14+16*5] = 22;
+		}
 	}
 }
