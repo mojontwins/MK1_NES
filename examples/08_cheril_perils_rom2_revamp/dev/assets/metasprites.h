@@ -43,7 +43,10 @@ const unsigned char * const spr_enems0 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
-	ssit_05
+	ssit_05,
+
+	// Steady shooters (offset 44)
+	ssss_00, ssss_01, ssss_02, ssss_03
 };
 
 const unsigned char * const spr_enems1 [] = {
@@ -63,7 +66,10 @@ const unsigned char * const spr_enems1 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
-	ssit_05
+	ssit_05,
+
+	// Steady shooters (offset 44)
+	ssss_00, ssss_01, ssss_02, ssss_03
 };
 
 

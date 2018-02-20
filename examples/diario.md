@@ -2618,7 +2618,7 @@ Deberían ser más sencillos que en la churrera:
 
 [ ] Terminar de integrar los enemigos programados de pantanow engine.
 
-[ ] Timers
+[X] Timers
 
 ```
 	config.h
@@ -2629,3 +2629,18 @@ Deberían ser más sencillos que en la churrera:
 	ram/bss.h
 ```
 
+Piensa en steady shooters. No pienses mucho, cópialos de MK2.
+
+~~
+
+```
+	config.h
+	mainloop.h
+	assets/precalcs.h
+	engine/enems.h
+	ram/zp.h
+```
+
+[ ] Probar steady shooters
+
+[ ] Probar que no he roto los shooties

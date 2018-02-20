@@ -17,8 +17,9 @@ unsigned char *gp_ram, *gp_ram_aux;
 unsigned int gp_addr;
 unsigned char rdx, rdy, rdt, rdit;
 unsigned char rda, rdb, rdc, rdd, rdm;
-unsigned char rds;
+signed char rds;
 unsigned char rdct;
+unsigned char ticker;
 
 // Used for two-points collision
 

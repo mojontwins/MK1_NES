@@ -49,7 +49,7 @@ Fanties / Homing fanties
 Chac-Chacs
 ----------
 
-- Type 10
+- Type 10 (0xA)
 - 3 tiles tall, placed in ponedor marking the topmost tile.
 - Attribute in ponedor is delay between shutter
 - Needs 7 contiguous tiles in the tileset (can be outside the 16 first).
@@ -85,7 +85,7 @@ const unsigned char monococo_state_times [] = {
 };
 ```
 
-- Type 11
+- Type 11 (0xB)
 - Just define the position in ponedor.
 
 Cocos frames are (order may be off, but helps with saving bytes)

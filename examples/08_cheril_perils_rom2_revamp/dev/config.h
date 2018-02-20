@@ -306,6 +306,13 @@
 #define PUNCHIES_PUNCH_OFFS_Y			-7
 #define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
 
+// Steady shooters
+
+#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		44
+#define STEADY_SHOOTER_KILLABLE
+#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS

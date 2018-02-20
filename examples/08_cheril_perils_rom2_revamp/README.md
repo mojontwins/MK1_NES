@@ -78,13 +78,13 @@ Runs a timer which you can display. It detects when it reaches zero. You can int
 
 ```c
 	#define ENABLE_TIMER
-	#define TIMER_INITIAL		5
+	#define TIMER_INITIAL					5
 	#define TIMER_START_ON
-	#define TIMER_REFILL		10
-	#define TIMER_TIME_FLAG		0
-	#define TIMER_ZERO_FLAG 	1
+	#define TIMER_REFILL					10
+	#define TIMER_TIME_FLAG					0
+	#define TIMER_ZERO_FLAG 				1
 	#define TIMER_RESET_ON_ENTER
-	#define HOTSPOT_TYPE_TIME	5
+	#define HOTSPOT_TYPE_TIME				5
 ```
 
 - `timer` equals `TIMER_INITIAL` at the beginning.
@@ -95,4 +95,16 @@ Runs a timer which you can display. It detects when it reaches zero. You can int
 
 If you are using scripting, use `TIMER_TIME_FLAG` and `TIMER_ZERO_FLAG` to copy the values of `timer` and `timer_zero` to a couple of flags.
 
+Steady Shooters
+---------------
 
+```c
+	#define ENABLE_STEADY_SHOOTERS
+	#define STEADY_SHOOTERS_BASE_SPRID		44
+	#define STEADY_SHOOTER_KILLABLE
+```
+
+- Type 5 (0x5).
+- Place them. Relation between (x1, y1) and (x2, y2) defines direction. Attribute defines # of seconds between shoots.
+- Cells are from `STEADY_SHOOTERS_BASE_SPRID` onwards, from left, clockwise: left up right down.
+- `STEADY_SHOOTER_KILLABLE` make steady shooters destructible. But beware! They are not counted as killable by `eneexp3.exe`'s option `gencounter`. You can count them in using the `genallcounters` option in addition to `gencounter` and adding `KILLABLE_ENEMS_prefix + MAX_ENEMS_TYPE_5_prefix`.

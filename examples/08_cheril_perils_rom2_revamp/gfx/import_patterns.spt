@@ -82,6 +82,10 @@ METASPRITESET 4, 10, 2, 2, 2, 1, 0, 0
 LABEL ssocl
 METASPRITE 8, 10, 2, 2, 0, 0
 
+# Steady shooters
+LABEL ssss
+METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
+
 # Items
 # Empty, Key, Heart, Resonator off, Resonator on, explosion, No
 LABEL ssit
