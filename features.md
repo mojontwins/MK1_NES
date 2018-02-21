@@ -7,7 +7,7 @@ Quicksands
 ----------
 
 ```c
-	#define ENABLE_QUICKSANDS
+    #define ENABLE_QUICKSANDS
 ```
 
 Tiles with `beh == 2` make the player sink slowly.
@@ -16,15 +16,15 @@ Breakable
 ---------
 
 ```c
-	// Breakable, beh & 16
-	#define ENABLE_BREAKABLE				// Breakable walls
-	#define BREAKABLE_LIFE	2				// Amount of hits to break wall
-	#define BREAKABLE_ANIM					// Show explosion when breaking
-	#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-	#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
-	#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-	#define BREAKABLE_BREAKING		8		// Tile to display while breaking
-	#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+    // Breakable, beh & 16
+    #define ENABLE_BREAKABLE                // Breakable walls
+    #define BREAKABLE_LIFE  2               // Amount of hits to break wall
+    #define BREAKABLE_ANIM                  // Show explosion when breaking
+    #define BREAKABLE_MAX           4       // Max # of concurrent explosions
+    #define BREAKABLE_MAX_FRAMES    8       // Frames to show explosion
+    #define BREAKABLE_ERASE         0       // Tile to erase broken tiles
+    #define BREAKABLE_BREAKING      8       // Tile to display while breaking
+    #define BREAKABLE_WALKABLE              // If defined (side view), tiles break when stepped on
 ```
 
 - Tiles with `beh & 16` are breakable. 
@@ -37,11 +37,11 @@ Conveyors
 ---------
 
 ```c
-	// Conveyors, beh & 32 [+1] (must be & 8!)
-	// For player movement values, see section 4
-	// (PLAYER_VX_CONVEYORS)
+    // Conveyors, beh & 32 [+1] (must be & 8!)
+    // For player movement values, see section 4
+    // (PLAYER_VX_CONVEYORS)
 
-	#define ENABLE_CONVEYORS
+    #define ENABLE_CONVEYORS
 ```
 
 Tiles for side-view which push the player left or right when walked over. Use beh & 32 (pushes right) or beh & 33 (pushes left).
@@ -50,11 +50,11 @@ Slippery
 --------
 
 ```c
-	// Slippery, beh & 64. (must be & 12!)
-	// For player movement values, see section 4
-	// (PLAYER_AX_ICE & PLAYER_RX_ICE)
+    // Slippery, beh & 64. (must be & 12!)
+    // For player movement values, see section 4
+    // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
-	#define ENABLE_SLIPPERY
+    #define ENABLE_SLIPPERY
 ```
 
 Tiles for side-view which are slippery when walked over. Use beh & 64.
@@ -111,10 +111,10 @@ Monococo has a timer which is controlled by a number of "state times" in a 4 ele
 
 ```c
 const unsigned char monococo_state_times [] = {
-	MONOCOCO_BASE_TIME_HIDDEN,
-	MONOCOCO_BASE_TIME_APPEARING,
-	MONOCOCO_BASE_TIME_ONBOARD, 
-	MONOCOCO_BASE_TIME_APPEARING
+    MONOCOCO_BASE_TIME_HIDDEN,
+    MONOCOCO_BASE_TIME_APPEARING,
+    MONOCOCO_BASE_TIME_ONBOARD, 
+    MONOCOCO_BASE_TIME_APPEARING
 };
 ```
 
@@ -191,15 +191,15 @@ Player punches, player kicks
 ----------------------------
 
 ```c
-	// Silly Brawlers
-	// --------------
-	#define PLAYER_PUNCHES					// When on floor
-	#define PLAYER_PUNCH_OFFS_X				15
-	#define PLAYER_PUNCH_OFFS_Y				-7
+    // Silly Brawlers
+    // --------------
+    #define PLAYER_PUNCHES                  // When on floor
+    #define PLAYER_PUNCH_OFFS_X             15
+    #define PLAYER_PUNCH_OFFS_Y             -7
 
-	#define PLAYER_KICKS					// While airborne
-	#define PLAYER_KICK_OFFS_X				12
-	#define PLAYER_KICK_OFFS_Y				-3
+    #define PLAYER_KICKS                    // While airborne
+    #define PLAYER_KICK_OFFS_X              12
+    #define PLAYER_KICK_OFFS_Y              -3
 ```
 
 - Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
@@ -216,11 +216,11 @@ Propellers
 Enable and configure.
 
 ```c
-	#define ENABLE_PROPELLERS
-	#define PROPELLERS_MAX 					4
-	#define PROPELLERS_BASE_PATTERN			64
-	#define PROPELLERS_MAX_LENGTH			6
-	#define PROPELLER_TILE					14
+    #define ENABLE_PROPELLERS
+    #define PROPELLERS_MAX                  4
+    #define PROPELLERS_BASE_PATTERN         64
+    #define PROPELLERS_MAX_LENGTH           6
+    #define PROPELLER_TILE                  14
 ```
 
 Place in your map using tile `PROPELLER_TILE`. Propeller animation will alternate two 2x1 patterns cells defined in the bg tileset from pattern `PROPELLERS_BASE_PATTERN`. Place as much as `PROPELLERS_MAX` per screen.
@@ -230,8 +230,8 @@ If you define `PROPELLERS_MAX_LENGTH` the propeller will affect an area max N ti
 Vertical movement is then controlled by these:
 
 ```c
-	#define PLAYER_AY_FLOAT			16	
-	#define PLAYER_VY_FLOAT_MAX		256
+    #define PLAYER_AY_FLOAT         16  
+    #define PLAYER_VY_FLOAT_MAX     256
 ```
 
 Simple Warpers
@@ -240,9 +240,9 @@ Simple Warpers
 Simple warpers are portal which take you from where they are placed to an arbitrary position (screen, Y, X).
 
 ```c
-	#define ENABLE_SIMPLE_WARPERS
-	#define SIMPLE_WARPERS_BASE_SPRID	56
-	#define SIMPLE_WARPERS_FIRE_BUTTON
+    #define ENABLE_SIMPLE_WARPERS
+    #define SIMPLE_WARPERS_BASE_SPRID   56
+    #define SIMPLE_WARPERS_FIRE_BUTTON
 ```
 
 They are placed *as enemies*, type = 0xff. Use `attr` for the destination screen number and `s1` for the YX coordinate (high nibble Y, low nibble X).
@@ -257,11 +257,11 @@ Shines
 Create small shines on killing objects, up to a maximum. Shines are rendered using two different patterns in bank 1:
 
 ```c
-	#define ENABLE_SHINES
-	#define SHINES_MAX 						8
-	#define SHINES_BASE_PATTERN				10	// In the sprite bank, two patterns needed
-	#define SHINES_PALETTE					3
-	#define SHINING_TILE					23	// Tile # in map to add shines
+    #define ENABLE_SHINES
+    #define SHINES_MAX                      8
+    #define SHINES_BASE_PATTERN             10  // In the sprite bank, two patterns needed
+    #define SHINES_PALETTE                  3
+    #define SHINING_TILE                    23  // Tile # in map to add shines
 ```
 
 Shines are added automaticly to the scene when rendering a new screen and `SHINING_TILE` is detected.
@@ -272,11 +272,11 @@ Resonators
 These make up the gameplay in Cheril Perils. If you press them, enemies freeze and are killable by means of jumping on them. Resonators are placed as hotspots, and need two metasprites in the items array.
 
 ```c
-	#define ENABLE_RESONATORS
-	#define RESONATOR_BASE_PATTERN			0
-	#define RESONATOR_PALETTE				3
-	#define RESONATOR_COUNTER_OFFS_X		4
-	#define RESONATOR_COUNTER_OFFS_Y		7
+    #define ENABLE_RESONATORS
+    #define RESONATOR_BASE_PATTERN          0
+    #define RESONATOR_PALETTE               3
+    #define RESONATOR_COUNTER_OFFS_X        4
+    #define RESONATOR_COUNTER_OFFS_Y        7
 ```
 
 They also need 10 patterns with all the digits 0-9 in bank 1, from `RESONATOR_BASE_PATTERN` onwards. Those are used to draw the counter, which is rendered at offset `(RESONATOR_COUNTER_OFFS_X, RESONATOR_COUNTER_OFFS_Y)` from the hotspot's top-left corner.
@@ -287,10 +287,10 @@ No!
 Displays a balloon with "NO!" written on it over the sprite.
 
 ```c
-	#define ENABLE_NO 
-	#define NO_METASPRITE					ssit_6
-	#define NO_OFFS_X						0
-	#define NO_OFFS_Y						-24
+    #define ENABLE_NO 
+    #define NO_METASPRITE                   ssit_6
+    #define NO_OFFS_X                       0
+    #define NO_OFFS_Y                       -24
 ```
 
 Initially this is mapped to just one action: failing to open a lock 'cause you have no keys left, but you can trigger whenever you want just making `no_ct = 100` or any number of frames.
@@ -301,18 +301,18 @@ Use animation
 Hotspots must be interacted with the B button, and an animation is displayed. When a certain step in the animation is displayed, the interaction with the hotspot is spawn.
 
 ```c
-	#define ENABLE_USE_ANIM
-	#define USE_ANIM_MAX_FRAMES				13
-	#define USE_ANIM_INTERACT_ON			7
-	#define USE_ANIM_FRAMES_PER_STEP		4
+    #define ENABLE_USE_ANIM
+    #define USE_ANIM_MAX_FRAMES             13
+    #define USE_ANIM_INTERACT_ON            7
+    #define USE_ANIM_FRAMES_PER_STEP        4
 ```
 
 You are in charge of preparing your `my/player_frame_selector.h` to support this animation. Note that the first cell in your sequence will show when the counter is "1", and the last when it reaches `USE_ANIM_MAX_FRAMES`. Each frame will show for `USE_ANIM_FRAMES_PER_STEP` game frames; the last one will last for 1 whole second. The current animation step (1 to `USE_ANIM_MAX_FRAMES`) is `use_ct`, so you can do this on `my/player_frame_selector.h`:
 
 ```c
-	if (use_ct) {
-		psprid = CELL_USE + use_ct - 1;
-	} else // ...
+    if (use_ct) {
+        psprid = CELL_USE + use_ct - 1;
+    } else // ...
 ```
 
 Where `CELL_USE` is the index of the first "use animation" metasprite in the `spr_player` array. Check the Cheril Perils ROM2 revamp example to se this in action!
@@ -325,14 +325,14 @@ Timer
 Runs a timer which you can display. It detects when it reaches zero. You can integrate this with the scripting engine, or react to it adding C code to `my/extra_checks.h`.
 
 ```c
-	#define ENABLE_TIMER
-	#define TIMER_INITIAL					5
-	#define TIMER_START_ON
-	#define TIMER_REFILL					10
-	#define TIMER_TIME_FLAG					0
-	#define TIMER_ZERO_FLAG 				1
-	#define TIMER_RESET_ON_ENTER
-	#define HOTSPOT_TYPE_TIME				5
+    #define ENABLE_TIMER
+    #define TIMER_INITIAL                   5
+    #define TIMER_START_ON
+    #define TIMER_REFILL                    10
+    #define TIMER_TIME_FLAG                 0
+    #define TIMER_ZERO_FLAG                 1
+    #define TIMER_RESET_ON_ENTER
+    #define HOTSPOT_TYPE_TIME               5
 ```
 
 - `timer` equals `TIMER_INITIAL` at the beginning.
@@ -347,9 +347,9 @@ Steady Shooters
 ---------------
 
 ```c
-	#define ENABLE_STEADY_SHOOTERS
-	#define STEADY_SHOOTERS_BASE_SPRID		44
-	#define STEADY_SHOOTER_KILLABLE
+    #define ENABLE_STEADY_SHOOTERS
+    #define STEADY_SHOOTERS_BASE_SPRID      44
+    #define STEADY_SHOOTER_KILLABLE
 ```
 
 - Type 5 (0x5).
@@ -361,10 +361,10 @@ Springs
 -------
 
 ```c
-	#define ENABLE_SPRINGS
-	#define SPRING_TILE 					10
-	#define SPRING_SPIKE_TILE 				11
-	//#define SPRINGS_ON_BY_DEFAULT	
+    #define ENABLE_SPRINGS
+    #define SPRING_TILE                     10
+    #define SPRING_SPIKE_TILE               11
+    //#define SPRINGS_ON_BY_DEFAULT 
 ```
 
 - When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.

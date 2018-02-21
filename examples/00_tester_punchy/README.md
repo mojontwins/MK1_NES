@@ -59,15 +59,15 @@ Player punches, player kicks
 ----------------------------
 
 ```c
-	// Silly Brawlers
-	// --------------
-	#define PLAYER_PUNCHES					// When on floor
-	#define PLAYER_PUNCH_OFFS_X				15
-	#define PLAYER_PUNCH_OFFS_Y				-7
+    // Silly Brawlers
+    // --------------
+    #define PLAYER_PUNCHES                  // When on floor
+    #define PLAYER_PUNCH_OFFS_X             15
+    #define PLAYER_PUNCH_OFFS_Y             -7
 
-	#define PLAYER_KICKS					// While airborne
-	#define PLAYER_KICK_OFFS_X				12
-	#define PLAYER_KICK_OFFS_Y				-3
+    #define PLAYER_KICKS                    // While airborne
+    #define PLAYER_KICK_OFFS_X              12
+    #define PLAYER_KICK_OFFS_Y              -3
 ```
 
 - Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
@@ -84,11 +84,11 @@ Propellers
 Enable and configure.
 
 ```c
-	#define ENABLE_PROPELLERS
-	#define PROPELLERS_MAX 					4
-	#define PROPELLERS_BASE_PATTERN			64
-	#define PROPELLERS_MAX_LENGTH			6
-	#define PROPELLER_TILE					14
+    #define ENABLE_PROPELLERS
+    #define PROPELLERS_MAX                  4
+    #define PROPELLERS_BASE_PATTERN         64
+    #define PROPELLERS_MAX_LENGTH           6
+    #define PROPELLER_TILE                  14
 ```
 
 Place in your map using tile `PROPELLER_TILE`. Propeller animation will alternate two 2x1 patterns cells defined in the bg tileset from pattern `PROPELLERS_BASE_PATTERN`. Place as much as `PROPELLERS_MAX` per screen.
@@ -98,8 +98,8 @@ If you define `PROPELLERS_MAX_LENGTH` the propeller will affect an area max N ti
 Vertical movement is then controlled by these:
 
 ```c
-	#define PLAYER_AY_FLOAT			16	
-	#define PLAYER_VY_FLOAT_MAX		256
+    #define PLAYER_AY_FLOAT         16  
+    #define PLAYER_VY_FLOAT_MAX     256
 ```
 
 Simple Warpers
@@ -108,9 +108,9 @@ Simple Warpers
 Simple warpers are portal which take you from where they are placed to an arbitrary position (screen, Y, X).
 
 ```c
-	#define ENABLE_SIMPLE_WARPERS
-	#define SIMPLE_WARPERS_BASE_SPRID	56
-	#define SIMPLE_WARPERS_FIRE_BUTTON
+    #define ENABLE_SIMPLE_WARPERS
+    #define SIMPLE_WARPERS_BASE_SPRID   56
+    #define SIMPLE_WARPERS_FIRE_BUTTON
 ```
 
 They are placed *as enemies*, type = 0xff. Use `attr` for the destination screen number and `s1` for the YX coordinate (high nibble Y, low nibble X).

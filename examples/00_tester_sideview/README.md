@@ -30,7 +30,7 @@ Quicksands
 ----------
 
 ```c
-	#define ENABLE_QUICKSANDS
+    #define ENABLE_QUICKSANDS
 ```
 
 Tiles with `beh == 2` make the player sink slowly.
@@ -39,15 +39,15 @@ Breakable
 ---------
 
 ```c
-	// Breakable, beh & 16
-	#define ENABLE_BREAKABLE				// Breakable walls
-	#define BREAKABLE_LIFE	2				// Amount of hits to break wall
-	#define BREAKABLE_ANIM					// Show explosion when breaking
-	#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-	#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
-	#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-	#define BREAKABLE_BREAKING		8		// Tile to display while breaking
-	#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+    // Breakable, beh & 16
+    #define ENABLE_BREAKABLE                // Breakable walls
+    #define BREAKABLE_LIFE  2               // Amount of hits to break wall
+    #define BREAKABLE_ANIM                  // Show explosion when breaking
+    #define BREAKABLE_MAX           4       // Max # of concurrent explosions
+    #define BREAKABLE_MAX_FRAMES    8       // Frames to show explosion
+    #define BREAKABLE_ERASE         0       // Tile to erase broken tiles
+    #define BREAKABLE_BREAKING      8       // Tile to display while breaking
+    #define BREAKABLE_WALKABLE              // If defined (side view), tiles break when stepped on
 ```
 
 - Tiles with `beh & 16` are breakable. 
@@ -60,11 +60,11 @@ Conveyors
 ---------
 
 ```c
-	// Conveyors, beh & 32 [+1] (must be & 8!)
-	// For player movement values, see section 4
-	// (PLAYER_VX_CONVEYORS)
+    // Conveyors, beh & 32 [+1] (must be & 8!)
+    // For player movement values, see section 4
+    // (PLAYER_VX_CONVEYORS)
 
-	#define ENABLE_CONVEYORS
+    #define ENABLE_CONVEYORS
 ```
 
 Tiles for side-view which push the player left or right when walked over. Use beh & 32 (pushes right) or beh & 33 (pushes left).
@@ -73,11 +73,11 @@ Slippery
 --------
 
 ```c
-	// Slippery, beh & 64. (must be & 12!)
-	// For player movement values, see section 4
-	// (PLAYER_AX_ICE & PLAYER_RX_ICE)
+    // Slippery, beh & 64. (must be & 12!)
+    // For player movement values, see section 4
+    // (PLAYER_AX_ICE & PLAYER_RX_ICE)
 
-	#define ENABLE_SLIPPERY
+    #define ENABLE_SLIPPERY
 ```
 
 Tiles for side-view which are slippery when walked over. Use beh & 64.
@@ -134,10 +134,10 @@ Monococo has a timer which is controlled by a number of "state times" in a 4 ele
 
 ```c
 const unsigned char monococo_state_times [] = {
-	MONOCOCO_BASE_TIME_HIDDEN,
-	MONOCOCO_BASE_TIME_APPEARING,
-	MONOCOCO_BASE_TIME_ONBOARD, 
-	MONOCOCO_BASE_TIME_APPEARING
+    MONOCOCO_BASE_TIME_HIDDEN,
+    MONOCOCO_BASE_TIME_APPEARING,
+    MONOCOCO_BASE_TIME_ONBOARD, 
+    MONOCOCO_BASE_TIME_APPEARING
 };
 ```
 
