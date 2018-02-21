@@ -89,7 +89,6 @@ unsigned char hact [MAP_SIZE];
 #endif
 
 // Flags
-
 unsigned char flags [MAX_FLAGS];
 
 #ifdef ENABLE_CONTAINERS

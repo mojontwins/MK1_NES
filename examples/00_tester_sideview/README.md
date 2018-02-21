@@ -26,6 +26,62 @@ All fixed.
 Things to note for possible documentation
 =========================================
 
+Quicksands
+----------
+
+```c
+	#define ENABLE_QUICKSANDS
+```
+
+Tiles with `beh == 2` make the player sink slowly.
+
+Breakable
+---------
+
+```c
+	// Breakable, beh & 16
+	#define ENABLE_BREAKABLE				// Breakable walls
+	#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+	#define BREAKABLE_ANIM					// Show explosion when breaking
+	#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
+	#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
+	#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
+	#define BREAKABLE_BREAKING		8		// Tile to display while breaking
+	#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+```
+
+- Tiles with `beh & 16` are breakable. 
+- They have to be shoot/hit `BREAKABLE_LIFE` times to break. 
+- If `BREAKABLE_ANIM` is set, an intermediate tile (breaking, or explosion, id `BREAKABLE_BREAKING`) is shown for `BREAKABLE_MAX_FRAMES` game frames. 
+- Broken tiles are replaced with tile id `BREAKABLE_ERASE`.
+- If `BREAKABLE_WALKABLE` is set, tiles break if you walk over them.
+
+Conveyors
+---------
+
+```c
+	// Conveyors, beh & 32 [+1] (must be & 8!)
+	// For player movement values, see section 4
+	// (PLAYER_VX_CONVEYORS)
+
+	#define ENABLE_CONVEYORS
+```
+
+Tiles for side-view which push the player left or right when walked over. Use beh & 32 (pushes right) or beh & 33 (pushes left).
+
+Slippery
+--------
+
+```c
+	// Slippery, beh & 64. (must be & 12!)
+	// For player movement values, see section 4
+	// (PLAYER_AX_ICE & PLAYER_RX_ICE)
+
+	#define ENABLE_SLIPPERY
+```
+
+Tiles for side-view which are slippery when walked over. Use beh & 64.
+
 The occluding frame
 -------------------
 
@@ -94,7 +150,7 @@ Cocos frames are (order may be off, but helps with saving bytes)
 [(RIGHT) `APPEARING`, `HIDDEN`, (LEFT) `APPEARING`, `HIDDEN`]
 
 Easy objects
-============
+------------
 
 Provides infraestructure to place N objects in hotspots, N places to use such objects, and places to add custom code that is executed everytime you get an object and everytime you use an object.
 

@@ -9,7 +9,7 @@
 	};
 #endif
 
-#ifdef ENABLE_STEADY_SHOOTERS
+#if defined (ENABLE_COCOS) && defined(COCOS_ENABLE_LINEAR)
 	// left, up, right, down
 	const signed int coco_dx [] = { -COCO_V, 0, COCO_V, 0 };
 	const signed int coco_dy [] = { 0, -COCO_V, 0, COCO_V };

@@ -2639,6 +2639,7 @@ Piensa en steady shooters. No pienses mucho, cópialos de MK2.
 	assets/precalcs.h
 	engine/enems.h
 	engine/cocos.h
+	engine/enemmods/enem_steady_shooter.h
 	ram/zp.h
 ```
 
@@ -2646,4 +2647,55 @@ Piensa en steady shooters. No pienses mucho, cópialos de MK2.
 
 [ ] Probar que no he roto los shooties
 
-[ ] `COCOS_COLLIDE`
+[X] `COCOS_COLLIDE`
+
+20180221
+========
+
+Update:
+
+COPY `autodefs.h mainloop.h engine/ ram/ assets/precalcs.h engine/enemmods/enem_steady_shooter.h `
+
+MERGE `config.h`
+
+~~
+
+Quiero hacer el paso de arrays->vars también en el inicializador de enemigos. Para eso sólo necesito la copia vars->arrays del final, que tendría que encapsular para reaprovechar. Esa y otras optimizaciones parecidas (en las funciones auxiliares). Voy a hacerla sobre Cheril y luego propago. Esta vez quiero controlar bien la mejora, así que voy a calcular *ahora* lo que hay libre en cada ROM:
+
+```
+Tester punchy    15629 bytes -> 15974 bytes: +345 bytes!
+Tester sideview  13338 bytes -> 13933 bytes: +595 bytes!
+Tester top-down   7912 bytes ->  8142 bytes: +230 bytes!
+Cheril ROM2       8274 bytes ->  8843 bytes: +569 bytes!
+```
+
+O_o
+
+Vaya mejora ¿no? Y aún quedarían un par de miserias. Sólo con optimizaciones de este tipo, en tester sideview llevo ~3.5Kb menos, joder, que ahí cabe todo un nivel nuevo :-O
+
+~~
+
+Sigo teniendo que probar que no he roto los shooties pero ahora no puedor.
+
+[ ] Mover config.h a /my
+
+[ ] Springs
+
+[ ] Containers
+
+[ ] Terminar de integrar los enemigos programados.
+
+[ ] Probar que no he roto los shooties
+
+Los springs consistene en un tile que se detecta al pasar sobre él y que saca unos pinchos. En MK2 se detectaba un rectángulo calculado sobre el spring, creo, pero yo lo voy a hacer más sencillo: sólo si estamos posados y pisamos el tile con el punto central del player.
+
+```c
+	#define ENABLE_SPRINGS
+	#define SPRING_TILE 				10
+	#define SPRING_SPIKE_TILE 			11
+```
+
+Se me acaba el espacio en los testers así que lo suyo es que lo monte en el tentativo tercer nivel de Cheril que incluirá warpers, steady shooters... y Springs.
+
+Lo dejo implementado aunque no lo pueda probar aún.
+

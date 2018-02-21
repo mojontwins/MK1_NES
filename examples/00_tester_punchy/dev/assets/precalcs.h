@@ -8,3 +8,9 @@
 		MONOCOCO_BASE_TIME_HIDDEN, MONOCOCO_BASE_TIME_APPEARING, MONOCOCO_BASE_TIME_ONBOARD, MONOCOCO_BASE_TIME_APPEARING
 	};
 #endif
+
+#if defined (ENABLE_COCOS) && defined(COCOS_ENABLE_LINEAR)
+	// left, up, right, down
+	const signed int coco_dx [] = { -COCO_V, 0, COCO_V, 0 };
+	const signed int coco_dy [] = { 0, -COCO_V, 0, COCO_V };
+#endif

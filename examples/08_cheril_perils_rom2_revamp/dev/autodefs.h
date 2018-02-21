@@ -25,7 +25,7 @@
 #define PLAYER_CAN_FLOAT
 #endif
 
-#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS)
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS) || defined (ENABLE_SPRINGS)
 #define NEEDS_INITIAL_DETECTION
 #endif
 

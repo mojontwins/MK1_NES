@@ -187,6 +187,20 @@ void enems_load (void) {
 					
 					break;
 
+				#ifdef ENABLE_STEADY_SHOOTERS
+					case 5:
+						// en_my [gpit] = direction (LEFT UP RIGHT DOWN)
+						if (en_x2 [gpit] > en_x1 [gpit]) en_my [gpit] = 2;
+						else if (en_x2 [gpit] < en_x1 [gpit]) en_my [gpit] = 0;
+						else if (en_y2 [gpit] > en_y1 [gpit]) en_my [gpit] = 3;
+						else en_my [gpit] = 1;
+						en_s [gpit] = STEADY_SHOOTERS_BASE_SPRID + en_my [gpit];
+
+						// en_mx [gpit] = frequency from the attr
+						en_ct [gpit] = en_mx [gpit] = rda;
+						break;
+				#endif
+
 				#ifdef ENABLE_FANTY				
 					case 6:
 						// Fantys
@@ -320,11 +334,15 @@ void enems_load (void) {
 			run_script (2 * MAP_SIZE + 5);
 		#endif
 
-			pkilled ++;
-
-		#ifdef COUNT_KILLED_IN_FLAG
-			flags [COUNT_KILLED_IN_FLAG] ++;
+		#if defined (ENABLE_STEADY_SHOOTERS) && !(defined (STEADY_SHOOTER_KILLABLE) && defined (STEADY_SHOOTER_COUNT))
+			if (_ent != 5)
 		#endif
+		{
+			pkilled ++;
+			#ifdef COUNT_KILLED_IN_FLAG
+				flags [COUNT_KILLED_IN_FLAG] ++;
+			#endif
+		}
 	}
 
 	void enems_hit (void) {
@@ -451,14 +469,17 @@ void enems_move (void) {
 			
 			#ifdef ENABLE_RESONATORS
 				if (res_on 
+					#ifndef PLAYER_TOP_DOWN
+						&& _en_t != 4
+					#endif
+					#ifdef ENABLE_STEADY_SHOOTERS
+						&& _en_t != 5
+					#endif
 					#ifdef ENABLE_SAW
 						&& _en_t != 8 
 					#endif
 					#ifdef ENABLE_CHAC_CHAC
 						&& _en_t != 10
-					#endif
-					#ifndef PLAYER_TOP_DOWN
-						&& _en_t != 4
 					#endif
 				) {
 					en_spr = en_spr_id [gpit];
@@ -490,6 +511,12 @@ void enems_move (void) {
 							#include "engine/enemmods/enem_punchy.h"
 						#endif
 						break;
+
+					#ifdef ENABLE_STEADY_SHOOTERS
+						case 5:
+							#include "engine/enemmods/enem_steady_shooter.h"
+							break;
+					#endif
 
 					#ifdef ENABLE_FANTY					
 						case 6:
@@ -635,6 +662,9 @@ void enems_move (void) {
 					#ifdef PLAYER_MIN_KILLABLE
 						&& _en_t >= PLAYER_MIN_KILLABLE
 					#endif
+					#ifndef STEADY_SHOOTER_KILLABLE
+						&& _en_t != 5
+					#endif	
 					#ifdef ENABLE_SAW
 						&& _en_t != 8
 					#endif
@@ -699,6 +729,9 @@ void enems_move (void) {
 				#ifdef PLAYER_MIN_KILLABLE
 					|| _en_t < PLAYER_MIN_KILLABLE
 				#endif
+				#ifndef STEADY_SHOOTER_KILLABLE
+					|| _en_t == 5
+				#endif					
 				#ifdef ENABLE_SAW
 					|| _en_t == 8
 				#endif

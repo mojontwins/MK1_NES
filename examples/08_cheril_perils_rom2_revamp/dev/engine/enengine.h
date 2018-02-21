@@ -70,6 +70,43 @@
 	}
 #endif
 
+void enems_update_unsigned_char_arrays (void) {
+	__asm__ ("ldy %v", gpit);
+
+	__asm__ ("lda %v", _en_t);
+	__asm__ ("sta %v, y", en_t);
+
+	__asm__ ("lda %v", _en_x);
+	__asm__ ("sta %v, y", en_x);
+
+	__asm__ ("lda %v", _en_y);
+	__asm__ ("sta %v, y", en_y);
+
+	__asm__ ("lda %v", _en_x1);
+	__asm__ ("sta %v, y", en_x1);
+
+	__asm__ ("lda %v", _en_x2);
+	__asm__ ("sta %v, y", en_x2);
+
+	__asm__ ("lda %v", _en_y1);
+	__asm__ ("sta %v, y", en_y1);
+
+	__asm__ ("lda %v", _en_y2);
+	__asm__ ("sta %v, y", en_y2);
+
+	__asm__ ("lda %v", _en_mx);
+	__asm__ ("sta %v, y", en_mx);
+
+	__asm__ ("lda %v", _en_my);
+	__asm__ ("sta %v, y", en_my);
+
+	__asm__ ("lda %v", _en_ct);
+	__asm__ ("sta %v, y", en_ct);
+
+	__asm__ ("lda %v", _en_facing);
+	__asm__ ("sta %v, y", en_facing);
+}
+
 void enems_load (void) {
 	// Loads enems from n_pant
 
@@ -92,40 +129,40 @@ void enems_load (void) {
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
 			if (!(ep_flags [rdc] & 1)) {
-				en_t [gpit] = 0;
+				_en_t = 0;
 				gp_gen += 4;
 			} else 
 		#endif
 		{
 			// First get T, then do whatever I need
-			en_t [gpit] = *gp_gen ++;
+			_en_t = *gp_gen ++;
 
 			// General...
 
 			// YX1
 			rda = *gp_gen ++;
-			en_y1 [gpit] = rda & 0xf0;
-			en_x1 [gpit] = rda << 4;
+			_en_y1 = rda & 0xf0;
+			_en_x1 = rda << 4;
 
 			// YX2
 			rda = *gp_gen ++;
-			en_y2 [gpit] = rda & 0xf0;
-			en_x2 [gpit] = rda << 4;
+			_en_y2 = rda & 0xf0;
+			_en_x2 = rda << 4;
 		
 			// P, here used for speed
 			rda = *gp_gen ++;
 
 			#ifdef PERSISTENT_ENEMIES
 				// Copy position & direction from ep_*
-				en_x [gpit] = ep_x [rdc];
-				en_y [gpit] = ep_y [rdc];
+				_en_x = ep_x [rdc];
+				_en_y = ep_y [rdc];
 			#else
 				// Initialize position & direction from ROM
-				en_x [gpit] = en_x1 [gpit];
-				en_y [gpit] = en_y1 [gpit];
+				_en_x = _en_x1;
+				_en_y = _en_y1;
 			#endif
 
-			switch (en_t [gpit]) {
+			switch (_en_t) {
 				case 1:
 				case 2:
 				case 3:
@@ -142,32 +179,32 @@ void enems_load (void) {
 					case 18:
 					case 19:
 				#endif
-					en_ct [gpit] = 0;
+					_en_ct = 0;
 	
 					// Linear enems.
 					#ifdef ENABLE_PUNCHIES
-						if (en_t [gpit] >= 16) {
+						if (_en_t >= 16) {
 							en_rawv [gpit] = 2;
-							en_s [gpit] = PUNCHIES_BASE_SPRID + ((en_t [gpit] - 16) << 3);
+							en_s [gpit] = PUNCHIES_BASE_SPRID + ((_en_t - 16) << 3);
 						} else
 					#endif					
 					#ifdef ENABLE_SHOOTIES
-						if (en_t [gpit] >= 12) {
+						if (_en_t >= 12) {
 							en_rawv [gpit] = 1;
-							en_s [gpit] = SHOOTIES_BASE_SPRID + ((en_t [gpit] - 12) << 3);
+							en_s [gpit] = SHOOTIES_BASE_SPRID + ((_en_t - 12) << 3);
 						} else
 					#endif
 					{
 						en_rawv [gpit] = 0;
-						en_s [gpit] = (en_t [gpit] - 1) << 3;
+						en_s [gpit] = (_en_t - 1) << 3;
 					}
 
 					#ifdef PERSISTENT_ENEMIES
-						en_mx [gpit] = ep_mx [rdc];
-						en_my [gpit] = ep_my [rdc];
+						_en_mx = ep_mx [rdc];
+						_en_my = ep_my [rdc];
 					#else
-						en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
-						en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
+						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
 					#endif
 
 					// HL conversion		
@@ -177,36 +214,36 @@ void enems_load (void) {
 					} else {
 						en_status [gpit] = 0;
 						#ifndef PERSISTENT_ENEMIES
-							en_mx [gpit] >>= 1;
-							en_my [gpit] >>= 1;
+							_en_mx >>= 1;
+							_en_my >>= 1;
 						#endif
 					}
 
 					// Fix limits so 1 < 2 always.
-					if (en_x1 [gpit] > en_x2 [gpit]) { rda = en_x1 [gpit]; en_x1 [gpit] = en_x2 [gpit]; en_x2 [gpit] = rda; }
-					if (en_y1 [gpit] > en_y2 [gpit]) { rda = en_y1 [gpit]; en_y1 [gpit] = en_y2 [gpit]; en_y2 [gpit] = rda; }
+					if (_en_x1 > _en_x2) { rda = _en_x1; _en_x1 = _en_x2; _en_x2 = rda; }
+					if (_en_y1 > _en_y2) { rda = _en_y1; _en_y1 = _en_y2; _en_y2 = rda; }
 					
 					break;
 
 				#ifdef ENABLE_STEADY_SHOOTERS
 					case 5:
-						// en_my [gpit] = direction (LEFT UP RIGHT DOWN)
-						if (en_x2 [gpit] > en_x1 [gpit]) en_my [gpit] = 2;
-						else if (en_x2 [gpit] < en_x1 [gpit]) en_my [gpit] = 0;
-						else if (en_y2 [gpit] > en_y1 [gpit]) en_my [gpit] = 3;
-						else en_my [gpit] = 1;
-						en_s [gpit] = STEADY_SHOOTERS_BASE_SPRID + en_my [gpit];
+						// _en_my = direction (LEFT UP RIGHT DOWN)
+						if (_en_x2 > _en_x1) _en_my = 2;
+						else if (_en_x2 < _en_x1) _en_my = 0;
+						else if (_en_y2 > _en_y1) _en_my = 3;
+						else _en_my = 1;
+						en_s [gpit] = STEADY_SHOOTERS_BASE_SPRID + _en_my;
 
-						// en_mx [gpit] = frequency from the attr
-						en_ct [gpit] = en_mx [gpit] = rda;
+						// _en_mx = frequency from the attr
+						_en_ct = _en_mx = rda;
 						break;
 				#endif
 
 				#ifdef ENABLE_FANTY				
 					case 6:
 						// Fantys
-						enf_x [gpit] = en_x [gpit] << 6;
-						enf_y [gpit] = en_y [gpit] << 6;
+						enf_x [gpit] = _en_x << 6;
+						enf_y [gpit] = _en_y << 6;
 						enf_vx [gpit] = enf_vy [gpit] = 0;
 						en_s [gpit] = FANTY_BASE_SPRID;
 						break;
@@ -215,8 +252,8 @@ void enems_load (void) {
 				#ifdef ENABLE_HOMING_FANTY				
 					case 6:
 						// Fantys
-						enf_x [gpit] = en_x [gpit] << 6;
-						enf_y [gpit] = en_y [gpit] << 6;
+						enf_x [gpit] = _en_x << 6;
+						enf_y [gpit] = _en_y << 6;
 						enf_vx [gpit] = enf_vy [gpit] = 0;
 						en_s [gpit] = FANTY_BASE_SPRID;
 						// State idle
@@ -228,7 +265,7 @@ void enems_load (void) {
 					case 7:
 						// Pursuers
 						en_alive [gpit] = 0;
-						en_ct [gpit] = DEATH_COUNT_EXPRESSION;	
+						_en_ct = DEATH_COUNT_EXPRESSION;	
 						#ifdef ENABLE_GENERATORS
 							en_generator_life [gpit] = GENERATOR_LIFE_GAUGE;
 							gen_was_hit [gpit] = 0;
@@ -242,27 +279,27 @@ void enems_load (void) {
 						// Saws
 						#ifdef PERSISTENT_ENEMIES
 							// Initialize position & direction from ROM
-							en_x [gpit] = en_x1 [gpit];
-							en_y [gpit] = en_y1 [gpit];
-							en_mx [gpit] = ADD_SIGN2 (en_x2 [gpit], en_x1 [gpit], rda);
-							en_my [gpit] = ADD_SIGN2 (en_y2 [gpit], en_y1 [gpit], rda);
+							_en_x = _en_x1;
+							_en_y = _en_y1;
+							_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
+							_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
 						#endif
 
 						// emerging sense
-						rda = ABS (en_mx [gpit]); if (!rda) rda = ABS (en_my [gpit]);
+						rda = ABS (_en_mx); if (!rda) rda = ABS (_en_my);
 						rda --;
 
 						// Sense
-						rdb = (en_x1 [gpit] != en_x2 [gpit]) ? 
-							SGNC (en_x2 [gpit], en_x1 [gpit], SAW_V_DISPL) :
-							SGNC (en_y2 [gpit], en_y1 [gpit], SAW_V_DISPL);
+						rdb = (_en_x1 != _en_x2) ? 
+							SGNC (_en_x2, _en_x1, SAW_V_DISPL) :
+							SGNC (_en_y2, _en_y1, SAW_V_DISPL);
 
 						// Store:
-						en_my [gpit] = rda; // EMERGING SENSE
-						en_mx [gpit] = rdb; // MOVING SENSE
+						_en_my = rda; // EMERGING SENSE
+						_en_mx = rdb; // MOVING SENSE
 
 						en_alive [gpit] = 1;
-						en_ct [gpit] = SAW_EMERGING_STEPS;
+						_en_ct = SAW_EMERGING_STEPS;
 
 						break;
 				#endif		
@@ -272,9 +309,9 @@ void enems_load (void) {
 						// Pezones
 
 						// Initialize
-						en_my [gpit] = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
+						_en_my = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
 						en_alive [gpit] = 0;
-						en_mx [gpit] = en_my [gpit];
+						_en_mx = _en_my;
 
 						en_s [gpit] = PEZONS_BASE_SPRID;
 						break;
@@ -284,11 +321,11 @@ void enems_load (void) {
 					case 10:
 						// Cuchillas Chac Chac
 
-						en_my [gpit] = (rda << 4);	// IDLE_1
-						en_x [gpit] = en_x1 [gpit] >> 4;
-						en_y [gpit] = (en_y1 [gpit] >> 4) - 1;
+						_en_my = (rda << 4);	// IDLE_1
+						_en_x = _en_x1 >> 4;
+						_en_y = (_en_y1 >> 4) - 1;
 						en_alive [gpit] = 0;
-						en_mx [gpit] = en_my [gpit];
+						_en_mx = _en_my;
 
 						break;
 				#endif
@@ -296,20 +333,20 @@ void enems_load (void) {
 				#ifdef ENABLE_MONOCOCOS
 					case 11:
 						// Monococos
-						en_mx [gpit] = 0; en_my [gpit] = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
+						_en_mx = 0; _en_my = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
 						en_s [gpit] = MONOCOCO_BASE_SPRID;
 						break;
 				#endif	
 
 				#ifdef ENABLE_SIMPLE_WARPERS
 					case 0xff:
-						en_mx [gpit] = rda;
+						_en_mx = rda;
 						break;
 				#endif				
 			}
 
 			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
-				en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
+				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
 			#else
 				en_life [gpit] = ENEMIES_LIFE_GAUGE;
 			#endif
@@ -320,6 +357,8 @@ void enems_load (void) {
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			rdc ++;
 		#endif
+
+		enems_update_unsigned_char_arrays ();
 	}
 }
 
@@ -785,40 +824,7 @@ skipdo:
 
 		// Update arrays
 
-		__asm__ ("ldy %v", gpit);
-
-		__asm__ ("lda %v", _en_t);
-		__asm__ ("sta %v, y", en_t);
-
-		__asm__ ("lda %v", _en_x);
-		__asm__ ("sta %v, y", en_x);
-
-		__asm__ ("lda %v", _en_y);
-		__asm__ ("sta %v, y", en_y);
-
-		__asm__ ("lda %v", _en_x1);
-		__asm__ ("sta %v, y", en_x1);
-
-		__asm__ ("lda %v", _en_x2);
-		__asm__ ("sta %v, y", en_x2);
-
-		__asm__ ("lda %v", _en_y1);
-		__asm__ ("sta %v, y", en_y1);
-
-		__asm__ ("lda %v", _en_y2);
-		__asm__ ("sta %v, y", en_y2);
-
-		__asm__ ("lda %v", _en_mx);
-		__asm__ ("sta %v, y", en_mx);
-
-		__asm__ ("lda %v", _en_my);
-		__asm__ ("sta %v, y", en_my);
-
-		__asm__ ("lda %v", _en_ct);
-		__asm__ ("sta %v, y", en_ct);
-
-		__asm__ ("lda %v", _en_facing);
-		__asm__ ("sta %v, y", en_facing);
+		enems_update_unsigned_char_arrays ();
 
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;

@@ -12,10 +12,9 @@ void cocos_init (void) {
 }
 
 #ifdef COCOS_ENABLE_AIMED
-	void cocos_shoot_aimed (void) {
-		// Create a coco @ (rdx, rdy)
-		
-		// Shoot towards player
+	// Create a coco @ (rdx, rdy), shoot towards player
+
+	void cocos_shoot_aimed (void) {		
 		rdct = distance ();
 
 		if (rdct > COCO_FAIR_D && coco_slots_i) {
@@ -34,19 +33,18 @@ void cocos_init (void) {
 #endif
 
 #ifdef COCOS_ENABLE_LINEAR
+	// Create a coco @ (rdx, rdy), direction rda.
+
 	void cocos_shoot_linear (void) {
 		if (coco_slots_i == 0) return;
 
-		// Create a coco @ (rdx, rdy)
 		coco_slots_i --; coco_it = coco_slots [coco_slots_i];
 
 		coco_x [coco_it] = rdx << 6;
 		coco_y [coco_it] = rdy << 6;
 
-		coco_vx [coco_it] = en_facing [gpit] ? -COCO_V : COCO_V;
-	#ifdef COCOS_ENABLE_AIMED	
-		coco_vy [coco_it] = 0;
-	#endif	
+		coco_vx [coco_it] = coco_dx [rda];
+		coco_vy [coco_it] = coco_dy [rda];
 
 		coco_on [coco_it] = 1;
 	}
@@ -64,18 +62,23 @@ void cocos_do (void) {
 		coco_y [coco_it] += coco_vy [coco_it];
 
 		// Out of bounds
-		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 256<<6 || coco_y [coco_it] < 0 || coco_y [coco_it] > 192<<6) {
+		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 248<<FIXBITS || coco_y [coco_it] < 16<<FIXBITS || coco_y [coco_it] > 200<<FIXBITS) {
 			cocos_destroy ();
 			continue;
 		}
 
 		rdx = coco_x [coco_it] >> 6;
-	#ifdef COCOS_ENABLE_AIMED		
 		rdy = coco_y [coco_it] >> 6;
-	#endif
 
 		// Render
 		oam_index = oam_spr (rdx, rdy + SPRITE_ADJUST, COCO_PATTERN, COCO_PALETTE, oam_index);
+
+		#ifdef COCO_COLLIDES
+			rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			if (rdm & 8) {
+				cocos_destroy (); continue;
+			}
+		#endif
 
 		// Collide w/player
 		if (pstate == EST_NORMAL && 

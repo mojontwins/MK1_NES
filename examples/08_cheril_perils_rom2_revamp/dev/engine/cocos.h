@@ -73,6 +73,13 @@ void cocos_do (void) {
 		// Render
 		oam_index = oam_spr (rdx, rdy + SPRITE_ADJUST, COCO_PATTERN, COCO_PALETTE, oam_index);
 
+		#ifdef COCO_COLLIDES
+			rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			if (rdm & 8) {
+				cocos_destroy (); continue;
+			}
+		#endif
+
 		// Collide w/player
 		if (pstate == EST_NORMAL && 
 			rdx + 7 >= prx && rdx <= prx + 7 && 

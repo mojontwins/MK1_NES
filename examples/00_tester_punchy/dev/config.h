@@ -13,11 +13,11 @@
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W 					16		//
-#define MAP_H					1		// Map dimmensions in screens
+#define MAP_H					1		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL			1		// Recarga de vida.
+#define PLAYER_LIFE				5		// Max / Initial life
+#define PLAYER_REFILL			1		// Life refill
 
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
@@ -175,6 +175,7 @@
 
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
+
 #define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID		(48+((frame_counter>>2)&3))
 #define SIMPLE_WARPERS_FIRE_BUTTON
@@ -226,7 +227,6 @@
 #define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
 #define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
-
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
@@ -304,11 +304,19 @@
 #define PUNCHIES_PUNCH_OFFS_Y			-7
 #define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
 
+// Steady shooters
+
+//#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		44
+#define STEADY_SHOOTER_KILLABLE
+#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
 #define COCOS_MAX						4
 #define COCO_V							128
+//#define COCO_COLLIDES
 
 #define COCO_PATTERN					0
 #define COCO_PALETTE 					0
@@ -424,7 +432,6 @@
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X		1		// X coordinate.
-
 
 // ============================================================================
 // IV. Player movement configuration

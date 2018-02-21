@@ -62,7 +62,7 @@ void cocos_do (void) {
 		coco_y [coco_it] += coco_vy [coco_it];
 
 		// Out of bounds
-		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 256<<6 || coco_y [coco_it] < 0 || coco_y [coco_it] > 192<<6) {
+		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 248<<FIXBITS || coco_y [coco_it] < 16<<FIXBITS || coco_y [coco_it] > 200<<FIXBITS) {
 			cocos_destroy ();
 			continue;
 		}
@@ -72,6 +72,13 @@ void cocos_do (void) {
 
 		// Render
 		oam_index = oam_spr (rdx, rdy + SPRITE_ADJUST, COCO_PATTERN, COCO_PALETTE, oam_index);
+
+		#ifdef COCO_COLLIDES
+			rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			if (rdm & 8) {
+				cocos_destroy (); continue;
+			}
+		#endif
 
 		// Collide w/player
 		if (pstate == EST_NORMAL && 

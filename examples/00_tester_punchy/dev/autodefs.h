@@ -11,7 +11,7 @@
 #define COCOS_ENABLE_AIMED
 #endif
 
-#ifdef ENABLE_SHOOTIES
+#if defined (ENABLE_SHOOTIES) || defined (ENABLE_STEADY_SHOOTERS)
 #define ENABLE_COCOS
 #define COCOS_ENABLE_LINEAR
 #endif

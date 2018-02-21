@@ -47,6 +47,9 @@ const unsigned char * const * const l_spr_enems [] =
 #ifdef MAP_FORMAT_RLE16
 	const unsigned char * const * const l_map [] =	
 #endif
+#ifdef MAP_FORMAT_RLE53
+	const unsigned char * const * const l_map [] =	
+#endif
 												{ map_0, map_1 };
 
 #ifdef MAP_WITH_DECORATIONS

@@ -18,7 +18,6 @@ if (en_rawv [gpit] & 1) {
 			else 
 				rdx = _en_x + SHOOTIES_SHOOT_OFFS_X;
 			rdy = _en_y + SHOOTIES_SHOOT_OFFS_Y;
-			rda = _en_facing ? 0 : 2;
 			cocos_shoot_linear ();
 			_en_ct = 16;
 		}

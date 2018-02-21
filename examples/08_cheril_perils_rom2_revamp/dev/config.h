@@ -212,6 +212,13 @@
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 
+// Springs
+
+#define ENABLE_SPRINGS
+#define SPRING_TILE 					10
+#define SPRING_SPIKE_TILE 				11
+//#define SPRINGS_ON_BY_DEFAULT
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -318,6 +325,7 @@
 //#define ENABLE_COCOS
 #define COCOS_MAX						4
 #define COCO_V							128
+#define COCO_COLLIDES
 
 #define COCO_PATTERN					12
 #define COCO_PALETTE 					3

@@ -291,24 +291,32 @@
 // Shooties
 
 //#define ENABLE_SHOOTIES
-#define SHOOTIES_BASE_SPRID				22
+#define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
-#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
+#define SHOOT_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
 
 // Punchies
 
 //#define ENABLE_PUNCHIES
-#define PUNCHIES_BASE_SPRID				16
+#define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
-#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing&&en_x[gpit]>prx)||(en_facing==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit])<12)
+#define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
+
+// Steady shooters
+
+//#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		44
+#define STEADY_SHOOTER_KILLABLE
+#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
 #define COCOS_MAX						3
 #define COCO_V							192
+//#define COCO_COLLIDES
 
 #define COCO_PATTERN					0
 #define COCO_PALETTE 					3

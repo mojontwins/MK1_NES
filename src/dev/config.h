@@ -226,8 +226,7 @@
 #define ENEMS_EXPLODING_CELL 			32
 #define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
-#define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
-
+#define ENEMS_OCCLUDING_CELL			33	// If you use pezons or saws you need a flame for occlusion
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
@@ -305,11 +304,19 @@
 #define PUNCHIES_PUNCH_OFFS_Y			-7
 #define PUNCH_FREQ						(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
 
+// Steady shooters
+
+//#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		44
+#define STEADY_SHOOTER_KILLABLE
+#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
 #define COCOS_MAX						4
 #define COCO_V							128
+//#define COCO_COLLIDES
 
 #define COCO_PATTERN					0
 #define COCO_PALETTE 					0

@@ -213,7 +213,10 @@ void game_loop (void) {
 #endif
 
 	oam_index = 0;
+	ticker = 50;
 	while (1) {
+		// Count frames		
+		if (ticker) ticker --; else ticker = 50;
 		half_life = 1 - half_life;
 		frame_counter ++;
 

@@ -74,6 +74,8 @@ Where `CELL_USE` is the index of the first "use animation" metasprite in the `sp
 Timer
 -----
 
+(Not used on this game?)
+
 Runs a timer which you can display. It detects when it reaches zero. You can integrate this with the scripting engine, or react to it adding C code to `my/extra_checks.h`.
 
 ```c
@@ -108,3 +110,16 @@ Steady Shooters
 - Place them. Relation between (x1, y1) and (x2, y2) defines direction. Attribute defines # of seconds between shoots.
 - Cells are from `STEADY_SHOOTERS_BASE_SPRID` onwards, from left, clockwise: left up right down.
 - `STEADY_SHOOTER_KILLABLE` make steady shooters destructible. But beware! They are not counted as killable by `eneexp3.exe`'s option `gencounter`. You can count them in using the `genallcounters` option in addition to `gencounter` and adding `KILLABLE_ENEMS_prefix + MAX_ENEMS_TYPE_5_prefix`.
+
+Springs
+-------
+
+```c
+	#define ENABLE_SPRINGS
+	#define SPRING_TILE 					10
+	#define SPRING_SPIKE_TILE 				11
+	//#define SPRINGS_ON_BY_DEFAULT	
+```
+
+- When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.
+- Springs will only work if `springs_on`. `springs_on` is set from the beginning if `SPRINGS_ON_BY_DEFAULT` is set.
