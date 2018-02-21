@@ -2679,7 +2679,7 @@ Sigo teniendo que probar que no he roto los shooties pero ahora no puedor.
 
 [ ] Mover config.h a /my
 
-[ ] Springs
+[X] Springs
 
 [ ] Containers
 
@@ -2698,4 +2698,88 @@ Los springs consistene en un tile que se detecta al pasar sobre él y que saca u
 Se me acaba el espacio en los testers así que lo suyo es que lo monte en el tentativo tercer nivel de Cheril que incluirá warpers, steady shooters... y Springs.
 
 Lo dejo implementado aunque no lo pueda probar aún.
+
+~~
+
+Containers
+----------
+
+En el modo más sencillo deberían ser dispositivos que permitan intercambiar el valor de un flag con el de otro. Qué mal explicado. Un Container es una representación gráfica de un flag. Se dibuja con el contenido de ese flag.
+
+Esto no es moco de pavo porque se puede hacer de mil formas. Estoy seguro de que esto estaba hecho de una forma en Cave de MK1 que la implementación de MK2 que hice, precisamente, para el remake de Cave.
+
+Voy a mirar el de MK2 primero a ver qué hace y como se integra.
+
+- Hay una estructura que almacena, para cada container, qué flag representa y su ubicación en pantalla. MK2 usa dos variables x e y, pero creo que no es mucho impacto usar una sola (porque además la RAM se acaba rápido).
+
+- Los containers existen para la pantalla actual y se crean en el ENTERING del script. En cada pantalla se reinicia el índice de los arrays y se van añadiendo de forma lineal desde el script.
+
+- Una función `containers_draw` pinta todos los activos, y otra `containers_do` registra la colisión. En realidad todo lo que hace es ver si el punto central del personaje está dentro del área de 16x16 de cada container, y pone el resultado en `containers_get`. Esta función se llama en la parte de `player_move` que controla la pulsación del botón B y debería invalidar la pulsación. 
+
+- Los containers no pueden representar el flag 0, ya que es el valor al que se inicializa `containers_get`. 
+
+- Tras la llamada a `containers_do` con un `containers_get != 0`: 
+
+1. Se invalida el botón B.
+2. Se intercambian los valores de los flags `PLAYER_INV_FLAG` y el del contenedor.
+
+Esto tiene su propia forma muy custom (en cave) de integrar con el player animation.
+
+Para integrarlo en MK1 debería quizá localizar las cosas de otra forma, quizá dividir el manejo en dos .h, uno en engine/ para la creación y otro en mainloop/ para el pintado/interacción, y hacer la misma integración que con los hotspots.
+
+Esto no lo voy a poder probar hasta que haga un tester con scripting. Lo puedo dejar planteado, eso sí, pero no me voy a poner a implementarlo aún. Quiero completar cosas, completar Cheril y completar Sir Ababol DX, que si no esto se me va a enquistar.
+
+Una vez diseñados, los aparcamos.
+
+Volviendo a los enemigos programados
+------------------------------------
+
+Necesitaré algo en assets con las programaciones de los enemigos e introducir el puntero a programa. Por lo demás ya están bastante planteados. Voy a revisitar para resolver el tema de los sprites, que seguramente limitaré a izquierda y derecha. O no.
+
+Creo que debería simplificar y tirar por el camino de facing left/right aunque estemos en un juego top-down. Para ello tengo que recordar el último facing, lo cual es trivial porque lo tengo guardado, y sólo cambiarlo cuando la dirección contiene left o right.
+
+Recordemos que necesitamos endx, endy en precalcs:
+
+```c
+	// Directions are
+	// LEFT DOWNLEFT DOWN DOWNRIGHT RIGHT UPRIGHT UP UPLEFT
+	// 0    1        2    3         4     5       6  7
+	const signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};
+	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
+```
+
+Así es sencillo. Al seleccionar, si `_en_mx < 0`, entonces `_en_facing = 4`; si `_en_mx > 0` entonces `_en_facing = 0`. En otro caso no se toca.
+
+He visto que solo se mueve a un pixel por frame pero creo que esto, por ahora, me va a ir valiendo.
+
+`*en_behptr` debería inicializarse en base al atributo, por ejemplo.
+
+Puedo hacer una animación de idle para las posiciones 2 y 3 de cada orientación.
+
+```
+	game.c
+	autodefs.h
+	config.h
+	assets/compiled_enems.h
+	assets/precalcs.h
+	engine/enengine.h
+	engine/enemmods/enem_compiled.h
+	ram/zp.h
+```
+
+```c
+	#define ENABLE_COMPILED_ENEMS
+	#define COMPILED_ENEMS_SHOOT
+```
+
+Tengo que generalizar pencompiler.exe para que pille todos los comportamientos y genere `compiled_enems.h` automáticamente.
+
+Puedo poner 
+
+```
+	BEGIN label
+	END 
+```
+
+Por ejemplo. Voy a probar.
 

@@ -1,0 +1,32 @@
+# Compiled enems
+
+# Enemy type 0 makes a square firing in each vertex.
+
+BEGIN beh0
+	:START
+	IDLE 4
+	RIGHT 2
+	IDLE 1
+	DOWN 2
+	IDLE 1
+	LEFT 2
+	IDLE 1
+	UP 2
+	IDLE 1
+	FIRE
+	RETURN START
+END
+
+# Enemy type 1 makes a diamond firing in the last step.
+
+BEGIN beh1
+	:START
+	IDLE 2
+	DOWN RIGHT 2
+	DOWN LEFT 2
+	UP LEFT 2
+	UP RIGHT 2
+	IDLE 2
+	FIRE
+	RETURN START
+END

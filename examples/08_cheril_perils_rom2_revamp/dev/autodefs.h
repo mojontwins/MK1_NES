@@ -6,7 +6,7 @@
 #define MONOCOCO_COUNTER 		_en_my
 #define MONOCOCO_STATE 			_en_mx
 
-#ifdef ENABLE_MONOCOCOS
+#if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
 #define ENABLE_COCOS
 #define COCOS_ENABLE_AIMED
 #endif

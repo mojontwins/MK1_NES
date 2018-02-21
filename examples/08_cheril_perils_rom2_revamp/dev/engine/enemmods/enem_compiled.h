@@ -2,7 +2,7 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Compiled enemies!
-// needs a const unsigned char *enbehptr [ENEMS_MAX];
+// needs a const unsigned char *en_behptr [ENEMS_MAX];
 // needs endx [8], endy [8] from precalcs.h
 
 if (_en_ct) {
@@ -12,8 +12,9 @@ if (_en_ct) {
 		case 0:
 			// Idling
 
-			// TODO Choose a special sprite face? 
-			spr_id = _en_s + _en_facing; 
+			// Idle animation, cells 2, 3.
+			spr_id = _en_s + _en_facing + 2 + 
+				((frame_counter >> 3) & 2); 
 			break;
 		case 1:
 			// Moving
@@ -22,8 +23,7 @@ if (_en_ct) {
 			rdx = _en_x; _en_x += _en_mx;
 			rdy = _en_y; _en_y += _en_my;
 
-			// TODO animate better
-			_en_facing = (_en_mx > 0 || _en_my > 0) ? 0 : 4;
+			// Moving animation, cells 0, 1.
 			spr_id = _en_s + _en_facing + en_fr;
 			break;
 	}
@@ -34,7 +34,7 @@ if (_en_ct) {
 	// Choose. Beware, this assumes you will never consume
 	// the whole array and that a proper RETURN is issued!
 
-	rda = *enbehptr [gpit] ++;
+	rda = *en_behptr [gpit] ++;
 
 	rdc = (rda & 0x38) >> 3;
 	rdt = rda & 0x07;
@@ -49,20 +49,22 @@ if (_en_ct) {
 
 		case 0x40:
 			// ADVANCE
-			_en_mx = endx [rdc];
-			_en_my = endy [rdc];
-			_en_ct = rdt << 4;
-			en_alive [gpit] = 1;
+			_en_mx = endx [rdc]; _en_my = endy [rdc];
+					
+			if (_en_mx < 0) _en_facing = 4;
+			else if (_en_mx > 0) _en_facing = 0;
+			
+			_en_ct = rdt << 4; en_alive [gpit] = 1;
 			break;
 
 		case 0x80:
 			// FIRE
-			// TODO
+			rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
 			break;
 
 		case 0xC0:
 			// RETURN
-			enbehptr [enit] -= rda & 0x3f;
+			en_behptr [enit] -= rda & 0x3f;
 			break;
 	}
 }

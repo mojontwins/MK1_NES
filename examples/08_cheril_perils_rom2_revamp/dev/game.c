@@ -39,6 +39,9 @@
 #ifdef ENABLE_TEXT_BOX
 	#include "assets/custom_texts.h"
 #endif
+#ifdef ENABLE_COMPILED_ENEMS
+	#include "assets/compiled_enems.h"
+#endif
 
 #include "assets/hud_rle.h"
 

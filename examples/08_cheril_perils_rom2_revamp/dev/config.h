@@ -320,6 +320,11 @@
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
 
+// Compiled enemies
+
+#define ENABLE_COMPILED_ENEMS
+#define COMPILED_ENEMS_SHOOT
+
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
