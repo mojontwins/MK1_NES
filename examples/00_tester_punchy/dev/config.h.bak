@@ -100,7 +100,7 @@
 
 // Same for enemies.
 // I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
-#define ENEMS_COLLISION_TOP_FG		8
+#define ENEMS_COLLISION_TOP_FG		8	
 
 // General directives:
 // -------------------

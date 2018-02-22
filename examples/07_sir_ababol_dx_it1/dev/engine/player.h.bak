@@ -17,15 +17,19 @@ void player_init (void) {
 
 	pvx = pvy = 0;
 
+	// CUSTOM {
+	/*
 	#ifdef PLAYER_TOP_DOWN	
 		pfacing = CELL_FACING_DOWN;
 	#else
 		pfacing = 0;
 	#endif	
-
+	*/
+	// } END_OF_CUSTOM
+	
 	pfr = pctfr = 0;
 	pj = pctj = 0;
-	psprid = 0;
+	psprid = 6;
 
 	#ifndef DEACTIVATE_OBJECTS
 		pobjs = 0;
@@ -237,12 +241,18 @@ void player_move (void) {
 			} else
 		#endif
 
-		#ifndef PLAYER_SWIMS
+		// CUSTOM {
+		//#ifndef PLAYER_SWIMS
+		if (level != 1) {
+		// } END_OF_CUSTOM
 			if (!pj) {
 				pvy += PLAYER_G;
 				if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 			}
-		#endif
+		// CUSTOM {
+		}
+		//#endif
+		// } END_OF_CUSTOM
 
 		// Moving platforms invalidate pvy
 
@@ -264,7 +274,10 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef PLAYER_SWIMS
+	// CUSTOM {
+	//#ifdef PLAYER_SWIMS
+	if (level == 1) {
+	// } END_OF_CUSTOM	
 		// Controller 
 
 		if (!(i & (PAD_DOWN|PAD_A))) {
@@ -282,8 +295,10 @@ void player_move (void) {
 		if (pvy < -PLAYER_VY_SWIM_MAX) {
 			pvy = -PLAYER_VY_SWIM_MAX;
 		}
-
-	#endif
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// Move
 	py += pvy;
@@ -300,10 +315,18 @@ void player_move (void) {
 		if (rds16 < 0)
 	#endif		
 		{
-			cy1 = cy2 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;			
+			#ifdef TALL_PLAYER
+				cy1 = cy2 = (pry + (PLAYER_COLLISION_TOP_BG - 16)) >> 4;
+			#else
+				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP_BG) >> 4;
+			#endif
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pry = ((cy1 + 1) << 4) + PLAYER_COLLISION_TOP_BG;
+				#ifdef TALL_PLAYER
+					pry = ((cy1 + 1) << 4) + 16 - PLAYER_COLLISION_TOP_BG;
+				#else
+					pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP_BG;
+				#endif
 				pvy = 0; py = pry << FIXBITS;
 				pgotten = 0;
 				pfiring = 1;
@@ -378,7 +401,11 @@ void player_move (void) {
 			#endif
 		}
 	
-	#ifdef PLAYER_HAS_JUMP
+
+	// CUSTOM {
+	//#ifdef PLAYER_HAS_JUMP
+	if (level != 1) {
+	// } END_OF_CUSTOM
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
@@ -411,7 +438,10 @@ void player_move (void) {
 		} else {
 			pj = 0; 
 		}
-	#endif
+	// CUSTOM {
+	//#endif
+	}
+	// } END_OF_CUSTOM
 
 	// **********
 	// Horizontal
@@ -490,8 +520,8 @@ void player_move (void) {
 	
 	// Collision
 
-	#if PLAYER_COLLISION_TOP_BG <= 0
-		cy1 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;
+	#ifndef TALL_PLAYER
+		cy1 = (pry + PLAYER_COLLISION_TOP_BG) >> 4;
 		cy2 = (pry + 15) >> 4;
 	#endif
 
@@ -506,15 +536,16 @@ void player_move (void) {
 			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
-		#if PLAYER_COLLISION_TOP_BG > 0
+		#ifdef TALL_PLAYER
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
 				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
+					if (at1 & 2) player_process_tile (at1, cx1, (PLAYER_COLLISION_TOP_BG - 16)) >> 4, rdm, cy1);
 					if (at2 & 2) player_process_tile (at2, cx1, pry >> 4, rdm, cy2);
-					if (at3 & 2) player_process_tile (at3, cx1, (pry + 15) >> 4, rdm, cy3);
+					if (at3 & 2) player_process_tile (at2, cx1, (pry + 15) >> 4, rdm, cy2);
 				#endif				
 			} else {
 				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));

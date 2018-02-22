@@ -24,8 +24,8 @@ unsigned char ticker;
 // Used for two-points collision
 
 unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
-#ifdef TALL_PLAYER
-	unsigned char at3;
+#if PLAYER_COLLISION_TOP_BG > 0
+	unsigned char cy3, at3;
 #endif
 
 // Sprite related

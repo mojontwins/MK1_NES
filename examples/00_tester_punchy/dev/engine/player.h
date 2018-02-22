@@ -491,7 +491,7 @@ void player_move (void) {
 	// Collision
 
 	#if PLAYER_COLLISION_TOP_BG <= 0
-		cy1 = (pry + PLAYER_COLLISION_TOP_BG) >> 4;
+		cy1 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;
 		cy2 = (pry + 15) >> 4;
 	#endif
 

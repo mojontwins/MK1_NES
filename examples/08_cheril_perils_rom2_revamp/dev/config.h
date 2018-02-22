@@ -87,13 +87,20 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP_BG)
-#define PLAYER_COLLISION_TOP_BG		4   // Player is 8x16, but this can make him "shorter" for collision
+// Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
+#define PLAYER_COLLISION_TOP_BG		-4
 
-// This defines how the player will collide with enemies. Needs rehash.
-#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
-//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
-// (Comment both for ol' good unforgiving collision)
+// This defines how the player will collide with enemies. 
+// Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
+// this offset goes to the head. 
+// So if you define it as -8, the collision box will be 8x8 bottom centerd.
+// And if you define it as 4 the collision box will be 8x20 bottom centered.
+// For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.
+#define PLAYER_COLLISION_TOP_FG 	4
+
+// Same for enemies.
+// I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
+#define ENEMS_COLLISION_TOP_FG		0
 
 // General directives:
 // -------------------

@@ -33,7 +33,7 @@ void cocos_init (void) {
 #endif
 
 #ifdef COCOS_ENABLE_LINEAR
-	// Create a coco @ (rdx, rdy), direction rda.
+	// Create a coco @ (rdx, rdy), direction rda. LEFT UP RIGHT DOWN
 
 	void cocos_shoot_linear (void) {
 		if (coco_slots_i == 0) return;
@@ -82,12 +82,9 @@ void cocos_do (void) {
 
 		// Collide w/player
 		if (pstate == EST_NORMAL && 
-			rdx + 7 >= prx && rdx <= prx + 7 && 
-			#ifdef TALL_PLAYER
-				rdy + 7 >= pry - 16 + PLAYER_COLLISION_TOP_BG &&
-			#else			
-				rdy + 7 >= pry && 
-			#endif
+			rdx + 7 >= prx && 
+			rdx <= prx + 7 && 
+			rdy + 7 + PLAYER_COLLISION_TOP_FG >= pry && 
 			rdy <= pry + 12
 		) {
 			pkill = 1;

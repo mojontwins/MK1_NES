@@ -619,7 +619,7 @@ void enems_move (void) {
 
 			#ifdef ENABLE_SIMPLE_WARPERS
 				if (_en_t == 0xff) {
-					if (collide (prx, pry, _en_x, _en_y)
+					if (collide ()
 					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
 						&& (pad_this_frame & PAD_B)
 					#endif
@@ -737,7 +737,7 @@ void enems_move (void) {
 			if (
 				touched == 0 &&
 				pstate == EST_NORMAL &&
-				collide (prx, pry, _en_x, _en_y)
+				collide ()
 			) {
 				#ifdef PLAYER_BOUNCES
 					pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
@@ -782,13 +782,10 @@ void enems_move (void) {
 			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 				if (phitteract) {
 					if (
-						_en_x + 7 >= phitterx && _en_x <= phitterx + 7 &&
-						#ifdef TALL_COLLISION
-							phittery + 15 >= _en_y &&
-						#else
-							phittery + 7 >= _en_y &&
-						#endif					
-						phittery <= _en_y + 7
+						phitterx + 7 >= _en_x &&
+						phitterx <= _en_x + 7 &&
+						phittery + 7 + ENEMS_COLLISION_TOP_FG >= _en_y &&
+						phittery <= _en_y + 12
 					) {
 						enems_hit ();
 						phitteract = 0;

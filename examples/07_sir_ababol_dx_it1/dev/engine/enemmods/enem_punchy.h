@@ -24,12 +24,8 @@ if (en_rawv [gpit] & 2) {
 			// Collide w/player
 			if (pstate == EST_NORMAL && 
 				rdx + 7 >= prx && rdx <= prx + 7 && 
-				#ifdef TALL_PLAYER
-					rdy + 7 >= pry - 16 + PLAYER_COLLISION_TOP_BG &&
-				#else			
-					rdy + 7 >= pry && 
-				#endif
-				rdy <= pry + 12
+				rdy + 7 + PLAYER_COLLISION_TOP_FG >= pry && 
+				rdy <= pry + 13
 			) {
 				pkill = 1;
 				en_spr = _en_s + _en_facing + 2;

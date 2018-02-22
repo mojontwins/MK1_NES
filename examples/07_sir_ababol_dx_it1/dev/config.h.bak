@@ -12,15 +12,15 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					16		//
-#define MAP_H					1		// Map dimensions in screens
+#define MAP_W 					20		//
+#define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Max / Initial life
-#define PLAYER_REFILL			1		// Life refill
+#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				1
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				3
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
@@ -28,8 +28,8 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					1		// Initial screen
-	#define PLAYER_INI_X			2		//
+	#define SCR_INI					0		// Initial screen
+	#define PLAYER_INI_X			3		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
@@ -61,6 +61,9 @@
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
+#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
+
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
@@ -87,32 +90,25 @@
 // Bounding box size
 // -----------------
 
-// Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_TOP_BG		8
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP_BG)
+#define PLAYER_COLLISION_TOP_BG		4   // Player is 8x16, but this can make him "shorter" for collision
 
-// This defines how the player will collide with enemies. 
-// Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
-// this offset goes to the head. 
-// So if you define it as -8, the collision box will be 8x8 bottom centerd.
-// And if you define it as 4 the collision box will be 8x20 bottom centered.
-// For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.
-#define PLAYER_COLLISION_TOP_FG 	8
-
-// Same for enemies.
-// I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
-#define ENEMS_COLLISION_TOP_FG		8
+// This defines how the player will collide with enemies. Needs rehash.
+#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
+//#define TALL_COLLISION				// 8x12 bottom collision instead of 12x12
+// (Comment both for ol' good unforgiving collision)
 
 // General directives:
 // -------------------
 
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-#define DIE_AND_REENTER					// Reenter screen on death
+//#define DIE_AND_REENTER				// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -126,13 +122,13 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-#define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE			1		// Amount of hits to break wall
+//#define ENABLE_BREAKABLE				// Breakable walls
+#define BREAKABLE_LIFE	2				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES	16		// Frames to show explosion
+#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
 #define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		31		// Tile to display while breaking
+#define BREAKABLE_BREAKING		8		// Tile to display while breaking
 //#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
@@ -149,14 +145,14 @@
 
 // Ladders, beh == 32
 
-#define ENABLE_LADDERS
+//#define ENABLE_LADDERS
 
 // Extra special stuff
 // -------------------
 
 // Propellers
 
-#define ENABLE_PROPELLERS
+//#define ENABLE_PROPELLERS
 #define PROPELLERS_MAX 					4
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
@@ -184,8 +180,8 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-#define ENABLE_SIMPLE_WARPERS
-#define SIMPLE_WARPERS_BASE_SPRID		(48+((frame_counter>>2)&3))
+//#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!
@@ -205,7 +201,7 @@
 
 // Text boxes. If you need them, you call them
 
-//#define ENABLE_TEXT_BOX
+#define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
 
 // Timer. 
@@ -228,20 +224,20 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
-#define ENEMS_FLICKER
+#define ENEMIES_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+//#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_TOUCHED_FRAMES			32	// # frames to stay frozen after hit
+#define ENEMS_TOUCHED_FRAMES			16	// # frames to stay frozen after hit
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
 #define ENEMS_EXPLODING_CELL 			32
 #define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
-#define ENEMS_OCCLUDING_CELL			33 // If you use pezons or saws you need a flame for occlusion
+#define ENEMS_OCCLUDING_CELL			33	// If you use pezons or saws you need a flame for occlusion
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
@@ -305,7 +301,7 @@
 
 // Shooties
 
-#define ENABLE_SHOOTIES
+//#define ENABLE_SHOOTIES
 #define SHOOTIES_BASE_SPRID				40
 #define SHOOTIES_SHOOT_OFFS_X			16
 #define SHOOTIES_SHOOT_OFFS_Y			-2
@@ -313,7 +309,7 @@
 
 // Punchies
 
-#define ENABLE_PUNCHIES
+//#define ENABLE_PUNCHIES
 #define PUNCHIES_BASE_SPRID				32
 #define PUNCHIES_PUNCH_OFFS_X			16
 #define PUNCHIES_PUNCH_OFFS_Y			-7
@@ -362,11 +358,11 @@
 
 // Silly Brawlers
 // --------------
-#define PLAYER_PUNCHES					// When on floor
+//#define PLAYER_PUNCHES				// When on floor
 #define PLAYER_PUNCH_OFFS_X				15
 #define PLAYER_PUNCH_OFFS_Y				-7
 
-#define PLAYER_KICKS					// While airborne
+//#define PLAYER_KICKS					// While airborne
 #define PLAYER_KICK_OFFS_X				12
 #define PLAYER_KICK_OFFS_Y				-3
 
@@ -416,10 +412,10 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
@@ -478,7 +474,7 @@
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
 
 #define PLAYER_AY_SWIM			8		// Swimming acceleration.
-#define PLAYER_VY_SWIM_MAX		64		// Swimming max. speed
+#define PLAYER_VY_SWIM_MAX		48		// Swimming max. speed
 
 #define PLAYER_VY_LADDERS		96
 
@@ -491,10 +487,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
@@ -521,10 +517,10 @@
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
-	#define CELL_WALK_CYCLE		2
+	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
-	#define CELL_ASCENDING		6
-	#define CELL_DESCENDING		7
+	#define CELL_ASCENDING		5
+	#define CELL_DESCENDING		6
 
 	#define CELL_SWIM_CYCLE		6
 

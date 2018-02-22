@@ -50,7 +50,7 @@ unsigned char collide (void) {
 	return (
 		prx + 3 >= _en_x && 
 		prx <= _en_x + 11 && 
-		pry + 13 + ENEMS_COLLISION_TOP_FG <= _en_y &&
+		pry + 13 + ENEMS_COLLISION_TOP_FG >= _en_y &&
 		pry <= _en_y + 13 + PLAYER_COLLISION_TOP_FG
 	);
 
