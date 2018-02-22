@@ -370,3 +370,44 @@ Springs
 - When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.
 - Springs will only work if `springs_on`. `springs_on` is set from the beginning if `SPRINGS_ON_BY_DEFAULT` is set.
 
+CNROM
+-----
+
+To make CNROM games you have to:
+
+- Generate four tileset?.chr files, with ? = 0..3, instead of just one tileset.chr file for NROM.
+- Add `-D CNROM` in the `cc65` call which compiles the game in `compile.bat`
+- Add `-D CNROM=1` in the `ca65` call which assembles `crt0.s` in `compile.bat`.
+- Use `-C nes-CNROM.cfg` instead of `-C nes.cfg` in the `la65` call which links the cart in `compile.bat`
+- Provide correct values in the `l_chr_rom_bank` array in `levelset.h` so the engine knows which CHR-ROM bank it should page in for each level.
+- Note that you might need to include sets of `tileset?.h` and `spriteset?.h` files in `game.c` to fit your needs.
+
+Take a peek at `08_cheril_perils_rom2_revamp` to see this in action!
+
+Compiled enemies
+----------------
+
+Compiled enemies follow a programmed path from a set. Such set is generated compiling the `script/enembehs.spt` script. The language is pretty straightforward, just check the simple examples provided. 
+
+Behaviours included in the script are compiled in order, the first one is #0. When adding enenmies in `ponedor.exe`, just add your enemy in its starting position as type 0x14 and especify the behaviour number in the attr field. The ending position is discarded.
+
+```c
+    #define ENABLE_COMPILED_ENEMS
+    #define COMPILED_ENEMS_SHOOT
+    #define COMPILED_ENEMS_BASE_SPRID       48
+```
+
+If your enemies shoot, define `COMPILED_ENEMS_SHOOT`. Leave it commented out if none of them do, as you will save space (`COCOS` won't get added). 
+
+Enemmies are rendered facing left or right. There are two animation cells for when they are moving around and two extra animation cells for when they are idling (not moving). Cells are in the active `spr_enems` array starting at index `COMPILED_ENEMS_BASE_SPRID`:
+
+```
+    WALK_RIGHT_0
+    WALK_RIGHT_1
+    IDLE_RIGHT_0
+    IDLE_RIGHT_1
+    WALK_LEFT_0
+    WALK_LEFT_1
+    IDLE_LEFT_0
+    IDLE_LEFT_1
+```

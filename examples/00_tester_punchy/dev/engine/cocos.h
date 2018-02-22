@@ -84,7 +84,7 @@ void cocos_do (void) {
 		if (pstate == EST_NORMAL && 
 			rdx + 7 >= prx && 
 			rdx <= prx + 7 && 
-			rdy + 7 + PLAYER_COLLISION_TOP_FG >= pry && 
+			rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
 			rdy <= pry + 12
 		) {
 			pkill = 1;

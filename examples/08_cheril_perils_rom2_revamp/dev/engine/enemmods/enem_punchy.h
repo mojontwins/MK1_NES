@@ -24,7 +24,7 @@ if (en_rawv [gpit] & 2) {
 			// Collide w/player
 			if (pstate == EST_NORMAL && 
 				rdx + 7 >= prx && rdx <= prx + 7 && 
-				rdy + 7 + PLAYER_COLLISION_TOP_FG >= pry && 
+				rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
 				rdy <= pry + 13
 			) {
 				pkill = 1;

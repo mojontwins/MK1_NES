@@ -3,7 +3,7 @@ Modules list:
 crt0.o:
     RODATA            Offs = 000000   Size = 000808
     HEADER            Offs = 000000   Size = 000010
-    STARTUP           Offs = 000000   Size = 000BCF
+    STARTUP           Offs = 000000   Size = 000BD4
     VECTORS           Offs = 000000   Size = 000006
     CHARS             Offs = 000000   Size = 002000
 game.o:
@@ -102,27 +102,27 @@ HEADER                000000  00000F  000010
 ZEROPAGE              000028  0000F3  0000CC
 DATA                  000300  000324  000025
 BSS                   000325  0007BD  000499
-STARTUP               008000  008BCE  000BCF
-INIT                  008BCF  008BFE  000030
-CODE                  008BFF  00B850  002C52
-RODATA                00B851  00DFA2  002752
+STARTUP               008000  008BD3  000BD4
+INIT                  008BD4  008C03  000030
+CODE                  008C04  00B855  002C52
+RODATA                00B856  00DFA7  002752
 VECTORS               00FFFA  00FFFF  000006
 
 
 Exports list:
 -------------
 __BSS_RUN__               000325 RLA    __BSS_SIZE__              000499 REA    
-__CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     008BFF RLA    
-__DATA_LOAD__             00DFA3 RLA    __DATA_RUN__              000300 RLA    
+__CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     008C04 RLA    
+__DATA_LOAD__             00DFA8 RLA    __DATA_RUN__              000300 RLA    
 __DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
-__DESTRUCTOR_TABLE__      00DFA3 RLA    __RAM_SIZE__              000500 REA    
+__DESTRUCTOR_TABLE__      00DFA8 RLA    __RAM_SIZE__              000500 REA    
 __RAM_START__             000300 RLA    __STARTUP__               000001 REA    
 _bank_bg                  0083E2 RLA    _bank_spr                 0083D2 RLA    
-_delay                    00858F RLA    _m_gameover               00BE08 RLA    
-_m_ingame                 00BC07 RLA    _m_title                  00BA09 RLA    
-_main                     00B539 RLA    _memfill                  008560 RLA    
-_music_pause              008747 REA    _music_play               008456 RLA    
-_music_stop               0086A0 REA    _oam_clear                0082A7 RLA    
+_delay                    00858F RLA    _m_gameover               00BE0D RLA    
+_m_ingame                 00BC0C RLA    _m_title                  00BA0E RLA    
+_main                     00B53E RLA    _memfill                  008560 RLA    
+_music_pause              00874C REA    _music_play               008456 RLA    
+_music_stop               0086A5 REA    _oam_clear                0082A7 RLA    
 _oam_hide_rest            008339 RLA    _oam_meta_spr             0082F1 RLA    
 _oam_spr                  0082C7 RLA    _pad_poll                 00846F RLA    
 _pal_bg                   008228 RLA    _pal_bright               00825A RLA    
@@ -132,33 +132,33 @@ _rand8                    0084CE RLA    _scroll                   00839F RLA
 _set_vram_update          0084E4 RLA    _sfx_play                 00845E RLA    
 _unrle_vram               00835F RLA    _vram_adr                 0084EE RLA    
 _vram_fill                0084F9 RLA    _vram_put                 0084F5 RLA    
-_vram_write               008426 RLA    addysp                    00B58D RLA    
-addysp1                   00B58C RLA    aslax2                    00B59A RLA    
-aslax3                    00B5A5 RLA    aslax4                    00B5B3 RLA    
-asrax1                    00B5C4 RLA    asrax2                    00B5CE RLA    
-asrax4                    00B5DD RLA    bnega                     00B5FA RLA    
-boolne                    00B6D2 RLA    copydata                  00B610 RLA    
-decsp2                    00B63D RLA    decsp3                    00B64A RLA    
-decsp4                    00B657 RLA    decsp8                    00B664 RLA    
-incsp1                    00B69F RLA    incsp2                    00B6AE RLA    
-incsp4                    00B6BC RLA    incsp8                    00B6C1 RLA    
-initlib                   008BCF RLA    ldaidx                    00B6C6 RLA    
-negax                     00B70D RLA    popa                      00B72D RLA    
-popax                     00B6A6 RLA    popsreg                   00B739 RLA    
+_vram_write               008426 RLA    addysp                    00B592 RLA    
+addysp1                   00B591 RLA    aslax2                    00B59F RLA    
+aslax3                    00B5AA RLA    aslax4                    00B5B8 RLA    
+asrax1                    00B5C9 RLA    asrax2                    00B5D3 RLA    
+asrax4                    00B5E2 RLA    bnega                     00B5FF RLA    
+boolne                    00B6D7 RLA    copydata                  00B615 RLA    
+decsp2                    00B642 RLA    decsp3                    00B64F RLA    
+decsp4                    00B65C RLA    decsp8                    00B669 RLA    
+incsp1                    00B6A4 RLA    incsp2                    00B6B3 RLA    
+incsp4                    00B6C1 RLA    incsp8                    00B6C6 RLA    
+initlib                   008BD4 RLA    ldaidx                    00B6CB RLA    
+negax                     00B712 RLA    popa                      00B732 RLA    
+popax                     00B6AB RLA    popsreg                   00B73E RLA    
 ptr1                      0000E2 RLZ    ptr2                      0000E4 RLZ    
-ptr4                      0000E8 RLZ    push0                     00B75F RLA    
-pusha                     00B74D RLA    pusha0                    00B761 RLA    
-pushax                    00B763 RLA    regsave                   0000DE RLZ    
-shlax4                    00B5B3 RLA    shrax3                    00B7A4 RLA    
-shrax4                    00B7B2 RLA    sp                        0000DA RLZ    
-sreg                      0000DC RLZ    staspidx                  00B7C3 RLA    
-stax0sp                   00B7D9 RLA    staxysp                   00B7DB RLA    
-subysp                    00B7E4 RLA    tmp1                      0000EA RLZ    
-tosaddax                  00B574 RLA    tosaslax                  00B779 RLA    
-tosicmp                   00B673 RLA    tosicmp0                  00B671 RLA    
-tosneax                   00B707 RLA    tosorax                   00B71D RLA    
-tosudiva0                 00B7F1 RLA    tosumoda0                 00B840 RLA    
-udiv16                    00B802 RLA    zerobss                   008BDB RLA    
+ptr4                      0000E8 RLZ    push0                     00B764 RLA    
+pusha                     00B752 RLA    pusha0                    00B766 RLA    
+pushax                    00B768 RLA    regsave                   0000DE RLZ    
+shlax4                    00B5B8 RLA    shrax3                    00B7A9 RLA    
+shrax4                    00B7B7 RLA    sp                        0000DA RLZ    
+sreg                      0000DC RLZ    staspidx                  00B7C8 RLA    
+stax0sp                   00B7DE RLA    staxysp                   00B7E0 RLA    
+subysp                    00B7E9 RLA    tmp1                      0000EA RLZ    
+tosaddax                  00B579 RLA    tosaslax                  00B77E RLA    
+tosicmp                   00B678 RLA    tosicmp0                  00B676 RLA    
+tosneax                   00B70C RLA    tosorax                   00B722 RLA    
+tosudiva0                 00B7F6 RLA    tosumoda0                 00B845 RLA    
+udiv16                    00B807 RLA    zerobss                   008BE0 RLA    
 
 
 
@@ -183,9 +183,9 @@ __DESTRUCTOR_COUNT__ ([linker generated]):
 __DESTRUCTOR_TABLE__ ([linker generated]):
     condes.o                  condes.s(19)
 __RAM_SIZE__ ([linker generated]):
-    crt0.o                    crt0.s(23)
+    crt0.o                    crt0.s(28)
 __RAM_START__ ([linker generated]):
-    crt0.o                    crt0.s(23)
+    crt0.o                    crt0.s(28)
 __STARTUP__ (crt0.o):
     game.o                    game.s(12)
 _bank_bg (crt0.o):
@@ -201,7 +201,7 @@ _m_ingame (crt0.o):
 _m_title (crt0.o):
     game.o                    game.s(100)
 _main (game.o):
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 _memfill (crt0.o):
     game.o                    game.s(38)
 _music_pause (crt0.o):
@@ -301,7 +301,7 @@ boolne (makebool.o):
     ne.o                      ne.s(8)
     game.o                    game.s(8580)
 copydata (copydata.o):
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 decsp2 (decsp2.o):
     game.o                    game.s(11878)
 decsp3 (decsp3.o):
@@ -333,7 +333,7 @@ incsp4 (incsp4.o):
 incsp8 (incsp8.o):
     game.o                    game.s(9067)
 initlib (condes.o):
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 ldaidx (ldai.o):
     game.o                    game.s(11764)
     game.o                    game.s(13760)
@@ -344,10 +344,10 @@ negax (neg.o):
     game.o                    game.s(13297)
     game.o                    game.s(14418)
 popa (popa.o):
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 popax (incsp2.o):
     shl.o                     shl.s(15)
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 popsreg (popsreg.o):
     umod.o                    umod.s(8)
     udiv.o                    udiv.s(8)
@@ -493,5 +493,5 @@ tosumoda0 (umod.o):
 udiv16 (udiv.o):
     umod.o                    umod.s(8)
 zerobss (zerobss.o):
-    crt0.o                    crt0.s(20)
+    crt0.o                    crt0.s(25)
 

@@ -928,9 +928,12 @@ _delay:
 ; void __fastcall__ bankswitch(unsigned char bank);
 
 _bankswitch:
-   sta $8000
-   rts
-	
+	tax
+	sta bankList, x
+	rts
+
+bankList:
+	.byte $00, $01, $02, $03
 	
 palBrightTableL:
 	.byte <palBrightTable0,<palBrightTable1,<palBrightTable2

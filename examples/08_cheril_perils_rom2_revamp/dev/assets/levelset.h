@@ -65,3 +65,9 @@ const unsigned char * const * const l_spr_enems [] =
 
 const unsigned char * const l_enems [] = 		{ enems_1, enems_0 };
 const unsigned char * const l_hotspots [] = 	{ hotspots_1, hotspots_0 };
+
+// CHR-ROM bank, for CNROM
+
+#ifdef CNROM
+	const unsigned char l_chr_rom_bank [] = 	{ 0, 0, 1 };
+#endif

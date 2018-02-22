@@ -315,10 +315,10 @@ void player_move (void) {
 		if (rds16 < 0)
 	#endif		
 		{
-			cy1 = cy2 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;			
+			cy1 = cy2 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;			
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pry = ((cy1 + 1) << 4) + PLAYER_COLLISION_TOP_BG;
+				pry = ((cy1 + 1) << 4) + PLAYER_COLLISION_VSTRETCH_BG;
 				pvy = 0; py = pry << FIXBITS;
 				pgotten = 0;
 				pfiring = 1;
@@ -512,8 +512,8 @@ void player_move (void) {
 	
 	// Collision
 
-	#if PLAYER_COLLISION_TOP_BG <= 0
-		cy1 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;
+	#if PLAYER_COLLISION_VSTRETCH_BG <= 0
+		cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
 		cy2 = (pry + 15) >> 4;
 	#endif
 
@@ -528,7 +528,7 @@ void player_move (void) {
 			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
-		#if PLAYER_COLLISION_TOP_BG > 0
+		#if PLAYER_COLLISION_VSTRETCH_BG > 0
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
 				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;

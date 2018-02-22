@@ -5,6 +5,10 @@
 
 void game_init (void) {
 
+	#ifdef CNROM
+		bankswitch (l_chr_rom_bank [level]);
+	#endif
+
 	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.

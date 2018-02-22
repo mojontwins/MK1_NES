@@ -681,6 +681,9 @@ void enems_move (void) {
 				#ifndef PLAYER_TOP_DOWN				
 					|| _en_t == 4
 				#endif
+				#ifdef ENABLE_PURSUERS
+					|| (_en_t == 7 && en_alive [gpit] != 2)
+				#endif
 				#ifdef ENABLE_SAW
 					|| (_en_t == 8 && en_alive [gpit] == 0)
 				#endif
@@ -787,7 +790,7 @@ void enems_move (void) {
 					if (
 						phitterx + 7 >= _en_x &&
 						phitterx <= _en_x + 7 &&
-						phittery + 7 + ENEMS_COLLISION_TOP_FG >= _en_y &&
+						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 						phittery <= _en_y + 12
 					) {
 						enems_hit ();

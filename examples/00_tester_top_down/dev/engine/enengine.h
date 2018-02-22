@@ -787,7 +787,7 @@ void enems_move (void) {
 					if (
 						phitterx + 7 >= _en_x &&
 						phitterx <= _en_x + 7 &&
-						phittery + 7 + ENEMS_COLLISION_TOP_FG >= _en_y &&
+						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 						phittery <= _en_y + 12
 					) {
 						enems_hit ();

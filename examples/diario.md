@@ -2809,4 +2809,48 @@ engine/player.h
 engine/enemmods/enem_punchy.h
 ```
 
+Hecho y propagado. Ahora todo es mucho más sencillo a nivel de código y configuración, aunque me parece que los nombres que les he puesto a los defines no son del todo intuitivos.
 
+Creo que voy a cambiar "TOP" por "STRETCH". `PLAYER_COLLISION_VSTRETCH_*` se parece más a lo que es: una "ampliación vertical" de los rectángulos de colisión.
+
+~~
+
+Lo siguiente que quiero meter (aunque la lista siga sin estar vacía) es soporte básico para CNROM, que se resume en:
+
+- Rutina de paginación (quizá esto lo tenga que meter para todas las ROMs porque va en neslib.s, aunque son unos bytes).
+- Array en levelset que indica qué página de CHR-ROM lleva cada nivel.
+- Pertinentes llamadas al iniciar cada nivel.
+
+También puedo hacer que haya que incluir la rutina de paginación de forma específica al compilar crt0.s metiendo un -D CNROM. Voy a probar.
+
+Vaya... Si ya estaba (aunque en modo que no tiene en cuenta los bus conflicts). Modificada es así:
+
+```s
+	_bankswitch:
+		tax
+		sta bankList, x
+		rts
+
+	bankList:
+		.byte $00, $01, $02, $03
+```
+
+¿Qué son, 10 bytes? meh, la dejo por defecto!
+
+```
+	nes-CNROM.cfg
+	crt0.s
+	neslib.s
+	mainloop.h
+	assets/levelset.h
+```
+
+He roto Sir Ababol: por alguna razón al pasar de level1 a level0 se reinicia. Lo miraré. Pero:
+
+[ ] Mover config.h a /my
+
+[ ] Containers
+
+:-D
+
+Buenas noches.

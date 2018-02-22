@@ -14,7 +14,10 @@ copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\pal
 
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns0.spt out=..\dev\tileset0.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns1.spt out=..\dev\tileset1.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns2.spt out=..\dev\tileset2.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns3.spt out=..\dev\tileset3.chr silent
 
 echo Exporting enems
 cd ..\enems
@@ -41,10 +44,10 @@ copy mscnes.h ..\dev\assets\ > nul
 cd ..\dev
 
 :noscript
-cc65 -Oi game.c --add-source
-ca65 crt0.s -o crt0.o
+cc65 -Oi game.c --add-source -D CNROM
+ca65 crt0.s -o crt0.o -D CNROM=1
 ca65 game.s
-ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 del *.o
 del game.s

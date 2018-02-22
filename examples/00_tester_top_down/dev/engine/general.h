@@ -13,10 +13,10 @@ void cm_two_points (void) {
 	at2 = map_attr [COORDS (cx2, caux)];
 }
 
-#if PLAYER_COLLISION_TOP_BG > 0
+#if PLAYER_COLLISION_VSTRETCH_BG > 0
 void cm_three_points (void) {
 	// Always vertical, upon pry and pre-calculated cx1.
-	cy1 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;
+	cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
 	if (cy1 <= 12) {
 		caux = cy1 ? cy1 - 1 : 0;
 		at1 = map_attr [COORDS (cx1, caux)];
@@ -42,16 +42,16 @@ unsigned char collide (void) {
 
 	// Player bounding box is:
 	//     prx to prx + 7
-	//     pry - PLAYER_COLLISION_TOP_FG to pry + 13
+	//     pry - PLAYER_COLLISION_VSTRETCH_FG to pry + 13
 	// Enemy bounding box is:
 	//     _en_x + 4 to _en_x + 11
-	//     _en_y - ENEMS_COLLISION_TOP_FG to _en_y + 13
+	//     _en_y - ENEMS_COLLISION_VSTRETCH_FG to _en_y + 13
 
 	return (
 		prx + 3 >= _en_x && 
 		prx <= _en_x + 11 && 
-		pry + 13 + ENEMS_COLLISION_TOP_FG >= _en_y &&
-		pry <= _en_y + 13 + PLAYER_COLLISION_TOP_FG
+		pry + 13 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+		pry <= _en_y + 13 + PLAYER_COLLISION_VSTRETCH_FG
 	);
 
 }
