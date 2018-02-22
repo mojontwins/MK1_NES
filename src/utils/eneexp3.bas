@@ -110,7 +110,7 @@ Next i
 Print #fOut, ""
 
 If genCounter Then
-	print #fOut, "#define KILLABLE_ENEMS_" & prefix & " " & (enemTypeCounters (1) + enemTypeCounters (2) + enemTypeCounters (3) + enemTypeCounters (12) + enemTypeCounters (13) +enemTypeCounters (14) + enemTypeCounters (15) + enemTypeCounters (16) + enemTypeCounters (17) + enemTypeCounters (18)  + enemTypeCounters (19) + enemTypeCounters (6) + enemTypeCounters (9) + enemTypeCounters (11) )
+	print #fOut, "#define KILLABLE_ENEMS_" & prefix & " " & (enemTypeCounters (1) + enemTypeCounters (2) + enemTypeCounters (3) + enemTypeCounters (12) + enemTypeCounters (13) +enemTypeCounters (14) + enemTypeCounters (15) + enemTypeCounters (16) + enemTypeCounters (17) + enemTypeCounters (18)  + enemTypeCounters (19) + enemTypeCounters (6) + enemTypeCounters (9) + enemTypeCounters (11) + enemTypeCounters (20) )
 	Print #fOut, ""
 End If
 

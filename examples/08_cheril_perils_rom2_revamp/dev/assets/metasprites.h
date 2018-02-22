@@ -72,7 +72,8 @@ const unsigned char * const spr_enems1 [] = {
 	ssss_00, ssss_01, ssss_02, ssss_03,
 
 	// Compiled (offset 48)
-	sscomp_00, sscomp_01, sscomp_02, sscomp_03
+	sscomp_00_a, sscomp_01_a, sscomp_02_a, sscomp_03_a, 
+	sscomp_00_b, sscomp_01_b, sscomp_02_b, sscomp_03_b
 };
 
 

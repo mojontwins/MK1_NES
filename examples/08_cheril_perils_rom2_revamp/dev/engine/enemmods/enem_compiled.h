@@ -13,8 +13,8 @@ if (_en_ct) {
 			// Idling
 
 			// Idle animation, cells 2, 3.
-			spr_id = _en_s + _en_facing + 2 + 
-				((frame_counter >> 3) & 2); 
+			en_spr = _en_s + _en_facing + 2 + 
+				((frame_counter >> 3) & 1); 
 			break;
 		case 1:
 			// Moving
@@ -24,7 +24,7 @@ if (_en_ct) {
 			rdy = _en_y; _en_y += _en_my;
 
 			// Moving animation, cells 0, 1.
-			spr_id = _en_s + _en_facing + en_fr;
+			en_spr = _en_s + _en_facing + en_fr;
 			break;
 	}
 
@@ -64,8 +64,10 @@ if (_en_ct) {
 
 		case 0xC0:
 			// RETURN
-			en_behptr [enit] -= rda & 0x3f;
+			en_behptr [gpit] -= rda & 0x3f;
 			break;
 	}
+
+	en_spr = _en_s + _en_facing;
 }
 

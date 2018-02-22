@@ -1,6 +1,6 @@
-# Compiled enems
+# Compiled enems (sample)
 
-# Enemy type 0 makes a square firing in each vertex.
+# Enemy type 0 makes a square firing on cycle completed
 
 BEGIN beh0
 	:START

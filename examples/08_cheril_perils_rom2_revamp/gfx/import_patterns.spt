@@ -88,7 +88,7 @@ METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
 
 # (Test) Compiled enemies
 LABEL sscomp
-METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0
+METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0 FLIPPED
 
 # Items
 # Empty, Key, Heart, Resonator off, Resonator on, explosion, No

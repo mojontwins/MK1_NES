@@ -2757,6 +2757,7 @@ He visto que solo se mueve a un pixel por frame pero creo que esto, por ahora, m
 Puedo hacer una animación de idle para las posiciones 2 y 3 de cada orientación.
 
 ```
+	compile.bat
 	game.c
 	autodefs.h
 	config.h
