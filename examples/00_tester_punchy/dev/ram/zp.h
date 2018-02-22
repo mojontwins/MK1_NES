@@ -24,8 +24,8 @@ unsigned char ticker;
 // Used for two-points collision
 
 unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
-#ifdef TALL_PLAYER
-	unsigned char at3;
+#if PLAYER_COLLISION_TOP_BG > 0
+	unsigned char cy3, at3;
 #endif
 
 // Sprite related
@@ -52,6 +52,10 @@ unsigned char _en_ct, _en_facing;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
 unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
+
+#ifdef ENABLE_COMPILED_ENEMS
+	const unsigned char *en_behptr [3];
+#endif
 
 // Main player
 

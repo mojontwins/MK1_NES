@@ -6,6 +6,7 @@ Listo los sonidos que necesitaré
 - activar resonador
 - cuenta atrás.
 - golpear con hitter.
+- enemigo punchy golpea (el mismo de antes).
 - golpear breakable.
 - breakable se rompe (al pisar o disparar).
 - enemigo lanza coco.

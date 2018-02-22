@@ -17,6 +17,10 @@ cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1
 ..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1
 
+echo Compiling enembehs
+cd ..\script
+..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h
+
 echo Making map
 cd ..\map
 ..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 20 2 15 0

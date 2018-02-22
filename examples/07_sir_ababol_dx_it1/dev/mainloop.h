@@ -93,6 +93,14 @@ void game_init (void) {
 	#endif
 #endif
 
+#ifdef ENABLE_SPRINGS
+	#ifdef SPRINGS_ON_BY_DEFAULT
+		springs_on = 1;
+	#else
+		springs_on = 0;
+	#endif
+#endif
+
 #ifdef ENABLE_TIMER
 	#ifndef TIMER_RESET_ON_ENTER
 		timer = TIMER_INITIAL;

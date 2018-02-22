@@ -56,9 +56,10 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-
 #define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
+
+//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -86,8 +87,8 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
-#define PLAYER_COLLISION_TOP		8   // Player is 8x16, but this can make him "shorter" for collision
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP_BG)
+#define PLAYER_COLLISION_TOP_BG		8   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
 #define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
@@ -175,6 +176,7 @@
 
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
+
 //#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID
 #define SIMPLE_WARPERS_FIRE_BUTTON
@@ -208,6 +210,13 @@
 #define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
+
+// Springs
+
+//#define ENABLE_SPRINGS
+#define SPRING_TILE 					10
+#define SPRING_SPIKE_TILE 				11
+//#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
 // ---------------------------
@@ -309,6 +318,12 @@
 #define STEADY_SHOOTERS_BASE_SPRID		44
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+
+// Compiled enemies
+
+//#define ENABLE_COMPILED_ENEMS
+#define COMPILED_ENEMS_SHOOT
+#define COMPILED_ENEMS_BASE_SPRID		48
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 

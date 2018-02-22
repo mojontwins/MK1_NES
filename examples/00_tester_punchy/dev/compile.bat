@@ -13,7 +13,11 @@ cd ..\gfx
 
 echo Exporting enems
 cd ..\enems
-..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1
+..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
+
+echo Compiling enembehs
+cd ..\script
+..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h
 
 echo Making map
 cd ..\map

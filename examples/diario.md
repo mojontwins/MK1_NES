@@ -2761,6 +2761,7 @@ Puedo hacer una animación de idle para las posiciones 2 y 3 de cada orientació
 	game.c
 	autodefs.h
 	config.h
+	mainloop.h
 	assets/compiled_enems.h
 	assets/precalcs.h
 	engine/enengine.h
@@ -2783,4 +2784,28 @@ Puedo poner
 ```
 
 Por ejemplo. Voy a probar.
+
+20180222
+========
+
+Sí que he roto los disparos en los shooties. Voy a arreglarlo y a propagar. Fixed! Y tengo que documentar los compiled.
+
+¡Los saws están rotos! Seguramente al cambiar la inicialización los he cagao. Voy a ver. Fixed! Esto de tener testers para todo es la laite.
+
+Con el cambio que hice a la colisión he cagado los sprites de 16x16. Tengo que ver esto. Voy a definir un `PLAYER_COLLSION_TOP_FG` para llevar esto mejor controlado!
+
+El jugador colisionará desde `y - PLAYER_COLLISION_TOP_FG + 2`  hasta `y + 12`, verticalmente.
+
+Cambio tocho. Tengo que cambiar en general, la colisión con los cocos, y en general revisar todos los sitios donde antes usara (mal) `TALL_COLLISION`, `SMALL_COLLISION` o `PLAYER_COLLISION_TOP` para sprites.
+
+Luego debería unificar cambiarndo tambien "TALL_PLAYER".
+
+```
+config.h
+engine/cocos.h
+engine/enengine.h
+engine/general.h
+engine/player.h
+```
+
 

@@ -13,10 +13,13 @@ if (en_rawv [gpit] & 1) {
 	} else {
 		// Attempt to shoot
 		if (SHOOT_FREQ) {
-			if (_en_facing) 
+			if (_en_facing) {
 				rdx = _en_x + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
-			else 
+				rda = 0;
+			} else {
 				rdx = _en_x + SHOOTIES_SHOOT_OFFS_X;
+				rda = 2;
+			}
 			rdy = _en_y + SHOOTIES_SHOOT_OFFS_Y;
 			cocos_shoot_linear ();
 			_en_ct = 16;

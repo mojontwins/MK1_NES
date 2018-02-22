@@ -26,7 +26,7 @@ Tall player
 
 - Makes bounding boxes from 17 to 32 pixels tall for players.
 - Sprite handle NOT ALTERED, still 8x16 bottom-centered. This is a hack, remember?
-- Horizontal collision points will be three: `(X, pry)`, `(X, pry + 15)` and `(X, pry - 16 + PLAYER_COLLISION_TOP)`.
+- Horizontal collision points will be three: `(X, pry)`, `(X, pry + 15)` and `(X, pry - 16 + PLAYER_COLLISION_TOP_BG)`.
 - **When cutting metasprites, remember that the player box is still 8x16, bottom-centered**
 
 Tall enemies

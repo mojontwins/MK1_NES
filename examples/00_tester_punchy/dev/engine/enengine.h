@@ -76,6 +76,9 @@ void enems_update_unsigned_char_arrays (void) {
 	__asm__ ("lda %v", _en_t);
 	__asm__ ("sta %v, y", en_t);
 
+	__asm__ ("lda %v", _en_s);
+	__asm__ ("sta %v, y", en_s);
+
 	__asm__ ("lda %v", _en_x);
 	__asm__ ("sta %v, y", en_x);
 
@@ -138,6 +141,7 @@ void enems_load (void) {
 			_en_t = *gp_gen ++;
 
 			// General...
+			en_alive [gpit] = 0;
 
 			// YX1
 			rda = *gp_gen ++;
@@ -185,18 +189,18 @@ void enems_load (void) {
 					#ifdef ENABLE_PUNCHIES
 						if (_en_t >= 16) {
 							en_rawv [gpit] = 2;
-							en_s [gpit] = PUNCHIES_BASE_SPRID + ((_en_t - 16) << 3);
+							_en_s = PUNCHIES_BASE_SPRID + ((_en_t - 16) << 3);
 						} else
 					#endif					
 					#ifdef ENABLE_SHOOTIES
 						if (_en_t >= 12) {
 							en_rawv [gpit] = 1;
-							en_s [gpit] = SHOOTIES_BASE_SPRID + ((_en_t - 12) << 3);
+							_en_s = SHOOTIES_BASE_SPRID + ((_en_t - 12) << 3);
 						} else
 					#endif
 					{
 						en_rawv [gpit] = 0;
-						en_s [gpit] = (_en_t - 1) << 3;
+						_en_s = (_en_t - 1) << 3;
 					}
 
 					#ifdef PERSISTENT_ENEMIES
@@ -232,45 +236,32 @@ void enems_load (void) {
 						else if (_en_x2 < _en_x1) _en_my = 0;
 						else if (_en_y2 > _en_y1) _en_my = 3;
 						else _en_my = 1;
-						en_s [gpit] = STEADY_SHOOTERS_BASE_SPRID + _en_my;
+						_en_s = STEADY_SHOOTERS_BASE_SPRID + _en_my;
 
 						// _en_mx = frequency from the attr
 						_en_ct = _en_mx = rda;
 						break;
 				#endif
 
-				#ifdef ENABLE_FANTY				
+				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 					case 6:
 						// Fantys
 						enf_x [gpit] = _en_x << 6;
 						enf_y [gpit] = _en_y << 6;
 						enf_vx [gpit] = enf_vy [gpit] = 0;
-						en_s [gpit] = FANTY_BASE_SPRID;
+						_en_s = FANTY_BASE_SPRID;
 						break;
 				#endif
-
-				#ifdef ENABLE_HOMING_FANTY				
-					case 6:
-						// Fantys
-						enf_x [gpit] = _en_x << 6;
-						enf_y [gpit] = _en_y << 6;
-						enf_vx [gpit] = enf_vy [gpit] = 0;
-						en_s [gpit] = FANTY_BASE_SPRID;
-						// State idle
-						en_alive [gpit] = 0; 
-						break;
-				#endif	
 
 				#ifdef ENABLE_PURSUERS		
 					case 7:
 						// Pursuers
-						en_alive [gpit] = 0;
 						_en_ct = DEATH_COUNT_EXPRESSION;	
 						#ifdef ENABLE_GENERATORS
 							en_generator_life [gpit] = GENERATOR_LIFE_GAUGE;
 							gen_was_hit [gpit] = 0;
 						#endif	
-						en_s [gpit] = ((TYPE_7_FIXED_SPRITE - 1) << 3);
+						_en_s = ((TYPE_7_FIXED_SPRITE - 1) << 3);
 						break;
 				#endif	
 
@@ -280,10 +271,10 @@ void enems_load (void) {
 						#ifdef PERSISTENT_ENEMIES
 							// Initialize position & direction from ROM
 							_en_x = _en_x1;
-							_en_y = _en_y1;
-							_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
-							_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
+							_en_y = _en_y1;							
 						#endif
+						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
+						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
 
 						// emerging sense
 						rda = ABS (_en_mx); if (!rda) rda = ABS (_en_my);
@@ -310,10 +301,9 @@ void enems_load (void) {
 
 						// Initialize
 						_en_my = PEZON_WAIT + (rda << 3);	// Speed in colocador defines idle time! (x8)
-						en_alive [gpit] = 0;
 						_en_mx = _en_my;
 
-						en_s [gpit] = PEZONS_BASE_SPRID;
+						_en_s = PEZONS_BASE_SPRID;
 						break;
 				#endif
 
@@ -324,7 +314,6 @@ void enems_load (void) {
 						_en_my = (rda << 4);	// IDLE_1
 						_en_x = _en_x1 >> 4;
 						_en_y = (_en_y1 >> 4) - 1;
-						en_alive [gpit] = 0;
 						_en_mx = _en_my;
 
 						break;
@@ -334,9 +323,17 @@ void enems_load (void) {
 					case 11:
 						// Monococos
 						_en_mx = 0; _en_my = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
-						en_s [gpit] = MONOCOCO_BASE_SPRID;
+						_en_s = MONOCOCO_BASE_SPRID;
 						break;
 				#endif	
+
+				#ifdef ENABLE_COMPILED_ENEMS
+					case 20:
+						_en_ct = 0;
+						_en_s = COMPILED_ENEMS_BASE_SPRID;
+						en_behptr [gpit] = en_behptrs [rda];
+						break;
+				#endif
 
 				#ifdef ENABLE_SIMPLE_WARPERS
 					case 0xff:
@@ -352,7 +349,7 @@ void enems_load (void) {
 			#endif
 			
 			en_cttouched [gpit] = 0;
-			en_spr_id [gpit] = en_s [gpit];
+			en_spr_id [gpit] = _en_s;
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			rdc ++;
@@ -605,6 +602,12 @@ void enems_move (void) {
 							en_spr = SIMPLE_WARPERS_BASE_SPRID;
 							break;
 					#endif
+
+					#ifdef ENABLE_COMPILED_ENEMS
+						case 20:
+							#include "engine/enemmods/enem_compiled.h"
+							break;
+					#endif
 				}
 
 				// Store corrent sprite frame as calculated
@@ -616,7 +619,7 @@ void enems_move (void) {
 
 			#ifdef ENABLE_SIMPLE_WARPERS
 				if (_en_t == 0xff) {
-					if (collide (prx, pry, _en_x, _en_y)
+					if (collide ()
 					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
 						&& (pad_this_frame & PAD_B)
 					#endif
@@ -734,7 +737,7 @@ void enems_move (void) {
 			if (
 				touched == 0 &&
 				pstate == EST_NORMAL &&
-				collide (prx, pry, _en_x, _en_y)
+				collide ()
 			) {
 				#ifdef PLAYER_BOUNCES
 					pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
@@ -779,13 +782,10 @@ void enems_move (void) {
 			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 				if (phitteract) {
 					if (
-						_en_x + 7 >= phitterx && _en_x <= phitterx + 7 &&
-						#ifdef TALL_COLLISION
-							phittery + 15 >= _en_y &&
-						#else
-							phittery + 7 >= _en_y &&
-						#endif					
-						phittery <= _en_y + 7
+						phitterx + 7 >= _en_x &&
+						phitterx <= _en_x + 7 &&
+						phittery + 7 + ENEMS_COLLISION_TOP_FG >= _en_y &&
+						phittery <= _en_y + 12
 					) {
 						enems_hit ();
 						phitteract = 0;

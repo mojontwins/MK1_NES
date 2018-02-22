@@ -25,7 +25,7 @@ if (en_rawv [gpit] & 2) {
 			if (pstate == EST_NORMAL && 
 				rdx + 7 >= prx && rdx <= prx + 7 && 
 				#ifdef TALL_PLAYER
-					rdy + 7 >= pry - 16 + PLAYER_COLLISION_TOP &&
+					rdy + 7 >= pry - 16 + PLAYER_COLLISION_TOP_BG &&
 				#else			
 					rdy + 7 >= pry && 
 				#endif

@@ -271,10 +271,10 @@ void enems_load (void) {
 						#ifdef PERSISTENT_ENEMIES
 							// Initialize position & direction from ROM
 							_en_x = _en_x1;
-							_en_y = _en_y1;							
+							_en_y = _en_y1;
+							_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
+							_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
 						#endif
-						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
-						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
 
 						// emerging sense
 						rda = ABS (_en_mx); if (!rda) rda = ABS (_en_my);

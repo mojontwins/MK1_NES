@@ -89,7 +89,6 @@ unsigned char hact [MAP_SIZE];
 #endif
 
 // Flags
-
 unsigned char flags [MAX_FLAGS];
 
 #ifdef ENABLE_CONTAINERS
@@ -175,3 +174,10 @@ unsigned char en_spr_id [3];
 #endif
 
 #include "my/extra_vars.h"
+
+// Springs
+
+#ifdef ENABLE_SPRINGS
+	unsigned char springs_on;
+#endif
+	

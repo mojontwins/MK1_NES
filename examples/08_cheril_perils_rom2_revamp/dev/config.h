@@ -56,11 +56,10 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
+//#define HOTSPOT_TYPE_AMMO		4		// For ammo refills
+//#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 #define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
-
-//#define HOTSPOT_TYPE_AMMO		4		// For ammo refills
-#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -88,8 +87,8 @@
 // Bounding box size
 // -----------------
 
-//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
-#define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
+//#define TALL_PLAYER					// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP_BG)
+#define PLAYER_COLLISION_TOP_BG		4   // Player is 8x16, but this can make him "shorter" for collision
 
 // This defines how the player will collide with enemies. Needs rehash.
 #define SMALL_COLLISION					// 8x8 centered collision instead of 12x12

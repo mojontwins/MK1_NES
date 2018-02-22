@@ -15,6 +15,10 @@ echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1
 
+echo Compiling enembehs
+cd ..\script
+..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h
+
 echo Making map
 cd ..\map
 ..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 3 2 15 0

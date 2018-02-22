@@ -175,6 +175,14 @@ void player_move (void) {
 		pfloating = (at1 == 64 || at2 == 64);
 	#endif
 
+	#ifdef ENABLE_SPRINGS
+		if (springs_on && cy1 < 12) {
+			_t = SPRING_SPIKE_TILE; 
+			if (QTILE (cx1, cy1 + 1) == SPRING_TILE) { _x = cx1; _y = cy1; map_set (); }
+			if (QTILE (cx2, cy1 + 1) == SPRING_TILE) { _x = cx2; _y = cy1; map_set (); }
+		}
+	#endif
+
 	// ********
 	// Vertical
 	// ********
@@ -292,18 +300,10 @@ void player_move (void) {
 		if (rds16 < 0)
 	#endif		
 		{
-			#ifdef TALL_PLAYER
-				cy1 = cy2 = (pry + (PLAYER_COLLISION_TOP - 16)) >> 4;
-			#else
-				cy1 = cy2 = (pry + PLAYER_COLLISION_TOP) >> 4;
-			#endif
+			cy1 = cy2 = (pry - PLAYER_COLLISION_TOP_BG) >> 4;			
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				#ifdef TALL_PLAYER
-					pry = ((cy1 + 1) << 4) + 16 - PLAYER_COLLISION_TOP;
-				#else
-					pry = ((cy1 + 1) << 4) - PLAYER_COLLISION_TOP;
-				#endif
+				pry = ((cy1 + 1) << 4) + PLAYER_COLLISION_TOP_BG;
 				pvy = 0; py = pry << FIXBITS;
 				pgotten = 0;
 				pfiring = 1;
@@ -490,8 +490,8 @@ void player_move (void) {
 	
 	// Collision
 
-	#ifndef TALL_PLAYER
-		cy1 = (pry + PLAYER_COLLISION_TOP) >> 4;
+	#if PLAYER_COLLISION_TOP_BG <= 0
+		cy1 = (pry + PLAYER_COLLISION_TOP_BG) >> 4;
 		cy2 = (pry + 15) >> 4;
 	#endif
 
@@ -506,16 +506,15 @@ void player_move (void) {
 			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
-		#ifdef TALL_PLAYER
+		#if PLAYER_COLLISION_TOP_BG > 0
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
 				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
-					if (at1 & 2) player_process_tile (at1, cx1, (PLAYER_COLLISION_TOP - 16)) >> 4, rdm, cy1);
 					if (at2 & 2) player_process_tile (at2, cx1, pry >> 4, rdm, cy2);
-					if (at3 & 2) player_process_tile (at2, cx1, (pry + 15) >> 4, rdm, cy2);
+					if (at3 & 2) player_process_tile (at3, cx1, (pry + 15) >> 4, rdm, cy3);
 				#endif				
 			} else {
 				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));

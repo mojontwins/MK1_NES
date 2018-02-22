@@ -14,3 +14,11 @@
 	const signed int coco_dx [] = { -COCO_V, 0, COCO_V, 0 };
 	const signed int coco_dy [] = { 0, -COCO_V, 0, COCO_V };
 #endif
+
+#if defined (ENABLE_COMPILED_ENEMS)
+	// Directions are
+	// LEFT DOWNLEFT DOWN DOWNRIGHT RIGHT UPRIGHT UP UPLEFT
+	// 0    1        2    3         4     5       6  7
+	const signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};
+	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
+#endif

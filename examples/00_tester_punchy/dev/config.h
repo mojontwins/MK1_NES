@@ -56,9 +56,10 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
+
+//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -86,13 +87,19 @@
 // Bounding box size
 // -----------------
 
-#define TALL_PLAYER						// Player is 8x16, but collides 8x(16+16-PLAYER_COLLISION_TOP)
-#define PLAYER_COLLISION_TOP		4   // Player is 8x16, but this can make him "shorter" for collision
+// Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
+#define PLAYER_COLLISION_TOP_BG		8
 
-// This defines how the player will collide with enemies. Needs rehash.
-//#define SMALL_COLLISION               // 8x8 centered collision instead of 12x12
-#define TALL_COLLISION					// 8x12 bottom collision instead of 12x12
-// (Comment both for ol' good unforgiving collision)
+// This defines how the player will collide with enemies. 
+// Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
+// this offset goes to the head. 
+// So if you define it as -8, the collision box will be 8x8 bottom centerd.
+// And if you define it as 4 the collision box will be 8x20 bottom centered.
+#define PLAYER_COLLISION_TOP_FG 	8
+
+// Same for enemies.
+// I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
+#define ENEMS_COLLISION_TOP_FG		8	
 
 // General directives:
 // -------------------
@@ -210,6 +217,13 @@
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 
+// Springs
+
+//#define ENABLE_SPRINGS
+#define SPRING_TILE 					10
+#define SPRING_SPIKE_TILE 				11
+//#define SPRINGS_ON_BY_DEFAULT
+
 // Enemy types and definitions
 // ---------------------------
 
@@ -310,6 +324,12 @@
 #define STEADY_SHOOTERS_BASE_SPRID		44
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+
+// Compiled enemies
+
+//#define ENABLE_COMPILED_ENEMS
+#define COMPILED_ENEMS_SHOOT
+#define COMPILED_ENEMS_BASE_SPRID		48
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
