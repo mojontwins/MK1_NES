@@ -86,6 +86,10 @@ METASPRITE 8, 10, 2, 2, 0, 0
 LABEL ssss
 METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
 
+# (Test) Compiled enemies
+LABEL sscomp
+METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0
+
 # Items
 # Empty, Key, Heart, Resonator off, Resonator on, explosion, No
 LABEL ssit

@@ -324,6 +324,7 @@
 
 #define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
+#define COMPILED_ENEMS_BASE_SPRID		48
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 

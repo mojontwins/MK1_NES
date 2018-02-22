@@ -69,7 +69,10 @@ const unsigned char * const spr_enems1 [] = {
 	ssit_05,
 
 	// Steady shooters (offset 44)
-	ssss_00, ssss_01, ssss_02, ssss_03
+	ssss_00, ssss_01, ssss_02, ssss_03,
+
+	// Compiled (offset 48)
+	sscomp_00, sscomp_01, sscomp_02, sscomp_03
 };
 
 
