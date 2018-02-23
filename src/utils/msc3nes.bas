@@ -699,7 +699,7 @@ Function procesaClausulas (f As integer) As String
 					Case "ADD_CONTAINER"
 						'clausula = clausula + Chr (&H82) + Chr (128 + pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5)))
 						'actionsUsed (&H82) = -1
-						clausula = clausula + Chr (&H86) + Chr (pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5)))
+						clausula = clausula + Chr (&H86) + Chr (pval (lP (1)) + 16 * (pval (lP (3)))) + Chr (pval (lP (5)))
 						actionsUsed (&H86) = -1
 					Case "SHOW_CONTAINERS"
 						clausula = clausula + Chr (&H87)
@@ -1748,8 +1748,8 @@ End If
 If actionsUsed (&H86) Then
 	Print #f2, "					case 0x86:"
 	Print #f2, "						// ADD_CONTAINER f, x, y"
-	Print #f2, "						sc_n = read_vbyte (); readxy ();"
-	Print #f2, "						containers_add (sc_x, sc_y, sc_n);"
+	Print #f2, "						readxy ();"
+	Print #f2, "						containers_add ();"
 	Print #f3, "						break;"
 End If
 

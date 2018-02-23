@@ -198,6 +198,11 @@ void prepare_scr (void) {
 	#endif
 #endif
 
+#ifdef ENABLE_CONTAINERS
+	containers_index = 0;
+	containers_interact_with = 0;
+#endif
+
 	oam_hide_rest (oam_index);
 	hud_update ();
 	ppu_waitnmi ();
@@ -314,6 +319,10 @@ void game_loop (void) {
 
 		#include "mainloop/hotspots.h"
 
+#ifdef ENABLE_CONTAINERS
+		#include "mainloop/containers.h"
+#endif		
+
 		player_move ();
 		player_render ();
 
@@ -331,6 +340,10 @@ void game_loop (void) {
 		// Moved this here so they appear BEHIND the actors
 
 		if (hrt) hotspots_paint ();
+
+#ifdef ENABLE_CONTAINERS
+		containers_paint ();
+#endif
 
 #if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 		if (do_process_breakable) breakable_do_anim ();

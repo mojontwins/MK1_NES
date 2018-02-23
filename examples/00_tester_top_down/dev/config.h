@@ -395,9 +395,10 @@
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
 //#define SCRIPTING_TEXT_BOX
-//#define FIRE_SCRIPT_WITH_ANIMATION	// So I don't have to make a custom for something 
-										// I will be reusing, most likely
 
+//#define ENABLE_CONTAINERS				// Graphical flag representations!
+#define CONTAINERS_MAX 					4	// As per screen
+#define FLAG_INVENTORY					0
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 

@@ -2854,3 +2854,24 @@ He roto Sir Ababol: por alguna razón al pasar de level1 a level0 se reinicia. L
 :-D
 
 Buenas noches.
+
+20180223
+========
+
+Estoy metiendo los containers, de forma tentativa. Tendré que montar un scripting tester tonto para probarlos, pero bueno.
+
+Por ahora nada de inventarios. Se tendrán que contentar con poder llevar solo un objeto. Más tarde meteremos algo de inventarios si me apetece.
+
+Dejo apuntadas aquí algunas cosas porque luego tendré que modificar msc3nes.bas para que genere el código correcto.
+
+ADD_CONTAINER x, y, f debería generar OP YX F, y el parser debería devolver `sc_x == YX` y `sc_y == F` (y así uso la función que lee dos bytes).
+
+Todo hecho, voy a propagarlo aunque no lo pruebe ahora.
+
+~~
+
+Para el scripting, molaría tener una estructura de sprites fijos que activar por pantalla, para mostrar personajes sin tener que tirar de tileset. Quedará major, aunque sigan alineados a tile. Serán a nivel lógico de 16x16 aunque los podrás estirar para arriba lo que quieras usando los métodos normales (poner el origen Y más arriba, de cajón).
+
+Estoy planteándome portar 1:1 el Cadaverion para probar timers y scripting, mejor que hacer un tester dedicado. Siempre puedo activar contenedores en una pantalla para probarlos rápidamente.
+
+Voy a hacer esto porque la integración que he hecho del timer es una mierda, y necesito eventos `ON_TIMER_OFF` y cosas así.

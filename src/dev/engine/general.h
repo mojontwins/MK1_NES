@@ -7,30 +7,19 @@
 void cm_two_points (void) {
 	// Calculates at1 & at2 from cx1, cy1 & cx2, cy2
 	if (cy1 > 12 || cy2 > 12) { at1 = at2 = 0; return; }
-	caux = cy1 ? cy1 - 1 : 0;
-	at1 = map_attr [COORDS (cx1, caux)];
-	caux = cy2 ? cy2 - 1 : 0;
-	at2 = map_attr [COORDS (cx2, caux)];
+	at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
+	at2 = map_attr [COORDS (cx2, cy2 ? cy2 - 1 : 0)];
 }
 
 #if PLAYER_COLLISION_VSTRETCH_BG > 0
 void cm_three_points (void) {
 	// Always vertical, upon pry and pre-calculated cx1.
 	cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
-	if (cy1 <= 12) {
-		caux = cy1 ? cy1 - 1 : 0;
-		at1 = map_attr [COORDS (cx1, caux)];
-	}
+	if (cy1 <= 12) at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
 	cy2 = pry >> 4;
-	if (cy2 <= 12) {
-		caux = cy2 ? cy2 - 1 : 0;
-		at2 = map_attr [COORDS (cx1, caux)];
-	}
+	if (cy2 <= 12) at2 = map_attr [COORDS (cx1, cy2 ? cy2 - 1 : 0)];
 	cy3 = (pry + 15) >> 4;
-	if (cy3 <= 12) {
-		caux = cy3 ? cy3 - 1 : 0;
-		at3 = map_attr [COORDS (cx1, caux)];
-	}
+	if (cy3 <= 12) at3 = map_attr [COORDS (cx1, cy3 ? cy3 - 1 : 0)];
 }
 #endif
 

@@ -89,11 +89,12 @@ unsigned char hact [MAP_SIZE];
 #endif
 
 // Flags
+
 unsigned char flags [MAX_FLAGS];
 
 #ifdef ENABLE_CONTAINERS
-	unsigned char upd_cont_index;
-	unsigned char c_x [MAX_CONTAINERS], c_y [MAX_CONTAINERS], c_f [MAX_CONTAINERS], last_container;
+	unsigned char containers_index, containers_interact_with;
+	unsigned char containers_f [CONTAINERS_MAX] , containers_yx [CONTAINERS_MAX];
 #endif
 
 // More baddies
@@ -121,7 +122,6 @@ unsigned char en_spr_id [3];
 // Make enemies persistent
 
 #ifdef PERSISTENT_ENEMIES
-	// Persistent enemies
 	unsigned char ep_x [3 * MAP_SIZE];
 	unsigned char ep_y [3 * MAP_SIZE];
 	signed char ep_mx [3 * MAP_SIZE];
@@ -180,4 +180,3 @@ unsigned char en_spr_id [3];
 #ifdef ENABLE_SPRINGS
 	unsigned char springs_on;
 #endif
-	
