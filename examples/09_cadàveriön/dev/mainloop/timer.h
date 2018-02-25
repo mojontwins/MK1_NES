@@ -12,6 +12,9 @@ if (timer_on && timer) {
 				flags [TIMER_ZERO_FLAG] = 
 			#endif
 			timer_zero = 1;
+			#ifdef ACTIVATE_SCRIPTING
+				run_script ((n_pant << 1) + 3);
+			#endif
 		}
 	}
 }

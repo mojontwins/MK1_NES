@@ -11,7 +11,7 @@
 		if (f_zone_ac) 
 			if (pry >= fzy1 && pry <= fzy2)
 				if (prx >= fzx1 && prx <= fzx2)
-					run_script (n_pant + n_pant + 1);
+					run_script ((n_pant << 1) + 1);
 #else
 	#ifndef FIRE_SCRIPT_WITH_ANIMATION
 		#ifdef ENABLE_FIRE_ZONE

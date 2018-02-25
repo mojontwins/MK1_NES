@@ -2875,3 +2875,17 @@ Para el scripting, molaría tener una estructura de sprites fijos que activar po
 Estoy planteándome portar 1:1 el Cadaverion para probar timers y scripting, mejor que hacer un tester dedicado. Siempre puedo activar contenedores en una pantalla para probarlos rápidamente.
 
 Voy a hacer esto porque la integración que he hecho del timer es una mierda, y necesito eventos `ON_TIMER_OFF` y cosas así.
+
+20180225
+========
+
+Me he puestoa medio integrar Cadàveriön y me he dado cuenta de que faltan un montón de cosas que estoy medio montando.
+
+Pero la que más coñazo va a ser (creo) va a ser la que lanza el fire script en la animación, al igual que se comprueban los containers o los hotspots en la animación.
+
+El inicio de la animación ahora mismo no hace nada y se detecta por separado para hotspots y containers. Justo después debería lanzarse anyways si está el scripting y `FIRE_SCRIPT_WITH_ANIMATION`.
+
+La llamada  a `run_fire_script` debería ser o bien al pulsar `b_button` o bien al llegar al frame correcto, según la combinación de `ENABLE_USE_ANIM`.
+
+Ahora tengo al churum en plan destroyer, ya lo pienso más despacio luego.
+

@@ -664,7 +664,7 @@ Function procesaClausulas (f As integer) As String
 						clausula = clausula + Chr (&H69) + Chr (pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5))) + Chr (pval (lP (7))) + Chr (pval (lP (9)))
 						actionsUsed (&H69) = -1
 					Case "SET_TIMER"
-						clausula = clausula + Chr (&H70) + Chr (pval (lP (1))) + Chr (pval (lP (3)))
+						clausula = clausula + Chr (&H70) + Chr (pval (lP (1))) 
 						actionsUsed (&H70) = -1
 					Case "TIMER_START"
 						clausula = clausula + Chr (&H71)
@@ -1313,7 +1313,7 @@ if clausulasUsed (&H20) Then
 	print #f2, "					// Opcode: 20 sc_x sc_y"
 	print #f2, "					readxy ();"
 	print #f2, "					sc_x <<= 4; sc_y <<= 4;"
-	print #f2, "					sc_terminado = (!(prx + 15 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15));"
+	print #f2, "					sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15));"
 	print #f2, "					break;"
 end if
 
@@ -1395,14 +1395,14 @@ End If
 If clausulasUsed (&H70) Then
 	print #f2, "				case 0x70:"
 	print #f2, "					 // IF TIMER >= sc_x"
-	print #f2, "					 sc_terminado = (ctimer.t < read_vbyte ());"
+	print #f2, "					 sc_terminado = (timer < read_vbyte ());"
 	print #f2, "					 break;"
 End If
 
 If clausulasUsed (&H71) Then
 	print #f2, "				case 0x71:"
 	print #f2, "					 // IF TIMER <= sc_x"
-	print #f2, "					 sc_terminado = (ctimer.t > read_vbyte ());"
+	print #f2, "					 sc_terminado = (timer > read_vbyte ());"
 	print #f2, "					 break;"
 End If
 
@@ -1686,9 +1686,9 @@ if actionsUsed (&H70) Then
 	print #f2, "					case 0x70:"
 	print #f2, "						// SET_TIMER a, b"
 	print #f2, "						// Opcode: 0x70 a b"
-	print #f2, "						ctimer.t = read_vbyte ();"
-	print #f2, "						ctimer.frames = read_vbyte ();"
-	print #f2, "						ctimer.count = ctimer.zero = 0;"
+	print #f2, "						timer = read_vbyte ();"
+	print #f2, "						timer_frames = 50;"
+	print #f2, "						timer_zero = 0;"
 	print #f2, "						break;"
 End If
 
@@ -1696,7 +1696,7 @@ If actionsUsed (&H71) Then
 	print #f2, "					case 0x71:"
 	print #f2, "						// TIMER_START"
 	print #f2, "						// Opcode: 0x71"
-	print #f2, "						ctimer.on = 1;"
+	print #f2, "						timer_on = 1;"
 	print #f2, "						break;"
 End If
 
@@ -1704,7 +1704,7 @@ If actionsUsed (&H72) Then
 	print #f2, "					case 0x72:"
 	print #f2, "						// TIMER_START"
 	print #f2, "						// Opcode: 0x72"
-	print #f2, "						ctimer.on = 0;"
+	print #f2, "						timer_on = 0;"
 	print #f2, "						break;"
 End If
 
