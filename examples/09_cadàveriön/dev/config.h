@@ -13,7 +13,7 @@
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W 					5		//
-#define MAP_H					5		// Map dimensions in screens
+#define MAP_H					4		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
@@ -22,15 +22,15 @@
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
 
-#define MAX_FLAGS 				2		// Keep it low if you don't need flags
+#define MAX_FLAGS 				17		// Keep it low if you don't need flags
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
 	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			3		//
-	#define PLAYER_INI_Y			3		// Initial position
+	#define PLAYER_INI_X			2		//
+	#define PLAYER_INI_Y			1		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -65,15 +65,15 @@
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -88,7 +88,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG		0
+#define PLAYER_COLLISION_VSTRETCH_BG		-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -96,7 +96,7 @@
 // So if you define it as -8, the collision box will be 8x8 bottom centerd.
 // And if you define it as 4 the collision box will be 8x20 bottom centered.
 // For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.
-#define PLAYER_COLLISION_VSTRETCH_FG 	0
+#define PLAYER_COLLISION_VSTRETCH_FG 	4
 
 // Same for enemies.
 // I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
@@ -105,16 +105,27 @@
 // General directives:
 // -------------------
 
-//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
-//#define FIRE_TO_PUSH
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+// Push boxes
+
+#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+#define FIRE_TO_PUSH
+
+#define ENABLE_PUSHED_SCRIPT
+#define PUSHED_TILE_FLAG				1
+#define PUSHED_TO_X_FLAG				2
+#define PUSHED_TO_Y_FLAG				3
+#define PUSHED_FIRE
+
+// General stuff
+
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				// Reenter screen on death
+#define DIE_AND_REENTER					//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
@@ -210,11 +221,11 @@
 
 // Timer. 
 
-//#define ENABLE_TIMER
-#define TIMER_INITIAL					5
+#define ENABLE_TIMER
+#define TIMER_INITIAL					50
 #define TIMER_START_ON
-#define TIMER_REFILL					0
-#define TIMER_RESET_ON_ENTER
+#define TIMER_REFILL					10
+//#define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 
@@ -393,15 +404,13 @@
 
 // Scripting
 // ---------
-/*
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
-#define SCRIPTING_TEXT_BOX
 
-#define ENABLE_CONTAINERS				// Graphical flag representations!
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+//#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
+
+//#define ENABLE_CONTAINERS				// Graphical flag representations!
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
-*/
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 /*
@@ -410,14 +419,14 @@
 */
 // Top view:
 // ---------
-/*
+
 #define PLAYER_TOP_DOWN            		// Enable top view.
-#define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
-*/
+//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
+
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -431,14 +440,14 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+#define LIFE_X					5		//
+#define LIFE_Y					4		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+//#define OBJECTS_X				18		//
+//#define OBJECTS_Y				3		// Objects counter character coordinates
 
-#define KEYS_X					28		//
-#define KEYS_Y					3		// Keys counter character coordinates
+//#define KEYS_X				28		//
+//#define KEYS_Y				3		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
@@ -449,8 +458,8 @@
 //#define HS_INV_X				160		//
 //#define HS_INV_Y				15		// Object you are carrying
 
-//#define TIMER_X				0		//
-//#define TIMER_Y				5		// Current timer value
+#define TIMER_X					27		//
+#define TIMER_Y					4		// Current timer value
 
 // Text
 //#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
@@ -510,9 +519,13 @@
 	// Cell definitions for top-down view
 
 	#define CELL_FACING_RIGHT 	0
-	#define CELL_FACING_LEFT 	2
-	#define CELL_FACING_UP 		4
-	#define CELL_FACING_DOWN 	6
+	#define CELL_FACING_LEFT 	6
+	#define CELL_FACING_UP 		12
+	#define CELL_FACING_DOWN 	18
+
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_PUSHING		5
 
 #else
 

@@ -232,82 +232,20 @@
 	"buffers":
 	[
 		{
+			"file": "examples/09_cadàveriön/dev/config.h",
+			"settings":
+			{
+				"buffer_size": 17626,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "examples/09_cadàveriön/README.md",
 			"settings":
 			{
-				"buffer_size": 2015,
+				"buffer_size": 2141,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/diario.md",
-			"settings":
-			{
-				"buffer_size": 108092,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/dev/mainloop/timer.h",
-			"settings":
-			{
-				"buffer_size": 453,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 76 files for \"ENABLE_FAST_FIRE_ZONE\"\n\nC:\\git\\MK1_NES\\examples\\09_cadàveriön\\dev\\config.h:\n  396  /*\n  397  #define ACTIVATE_SCRIPTING\t\t\t\t// Activates msc scripting and flag related stuff.\n  398: #define ENABLE_FAST_FIRE_ZONE\t\t\t// Fire zone only triggers FIRE n, not FIRE ANY\n  399  #define SCRIPTING_TEXT_BOX\n  400  \n\nC:\\git\\MK1_NES\\examples\\09_cadàveriön\\dev\\mainloop.h:\n  124  #endif\t\n  125  \n  126: #if defined (ACTIVATE_SCRIPTING) && (defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE))\n  127  \tf_zone_ac = 0;\n  128  \tfzx1 = fzx2 = fzy1 = fzy2 = 240;\n\nC:\\git\\MK1_NES\\examples\\09_cadàveriön\\dev\\mainloop\\scripting.h:\n    4  // Throw fire script\n    5  \n    6: #ifdef ENABLE_FAST_FIRE_ZONE\n    7  \t#ifndef FIRE_SCRIPT_WITH_ANIMATION\t\t\t\n    8  \t\ti = pad_poll (0);\n\nC:\\git\\MK1_NES\\examples\\09_cadàveriön\\dev\\ram\\bss.h:\n   84  \tvoid msc_clear_flags (void);\n   85  \tvoid run_script (unsigned char whichs);\n   86: \t#if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)\n   87  \t\tunsigned char f_zone_ac, fzx1, fzx2, fzy1, fzy2;\n   88  \t#endif\n\n4 matches across 4 files\n",
-			"settings":
-			{
-				"buffer_size": 1098,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/dev/mainloop/scripting.h",
-			"settings":
-			{
-				"buffer_size": 741,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/script/script.spt",
-			"settings":
-			{
-				"buffer_size": 3193,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/trash/ft1.spt",
-			"settings":
-			{
-				"buffer_size": 127,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/utils/msc3nes.bas",
-			"settings":
-			{
-				"buffer_size": 60517,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/trash/mscnes.h",
-			"settings":
-			{
-				"buffer_size": 6419,
 				"line_ending": "Windows"
 			}
 		}
@@ -354,20 +292,27 @@
 	[
 		"/C/git/MK1_NES",
 		"/C/git/MK1_NES/examples",
-		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp",
 		"/C/git/MK1_NES/examples/09_cadàveriön",
 		"/C/git/MK1_NES/examples/09_cadàveriön/dev"
 	],
 	"file_history":
 	[
-		"/C/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/scripting.h",
-		"/C/git/MK1_NES/examples/09_cadàveriön/dev/my/extern.h",
+		"/C/git/MK1_NES/examples/09_cadàveriön/gfx/ss.png",
+		"/C/git/MK1_NES/examples/09_cadàveriön/gfx/import_patterns.spt",
+		"/C/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
+		"/C/git/MK1_NES/src/utils/msc3nes.bas",
 		"/C/git/MK1_NES/examples/09_cadàveriön/trash/mscnes.h",
+		"/C/git/MK1_NES/examples/09_cadàveriön/README.md",
+		"/C/git/MK1_NES/examples/diario.md",
+		"/C/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/timer.h",
+		"/C/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/scripting.h",
+		"/C/git/MK1_NES/examples/09_cadàveriön/script/script.spt",
+		"/C/git/MK1_NES/examples/09_cadàveriön/trash/ft1.spt",
+		"/C/git/MK1_NES/examples/09_cadàveriön/dev/my/extern.h",
 		"/C/Users/na_th_an/Desktop/Work/Cadàveriön/script/cadaver.spt",
 		"/C/Users/na_th_an/Desktop/Work/Cadàveriön/dev/config.h",
 		"/C/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/compile.bat",
 		"/C/git/MK1_NES/src/dev/compile.bat",
-		"/C/git/MK1_NES/examples/diario.md",
 		"/C/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
 		"/C/git/MK1_NES/examples/00_tester_top_down/dev/compile.bat",
 		"/C/git/MK1_NES/examples/00_tester_sideview/dev/compile.bat",
@@ -479,15 +424,7 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/shines.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_detectors.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/00_tester_punchy/dev/game.c.bak",
-		"/D/git/MK1_NES/examples/00_tester_sideview/dev/game.c",
-		"/D/git/MK1_NES/examples/00_tester_top_down/dev/game.c",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/game.c",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/game.c",
-		"/D/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/game.c",
-		"/D/git/MK1_NES/examples/04_d'veel'ng/dev/game.c",
-		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/game.c",
-		"/D/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/game.c"
+		"/D/git/MK1_NES/examples/00_tester_punchy/dev/game.c.bak"
 	],
 	"find":
 	{
@@ -550,6 +487,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"..\\utils\\",
 			"ENABLE_FAST_FIRE_ZONE",
 			"timer",
 			"TIMER",
@@ -676,8 +614,7 @@
 			"plife",
 			"psprid",
 			"pfr",
-			"clear_",
-			"clear_update_list"
+			"clear_"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -685,6 +622,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"..\\..\\..\\src\\utils\\",
 			"IF #$FINI",
 			"COLLISION_VSTRETCH_",
 			"_\\1",
@@ -811,8 +749,7 @@
 			"\\o",
 			"\\i",
 			"\\e",
-			"\\a",
-			"T.A.R.D.I.S."
+			"\\a"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -823,52 +760,59 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/09_cadàveriön/README.md",
+					"file": "examples/09_cadàveriön/dev/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2015,
+						"buffer_size": 17626,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
+								17223,
+								17223
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6602.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 1,
-					"file": "examples/diario.md",
-					"semi_transient": false,
+					"file": "examples/09_cadàveriön/README.md",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 108092,
+						"buffer_size": 2141,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								108092,
-								108092
+								655,
+								655
 							]
 						],
 						"settings":
@@ -877,246 +821,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 53926.0,
+						"translation.y": 195.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/09_cadàveriön/dev/mainloop/timer.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 453,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								383,
-								383
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1098,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										213,
-										234
-									],
-									[
-										488,
-										509
-									],
-									[
-										691,
-										712
-									],
-									[
-										976,
-										997
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								695,
-								695
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "examples/09_cadàveriön/dev/mainloop/scripting.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 741,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								86,
-								86
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "examples/09_cadàveriön/script/script.spt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3193,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								432,
-								432
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 249.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "examples/09_cadàveriön/trash/ft1.spt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 127,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								127,
-								127
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 7,
-					"file": "src/utils/msc3nes.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 60517,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								41119,
-								41119
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 29382.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "examples/09_cadàveriön/trash/mscnes.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6419,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5941,
-								5941
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1691.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
