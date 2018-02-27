@@ -17,11 +17,23 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			
 			if (
 				x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11 &&
-				map_attr [COORDS (x1, y1)] == 0
+				ATTR (x1, y1) == 0
 			) {
+				#ifdef ENABLE_PUSHED_SCRIPT
+					flags [PUSHED_TO_X_FLAG] = x1;
+					flags [PUSHED_TO_Y_FLAG] = y1;
+					flags [PUSHED_TILE_FLAG] = QTILE (x1, y1);
+				#endif
+				
 				sfx_play (1, 1);
 				_x = x0; _y = y0; _t = 0;  map_set ();
 				_x = x1; _y = y1; _t = 14; map_set ();
+				
+				#ifdef ENABLE_PUSHED_SCRIPT
+					just_pushed = 1;
+					run_fire_script ();
+					just_pushed = 0;
+				#endif
 			}	
 		}
 	#else

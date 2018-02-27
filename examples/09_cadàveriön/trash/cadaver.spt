@@ -1,0 +1,505 @@
+# Cadàveriön
+# Copyleft 2013 Mojon Twins
+# Churrera 3.99.2
+
+# flags:
+# 1	- Tile pisado por el bloque que se empuja
+# 2, 3 - coordenadas X e Y
+# 4, 5 - coordenadas X e Y del tile "retry"
+# 6, 7 - coordenadas X e Y del tile puerta
+# 8 - número de pantallas finalizadas
+# 9 - número de estatuas que hay que colocar
+# 10 - número de estatuas colocadas
+# 11 - Ya hemos quitado la cancela
+# 12 - Pantalla a la que volvemos al agotarse el tiempo
+# 13, 14 - Coordenadas a las que volvemos... bla
+# 15 - Piso
+# 0 - valor de 8 almacenado
+# 16 - Vendo moto seminueva. 
+
+# Atención: para poder usar un flag #16, he tenido que
+# ampliar en 1 el máximo de flags, en definitions.h, linea 131!
+# He puesto esto:
+#define MAX_FLAGS 17
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET_TIMER 60, 32	
+		# DEBUG :: 8 = puzzle order, 15 = floor #.
+		# SET FLAG 8 = 10
+		# SET FLAG 15 = 1
+		# WARP_TO 10, 2, 
+	END
+END
+
+# Esto es lo que pasa cuando se acaba el tiempo.
+# En #12 guardamos la pantalla a la que hay que volver al acabarse el tiempo.
+# En #13, #14 las coordenadas donde apareceremos cuando esto ocurra.
+
+ON_TIMER_OFF
+	IF TRUE
+	THEN
+		SOUND 0
+		SOUND 0
+		SOUND 0
+		SOUND 0
+		SET_TIMER 60, 40
+		DEC LIFE 1
+		SET FLAG 8 = #0
+		WARP_TO #12, #13, #14
+	END
+END
+
+# En cada pantalla, ponemos a 0 dos flags:
+# FLAG 10, el número de estatuas colocadas.
+# FLAG 11, que valdrá 1 cuando abramos la cancela.
+
+ENTERING ANY
+	IF TRUE
+	THEN
+		SET FLAG 10 = 0
+		SET FLAG 11 = 0
+	END
+END
+
+# En los "entering" lo que hago es inicializar las
+# variables necesarias para controlar toda la lógica
+# en la sección PRESS_FIRE AT ANY, y así ahorro código.
+
+# Los tiles "retry" y puertas se colocan también aquí:
+
+ENTERING SCREEN 0
+	IF FLAG 8 = 0
+	THEN
+		#TEXT PON_LA_ESTATUA_EN_SU_PEDESTAL
+		TEXT PUSH_THE_STATUE_TO_THE_BASE
+		SET TILE (1, 5) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 5
+		SET TILE (14, 8) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 8
+		# Hay que colocar una estatua
+		SET FLAG 9 = 1
+		
+		# Esta pantalla es la primera de un piso,
+		# así que definimos adónde se vuelve al 
+		# acabarse el tiempo:
+		
+		SET FLAG 12 = 0
+		SET FLAG 13 = 2
+		SET FLAG 14 = 2
+		SET FLAG 0 = 0
+	END
+END
+
+ENTERING SCREEN 1
+	IF FLAG 8 = 1
+	THEN
+		#TEXT AHORA_HAY_DOS_ESTATUAS...
+		TEXT NOW_WITH_TWO_STATUES..._
+		SET TILE (13, 8) = 25
+		SET FLAG 4 = 13
+		SET FLAG 5 = 8
+		SET TILE (14, 2) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 2
+		# Hay que colocar dos estatuas
+		SET FLAG 9 = 2
+	END
+END
+
+ENTERING SCREEN 2
+	IF FLAG 8 = 2
+	THEN
+		#TEXT VAYA..._PIENSA_UN_POCO...
+		TEXT WHOOPS..._THINK_HARDER!
+		SET TILE (1, 1) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 1
+		SET TILE (14, 7) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 7
+		# Tres estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+ENTERING SCREEN 3
+	IF FLAG 8 = 3
+	THEN
+		#TEXT DATE_MUCHA_PISA!!
+		TEXT HURRY_UP!
+		SET TILE (7, 8) = 25
+		SET FLAG 4 = 7
+		SET FLAG 5 = 8
+		SET TILE (14, 1) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 1
+		# Estatuas.
+		SET FLAG 9 = 2
+	END
+END
+
+ENTERING SCREEN 4
+	IF FLAG 8 = 4
+	THEN
+		#TEXT CASI_ACABAMOS_ESTE_PISO
+		TEXT FIRST_FLOOR_ALMOST_DONE
+		SET TILE (1, 8) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 8
+		SET TILE (13, 9) = 15
+		SET FLAG 6 = 13
+		SET FLAG 7 = 9
+		# Estatuas.
+		SET FLAG 9 = 1
+		
+		# Moto seminueva
+		SET TILE (1, 8) = 23
+		SET TILE (2, 8) = 24
+		SET_FIRE_ZONE 16, 112, 52, 144
+		SET FLAG 16 = 0
+	END
+END
+
+PRESS_FIRE AT SCREEN 4
+	IF FLAG 16 = 0
+	IF PLAYER_IN_X 16, 52
+	IF PLAYER_IN_Y 112, 144
+	THEN
+		SET FLAG 16 = 1
+		#TEXT VENDO_MOTO_SEMINUEVA______
+		TEXT _HALF_NEW_MOTORBIKE_FOR_SALE!_
+	END
+END
+
+# Segundo piso <---.
+
+ENTERING SCREEN 9
+	IF FLAG 8 = 5
+	THEN
+		SET TILE (1, 1) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 1
+		SET TILE (0, 4) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 4
+		# Estatuas.
+		SET FLAG 9 = 2
+		
+		# Esta pantalla es la primera de un piso,
+		# así que definimos adónde se vuelve al 
+		# acabarse el tiempo:
+		
+		SET FLAG 12 = 9
+		SET FLAG 13 = 13
+		SET FLAG 14 = 1
+		SET FLAG 0 = 5
+	END
+	
+	# Reiniciar el contador de tiempo si acabamos de entrar
+	# en este piso
+	IF FLAG 15 = 0
+	THEN
+		SET_TIMER 60, 40
+		SET FLAG 15 = 1
+	END
+END
+
+ENTERING SCREEN 8
+	IF FLAG 8 = 6
+	THEN
+		SET TILE (9, 1) = 25
+		SET FLAG 4 = 9
+		SET FLAG 5 = 1
+		SET TILE (0, 5) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 5
+		# Estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+ENTERING SCREEN 7
+	IF FLAG 8 = 7
+	THEN
+		SET TILE (13, 8) = 25
+		SET FLAG 4 = 13
+		SET FLAG 5 = 8
+		SET TILE (0, 7) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 7
+		# Estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+ENTERING SCREEN 6
+	IF FLAG 8 = 8
+	THEN
+		SET TILE (1, 8) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 8
+		SET TILE (0, 2) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 2
+		# Estatuas.
+		SET FLAG 9 = 2
+	END
+END
+
+ENTERING SCREEN 5
+	IF FLAG 8 = 9
+	THEN
+		#TEXT CASI_ACABAMOS_ESTE_PISO
+		TEXT THIS_FLOOR_IS_ALMOST_DONE
+		SET TILE (7, 8) = 25
+		SET FLAG 4 = 7
+		SET FLAG 5 = 8
+		SET TILE (2, 9) = 15
+		SET FLAG 6 = 2
+		SET FLAG 7 = 9
+		# Estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+# Tercer piso --->.
+
+ENTERING SCREEN 10
+	IF FLAG 8 = 10
+	THEN
+		SET TILE (1, 8) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 8
+		SET TILE (14, 8) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 8
+		# Estatuas.
+		SET FLAG 9 = 2
+		
+		# Esta pantalla es la primera de un piso,
+		# así que definimos adónde se vuelve al 
+		# acabarse el tiempo:
+		
+		SET FLAG 12 = 10
+		SET FLAG 13 = 2
+		SET FLAG 14 = 1
+		SET FLAG 0 = 10
+	END
+	
+	# Reiniciar el contador de tiempo si acabamos de entrar
+	# en este piso
+	IF FLAG 15 = 1
+	THEN
+		SET_TIMER 60, 40
+		SET FLAG 15 = 2
+	END
+END
+
+ENTERING SCREEN 11
+	IF TRUE
+	THEN
+		#TEXT ANIMO!!_YA_QUEDA_MENOS
+		TEXT COME_ON!_ALMOST_DONE!
+		SET FLAG 4 = 99
+		SET FLAG 5 = 99
+		SET FLAG 6 = 99
+		SET FLAG 7 = 99
+		# Estatuas.
+		SET FLAG 9 = 99
+	END
+END
+
+ENTERING SCREEN 12
+	IF FLAG 8 = 11
+	THEN
+		SET TILE (4, 8) = 25
+		SET FLAG 4 = 4
+		SET FLAG 5 = 8
+		SET TILE (14, 5) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 5
+		# Estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+ENTERING SCREEN 13
+	IF FLAG 8 = 12
+	THEN
+		SET TILE (1, 1) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 1
+		SET TILE (14, 5) = 15
+		SET FLAG 6 = 14
+		SET FLAG 7 = 5
+		# Estatuas.
+		SET FLAG 9 = 3
+	END
+END
+
+ENTERING SCREEN 14
+	IF FLAG 8 = 13
+	THEN
+		SET TILE (7, 1) = 25
+		SET FLAG 4 = 7
+		SET FLAG 5 = 1
+		SET TILE (12, 9) = 15
+		SET FLAG 6 = 12
+		SET FLAG 7 = 9
+		# Estatuas.
+		SET FLAG 9 = 1
+	END
+END
+
+# Cuarto piso <---.
+
+ENTERING SCREEN 19
+	IF FLAG 8 = 14
+	THEN
+		SET TILE (1, 1) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 1
+		SET TILE (0, 4) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 4
+		# Estatuas.
+		SET FLAG 9 = 2
+		
+		# Esta pantalla es la primera de un piso,
+		# así que definimos adónde se vuelve al 
+		# acabarse el tiempo:
+		
+		SET FLAG 12 = 19
+		SET FLAG 13 = 13
+		SET FLAG 14 = 1
+		SET FLAG 0 = 14
+	END
+	
+	# Reiniciar el contador de tiempo si acabamos de entrar
+	# en este piso
+	IF FLAG 15 = 2
+	THEN
+		SET_TIMER 60, 40
+		SET FLAG 15 = 3
+	END
+END
+
+ENTERING SCREEN 18
+	IF FLAG 8 = 15
+	THEN
+		SET TILE (7, 8) = 25
+		SET FLAG 4 = 7
+		SET FLAG 5 = 8
+		SET TILE (0, 2) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 2
+		# Estatuas.
+		SET FLAG 9 = 2
+	END
+END
+
+ENTERING SCREEN 17
+	IF FLAG 8 = 16
+	THEN
+		SET TILE (7, 1) = 25
+		SET FLAG 4 = 7
+		SET FLAG 5 = 1
+		SET TILE (0, 2) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 2
+		# Estatuas.
+		SET FLAG 9 = 6
+	END
+END
+
+ENTERING SCREEN 16
+	IF FLAG 8 = 17
+	THEN
+		SET TILE (1, 2) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 2
+		SET TILE (0, 6) = 15
+		SET FLAG 6 = 0
+		SET FLAG 7 = 6
+		# Estatuas.
+		SET FLAG 9 = 2
+	END
+END
+
+## Pantalla final
+
+ENTERING SCREEN 15
+	IF FLAG 8 = 18
+	THEN
+		SET TILE (1, 1) = 25
+		SET FLAG 4 = 1
+		SET FLAG 5 = 1
+		SET TILE (1, 9) = 15
+		SET FLAG 6 = 1
+		SET FLAG 7 = 9
+		# Estatuas.
+		SET FLAG 9 = 3
+		
+		# Para la condición de acabar el güego:
+		SET_FIRE_ZONE 0, 144, 239, 159
+	END
+END
+
+PRESS_FIRE AT SCREEN 15
+	IF PLAYER_TOUCHES 1, 9
+	IF FLAG 8 = 19
+	THEN
+		WIN GAME
+	END
+END
+
+# Aquí se controla la lógica general del güego:
+
+PRESS_FIRE AT ANY
+	# Tile "retry"
+	# La posición de este tile está en #4 y #5:
+	
+	IF PLAYER_TOUCHES #4, #5
+	THEN
+		SOUND 2
+		SOUND 2
+		SOUND 3
+		REENTER
+	END
+
+	# Empujar una estatua sobre el pedestal
+	# El tile sobre el que se empuja se guarda en #1.
+	# La coordenada donde queda es #2, #3.
+	# En #10 llevamos la cuenta de los que tenemos puestos
+	
+	IF JUST_PUSHED
+	IF FLAG 1 = 13
+	THEN
+		INC FLAG 10, 1
+		SOUND 0
+		SET TILE (#2, #3) = 22
+		SHOW
+		SOUND 0
+	END
+	
+	# Detectar que las hemos colocado todas.
+	# En #9 almacenamos el total, lo comparamos con las que llevamos (#10)
+	# Además, que no hayamos abierto ya la cancela (#11)
+	
+	IF FLAG 9 = #10
+	IF FLAG 11 = 0
+	THEN
+		SET FLAG 11 = 1
+		SET TILE (#6, #7) = 0
+		SHOW
+		SOUND 0
+		SOUND 7
+		INC FLAG 8, 1
+		# Desactivar "retry". Ponemos su coordenada "Y" fuera de la pantalla:
+		SET FLAG 5 = 10
+	END
+END

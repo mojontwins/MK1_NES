@@ -2889,3 +2889,12 @@ La llamada  a `run_fire_script` debería ser o bien al pulsar `b_button` o bien 
 
 Ahora tengo al churum en plan destroyer, ya lo pienso más despacio luego.
 
+20180227
+========
+
+Terminando Cadàveriön me doy cuenta de que msc3 (y msc4) tienen un montón de mierdas que están ahí por haber estado arrastrando esto tanto tiempo, sobre todo el tema de las comparaciones de flags con valores. Teniendo la construcción #flag, no es necesario que se generen opcodes específicos para IF FLAG n = 1 y IF FLAG n = FLAG m, por ejemplo. El compilador tiene un parchazo que cambia todo por IF FLAG n = X, con X un literal o un #flag.
+
+Bue, por ahora me vale. Pero debería sanear eso también *un poco*.
+
+Tengo que integrar además la animación con el tema de script, como dije hace unos días, pero antes voy a dejar el juego funcionando al 100%.
+

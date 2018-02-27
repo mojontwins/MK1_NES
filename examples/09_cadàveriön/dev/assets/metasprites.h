@@ -6,18 +6,32 @@
 // Player metasprites
 const unsigned char * const spr_player [] = {
 	// Facing right (offset 0)
-	sspl_00_a,										// Standing (offset 0)
-	sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-	sspl_05_a, sspl_06_a,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
-	
+	sspl_00,								// Standing (offset 0)
+	sspl_01, sspl_02, sspl_03, sspl_04,		// Walk cycle (offset 1)
+	sspl_05,								// Pushing
 
-	// Facing left (offset 8)
-	sspl_00_b,										// Standing (offset 0)
-	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
-	sspl_05_b, sspl_06_b,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
+	// Facing left (offset 6)
+	sspl_06,
+	sspl_07, sspl_08, sspl_09, sspl_0A,
+	sspl_0B,
+
+	// Facing down (offset 12)
+	sspl_0C,
+	sspl_0D, sspl_0E, sspl_0F, sspl_10,
+	sspl_11,
+
+	// Facing up (offset 18)
+	sspl_12,
+	sspl_13, sspl_14, sspl_15, sspl_16,
+	sspl_17,
 	
+	// Use animation (offset 24)
+	sspl_18, sspl_19, sspl_1A, sspl_1B,		// Up to down
+	sspl_1C, sspl_1D,						// After this, *interact*
+	sspl_1D, sspl_1C, sspl_1B, sspl_1A,		// Down to up
+	sspl_19, sspl_18,
+	sspl_1E, 								// Final, good pose
+	sspl_1F									// Final, wrong pose
 };
 
 // Enemy metasprites
@@ -28,15 +42,15 @@ const unsigned char * const spr_enems0 [] = {
 	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
 	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
 	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
-	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0,	// Platform (4)
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0,	// 4
 
-	// Explosion (offset 32)
-	ssexpl
+	// Warp (offset 32)
+	sswarp_00, sswarp_01, sswarp_02, sswarp_03
 };
 
 // Item metasprites
-// nothing, object, key, refill
+// nothing, nothing, nothing, refill, nothing, time
 const unsigned char * const spr_hs [] = {
-	0, ssit_00, ssit_01, ssit_02
+	0, 0, 0, ssit_00, 0, ssit_01
 };
 

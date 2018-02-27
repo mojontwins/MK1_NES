@@ -166,6 +166,16 @@ void prepare_scr (void) {
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
+#ifdef ACTIVATE_SCRIPTING
+	#if defined (ENABLE_PUSHED_SCRIPT)
+		just_pushed = 0;
+	#endif
+	// Entering any script
+	run_script (2 * MAP_SIZE + 1);
+	// This room script
+	run_script (n_pant << 1);
+#endif
+	
 	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
 #if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
@@ -177,13 +187,6 @@ void prepare_scr (void) {
 	enems_move ();
 	if (hrt) hotspots_paint ();
 	player_render ();
-
-#ifdef ACTIVATE_SCRIPTING
-	// Entering any script
-	run_script (2 * MAP_SIZE + 1);
-	// This room script
-	run_script (n_pant + n_pant);
-#endif
 
 #ifdef ENABLE_CONTAINERS	
 	containers_draw ();
@@ -276,10 +279,6 @@ void game_loop (void) {
 			on_pant = n_pant;
 		}
 
-#ifdef ACTIVATE_SCRIPTING
-		#include "mainloop/scripting.h"
-#endif
-
 		// Extra checks
 		#include "my/extra_checks.h"
 
@@ -317,15 +316,18 @@ void game_loop (void) {
 		#include "mainloop/resonators.h"
 #endif
 
-		#include "mainloop/hotspots.h"
-
 #ifdef ENABLE_CONTAINERS
 		#include "mainloop/containers.h"
 #endif		
 
+		#include "mainloop/hotspots.h"
+
 		player_move ();
 		player_render ();
 
+#ifdef ACTIVATE_SCRIPTING
+		#include "mainloop/scripting.h"
+#endif
 
 #ifdef PLAYER_CAN_FIRE
 		bullets_move ();

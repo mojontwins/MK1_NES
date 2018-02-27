@@ -13,7 +13,8 @@ if (timer_on && timer) {
 			#endif
 			timer_zero = 1;
 			#ifdef ACTIVATE_SCRIPTING
-				run_script ((n_pant << 1) + 3);
+				hud_update (); 
+				run_script (2 * MAP_SIZE + 3);
 			#endif
 		}
 	}

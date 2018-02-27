@@ -43,54 +43,65 @@ Sub resetScript (n as Integer)
 End Sub
 
 Sub stringToArray (in As String)
-	Dim As Integer m, index, i1, i2, found
+	Dim As Integer m, index, i1, i2, found, quotes
 	Dim As String character, curWord
 	
 	For m = 0 To LIST_WORDS_SIZE: lP (m) = "": Next m
 	in = Trim (in): If in = "" Then Exit Sub
 		
 	index = 0: curWord = "": in = in + " "
+	quotes = 0
 	
 	For m = 1 To Len (in)
 		character = Ucase (Mid (in, m, 1))
-		If Instr (" " & Chr (9) & ",<=>;()", character) Then
-			If curWord <> "" Then
-				' Macro insertion
-				If Left (curWord, 1) = "%" Then
-					' Attempt to find macro
-					found = 0
-					For i1 = 0 TO MAX_MACROS
-						If curWord = macros (i1, 0) Then
-							For i2 = 1 TO MACRO_SIZE
-								If macros (i1, i2) <> "" Then
-									lP (index) = macros (i1, i2)			
-									index = index + 1
-									IF index >= LIST_WORDS_SIZE Then Exit For
-								End If
-							Next i2
-							found = -1
-							Exit For
+		If quotes Then
+			If character = Chr (34) Then 
+				quotes = 0
+			Else
+				curWord = curWord + character
+			End If
+		Else 
+			If character = Chr (34) Then
+				quotes = -1
+			ElseIf Instr (" " & Chr (9) & ",<=>;()", character) Then
+				If curWord <> "" Then
+					' Macro insertion
+					If Left (curWord, 1) = "%" Then
+						' Attempt to find macro
+						found = 0
+						For i1 = 0 TO MAX_MACROS
+							If curWord = macros (i1, 0) Then
+								For i2 = 1 TO MACRO_SIZE
+									If macros (i1, i2) <> "" Then
+										lP (index) = macros (i1, i2)			
+										index = index + 1
+										IF index >= LIST_WORDS_SIZE Then Exit For
+									End If
+								Next i2
+								found = -1
+								Exit For
+							End If
+						Next i1
+						If Not found Then
+							lP (index) = curWord
+							index = index + 1
+							If index >= LIST_WORDS_SIZE Then Exit For
 						End If
-					Next i1
-					If Not found Then
+					Else
 						lP (index) = curWord
 						index = index + 1
 						If index >= LIST_WORDS_SIZE Then Exit For
 					End If
-				Else
-					lP (index) = curWord
+					curWord = ""
+				End If
+				If Instr (" " & Chr (9), character) = 0 Then
+					lP (index) = character
 					index = index + 1
 					If index >= LIST_WORDS_SIZE Then Exit For
 				End If
-				curWord = ""
+			Else
+				curWord = curWord & character
 			End If
-			If Instr (" " & Chr (9), character) = 0 Then
-				lP (index) = character
-				index = index + 1
-				If index >= LIST_WORDS_SIZE Then Exit For
-			End If
-		Else
-			curWord = curWord & character
 		End If
 	Next m
 	'for m = 0 to index:Print lP (m); " ";:next m: Print
@@ -404,15 +415,15 @@ Function procesaClausulas (f As integer) As String
 								clausula = clausula + chr (&H21) + chr (fzx1) + chr (fzx2)
 								clausulasUsed (&H21) = -1
 								numClausulas = numClausulas + 1
-							Case "PLAYER_IN_Y":
+							Case "PLAYER_IN_Y_TILES":
 								fzx1 = val (lP (2)) * 16 - 15
 								If fzx1 < 0 Then fzx1 = 0
-								fzx2 = val (lP (4)) * 16 + 15
+								fzx2 = (val (lP (4)) + 1) * 16 + 15
 								If fzx2 > 191 Then fzx2 = 191
 								clausula = clausula + chr (&H22) + chr (fzx1) + chr (fzx2)
 								clausulasUsed (&H22) = -1
 								numClausulas = numClausulas + 1
-							Case "PLAYER_IN_Y_TILES":
+							Case "PLAYER_IN_Y":
 								clausula = clausula + chr (&H22) + chr (val (lP (2)) * 16 - 15) + chr (val (lP (4)) * 16 + 15)
 								clausulasUsed (&H22) = -1
 								numClausulas = numClausulas + 1
@@ -603,11 +614,11 @@ Function procesaClausulas (f As integer) As String
 					Case "SET_FIRE_ZONE_TILES":
 						fzx1 = pval (lP (1)) * 16 - 15
 						If fzx1 < 0 Then fzx1 = 0
-						fzy1 = pval (lP (3)) * 16 - 15
+						fzy1 = (pval (lP (3)) + 1) * 16 - 15
 						If fzy1 < 0 Then fzy1 = 0
 						fzx2 = pval (lP (5)) * 16 + 15
 						If fzx2 > 254 Then fzx2 = 254
-						fzy2 = pval (lP (7)) * 16 + 15
+						fzy2 = (pval (lP (7)) + 1) * 16 + 15
 						If fzy2 > 191 Then fzy2 = 191
 						
 						clausula = clausula + Chr (&H51) + Chr (fzx1) + Chr (fzy1) + Chr (fzx2) + Chr (fzy2)
@@ -717,16 +728,15 @@ Function procesaClausulas (f As integer) As String
 						clausula = clausula + Chr (&HE2)
 						actionsUsed (&HE2) = -1
 					Case "TEXT":
-						clausula = clausula + Chr (&HE3)
+						clausula = clausula + Chr (&HE3) + Chr (Len (lP (1)))
 						For ai = 1 To Len (lP (1))
-							'If ai = 15 Then Exit For
 							If Mid (lP (1), ai, 1) = "_" Then
-								clausula = clausula + Chr (0)
+								clausula = clausula + Chr (32)
 							Else
-								clausula = clausula + Chr (Asc(Mid (lP (1), ai, 1)) - 32)
+								clausula = clausula + Mid (lP (1), ai, 1)
 							End If
 						Next ai
-						clausula = clausula + Chr (&HEE)
+						clausula = clausula + Chr (0)
 						actionsUsed (&HE3) = -1
 					Case "OPENTEXT":
 						clausula = clausula + Chr (&HEB)
@@ -734,6 +744,9 @@ Function procesaClausulas (f As integer) As String
 					Case "CLOSETEXT":
 						clausula = clausula + Chr (&HEC)
 						actionsUsed (&HEC) = -1
+					case "TEXTBOX":
+						clausula = clausula + Chr (&HED) + Chr (Val (lP (1)))
+						actionsUsed (&HED) = -1
 					Case "EXTERN":
 						clausula = clausula + Chr (&HE4) + Chr (Val (lP (1)))
 						actionsUsed (&HE4) = -1
@@ -1156,7 +1169,7 @@ Close #f
 
 Print #f2, "#ifdef CLEAR_FLAGS"
 Print #f2, "void msc_clear_flags (void) {"
-Print #f2, "	gpit = max_flags; while (gpit --) flags [gpit] = 0;"
+Print #f2, "    memfill (flags, 0, MAX_FLAGS);"
 Print #f2, "}"
 Print #f2, "#endif"
 Print #f2, ""
@@ -1171,19 +1184,17 @@ Print #f2, "	return sc_c;"
 Print #f2, "}"
 Print #f2, ""
 Print #f2, "void readxy (void) {"
-Print #f2, "	sc_x = read_byte ();"
-Print #f2, "	sc_y = read_byte ();"
+Print #f2, "	sc_x = read_vbyte ();"
+Print #f2, "	sc_y = read_vbyte ();"
 Print #f2, "}"
-Print #f2, ""
-Print #f2, "void stop_player (void) {"
-Print #f2, "	pvx = pvy = 0;"
-Print #f2, "}"
-Print #f2, ""
-Print #f2, "void reloc_player (void) {"
-Print #f2, "	px = read_vbyte () << 10;"
-Print #f2, "	py = read_vbyte () << 10;"
-Print #f2, "	stop_player ();"
-Print #f2, "}"
+If actionsUsed (&H68) Or actionsUsed (&H6A) Or actionsUsed (&H6B) Or actionsUsed (&H6C) Or actionsUsed (&H6D) Then
+	Print #f2, ""
+	Print #f2, "void reloc_player (void) {"
+	Print #f2, "	prx = read_vbyte () << 4;        px = prx << FIXBITS;"
+	Print #f2, "	pry = (read_vbyte () << 4) + 16; py = pry << FIXBITS;"
+	Print #f2, "	player_stop ();"
+	Print #f2, "}"
+End If
 Print #f2, ""
 Print #f2, "void run_script (unsigned char whichs) {"
 Print #f2, "	// read address offset from index"
@@ -1312,7 +1323,7 @@ if clausulasUsed (&H20) Then
 	print #f2, "					// IF PLAYER_TOUCHES x, y"
 	print #f2, "					// Opcode: 20 sc_x sc_y"
 	print #f2, "					readxy ();"
-	print #f2, "					sc_x <<= 4; sc_y <<= 4;"
+	print #f2, "					sc_x <<= 4; sc_y = 16 + (sc_y << 4);"
 	print #f2, "					sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15));"
 	print #f2, "					break;"
 end if
@@ -1321,7 +1332,8 @@ if clausulasUsed (&H21) Then
 	print #f2, "				case 0x21:"
 	print #f2, "					// IF PLAYER_IN_X x1, x2"
 	print #f2, "					// Opcode: 21 x1 x2"
-	print #f2, "					readxy ();"
+	print #f2, "					sc_x = read_byte ();"
+	print #f2, "					sc_y = read_byte ();"
 	print #f2, "					sc_terminado = (!(prx >= sc_x && prx <= sc_y));"
 	print #f2, "					break;"
 end if
@@ -1330,7 +1342,8 @@ if clausulasUsed (&H22) Then
 	print #f2, "				case 0x22:"
 	print #f2, "					// IF PLAYER_IN_Y y1, y2"
 	print #f2, "					// Opcode: 22 y1 y2"
-	print #f2, "					readxy ();"
+	print #f2, "					sc_x = read_byte ();"
+	print #f2, "					sc_y = read_byte ();"
 	print #f2, "					sc_terminado = (!(pry >= sc_x && pry <= sc_y));"
 	print #f2, "					break;"
 end if
@@ -1383,7 +1396,6 @@ If clausulasUsed (&H51) Then
 	print #f2, "					 break;"
 End If
 
-'' TODO
 If clausulasUsed (&H60) Then
 	print #f2, "				case 0x60:"
 	print #f2, "					 // IF JUST_PUSHED"
@@ -1595,7 +1607,7 @@ If actionsUsed (&H6A) Then
 	print #f2, "						// SETY sc_y"
 	print #f2, "						// Opcode: 6B sc_y"
 	print #f2, "						py = read_vbyte () << 10;"
-	Print #f2, "						stop_player ();"
+	Print #f2, "						player_stop ();"
 	print #f2, "						break;"
 End If
 
@@ -1604,7 +1616,7 @@ If actionsUsed (&H6B) Then
 	print #f2, "						// SETX sc_x"
 	print #f2, "						// Opcode: 6B sc_x"
 	print #f2, "						px = read_vbyte () << 10;"
-	Print #f2, "						stop_player ();"
+	Print #f2, "						player_stop ();"
 	print #f2, "						break;"
 End If
 
@@ -1827,30 +1839,11 @@ End If
 
 if actionsUsed (&HE3) Then
 	print #f2, "					case 0xE3:"
-	print #f2, "						ppu_waitnmi ();"
-	print #f2, "						clear_update_list ();"
-	print #f2, "						update_index = 0;"
-	print #f2, "#ifdef SCRIPTING_TEXT_BOX"
-	print #f2, "						gp_addr = (stbl << 5) + 0x2009;"
-	print #f2, "						while (1) {"
-	print #f2, "							sc_n = read_byte (); if (sc_n == 0xEE) break;"
-	print #f2, "							update_list [update_index ++] = MSB (gp_addr);"
-	print #f2, "							update_list [update_index ++] = LSB (gp_addr ++);"
-	print #f2, "							update_list [update_index ++] = sc_n;"
-	print #f2, "						}"
-	print #f2, "						stbl += 2;"
-	print #f2, "#else"
-	print #f2, "						gp_addr = 0x2000 + (LINE_OF_TEXT << 5) + LINE_OF_TEXT_X;"
-	print #f2, "						while (1) {"
-	print #f2, "							sc_n = read_byte (); if (sc_n == 0xEE) break;"
-	print #f2, "							update_list [update_index++] = MSB (gp_addr);"
-	print #f2, "							update_list [update_index++] = LSB (gp_addr ++);"
-	print #f2, "							update_list [update_index++] = sc_n;"
-	print #f2, "						}"
-	print #f2, "#endif"
-	print #f2, "						ppu_waitnmi ();"
-	print #f2, "						clear_update_list ();"
-	print #f2, "						update_index = 0;"
+	print #f2, "                        // TEXT"
+	print #f2, "                        // Opcode: E3 length characters* 0"
+	print #f2, "                        _x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; gp_gen = script;"
+	print #f2, "						sc_n = read_byte (); script += (sc_n + 1);"
+	print #f2, "                        pr_ul_str ();"
 	print #f2, "						break;"
 End If
 
@@ -1864,6 +1857,15 @@ If actionsUsed (&HEC) Then
 	Print #f2, "					case 0xEC:"
 	Print #f2, "						// CLOSETEXT"
 	Print #f2, "						open_box (1); break;"
+End If
+
+If actionsUsed (&HED) Then
+	Print #f2, "                    case 0xED:"
+	Print #f2, "                        // TEXTBOX n"
+	Print #f2, "                        // Opcode: 0xED sc_n"
+	Print #f2, "                        gp_gen = custom_texts [read_vbyte];"
+	Print #f2, "                        textbox_do ();"
+	print #f2, "						break;"
 End If
 
 '' TODO
@@ -1894,12 +1896,7 @@ End If
 If actionsUsed (&HE6) Then
 	print #f2, "					case 0xE6:"
 	print #f2, "						// MUSIC n"
-	print #f2, "#ifdef COMPRESSED_LEVELS"
-	print #f2, "						level_data->music_id = read_vbyte ();"
-	print #f2, "						wyz_play_music (level_data->music_id);"
-	print #f2, "#else"
-	print #f2, "						wyz_play_music (read_vbyte ());"
-	print #f2, "#endif"
+	print #f2, "                        music_play (game_music [read_vbyte]);"
 	print #f2, "						break;"
 End If
 
@@ -1966,7 +1963,7 @@ if actionsUsed (&HF4) Then
 	print #f2, "						while (0xff != (sc_x = read_byte ())) {"
 	print #f2, "							_x = sc_x >> 4; _y = sc_x & 15; _t = read_byte ();"
 	print #f2, "							map_set ();"
-	print #f2, "							ppu_waitnmi (); clear_update_list (); update_index = 0;"
+	print #f2, "							ppu_waitnmi (); clear_update_list ();"
 	print #f2, "						}"
 	print #f2, "						break;"
 End If
@@ -1980,6 +1977,7 @@ Print #f2, "		}"
 
 Print #f2, "		script = next_script;"
 Print #f2, "	}"
+
 Print #f2, "}"
 
 close #f3

@@ -47,12 +47,18 @@ MAPFILE ..\dev\assets\spritedata.h
 LABEL sspl
 
 # Player cells, 16x24. Box is 8x16 centered bottom:
-METASPRITESET 0, 0, 2, 3, 6, 5, -4, -8, 26 FLIPPED
+METASPRITESET 0, 0, 2, 3, 6, 4, -4, -8
+METASPRITESET 0, 12, 2, 3, 8, 1, -4, -8
 
 # Enemies. Linear enemies, 4 kinds, 2x2.
 # Box is 16x16 centered bottom
 LABEL ssen
 METASPRITESET 12, 0, 2, 2, 2, 4, 0, 0 FLIPPED
+
+# Warp animation, 4 cells, 2x2
+# Box is 16x16 centered bottom
+LABEL sswarp
+METASPRITESET 0, 15, 2, 2, 4, 1, 0, 0
 
 # Items
 # Heart, Time

@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
-//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_MIDDLE
+#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -30,7 +30,7 @@
 
 	#define SCR_INI					0		// Initial screen
 	#define PLAYER_INI_X			2		//
-	#define PLAYER_INI_Y			1		// Initial position
+	#define PLAYER_INI_Y			2		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -57,7 +57,7 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-//#define HOTSPOT_TYPE_TIME		5		// For time refills
+#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
@@ -88,7 +88,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG		-4
+#define PLAYER_COLLISION_VSTRETCH_BG	-8
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -96,7 +96,7 @@
 // So if you define it as -8, the collision box will be 8x8 bottom centerd.
 // And if you define it as 4 the collision box will be 8x20 bottom centered.
 // For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.
-#define PLAYER_COLLISION_VSTRETCH_FG 	4
+#define PLAYER_COLLISION_VSTRETCH_FG 	-4
 
 // Same for enemies.
 // I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
@@ -195,9 +195,9 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-//#define ENABLE_SIMPLE_WARPERS
-#define SIMPLE_WARPERS_BASE_SPRID
-#define SIMPLE_WARPERS_FIRE_BUTTON
+#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID		32
+//#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!
 
@@ -209,7 +209,7 @@
 // Use animation.
 // Note: When activated hotspots need b_button press and, in side view, possee.
 
-//#define ENABLE_USE_ANIM
+#define ENABLE_USE_ANIM
 #define USE_ANIM_MAX_FRAMES				13
 #define USE_ANIM_INTERACT_ON			7
 #define USE_ANIM_FRAMES_PER_STEP		4
@@ -222,9 +222,9 @@
 // Timer. 
 
 #define ENABLE_TIMER
-#define TIMER_INITIAL					50
+#define TIMER_INITIAL					99
 #define TIMER_START_ON
-#define TIMER_REFILL					10
+#define TIMER_REFILL					30
 //#define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
@@ -408,15 +408,17 @@
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
 
+#define CLEAR_FLAGS						// Zero all flags when entering a level
+
 //#define ENABLE_CONTAINERS				// Graphical flag representations!
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
-/*
-//#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
+
+#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
-*/
+
 // Top view:
 // ---------
 
@@ -441,7 +443,7 @@
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
 #define LIFE_X					5		//
-#define LIFE_Y					4		// Life gauge counter character coordinates
+#define LIFE_Y					3		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
@@ -459,11 +461,11 @@
 //#define HS_INV_Y				15		// Object you are carrying
 
 #define TIMER_X					27		//
-#define TIMER_Y					4		// Current timer value
+#define TIMER_Y					3		// Current timer value
 
 // Text
-//#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
-//#define LINE_OF_TEXT_X		1		// X coordinate.
+#define LINE_OF_TEXT			5		// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT_X			1		// X coordinate.
 
 // ============================================================================
 // IV. Player movement configuration
@@ -520,13 +522,14 @@
 
 	#define CELL_FACING_RIGHT 	0
 	#define CELL_FACING_LEFT 	6
-	#define CELL_FACING_UP 		12
-	#define CELL_FACING_DOWN 	18
+	#define CELL_FACING_UP 		18
+	#define CELL_FACING_DOWN 	12
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_CYCLE		1
 	#define CELL_PUSHING		5
 
+	#define CELL_USE			24
 #else
 
 	// Cell definitions for side view

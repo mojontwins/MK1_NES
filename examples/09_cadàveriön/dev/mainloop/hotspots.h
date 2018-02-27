@@ -35,9 +35,10 @@ if (hrt) {
 				) {
 					use_ct = 1; use_sub_ct = USE_ANIM_FRAMES_PER_STEP;
 					b_button = a_button = 0;
+					use_type = USE_TYPE_HOTSPOT;
 				}
 
-				if (use_ct == USE_ANIM_INTERACT_ON && use_sub_ct == USE_ANIM_FRAMES_PER_STEP)
+				if (use_ct == USE_ANIM_INTERACT_ON && use_sub_ct == USE_ANIM_FRAMES_PER_STEP && use_type == USE_TYPE_HOTSPOT)
 			#endif
 			{
 				#ifdef CARRY_ONE_HS_OBJECT

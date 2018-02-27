@@ -18,7 +18,7 @@ Quick and dirty port from the 2013 ZX Spectrum original used mainly to test the 
 
 `PUSHED_FIRE` means that the fire scripts will be ran when you push a tile. In the script, `JUST_PUSHED` will evaluate to true. The pushable tile coordinates will be copied to the pair of flags `PUSHED_TO_X_FLAG` and `PUSHED_TO_Y`, and the overwritten tile will be put to flag `PUSHED_TILE_FLAG`.
 
-- Custom code when rendering the screen which records retry blocks (tile #) coordinates to flags #4 and #5, and gates (tile #15) coordinates to flags #6 and #7.
+- Custom code when rendering the screen which records retry blocks (tile #25) coordinates to flags #4 and #5, and gates (tile #15) coordinates to flags #6 and #7.
 
 - Custom code when rendering the screen which counts statues (tile #14, pushable) in flag #9.
 
