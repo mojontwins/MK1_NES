@@ -1627,7 +1627,7 @@ If actionsUsed (&H6C) Then
 	print #f2, "						// Opcode: 6C sc_x sc_y"
 	print #f2, "						do_respawn = 0;"
 	print #f2, "						reloc_player ();"
-	print #f2, "						on_pant = 99;"
+	print #f2, "						on_pant = 0xfe;"
 	print #f2, "						sc_terminado = 1;"
 	print #f2, "						break;"
 End If
@@ -1638,7 +1638,7 @@ If actionsUsed (&H6D) Then
 	print #f2, "						// WARP_TO sc_n sc_x sc_y"
 	print #f2, "						// Opcode: 6D sc_n"
 	print #f2, "						n_pant = read_vbyte ();"
-	print #f2, "						on_pant = 99;"
+	print #f2, "						on_pant = 0xfe;"
 	print #f2, "						reloc_player ();"
 	print #f2, "						return;"
 End If
@@ -1689,7 +1689,7 @@ if actionsUsed (&H6F) Then
 	print #f2, "						// REENTER"
 	print #f2, "						// Opcode: 6F"
 	print #f2, "						//do_respawn = 0;"
-	print #f2, "						on_pant = 99; "
+	print #f2, "						on_pant = 0xfe; "
 	print #f2, "						return;"
 End If
 
@@ -1725,7 +1725,7 @@ If actionsUsed (&H73) Then
 	print #f2, "						// REHASH"
 	print #f2, "						// Opcode: 73"
 	print #f2, "						do_respawn = 0;"
-	print #f2, "						on_pant = 99; "
+	print #f2, "						on_pant = 0xfe; "
 	print #f2, "						sc_terminado = 1;"
 	print #f2, "						no_draw = 1;"
 	print #f2, "						return;"

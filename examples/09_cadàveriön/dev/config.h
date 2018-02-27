@@ -504,10 +504,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				32		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				32		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)

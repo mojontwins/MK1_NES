@@ -248,9 +248,12 @@ void game_loop (void) {
 
 		#ifdef ENABLE_TIMER
 			#include "mainloop/timer.h"
-		#endif
+		#endif       
 
-		hud_update ();
+		#ifdef ACTIVATE_SCRIPTING
+			if (n_pant != 0xfe && on_pant != 0xfe) 
+		#endif
+			hud_update ();
 
 		// Finish frame and wait for NMI
 		oam_hide_rest (oam_index);

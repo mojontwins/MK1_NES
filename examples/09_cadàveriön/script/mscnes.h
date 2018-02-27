@@ -183,14 +183,14 @@ void run_script (unsigned char whichs) {
 						// WARP_TO sc_n sc_x sc_y
 						// Opcode: 6D sc_n
 						n_pant = read_vbyte ();
-						on_pant = 99;
+						on_pant = 0xfe;
 						reloc_player ();
 						return;
 					case 0x6F:
 						// REENTER
 						// Opcode: 6F
 						//do_respawn = 0;
-						on_pant = 99; 
+						on_pant = 0xfe; 
 						return;
 					case 0x70:
 						// SET_TIMER a, b
