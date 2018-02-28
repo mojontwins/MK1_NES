@@ -41,6 +41,8 @@
 	#include "assets/compiled_enems.h"
 #endif
 #include "assets/hud_rle.h"
+#include "assets/title_rle.h"
+#include "assets/ending_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];

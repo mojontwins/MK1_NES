@@ -18,6 +18,20 @@ LABEL tsdummy0
 MAPFILE ..\dev\work\dummy0.h
 MAPPED 0, 0, 2, 2, 16, 15
 
+# Title
+OPEN title.png
+PALS paltscuts.png
+LABEL tsdummy1
+MAPFILE ..\dev\work\dummy1.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Ending
+OPEN ending.png
+PALS paltscuts.png
+LABEL tsdummy2
+MAPFILE ..\dev\work\dummy2.h
+MAPPED 0, 0, 2, 2, 16, 15
+
 # Tilesets are generated as tilemaps. They will be stored in this file:
 MAPFILE ..\dev\assets\tiledata.h
 
