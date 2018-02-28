@@ -12,6 +12,10 @@ if (timer_on && timer) {
 				flags [TIMER_ZERO_FLAG] = 
 			#endif
 			timer_zero = 1;
+			#ifdef ACTIVATE_SCRIPTING
+				hud_update (); 
+				run_script (2 * MAP_SIZE + 3);
+			#endif
 		}
 	}
 }

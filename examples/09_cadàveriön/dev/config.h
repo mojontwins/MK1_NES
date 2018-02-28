@@ -406,8 +406,6 @@
 // ---------
 
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-//#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
-
 #define CLEAR_FLAGS						// Zero all flags when entering a level
 
 //#define ENABLE_CONTAINERS				// Graphical flag representations!

@@ -88,7 +88,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG		-8
+#define PLAYER_COLLISION_VSTRETCH_BG	-8
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -105,8 +105,19 @@
 // General directives:
 // -------------------
 
+// Push boxes
+
 #define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
 #define FIRE_TO_PUSH
+
+//#define ENABLE_PUSHED_SCRIPT
+#define PUSHED_TILE_FLAG				1
+#define PUSHED_TO_X_FLAG				2
+#define PUSHED_TO_Y_FLAG				3
+#define PUSHED_FIRE
+
+// General stuff
+
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 #define PLAYER_BOUNCES
@@ -392,9 +403,9 @@
 
 // Scripting
 // ---------
+
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-//#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
-//#define SCRIPTING_TEXT_BOX
+#define CLEAR_FLAGS						// Zero all flags when entering a level
 
 //#define ENABLE_CONTAINERS				// Graphical flag representations!
 #define CONTAINERS_MAX 					4	// As per screen

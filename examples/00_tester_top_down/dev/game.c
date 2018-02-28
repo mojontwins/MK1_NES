@@ -98,6 +98,9 @@ extern const unsigned char m_gameover [];
 #include "engine/frame.h"
 #include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
+	#ifdef ENABLE_EXTERN_CODE
+		#include "my/extern.h"
+	#endif
 	#include "assets/mscnes.h"
 #endif
 #include "mainloop.h"

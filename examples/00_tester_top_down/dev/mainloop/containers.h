@@ -19,6 +19,7 @@ if (containers_index) {
 					) {
 						use_ct = 1; use_sub_ct = USE_ANIM_FRAMES_PER_STEP;
 						b_button = a_button = 0;
+						use_type = USE_TYPE_CONTAINER;
 					}
 				#endif
 				containers_interact_with = gpit;
@@ -29,7 +30,7 @@ if (containers_index) {
 
 	if (
 		containers_interact_with
-		#ifdef ENABLE_UESE_ANM
+		#ifdef ENABLE_USE_ANIM
 			&& use_ct == USE_ANIM_INTERACT_ON && use_sub_ct == USE_ANIM_FRAMES_PER_STEP
 		#endif
 	) {

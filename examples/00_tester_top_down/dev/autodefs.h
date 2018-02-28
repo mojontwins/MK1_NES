@@ -62,3 +62,7 @@
 #else
 	#define ENEMS_UPPER_COLLISION_BOUND 12
 #endif
+
+#if defined (ACTIVATE_SCRIPTING) && defined (LINE_OF_TEXT)
+	#define ENABLE_UL_PRINTER
+#endif

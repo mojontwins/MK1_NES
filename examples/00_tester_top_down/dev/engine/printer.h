@@ -112,11 +112,21 @@ unsigned char get_byte (void) {
 	#include "engine/mapmods/map_renderer_fast.h"
 #endif
 
-// Neefs _x, _y set.
+// Needs _x, _y set.
 void pr_str (unsigned char *s) {
 	vram_adr (((_y << 5) | _x) + 0x2000);
 	while (gpit = *s++) vram_put (gpit - 32); 
 }
+
+#ifdef ENABLE_UL_PRINTER
+	// Needs _x, _y set and gp_gen pointing to the string
+	void pr_ul_str () {
+		ppu_waitnmi (); clear_update_list ();
+		gp_addr = 0x2000 + ((_y << 5) | _x);
+		while (_n = *gp_gen ++) { _n -= 32; ul_putc (); }
+		ppu_waitnmi (); clear_update_list ();
+	}
+#endif
 
 #ifdef DEBUG
 unsigned char get_hex_digit (unsigned char n) {
