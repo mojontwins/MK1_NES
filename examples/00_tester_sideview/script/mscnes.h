@@ -58,6 +58,7 @@ void run_script (unsigned char whichs) {
 		}
 
 		if (sc_continuar) {
+            fire_script_success |= sc_continuar;
 			sc_terminado = 0;
 			while (!sc_terminado) {
 				switch (read_byte ()) {

@@ -18,6 +18,7 @@ switch (en_alive [gpit]) {
 			en_alive [gpit] = 1;
 			_enf_y = _en_y1 << 6;
 			_enf_vy = -PEZON_THRUST;
+			sfx_play (SFX_FLOAT, 1);
 		}
 		break;
 

@@ -228,6 +228,7 @@
 //#define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
+#define TIMER_SOUND						10  // play a sound if timer < value
 
 // Springs
 
@@ -555,6 +556,26 @@
 // Music
 
 #define MUSIC_INGAME 			0
-#define MUSIC_TITLE				1
+#define MUSIC_CUTS				1
+#define MUSIC_TITLE				2
 
 // SFX
+
+#define SFX_START				0
+#define SFX_TILE				1
+#define SFX_OBJECT				2
+#define SFX_USE					3
+#define SFX_PHIT				4
+#define SFX_DUMMY1				5
+#define SFX_ENHIT 				6
+#define SFX_DUMMY2				7
+#define SFX_JUMP				8
+#define SFX_BULLET				9
+#define SFX_COCO				10
+#define SFX_SPRING				11
+#define SFX_COUNT				12
+#define SFX_BREAKH				13
+#define SFX_HITTER				14
+#define SFX_STEPON				15
+#define SFX_FLOAT				16
+#define SFX_BREAKB				17

@@ -84,7 +84,7 @@ void player_render (void) {
 
 void player_kill (void) {
 	pkill = 0;
-	sfx_play (4, 0);
+	sfx_play (SFX_PHIT, 0);
 	
 	if (plife) plife --; else game_over = 1;
 
@@ -183,7 +183,9 @@ void player_move (void) {
 	#endif
 
 	#ifdef ENABLE_PROPELLERS
+		rda = pfloating;
 		pfloating = (at1 == 64 || at2 == 64);
+		if (rda != pfloating) sfx_play (SFX_FLOAT, 0);
 	#endif
 
 	#ifdef ENABLE_SPRINGS
@@ -191,6 +193,7 @@ void player_move (void) {
 			_t = SPRING_SPIKE_TILE; 
 			if (QTILE (cx1, cy1 + 1) == SPRING_TILE) { _x = cx1; _y = cy1; map_set (); }
 			if (QTILE (cx2, cy1 + 1) == SPRING_TILE) { _x = cx2; _y = cy1; map_set (); }
+			sfx_play (SFX_SPRING, 1);
 		}
 	#endif
 
@@ -403,7 +406,7 @@ void player_move (void) {
 				#endif
 			)
 		) {
-			sfx_play (7, 0);
+			sfx_play (SFX_JUMP, 0);
 			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
 			
 			#ifdef DIE_AND_RESPAWN
@@ -601,11 +604,11 @@ void player_move (void) {
 			#endif		
 			
 			#ifdef PLAYER_PUNCHES
-				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; }				
+				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; sfx_play (SFX_HITTER, 0); }
 			#endif
 
 			#ifdef PLAYER_KICKS
-				if (!ppossee && pkicking == 0) { pkicking = 16; phitteract = 1; }
+				if (!ppossee && pkicking == 0) { pkicking = 16; phitteract = 1; sfx_play (SFX_HITTER, 0); }
 			#endif
 		} 
 	#endif

@@ -25,7 +25,7 @@ void player_process_tile (at, x0, y0, x1, y1) {
 					flags [PUSHED_TILE_FLAG] = QTILE (x1, y1);
 				#endif
 				
-				sfx_play (1, 1);
+				sfx_play (SFX_TILE, 1);
 				_x = x0; _y = y0; _t = 0;  map_set ();
 				_x = x1; _y = y1; _t = 14; map_set ();
 				
@@ -50,7 +50,7 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			_x = x0; _y = y0; _t = 0; map_set ();
 			clear_cerrojo (COORDS(x0, y0));
 			pkeys --;
-			sfx_play (1, 1);
+			sfx_play (SFX_TILE, 1);
 		} else {
 			#ifdef ENABLE_NO
 				no_ct = 100;

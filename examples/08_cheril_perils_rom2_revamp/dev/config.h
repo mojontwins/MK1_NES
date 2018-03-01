@@ -558,3 +558,22 @@
 #define MUSIC_INGAME 			0
 
 // SFX
+
+#define SFX_START				0
+#define SFX_TILE				1
+#define SFX_OBJECT				2
+#define SFX_USE					3
+#define SFX_PHIT				4
+#define SFX_DUMMY1				5
+#define SFX_ENHIT 				6
+#define SFX_DUMMY2				7
+#define SFX_JUMP				8
+#define SFX_BULLET				9
+#define SFX_COCO				10
+#define SFX_SPRING				11
+#define SFX_COUNT				12
+#define SFX_BREAKH				13
+#define SFX_HITTER				14
+#define SFX_STEPON				15
+#define SFX_FLOAT				16
+#define SFX_BREAKB				17

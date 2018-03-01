@@ -9,7 +9,8 @@
 		use_type == USE_TYPE_SCRIPTING
 	) {
 		run_fire_script ();
-		fire_script_success = sc_continuar;
+		sfx_play (fire_script_success ? SFX_OBJECT : SFX_SPRING, 1);
+
 	}
 	#ifdef ENABLE_FIRE_ZONE
 		else

@@ -26,6 +26,7 @@ switch (en_alive [gpit]) {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 5);
 			_en_mx = CHAC_CHAC_IDLE_4;
 			en_alive [gpit] = 3;
+			sfx_play (SFX_STEPON, 1);
 		}
 		break;
 	case 3:

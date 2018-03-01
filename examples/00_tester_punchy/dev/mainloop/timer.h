@@ -7,6 +7,11 @@ if (timer_on && timer) {
 	if (timer_frames) timer_frames --; else {
 		timer_frames = 50;
 		timer --; 
+
+		#ifdef TIMER_SOUND
+			if (timer < TIMER_SOUND) sfx_play (SFX_COUNT, 2);
+		#endif
+
 		if (timer == 0) {
 			#ifdef TIMER_ZERO_FLAG
 				flags [TIMER_ZERO_FLAG] = 

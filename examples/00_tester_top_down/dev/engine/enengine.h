@@ -726,8 +726,9 @@ void enems_move (void) {
 
 					if (i & PAD_A) {
 						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-						sfx_play (7, 0);
+						sfx_play (SFX_JUMP, 0);
 					} else {
+						sfx_play (SFX_STEPON, 1);
 						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
 					}
 
@@ -805,7 +806,7 @@ void enems_move (void) {
 					#endif
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
-						sfx_play (6, 2);
+						sfx_play (SFX_ENHIT, 1);
 						bullets_destroy ();
 						enems_hit ();
 						break;

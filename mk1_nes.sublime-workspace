@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"SFX_CO",
+				"SFX_COCO\t(sonidos.md)"
+			],
+			[
 				"USE_TYPE_",
 				"USE_TYPE_SCRIPTING\t(definitions.h)"
 			],
@@ -284,64 +288,55 @@
 	"buffers":
 	[
 		{
-			"file": "examples/09_cadàveriön/dev/my/pres.h",
+			"file": "examples/sonidos.md",
 			"settings":
 			{
-				"buffer_size": 1159,
+				"buffer_size": 1768,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 95 files for \"cheat\"\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\09_cadàveriön\\dev\\mainloop.h:\n  368  #endif\n  369  \n  370: \t\t//#include \"mainloop/cheat.h\"\n  371  \n  372  \t\t#include \"mainloop/pause.h\"\n\n1 match in 1 file\n",
+			"file": "examples/09_cadàveriön/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 231,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "examples/09_cadàveriön/dev/mainloop/cheat.h",
-			"settings":
-			{
-				"buffer_size": 133,
+				"buffer_size": 18231,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/09_cadàveriön/dev/mainloop.h",
+			"file": "examples/09_cadàveriön/dev/mainloop/timer.h",
 			"settings":
 			{
-				"buffer_size": 6427,
+				"buffer_size": 557,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/09_cadàveriön/dev/compile.bat",
+			"file": "examples/09_cadàveriön/dev/engine/breakable.h",
 			"settings":
 			{
-				"buffer_size": 1311,
+				"buffer_size": 1165,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/00_tester_top_down/dev/my/pres.h",
+			"file": "examples/09_cadàveriön/dev/mainloop/scripting.h",
 			"settings":
 			{
-				"buffer_size": 2017,
+				"buffer_size": 567,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/09_cadàveriön/dev/game.c",
+			"file": "examples/diario.md",
 			"settings":
 			{
-				"buffer_size": 2623,
+				"buffer_size": 114544,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -392,18 +387,46 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/enemmods",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop"
 	],
 	"file_history":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/enemmods/enem_punchy.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/hotspots.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/resonators.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/cocos.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/playermods/bullets.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/playermods/process_tile.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/player.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/sonidos.md",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/containers.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/diario.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/game.c",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/nes-CNROM.cfg",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/config.h",
+		"/C/Users/na_th/Desktop/git/nes_work/D'Veel'NgR/dev/crt0-CNROM.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/nes.cfg",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/my/pres.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/neslib.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/crt0.s",
+		"/C/Users/na_th/Desktop/git/nes_work/D'Veel'NgR/dev/famitone2.s",
+		"/C/Users/na_th/Desktop/git/nes_work/D'Veel'NgR/dev/neslib-CNROM.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/famitone.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/neslib.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/music.s",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/my/pres.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/cheat.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/mainloop.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/msc3nes.bas",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/player.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/config.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/playermods/bullets.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/engine/playermods/scripting.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/script/script.spt",
@@ -415,21 +438,14 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/my/extern.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/assets/behs.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/player.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/my/player_frame_selector.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/hotspots.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/assets/spritedata.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/playermods/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/playermods/process_tile.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/gfx/import_patterns.spt",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/assets/metasprites.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/containers.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/ram/bss.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/definitions.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/playermods/bullets.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/assets/mscnes.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/timer.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/pause.h",
@@ -438,8 +454,6 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/printer.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/trash/cadaver.spt",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/my/map_renderer_customization.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
 		"/C/Users/na_th/Google Drive/Maritrini/dev/Speccy/MK1/Cadàveriön/dev/msc.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/my/game_frame.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/game.c",
@@ -460,9 +474,7 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_punchy.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enengine.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/engine/enemmods/enem_shooty.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/sonidos.md",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/config.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/cocos.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/enemmods/enem_punchy.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/dev/engine/general.h",
@@ -508,22 +520,7 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_checks.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_vars.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_punchy/dev/my/on_object_used.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/ponedor.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/resonators.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/player_frame_selector.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_sideview/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/spritedata.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_detectors.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/00_tester_top_down/dev/assets/levelset.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_sir_ababol_dx_it1/dev/assets/levelset.h"
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h"
 	],
 	"find":
 	{
@@ -534,6 +531,8 @@
 		"height": 135.0,
 		"where_history":
 		[
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\09_cadàveriön\\dev",
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\09_cadàveriön",
 			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\09_cadàveriön\\dev",
 			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy\\dev",
 			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\00_tester_punchy\\dev\\engine",
@@ -595,6 +594,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sfx_play",
+			"SAMPLES",
+			"NTSC_MODE",
+			"music_play",
+			"ft",
+			"FT",
+			"fa",
+			"dpcm",
+			"FT_DPCM_PTR",
+			"FT_",
 			"cheat",
 			"warp",
 			"script_result",
@@ -712,17 +721,7 @@
 			"printscrsizes <",
 			"cMap",
 			"sclpGetValue (\"scrsizes\")",
-			"sclpGetValue (\"prefix\")",
-			"#fOut",
-			"scrsizes",
-			"TOP_ADJUST",
-			"conflict",
-			"enems_hit",
-			"ENEMS_OCCLUDING_FRAME",
-			"msc3nes.exe",
-			"msc3nes",
-			"x",
-			"<< 6"
+			"sclpGetValue (\"prefix\")"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -873,70 +872,24 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/09_cadàveriön/dev/my/pres.h",
+					"file": "examples/sonidos.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1159,
+						"buffer_size": 1768,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1153,
-								1153
+								1662,
+								1662
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 231,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										158,
-										163
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								138,
-								138
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -944,27 +897,121 @@
 					},
 					"stack_index": 3,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
 				{
-					"buffer": 2,
-					"file": "examples/09_cadàveriön/dev/mainloop/cheat.h",
+					"buffer": 1,
+					"file": "examples/09_cadàveriön/dev/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 133,
+						"buffer_size": 18231,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								133,
-								133
+								7684,
+								7695
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2435.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/09_cadàveriön/dev/mainloop/timer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 557,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								557,
+								557
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/09_cadàveriön/dev/engine/breakable.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1081,
+								1081
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "examples/09_cadàveriön/dev/mainloop/scripting.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 567,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								346,
+								346
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -974,124 +1021,32 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "examples/09_cadàveriön/dev/mainloop.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6427,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6278,
-								6278
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3031.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "examples/09_cadàveriön/dev/compile.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								363,
-								372
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
 					"buffer": 5,
-					"file": "examples/00_tester_top_down/dev/my/pres.h",
+					"file": "examples/diario.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2017,
+						"buffer_size": 114544,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1180,
-								1180
+								114544,
+								114544
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 273.0,
+						"translation.y": 45527.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "examples/09_cadàveriön/dev/game.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2623,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2588,
-								2588
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1092.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1185,7 +1140,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

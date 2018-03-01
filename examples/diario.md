@@ -3175,3 +3175,5 @@ En realidad al final lo que más me queda es hacer juegos XD
 
 ~~
 
+Lo dejo a mitad de montar los sonidos nuevos en Cadàveriön porque el tema de usar con fire script -> OK parece NO FUNCIONAR OTRA PUTA VEZ.
+

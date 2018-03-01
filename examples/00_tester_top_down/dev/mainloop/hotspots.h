@@ -20,7 +20,7 @@ if (hrt) {
 							pal_spr (RESONATOR_CHANGE_SPR_PAL);
 						#endif
 
-						// Sound 
+						sfx_play (SFX_BREAKH, 1);
 					} 
 				}
 			} else
@@ -55,7 +55,7 @@ if (hrt) {
 							pinv = HS_OBJ_EMPTY;
 
 							b_button = 0;
-							sfx_play (1, 1);
+							sfx_play (SFX_TILE, 1);
 						}
 
 					} else if (hrt >= HS_OBJ_MIN && hrt <= HS_OBJ_MAX) {
@@ -71,7 +71,7 @@ if (hrt) {
 							pinv = rda;
 
 							b_button = 0;
-							sfx_play (2, 1);
+							sfx_play (SFX_OBJECT, 1);
 						}
 
 					} else if (hrt >= HS_OBJ_MIN + HS_USE_OFFS && hrt <= HS_OBJ_MAX + HS_USE_OFFS) {
@@ -100,7 +100,7 @@ if (hrt) {
 								#include "my/on_object_used.h"
 
 								b_button = 0;
-								sfx_play (1, 1);
+								sfx_play (SFX_USE, 1);
 
 							} 
 							#ifdef ENABLE_NO
@@ -130,13 +130,13 @@ if (hrt) {
 						#ifndef DEACTIVATE_OBJECTS
 							case HOTSPOT_TYPE_OBJECT:
 								pobjs ++;
-								rda = 2;
+								rda = SFX_OBJECT;
 								break;
 						#endif
 						#ifndef DEACTIVATE_KEYS
 							case HOTSPOT_TYPE_KEYS:
 								pkeys ++;
-								rda = 2;
+								rda = SFX_OBJECT;
 								break;
 						#endif
 							case HOTSPOT_TYPE_REFILL:
@@ -144,11 +144,11 @@ if (hrt) {
 								#ifdef LIMIT_LIFE
 									if (plife > PLAYER_LIFE) plife = PLAYER_LIFE;
 								#endif
-								rda = 3;
+								rda = SFX_USE;
 								break;
 						#ifdef MAX_AMMO
 							case HOTSPOT_TYPE_AMMO:
-								rda = 2;
+								rda = SFX_OBJECT;
 								if (MAX_AMMO - pammo > AMMO_REFILL)
 									pammo += AMMO_REFILL;
 								else
@@ -157,7 +157,7 @@ if (hrt) {
 						#endif
 						#if defined (ENABLE_TIMER) && defined (HOTSPOT_TYPE_TIME)
 							case HOTSPOT_TYPE_TIME:
-								rda = 2;
+								rda = SFX_OBJECT;
 								#if TIMER_REFILL == 0
 									timer = TIMER_INITIAL;
 								#else

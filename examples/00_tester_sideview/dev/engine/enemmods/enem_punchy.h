@@ -11,7 +11,7 @@ if (en_rawv [gpit] & 2) {
 		en_spr = _en_s + _en_facing + 2;
 		_en_ct --;
 	} else {
-		// Attempt to shoot
+		// Attempt to punch
 		if (PUNCH_FREQ) {
 			if (_en_facing) 
 				rdx = _en_x + 16 - PUNCHIES_PUNCH_OFFS_X - 8;
@@ -20,6 +20,7 @@ if (en_rawv [gpit] & 2) {
 			rdy = _en_y + PUNCHIES_PUNCH_OFFS_Y;
 			
 			_en_ct = 16;
+			sfx_play (SFX_HITTER, 1);
 
 			// Collide w/player
 			if (pstate == EST_NORMAL && 

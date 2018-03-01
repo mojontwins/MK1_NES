@@ -27,6 +27,7 @@ void breakable_break (unsigned char x, unsigned char y) {
 	if (brk_buff [gpaux] < BREAKABLE_LIFE) {
 		brk_buff [gpaux] ++;
 	} else {
+		sfx_play (SFX_BREAKH, 1);
 #ifdef BREAKABLE_ANIM
 		// Unsafe but short & fast. Adjust BREAKABLE_MAX if this breaks your game
 		gpit = BREAKABLE_MAX; while (gpit --) {
@@ -37,6 +38,7 @@ void breakable_break (unsigned char x, unsigned char y) {
 				_y = brky [gpit] = y;
 				_t = BREAKABLE_BREAKING;
 				map_set ();					// Break tile!
+				sfx_play (SFX_BREAKB, 1);
 				break;						// HA HA HA
 			}
 		}

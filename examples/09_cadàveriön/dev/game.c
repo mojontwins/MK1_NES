@@ -138,7 +138,9 @@ void main(void) {
 				if (level == MAX_LEVELS) 
 #endif
 				{
+					music_play (MUSIC_CUTS);
 					pres (paltscuts, scr_game_ending);
+					music_stop ();
 					break;
 				}
 			}

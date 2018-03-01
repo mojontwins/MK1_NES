@@ -28,6 +28,8 @@ void cocos_init (void) {
 			rds16 = COCO_V * rdb / rdct; coco_vy [coco_it] = ADD_SIGN2 (py, coco_y [coco_it], rds16);
 
 			coco_on [coco_it] = 1;
+
+			sfx_play (SFX_COCO, 2);
 		}	
 	}
 #endif
@@ -47,12 +49,15 @@ void cocos_init (void) {
 		coco_vy [coco_it] = coco_dy [rda];
 
 		coco_on [coco_it] = 1;
+
+		sfx_play (SFX_COCO, 2);
 	}
 #endif
 
 void cocos_destroy (void) {
 	coco_on [coco_it] = 0;
 	coco_slots [coco_slots_i] = coco_it; coco_slots_i ++;
+	sfx_play (SFX_DUMMY1, 2);
 }
 
 void cocos_do (void) {

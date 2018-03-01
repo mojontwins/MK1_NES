@@ -42,11 +42,14 @@ void fire_bullet (void) {
 				break;	
 		#endif
 	}	
+
+	sfx_play (SFX_BULLET, 2);
 }
 
 void bullets_destroy (void) {
 	bst [bi] = 0;
 	b_slots [b_slots_i] = bi; b_slots_i ++;
+	sfx_play (SFX_DUMMY1, 2);
 }
 
 void bullets_move (void) {
