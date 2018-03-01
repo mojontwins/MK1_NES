@@ -23,6 +23,13 @@ echo Making map
 cd ..\map
 ..\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 5 5 15 0
 
+echo Exporting music and sound
+cd ..\dev
+..\utils\text2data.exe ..\ogt\music.txt -ca65 -ch1..4
+..\utils\nsf2data.exe ..\ogt\sounds.nsf -ca65 -ntsc
+copy ..\ogt\music.s > nul
+copy ..\ogt\sounds.s > nul
+
 cd ..\dev
 
 :justcompile

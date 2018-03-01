@@ -209,7 +209,7 @@ void prepare_scr (void) {
 }
 
 void game_loop (void) {
-	music_play (m_ingame);
+	music_play (MUSIC_INGAME);
 
 	clear_update_list ();
 	set_vram_update (UPDATE_LIST_SIZE, update_list);
@@ -367,7 +367,7 @@ void game_loop (void) {
 		}
 #endif
 
-		//#include "mainloop/cheat.h"
+		#include "mainloop/cheat.h"
 
 		#include "mainloop/pause.h"
 	}

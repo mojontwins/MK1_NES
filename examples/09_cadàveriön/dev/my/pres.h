@@ -38,9 +38,12 @@ void pres_title (void) {
 	pal_bg (paltscuts);
 	bat_in ();
 
+	music_play (MUSIC_TITLE);
+
 	while (!(pad_poll (0) & PAD_START)) ppu_waitnmi ();
 	while ((pad_poll (0) & PAD_START)) ppu_waitnmi ();
 
+	music_stop ();
 	bat_out ();
 }
 

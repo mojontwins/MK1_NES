@@ -1,6 +1,8 @@
 ; Startup code for cc65 and Shiru's NES library
 ; based on code by Groepaz/Hitmen <groepaz@gmx.net>, Ullrich von Bassewitz <uz@cc65.org>
 
+; Old neslib integrated with FT2 by na_th_an
+
 .if CNROM
 NES_MAPPER				=3	;mapper number
 NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
@@ -88,11 +90,10 @@ RLE_BYTE	=TEMP+3
 
 
 FT_BASE_ADR		=$0100	;page in RAM, should be $xx00
-FT_DPCM_PTR		=(FT_DPCM_OFF&$3fff)>>6
 
 .define FT_THREAD      1;undefine if you call sound effects in the same thread as sound update
-
-
+.define FT_PAL_SUPPORT	1   ;undefine to exclude PAL support
+.define FT_NTSC_SUPPORT	1   ;undefine to exclude NTSC support
 
 .segment "HEADER"
 
@@ -206,14 +207,10 @@ detectNTSC:
 
 	jsr _ppu_off
 
+	ldx #<MUSIC_data
+	ldy #>MUSIC_data
 	lda <NTSCMODE
 	jsr FamiToneInit
-
-	.if(FT_DPCM_ENABLE)
-	ldx #<music_dpcm
-	ldy #>music_dpcm
-	jsr FamiToneSampleInit
-	.endif
 
 	.if(FT_SFX_ENABLE)
 	ldx #<sounds_data
@@ -240,16 +237,13 @@ detectNTSC:
 
 .segment "RODATA"
 
+MUSIC_data:
 	.include "music.s"
 
 	.if(FT_SFX_ENABLE)
 sounds_data:
 	.include "sounds.s"
 	.endif
-
-.segment "SAMPLES"
-
-	;.incbin "music_dpcm.bin"
 
 .segment "VECTORS"
 
@@ -267,3 +261,4 @@ sounds_data:
 	.else
 	.incbin "tileset.chr"
 	.endif
+	

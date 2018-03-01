@@ -522,6 +522,12 @@
 	#define CELL_FACING_UP 		4
 	#define CELL_FACING_DOWN 	6
 
+	#define CELL_IDLE			0
+	#define CELL_WALK_CYCLE		1
+	#define CELL_PUSHING		5
+
+	#define CELL_USE			24
+
 #else
 
 	// Cell definitions for side view
@@ -545,3 +551,11 @@
 
 	#define CELL_CLIMB_CYCLE	20
 #endif
+
+// Music
+
+#define MUSIC_INGAME 			0
+#define MUSIC_TITLE				1
+#define MUSIC_GAME_OVER 		2
+
+// SFX

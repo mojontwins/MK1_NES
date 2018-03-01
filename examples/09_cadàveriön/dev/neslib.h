@@ -1,6 +1,8 @@
 //NES hardware-dependent functions by Shiru (shiru@mail.ru)
 //Feel free to do anything you want with this code, consider it Public Domain
 
+// Integrated with Famitone 2 by na_th_an
+
 
 //set bg and spr palettes, data is 32 bytes array
 
@@ -84,7 +86,7 @@ void __fastcall__ ppu_waitnmi(void);
 
 //play a music in FamiTone format
 
-void __fastcall__ music_play(const unsigned char *data);
+void __fastcall__ music_play(unsigned char song);
 
 //stop music
 

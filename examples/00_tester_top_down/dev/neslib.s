@@ -620,13 +620,9 @@ _vram_write:
 
 
 
-;void __fastcall__ music_play(const unsigned char *data);
+;void __fastcall__ music_play(unsigned char song);
 
-_music_play:
-	stx <PTR
-	tax
-	ldy <PTR
-	jmp FamiToneMusicStart
+_music_play=FamiToneMusicPlay
 
 
 
@@ -650,7 +646,7 @@ _sfx_play:
 	lda @sfxPriority,x
 	tax
 	jsr popa
-	jmp FamiToneSfxStart
+	jmp FamiToneSfxPlay
 
 @sfxPriority:
 	.byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
@@ -966,4 +962,5 @@ palBrightTable8:
 	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30
 	.byte $30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30
 
-	.include "famitone.s"
+	.include "famitone2.s"
+	

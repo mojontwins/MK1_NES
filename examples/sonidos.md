@@ -12,3 +12,13 @@ Listo los sonidos que necesitaré
 - enemigo lanza coco.
 - spring lanzado
 
+Estos son los que hay
+
+00 Start
+01 TR
+02 Item (Usar, trit agudo)
+03 toitoitoitoi (con eco)
+04 Muerte
+05 TR RT
+06 TST
+07 Salto

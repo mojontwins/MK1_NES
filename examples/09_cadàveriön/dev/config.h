@@ -551,3 +551,10 @@
 
 	#define CELL_CLIMB_CYCLE	20
 #endif
+
+// Music
+
+#define MUSIC_INGAME 			0
+#define MUSIC_TITLE				1
+
+// SFX

@@ -17,7 +17,7 @@ void bat_out (void) {
 unsigned char pres_title (void) {
 	unrle_vram (title_rle, 0x2000);
 	bat_in ();
-	music_play (m_title);
+	music_play (MUSIC_TITLE);
 
 	gpit = 0;
 	while (1) {
@@ -42,7 +42,7 @@ unsigned char pres_title (void) {
 
 void pres_common (void) {
 	bat_in ();
-	music_play (m_gameover);
+	music_play (MUSIC_GAME_OVER);
 	while (!pad_poll (0));
 	bat_out ();
 }

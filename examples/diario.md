@@ -3151,3 +3151,27 @@ Y FT2:
 
 Finalmente, al final se incluye `famitone.s` y `famitone2.s`. En principio parece sencillo ¿no? ¿Y si pruebo? Siempre puedo hacer stash... Voy a subir los cambios antes de empezar.
 
+~~
+
+¡¡Funciona!! Joder, sí que ha sido fácil. Ahora tengo que portar los cambios a los demás juegos, lo que implica convertir las músicas para unos cuantos.
+
+~~
+
+Veamos el TODO, ampliado como siempre :*)
+
+[ ] Mover config.h a /my
+
+[ ] Containers
+
+[ ] Sonidos
+
+[ ] Música OGT Cheril Perils y Cadàveriön
+
+[ ] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+En realidad al final lo que más me queda es hacer juegos XD
+
+~~
+
