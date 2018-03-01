@@ -16,7 +16,7 @@ const unsigned char script_pool [] = {
 
 #ifdef CLEAR_FLAGS
 void msc_clear_flags (void) {
-	gpit = max_flags; while (gpit --) flags [gpit] = 0;
+    memfill (flags, 0, MAX_FLAGS);
 }
 #endif
 
@@ -31,18 +31,8 @@ unsigned char read_vbyte (void) {
 }
 
 void readxy (void) {
-	sc_x = read_byte ();
-	sc_y = read_byte ();
-}
-
-void stop_player (void) {
-	pvx = pvy = 0;
-}
-
-void reloc_player (void) {
-	px = read_vbyte () << 10;
-	py = read_vbyte () << 10;
-	stop_player ();
+	sc_x = read_vbyte ();
+	sc_y = read_vbyte ();
 }
 
 void run_script (unsigned char whichs) {
@@ -50,6 +40,7 @@ void run_script (unsigned char whichs) {
 	gp_gen = (unsigned char *) script_pool + whichs + whichs;
 	rda = *gp_gen ++; rdb = *gp_gen;
 	script_result = 0;
+	sc_continuar = 0;
 	if (!(rda | rdb)) return;
 	script = (unsigned char *) script_pool + rda + (rdb << 8);
 

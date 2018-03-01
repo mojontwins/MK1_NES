@@ -53,6 +53,7 @@ void pres_game_over (void) {
 	_x =  4; _y = 14; pr_str ("NICE TRY, BUT NO BANANA!");
 	_x =  5; _y = 16; pr_str ("DO IT BETTER NEXT TIME");
 	_x =  9; _y = 18; pr_str ("MISSION FAILED");
+	pres_common ();
 }
 
 void pres_ending (void) {
@@ -61,6 +62,7 @@ void pres_ending (void) {
 	_x = 2; _y = 14; pr_str ("YOU MANAGED TO SET THE BOMBS");
 	_x = 4; _y = 16; pr_str ("AND DESTROY THE COMPUTER");
 	_x = 5; _y = 18; pr_str ("MISSION ACCOMPLISHED!!");	
+	pres_common ();
 }
 
 signed int lower_end;

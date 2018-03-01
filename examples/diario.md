@@ -2898,3 +2898,256 @@ Bue, por ahora me vale. Pero debería sanear eso también *un poco*.
 
 Tengo que integrar además la animación con el tema de script, como dije hace unos días, pero antes voy a dejar el juego funcionando al 100%.
 
+20180229
+========
+
+Tras trasladar los cambios para Cadàveriön al tester top-down (el remake de Sgt. Helmet's Training Day), he corregido algunas cosas en la generación de código de msc3nes (¡cómo mola tener tantos testers!) y ahora veo unos cuantos bugs que no sé de qué serán. Hay uno fácil y otro que parece difícil:
+
+[X] No puedo disparar en la fila inferior de la pantalla (FASI).
+
+[X] Tras colocar las bombas, en la pantalla de abajo ¡no se puede disparar! (DIFISI).
+
+Veamos todo.
+
+Lo fasi está ya; lo difísi parece que ocurre cuando el mensaje general "cambia". Este es el código del script que controla eso:
+
+```
+	ENTERING ANY
+		IF FLAG 1 = 0
+		THEN
+			#TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
+			TEXT _SET_5_BOMBS_IN_EVIL_COMPUTER_
+		END
+		
+		IF FLAG 1 = 1
+		THEN
+			#TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
+			TEXT BOMBS_ARE_SET!_RETURN_TO_BASE!
+		END
+	END
+```
+
+Tampoco tiene mucha historia, no :-?
+
+Voy a ver dónde se detiene esto. Seguramente "algo" esté invalidando `b_button` y tengo que encontrar qué es. Exacto, `b_button == 0` en la pantalla 1 tras colocar las bombas... Eso justo antes de detectar para disparar; lo que se hace antes es ejecutar la detección de FIRE para lanzar scripts. Eso invalidaría `b_button` bajo algunas circunstancias:
+
+```c
+	if (b_button) {
+		run_fire_script ();
+		if (sc_continuar) b_button = 0;
+	}
+```
+
+¿Qué fire script se ejecuta ahí? Vuelvo al script. Respuesta: NINGUNO.
+
+Claro, al no ejecutarse nada, el `sc_continue` del ENTERING sigue a 1. Tengo que invalidar `sc_continue` SIEMPRE. Lo hago en el código generado por msc3nes, y así no tengo que tocar nada de engine.
+
+Todo correcto! Propagamos.
+
+~~
+
+Me iba a meter con el sonido pero ¿cómo de viable será integrar con famitracker2? Voy a comparar los puntos de entrada.
+
+crt0.h
+------
+
+Las constantes `FT_DPCM_OFF` y `FX_SFX_STREAMS` están presentes en ambos. Los defines `FT_DPCM_ENABLE` y `FT_SFX_ENABLE` también.
+
+`FT_TEMP` parece estar definido; en FT1 son 7 bytes; en FT2 son 3.
+
+`FT_BASE_ADDR` fijo a $100 en ambos.
+
+`FT_DPCM_PTR` no se define para FT2.
+
+De estos tres en FT2 sólo FT_THREAD parece usarse en FT1.
+
+```s
+	.define FT_THREAD       1	;undefine if you call sound effects in the same thread as sound update
+	.define FT_PAL_SUPPORT	1   ;undefine to exclude PAL support
+	.define FT_NTSC_SUPPORT	1   ;undefine to exclude NTSC support
+```
+
+Luego vienen las inicializaciones. Para FT1:
+
+```s
+		lda <NTSCMODE
+		jsr FamiToneInit
+
+		.if(FT_DPCM_ENABLE)
+		ldx #<music_dpcm
+		ldy #>music_dpcm
+		jsr FamiToneSampleInit
+		.endif
+
+		.if(FT_SFX_ENABLE)
+		ldx #<sounds_data
+		ldy #>sounds_data
+		jsr FamiToneSfxInit
+		.endif
+```
+
+Para FT2:
+
+```s
+		ldx #<MUSIC_data
+		ldy #>MUSIC_data
+		lda <NTSC_MODE
+		jsr FamiToneInit
+
+		.if(FT_SFX_ENABLE)
+		ldx #<sounds_data
+		ldy #>sounds_data
+		jsr FamiToneSfxInit
+		.endif
+```
+
+La inicialización para los SFX es igual, pero en FT1 se pasa el resultado de la detección de NTSC y se inicializa el DPCM.
+
+La carga de datos es también diferente; FT1:
+
+```s 
+	.segment "RODATA"
+
+		.include "music.s"
+
+		.if(FT_SFX_ENABLE)
+	sounds_data:
+		.include "sounds.s"
+		.endif
+
+	.segment "SAMPLES"
+
+		;.incbin "music_dpcm.bin"
+```
+
+FT2:
+
+```s
+	.segment "RODATA"
+
+	MUSIC_data:
+		.include "music.s"
+
+		.if(FT_SFX_ENABLE)
+	sounds_data:
+		.include "sounds.s"
+		.endif
+```
+
+Los samples no aparecen por ningún lado en FT2 y se carga la música exportada tras una etiqueta. La adaptación en este archivo parece sencilla.
+
+neslib.s
+--------
+
+El la NMI, para FT1 se llama a `FamiToneUpdate` justo al final:
+
+```s 
+	@skipNtsc:
+
+		jsr FamiToneUpdate
+
+		pla
+		tay
+		pla
+		tax
+		pla
+
+	irq:
+	    rti
+```
+
+En FT2 es exactamente igual:
+
+```s
+	@skipNtsc:
+
+		jsr FamiToneUpdate
+
+		pla
+		tay
+		pla
+		tax
+		pla
+
+	irq:
+	    rti
+```
+
+Las funciones que integran; FT1:
+
+```s
+	;void __fastcall__ music_play(const unsigned char *data);
+
+	_music_play:
+		stx <PTR
+		tax
+		ldy <PTR
+		jmp FamiToneMusicStart
+
+
+
+	;void __fastcall__ music_stop(void);
+
+	_music_stop=FamiToneMusicStop
+
+
+
+	;void __fastcall__ music_pause(unsigned char pause);
+
+	_music_pause=FamiToneMusicPause
+
+
+
+	;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+
+	_sfx_play:
+		and #$03
+		tax
+		lda @sfxPriority,x
+		tax
+		jsr popa
+		jmp FamiToneSfxStart
+
+	@sfxPriority:
+		.byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
+```
+
+Y FT2:
+
+```s
+	;void __fastcall__ music_play(unsigned char song);
+
+	_music_play=FamiToneMusicPlay
+
+
+
+	;void __fastcall__ music_stop(void);
+
+	_music_stop=FamiToneMusicStop
+
+
+
+	;void __fastcall__ music_pause(unsigned char pause);
+
+	_music_pause=FamiToneMusicPause
+
+
+
+	;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+
+	_sfx_play:
+		and #$03
+		tax
+		lda @sfxPriority,x
+		tax
+		jsr popa
+		jmp FamiToneSfxPlay
+
+	@sfxPriority:
+		.byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
+```
+
+`music_stop`, `music_pause` y `sfxplay` parece exactamente iguales. `music_play` es más sencilla, supongo que porque se maneja una biblioteca de canciones indexada por un byte.
+
+Finalmente, al final se incluye `famitone.s` y `famitone2.s`. En principio parece sencillo ¿no? ¿Y si pruebo? Siempre puedo hacer stash... Voy a subir los cambios antes de empezar.
+

@@ -52,7 +52,7 @@ signed int add_sign (signed int sign, signed int value) {
 #ifdef ACTIVATE_SCRIPTING
 void run_fire_script (void) {
 	run_script (2 * MAP_SIZE + 2);
-	run_script (n_pant + n_pant + 1);
+	run_script ((n_pant << 1) + 1);
 }
 #endif
 

@@ -40,10 +40,6 @@ void game_init (void) {
 	enems_persistent_deaths_load ();
 #endif
 
-#ifdef CLEAR_FLAGS
-	msc_clear_flags ();
-#endif
-
 #ifndef DEACTIVATE_OBJECTS
 	pobjs = 0;
 #endif
@@ -99,7 +95,6 @@ void game_init (void) {
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
-	// n_pant = 2; pkeys = 1;
 	#include "my/extra_inits.h"
 }
 
@@ -227,7 +222,10 @@ void game_loop (void) {
 	ppu_on_all ();
 	
 #ifdef ACTIVATE_SCRIPTING
-	script_result = 0;
+	#ifdef CLEAR_FLAGS
+		msc_clear_flags ();
+	#endif
+	
 	// Entering game script
 	run_script (2 * MAP_SIZE);
 #endif
@@ -248,7 +246,7 @@ void game_loop (void) {
 
 		#ifdef ENABLE_TIMER
 			#include "mainloop/timer.h"
-		#endif       
+		#endif
 
 		#ifdef ACTIVATE_SCRIPTING
 			if (n_pant != 0xfe && on_pant != 0xfe) 
@@ -369,7 +367,7 @@ void game_loop (void) {
 		}
 #endif
 
-		//#include "mainloop/cheat.h"
+		#include "mainloop/cheat.h"
 
 		#include "mainloop/pause.h"
 	}

@@ -75,7 +75,7 @@ void bullets_move (void) {
 				bx [bi] < PLAYER_BULLET_SPEED ||
 				bx [bi] > 255 - PLAYER_BULLET_SPEED ||
 				by [bi] < PLAYER_BULLET_SPEED ||
-				by [bi] > 191 - PLAYER_BULLET_SPEED ||
+				by [bi] > 207 - PLAYER_BULLET_SPEED ||
 				(rdm & 8)
 			) bullets_destroy (); 
 		}

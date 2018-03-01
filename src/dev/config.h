@@ -105,8 +105,19 @@
 // General directives:
 // -------------------
 
+// Push boxes
+
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
-//#define FIRE_TO_PUSH
+#define FIRE_TO_PUSH
+
+//#define ENABLE_PUSHED_SCRIPT
+#define PUSHED_TILE_FLAG				1
+#define PUSHED_TO_X_FLAG				2
+#define PUSHED_TO_Y_FLAG				3
+#define PUSHED_FIRE
+
+// General stuff
+
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
@@ -393,21 +404,19 @@
 
 // Scripting
 // ---------
-/*
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-#define ENABLE_FAST_FIRE_ZONE			// Fire zone only triggers FIRE n, not FIRE ANY
-#define SCRIPTING_TEXT_BOX
 
-#define ENABLE_CONTAINERS				// Graphical flag representations!
+//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define CLEAR_FLAGS						// Zero all flags when entering a level
+
+//#define ENABLE_CONTAINERS				// Graphical flag representations!
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
-*/
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
-/*
+
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
-*/
+//#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
+
 // Top view:
 // ---------
 /*

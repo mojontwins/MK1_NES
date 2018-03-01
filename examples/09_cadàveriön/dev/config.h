@@ -196,7 +196,7 @@
 // Destination is attr:s1 (n_pant:YX).
 
 #define ENABLE_SIMPLE_WARPERS
-#define SIMPLE_WARPERS_BASE_SPRID		32
+#define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
 //#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!

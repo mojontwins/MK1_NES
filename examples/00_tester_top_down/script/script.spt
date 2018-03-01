@@ -64,11 +64,11 @@ ENTERING SCREEN 0
 	# Si ya hemos puesto las bombas: pintarlas.
 	IF FLAG 1 = 1
 	THEN
-		SET TILE (4, 5) = 33
-		SET TILE (4, 3) = 33
-		SET TILE (7, 2) = 33
-		SET TILE (10, 3) = 33
-		SET TILE (10, 5) = 33
+		SET TILE (4, 5) = 24
+		SET TILE (4, 3) = 24
+		SET TILE (7, 2) = 24
+		SET TILE (10, 3) = 24
+		SET TILE (10, 5) = 24
 		SHOW
 	END
 	
@@ -94,19 +94,19 @@ PRESS_FIRE AT SCREEN 0
 	IF FLAG 1 = 0
 	THEN
 		SET FLAG 1 = 1
-		SET TILE (4, 5) = 33
+		SET TILE (4, 5) = 24
 		SHOW
 		SOUND 0
-		SET TILE (4, 3) = 33
+		SET TILE (4, 3) = 24
 		SHOW
 		SOUND 0
-		SET TILE (7, 2) = 33
+		SET TILE (7, 2) = 24
 		SHOW
 		SOUND 0
-		SET TILE (10, 3) = 33
+		SET TILE (10, 3) = 24
 		SHOW
 		SOUND 0
-		SET TILE (10, 5) = 33
+		SET TILE (10, 5) = 24
 		SHOW
 		SOUND 0
 		#TEXT ____AHORA_VUELVE_A_LA_BASE____

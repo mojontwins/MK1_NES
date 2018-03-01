@@ -138,7 +138,7 @@
 
 // Breakable, beh & 16
 #define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define BREAKABLE_LIFE			2		// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
 #define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
@@ -390,7 +390,7 @@
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
-#define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
+#define PLAYER_BULLET_X_OFFSET			-3	// vertical offset from the player's left/right.
 #define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
 #define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 

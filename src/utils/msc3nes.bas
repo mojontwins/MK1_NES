@@ -424,7 +424,7 @@ Function procesaClausulas (f As integer) As String
 								clausulasUsed (&H22) = -1
 								numClausulas = numClausulas + 1
 							Case "PLAYER_IN_Y":
-								clausula = clausula + chr (&H22) + chr (val (lP (2)) * 16 - 15) + chr (val (lP (4)) * 16 + 15)
+								clausula = clausula + chr (&H22) + chr (val (lP (2))) + chr (val (lP (4)))
 								clausulasUsed (&H22) = -1
 								numClausulas = numClausulas + 1
 							Case "ALL_ENEMIES_DEAD"
@@ -1201,6 +1201,7 @@ Print #f2, "	// read address offset from index"
 Print #f2, "	gp_gen = (unsigned char *) script_pool + whichs + whichs;"
 Print #f2, "	rda = *gp_gen ++; rdb = *gp_gen;"
 Print #f2, "	script_result = 0;"
+Print #f2, "	sc_continuar = 0;"
 Print #f2, "	if (!(rda | rdb)) return;"
 Print #f2, "	script = (unsigned char *) script_pool + rda + (rdb << 8);"
 Print #f2, ""
@@ -1677,7 +1678,7 @@ If actionsUsed (&H6E) Then
 	print #f2, "						// opcode: 6e"
 	print #f2, "						gpit = 192; gp_gen = map_buff;"
 	print #f2, "						rdx = rdy = 0;"
-	print #f2, "						ppu_waitnmi ();"
+	print #f2, "						ppu_waitnmi (); clear_update_list ();"
 	print #f2, "						ppu_off ();"
 	print #f2, "						while (gpit --) draw_map_tile (*gp_gen ++);"
 	print #f2, "						ppu_on_all ();"
@@ -1826,7 +1827,7 @@ If actionsUsed (&HE1) Then
 	print #f2, "					case 0xE1:"
 	print #f2, "						// SHOW"
 	print #f2, "						// Opcode: E1"
-	print #f2, "						ppu_waitnmi ();"
+	print #f2, "						ppu_waitnmi (); clear_update_list ();"
 	print #f2, "						break;"
 End If
 

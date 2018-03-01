@@ -83,6 +83,7 @@ void run_script (unsigned char whichs) {
 	gp_gen = (unsigned char *) script_pool + whichs + whichs;
 	rda = *gp_gen ++; rdb = *gp_gen;
 	script_result = 0;
+	sc_continuar = 0;
 	if (!(rda | rdb)) return;
 	script = (unsigned char *) script_pool + rda + (rdb << 8);
 

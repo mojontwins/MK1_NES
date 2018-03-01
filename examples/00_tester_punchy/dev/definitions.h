@@ -34,3 +34,9 @@
 #define WBOTTOM 				2
 #define WLEFT 					3
 #define WRIGHT 					4
+
+// Use types
+
+#define USE_TYPE_HOTSPOT		1
+#define USE_TYPE_CONTAINER		2
+#define USE_TYPE_SCRIPTING		3

@@ -12,10 +12,14 @@
 	}
 #endif
 
+void player_stop (void) {
+	pvx = pvy = 0;
+}
+
 void player_init (void) {
 	// Init player data
 
-	pvx = pvy = 0;
+	player_stop ();
 
 	#ifdef PLAYER_TOP_DOWN	
 		pfacing = CELL_FACING_DOWN;
@@ -102,7 +106,7 @@ void player_kill (void) {
 		n_pant = n_pant_safe;
 		music_pause (1);
 		delay (60);
-		pvx = pvy = pj = 0;
+		player_stop ();
 		music_pause (0);
 	#endif	
 
@@ -142,6 +146,13 @@ void player_move (void) {
 				if (use_ct < USE_ANIM_MAX_FRAMES) {
 					use_ct ++;
 					use_sub_ct = (use_ct == USE_ANIM_MAX_FRAMES) ? 50 : USE_ANIM_FRAMES_PER_STEP;
+					#ifdef ACTIVATE_SCRIPTING
+						if (
+							use_type == USE_TYPE_SCRIPTING && 
+							fire_script_success == 0 && 
+							use_ct == USE_ANIM_MAX_FRAMES
+						) use_ct ++;
+					#endif
 				} else use_ct = 0;
 			}
 			// Invalidate pad input
@@ -569,31 +580,26 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do containers)
 
-	#if (defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
+	#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
 		if (
 			b_button
 			#ifdef ENABLE_LADDERS
 				&& !ponladder
 			#endif
 		) {
-			#ifdef PLAYER_CAN_FIRE				
-				fire_bullet ();
-			#endif		
-			
+
 			#ifdef ENABLE_CONTAINERS
 				containers_do ();
 			#endif
-			
-			#if defined (ACTIVATE_SCRIPTING) && defined (FIRE_SCRIPT_WITH_ANIMATION)
-				if (ppossee) {
-					pvx = pvy = 0;
-					#ifdef ENABLE_CONTAINERS
-						upd_cont_index = 0;
-					#endif								
-					use_ct = 1;
-				}
+
+			#ifdef ACTIVATE_SCRIPTING
+				#include "engine/playermods/scripting.h"
 			#endif
 
+			#ifdef PLAYER_CAN_FIRE				
+				if (b_button) fire_bullet ();
+			#endif		
+			
 			#ifdef PLAYER_PUNCHES
 				if (ppossee && ppunching == 0) { ppunching = 16; phitteract = 1; }				
 			#endif

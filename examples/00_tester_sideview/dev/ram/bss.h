@@ -10,6 +10,10 @@ unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;
 #ifdef ENABLE_USE_ANIM
 	unsigned char use_ct, use_sub_ct;
+	#ifdef ACTIVATE_SCRIPTING
+		unsigned char run_fire_script_do;
+	#endif
+	unsigned char use_type;
 #endif
 #ifdef ENABLE_NO
 	unsigned char no_ct;
@@ -86,6 +90,10 @@ unsigned char hact [MAP_SIZE];
 	#if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)
 		unsigned char f_zone_ac, fzx1, fzx2, fzy1, fzy2;
 	#endif
+	#if defined (ENABLE_PUSHED_SCRIPT)
+		unsigned char just_pushed;
+	#endif
+	unsigned char fire_script_success;
 #endif
 
 // Flags
