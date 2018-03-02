@@ -291,7 +291,7 @@
 			"file": "examples/sonidos.md",
 			"settings":
 			{
-				"buffer_size": 1768,
+				"buffer_size": 1798,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -300,7 +300,7 @@
 			"file": "examples/09_cadàveriön/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 18231,
+				"buffer_size": 18322,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -327,7 +327,7 @@
 			"file": "examples/09_cadàveriön/dev/mainloop/scripting.h",
 			"settings":
 			{
-				"buffer_size": 567,
+				"buffer_size": 529,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -336,7 +336,7 @@
 			"file": "examples/diario.md",
 			"settings":
 			{
-				"buffer_size": 114544,
+				"buffer_size": 115709,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -383,13 +383,7 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/enemmods",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/mainloop"
+		"/E/git/MK1_NES"
 	],
 	"file_history":
 	[
@@ -524,7 +518,7 @@
 	],
 	"find":
 	{
-		"height": 49.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -876,15 +870,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1768,
+						"buffer_size": 1798,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1662,
-								1662
+								0,
+								0
 							]
 						],
 						"settings":
@@ -910,15 +904,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18231,
+						"buffer_size": 18322,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7684,
-								7695
+								0,
+								0
 							]
 						],
 						"settings":
@@ -997,15 +991,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 567,
+						"buffer_size": 529,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								346,
-								346
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1026,15 +1020,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 114544,
+						"buffer_size": 115709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								114544,
-								114544
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1043,7 +1037,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 45527.0,
+						"translation.y": 58085.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
