@@ -27,11 +27,11 @@ del tschr5.bin > nul
 
 rem main sprite (16x24)x16, enemy sprite frames (16x16)x32, small charset (8x8)x32,  fill to 4096
 
-..\..\..\src\utils\legacy\mkts_old.exe in=ssb-cheril.png pals=palssb.png out=sschr1.bin mode=sprites tsmap=..\dev\assets\spr_pl.h offset=0,0 size=6,5 metasize=2,3 sprorg=0,-8 label=spr_pl max=26 silent
-..\..\..\src\utils\legacy\mkts_old.exe in=ssb-enems.png pals=palssb.png out=sschr2.bin mode=sprites tsmap=..\dev\assets\spr_en.h offset=0,0 size=11,2 metasize=2,2 sprorg=0,0 label=spr_en max=15 tmapoffset=129 silent
-..\..\..\src\utils\legacy\mkts_old.exe in=hostage.png pals=palssb.png out=sschr3.bin mode=sprites tsmap=..\dev\assets\spr_hs1.h offset=0,0 size=4,1 metasize=2,3 sprorg=0,-8 label=spr_hs1 max=4 tmapoffset=184 silent
-..\..\..\src\utils\legacy\mkts_old.exe in=items.png pals=palssb.png out=sschr4.bin mode=sprites tsmap=..\dev\assets\spr_hs2.h offset=0,0 size=3,1 metasize=2,2 sprorg=0,0 label=spr_hs2 max=3 tmapoffset=208 silent
-..\..\..\src\utils\legacy\mkts_old.exe in=logo.png pals=palcuts.png out=sschr5.bin mode=chars offset=0,0 size=6,2 silent
+..\..\..\src\utils\mkts.exe in=ssb-cheril.png pals=palssb.png out=sschr1.bin mode=sprites tsmap=..\dev\assets\spr_pl.h offset=0,0 size=6,5 metasize=2,3 sprorg=0,-8 label=spr_pl max=26 silent
+..\..\..\src\utils\mkts.exe in=ssb-enems.png pals=palssb.png out=sschr2.bin mode=sprites tsmap=..\dev\assets\spr_en.h offset=0,0 size=11,2 metasize=2,2 sprorg=0,0 label=spr_en max=15 tmapoffset=101 silent
+..\..\..\src\utils\mkts.exe in=hostage.png pals=palssb.png out=sschr3.bin mode=sprites tsmap=..\dev\assets\spr_hs1.h offset=0,0 size=4,1 metasize=2,3 sprorg=0,-8 label=spr_hs1 max=4 tmapoffset=143 silent
+..\..\..\src\utils\mkts.exe in=items.png pals=palssb.png out=sschr4.bin mode=sprites tsmap=..\dev\assets\spr_hs2.h offset=0,0 size=3,1 metasize=2,2 sprorg=0,0 label=spr_hs2 max=3 tmapoffset=162 silent
+..\..\..\src\utils\mkts.exe in=logo.png pals=palcuts.png out=sschr5.bin mode=chars offset=0,0 size=6,2 silent
 
 copy /b sschr1.bin + sschr2.bin + sschr3.bin + sschr4.bin + sschr5.bin sschra.bin > nul
 del sschr1.bin > nul
