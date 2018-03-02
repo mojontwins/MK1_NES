@@ -1,0 +1,93 @@
+# import_patterns.spt
+# Imports patterns for Tester Punchy
+
+# This is a mkts.exe script file
+# Needs mkts v0.8.0 20180205
+
+# Bank 0 (patterns for bg)
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+# Propellers
+OPEN propellers.png
+PALS palts0.png
+CHARSET 0, 0, 4, 1
+
+# Hud
+OPEN hud.png
+PALS palts0.png
+LABEL tsdummy0
+MAPFILE ..\dev\work\dummy0.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Done with patterns for bg. Reset and fill with zeroes:
+RESETPOOL
+FILL 4096
+
+# Bank 1 (patterns for spr)
+
+# All sprites are in the same file, and use the same palette
+OPEN ss.png
+PALS palss0.png
+
+# Bits (numbers for countdown in resonators and shines)
+CHARSET 0, 9, 13, 1
+
+# Metasprites will be stored in this file:
+MAPFILE ..\dev\assets\spritedata.h
+
+# Main player
+LABEL sspl
+
+# Player cells, 16x24. Box is 8x16 centered bottom:
+METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
+METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8 FLIPPED
+
+# Enemies. Linear enemies, only 2+2 kinds, 2x3.
+# Box is 16x16 centered bottom
+LABEL ssen
+METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
+
+# Platforms. Two cells
+LABEL ssplat
+METASPRITESET 12, 10, 2, 2, 2, 1, 0, 0
+
+# Fanty. Two cells
+LABEL ssfanty
+METASPRITESET 0, 10, 2, 2, 2, 1, 0, 0 FLIPPED
+
+# Saw. Two cells
+LABEL sssaw
+METASPRITESET 4, 10, 2, 2, 2, 1, 0, 0
+
+# Occlusion.
+LABEL ssocl
+METASPRITE 8, 10, 2, 2, 0, 0
+
+# Steady shooters
+LABEL ssss
+METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
+
+# (Test) Compiled enemies
+LABEL sscomp
+METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0 FLIPPED
+
+# Items
+# Empty, Key, Heart, Resonator off, Resonator on, explosion, No
+LABEL ssit
+METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
+
+# Simple items
+# item 1, place 1, used 1, item 2, place 2, used 2
+LABEL sssit
+METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
+
+# item 3, item 4, item 5
+METASPRITESET 0, 16, 2, 2, 3, 1, 0, 0
+
+FILL 8192
+
+
