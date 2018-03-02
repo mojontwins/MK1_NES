@@ -155,7 +155,13 @@ void prepare_scr (void) {
 #endif
 
 #ifdef ENABLE_CONTAINERS
-	containers_init ();
+	#ifdef CONTAINERS_FROM_CODE
+		containers_create ();
+	#else
+		containers_index = 0;
+	#endif
+
+	containers_interact_with = 0;		
 #endif
 	
 	// Reenable sprites and tiles now we are finished.
@@ -184,7 +190,7 @@ void prepare_scr (void) {
 	player_render ();
 
 #ifdef ENABLE_CONTAINERS	
-	containers_draw ();
+	containers_paint ();
 #endif
 
 #ifdef ENABLE_TIMER
@@ -194,11 +200,6 @@ void prepare_scr (void) {
 		timer_zero = 0;
 		otimer = 0xff;
 	#endif
-#endif
-
-#ifdef ENABLE_CONTAINERS
-	containers_index = 0;
-	containers_interact_with = 0;
 #endif
 
 	oam_hide_rest (oam_index);

@@ -3163,11 +3163,11 @@ Veamos el TODO, ampliado como siempre :*)
 
 [ ] Containers
 
-[ ] Sonidos
+[X] Sonidos
 
-[ ] Música OGT Cheril Perils y Cadàveriön
+[/] Música OGT Cheril Perils y Cadàveriön
 
-[ ] Terminar Cheril Perils (fase extra, pantallas fijas).
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
 
 [ ] Sir Ababol DX se me está quedando muy atrasado.
 
@@ -3176,4 +3176,29 @@ En realidad al final lo que más me queda es hacer juegos XD
 ~~
 
 Lo dejo a mitad de montar los sonidos nuevos en Cadàveriön porque el tema de usar con fire script -> OK parece NO FUNCIONAR OTRA PUTA VEZ.
+
+Nah, era que había diseñado muy mal toda la interacción pero al final guay.
+
+20180302
+========
+
+Debería establecer una forma de añadir containers desde código, para los que no vayan a usar script. Debería montar un tester. Voy a pensar en qué personaje, Cheril ya me estoy colando.
+
+Debería pasar los gráficos de Bosque y D'Veel'Ng al sprite nuevo de Cheril y tal. Porque yo lo valgo. Debería hacer algo en Bosque que lo haga radicalmente diferente de la versión MK2 de los multicarts.
+
+Debería deber.
+
+Voy a revisar (sin probar realmente, necesito tester) de nuevo a ojal los containers y comprobar que desde el scripting se genera código correcto para crearlos.
+
+También voy a pensar en una forma de hacerlo desde código, aunque lo más sencillo es hacer una especie de estructura rollo locks:
+
+```
+	{ NP, YX, F, ... };
+```
+
+Al entrar en cada pantalla se recorrería y tal y cual. Tampoco serán listas muy largas, y si algún día lo son, ya me apañaré para acelerar.
+
+No sé, macho, yo lo veo todo bien. Voy a hacer un `00_tester_containers` donde pueda probar toda esta mierda. Pero antes, propago de cadàveriön a src porque lo he hecho ahí, desordenado de mi.
+
+~~
 

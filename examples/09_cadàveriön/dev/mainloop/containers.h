@@ -38,7 +38,7 @@ if (containers_index) {
 		rda = flags [containers_f [containers_interact_with]];
 		flags [containers_f [containers_interact_with]] = flags [FLAG_INVENTORY];
 		flags [FLAG_INVENTORY] = rda;
-		sfx_play (2, 1);
+		sfx_play (SFX_OBJECT, 1);
 
 		// Object has been got. You may complete here. You are using scripting but just in case.
 		#include "my/on_object_got.h"

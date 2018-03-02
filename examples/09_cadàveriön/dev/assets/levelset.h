@@ -66,6 +66,13 @@ const unsigned char * const * const l_spr_enems [] =
 const unsigned char * const l_enems [] = 		{ enems_0, enems_1 };
 const unsigned char * const l_hotspots [] = 	{ hotspots_0, hotspots_1 };
 
+// Containers
+
+#if defined (ENABLE_CONTAINERS) && defined (CONTAINERS_FROM_CODE)
+	const unsigned char * const l_containers [] = 
+												{ containers_0, containers_1};
+#endif
+
 // CHR-ROM bank, for CNROM
 
 #ifdef CNROM

@@ -410,8 +410,10 @@
 #define CLEAR_FLAGS						// Zero all flags when entering a level
 
 //#define ENABLE_CONTAINERS				// Graphical flag representations!
+//#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
+
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
