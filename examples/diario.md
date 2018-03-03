@@ -3200,5 +3200,56 @@ Al entrar en cada pantalla se recorrería y tal y cual. Tampoco serán listas mu
 
 No sé, macho, yo lo veo todo bien. Voy a hacer un `00_tester_containers` donde pueda probar toda esta mierda. Pero antes, propago de cadàveriön a src porque lo he hecho ahí, desordenado de mi.
 
+20180303
+========
+
+Voy a rehacer el TODO, porque se me olvida de todo que quiero poner.
+
+[ ] Mover config.h a /my
+
+[/] Containers
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Estructura de sprites extra que, al igual que los containers, pueda poblarse por pantalla desde script o estructura de memoria, para poner personajes por ahí o simplemente decoraciones.
+
 ~~
+
+Veamos, voy a hablar un poco sobre configuración.
+
+- Por un lado tendremos `ENABLE_EASY_OBJECTS`, donde los hotspots pueden contener objetos y se define pinv como el "inventario" del personaje.
+
+- Por otro lado tenemos los containers, que usan las flags, y `flags [FLAG_INVENTORY]` como el "inventario" de los personajes.
+
+Podríamos definir `ENABLE_NORMAL_OBJECTS`... Hum.
+
+```c
+	#ifdef ENABLE_EASY_OBJECTS
+	#define HOTSPOTS_DYNAMIC
+	#define CARRY_ONE_HS_OBJECT
+	#endif
+```
+
+Podríamos hacer
+
+```c
+	#ifdef ENABLE_NORMAL_OBJECTS
+	#define ENABLE_CONTAINERS
+	#define CONTAINERS_FROM_CODE
+	#endif
+```
+
+Aunque no creo que sea necesario. Ahora no me puedo concentrar para decidir qué es lo mejor, porque tenemos tres opciones (de nuevo):
+
+- Sistema "easy", con hotspots y pinv.
+- Sistema "normal", con containers desde código y flags.
+- Sistema "scripting", con containers desde script y flags.
+
+En realidad los tipos "normal" y "scripting" son iguales salvo porque uno define `CONTAINERS_FROM_CODE` Y el otro `ACTIVATE_SCRIPTING`. 
+
+Bueno, con documentarlo creo que es más que suficiente.
 
