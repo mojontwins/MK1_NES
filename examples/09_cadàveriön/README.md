@@ -64,7 +64,6 @@ As mentioned, when timer goes off when scripting is enabled, the `ON_TIMER_OFF` 
     #define PUSHED_TILE_FLAG        1
     #define PUSHED_TO_X_FLAG        2
     #define PUSHED_TO_Y_FLAG        3
-    #define PUSHED_FIRE
 ```
 
 So everytime you push a statue, the tile being overwritten gets copied to flag 1 (so you know when you place the statue over the pedestal) and its coordinates to flags 2 and 3.
@@ -92,27 +91,11 @@ So if flag 8 (`$FINISHED_SCREENS`) equals "6" it means that gate puzzles 0, 1, 2
 
 There's an expression in `SIMPLE_WARPERS_BASE_SPRID` so it animates (it's a spinning spyral). We want them to transport the player when simply touched, so `SIMPLE_WARPERS_FIRE_BUTTON` is commented out.
 
-- Timer enabled.
-- If timer enabled *and* script active, call ON_TIMER_OFF section when timer reaches zero.
-- Use of EXTERN to show "TIMER OVER" screen.
-- These:
-
-```c
-    #define ENABLE_PUSHED_SCRIPT
-    #define PUSHED_TILE_FLAG        1
-    #define PUSHED_TO_X_FLAG        2
-    #define PUSHED_TO_Y_FLAG        3
-    #define PUSHED_FIRE
-```
-
-`PUSHED_FIRE` means that the fire scripts will be ran when you push a tile. In the script, `JUST_PUSHED` will evaluate to true. The pushable tile coordinates will be copied to the pair of flags `PUSHED_TO_X_FLAG` and `PUSHED_TO_Y`, and the overwritten tile will be put to flag `PUSHED_TILE_FLAG`.
-
 Last but not least, we'll be using 17 different flags in this game, so don't forget to set:
 
 ```c
     #define MAX_FLAGS               17
 ```
-
 
 Scripting
 ---------

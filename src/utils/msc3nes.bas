@@ -612,12 +612,12 @@ Function procesaClausulas (f As integer) As String
 						clausula = clausula + Chr (&H51) + Chr (pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5))) + Chr (pval (lP (7)))
 						actionsUsed (&H51) = -1
 					Case "SET_FIRE_ZONE_TILES":
-						fzx1 = pval (lP (1)) * 16 - 15
+						fzx1 = pval (lP (1)) * 16 - 7
 						If fzx1 < 0 Then fzx1 = 0
 						fzy1 = (pval (lP (3)) + 1) * 16 - 15
 						If fzy1 < 0 Then fzy1 = 0
 						fzx2 = pval (lP (5)) * 16 + 15
-						If fzx2 > 254 Then fzx2 = 254
+						If fzx2 > 255 Then fzx2 = 255
 						fzy2 = (pval (lP (7)) + 1) * 16 + 15
 						If fzy2 > 191 Then fzy2 = 191
 						
@@ -708,9 +708,7 @@ Function procesaClausulas (f As integer) As String
 						clausula = clausula + Chr (&H82) + Chr (pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5)))
 						actionsUsed (&H82) = -1
 					Case "ADD_CONTAINER"
-						'clausula = clausula + Chr (&H82) + Chr (128 + pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5)))
-						'actionsUsed (&H82) = -1
-						clausula = clausula + Chr (&H86) + Chr (pval (lP (1)) + 16 * (pval (lP (3)))) + Chr (pval (lP (5)))
+						clausula = clausula + Chr (&H86) + Chr (val (lP (3)) + 16 * (1+val (lP (5)))) + Chr (pval (lP (1)))
 						actionsUsed (&H86) = -1
 					Case "SHOW_CONTAINERS"
 						clausula = clausula + Chr (&H87)
@@ -1762,9 +1760,9 @@ End If
 If actionsUsed (&H86) Then
 	Print #f2, "					case 0x86:"
 	Print #f2, "						// ADD_CONTAINER f, x, y"
-	Print #f2, "						readxy ();"
+	Print #f2, "						sc_x = read_byte (); sc_y = read_vbyte ();"
 	Print #f2, "						containers_add ();"
-	Print #f3, "						break;"
+	Print #f2, "						break;"
 End If
 
 If actionsUsed (&H87) Then

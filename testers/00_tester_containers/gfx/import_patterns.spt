@@ -35,11 +35,12 @@ CHARSET 0, 15, 1, 1
 # Metasprites will be stored in this file:
 MAPFILE ..\dev\assets\spritedata.h
 
-# Main player, 7 frames, 2x3 patterns, generate flipped versions
+# Main player, 14 frames, 2x3 patterns, generate flipped versions
 # hot point (where oam_meta_spr places its origin) is (-4, -8).
 # (player active rectangle is 8x16, centered bottom).
 LABEL sspl
-METASPRITESET 0, 0, 2, 3, 7, 1, -4, -8 FLIPPED
+METASPRITESET 0, 0, 2, 3, 8, 1, -4, -8 FLIPPED
+METASPRITESET 0, 3, 2, 3, 4, 1, -4, -8 FLIPPED
 
 # Enemies, 
 # Tall enemies, 6 frames, 2x3 patterns, generate flipped versions

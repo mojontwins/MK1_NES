@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-//#define GAME_AREA_MIDDLE
-#define GAME_AREA_BOTTOM
+#define GAME_AREA_MIDDLE
+//#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -12,8 +12,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					4		// Map dimensions in screens
+#define MAP_W 					1		//
+#define MAP_H					5		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
@@ -22,15 +22,15 @@
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
 
-#define MAX_FLAGS 				17		// Keep it low if you don't need flags
+#define MAX_FLAGS 				16		// Keep it low if you don't need flags
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			2		//
-	#define PLAYER_INI_Y			2		// Initial position
+	#define SCR_INI					4		// Initial screen
+	#define PLAYER_INI_X			0xe		//
+	#define PLAYER_INI_Y			0x9		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -57,7 +57,7 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-#define HOTSPOT_TYPE_TIME		5		// For time refills
+//#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
@@ -88,7 +88,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-8
+#define PLAYER_COLLISION_VSTRETCH_BG	-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -107,14 +107,13 @@
 
 // Push boxes
 
-#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
-#define FIRE_TO_PUSH
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
+//#define FIRE_TO_PUSH
 
-#define ENABLE_PUSHED_SCRIPT
+//#define ENABLE_PUSHED_SCRIPT
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
-#define PUSHED_FIRE
 
 // General stuff
 
@@ -123,9 +122,9 @@
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-#define DIE_AND_REENTER					//     ... also, reenter screen on death
+//#define DIE_AND_REENTER				//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
@@ -195,7 +194,7 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-#define ENABLE_SIMPLE_WARPERS
+//#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
 //#define SIMPLE_WARPERS_FIRE_BUTTON
 
@@ -210,8 +209,8 @@
 // Note: When activated hotspots need b_button press and, in side view, possee.
 
 #define ENABLE_USE_ANIM
-#define USE_ANIM_MAX_FRAMES				13
-#define USE_ANIM_INTERACT_ON			7
+#define USE_ANIM_MAX_FRAMES				8
+#define USE_ANIM_INTERACT_ON			3
 #define USE_ANIM_FRAMES_PER_STEP		4
 
 // Text boxes. If you need them, you call them
@@ -221,7 +220,7 @@
 
 // Timer. 
 
-#define ENABLE_TIMER
+//#define ENABLE_TIMER
 #define TIMER_INITIAL					99
 #define TIMER_START_ON
 #define TIMER_REFILL					30
@@ -407,28 +406,28 @@
 // ---------
 
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-#define CLEAR_FLAGS						// Zero all flags when entering a level
+//#define CLEAR_FLAGS					// Zero all flags when entering a level
 
-//#define ENABLE_CONTAINERS				// Graphical flag representations!
+#define ENABLE_CONTAINERS				// Graphical flag representations!
 //#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
-#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
+//#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
 
 // Top view:
 // ---------
 
-#define PLAYER_TOP_DOWN            		// Enable top view.
+//#define PLAYER_TOP_DOWN            	// Enable top view.
 //#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
+#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -442,14 +441,14 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					5		//
+#define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
 
-//#define KEYS_X				28		//
-//#define KEYS_Y				3		// Keys counter character coordinates
+#define KEYS_X					28		//
+#define KEYS_Y					3		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
@@ -457,15 +456,15 @@
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
-//#define HS_INV_X				160		//
-//#define HS_INV_Y				15		// Object you are carrying
+#define HS_INV_X				136		//
+#define HS_INV_Y				11		// Object you are carrying
 
-#define TIMER_X					27		//
-#define TIMER_Y					3		// Current timer value
+//#define TIMER_X				0		//
+//#define TIMER_Y				5		// Current timer value
 
 // Text
-#define LINE_OF_TEXT			5		// If defined, scripts can show text @ Y = #
-#define LINE_OF_TEXT_X			1		// X coordinate.
+//#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
+//#define LINE_OF_TEXT_X		1		// X coordinate.
 
 // ============================================================================
 // IV. Player movement configuration
@@ -504,10 +503,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				32		// Horizontal acceleration
+#define PLAYER_AX				16		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				32		// Horizontal friction
+#define PLAYER_RX				16		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)
@@ -529,13 +528,13 @@
 	#define CELL_WALK_CYCLE		1
 	#define CELL_PUSHING		5
 
-	#define CELL_USE			24
+	#define CELL_USE			8
 #else
 
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	16
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
@@ -546,7 +545,7 @@
 
 	#define CELL_SWIM_CYCLE		6
 
-	#define CELL_USE			6
+	#define CELL_USE			7
 
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9

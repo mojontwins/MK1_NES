@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-//#define GAME_AREA_MIDDLE
-#define GAME_AREA_BOTTOM
+#define GAME_AREA_MIDDLE
+//#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -65,8 +65,8 @@
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
@@ -107,10 +107,10 @@
 
 // Push boxes
 
-#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
 #define FIRE_TO_PUSH
 
-#define ENABLE_PUSHED_SCRIPT
+//#define ENABLE_PUSHED_SCRIPT
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
@@ -118,14 +118,14 @@
 
 // General stuff
 
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
-#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-#define DIE_AND_REENTER					//     ... also, reenter screen on death
+//#define DIE_AND_REENTER				//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
@@ -195,7 +195,7 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-#define ENABLE_SIMPLE_WARPERS
+//#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
 //#define SIMPLE_WARPERS_FIRE_BUTTON
 
@@ -209,7 +209,7 @@
 // Use animation.
 // Note: When activated hotspots need b_button press and, in side view, possee.
 
-#define ENABLE_USE_ANIM
+//#define ENABLE_USE_ANIM
 #define USE_ANIM_MAX_FRAMES				13
 #define USE_ANIM_INTERACT_ON			7
 #define USE_ANIM_FRAMES_PER_STEP		4
@@ -221,7 +221,7 @@
 
 // Timer. 
 
-#define ENABLE_TIMER
+//#define ENABLE_TIMER
 #define TIMER_INITIAL					99
 #define TIMER_START_ON
 #define TIMER_REFILL					30
@@ -406,29 +406,29 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
-#define CLEAR_FLAGS						// Zero all flags when entering a level
+//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+//#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_CONTAINERS				// Graphical flag representations!
 //#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
 #define CONTAINERS_MAX 					4	// As per screen
-#define FLAG_INVENTORY					0
+//#define FLAG_INVENTORY				0
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
-#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
+//#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
+//#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
 
 // Top view:
 // ---------
 
-#define PLAYER_TOP_DOWN            		// Enable top view.
+//#define PLAYER_TOP_DOWN            	// Enable top view.
 //#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
+#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -442,14 +442,14 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					5		//
+#define LIFE_X					7		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
 
-//#define OBJECTS_X				18		//
-//#define OBJECTS_Y				3		// Objects counter character coordinates
+#define OBJECTS_X				18		//
+#define OBJECTS_Y				3		// Objects counter character coordinates
 
-//#define KEYS_X				28		//
-//#define KEYS_Y				3		// Keys counter character coordinates
+#define KEYS_X					28		//
+#define KEYS_Y					3		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates
@@ -457,15 +457,15 @@
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
-//#define HS_INV_X				160		//
-//#define HS_INV_Y				15		// Object you are carrying
+//#define HS_INV_X				136		//
+//#define HS_INV_Y				11		// Object you are carrying
 
-#define TIMER_X					27		//
-#define TIMER_Y					3		// Current timer value
+//#define TIMER_X				0		//
+//#define TIMER_Y				5		// Current timer value
 
 // Text
-#define LINE_OF_TEXT			5		// If defined, scripts can show text @ Y = #
-#define LINE_OF_TEXT_X			1		// X coordinate.
+//#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
+//#define LINE_OF_TEXT_X		1		// X coordinate.
 
 // ============================================================================
 // IV. Player movement configuration
