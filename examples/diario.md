@@ -3253,3 +3253,14 @@ En realidad los tipos "normal" y "scripting" son iguales salvo porque uno define
 
 Bueno, con documentarlo creo que es más que suficiente.
 
+20180304
+========
+
+Con esto a medi omontar, idea integradora:
+
+- Containers y sprites no interactuables juntos.
+- Diferencia: el "flag" que represnetan si AND 128 (containers), o el gráfico que pintar de spr_it si !(AND 128) (fixed sprites).
+- Rellenar una variable especial que comprobar desde el script y lanzar el fire script _después_ del intercambio en el caso de los containers.
+
+Cuando me pueda concentrar lo añado.
+
