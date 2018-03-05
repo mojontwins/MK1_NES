@@ -67,7 +67,7 @@ Function pVal (s As String) As Integer
 	Return res
 End Function
 
-Function pvalL (s As String) As Integer
+Function pValL (s As String) As Integer
 	Dim As Integer res, i
 
 	If s = "SLOT_SELECTED" Then 
@@ -87,7 +87,7 @@ Function pvalL (s As String) As Integer
 	Return res
 End Function
 
-Function pvalR (s As String) As Integer
+Function pValR (s As String) As Integer
 	Dim As Integer res, i
 	If s = "SLOT_SELECTED" Then 
 		res = 128 + slotFlag
@@ -102,7 +102,7 @@ Function pvalR (s As String) As Integer
 	Else
 		res = Val (s)
 	End If
-	pvalR = res
+	pValR = res
 End Function
 
 Sub ProcessItems (f As Integer)
@@ -161,7 +161,7 @@ Sub ProcessAlias (f As Integer)
 		parseTokenizeString linea, lP (), ",;()" & chr (9), "'"
 		If lP (0) = "END" Then terminado = Not 0
 		If Left (lP (0), 1) = "$" Then
-			AddAlias lP (0), pvalR (lP (1))
+			AddAlias lP (0), pValR (lP (1))
 		ElseIf Left (lP (0), 1) = "%" Then
 			AddMacro
 		End If
@@ -181,11 +181,12 @@ Function strictMscNumeric (word As String) As Integer
 	Dim As String m
 	If word = "" Then
 		res = 0
-	ElseIf Left (word, 1) = "$" Or Left (word, 1) = "'" Then
+	ElseIf Left (word, 1) = "$" Or Left (word, 1) = "#" Then
 		res = -1
 	Else
 		res = -1
 		For i = 1 To Len (word)
+			m = Mid (word, i, 1)
 			If m < "0" Or m > "9" Then
 				res = 0: Exit For
 			End If
@@ -217,14 +218,18 @@ Sub fixTokens
 	i = 0: While i < LIST_WORDS_SIZE
 		If lP (i) = "" Then 
 			Exit While
-		ElseIf lP (i) = "SET" Then
+		ElseIf lP (i) = "SET" Or lP (i) = "INC" Or lP (i) = "DEC" Then
 			If Not strictMscNumeric (lP (i + 1)) Then
-				lP (i) = "SET_" & lP (i + 1)
+				lP (i) = lP (i) & lP (i + 1)
 				lPshiftLeft i + 2
 			End If
 		End If
 		i = i + 1
 	Wend
+End Sub
+
+Sub fixEquals (position As Integer)
+	If lP (position) = "=" Then lPshiftLeft (position + 1)
 End Sub
 
 Function procesaClausulas (f As Integer) As String
@@ -314,6 +319,7 @@ Function procesaClausulas (f As Integer) As String
 	sc_terminado = 0
 	estado = 0
 	clausula = ""
+	If debug Then Print
 
 	While Not sc_terminado And Not Eof (f)
 		Line Input #f, linea
@@ -341,7 +347,7 @@ Function procesaClausulas (f As Integer) As String
 						If Left (lP (1), 1) = "$" Or Left (lP (1), 1) = "#" Then
 							' 0  1    2  3
 							' IF FLAG OP RVALUE
-							lvalue = pvalL (lP (1))
+							lvalue = pValL (lP (1))
 							If lvalue = -1 Then Print "ERROR - Wrong lvalue": End
 
 							Select Case lP (2)
@@ -353,13 +359,14 @@ Function procesaClausulas (f As Integer) As String
 									Print "ERROR - Wrong operand": End
 							End Select
 
-							clausula = clausula + Chr (opCode) + Chr (lvalue) + Chr (pvalR (lP (3)))
+							clausula = clausula + Chr (opCode) + Chr (lvalue) + Chr (pValR (lP (3)))
 							clausulasUsed (opCode) = -1							
 						Else
 							Select Case Ucase (lP (1))
+
 								' Conditions about position
 								Case "PLAYER_TOUCHES":
-									clausula = clausula + chr (&H20) + chr (pvalR (lP (2))) + chr (pvalR (lP (3)))
+									clausula = clausula + chr (&H20) + chr (pValR (lP (2))) + chr (pValR (lP (3)))
 									clausulasUsed (&H20) = -1
 								Case "PLAYER_IN_X":
 									clausula = clausula + chr (&H21) + chr (val (lP (2))) + chr (val (lP (3)))
@@ -393,21 +400,30 @@ Function procesaClausulas (f As Integer) As String
 										Case Else
 											Print "ERROR - Wrong operand": End
 									End Select
-									clausula = clausula + chr (opCode) + chr (pvalR (lP (3)))
+									clausula = clausula + chr (opCode) + chr (pValR (lP (3)))
 									clausulasUsed (opCode) = -1
 								Case "NPANT_NOT"
-									clausula = clausula + chr (&H51) + chr (pvalR (lP (2)))
+									clausula = clausula + chr (&H51) + chr (pValR (lP (2)))
 									clausulasUsed (&H51) = -1
+								Case "LEVEL"
+									Select Case lP (2)
+										Case "=": opCode = &H80
+										Case "<>", "!=": OpCode = &H81
+										Case Else
+											Print "ERROR - Wrong operand": End
+									End Select
+									clausula = clausula + chr (opCode) + chr (pValR (lP (3)))
+									clausulasUsed (opCode) = -1
 
 								' Conditions about enemies killed
 								Case "ALL_ENEMIES_DEAD":
 									clausula = clausula + chr (&H30)
 									clausulasUsed (&H30) = -1
 								Case "ENEMIES_KILLED_EQUALS":
-									clausula = clausula + chr (&H31) + chr (pvalR (lP (2)))
+									clausula = clausula + chr (&H31) + chr (pValR (lP (2)))
 									clausulasUsed (&H31) = -1
 								Case "ENEMIES_KILLED", "ENEMS_KILLED":
-									clausula = clausula + chr (&H31) + chr (pvalR (lP (3)))
+									clausula = clausula + chr (&H31) + chr (pValR (lP (3)))
 									clausulasUsed (&H31) = -1
 
 								' Conditions based on recent actions
@@ -420,10 +436,10 @@ Function procesaClausulas (f As Integer) As String
 								Case "ARG"
 									Select Case lP (2)
 										Case "=":
-											value = pvalR (lP (3))
+											value = pValR (lP (3))
 											opCode = &H62
 										Case "~":
-											value = pvalL (lP (3))
+											value = pValL (lP (3))
 											If value = -1 Then Print "ERROR - Wrong lvalue in ARG ~": End
 											value = 128 + value
 											opCode = &H63
@@ -432,6 +448,33 @@ Function procesaClausulas (f As Integer) As String
 									End Select
 									clausula = clausula + chr (opCode) + chr (value)
 									clausulasUsed (opCode) = -1
+
+								' Conditions based upon # of collectable objects
+								Case "PLAYER_HAS_OBJECTS"
+									clausula = clausula + chr (&H40)
+									clausulasUsed (&H61) = -1
+								Case "OBJECT_COUNT"
+									If lP(2) <> "=" Then Print "ERROR - Wrong operand": End
+									clausula = clausula + chr (&H41) + chr (pValR (lP (3)))
+									clausulasUsed (&H41) = -1
+
+								' Conditions based on the timer
+								Case "TIMER"
+									Select Case lP (2)
+										Case ">=": opCode = &H70
+										Case "<=": opCode = &H71
+										Case "=": opCode = &H72
+										Case "<>", "!=": opCode = &H73
+										Case Else
+											Print "ERROR - Wrong operand": End
+									End Select
+									clausula = clausula + Chr (opCode) + Chr (pValR (lP (3)))
+									clausulasUsed (opCode) = -1
+
+								' T
+								Case "TRUE"
+									clausula = clausula + chr (&HF0)
+									clausulasUsed (&HF0) = -1
 							End Select
 						End If
 
@@ -452,7 +495,121 @@ Function procesaClausulas (f As Integer) As String
 
 		Else
 			' Actions
-			Select Case lP (0)
+			Select Case Ucase (lP (0))
+
+				' Setters
+				Case "SET":
+					' 0   1      2 3
+					' SET lvalue = rvalue
+					lvalue = pValL (lP (1))
+					If lvalue = -1 Then Print "ERROR - Wrong lvalue": End
+					rValue = pValR (lP (3))
+					If lP (2) <> "=" Then Print "ERROR - Syntax error in SET": End
+					clausula = clausula + Chr (&H1) + Chr (lvalue) + Chr (rvalue)
+					actionsUsed (&H1) = -1
+				Case "SET_TILE"
+					' 0        1 2 3 4'
+					' SET_TILE x y = t'
+					If lP (3) <> "=" Then Print "ERROR - Syntax error in SET_TILE": End
+					clausula = clausula + Chr (&H20) + Chr (pValR (lP (1))) + Chr (pValR (lP (2))) + Chr (pValR (lP (4)))
+					actionsUsed (&H20) = -1
+				Case "SET_SAFE"
+				    ' 0        1    2 3
+					' SET_SAFE HERE
+					' SET_SAFE np   x y
+					If lP (1) = "HERE" Then
+						clausula = clausula + Chr (&HEA)
+						actionsUsed (&HEA) = -1
+					Else
+						clausula = clausula + Chr (&HE9) + Chr (pValR (lP (1))) + Chr (pValR (lP (2))) + Chr (pValR (lP (3)))
+						actionsUsed (&HE9) = -1
+					End If
+				Case "SET_FIRE_ZONE":
+					clausula = clausula + Chr (&H51) + Chr (Val (lP (1))) + Chr (Val (lP (2))) + Chr (Val (lP (3))) + Chr (Val (lP (4)))
+					actionsUsed (&H51) = -1
+				Case "SET_FIRE_ZONE_TILES":
+					fzx1 = pValR (lP (1)) * 16 - 7: If fzx1 < 0 Then fzx1 = 0
+					fzy1 = (pValR (lP (2)) + 1) * 16 - 15: If fzy1 < 0 Then fzy1 = 0
+					fzx2 = pValR (lP (3)) * 16 + 15: If fzx2 > 255 Then fzx2 = 255
+					fzy2 = (pValR (lP (4)) + 1) * 16 + 15: If fzx2 > 207 Then fzx2 = 207
+					clausula = clausula + Chr (&H51) + Chr (fzx1) + Chr (fzy1) + Chr (fzx2) + Chr (fzy2)
+					actionsUsed (&H51) = -1
+				Case "SETX", "SET_X":
+					fixEquals 1
+					clausula = clausula + Chr (&H6B) + Chr (pValR (lP (1)))
+					actionsUsed (&H6B) = -1
+				Case "SETX", "SET_Y":
+					fixEquals 1
+					clausula = clausula + Chr (&H6A) + Chr (pValR (lP (1)))
+					actionsUsed (&H6A) = -1
+				Case "SETXY", "SET_XY":
+					fixEquals 1
+					clausula = clausula + Chr (&H68) + Chr (pValR (lP (1))) + Chr (pValR (lP (2)))
+					actionsUsed (&H68) = -1
+				Case "SET_TIMER"
+					fixEquals 1
+					clausula = clausula + Chr (&H70) + Chr (pValR (lP (1)))
+					actionsUsed (&H70) = -1
+
+				' Maths
+				Case "INC", "DEC", "ADD", "SUB"
+					' 0  1      2
+					' OP lvalue rvalue
+					lValue = pValL (lP (1))
+					If lValue = -1 Then Print "ERROR - Wrong lvalue": End
+					rValue = pValR (lP (2))
+					Select Case Ucase (lP (0))
+						Case "INC", "ADD": opCode = &H10
+						Case "DEC", "SUB": opCode = &H11
+					End Select
+					clausula = clausula + Chr (opCode) + Chr (lValue) +  Chr (rValue)
+					actionsUsed (opCode) = -1
+				Case "SWAP"
+					clausula = clausula + Chr (&H14) + Chr (pVal (lP (1))) + Chr (pVal (lP (2)))
+					actionsUsed (&H14) = -1
+				Case "FLIPFLOP"
+					clausula = clausula + Chr (&H15) + Chr (pVal (lP (1)))
+					actionsUsed (&H15) = -1
+
+				Case "INC_LIFE"
+				Case "DEC_LIFE"
+				Case "RECHARGE"
+				Case "INC_OBJECTS"
+				Case "DEC_OBJECTS"
+
+				Case "FLICKER"
+				
+				Case "PRINT_TILE_AT"
+				Case "SHOW"
+				Case "TEXT"
+				Case "TEXTBOX"
+
+				Case "REDRAW"
+				Case "REENTER"
+				Case "WARP_TO"
+				Case "REPOSTN"
+
+				Case "TIMER_START"
+				Case "TIMER_STOP"
+
+				Case "ADD_CONTAINER"
+				Case "ADD_SPRITE"
+
+				Case "EXTERN"
+
+				Case "PAUSE"
+
+				Case "MUSIC"
+				Case "SOUND"
+
+				Case "GAME", "GAME_OVER"
+				Case "WIN", "WIN_GAME"
+
+				Case "BREAK"
+
+				Case "DECORATIONS"
+
+				' Finally
 				Case "END":
 					clausula = clausula + Chr (&HFF)
 					clausula = Chr (len (clausula)) + clausula
@@ -492,6 +649,50 @@ Open Command (2) For Output As #fOut
 procesaClausulas fIn
 
 ' Write interpreter
+
+Print #fOut, "#ifdef CLEAR_FLAGS"
+Print #fOut, "void msc_clear_flags (void) {"
+Print #fOut, "    memfill (flags, 0, MAX_FLAGS);"
+Print #fOut, "}"
+Print #fOut, "#endif"
+Print #fOut, ""
+Print #fOut, "unsigned char read_byte (void) {"
+Print #fOut, "    return *script ++;"
+Print #fOut, "}"
+Print #fOut, ""
+Print #fOut, "unsigned char read_vbyte (void) {"
+Print #fOut, "    sc_c = *script ++;"
+Print #fOut, "    if (sc_c & 128) return flags [sc_c & 127];"
+Print #fOut, "    return sc_c;"
+Print #fOut, "}"
+Print #fOut, ""
+Print #fOut, "void readxy (void) {"
+Print #fOut, "    sc_x = read_vbyte ();"
+Print #fOut, "    sc_y = read_vbyte ();"
+Print #fOut, "}"
+If actionsUsed (&H68) Or actionsUsed (&H6A) Or actionsUsed (&H6B) Or actionsUsed (&H6C) Or actionsUsed (&H6D) Then
+	Print #fOut, ""
+	Print #fOut, "void reloc_player (void) {"
+	Print #fOut, "    prx = read_vbyte () << 4;        px = prx << FIXBITS;"
+	Print #fOut, "    pry = (read_vbyte () << 4) + 16; py = pry << FIXBITS;"
+	Print #fOut, "    player_stop ();"
+	Print #fOut, "}"
+End If
+Print #fOut, ""
+Print #fOut, "void run_script (unsigned char whichs) {"
+Print #fOut, "    // read address offset from index"
+Print #fOut, "    gp_gen = (unsigned char *) script_pool + whichs + whichs;"
+Print #fOut, "    rda = *gp_gen ++; rdb = *gp_gen;"
+Print #fOut, "    script_result = 0;"
+Print #fOut, "    sc_continuar = 0;"
+Print #fOut, "    if (!(rda | rdb)) return;"
+Print #fOut, "    script = (unsigned char *) script_pool + rda + (rdb << 8);"
+Print #fOut, ""
+Print #fOut, "    while ((sc_c = read_byte ()) != 0xff) {"
+Print #fOut, "        next_script = script + sc_c;"
+Print #fOut, "        sc_terminado = sc_continuar = 0;"
+Print #fOut, "        while (!sc_terminado) {"
+Print #fOut, "            switch (read_byte ()) {"
 
 ' Conditions with IF FLAG
 
@@ -535,14 +736,25 @@ If clausulasUsed (&H22) Then
 End If
 
 If clausulasUsed (&H50) Then
-	' IF NPANT = n'
+	' IF NPANT = n
 	' &H50 n
 	Print #fOut, "                case 0x50: sc_terminado = (n_pant != read_vbyte ()); break;"
 End If
 If clausulasUsed (&H51) Then
-	' IF NPANT <> n'
+	' IF NPANT <> n
 	' &H51 n
 	Print #fOut, "                case 0x51: sc_terminado = (n_pant == read_vbyte ()); break;"
+End If
+
+If clausulasUsed (&H80) Then
+	' IF LEVEL = n
+	' &H80 n
+	Print #fOut, "                case 0x80: sc_terminado = (level != read_vbyte ()); break;"
+End If
+If clausulasUsed (&H80) Then
+	' IF LEVEL <> n
+	' &H81 n
+	Print #fOut, "                case 0x81: sc_terminado = (level == read_vbyte ()); break;"
 End If
 
 ' Conditions about enemies DEAD
@@ -582,3 +794,150 @@ If clausulasUsed (&H63) Then
 	' &63 'n'
 	Print #fOut, "                case 0x63: sc_terminado = (script_arg != read_byte ()); break;"
 End If
+
+' Conditions based on collectable objects count
+If clausulasUsed (&H40) Then
+	' IF PLAYER_HAS_OBJECTS
+	' &H40
+	Print #fOut, "                case 0x40: sc_terminado = (pobjs == 0); break;"
+End If
+If clausulasUsed (&H41) Then
+	' IF OBJECT_COUNT = n
+	' &H41 n
+	Print #fOut, "                case 0x41: sc_terminado = (pobjs != read_vbyte ()); break;"
+End If
+
+' Conditions based on TIMER
+If clausulasUsed (&H70) Then
+	' IF TIMER >= n
+	' &H70 n
+	Print #fOut, "                case 0x70: sc_terminado = (timer < read_vbyte ()); break;"
+End If
+If clausulasUsed (&H71) Then
+	' IF TIMER <= n
+	' &H71 n
+	Print #fOut, "                case 0x71: sc_terminado = (timer > read_vbyte ()); break;"
+End If
+If clausulasUsed (&H72) Then
+	' IF TIMER = n
+	' &H72 n
+	Print #fOut, "                case 0x72: sc_terminado = (timer != read_vbyte ()); break;"
+End If
+If clausulasUsed (&H73) Then
+	' IF TIMER <> n
+	' &H73 n
+	Print #fOut, "                case 0x73: sc_terminado = (timer == read_vbyte ()); break;"
+End If
+
+' T
+If clausulasUsed (&HF0) Then
+	' IF TRUE
+	' &HF0
+	Print #fOut, "                case 0xf0: break;"
+End If
+
+' End conditions
+
+Print #fOut, "                case 0xff: sc_terminado = sc_continuar = 1; break;"
+Print #fOut, "            }"
+Print #fOut, "        }"
+Print #fOut, ""
+Print #fOut, "        if (sc_continuar) {"
+Print #fOut, "            fire_script_success |= sc_continuar;"
+Print #fOut, "            sc_terminado = 0;"
+Print #fOut, "            while (!sc_terminado) {"
+Print #fOut, "                switch (read_byte ()) {"
+
+' Actions
+
+' Setter actions
+
+If actionsUsed (&H1) Then
+	' SET #x = y
+	' &H11 x y
+	Print #fOut, "                    case 0x01: readxy (); flags [sc_x] = sc_y; break;"
+End If
+
+If actionsUsed (&H20) Then
+	' SET_TILE x y t
+	' &H20 x y t
+	Print #fOut, "                    case 0x20: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); map_set (); break;"
+End If
+
+If actionsUsed (&H51) Then
+	' SET_FIRE_ZONE x1 y1 x2 y2
+	' &H51 'x1' 'y1' 'x2' 'y2'
+	Print #fOut, "                    case 0x51: fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;"
+End If
+
+If actionsUsed (&H68) Then
+	' SET_XY x y
+	' &H68 x y
+	Print #fOut, "                    case 0x68: reloc_player (); break;"
+End If
+If actionsUsed (&H6A) Then
+	' SET_Y x
+	' &H6A x
+	Print #fOut, "                    case 0x6a: py = read_vbyte () << 10; player_stop (); break;"
+End If
+If actionsUsed (&H6B) Then
+	' SET_X x
+	' &H6B x
+	Print #fOut, "                    case 0x6b: px = read_vbyte () << 10; player_stop (); break;"
+End If
+
+If actionsUsed (&H70) Then
+	' SET_TIMER n
+	' &H70 n
+	Print #fOut, "                    case 0x70: timer = read_vbyte (); break;"
+End If
+
+If actionsUsed (&HE9) Then
+	' SET SAFE n, x, y
+	' &HE9 n x y
+	Print #fOut, "                    case 0xe9: n_pant_safe = read_vbyte (); px_safe = read_vbyte () << 10; py_safe = read_vbyte () << 10; break;"
+End If
+If actionsUsed (&HEA) Then
+	' SET SAFE HERE
+	' &HEA
+	Print #fOut, "                    case 0xea: player_register_safe_spot (); break;"
+End If
+
+' Maths
+
+If actionsUsed (&H10) Then
+	' INC #n x
+	' &H10 n x
+	Print #fOut, "                    case 0x10: readxy (); flags [sc_x] += sc_y; break;"
+End If
+If actionsUsed (&H11) Then
+	' DEC #n x
+	' &H11 n x
+	Print #fOut, "                    case 0x11: readxy (); flags [sc_x] -= sc_y; break;"
+End If
+
+If actionsUsed (&H14) Then
+	' SWAP #x #y
+	' &H14 x y
+	Print #fOut, "                    case 0x14: readxy (); rda = flags [sc_x]; flags [sc_x] = flags [sc_y]; flags [sc_y] = rda; break;"
+End If
+
+If actionsUsed (&H15) Then
+	' FLIPFLOP #n
+	' &H15 n
+	Print #fOut, "                    case 0x15: sc_x = read_vbyte (); flags [sc_x] = 1 - flags [sc_x]; break;"
+End If
+
+' End actions
+
+Print #fOut, "                    case 0xff: sc_terminado = 1; break;"
+Print #fOut, "                }"
+Print #fOut, "            }"
+Print #fOut, "        }"
+Print #fOut, "        script = next_script;"
+Print #fOut, "    }"
+Print #fOut, "}"
+
+Close
+
+Print "DONE!"
