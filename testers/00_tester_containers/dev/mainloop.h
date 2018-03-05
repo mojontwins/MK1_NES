@@ -171,6 +171,9 @@ void prepare_scr (void) {
 	#if defined (ENABLE_PUSHED_SCRIPT)
 		just_pushed = 0;
 	#endif
+	#if defined (ENABLE_CONTAINERS)
+		just_interacted = 0;
+	#endif
 	// Entering any script
 	run_script (2 * MAP_SIZE + 1);
 	// This room script

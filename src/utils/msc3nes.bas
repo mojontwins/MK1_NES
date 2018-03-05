@@ -455,6 +455,14 @@ Function procesaClausulas (f As integer) As String
 								clausula = clausula + chr (&H60)
 								clausulasUsed (&H60) = -1
 								numClausulas = numClausulas + 1
+							Case "JUST_INTERACTED"
+								clausula = clausula + chr (&H61)
+								clausulasUsed (&H61) = -1
+								numClausulas = numClausulas + 1
+							Case "ARG"
+								clausula = clausula + chr (&H62) + chr (pval (lP (3)))
+								clausulasUsed (&H62) = -1
+								numClausulas = numClausulas + 1
 							Case "TIMER"
 								If lP (2) = ">=" Then
 									clausula = clausula + chr (&H70) + chr (pval (lP (3)))
@@ -708,6 +716,9 @@ Function procesaClausulas (f As integer) As String
 						clausula = clausula + Chr (&H82) + Chr (pval (lP (1))) + Chr (pval (lP (3))) + Chr (pval (lP (5)))
 						actionsUsed (&H82) = -1
 					Case "ADD_CONTAINER"
+						clausula = clausula + Chr (&H86) + Chr (val (lP (3)) + 16 * (1+val (lP (5)))) + Chr (128 + pval (lP (1)))
+						actionsUsed (&H86) = -1
+					Case "ADD_SPRITE"
 						clausula = clausula + Chr (&H86) + Chr (val (lP (3)) + 16 * (1+val (lP (5)))) + Chr (pval (lP (1)))
 						actionsUsed (&H86) = -1
 					Case "SHOW_CONTAINERS"
@@ -1403,34 +1414,50 @@ If clausulasUsed (&H60) Then
 	print #f2, "					 break;"
 End If
 
+If clausulasUsed (&H61) Then
+	Print #f2, "                case 0x61:"
+	Print #f2, "                    // IF JUST_INTERACTED"
+	Print #f2, "                    // Opcode: 61"
+	Print #f2, "                    sc_terminado = (!just_interacted);"
+	Print #f2, "                    break;"
+End If
+
+If clausulasUsed (&H62) Then
+	Print #f2, "                case 0x62:"
+	Print #f2, "                    // IF ARG = sc_n"
+	Print #f2, "                    // Opciode: 62 sc_n"
+	Print #f2, "                    sc_terminado = (script_arg != read_vbyte ());"
+	Print #f2, "                    break;"
+End If
+
 If clausulasUsed (&H70) Then
 	print #f2, "				case 0x70:"
-	print #f2, "					 // IF TIMER >= sc_x"
-	print #f2, "					 sc_terminado = (timer < read_vbyte ());"
-	print #f2, "					 break;"
+	print #f2, "					// IF TIMER >= sc_x"
+	print #f2, "					sc_terminado = (timer < read_vbyte ());"
+	print #f2, "					break;"
 End If
 
 If clausulasUsed (&H71) Then
 	print #f2, "				case 0x71:"
-	print #f2, "					 // IF TIMER <= sc_x"
-	print #f2, "					 sc_terminado = (timer > read_vbyte ());"
-	print #f2, "					 break;"
+	print #f2, "					// IF TIMER <= sc_x"
+	print #f2, "					sc_terminado = (timer > read_vbyte ());"
+	print #f2, "					break;"
 End If
 
 If clausulasUsed (&H80) Then
 	print #f2, "				case 0x80:"
-	print #f2, "					 // IF LEVEL = sc_n"
-	print #f2, "					 // Opcode: 80 sc_n"
-	print #f2, "					 sc_terminado = (read_vbyte () != level);"
-	print #f2, "					 break;"
+	print #f2, "					// IF LEVEL = sc_n"
+	print #f2, "					// Opcode: 80 sc_n"
+	print #f2, "					sc_terminado = (read_vbyte () != level);"
+	print #f2, "					break;"
 End If
 '' EOTODO
 
 if clausulasUsed (&HF0) Then
 	print #f2, "				case 0xF0:"
-	print #f2, "					 // IF TRUE"
-	print #f2, "					 // Opcode: F0"
-	print #f2, "					 break;"
+	print #f2, "					// IF TRUE"
+	print #f2, "					// Opcode: F0"
+	print #f2, "					break;"
 End If
 
 Print #f2, "				case 0xff:"
@@ -1759,8 +1786,8 @@ End If
 
 If actionsUsed (&H86) Then
 	Print #f2, "					case 0x86:"
-	Print #f2, "						// ADD_CONTAINER f, x, y"
-	Print #f2, "						sc_x = read_byte (); sc_y = read_vbyte ();"
+	Print #f2, "						// ADD_CONTAINER/ADD_SPRITE f, x, y"
+	Print #f2, "						sc_x = read_byte (); sc_y = read_byte ();"
 	Print #f2, "						containers_add ();"
 	Print #f2, "						break;"
 End If
@@ -1863,7 +1890,7 @@ If actionsUsed (&HED) Then
 	Print #f2, "                    case 0xED:"
 	Print #f2, "                        // TEXTBOX n"
 	Print #f2, "                        // Opcode: 0xED sc_n"
-	Print #f2, "                        gp_gen = custom_texts [read_vbyte];"
+	Print #f2, "                        gp_gen = custom_texts [read_vbyte ()];"
 	Print #f2, "                        textbox_do ();"
 	print #f2, "						break;"
 End If

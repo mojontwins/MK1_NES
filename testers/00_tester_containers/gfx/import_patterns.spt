@@ -17,7 +17,7 @@ MAPFILE ..\dev\assets\tiledata.h
 OPEN ts0.png
 PALS palts0.png
 LABEL ts0
-MAPPED 0, 0, 2, 2, 16, 3
+MAPPED 0, 0, 2, 2, 16, 4
 
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
@@ -68,5 +68,8 @@ METASPRITE 4, 11, 2, 2, 0, 0
 # Hot point (where oam_meta_spr places its origin) (is 0, 0).
 # (items rectangle is 16x16, centered bottom).
 METASPRITESET 6, 11, 2, 2, 2, 2, 0, 0
+
+# Cheril, tu show ADD_SPRITE
+METASPRITE 8, 3, 2, 3, 0, -8
 
 FILL 8192

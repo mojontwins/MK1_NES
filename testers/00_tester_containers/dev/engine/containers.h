@@ -4,11 +4,14 @@
 // Containers definition
 
 void containers_paint (void) {
-	gpit = containers_index; while (gpit --) oam_index = oam_meta_spr (
-		containers_yx [gpit] << 4, (containers_yx [gpit] & 0xf0) + SPRITE_ADJUST,
-		oam_index,
-		spr_hs [flags [containers_f [gpit]]]
-	);
+	gpit = containers_index; while (gpit --) {
+		rda = containers_f [gpit];
+		oam_index = oam_meta_spr (
+			containers_yx [gpit] << 4, (containers_yx [gpit] & 0xf0) + SPRITE_ADJUST,
+			oam_index,
+			spr_hs [rda & 0x80 ? flags [rda & 0x7f] : rda]
+		);
+	}
 }
 
 #ifdef CONTAINERS_FROM_CODE
@@ -25,8 +28,6 @@ void containers_paint (void) {
 #else
 	void containers_add (void) {
 		containers_yx [containers_index] = sc_x;
-		*((unsigned char *) (0xf0+containers_index)) = sc_x;
-		*((unsigned char *) (0xf1+containers_index)) = 0;
 		containers_f [containers_index ++] = sc_y;
 	}
 #endif

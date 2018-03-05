@@ -41,7 +41,9 @@ const unsigned char * const spr_enems0 [] = {
 // Item metasprites
 // EMPTY, object, key, refill
 // potion, eye, skull, puff
+// Cheril
 const unsigned char * const spr_hs [] = {
 	ssit_03, ssit_00, ssit_01, ssit_02,
-	ssit_04, ssit_05, ssit_06, ssit_07
+	ssit_04, ssit_05, ssit_06, ssit_07,
+	ssit_08
 };

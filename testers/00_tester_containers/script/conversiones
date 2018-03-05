@@ -1,0 +1,2 @@
+SET FLAG 1 = FLAG 2
+SET TILE ($X, $Y) = FLAG 4

@@ -9,7 +9,7 @@ copy /b work\palts0.h + work\palss0.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr 
 
 echo Exporting enems
 cd ..\enems

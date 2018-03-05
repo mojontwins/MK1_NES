@@ -3256,11 +3256,74 @@ Bueno, con documentarlo creo que es más que suficiente.
 20180304
 ========
 
-Con esto a medi omontar, idea integradora:
+Con esto a medio montar, idea integradora:
 
 - Containers y sprites no interactuables juntos.
-- Diferencia: el "flag" que represnetan si AND 128 (containers), o el gráfico que pintar de spr_it si !(AND 128) (fixed sprites).
+- Diferencia: el "flag" que representan si AND 128 (containers), o el gráfico que pintar de spr_it si !(AND 128) (fixed sprites).
 - Rellenar una variable especial que comprobar desde el script y lanzar el fire script _después_ del intercambio en el caso de los containers.
 
 Cuando me pueda concentrar lo añado.
+
+20180305
+========
+
+Vale, tengo que generalizar las funciones de containers.h - Aunque ahora quizá debiera buscarles otro nombre porque ya no son estrictamente containers.
+
+- Si `f & 128` -> Es un container. Dibujar `spr_hs [flags [(f & 0x7f)]]`. 
+- Si `!(f & 128)` -> Es un sprite. Dibujar `spr_hs [f]`.
+
+`containers_add` no cambiará. Ya me ocuparé de escribir el valor correcto desde msc3nes. `containers_create` idem, tendré que documentar bien todo esto cuando acabe este tester.
+
+La comunicación con el script es mediante una nueva variable script_arg que voy a crear ya mismo.
+
+- Si `script_arg & 128` -> Se cogió el objeto que había en el container `script_arg & 0x7f`.
+- Si `!script_arg & 128` -> Se interactuó con el sprite `script_arg`.
+
+El manejador del script siempre pondrá script_arg a 0xff tras consumirla.
+
+~~
+
+Sobre el tema del script - va siendo hora de sanear, sobre todo el tema de los alias, los flags, los contenidos, etc.
+
+Ahora mismo, N es un número, #N es "el contenido del flag N", $ALIAS equivale a N, y #$ALIAS es "el contenido del flag $ALIAS, o asea, del flag N".
+
+Esto me parece engorroso.
+
+Debería ser $ALIAS "el contenido del flag N" al que representa, directamente, dependiendo del contexto: siempre que aparezca como rvalue. No sé si me explico.
+
+`SET $ALIAS = 3` => `SET FLAG N = 3`.
+`SET $HOLA = $ADIOS` => `SET FLAG N = FLAG M`.
+
+Yo debería tener un sólo set de "SET" e "IF" que comparasen A con B, siendo A y/o B:
+
+- N
+- FLAG N
+- #N
+- $ALIAS
+
+"Todas" las versiones deberían generar el mismo bytecode. Esto limita el anterior pero lo hace recortando cosas que no usaba, y lo hace menos engorroso de usar. Así pues:
+
+- N se traduce por Chr (N).
+- FLAG N, #N o $ALIAS se traducen por Chr (128|N).
+
+Así, por ejemplo, `IF ARG = $CONT_OFFER` se traducirá correctamente. Aunque aquí tampoco es intuitivo. Quizá necesite un nuevo operador ~ para este caso:
+
+`IF ARG ~ $CONT_OFFER`, si ARG "es" el `$CONT_OFFER`.
+`IF ARG = $CONT_OFFER`, si ARG vale el contenido de `$CONT_OFFER`.
+
+Tengo que revisar todo el parser e ir apuntando por aquí mismo las cosas que voy viendo / simplificando.
+
+Empezamos con el parser pval. $ALIAS no traducirá a N, sino a #N.
+
+Qué hostias, creo que voy a hacer lo que llevaba mucho tiempo queriendo hacer: un msc nuevo. Llamémosle msc_mk1.bas. Esto va a ser un piponazo a estas alturas, pero me mola y siempre puedo cambiar a otro proyecto (terminar espinete) si me aburro.
+
+~~
+
+
+
+
+
+
+
+
 

@@ -28,7 +28,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					4		// Initial screen
+	#define SCR_INI					0		// Initial screen
 	#define PLAYER_INI_X			0xe		//
 	#define PLAYER_INI_Y			0x9		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -215,8 +215,8 @@
 
 // Text boxes. If you need them, you call them
 
-//#define ENABLE_TEXT_BOX
-#define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
+#define ENABLE_TEXT_BOX
+#define TEXT_BOX_FRAME_TILE_OFFSET		0x30	// We need tiles in the active metatileset to draw the frame
 
 // Timer. 
 
