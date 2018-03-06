@@ -37,8 +37,7 @@ if [%2]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
-..\..\..\src\utils\msc3nes.exe script.spt 5
-copy mscnes.h ..\dev\assets\ > nul
+..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 5
 cd ..\dev
 
 :noscript

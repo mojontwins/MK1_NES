@@ -290,7 +290,7 @@ void game_loop (void) {
 #if defined (WIN_LEVEL_CUSTOM)
 		if (win_level)
 #elif defined (ACTIVATE_SCRIPTING)
-		if (script_result) 
+		if (script_result == 1) 
 #elif defined (PLAYER_MAX_OBJECTS)
 		if (pobjs == PLAYER_MAX_OBJECTS) 
 #elif defined (SCR_END)

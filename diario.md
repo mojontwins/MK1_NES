@@ -3317,13 +3317,22 @@ Empezamos con el parser pval. $ALIAS no traducirá a N, sino a #N.
 
 Qué hostias, creo que voy a hacer lo que llevaba mucho tiempo queriendo hacer: un msc nuevo. Llamémosle msc_mk1.bas. Esto va a ser un piponazo a estas alturas, pero me mola y siempre puedo cambiar a otro proyecto (terminar espinete) si me aburro.
 
+20180306
+========
+
+¡Viva mi picha! Ya tengo el nuevo compilador de scripts terminado y más fácilmente ampliable / modificable. All hail the pichaw!
+
+Cosas:
+
+- Probar en multilevel.
+- Añadir itemset y tal, eso para MK1 v1.1 XD
+- Añadir macros
+
+Pero next: 
+
+- Propagar, también el compilador. Ver qué cambios hay que hacer en el script.
+- Escribir el README de cómo está hecho, aunque sea un tester.
+
 ~~
-
-
-
-
-
-
-
 
 

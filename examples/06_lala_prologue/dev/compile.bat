@@ -56,7 +56,7 @@ cd ..\dev
 if [%2]==[noscript] goto :noscript
 rem echo Building script
 rem cd ..\script
-rem ..\..\..\src\utils\msc3nes.exe script.spt 30
+rem ..\..\..\src\utils\legacy\msc3nes.exe script.spt 30
 rem copy mscnes.h ..\dev\assets\ > nul
 rem cd ..\dev
 :noscript

@@ -11,7 +11,7 @@ const unsigned char custom_text1 [] =
 	"IT SEEMS THAT YOU%"
 	"MADE YOUR OFFER!%"
 	"IF YOU ARE NOT SURE%"
-	"JUST TALK TO CHERIL."
+	"JUST TALK TO CHERIL.%"
 	"TESTER AHOY!";
 	
 const unsigned char * const custom_texts [] = {

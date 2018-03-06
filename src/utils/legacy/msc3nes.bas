@@ -1959,7 +1959,7 @@ End If
 if actionsUsed (&HF0) Then
 	print #f2, "					case 0xF0:"
 	print #f2, "						// GAME OVER"
-	print #f2, "						script_result = 2;"
+	print #f2, "						game_over = 1;"
 	print #f2, "						return;"
 End If
 
