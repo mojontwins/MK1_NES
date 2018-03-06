@@ -32,7 +32,6 @@ void player_process_tile (at, x0, y0, x1, y1) {
 				#ifdef ENABLE_PUSHED_SCRIPT
 					just_pushed = 1;
 					run_fire_script ();
-					just_pushed = 0;
 				#endif
 			}	
 		}

@@ -361,8 +361,6 @@ void enems_load (void) {
 
 #ifdef ENEMS_MAY_DIE
 	void enems_kill () {
-		sfx_play (SFX_BREAKB, 1); 
-		
 		_en_t = 0;
 
 		#ifdef PERSISTENT_DEATHS

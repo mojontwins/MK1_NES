@@ -63,14 +63,6 @@ void player_init (void) {
 	#ifdef CARRY_ONE_HS_OBJECT
 		pinv = HS_OBJ_EMPTY; 
 	#endif
-
-	#ifdef CARRY_ONE_FLAG_OBJ
-		flags [HS_INV_FLAG] = HS_OBJ_EMPTY;
-	#endif
-
-	#ifdef ENABLE_CONTAINERS
-		upd_cont_index = 0;
-	#endif
 }
 
 void player_render (void) {
@@ -83,7 +75,7 @@ void player_render (void) {
 }
 
 void player_kill (void) {
-	pkill = 0;
+	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
 	
 	if (plife) plife --; else game_over = 1;
@@ -101,8 +93,8 @@ void player_kill (void) {
 	#endif
 
 	#ifdef DIE_AND_RESPAWN
-		px = px_safe;
-		py = py_safe;
+		px = px_safe; prx = px >> FIXBITS;
+		py = py_safe; pry = py >> FIXBITS;
 		n_pant = n_pant_safe;
 		music_pause (1);
 		delay (60);
@@ -185,7 +177,7 @@ void player_move (void) {
 	#ifdef ENABLE_PROPELLERS
 		rda = pfloating;
 		pfloating = (at1 == 64 || at2 == 64);
-		if (pfloating && rda == 0) sfx_play (SFX_FLOAT, 0);
+		if (rda != pfloating) sfx_play (SFX_FLOAT, 0);
 	#endif
 
 	#ifdef ENABLE_SPRINGS
@@ -590,11 +582,6 @@ void player_move (void) {
 				&& !ponladder
 			#endif
 		) {
-
-			#ifdef ENABLE_CONTAINERS
-				containers_do ();
-			#endif
-
 			#ifdef ACTIVATE_SCRIPTING
 				#include "engine/playermods/scripting.h"
 			#endif

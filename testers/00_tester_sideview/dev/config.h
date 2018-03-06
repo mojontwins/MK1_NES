@@ -114,7 +114,6 @@
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
-#define PUSHED_FIRE
 
 // General stuff
 
@@ -228,6 +227,7 @@
 #define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
+#define TIMER_SOUND						10  // play a sound if timer < value
 
 // Springs
 
@@ -408,6 +408,7 @@
 #define CLEAR_FLAGS						// Zero all flags when entering a level
 
 //#define ENABLE_CONTAINERS				// Graphical flag representations!
+//#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
 #define CONTAINERS_MAX 					4	// As per screen
 #define FLAG_INVENTORY					0
 
@@ -418,10 +419,10 @@
 
 // Top view:
 // ---------
-/*
-#define PLAYER_TOP_DOWN            		// Enable top view.
-#define TOP_OVER_SIDE                 	// UP/DOWN has priority over LEFT/RIGHT
-*/
+
+//#define PLAYER_TOP_DOWN            	// Enable top view.
+//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
+
 // Side view:
 // ----------
 

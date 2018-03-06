@@ -617,8 +617,8 @@ Function procesaClausulas (f As Integer) As String
 						clausula = clausula + Chr (&HED) + Chr (pValR (lP (1)))
 						actionsUsed (&HED) = -1
 					Case "DECORATIONS"
-						clausula = clausula + Chr (&HE4)
-						actionsUsed (&HE4) = -1
+						clausula = clausula + Chr (&HF4)
+						actionsUsed (&HF4) = -1
 						Do
 							Line Input #f, linea
 							linea = Trim (linea, Any Chr (32) + Chr (9))
@@ -812,7 +812,7 @@ While keepGoing
 			sDone = -1
 			clausulas = procesaClausulas (fIn)
 			parseTokenizeString linea, lP (), ",;()" & chr (9), "'"
-			If lP (1) = "ANY" Then
+			If lP (2) = "ANY" Then
 				script (maxidx + 2) = clausulas
 			Else
 				i = 3
@@ -987,7 +987,7 @@ End If
 If clausulasUsed (&H20) Then
 	' IF PLAYER_TOUCHES (x, y)
 	' &H20 x y
-	Print #fOut, "                case 0x20: readxy (); sc_x << = 4; sc_y = 16 + (sc_y << 4); sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15)); break;"
+	Print #fOut, "                case 0x20: readxy (); sc_x <<= 4; sc_y = 16 + (sc_y << 4); sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15)); break;"
 End If
 If clausulasUsed (&H21) Then
 	' IF PLAYER_IN_X ('x1', 'x2')
@@ -1132,7 +1132,7 @@ End If
 If actionsUsed (&H51) Then
 	' SET_FIRE_ZONE x1 y1 x2 y2
 	' &H51 'x1' 'y1' 'x2' 'y2'
-	Print #fOut, "                    case 0x51: fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;"
+	Print #fOut, "                    case 0x51: f_zone_ac = 1; fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;"
 End If
 
 If actionsUsed (&H68) Then
@@ -1314,7 +1314,7 @@ End If
 If actionsUsed (&HE0) Then
 	' SOUND n
 	' &HE0 n
-	Print #fOut, "                    case 0xe0: sfx_play (read_vbyte ()); break;"
+	Print #fOut, "                    case 0xe0: sfx_play (read_vbyte (), 1); break;"
 End If
 If actionsUsed (&HE6) Then
 	' MUSIC n

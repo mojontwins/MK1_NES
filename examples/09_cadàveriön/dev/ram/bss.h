@@ -94,6 +94,10 @@ unsigned char hact [MAP_SIZE];
 		unsigned char just_pushed;
 	#endif
 	unsigned char fire_script_success;
+	#if defined (ENABLE_CONTAINERS)
+		unsigned char script_arg; 
+		unsigned char just_interacted;
+	#endif
 #endif
 
 // Flags
@@ -103,9 +107,6 @@ unsigned char flags [MAX_FLAGS];
 #ifdef ENABLE_CONTAINERS
 	unsigned char containers_index, containers_interact_with;
 	unsigned char containers_f [CONTAINERS_MAX] , containers_yx [CONTAINERS_MAX];
-	#ifdef CONTAINERS_FROM_CODE
-		const unsigned char *c_containers;
-	#endif
 #endif
 
 // More baddies

@@ -35,11 +35,10 @@ cd ..\dev
 :justcompile
 if [%2]==[noscript] goto :noscript
 
-echo Building script
-cd ..\script
-..\..\..\src\utils\msc3nes.exe script.spt 6
-copy mscnes.h ..\dev\assets\ > nul
-cd ..\dev
+rem echo Building script
+rem cd ..\script
+rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 6
+rem cd ..\dev
 
 :noscript
 cc65 -Oi game.c --add-source

@@ -147,7 +147,7 @@ Next, the `ON_TIMER_OFF` section. It will play a sound, execute `EXTERN 0`, rese
             SET_TIMER 99
             DEC LIFE 1
             SET $FINISHED_SCREENS = $FIN_SCR_CPY
-            WARP_TO #$RETURN_TO_SCREEN, #$RETURN_TO_X, #$RETURN_TO_Y
+            WARP_TO $RETURN_TO_SCREEN, $RETURN_TO_X, $RETURN_TO_Y
         END
     END
 ```
@@ -173,20 +173,20 @@ Remember that the `PRESS_FIRE` scripts are triggered everytime you push a statue
         # Coordinates at $PUSHABLE_X, $PUSHABLE_Y
 
         IF JUST_PUSHED
-        IF #$PUSHABLE_OVER = 13
+        IF $PUSHABLE_OVER = 13
         THEN
             INC $STATUES_IN_PLACE, 1
             SOUND 3
-            SET TILE (#$PUSHABLE_X, #$PUSHABLE_Y) = 30
+            SET TILE ($PUSHABLE_X, $PUSHABLE_Y) = 30
         END
 
         # All in place?
 
-        IF #$STATUES_IN_PLACE = #$STATUES_TO_PLACE
-        IF #$GATE_OPEN = 0
+        IF $STATUES_IN_PLACE = $STATUES_TO_PLACE
+        IF $GATE_OPEN = 0
         THEN
             SET $GATE_OPEN = 1
-            SET TILE (#$GATE_X, #$GATE_Y) = 0
+            SET TILE ($GATE_X, $GATE_Y) = 0
             SOUND 7
             INC $FINISHED_SCREENS, 1
 
@@ -203,7 +203,7 @@ Remember that the `PRESS_FIRE` scripts are triggered everytime you push a statue
         END
 
         # Retry tile
-        IF PLAYER_TOUCHES #$RETRY_X, #$RETRY_Y
+        IF PLAYER_TOUCHES $RETRY_X, $RETRY_Y
         THEN
             SOUND 2
             REENTER
@@ -215,9 +215,9 @@ Most screens are the same. Just check if the current amount of finished gates is
 
 ```
     ENTERING SCREEN 1
-        IF #$FINISHED_SCREENS > 1
+        IF $FINISHED_SCREENS > 1
         THEN
-            SET TILE (#$GATE_X, #$GATE_Y) = 0
+            SET TILE ($GATE_X, $GATE_Y) = 0
             SET $GATE_OPEN = 1
         END
     END
@@ -227,14 +227,14 @@ On the first screen in each floor (this is, screens 0, 9, 10 and 19) we have a c
 
 ```
     ENTERING SCREEN 9
-        IF #$FINISHED_SCREENS > 5
+        IF $FINISHED_SCREENS > 5
         THEN
-            SET TILE (#$GATE_X, #$GATE_Y) = 0
+            SET TILE ($GATE_X, $GATE_Y) = 0
             SET $GATE_OPEN = 1
             BREAK
         END
 
-        IF #$FINISHED SCREENS = 5
+        IF $FINISHED_SCREENS = 5
         THEN
             SET_TIMER 99
             TEXT "YOU GET TO THE SECOND FLOOR!"
@@ -252,9 +252,9 @@ Finally, you win the game via a fire zone which can be only accessed then the ga
 
 ```
     ENTERING SCREEN 15
-        IF #$FINISHED_SCREENS > 18
+        IF $FINISHED_SCREENS > 18
         THEN
-            SET TILE (#$GATE_X, #$GATE_Y) = 0
+            SET TILE ($GATE_X, $GATE_Y) = 0
             SET $GATE_OPEN = 1
         END IF
 

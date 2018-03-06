@@ -4,6 +4,19 @@
 
 # flags:
 # 1	- Hemos colocado los cinco objetos
+# 2 - Moto seminueva
+
+DEFALIAS
+	$BOMBS_SET	1
+	$MOTORBIKE	2
+END
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET $BOMBS_SET = 0
+	END
+END
 
 ###########################
 # Para cualquier pantalla #
@@ -18,16 +31,14 @@
 # justo después:
 
 ENTERING ANY
-	IF FLAG 1 = 0
+	IF $BOMBS_SET = 0
 	THEN
-		#TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
-		TEXT _SET_5_BOMBS_IN_EVIL_COMPUTER_
+		TEXT " SET 5 BOMBS IN EVIL COMPUTER "
 	END
 	
-	IF FLAG 1 = 1
+	IF $BOMBS_SET = 1
 	THEN
-		#TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
-		TEXT BOMBS_ARE_SET!_RETURN_TO_BASE!
+		TEXT "BOMBS ARE SET! RETURN TO BASE!"
 	END
 END
 
@@ -38,7 +49,7 @@ END
 # Esta es la pantalla del super ordenador malo.
 # Cuando entremos en la pantalla tendremos dos cláusulas:
 # la primera se ejecuta siempre (IF TRUE) y pinta el ordenador.
-# la segunda se ejecuta si hemos colocado las bombas (FLAG 1 = 1),
+# la segunda se ejecuta si hemos colocado las bombas ($BOMBS_SET = 1),
 # y pinta las bombas. Es por si salimos y luego volvemos a
 # entrar una vez que hemos colocado las bombas
 
@@ -51,29 +62,31 @@ ENTERING SCREEN 0
 	# Siempre: pintar el ordenador.
 	IF TRUE
 	THEN
-		SET TILE (6, 4) = 16
-		SET TILE (7, 4) = 17
-		SET TILE (8, 4) = 18
-		SET TILE (6, 5) = 19
-		SET TILE (7, 5) = 20
-		SET TILE (8, 5) = 21
-		SHOW
-		SET_FIRE_ZONE 80, 32, 159, 111
+		DECORATIONS
+			6, 4, 16
+			7, 4, 17
+			8, 4, 18
+			6, 5, 19
+			7, 5, 20
+			8, 5, 21
+		END
+		SET_FIRE_ZONE_TILES 0, 0, 15, 7
 	END
 	
 	# Si ya hemos puesto las bombas: pintarlas.
-	IF FLAG 1 = 1
+	IF $BOMBS_SET = 1
 	THEN
-		SET TILE (4, 5) = 24
-		SET TILE (4, 3) = 24
-		SET TILE (7, 2) = 24
-		SET TILE (10, 3) = 24
-		SET TILE (10, 5) = 24
-		SHOW
+		DECORATIONS
+			4, 5, 24
+			4, 3, 24
+			7, 2, 24
+			10, 3, 24
+			10, 5, 24
+		END
 	END
 	
 	# Si no, mensajito.
-	IF FLAG 1 = 0
+	IF $BOMBS_SET = 0
 	THEN
 		#TEXT _PON_LAS_CINCO_BOMBAS_Y_CORRE_
 		TEXT SET_BOMBS_IN_COMPUTER_AND_RUN!
@@ -82,7 +95,7 @@ END
 
 # Si pulsamos FIRE en la pantalla cero, estamos cerca del
 # ordenador, no hemos colocado las bombas, y llevamos las cinco,
-# se colocan las bombas (con un efecto guay) y se pone el FLAG 1 a 1.
+# se colocan las bombas (con un efecto guay) y se pone el $BOMBS_SET a 1.
 
 # Tendremos que estar pegados al ordenador, o sea, dentro del rectángulo
 # que va desde 80,32 hasta 159,95:
@@ -91,9 +104,9 @@ PRESS_FIRE AT SCREEN 0
 	IF PLAYER_IN_X 80, 159
 	IF PLAYER_IN_Y 32, 111
 	IF OBJECT_COUNT = 5
-	IF FLAG 1 = 0
+	IF $BOMBS_SET = 0
 	THEN
-		SET FLAG 1 = 1
+		SET $BOMBS_SET = 1
 		SET TILE (4, 5) = 24
 		SHOW
 		SOUND 0
@@ -109,8 +122,7 @@ PRESS_FIRE AT SCREEN 0
 		SET TILE (10, 5) = 24
 		SHOW
 		SOUND 0
-		#TEXT ____AHORA_VUELVE_A_LA_BASE____
-		TEXT __DONE!_NOW_GO_BACK_TO_BASE!__
+		TEXT "  DONE! NOW GO BACK TO BASE!  "
 	END
 END
 
@@ -127,7 +139,7 @@ ENTERING SCREEN 21
 	THEN
 		SET TILE (1, 4) = 22
 		SET TILE (2, 4) = 23
-		SET FLAG 2 = 0
+		SET $MOTORBIKE = 0
 		SET_FIRE_ZONE 32, 32, 50, 95
 	END
 END
@@ -138,11 +150,11 @@ END
 PRESS_FIRE AT SCREEN 21
 	IF PLAYER_IN_X 32, 63
 	IF PLAYER_IN_Y 33, 95
-	IF FLAG 2 = 0
+	IF $MOTORBIKE = 0
 	THEN
-		SET FLAG 2 = 1
+		SET $MOTORBIKE = 1
 		SOUND 9
-		TEXT _HALF_NEW_MOTORBIKE_FOR_SALE!_
+		TEXT " HALF NEW MOTORBIKE FOR SALE! "
 		SHOW
 		SOUND 0
 		SOUND 8
@@ -153,11 +165,11 @@ END
 # Pantalla 23 #
 ###############
 
-# Aquí se comprueba si el flag 1 está a 1 para terminar el 
+# Aquí se comprueba si el $BOMBS_SET está a 1 para terminar el 
 # güego. Si no, se dice qué hay que hacer:
 
 ENTERING SCREEN 23
-	IF FLAG 1 = 1
+	IF $BOMBS_SET = 1
 	THEN
 		WIN GAME
 	END

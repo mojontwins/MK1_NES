@@ -114,7 +114,6 @@
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
-#define PUSHED_FIRE
 
 // General stuff
 
