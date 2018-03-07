@@ -7,6 +7,8 @@ I had to test containers and how they interact with the script system and that's
 - Place (interactuable) sprites from the script.
 - Tons of fixes.
 
+*I have to rewrite this. I wrote this very tired and doesn't make sense at all*
+
 What containers are
 ===================
 
