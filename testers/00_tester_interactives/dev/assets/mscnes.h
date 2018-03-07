@@ -74,7 +74,7 @@ void run_script (unsigned char whichs) {
                     case 0x20: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); map_set (); break;
                     case 0x51: f_zone_ac = 1; fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;
                     case 0xed: gp_gen = custom_texts [read_vbyte ()]; textbox_do (); break;
-                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); containers_add (); break;
+                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); interactives_add (); break;
                     case 0xf1: script_result = 1; return;
                     case 0xff: sc_terminado = 1; break;
                 }

@@ -1285,9 +1285,9 @@ End If
 ' Spritey things
 
 If actionsUsed (&H86) Then
-	' ADD_CONTAINER / ADD_SPRITE f x y
+	' ADD_INTERACTIVE / ADD_SPRITE f x y
 	' &H86 'f' 'x' 'y'
-	Print #fOut, "                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); containers_add (); break;"
+	Print #fOut, "                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); interactives_add (); break;"
 End If
 
 ' Misc

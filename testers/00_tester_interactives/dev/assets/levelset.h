@@ -65,3 +65,10 @@ const unsigned char * const * const l_spr_enems [] =
 
 const unsigned char * const l_enems [] = 		{ enems_0, enems_1 };
 const unsigned char * const l_hotspots [] = 	{ hotspots_0, hotspots_1 };
+
+// Interactives
+
+#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+	const unsigned char * const l_interactives [] = 
+												{ interactives_0, interactives_1 };
+#endif

@@ -3340,10 +3340,17 @@ Tras portar todo al msc nuevo y probar y corregir cosas, voy a revisar que todo 
 
 [ ] Mover config.h a /my
 
-[/] Containers
+[X] Probar "containers desde código"
 
 [/] Música OGT Cheril Perils y Cadàveriön
 
 [·] Terminar Cheril Perils (fase extra, pantallas fijas).
 
 [ ] Sir Ababol DX se me está quedando muy atrasado.
+
+~~ 
+
+Estoy probando "containers desde código", y creo que será mejor cambiar el nombre "global" de containers + sprites por "interactives".
+
+~~
+

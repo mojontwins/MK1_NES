@@ -21,7 +21,7 @@ So there's two kinds of containers as of v1.0:
 - **Containers**: Represent a flag. Show the value of the flag as a graphic. To show the contents of flag f at (x, y) (tile coordinates):
 
 ```
-    ADD_CONTAINER f, x, y
+    ADD_INTERACTIVE f, x, y
 ```
 
 - **Sprites**: Just a fixed sprite. To show spr_it [m] at (x, y) (tile coordinates):
@@ -111,9 +111,9 @@ And of course, activate scripting, enable containers, 4 is more than enough (we'
     #define ACTIVATE_SCRIPTING
     //#define CLEAR_FLAGS
 
-    #define ENABLE_CONTAINERS
-    //#define CONTAINERS_FROM_CODE
-    #define CONTAINERS_MAX                  4   // As per screen
+    #define ENABLE_INTERACTIVES
+    //#define INTERACTIVES_FROM_CODE
+    #define INTERACTIVES_MAX                  4   // As per screen
     #define FLAG_INVENTORY                  0
 
     //#define FIRE_ON_KILL
@@ -239,7 +239,7 @@ Screen 1 contains our first container, the one which represents `$CONT_OFFER`.
     ENTERING SCREEN 1
         IF TRUE
         THEN
-            ADD_CONTAINER $CONT_OFFER, 8, 8
+            ADD_INTERACTIVE $CONT_OFFER, 8, 8
         END
     END
 ```
@@ -264,22 +264,22 @@ Next screens just place the remaining containers. One on screen 2, one on screen
     ENTERING SCREEN 2
         IF TRUE
         THEN
-            ADD_CONTAINER $CONT_BOTTLE, 4, 8
+            ADD_INTERACTIVE $CONT_BOTTLE, 4, 8
         END IF
     END IF
 
     ENTERING SCREEN 3
         IF TRUE
         THEN
-            ADD_CONTAINER $CONT_EYE, 14, 4
+            ADD_INTERACTIVE $CONT_EYE, 14, 4
         END IF
     END IF
 
     ENTERING SCREEN 4
         IF TRUE
         THEN 
-            ADD_CONTAINER $CONT_SKULL, 1, 2
-            ADD_CONTAINER $CONT_PUFF, 13, 3
+            ADD_INTERACTIVE $CONT_SKULL, 1, 2
+            ADD_INTERACTIVE $CONT_PUFF, 13, 3
         END IF
     END IF
 ```

@@ -6,5 +6,5 @@
 
 void draw_game_frame (void) {
 	_x = 2; _y = 3;	 pr_str ("LIFE:00   ITEM:      KEYS:00");
-	        _y = 28; pr_str ("CONTAINERS - THE MOJON TWINS");
+	        _y = 28; pr_str ("INTERACTIVES-THE MOJON TWINS");
 }
