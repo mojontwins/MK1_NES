@@ -3333,6 +3333,17 @@ Pero next:
 - Propagar, también el compilador. Ver qué cambios hay que hacer en el script.
 - Escribir el README de cómo está hecho, aunque sea un tester.
 
-~~
+20180307
+========
 
+Tras portar todo al msc nuevo y probar y corregir cosas, voy a revisar que todo está debidamente actualizado y si eso ya por fin retomo el TODO.
 
+[ ] Mover config.h a /my
+
+[/] Containers
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.

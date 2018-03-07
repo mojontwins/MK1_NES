@@ -118,7 +118,7 @@ void prepare_scr (void) {
 	cocos_init ();
 #endif	
 
-#if defined (ACTIVATE_SCRIPTING) && (defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE))
+#if defined (ACTIVATE_SCRIPTING) && defined (ENABLE_FIRE_ZONE)
 	f_zone_ac = 0;
 	fzx1 = fzx2 = fzy1 = fzy2 = 240;
 #endif
@@ -161,7 +161,7 @@ void prepare_scr (void) {
 		containers_index = 0;
 	#endif
 
-	containers_interact_with = 0;		
+	containers_interact_with = 0xff;
 #endif
 	
 	// Reenable sprites and tiles now we are finished.
@@ -170,6 +170,9 @@ void prepare_scr (void) {
 #ifdef ACTIVATE_SCRIPTING
 	#if defined (ENABLE_PUSHED_SCRIPT)
 		just_pushed = 0;
+	#endif
+	#if defined (ENABLE_CONTAINERS)
+		just_interacted = 0;
 	#endif
 	// Entering any script
 	run_script (2 * MAP_SIZE + 1);
@@ -287,7 +290,7 @@ void game_loop (void) {
 #if defined (WIN_LEVEL_CUSTOM)
 		if (win_level)
 #elif defined (ACTIVATE_SCRIPTING)
-		if (script_result) 
+		if (script_result == 1) 
 #elif defined (PLAYER_MAX_OBJECTS)
 		if (pobjs == PLAYER_MAX_OBJECTS) 
 #elif defined (SCR_END)

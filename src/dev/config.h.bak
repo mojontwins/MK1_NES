@@ -114,6 +114,7 @@
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
+#define PUSHED_FIRE
 
 // General stuff
 
@@ -529,7 +530,6 @@
 	#define CELL_PUSHING		5
 
 	#define CELL_USE			24
-
 #else
 
 	// Cell definitions for side view

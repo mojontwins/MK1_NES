@@ -94,6 +94,10 @@ unsigned char hact [MAP_SIZE];
 		unsigned char just_pushed;
 	#endif
 	unsigned char fire_script_success;
+	#if defined (ENABLE_CONTAINERS)
+		unsigned char script_arg; 
+		unsigned char just_interacted;
+	#endif
 #endif
 
 // Flags

@@ -43,12 +43,20 @@ void hud_update (void) {
 	}
 #endif
 
-#if defined (ENABLE_EASY_OBJECTS) && defined (HS_INV_X)
-	oam_index = oam_meta_spr (
-		HS_INV_X, HS_INV_Y,
-		oam_index,
-		spr_hs [pinv]
-	);
+#if defined (HS_INV_X)
+	#if defined (ENABLE_CONTAINERS) && defined (FLAG_INVENTORY)
+		oam_index = oam_meta_spr (
+			HS_INV_X, HS_INV_Y,
+			oam_index,
+			spr_hs [flags [FLAG_INVENTORY]]
+		);
+	#else
+		oam_index = oam_meta_spr (
+			HS_INV_X, HS_INV_Y,
+			oam_index,
+			spr_hs [pinv]
+		);
+	#endif
 #endif
 
 #if defined (ENABLE_TIMER) && defined (TIMER_X)

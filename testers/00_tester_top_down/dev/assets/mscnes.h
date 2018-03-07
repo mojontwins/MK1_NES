@@ -66,7 +66,6 @@ void run_script (unsigned char whichs) {
     gp_gen = (unsigned char *) script_pool [level] + whichs + whichs;
     rda = *gp_gen ++; rdb = *gp_gen;
     script_result = 0;
-    sc_continuar = 0;
     if (!(rda | rdb)) return;
     script = (unsigned char *) script_pool [level] + rda + (rdb << 8);
 
@@ -85,7 +84,7 @@ void run_script (unsigned char whichs) {
         }
 
         if (sc_continuar) {
-            fire_script_success |= sc_continuar;
+            fire_script_success = 1;
             sc_terminado = 0;
             while (!sc_terminado) {
                 switch (read_byte ()) {
