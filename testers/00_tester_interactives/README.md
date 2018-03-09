@@ -73,9 +73,9 @@ In config.h
 -----------
 
 ```c
-#define ENABLE_INTERACTIVES	
-#define INTERACTIVES_MAX 		4
-#define FLAG_INVENTORY			0
+#define ENABLE_INTERACTIVES 
+#define INTERACTIVES_MAX        4
+#define FLAG_INVENTORY          0
 ```
 
 As mentioned, the object the player carries is stored in `flag [FLAG_INVENTORY]` instead of `pinv`. 
@@ -112,9 +112,9 @@ Here we will implement the game using scripting.
 To use interactives and scripting...
 
 ```c
-	#define ACTIVATE_SCRIPTING
-	[...]
-	#define ENABLE_INTERACTIVES
+    #define ACTIVATE_SCRIPTING
+    [...]
+    #define ENABLE_INTERACTIVES
 ```
 
 Handy aliases
@@ -143,7 +143,7 @@ Containers will be bound to flags when placed, and such flags should contain a p
 In this example, we have four objects: bottle, eye, skull and puff of smoke (!). We also have the "empty" object, and a metatile representing Cheril. Metatiles for them are laid out in the `spr_hs` as follows:
 
 ```
-	spr_hs array:
+    spr_hs array:
 
     index   contents
     ------- -------------------------------
@@ -189,7 +189,7 @@ Interactives (both plain sprites and containers) have to be placed on screen. Th
 To place a sprite:
 
 ```spt
-	ADD_SPRITE S, X, Y
+    ADD_SPRITE S, X, Y
 ```
 
 Where S is the metasprite index in `spr_hs` and (X, Y) the coordinates (tile coordinates, X = 0..15; Y = 0..12).
@@ -197,7 +197,7 @@ Where S is the metasprite index in `spr_hs` and (X, Y) the coordinates (tile coo
 To place a container:
 
 ```spt
-	ADD_CONTAINER F, X, Y
+    ADD_CONTAINER F, X, Y
 ```
 
 Where F is the flag bound to the container (or an alias to it), and (X, Y) the coordinates (tile coordinates, X = 0..15; Y = 0..12).
@@ -215,15 +215,15 @@ When the player interacts with an interactive, the interactive will be reference
 To check if the player interacted with sprite S:
 
 ```spt
-	IF JUST_INTERACTED
-	IF ARG = S
+    IF JUST_INTERACTED
+    IF ARG = S
 ```
 
 To check if the player interacted with container F (executed after the objects have been swapped):
 
 ```spt
-	IF JUST_INTERACTED
-	IF ARG ~ F
+    IF JUST_INTERACTED
+    IF ARG ~ F
 ```
 
 Screen by screen analysis
@@ -337,9 +337,106 @@ Here we will implement the game using just C code.
 To use interactives from C code...
 
 ```c
-	//#define ACTIVATE_SCRIPTING
-	[...]
-	#define ENABLE_INTERACTIVES
+    //#define ACTIVATE_SCRIPTING
+    [...]
+    #define ENABLE_INTERACTIVES
 ```
 
-<TODO>
+Using interactives from within C code implies adding code to some files in the `my/` folder, is generally simpler, but of course less powerful / more fiddly. If you are not a C coder you'd better use the scripting system.
+
+Besides, if you are already using the scripting system for your game (`ACTIVATE_SCRIPTING` is defined), you *cant* use interactives from C code. Both techniques are **mutually exclusive**.
+
+Also, dont' use `ENABLE_EASY_OBJECTS` alongside `ENABLE_INTERACTIVES`. Those are **mutually exclusive** as well.
+
+Populating containers
+---------------------
+
+Containers will be bound to flags when placed, and such flags should contain a proper value. The `FLAG_INVENTORY` flag should be initialized as well. 
+
+In this example, we have four objects: bottle, eye, skull and puff of smoke (!). We also have the "empty" object, and a metatile representing Cheril. Metatiles for them are laid out in the `spr_hs` as follows:
+
+```
+    spr_hs array:
+
+    index   contents
+    ------- -------------------------------
+    0       the "empty" object 
+    1       hotspot collectibles (not used)
+    2       hotspot keys (not used)
+    3       life refills
+    4       a bottle
+    5       an eye
+    6       a skull
+    7       a puff of smoke
+    8       a nice sprite of Cheril
+```
+
+The initialization is performed in `my/interactives_setup.h`:
+
+```c
+    flags [FLAG_INVENTORY] = 0; // Carrying nothing
+
+    flags [1] = 4;              // Container for bottle
+    flags [2] = 5;              // Container for eye
+    flags [3] = 6;              // Container for skull
+    flags [4] = 7;              // Container for puff
+
+    flags [5] = 0;              // An empty container
+```
+
+Note how we assign the objects to their flags, and the empty object to both the inventory and `flags [5]`, which is the flag which will be bound to the container over the pedestal where we should place the "skull" object.
+
+Placing interactives
+--------------------
+
+The interactives are placed around the map using arrays defined in `assets/interactives.h`, one per level. As our example only has one level, we only need an array. 
+
+The array will contain screen number, coordinates (YX) and **value** for each interactive.
+
+If the interactive is a **sprite**, **value** should be the index to the desired metasprite in the `spr_hs` array.
+
+If the interactive is a **container**, the value should be `0x80 | F`, where F is the flag the container is bound to.
+
+So, in our example:
+
+```c 
+    const unsigned char interactives_0 [] = {
+        0, 0x92,        8,      // screen 0, SPR Cheril
+        1, 0x88, 0x80 | 5,      // screen 1, CONT pedestal
+        2, 0x84, 0x80 | 1,      // screen 2, CONT bottle
+        3, 0x4e, 0x80 | 2,      // screen 3, CONT eye
+        4, 0x21, 0x80 | 3,      // screen 4, CONT skull
+        4, 0x3d, 0x80 | 4,      //       and CONT puff of smoke
+
+        0xff
+    };
+```
+
+Interaction
+-----------
+
+When an interactive is interacted with (!), the code containerd in `my/on_interactive.h` is run. The interactive **value** will be copied to variable `rdc`. Remember:
+
+If the interactive is a **sprite**, `rdc` will contain the index to the desired metasprite in the `spr_hs` array.
+
+If the interactive is a **container**,  `rdc` will contain `0x80 | F`, where F is the flag the container is bound to.
+
+So, in our example:
+
+```c
+    if (rdc == 8) {
+        gp_gen = custom_text0; textbox_do (); 
+    }
+
+    if (rdc == (0x80 | 5)) {
+        gp_gen = custom_text1; textbox_do (); 
+    }
+```
+
+Which translates to:
+
+- If the user interacted with sprite '8' (Cheril), display a textbox with `custom_text0`.
+
+- If the user interacted with container '5' (the pedestal), display a textbox with `custom_text1`.
+
+And that's it!.
