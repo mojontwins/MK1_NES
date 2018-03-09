@@ -73,9 +73,9 @@ In config.h
 -----------
 
 ```c
-#define ENABLE_INTERACTIVES 
-#define INTERACTIVES_MAX        4
-#define FLAG_INVENTORY          0
+    #define ENABLE_INTERACTIVES 
+    #define INTERACTIVES_MAX        4
+    #define FLAG_INVENTORY          0
 ```
 
 As mentioned, the object the player carries is stored in `flag [FLAG_INVENTORY]` instead of `pinv`. 
