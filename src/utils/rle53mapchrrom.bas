@@ -283,6 +283,7 @@ While Not Eof (fListIn)
 	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_W         " & mapW
 	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_H         " & mapH
 	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_MAXPANTS  " & (mapW*mapH)
+	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_N_LOCKS   " & locksI
 	Print #fOut, ""
 
 	Print #fOut, "// Screens index"

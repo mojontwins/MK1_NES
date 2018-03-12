@@ -41,15 +41,21 @@ const unsigned char * const * const l_spr_enems [] =
 // Map data
 
 #ifdef MAP_FORMAT_PACKED
-	const unsigned char * const l_map [] =
+	const unsigned char * const l_map [] =		{ map_1, map_0 };
 #endif
 #ifdef MAP_FORMAT_RLE16
-	const unsigned char * const * const l_map [] =	
+	const unsigned char * const * const l_map [] =
+												{ map_1, map_0 };
 #endif
 #ifdef MAP_FORMAT_RLE53
 	const unsigned char * const * const l_map [] =	
-#endif
 												{ map_1, map_0 };
+#endif
+#ifdef MAP_FORMAT_CHRROM
+	const unsigned char l_map_chr_rom_bank [] = { MAP_01_CHRROM, MAP_00_CHRROM };
+	const unsigned int * const l_map [] = 		{ map_01_scr_offsets, map_00_scr_offsets };
+#endif
+												
 
 #ifdef MAP_WITH_DECORATIONS
 	const unsigned char * const * const l_decos [] =
@@ -57,8 +63,8 @@ const unsigned char * const * const l_spr_enems [] =
 #endif
 
 #ifndef DEACTIVATE_KEYS
-	const unsigned char * const l_locks [] = 	{ 0, map_0_locks };
-	const unsigned char l_n_bolts [] = 			{ 1, N_BOLTS_0 };
+	const unsigned char * const l_locks [] = 	{ 0, map_00_locks };
+	const unsigned char l_n_bolts [] = 			{ 1, MAP_00_N_LOCKS };
 #endif
 
 // Objects

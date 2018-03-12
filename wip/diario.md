@@ -3367,11 +3367,11 @@ Voy a darle un achuchón a las fases de Cheril Perils a ver si les saco algo má
 
 ~~
 
-[ ] Al hacerse `player_process_tile` en dos puntos, al abrir un cerrojo el segundo falla (y pone un NO!). Tengo que revisar esto para que solo se haga una detección, al menos con los cerrojos.
+[X] Al hacerse `player_process_tile` en dos puntos, al abrir un cerrojo el segundo falla (y pone un NO!). Tengo que revisar esto para que solo se haga una detección, al menos con los cerrojos.
 
 [ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
 
-[ ] Añadir mapas RLE en CHR-ROM (sólo para los complex).
+[X] Añadir mapas RLE en CHR-ROM (sólo para los complex).
 
 20180309
 ========
@@ -3392,4 +3392,41 @@ Voy a integrar los mapas CNROM en Cheril ROM2. Será mi conejillo de indias para
 - El conversor.
 - Código.
 - Tortilla.
+
+¡Funcionandow! Voy a corregir lo de los shines. Hm - es raro, porque sí que se está reiniciando los tiestos. Pero aparecen malw.
+
+Bueno, aparecían mal el otro día que probé empezando en otra pantalla. Desde el principio, al menos en las primeras pantallas, todo parece guachi. Hm. ¿Será que el máximo de shines será menor que el número de tiles que los necesitan y se jode todo? ¿Está controlado?
+
+Está controlado. Qué raro.
+
+Bueno, ahora tampoco me puedo poner a jugar y tal para reproducirlo, así que pasamos a lo próximo.
+
+~~
+
+El rollo de `player_process_tile`. Meh, fási.
+
+~~
+
+Bufferless breakables. Follarme el buffer si la vida de los breakables es 1. Pero esto es mejor hacerlo en otro tester. Y el hit recoil (en el tester punchy). Pues lo que me queda es propagar y ponerme en el otro tester. Este es el todo:
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Tipo 7 en lateral spawns walker-fallers que pueden hostiar.
+
+[ ] Estado hit con recoil (y colisión!) para TODOS los enemigos.
+
+[ ] Bufferless breakables. Breakables sin buffer cuando la vida de los breakables es 1.
+
+[ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
+
+~~
+
+También tengo que documentar el tema de los mapas en CHR_ROM.
+
 

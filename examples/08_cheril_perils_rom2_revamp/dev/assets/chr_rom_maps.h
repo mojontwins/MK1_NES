@@ -11,6 +11,7 @@
 #define MAP_00_W         6
 #define MAP_00_H         4
 #define MAP_00_MAXPANTS  24
+#define MAP_00_N_LOCKS   4
 
 // Screens index
 
@@ -46,6 +47,7 @@ const unsigned char map_00_locks [] = {
 #define MAP_01_W         8
 #define MAP_01_H         3
 #define MAP_01_MAXPANTS  24
+#define MAP_01_N_LOCKS   0
 
 // Screens index
 

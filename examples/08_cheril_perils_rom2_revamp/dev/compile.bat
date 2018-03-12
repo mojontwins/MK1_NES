@@ -29,7 +29,7 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rle53mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr-rom-maps.h chr=3
+..\..\..\src\utils\rle53mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr_rom_maps.h chr=3
 cd ..\dev
 copy work\mapchr.bin.3 tileset3.chr >nul
 

@@ -15,6 +15,11 @@
 	spr_enems = 	l_spr_enems [level];
 
 	c_map = 		l_map [level];
+	#ifdef MAP_FORMAT_CHRROM
+		c_map_chr_rom_bank = 
+					l_map_chr_rom_bank [level];
+	#endif
+
 	#ifdef MAP_WITH_DECORATIONS
 		c_decos = 	l_decos [level];
 	#endif
@@ -46,7 +51,14 @@
 	c_behs = 		behs0;
 	spr_enems = 	spr_enems0;
 
-	c_map = 		map_0;
+	#ifdef MAP_FORMAT_CHRROM
+		c_map = 	map_00_scr_offsets;
+		c_map_chr_rom_bank = 
+					MAP_00_CHRROM;
+	#else
+		c_map = 	map_0;
+	#endif		
+
 	#ifdef MAP_WITH_DECORATIONS
 		c_decos = 	map_0_decos;
 	#endif

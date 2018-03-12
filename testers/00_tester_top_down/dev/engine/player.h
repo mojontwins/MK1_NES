@@ -315,8 +315,8 @@ void player_move (void) {
 				pfiring = 1;
 				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					// Special obstacles
-					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
-					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
+					                if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 - 1);
+					if (cx1 != cx2) if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 - 1);
 				#endif
 			} else if ((at1 & 1) || (at2 & 1)) {
 				hitv = 1;
@@ -351,8 +351,8 @@ void player_move (void) {
 				ppossee = 1;
 				
 				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
-					if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
-					if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
+					                if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
+					if (cx1 != cx2) if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
 				#endif
 
 				#ifdef ENABLE_SLIPPERY
@@ -519,8 +519,8 @@ void player_move (void) {
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
-					if (at2 & 2) player_process_tile (at2, cx1, pry >> 4, rdm, cy2);
-					if (at3 & 2) player_process_tile (at3, cx1, (pry + 15) >> 4, rdm, cy3);
+					                if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
+					if (cy2 != cy3) if (at3 & 2) player_process_tile (at3, cx1, cy3, rdm, cy3);
 				#endif				
 			} else {
 				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));
@@ -532,8 +532,8 @@ void player_move (void) {
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
-					if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
-					if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
+					                if (at1 & 2) player_process_tile (at1, cx1, cy1, rdm, cy1);
+					if (cy1 != cy2) if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 				#endif				
 			} else {
 				hith = ((at1 & 1) || (at2 & 1));

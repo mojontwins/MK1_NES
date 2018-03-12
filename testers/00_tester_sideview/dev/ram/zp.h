@@ -170,8 +170,13 @@ const unsigned char *c_pal_fg;
 
 #ifdef MAP_FORMAT_PACKED
 	const unsigned char *c_map;
-#else
+#endif
+#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_RLE53)
 	const unsigned char * const *c_map;
+#endif
+#if defined (MAP_FORMAT_CHRROM)
+	const unsigned int *c_map;
+	unsigned char c_map_chr_rom_bank;
 #endif
 	
 #ifdef MAP_WITH_DECORATIONS

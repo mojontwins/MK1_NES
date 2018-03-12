@@ -77,6 +77,21 @@ void draw_scr (void) {
 		}
 	#endif
 
+	#ifdef MAP_FORMAT_CHRROM
+		bankswitch (c_map_chr_rom_bank);
+		vram_adr (c_map [n_pant]);
+		rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+		
+		// UNRLE into scr_buff
+		while (rdm < 192) {
+			rdt = *((unsigned char *) (0x2007));
+			rdct = 1 + (rdt >> 5);
+			rda = rdt & 0x1f;
+			while (rdct --) add_tile (); 
+		}
+		bankswitch (l_chr_rom_bank [level]);
+	#endif
+
 	// Edit this file to alter map_buff the way you need:
 	#include "my/map_renderer_customization.h"
 
