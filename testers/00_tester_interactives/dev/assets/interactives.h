@@ -5,7 +5,7 @@
 
 // For each interactive: NP YX F.
 const unsigned char interactives_0 [] = {
-	0, 0x92,        8,      // screen 0, SPR Cheril
+	0, 0x92,        8,		// screen 0, SPR Cheril
 	1, 0x88, 0x80 | 5,		// screen 1, CONT pedestal
 	2, 0x84, 0x80 | 1,		// screen 2, CONT bottle
 	3, 0x4e, 0x80 | 2,		// screen 3, CONT eye
