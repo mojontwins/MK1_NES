@@ -3352,5 +3352,23 @@ Tras portar todo al msc nuevo y probar y corregir cosas, voy a revisar que todo 
 
 Estoy probando "containers desde código", y creo que será mejor cambiar el nombre "global" de containers + sprites por "interactives".
 
+20180308
+========
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+Voy a darle un achuchón a las fases de Cheril Perils a ver si les saco algo más de fran. A la fase de la fábrica le queda nada y sigo pensando qué hacer para la fase 3. Buscaré algo que tenga hecho y le cambiaré el tileset.
+
 ~~
 
+[ ] Al hacerse `player_process_tile` en dos puntos, al abrir un cerrojo el segundo falla (y pone un NO!). Tengo que revisar esto para que solo se haga una detección, al menos con los cerrojos.
+
+[ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
+
+[ ] Añadir mapas RLE en CHR-ROM (sólo para los complex).

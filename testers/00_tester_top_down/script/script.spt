@@ -18,9 +18,9 @@ ENTERING GAME
 	END
 END
 
-###########################
-# Para cualquier pantalla #
-###########################
+# #######################
+# Para cualquier pantalla
+# #######################
 
 # Esta sección se ejecuta justo antes del ENTERING SCREEN n
 # en cada una de las pantallas del güego.
@@ -42,9 +42,9 @@ ENTERING ANY
 	END
 END
 
-##############
-# Pantalla 0 #
-##############
+# ##########
+# Pantalla 0
+# ##########
 
 # Esta es la pantalla del super ordenador malo.
 # Cuando entremos en la pantalla tendremos dos cláusulas:
@@ -126,9 +126,9 @@ PRESS_FIRE AT SCREEN 0
 	END
 END
 
-###############
-# Pantalla 21 #
-###############
+# ###########
+# Pantalla 21
+# ###########
 
 # Vendo moto seminueva. Al entrar en la pantalla pintaremos
 # el amoto en el sitio correcto. Estableceremos el fire zone
@@ -161,9 +161,9 @@ PRESS_FIRE AT SCREEN 21
 	END
 END
 
-###############
-# Pantalla 23 #
-###############
+# ###########
+# Pantalla 23
+# ###########
 
 # Aquí se comprueba si el $BOMBS_SET está a 1 para terminar el 
 # güego. Si no, se dice qué hay que hacer:

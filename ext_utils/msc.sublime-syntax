@@ -1,0 +1,66 @@
+%YAML 1.2
+---
+# syntax file for MSC scripts v1.0
+# Copyleft 2018 by The Mojon Twins
+# Copy to [...]/Packages/User
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: MSC Script
+file_extensions: 
+  - spt
+scope: source.msc-script
+contexts:
+  main:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: '"'
+      scope: punctuation.definition.string.begin.msc-script
+      push: double_quoted_string
+
+    # Comments begin with a '# ' and finish at the end of the line
+    - match: '# '
+      scope: punctuation.definition.comment.msc-script
+      push: line_comment
+
+    - match: '\$[A-Z_]*'
+      scope: variable.msc-script
+
+    - match: '[=<>!,\(\)]'
+      scope: punctuation.separator.msc-script
+
+
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '\b(LEVELID|INC_DECORATIONS|ITEMSET|DEFALIAS|ENTERING|GAME|ANY|AT|PRESS_FIRE|ON_TIMER_OFF|PLAYER_GETS_COIN|PLAYER_KILLS_ENEMY|END_OF_LEVEL)\b'
+      scope: keyword.declaration.msc-script
+
+    - match: '\b(TRUE|JUST_PUSHED|JUST_INTERACTED|FALSE|ARG|SLOT_SELECTED|ITEM_SELECTED|NPANT|NPANT_NOT|LEVEL|ENEMS_KILLED|ENEMIES_KILLED|OBJECT_COUNT|TIMER|TILE|SAFE|FIRE_ZONE|FIRE_ZONE_TILES|X|Y|XY|LIFE|OBJECTS)\b'
+      scope: constant.msc-script
+
+    - match: '\b(IF|THEN|END)\b'
+      scope: keyword.control.msc-script
+
+    - match: '\b(PLAYER_TOUCHES|PLAYER_IN_X|PLAYER_IN_X_TILES|PLAYER_IN_Y|PLAYER_IN_Y_TILES|ALL_ENEMIES_DEAD|ENEMS_KILLED_EQUALS|PLAYER_HAS_OBJECTS)\b'
+      scope: keyword.operator.word.msc-script
+
+    - match: '\b(SET|SET_TILE|SET_SAFE|SET_FIRE_ZONE|SET_FIRE_ZONE_TILES|SETX|SET_X|SETY|SET_Y|SETXY|SET_XY|SET_TIMER|INC|DEC|ADD|SUB|SWAP|FLIPFLOP|INC_LIFE|DEC_LIFE|RECHARGE|INC_OBJECTS|DEC_OBJECTS|PRINT_TILE_AT|SHOW|TEXT|TEXTBOX|DECORATIONS|REDRAW|REENTER|WARP_TO|TIMER_START|TIMER_STOP|ADD_CONTAINER|ADD_SPRITE|FLICKER|EXTERN|PAUSE|DELAY|MUSIC|SOUND|GAME|OVER|GAME_OVER|WIN|WIN_GAME|BREAK)\b'
+      scope: keyword.other.msc-script
+
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.msc-script
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.msc-script
+    - match: '\\.'
+      scope: constant.character.escape.msc-script
+    - match: '"'
+      scope: punctuation.definition.string.end.msc-script
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line.msc-script
+    - match: $
+      pop: true

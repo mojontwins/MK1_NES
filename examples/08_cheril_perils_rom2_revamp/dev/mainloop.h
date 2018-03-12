@@ -94,7 +94,7 @@ void game_init (void) {
 	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
-
+pkeys=1; propellers_on = 1;
 	#include "my/extra_inits.h"
 }
 
