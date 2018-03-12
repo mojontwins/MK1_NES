@@ -24,9 +24,12 @@
 
 void breakable_break (unsigned char x, unsigned char y) {
 	gpaux = COORDS (x, y);
-	if (brk_buff [gpaux] < BREAKABLE_LIFE) {
-		brk_buff [gpaux] ++;
-	} else {
+	#ifndef BREAKABLES_SOFT
+		if (brk_buff [gpaux] < BREAKABLE_LIFE) {
+			brk_buff [gpaux] ++;
+		} else 
+	#endif
+	{
 		sfx_play (SFX_BREAKH, 1);
 #ifdef BREAKABLE_ANIM
 		// Unsafe but short & fast. Adjust BREAKABLE_MAX if this breaks your game

@@ -53,6 +53,10 @@ signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
 unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
+#ifdef ENEMS_RECOIL_ON_HIT
+	signed char en_rmx [3];
+#endif
+
 #ifdef ENABLE_COMPILED_ENEMS
 	const unsigned char *en_behptr [3];
 #endif

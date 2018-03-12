@@ -471,7 +471,12 @@ void enems_move (void) {
 			if (en_cttouched [gpit]) {
 				en_cttouched [gpit] --;
 				#ifdef ENEMS_FLICKER
-					if (half_life) {
+					if (
+						half_life
+						#ifdef ENEMS_FLICKER_ONLY_ON_DYING
+						|| en_life [gpit]
+						#endif
+					) {
 						#ifdef ENEMS_ENABLE_DYING_FRAME
 							rda = _en_s + _en_facing + 3;
 							if (spr_enems [rda]) en_spr = rda; 
@@ -488,6 +493,10 @@ void enems_move (void) {
 					#ifndef ENEMS_EXPLODING_CELLS_HIDES
 						en_spr = en_spr_id [gpit];
 					#endif
+				#endif
+
+				#ifdef ENEMS_RECOIL_ON_HIT
+					#include "engine/enemmods/enems_recoiling.h"
 				#endif
 			} 
 		#endif
@@ -794,6 +803,9 @@ void enems_move (void) {
 						enems_hit ();
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
+						#ifdef ENEMS_RECOIL_ON_HIT
+							en_rmx [gpit] = ADD_SIGN2 (_en_x, prx, ENEMS_RECOIL_ON_HIT);
+						#endif
 					}
 				} 
 			#endif

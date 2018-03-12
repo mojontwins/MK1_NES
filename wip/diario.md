@@ -3419,9 +3419,9 @@ Bufferless breakables. Follarme el buffer si la vida de los breakables es 1. Per
 
 [ ] Tipo 7 en lateral spawns walker-fallers que pueden hostiar.
 
-[ ] Estado hit con recoil (y colisión!) para TODOS los enemigos.
+[X] Estado hit con recoil (y colisión!) para TODOS los enemigos.
 
-[ ] Bufferless breakables. Breakables sin buffer cuando la vida de los breakables es 1.
+[X] *Soft* breakables. Breakables sin buffer cuando la vida de los breakables es 1.
 
 [ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
 
@@ -3429,4 +3429,13 @@ Bufferless breakables. Follarme el buffer si la vida de los breakables es 1. Per
 
 También tengo que documentar el tema de los mapas en CHR_ROM.
 
+~~
+
+'soft breakables' listos. ¿Hit con recoil? Es retroceder N pasos (por ejemplo, durante el tiempo en el que está parpadeando / explotao). Tengo que ver cómo calcular la dirección.
+
+```c
+	#define ENEMS_RECOIL_ON_HIT
+```
+
+¡Hecho! Pero no me da tiempo de propagar. Total, da igual: tengo que implementar los tipo 7 en vista lateral.
 

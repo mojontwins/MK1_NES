@@ -28,7 +28,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					1		// Initial screen
+	#define SCR_INI					0		// Initial screen
 	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -240,13 +240,15 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMIES_LIFE_GAUGE				3	// Amount of shots/punches/kicks needed to kill enemies.
 #define ENEMS_FLICKER
+#define ENEMS_FLICKER_ONLY_ON_DYING			// Flicker, but only when life == 0
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_TOUCHED_FRAMES			32	// # frames to stay frozen after hit
+#define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
 
 //#define ENEMS_ENABLE_DYING_FRAME
 

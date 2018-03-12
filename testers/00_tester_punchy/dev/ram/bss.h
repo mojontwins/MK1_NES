@@ -54,7 +54,9 @@ unsigned char map_buff [192];
 // Breakable walls
 
 #ifdef ENABLE_BREAKABLE
-	unsigned char brk_buff [192];
+	#ifndef BREAKABLES_SOFT
+		unsigned char brk_buff [192];
+	#endif
 	#ifdef BREAKABLE_ANIM
 		unsigned char brkf [BREAKABLE_MAX];
 		unsigned char brkx [BREAKABLE_MAX];
