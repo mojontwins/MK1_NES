@@ -38,5 +38,5 @@
 // Use types
 
 #define USE_TYPE_HOTSPOT		1
-#define USE_TYPE_CONTAINER		2
+#define USE_TYPE_INTERACTIVE	2
 #define USE_TYPE_SCRIPTING		3

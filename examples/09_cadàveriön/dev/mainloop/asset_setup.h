@@ -30,6 +30,11 @@
 	c_max_enems = 	l_player_max_enems [level];
 
 	c_map_w = 		l_map_w [level];
+
+	#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+		c_interactives = 
+					l_interactives [level];
+	#endif
 	
 #else
 
@@ -46,19 +51,26 @@
 		c_decos = 	map_0_decos;
 	#endif
 	#ifndef DEACTIVATE_KEYS
-		c_locks = 		map_0_locks;
-		c_max_bolts = 	N_BOLTS_0;
+		c_locks = 	map_0_locks;
+		c_max_bolts = 	
+					N_BOLTS_0;
 	#endif
 	
 	c_enems = 		enems_0;
 	c_hotspots = 	hotspots_0;
 	
 	#ifdef KILLABLE_ENEMS_0
-		c_max_enems = 	KILLABLE_ENEMS_0;
+		c_max_enems = 	
+					KILLABLE_ENEMS_0;
 	#else
 		c_max_enems = 	99;
 	#endif
 
 	c_map_w = MAP_W;
+
+	#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+		c_interactives =
+					interactives_0;
+	#endif
 
 #endif

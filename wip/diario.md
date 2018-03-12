@@ -3372,3 +3372,24 @@ Voy a darle un achuchón a las fases de Cheril Perils a ver si les saco algo má
 [ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
 
 [ ] Añadir mapas RLE en CHR-ROM (sólo para los complex).
+
+20180309
+========
+
+Más todo, neverending (buy easy):
+ 
+[ ] Tipo 7 en lateral spawns walker-fallers que pueden hostiar.
+
+[ ] Estado hit con recoil (y colisión!) para TODOS los enemigos.
+
+[ ] Bufferless breakables. Breakables sin buffer cuando la vida de los breakables es 1.
+
+20180312
+========
+
+Voy a integrar los mapas CNROM en Cheril ROM2. Será mi conejillo de indias para esto. Veamos, necesito:
+
+- El conversor.
+- Código.
+- Tortilla.
+

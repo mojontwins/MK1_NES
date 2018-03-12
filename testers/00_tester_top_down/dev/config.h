@@ -407,15 +407,17 @@
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 #define CLEAR_FLAGS						// Zero all flags when entering a level
 
-//#define ENABLE_CONTAINERS				// Graphical flag representations!
-//#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
-#define CONTAINERS_MAX 					4	// As per screen
-#define FLAG_INVENTORY					0
-
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
+
+// Interactives
+// ------------
+
+//#define ENABLE_INTERACTIVES				// Graphical flag representations!
+#define INTERACTIVES_MAX 				4	// As per screen
+#define FLAG_INVENTORY					0
 
 // Top view:
 // ---------

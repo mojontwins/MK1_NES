@@ -44,7 +44,7 @@ void hud_update (void) {
 #endif
 
 #if defined (HS_INV_X)
-	#if defined (ENABLE_CONTAINERS) && defined (FLAG_INVENTORY)
+	#if defined (ENABLE_INTERACTIVES) && defined (FLAG_INVENTORY)
 		oam_index = oam_meta_spr (
 			HS_INV_X, HS_INV_Y,
 			oam_index,

@@ -405,7 +405,7 @@
 // Scripting
 // ---------
 
-//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill

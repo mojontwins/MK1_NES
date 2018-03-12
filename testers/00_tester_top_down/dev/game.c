@@ -42,6 +42,9 @@
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
 #endif
+#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+	#include "assets/interactives.h"
+#endif
 
 #include "assets/frame_rle.h"
 #include "assets/title_rle.h"
@@ -87,8 +90,8 @@ extern const unsigned char m_gameover [];
 #ifdef ENABLE_SHINES
 	#include "engine/shines.h"
 #endif
-#ifdef ENABLE_CONTAINERS
-	#include "engine/containers.h"
+#ifdef ENABLE_INTERACTIVES
+	#include "engine/interactives.h"
 #endif
 #ifdef ENABLE_COCOS
 	#include "engine/cocos.h"

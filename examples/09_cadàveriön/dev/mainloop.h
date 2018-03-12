@@ -25,70 +25,71 @@ void game_init (void) {
 	n_pant = SCR_INI;
 	
 	hotspots_load ();
-#ifndef DEACTIVATE_KEYS		
-	bolts_load ();
-#endif		
+	#ifndef DEACTIVATE_KEYS		
+		bolts_load ();
+	#endif		
+
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
 	py = (PLAYER_INI_Y << 4) << FIXBITS;
 	player_init ();
 		
-#ifdef PERSISTENT_ENEMIES
-	enems_persistent_load ();
-#endif		
+	#ifdef PERSISTENT_ENEMIES
+		enems_persistent_load ();
+	#endif		
 
-#ifdef PERSISTENT_DEATHS
-	enems_persistent_deaths_load ();
-#endif
-
-#ifndef DEACTIVATE_OBJECTS
-	pobjs = 0;
-#endif
-
-#ifndef DEACTIVATE_KEYS	
-	pkeys = 0;
-#endif
-
-#ifdef ENABLE_RESONATORS
-	res_on = 0;
-#endif
-
-#ifdef ENABLE_USE_ANIM
-	use_ct = 0;
-#endif
-
-#ifdef ENABLE_NO
-	no_ct = 0;
-#endif	
-
-#ifdef ENABLE_PROPELLERS
-	#ifdef PROPELLERS_ON_BY_DEFAULT
-		propellers_on = 1;
-	#else
-		propellers_on = 0;
+	#ifdef PERSISTENT_DEATHS
+		enems_persistent_deaths_load ();
 	#endif
-#endif
 
-#ifdef ENABLE_SPRINGS
-	#ifdef SPRINGS_ON_BY_DEFAULT
-		springs_on = 1;
-	#else
-		springs_on = 0;
+	#ifndef DEACTIVATE_OBJECTS
+		pobjs = 0;
 	#endif
-#endif
 
-#ifdef ENABLE_TIMER
-	#ifndef TIMER_RESET_ON_ENTER
-		timer = TIMER_INITIAL;
-		timer_frames = 50;
-		timer_zero = 0;
-		otimer = 0xff;
+	#ifndef DEACTIVATE_KEYS	
+		pkeys = 0;
 	#endif
-	#ifdef TIMER_START_ON
-		timer_on = 1;
-	#else
-		timer_on = 0;
+
+	#ifdef ENABLE_RESONATORS
+		res_on = 0;
 	#endif
-#endif
+
+	#ifdef ENABLE_USE_ANIM
+		use_ct = 0;
+	#endif
+
+	#ifdef ENABLE_NO
+		no_ct = 0;
+	#endif	
+
+	#ifdef ENABLE_PROPELLERS
+		#ifdef PROPELLERS_ON_BY_DEFAULT
+			propellers_on = 1;
+		#else
+			propellers_on = 0;
+		#endif
+	#endif
+
+	#ifdef ENABLE_SPRINGS
+		#ifdef SPRINGS_ON_BY_DEFAULT
+			springs_on = 1;
+		#else
+			springs_on = 0;
+		#endif
+	#endif
+
+	#ifdef ENABLE_TIMER
+		#ifndef TIMER_RESET_ON_ENTER
+			timer = TIMER_INITIAL;
+			timer_frames = 50;
+			timer_zero = 0;
+			otimer = 0xff;
+		#endif
+		#ifdef TIMER_START_ON
+			timer_on = 1;
+		#else
+			timer_on = 0;
+		#endif
+	#endif
 
 	half_life = 0;
 	frame_counter = 0;
@@ -96,95 +97,99 @@ void game_init (void) {
 	okilled = 0xff;
 
 	#include "my/extra_inits.h"
+
+	#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+		#include "my/interactives_setup.h"
+	#endif
 }
 
 void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
 	
-#ifdef ENABLE_PROPELLERS
-	// Clear propellers
-	prp_idx = 0;
-#endif
+	#ifdef ENABLE_PROPELLERS
+		// Clear propellers
+		prp_idx = 0;
+	#endif
 
-#ifdef PERSISTENT_ENEMIES
-	// Preserve enems
-	enems_persistent_update ();
-#endif
+	#ifdef PERSISTENT_ENEMIES
+		// Preserve enems
+		enems_persistent_update ();
+	#endif
 
 	enems_load ();
 	hotspots_create ();	
 
-#ifdef ENABLE_COCOS
-	cocos_init ();
-#endif	
+	#ifdef ENABLE_COCOS
+		cocos_init ();
+	#endif	
 
-#if defined (ACTIVATE_SCRIPTING) && defined (ENABLE_FIRE_ZONE)
-	f_zone_ac = 0;
-	fzx1 = fzx2 = fzy1 = fzy2 = 240;
-#endif
+	#if defined (ACTIVATE_SCRIPTING) && defined (ENABLE_FIRE_ZONE)
+		f_zone_ac = 0;
+		fzx1 = fzx2 = fzy1 = fzy2 = 240;
+	#endif
 
 	// Disable sprites and tiles so we can write to VRAM.
 	ppu_off ();
 
-#ifdef ENABLE_SHINES
-	shine_active_ct = 0;
-	max_shines = 0;
-#endif
-
-	draw_scr ();
-
-#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
-	do_process_breakable = 0;
-	gpit = BREAKABLE_MAX; while (gpit --) brkf [gpit] = 0;
-#endif
-
-#ifdef LINE_OF_TEXT
-	_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT;
-	pr_str ("                              ");
-#endif
-
-#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
-	player_register_safe_spot ();
-#endif
-
-#ifdef PLAYER_CAN_FIRE
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		b_slots [gpit] = gpit; bst [gpit] = 0;
-	}
-	b_slots_i = MAX_BULLETS;
-#endif
-
-#ifdef ENABLE_CONTAINERS
-	#ifdef CONTAINERS_FROM_CODE
-		containers_create ();
-	#else
-		containers_index = 0;
+	#ifdef ENABLE_SHINES
+		shine_active_ct = 0;
+		max_shines = 0;
 	#endif
 
-	containers_interact_with = 0xff;
-#endif
+		draw_scr ();
+
+	#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
+		do_process_breakable = 0;
+		gpit = BREAKABLE_MAX; while (gpit --) brkf [gpit] = 0;
+	#endif
+
+	#ifdef LINE_OF_TEXT
+		_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT;
+		pr_str ("                              ");
+	#endif
+
+	#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
+		player_register_safe_spot ();
+	#endif
+
+	#ifdef PLAYER_CAN_FIRE
+		for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
+			b_slots [gpit] = gpit; bst [gpit] = 0;
+		}
+		b_slots_i = MAX_BULLETS;
+	#endif
+
+	#ifdef ENABLE_INTERACTIVES
+		#ifdef INTERACTIVES_FROM_CODE
+			interactives_create ();
+		#else
+			interactives_index = 0;
+		#endif
+
+		interactives_interact_with = 0xff;
+	#endif
 	
 	// Reenable sprites and tiles now we are finished.
 	ppu_on_all ();
 
-#ifdef ACTIVATE_SCRIPTING
-	#if defined (ENABLE_PUSHED_SCRIPT)
-		just_pushed = 0;
+	#ifdef ACTIVATE_SCRIPTING
+		#if defined (ENABLE_PUSHED_SCRIPT)
+			just_pushed = 0;
+		#endif
+		#if defined (ENABLE_INTERACTIVES)
+			just_interacted = 0;
+		#endif
+		// Entering any script
+		run_script (2 * MAP_SIZE + 1);
+		// This room script
+		run_script (n_pant << 1);
 	#endif
-	#if defined (ENABLE_CONTAINERS)
-		just_interacted = 0;
-	#endif
-	// Entering any script
-	run_script (2 * MAP_SIZE + 1);
-	// This room script
-	run_script (n_pant << 1);
-#endif
 	
 	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
-#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
-	phitteract = 0;
-#endif	
+	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+		phitteract = 0;
+	#endif	
 
 	player_move ();
 	player_render ();
@@ -192,18 +197,18 @@ void prepare_scr (void) {
 	if (hrt) hotspots_paint ();
 	player_render ();
 
-#ifdef ENABLE_CONTAINERS	
-	containers_paint ();
-#endif
-
-#ifdef ENABLE_TIMER
-	#ifdef TIMER_RESET_ON_ENTER
-		timer = TIMER_INITIAL;
-		timer_frames = 50;
-		timer_zero = 0;
-		otimer = 0xff;
+	#ifdef ENABLE_INTERACTIVES	
+		interactives_paint ();
 	#endif
-#endif
+
+	#ifdef ENABLE_TIMER
+		#ifdef TIMER_RESET_ON_ENTER
+			timer = TIMER_INITIAL;
+			timer_frames = 50;
+			timer_zero = 0;
+			otimer = 0xff;
+		#endif
+	#endif
 
 	oam_hide_rest (oam_index);
 	hud_update ();
@@ -225,14 +230,14 @@ void game_loop (void) {
 	pal_bright (0);
 	ppu_on_all ();
 	
-#ifdef ACTIVATE_SCRIPTING
-	#ifdef CLEAR_FLAGS
-		msc_clear_flags ();
+	#ifdef ACTIVATE_SCRIPTING
+		#ifdef CLEAR_FLAGS
+			msc_clear_flags ();
+		#endif
+		
+		// Entering game script
+		run_script (2 * MAP_SIZE);
 	#endif
-	
-	// Entering game script
-	run_script (2 * MAP_SIZE);
-#endif
 
 	oam_index = 0;
 	ticker = 50;
@@ -287,19 +292,19 @@ void game_loop (void) {
 		// Extra checks
 		#include "my/extra_checks.h"
 
-#if defined (WIN_LEVEL_CUSTOM)
-		if (win_level)
-#elif defined (ACTIVATE_SCRIPTING)
-		if (script_result == 1) 
-#elif defined (PLAYER_MAX_OBJECTS)
-		if (pobjs == PLAYER_MAX_OBJECTS) 
-#elif defined (SCR_END)
-		if (
-			n_pant == SCR_END && 
-			((prx + 8) >> 4) == PLAYER_END_X &&
-			((pry + 8) >> 4) == PLAYER_END_Y
-		) 
-#endif
+		#if defined (WIN_LEVEL_CUSTOM)
+			if (win_level)
+		#elif defined (ACTIVATE_SCRIPTING)
+			if (script_result == 1) 
+		#elif defined (PLAYER_MAX_OBJECTS)
+			if (pobjs == PLAYER_MAX_OBJECTS) 
+		#elif defined (SCR_END)
+			if (
+				n_pant == SCR_END && 
+				((prx + 8) >> 4) == PLAYER_END_X &&
+				((pry + 8) >> 4) == PLAYER_END_Y
+			) 
+		#endif
 		{
 			music_stop ();
 			delay (50);
@@ -313,34 +318,34 @@ void game_loop (void) {
 			if (!pctstate) pstate = EST_NORMAL;
 		}
 
-#ifdef ENABLE_PROPELLERS
-		if (propellers_on) propellers_do ();
-#endif
+		#ifdef ENABLE_PROPELLERS
+			if (propellers_on) propellers_do ();
+		#endif
 
-#ifdef ENABLE_RESONATORS
-		#include "mainloop/resonators.h"
-#endif
+		#ifdef ENABLE_RESONATORS
+			#include "mainloop/resonators.h"
+		#endif
 
-#ifdef ENABLE_CONTAINERS
-		#include "mainloop/containers.h"
-#endif		
+		#ifdef ENABLE_INTERACTIVES
+			#include "mainloop/interactives.h"
+		#endif		
 
 		#include "mainloop/hotspots.h"
 
 		player_move ();
 		player_render ();
 
-#ifdef ACTIVATE_SCRIPTING
-		#include "mainloop/scripting.h"
-#endif
+		#ifdef ACTIVATE_SCRIPTING
+			#include "mainloop/scripting.h"
+		#endif
 
-#ifdef PLAYER_CAN_FIRE
-		bullets_move ();
-#endif
+		#ifdef PLAYER_CAN_FIRE
+			bullets_move ();
+		#endif
 
-#ifdef ENABLE_COCOS
-		cocos_do ();
-#endif
+		#ifdef ENABLE_COCOS
+			cocos_do ();
+		#endif
 	
 		enems_move ();
 
@@ -348,28 +353,28 @@ void game_loop (void) {
 
 		if (hrt) hotspots_paint ();
 
-#ifdef ENABLE_CONTAINERS
-		containers_paint ();
-#endif
+		#ifdef ENABLE_INTERACTIVES
+			interactives_paint ();
+		#endif
 
-#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
-		if (do_process_breakable) breakable_do_anim ();
-#endif
+		#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
+			if (do_process_breakable) breakable_do_anim ();
+		#endif
 
-#ifdef ENABLE_SHINES
-		shines_do ();
-#endif
+		#ifdef ENABLE_SHINES
+			shines_do ();
+		#endif
 
-#ifdef ENABLE_NO
-		if (no_ct) {
-			no_ct --;
-			oam_index = oam_meta_spr (
-				prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
-				oam_index,
-				NO_METASPRITE
-			);
-		}
-#endif
+		#ifdef ENABLE_NO
+			if (no_ct) {
+				no_ct --;
+				oam_index = oam_meta_spr (
+					prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
+					oam_index,
+					NO_METASPRITE
+				);
+			}
+		#endif
 
 		#include "mainloop/cheat.h"
 

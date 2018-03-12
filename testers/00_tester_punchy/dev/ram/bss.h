@@ -94,7 +94,7 @@ unsigned char hact [MAP_SIZE];
 		unsigned char just_pushed;
 	#endif
 	unsigned char fire_script_success;
-	#if defined (ENABLE_CONTAINERS)
+	#if defined (ENABLE_INTERACTIVES)
 		unsigned char script_arg; 
 		unsigned char just_interacted;
 	#endif
@@ -104,9 +104,12 @@ unsigned char hact [MAP_SIZE];
 
 unsigned char flags [MAX_FLAGS];
 
-#ifdef ENABLE_CONTAINERS
-	unsigned char containers_index, containers_interact_with;
-	unsigned char containers_f [CONTAINERS_MAX] , containers_yx [CONTAINERS_MAX];
+#ifdef ENABLE_INTERACTIVES
+	unsigned char interactives_index, interactives_interact_with;
+	unsigned char interactives_f [INTERACTIVES_MAX] , interactives_yx [INTERACTIVES_MAX];
+	#ifdef INTERACTIVES_FROM_CODE
+		const unsigned char *c_interactives;
+	#endif
 #endif
 
 // More baddies

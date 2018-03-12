@@ -573,9 +573,9 @@ void player_move (void) {
 	// B Button stuff
 	// **************
 
-	// (fire bullets, run scripting w/animation, do containers)
+	// (fire bullets, run scripting w/animation, do interactives)
 
-	#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_CONTAINERS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
+	#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_INTERACTIVES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
 		if (
 			b_button
 			#ifdef ENABLE_LADDERS

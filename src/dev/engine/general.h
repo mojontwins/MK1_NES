@@ -57,7 +57,7 @@ void run_fire_script (void) {
 	#ifdef ENABLE_PUSHED_SCRIPT
 		just_pushed = 0;
 	#endif
-	#ifdef ENABLE_CONTAINERS
+	#ifdef ENABLE_INTERACTIVES
 		just_interacted = 0;
 	#endif
 }

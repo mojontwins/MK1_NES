@@ -66,14 +66,15 @@
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -408,15 +409,17 @@
 //#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 #define CLEAR_FLAGS						// Zero all flags when entering a level
 
-//#define ENABLE_CONTAINERS				// Graphical flag representations!
-//#define CONTAINERS_FROM_CODE			// Add arrays for containers instead of using scripting.
-#define CONTAINERS_MAX 					4	// As per screen
-#define FLAG_INVENTORY					0
-
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
+
+// Interactives
+// ------------
+
+//#define ENABLE_INTERACTIVES				// Graphical flag representations!
+#define INTERACTIVES_MAX 				4	// As per screen
+#define FLAG_INVENTORY					0
 
 // Top view:
 // ---------

@@ -66,3 +66,7 @@
 #if defined (ACTIVATE_SCRIPTING) && defined (LINE_OF_TEXT)
 	#define ENABLE_UL_PRINTER
 #endif
+
+#if defined (ENABLE_INTERACTIVES) && !defined (ACTIVATE_SCRIPTING)
+	#define INTERACTIVES_FROM_CODE
+#endif

@@ -17,7 +17,6 @@ cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns0.spt out=..\dev\tileset0.chr silent
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns1.spt out=..\dev\tileset1.chr silent
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns2.spt out=..\dev\tileset2.chr silent
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns3.spt out=..\dev\tileset3.chr silent
 
 echo Exporting enems
 cd ..\enems
@@ -30,8 +29,9 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 6 4 15 0
-..\..\..\src\utils\rle53mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 8 3 99 1 1
+..\..\..\src\utils\rle53mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr-rom-maps.h chr=3
+cd ..\dev
+copy work\mapchr.bin.3 tileset3.chr >nul
 
 echo Exporting music and sound
 cd ..\dev
