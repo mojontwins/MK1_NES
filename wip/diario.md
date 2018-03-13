@@ -3439,3 +3439,123 @@ También tengo que documentar el tema de los mapas en CHR_ROM.
 
 ¡Hecho! Pero no me da tiempo de propagar. Total, da igual: tengo que implementar los tipo 7 en vista lateral.
 
+20180313
+========
+
+Sin ponerme poder a probar Cheril para ver que los shines medio se comportan, tengo que pensar en el tipo 7 para side view. También tengo que recordar que al salir del estado recoil de los enemigos hay que actualizar las variables float, y que enemigos como pezón o monococo no deberían ser afectados.
+
+Espera, hagámoslo mejor: también debería haber recoil con los disparos.
+
+Puedo generalizar y hacer una función que calcule `en_rmx [gpit]` en base al tipo de enemigo y usando `rdx` como factor golpeante (posición del player o posición del bullet).
+
+~~
+
+Divaguemos un poco sobre el tipo 7 para side view, porque básicamente no tengo mucha idea de lo que quiero. Lo suyo sería un tipo de enemigo que tuviese spawns infinitos desde un punto para simular lo que ocurre en Spartan-X con los enemigos que van a por tí. O sea, un tipo 7 de toda la vida, pero habría que definir qué hacen los bichos lanzados.
+
+Esto ya lo planteé antes, pero me dio mucha pereza porque lo suyo es que el muñeco que sale hiciera algo más que lanzarse contra tí, y luego ya surge el tema de integrarlo con lo que ya hay, lo cual multiplica la complejidad.
+
+Lo que sí podría hacer es que los enemigos que matas pudiesen hacer respawn tras cierto tiempo, sin tener por qué salir de la pantalla. Podría indicar esto con algún tipo de atributo extra.
+
+El atributo, que empleo sobre todo para almacenar la velocidad, tiene muchos bits libres teniendo en cuenta de que jamás pongo velocidades mayores que 4. Esto podría emplearse para indicar que ciertos enemigos pueden hacer respawn tras cierto tiempo.
+
+Habría que hacer una animación de apareciendo, como las que tienen los tipo 7.
+
+Imaginate que pillo el nibble más alto del atributo para indicar respawn. Si este nibble > 0, el muñeco hará respawn un número de frames proporcional al valor del nibble.
+
+Esto podría molar, pero tengo que introducir un estado "apareciendo" en los enemigos que ahora no tienen. Por suerte, es parecido al estado de "hit", con lo que no voy a tener que modificar mucho código, más añadir que otra cosa.
+
+Lo sigo macerando.
+
+~~
+
+Me está empezando a parecer una buena solución y todo, Hulio.
+
+~~
+
+¿Y otro bit para que los lineales siempre vayan adonde estás tú?
+
+~~
+
+El parámetro se necesita "verbatim" para steady shooters, pezones, chac-chacs, compiled enems y simple warpers.
+
+~~
+
+He metido este cambio a la hora de tratar el atributo. Debería propagar a los otros testers al menos antes de seguir.
+
+~~
+
+Creo que podría utilizar el propio `en_cttouched` porque no hace más que display y bloquear el movimiento. Sólo tengo que adaptarlo un poco, asegurarme de que no se hará recoil (con `en_rmx` a 0) y que si `ENEMS_FLICKER_ONLY_ON_DYING` esté activo igualmente parpadée porque está apareciendo.
+
+El tema es que necesito algo para distinguir si estoy apareciendo o si estoy muriendo. Pensemos un rato.
+
+Cuando lo encuentre, el primer paso es crear a todos los enemigos "apareciendo", sin tocar nada más, para probar.
+
+~~
+
+A tomar por culo, `en_spawning` nasió.
+
+~~
+
+spawn sería:
+
+```c
+	en_cttouched [gpit] = 50;
+	en_spawning [gpit] = 1;
+	en_life [gpit] = Lo que tengan al principio;
+```
+
+Hace algo raro y eso es porque me queda algo sin inicializar...
+
+Fuck. Y hoy no hay quien se concentre.
+
+Pero vaya pifostie se lía si lo activo desde el principio, con increíbles glitches a go gó. A mogollón.
+
+Creo que ya sé por qué es: Está también procesando a los que tienen `en_t` = 0. Y no lo puedo arreglar fácil, porque ya pongo `en_t = 0` cuando mato a un enemigo.
+
+Juer, qué mierda es todo XD Si quiero hacer respawn, no puedo poner `en_t` = 0 cuando mato a un enemigo. Necesito un array nuevo para estados donde meter todas estas cosas, `en_spawning` incluido.
+
+~~
+
+OK - Ya va.
+
+Ahora que el estado de apareciendo es posible, tengo que pensar en cómo integrar todo el resto y cómo controlar el respawn.
+
+Tengo contadores de sobra para hacer todo el tiesto. Sólo haré respawn para lineales y fantasmas PERO NO LO CONTROLARÉ EN EL CÓDIGO. Estas cosas son trabajo del programador que tiene que meter los valores correctamente.
+
+Multiplicador: tendré valores de contador de 1 a 15. Multiplicador = 8 tendríamos 8 a 120 frames (hasta 2 segundos). Multiplicador = 16 tendríamos 16 a 240 (hasta 4 segundos). Creo que está bien. En este caso, sería 11 =~ 3 segundos, 7 = ~2 segundos, 4 = ~1 segundo
+
+Necesitaré un `ENEMS_CAN_RESPAWN` para controlar esto.
+
+~~
+
+Lo he implementado pero va cutre... No sé, no me gusta. No queda limpico y culico como el resto de las cosas y hay poco control.
+
+Para que el respawn sea completo y guay, tengo que almacenar los valores iniciales tal cual: x, y, mx, my. Eso son muchas cosas. A lo mejor los puedo apañar en dos bytes Y-X y MY-MX, con los nibbles del último [0-15] -> [-8..7]. Aunque es tontería por ahorrarme 6 bytes de RAM gastar un montón de código.
+
+~~
+
+Ahora parece que me gusta más.
+
+Debería haber una opción para empezar muerto. Empezar muerto es con el flag puesto y `_en_ct` con el valor de `en_respawn`. Pero debería poder controlarla por enemigo. Y se me acaban los bits. Tengo uno ya pero a lo mejor querría usarlo de otra forma.
+
+Tengo que reorganizar muchas cosas.
+
+Todo lo complico hulio.
+
+Propuesta:
+
+- Tipo enemigo = 0-63.
+- + Punch = |64.
+- + Fire = |128.
+
+Lineales = 1, 2, 3, 4 (1, 2, 3, 4)
+Lineales punch = 65, 66, 67, 68 (41, 42, 43, 44)
+Lineales fire = 129, 130, 131, 132 (81, 82, 83, 84)
+
+Sí, me gusta más y funciona. Voy a actualizar docs.
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
+[ ] En la animación de usar, si pulsas el salto "da saltitos".
+
+Voy a ver si me da tiempo a propagar lo de los respawners y me voy.

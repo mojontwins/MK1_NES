@@ -168,9 +168,9 @@ void __fastcall__ enems_load (void) {
 
 	#if defined(PLAYER_CAN_FIRE)
 	#if defined (ENABLE_FANTY)
-			en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
+			en_life [gpit] = en_t [gpit] == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 	#else
-			en_life [gpit] = ENEMIES_LIFE_GAUGE;
+			en_life [gpit] = ENEMS_LIFE_GAUGE;
 	#endif
 	#elif defined(PLAYER_KILLS_ENEMIES)
 			en_life [gpit] = 1;
@@ -330,7 +330,7 @@ void enems_move (void) {
 						if (en_t [gpit] == 7) {
 							en_alive [gpjt] = 0;
 							en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-							en_life [gpjt] = ENEMIES_LIFE_GAUGE;
+							en_life [gpjt] = ENEMS_LIFE_GAUGE;
 						} else 
 #endif
 						{

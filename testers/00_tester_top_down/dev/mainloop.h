@@ -244,7 +244,7 @@ void game_loop (void) {
 	while (1) {
 		// Count frames		
 		if (ticker) ticker --; else ticker = 50;
-		half_life = 1 - half_life;
+		half_life ^= 1;
 		frame_counter ++;
 
 		// Change screen

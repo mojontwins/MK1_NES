@@ -343,9 +343,9 @@ void enems_load (void) {
 			}
 
 			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
-				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
+				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 			#else
-				en_life [gpit] = ENEMIES_LIFE_GAUGE;
+				en_life [gpit] = ENEMS_LIFE_GAUGE;
 			#endif
 			
 			en_cttouched [gpit] = 0;
@@ -392,7 +392,7 @@ void enems_load (void) {
 				if (_en_t == 7) {
 					en_alive [gpit] = 0;
 					_en_ct = DEATH_COUNT_EXPRESSION;
-					en_life [gpit] = ENEMIES_LIFE_GAUGE;
+					en_life [gpit] = ENEMS_LIFE_GAUGE;
 				} else 
 			#endif
 			{

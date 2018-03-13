@@ -54,7 +54,9 @@ unsigned char map_buff [192];
 // Breakable walls
 
 #ifdef ENABLE_BREAKABLE
-	unsigned char brk_buff [192];
+	#ifndef BREAKABLES_SOFT
+		unsigned char brk_buff [192];
+	#endif
 	#ifdef BREAKABLE_ANIM
 		unsigned char brkf [BREAKABLE_MAX];
 		unsigned char brkx [BREAKABLE_MAX];
@@ -119,6 +121,12 @@ unsigned char en_x1 [3], en_y1 [3];
 unsigned char en_x2 [3], en_y2 [3];
 signed char en_mx [3], en_my [3];
 unsigned char en_t [3], en_s [3], en_facing [3];
+
+#ifdef ENEMS_CAN_RESPAWN
+	unsigned char en_respawn [3];
+	unsigned char en_resx [3], en_resy [3];
+	signed char en_resmx [3], en_resmy [3];
+#endif
 
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
 	signed int enf_x [3], enf_vx [3];

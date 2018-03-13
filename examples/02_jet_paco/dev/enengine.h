@@ -20,7 +20,7 @@ void __fastcall__ enems_load (void) {
 		en_y [gpit] = en_y1 [gpit];
 
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
-		en_life [gpit] = ENEMIES_LIFE_GAUGE;
+		en_life [gpit] = ENEMS_LIFE_GAUGE;
 #endif		
 		en_status [gpit] = 0;
 		

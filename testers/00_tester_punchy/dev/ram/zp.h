@@ -41,7 +41,7 @@ unsigned char en_fr;
 unsigned char en_collx, en_colly;
 unsigned char en_spr;
 unsigned char touched;
-unsigned char en_cttouched [3];
+unsigned char en_cttouched [3], en_flags [3], en_is_alive;
 unsigned char pregotten;
 
 unsigned char _en_t, _en_s;

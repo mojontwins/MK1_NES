@@ -36,24 +36,28 @@ Tall enemies
 - SMALL_COLLISION (8x8) and undef (12x12) as always.
 - New hacky TALL_COLLISION (8x24), from within the 16x16 enemy rectangle.
 
-Shooties
---------
-
-- `#define ENABLE_SHOOTIES`.
-- 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
-- Type 12, 13, 14, 15, (0xC, 0xD, 0xE, 0xF) place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
-- Imply linear cocos.
-- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot when looking RIGHT. Notice bullets are 8 pixels wide (top-left origin), and enemies are always 16 pixels wide (top-left origin).
-- Shoot when player is "in range" using `PUNCH_FREQ` (en expresion which will produce a coco when evaluates to true).
-
 Punchies
 --------
 
 - `#define ENABLE_PUNCHIES`.
 - 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
-- Type 16, 17, 18, 19, (0x10, 0x11, 0x12, 0x13) place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
+- Type 0x41, 0x42, 0x43, 0x44,  place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
 - ` PUNCHIES_PUNCH_OFFS_X` and `PUNCHIES_PUNCH_OFFS_Y`, offset from top-left of sprite bounding box to punch when looking RIGHT. Notice punching hitbox is 8x8, top-left origin, and enemies are always 16 pixels wide (top-left origin).
 - Punch when player is "in range" using `PUNCH_FREQ` (an expresion which will produce a punch when evaluates to true).
+
+**Note that Punchies = Linear | 0x40**
+
+Shooties
+--------
+
+- `#define ENABLE_SHOOTIES`.
+- 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
+- Type 0x81, 0x82, 0x82, 0x84, place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
+- Imply linear cocos.
+- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot when looking RIGHT. Notice bullets are 8 pixels wide (top-left origin), and enemies are always 16 pixels wide (top-left origin).
+- Shoot when player is "in range" using `PUNCH_FREQ` (en expresion which will produce a coco when evaluates to true).
+
+**Note that Shooties = Linear | 0x80**
 
 Player punches, player kicks
 ----------------------------

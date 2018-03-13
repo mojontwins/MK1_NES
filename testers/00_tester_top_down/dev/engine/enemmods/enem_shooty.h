@@ -4,7 +4,7 @@
 // Shooties are shooting patrollers. This code executes
 // right after that of the patrollers, overriding some stuff.
 
-if (en_rawv [gpit] & 1) {
+if (_en_t & 0x80) {
 	if (_en_ct) {
 		// Is in shooting animation
 		_en_x = rdx; _en_y = rdy;

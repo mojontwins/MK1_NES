@@ -74,3 +74,11 @@
 #if defined (MAP_FORMAT_CHRROM)
 	#define MAP_RENDERER_COMPLEX
 #endif
+
+#if defined (ENABLE_BREAKABLE) && BREAKABLE_LIFE == 1
+	#define BREAKABLES_SOFT
+#endif
+
+#if defined (ENEMS_FLICKER_ONLY_ON_DYING)
+	#define ENEMS_FLICKER
+#endif

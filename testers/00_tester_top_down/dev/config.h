@@ -240,13 +240,16 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
-#define ENEMS_FLICKER
+#define ENEMS_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+//#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
+//#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
+//#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 #define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+//#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
 
 //#define ENEMS_ENABLE_DYING_FRAME
 

@@ -30,7 +30,7 @@
 			rdb = rda << 4;
 
 			// P, here used for speed
-			rda = *gp_gen ++;
+			rda = (*gp_gen ++) & 0x0f;
 			if (rda > 1) rda >>= 1;	// Store converted!
 			ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 			ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
@@ -156,6 +156,10 @@ void enems_load (void) {
 			// P, here used for speed
 			rda = *gp_gen ++;
 
+			// clean nibbles
+			rdd = rda & 0xf0; 	// Used for respawn speed!
+			rdm = rda & 0x0f; 	// Actual speed.
+
 			#ifdef PERSISTENT_ENEMIES
 				// Copy position & direction from ep_*
 				_en_x = ep_x [rdc];
@@ -166,54 +170,34 @@ void enems_load (void) {
 				_en_y = _en_y1;
 			#endif
 
-			switch (_en_t) {
+			switch (_en_t & 0x3f) {
 				case 1:
 				case 2:
 				case 3:
 				case 4:
-				#ifdef ENABLE_SHOOTIES
-					case 12:
-					case 13:
-					case 14:
-					case 15:
-				#endif
-				#ifdef ENABLE_PUNCHIES
-					case 16:
-					case 17:
-					case 18:
-					case 19:
-				#endif
-					_en_ct = 0;
-	
 					// Linear enems.
+					
+					_en_ct = 0;			
+					_en_s = (_en_t - 1) << 3;
+
 					#ifdef ENABLE_PUNCHIES
-						if (_en_t >= 16) {
-							en_rawv [gpit] = 2;
-							_en_s = PUNCHIES_BASE_SPRID + ((_en_t - 16) << 3);
-						} else
+						if (_en_t & 0x40) _en_s += PUNCHIES_BASE_SPRID;
 					#endif					
 					#ifdef ENABLE_SHOOTIES
-						if (_en_t >= 12) {
-							en_rawv [gpit] = 1;
-							_en_s = SHOOTIES_BASE_SPRID + ((_en_t - 12) << 3);
-						} else
+						if (_en_t & 0x80) _en_s += SHOOTIES_BASE_SPRID;
 					#endif
-					{
-						en_rawv [gpit] = 0;
-						_en_s = (_en_t - 1) << 3;
-					}
 
 					#ifdef PERSISTENT_ENEMIES
 						_en_mx = ep_mx [rdc];
 						_en_my = ep_my [rdc];
 					#else
-						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
-						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
+						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rdm);
+						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rdm);
 					#endif
 
 					// HL conversion		
 
-					if (rda == 1) {
+					if (rdm == 1) {
 						en_status [gpit] = 1; 
 					} else {
 						en_status [gpit] = 0;
@@ -226,7 +210,15 @@ void enems_load (void) {
 					// Fix limits so 1 < 2 always.
 					if (_en_x1 > _en_x2) { rda = _en_x1; _en_x1 = _en_x2; _en_x2 = rda; }
 					if (_en_y1 > _en_y2) { rda = _en_y1; _en_y1 = _en_y2; _en_y2 = rda; }
-					
+
+					#ifdef ENEMS_CAN_RESPAWN
+						en_respawn [gpit] = rdd;
+						en_resx [gpit] = _en_x;
+						en_resy [gpit] = _en_y;
+						en_resmx [gpit] = _en_mx;
+						en_resmy [gpit] = _en_my;
+					#endif
+
 					break;
 
 				#ifdef ENABLE_STEADY_SHOOTERS
@@ -273,8 +265,8 @@ void enems_load (void) {
 							_en_x = _en_x1;
 							_en_y = _en_y1;							
 						#endif
-						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rda);
-						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rda);
+						_en_mx = ADD_SIGN2 (_en_x2, _en_x1, rdm);
+						_en_my = ADD_SIGN2 (_en_y2, _en_y1, rdm);
 
 						// emerging sense
 						rda = ABS (_en_mx); if (!rda) rda = ABS (_en_my);
@@ -336,20 +328,21 @@ void enems_load (void) {
 				#endif
 
 				#ifdef ENABLE_SIMPLE_WARPERS
-					case 0xff:
+					case 0x3f:
 						_en_mx = rda;
 						break;
 				#endif				
 			}
 
 			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
-				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMIES_LIFE_GAUGE;
+				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 			#else
-				en_life [gpit] = ENEMIES_LIFE_GAUGE;
+				en_life [gpit] = ENEMS_LIFE_GAUGE;
 			#endif
 			
 			en_cttouched [gpit] = 0;
 			en_spr_id [gpit] = _en_s;
+			en_flags [gpit] = 0;
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			rdc ++;
@@ -361,7 +354,10 @@ void enems_load (void) {
 
 #ifdef ENEMS_MAY_DIE
 	void enems_kill () {
-		_en_t = 0;
+		en_flags [gpit] |= EN_STATE_DEAD;
+		#ifdef ENEMS_CAN_RESPAWN
+			if (en_respawn [gpit]) _en_ct = en_respawn [gpit];
+		#endif
 
 		#ifdef PERSISTENT_DEATHS
 			ep_flags [en_offs + gpit] &= 0xFE;
@@ -392,7 +388,7 @@ void enems_load (void) {
 				if (_en_t == 7) {
 					en_alive [gpit] = 0;
 					_en_ct = DEATH_COUNT_EXPRESSION;
-					en_life [gpit] = ENEMIES_LIFE_GAUGE;
+					en_life [gpit] = ENEMS_LIFE_GAUGE;
 				} else 
 			#endif
 			{
@@ -460,6 +456,9 @@ void enems_move (void) {
 		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
+
+		if (_en_t == 0) continue;
+		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
 		
 		// Clear selected sprite
 
@@ -474,7 +473,7 @@ void enems_move (void) {
 					if (
 						half_life
 						#ifdef ENEMS_FLICKER_ONLY_ON_DYING
-						|| en_life [gpit]
+						|| !en_flags [gpit]
 						#endif
 					) {
 						#ifdef ENEMS_ENABLE_DYING_FRAME
@@ -498,12 +497,12 @@ void enems_move (void) {
 				#ifdef ENEMS_RECOIL_ON_HIT
 					#include "engine/enemmods/enems_recoiling.h"
 				#endif
-			} 
+			} else
 		#endif
 		
 		// Enemy is considered active if...
 
-		if (_en_t && en_cttouched [gpit] == 0) {
+		if (en_is_alive) {
 
 			// Gotten preliminary:
 			pregotten = (prx + 7 >= _en_x && prx <= _en_x + 15);
@@ -532,23 +531,12 @@ void enems_move (void) {
 				} else
 			#endif
 			{
-				switch (_en_t) {
+				switch (_en_t & 63) {
 					case 1:
 					case 2:
 					case 3:
 					case 4:
-					#ifdef ENABLE_SHOOTIES
-						case 12:
-						case 13:
-						case 14:
-						case 15:
-					#endif
-					#ifdef ENABLE_PUNCHIES
-						case 16:
-						case 17:
-						case 18:
-						case 19:
-					#endif
+					
 						#include "engine/enemmods/enem_linear.h"
 						#ifdef ENABLE_SHOOTIES
 							#include "engine/enemmods/enem_shooty.h"
@@ -607,7 +595,7 @@ void enems_move (void) {
 					#endif	
 
 					#ifdef ENABLE_SIMPLE_WARPERS
-						case 0xff:
+						case 0x3f:
 							en_spr = SIMPLE_WARPERS_BASE_SPRID;
 							break;
 					#endif
@@ -686,7 +674,7 @@ void enems_move (void) {
 			// Is enemy collidable? If not, exit
 
 			if (
-					_en_t == 0	// General condition.
+					en_is_alive == 0	// General condition.
 				#ifndef PLAYER_TOP_DOWN				
 					|| _en_t == 4
 				#endif
@@ -804,7 +792,7 @@ void enems_move (void) {
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
 						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ADD_SIGN2 (_en_x, prx, ENEMS_RECOIL_ON_HIT);
+							en_rmx [gpit] = ENEMS_RECOIL;
 						#endif
 					}
 				} 
@@ -821,11 +809,39 @@ void enems_move (void) {
 						sfx_play (SFX_ENHIT, 1);
 						bullets_destroy ();
 						enems_hit ();
+						#ifdef ENEMS_RECOIL_ON_HIT
+							en_rmx [gpit] = ENEMS_RECOIL;
+						#endif
 						break;
 					}
 				}
 			#endif
 		} 
+
+		#ifdef ENEMS_CAN_RESPAWN
+			else {
+				if (en_respawn [gpit]) {
+					if (_en_ct ) _en_ct --; else {
+						// Respawn
+						
+						_en_x = en_resx [gpit]; _en_mx = en_resmx [gpit];
+						_en_y = en_resy [gpit]; _en_my = en_resmy [gpit];
+						
+						#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
+							_enf_x = _en_x << FIXBITS;
+							_enf_y = _en_y << FIXBITS;
+							en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
+						#else
+							en_life [gpit] = ENEMS_LIFE_GAUGE;
+						#endif
+
+						en_cttouched [gpit] = 50;
+						en_rmx [gpit] = 0;
+						en_flags [gpit] = EN_STATE_SPAWNING;
+					}
+				}
+			}
+		#endif
 
 skipdo: 
 		// Render enemy metasprite en_spr

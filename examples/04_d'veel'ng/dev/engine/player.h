@@ -226,7 +226,7 @@ void __fastcall__ bullets_move (void) {
 								if (en_t [gpjt] == 7) {
 									en_alive [gpjt] = 0;
 									en_ct [gpjt] = DEATH_COUNT_EXPRESSION;
-									en_life [gpjt] = ENEMIES_LIFE_GAUGE;
+									en_life [gpjt] = ENEMS_LIFE_GAUGE;
 								} else
 #endif
 								{

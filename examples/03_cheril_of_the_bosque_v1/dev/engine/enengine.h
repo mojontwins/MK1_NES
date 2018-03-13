@@ -64,7 +64,7 @@ void __fastcall__ enems_load (void) {
 #endif
 
 #if defined(PLAYER_CAN_FIRE)
-		en_life [gpit] = ENEMIES_LIFE_GAUGE;
+		en_life [gpit] = ENEMS_LIFE_GAUGE;
 #elif defined(PLAYER_KILLS_ENEMIES)
 		en_life [gpit] = 1;
 #endif		

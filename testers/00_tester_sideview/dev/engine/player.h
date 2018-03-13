@@ -602,7 +602,7 @@ void player_move (void) {
 
 	#ifdef PLAYER_PUNCHES
 		if (ppunching) {
-			ppunching --; if (ppunching == 0) phitteract = 0;
+			ppunching --; if (ppunching < 12) phitteract = 0;
 			phitterx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
 			phittery = pry + PLAYER_PUNCH_OFFS_Y;
 		} 
@@ -610,7 +610,7 @@ void player_move (void) {
 
 	#ifdef PLAYER_KICKS
 		if (pkicking) {
-			pkicking --; if (pkicking == 0) phitteract = 0;
+			pkicking --; if (pkicking < 12) phitteract = 0;
 			phitterx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
 			phittery = pry + PLAYER_KICK_OFFS_Y;
 			if (ppossee) pkicking = 0;

@@ -99,7 +99,7 @@
 #define MAX_BULLETS 			4		// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET	5		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET	8		// vertical offset from the player's left/right.
-#define ENEMIES_LIFE_GAUGE		3		// Amount of shots needed to kill enemies.
+#define ENEMS_LIFE_GAUGE		3		// Amount of shots needed to kill enemies.
 #define FANTY_LIFE_GAUGE		16
 #define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
 //#define FIRE_MIN_KILLABLE 	3		// If defined, only enemies >= N can be killed.

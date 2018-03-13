@@ -231,7 +231,7 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER
 
 //#define PERSISTENT_ENEMIES

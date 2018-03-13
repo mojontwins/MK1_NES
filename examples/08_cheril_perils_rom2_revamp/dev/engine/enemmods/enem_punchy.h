@@ -4,7 +4,7 @@
 // PUNCHIES are shooting patrollers. This code executes
 // right after that of the patrollers, overriding some stuff.
 
-if (en_rawv [gpit] & 2) {
+if (_en_t & 0x40) {
 	if (_en_ct) {
 		// Is in shooting animation
 		_en_x = rdx; _en_y = rdy;

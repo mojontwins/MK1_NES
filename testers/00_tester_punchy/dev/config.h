@@ -240,9 +240,10 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMIES_LIFE_GAUGE				3	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_LIFE_GAUGE				3	// Amount of shots/punches/kicks needed to kill enemies.
 #define ENEMS_FLICKER
 #define ENEMS_FLICKER_ONLY_ON_DYING			// Flicker, but only when life == 0
+#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
@@ -397,14 +398,13 @@
 #define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
 #define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 
-#define MAX_AMMO						99	// If defined, ammo is not infinite!
+//#define MAX_AMMO						99	// If defined, ammo is not infinite!
 #define AMMO_REFILL						50	// type 3 hotspots refill amo, using tile 20
 //#define INITIAL_AMMO 					0	// If defined, ammo = X when entering game.
 
 #define BULLET_PALETTE					3
 #define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
 */
-
 // Scripting
 // ---------
 

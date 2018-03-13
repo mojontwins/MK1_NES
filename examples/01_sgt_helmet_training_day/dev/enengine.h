@@ -19,7 +19,7 @@ void __fastcall__ enems_load (void) {
 		en_x [gpit] = en_x1 [gpit];
 		en_y [gpit] = en_y1 [gpit];
 		
-		en_life [gpit] = ENEMIES_LIFE_GAUGE;
+		en_life [gpit] = ENEMS_LIFE_GAUGE;
 		en_status [gpit] = 0;
 		
 #ifdef ENABLE_PURSUERS		

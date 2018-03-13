@@ -138,7 +138,7 @@ void draw_scr (void) {
 		rdt = *gp_ram ++;
 		map_attr [rdm] = c_behs [rdt];
 
-		#ifdef ENABLE_BREAKABLE
+		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
 			brk_buff [rdm] = 1;
 		#endif
 
