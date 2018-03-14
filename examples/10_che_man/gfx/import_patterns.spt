@@ -1,5 +1,5 @@
 # import_patterns.spt
-# Imports patterns for Cadàveriön
+# Imports patterns for Che Man
 
 # This is a mkts.exe script file
 # Needs mkts v0.8.0 20180205
@@ -9,7 +9,6 @@
 # Font
 OPEN font.png
 PALS palts0.png
-CHARSET 0, 0, 32, 2
 
 # Hud
 OPEN hud.png
@@ -51,7 +50,7 @@ FILL 4096
 OPEN ss.png
 PALS palss0.png
 
-# Bits 
+# Bits
 CHARSET 0, 15, 1, 1
 
 # Metasprites will be stored in this file:
@@ -59,26 +58,16 @@ MAPFILE ..\dev\assets\spritedata.h
 
 # Main player
 LABEL sspl
+METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
 
-# Player cells, 16x24. Box is 8x16 centered bottom:
-METASPRITESET 0, 0, 2, 3, 6, 4, -4, -8
-METASPRITESET 0, 12, 2, 3, 8, 1, -4, -8
-
-# Enemies. Linear enemies, 4 kinds, 2x2.
-# Box is 16x16 centered bottom
+ #Enemies
 LABEL ssen
-METASPRITESET 12, 0, 2, 2, 2, 4, 0, 0 FLIPPED
+METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
 
-# Warp animation, 4 cells, 2x2
-# Box is 16x16 centered bottom
-LABEL sswarp
-METASPRITESET 0, 15, 2, 2, 4, 1, 0, 0
+# Platforms
+LABEL ssplat
+METASPRITE 13, 3, 2, 2, 1, 1, 0, 0
 
-# Items
-# Heart, Time
+# Items / special
 LABEL ssit
-METASPRITESET 12, 8, 2, 2, 2, 1, 0, 0
-
-FILL 8192
-
-
+METASPRITE 0, 6, 2, 2, 6, 1, 0, 0
