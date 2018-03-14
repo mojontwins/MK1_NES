@@ -136,9 +136,12 @@ for yy = 0 To map_h - 1
 							founddecos = -1
 							Print "Found decos ~ ";
 						End If
+
 						decosXY (nPant, decosI (nPant)) = cx * 16 + cy
 						decos (nPant, decosI (nPant)) = BigOrigMap (cy, cx)
 						decosI (nPant) = decosI (nPant) + 1
+
+						If decosI (nPant) > 127 Then Print "TOO MANY DECOS! Maybe not suited for this compressor?": End
 						' Reset to previous (so there's more repetitions)
 						BigOrigMap (cy, cx) = dp
 					End If

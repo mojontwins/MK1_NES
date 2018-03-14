@@ -22,7 +22,7 @@
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
 
-#define MAX_FLAGS 				17		// Keep it low if you don't need flags
+#define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
 #ifndef MULTI_LEVEL
 
@@ -437,7 +437,7 @@
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
@@ -509,13 +509,13 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				32		// Horizontal acceleration
+#define PLAYER_AX				16		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				32		// Horizontal friction
+#define PLAYER_RX				16		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
-#define PLAYER_VX_MIN (PLAYER_AX << 2)
+#define PLAYER_VX_MIN (PLAYER_AX << 1)
 
 #define PLAYER_V_REBOUND		224
 

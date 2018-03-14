@@ -626,7 +626,7 @@ Por ahora sólo activaremos
 
 ```c
 	#define PLAYER_HAS_JUMP
-	#define PLAYER_KILLS_ENEMIES
+	#define PLAYER_STEPS_ON_ENEMIES
 ```
 
 Y posteriormente supeditaremos de forma custom el que se pueda matar enemigos a que se haya pillado el hotspot tipo 4 (las botas).
@@ -976,7 +976,7 @@ Se emplea el antediluviano `en_touched`, un flag redundante que se eliminó hace
 engine/enengine.h
 -----------------
 
-Se queja de que no tiene `BADDIES_COUNT`. Parece que era un `#define` para contar *en algún sitio* todos los enemigos que había en la fase, seguro que para **Cheril Perils**. En efecto, `BADDIES_COUNT` se define como una variable simple si `PLAYER_KILLS_ENEMIES`, con la idea de meter en el scripting de alguna forma si aplicaba. Por ahora es fácil de eliminar la linea si `BADDIES_COUNT` no está definido.
+Se queja de que no tiene `BADDIES_COUNT`. Parece que era un `#define` para contar *en algún sitio* todos los enemigos que había en la fase, seguro que para **Cheril Perils**. En efecto, `BADDIES_COUNT` se define como una variable simple si `PLAYER_STEPS_ON_ENEMIES`, con la idea de meter en el scripting de alguna forma si aplicaba. Por ahora es fácil de eliminar la linea si `BADDIES_COUNT` no está definido.
 
 Hay otro fallo que me da la cara en el siguiente archivo, así que tendré paréntesis no balanceados y su puta madre.
 
@@ -1441,7 +1441,7 @@ Jandero. Hay que tener en cuenta un problema con que te maten nada más entrar a
 
 ~~
 
-Lo siguiente que quiero meter es la caja de texto y la interacción con las botas. Aunque esté activado `PLAYER_KILLS_ENEMIES`, sólo se debe poder matar enemigos tras coger las botas. Esta modificación es muy sencilla y sólo necesitaremos una variable como flag, por ejemplo `has_boots`, en ram/bss.
+Lo siguiente que quiero meter es la caja de texto y la interacción con las botas. Aunque esté activado `PLAYER_STEPS_ON_ENEMIES`, sólo se debe poder matar enemigos tras coger las botas. Esta modificación es muy sencilla y sólo necesitaremos una variable como flag, por ejemplo `has_boots`, en ram/bss.
 
 Pero antes pensemos en los recuadros de texto. Puedo hacer una reimplementación hiper pulida y sencilla de los de **Cheril in another Forest** e incluirla en el paquete estándar por si se quiere usar.
 
@@ -2059,7 +2059,7 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 20180212
 ========
 
-[X] meter `PLAYER_KILLS_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
+[X] meter `PLAYER_STEPS_ON_ENEMIES` para declarar `enems_kill`. Y luego meter un `ENEMIES_MAY_DIE` controlable via autodefines.
 
 [/] Estudiar incluir los enemigos programados de pantanow engine (en especial como integrar la animación).
 

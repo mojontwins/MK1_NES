@@ -247,7 +247,7 @@ void enems_load (void) {
 	#else
 			en_life [gpit] = ENEMS_LIFE_GAUGE;
 	#endif
-	#elif defined(PLAYER_KILLS_ENEMIES)
+	#elif defined(PLAYER_STEPS_ON_ENEMIES)
 			en_life [gpit] = 1;
 	#endif		
 			en_cttouched [gpit] = 0;
@@ -268,7 +268,7 @@ void enems_move (void) {
 	// Updates sprites
 	touched = 0;
 	for (gpit = 0; gpit < 3; gpit ++) {
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
 			oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, OAM_ENEMS + (gpit << 4), SPRITE_BADDIE_DYING);
@@ -354,7 +354,7 @@ void enems_move (void) {
 			}
 #endif
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_SAFE_LANDING)
+#if defined (PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_SAFE_LANDING)
 #ifdef PLAYER_MIN_KILLABLE
 			if (en_t [gpit] >= PLAYER_MIN_KILLABLE && en_t [gpit] != 8 && en_t [gpit] != 4) {
 #else
@@ -449,7 +449,7 @@ void enems_move (void) {
 				}
 			}
 		} 
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES) || defined (FANTY_KILLED_BY_TILE)
 		else {
 			oam_meta_spr (0, 240, OAM_ENEMS + (gpit << 4), spr_empty); 
 			continue;

@@ -196,7 +196,7 @@
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
 //#define PLAYER_BOOTEE					// Jump is automatic
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
+//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 #define NO_HORIZONTAL_EVIL_TILE			// Only check for colisions with evil tiles vertically

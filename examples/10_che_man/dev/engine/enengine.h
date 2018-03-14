@@ -702,9 +702,7 @@ void enems_move (void) {
 				if (
 					pregotten && pry < _en_y && pry + 15 > _en_y && pvy > 0 &&
 					pgotten == 0 &&	ppossee == 0
-					#ifdef PLAYER_MIN_KILLABLE
-						&& _en_t >= PLAYER_MIN_KILLABLE
-					#endif
+					
 					#ifndef STEADY_SHOOTER_KILLABLE
 						&& _en_t != 5
 					#endif	
@@ -712,13 +710,17 @@ void enems_move (void) {
 						&& _en_t != 8
 					#endif
 				) {
+				
+					#ifdef ENABLE_RESONATORS
+						if (res_on)
+					#endif
+					#ifdef PLAYER_STEPS_MIN_KILLABLE
+						if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
+					#endif
+					enems_hit ();
+				
 					#ifdef PLAYER_SAFE_LANDING
 						if (_en_my < 0) _en_my = -_en_my;
-					#else
-						#ifdef ENABLE_RESONATORS
-							if (res_on)
-						#endif
-						enems_hit ();
 					#endif
 
 					if (i & PAD_A) {

@@ -50,7 +50,7 @@ signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
 }
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+#if defined (PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 void kill_enemy (unsigned char gpit) {
 	en_t [gpit] = 0;
 	ep_flags [n_pant + n_pant + n_pant + gpit] &= 0xFE;

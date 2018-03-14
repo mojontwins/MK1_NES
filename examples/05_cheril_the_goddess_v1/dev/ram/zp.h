@@ -55,7 +55,7 @@ unsigned char plife, pcontinues;
 #ifndef DEACTIVATE_KEYS
 unsigned char pkeys;
 #endif
-#ifdef PLAYER_KILLS_ENEMIES
+#ifdef PLAYER_STEPS_ON_ENEMIES
 unsigned char pkilled;
 #endif
 unsigned char pammo, pfiring;

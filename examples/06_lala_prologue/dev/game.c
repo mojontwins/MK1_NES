@@ -128,7 +128,7 @@ unsigned char wall, hitv, hith;
 #ifdef ENABLE_PROPELLERS
 unsigned char ppropelled;
 #endif
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 unsigned char pkilled;
 #endif
 
@@ -231,7 +231,7 @@ unsigned char upd_cont_index;
 #endif
 
 // Baddies count. Properly fill this value!
-#ifdef PLAYER_KILLS_ENEMIES
+#ifdef PLAYER_STEPS_ON_ENEMIES
 unsigned char baddies_count;
 #define BADDIES_COUNT baddies_count
 #endif

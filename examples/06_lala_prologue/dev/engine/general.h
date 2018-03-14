@@ -42,7 +42,7 @@ signed int saturate (signed int v, signed int max) {
 	return v >= 0 ? (v > max ? max : v) : (v < -max ? -max : v);
 }
 
-#if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
 void kill_enemy (unsigned char gpit) {
 	en_t [gpit] = 0;
 #ifdef PERSISTENT_DEATHS

@@ -12,6 +12,7 @@ Const MACRO_SIZE = 32
 Const MAX_MACROS = 31
 
 ReDim Shared As String script (0)
+ReDim Shared As Integer scriptEQ (0)
 ReDim Shared As Integer addresses (0)
 Dim Shared As Integer clausulasUsed (255)
 Dim Shared As Integer actionsUsed (255)
@@ -48,7 +49,7 @@ End Function
 
 Sub resetScript (n As Integer)
 	Dim As Integer i
-	For i = 0 To n: script (i) = "": Next i
+	For i = 0 To n: script (i) = "": scriptEQ (i) = 255: Next i
 	For i = 0 To 16383: myBin (i) = 0: Next i
 	For i = 0 To maxScr: decorated (i) = 0: Next i
 End Sub
@@ -584,10 +585,10 @@ Function procesaClausulas (f As Integer) As String
 						actionsUsed (&HE2) = -1
 
 					Case "INC_OBJECTS"
-						clausula = clausula + Chr (&H40) + Chr (pValR (lP (2)))
+						clausula = clausula + Chr (&H40) + Chr (pValR (lP (1)))
 						actionsUsed (&H40) = -1
 					Case "DEC_OBJECTS"
-						clausula = clausula + Chr (&H41) + Chr (pValR (lP (2)))
+						clausula = clausula + Chr (&H41) + Chr (pValR (lP (1)))
 						actionsUsed (&H41) = -1
 					
 					' Printers
@@ -737,6 +738,7 @@ Open Command (2) For Output As #fOut
 maxScr = Val (Command (3)) - 1
 maxidx = 2 * Val (Command (3))
 ReDim script (maxidx + 5)
+ReDim scriptEQ (maxidx + 5)
 ReDim addresses (maxidx + 5)
 
 ' Output code & data
@@ -804,6 +806,7 @@ While keepGoing
 				While i < LIST_WORDS_SIZE
 					If lP (i) = "" Then Exit While
 						script (2 * Val (lP (i))) = clausulas
+						scriptEQ (2 * Val (lP (i))) = 2 * Val (lP (2))
 					i = i + 1
 				Wend
 				nSections = nSections + 1
@@ -819,6 +822,7 @@ While keepGoing
 				While i < LIST_WORDS_SIZE
 					If lP (i) = "" Then Exit While
 						script (1 + 2 * Val (lP (i))) = clausulas
+						scriptEQ (1 + 2 * Val (lP (i))) = 1 + 2 * Val (lP (3))
 					i = i + 1
 				Wend
 				nSections = nSections + 1
@@ -865,13 +869,18 @@ While keepGoing
 						addresses (i) = binPt
 					End If 
 
-					For j = 1 To Len (script (i))
-						myBin (binPt) = Asc (Mid (script (i), j, 1))
-						binPt = binPt + 1
-					Next j
+					If scriptEQ (i) <> 255 And scriptEQ (i) <> i Then
+						myBin (i * 2) = addresses (scriptEQ (i)) And 255
+						myBin (i * 2 + 1) = addresses (scriptEQ (i)) Shr 8
+					Else
+						For j = 1 To Len (script (i))
+							myBin (binPt) = Asc (Mid (script (i), j, 1))
+							binPt = binPt + 1
+						Next j
 
-					myBin (i * 2) = addresses (i) And 255
-					myBin (i * 2 + 1) = addresses (i) Shr 8
+						myBin (i * 2) = addresses (i) And 255
+						myBin (i * 2 + 1) = addresses (i) Shr 8
+					End If
 				Next i
 
 				Print #fOut, "const unsigned char script_pool_" & scriptCount & " [] = {"

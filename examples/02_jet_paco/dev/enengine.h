@@ -19,7 +19,7 @@ void __fastcall__ enems_load (void) {
 		en_x [gpit] = en_x1 [gpit];
 		en_y [gpit] = en_y1 [gpit];
 
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES)
 		en_life [gpit] = ENEMS_LIFE_GAUGE;
 #endif		
 		en_status [gpit] = 0;
@@ -65,7 +65,7 @@ void __fastcall__ enems_move (void) {
 	// Updates sprites
 	touched = 0;
 	for (gpit = 0; gpit < 3; gpit ++) {
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES)
 		if (en_touched [gpit]) {
 			en_cttouched [gpit] --;
 			if (!en_cttouched [gpit]) {

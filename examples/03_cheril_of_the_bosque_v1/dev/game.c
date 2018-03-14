@@ -169,7 +169,7 @@ unsigned char f_zone_ac, fzx1, fzx2, fzy1, fzy2;
 #endif
 
 // Baddies count. Properly fill this value!
-#ifdef PLAYER_KILLS_ENEMIES
+#ifdef PLAYER_STEPS_ON_ENEMIES
 unsigned char baddies_count;
 #define BADDIES_COUNT baddies_count
 #endif

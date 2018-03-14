@@ -3,3 +3,5 @@
 
 // extra_vars.h
 // If your customs need extra variables (in BSS) define them here
+
+unsigned char first_text;

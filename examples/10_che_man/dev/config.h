@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
-//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_MIDDLE
+#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -16,21 +16,21 @@
 #define MAP_H					4		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Max / Initial life
+#define PLAYER_LIFE				10		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
 
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
 
-#define MAX_FLAGS 				17		// Keep it low if you don't need flags
+#define MAX_FLAGS 				16		// Keep it low if you don't need flags
 
 #ifndef MULTI_LEVEL
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
-	#define PLAYER_INI_X			2		//
-	#define PLAYER_INI_Y			2		// Initial position
+	#define SCR_INI					19		// Initial screen
+	#define PLAYER_INI_X			13		//
+	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
@@ -57,16 +57,16 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-#define HOTSPOT_TYPE_TIME		5		// For time refills
+//#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
-//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 //#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
@@ -74,7 +74,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -89,7 +89,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-8
+#define PLAYER_COLLISION_VSTRETCH_BG	-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -216,7 +216,7 @@
 
 // Text boxes. If you need them, you call them
 
-//#define ENABLE_TEXT_BOX
+#define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
 
 // Timer. 
@@ -246,7 +246,7 @@
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 //#define PERSISTENT_ENEMIES
-//#define PERSISTENT_DEATHS
+#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
 //#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
@@ -360,6 +360,9 @@
 
 // Carry directives
 
+#define ENABLE_ONLY_ONE_OBJECT			// Hotspots tupe 1 -> inventory (just 1)
+#define ONLY_ONE_OBJECT_FLAG			0	// If def, use flag [.] instead of pinv
+
 // Easy objects mode: A range of hotspot id's are considered
 // 'objects'. The user can carry one of those. Contents of hotspots
 // can change in this mode.
@@ -409,7 +412,7 @@
 // Scripting
 // ---------
 
-//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
@@ -437,9 +440,9 @@
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES			// If defined, stepping on enemies kills them
-//#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
-//#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
+#define PLAYER_STEPS_MIN_KILLABLE 		3 // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+#define PLAYER_SAFE_LANDING				// Changes vertical direction of enemies when stepping
 
 // ============================================================================
 // III. Screen configuration
@@ -447,23 +450,24 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
+#define LIFE_X					29		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+#define OBJECTS_X				20		//
+#define OBJECTS_Y				4		// Objects counter character coordinates
+#define OBJECTS_REMAINING				// Show # remaining instead of got
 
-#define KEYS_X					28		//
-#define KEYS_Y					3		// Keys counter character coordinates
+#define KEYS_X					29		//
+#define KEYS_Y					4		// Keys counter character coordinates
 
-//#define KILLED_X				16		//
-//#define KILLED_Y				2		// Kills counter character coordinates
+#define KILLED_X				20		//
+#define KILLED_Y				3		// Kills counter character coordinates
 
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
-//#define HS_INV_X				136		//
-//#define HS_INV_Y				11		// Object you are carrying
+#define HS_INV_X				56		//
+#define HS_INV_Y				15		// Object you are carrying
 
 //#define TIMER_X				0		//
 //#define TIMER_Y				5		// Current timer value
@@ -509,10 +513,10 @@
 #define PLAYER_VX_SPRINT_MAX	192
 #define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				32		// Horizontal acceleration
+#define PLAYER_AX				16		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				32		// Horizontal friction
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 2)

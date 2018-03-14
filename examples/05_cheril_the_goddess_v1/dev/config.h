@@ -148,7 +148,7 @@
 
 #define PLAYER_HAS_JUMP               	// If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
+//#define PLAYER_STEPS_ON_ENEMIES          // If defined, stepping on enemies kills them
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
 // ============================================================================

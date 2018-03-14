@@ -107,11 +107,14 @@ While Not Eof (f)
 		' Write to decos
 		If Not founddecos Then 
 			founddecos = -1
-			Print "Found decos ~ ";
+			Print "Found decoss ~ ";
 		End If
+
 		decosXY (nPant, decosI (nPant)) = x * 16 + y
 		decos (nPant, decosI (nPant)) = d
 		decosI (nPant) = decosI (nPant) + 1
+
+		If decosI (nPant) > 127 Then Print "TOO MANY DECOS! Maybe not suited for this compressor?": End
 		' Reset to previous (so there's more repetitions)
 		d = dp
 	End If
@@ -313,7 +316,6 @@ Print #f, "// Compressed map structure, screens"
 Print #f, "// Format: [SCR_SIZE, [ T COUNT | 0xF0 + COUNT T1 T2 T3 T4 ... ] | 0, 96 packed bytes]"
 Print #f, ""
 For nPant = 0 To mapPants - 1
-
 	If mOutI (nPant) = 2 Then
 		' Empty screen!
 		Print #f, "// scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " is empty."
@@ -321,9 +323,7 @@ For nPant = 0 To mapPants - 1
 	Else
 		Print #f, "const unsigned char scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " [] = { ";
 		Print #f, "0x" & Lcase (Hex (mOutI (nPant), 2)) & ", ";
-		
 		If mOutI (nPant) = 0 Then mOutI (nPant) = 96
-			
 		mapsize = mapsize + 1
 		scrsize = 1
 		For j = 0 To mOutI (nPant) - 1

@@ -172,7 +172,7 @@ void __fastcall__ enems_load (void) {
 	#else
 			en_life [gpit] = ENEMS_LIFE_GAUGE;
 	#endif
-	#elif defined(PLAYER_KILLS_ENEMIES)
+	#elif defined(PLAYER_STEPS_ON_ENEMIES)
 			en_life [gpit] = 1;
 	#endif		
 			en_status [gpit] = 0;
@@ -191,7 +191,7 @@ void enems_move (void) {
 	// Updates sprites
 	touched = 0;
 	for (gpit = 0; gpit < 3; gpit ++) {
-#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_KILLS_ENEMIES)
+#if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES)
 		if (en_cttouched [gpit]) {
 			en_cttouched [gpit] --;
 			oam_meta_spr (en_x [gpit], en_y [gpit] + SPRITE_ADJUST, ENEMS_OAM_BASE + (gpit << 4), spr_en_0A);
@@ -267,7 +267,7 @@ void enems_move (void) {
 			}
 #endif
 
-#ifdef PLAYER_KILLS_ENEMIES
+#ifdef PLAYER_STEPS_ON_ENEMIES
 #ifdef PLAYER_MIN_KILLABLE
 			if (en_t [gpit] >= PLAYER_MIN_KILLABLE && en_t [gpit] != 8 && en_t [gpit] != 4) {
 #else

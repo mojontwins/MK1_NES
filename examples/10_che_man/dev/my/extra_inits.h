@@ -3,3 +3,6 @@
 
 // extra_inits.h
 // Extra stuff you have to initialize before the level starts
+
+pfacing = CELL_FACING_LEFT;
+first_text = 1;

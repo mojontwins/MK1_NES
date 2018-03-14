@@ -702,8 +702,8 @@ void enems_move (void) {
 				if (
 					pregotten && pry < _en_y && pry + 15 > _en_y && pvy > 0 &&
 					pgotten == 0 &&	ppossee == 0
-					#ifdef PLAYER_MIN_KILLABLE
-						&& _en_t >= PLAYER_MIN_KILLABLE
+					#ifdef PLAYER_STEPS_MIN_KILLABLE
+						&& _en_t >= PLAYER_STEPS_MIN_KILLABLE
 					#endif
 					#ifndef STEADY_SHOOTER_KILLABLE
 						&& _en_t != 5
