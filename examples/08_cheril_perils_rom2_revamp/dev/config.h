@@ -168,7 +168,7 @@
 // Propellers
 
 #define ENABLE_PROPELLERS
-#define PROPELLERS_MAX 					4
+#define PROPELLERS_MAX 					6
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
 #define PROPELLERS_MAX_LENGTH			5	// In tiles; undef for infinite
 #define PROPELLER_TILE					24	// Tile # in map to detect a propeller

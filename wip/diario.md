@@ -3559,3 +3559,35 @@ Sí, me gusta más y funciona. Voy a actualizar docs.
 [ ] En la animación de usar, si pulsas el salto "da saltitos".
 
 Voy a ver si me da tiempo a propagar lo de los respawners y me voy.
+
+20180315
+========
+
+Ayer estuvimos haciendo un regalo a Chema que ha quedado muy chulo, reimplementando una versión modificada de Trabajo Basura (Dire Job) con MK1/AGNES. Tengo que hacer postmortem de este porque he reinmplementado algunas cosas y he usado bastante extensivamente la inyección de código propio en los archivos de la carpeta `my/`.
+
+Hoy poco tiempo tendré para hacer más, así que por lo pronto voy a repasar la lista de TO DO. Hay varios bugs, debería librarme de ellos primero.
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Tipo 7 en lateral spawns walker-fallers que pueden hostiar.
+
+[ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
+[ ] En la animación de usar, si pulsas el salto "da saltitos".
+
+Tengo unos minutos, voy a ver si reproduzco lo de los shines. - Ok, los shines están bien. Pero tenía definido MAX_PROPELLERS como 4 y en la pantalla donde lo detecté hay más. Voy a revisar el mapa para establecer bien un máximo mínimo (!).
+
+Son 6.
+
+¡Pues fuera de la lista!
+
+También he apañado una comprobación extra para este juego en el que los enemigos no te matan si están parados y se espera que los pises: `pvy > 0` para detectar pisada. Lo amalgamo con la comprobación de que estén los resonadores activados.
+

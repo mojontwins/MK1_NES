@@ -703,9 +703,10 @@ void enems_move (void) {
 					pregotten && 
 					pry < _en_y && 
 					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
-					//pvy > 0 &&
 					pgotten == 0 &&	ppossee == 0
-					
+					#ifdef ENABLE_RESONATORS
+						&& pvy > 0
+					#endif
 					#ifndef STEADY_SHOOTER_KILLABLE
 						&& _en_t != 5
 					#endif	
