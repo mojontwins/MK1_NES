@@ -8,7 +8,7 @@ crt0.o:
     CHARS             Offs = 000000   Size = 002000
 game.o:
     CODE              Offs = 000000   Size = 00205A
-    RODATA            Offs = 000696   Size = 00101C
+    RODATA            Offs = 000696   Size = 001020
     BSS               Offs = 000000   Size = 0002CA
     ZEROPAGE          Offs = 000000   Size = 0000B9
 runtime.lib(addysp.o):
@@ -105,7 +105,7 @@ BSS                   000325  0005EE  0002CA
 STARTUP               008000  008C81  000C82
 INIT                  008C82  008CB1  000030
 CODE                  008CB2  00AFE5  002334
-RODATA                00AFE6  00C697  0016B2
+RODATA                00AFE6  00C69B  0016B6
 VECTORS               00FFFA  00FFFF  000006
 
 
@@ -113,9 +113,9 @@ Exports list:
 -------------
 __BSS_RUN__               000325 RLA    __BSS_SIZE__              0002CA REA    
 __CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     008CB2 RLA    
-__DATA_LOAD__             00C698 RLA    __DATA_RUN__              000300 RLA    
+__DATA_LOAD__             00C69C RLA    __DATA_RUN__              000300 RLA    
 __DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
-__DESTRUCTOR_TABLE__      00C698 RLA    __RAM_SIZE__              000500 REA    
+__DESTRUCTOR_TABLE__      00C69C RLA    __RAM_SIZE__              000500 REA    
 __RAM_START__             000300 RLA    __STARTUP__               000001 REA    
 _bank_bg                  0083E6 RLA    _bank_spr                 0083D6 RLA    
 _delay                    00858B RLA    _main                     00AC9D RLA    

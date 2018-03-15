@@ -26,8 +26,8 @@ const unsigned char custom_text2 [] =
 
 const unsigned char custom_text3 [] = 
 	"VAYA, SE LO HA COMIDO%"
-	"CREO QUE TENGO QUE%"
-	"HACE ESTO HASTA 15%"
+	"AHI ESTA ER TIO! HAY%"
+	"QUE REPETIR HASTA 15%"
 	"VECES PARA COMPLETAR%"
 	"EL SACRIFICIO . . .%"
 	"MANOS A LA OBRA!%";
