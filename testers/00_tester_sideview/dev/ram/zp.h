@@ -78,7 +78,7 @@ unsigned char pstate, pctstate, pskip;
 unsigned char phit;
 signed int pgtmx, pgtmy;
 
-#if defined (ENABLE_EASY_OBJECTS)
+#if defined (ENABLE_EASY_OBJECTS) || defined (ENABLE_ONLY_ONE_OBJECT)
 	unsigned char pinv, opinv;
 #endif
 

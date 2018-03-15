@@ -6,3 +6,7 @@
 
 pfacing = CELL_FACING_LEFT;
 first_text = 1;
+first_batucada = 1;
+first_medallion = 1;
+first_totem = 1;
+c_max_enems = MAX_ENEMS_TYPE_3_0;

@@ -117,6 +117,7 @@ void main(void) {
 	bank_bg (0);
 
 	ppu_off ();
+	first_game = 1;
 
 	credits ();
 
@@ -147,5 +148,7 @@ void main(void) {
 				break;
 			}
 		}
+
+		first_game = 0;
 	}
 }

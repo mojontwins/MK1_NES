@@ -129,8 +129,22 @@ if (hrt) {
 					switch (hrt) {
 						#ifndef DEACTIVATE_OBJECTS
 							case HOTSPOT_TYPE_OBJECT:
-								pobjs ++;
-								rda = SFX_OBJECT;
+								#ifdef ENABLE_ONLY_ONE_OBJECT
+									#ifdef ONLY_ONE_OBJECT_FLAG
+										if (flags [ONLY_ONE_OBJECT_FLAG] == 0) {
+											flags [ONLY_ONE_OBJECT_FLAG] = 1;
+											rda = SFX_OBJECT;
+										}
+									#else
+										if (pinv == 0) {
+											pinv = 1;
+											rda = SFX_OBJECT;
+										}
+									#endif
+								#else
+									pobjs ++;
+									rda = SFX_OBJECT;
+								#endif
 								break;
 						#endif
 						#ifndef DEACTIVATE_KEYS

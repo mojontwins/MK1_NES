@@ -360,6 +360,9 @@
 
 // Carry directives
 
+//#define ENABLE_ONLY_ONE_OBJECT			// Hotspots tupe 1 -> inventory (just 1)
+//#define ONLY_ONE_OBJECT_FLAG			0	// If def, use flag [.] instead of pinv
+
 // Easy objects mode: A range of hotspot id's are considered
 // 'objects'. The user can carry one of those. Contents of hotspots
 // can change in this mode.

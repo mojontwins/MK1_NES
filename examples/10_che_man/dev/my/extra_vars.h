@@ -5,3 +5,6 @@
 // If your customs need extra variables (in BSS) define them here
 
 unsigned char first_text;
+unsigned char first_batucada;
+unsigned char first_medallion;
+unsigned char first_totem;

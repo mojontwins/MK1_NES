@@ -5,6 +5,8 @@
 
 // Game flow
 
+unsigned char first_game;
+
 unsigned char half_life, frame_counter;
 unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;

@@ -700,7 +700,10 @@ void enems_move (void) {
 			// Step over enemy?
 			#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_SAFE_LANDING))
 				if (
-					pregotten && pry < _en_y && pry + 15 > _en_y && pvy > 0 &&
+					pregotten && 
+					pry < _en_y && 
+					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+					//pvy > 0 &&
 					pgotten == 0 &&	ppossee == 0
 					
 					#ifndef STEADY_SHOOTER_KILLABLE

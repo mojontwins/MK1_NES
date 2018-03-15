@@ -16,8 +16,8 @@
 #define MAP_H					4		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				10		// Max / Initial life
-#define PLAYER_REFILL			1		// Life refill
+#define PLAYER_LIFE				5		// Max / Initial life
+#define PLAYER_REFILL			3		// Life refill
 
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
@@ -34,7 +34,7 @@
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
-	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
+	#define PLAYER_MAX_OBJECTS		15		// Objects to finish game
 
 #else
 
@@ -101,7 +101,7 @@
 
 // Same for enemies.
 // I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
-#define ENEMS_COLLISION_VSTRETCH_FG		0
+#define ENEMS_COLLISION_VSTRETCH_FG		4
 
 // General directives:
 // -------------------

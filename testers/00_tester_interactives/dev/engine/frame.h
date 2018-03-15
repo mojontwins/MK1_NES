@@ -18,7 +18,13 @@ void hud_update (void) {
 #if !defined (DEACTIVATE_OBJECTS) && defined (OBJECTS_X)
 	if (oobjs != pobjs) {
 		oobjs = pobjs;
-		_x = OBJECTS_X; _y = OBJECTS_Y; _n = pobjs; p_t ();
+		_x = OBJECTS_X; _y = OBJECTS_Y; 
+		#ifdef OBJECTS_REMAINING
+			_n = PLAYER_MAX_OBJECTS - pobjs;
+		#else
+			_n = pobjs; 
+		#endif
+		p_t ();
 	}
 #endif
 
@@ -44,7 +50,7 @@ void hud_update (void) {
 #endif
 
 #if defined (HS_INV_X)
-	#if defined (ENABLE_INTERACTIVES) && defined (FLAG_INVENTORY)
+	#if (defined (ENABLE_INTERACTIVES) && defined (FLAG_INVENTORY)) || (defined (ENABLE_ONLY_ONE_OBJECT) && defined (ONLY_ONE_OBJECT_FLAG))
 		oam_index = oam_meta_spr (
 			HS_INV_X, HS_INV_Y,
 			oam_index,

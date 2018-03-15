@@ -195,8 +195,7 @@ void prepare_scr (void) {
 	player_render ();
 	enems_move ();
 	if (hrt) hotspots_paint ();
-	player_render ();
-
+	
 	#ifdef ENABLE_INTERACTIVES	
 		interactives_paint ();
 	#endif
@@ -214,6 +213,7 @@ void prepare_scr (void) {
 	hud_update ();
 	ppu_waitnmi ();
 	clear_update_list ();
+	oam_index = 4;
 	fade_in ();
 }
 
@@ -266,6 +266,7 @@ void game_loop (void) {
 		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
+		oam_index = 4;
 
 		// Poll pads
 
@@ -311,8 +312,6 @@ void game_loop (void) {
 			break;
 		}
 
-		oam_index = 4;
-		
 		if (pstate) {
 			pctstate --;
 			if (!pctstate) pstate = EST_NORMAL;
@@ -381,6 +380,7 @@ void game_loop (void) {
 		#include "mainloop/pause.h"
 	}
 
+	fade_delay = 4;
 	music_stop ();
 	fade_out ();
 	set_vram_update (0, 0);

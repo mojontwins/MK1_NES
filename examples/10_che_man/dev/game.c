@@ -113,6 +113,7 @@ void main(void) {
 	bank_bg (0);
 
 	ppu_off ();
+	first_game = 1;
 
 	// Main loop
 
@@ -148,5 +149,7 @@ void main(void) {
 				}
 			}
 		}
+
+		first_game = 0;
 	}
 }
