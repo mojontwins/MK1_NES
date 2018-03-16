@@ -190,7 +190,7 @@ if (hrt) {
 					}
 				}
 
-				#ifdef CARRY_ONE_HS_OBJECT
+				#if defined (ENABLE_ONLY_ONE_OBJECT) || defined (ENABLE_EASY_OBJECTS)
 					if (opinv != pinv) {
 						// Object has been got. You may complete here
 						#include "my/on_object_got.h"

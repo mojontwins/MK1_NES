@@ -454,6 +454,7 @@
 
 #define OBJECTS_X				27		//
 #define OBJECTS_Y				29		// Objects counter character coordinates
+//#define OBJECTS_REMAINING				// Show # remaining instead of got
 
 #define KEYS_X					22		//
 #define KEYS_Y					29		// Keys counter character coordinates

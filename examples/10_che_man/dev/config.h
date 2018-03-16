@@ -368,7 +368,7 @@
 // can change in this mode.
 
 //#define ENABLE_EASY_OBJECTS
-
+/*
 #define HS_OBJ_EMPTY					4
 #define HS_OBJ_MIN						5
 #define HS_OBJ_MAX						6
@@ -377,7 +377,7 @@
 #define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 										// Otherwise, use its own graphics.
 #define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
-
+*/
 // Silly Brawlers
 // --------------
 //#define PLAYER_PUNCHES				// When on floor
