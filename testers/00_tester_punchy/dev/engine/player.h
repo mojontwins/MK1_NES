@@ -148,7 +148,7 @@ void player_move (void) {
 				} else use_ct = 0;
 			}
 			// Invalidate pad input
-			i = 0;
+			a_button = b_button = i = 0;
 		}
 	#endif
 

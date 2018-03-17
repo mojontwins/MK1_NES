@@ -18,19 +18,19 @@
 const unsigned int map_00_scr_offsets [] = {
 	MAP_00_BASE + 0x0000, MAP_00_BASE + 0x005E, 
 	MAP_00_BASE + 0x00C8, MAP_00_BASE + 0x0145, 
-	MAP_00_BASE + 0x01C2, MAP_00_BASE + 0x0248, 
-	MAP_00_BASE + 0x02A7, MAP_00_BASE + 0x0317, 
-	MAP_00_BASE + 0x039C, MAP_00_BASE + 0x0410, 
-	MAP_00_BASE + 0x0479, MAP_00_BASE + 0x04F7, 
-	MAP_00_BASE + 0x056F, MAP_00_BASE + 0x05CE, 
-	MAP_00_BASE + 0x0642, MAP_00_BASE + 0x06B7, 
-	MAP_00_BASE + 0x0738, MAP_00_BASE + 0x079E, 
-	MAP_00_BASE + 0x0811, MAP_00_BASE + 0x088B, 
-	MAP_00_BASE + 0x091C, MAP_00_BASE + 0x0994, 
-	MAP_00_BASE + 0x0A1C, MAP_00_BASE + 0x0A78
+	MAP_00_BASE + 0x01C4, MAP_00_BASE + 0x024A, 
+	MAP_00_BASE + 0x02A9, MAP_00_BASE + 0x0319, 
+	MAP_00_BASE + 0x039E, MAP_00_BASE + 0x0412, 
+	MAP_00_BASE + 0x047B, MAP_00_BASE + 0x04F9, 
+	MAP_00_BASE + 0x0571, MAP_00_BASE + 0x05D0, 
+	MAP_00_BASE + 0x0644, MAP_00_BASE + 0x06B9, 
+	MAP_00_BASE + 0x073A, MAP_00_BASE + 0x07A0, 
+	MAP_00_BASE + 0x0813, MAP_00_BASE + 0x088D, 
+	MAP_00_BASE + 0x091E, MAP_00_BASE + 0x0996, 
+	MAP_00_BASE + 0x0A1E, MAP_00_BASE + 0x0A7A
 };
 
-// Total screens size in bytes is 2778
+// Total screens size in bytes is 2780
 
 // Locks
 // These tiles are locks:  15
@@ -43,7 +43,7 @@ const unsigned char map_00_locks [] = {
 // Definitions
 
 #define MAP_01_CHRROM    3
-#define MAP_01_BASE      0x0ADA
+#define MAP_01_BASE      0x0ADC
 #define MAP_01_W         8
 #define MAP_01_H         3
 #define MAP_01_MAXPANTS  24

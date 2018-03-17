@@ -3575,8 +3575,6 @@ Hoy poco tiempo tendré para hacer más, así que por lo pronto voy a repasar la
 
 [ ] Sir Ababol DX se me está quedando muy atrasado.
 
-[ ] Tipo 7 en lateral spawns walker-fallers que pueden hostiar.
-
 [ ] Los shines aparecen donde no deben (¿No se reinician bien con la pantalla?)
 
 [ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
@@ -3590,4 +3588,35 @@ Son 6.
 ¡Pues fuera de la lista!
 
 También he apañado una comprobación extra para este juego en el que los enemigos no te matan si están parados y se espera que los pises: `pvy > 0` para detectar pisada. Lo amalgamo con la comprobación de que estén los resonadores activados.
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
+[ ] En la animación de usar, si pulsas el salto "da saltitos".
+
+20180317
+========
+
+Veamos lo de los salitos, que estoy en medio de un "la Casa de Mickey" y es la paz que tendré hoy ¡Resuelto!
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
+[X] En la animación de usar, si pulsas el salto "da saltitos".
+
+Vamos a hacer la fase que queda de Cheril de un barco, y por petición popular meteré también la del cementerio, aunque intentaré que sea algo diferente, al menos en gráficos.
 
