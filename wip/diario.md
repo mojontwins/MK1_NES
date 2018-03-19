@@ -3620,3 +3620,18 @@ Veamos lo de los salitos, que estoy en medio de un "la Casa de Mickey" y es la p
 
 Vamos a hacer la fase que queda de Cheril de un barco, y por petición popular meteré también la del cementerio, aunque intentaré que sea algo diferente, al menos en gráficos.
 
+20180319
+========
+
+Ahora se me ha antojado un revamp bestial de Gran Sabiduría (MK2 polishing, that's it), pero antes me voy a obligar a terminar esto. Además tengo que darle un laneo para dejar listo el MiedoW. A ver si me quito esta lista de encima:
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[·] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
