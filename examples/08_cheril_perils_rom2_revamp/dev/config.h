@@ -160,7 +160,7 @@
 
 // Ladders, beh == 32
 
-//#define ENABLE_LADDERS
+#define ENABLE_LADDERS
 
 // Extra special stuff
 // -------------------
@@ -561,7 +561,7 @@
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 
-	#define CELL_CLIMB_CYCLE	20
+	#define CELL_CLIMB_CYCLE	25
 #endif
 
 // Music

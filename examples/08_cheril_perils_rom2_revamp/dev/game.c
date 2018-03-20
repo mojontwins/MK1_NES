@@ -29,8 +29,10 @@
 #include "assets/chr_rom_maps.h"
 #include "assets/enems0.h"
 #include "assets/enems1.h"
+#include "assets/enems2.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
+#include "assets/tiledata2.h"
 #include "assets/metasprites.h"
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
@@ -121,7 +123,7 @@ void main(void) {
 		//title ();
 
 #ifdef MULTI_LEVEL		
-		level = 0;
+		level = 2;
 #endif
 		plife = PLAYER_LIFE;
 

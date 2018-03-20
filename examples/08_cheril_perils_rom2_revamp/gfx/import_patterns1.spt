@@ -23,6 +23,15 @@ LABEL tsdummy0
 MAPFILE ..\dev\work\dummy0.h
 MAPPED 0, 0, 2, 2, 16, 15
 
+# Tilesets are generated as tilemaps. They will be stored in this file:
+MAPFILE ..\dev\assets\tiledata2.h
+
+# ts2
+OPEN ts2.png
+PALS palts2.png
+LABEL ts2
+MAPPED 0, 0, 2, 2, 16, 3, 41
+
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
 FILL 4096
@@ -37,14 +46,16 @@ PALS palss0.png
 CHARSET 0, 9, 13, 1
 
 # Metasprites will be stored in this file:
-MAPFILE ..\dev\assets\spritedata.h
+MAPFILE ..\dev\work\spritedata_dummy.h
 
 # Main player
 LABEL sspl
 
 # Player cells, 16x24. Box is 8x16 centered bottom:
 METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
-METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8 FLIPPED
+METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8
+METASPRITESET 12, 0, 2, 3, 2, 1, -4, -8
+METASPRITE 14, 3, 2, 3, -4, -8
 
 # Enemies. Linear enemies, only 2+2 kinds, 2x3.
 # Box is 16x16 centered bottom

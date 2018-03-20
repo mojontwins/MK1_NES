@@ -68,3 +68,33 @@ const unsigned int map_01_scr_offsets [] = {
 
 // Total screens size in bytes is 1778
 
+// Map # 2 read from level2.map (6x4)
+
+// Definitions
+
+#define MAP_02_CHRROM    3
+#define MAP_02_BASE      0x11CE
+#define MAP_02_W         6
+#define MAP_02_H         4
+#define MAP_02_MAXPANTS  24
+#define MAP_02_N_LOCKS   0
+
+// Screens index
+
+const unsigned int map_02_scr_offsets [] = {
+	MAP_02_BASE + 0x0000, MAP_02_BASE + 0x001C, 
+	MAP_02_BASE + 0x004A, MAP_02_BASE + 0x008A, 
+	MAP_02_BASE + 0x00C4, MAP_02_BASE + 0x00DE, 
+	MAP_02_BASE + 0x0105, MAP_02_BASE + 0x012C, 
+	MAP_02_BASE + 0x0188, MAP_02_BASE + 0x01E1, 
+	MAP_02_BASE + 0x0251, MAP_02_BASE + 0x0275, 
+	MAP_02_BASE + 0x02AB, MAP_02_BASE + 0x0303, 
+	MAP_02_BASE + 0x0358, MAP_02_BASE + 0x03C7, 
+	MAP_02_BASE + 0x042E, MAP_02_BASE + 0x0453, 
+	MAP_02_BASE + 0x04A6, MAP_02_BASE + 0x04D4, 
+	MAP_02_BASE + 0x0544, MAP_02_BASE + 0x059B, 
+	MAP_02_BASE + 0x05D9, MAP_02_BASE + 0x063B
+};
+
+// Total screens size in bytes is 1667
+

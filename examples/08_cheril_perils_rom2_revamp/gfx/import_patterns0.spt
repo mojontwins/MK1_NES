@@ -59,7 +59,9 @@ LABEL sspl
 
 # Player cells, 16x24. Box is 8x16 centered bottom:
 METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
-METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8 FLIPPED
+METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8
+METASPRITESET 12, 0, 2, 3, 2, 1, -4, -8
+METASPRITE 14, 3, 2, 3, -4, -8
 
 # Enemies. Linear enemies, only 2+2 kinds, 2x3.
 # Box is 16x16 centered bottom

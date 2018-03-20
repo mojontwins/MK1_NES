@@ -16,11 +16,14 @@ const unsigned char * const spr_player [] = {
 	sspl_05_b,										// Airborne (offset 5)
 		
 	// Use animation (offset 12)
-	sspl_06_a, sspl_07_a, sspl_08_a, sspl_09_a,		// Up to down
-	sspl_0A_a, sspl_0B_a, 							// After this, *interact*
-	sspl_0B_a, sspl_0A_a, sspl_09_a, sspl_08_a,		// Down to up
-	sspl_07_a, sspl_06_a,
-	sspl_0C_a										// Final frame
+	sspl_06, sspl_07, sspl_08, sspl_09,				// Up to down
+	sspl_0A, sspl_0B, 								// After this, *interact*
+	sspl_0B, sspl_0A, sspl_09, sspl_08,				// Down to up
+	sspl_07, sspl_06,
+	sspl_0C,										// Final frame
+
+	// Climbing ladder (offset 25)
+	sspl_0D, sspl_0E, sspl_0F
 };
 
 // Enemy metasprites

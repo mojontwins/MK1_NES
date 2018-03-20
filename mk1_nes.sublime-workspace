@@ -336,11 +336,18 @@
 	"buffers":
 	[
 		{
-			"file": "wip/diario.md",
+			"file": "src/utils/mtparser.bas",
 			"settings":
 			{
-				"buffer_size": 132663,
-				"encoding": "UTF-8",
+				"buffer_size": 3702,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/utils/mkts.bas",
+			"settings":
+			{
+				"buffer_size": 133859,
 				"line_ending": "Windows"
 			}
 		}
@@ -387,10 +394,36 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map",
+		"/D/git/MK1_NES/src",
+		"/D/git/MK1_NES/src/utils",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns1.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/examples/10_che_man/README.md",
 		"/D/git/MK1_NES/examples/10_che_man/dev/engine/hotspots.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/mainloop/hotspots.h",
@@ -429,7 +462,6 @@
 		"/D/git/MK1_NES/src/utils/rlemap2.bas",
 		"/D/git/MK1_NES/src/utils/mapcnvnes2.bas",
 		"/D/git/MK1_NES/examples/10_che_man/trash/fliphts.bas",
-		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/testers/00_tester_punchy/README.md",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/assets/enems0.h",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/definitions.h",
@@ -451,22 +483,16 @@
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/shines.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/general.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_renderer_complex.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/asset_setup.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/chr_rom_maps.h",
 		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/chr-rom-maps.h",
 		"/D/git/MK1_NES/src/utils/packmapchrrom.bas",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
 		"/D/git/MK1_NES/wip/add.md",
 		"/D/git/MK1_NES/testers/00_tester_interactives/README.md",
 		"/D/git/MK1_NES/testers/00_tester_interactives/dev/config.h",
@@ -509,20 +535,11 @@
 		"/D/git/MK1_NES/testers/00_tester_containers/trash/testermacro.c",
 		"/D/git/MK1_NES/testers/00_tester_containers/trash/testermacro.s",
 		"/D/git/MK1_NES/examples/09_cadàveriön/README.md",
-		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/assets/mscnes.h",
-		"/D/git/MK1_NES/examples/09_cadàveriön/script/mscnes_orig.h",
-		"/D/git/MK1_NES/testers/00_tester_top_down/script/script.spt",
-		"/D/git/MK1_NES/testers/00_tester_top_down/dev/mainloop.h",
-		"/D/git/MK1_NES/testers/00_tester_top_down/dev/compile.bat",
-		"/D/git/MK1_NES/testers/00_tester_top_down/dev/mainloop/scripting.h",
-		"/D/git/MK1_NES/testers/00_tester_top_down/dev/assets/mscnes.h",
-		"/D/git/MK1_NES/testers/00_tester_top_down/dev/config.h"
+		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -599,6 +616,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"FLIPPED",
+			"_a",
+			"conveyors",
 			"game_loop",
 			"OBJ_X",
 			"scritp",
@@ -723,10 +743,7 @@
 			"PRINT_TILE_AT",
 			"SHOW",
 			"PLAYER_FLICKERS",
-			"FLICKER",
-			"pVal",
-			"plife",
-			"0x3"
+			"FLICKER"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -734,6 +751,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			"_b",
 			"..\\..\\..\\src\\utils",
 			"ENEMS_LIFE_GAUGE",
@@ -860,8 +878,7 @@
 			"0",
 			"max_pants",
 			"sc_c",
-			"_b",
-			"ROM3"
+			"_b"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -872,29 +889,24 @@
 	"groups":
 	[
 		{
-			"sheets":
-			[
-			]
-		},
-		{
 			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "wip/diario.md",
-					"semi_transient": false,
+					"file": "src/utils/mtparser.bas",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 132663,
+						"buffer_size": 3702,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								132663,
-								132663
+								0,
+								0
 							]
 						],
 						"settings":
@@ -902,14 +914,52 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 60968.0,
+						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "src/utils/mkts.bas",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 133859,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								112120,
+								112120
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 29.0,
+						"translation.y": 46927.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -969,7 +1019,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1003,7 +1053,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
