@@ -10,14 +10,16 @@
 
 // Todo: USE
 
-rda = (ATTR((prx + 4) >> 4, pry >> 4) & 12);
+rdx = (prx + 4) >> 4;
+rda = ATTR(rdx, pry >> 4) & 12;
+rdb = ATTR(rdx, (pry-2) >> 4) == 32;
 if (use_ct) {
 	psprid = CELL_USE + use_ct - 1;
-} else if (ponladder && !rda) {
+} else if (ponladder && !rda && rdb) {
 	if (pvy) ponladderctr ++;
 	psprid = CELL_CLIMB_CYCLE + ((ponladderctr >> 2) & 3);
 } else {
-	if (ppossee || pgotten) {
+	if (ppossee || pgotten || ponladder) {
 		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
 		} else {

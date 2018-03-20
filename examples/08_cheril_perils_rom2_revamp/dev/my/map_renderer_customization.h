@@ -44,6 +44,7 @@ switch (level) {
 			}
 			if (rda == 15 && map_buff [gpit - 1] == 15) rda = 31;
 			if (rda == 14 && map_buff [gpit - 16] != 14) rda = 30;
+			map_buff [gpit] = rda;
 		}
 		break;
 }

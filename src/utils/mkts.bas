@@ -1273,7 +1273,7 @@ Sub nesDoTiles (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Inte
 	
 	filteredPuts ("Processing image in 'tiles' mode")
 	filteredPuts ("Cut rect proc = " & x0 & ", " & y0 & " - " & x1 & ", " & y1 & ".")
-	If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
+	'If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
 	
 	For y = y0 To y1 Step vSize
 		If Not ignoreMapFile Then Print #fOut, "	";
@@ -1405,7 +1405,7 @@ Sub nesDoColTiles (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As I
 	
 	filteredPuts ("Processing image in 'coltiles' mode")
 	filteredPuts ("Cut rect proc = " & x0 & ", " & y0 & " - " & x1 & ", " & y1 & ".")
-	If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
+	'If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
 	
 	For y = y0 To y1 Step vSize
 		If Not ignoreMapFile Then Print #fOut, "	";
@@ -1921,7 +1921,7 @@ Sub nesDoTmaps (img As Any Ptr, pal () As Integer, xOrg As Integer, yOrg As Inte
 	
 	filteredPuts ("Processing image in 'meta' mode")
 	filteredPuts ("Cut rect proc = " & x0 & ", " & y0 & " - " & x1 & ", " & y1 & ".")
-	If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
+	'If wMeta = 2 And hMeta = 2 Then filteredPuts ("+ Writing pal info to " & tsMapFn)
 	If wMeta = 4 And hMeta = 4 Then filteredPuts ("+ Writing precalculated pal bytes to " & tsMapFn)
 	
 	tMapsIndex = 0
@@ -3637,6 +3637,9 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 
 		If debug Then 
 			Puts "Line > " & inLine
+			i = 0: Do 
+				Puts tokens (i): i = i + 1
+			Loop Until tokens (i) = ""
 			Puts "cPoolIndex = " & cPoolIndex & ", NoSkipEmpty = " & noskipempty
 		End If
 
@@ -3725,11 +3728,11 @@ Sub doScripted (inFileName As String, outFileName As String, platform As Integer
 
 				Select Case platform
 					Case PLATFORM_NES:
-						nesDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" & Lcase (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile
+						nesDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" &  (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile
 					Case PLATFORM_GB:
-						gbDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" & Lcase (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile
+						gbDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" &  (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile
 					Case PLATFORM_SMS:
-						smsDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" & Lcase (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile						
+						smsDoSprites img, pal (), xOrg, yOrg, 1, 1, wMeta, hMeta, "-", label & "_" &  (Hex (metaSpriteCounter, 2)), charOffset, 1, sprxorg, spryorg, fMapFile						
 				End Select
 				
 			Case "CHARSET":

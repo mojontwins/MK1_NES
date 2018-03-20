@@ -31,7 +31,7 @@ const unsigned char behs1 [] = {
 
 const unsigned char behs2 [] = {
 	0, 0, 0, 4, 0, 0, 0, 0, 0, 4, 8, 8, 8, 8, 0, 4,
-	0, 0, 0, 4, 8, 1,32, 0, 0, 8, 8, 8, 8, 4, 0, 4
+	0, 0, 0, 4, 8, 0,32, 1, 0, 8, 8, 8, 8, 4, 0, 4
 };
 
 // 68 = 4 + 64, slippery platform

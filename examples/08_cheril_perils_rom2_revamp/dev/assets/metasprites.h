@@ -23,7 +23,7 @@ const unsigned char * const spr_player [] = {
 	sspl_0C,										// Final frame
 
 	// Climbing ladder (offset 25)
-	sspl_0D, sspl_0E, sspl_0F
+	sspl_0D, sspl_0E, sspl_0F, sspl_0E
 };
 
 // Enemy metasprites
