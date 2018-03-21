@@ -83,7 +83,7 @@ signed int pgtmx, pgtmy;
 #endif
 
 #ifdef ENABLE_LADDERS
-	unsigned char ponladder;
+	unsigned char ponladder, phalfladder;
 	unsigned char ponladderctr;
 #endif
 

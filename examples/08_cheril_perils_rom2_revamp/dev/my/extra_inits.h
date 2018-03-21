@@ -9,3 +9,7 @@ if (level == 0) {
 	pal_cycle [1] = palts1 [14];
 	pal_cycle [2] = palts1 [15];
 }
+
+if (level == 2) {
+	
+}

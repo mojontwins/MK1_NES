@@ -44,6 +44,9 @@ FILL 4096
 
 # Bank 1 (patterns for spr)
 
+# Stuff which has to show the same in each CHR-ROM, place
+# at the beginning. It's easier to manage.
+
 # All sprites are in the same file, and use the same palette
 OPEN ss.png
 PALS palss0.png
@@ -63,10 +66,10 @@ METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8
 METASPRITESET 12, 0, 2, 3, 2, 1, -4, -8
 METASPRITE 14, 3, 2, 3, -4, -8
 
-# Enemies. Linear enemies, only 2+2 kinds, 2x3.
-# Box is 16x16 centered bottom
-LABEL ssen
-METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
+# Items
+# Empty, Key, Heart, Resonator off, Resonator on, explosion, No
+LABEL ssit
+METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
 
 # Platforms. Two cells
 LABEL ssplat
@@ -84,18 +87,12 @@ METASPRITESET 4, 10, 2, 2, 2, 1, 0, 0
 LABEL ssocl
 METASPRITE 8, 10, 2, 2, 0, 0
 
-# Steady shooters
-LABEL ssss
-METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
+# Stuff which may chage per CHR-ROM.
 
-# (Test) Compiled enemies
-LABEL sscomp
-METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0 FLIPPED
-
-# Items
-# Empty, Key, Heart, Resonator off, Resonator on, explosion, No
-LABEL ssit
-METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
+# Enemies. Linear enemies, only 2+2 kinds, 2x3.
+# Box is 16x16 centered bottom
+LABEL ssen
+METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
 
 # Simple items
 # item 1, place 1, used 1, item 2, place 2, used 2

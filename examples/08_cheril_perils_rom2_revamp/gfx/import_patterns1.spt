@@ -45,7 +45,7 @@ PALS palss0.png
 # Bits (numbers for countdown in resonators and shines)
 CHARSET 0, 9, 13, 1
 
-# Metasprites will be stored in this file:
+# Metasprites will be discarded in this file (alreadly defined)
 MAPFILE ..\dev\work\spritedata_dummy.h
 
 # Main player
@@ -57,10 +57,10 @@ METASPRITESET 0, 3, 2, 3, 7, 1, -4, -8
 METASPRITESET 12, 0, 2, 3, 2, 1, -4, -8
 METASPRITE 14, 3, 2, 3, -4, -8
 
-# Enemies. Linear enemies, only 2+2 kinds, 2x3.
-# Box is 16x16 centered bottom
-LABEL ssen
-METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
+# Items
+# Empty, Key, Heart, Resonator off, Resonator on, explosion, No
+LABEL ssit
+METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
 
 # Platforms. Two cells
 LABEL ssplat
@@ -78,27 +78,26 @@ METASPRITESET 4, 10, 2, 2, 2, 1, 0, 0
 LABEL ssocl
 METASPRITE 8, 10, 2, 2, 0, 0
 
+# Stuff which may chage per CHR-ROM.
+# Metasprites will be stored in this file:
+MAPFILE ..\dev\assets\spritedata2.h
+
+# Enemies. Linear enemies,3 kinds, 2x3.
+# Box is 16x16 centered bottom
+LABEL ssen2
+METASPRITESET 0, 20, 2, 3, 6, 1, 0, -8 FLIPPED
+
 # Steady shooters
 LABEL ssss
 METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0
 
-# (Test) Compiled enemies
+# Compiled enemies. Those are BIG
 LABEL sscomp
-METASPRITESET 8, 18, 2, 2, 4, 1, 0, 0 FLIPPED
+METASPRITESET 0, 23, 4, 5, 4, 1, -8, -8 FLIPPED
 
-# Items
-# Empty, Key, Heart, Resonator off, Resonator on, explosion, No
-LABEL ssit
-METASPRITESET 0, 12, 2, 2, 7, 1, 0, 0
-
-# Simple items
-# item 1, place 1, used 1, item 2, place 2, used 2
-LABEL sssit
-METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
-
-# item 3, item 4, item 5
-METASPRITESET 0, 16, 2, 2, 3, 1, 0, 0
+# Simple items 2
+# TODO
+LABEL sssit2
+# METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
 
 FILL 8192
-
-

@@ -338,8 +338,9 @@
 
 #define ENABLE_STEADY_SHOOTERS
 #define STEADY_SHOOTERS_BASE_SPRID		44
-#define STEADY_SHOOTER_KILLABLE
-#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+//#define STEADY_SHOOTER_KILLABLE
+//#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
 
 // Compiled enemies
 
@@ -562,6 +563,7 @@
 	#define CELL_KICKING		9
 
 	#define CELL_CLIMB_CYCLE	25
+	#define CELL_CLIMB_HALF		29
 #endif
 
 // Music

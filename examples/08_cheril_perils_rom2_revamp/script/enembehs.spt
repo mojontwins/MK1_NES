@@ -1,32 +1,63 @@
-# Compiled enems (sample)
+# Compiled enems 
+# Lame boss for level 2
 
-# Enemy type 0 makes a square firing on cycle completed
+# Enemy type 0 
 
 BEGIN beh0
 	:START
 	IDLE 4
-	RIGHT 2
-	IDLE 1
-	DOWN 2
-	IDLE 1
+	FIRE
 	LEFT 2
-	IDLE 1
+	DOWN LEFT 2
+	FIRE
+	RIGHT 7
+	FIRE
 	UP 2
+	FIRE
+	DOWN LEFT 4
+	LEFT 1
+	FIRE
+	UP 3
+	RIGHT 3
+	FIRE
+	DOWN 3
+	FIRE
 	IDLE 1
+	FIRE
+	UP LEFT 4
+	LEFT 1
+	FIRE
+	RIGHT 4
 	FIRE
 	RETURN START
 END
 
-# Enemy type 1 makes a diamond firing in the last step.
+# Enemy type 1 
 
 BEGIN beh1
 	:START
-	IDLE 2
-	DOWN RIGHT 2
-	DOWN LEFT 2
+
+	DOWN 2
+	UP RIGHT 1
+	DOWN 1
+	FIRE
+	UP RIGHT 1
+	DOWN 1
+	FIRE
+	UP RIGHT 1
+	DOWN 2
+	FIRE
+	UP RIGHT 1
 	UP LEFT 2
-	UP RIGHT 2
-	IDLE 2
+	FIRE
+	DOWN 5
+	UP LEFT 2
+	LEFT 1
+	FIRE
+	DOWN LEFT 2
+	FIRE
+	UP 2
+	UP RIGHT 3
 	FIRE
 	RETURN START
 END

@@ -7,6 +7,8 @@
 // Reaching this point, map_buff has the decompressed map screen.
 // You can write as many modifications as you like here:
 
+set_rand (1 + n_pant);
+
 switch (level) {
 	case 0:
 		gpit = 192; while (gpit --) {
@@ -40,7 +42,6 @@ switch (level) {
 			rda = map_buff [gpit]; 
 			if ((rand8 () & 1) && (rda == 3 || rda == 10 || rda == 12)) {				
 				rda += 16;
-				continue;
 			}
 			if (rda == 15 && map_buff [gpit - 1] == 15) rda = 31;
 			if (rda == 14 && map_buff [gpit - 16] != 14) rda = 30;

@@ -31,6 +31,7 @@
 #include "assets/enems1.h"
 #include "assets/enems2.h"
 #include "assets/spritedata.h"
+#include "assets/spritedata2.h"
 #include "assets/tiledata.h"
 #include "assets/tiledata2.h"
 #include "assets/metasprites.h"

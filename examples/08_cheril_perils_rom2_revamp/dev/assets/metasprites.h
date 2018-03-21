@@ -23,7 +23,10 @@ const unsigned char * const spr_player [] = {
 	sspl_0C,										// Final frame
 
 	// Climbing ladder (offset 25)
-	sspl_0D, sspl_0E, sspl_0F, sspl_0E
+	sspl_0D, sspl_0E, sspl_0F, sspl_0E,
+
+	// Half ladder (offset 29)
+	sspl_0A
 };
 
 // Enemy metasprites
@@ -46,10 +49,7 @@ const unsigned char * const spr_enems0 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
-	ssit_05,
-
-	// Steady shooters (offset 44)
-	ssss_00, ssss_01, ssss_02, ssss_03
+	ssit_05
 };
 
 const unsigned char * const spr_enems1 [] = {
@@ -69,16 +69,35 @@ const unsigned char * const spr_enems1 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
+	ssit_05
+};
+
+const unsigned char * const spr_enems2 [] = {
+	// Linear enems and platforms (ids 1-4)
+	ssen2_00_a, ssen2_01_a, 0, 0, ssen2_00_b, ssen2_01_b, 0, 0, // 1
+	ssen2_02_a, ssen2_03_a, 0, 0, ssen2_02_b, ssen2_03_b, 0, 0, // 2
+	ssen2_04_a, ssen2_05_a, 0, 0, ssen2_04_b, ssen2_05_b, 0, 0, // 3 (duplicated 2, won't use)
+	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0,	// Platform (4)
+
+	// Fanty (offset 32)
+	ssfanty_00_a, ssfanty_01_a, 0, 0, ssfanty_00_b, ssfanty_01_b, 0, 0,
+
+	// Saw (offset 40)
+	sssaw_00, sssaw_01,
+
+	// Occlusion (offset 42)
+	ssocl_00,
+
+	// Explosion (offset 43)
 	ssit_05,
 
 	// Steady shooters (offset 44)
 	ssss_00, ssss_01, ssss_02, ssss_03,
 
-	// Compiled (offset 48)
+	// Precompiled (offset 48)
 	sscomp_00_a, sscomp_01_a, sscomp_02_a, sscomp_03_a, 
-	sscomp_00_b, sscomp_01_b, sscomp_02_b, sscomp_03_b
+	sscomp_00_b, sscomp_01_b, sscomp_02_b, sscomp_03_b, 
 };
-
 
 // Item metasprites
 const unsigned char * const spr_hs [] = {

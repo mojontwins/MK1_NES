@@ -3635,3 +3635,29 @@ Ahora se me ha antojado un revamp bestial de Gran Sabiduría (MK2 polishing, tha
 
 [ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
 
+20180321
+========
+
+[ ] Mover config.h a /my
+
+[/] Música OGT Cheril Perils y Cadàveriön
+
+[/] Terminar Cheril Perils (fase extra, pantallas fijas).
+
+[ ] Sir Ababol DX se me está quedando muy atrasado.
+
+[ ] Si te cargas trozos de la fase y hay un reenter al morir, puedes aparecer bloqueado. Buscar solución
+
+Tengo la fase del barco a puntito de caramelo melo, pero quiero ponerle algo de videoaventura. Por lo pronto sería para abrir dos partes: 
+
+- La bodega, en la pantalla 14. Si no se cumple "el resultado del primer puzzle", hay que bloquear los tiles X = (A, B, C), Y = 9 con el tile 25.
+- El castillo, en la pantalla 15. Si no se cumple "el resultado del segundo puzzle", hay que bloquear los tiles X = 15, Y = (6, 7, 8) con el tile 25.
+
+Mientras tanto puedo ver de ir metiendo el cementerio pelao, que le hace ilusión a Anjuel. Lo bueno de meter el cementerio es que creo que de esta hay música, aunque quizá tenga que meterle bien metida la tijera.
+
+~~
+
+Los puzzles molaría que fueran de hablar con gente y correveydiles o quizá objetos y gente. Pero tiene que haber diálogo.
+
+~~
+

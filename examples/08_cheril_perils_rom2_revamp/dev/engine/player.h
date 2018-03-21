@@ -171,6 +171,7 @@ void player_move (void) {
 	#endif
 
 	#ifdef ENABLE_LADDERS
+		rdb = ponladder;
 		ponladder = (!pj && at1 == 32 && at2 == 32);
 	#endif
 
@@ -227,12 +228,28 @@ void player_move (void) {
 		// Gravity
 
 		#ifdef ENABLE_LADDERS
+			// Special cases: in and out the ladder.
+
+			if (ponladder == 0) {
+				if (i & PAD_DOWN) {
+					cy1 = cy2 = (pry + 16) >> 4;
+					cm_two_points ();
+					ponladder = (!pj && at1 == 32 && at2 == 32);
+				}
+
+				if ((i & PAD_UP) && rdb) pvy = 0;
+			}
+
 			if (ponladder) {
 				if (i & PAD_UP) {
 					pvy = -PLAYER_VY_LADDERS;
 				} else if (i & PAD_DOWN) {
 					pvy = PLAYER_VY_LADDERS;
 				} else pvy = 0;
+
+				cy1 = cy2 = (pry + 4) >> 4;
+				cm_two_points ();
+				phalfladder = (at1 != 32) && (at2 != 32);
 			} else
 		#endif
 
@@ -339,9 +356,13 @@ void player_move (void) {
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
 	 		if (
-				//pry + 4 < (cy1 << 4) &&
 				pry < ((cy1 - 1) << 4) + 4 && 
-				((at1 & 12) || (at2 & 12))
+				(
+					(at1 & 12) || (at2 & 12)
+					#ifdef ENABLE_LADDERS
+						|| (!ponladder && ((at1 & 32) && at2 & 32))
+					#endif					
+				)
 			)
 	 		#endif
 			{

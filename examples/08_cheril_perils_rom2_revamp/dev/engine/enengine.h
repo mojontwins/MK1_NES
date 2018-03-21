@@ -261,7 +261,7 @@ void enems_load (void) {
 					case 8:
 						// Saws
 						#ifdef PERSISTENT_ENEMIES
-							// Initialize position & direction from ROM
+							// Initialize position from ROM
 							_en_x = _en_x1;
 							_en_y = _en_y1;							
 						#endif
@@ -321,6 +321,11 @@ void enems_load (void) {
 
 				#ifdef ENABLE_COMPILED_ENEMS
 					case 20:
+						#ifdef PERSISTENT_ENEMIES
+							// Initialize position from ROM
+							_en_x = _en_x1;
+							_en_y = _en_y1;							
+						#endif
 						_en_ct = 0;
 						_en_s = COMPILED_ENEMS_BASE_SPRID;
 						en_behptr [gpit] = en_behptrs [rda];
@@ -368,7 +373,7 @@ void enems_load (void) {
 		#endif
 
 		#if defined (ENABLE_STEADY_SHOOTERS) && !(defined (STEADY_SHOOTER_KILLABLE) && defined (STEADY_SHOOTER_COUNT))
-			if (_ent != 5)
+			if (_en_t != 5)
 		#endif
 		{
 			pkilled ++;
@@ -742,6 +747,9 @@ void enems_move (void) {
 			#endif
 
 			if (
+				#if defined (ENABLE_STEADY_SHOOTERS) && defined (STEADY_SHOOTERS_HARMLESS)
+					_en_t != 5 &&
+				#endif
 				touched == 0 &&
 				pstate == EST_NORMAL &&
 				collide ()

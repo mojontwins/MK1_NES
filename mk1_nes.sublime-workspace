@@ -336,18 +336,29 @@
 	"buffers":
 	[
 		{
-			"file": "src/utils/mtparser.bas",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 3702,
+				"buffer_size": 18806,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/utils/mkts.bas",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 133859,
+				"buffer_size": 19947,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "wip/diario.md",
+			"settings":
+			{
+				"buffer_size": 133751,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -394,35 +405,36 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/utils",
+		"/D/git/MK1_NES/examples/06_lala_prologue",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns1.spt",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
+		"/D/git/MK1_NES/src/utils/pencompiler.bas",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/compiled_enems.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_compiled.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/script/enembehs.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns1.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/spritedata2.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/src/utils/mkts.bas",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/behs.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/my/player_frame_selector.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
 		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/examples/10_che_man/README.md",
 		"/D/git/MK1_NES/examples/10_che_man/dev/engine/hotspots.h",
@@ -483,11 +495,9 @@
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/shines.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/general.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_renderer_complex.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/asset_setup.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/chr_rom_maps.h",
 		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
@@ -527,15 +537,7 @@
 		"/D/git/MK1_NES/testers/00_tester_containers/dev/assets/containers.h",
 		"/D/git/MK1_NES/testers/00_tester_containers/dev/assets/mscnes.h",
 		"/D/git/MK1_NES/testers/00_tester_containers/dev/my/containers_setup.h",
-		"/D/git/MK1_NES/testers/00_tester_containers/dev/my/on_container.h",
-		"/D/git/MK1_NES/examples/make-examples.bat",
-		"/D/git/MK1_NES/diario.md",
-		"/D/Proyectos/2016/20160914--Modificacion WS GestorUsuariosGUIA2 - WS GUIA/instrucciones.txt",
-		"/D/Proyectos/2015/20150309a--cambio-mensaje-descarga-avisos-junta/instruciones.txt",
-		"/D/git/MK1_NES/testers/00_tester_containers/trash/testermacro.c",
-		"/D/git/MK1_NES/testers/00_tester_containers/trash/testermacro.s",
-		"/D/git/MK1_NES/examples/09_cadàveriön/README.md",
-		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt"
+		"/D/git/MK1_NES/testers/00_tester_containers/dev/my/on_container.h"
 	],
 	"find":
 	{
@@ -546,6 +548,10 @@
 		"height": 135.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
+			"D:\\git\\MK1_NES\\examples\\05_cheril_the_goddess_v1\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\ram",
 			"D:\\git\\MK1_NES\\examples\\10_che_man\\dev",
 			"D:\\git\\MK1_NES\\src",
 			"D:\\git\\MK1_NES\\testers\\00_tester_punchy",
@@ -616,6 +622,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rand",
+			"set_rand",
+			"srand",
+			"en_t",
+			"_ent",
+			"ssen",
+			"center",
 			"FLIPPED",
 			"_a",
 			"conveyors",
@@ -736,14 +749,7 @@
 			"timer_start",
 			"WARP_TO",
 			"pval",
-			"REDRAW",
-			"TEXTBOX",
-			"TEXT",
-			"SHOW",
-			"PRINT_TILE_AT",
-			"SHOW",
-			"PLAYER_FLICKERS",
-			"FLICKER"
+			"REDRAW"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -751,6 +757,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"ssen2",
 			"",
 			"_b",
 			"..\\..\\..\\src\\utils",
@@ -877,8 +884,7 @@
 			"IMGD",
 			"0",
 			"max_pants",
-			"sc_c",
-			"_b"
+			"sc_c"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -889,24 +895,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/utils/mtparser.bas",
-					"semi_transient": true,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/config.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3702,
+						"buffer_size": 18806,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								11134,
+								11158
 							]
 						],
 						"settings":
@@ -914,14 +920,46 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 585.0,
+						"translation.y": 3956.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19947,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17040,
+								17040
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9437.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -931,20 +969,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "src/utils/mkts.bas",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "wip/diario.md",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 133859,
+						"buffer_size": 133751,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								112120,
-								112120
+								133622,
+								133622
 							]
 						],
 						"settings":
@@ -952,14 +990,14 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 29.0,
-						"translation.y": 46927.0,
+						"translation.x": 0.0,
+						"translation.y": 60162.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1053,7 +1091,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1061,7 +1099,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 202.0,
+	"side_bar_width": 150.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
