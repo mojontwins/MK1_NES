@@ -9,10 +9,11 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss1.png out=work\palss1.h label=palss1 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2.png out=work\palts2.h label=palts2 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss2.png out=work\palss2.h label=palss2 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltsgrey.png out=work\paltsgrey.h label=paltsgrey silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palssgrey.png out=work\palssgrey.h label=palssgrey silent
 
-copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h+ work\palss2.h + work\paltsgrey.h + work\palssgrey.h assets\palettes.h > nul
+copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h+ work\palss2.h + work\palts3.h + work\paltsgrey.h + work\palssgrey.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
@@ -25,6 +26,8 @@ cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
 ..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1 gencounter
 ..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\assets\enems2.h 2 1 gencounter
+..\..\..\src\utils\eneexp3.exe level3.ene ..\dev\assets\enems3.h 3 1 gencounter
+..\..\..\src\utils\eneexp3.exe level4.ene ..\dev\assets\enems4.h 4 1 gencounter
 
 echo Compiling enembehs
 cd ..\script
@@ -35,6 +38,8 @@ cd ..\map
 ..\..\..\src\utils\rle53mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr_rom_maps.h chr=3
 cd ..\dev
 copy work\mapchr.bin.3 tileset3.chr >nul
+..\..\..\src\utils\mapcnvnes2.exe ..\map\level0_bg.map ..\dev\assets\bg0.h 1 1 99 bg0
+..\..\..\src\utils\mapcnvnes2.exe ..\map\level3_bg.map ..\dev\assets\bg3.h 2 1 99 bg3
 
 echo Exporting music and sound
 cd ..\dev

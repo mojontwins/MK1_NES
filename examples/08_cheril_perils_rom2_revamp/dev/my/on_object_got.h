@@ -6,7 +6,7 @@
 
 // Player got object rda.
 
-if (level == 0 && ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8) {
+if (level == 1 && ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8) {
 	// Make player know 
 	gp_gen = text_open_gate;
 	textbox_do ();

@@ -66,7 +66,7 @@ Print #fOut, ""
 Print " Compiling ~ ";
 
 If debug Then Print
-Print "00            COMMAND       ARG           OOPPPVVV      Hex"
+If debug Then Print "00            COMMAND       ARG           OOPPPVVV      Hex"
 
 prefixesI = 0: totalBytes = 0: totalbehs = 0
 

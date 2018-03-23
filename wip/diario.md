@@ -3659,5 +3659,40 @@ Mientras tanto puedo ver de ir metiendo el cementerio pelao, que le hace ilusió
 
 Los puzzles molaría que fueran de hablar con gente y correveydiles o quizá objetos y gente. Pero tiene que haber diálogo.
 
+20180323
+========
+
+La cosa es ver qué personajes puedo meter. El problema es que me he liado a hacer este juego sin inventarme historia ni hostias, y quizá debería resolver esto antes de empezar.
+
+La fase 1 es en la playa de pepinoni. Ahí hay que romper los templos raros para que se abra la puerta fosfi porque así podemos matar a todos los enemigos.  La fase 2 es una fábrica de conservas. La fase 3 es el barco. ¿Dónde encasqueto el cementerio? Creo que puedo meterlo como tercera fase y dejar el barco como fase 4.
+
+Aquí el tema debería estar en limpiar a todos los enemigos de todas las fases por un puto motivo. Si resuelvo estas cosas puedo meter más personajes y hablar y tal.
+
+Por ejemplo, como me mola mucho Yun, puedo meter a Yun como recurrente. ¿Tengo paleta para Yun? Bueno, se podría intentar resolver. Podría decirse que Yun quiere expandir el negocio y como no puede dejar el mostrador en temporada alta llama a Cheril - pero esto tampoco tiene mucho sentido. Supuestamente Yun es una demonia (antiheroína) y Cheril suele trabajar por su propio oficio y beneficio. Esto no me casa. Es crossover metido con calzador. No me gusta.
+
+También podemos ponerlo de precuela a The Nine. Quizá sea buena idea limpiar la costa de Pepinoni de escoria antes de que empiecen las olimpiadas. En este caso podría hablar con las musas y tal.
+
+Otra cosa que podría resultarme es pensar en una lista de tonterías que quiero meter y a partir de ahí ver qué personajes necesito e inventarme algo.
+
+Llevarse toda la mañana programando en typescript no te deja el celebro muy creativo, por lo que se ve.
+
+~~
+
+Voy a hacer una fase intro reaprovechando pepinoni (TS) y con texto introductorio. "ah, pepinoni, mi sitio preferido" "playas soleadas, alegres bañistas" "¿Pero qué ha pasado? ¿Por qué está todo tan mustio?" Y luego tras unas pantallas te encuentras a la novia de Ninjajar o a quien sea y te explica que han venido los Ohú, unos fantasmas horroribles que dan un montón de mieo. Y que hay que cargarse a todos los monstruos de cada sección para debilitar la magia maligna que hace que salgan más. O algo.
+
+~~
+
+Ya estoy otra vez con fases desordenadas por mierdas de no pensar y diseñar antes de hacer. W.
+
+```
+	0 - assets*4 (pepinoni intro)
+	1 - assets*1 (pepinoni)
+	2 - assets*0 (factory)
+	3 - assets*3 (cementerio)
+	4 - assets*2 (barco pirata)
+```
+
+AFU PICHA.
+
 ~~
 
