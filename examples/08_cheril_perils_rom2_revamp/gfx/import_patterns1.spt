@@ -93,6 +93,11 @@ MAPFILE ..\dev\assets\spritedata2.h
 LABEL ssen2
 METASPRITESET 0, 20, 2, 3, 6, 1, 0, -8 FLIPPED
 
+# Enemies. Linear enemies,3 kinds, 2x3.
+LABEL ssen3
+METASPRITESET 12, 14, 2, 3, 2, 1, 0, -8 FLIPPED
+METASPRITESET 8, 17, 2, 3, 4, 1, 0, -8 FLIPPED
+
 # Steady shooters
 LABEL ssss
 METASPRITESET 0, 18, 2, 2, 4, 1, 0, 0

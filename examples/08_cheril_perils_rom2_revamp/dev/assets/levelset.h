@@ -25,7 +25,7 @@ const unsigned char l_player_max_enems [] = 	{ KILLABLE_ENEMS_4, KILLABLE_ENEMS_
 // Palettes
 
 const unsigned char * const l_pal_bg [] = 		{ palts1, palts1, palts0, palts3, palts2 };
-const unsigned char * const l_pal_fg [] = 		{ palss1, palss1, palss0, palss0, palss2 };
+const unsigned char * const l_pal_fg [] = 		{ palss1, palss1, palss0, palss3, palss2 };
 
 // Metatiles
 
@@ -36,7 +36,7 @@ const unsigned char * const l_behs [] = 		{ behs1, behs1, behs0, behs3, behs2 };
 // Enemy spriteset
 
 const unsigned char * const * const l_spr_enems [] =
-												{ spr_enems1, spr_enems1, spr_enems0, spr_enems0, spr_enems2 };
+												{ spr_enems1, spr_enems1, spr_enems0, spr_enems3, spr_enems2 };
 
 // Map data
 
