@@ -3694,5 +3694,46 @@ Ya estoy otra vez con fases desordenadas por mierdas de no pensar y diseñar ant
 
 AFU PICHA.
 
+20180327
+========
+
+Anjuel es un amor y me ha pasado esta idea para argumento que voy a desarrollar metiendo personajes y diálogos:
+
+> Cheril se va a Pepinoni a pasar unas vacaciones y ya de paso comenzar a pensar en su propia novela, aprovechando que ahora todo el mundo escribe la suya. Ahí ha quedado con Aitor, el Editor que le va a conseguir toda la gente necesaria para que le rellene párrafos de su libro y así no tenga que hacer nada. Ah, y por supuesto que sean graciosos, qué menos. Al llegar a Pepinoni se da cuenta del chocho que tienen montado con los zombis. Joder, no le dejan a una descansar en paz! 
+
+> Una vez destrozados todos los zombies, y hecho eso de los templos que dice el nath y que no me acuerdo qué era, se da cuenta que se había dejado su libreta de APÚNTALO en casa. Así es imposible que te escriban una novela. Mientras volvía a casa, recordó que en su último picnic en el cementerio se había llevado la libreta de APÚNTALO para los posibles chascarrillos que pudieran surgir, pero una vez más, el cementerio estaba lleno de zombis! puñeteros zombis... cunden más que los crowdfundings. Crowdzombis!
+
+> Pero la libreta de APÚNTALO no estaba ahí. ¿Y dónde estará? Lo mejor es contratar a un detective que estuviera libre un domingo por la mañana. El único era Perry Uribe, el Detective, que casualmente estaba por la ciudad. Este citó a Cheril en la vieja fábrica de Longanizas Nardo, pero el asunto no pintaba bien. ¿Quién podría quedar un domingo por la mañana en un sitio tan sugerente? Justo, un guarro de cuidado. Y encima también había zombis. 
+
+> Total, que Cheril decidió, una vez matados todos los zombis, volverse a Pepinoni. Hasta que vio un maravilloso y lujoso Barco Pirata de Playmobil aparcado, que no anclado, a los muelles de Pepinoni. Evidentemente, infestado de zombis. Su sueño de tener un sombrero pirata cada vez más cerca. ¡Qué pena que no cabía en el juego!
+
+Mancantao candela. Ahora tengo que cambiar las fases de orden:
+
+```
+	- Intro (4)
+	- Pepinoni (1)
+	- Cementerio (3)
+	- Fábrica (0)
+	- Barco pirata (2)
+```
+
+Pero eso es cosa fásil. De `4 1 0 3 2` a `4 1 3 0 2`. No te qué, no te qué, no te quejes, nene.
+
+Anda que no molaría un level manager que automáticamente te generase el código en orden y tal, pero no lo voy a escribir dos veces porque me pondré a hacerlo y tampoco es que haga tanta falta.
+
+Ea, cambiao.
+
 ~~
+
+También quiero cutscenes y tal, pero antes voy a hacer los diálogos ingame. Y tengo que modificar textbox para que saque un sprite en la esquinita como en el Otro Bosque de MK2.
+
+Veamos, extensión a text box para portraits. Lo suyo es que haya la opción de no llevar personaje. Los sprites deberían poder sacarse de `spr_hs`, como todo lo demás asín que no es player o enemigos. Así que lo suyo sería codificar 0 = no sprite, cualquier número = índice en `spr_hs` de lo que hay que dibujar.
+
+En `textbox_draw_text`, la linea de texto empieza en `0x2000 + 6 + (rdy << 5)` para cada linea. Tengo que modificar ese 6. En modo "con portraits", ese 6 debe venir de una variable que valga 6 (no portraits) o 9 (portraits).
+
+Hecho. Ha sido una modificación ínfima (aunque tendré que ajustar, que la Y del metasprite la he puesto un poco a boleo).
+
+~~
+
+Tengo que montar un rollo script de diálogo que sencillamente secuencie textboxes. Rollo dos listas de `id_portrait` y `custom_text`, y que vaya consumiéndolas hasta un end marker o algo.
 

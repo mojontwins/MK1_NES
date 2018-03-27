@@ -138,7 +138,7 @@ const unsigned char * const spr_hs [] = {
 	// 	used 1,	 used 2,  0,       0,       0,       0, 0, 0
 	sssit_00, sssit_03, sssit_06, sssit_07, sssit_08, 0, 0, 0,	// N (total = 8)
 	sssit_01, sssit_04, 0, 0, 0, 0, 0, 0, 						// N + HS_USE_OFFS (N+8)
-	sssit_02, sssit_05, 0, 0, 0, 0, 0, 0 						// N + 2*HS_USE_OFFS (N+16)
+	sssit_02, sssit_05, 0, 0, 0, 0, 0, 0,						// N + 2*HS_USE_OFFS (N+16)
 
 	//  6 = crank/key
 	//  7 = ?
@@ -152,4 +152,7 @@ const unsigned char * const spr_hs [] = {
 	// 15 = ?
 	// 22 = propellers started + crank (used)
 	// 23 = ? + ? (used)
+
+	// 30 onwards: Characters
+	sschar1_00, 					// Amador / Jack
 };

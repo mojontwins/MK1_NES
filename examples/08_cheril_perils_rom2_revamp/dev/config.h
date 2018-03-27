@@ -218,6 +218,8 @@
 
 #define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
+#define TEXT_BOX_WITH_PORTRAITS					// Draw spr_hs [rdd] if != 0 in the text box if defined
+#define TEXT_BOX_DIALOGUES						// Add code for dialogues
 
 // Timer. 
 

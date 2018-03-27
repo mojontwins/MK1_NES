@@ -46,13 +46,6 @@ switch (level) {
 		break;
 
 	case 2:
-		gp_gen = bgs [level];
-		gpit = 129; while (gpit --) {
-			if (map_buff [gpit] == 0) map_buff [gpit] = gp_gen [gpit];
-		}
-		break;
-
-	case 3:
 		rda = n_pant & 1;
 		gp_gen = bgs [level] + (rda << 7) + (rda << 6);
 		gpit = 192; while (gpit --) {
@@ -71,6 +64,13 @@ switch (level) {
 			if (rda == 8 && map_buff [gpit - 16] != 8) rda = 24;
 			if (rda == 0) rda = gp_gen [gpit];
 			map_buff [gpit] = rda;
+		}
+		break;
+
+	case 3:
+		gp_gen = bgs [level];
+		gpit = 129; while (gpit --) {
+			if (map_buff [gpit] == 0) map_buff [gpit] = gp_gen [gpit];
 		}
 		break;
 

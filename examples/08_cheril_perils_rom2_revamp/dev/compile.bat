@@ -60,10 +60,16 @@ rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 5
 rem cd ..\dev
 
 :noscript
-cc65 -Oi game.c --add-source -D CNROM
 ca65 crt0.s -o crt0.o -D CNROM=1
+
+cc65 -Oi game.c --add-source -D CNROM
 ca65 game.s
 ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+
+cc65 -Oi game.c --add-source -D CNROM -D SPANISH
+ca65 game.s
+ld65 -v -C nes-CNROM.cfg -o cart-sp.nes crt0.o game.o runtime.lib -m labels.txt
+
 
 del *.o
 del game.s
