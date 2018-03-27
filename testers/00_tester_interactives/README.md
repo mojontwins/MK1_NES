@@ -11,6 +11,8 @@ This tester contains code to generate the same experience using both script driv
 
 **As of v1.0 you acn't use scripting *and* interactives from code at the same time.** - When scripting is on, interactives are created from the script only and all code related to interactives in the engine won't be included.
 
+You may use interactives *and* **easy_objects** if you plan to use interactives just for *sprites* (see below). In such case, save code leaving `#define INTERACTIVES_ONLY_SPRITES` uncommented.
+
 Flags
 -----
 
@@ -35,6 +37,8 @@ Interactives are just stuff on screen you can interact with. They are rendered a
 If you know about **easy objects**, you probably know that the object you are carrying is stored in the `pinv` variable. When using interactives, the object you are carrying is stored in a flag. Which flag is again configured in `config.h` via the `FLAG_INVENTORY` directive.
 
 So when you interact with a container, the value in the flag bound with the container and the value of `flags [FLAG_INVENTORY]` are swapped.
+
+If you only need interactive *sprites* (if you are using **easy_objects** for object management, or nothing at all, for instance), don't forget to define `INTERACTIVES_ONLY_SPRITES`. To see that in action, be sure to check `08_cheril_perils_rom2_revamp`. 
 
 Display
 -------

@@ -35,9 +35,6 @@
 #include "assets/tiledata.h"
 #include "assets/tiledata2.h"
 #include "assets/metasprites.h"
-#ifdef MULTI_LEVEL
-	#include "assets/levelset.h"
-#endif
 #ifdef ENABLE_TEXT_BOX
 	#include "assets/custom_texts.h"
 #endif
@@ -46,6 +43,9 @@
 #endif
 #if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 	#include "assets/interactives.h"
+#endif
+#ifdef MULTI_LEVEL
+	#include "assets/levelset.h"
 #endif
 
 #include "assets/hud_rle.h"

@@ -4,9 +4,6 @@
 // Interactives from code
 
 // For each interactive: NP YX F.
-const unsigned char interactives_0 [] = {
-	0, 0, 0,
-
+const unsigned char interactives2 [] = {
 	0xff
 };
-

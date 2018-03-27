@@ -77,3 +77,10 @@ const unsigned char * const l_hotspots [] = 	{ hotspots_1, hotspots_0, hotspots_
 #ifdef CNROM
 	const unsigned char l_chr_rom_bank [] = 	{ 0, 0, 1 };
 #endif
+
+// Interactives
+
+#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
+	const unsigned char * const l_interactives [] = 
+												{ 0, 0, interactives2 };
+#endif

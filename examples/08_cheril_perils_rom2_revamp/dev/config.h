@@ -424,9 +424,10 @@
 // Interactives
 // ------------
 
-//#define ENABLE_INTERACTIVES				// Graphical flag representations!
+#define ENABLE_INTERACTIVES					// Graphical flag representations!
 #define INTERACTIVES_MAX 				4	// As per screen
-#define FLAG_INVENTORY					0
+//#define FLAG_INVENTORY					0
+#define INTERACTIVES_ONLY_SPRITES			// If you are using other means for items and just need sprites
 
 // Top view:
 // ---------
