@@ -32,6 +32,12 @@ PALS palts2.png
 LABEL ts2
 MAPPED 0, 0, 2, 2, 16, 3, 41
 
+# ts3
+OPEN ts3.png
+PALS palts3.png
+LABEL ts3
+MAPPED 0, 0, 2, 2, 16, 3, 41
+
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
 FILL 4096
@@ -86,6 +92,11 @@ MAPFILE ..\dev\assets\spritedata2.h
 # Box is 16x16 centered bottom
 LABEL ssen2
 METASPRITESET 0, 20, 2, 3, 6, 1, 0, -8 FLIPPED
+
+# Enemies. Linear enemies,3 kinds, 2x3.
+LABEL ssen3
+METASPRITESET 12, 14, 2, 3, 2, 1, 0, -8 FLIPPED
+METASPRITESET 8, 17, 2, 3, 4, 1, 0, -8 FLIPPED
 
 # Steady shooters
 LABEL ssss

@@ -3659,5 +3659,81 @@ Mientras tanto puedo ver de ir metiendo el cementerio pelao, que le hace ilusió
 
 Los puzzles molaría que fueran de hablar con gente y correveydiles o quizá objetos y gente. Pero tiene que haber diálogo.
 
+20180323
+========
+
+La cosa es ver qué personajes puedo meter. El problema es que me he liado a hacer este juego sin inventarme historia ni hostias, y quizá debería resolver esto antes de empezar.
+
+La fase 1 es en la playa de pepinoni. Ahí hay que romper los templos raros para que se abra la puerta fosfi porque así podemos matar a todos los enemigos.  La fase 2 es una fábrica de conservas. La fase 3 es el barco. ¿Dónde encasqueto el cementerio? Creo que puedo meterlo como tercera fase y dejar el barco como fase 4.
+
+Aquí el tema debería estar en limpiar a todos los enemigos de todas las fases por un puto motivo. Si resuelvo estas cosas puedo meter más personajes y hablar y tal.
+
+Por ejemplo, como me mola mucho Yun, puedo meter a Yun como recurrente. ¿Tengo paleta para Yun? Bueno, se podría intentar resolver. Podría decirse que Yun quiere expandir el negocio y como no puede dejar el mostrador en temporada alta llama a Cheril - pero esto tampoco tiene mucho sentido. Supuestamente Yun es una demonia (antiheroína) y Cheril suele trabajar por su propio oficio y beneficio. Esto no me casa. Es crossover metido con calzador. No me gusta.
+
+También podemos ponerlo de precuela a The Nine. Quizá sea buena idea limpiar la costa de Pepinoni de escoria antes de que empiecen las olimpiadas. En este caso podría hablar con las musas y tal.
+
+Otra cosa que podría resultarme es pensar en una lista de tonterías que quiero meter y a partir de ahí ver qué personajes necesito e inventarme algo.
+
+Llevarse toda la mañana programando en typescript no te deja el celebro muy creativo, por lo que se ve.
+
 ~~
+
+Voy a hacer una fase intro reaprovechando pepinoni (TS) y con texto introductorio. "ah, pepinoni, mi sitio preferido" "playas soleadas, alegres bañistas" "¿Pero qué ha pasado? ¿Por qué está todo tan mustio?" Y luego tras unas pantallas te encuentras a la novia de Ninjajar o a quien sea y te explica que han venido los Ohú, unos fantasmas horroribles que dan un montón de mieo. Y que hay que cargarse a todos los monstruos de cada sección para debilitar la magia maligna que hace que salgan más. O algo.
+
+~~
+
+Ya estoy otra vez con fases desordenadas por mierdas de no pensar y diseñar antes de hacer. W.
+
+```
+	0 - assets*4 (pepinoni intro)
+	1 - assets*1 (pepinoni)
+	2 - assets*0 (factory)
+	3 - assets*3 (cementerio)
+	4 - assets*2 (barco pirata)
+```
+
+AFU PICHA.
+
+20180327
+========
+
+Anjuel es un amor y me ha pasado esta idea para argumento que voy a desarrollar metiendo personajes y diálogos:
+
+> Cheril se va a Pepinoni a pasar unas vacaciones y ya de paso comenzar a pensar en su propia novela, aprovechando que ahora todo el mundo escribe la suya. Ahí ha quedado con Aitor, el Editor que le va a conseguir toda la gente necesaria para que le rellene párrafos de su libro y así no tenga que hacer nada. Ah, y por supuesto que sean graciosos, qué menos. Al llegar a Pepinoni se da cuenta del chocho que tienen montado con los zombis. Joder, no le dejan a una descansar en paz! 
+
+> Una vez destrozados todos los zombies, y hecho eso de los templos que dice el nath y que no me acuerdo qué era, se da cuenta que se había dejado su libreta de APÚNTALO en casa. Así es imposible que te escriban una novela. Mientras volvía a casa, recordó que en su último picnic en el cementerio se había llevado la libreta de APÚNTALO para los posibles chascarrillos que pudieran surgir, pero una vez más, el cementerio estaba lleno de zombis! puñeteros zombis... cunden más que los crowdfundings. Crowdzombis!
+
+> Pero la libreta de APÚNTALO no estaba ahí. ¿Y dónde estará? Lo mejor es contratar a un detective que estuviera libre un domingo por la mañana. El único era Perry Uribe, el Detective, que casualmente estaba por la ciudad. Este citó a Cheril en la vieja fábrica de Longanizas Nardo, pero el asunto no pintaba bien. ¿Quién podría quedar un domingo por la mañana en un sitio tan sugerente? Justo, un guarro de cuidado. Y encima también había zombis. 
+
+> Total, que Cheril decidió, una vez matados todos los zombis, volverse a Pepinoni. Hasta que vio un maravilloso y lujoso Barco Pirata de Playmobil aparcado, que no anclado, a los muelles de Pepinoni. Evidentemente, infestado de zombis. Su sueño de tener un sombrero pirata cada vez más cerca. ¡Qué pena que no cabía en el juego!
+
+Mancantao candela. Ahora tengo que cambiar las fases de orden:
+
+```
+	- Intro (4)
+	- Pepinoni (1)
+	- Cementerio (3)
+	- Fábrica (0)
+	- Barco pirata (2)
+```
+
+Pero eso es cosa fásil. De `4 1 0 3 2` a `4 1 3 0 2`. No te qué, no te qué, no te quejes, nene.
+
+Anda que no molaría un level manager que automáticamente te generase el código en orden y tal, pero no lo voy a escribir dos veces porque me pondré a hacerlo y tampoco es que haga tanta falta.
+
+Ea, cambiao.
+
+~~
+
+También quiero cutscenes y tal, pero antes voy a hacer los diálogos ingame. Y tengo que modificar textbox para que saque un sprite en la esquinita como en el Otro Bosque de MK2.
+
+Veamos, extensión a text box para portraits. Lo suyo es que haya la opción de no llevar personaje. Los sprites deberían poder sacarse de `spr_hs`, como todo lo demás asín que no es player o enemigos. Así que lo suyo sería codificar 0 = no sprite, cualquier número = índice en `spr_hs` de lo que hay que dibujar.
+
+En `textbox_draw_text`, la linea de texto empieza en `0x2000 + 6 + (rdy << 5)` para cada linea. Tengo que modificar ese 6. En modo "con portraits", ese 6 debe venir de una variable que valga 6 (no portraits) o 9 (portraits).
+
+Hecho. Ha sido una modificación ínfima (aunque tendré que ajustar, que la Y del metasprite la he puesto un poco a boleo).
+
+~~
+
+Tengo que montar un rollo script de diálogo que sencillamente secuencie textboxes. Rollo dos listas de `id_portrait` y `custom_text`, y que vaya consumiéndolas hasta un end marker o algo.
 

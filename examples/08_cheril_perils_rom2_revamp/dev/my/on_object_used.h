@@ -8,7 +8,7 @@
 
 // If object 6 is placed on screen 9 -> enable propellers
 
-if (level == 1 && ht [9] == 6 + 2*HS_USE_OFFS) {
+if (level == 3 && ht [9] == 6 + 2*HS_USE_OFFS) {
 	propellers_on = 1;
 	// Make player know 
 	gp_gen = text_propellers;

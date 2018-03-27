@@ -30,6 +30,8 @@
 #include "assets/enems0.h"
 #include "assets/enems1.h"
 #include "assets/enems2.h"
+#include "assets/enems3.h"
+#include "assets/enems4.h"
 #include "assets/spritedata.h"
 #include "assets/spritedata2.h"
 #include "assets/tiledata.h"
@@ -49,6 +51,11 @@
 #endif
 
 #include "assets/hud_rle.h"
+
+ // Custom bgs
+#include "assets/bg0.h"
+#include "assets/bg3.h"
+#include "my/bgs.h"
 
 // Music
 extern const unsigned char m_ingame [];
@@ -124,7 +131,7 @@ void main(void) {
 		//title ();
 
 #ifdef MULTI_LEVEL		
-		level = 2;
+		level = 3;
 #endif
 		plife = PLAYER_LIFE;
 
