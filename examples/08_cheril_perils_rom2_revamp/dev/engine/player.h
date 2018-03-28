@@ -42,9 +42,11 @@ void player_init (void) {
 	pgotten = 0;
 	pfiring = 0;
 
-	#ifdef PLAYER_CAN_FIRE
+	#ifdef ENEMS_MAY_DIE
 		pkilled = 0;
+	#endif
 
+	#ifdef PLAYER_CAN_FIRE
 		#ifdef MAX_AMMO
 			#ifdef INITIAL_AMMO
 				pammo = INITIAL_AMMO
