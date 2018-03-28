@@ -18,17 +18,18 @@
 
 	const unsigned char dialogue_0_0 [] =
 		"EH, CHERIL, QUE%"
-		"TAL ESTAS?%"
+		"TAL TE VA TODO?%"
 		"SEH, NO HAY NADIE.%"
 		"NO ES EL PEPINONI%"
-		"QUE CONOCEMOS...%";
+		"AL QUE ESTAMOS%"
+		"ACOSTUMBRADOS";
 
 	const unsigned char dialogue_0_1 [] =
 		"AL PRINCIPIO PENSE%"
 		"QUE NO HABIA NADIE%"
 		"POR LA LLUVIA, PERO%"
 		"A LO MEJOR ES POR%"
-		"LOSZOMBIES, NO?%"
+		"LOS ZOMBIES, NO?%"
 		"SI, ES POSIBLE.%";
 
 	const unsigned char dialogue_0_2 [] =
@@ -84,10 +85,9 @@
 // Dialogue portraits: 0 for none, number for index to spr_hs!
 
 #define PORTRAIT_NONE 		0
-#define PORTRAIT_AMADOR 	30
 
 const unsigned char dialogue_portraits [] = {
-	PORTRAIT_AMADOR, PORTRAIT_AMADOR, PORTRAIT_AMADOR,
+	SPR_AMADOR, SPR_AMADOR, SPR_AMADOR,
 };
 
 const unsigned char * const dialogue_texts [] = {
