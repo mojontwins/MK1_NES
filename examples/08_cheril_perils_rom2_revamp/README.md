@@ -68,13 +68,13 @@ We need quicksands (map tiles with `beh = 2`):
     #define ENABLE_QUICKSANDS
 ```
 
-And conveyors (map tiles with beh & (8 | 32)):
+And conveyors (map tiles with `beh & (8 | 32)`):
 
 ```c
     #define ENABLE_CONVEYORS
 ```
 
-And ladders (map tiles with beh == 32). More on them latter, as half of their functionality is customized when selecting the main character cell.
+And ladders (map tiles with `beh == 32`). More on them latter, as half of their functionality is customized when selecting the main character cell.
 
 ```c
     #define ENABLE_LADDERS
@@ -91,7 +91,7 @@ And propellers.
     //#define PROPELLERS_ON_BY_DEFAULT
 ```
 
-Propeller tile 24 will place a propeller. This is a multilevel game so does it mean that tile 24 will spawn propellers in every level? Yes and no. `PROPELLERS_ON_BY_DEFAULT` is commented out, so unless you make `propellers_on = 1` *manually*, no propellers will be placed.
+Map tile 24 will place a propeller. This is a multilevel game... does it mean that tile 24 will spawn propellers in every level? Yes and no. `PROPELLERS_ON_BY_DEFAULT` is commented out, so unless you make `propellers_on = 1` *manually*, no propellers will be placed.
 
 In fact, we will be using propellers only on level 4 (the factory), and they are off until we use a special item. We will set `propellers_on` manually when that happens.
 
@@ -282,7 +282,7 @@ Level by level: level 0
 
 Level 0, the first level, is a short level to make the player learn how to jump and contains a trivial "activate resonator then jump on baddie" situation.
 
-The level begins with 4 screens with simple platform arrangements, then a screen with Amador the Lumberjack, who will tell us about our mission, and a final screen with an enemy and a resonator. The enemy and the resonator are locked behind a gate. The gate will open once Cheril talks with Amador.
+The level begins with 4 screens with simple platform arrangements, then a screen with Amador the Lumberjack, who will tell the player about the mission, and a final screen with an enemy and a resonator. The enemy and the resonator are locked behind a gate. The gate will open once Cheril talks with Amador.
 
 Amador the lumberjack will be implemented as an interactive sprite. Interacting with Amador will display a dialogue and set a custom variable. The gate will be cleared if such custom variable is set via custom map rendering. There's also a nice palette cycle to make quicksands look pretty.
 
@@ -303,7 +303,7 @@ Such variables need to be initialized in `my/extra_inits.h`:
     level0_gate = 0;
 ```
 
-Let's place the interactive sprite. `assets/interactives.h` has an array defined for each level. Amador is sprite #30 in `spr_hs` and we need to place it at X = 8, Y = 9. We won't need more interactive sprites in this level. We had the decency of defining `SPR_AMADOR` as "30" in `assets/metasprites.h`. This will make the code more readable.
+Let's place the interactive sprite. `assets/interactives.h` has an array defined for each level. Amador is sprite #30 in `spr_hs` and we need to place it at X = 8, Y = 9. We won't need more interactive sprites in this level. For readability, `SPR_AMADOR` is defined as "30" in `assets/metasprites.h`. 
 
 ```c 
     const unsigned char interactives0 [] = {
@@ -312,13 +312,19 @@ Let's place the interactive sprite. `assets/interactives.h` has an array defined
     };
 ```
 
-So the engine will place amador on screen 4 at (8, 9) and make it interactive. When the player collides with such sprite and presses the B button, the code in `my/on_interactive.h` will be run.
+So the engine will place Amador on screen 4 at (8, 9) and make it interactive. When the player collides with such sprite and presses the B button, the code in `my/on_interactive.h` will be run.
 
-We have to define a dialogue. Just three lines of text displayed in sequence. This is done in `assets/custom_texts.h`. The three lines of text are `dialogue_0_0`, `dialogue_0_1` and `dialogue_0_2`. All three lines of text will be said by Amador, so:
+When the player interacts with Amador, three text boxes (with a "portrait" consisting in Amador's metasprite) will be displayed in sequence. That is achieved by defining a dialogue. Dialogues are just sequences of text boxes. 
+
+Dialogues are defined by two arrays in `custom_texts.h`. The first, `dialogue_portraits`, is used to store which portrait should be displayed with each text box (0 means "no portrait").  The second, `dialogue_texts`, to store the actual string of text displayed in the text box.
+
+A dialogue is run calling `textbox_dialogue_do (n, m)`, which will display the text boxes using `dialogue_portraits` and `dialogue_texts` elements from n to m, both included.
+
+The elements 0 to 2 in the arrays will contain the first dialogue in the game:
 
 ```c
     const unsigned char dialogue_portraits [] = {
-        PORTRAIT_AMADOR, PORTRAIT_AMADOR, PORTRAIT_AMADOR,
+        SPR_AMADOR, SPR_AMADOR, SPR_AMADOR,
         [...]
     };
 
@@ -355,7 +361,7 @@ The gate has to be cleared on entering screen 5. This is achieved via custom ren
     }
 ```
 
-This will clear tiles X, Y = (4, 9) and (4, 10) on level 0, screen 5, if level0_gate is set.
+This will clear tiles X, Y = (4, 9) and (4, 10) on level 0, screen 5, if `level0_gate` is set.
 
 Remember the custom level ending condition. We need to make it happen when every enemy in the level is killed. So we add some code to `my/extra_checks.h`:
 
