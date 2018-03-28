@@ -82,5 +82,5 @@ const unsigned char * const l_hotspots [] = 	{ hotspots_4, hotspots_1, hotspots_
 
 #if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 	const unsigned char * const l_interactives [] = 
-												{ 0, 0, interactives2 };
+												{ interactives0, interactives1, interactives2, interactives3, interactives4 };
 #endif

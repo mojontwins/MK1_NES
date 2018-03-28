@@ -30,7 +30,7 @@ unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
 
 // Sprite related
 
-unsigned char oam_index;
+unsigned char oam_index, oam_index_aux;
 
 // Enemies
 

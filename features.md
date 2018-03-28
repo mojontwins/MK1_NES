@@ -320,8 +320,6 @@ Where `CELL_USE` is the index of the first "use animation" metasprite in the `sp
 Timer
 -----
 
-(Not used on this game?)
-
 Runs a timer which you can display. It detects when it reaches zero. You can integrate this with the scripting engine, or react to it adding C code to `my/extra_checks.h`.
 
 ```c
@@ -370,20 +368,6 @@ Springs
 - When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.
 - Springs will only work if `springs_on`. `springs_on` is set from the beginning if `SPRINGS_ON_BY_DEFAULT` is set.
 
-CNROM
------
-
-To make CNROM games you have to:
-
-- Generate four tileset?.chr files, with ? = 0..3, instead of just one tileset.chr file for NROM.
-- Add `-D CNROM` in the `cc65` call which compiles the game in `compile.bat`
-- Add `-D CNROM=1` in the `ca65` call which assembles `crt0.s` in `compile.bat`.
-- Use `-C nes-CNROM.cfg` instead of `-C nes.cfg` in the `la65` call which links the cart in `compile.bat`
-- Provide correct values in the `l_chr_rom_bank` array in `levelset.h` so the engine knows which CHR-ROM bank it should page in for each level.
-- Note that you might need to include sets of `tileset?.h` and `spriteset?.h` files in `game.c` to fit your needs.
-
-Take a peek at `08_cheril_perils_rom2_revamp` to see this in action!
-
 Compiled enemies
 ----------------
 
@@ -411,3 +395,107 @@ Enemmies are rendered facing left or right. There are two animation cells for wh
     IDLE_LEFT_0
     IDLE_LEFT_1
 ```
+
+CNROM
+-----
+
+To make CNROM games you have to:
+
+- Generate four tileset?.chr files, with ? = 0..3, instead of just one tileset.chr file for NROM.
+- Add `-D CNROM` in the `cc65` call which compiles the game in `compile.bat`
+- Add `-D CNROM=1` in the `ca65` call which assembles `crt0.s` in `compile.bat`.
+- Use `-C nes-CNROM.cfg` instead of `-C nes.cfg` in the `la65` call which links the cart in `compile.bat`
+- Provide correct values in the `l_chr_rom_bank` array in `levelset.h` so the engine knows which CHR-ROM bank it should page in for each level.
+- Note that you might need to include sets of `tileset?.h` and `spriteset?.h` files in `game.c` to fit your needs.
+
+Take a peek at `08_cheril_perils_rom2_revamp` to see this in action!
+
+Maps in CNROM
+-------------
+
+You can store map data in unused CHR-ROM banks. This can be great, specially if manufacturers like INL can make CNROM carts with up to 16 banks of CHR-ROM. You can out lots of maps in the extra space.
+
+To put your maps into CHR-ROM you have to do some preparations. The converter `rle53mapchrrom` will generate .bin files you can use as CHR-ROM banks plus a `.h` file with indexes and stuff for you to `#include` in your project.
+
+First of all, create a maplist.txt file in `/maps` containing the list of maps in your game, plus some parameters. For example, in this game...
+
+```
+    level0.map,6,4,15
+    level1.map,8,3,99,fixmappy
+```
+
+Each line defines a map: file name, width, height, tile representing locks, and "fixmappy" if you want the converter to substract 1 to all read tiles.
+
+The converter will stuff all map data from a given CHR-BANK onwards, and generate an index file. In compile.bat
+
+```bat
+    echo Making map
+    cd ..\map
+    ..\..\..\src\utils\rle53mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr_rom_maps.h chr=3
+    cd ..\dev
+    copy work\mapchr.bin.3 tileset3.chr >nul
+```
+
+In this example, we read `maplist.txt` in `/map` and generate the `/dev/assets/chr_rom_maps.h` index file, plus a set of binaries for CHR_ROM 3 (`chr=3`) onwards. The generated files will have a file name `..\dev\work\mapchr.bin.<bank>`.
+
+In the example, just one binary is generated, `work/mapchr.bin.3`, which is copied to `tileset3.chr` so it is included in the ROM by the `crt0.s` file.
+
+The index file will contain something simmilar to this fragment of code as per included map:
+
+```c 
+    // Map # 0 read from level0.map (6x4)
+
+    // Definitions
+
+    #define MAP_00_CHRROM    3
+    #define MAP_00_BASE      0x0000
+    #define MAP_00_W         6
+    #define MAP_00_H         4
+    #define MAP_00_MAXPANTS  24
+    #define MAP_00_N_LOCKS   4
+
+    // Screens index
+
+    const unsigned int map_00_scr_offsets [] = {
+        MAP_00_BASE + 0x0000, MAP_00_BASE + 0x005E, 
+        MAP_00_BASE + 0x00C8, MAP_00_BASE + 0x0145, 
+        MAP_00_BASE + 0x01C2, MAP_00_BASE + 0x0248, 
+        MAP_00_BASE + 0x02A7, MAP_00_BASE + 0x0317, 
+        MAP_00_BASE + 0x039C, MAP_00_BASE + 0x0410, 
+        MAP_00_BASE + 0x0479, MAP_00_BASE + 0x04F7, 
+        MAP_00_BASE + 0x056F, MAP_00_BASE + 0x05CE, 
+        MAP_00_BASE + 0x0642, MAP_00_BASE + 0x06B7, 
+        MAP_00_BASE + 0x0738, MAP_00_BASE + 0x079E, 
+        MAP_00_BASE + 0x0811, MAP_00_BASE + 0x088B, 
+        MAP_00_BASE + 0x091C, MAP_00_BASE + 0x0994, 
+        MAP_00_BASE + 0x0A1C, MAP_00_BASE + 0x0A78
+    };
+
+    // Total screens size in bytes is 2778
+
+    // Locks
+    // These tiles are locks:  15
+    const unsigned char map_00_locks [] = {
+        0x15, 0xaf, 0x16, 0xaf
+    };
+```
+
+You will have to use `MAP_xx_CHRROM`, `map_xx_scr_offsets`, `MAP_00_N_LOCKS` and  `map_00_locks` in your `assets/levelset.h` file.
+
+```c
+    const unsigned char l_map_chr_rom_bank [] = { MAP_00_CHRROM, ... };
+    const unsigned int * const l_map [] =       { map_00_scr_offsets, ... };
+    const unsigned char * const l_locks [] =    { map_00_locks, ... };
+    const unsigned char l_n_bolts [] =          { MAP_00_N_LOCKS, ... };
+```
+
+And hat's it. Don'r forget to setup the map format in `config.h`, of course:
+
+```c
+    //#define MAP_FORMAT_PACKED
+    //#define MAP_FORMAT_RLE16
+    //#define MAP_FORMAT_RLE53
+    #define MAP_FORMAT_CHRROM
+```
+
+Note that `MAP_FORMAT_CHRROM` will autodefine `MAP_RENDERER_COMPLEX`.

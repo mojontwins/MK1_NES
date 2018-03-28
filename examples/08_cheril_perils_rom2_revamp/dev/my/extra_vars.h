@@ -5,3 +5,4 @@
 // If your customs need extra variables (in BSS) define them here
 
 unsigned char pal_cycle [3];
+unsigned char level0_gate;

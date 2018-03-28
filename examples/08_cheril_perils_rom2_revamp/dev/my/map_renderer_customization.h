@@ -29,19 +29,15 @@ switch (level) {
 		// Clear gate if all objects in place
 		if (level == 1 && n_pant == 6) {
 			if (ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8) {
-				map_buff [14+16*4] = 22;
-				map_buff [14+16*5] = 22;
+				map_buff [0x4E] = 22; 
+				map_buff [0x5E] = 22;
 			}
 		}
 
-		// Clear gate if already talked to muse
-		if (level == 0 && n_pant == 5) {
-			/*
-			if () {
-				map_buff [14+16*4] = 22;
-				map_buff [14+16*5] = 22;
-			}
-			*/
+		// Clear gate if already talked to Amador
+		if (level == 0 && n_pant == 5 && level0_gate) {
+			map_buff [0x94] = 0;
+			map_buff [0xA4] = 0;
 		}
 		break;
 

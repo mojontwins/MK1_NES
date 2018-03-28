@@ -131,7 +131,7 @@ void main(void) {
 		//title ();
 
 #ifdef MULTI_LEVEL		
-		level = 3;
+		level = 0;
 #endif
 		plife = PLAYER_LIFE;
 

@@ -7,3 +7,8 @@
 // rdc contains which interactive 'f' has been interacted.
 // if rdc&128    -> container.
 // if !(rdc&128) -> sprite face.
+
+if (level == 0 && rdc == SPR_AMADOR) {
+	textbox_dialogue_do (0, 2);
+	level0_gate = 1;
+}

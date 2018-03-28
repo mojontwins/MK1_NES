@@ -57,11 +57,11 @@ void textbox_do (void) {
 	rdm = TEXT_BOX_FRAME_TILE_OFFSET; textbox_frame ();
 #ifdef TEXT_BOX_WITH_PORTRAITS
 	if (rdd) {
-		oam_hide_rest (oam_meta_spr (
-			48, 103,
-			oam_index,
-			spr_hs [rdd]));
-		rdm = 9;
+		oam_meta_spr (
+			44, 103,
+			256-32,
+			spr_hs [rdd]);
+		rdm = 8;
 	} else rdm = 6;
 #endif	
 	textbox_draw_text ();
@@ -69,13 +69,16 @@ void textbox_do (void) {
 		ppu_waitnmi ();
 		pad_read (); if (pad_this_frame & (PAD_A|PAD_B)) break;
 	}
+#ifdef TEXT_BOX_WITH_PORTRAITS
+	if (rdd) oam_hide_rest (256-32);
+#endif
 	rdm = 0; textbox_frame ();
 	clear_update_list ();
 }
 
 #ifdef TEXT_BOX_DIALOGUES
 	void textbox_dialogue_do (unsigned char dfrom, unsigned char dto) {
-		for (gpjt = dfrom; gpjt < dto; gpjt ++) {
+		for (gpjt = dfrom; gpjt <= dto; gpjt ++) {
 			rdd = dialogue_portraits [gpjt];
 			gp_gen = dialogue_texts [gpjt];
 			textbox_do ();

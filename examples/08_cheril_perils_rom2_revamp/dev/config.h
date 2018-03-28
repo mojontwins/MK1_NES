@@ -20,7 +20,7 @@
 #define PLAYER_REFILL			1		// Recarga de vida.
 
 #define MULTI_LEVEL						// Comment for single level
-#define MAX_LEVELS				2
+#define MAX_LEVELS				5
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 

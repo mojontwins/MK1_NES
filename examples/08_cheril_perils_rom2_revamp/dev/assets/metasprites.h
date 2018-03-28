@@ -156,3 +156,7 @@ const unsigned char * const spr_hs [] = {
 	// 30 onwards: Characters
 	sschar1_00, 					// Amador / Jack
 };
+
+// Some custom defines
+
+#define SPR_AMADOR			30

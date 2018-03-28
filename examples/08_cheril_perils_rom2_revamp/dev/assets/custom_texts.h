@@ -17,26 +17,28 @@
 		"SE ABRE NO MUY LEJOS.%";
 
 	const unsigned char dialogue_0_0 [] =
-		"EH, CHERIL, QUE TAL?%"
-		"SEH, NADIE POR AQUI.%"
+		"EH, CHERIL, QUE%"
+		"TAL ESTAS?%"
+		"SEH, NO HAY NADIE.%"
 		"NO ES EL PEPINONI%"
 		"QUE CONOCEMOS...%";
 
 	const unsigned char dialogue_0_1 [] =
 		"AL PRINCIPIO PENSE%"
-		"QUE NO HABIA TURISTAS%"
+		"QUE NO HABIA NADIE%"
 		"POR LA LLUVIA, PERO%"
-		"A LO MEJOR ES POR LOS%"
-		"ZOMBIES, NO?%"
+		"A LO MEJOR ES POR%"
+		"LOSZOMBIES, NO?%"
 		"SI, ES POSIBLE.%";
 
 	const unsigned char dialogue_0_2 [] =
-		"SE PUEDEN MATAR, YA%"
-		"SABES. SE PARALIZAN%"
-		"CON LAS MAQUINAS ESAS%"
-		"Y LUEGO LES SALTAS EN%"
-		"LA CAMOLLA. DEJA QUE%"
+		"PUEDEN MATARSE, YA%"
+		"SABES. PARALIZALOS%"
+		"CON LAS MAQUINAS%"
+		"Y LUEGO LES SALTAS%"
+		"EN LA CAMOLLA.%"
 		"TE ABRO LA CANCELA%";
+		
 #else
 
 	const unsigned char text_propellers [] = 
@@ -55,26 +57,27 @@
 		"ELSEWHERE...%";
 
 	const unsigned char dialogue_0_0 [] = 
-		"HEY, CHERIL, WHAT'S%"
-		"UP? YA, NOBODY HERE.%"
+		"HO, CHERIL, WHAT'S%"
+		"UP? YA, NOBODY'ERE%"
+		"I RECKON THIS IS%"
 		"NOT THE GOOD OL'%"
 		"PEPINONI, INNIT?%";
 
 	const unsigned char dialogue_0_1 [] = 
-		"FIRST I THOUGHT THAT%"
-		"THE LACK OF TOURISTS%"
+		"FIRST I THO' THAT%"
+		"DA LACK O'TOURISTS%"
 		"WAS BECAUSE OF THE%"
-		"RAIN, BUT MAYBE IT'S%"
-		"THE ZOMBIES. YEH,%"
-		"I THINK SO.%";
+		"RAIN, BUT MAYBE%"
+		"IT'S THE ZOMBIES.%"
+		"YEH, I THINK SO.%";
 
 	const unsigned char dialogue_0_2 [] = 
-		"THEY CAN BE KILLED.%"
-		"YOU KNOW THE DRILL.%"
+		"THEY CAN BE KILLED%"
+		"YA KNOW THE DRILL:%"
 		"PARALIZE THEM WITH%"
-		"THOSE MACHINES, THEN%"
-		"JUMP ON THEM. LET ME%"
-		"OPEN THE GATE . . .%";
+		"THE MACHINES, THEN%"
+		"JUMP ON THEM. LET%"
+		"ME OPEN THE GATE.%";
 
 #endif
 
@@ -90,3 +93,6 @@ const unsigned char dialogue_portraits [] = {
 const unsigned char * const dialogue_texts [] = {
 	dialogue_0_0, dialogue_0_1, dialogue_0_2,
 };
+
+// Defined dialogues for this game:
+// Level 0, amador: 0..2
