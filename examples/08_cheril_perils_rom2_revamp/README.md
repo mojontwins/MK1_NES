@@ -271,7 +271,7 @@ Items and characters (displayed via interactive sprites) are stored, as you know
     29
 
     Characters
-    30      Jack the lumberjack
+    30      Amador the lumberjack
 
 ```
 
@@ -282,9 +282,9 @@ Level by level: level 0
 
 Level 0, the first level, is a short level to make the player learn how to jump and contains a trivial "activate resonator then jump on baddie" situation.
 
-The level begins with 4 screens with simple platform arrangements, then a screen with Jack the Lumberjack, who will tell us about our mission, and a final screen with an enemy and a resonator. The enemy and the resonator are locked behind a gate. The gate will open once Cheril talks with Jack.
+The level begins with 4 screens with simple platform arrangements, then a screen with Amador the Lumberjack, who will tell us about our mission, and a final screen with an enemy and a resonator. The enemy and the resonator are locked behind a gate. The gate will open once Cheril talks with Amador.
 
-Jack the lumberjack will be implemented as an interactive sprite. Interacting with jack will display a dialogue and set a custom variable. The gate will be cleared if such custom variable is set via custom map rendering. There's also a nice palette cycle to make quicksands look pretty.
+Amador the lumberjack will be implemented as an interactive sprite. Interacting with Amador will display a dialogue and set a custom variable. The gate will be cleared if such custom variable is set via custom map rendering. There's also a nice palette cycle to make quicksands look pretty.
 
 First of all, we need to add the custom variables to `my/extra_vars.h`:
 
@@ -303,7 +303,7 @@ Such variables need to be initialized in `my/extra_inits.h`:
     level0_gate = 0;
 ```
 
-Let's place the interactive sprite. `assets/interactives.h` has an array defined for each level. Jack is sprite #30 in `spr_hs` and we need to place it at X = 8, Y = 9. We won't need more interactive sprites in this level. We had the decency of defining `SPR_AMADOR` as "30" in `assets/metasprites.h`. This will make the code more readable.
+Let's place the interactive sprite. `assets/interactives.h` has an array defined for each level. Amador is sprite #30 in `spr_hs` and we need to place it at X = 8, Y = 9. We won't need more interactive sprites in this level. We had the decency of defining `SPR_AMADOR` as "30" in `assets/metasprites.h`. This will make the code more readable.
 
 ```c 
     const unsigned char interactives0 [] = {
@@ -314,7 +314,7 @@ Let's place the interactive sprite. `assets/interactives.h` has an array defined
 
 So the engine will place amador on screen 4 at (8, 9) and make it interactive. When the player collides with such sprite and presses the B button, the code in `my/on_interactive.h` will be run.
 
-We have to define a dialogue. Just three lines of text displayed in sequence. This is done in `assets/custom_texts.h`. The three lines of text are `dialogue_0_0`, `dialogue_0_1` and `dialogue_0_2`. All three lines of text will be said by jack, so:
+We have to define a dialogue. Just three lines of text displayed in sequence. This is done in `assets/custom_texts.h`. The three lines of text are `dialogue_0_0`, `dialogue_0_1` and `dialogue_0_2`. All three lines of text will be said by Amador, so:
 
 ```c
     const unsigned char dialogue_portraits [] = {
