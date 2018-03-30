@@ -12,3 +12,7 @@ if (level == 0 && rdc == SPR_AMADOR) {
 	textbox_dialogue_do (0, 2);
 	level0_gate = 1;
 }
+
+if (level == 1 && rdc == SPR_MANDEE) {
+	textbox_dialogue_do (3, 5);
+}

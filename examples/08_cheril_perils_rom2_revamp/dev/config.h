@@ -523,7 +523,7 @@
 #define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
-#define PLAYER_VX_MIN (PLAYER_AX << 3)
+#define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
 

@@ -11,6 +11,7 @@ const unsigned char interactives0 [] = {
 };
 
 const unsigned char interactives1 [] = {
+	16, 0x92, SPR_MANDEE,
 	0xff
 };
 

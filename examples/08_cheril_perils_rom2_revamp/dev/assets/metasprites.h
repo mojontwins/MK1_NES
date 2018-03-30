@@ -155,8 +155,10 @@ const unsigned char * const spr_hs [] = {
 
 	// 30 onwards: Characters
 	sschar1_00, 					// Amador / Jack
+	sschar1_01,						// Mandee
 };
 
 // Some custom defines
 
 #define SPR_AMADOR			30
+#define SPR_MANDEE			31
