@@ -272,6 +272,7 @@ Items and characters (displayed via interactive sprites) are stored, as you know
 
     Characters
     30      Amador the lumberjack
+    31      Mandee the muse
 
 ```
 
@@ -356,6 +357,9 @@ The gate has to be cleared on entering screen 5. This is achieved via custom ren
                 map_buff [0x94] = 0;
                 map_buff [0xA4] = 0;
             }
+
+            [...]
+
             break;        
         [...]
     }
@@ -381,3 +385,99 @@ Finally, the nice pal cycling code, in `my/extra_checks.h` as well, which is a b
 ```
 
 And we are done.
+
+Level by level: level 1
+-----------------------
+
+Level 1 is the first level proper. At the beginning, Mandee the Muse will tell you about special baddies behind a gate, and some temples with misplaced objects.
+
+Each temple has an item inside. They are implemented using hotspots via Easy Objects. This case of use is the most simple: just move the objects around, and check if they are in place.
+
+But first, Mandee. Just an interactive sprite which works the same way Amador did, but doesn't need to switch a custom variable.
+
+`assets/interactives.h` (`SPR_MANDEE` is defined in `assets/metasprites.h`):
+
+```c 
+    const unsigned char interactives1 [] = {
+        16, 0x92, SPR_MANDEE,
+        0xff
+    };
+```
+
+`assets/custom_texts.h`:
+
+```c
+    const unsigned char dialogue_portraits [] = {
+        [...]
+        SPR_MANDEE, SPR_MANDEE, SPR_MANDEE, 
+        [...]
+    };
+
+    const unsigned char * const dialogue_texts [] = {
+        [...]
+        dialogue_1_0, dialogue_1_1, dialogue_1_2,
+        [...]
+    };
+```
+
+`my/on_interactive.h`
+
+```c
+    if (level == 1 && rdc == SPR_MANDEE) {
+        textbox_dialogue_do (3, 5);
+    }
+```
+
+
+Now the temples. Relevant hotspots are located at screens 0x0c, 0x12 and 0x16. The correct placement of items are fork, zurully and silver key, in this order. The initial placements of such items (i.e. the initial value of the hotspots as defined when creating the enemy and hotspots placement file .ene in ponedor.exe) is different.
+
+Getting this done is simple. For the sake of clarity, we need an extra custom variable, `my/extra_vars.h`:
+
+```c
+    unsigned char pal_cycle [3];
+    unsigned char level0_gate;
+    unsigned char level1_gate;
+```
+
+Correctly initialized, `my/extra_inits.h`:
+
+```c
+    [...]
+    level1_gate = 0;
+```
+
+Everytime you interchange the item you are carrying (which can be 'the empty item') with the one in a hotspot, the code in `my/on_object_got.h` is executed. There, we just check if everything is in place, to set `level1_gate` and show some text:
+
+```c
+    if (
+        level == 1 && 
+        level1_gate == 0 && 
+        ht [0x12] == 9 && ht [0x16] == 10 && ht [0x0c] == 8
+    ) {
+        level1_gate = 1;
+        gp_gen = text_open_gate;
+        textbox_do ();
+    }
+```
+
+And finally the gate is opened by detecting `level1_gate` in the custom renderer, exactly as we did in level 0. `my/map_renderer_customization.h`:
+
+```c
+    switch (level) {
+        case 0:
+        case 1:
+
+            [...]
+
+            // Clear gate if all objects in place
+            if (level == 1 && n_pant == 6 && level1_gate) {
+                map_buff [0x4E] = 22; 
+                map_buff [0x5E] = 22;
+            }
+
+            break;
+        [...]
+    }
+```
+
+And that's about it.

@@ -6,3 +6,4 @@
 
 unsigned char pal_cycle [3];
 unsigned char level0_gate;
+unsigned char level1_gate;

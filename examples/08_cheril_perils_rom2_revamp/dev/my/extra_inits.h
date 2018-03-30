@@ -9,3 +9,4 @@ pal_cycle [1] = palts1 [14];
 pal_cycle [2] = palts1 [15];
 
 level0_gate = 0;
+level1_gate = 0;
