@@ -69,7 +69,10 @@ const unsigned char * const spr_enems1 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
-	ssit_05
+	ssit_05,
+
+	// Alternate, big fanty (offset 44)
+	ssbigf_00_b, ssbigf_01_b, 0, 0, ssbigf_00_b, ssbigf_01_b, 0, 0, 
 };
 
 const unsigned char * const spr_enems2 [] = {
@@ -116,14 +119,7 @@ const unsigned char * const spr_enems3 [] = {
 	ssocl_00,
 
 	// Explosion (offset 43)
-	ssit_05,
-
-	// Steady shooters (offset 44)
-	ssss_00, ssss_01, ssss_02, ssss_03,
-
-	// Precompiled (offset 48)
-	sscomp_00_a, sscomp_01_a, sscomp_02_a, sscomp_03_a, 
-	sscomp_00_b, sscomp_01_b, sscomp_02_b, sscomp_03_b, 
+	ssit_05
 };
 
 // Item metasprites

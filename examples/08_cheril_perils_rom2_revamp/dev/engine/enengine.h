@@ -346,7 +346,6 @@ void enems_load (void) {
 			#endif
 			
 			en_cttouched [gpit] = 0;
-			en_spr_id [gpit] = _en_s;
 			en_flags [gpit] = 0;
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)

@@ -399,7 +399,7 @@ But first, Mandee. Just an interactive sprite which works the same way Amador di
 
 ```c 
     const unsigned char interactives1 [] = {
-        16, 0x92, SPR_MANDEE,
+        6, 0x94, SPR_MANDEE,
         0xff
     };
 ```
@@ -472,12 +472,22 @@ And finally the gate is opened by detecting `level1_gate` in the custom renderer
             // Clear gate if all objects in place
             if (level == 1 && n_pant == 6 && level1_gate) {
                 map_buff [0x4E] = 22; 
-                map_buff [0x5E] = 22;
+                map_buff [0x5E] = 21;
             }
 
             break;
         [...]
     }
 ```
+
+As an extra, we'll use an alternative sprite for the three type 6 enemies (ghosts) in screen 8 (the screen behind the gate the player has to open). The engine doesn't support defining different kinds of type 6 enemies, so we'll inject code after each screen is initialized via the `my/on_entering_screen.h` file:
+
+```c
+    if (level == 1 && n_pant == 7) {
+        en_s [0] = en_s [1] = en_s [2] = 44; 
+    }
+```
+
+So on level 1, screen 7, all three enemies have their base sprite redefined as 44, which is the index in the `spr_enems` array used for level 1 from where the alternative ghost metasprites are stored.
 
 And that's about it.

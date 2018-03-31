@@ -94,6 +94,10 @@ METASPRITE 8, 10, 2, 2, 0, 0
 LABEL ssen
 METASPRITESET 0, 6, 2, 3, 8, 1, 0, -8 FLIPPED
 
+# Big fanty
+LABEL ssbigf
+METASPRITESET 12, 20, 2, 3, 2, 1, 0, -8 FLIPPED
+
 # Simple items
 # item 1, place 1, used 1, item 2, place 2, used 2
 LABEL sssit

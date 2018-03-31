@@ -35,7 +35,7 @@ switch (level) {
 		// Clear gate if all objects in place
 		if (level == 1 && n_pant == 6 && level1_gate) {
 			map_buff [0x4E] = 22; 
-			map_buff [0x5E] = 22;
+			map_buff [0x5E] = 21;
 		}
 		
 		break;
