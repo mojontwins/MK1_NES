@@ -108,7 +108,7 @@ METASPRITESET 0, 16, 2, 2, 3, 1, 0, 0
 
 # characters
 LABEL sschar1
-METASPRITESET 0, 28, 2, 3, 2, 1, 0, -8
+METASPRITESET 0, 28, 2, 3, 4, 1, 0, -8
 
 FILL 8192
 

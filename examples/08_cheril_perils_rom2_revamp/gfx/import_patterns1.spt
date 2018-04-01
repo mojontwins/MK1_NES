@@ -111,4 +111,8 @@ METASPRITESET 0, 23, 4, 5, 4, 1, -8, -8 FLIPPED
 LABEL sssit2
 # METASPRITESET 0, 14, 2, 2, 6, 1, 0, 0
 
+# characters
+LABEL sschar2
+METASPRITESET 8, 28, 2, 3, 4, 1, 0, -8
+
 FILL 8192

@@ -16,6 +16,7 @@ const unsigned char interactives1 [] = {
 };
 
 const unsigned char interactives2 [] = {
+	23, 0x8C, SPR_GIRL,
 	0xff
 };
 
