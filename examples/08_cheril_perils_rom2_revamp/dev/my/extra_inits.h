@@ -10,5 +10,3 @@ pal_cycle [2] = palts1 [15];
 
 level0_gate = 0;	// There's a gate in level 0 which will be opened upon talking to Amador
 level1_gate = 0;	// There's a gate in level 1 which will be opened solving a puzzle
-
-n_pant = 19;

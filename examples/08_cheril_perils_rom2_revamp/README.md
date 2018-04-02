@@ -539,5 +539,14 @@ The graveyard is a cheap rehash of the already rehashed level from the original 
 Level by level: level 3
 -----------------------
 
+Level 3 uses propellers. As mentioned earlier, propellers are configured to be off. They won't work until the `propellers_on` variable is set. That is convenient as this makes them de-facto inactive in levels 0, 1, 2 and 4.
 
+To make propellers active in level 3, we could easily add a 
 
+```c
+    propellers_on = (level == 3);
+```
+
+to `my/extra_inits.h`. But we are going to make more of this feature: we'll require the player to manually activate propellers by means of finding an object (a winding key) and using it somewhere. This is easy objects at its best. We'll set up the object in a hotspot, and where to use it in a different one.
+
+The winding key is index #6 in `spr_hs`. As `HS_USE_OFFS` is 8, the hotspot configured to be the place where the player uses the winding key must have a value of 6 + 8 = 14.
