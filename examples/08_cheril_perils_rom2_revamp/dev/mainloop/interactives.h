@@ -15,7 +15,7 @@ if (interactives_index) {
 		gpit = interactives_index; while (gpit --) {
 			rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
 			if (
-				collide_in (rdx, rdy, rdb, rdc)
+				(rdx >= rdb - 4 && rdx <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15)
 				#ifndef PLAYER_TOP_DOWN
 					/*&& ppossee*/
 				#endif

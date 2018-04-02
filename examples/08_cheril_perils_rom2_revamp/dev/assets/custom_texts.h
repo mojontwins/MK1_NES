@@ -64,6 +64,38 @@
 		"ESO DICEN POR AHI.%"
 		"SUERTE, CHERIL!%";
 
+	const unsigned char dialogue_2_0 [] =
+		"YA SABES QUE SOLO%"
+		"ME MOLA ESTAR AQUI%"
+		"CONTIGO SI TE VIS-%"
+		"TES DE NINJA, YA%"
+		"SABES, POR EL ROLLO%"
+		"OCHENTOSO MOLON.%";
+
+	const unsigned char dialogue_2_1 [] =
+		"LO SIENTO, NO PUEDO%"
+		"RECORDAR SI TRAIAS%"
+		"TU CUADERNO LA UL-%"
+		"TIMA VEZ... NO SE,%"
+		"ECHA UN VISTAZO, A%"
+		"LO MEJOR LO VES...%";
+
+	const unsigned char dialogue_2_2 [] =
+		"EEEH, NO. NO VOY A%"
+		"AYUDARTE. ESTO ESTA%"
+		"PETADO DE ZOMBIES,%"
+		"Y LOS ZOMBIES SON%"
+		"'TU' ROLLO, NO EL%"
+		"MIO. SUERTE, GUAPA.%";
+
+	const unsigned char dialogue_2_3 [] =
+		"ZOMBIES, ZOMBIES...%"
+		"MEH, QUE SOIS TODOS%"
+		"UNOS COPIONES!%"
+		"SEGUID TOCANDOME LA%"
+		"MORAL QUE OS ENDI\\O%"
+		"CON UN TORREZNO!%";
+
 #else
 
 	const unsigned char text_propellers [] = 
@@ -128,6 +160,37 @@
 		"OR SO THEY SAY.%"
 		"GOOD LUCK, CHERIL!%";
 
+	const unsigned char dialogue_2_0 [] =
+		"YOU KNOW I ONLY%"
+		"LIKE IT HERE WHEN%"
+		"YOU WEAR THAT BLACK%"
+		"SHOZUKU, YOU KNOW,%"
+		"FOR THE NICE 80S%"
+		"VIBE...%";
+
+	const unsigned char dialogue_2_1 [] =
+		"SORRY, BUT I CAN'T%"
+		"REMEMBER IF YOU%"
+		"WERE CARRYING YOUR%"
+		"NOTEBOOK LAST TIME%"
+		"WE WERE HERE. LOOK%"
+		"AROUND, GURL.%";
+
+	const unsigned char dialogue_2_2 [] =
+		"HEH - NOPE, I WON'T%"
+		"BE HELPING OUT. THE%"
+		"PLACE IS FULL OF%"
+		"THOSE DIRTY ZOMBIES%"
+		"AND THEY ARE 'YOUR'%"
+		"THING, NOT MINE...%";
+
+	const unsigned char dialogue_2_3 [] =
+		"ZOMBIES, ZOMBIES...%"
+		"YOU ALWAYS GO THE%"
+		"EASY WAY, COPYCATS!%"
+		"THANK GOODNESS I'M%"
+		"NOT THROWIN' SPICY%"
+		"FOOD AT YE!%";
 #endif
 
 // Dialogue portraits: 0 for none, number for index to spr_hs!
@@ -137,13 +200,19 @@
 const unsigned char dialogue_portraits [] = {
 	SPR_AMADOR, SPR_AMADOR, SPR_AMADOR,
 	SPR_MANDEE, SPR_MANDEE, SPR_MANDEE, 
+	SPR_GIRL, SPR_GIRL, SPR_GIRL,
+	SPR_JON,
 };
 
 const unsigned char * const dialogue_texts [] = {
 	dialogue_0_0, dialogue_0_1, dialogue_0_2,
 	dialogue_1_0, dialogue_1_1, dialogue_1_2,
+	dialogue_2_0, dialogue_2_1, dialogue_2_2,
+	dialogue_2_3,
 };
 
 // Defined dialogues for this game:
 // Level 0, amador: 0..2
 // Level 1, mandee: 3..5
+// Level 2, girl:   6..8
+// Level 2, jon:    9

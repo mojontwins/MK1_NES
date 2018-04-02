@@ -491,3 +491,53 @@ As an extra, we'll use an alternative sprite for the three type 6 enemies (ghost
 So on level 1, screen 7, all three enemies have their base sprite redefined as 44, which is the index in the `spr_enems` array used for level 1 from where the alternative ghost metasprites are stored.
 
 And that's about it.
+
+Level by level: level 2
+-----------------------
+
+The graveyard is a cheap rehash of the already rehashed level from the original (and abandoned) Cheril Perils. Anjuel wanted it here, so here it is. Revamped the graphics, created a custom renderer to save space, and added interactives and changed the starting point a bit. A simple level, nonetheless. As with level 0 and level 1, there's an interactive to show some text at the beginning, plus an extra interactive depicting Jon Cortázar from Relevo which is only there to say something which may amuse a couple of people, so FF:
+
+`assets/interactives.h` (`SPR_GIRL` is defined in `assets/metasprites.h`):
+
+```c 
+    const unsigned char interactives2 [] = {
+        23, 0x8E, SPR_GIRL,
+        0xff
+    };
+```
+
+`assets/custom_texts.h`:
+
+```c
+    const unsigned char dialogue_portraits [] = {
+        [...]
+        SPR_GIRL, SPR_GIRL, SPR_GIRL,
+        SPR_JON,
+        [...]
+    };
+
+    const unsigned char * const dialogue_texts [] = {
+        [...]
+        dialogue_2_0, dialogue_2_1, dialogue_2_2,
+        dialogue_2_2,
+        [...]
+    };
+```
+
+`my/on_interactive.h`
+
+```c
+    if (level == 2) {
+        if (rdc == SPR_GIRL) {
+            textbox_dialogue_do (6, 8);
+        } else if (rdc == SPR_JON) {
+            textbox_dialogue_do (9, 9);
+        }
+    }
+```
+
+Level by level: level 3
+-----------------------
+
+
+

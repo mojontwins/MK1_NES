@@ -126,7 +126,7 @@ const unsigned int map_03_scr_offsets [] = {
 	MAP_03_BASE + 0x04AA, MAP_03_BASE + 0x04E3
 };
 
-// Total screens size in bytes is 1315
+// Total screens size in bytes is 1314
 
 // Locks
 // These tiles are locks:  15
@@ -139,7 +139,7 @@ const unsigned char map_03_locks [] = {
 // Definitions
 
 #define MAP_04_CHRROM    3
-#define MAP_04_BASE      0x1D7C
+#define MAP_04_BASE      0x1D7B
 #define MAP_04_W         6
 #define MAP_04_H         1
 #define MAP_04_MAXPANTS  6

@@ -16,3 +16,11 @@ if (level == 0 && rdc == SPR_AMADOR) {
 if (level == 1 && rdc == SPR_MANDEE) {
 	textbox_dialogue_do (3, 5);
 }
+
+if (level == 2) {
+	if (rdc == SPR_GIRL) {
+		textbox_dialogue_do (6, 8);
+	} else if (rdc == SPR_JON) {
+		textbox_dialogue_do (9, 9);
+	}
+}
