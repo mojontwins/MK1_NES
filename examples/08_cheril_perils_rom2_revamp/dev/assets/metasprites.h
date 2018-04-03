@@ -154,6 +154,9 @@ const unsigned char * const spr_hs [] = {
 	sschar1_01,						// Mandee
 	sschar2_00,						// Girl
 	sschar2_01,						// Jon Cortázar
+	sschar1_02,						// Newsagent
+	sspl_00_a,						// Cheril
+	sschar1_03,						// Worker
 };
 
 // Some custom defines
@@ -162,3 +165,6 @@ const unsigned char * const spr_hs [] = {
 #define SPR_MANDEE			31
 #define SPR_GIRL			32
 #define SPR_JON				33
+#define SPR_NEWSAGENT		34
+#define SPR_CHERIL			35
+#define SPR_WORKER			36

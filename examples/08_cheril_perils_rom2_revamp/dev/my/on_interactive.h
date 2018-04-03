@@ -8,9 +8,13 @@
 // if rdc&128    -> container.
 // if !(rdc&128) -> sprite face.
 
-if (level == 0 && rdc == SPR_AMADOR) {
-	textbox_dialogue_do (0, 2);
-	level0_gate = 1;
+if (level == 0) {
+	if (rdc == SPR_AMADOR) {
+		textbox_dialogue_do (0, 2);
+		level0_gate = 1;
+	} else {
+		textbox_dialogue_do (10, 11);
+	}
 }
 
 if (level == 1 && rdc == SPR_MANDEE) {
@@ -23,4 +27,8 @@ if (level == 2) {
 	} else if (rdc == SPR_JON) {
 		textbox_dialogue_do (9, 9);
 	}
+}
+
+if (level == 3 && rdc == SPR_WORKER) {
+	textbox_dialogue_do (12, 13);
 }

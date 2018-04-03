@@ -26,10 +26,18 @@ switch (level) {
 			map_buff [gpit] = rda;
 		}
 
-		// Clear gate if already talked to Amador
-		if (level == 0 && n_pant == 5 && level0_gate) {
-			map_buff [0x94] = 0;
-			map_buff [0xA4] = 0;
+		// Level 0 stuff
+		if (level == 0) {
+			// Clear gate if already talked to Amador
+			if (n_pant == 5 && level0_gate) {
+				map_buff [0x94] = 0;
+				map_buff [0xA4] = 0;
+			} else if (n_pant == 11) {
+				map_buff [0x9D] = 41;
+				map_buff [0x9E] = 42;
+				map_buff [0xAD] = 43;
+				map_buff [0xAE] = 44;
+			}
 		}
 
 		// Clear gate if all objects in place

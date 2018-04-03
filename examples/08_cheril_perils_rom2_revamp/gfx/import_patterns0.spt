@@ -36,7 +36,7 @@ MAPPED 0, 0, 2, 2, 16, 3, 41
 OPEN ts1.png
 PALS palts1.png
 LABEL ts1
-MAPPED 0, 0, 2, 2, 16, 3, 41
+MAPPED 0, 0, 2, 2, 16, 3, 45
 
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL

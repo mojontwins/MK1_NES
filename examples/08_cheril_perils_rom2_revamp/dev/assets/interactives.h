@@ -6,12 +6,13 @@
 // For each interactive: NP YX F.
 
 const unsigned char interactives0 [] = {
-	4, 0x98, SPR_AMADOR,		// 0
+	 4, 0x98, SPR_AMADOR,
+	11, 0xAC, SPR_NEWSAGENT,
 	0xff
 };
 
 const unsigned char interactives1 [] = {
-	6, 0x94, SPR_MANDEE,
+	 6, 0x94, SPR_MANDEE,
 	0xff
 };
 
@@ -22,6 +23,7 @@ const unsigned char interactives2 [] = {
 };
 
 const unsigned char interactives3 [] = {
+	12, 0x93, SPR_WORKER,
 	0xff
 };
 

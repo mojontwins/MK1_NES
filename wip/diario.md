@@ -3737,3 +3737,11 @@ Hecho. Ha sido una modificación ínfima (aunque tendré que ajustar, que la Y d
 
 Tengo que montar un rollo script de diálogo que sencillamente secuencie textboxes. Rollo dos listas de `id_portrait` y `custom_text`, y que vaya consumiéndolas hasta un end marker o algo.
 
+
+20180403
+========
+
+Estos días he avanzado un montón (además, documentándolo todo en el README.md del juego), y ahora mismo tengo todas las fases hechas, dos dibujos de cutscenes listos, y personajes metidos en todas menos en la última fase. Además tengo que probar BIEN el cementerio y la fábrica.
+
+~~
+

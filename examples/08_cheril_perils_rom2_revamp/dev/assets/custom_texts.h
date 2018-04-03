@@ -40,6 +40,19 @@
 		"EN LA CAMOLLA.%"
 		"TE ABRO LA CANCELA%";
 
+	const unsigned char dialogue_0_3 [] =
+		"HOLA, GUAPI. VENDO%"
+		"PERIODICOS Y REVIS-%"
+		"TAS. TE INTERESA EL%"
+		"NUEVO NUMERO DE LA%"
+		"RETROGAMER?%";
+
+	const unsigned char dialogue_0_4 [] =
+		"NO, GRACIAS, ESTOY%"
+		"LIADA. Y DE TODOS%"
+		"MODOS NO SALIMOS%"
+		"NUNCA...%";
+
 	const unsigned char dialogue_1_0 [] =
 		"HOLA, CHERIL. TE%"
 		"ACUERDAS DE MI? SOY%"
@@ -96,6 +109,22 @@
 		"MORAL QUE OS ENDI\\O%"
 		"CON UN TORREZNO!%";
 
+	const unsigned char dialogue_3_0 [] =
+		"HOLA! COMO TODA LA%"
+		"FABRICA ESTA LLENA%"
+		"DE ZOMBIES HUELE%"
+		"FATAL Y HE APAGADO%"
+		"LOS VENTILADORES A%"
+		"VER SI SE MUEREN.%";
+
+	const unsigned char dialogue_3_1 [] =
+		"SI LOS NECESITAS%"
+		"VAS A TENER QUE%"
+		"ENCENDERLOS TU, QUE%"
+		"YO NO ENTRO AHI NI%"
+		"JARTA DE BIOMANAL,%"
+		"GUAPA.%";
+
 #else
 
 	const unsigned char text_propellers [] = 
@@ -135,6 +164,19 @@
 		"THE MACHINES, THEN%"
 		"JUMP ON THEM. LET%"
 		"ME OPEN THE GATE.%";
+
+	const unsigned char dialogue_0_3 [] =
+		"HI SWETTIE. I SELL%"
+		"NEWSPAPERS AND%"
+		"MAGAZINES. I GOT%"
+		"THE NEW RETROGAMER%"
+		"ISSUE. DO YOU WANT%"
+		"A COPY?%";
+
+	const unsigned char dialogue_0_4 [] =
+		"NO, THANKS. WE ARE%"
+		"NEVER FEATURED,%"
+		"ANYWAYS...";
 
 	const unsigned char dialogue_1_0 [] =
 		"HI, CHERIL. REMEM-%"
@@ -191,6 +233,21 @@
 		"THANK GOODNESS I'M%"
 		"NOT THROWIN' SPICY%"
 		"FOOD AT YE!%";
+
+	const unsigned char dialogue_3_0 [] =
+		"HI! I'VE TURNED THE%"
+		"FANS OFF 'CAUSE THE%"
+		"ZOMBIES SMELL SO%"
+		"BAD I CAN'T EVEN%"
+		"BREATHE. EEEKS.%";
+
+	const unsigned char dialogue_3_1 [] =
+		"YOU WILL NEED THEM%"
+		"EVENTUALLY, SO FIND%"
+		"THE WAY TO TURN'EM%"
+		"BACK ON. I WON'T%"
+		"BE ENTERING THERE,%"
+		"SWEETIE...%";
 #endif
 
 // Dialogue portraits: 0 for none, number for index to spr_hs!
@@ -202,6 +259,8 @@ const unsigned char dialogue_portraits [] = {
 	SPR_MANDEE, SPR_MANDEE, SPR_MANDEE, 
 	SPR_GIRL, SPR_GIRL, SPR_GIRL,
 	SPR_JON,
+	SPR_NEWSAGENT, SPR_CHERIL,
+	SPR_WORKER, SPR_WORKER,
 };
 
 const unsigned char * const dialogue_texts [] = {
@@ -209,10 +268,14 @@ const unsigned char * const dialogue_texts [] = {
 	dialogue_1_0, dialogue_1_1, dialogue_1_2,
 	dialogue_2_0, dialogue_2_1, dialogue_2_2,
 	dialogue_2_3,
+	dialogue_0_3, dialogue_0_4,
+	dialogue_3_0, dialogue_3_1,
 };
 
 // Defined dialogues for this game:
 // Level 0, amador: 0..2
+// Level 0, news:   10..11
 // Level 1, mandee: 3..5
 // Level 2, girl:   6..8
 // Level 2, jon:    9
+// Level 3, worker: 12..13

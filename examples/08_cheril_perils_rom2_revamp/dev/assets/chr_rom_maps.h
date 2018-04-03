@@ -134,15 +134,15 @@ const unsigned char map_03_locks [] = {
 	0x00, 0x8b, 0x12, 0x83
 };
 
-// Map # 4 read from level4.map (6x1)
+// Map # 4 read from level4.map (6x2)
 
 // Definitions
 
 #define MAP_04_CHRROM    3
 #define MAP_04_BASE      0x1D7B
 #define MAP_04_W         6
-#define MAP_04_H         1
-#define MAP_04_MAXPANTS  6
+#define MAP_04_H         2
+#define MAP_04_MAXPANTS  12
 #define MAP_04_N_LOCKS   0
 
 // Screens index
@@ -150,8 +150,11 @@ const unsigned char map_03_locks [] = {
 const unsigned int map_04_scr_offsets [] = {
 	MAP_04_BASE + 0x0000, MAP_04_BASE + 0x0034, 
 	MAP_04_BASE + 0x0068, MAP_04_BASE + 0x0094, 
-	MAP_04_BASE + 0x00B7, MAP_04_BASE + 0x00DF
+	MAP_04_BASE + 0x00B7, MAP_04_BASE + 0x00DF, 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , MAP_04_BASE + 0x0119
 };
 
-// Total screens size in bytes is 279
+// Total screens size in bytes is 344
 

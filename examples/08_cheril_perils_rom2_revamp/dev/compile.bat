@@ -13,8 +13,9 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss3.png out=work\palss3.h label=palss3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltsgrey.png out=work\paltsgrey.h label=paltsgrey silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palssgrey.png out=work\palssgrey.h label=palssgrey silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts0.png out=work\palcuts0.h label=palcuts0 silent
 
-copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h + work\palss2.h + work\palts3.h + work\palss3.h + work\paltsgrey.h + work\palssgrey.h assets\palettes.h > nul
+copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h + work\palss2.h + work\palts3.h + work\palss3.h + work\palssgrey.h + works\aplcuts0.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx

@@ -460,6 +460,8 @@ Everytime you interchange the item you are carrying (which can be 'the empty ite
     }
 ```
 
+The `ht` array contains the value of the hotspot in each screen.
+
 And finally the gate is opened by detecting `level1_gate` in the custom renderer, exactly as we did in level 0. `my/map_renderer_customization.h`:
 
 ```c
@@ -547,6 +549,29 @@ To make propellers active in level 3, we could easily add a
     propellers_on = (level == 3);
 ```
 
-to `my/extra_inits.h`. But we are going to make more of this feature: we'll require the player to manually activate propellers by means of finding an object (a winding key) and using it somewhere. This is easy objects at its best. We'll set up the object in a hotspot, and where to use it in a different one.
+to `my/extra_inits.h`. But we are going to make more of this feature: we'll require the player to manually activate propellers by means of finding an item (a winding key) and using it somewhere. This is **Easy Objects** at its best. We'll set up the item in a hotspot, and where to use it in a different one.
 
-The winding key is index #6 in `spr_hs`. As `HS_USE_OFFS` is 8, the hotspot configured to be the place where the player uses the winding key must have a value of 6 + 8 = 14.
+The winding key is index #6 in `spr_hs`. As `HS_USE_OFFS` is 8, the hotspot configured to be the place where the player uses the winding key must have a value of 6 + 8 = 14. Also in `spr_hs`, at index 14 + 8 = 22, we have a nice sprite of the winding key inside the hole, as required by *type B* Easy Objects.
+
+When the player interacts with the destination hotspot and the carried item is the right one (this is, the carried item is #6 and the hotspot being interacted has a value of 14):
+
+1. The carried item is *cleared* (this is, assigned the empty item).
+2. The value of the hotspot becomes 22 (i.e. `HS_USE_OFFS` is added to the original value).
+3. The code in `my/on_object_used.h` is executed.
+
+So there is where we add our code to handle the activation of the propellers (this is only a way to handle this; the object that has just been used is in `rda` so we could have performed the detection using that instead):
+
+```c
+// If object 6 is placed on screen 9 -> enable propellers
+
+if (level == 3 && ht [9] == 6 + 2*HS_USE_OFFS) {
+    propellers_on = 1;
+    // Make player know 
+    gp_gen = text_propellers;
+    textbox_do ();
+}
+```
+
+`ht [9]` is the value of the hotspot in screen 9. 6 is the value of the winding key. `6 + 2*HS_USE_OFFS` (which equals 22) means "the value of the winding key once it has been used in the hole".
+
+`propellers_on` activates propellers and `text_propellers` (as defined in `assets/custom_texts.h` is displayed.
