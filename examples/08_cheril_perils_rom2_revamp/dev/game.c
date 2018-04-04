@@ -52,6 +52,10 @@
 
 #include "assets/hud_rle.h"
 
+#include "assets/cuts0_rle.h"
+#include "assets/cuts1_rle.h"
+#include "assets/cuts2_rle.h"
+
  // Custom bgs
 #include "assets/bg0.h"
 #include "assets/bg3.h"
@@ -128,7 +132,7 @@ void main(void) {
 
 	while (1) {	
 
-		//title ();
+		pres_title ();
 
 #ifdef MULTI_LEVEL		
 		level = 0;
@@ -143,7 +147,7 @@ void main(void) {
 			game_loop ();
 
 			if (game_over) {
-				// game_over ();
+				pres (palcuts0, scr_game_over);
 				break;
 			} else {
 #ifdef MULTI_LEVEL

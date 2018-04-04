@@ -109,7 +109,7 @@
 // Push boxes
 
 //#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
-#define FIRE_TO_PUSH
+//#define FIRE_TO_PUSH
 
 //#define ENABLE_PUSHED_SCRIPT
 #define PUSHED_TILE_FLAG				1

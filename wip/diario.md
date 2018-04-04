@@ -3753,3 +3753,36 @@ El array de 64 bytes está bien. Otra forma sería definir 3 cadenas de 32 bytes
 
 Bueno, hago un commit y un push ahora y lo cambio a ver :*)
 
+Uf, es que me voy a hartar de trabajar para salvar unas decenas de bytes y además voy a complicarlo todo y tener que modificar todos los testers y ejemplos y 
+
+buaaah, así se queda.
+
+También puedo mirar de meter los enemigos indexados de MK2 si me veo chungui pirati... Porque tengo que meter.
+
+- Módulo de cutscenes.
+- Los RLE de las cutscenes (!).
+- Música (!!)
+
+Y me quedan 2507 bytes. Uf, lo veo chungui.
+
+Claro que para las cutscenes puedo pasar de boniteces y mostrar el texto del tirón, a piñón, y eso ocupa mucho menos. Pero aún tengo RLE a saco.
+
+Voy a ir convirtiendo las cutscenes en RLE para ir haciéndome una idea. 
+
+La pantalla de título va a tener que ser minimalista de la leche.
+
+- Cuts 0 : 128 bytes.
+- Cuts 1 : 133 bytes.
+- Cuts 2 : 125 bytes.
+
+Bueno, no es tanto. Los voy a ir metiendo para que luego no me pegue un zusto. 2124 bytes libres para música, código, y lo que quede. Me veo metiendo nametables en chr-rom XD
+
+He metido un rearreglo de la música "fábrica" y quedan 1646 bytes. Miedo.
+
+Voy a ir metiendo pres y luego ya lo dejo para llorar XD.
+
+1201 bytes. Buaaaah.
+
+
+
+
