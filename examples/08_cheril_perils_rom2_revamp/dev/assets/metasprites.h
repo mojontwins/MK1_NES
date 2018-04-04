@@ -157,6 +157,8 @@ const unsigned char * const spr_hs [] = {
 	sschar1_02,						// Newsagent
 	sspl_00_a,						// Cheril
 	sschar1_03,						// Worker
+	sschar2_02,						// Chema
+	sschar2_03,						// Pirate
 };
 
 // Some custom defines
@@ -168,3 +170,5 @@ const unsigned char * const spr_hs [] = {
 #define SPR_NEWSAGENT		34
 #define SPR_CHERIL			35
 #define SPR_WORKER			36
+#define SPR_CHEMA			37
+#define SPR_PIRATE			38

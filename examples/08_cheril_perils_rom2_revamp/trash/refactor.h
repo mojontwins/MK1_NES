@@ -7,8 +7,6 @@
 // Reaching this point, map_buff has the decompressed map screen.
 // You can write as many modifications as you like here:
 
-// Rearranged code to save ~120 bytes
-
 set_rand (1 + n_pant);
 
 if (level == 2) {
@@ -30,24 +28,21 @@ gpit = 192; while (gpit --) {
 			|| (level == 4 && (rda == 3 || rda == 10 || rda == 12))
 		) rda += 16;
 
-		if (level < 2 && rda == 8) rda = 25;
-	}
-
-	switch (level) {
-		case 0:
-		case 1:
-			if (rda == 21 && map_buff [gpit - 16] != 21) rda = 22;
-			break;
-		case 2:
-			if (rda == 8 && map_buff [gpit - 16] != 8) rda = 24;
-		case 3:
-			if (rda == 0) rda = gp_gen [gpit];
-			break;
-		case 4:
-			if (rda == 15 && map_buff [gpit - 1] == 15) rda = 31;
-			if (rda == 14 && map_buff [gpit - 16] != 14) rda = 30;
-			break;
-	}
+		switch (level) {
+			case 0:
+			case 1:
+				if (rda == 21 && map_buff [gpit - 16] != 21) rda = 22;
+				break;
+			case 2:
+				if (rda == 8 && map_buff [gpit - 16] != 8) rda = 24;
+			case 3:
+				if (rda == 0) rda = gp_gen [gpit];
+				break;
+			case 4:
+				if (rda == 15 && map_buff [gpit - 1] == 15) rda = 31;
+				if (rda == 14 && map_buff [gpit - 16] != 14) rda = 30;
+				break;
+		}
 
 	map_buff [gpit] = rda;
 }

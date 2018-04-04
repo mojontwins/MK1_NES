@@ -101,6 +101,13 @@
 		"'TU' ROLLO, NO EL%"
 		"MIO. SUERTE, GUAPA.%";
 
+	const unsigned char dialogue_2_4 [] = 
+		"OSTRAS, BUENA IDEA,%"
+		"LE PUEDO PREGUNTAR%"
+		"A LOS ZOMBIES...%"
+		"Y LUEGO REVENTARLES%"
+		"EL OHIO, CLARO.%";
+
 	const unsigned char dialogue_2_3 [] =
 		"ZOMBIES, ZOMBIES...%"
 		"MEH, QUE SOIS TODOS%"
@@ -125,6 +132,35 @@
 		"JARTA DE BIOMANAL,%"
 		"GUAPA.%";
 
+	const unsigned char dialogue_4_0 [] =
+		"VAYA, ESTE SITIO%"
+		"ESTA BASTANTE CHULO%"
+		"_PERO NO SE PARECE%"
+		"ESTE BARCO UN POCO%"
+		"AL DE CASTLEVANIA?%";
+
+	const unsigned char dialogue_4_1 [] =
+		"EEEEHMMM... ES QUE%"
+		"ES UN PLACEHOLDER.%"
+		"NO ME MIRES ASI,%"
+		"^^TODO EL MUNDO LO%"
+		"HACE!!%";
+
+	const unsigned char dialogue_4_2 [] = 
+		"AR! SI QUE HE VISTO%"
+		"UN CUADERNO COMO EL%"
+		"QUE DESCRIBES. DE%"
+		"HECHO LO TENGO YO.%"
+		"TIENES UNA LETRA DE%"
+		"MIERDA, TIA...%";
+
+	const unsigned char dialogue_4_3 [] =
+		"SE QUE LO QUIERES,%"
+		"GRUMETA, ASI QUE%"
+		"HAGAMOS UN TRATO:%"
+		"TU ME LIMPIAS EL%"
+		"BARCO DE ZOMBIES Y%"
+		"YO TE DOY ESTO.%";
 #else
 
 	const unsigned char text_propellers [] = 
@@ -234,6 +270,14 @@
 		"NOT THROWIN' SPICY%"
 		"FOOD AT YE!%";
 
+	const unsigned char dialogue_2_4 [] = 
+		"GOSH, ZIMBIES, GOOD%"
+		"IDEA! I WILL ASK%"
+		"THEM IF THEY HAVE%"
+		"SEEN MY NOTEBOOK...%"
+		"AFTER I BEAT THE%"
+		"CRAP OUT OF THEM!%";
+
 	const unsigned char dialogue_3_0 [] =
 		"HI! I'VE TURNED THE%"
 		"FANS OFF 'CAUSE THE%"
@@ -248,6 +292,35 @@
 		"BACK ON. I WON'T%"
 		"BE ENTERING THERE,%"
 		"SWEETIE...%";
+
+	const unsigned char dialogue_4_0 [] =
+		"WHOAH, THIS PLACE%"
+		"IS VERY COOL! BUT%"
+		"DOESN'T IT LOOK A%"
+		"BIT LIKE THE SHIP%"
+		"IN CASTLEVANIA?%";
+
+	const unsigned char dialogue_4_1 [] =
+		"EEEEHMMM... WELL,%"
+		"YEH, HUM, IT'S ONLY%"
+		"A PLACEHOLDER.%"
+		"DON'T LOOK AT ME!%"
+		"EVERYBODY DOES IT!%";
+
+	const unsigned char dialogue_4_2 [] = 
+		"AR! YES, GIRL, I DO%"
+		"HAVE SEETH YER LIL%"
+		"NOTEBOOK! IN FACT I%"
+		"RECKON I HAVE IT!%"
+		"HAR HAR HAR!%";
+
+	const unsigned char dialogue_4_3 [] =
+		"I KNOW YOU WANT IT,%"
+		"DEARY, SO WE COULD%"
+		"MAKE A DEAL. CLEAN%"
+		"ALL THE ZOMBIES IN%"
+		"MY SHIP AND I SHALL%"
+		"GIVE YA YOUR THING.%";
 #endif
 
 // Dialogue portraits: 0 for none, number for index to spr_hs!
@@ -257,25 +330,31 @@
 const unsigned char dialogue_portraits [] = {
 	SPR_AMADOR, SPR_AMADOR, SPR_AMADOR,
 	SPR_MANDEE, SPR_MANDEE, SPR_MANDEE, 
-	SPR_GIRL, SPR_GIRL, SPR_GIRL,
+	SPR_GIRL, SPR_GIRL, SPR_GIRL, SPR_CHERIL,
 	SPR_JON,
 	SPR_NEWSAGENT, SPR_CHERIL,
 	SPR_WORKER, SPR_WORKER,
+	SPR_CHEMA, SPR_CHERIL,
+	SPR_PIRATE, SPR_PIRATE,
 };
 
 const unsigned char * const dialogue_texts [] = {
 	dialogue_0_0, dialogue_0_1, dialogue_0_2,
 	dialogue_1_0, dialogue_1_1, dialogue_1_2,
-	dialogue_2_0, dialogue_2_1, dialogue_2_2,
+	dialogue_2_0, dialogue_2_1, dialogue_2_2, dialogue_2_4,
 	dialogue_2_3,
 	dialogue_0_3, dialogue_0_4,
 	dialogue_3_0, dialogue_3_1,
+	dialogue_4_0, dialogue_4_1,
+	dialogue_4_2, dialogue_4_3,
 };
 
 // Defined dialogues for this game:
 // Level 0, amador: 0..2
-// Level 0, news:   10..11
+// Level 0, news:   11..12
 // Level 1, mandee: 3..5
-// Level 2, girl:   6..8
-// Level 2, jon:    9
-// Level 3, worker: 12..13
+// Level 2, girl:   6..9
+// Level 2, jon:    10
+// Level 3, worker: 13..14
+// Level 4, chema:  15..16
+// Level 4, pirate: 17..18

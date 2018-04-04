@@ -3745,3 +3745,11 @@ Estos días he avanzado un montón (además, documentándolo todo en el README.m
 
 ~~
 
+Para ganar un poco de memoria, creo que voy a reorganizar el tema del textbox. 
+
+Ahora mismo requiere definir 9 metatiles del tileset. Eso suponen 9*5 = 45 bytes, a lo que sumamos el array de 64 bytes que hace las veces de tilemap. El tema es que estamos gastando, con nuestros 4 tilemaps diferentes, 64 + 4 * 45 = 180 bytes.
+
+El array de 64 bytes está bien. Otra forma sería definir 3 cadenas de 32 bytes, pero ya estamos usando más espacio aunque nos ahorremos los tilemaps...
+
+Bueno, hago un commit y un push ahora y lo cambio a ver :*)
+

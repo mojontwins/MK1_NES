@@ -575,3 +575,16 @@ if (level == 3 && ht [9] == 6 + 2*HS_USE_OFFS) {
 `ht [9]` is the value of the hotspot in screen 9. 6 is the value of the winding key. `6 + 2*HS_USE_OFFS` (which equals 22) means "the value of the winding key once it has been used in the hole".
 
 `propellers_on` activates propellers and `text_propellers` (as defined in `assets/custom_texts.h` is displayed.
+
+Level by level: level 4
+-----------------------
+
+
+
+Now save some bytes
+-------------------
+
+Most of the code was later re-arranged so I could fit some more stuff (i.e. static screens).
+
+- Rearranged `my/map_renderer_customization.h`  and saved ~ 120 bytes.
+- Rearranged `my/on_interactive.h`              and saved ~  67 bytes.
