@@ -3783,6 +3783,9 @@ Voy a ir metiendo pres y luego ya lo dejo para llorar XD.
 
 1201 bytes. Buaaaah.
 
+Texto de las cutscenes metido... Y queda poco más de medio K... XD
+
+~~
 
 
 

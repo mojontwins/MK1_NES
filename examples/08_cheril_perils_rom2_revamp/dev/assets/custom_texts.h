@@ -161,6 +161,43 @@
 		"TU ME LIMPIAS EL%"
 		"BARCO DE ZOMBIES Y%"
 		"YO TE DOY ESTO.%";
+
+	const unsigned char cutscene_0 [] = 
+	//	 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+		"CHERIL SE FUE A PEPINONI A%"
+		"BUSCAR INSPIRACION PARA SU%"
+		"LIBRO SOBRE JUEGOS RETRO, YA%"
+		"QUE AHORA TODO EL MUNDO PA-%"
+		"RECIA ESTAR SACANDO EL SUYO.%";
+		
+	const unsigned char cutscene_1 [] = 
+		"ZOMBIES EN PEPINONI? VENGA%"
+		"YA! ESTO ES UN TRABAJO PARA%"
+		"CHERIL, QUE ACABE CON TODOS%"
+		"ESOS CHUNGUEROS A GOLPE DE%"
+		"BULLARANGA%";
+
+	const unsigned char cutscene_2 [] = 
+		"^ZOMBIES ACABADOS! ES HORA%"
+		"DE PONERSE A ESCRIBIR. PERO%"
+		"CHERIL HA PERDIDO LA LIBRETA%"
+		"DONDE APUNTABA CHASCARRILLOS%"
+		"'_UN CEMENTERIO? ^ME SUENA!%'";
+		
+	const unsigned char cutscene_3 [] = 
+		"'VI QUE SE LLEVABAN LA LI-%"
+		"BRETA A LA FABRICA!', DIJO%"
+		"EL ZOMBIE ANTES DE PALMAR.%"
+		"'OH, NO... MAS FABRICAS.%"
+		"ME TIENEN HASTA EL TOTO!%'";
+		
+	const unsigned char cutscene_4 [] = 
+		"SIGUIENDO LA PISTA, CHERIL%"
+		"CREE QUE LA LIBRETA ESTARA%"
+		"SEGURO EN EL BARCO PIRATA%"
+		"APARCADO EN EL PUERTO.%"
+		"A POR UN GORRO PIRATA!%";
+
 #else
 
 	const unsigned char text_propellers [] = 
@@ -321,6 +358,42 @@
 		"ALL THE ZOMBIES IN%"
 		"MY SHIP AND I SHALL%"
 		"GIVE YA YOUR THING.%";
+
+	const unsigned char cutscene_0 [] = 
+	//	 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+		"CHERIL TRAVELED TO PEPINONI%"
+		"TO FIND INSPIRATION FOR HER%"
+		"NEW BOOK ABOUT RETRO VIDEO%"
+		"GAMES, NOW THAT EVERYBODY%"
+		"SEEMED TO BE RELEASING ONE.%";
+
+	const unsigned char cutscene_1 [] = 
+		"ZOMBIES IN PEPINONI? GOSH,%"
+		"THIS IS A JOB FOR CHERIL!%"
+		"BACK TO THE GOOD OL' DAYS%"
+		"OF PARALYZING THE BAD GUYS%"
+		"AND THEN SMASHING THEM!%";
+
+	const unsigned char cutscene_2 [] = 
+		"NO MORE ZOMBIES AROUND!%"
+		"TIME TO WRITE - BUT CHERIL%"
+		"HAS LOST THE NOTEPAD! SHE%"
+		"CAN'T POSSIBLY WRITE THE%"
+		"GODMNED BOOK WITHOUT IT!%";
+
+	const unsigned char cutscene_3 [] = 
+		"'I SAW SOMEBODY TAKE THE%"
+		"NOTEPAD TO THE FACTORY,%"
+		"I SWEAR', CRIED THE ZOMBIE%"
+		"'OH, NO, MORE FACTORIES!"
+		"THE NEVER END!%";
+
+	const unsigned char cutscene_4 [] = 
+		"FOLLOWING THE TRACES, THE%"
+		"NOTEPAD IS PROBABLY AT THE%"
+		"PIRATE SHIP PARKED IN THE%"
+		"DOCKS. WELL, CHERIL ALWAYS%"
+		"WANTED A PIRATE HAT!%";
 #endif
 
 // Dialogue portraits: 0 for none, number for index to spr_hs!
@@ -358,3 +431,7 @@ const unsigned char * const dialogue_texts [] = {
 // Level 3, worker: 13..14
 // Level 4, chema:  15..16
 // Level 4, pirate: 17..18
+
+const unsigned char * const cutscenes [] = {
+	cutscene_0, cutscene_1, cutscene_2, cutscene_3, cutscene_4
+};
