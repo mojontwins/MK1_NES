@@ -188,8 +188,14 @@ const unsigned char *c_pal_fg;
 #endif
 
 const unsigned char *c_locks;
-const unsigned char *c_enems;
-const unsigned char *c_hotspots;
+
+#ifdef ENEMS_IN_CHRROM
+	unsigned int c_enems;
+	unsigned int c_hotspots;
+#else
+	const unsigned char *c_enems;
+	const unsigned char *c_hotspots;
+#endif
 
 unsigned char c_max_bolts;
 

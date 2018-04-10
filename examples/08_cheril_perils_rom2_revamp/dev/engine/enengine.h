@@ -14,27 +14,55 @@
 
 #ifdef PERSISTENT_ENEMIES
 	void enems_persistent_load (void) {
-		gp_gen = (unsigned char *) (c_enems);
-		for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
-			// Skip t
-			rdt = *gp_gen ++; 
+		#ifdef ENEMS_IN_CHRROM
+			bankswitch (l_enems_chr_rombank [level]);
+			vram_adr (c_enems);
+			rda = *((unsigned char *) (0x2007)); 	// Dummy read.			
 
-			// YX1
-			rda = *gp_gen ++;
-			ep_y [gpjt] = rda & 0xf0;
-			ep_x [gpjt] = rda << 4;
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+				// Skip t
+				rdt = *((unsigned char *) (0x2007));
 
-			// YX2
-			rda = *gp_gen ++;
-			rdc = rda & 0xf0;
-			rdb = rda << 4;
+				// YX1
+				rda = *((unsigned char *) (0x2007));
+				ep_y [gpjt] = rda & 0xf0;
+				ep_x [gpjt] = rda << 4;
 
-			// P, here used for speed
-			rda = (*gp_gen ++) & 0x0f;
-			if (rda > 1) rda >>= 1;	// Store converted!
-			ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
-			ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
-		}
+				// YX2
+				rda = *((unsigned char *) (0x2007));
+				rdc = rda & 0xf0;
+				rdb = rda << 4;
+
+				// P, here used for speed
+				rda = *((unsigned char *) (0x2007));
+				rda &= 0x0f;
+				if (rda > 1) rda >>= 1;	// Store converted!
+				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
+				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);
+			}
+		#else		
+			gp_gen = (unsigned char *) (c_enems);
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+				// Skip t
+				rdt = *gp_gen ++; 
+
+				// YX1
+				rda = *gp_gen ++;
+				ep_y [gpjt] = rda & 0xf0;
+				ep_x [gpjt] = rda << 4;
+
+				// YX2
+				rda = *gp_gen ++;
+				rdc = rda & 0xf0;
+				rdb = rda << 4;
+
+				// P, here used for speed
+				rda = (*gp_gen ++) & 0x0f;
+				if (rda > 1) rda >>= 1;	// Store converted!
+				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
+				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
+			}
+		#endif
 	}
 
 	void enems_persistent_update (void) {
@@ -119,11 +147,17 @@ void enems_load (void) {
 
 	// Each screen holds 3 * 4 bytes of enemies, that's 12 bytes per screen.
 	// 12 = 4 + 8 so you know the drill...
-	
-	gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
+
+	#ifdef ENEMS_IN_CHRROM
+		bankswitch (l_enems_chr_rombank [level]);
+		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	
+		rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+	#else
+		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
+	#endif
 
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		en_offs = rdc = n_pant + n_pant + n_pant;// + 3;
+		en_offs = rdc = n_pant + n_pant + n_pant;
 	#endif
 
 	//gpit = 3; while (gpit --) {
@@ -133,28 +167,56 @@ void enems_load (void) {
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
 			if (!(ep_flags [rdc] & 1)) {
 				_en_t = 0;
-				gp_gen += 4;
+				#ifdef ENEMS_IN_CHRROM
+					rda = *((unsigned char *) (0x2007));
+					rda = *((unsigned char *) (0x2007));
+					rda = *((unsigned char *) (0x2007));
+					rda = *((unsigned char *) (0x2007));
+				#else
+					gp_gen += 4;
+				#endif
 			} else 
 		#endif
 		{
-			// First get T, then do whatever I need
-			_en_t = *gp_gen ++;
+			#ifdef ENEMS_IN_CHRROM
+				// First get T, then do whatever I need
+				_en_t = *((unsigned char *) (0x2007));
 
-			// General...
-			en_alive [gpit] = 0;
+				// General...
+				en_alive [gpit] = 0;
 
-			// YX1
-			rda = *gp_gen ++;
-			_en_y1 = rda & 0xf0;
-			_en_x1 = rda << 4;
+				// YX1
+				rda = *((unsigned char *) (0x2007));
+				_en_y1 = rda & 0xf0;
+				_en_x1 = rda << 4;
 
-			// YX2
-			rda = *gp_gen ++;
-			_en_y2 = rda & 0xf0;
-			_en_x2 = rda << 4;
-		
-			// P, here used for speed
-			rda = *gp_gen ++;
+				// YX2
+				rda = *((unsigned char *) (0x2007));
+				_en_y2 = rda & 0xf0;
+				_en_x2 = rda << 4;
+			
+				// P, here used for speed
+				rda = *((unsigned char *) (0x2007));
+			#else
+				// First get T, then do whatever I need
+				_en_t = *gp_gen ++;
+
+				// General...
+				en_alive [gpit] = 0;
+
+				// YX1
+				rda = *gp_gen ++;
+				_en_y1 = rda & 0xf0;
+				_en_x1 = rda << 4;
+
+				// YX2
+				rda = *gp_gen ++;
+				_en_y2 = rda & 0xf0;
+				_en_x2 = rda << 4;
+			
+				// P, here used for speed
+				rda = *gp_gen ++;
+			#endif
 
 			// clean nibbles
 			rdd = rda & 0xf0; 	// Used for respawn speed!

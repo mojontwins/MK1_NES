@@ -10,7 +10,13 @@
 
 // Whenever you want to WIN the game just set win_level = 1
 
-win_level = (c_max_enems == pkilled);
+if (c_max_enems == pkilled) {
+	if (
+		en_cttouched [0] == 0 &&
+		en_cttouched [1] == 0 &&
+		en_cttouched [2] == 0
+	) win_level = 1;
+}
 
 // Some palete cycling
 

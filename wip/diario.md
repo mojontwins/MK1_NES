@@ -3785,7 +3785,21 @@ Voy a ir metiendo pres y luego ya lo dejo para llorar XD.
 
 Texto de las cutscenes metido... Y queda poco más de medio K... XD
 
+20180405
+========
+
+Ya sé lo que voy a hacer, después de pasarme pensando desde ayer a las 18:00 hasta hoy a las 9:25. Voy a sacar los enemigos a CHR-ROM. La forma en la que lo montaré, es crear una especie de librarian que junte bins y genere un índice. También haré que algunas herramientas, namely el exportador de enemigos, tengan un switch para que generen binario en vez de h (o simplemente detecten un .bin en el nombre de archivo de salida).
+
+Me pondré primero con las herramientas y luego a dar soporte en el código. Esto debería liberarme una cantidad bestial de PRG-ROM que podré usar en darle a esto mejor aspecto y sobre todo meter música (`12*12 + 4*12*24` = 1296 bytes extra).
+
 ~~
 
+Herramientas hechas y montado todo en el .bat. Esto va a necesitar un artículo para sí, algo que hable sobre CNROM, qué se espera de él, cómo se monta, y cómo está montado Cheril en concreto.
+
+Ahora voy a programar la parte de engine. No debería ser complicado :*)
+
+~~
+
+Mierda, no había pensado en los hotspots, que deben estar todos disponibles. Voy a necesitar copia en RAM. Ehpehre, que ya lo tengo. Si son dinámicos tengo ya `ht` y `hyx`. Los puedo usar también en el caso este.
 
 

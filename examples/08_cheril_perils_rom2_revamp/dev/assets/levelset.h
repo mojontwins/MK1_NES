@@ -69,8 +69,29 @@ const unsigned char * const * const l_spr_enems [] =
 
 // Objects
 
-const unsigned char * const l_enems [] = 		{ enems_4, enems_1, enems_3, enems_0, enems_2 };
-const unsigned char * const l_hotspots [] = 	{ hotspots_4, hotspots_1, hotspots_3, hotspots_0, hotspots_2 };
+#ifdef ENEMS_IN_CHRROM
+	// In this game, enems and hotspots are in CHR-ROM 2, from address (8192 - 1512) onwards.
+	// (i.e. they take 1512 bytes and are laid out at the end of CHR-ROM 2).
+
+	const unsigned char l_enems_chr_rombank [] = 	{ 2, 2, 2, 2, 2 };
+	const unsigned int l_enems [] = 				{ 
+														8192 - 1512 + ENEMS4_H_BIN_OFFS,
+														8192 - 1512 + ENEMS1_H_BIN_OFFS,
+														8192 - 1512 + ENEMS3_H_BIN_OFFS,
+														8192 - 1512 + ENEMS0_H_BIN_OFFS,
+														8192 - 1512 + ENEMS2_H_BIN_OFFS
+													};
+	const unsigned int l_hotspots [] = 				{ 
+	 													8192 - 1512 + ENEMS4_H_BIN_OFFS + HOTSPOTS_OFFSET_4,
+														8192 - 1512 + ENEMS1_H_BIN_OFFS + HOTSPOTS_OFFSET_1,
+														8192 - 1512 + ENEMS3_H_BIN_OFFS + HOTSPOTS_OFFSET_3,
+														8192 - 1512 + ENEMS0_H_BIN_OFFS + HOTSPOTS_OFFSET_0,
+														8192 - 1512 + ENEMS2_H_BIN_OFFS + HOTSPOTS_OFFSET_2
+													};
+#else
+	const unsigned char * const l_enems [] = 		{ enems_4, enems_1, enems_3, enems_0, enems_2 };
+	const unsigned char * const l_hotspots [] = 	{ hotspots_4, hotspots_1, hotspots_3, hotspots_0, hotspots_2 };
+#endif
 
 // CHR-ROM bank, for CNROM
 

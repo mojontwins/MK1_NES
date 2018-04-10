@@ -11,25 +11,32 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss2.png out=work\palss2.h label=palss2 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss3.png out=work\palss3.h label=palss3 silent
-..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltsgrey.png out=work\paltsgrey.h label=paltsgrey silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palssgrey.png out=work\palssgrey.h label=palssgrey silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts0.png out=work\palcuts0.h label=palcuts0 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltitle.png out=work\paltitle.h label=paltitle silent
 
-copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h + work\palss2.h + work\palts3.h + work\palss3.h + work\palssgrey.h + work\palcuts0.h assets\palettes.h > nul
+copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palss1.h + work\palts2.h + work\palss2.h + work\palts3.h + work\palss3.h + work\palssgrey.h + work\palcuts0.h + work\paltitle.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns0.spt out=..\dev\tileset0.chr silent
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns1.spt out=..\dev\tileset1.chr silent
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns2.spt out=..\dev\tileset2.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns2.spt out=..\dev\tileset2.bin silent
 
 echo Exporting enems
 cd ..\enems
-..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
-..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1 gencounter
-..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\assets\enems2.h 2 1 gencounter
-..\..\..\src\utils\eneexp3.exe level3.ene ..\dev\assets\enems3.h 3 1 gencounter
-..\..\..\src\utils\eneexp3.exe level4.ene ..\dev\assets\enems4.h 4 1 gencounter
+..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\work\enems0.h 0 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\work\enems1.h 1 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\work\enems2.h 2 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level3.ene ..\dev\work\enems3.h 3 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level4.ene ..\dev\work\enems4.h 4 1 gencounter bin
+cd ..\dev\work
+copy /b enems0.h + enems1.h + enems2.h + enems3.h + enems4.h ..\assets\enem_constants.h > nul
+..\..\..\..\src\utils\binpaster.exe index=..\assets\enem_index.h out=..\enems.bin files=enems0.h.bin,enems1.h.bin,enems2.h.bin,enems3.h.bin,enems4.h.bin
+cd ..
+copy /b tileset2.bin + enems.bin tileset2.chr 
+del tileset2.bin > nul
+del enems.bin > nul
 
 echo Compiling enembehs
 cd ..\script
@@ -72,8 +79,9 @@ ca65 game.s
 ld65 -v -C nes-CNROM.cfg -o cart-sp.nes crt0.o game.o runtime.lib -m labels.txt
 
 
-del *.o
-del game.s
+del *.o > nul
+del game.s > nul
+del work\*.* /q > nul
 
 copy cart.nes ..\..\cheril_perils_revamp.nes
 

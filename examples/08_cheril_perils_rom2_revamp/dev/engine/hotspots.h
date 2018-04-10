@@ -6,14 +6,24 @@
 
 void hotspots_load (void) {
 	// Copies hotspots from ROM to RAM and initializes them
+#ifdef ENEMS_IN_CHRROM
+	bankswitch (l_enems_chr_rombank [level]);
+	vram_adr (c_hotspots);
+	rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+#else
 	gp_gen = (unsigned char *) c_hotspots;
+#endif
+
 	for (gpit = 0; gpit < MAP_SIZE; gpit ++) {
-#ifdef HOTSPOTS_DYNAMIC
+#ifdef ENEMS_IN_CHRROM
+		ht [gpit] = *((unsigned char *) (0x2007));
+		hyx [gpit] = *((unsigned char *) (0x2007));
+#elif defined (HOTSPOTS_DYNAMIC)
 		ht [gpit] = *gp_gen ++;
 		hyx [gpit] = *gp_gen ++;
 #endif
 		hact [gpit] = 1;
-	}	
+	}
 }
 
 void hotspots_paint (void) {
@@ -41,7 +51,7 @@ void hotspots_paint (void) {
 
 void hotspots_create (void) {
 	
-#ifdef HOTSPOTS_DYNAMIC
+#if defined (HOTSPOTS_DYNAMIC) || defined (ENEMS_IN_CHRROM)
 
 	if (ht [n_pant] && hact [n_pant]) {
 		hrt = ht [n_pant];

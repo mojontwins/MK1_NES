@@ -26,12 +26,9 @@
 #include "assets/precalcs.h"
 #include "assets/palettes.h"
 #include "assets/behs.h"
-#include "assets/chr_rom_maps.h"
-#include "assets/enems0.h"
-#include "assets/enems1.h"
-#include "assets/enems2.h"
-#include "assets/enems3.h"
-#include "assets/enems4.h"
+#include "assets/chr_rom_maps.h"		// Maps in CHR-ROM
+#include "assets/enem_constants.h"		// 
+#include "assets/enem_index.h"			// Enems & hotspots in CHR-ROM
 #include "assets/spritedata.h"
 #include "assets/spritedata2.h"
 #include "assets/tiledata.h"
@@ -48,6 +45,12 @@
 #endif
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
+#endif
+
+#ifdef SPANISH
+	#include "assets/title_sp_rle.h"
+#else
+	#include "assets/title_en_rle.h"
 #endif
 
 #include "assets/hud_rle.h"

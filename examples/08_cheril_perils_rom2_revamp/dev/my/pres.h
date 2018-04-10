@@ -30,12 +30,19 @@ void pres (const unsigned char *p, void (*func) (void)) {
 }
 
 void pres_title (void) {
-	//unrle_vram (title_rle, 0x2000);
+	#ifdef SPANISH
+		unrle_vram (title_sp_rle, 0x2000);
+		_x = 10; _y = 19; pr_str ("PULSA START!"); 
+	#else
+		unrle_vram (title_en_rle, 0x2000);
+		_x = 10; _y = 19; pr_str ("PRESS START!"); 
+	#endif
 	
-	_x = 10; _y = 19; pr_str ("PRESS START!"); 
 	_x = 5;  _y = 26; pr_str ("@ 2018 THE MOJON TWINS"); 
 
-	pal_bg (palcuts0);
+	bankswitch (2); bank_bg (1);
+
+	pal_bg (paltitle);
 	bat_in ();
 
 	//music_play (MUSIC_TITLE);
@@ -45,6 +52,8 @@ void pres_title (void) {
 
 	music_stop ();
 	bat_out ();
+
+	bankswitch (0); bank_bg (0);
 }
 
 void scr_game_over (void) {

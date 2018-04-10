@@ -4,11 +4,6 @@
 // Main loop & helpers
 
 void game_init (void) {
-
-	#ifdef CNROM
-		bankswitch (l_chr_rom_bank [level]);
-	#endif
-
 	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.
@@ -105,7 +100,9 @@ void game_init (void) {
 
 void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
-	
+
+	ppu_off ();
+
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
 		prp_idx = 0;
@@ -127,9 +124,6 @@ void prepare_scr (void) {
 		f_zone_ac = 0;
 		fzx1 = fzx2 = fzy1 = fzy2 = 240;
 	#endif
-
-	// Disable sprites and tiles so we can write to VRAM.
-	ppu_off ();
 
 	#ifdef ENABLE_SHINES
 		shine_active_ct = 0;
@@ -170,6 +164,10 @@ void prepare_scr (void) {
 	#endif
 	
 	// Reenable sprites and tiles now we are finished.
+	#ifdef CNROM
+		bankswitch (l_chr_rom_bank [level]);
+	#endif
+
 	ppu_on_all ();
 
 	#ifdef ACTIVATE_SCRIPTING

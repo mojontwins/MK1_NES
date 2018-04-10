@@ -40,8 +40,19 @@ OPEN font.png
 PALS palts0.png
 CHARSET 0, 0, 32, 2
 
+# Title screen
+OPEN title_sp.png
+PALS paltitle.png
+LABEL dummyc3
+MAPPED 0, 0, 2, 2, 16, 15
 
+OPEN title_en.png
+PALS paltitle.png
+LABEL dummyc4
+MAPPED 0, 0, 2, 2, 16, 15
 
-FILL 8192
+# Enem + Hotspots data will be stuffed here, so make room for 1512 bytes:
+
+FILL 6680
 
 

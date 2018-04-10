@@ -89,7 +89,6 @@ void draw_scr (void) {
 			rda = rdt & 0x1f;
 			while (rdct --) add_tile (); 
 		}
-		bankswitch (l_chr_rom_bank [level]);
 	#endif
 
 	// Edit this file to alter map_buff the way you need:
