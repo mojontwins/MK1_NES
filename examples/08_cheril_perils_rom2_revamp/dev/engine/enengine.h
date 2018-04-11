@@ -17,24 +17,24 @@
 		#ifdef ENEMS_IN_CHRROM
 			bankswitch (l_enems_chr_rombank [level]);
 			vram_adr (c_enems);
-			rda = *((unsigned char *) (0x2007)); 	// Dummy read.			
+			rda = VRAM_READ; 	// Dummy read.			
 
 			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
 				// Skip t
-				rdt = *((unsigned char *) (0x2007));
+				rdt = VRAM_READ;
 
 				// YX1
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 				ep_y [gpjt] = rda & 0xf0;
 				ep_x [gpjt] = rda << 4;
 
 				// YX2
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 				rdc = rda & 0xf0;
 				rdb = rda << 4;
 
 				// P, here used for speed
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 				rda &= 0x0f;
 				if (rda > 1) rda >>= 1;	// Store converted!
 				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
@@ -92,9 +92,7 @@
 
 #ifdef PERSISTENT_DEATHS
 	void enems_persistent_deaths_load (void) {
-		gpit = MAP_SIZE * 3; while (gpit --) {
-			ep_flags [gpit] |= 0x01;
-		}
+		memfill (ep_dead, 0, MAP_SIZE * 3);
 	}
 #endif
 
@@ -139,39 +137,30 @@ void enems_update_unsigned_char_arrays (void) {
 }
 
 void enems_load (void) {
-	// Loads enems from n_pant
-
-	// Read 3 enemies from enems ROM pool and populate my arrays properly.
-	// If persistent enemies on: x, y, mx, my read from RAM pool.
-	// If persistent deaths on: read ep_flags and modify en_t accordingly.
-
-	// Each screen holds 3 * 4 bytes of enemies, that's 12 bytes per screen.
-	// 12 = 4 + 8 so you know the drill...
 
 	#ifdef ENEMS_IN_CHRROM
 		bankswitch (l_enems_chr_rombank [level]);
 		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	
-		rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+		rda = VRAM_READ; 	// Dummy read.
 	#else
 		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
 	#endif
 
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		en_offs = rdc = n_pant + n_pant + n_pant;
+		en_offs = rdc = (n_pant << 1) + n_pant;
 	#endif
 
-	//gpit = 3; while (gpit --) {
 	for (gpit = 0; gpit < 3; gpit ++) {
 		
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
-			if (!(ep_flags [rdc] & 1)) {
+			if (ep_dead [rdc]) {
 				_en_t = 0;
 				#ifdef ENEMS_IN_CHRROM
-					rda = *((unsigned char *) (0x2007));
-					rda = *((unsigned char *) (0x2007));
-					rda = *((unsigned char *) (0x2007));
-					rda = *((unsigned char *) (0x2007));
+					rda = VRAM_READ;
+					rda = VRAM_READ;
+					rda = VRAM_READ;
+					rda = VRAM_READ;
 				#else
 					gp_gen += 4;
 				#endif
@@ -180,23 +169,23 @@ void enems_load (void) {
 		{
 			#ifdef ENEMS_IN_CHRROM
 				// First get T, then do whatever I need
-				_en_t = *((unsigned char *) (0x2007));
+				_en_t = VRAM_READ;
 
 				// General...
 				en_alive [gpit] = 0;
 
 				// YX1
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 				_en_y1 = rda & 0xf0;
 				_en_x1 = rda << 4;
 
 				// YX2
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 				_en_y2 = rda & 0xf0;
 				_en_x2 = rda << 4;
 			
 				// P, here used for speed
-				rda = *((unsigned char *) (0x2007));
+				rda = VRAM_READ;
 			#else
 				// First get T, then do whatever I need
 				_en_t = *gp_gen ++;
@@ -426,7 +415,7 @@ void enems_load (void) {
 		#endif
 
 		#ifdef PERSISTENT_DEATHS
-			ep_flags [en_offs + gpit] &= 0xFE;
+			ep_dead [en_offs + gpit] = 1;
 		#endif
 
 		#ifdef ACTIVATE_SCRIPTING

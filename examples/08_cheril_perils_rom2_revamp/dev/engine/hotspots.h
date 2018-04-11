@@ -9,15 +9,15 @@ void hotspots_load (void) {
 #ifdef ENEMS_IN_CHRROM
 	bankswitch (l_enems_chr_rombank [level]);
 	vram_adr (c_hotspots);
-	rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+	rda = VRAM_READ; 	// Dummy read.
 #else
 	gp_gen = (unsigned char *) c_hotspots;
 #endif
 
 	for (gpit = 0; gpit < MAP_SIZE; gpit ++) {
 #ifdef ENEMS_IN_CHRROM
-		ht [gpit] = *((unsigned char *) (0x2007));
-		hyx [gpit] = *((unsigned char *) (0x2007));
+		ht [gpit] = VRAM_READ;
+		hyx [gpit] = VRAM_READ;
 #elif defined (HOTSPOTS_DYNAMIC)
 		ht [gpit] = *gp_gen ++;
 		hyx [gpit] = *gp_gen ++;

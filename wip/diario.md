@@ -3802,4 +3802,30 @@ Ahora voy a programar la parte de engine. No debería ser complicado :*)
 
 Mierda, no había pensado en los hotspots, que deben estar todos disponibles. Voy a necesitar copia en RAM. Ehpehre, que ya lo tengo. Si son dinámicos tengo ya `ht` y `hyx`. Los puedo usar también en el caso este.
 
+20180411
+========
 
+Working en la sombra (y en otras cosas), voy a intentar afeitar unos bytes más del código, que siempre viene bien. Voy a ver si gano algo cambiando los recorridos de arrays con puntero a recorridos con índice. Empezamos por ejemplo en `interactives_create`.
+
+2023 <- Antes de empezar
+
+Nu, en este caso termina ocupando algunos bytes más. ¿Ensamblador mierder? Voy a ver. Nah.
+
+Este es el punto en el que gano bytes buscando cosquillas al compilador. O pasando a ensamblador cosas. ¡Algo habrá! Y como no puedo hacer cosas creativas porque mira todo el mundo y esto canta menos, pues eso. Win.
+
+~~
+
+2023 - inicial
+2031 - `bolts_load`, de for a `memfill`
+2039 - Como sólo se llama `bolts_load` y a `bolts_clear` en un sitio, deshacer encap.
+2058 - `ep_flags` sólo se usa para muertos, simplificar.
+
+~~
+
+Me estoy desanimando, no encuentro mucho más de donde rascar XD
+
+TODO por los cambios:
+
+- Delete bolts.h
+- Test cerrojos.
+- Test they stay dead.

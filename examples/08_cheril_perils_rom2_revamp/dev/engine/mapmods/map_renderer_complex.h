@@ -80,11 +80,11 @@ void draw_scr (void) {
 	#ifdef MAP_FORMAT_CHRROM
 		bankswitch (c_map_chr_rom_bank);
 		vram_adr (c_map [n_pant]);
-		rda = *((unsigned char *) (0x2007)); 	// Dummy read.
+		rda = VRAM_READ; 	// Dummy read.
 		
 		// UNRLE into scr_buff
 		while (rdm < 192) {
-			rdt = *((unsigned char *) (0x2007));
+			rdt = VRAM_READ;
 			rdct = 1 + (rdt >> 5);
 			rda = rdt & 0x1f;
 			while (rdct --) add_tile (); 

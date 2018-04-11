@@ -154,7 +154,7 @@ unsigned char en_spr_id [3];
 #endif
 
 #ifdef PERSISTENT_DEATHS
-	unsigned char ep_flags [3 * MAP_SIZE];
+	unsigned char ep_dead [3 * MAP_SIZE];
 #endif
 
 // Text box

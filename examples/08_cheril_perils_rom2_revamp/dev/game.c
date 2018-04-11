@@ -89,9 +89,6 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_TEXT_BOX
 	#include "engine/textbox.h"
 #endif
-#ifndef DEACTIVATE_KEYS
-	#include "engine/bolts.h"
-#endif
 #ifdef ENABLE_BREAKABLE
 	#include "engine/breakable.h"
 #endif

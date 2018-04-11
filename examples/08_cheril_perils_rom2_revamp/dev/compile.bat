@@ -80,7 +80,7 @@ ld65 -v -C nes-CNROM.cfg -o cart-sp.nes crt0.o game.o runtime.lib -m labels.txt
 
 
 del *.o > nul
-del game.s > nul
+rem del game.s > nul
 del work\*.* /q > nul
 
 copy cart.nes ..\..\cheril_perils_revamp.nes

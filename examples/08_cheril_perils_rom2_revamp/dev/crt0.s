@@ -22,7 +22,6 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 
 .define SPEED_FIX		1	;zero if you want to handle PAL/NTSC speed difference by yourself
 
-
     .export _exit,__STARTUP__:absolute=1
 	.import initlib,push0,popa,popax,_main,zerobss,copydata
 

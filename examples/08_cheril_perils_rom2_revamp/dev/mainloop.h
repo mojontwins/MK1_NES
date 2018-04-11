@@ -21,7 +21,8 @@ void game_init (void) {
 	
 	hotspots_load ();
 	#ifndef DEACTIVATE_KEYS		
-		bolts_load ();
+		// bolts_load
+		memfill (lkact, 1, c_max_bolts);
 	#endif		
 
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
