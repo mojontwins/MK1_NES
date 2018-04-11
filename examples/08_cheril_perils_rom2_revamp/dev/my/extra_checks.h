@@ -9,6 +9,7 @@
 // each frame!
 
 // Whenever you want to WIN the game just set win_level = 1
+// (Don't forget to define WIN_LEVEL_CUSTOM in config.h)
 
 if (c_max_enems == pkilled) {
 	if (
@@ -21,8 +22,13 @@ if (c_max_enems == pkilled) {
 // Some palete cycling
 
 if (level < 2 && (frame_counter & 7) == 0 ) {
+	
 	rda = pal_cycle [2];
-	pal_cycle [2] = pal_cycle [1];	pal_col (13, pal_cycle [2]);
-	pal_cycle [1] = pal_cycle [0];	pal_col (14, pal_cycle [1]);
-	pal_cycle [0] = rda;			pal_col (15, pal_cycle [0]);
+	pal_cycle [2] = pal_cycle [1];	
+	pal_cycle [1] = pal_cycle [0];	
+	pal_cycle [0] = rda;			
+	
+	pal_col (13, pal_cycle [2]);
+	pal_col (14, pal_cycle [1]);
+	pal_col (15, pal_cycle [0]);
 }

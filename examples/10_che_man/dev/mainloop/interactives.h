@@ -15,12 +15,12 @@ if (interactives_index) {
 		gpit = interactives_index; while (gpit --) {
 			rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
 			if (
-				collide_in (rdx, rdy, rdb, rdc)
+				(rdx >= rdb - 4 && rdx <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15)
 				#ifndef PLAYER_TOP_DOWN
 					/*&& ppossee*/
 				#endif
 			) {
-				#ifdef ENABLE_USE_ANIM
+				#if defined (ENABLE_USE_ANIM) && !defined (INTERACTIVES_ONLY_SPRITES)
 					// Only if it is a genuine interactive				
 					if (interactives_f [gpit] & 0x80) {
 						use_ct = 1; use_sub_ct = USE_ANIM_FRAMES_PER_STEP;
@@ -40,21 +40,22 @@ if (interactives_index) {
 			script_arg = rdc;
 		#endif
 
-		#ifdef ENABLE_USE_ANIM
+		#if defined (ENABLE_USE_ANIM) && !defined (INTERACTIVES_ONLY_SPRITES)
 			if (
 				(use_ct == USE_ANIM_INTERACT_ON && use_sub_ct == USE_ANIM_FRAMES_PER_STEP)
 				|| (rdc & 0x80) == 0
 			)
 		#endif
 		{
-
-			if (rdc & 0x80) {	
-				rda = rdc & 0x7f;
-				rdb = flags [rda];
-				flags [rda] = flags [FLAG_INVENTORY];
-				flags [FLAG_INVENTORY] = rdb;
-				sfx_play (SFX_OBJECT, 1);
-			} 
+			#if !defined (INTERACTIVES_ONLY_SPRITES)
+				if (rdc & 0x80) {	
+					rda = rdc & 0x7f;
+					rdb = flags [rda];
+					flags [rda] = flags [FLAG_INVENTORY];
+					flags [FLAG_INVENTORY] = rdb;
+					sfx_play (SFX_OBJECT, 1);
+				} 
+			#endif
 
 			#include "my/on_interactive.h"
 

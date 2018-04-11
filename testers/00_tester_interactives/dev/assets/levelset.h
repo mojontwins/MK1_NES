@@ -41,15 +41,21 @@ const unsigned char * const * const l_spr_enems [] =
 // Map data
 
 #ifdef MAP_FORMAT_PACKED
-	const unsigned char * const l_map [] =
+	const unsigned char * const l_map [] =		{ map_0, map_1 };
 #endif
 #ifdef MAP_FORMAT_RLE16
 	const unsigned char * const * const l_map [] =	
+												{ map_0, map_1 };
 #endif
 #ifdef MAP_FORMAT_RLE53
 	const unsigned char * const * const l_map [] =	
-#endif
 												{ map_0, map_1 };
+#endif
+#ifdef MAP_FORMAT_CHRROM
+	const unsigned char l_map_chr_rom_bank [] = { MAP_00_CHRROM, MAP_01_CHRROM };
+	const unsigned int * const l_map [] = 		{ map_00_scr_offsets, map_01_scr_offsets };
+#endif
+												
 
 #ifdef MAP_WITH_DECORATIONS
 	const unsigned char * const * const l_decos [] =
@@ -63,12 +69,32 @@ const unsigned char * const * const l_spr_enems [] =
 
 // Objects
 
+#ifdef ENEMS_IN_CHRROM
+	// change 'base_address' for the actual base address in CHR-ROM
+
+	const unsigned char l_enems_chr_rombank [] = 	{ 2, 2 };
+	const unsigned int l_enems [] = 				{ 
+														base_address + ENEMS0_H_BIN_OFFS,
+														base_address + ENEMS1_H_BIN_OFFS,
+													};
+	const unsigned int l_hotspots [] = 				{ 
+	 													base_address + ENEMS0_H_BIN_OFFS + HOTSPOTS_OFFSET_4,
+														base_address + ENEMS1_H_BIN_OFFS + HOTSPOTS_OFFSET_1,
+													};
+#else
 const unsigned char * const l_enems [] = 		{ enems_0, enems_1 };
 const unsigned char * const l_hotspots [] = 	{ hotspots_0, hotspots_1 };
+#endif
+
+// CHR-ROM bank, for CNROM
+
+#ifdef CNROM
+	const unsigned char l_chr_rom_bank [] = 	{ 0, 1 };
+#endif
 
 // Interactives
 
 #if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 	const unsigned char * const l_interactives [] = 
-												{ interactives_0, interactives_1 };
+												{ interactives0, interactives1 };
 #endif

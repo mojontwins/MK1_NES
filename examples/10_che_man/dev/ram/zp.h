@@ -30,7 +30,7 @@ unsigned char at1, at2, cx1, cx2, cy1, cy2, caux;
 
 // Sprite related
 
-unsigned char oam_index;
+unsigned char oam_index, oam_index_aux;
 
 // Enemies
 
@@ -83,7 +83,7 @@ signed int pgtmx, pgtmy;
 #endif
 
 #ifdef ENABLE_LADDERS
-	unsigned char ponladder;
+	unsigned char ponladder, phalfladder;
 	unsigned char ponladderctr;
 #endif
 
@@ -188,8 +188,14 @@ const unsigned char *c_pal_fg;
 #endif
 
 const unsigned char *c_locks;
-const unsigned char *c_enems;
-const unsigned char *c_hotspots;
+
+#ifdef ENEMS_IN_CHRROM
+	unsigned int c_enems;
+	unsigned int c_hotspots;
+#else
+	const unsigned char *c_enems;
+	const unsigned char *c_hotspots;
+#endif
 
 unsigned char c_max_bolts;
 

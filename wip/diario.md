@@ -3819,6 +3819,7 @@ Este es el punto en el que gano bytes buscando cosquillas al compilador. O pasan
 2031 - `bolts_load`, de for a `memfill`
 2039 - Como sólo se llama `bolts_load` y a `bolts_clear` en un sitio, deshacer encap.
 2058 - `ep_flags` sólo se usa para muertos, simplificar.
+2079 - Restructurar pantalla de título.
 
 ~~
 
@@ -3829,3 +3830,7 @@ TODO por los cambios:
 - Delete bolts.h
 - Test cerrojos.
 - Test they stay dead.
+
+~~
+
+Voy a propagar a /src y luego a los demás para tenerlo todo actualizado. Total, algún día tendría que hacerlo.

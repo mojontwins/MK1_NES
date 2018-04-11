@@ -35,6 +35,7 @@ if (_en_ct) {
 	// the whole array and that a proper RETURN is issued!
 
 	rda = *en_behptr [gpit] ++;
+	en_alive [gpit] = 0;
 
 	rdc = (rda & 0x38) >> 3;
 	rdt = rda & 0x07;
@@ -43,7 +44,6 @@ if (_en_ct) {
 		case 0x00:
 			// IDLE
 			rdb = 1; while (rdt --) rdb += 25;
-			en_alive [gpit] = 0;
 			_en_ct = rdb;
 			break;
 
@@ -64,7 +64,7 @@ if (_en_ct) {
 
 		case 0xC0:
 			// RETURN
-			en_behptr [gpit] -= rda & 0x3f;
+			en_behptr [gpit] -= ((rda & 0x3f) + 1);
 			break;
 	}
 

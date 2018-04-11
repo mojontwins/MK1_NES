@@ -132,7 +132,12 @@ void main(void) {
 
 	while (1) {	
 
-		pres_title ();
+		//pres_title ();
+		bankswitch (2); bank_bg (1);
+		//music_play (MUSIC_TITLE);
+		pres (paltitle, scr_title);
+		music_stop ();
+		bankswitch (0); bank_bg (0);
 
 #ifdef MULTI_LEVEL		
 		level = 0;

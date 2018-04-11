@@ -16,7 +16,7 @@ void interactives_paint (void) {
 
 #ifdef INTERACTIVES_FROM_CODE
 	void interactives_create (void) {
-		gp_gen = c_interactives;
+		gp_gen = c_interactives; if (!gp_gen) return;
 		interactives_index = 0;
 		while ((rda = *gp_gen ++) != 0xff) {
 			if (rda == n_pant) {

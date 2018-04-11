@@ -19,9 +19,10 @@ if (res_on) {
 		res_subct = 50;
 		if (res_ct) { 
 			res_ct --; 
-			if (res_ct == 0) sfx_play (SFX_SPRING ,2); else if (res_ct <= 5) sfx_play (SFX_COUNT, 2);
+			if (res_ct <= 5) sfx_play (SFX_COUNT, 2);
 		} else {
 			res_on = 0;
+			sfx_play (SFX_SPRING ,2); 
 
 			#ifdef RESONATOR_CHANGE_BG_PAL
 				pal_bg (c_pal_bg);

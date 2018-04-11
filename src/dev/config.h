@@ -218,6 +218,8 @@
 
 //#define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
+//#define TEXT_BOX_WITH_PORTRAITS				// Draw spr_hs [rdd] if != 0 in the text box if defined
+//#define TEXT_BOX_DIALOGUES					// Add code for dialogues
 
 // Timer. 
 
@@ -240,7 +242,9 @@
 // Enemy types and definitions
 // ---------------------------
 
-#define ENEMS_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
+//#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
+
+#define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
@@ -340,6 +344,7 @@
 #define STEADY_SHOOTERS_BASE_SPRID		44
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+//#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
 
 // Compiled enemies
 
@@ -426,6 +431,7 @@
 //#define ENABLE_INTERACTIVES				// Graphical flag representations!
 #define INTERACTIVES_MAX 				4	// As per screen
 #define FLAG_INVENTORY					0
+//#define INTERACTIVES_ONLY_SPRITES			// If you are using other means for items and just need sprites
 
 // Top view:
 // ---------
@@ -562,6 +568,7 @@
 	#define CELL_KICKING		9
 
 	#define CELL_CLIMB_CYCLE	20
+	#define CELL_CLIMB_HALF		29
 #endif
 
 // Music

@@ -28,6 +28,7 @@
 #define ATTR(x,y)				(map_attr [COORDS((x),(y))])
 #define QTILE(x,y)				(map_buff [COORDS((x),(y))])
 #define ENEMS_RECOIL 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_x, prx, ENEMS_RECOIL_ON_HIT))
+#define VRAM_READ				(*((unsigned char *) (0x2007)))
 
 
 // Wall hits

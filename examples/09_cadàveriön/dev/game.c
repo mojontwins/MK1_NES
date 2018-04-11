@@ -31,9 +31,6 @@
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
-#ifdef MULTI_LEVEL
-	#include "assets/levelset.h"
-#endif
 #ifdef ENABLE_TEXT_BOX
 	#include "assets/custom_texts.h"
 #endif
@@ -42,6 +39,9 @@
 #endif
 #if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 	#include "assets/interactives.h"
+#endif
+#ifdef MULTI_LEVEL
+	#include "assets/levelset.h"
 #endif
 
 #include "assets/hud_rle.h"
@@ -72,9 +72,6 @@ extern const unsigned char m_ingame [];
 #include "engine/printer.h"
 #ifdef ENABLE_TEXT_BOX
 	#include "engine/textbox.h"
-#endif
-#ifndef DEACTIVATE_KEYS
-	#include "engine/bolts.h"
 #endif
 #ifdef ENABLE_BREAKABLE
 	#include "engine/breakable.h"

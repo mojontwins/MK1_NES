@@ -223,5 +223,3 @@ void __fastcall__ bankswitch(unsigned char bank);
 #define NULL			0
 #define TRUE			1
 #define FALSE			0
-
-#define PAL_BUF			0x01c0

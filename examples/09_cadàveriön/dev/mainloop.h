@@ -5,10 +5,6 @@
 
 void game_init (void) {
 
-	#ifdef CNROM
-		bankswitch (l_chr_rom_bank [level]);
-	#endif
-
 	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.
@@ -26,7 +22,8 @@ void game_init (void) {
 	
 	hotspots_load ();
 	#ifndef DEACTIVATE_KEYS		
-		bolts_load ();
+		// bolts_load
+		memfill (lkact, 1, c_max_bolts);
 	#endif		
 
 	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
@@ -105,7 +102,9 @@ void game_init (void) {
 
 void prepare_scr (void) {
 	if (!ft) fade_out (); else ft = 0;
-	
+
+	ppu_off ();
+
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
 		prp_idx = 0;
@@ -127,9 +126,6 @@ void prepare_scr (void) {
 		f_zone_ac = 0;
 		fzx1 = fzx2 = fzy1 = fzy2 = 240;
 	#endif
-
-	// Disable sprites and tiles so we can write to VRAM.
-	ppu_off ();
 
 	#ifdef ENABLE_SHINES
 		shine_active_ct = 0;
@@ -170,6 +166,10 @@ void prepare_scr (void) {
 	#endif
 	
 	// Reenable sprites and tiles now we are finished.
+	#ifdef CNROM
+		bankswitch (l_chr_rom_bank [level]);
+	#endif
+
 	ppu_on_all ();
 
 	#ifdef ACTIVATE_SCRIPTING
@@ -184,6 +184,10 @@ void prepare_scr (void) {
 		// This room script
 		run_script (n_pant << 1);
 	#endif
+
+	#include "my/on_entering_screen.h"
+
+	gpit = 3; while (gpit --) en_spr_id [gpit] = en_s [gpit];
 	
 	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;

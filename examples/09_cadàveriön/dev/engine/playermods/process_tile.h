@@ -47,7 +47,16 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			pkeys
 		) {
 			_x = x0; _y = y0; _t = 0; map_set ();
-			clear_cerrojo (COORDS(x0, y0));
+			
+			// bolts_clear 
+			gp_gen = (unsigned char *) c_locks;
+			gpit = c_max_bolts; while (gpit --) {
+				rda = *gp_gen ++; rdb = *gp_gen ++;
+				if (n_pant == rda && COORDS (x0, y0) == rdb) {
+					lkact [gpit] = 0;
+				}
+			}
+
 			pkeys --;
 			sfx_play (SFX_TILE, 1);
 		} else {

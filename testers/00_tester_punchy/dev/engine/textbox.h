@@ -39,7 +39,11 @@ void textbox_draw_text (void) {
 	rda = 1; // New line marker!
 	rdy = 13;
 	while (rdt = *gp_gen ++) {
-		if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + 6 + (rdy << 5); }
+		#ifdef TEXT_BOX_WITH_PORTRAITS
+			if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + rdm + (rdy << 5); }
+		#else
+			if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + 6 + (rdy << 5); }
+		#endif
 		if (rdt == '%') rda = 1; else { _n = rdt - 32; ul_putc (); }
 		if (rda) { ppu_waitnmi (); rdy ++; }
 	}	
@@ -48,12 +52,36 @@ void textbox_draw_text (void) {
 void textbox_do (void) {
 	// Textbox example, simple.
 	// Text must be pointed at by gp_gen.
+	// if defined TEXT_BOX_WITH_PORTRAITS, portrait # is in rdd
+	// rdd == 0 means no portrait.
 	rdm = TEXT_BOX_FRAME_TILE_OFFSET; textbox_frame ();
+#ifdef TEXT_BOX_WITH_PORTRAITS
+	if (rdd) {
+		oam_meta_spr (
+			44, 103,
+			256-32,
+			spr_hs [rdd]);
+		rdm = 8;
+	} else rdm = 6;
+#endif	
 	textbox_draw_text ();
 	while (1) {
 		ppu_waitnmi ();
 		pad_read (); if (pad_this_frame & (PAD_A|PAD_B)) break;
 	}
+#ifdef TEXT_BOX_WITH_PORTRAITS
+	if (rdd) oam_hide_rest (256-32);
+#endif
 	rdm = 0; textbox_frame ();
 	clear_update_list ();
 }
+
+#ifdef TEXT_BOX_DIALOGUES
+	void textbox_dialogue_do (unsigned char dfrom, unsigned char dto) {
+		for (gpjt = dfrom; gpjt <= dto; gpjt ++) {
+			rdd = dialogue_portraits [gpjt];
+			gp_gen = dialogue_texts [gpjt];
+			textbox_do ();
+		}
+	}
+#endif

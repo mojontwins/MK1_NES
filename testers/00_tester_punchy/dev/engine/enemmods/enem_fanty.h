@@ -98,7 +98,7 @@ en_fr = (_en_x >> 3) & 1;
 
 #ifdef FANTY_WITH_FACING
 	_en_facing = ((_en_x < prx) ? 0 : 4);
-	en_spr = FANTY_BASE_SPRID + en_fr + _en_facing;
+	en_spr = _en_s + en_fr + _en_facing;
 #else
-	en_spr = FANTY_BASE_SPRID + en_fr;
+	en_spr = _en_s + en_fr;
 #endif
