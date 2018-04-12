@@ -435,8 +435,7 @@ void player_move (void) {
 					#endif					
 				)
 			) {
-				sfx_play (SFX_JUMP, 0);
-				pj = 1; pctj = 0; pvy = -PLAYER_VY_MK2_JUMP_INITIAL;
+				jump_start ();
 				
 				#ifdef DIE_AND_RESPAWN
 					if (!(pgotten || hitv || pnotsafe)) {
@@ -465,8 +464,7 @@ void player_move (void) {
 					#endif
 				)
 			) {
-				sfx_play (SFX_JUMP, 0);
-				pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+				jump_start ();
 				
 				#ifdef DIE_AND_RESPAWN
 					if (!(pgotten || hitv || pnotsafe)) {

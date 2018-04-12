@@ -3842,6 +3842,9 @@ Para ahorrar un poco más (porque creo que es más liviana) voy a añadir al mot
 
 La hostia, he ganado 10 bytes XD pa freírme.
 
-TODO:
+TODO: Revisar todos los supuestos de salto (faltan: salto sobre enemigo, salto sobre hotspot) y modificar el inicio de salto para MK2. Probar: encapsular el "inicio de salto" (son tres asignaciones) y usar una llamada ¿salvará unos bytes?
 
-- Revisar todos los supuestos de salto (faltan: salto sobre enemigo, salto sobre hotspot) y modificar el inicio de salto para MK2. Probar: encapsular el "inicio de salto" (son tres asignaciones) y usar una llamada ¿salvará unos bytes?
+¡Hecho! Y he ahorrado 41 bytes. Ahora mismo la cuenta está en 2130 bytes. He arañado 107 puros bytes con el sudor de mi frentew.
+
+~~
+
