@@ -3841,3 +3841,7 @@ Voy a propagar a /src y luego a los demás para tenerlo todo actualizado. Total,
 Para ahorrar un poco más (porque creo que es más liviana) voy a añadir al motor la implementación del salto / gravedad / release de MK2 y la dejaré como opcional. Veré cuanto salvo, además de tener un salto mejor / distinto (depende de los gustos).
 
 La hostia, he ganado 10 bytes XD pa freírme.
+
+TODO:
+
+- Revisar todos los supuestos de salto (faltan: salto sobre enemigo, salto sobre hotspot) y modificar el inicio de salto para MK2. Probar: encapsular el "inicio de salto" (son tres asignaciones) y usar una llamada ¿salvará unos bytes?
