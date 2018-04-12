@@ -443,6 +443,7 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -512,6 +513,12 @@
 
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
+
+// IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
+#define PLAYER_G_MK2_JUMPING		4
+#define PLAYER_VY_MK2_JUMP_INITIAL	208
+#define PLAYER_VY_MK2_JUMP_RELEASE	96
+#define PLAYER_VY_MK2_JUMP_A_STEPS 	16
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 

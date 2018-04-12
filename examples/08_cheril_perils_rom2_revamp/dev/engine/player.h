@@ -263,10 +263,21 @@ void player_move (void) {
 		#endif
 
 		#ifndef PLAYER_SWIMS
-			if (!pj) {
-				pvy += PLAYER_G;
-				if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
-			}
+			#ifdef PLAYER_JUMP_TYPE_MK2
+				if (
+					!pgotten
+				) {
+					if (!pj) {
+						pvy += PLAYER_G;
+					} else pvy += PLAYER_G_MK2_JUMPING;
+					if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
+				}
+			#else
+				if (!pj) {
+					pvy += PLAYER_G;
+					if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
+				}
+			#endif
 		#endif
 
 		// Moving platforms invalidate pvy
@@ -411,35 +422,69 @@ void player_move (void) {
 		// *******************************
 		// Jump: PAD_A, change when needed
 		// *******************************
-		if (
-			a_button 
-			&& !pj
-			&& (
-				pgotten || ppossee || hitv
-				#ifdef ENABLE_LADDERS
-					|| ponladder
-				#endif
-			)
-		) {
-			sfx_play (SFX_JUMP, 0);
-			pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-			
-			#ifdef DIE_AND_RESPAWN
-				if (!(pgotten || hitv || pnotsafe)) {
-					player_register_safe_spot ();
-				}
-			#endif	
-		}
-		
-		if (i & PAD_A) {
-			if (pj) {
-				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-				pctj ++; if (pctj == 16) pj = 0;	
+
+		#ifdef PLAYER_JUMP_TYPE_MK2
+
+			if (
+				a_button 
+				&& !pj
+				&& (
+					pgotten || ppossee || hitv
+					#ifdef ENABLE_LADDERS
+						|| ponladder
+					#endif					
+				)
+			) {
+				sfx_play (SFX_JUMP, 0);
+				pj = 1; pctj = 0; pvy = -PLAYER_VY_MK2_JUMP_INITIAL;
+				
+				#ifdef DIE_AND_RESPAWN
+					if (!(pgotten || hitv || pnotsafe)) {
+						player_register_safe_spot ();
+					}
+				#endif					
 			}
-		} else {
-			pj = 0; 
-		}
+
+			if (pj) {
+				if (i & PAD_A) {
+					pctj ++; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
+				} else {
+					pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
+				}
+			}
+
+		#else
+			
+			if (
+				a_button 
+				&& !pj
+				&& (
+					pgotten || ppossee || hitv
+					#ifdef ENABLE_LADDERS
+						|| ponladder
+					#endif
+				)
+			) {
+				sfx_play (SFX_JUMP, 0);
+				pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+				
+				#ifdef DIE_AND_RESPAWN
+					if (!(pgotten || hitv || pnotsafe)) {
+						player_register_safe_spot ();
+					}
+				#endif	
+			}
+			
+			if (i & PAD_A) {
+				if (pj) {
+					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+					if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+					pctj ++; if (pctj == 16) pj = 0;	
+				}
+			} else {
+				pj = 0; 
+			}
+		#endif
 	#endif
 
 	// **********
