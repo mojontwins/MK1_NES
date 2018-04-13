@@ -515,6 +515,7 @@
 #define PLAYER_VY_FLOAT_MAX		256
 
 // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
+// (Used if PLAYER_JUMP_TYPE_MK2 is defined)
 #define PLAYER_G_MK2_JUMPING		4
 #define PLAYER_VY_MK2_JUMP_INITIAL	208
 #define PLAYER_VY_MK2_JUMP_RELEASE	96

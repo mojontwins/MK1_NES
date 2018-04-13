@@ -29,6 +29,11 @@ PALS palcuts0.png
 LABEL dummyc2
 MAPPED 0, 0, 2, 2, 16, 15
 
+OPEN cuts3.png
+PALS palcuts0.png
+LABEL dummyc3
+MAPPED 0, 0, 2, 2, 16, 15
+
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
 FILL 4096

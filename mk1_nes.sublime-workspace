@@ -416,10 +416,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
 			"settings":
 			{
-				"buffer_size": 10234,
+				"buffer_size": 1118,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -428,7 +428,25 @@
 			"file": "wip/diario.md",
 			"settings":
 			{
-				"buffer_size": 141537,
+				"buffer_size": 143832,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 2172,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/08_cheril_perils_rom2_revamp/dev/game.c",
+			"settings":
+			{
+				"buffer_size": 3218,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -514,19 +532,39 @@
 		"/D/git/MK1_NES/examples",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/printer.h",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/crt0.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/frame.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/definitions.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/cocos.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_shooty.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/playermods/process_tile.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/bolts.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/interactives.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/linear_cocos.h",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/on_interactive.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/palettes.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/cart-sp.nes",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
-		"/D/git/MK1_NES/wip/diario.md",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/game.c",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/cuts0_rle.h",
@@ -534,7 +572,6 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/interactives.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/palcuts0.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/my/pres.h",
@@ -627,30 +664,11 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_cliente_panel.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_intro_panel.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_configuracion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_seguridad_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/Touch.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/localization/es_ES/labels.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/en_US.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/es_ES.inc",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/index.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/js/app.js",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/roundpad/roundpad.js",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/ficheros.php",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/rcmail.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/calendar.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/database_attachments/database_attachments.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/filesystem_attachments/filesystem_attachments.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/templates/login.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/lib/filters.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/defaults.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/avelsieve/avelsieve.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_seguridad_panel.html"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -665,6 +683,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pal_col",
+			"tosudiv",
+			"tosumula",
+			"tosudiva",
+			"tosumula0",
+			"/",
+			"en_flags",
+			"ep_dead",
+			"ep_flags",
+			"persistent_load",
+			"cocos_shoot_linear",
+			"bolts",
+			"clear_cerrojo",
+			"bolts_load",
+			"interactives_create",
 			"CLEAR_FLAGS",
 			"rda",
 			"Jack"
@@ -675,6 +708,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"ep_dead",
+			"bolts_clear",
 			"Amador"
 		],
 		"reverse": false,
@@ -691,19 +726,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10234,
+						"buffer_size": 1118,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10233,
-								10233
+								1118,
+								1118
 							]
 						],
 						"settings":
@@ -715,16 +750,16 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4901.0,
+						"translation.y": 78.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -733,15 +768,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 141537,
+						"buffer_size": 143832,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								141534,
-								141534
+								143831,
+								143831
 							]
 						],
 						"settings":
@@ -753,10 +788,73 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 64010.0,
+						"translation.y": 64894.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2172,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1162,
+								1162
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/08_cheril_perils_rom2_revamp/dev/game.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3218,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2799,
+								2799
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -806,7 +904,7 @@
 	},
 	"output.sftp":
 	{
-		"height": 0.0
+		"height": 118.0
 	},
 	"pinned_build_system": "",
 	"project": "mk1_nes.sublime-project",

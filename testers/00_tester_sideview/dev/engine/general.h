@@ -85,3 +85,15 @@ void pad_read (void) {
 		return (rda + rdb - (rdc >> 1) - (rdc >> 2) + (rdc >> 4));
 	}
 #endif
+
+#ifndef PLAYER_TOP_DOWN
+	void jump_start (void) {
+		sfx_play (SFX_JUMP, 0);
+		pj = 1; pctj = 0; 
+		#ifdef PLAYER_JUMP_TYPE_MK2
+			pvy = -PLAYER_VY_MK2_JUMP_INITIAL;
+		#else
+			pvy = -PLAYER_VY_JUMP_INITIAL;
+		#endif
+	}
+#endif

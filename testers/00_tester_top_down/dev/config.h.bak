@@ -344,6 +344,7 @@
 #define STEADY_SHOOTERS_BASE_SPRID		44
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+//#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
 
 // Compiled enemies
 
@@ -429,6 +430,7 @@
 //#define ENABLE_INTERACTIVES				// Graphical flag representations!
 #define INTERACTIVES_MAX 				4	// As per screen
 #define FLAG_INVENTORY					0
+//#define INTERACTIVES_ONLY_SPRITES			// If you are using other means for items and just need sprites
 
 // Top view:
 // ---------
@@ -440,6 +442,7 @@
 // ----------
 
 //#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
+//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac

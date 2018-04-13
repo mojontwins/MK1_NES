@@ -10,7 +10,7 @@ if (hrt) {
 				if (pvy > 0 && pry < hry) {
 					if (res_on == 0) {
 						res_on = 1; res_ct = 9; res_subct = 50;
-						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
+						jump_start ();
 						
 						#ifdef RESONATOR_CHANGE_BG_PAL
 							pal_bg (RESONATOR_CHANGE_BG_PAL);

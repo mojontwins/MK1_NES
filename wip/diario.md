@@ -3846,5 +3846,32 @@ TODO: Revisar todos los supuestos de salto (faltan: salto sobre enemigo, salto s
 
 ¡Hecho! Y he ahorrado 41 bytes. Ahora mismo la cuenta está en 2130 bytes. He arañado 107 puros bytes con el sudor de mi frentew.
 
+20180413
+========
+
+He modificado algunas cosas para meter las cutscenes. En concreto he apañado el salto de linea a la función que imprime un texto. Idealmente debería haber gastado pocos bytes metiendo las cutscenes (a falta del texto del final y de meter dos escenas: la de antes de la última fase y la del final).
+
+Ahora mismo estamos en 2058 bytes libres en la versión en inglés y 1978 bytes libres en la versión en español (probablemente debido a que el título en RLE ocupa más).
+
+A unas malas podría meter los nametables en RLE dentro de CHR-ROM si me queda algo libre, pero necesitaría un buffer en RAM del tamaño de la que más ocupe, que ahora mismo es 169 bytes (el primer cutscene). Dejémonos esa carta en la manga por ahora.
+
+Tengo que:
+
+- Completar la cutscene que falta y ver qué hacer en el final.
+- Música.
+- Cerrar la puerta de la cueva de los fantasmas del barco hasta que solo queden precisamente 2 enemigos por matar (esos dos).
+
 ~~
+
+A ver si afeito algo más... Poco.
+
+~~
+
+Metidos todos los cutscenes, todos los textos. Todo
+
+- (más) Música.
+- Cerrar la puerta de la cueva de los fantasmas del barco hasta que solo queden precisamente 2 enemigos por matar (esos dos).
+
+Quedan 1777 bytes (peor caso, versión en español).
+
 

@@ -27,6 +27,7 @@ void pres (const unsigned char *p, void (*func) (void)) {
 		if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;
 	}
 	bat_out ();
+	bank_bg (0);
 }
 
 void scr_title (void) {
@@ -45,11 +46,13 @@ void scr_game_over (void) {
 	_x = 11; _y = 15; pr_str ("GAME OVER!");
 }
 
-void scr_cuts (void) {
-	//unrle_vram (ending_rle, 0x2000);
+const unsigned char * const cuts_rle [] = {
+//	level 0    level 1    level 2    level 3    level 4    ending
+	cuts0_rle, cuts0_rle, cuts1_rle, cuts2_rle, cuts3_rle, cuts3_rle
+};
 
-	_x =3; _y = 18; pr_str ("FINALLY, CHERIL MANAGED TO");
-	       _y = 20; pr_str (" ESCAPE FROM CASTLE MOJON");
-	       _y = 22; pr_str ("WHAT NEW ADVENTURES AWAIT?");
-	       _y = 24; pr_str ("   THANKS FOR PLAYING!!");
+void scr_cutscene (void) {
+	// show cuts + text in level;
+	unrle_vram (cuts_rle [level], 0x2000);
+	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [level]);
 }

@@ -783,8 +783,7 @@ void enems_move (void) {
 					#endif
 
 					if (i & PAD_A) {
-						pj = 1; pctj = 0; pvy = -PLAYER_VY_JUMP_INITIAL;
-						sfx_play (SFX_JUMP, 0);
+						jump_start ();
 					} else {
 						sfx_play (SFX_STEPON, 1);
 						pvy = -PLAYER_VY_JUMP_INITIAL << 1;

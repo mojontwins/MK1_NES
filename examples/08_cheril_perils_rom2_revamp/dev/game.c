@@ -58,6 +58,7 @@
 #include "assets/cuts0_rle.h"
 #include "assets/cuts1_rle.h"
 #include "assets/cuts2_rle.h"
+#include "assets/cuts3_rle.h"
 
  // Custom bgs
 #include "assets/bg0.h"
@@ -124,6 +125,7 @@ extern const unsigned char m_ingame [];
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
+	scroll (0, SCROLL_Y);
 
 	ppu_off ();
 	first_game = 1;
@@ -137,7 +139,6 @@ void main(void) {
 		//music_play (MUSIC_TITLE);
 		pres (paltitle, scr_title);
 		music_stop ();
-		bankswitch (0); bank_bg (0);
 
 #ifdef MULTI_LEVEL		
 		level = 0;
@@ -147,7 +148,8 @@ void main(void) {
 		// Game loop
 
 		while (1) {
-			scroll (0, SCROLL_Y);
+			bankswitch (2); 
+			pres (palcuts0, scr_cutscene);
 			game_init (); 
 			game_loop ();
 
@@ -160,7 +162,8 @@ void main(void) {
 				if (level == MAX_LEVELS) 
 #endif
 				{
-					// game_ending ();
+					bankswitch (2);
+					pres (palcuts0, scr_cutscene);
 					break;
 				}
 			}

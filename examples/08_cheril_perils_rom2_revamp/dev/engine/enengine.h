@@ -136,6 +136,10 @@ void enems_update_unsigned_char_arrays (void) {
 	__asm__ ("sta %v, y", en_facing);
 }
 
+void enems_facing () {
+	_en_facing = rda << 2;
+}
+
 void enems_load (void) {
 
 	#ifdef ENEMS_IN_CHRROM

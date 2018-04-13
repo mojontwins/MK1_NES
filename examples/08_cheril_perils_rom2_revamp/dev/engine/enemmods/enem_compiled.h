@@ -50,9 +50,12 @@ if (_en_ct) {
 		case 0x40:
 			// ADVANCE
 			_en_mx = endx [rdc]; _en_my = endy [rdc];
-					
+			
+			rda = (_en_mx < 0); enems_facing ();
+
 			if (_en_mx < 0) _en_facing = 4;
 			else if (_en_mx > 0) _en_facing = 0;
+			// If _en_mx == 0, no change!
 			
 			_en_ct = rdt << 4; en_alive [gpit] = 1;
 			break;
