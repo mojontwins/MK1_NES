@@ -76,6 +76,11 @@ void player_render (void) {
 		);
 }
 
+void player_to_pixels (void) {
+	prx = px >> FIXBITS;
+	pry = py >> FIXBITS;
+}
+
 void player_kill (void) {
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
@@ -95,8 +100,9 @@ void player_kill (void) {
 	#endif
 
 	#ifdef DIE_AND_RESPAWN
-		px = px_safe; prx = px >> FIXBITS;
-		py = py_safe; pry = py >> FIXBITS;
+		px = px_safe; 
+		py = py_safe; 
+		player_to_pixels ();
 		n_pant = n_pant_safe;
 		music_pause (1);
 		delay (60);
@@ -118,8 +124,6 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
-	if (pskip) { pskip = 0; goto player_justframe; }
-	
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
 			pfrozen --; 
@@ -155,7 +159,6 @@ void player_move (void) {
 	#endif
 
 	hitv = hith = 0;
-	pushed_any = 0;
 	pnotsafe = 0;
 	ppossee = 0;
 	#ifdef ENABLE_SLIPPERY
@@ -326,8 +329,7 @@ void player_move (void) {
 	if (py < 0) py = 0;
 	
 	// Collision
-	prx = px >> FIXBITS;
-	pry = py >> FIXBITS;
+	player_to_pixels ();
 
 	#ifdef PLAYER_TOP_DOWN		
 		if (pvy < 0)
@@ -558,7 +560,7 @@ void player_move (void) {
 		
 	if (px < (4<<FIXBITS)) prx = 4;
 	else if (px > (244<<FIXBITS)) prx = 244; 
-	else prx = px >> FIXBITS;
+	else player_to_pixels ();
 	
 	// Collision
 
@@ -633,7 +635,7 @@ void player_move (void) {
 	#ifndef NO_HORIZONTAL_EVIL_TILE	
 		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 	#endif	
-	if (pstate != EST_PARP) if (phit) { prx = px >> FIXBITS; pry = py >> FIXBITS; pkill = 1; }
+	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 
 	// **************
 	// B Button stuff
@@ -698,7 +700,6 @@ void player_move (void) {
 	// **********
 	// Calc frame
 	// **********
-player_justframe:
 	#include "my/player_frame_selector.h"
 
 	prx_old = prx;

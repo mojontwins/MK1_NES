@@ -3874,4 +3874,13 @@ Metidos todos los cutscenes, todos los textos. Todo
 
 Quedan 1777 bytes (peor caso, versión en español).
 
+20180416
+========
+
+He optimizado un millón de cosas aparte de meter lo que quedaba en la fase del barco: el tapón que bloquea el paso a los fantasmas y a la chica que te lo cuenta (texto incluido). Ahora tenemos 2070 bytes libres en la versión inglesa y 1978 bytes en la versión española. ¡Vaya mejora!
+
+El juego está terminado, creo, a falta de probar mil y de meter las músicas que faltan, y creo que en el espacio que tengo me da :) Hasta podré florear un poco una vez que todo esté dentro :-)
+
+~~
+
 

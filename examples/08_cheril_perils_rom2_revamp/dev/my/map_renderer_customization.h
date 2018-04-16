@@ -11,15 +11,12 @@
 
 set_rand (1 + n_pant);
 
-if (level == 2) {
-	rda = n_pant & 1;
-	gp_gen = bgs [level] + (rda << 7) + (rda << 6);
-} else if (level == 3) {
-	gp_gen = bgs [level];
-}
+gp_gen = bgs [level];
+if (level == 2 && (n_pant & 1)) gp_gen += 192;
 
 gpit = 192; while (gpit --) {
 	rda = map_buff [gpit];
+	rdb = map_buff [gpit - 16];
 
 	// Add 16 to
 	if (rand8 () & 1) {
@@ -36,16 +33,16 @@ gpit = 192; while (gpit --) {
 	switch (level) {
 		case 0:
 		case 1:
-			if (rda == 21 && map_buff [gpit - 16] != 21) rda = 22;
+			if (rda == 21 && rdb != 21) rda = 22;
 			break;
 		case 2:
-			if (rda == 8 && map_buff [gpit - 16] != 8) rda = 24;
+			if (rda == 8 && rdb != 8) rda = 24;
 		case 3:
 			if (rda == 0) rda = gp_gen [gpit];
 			break;
 		case 4:
 			if (rda == 15 && map_buff [gpit - 1] == 15) rda = 31;
-			if (rda == 14 && map_buff [gpit - 16] != 14) rda = 30;
+			if (rda == 14 && rdb != 14) rda = 30;
 			break;
 	}
 
@@ -70,4 +67,9 @@ if (level == 0) {
 if (level == 1 && n_pant == 6 && level1_gate) {
 	map_buff [0x4E] = 22; 
 	map_buff [0x5E] = 21;
+}
+
+// Add block until all enemies are killed (minus 2)
+if (level == 4 && n_pant == 0x11 && pkilled < c_max_enems - 2) {
+	map_buff [0x01] = 25;
 }

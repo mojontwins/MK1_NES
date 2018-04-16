@@ -60,6 +60,7 @@
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 #define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
+#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -234,7 +235,7 @@
 
 // Springs
 
-#define ENABLE_SPRINGS
+//#define ENABLE_SPRINGS
 #define SPRING_TILE 					10
 #define SPRING_SPIKE_TILE 				11
 //#define SPRINGS_ON_BY_DEFAULT

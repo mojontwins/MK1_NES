@@ -51,7 +51,7 @@
 		"NO, GRACIAS, ESTOY%"
 		"LIADA. Y DE TODOS%"
 		"MODOS NO SALIMOS%"
-		"NUNCA...%";
+		"NUNCA.%";
 
 	const unsigned char dialogue_1_0 [] =
 		"HOLA, CHERIL. TE%"
@@ -59,7 +59,7 @@
 		"MANDEE LA MUSA. VEO%"
 		"QUE SIGUES EN ESO%"
 		"DE IR POR AHI PI-%"
-		"SANDO ZOMBIES...%";
+		"SANDO ZOMBIES.%";
 
 	const unsigned char dialogue_1_1 [] =
 		"CASI TODOS LOS MA-%"
@@ -91,7 +91,7 @@
 		"TU CUADERNO LA UL-%"
 		"TIMA VEZ... NO SE,%"
 		"ECHA UN VISTAZO, A%"
-		"LO MEJOR LO VES...%";
+		"LO MEJOR LO VES.%";
 
 	const unsigned char dialogue_2_2 [] =
 		"EEEH, NO. NO VOY A%"
@@ -104,12 +104,12 @@
 	const unsigned char dialogue_2_4 [] = 
 		"OSTRAS, BUENA IDEA,%"
 		"LE PUEDO PREGUNTAR%"
-		"A LOS ZOMBIES...%"
+		"A LOS ZOMBIES.%"
 		"Y LUEGO REVENTARLES%"
 		"EL OHIO, CLARO.%";
 
 	const unsigned char dialogue_2_3 [] =
-		"ZOMBIES, ZOMBIES...%"
+		"~ZOMBIES, ZOMBIES!%"
 		"MEH, QUE SOIS TODOS%"
 		"UNOS COPIONES!%"
 		"SEGUID TOCANDOME LA%"
@@ -152,7 +152,7 @@
 		"QUE DESCRIBES. DE%"
 		"HECHO LO TENGO YO.%"
 		"TIENES UNA LETRA DE%"
-		"MIERDA, TIA...%";
+		"MIERDA, TIA.%";
 
 	const unsigned char dialogue_4_3 [] =
 		"SE QUE LO QUIERES,%"
@@ -161,6 +161,12 @@
 		"TU ME LIMPIAS EL%"
 		"BARCO DE ZOMBIES Y%"
 		"YO TE DOY ESTO.%";
+
+	const unsigned char dialogue_4_4 [] =
+		"LA CUEVA FANTASMAL%"
+		"ESTARA TAPADA HASTA%"
+		"QUE MATES A TODOS%"
+		"LOS DEMAS BICHOS.%";
 
 	const unsigned char cutscene_0 [] = 
 	//	 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -188,7 +194,7 @@
 		"'VI QUE SE LLEVABAN LA LI-%%"
 		"BRETA A LA FABRICA!', DIJO%%"
 		"EL ZOMBIE ANTES DE PALMAR.%%"
-		"'OH, NO... MAS FABRICAS. ME%%"
+		"'OH, NO! MAS FABRICAS. ME%%"
 		"TIENEN HASTA EL TOTO!'";
 
 	const unsigned char cutscene_4 [] =
@@ -219,7 +225,7 @@
 		"IN PLACE... NOW%"
 		"YOU CAN HEAR A%"
 		"RUSTY FENCE OPENING%"
-		"ELSEWHERE...%";
+		"ELSEWHERE.%";
 
 	const unsigned char dialogue_0_0 [] = 
 		"HO, CHERIL, WHAT'S%"
@@ -255,7 +261,7 @@
 	const unsigned char dialogue_0_4 [] =
 		"NO, THANKS. WE ARE%"
 		"NEVER FEATURED,%"
-		"ANYWAYS...";
+		"ANYWAYS.";
 
 	const unsigned char dialogue_1_0 [] =
 		"HI, CHERIL. REMEM-%"
@@ -287,7 +293,7 @@
 		"YOU WEAR THAT BLACK%"
 		"SHOZUKU, YOU KNOW,%"
 		"FOR THE NICE 80S%"
-		"VIBE...%";
+		"VIBE.%";
 
 	const unsigned char dialogue_2_1 [] =
 		"SORRY, BUT I CAN'T%"
@@ -303,7 +309,7 @@
 		"PLACE IS FULL OF%"
 		"THOSE DIRTY ZOMBIES%"
 		"AND THEY ARE 'YOUR'%"
-		"THING, NOT MINE...%";
+		"THING, NOT MINE.%";
 
 	const unsigned char dialogue_2_3 [] =
 		"ZOMBIES, ZOMBIES...%"
@@ -317,7 +323,7 @@
 		"GOSH, ZIMBIES, GOOD%"
 		"IDEA! I WILL ASK%"
 		"THEM IF THEY HAVE%"
-		"SEEN MY NOTEBOOK...%"
+		"SEEN MY NOTEBOOK.%"
 		"AFTER I BEAT THE%"
 		"CRAP OUT OF THEM!%";
 
@@ -334,7 +340,7 @@
 		"THE WAY TO TURN'EM%"
 		"BACK ON. I WON'T%"
 		"BE ENTERING THERE,%"
-		"SWEETIE...%";
+		"SWEETIE.%";
 
 	const unsigned char dialogue_4_0 [] =
 		"WHOAH, THIS PLACE%"
@@ -364,6 +370,12 @@
 		"ALL THE ZOMBIES IN%"
 		"MY SHIP AND I SHALL%"
 		"GIVE YA YOUR THING.%";
+
+	const unsigned char dialogue_4_4 [] =
+		"THE GHOST CAVE WILL%"
+		"BE SHUT UNTIL YOU%"
+		"KILL EVERY MONSTER,%"
+		"SORRY!%";
 
 	const unsigned char cutscene_0 [] = 
 	//	 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -423,6 +435,7 @@ const unsigned char dialogue_portraits [] = {
 	SPR_WORKER, SPR_WORKER,
 	SPR_CHEMA, SPR_CHERIL,
 	SPR_PIRATE, SPR_PIRATE,
+	SPR_GIRL
 };
 
 const unsigned char * const dialogue_texts [] = {
@@ -434,6 +447,7 @@ const unsigned char * const dialogue_texts [] = {
 	dialogue_3_0, dialogue_3_1,
 	dialogue_4_0, dialogue_4_1,
 	dialogue_4_2, dialogue_4_3,
+	dialogue_4_4
 };
 
 // Defined dialogues for this game:
@@ -445,6 +459,7 @@ const unsigned char * const dialogue_texts [] = {
 // Level 3, worker: 13..14
 // Level 4, chema:  15..16
 // Level 4, pirate: 17..18
+// Level 4, girl:   19
 
 const unsigned char * const cutscenes [] = {
 	cutscene_0, cutscene_1, cutscene_2, cutscene_3, cutscene_4, cutscene_5

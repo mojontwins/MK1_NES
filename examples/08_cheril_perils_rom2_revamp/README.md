@@ -579,7 +579,16 @@ if (level == 3 && ht [9] == 6 + 2*HS_USE_OFFS) {
 Level by level: level 4
 -----------------------
 
+On level 4, besides a couple of interactive sprites, a block should be rendered blocking the access to the final screen until every enemy in the level minus 2 is killed (there's two 'compiled' type enemies in the last screen).
 
+Interactive sprites are placed and configured as always. The block is added via `my/map_renderer_customization.h`, as usual:
+
+```c
+    // Add block until all enemies are killed (minus 2)
+    if (level == 4 && n_pant == 0x11 && pkilled < c_max_enems - 2) {
+        map_buff [0x01] = 25;
+    }
+```
 
 Now save some bytes
 -------------------

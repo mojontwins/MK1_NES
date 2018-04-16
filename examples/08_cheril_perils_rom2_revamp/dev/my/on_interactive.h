@@ -30,7 +30,7 @@ switch (level) {
 		if (rdc == SPR_GIRL) {
 			rda = 6; rdb = 9;
 		} else {
-			rda = 10; rdb = 10;
+			rda = rdb = 10;
 		}
 		break;
 	case 3:
@@ -39,6 +39,8 @@ switch (level) {
 	case 4:
 		if (rdc == SPR_CHEMA) {
 			rda = 15; rdb = 16;
+		} else if (rdc == SPR_GIRL) {
+			rda = rdb = 19;
 		} else {
 			rda = 17; rdb = 18;
 		}
