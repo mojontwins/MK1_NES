@@ -3881,6 +3881,8 @@ He optimizado un millón de cosas aparte de meter lo que quedaba en la fase del 
 
 El juego está terminado, creo, a falta de probar mil y de meter las músicas que faltan, y creo que en el espacio que tengo me da :) Hasta podré florear un poco una vez que todo esté dentro :-)
 
+Habrá que propagar los cambios. Pero antes tengo que probarlo bien, que he cambiado muchas cosas y a lo mejor me he cargado algo.
+
 ~~
 
 
