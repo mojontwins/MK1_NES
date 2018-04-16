@@ -747,7 +747,7 @@ void enems_move (void) {
 					|| (_en_t == 7 && en_alive [gpit] != 2)
 				#endif
 				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && en_alive [gpit] == 0)
+					|| (_en_t == 8 && en_alive [gpit] != 2)
 				#endif
 				#ifdef ENABLE_PEZONS
 					|| (_en_t == 9 && en_alive [gpit] == 0)

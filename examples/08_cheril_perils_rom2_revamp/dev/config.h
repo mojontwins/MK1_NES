@@ -444,7 +444,7 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
+//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
