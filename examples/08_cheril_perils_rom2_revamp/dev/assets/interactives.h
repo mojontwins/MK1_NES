@@ -30,6 +30,6 @@ const unsigned char interactives3 [] = {
 const unsigned char interactives4 [] = {
 	 4, 0xA4, SPR_CHEMA,
 	12, 0x12, SPR_PIRATE,
-	17, 0x46, SPR_GIRL,
+	17, 0xA8, SPR_GIRL,
 	0xff
 };
