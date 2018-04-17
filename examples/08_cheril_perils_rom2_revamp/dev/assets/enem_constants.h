@@ -73,8 +73,8 @@
 #define MAX_HOTSPOTS_TYPE_0_3	8
 #define MAX_HOTSPOTS_TYPE_1_3	0
 #define MAX_HOTSPOTS_TYPE_2_3	2
-#define MAX_HOTSPOTS_TYPE_3_3	5
-#define MAX_HOTSPOTS_TYPE_4_3	9
+#define MAX_HOTSPOTS_TYPE_3_3	4
+#define MAX_HOTSPOTS_TYPE_4_3	10
 
 // level4.ene
 

@@ -1,7 +1,7 @@
-MT Engine MK1 NES
-=================
+MT Engine MK1 NES / AGNES
+=========================
 
-**MT Engine MK1 NES** is a framework composed by a modular engine coded in C and a set of tools to create simple games for the NES platform. 
+**MT Engine MK1 NES / AGNES** (or **MK1_NES/AGNES** for short) is a framework composed by a modular engine coded in C and a set of tools to create simple games for the NES platform. 
 
 This engine was built as an excercise to learn to write simple games for the NES. It compiles using a fairly old version of cc65 (2.13.2), and uses the original neslib by **Shiru**.
 
