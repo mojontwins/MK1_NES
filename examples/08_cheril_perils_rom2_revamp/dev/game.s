@@ -3942,27 +3942,26 @@ _ts0_tmaps:
 	.byte	$00
 	.byte	$00
 	.byte	$00
-	.byte	$4A
-	.byte	$4A
-	.byte	$4A
-	.byte	$4A
 	.byte	$4B
-	.byte	$4A
 	.byte	$4B
-	.byte	$4A
+	.byte	$4B
+	.byte	$4B
 	.byte	$4C
+	.byte	$4B
 	.byte	$4C
-	.byte	$4A
-	.byte	$4A
+	.byte	$4B
 	.byte	$4D
-	.byte	$4E
-	.byte	$4E
 	.byte	$4D
+	.byte	$4B
+	.byte	$4B
+	.byte	$4E
 	.byte	$4F
-	.byte	$50
+	.byte	$4F
 	.byte	$4E
-	.byte	$4D
+	.byte	$50
 	.byte	$51
+	.byte	$4F
+	.byte	$4E
 	.byte	$52
 	.byte	$53
 	.byte	$54
@@ -3978,21 +3977,21 @@ _ts0_tmaps:
 	.byte	$5E
 	.byte	$5F
 	.byte	$60
+	.byte	$61
 	.byte	$00
 	.byte	$00
-	.byte	$61
-	.byte	$61
 	.byte	$62
 	.byte	$62
 	.byte	$63
 	.byte	$63
-	.byte	$63
-	.byte	$63
-	.byte	$63
-	.byte	$63
+	.byte	$64
+	.byte	$64
+	.byte	$64
+	.byte	$64
+	.byte	$64
 	.byte	$64
 	.byte	$65
-	.byte	$64
+	.byte	$66
 	.byte	$65
 	.byte	$66
 	.byte	$67
@@ -4016,27 +4015,27 @@ _ts0_tmaps:
 	.byte	$79
 	.byte	$7A
 	.byte	$7B
-	.byte	$78
-	.byte	$79
 	.byte	$7C
+	.byte	$79
+	.byte	$7A
 	.byte	$7D
 	.byte	$7E
 	.byte	$7F
 	.byte	$80
+	.byte	$81
+	.byte	$4D
 	.byte	$4C
 	.byte	$4B
-	.byte	$4A
-	.byte	$81
-	.byte	$4A
-	.byte	$4A
-	.byte	$4A
 	.byte	$82
+	.byte	$4B
+	.byte	$4B
+	.byte	$4B
 	.byte	$83
 	.byte	$84
 	.byte	$85
+	.byte	$86
 	.byte	$40
 	.byte	$41
-	.byte	$86
 	.byte	$87
 	.byte	$88
 	.byte	$89
@@ -4044,64 +4043,65 @@ _ts0_tmaps:
 	.byte	$8B
 	.byte	$8C
 	.byte	$8D
-	.byte	$8A
-	.byte	$8B
 	.byte	$8E
+	.byte	$8B
+	.byte	$8C
 	.byte	$8F
 	.byte	$90
-	.byte	$63
-	.byte	$90
-	.byte	$63
-	.byte	$90
-	.byte	$63
 	.byte	$91
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
+	.byte	$64
+	.byte	$91
+	.byte	$64
+	.byte	$91
+	.byte	$64
 	.byte	$92
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$00
 	.byte	$00
 	.byte	$93
 	.byte	$00
-	.byte	$00
 	.byte	$94
-	.byte	$45
+	.byte	$00
+	.byte	$00
 	.byte	$95
-	.byte	$00
-	.byte	$45
-	.byte	$45
-	.byte	$00
-	.byte	$00
 	.byte	$45
 	.byte	$96
 	.byte	$00
-	.byte	$95
-	.byte	$95
-	.byte	$00
-	.byte	$95
+	.byte	$45
+	.byte	$45
 	.byte	$00
 	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$95
-	.byte	$00
-	.byte	$95
-	.byte	$95
-	.byte	$00
+	.byte	$45
 	.byte	$97
-	.byte	$45
+	.byte	$00
+	.byte	$96
+	.byte	$96
+	.byte	$00
+	.byte	$96
 	.byte	$00
 	.byte	$00
-	.byte	$45
-	.byte	$45
 	.byte	$00
-	.byte	$95
-	.byte	$45
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$96
+	.byte	$00
+	.byte	$96
+	.byte	$96
+	.byte	$00
 	.byte	$98
+	.byte	$45
+	.byte	$00
+	.byte	$00
+	.byte	$45
+	.byte	$45
+	.byte	$00
+	.byte	$96
+	.byte	$45
+	.byte	$99
 _ts1_pals:
 	.byte	$00
 	.byte	$02
@@ -4149,20 +4149,19 @@ _ts1_pals:
 	.byte	$02
 	.byte	$02
 _ts1_tmaps:
-	.byte	$99
 	.byte	$9A
-	.byte	$9A
-	.byte	$99
 	.byte	$9B
+	.byte	$9B
+	.byte	$9A
 	.byte	$9C
-	.byte	$9C
+	.byte	$9D
 	.byte	$9D
 	.byte	$9E
 	.byte	$9F
 	.byte	$A0
 	.byte	$A1
 	.byte	$A2
-	.byte	$A2
+	.byte	$A3
 	.byte	$A3
 	.byte	$A4
 	.byte	$A5
@@ -4175,13 +4174,13 @@ _ts1_tmaps:
 	.byte	$AC
 	.byte	$AD
 	.byte	$AE
-	.byte	$AD
+	.byte	$AF
 	.byte	$AE
 	.byte	$AF
 	.byte	$B0
-	.byte	$A9
-	.byte	$AA
 	.byte	$B1
+	.byte	$AA
+	.byte	$AB
 	.byte	$B2
 	.byte	$B3
 	.byte	$B4
@@ -4190,9 +4189,9 @@ _ts1_tmaps:
 	.byte	$B7
 	.byte	$B8
 	.byte	$B9
-	.byte	$B9
 	.byte	$BA
 	.byte	$BA
+	.byte	$BB
 	.byte	$BB
 	.byte	$BC
 	.byte	$BD
@@ -4213,15 +4212,15 @@ _ts1_tmaps:
 	.byte	$CC
 	.byte	$CD
 	.byte	$CE
-	.byte	$9A
-	.byte	$99
-	.byte	$99
-	.byte	$9A
-	.byte	$9C
 	.byte	$CF
+	.byte	$9B
+	.byte	$9A
+	.byte	$9A
+	.byte	$9B
+	.byte	$9D
 	.byte	$D0
-	.byte	$9C
 	.byte	$D1
+	.byte	$9D
 	.byte	$D2
 	.byte	$D3
 	.byte	$D4
@@ -4237,33 +4236,33 @@ _ts1_tmaps:
 	.byte	$DE
 	.byte	$DF
 	.byte	$E0
+	.byte	$E1
 	.byte	$00
 	.byte	$00
-	.byte	$DF
 	.byte	$E0
 	.byte	$E1
 	.byte	$E2
 	.byte	$E3
 	.byte	$E4
-	.byte	$A0
-	.byte	$A1
-	.byte	$00
-	.byte	$00
 	.byte	$E5
+	.byte	$A1
+	.byte	$A2
+	.byte	$00
+	.byte	$00
 	.byte	$E6
 	.byte	$E7
 	.byte	$E8
 	.byte	$E9
-	.byte	$E9
 	.byte	$EA
 	.byte	$EA
 	.byte	$EB
+	.byte	$EB
 	.byte	$EC
-	.byte	$A0
+	.byte	$ED
 	.byte	$A1
 	.byte	$A2
-	.byte	$A2
-	.byte	$ED
+	.byte	$A3
+	.byte	$A3
 	.byte	$EE
 	.byte	$EF
 	.byte	$F0
@@ -4273,6 +4272,7 @@ _ts1_tmaps:
 	.byte	$F4
 	.byte	$F5
 	.byte	$F6
+	.byte	$F7
 	.byte	$00
 	.byte	$00
 	.byte	$00
@@ -4312,23 +4312,23 @@ _ts1_tmaps:
 	.byte	$00
 	.byte	$47
 	.byte	$45
-	.byte	$49
-	.byte	$F7
+	.byte	$4A
 	.byte	$F8
+	.byte	$F9
 	.byte	$00
 	.byte	$00
-	.byte	$F9
-	.byte	$F9
 	.byte	$FA
 	.byte	$FA
-	.byte	$00
+	.byte	$FB
 	.byte	$FB
 	.byte	$00
 	.byte	$FC
-	.byte	$FA
-	.byte	$FA
-	.byte	$FA
-	.byte	$FA
+	.byte	$00
+	.byte	$FD
+	.byte	$FB
+	.byte	$FB
+	.byte	$FB
+	.byte	$FB
 _ts2_pals:
 	.byte	$00
 	.byte	$03
@@ -4376,49 +4376,48 @@ _ts2_tmaps:
 	.byte	$00
 	.byte	$00
 	.byte	$00
-	.byte	$4A
 	.byte	$4B
-	.byte	$00
-	.byte	$4A
 	.byte	$4C
+	.byte	$00
+	.byte	$4B
 	.byte	$4D
 	.byte	$4E
-	.byte	$4B
 	.byte	$4F
+	.byte	$4C
 	.byte	$50
-	.byte	$00
-	.byte	$00
-	.byte	$4A
 	.byte	$51
 	.byte	$00
-	.byte	$4A
+	.byte	$00
+	.byte	$4B
 	.byte	$52
+	.byte	$00
+	.byte	$4B
 	.byte	$53
-	.byte	$51
 	.byte	$54
-	.byte	$54
-	.byte	$53
 	.byte	$52
+	.byte	$55
+	.byte	$55
 	.byte	$54
+	.byte	$53
 	.byte	$55
 	.byte	$56
-	.byte	$53
-	.byte	$55
-	.byte	$55
-	.byte	$56
-	.byte	$55
-	.byte	$55
 	.byte	$57
-	.byte	$58
-	.byte	$55
+	.byte	$54
 	.byte	$56
+	.byte	$56
+	.byte	$57
+	.byte	$56
+	.byte	$56
+	.byte	$58
 	.byte	$59
-	.byte	$59
+	.byte	$56
+	.byte	$57
+	.byte	$5A
 	.byte	$5A
 	.byte	$5B
 	.byte	$5C
-	.byte	$59
 	.byte	$5D
+	.byte	$5A
 	.byte	$5E
 	.byte	$5F
 	.byte	$60
@@ -4436,70 +4435,71 @@ _ts2_tmaps:
 	.byte	$6C
 	.byte	$6D
 	.byte	$6E
-	.byte	$4B
-	.byte	$4B
-	.byte	$4B
-	.byte	$4B
 	.byte	$6F
+	.byte	$4C
+	.byte	$4C
+	.byte	$4C
+	.byte	$4C
+	.byte	$70
 	.byte	$00
-	.byte	$4B
-	.byte	$6F
+	.byte	$4C
 	.byte	$70
 	.byte	$71
-	.byte	$4B
 	.byte	$72
+	.byte	$4C
 	.byte	$73
-	.byte	$50
-	.byte	$00
-	.byte	$00
 	.byte	$74
+	.byte	$51
+	.byte	$00
+	.byte	$00
 	.byte	$75
 	.byte	$76
 	.byte	$77
-	.byte	$55
+	.byte	$78
+	.byte	$56
+	.byte	$57
 	.byte	$56
 	.byte	$55
-	.byte	$54
-	.byte	$78
 	.byte	$79
-	.byte	$78
+	.byte	$7A
 	.byte	$79
 	.byte	$7A
 	.byte	$7B
-	.byte	$4B
-	.byte	$4B
-	.byte	$56
-	.byte	$00
-	.byte	$00
-	.byte	$56
 	.byte	$7C
+	.byte	$4C
+	.byte	$4C
+	.byte	$57
+	.byte	$00
+	.byte	$00
+	.byte	$57
 	.byte	$7D
 	.byte	$7E
 	.byte	$7F
-	.byte	$59
-	.byte	$59
 	.byte	$80
-	.byte	$5B
-	.byte	$59
+	.byte	$5A
+	.byte	$5A
 	.byte	$81
+	.byte	$5C
 	.byte	$5A
 	.byte	$82
+	.byte	$5B
 	.byte	$83
 	.byte	$84
-	.byte	$61
-	.byte	$62
 	.byte	$85
+	.byte	$62
+	.byte	$63
 	.byte	$86
 	.byte	$87
 	.byte	$88
-	.byte	$00
-	.byte	$00
-	.byte	$69
-	.byte	$6A
 	.byte	$89
+	.byte	$00
+	.byte	$00
+	.byte	$6A
+	.byte	$6B
 	.byte	$8A
 	.byte	$8B
 	.byte	$8C
+	.byte	$8D
 	.byte	$44
 	.byte	$45
 	.byte	$47
@@ -4535,7 +4535,7 @@ _ts2_tmaps:
 	.byte	$00
 	.byte	$47
 	.byte	$45
-	.byte	$49
+	.byte	$4A
 _ts3_pals:
 	.byte	$00
 	.byte	$01
@@ -4552,7 +4552,7 @@ _ts3_pals:
 	.byte	$03
 	.byte	$01
 	.byte	$02
-	.byte	$02
+	.byte	$01
 	.byte	$00
 	.byte	$01
 	.byte	$03
@@ -4583,86 +4583,88 @@ _ts3_tmaps:
 	.byte	$00
 	.byte	$00
 	.byte	$00
-	.byte	$8D
 	.byte	$8E
-	.byte	$8D
+	.byte	$8F
 	.byte	$8E
 	.byte	$8F
 	.byte	$90
 	.byte	$91
 	.byte	$92
-	.byte	$93
-	.byte	$94
 	.byte	$93
 	.byte	$94
 	.byte	$95
+	.byte	$94
+	.byte	$95
+	.byte	$5A
+	.byte	$5A
+	.byte	$5B
+	.byte	$5C
+	.byte	$96
+	.byte	$97
 	.byte	$96
 	.byte	$97
 	.byte	$98
+	.byte	$98
 	.byte	$99
-	.byte	$9A
 	.byte	$99
-	.byte	$9A
-	.byte	$9B
-	.byte	$9B
-	.byte	$9C
-	.byte	$9C
 	.byte	$00
 	.byte	$00
-	.byte	$9D
-	.byte	$9E
-	.byte	$67
+	.byte	$9A
+	.byte	$9B
 	.byte	$68
 	.byte	$69
 	.byte	$6A
+	.byte	$6B
+	.byte	$9C
+	.byte	$9D
+	.byte	$9E
 	.byte	$9F
 	.byte	$A0
 	.byte	$A1
+	.byte	$A1
+	.byte	$A0
 	.byte	$A2
 	.byte	$A3
 	.byte	$A4
-	.byte	$A4
-	.byte	$A3
 	.byte	$A5
+	.byte	$90
+	.byte	$00
+	.byte	$00
+	.byte	$00
 	.byte	$A6
 	.byte	$A7
 	.byte	$A8
-	.byte	$8F
-	.byte	$00
-	.byte	$00
-	.byte	$00
 	.byte	$A9
 	.byte	$AA
 	.byte	$AB
+	.byte	$AB
+	.byte	$AA
 	.byte	$AC
 	.byte	$AD
 	.byte	$AE
-	.byte	$AE
-	.byte	$AD
 	.byte	$AF
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$00
 	.byte	$B0
 	.byte	$B1
 	.byte	$B2
-	.byte	$00
-	.byte	$00
-	.byte	$00
-	.byte	$00
 	.byte	$B3
-	.byte	$B4
-	.byte	$B5
-	.byte	$B6
+	.byte	$93
 	.byte	$92
 	.byte	$91
 	.byte	$90
-	.byte	$8F
 	.byte	$00
 	.byte	$00
 	.byte	$00
 	.byte	$00
+	.byte	$B4
+	.byte	$B5
+	.byte	$B6
+	.byte	$5C
 	.byte	$B7
 	.byte	$B8
-	.byte	$97
-	.byte	$98
 	.byte	$B9
 	.byte	$BA
 	.byte	$BB
@@ -4673,38 +4675,36 @@ _ts3_tmaps:
 	.byte	$C0
 	.byte	$C1
 	.byte	$C2
+	.byte	$00
+	.byte	$00
+	.byte	$6A
+	.byte	$6B
 	.byte	$C3
 	.byte	$C4
-	.byte	$00
-	.byte	$00
-	.byte	$69
-	.byte	$6A
 	.byte	$C5
 	.byte	$C6
 	.byte	$C7
 	.byte	$C8
 	.byte	$C9
 	.byte	$CA
-	.byte	$CB
-	.byte	$CC
-	.byte	$00
-	.byte	$00
-	.byte	$91
-	.byte	$00
-	.byte	$00
 	.byte	$00
 	.byte	$00
 	.byte	$92
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$00
+	.byte	$93
+	.byte	$CB
+	.byte	$CC
 	.byte	$CD
 	.byte	$CE
+	.byte	$AA
+	.byte	$AB
+	.byte	$AB
 	.byte	$CF
-	.byte	$D0
-	.byte	$AD
-	.byte	$AE
-	.byte	$AE
-	.byte	$D1
 	.byte	$00
-	.byte	$90
+	.byte	$91
 	.byte	$00
 	.byte	$00
 	.byte	$44
@@ -4742,7 +4742,7 @@ _ts3_tmaps:
 	.byte	$00
 	.byte	$47
 	.byte	$45
-	.byte	$49
+	.byte	$4A
 _spr_player:
 	.addr	_sspl_00_a
 	.addr	_sspl_01_a

@@ -1,0 +1,436 @@
+<html>
+
+<head>
+<title>Mappy - Win32 Version History</title>
+</head>
+
+<body bgcolor="#cccccc" text="#000000" link="#0000ff" vlink="#0000aa">
+<p><a name="vhistory"></a></p>
+
+<h3>Version History</h3>
+
+<p>&nbsp;<strong>1.4.11</strong><br>
+Fixed problem with MSB (from MappyOSX) when saving<br>
+Fixed bug displaying labels on non-rectangular maps<br>
+Fixed bug with lua function newMap<br>
+TextStrings displayed in info bar (new default: tbarinfo=5 in mapwin.ini)<br>
+Pro: Added hold ctrl when picking a colour to find it in palette<br>
+
+<p>&nbsp;<strong>1.4.10</strong><br>
+TextSrings improved, saving in FMP fixed<br>
+TextStrings can be displayed with 'Show user info on tile'<br>
+Various minor GUI fixes<br>
+Can stop zoom in Block window with panelzoom option in mapwin.ini<br>
+Pro: TextStrings for objects, areas and labels<br>
+Pro: Can use next/prev keys on brushes and objects<br>
+Pro: Can hide panel using panelpro option in mapwin.ini<br>
+
+<p>&nbsp;<strong>1.4.9</strong><br>
+Fixed bug from V1.4.7 and V1.4.8 selecting a brush from the brush menu<br>
+Pressing 'e' with no map loaded no longer crashes<br>
+Non-working Tutorials option removed from Help menu (see main docs instead)<br>
+Experimental Text String added to Block Properties, see 'luascr/Set Text Strings'<br>
+
+<p>&nbsp;<strong>1.4.8</strong><br>
+Documentation is now updated to current version (1.4.8)<br>
+Documentation background colour changed to make it easier 
+to read (shouldn't affect printing)<br>
+Fixed 'Solid rectangle.lua' so it can use last row and column<br>
+Added 'Find block in map.lua' and 'Set colourkey transparency.lua'<br>
+New Key shortcut 'e' edits current block or anim properties<br>
+Map/Block window positions are preserved when minimizing<br>
+Tested with MemProof, fixed some minor resource problems 
+(like the Anim Preview window not being freed)<br>
+'MapTools:Useful functions:Create map from big picture' 
+can now append to an existing map (make a new layer)<br>
+
+<p>&nbsp;<strong>1.4.7</strong><br>
+mapwin147.zip is now under 400k<br>
+docs (and images) now in the new 'docs' folder<br>
+showuser, onion, curlayer, dividers status saved in new 'EPHD' chunk<br>
+Icon for exe is now the original one<br>
+Custom:Mousebuttons now lets you choose 'pick block', 'lay path', 'fill' and 'line'<br>
+Fixed possible conflict between F1 and F10 key binds<br>
+'Background darkened' is now in the Layers menu (works with objects too)<br>
+Better lines (key 'l') using Bresenham's algorithm (thanks to www.brackeen.com)<br>
+Pro: Lines now work in Graphics editor (key 'l')<br>
+Pro: 4 thicknesses for drawing in Graphics editor<br>
+Pro: Undo now undoes last operation in Graphics editor<br>
+Pro: Edit button now works in Object editor<br>
+Pro: You can define areas in the object editor<br>
+Pro: Objects and areas can have a custom border colour<br>
+Lua: New values CMDLINE, NUMCHUNKS<br>
+Lua: luafilemenu=1 in mapwin.ini replaces the functions in the 'File' 
+menu with luafilenewmap.lua, luafileopen.lua etc in the luascr 
+folder (if they exist)<br>
+Lua: new funcs:<br>
+createChunk ("CHNK", size, position)<br>
+deleteChunk (chunknum)<br>
+getChunkValue (chunknum, offset)<br>
+setChunkValue (chunknum, offset, value)<br>
+newMap (mapwidth, mapheight, mapdepth, tilewidth, tileheight, 
+[tilegapx, tilegapy, tilestaggerx, tilestaggery, maptype])<br>
+closeMap ()<br>
+openFMP (["filename"])<br>
+saveFMP (["filename"])<br>
+if no "filename" supplied, current filename is used. 
+On saving, use mappy.setValue(mappy.MAPFILENAME, "filename") 
+if you want to change the name<br>
+importGraphics ("imagename", starttile, numtiles)<br>
+numtiles can be 0 for as many as possible<br>
+resizeMap (mapwidth, mapheight, centering)<br>
+centering is 1 to 9, as in resize dialogue<br>
+
+
+<p>&nbsp;<strong>1.4.6</strong><br>
+Fixed uppercase FMP extension loading on startup (from 1.4.5)
+Fixed onionskin transparency with 'All' layers (from 1.4.5)
+Keys 1, 2 and 3 now switch between first three layers (mapwin.ini)
+Pro: Fixed object position on staggered maps
+Pro: Added fill function to Graphics editor (press 'f')
+Some other minor fixes/improvements
+
+<p>&nbsp;<strong>1.4.5</strong><br>
+Export as text, number of objects bug fixed<br>
+Object highlight in map window when zoomed bug fixed<br>
+Double click edit wrong structure bug fixed (bug in 1.4.4 only)<br>
+Custom:Mousebuttons:Drag map 2 now drags map properly<br>
+Some minor things fixed<br>
+You can now run a Lua script from commandline, example:<br>
+mapwin "luascr/Test tile graphic.lua" test.fmp<br>
+(note filenames with spaces must be in quotes. A handy hint, use:<br>
+mappy.sendMessage (106, 0) to exit the editor from a lua script, 
+the '106' is the FILEEXIT code, see 'Key Shortcuts' for more)<br>
+Added CUROBJECT and NUMOBJECTS to getValue()<br>
+Added XMAPOFFSET, YMAPOFFSET and MAPFILENAME to setValue()<br>
+Added value = getObjectValue (obnum, OBVALCODE)<br>
+setObjectValue (obnum, OBVALCODE, value)<br>
+createObject (obnum)<br>
+deleteObject (obnum)<br>
+Where OBVALCODE is one of:<br>
+OBJXPOS, OBJYPOS, OBJGFXID, OBJTILEID, OBJGXOFF, OBJGYOFF,<br>
+OBJGWIDTH, OBJGHEIGHT, OBJGHANDLEXOFF, OBJGHANDLEYOFF,<br>
+OBJSHOW, OBJUSER1 to OBJUSER7, OBJFLAGS<br>
+
+<p>&nbsp;<strong>1.4.4</strong><br>
+
+Better window alignment<br>
+Added Dividers to MapTools menu (useful for flipscreen games)<br>
+Added 'All' option to onionskin (shows all layers)<br>
+Incorporated MapWin32 Pro Preview 3 (demo and full version), 
+see mapwin32pro.html for details<br>
+Added 'Export binary file.lua' thanks to Jerzy Kut<br>
+removed unused graphics from hextst.fmp and hextst2.fmp to reduce zipfile size<br>
+
+<p>&nbsp;<strong>1.4.3</strong><br>
+PNG library now runtime linked, you need LIBPNG12.DLL if you want 
+to import a PNG format file, otherwise you don't need it<br>
+Added rotated tiles support. Enabling Rotated tiles mode (from 
+mapwin.ini or MapTools menu) lets you rotate tiles by 90, 180 and 
+270 degrees by setting USER7 in block properties to 1, 2 or 3<br>
+This is supported by MappyGL (R3) if you uncomment MPYROTATE near 
+the top of mappygl.c<br>
+tilemodes (flipped, rotated, pillars, wnesmode) are now saved in 
+the FMP file and set when reloaded (experimental)<br>
+
+<p>&nbsp;<strong>1.4.2</strong><br>
+Added 'Halve block dimensions' to MapTools:Useful functions<br>
+
+<p>&nbsp;<strong>1.4.1</strong><br>
+Grab Block from sequence should now work better<br>
+Export as text allows graphics export without cmap<br>
+Autofringe lua script is undocumented, see GBAMappy for instructions<br>
+
+New Lua additions (not in 1.4 docs):<br>
+Anim Test.lua and Brush Test.lua provided as examples<br>
+
+New values for use with getValue()<br>
+NUMBLOCKANIM, XMAPOFFSET, YMAPOFFSET, MAPFILENAME, MAPWINPATH,<br>
+MAPWINVERSION, MAPTYPE, NUMBRUSHES<br>
+
+
+Values for use with getAnimValue()<br>
+ANMDELAY, ANMCOUNT, ANMTYPE, ANMUSER, ANMCURFRAME, ANMREFFRAME<br>
+AN_END, AN_NONE, AN_LOOPF, AN_LOOPR, AN_ONCE, AN_ONCEH,<br>
+AN_PPFF, AN_PPRR, AN_PPRF, AN_PPFR, AN_ONCES,<br>
+
+createAnim (animnum)<br>
+deleteAnim (animnum)<br>
+getAnimFrame (animnum, framenum)<br>
+  'framenum' can be ANMREFFRAME<br>
+setAnimFrame (animnum, framenum, blockval)<br>
+  'framenum' can be ANMREFFRAME<br>
+insertAnimFrame (animnum, framenum, blockval)<br>
+cutAnimFrame (animnum, framenum)<br>
+numAnimFrames (animnum)<br>
+getAnimValue (VAL)<br>
+  VAL is:<br>
+  ANMDELAY, ANMCOUNT, ANMTYPE, ANMUSER, ANMCURFRAME<br>
+setAnimValue (VAL, val)<br>
+  VAL is:<br>
+  ANMDELAY, ANMCOUNT, ANMTYPE, ANMUSER, ANMCURFRAME<br>
+createBrush (brshnum, x, y, w, h)<br>
+deleteBrush (brshnum)<br>
+renameBrush (brshnum, "Brushname")<br>
+getBrushBlock (brshnum, x, y)<br>
+setBrushBlock (brshnum, x, y, blk)<br>
+getBrushValue (VAL)<br>
+  VAL is:<br>
+  BRUSHWIDTH, BRUSHHEIGHT, BRUSHNAME<br>
+shellExecute (action, file, params, dir, style)<br>
+sendMessage (code, 0)<br>
+  code is one of the key shortcuts listed in mapwin.htm<br>
+  for example sendMessage (119, 0) shows the helpfile<br>
+
+<p>&nbsp;<strong>1.4</strong><br>
+Convert 16x16 blocks to 8x8 now orders blocks differently in flipped tiles 
+mode (for island16b in GBAMappy release 2)<br>
+Export GBA 16x16 table LUA script corrected (again)<br>
+New copyLayer and updateScreen functions available to lua scripts<br>
+Some Lua scripts modified to support undo and screen update<br>
+New Lua script 'Show mouse coords'<br>
+You can now drag and drop .lua scripts on the editor to run them<br>
+You can set wlayout to -1 in mapwin.ini to stop windows autoresizing<br>
+New Map now goes straight to easy map dialogue<br>
+Import now uses default options (change with 'simpleimport' in mapwin.ini)<br>
+Added 'Save FMP without graphics' to Useful functions<br>
+Documentation updated<br>
+
+<p>&nbsp;<strong>1.3.27</strong><br>
+Autofringe LUA script modified with different order blocks (see GBAMappy)<br>
+Export GBA 16x16 table LUA script corrected<br>
+Map limits removed (now warnings)<br>
+textfile blockgfx export fixed for bitdepths above 8<br>
+textfile cmap type fixed<br>
+
+<p>&nbsp;<strong>1.3.26</strong><br>
+Stopped drag and drop renaming the map with non-map files<br>
+Fixed Custom menu names on scripts over 8<br>
+Fixed 16 colour tiles GBA text output (was reversed)<br>
+Fixed remove unused/duplicate with flipped tiles<br>
+PNG support for 4,8,24 and 32 bit PNG files<br>
+New option File:Export textfile<br>
+Textfile output updated<br>
+New Lua scripts:<br>
+*Autofringe by Robert Edwards (use a 32x32map made with images/fringe.tga)<br>
+*Read textfile<br>
+*Export GBA 16x16 table (for use with forthcoming GBAMappy)<br>
+
+<p>&nbsp;<strong>1.3.25</strong><br>
+Bugfix release to fix reading of mapwin.ini<br>
+
+<p>&nbsp;<strong>1.3.24</strong><br>
+MapTools:Show info on tiles now works (select it and see)<br>
+Map name in titlebar (tbarname in mapwin.ini)<br>
+.CSV values now taken from BG by default (csvusebg in mapwin.ini)<br>
+Number keys now work like functionkeys (see mapwin.ini)<br>
+Map Editor window now updates while dragging scrollbars (thumbtrack in mapwin.ini)<br>
+New example LUA script 'Merge layers.lua' (custom menu)<br>
+Placer.lua can be used for placing blocks<br>
+Can set mousebutton behaviour in custom menu (including drag map)<br>
+Mousewheel now scrolls blockwindow (unpressed), and current block (pressed)<br>
+Remove duplicate is much faster and 'MapTools: Import big picture' improved<br>
+Other tweaks and fixes<br>
+
+<p>&nbsp;<strong>1.3.23</strong><br>
+Added showuser to the mapwin.ini file, you can now view a user field 
+overlaying the blocks in the map window (useful for markers)<br>
+Right mousebutton now sets block 0 in the map window<br>
+Robert Edwards kindly contributed a random distribution LUA script 
+(more lua scripts please :)<br>
+Block number now shown in blocks window titlebar<br>
+MapTools: Import big picture and convert to map (make a new map, then select 
+it for instructions)<br>
+You can now map Functionkeys to most MappyWin32 functions (Zoom, save etc)<br>
+
+<p>&nbsp;<strong>1.3.22</strong><br>
+Added 'drag and drop' support (Opens .FMP and .MAP, imports .BMP, .PCX and .MAR)<br>
+Added LUA script support (see Custom Menu) this makes the EXE much bigger though<br>
+
+<p>&nbsp;<strong>1.3.21</strong><br>
+Flipped tiles now work with onionskin mode<br>
+Block Properties now show mode specific boxes in flippedtiles or isopillars mode<br>
+Flipped tiles mode can now be toggled in the MapTools menu<br>
+Added 'Duplicate Layer' to Layers menu<br>
+Now compiled with mingw 2.0 (www.mingw.org)<br>
+A few minor fixes<br>
+
+<p>&nbsp;<strong>1.3.20</strong><br>
+Zoom 0.5 and 0.25 added (may be quite slow and have some visual artifacts)<br>
+You can set amount for graphicsmem in mapwin.ini<br>
+Layer number now shown in titlebar (toggle with tbarinfo in mapwin.ini)<br>
+Exporting a map array in a .txt only multiplies values by 4 with a 16x16 map when block graphics (for GBA) is also checked<br>
+Dialog options in export .txt are remembered for the session<br>
+Export .CSV re-added<br>
+Can now double click .MAP files if you associate them with MappyWin32 (just like FMP files)<br>
+
+<p>&nbsp;<strong>1.3.19</strong><br>
+'Resize Map' moved from Edit menu to MapTools menu<br>
+'Auto set BG transparency' moved from Range edit blocks to MapTools menu<br>
+'Change block size/depth' added to MapTools menu<br>
+Can now export 16 colour GBA tiles (see 'Exporting map for GBA')<br>
+NOTE: on exporting a 16x16 map with merged bits bgoff is now multiplied by 4<br>
+
+<p>&nbsp;<strong>1.3.18</strong><br>
+lines can now be drawn with anims<br>
+file: export: arrays as text, take bg as index when no structures exported<br>
+fix backups<br>
+wnesmode show vertical wall positions in red (for use with 3d playback libs like MappyGL)<br>
+
+<p>&nbsp;<strong>1.3.17</strong><br>
+Can draw lines by pressing 'l'<br>
+Can Import .MAP files as layers<br>
+Two new ini file options, backups and hexordec<br>
+32 bit maps now use alpha channel (32 bit TGA only, alpha not rendered in editor)<br>
+flipbits can now be merged in export .txt<br>
+
+<p>&nbsp;<strong>1.3.16</strong><br>
+Fixed problem with brushes introduced in 1.3.15<br>
+Changed brush grabbing and menu display a bit<br>
+
+<p>&nbsp;<strong>1.3.15</strong><br>
+Brush handles (4 corners) and paste off edges<br>
+Should now have 'correct' folder for file dialogues<br>
+Layers: Adjust Values useful for removing marker blocks in .MAPs<br>
+Layers: Remove Marker graphics useful for removing marker blocks in .FMPs<br>
+Layers that don't exist now appear grey in menu<br>
+A few doc updates (inc hex/iso howto)<br>
+Save/Load multiple layers in .MAP files<br>
+
+<p>&nbsp;<strong>1.3.14</strong><br>
+Fixed export map as big screen BMP (8bit) also exact index (8bit)<br>
+Can now export from .MAP files<br>
+If you set mapdefbw=0 in mapwin.ini a requester is used every time a .MAP is opened<br>
+
+<p>&nbsp;<strong>1.3.13</strong><br>
+Added const keyword option to export data as text<br>
+corrected maparray type to short in export data as text<br>
+Busy cursor for long operations<br>
+
+<p>&nbsp;<strong>1.3.12</strong><br>
+
+Lots of GBA goodies, including convert 16x16 map to 8x8 (see
+'Exporting map for GBA' in the docs)<br>
+some doc updates<br>
+some tweaks and fixes<br>
+remove unused/duplicates improved<br>
+mapwin.ini has useful comments in now<br>
+
+<p>&nbsp;<strong>1.3.11</strong><br>
+
+used MemProof (www.automatedqa.com) to find and fix resource leaks:<br>
+Added a couple of ReleaseDC() calls<br>
+Removed -fomit-frame-pointer (caused exceptions in memproof, though was probably ok)<br>
+File Export ?scrn.bmp will now produce an 8bit BMP file for 8bit maps <br>
+
+<p>&nbsp;<strong>1.3.10</strong><br>
+
+new wlayout in mapwin.ini, when '1' block ed window is on left, map ed on right<br>
+fixed PCX import (again), last graphics line wasn't imported<br>
+Exporting a CSV now produces enough data for GBA developers (more docs soon)<br>
+You can now 'screenshot' the entire current layer in export (inc onionskin)<br>
+Some bugs fixed, some added ;)<br>
+
+<p>&nbsp;<strong>1.3.9</strong><br>
+
+Fixed logical update rate in anim preview<br>
+Added simpler 'New Map' dialogue<br>
+Changed URL and email in About box<br>
+Added TEST2.FMP map<br>
+Included blprop.gif which gives labels and iso/flip info<br>
+New grid style (to revert to old style, change 'grid = 2' in mapwin.ini)
+(This now means changing grid in menu or Ctrl+g toggles between 3 styles)<br>
+
+New import style (to revert to old style, change 'importskip = 1' in mapwin.ini)
+(This is the most intuitive I can think of, 1st block is skipped if black, all
+blocks thereon are imported until all following blocks are black)<br>
+
+You can now use flipped tiles (change 'flippedtiles = 1' in mapwin.ini)<br>
+IMPORTANT: You must set 'flippedtiles = 0' to work with isometric pillar maps,
+flipped tiles are also unsupported by the playback libraries and anim preview
+and are mainly for GameBoy developers.<br>
+
+1.3.8: Increased number of brushes to 16  <br>
+1.3.7: Slide layers, increment in range edit, import requester fix<br>
+1.3.6: Split layer support, pick layer<br>
+1.3.5: Unknown<br>
+1.3.4: Added PCX support<br>
+1.3.3: Isometric grid, isometric onionskin<br>
+1.3.2: Auto resize windows<br>
+1.3.1: Added pillar support<br>
+</p>
+
+<p>&nbsp;<strong>1.3</strong><br>
+Fixed some bugs in the .MAP loader<br>
+Transparent BG colour is now drawn as black (not 8bit)<br>
+Support for Isometric/Hexagonal/other shaped tiles<br>
+Fixed wrong colour 'DirectX feature' in 8bit Anim Preview<br>
+You can add an alternate 8bit graphics set to 15/16/24/32 bit maps<br>
+15/16bit to 8/24/32 bit is now 100% accurately scaled<br>
+Added auto-set BG transparency to Range Edit Blocks<br>
+You can now edit block properties in signed decimal as well as hexadecimal<br>
+Added FMP1.0 file format<br>
+Changed 'Map Information' to 'Map Properties' and moved colourkey and other things there<br>
+Upped limit for blocks to 30000 (from 1024), requires FMP1.0<br>
+</p>
+
+<p>&nbsp;<strong>1.2</strong><br>
+Now supports swapped mousebuttons<br>
+Fixed remaining alignment problems with BMP padding<br>
+You can now use any colour index (0-255) for 8bit transparency<br>
+Changed animprev.cpp to animprev.c, so source is now all in C<br>
+Compiled with mingw compiler (www.mingw.org, smaller exe)<br>
+Added user definable .MAP format<br>
+You can now name brushes<br>
+Various mapwin.ini additions<br>
+Colourkeys are now stored in FMP and can be changed from MapTools menu<br>
+More options for Range Edit Blocks<br>
+</p>
+
+<p>&nbsp;<strong>1.1</strong><br>
+Expanded max number of graphics for anim preview (now 4096)<br>
+Fixed outline when grabbing a brush in zoom mode<br>
+Upped graphics buffer from 2Mb to 4Mb<br>
+Added a few options to do with brushes<br>
+Tidied up display functions to cope with non-multiple of 4 graphics<br>
+Added more information to map window titlebar<br>
+Block Editor window now displays more than one column of blocks<br>
+</p>
+
+<p>&nbsp;<strong>1.0</strong><br>
+Finally got rid of the bug that meant if you clicked LMButton in Mappy,
+but released it outside the window it wasn't detected and stayed on<br>
+Added Range Edit Blocks to MapTools (apply changes to many blocks at once)<br>
+Added Clear Layer function to Layers<br>
+Added Import At function to File<br>
+Added ability to re-import .MAR files<br>
+Added Logic FPS setting to anim preview<br>
+You can now import Map Arrays (.MAR) with Import<br>
+</p>
+
+<p>&nbsp;<strong>1.0BETA3</strong><br>
+Have altered menus and dialogues to be more 'Windows-like'<br>
+Loading and saving now preserves unknown chunks<br>
+Improved documentation about 'edit menu'<br>
+Onion Skin feature (see Layers Menu)<br>
+</p>
+<p>&nbsp;<strong>1.0BETA2</strong><br>
+Altered info in 'About' box<br>
+Import now warns of incorrect bitdepth<br>
+You can now undo after using arrow keys<br>
+Menu functions now don't crash when no map is loaded<br>
+High/TrueColour transparency colour is now selectable via .ini file<br>
+4x Zoom added<br>
+You can now associate .FMP files with Mappy and double click them to start<br>
+DirectX preview now works properly in High/TrueColour<br>
+DirectX Preview colour depth default is the depth of the map<br>
+Fixed Map Information, Layers were being ignored<br>
+</p>
+
+<p><a href="#vhistory">(top of doc)</a> </p>
+
+<p><a href="MAPWIN.HTM">Main Contents</a> </p>
+
+<hr>
+</body>
+</html>

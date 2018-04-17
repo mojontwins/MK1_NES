@@ -1,0 +1,213 @@
+<html>
+
+<head>
+<title>MapWin32 Pro documentation</title>
+</head>
+
+<body bgcolor="#cccccc" text="#000000" link="#0000ff" vlink="#0000aa">
+
+<p><a name="topod"></a></p>
+<h2>MapWin32 Pro documentation</h2><br>
+<p>Index:<br>
+<br>
+&nbsp; <a href="#aboutpro">About MapWin32 Pro</a><br><br>
+&nbsp; <a href="#graphed">Tile graphic editor</a><br>
+&nbsp; <a href="#brushed">Brush selector</a><br>
+&nbsp; <a href="#objed">Object editor</a><br>
+&nbsp; <a href="#areaed">Area editor</a><br>
+&nbsp; <a href="#labeled">Label editor</a><br>
+<br><br>
+&nbsp; <a href="mapwin.htm">(back to main documentation)</a><br>
+
+</p>
+
+<hr>
+
+<p><a name="aboutpro"></a></p>
+
+<h3>About MapWin32 Pro</h3>
+
+<p><br>
+&nbsp; MapWin32 Pro is an extended, professional version of MappyWin32 by the 
+same author. It has all the features of MappyWin32 plus a tile graphic editor, 
+brush selector and object/area editor.<br>
+<br>
+&nbsp; MapWin32 Pro is not free, but you can try out all the Pro features (except 
+saving and object export) by selecting the pro demo in mapwin.ini 
+(set proregnumber=00000001).<br>
+<br>
+&nbsp; If you want to buy a registration number (required to enable map saving and object 
+export) you can get one at www.tilemap.co.uk If you are interested or have suggestions, 
+please contact me.<br>
+<br>
+&nbsp; To select which version to use (free, pro demo or pro full), open the 
+mapwin.ini file (see main docs on how to do this) and change the 
+<strong>proregnumber</strong> according to the instructions in the file.
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<hr>
+
+<p><a name="graphed"></a></p>
+
+<h3>Tile graphic editor</h3>
+
+<p><br>
+&nbsp; You can use New, Cut, Copy and Paste (Edit menu) to manipulate the 
+raw graphics when the 'Graph' window is active. 
+If you originally imported a picture for graphics doing 
+this may change the order, so you may need to export the graphics if 
+you want to import them again. If you want, you can make 
+an entire map without importing any graphics, instead creating them here. 
+Paste pastes over the selected graphic, 
+rather than inserting a new one (unlike the other windows). Use New to 
+insert a new, blank graphic. Cut, Copy, 
+and Paste also use the Windows clipboard, so you can use an external 
+paint package to alter individual tiles and paste them back.<br>
+<br>
+&nbsp; To use a newly created graphic in the map, it must be put in a 
+Block Structure. The quick way to do this is click the 'BLK' button 
+below the graphic.<br>
+<br>
+All maps have a 256 colour palette:<br>
+* 8bit (paletted) maps modify all the pixels of a set colour index 
+if you change that indexes colour<br>
+* 15/16/24 and 32 bit maps do NOT modify colours in the graphics, the 
+palette is used to store colours you want to use and can be changed 
+whenever you like<br>
+<br>
+Click the colour squares in the palette to select an index<br>
+Use the colour bars below to change the colour of an index<br>
+<br>
+Palette tools:<br>
+* CPY - Click index to copy in palette, then CPY, then dest index 
+in palette<br>
+* EXG - Click index to exchange in palette, then EXG, then dest index 
+in palette, the two indexes will be swapped<br>
+* SPR - Click index to spread from in palette, then SPR, then dest 
+index in palette, the indexes between will be smoothly spread in a gradient<br>
+* TRN - 8bit changes the current index to the 8bit transparent index, 
+15/16/24/32bit changes the current index to the 24bit colourkey<br>
+*  ?  - Click ? then a pixel in the block to the left to:<br>
+8bit changes to the index of that pixel<br>
+15/16/24/32bit changes the current index to the pixels colour (hold ctrl 
+when clicking the pixel to attempt to find the colour in the palette)<br>
+<br>
+Click in the area in the top left to edit the graphics<br>
+<br>
+Graphic Tools:<br>
+NOTE: The following 3 operations physically alter the block graphics, 
+they are not the same as selecting flipped tile mode or rotated tile mode 
+and using the block properties to modify how the block is drawn<br>
+* FLH - Flips the current graphic horizontally<br>
+* FLV - Flips the current graphic vertically<br>
+* ROT - Rotates the current graphic 90 degrees<br>
+* CLR - Clears the current graphic to the selected index/colour<br>
+* MSK - Masks out the current graphic with the clickmask graphic (for 
+non-rectangular tiles)<br>
+* BLK - Creates a new still block with this graphic as the BG<br>
+* REV - Reverts the current graphic to before lat draw, 
+also crtl+z (undo).<br>
+<br>
+Keys:<br>
+Use the arrow keys to slide the graphic (useful to smooth the joins at the edges)<br>
+The current map position is shown in the bottom right corner and changes 
+as you modify the graphics, zoom also works on this.<br>
+'l' will draw a line between the last pixel placed and the mouse position<br>
+'f' will fill the area at the mouse position with current colour<br>
+'p' will pick the colour at the mouse position (same as '?' button, but not with ctrl key)<br>
+<br>
+Draw size shows the thickness of the drawing tool when you edit the graphic<br>
+<br>
+Tip: Use CLR to fill a new graphic with selected colour, then use MSK to 
+get the right shape for non-rectangular tiles (try it with isotst.fmp or 
+hextst.fmp).<br>
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<hr>
+
+<p><a name="brushed"></a></p>
+
+<h3>Brush selector</h3>
+
+<p><br>
+&nbsp; This shows the brushes (from the brush menu), you can select them 
+by clicking then edit the map with them.<br>
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<hr>
+
+<p><a name="objed"></a></p>
+
+<h3>Object Editor</h3>
+
+<p><br>
+&nbsp; You can use New, Cut, Copy and Paste (Edit menu) to manipulate 
+objects when the 'Object' window is active. Click an object to select, 
+doubleclick an object to change its properties. An object is represented 
+either by a tile graphic, or part (or all) of an external graphic file. 
+Add an external graphic file (any format, 24bit pics can be used on 8bit 
+maps if you want) with the 'Add' button. An object can be any size 
+and positioned at any pixel coordinate (even off the map). Set its position 
+either in the properties, or left click in the map window when it is 
+selected. Hold the shift key to align the object to the tile boundaries 
+as you click in the map window. Hold the shift key as you select an object 
+in the Object window to go to its location in the map window. Colourkey is 
+used when drawing objects.<br>
+<br>
+&nbsp; The Object properties consist of map X, Y pixel coord to the handle 
+of the object. If you choose an external graphic, the Tile Graphic must be 
+set to 0. You can make a list of shared External Graphics with the 'Add' 
+button. Select the area of the graphic for the object with the Coords 
+section. The User data area is for your own use. You can set the border 
+colour of an object with the 'Col:' field in the object properties. The selected 
+object is highlighted with a white border. For no border, use 000000 
+(transparent), for black, use 000001.<br>
+<br>
+&nbsp; Objects can be exported with File:Export as text (Pro full version 
+only), they are stored in the FMP file as OBDT chunks, example code to read 
+them (I will update the playback libs to do this eventually):<br><br>
+<a href="readobj.c">readobj.c</a><br>
+<br>
+<br>
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<hr>
+
+<p><a name="areaed"></a></p>
+
+<h3>Area editor</h3>
+
+<p><br>
+&nbsp; This is incorporated into the Object editor, to define an area, make 
+a new object with 'area only' as the graphic, and set the width and height 
+you want, then place the area just like an object. You can set the border 
+colour of an area with the 'Col:' field in the object properties. The selected 
+object is highlighted with a white border. For no border, use 000000 
+(transparent), for black, use 000001.<br>
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<hr>
+
+<p><a name="labeled"></a></p>
+
+<h3>Labels</h3>
+
+<p><br>
+&nbsp; A label is just an Area with 0 width and height and a textstring.
+
+</p>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+</body>
+</html>

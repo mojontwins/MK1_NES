@@ -37,6 +37,7 @@ gpit = 192; while (gpit --) {
 			break;
 		case 2:
 			if (rda == 8 && rdb != 8) rda = 24;
+			// Right, no break here.
 		case 3:
 			if (rda == 0) rda = gp_gen [gpit];
 			break;

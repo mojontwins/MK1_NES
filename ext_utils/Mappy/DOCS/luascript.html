@@ -1,0 +1,296 @@
+<html>
+
+<head>
+<title>MappyWin32 Lua scripting documentation</title>
+</head>
+
+<body bgcolor="#cccccc" text="#000000" link="#0000ff" vlink="#0000aa">
+
+<p><a name="topod"></a></p>
+<h2>MappyWin32 Lua scripting documentation</h2>
+<br>
+&nbsp;<strong>Lua scripts</strong>. Added in 1.3.22, you can write 
+scripts to perform functions in the editor such as exporting/importing 
+graphics, maps and other data from custom formats, editing the map or 
+blocks, performing a custom task and 
+many other things. The scripts are written in a language called LUA 
+(see www.lua.org), see the copyright notice in the luascr folder. 
+Lua scripts can either be put in the luascr folder, and then set 
+the LUA values in the mapwin.ini file to add them to the Custom menu. 
+Alternatively, you can drag and drop a file ending with '.lua' 
+onto MappyWin32 to run it.<br><br>
+&nbsp;I'd like to thank Robbob (Autofringe, Random distribution) and 
+Jerzy Kut (Export binary file) for their help with lua. 
+I have included some example scripts in the luascr folder (not all 
+of these are listed in the custom menu), look 
+at them in a text editor to see how they work, I am a novice with 
+Lua, so they are quite basic. 
+Load a test map and run them to see what they do, most of them 
+give a brief summary of what they do before they start. 
+You do not need to restart Mappy if you modify a script. You can 
+override the functions in the file menu with lua scripts to fully 
+customize loading and saving of maps (see mapwin.ini). 
+MappyWin32 extends LUA with these functions (don't forget 
+to prefix functions and values with 'mappy.' see the .lua files in 
+the luascr folder):<br><br>
+<strong>General functions:</strong><br>
+R = getValue (VALUE_ID)<br>
+&nbsp;where VALUE_ID is one of:<br>
+MAPWIDTH, 
+MAPHEIGHT, 
+BLOCKDEPTH, 
+BLOCKWIDTH, 
+BLOCKHEIGHT, 
+NUMBLOCKSTR, 
+NUMBLOCKGFX, 
+BLOCKGAPX, 
+BLOCKGAPY, 
+BLOCKSTAGGERX, 
+BLOCKSTAGGERY, 
+CLICKMASK, 
+TRANS8, 
+TRANSRED, 
+TRANSGREEN,
+TRANSBLUE, 
+CURLAYER, 
+CURBLOCK, 
+CURANIM, 
+CURBRUSH, 
+MOUSEBLOCKX, 
+MOUSEBLOCKY, 
+GETBLOCKMODE, 
+PALETTEARGB+index, 
+NUMBLOCKANIM, 
+XMAPOFFSET, 
+YMAPOFFSET, 
+MAPFILENAME, 
+MAPWINPATH, 
+MAPTYPE, 
+MAPWINVERSION, 
+NUMBRUSHES, 
+NUMLAYERS, 
+CUROBJECT, 
+NUMOBJECTS, 
+CMDLINE, 
+NUMCHUNKS, 
+CURGFX<br><br>
+
+setValue (VALUE_ID, SETVALUE)<br>
+&nbsp;where VALUE_ID is one of:<br>
+TRANS8, 
+TRANSRED, 
+TRANSGREEN,
+TRANSBLUE,
+PALETTEARGB+index, 
+GETBLOCKMODE, 
+MAPCURLAYER, 
+MAPCURBLOCK, 
+MAPCURANIM, 
+MAPCURBRUSH, 
+XMAPOFFSET, 
+YMAPOFFSET, 
+MAPFILENAME, 
+CUROBJECT, 
+MAPTYPE, 
+CURGFX<br><br>
+R = shiftVal (VALUE, SHIFT) negative shift is left, positive is right<br>
+R = andVal (VALUE1, VALUE2)<br>
+R = orVal (VALUE1, VALUE2)<br><br>
+
+
+<strong>Block functions:</strong><br>
+R = getBlock (X, Y [,L])<br>
+&nbsp;where X is the x coord in blocks, 
+and Y is y coord in blocks, L is the optional layer number, omit it for current layer<br><br>
+setBlock (X, Y, B [,L])<br>
+&nbsp;where X is the x coord in blocks, and Y is y coord in blocks, and B is the block index, 
+L is the optional layer number, omit it for current layer (see 'Solid rectangle.lua' for an example)<br><br>
+R = getBlockValue (B, VALUE_ID)<br>
+&nbsp;where B is the block index, and VALUE_ID is one of:<br>
+BLKBG, 
+BLKFG1, 
+BLKFG2, 
+BLKFG3, 
+BLKUSER1, 
+BLKUSER2, 
+BLKUSER3, 
+BLKUSER4, 
+BLKUSER5, 
+BLKUSER6, 
+BLKUSER7, 
+BLKFLAG1, 
+BLKFLAG2, 
+BLKFLAG3, 
+BLKFLAG4, 
+BLKFLAG5, 
+BLKFLAG6, 
+BLKFLAG7, 
+BLKFLAG8<br><br>
+
+setBlockValue (B, VALUE_ID, VALUE)<br>
+&nbsp;where B is the block index, and VALUE_ID is one of:<br>
+BLKBG, 
+BLKFG1, 
+BLKFG2, 
+BLKFG3, 
+BLKUSER1, 
+BLKUSER2, 
+BLKUSER3, 
+BLKUSER4, 
+BLKUSER5, 
+BLKUSER6, 
+BLKUSER7, 
+BLKFLAG1, 
+BLKFLAG2, 
+BLKFLAG3, 
+BLKFLAG4, 
+BLKFLAG5, 
+BLKFLAG6, 
+BLKFLAG7, 
+BLKFLAG8<br>
+and VALUE is the value to write (flags are 0 or 1) see 'Tile graphic test.lua'<br><br>
+createBlock (B)<br>
+&nbsp;where B is the block index to insert the new block at<br><br>
+deleteBlock (B)<br>
+&nbsp;where B is the block index to remove<br><br>
+
+<strong>Layer functions:</strong><br>
+copyLayer (SOURCE, DEST)<br>
+&nbsp; where SOURCE is the layer to copy from (0 to 7 or MPY_UNDO), and DEST is the 
+layer to copy to (0 to 7 or MPY_UNDO) if you are changing the current layer, use:<br>
+mappy.copyLayer(mappy.getValue(mappy.CURLAYER),mappy.MPY_UNDO)<br>
+to enable undo.<br><br>
+createLayer (layer)<br>
+deleteLayer (layer)<br>
+<br>
+
+<strong>Graphics functions:</strong><br>
+createGraphic (G)<br>
+&nbsp;where G is the graphic index to insert the new graphic at<br><br>
+deleteGraphic (G)<br>
+&nbsp;where G is the graphic index to remove<br><br>
+In the following A is Alpha, R is Red, G is Green, B is Blue, all values between 
+0 (none) and 255 (max), 0 Alpha is transparent, 255 is solid.<br>
+A,R,G,B = getPixel (X, Y, G)<br>
+&nbsp;where X, Y is pixel coord within the graphic, G is the graphic index<br><br>
+setPixel (X, Y, G, A, R, G, B) or<br>
+setPixel (X, Y, G, INDEX)<br>
+&nbsp;where INDEX is the palette index 0 to 255)<br><br>
+R = importGraphics ("FILENAME", GFXPOS, AMOUNT)<br>
+&nbsp; where GFXPOS is the graphic number to start importing at, and AMOUNT 
+is the number of tiles to import. AMOUNT can be 0 for all.<br><br>
+
+<strong>Dialogue/Requester functions:</strong><br>
+R = msgBox ("TITLE", "MESSAGE", TYPE, ICON)<br>
+&nbsp;where TYPE is one of:<br>
+MMB_OK, 
+MMB_OKCANCEL, 
+MMB_YESNOCANCEL,<br>
+and ICON is one of:<br>
+MMB_ICONNONE, 
+MMB_ICONINFO, 
+MMB_ICONQUESTION, 
+MMB_ICONEXCLAMATION<br>
+returns one of:<br>
+MMB_CANCEL, 
+MMB_YES, 
+MMB_NO<br><br>
+R, "FILENAME" = fileRequester ("PATH", "DESCRIPTION", "EXTENSION", TYPE)<br>
+&nbsp;where PATH is the starting folder (try "."), DESCRIPTION is what 
+appears in the 'Save as type' box, EXTENSION is a properly formatted mask 
+for file extensions (ie: "*.FMP" or "*.FMP;*.MAP"). And TYPE is either 
+MMB_OPEN or MMB_SAVE<br>
+returns R, either MMB_OK or MMB_CANCEL, also "FILENAME"<br><br>
+R = doDialogue ("TITLE", "MESSAGE", "STRING", TYPE)<br>
+&nbsp;where TYPE is either MMB_DIALOGUE1 or MMB_DIALOGUE2, type 1 returns 
+MMB_OK or MMB_CANCEL and one string, type 2 returns MMB_OK or MMB_CANCEL 
+and as many strings as there were commas plus 1 (ie: hello,1,2,3 would 
+return four strings "hello" "1" "2" and "3")<br><br>
+
+<strong>Anim functions:</strong><br>
+createAnim (animnum)<br>
+deleteAnim (animnum)<br>
+R = getAnimFrame (animnum, framenum)<br>
+'framenum' can be ANMREFFRAME<br>
+setAnimFrame (animnum, framenum, blockval)<br>
+'framenum' can be ANMREFFRAME<br>
+insertAnimFrame (animnum, framenum, blockval)<br>
+cutAnimFrame (animnum, framenum)<br>
+R = numAnimFrames (animnum)<br>
+R = getAnimValue (VAL)<br>
+VAL is:<br>
+ANMDELAY, ANMCOUNT, ANMTYPE, ANMUSER, ANMCURFRAME<br>
+setAnimValue (VAL, val)<br>
+VAL is:<br>
+ANMDELAY, ANMCOUNT, ANMTYPE, ANMUSER, ANMCURFRAME<br>
+<br>
+<strong>Brush functions:</strong><br>
+createBrush (brshnum, x, y, w, h)<br>
+deleteBrush (brshnum)<br>
+renameBrush (brshnum, "Brushname")<br>
+R = getBrushBlock (brshnum, x, y)<br>
+setBrushBlock (brshnum, x, y, blk)<br>
+R = getBrushValue (VAL)<br>
+VAL is:<br>
+BRUSHWIDTH, BRUSHHEIGHT, BRUSHNAME<br>
+<br>
+<strong>Map/System functions:</strong><br>
+newMap (mapwidth, mapheight, mapdepth, tilewidth, tileheight, [tilegapx, tilegapy, tilestaggerx, tilestaggery, maptype])<br>
+closeMap ()<br>
+openFMP (["FILENAME"])<br>
+saveFMP (["FILENAME"])<br>
+&nbsp; if no "filename" supplied, current filename is used. On saving, 
+use mappy.setValue(mappy.MAPFILENAME, "filename") if you want to change the name<br>
+resizeMap (WIDTH, HEIGHT, CENTERING)<br>
+&nbsp; CENTERING is from 1 to 9 as in the MapTools:Resize dialogue<br>
+updateScreen ()<br>
+&nbsp; call this to refresh the display after altering a layer<br><br>
+shellExecute (action, file, params, dir, style)<br>
+&nbsp; call an external programme, example: 
+mappy.shellExecute ("open", "notepad", "mapwin.ini", "c:/mapwin148/", 0)<br>
+sendMessage (code, 0)<br>
+code is one of the key shortcuts listed in mapwin.htm<br>
+for example sendMessage (119, 0) shows the helpfile<br>
+<br>
+<strong>Object functions (Pro only):</strong><br>
+createObject (position)<br>
+deleteObject (objnum)<br>
+R = getObjectValue (objnum, VALUE_ID)<br>
+setObjectValue (objnum, VALUE_ID, objval)<br>
+VALUE_ID for the above can be one of: 
+OBJXPOS, 
+OBJYPOS, 
+OBJGFXID, 
+OBJTILEID, 
+OBJGXOFF, 
+OBJGYOFF, 
+OBJGWIDTH, 
+OBJGHEIGHT, 
+OBJGHANDLEXOFF, 
+OBJGHANDLEYOFF, 
+OBJSHOW, 
+OBJUSER1, 
+OBJUSER2, 
+OBJUSER3, 
+OBJUSER4, 
+OBJUSER5, 
+OBJUSER6, 
+OBJUSER7, 
+OBJFLAGS<br>
+<br>
+<strong>Chunk functions:</strong><br>
+Warning: for custom chunks only, incorrect use can corrupt map file<br>
+createChunk ("CHNK", size, position)<br>
+&nbsp; "CHNK" is a four character string NOT used by the editor, size is 
+the size of the chunk in bytes, position is where in custom chunks it is 
+inserted (use 0 to put it at the front)<br>
+deleteChunk (chunknum)<br>
+R = getChunkValue (chunknum, offset)<br>
+setChunkValue (chunknum, offset, value)<br><br>
+
+<p><a href="#topod">(top of doc)</a> </p>
+
+<p><a href="mapwin.htm">(Back to main documentation)</a> </p>
+
+</body>
+</html>
