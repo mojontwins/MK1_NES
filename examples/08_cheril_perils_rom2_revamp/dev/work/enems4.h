@@ -1,0 +1,14 @@
+// level4.ene
+
+#define HOTSPOTS_OFFSET_4 0x0090
+
+#define MAX_ENEMS_TYPE_1_4 1
+#define MAX_ENEMS_TYPE_4_4 1
+
+#define KILLABLE_ENEMS_4 1
+
+#define MAX_HOTSPOTS_TYPE_0_4	10
+#define MAX_HOTSPOTS_TYPE_1_4	0
+#define MAX_HOTSPOTS_TYPE_3_4	1
+#define MAX_HOTSPOTS_TYPE_4_4	1
+

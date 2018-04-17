@@ -1,0 +1,19 @@
+// level2.ene
+
+#define HOTSPOTS_OFFSET_2 0x0120
+
+#define MAX_ENEMS_TYPE_1_2 5
+#define MAX_ENEMS_TYPE_2_2 11
+#define MAX_ENEMS_TYPE_3_2 3
+#define MAX_ENEMS_TYPE_4_2 3
+#define MAX_ENEMS_TYPE_5_2 10
+#define MAX_ENEMS_TYPE_6_2 14
+#define MAX_ENEMS_TYPE_20_2 2
+
+#define KILLABLE_ENEMS_2 35
+
+#define MAX_HOTSPOTS_TYPE_0_2	9
+#define MAX_HOTSPOTS_TYPE_1_2	0
+#define MAX_HOTSPOTS_TYPE_3_2	3
+#define MAX_HOTSPOTS_TYPE_4_2	12
+
