@@ -45,7 +45,7 @@
 #define MAX_ENEMS_TYPE_2_2 11
 #define MAX_ENEMS_TYPE_3_2 3
 #define MAX_ENEMS_TYPE_4_2 3
-#define MAX_ENEMS_TYPE_5_2 10
+#define MAX_ENEMS_TYPE_5_2 9
 #define MAX_ENEMS_TYPE_6_2 14
 #define MAX_ENEMS_TYPE_20_2 2
 

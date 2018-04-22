@@ -24,13 +24,13 @@ const unsigned int map_00_scr_offsets [] = {
 	MAP_00_BASE + 0x0387, MAP_00_BASE + 0x0405, 
 	MAP_00_BASE + 0x047E, MAP_00_BASE + 0x04AA, 
 	MAP_00_BASE + 0x0516, MAP_00_BASE + 0x0584, 
-	MAP_00_BASE + 0x0600, MAP_00_BASE + 0x065C, 
-	MAP_00_BASE + 0x06CF, MAP_00_BASE + 0x0727, 
-	MAP_00_BASE + 0x07B3, MAP_00_BASE + 0x0824, 
-	MAP_00_BASE + 0x08A8, MAP_00_BASE + 0x0904
+	MAP_00_BASE + 0x0600, MAP_00_BASE + 0x0661, 
+	MAP_00_BASE + 0x06D4, MAP_00_BASE + 0x072C, 
+	MAP_00_BASE + 0x07B8, MAP_00_BASE + 0x0829, 
+	MAP_00_BASE + 0x08AD, MAP_00_BASE + 0x0909
 };
 
-// Total screens size in bytes is 2406
+// Total screens size in bytes is 2411
 
 // Locks
 // These tiles are locks:  15
@@ -43,7 +43,7 @@ const unsigned char map_00_locks [] = {
 // Definitions
 
 #define MAP_01_CHRROM    3
-#define MAP_01_BASE      0x0966
+#define MAP_01_BASE      0x096B
 #define MAP_01_W         8
 #define MAP_01_H         3
 #define MAP_01_MAXPANTS  24
@@ -73,7 +73,7 @@ const unsigned int map_01_scr_offsets [] = {
 // Definitions
 
 #define MAP_02_CHRROM    3
-#define MAP_02_BASE      0x1065
+#define MAP_02_BASE      0x106A
 #define MAP_02_W         6
 #define MAP_02_H         4
 #define MAP_02_MAXPANTS  24
@@ -93,17 +93,17 @@ const unsigned int map_02_scr_offsets [] = {
 	MAP_02_BASE + 0x0526, MAP_02_BASE + 0x057B, 
 	MAP_02_BASE + 0x05D9, MAP_02_BASE + 0x0617, 
 	MAP_02_BASE + 0x0689, MAP_02_BASE + 0x06E4, 
-	MAP_02_BASE + 0x0722, MAP_02_BASE + 0x078C
+	MAP_02_BASE + 0x0722, MAP_02_BASE + 0x0788
 };
 
-// Total screens size in bytes is 2035
+// Total screens size in bytes is 2031
 
 // Map # 3 read from level3.map (4x6)
 
 // Definitions
 
 #define MAP_03_CHRROM    3
-#define MAP_03_BASE      0x1858
+#define MAP_03_BASE      0x1859
 #define MAP_03_W         4
 #define MAP_03_H         6
 #define MAP_03_MAXPANTS  24
@@ -139,7 +139,7 @@ const unsigned char map_03_locks [] = {
 // Definitions
 
 #define MAP_04_CHRROM    3
-#define MAP_04_BASE      0x1D7A
+#define MAP_04_BASE      0x1D7B
 #define MAP_04_W         6
 #define MAP_04_H         2
 #define MAP_04_MAXPANTS  12
