@@ -5,7 +5,10 @@ if [%1]==[justcompile] goto :justcompile
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
-copy /b work\palts0.h + work\palss0.h assets\palettes.h > nul
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltsl.png out=work\paltsl.h label=paltsl silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palssl.png out=work\palssl.h label=palssl silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts.png out=work\palcuts.h label=palcuts silent
+copy /b work\palts0.h + work\palss0.h + work\paltsl.h + work\palssl.h + work\palcuts.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
@@ -21,7 +24,7 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 5 5 15 0
+..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 6 5 15 0 0 scrsizes
 
 echo Exporting music and sound
 cd ..\dev
