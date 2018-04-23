@@ -136,6 +136,10 @@ void enems_update_unsigned_char_arrays (void) {
 	__asm__ ("sta %v, y", en_facing);
 }
 
+void enems_facing () {
+	_en_facing = rda << 2;
+}
+
 void enems_load (void) {
 
 	#ifdef ENEMS_IN_CHRROM
@@ -390,10 +394,12 @@ void enems_load (void) {
 				#endif				
 			}
 
-			#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
-				en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
-			#else
-				en_life [gpit] = ENEMS_LIFE_GAUGE;
+			#ifdef NEEDS_LIFE_GAUGE_LOGIC
+				#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
+					en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
+				#else
+					en_life [gpit] = ENEMS_LIFE_GAUGE;
+				#endif
 			#endif
 			
 			en_cttouched [gpit] = 0;
@@ -436,14 +442,18 @@ void enems_load (void) {
 	void enems_hit (void) {
 		_en_facing = ((_en_x < prx) ? 0 : 4);
 		en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
-		en_life [gpit] --; 
-
-		if (en_life [gpit] == 0) {
+		#ifdef NEEDS_LIFE_GAUGE_LOGIC
+			en_life [gpit] --; 
+			if (en_life [gpit] == 0) 
+		#endif
+		{
 			#ifdef ENABLE_PURSUERS
 				if (_en_t == 7) {
 					en_alive [gpit] = 0;
 					_en_ct = DEATH_COUNT_EXPRESSION;
-					en_life [gpit] = ENEMS_LIFE_GAUGE;
+					#ifdef NEEDS_LIFE_GAUGE_LOGIC
+						en_life [gpit] = ENEMS_LIFE_GAUGE;	
+					#endif
 				} else 
 			#endif
 			{
@@ -737,7 +747,7 @@ void enems_move (void) {
 					|| (_en_t == 7 && en_alive [gpit] != 2)
 				#endif
 				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && en_alive [gpit] == 0)
+					|| (_en_t == 8 && en_alive [gpit] != 2)
 				#endif
 				#ifdef ENABLE_PEZONS
 					|| (_en_t == 9 && en_alive [gpit] == 0)
@@ -890,12 +900,16 @@ void enems_move (void) {
 						_en_x = en_resx [gpit]; _en_mx = en_resmx [gpit];
 						_en_y = en_resy [gpit]; _en_my = en_resmy [gpit];
 						
-						#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
+						#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY))
 							_enf_x = _en_x << FIXBITS;
 							_enf_y = _en_y << FIXBITS;
-							en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
+							#ifdef NEEDS_LIFE_GAUGE_LOGIC
+								en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
+							#endif
 						#else
-							en_life [gpit] = ENEMS_LIFE_GAUGE;
+							#ifdef NEEDS_LIFE_GAUGE_LOGIC
+								en_life [gpit] = ENEMS_LIFE_GAUGE;
+							#endif
 						#endif
 
 						en_cttouched [gpit] = 50;

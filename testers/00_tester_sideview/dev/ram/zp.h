@@ -73,8 +73,7 @@ unsigned char a_button, b_button;
 #endif
 
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
-unsigned char pushed_any;
-unsigned char pstate, pctstate, pskip;
+unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
 

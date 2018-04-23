@@ -39,7 +39,7 @@ void hotspots_paint (void) {
 	rda = hrt;
 
 #ifdef ENABLE_RESONATORS
-	if (hrt == HOTSPOT_TYPE_RESONATOR && res_on) rda ++;
+	if (hrt == HOTSPOT_TYPE_RESONATOR && res_on) rda = HOTSPOT_TYPE_RESONATOR_ON;
 #endif
 
 	oam_index = oam_meta_spr (

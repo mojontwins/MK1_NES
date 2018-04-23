@@ -74,9 +74,16 @@ void draw_scr (void) {
 
 		while (rdm < 192) {
 			rdd = *gp_gen ++;
-			rdct = 1 + (rdd >> 5);
 			rdt = rdd & 0x1f;
+			/*
+			rdct = 1 + (rdd >> 5);
 			while (rdct --) draw_map_tile (); 
+			*/
+			rdct = rdd;
+			while (rdct >= 32) {
+				draw_map_tile (); 
+				rdct -= 32;
+			} draw_map_tile (); 
 		}
 	#endif	
 

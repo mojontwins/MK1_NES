@@ -20,7 +20,7 @@ unsigned char olife, okeys, oobjs, oammo, okilled;
 #ifdef ENABLE_NO
 	unsigned char no_ct;
 #endif
-unsigned char level, game_over, win_level;
+unsigned char level, game_over, win_level, paused;
 
 unsigned char c_max_enems;
 

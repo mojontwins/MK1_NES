@@ -115,7 +115,12 @@ unsigned char get_byte (void) {
 // Needs _x, _y set.
 void pr_str (unsigned char *s) {
 	vram_adr (((_y << 5) | _x) + 0x2000);
-	while (gpit = *s++) vram_put (gpit - 32); 
+	while (gpit = *s++) {
+		if (gpit == '%') {
+			_y ++; vram_adr (((_y << 5) | _x) + 0x2000);
+		}
+		else vram_put (gpit - 32); 
+	}
 }
 
 #ifdef ENABLE_UL_PRINTER

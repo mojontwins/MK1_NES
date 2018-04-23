@@ -3883,6 +3883,11 @@ El juego está terminado, creo, a falta de probar mil y de meter las músicas qu
 
 Habrá que propagar los cambios. Pero antes tengo que probarlo bien, que he cambiado muchas cosas y a lo mejor me he cargado algo.
 
+20180423
+========
+
+Estoy empezando a escribir algunos tutoriales mientras juego y rejuego y pulo y repulo el Cheril. Ahora mismo voy a propagar los últimos cambios en el motor con vistas de añadir **Bootèe** a la ecuación (es sencillo). Aún estoy a vueltas con qué voy a hacer para el tutorial. **Bootèe** es un juego un poco raro para hacer de tutorial. No sé si empezar con **Sir Ababol DX** como tenía pensado, pero empezando por lo super básico (el juego pelado sin ampliaciones) y luego ir construyéndolas.
+
+Voy a propagar.
+
 ~~
-
-

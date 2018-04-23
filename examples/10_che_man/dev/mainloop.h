@@ -243,23 +243,15 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
-	oam_index = 0;
-	ticker = 50;
+	oam_index = 0; ticker = 50;
+	
 	while (1) {
-		// Count frames		
-		if (ticker) ticker --; else ticker = 50;
-		half_life ^= 1;
-		frame_counter ++;
 
 		// Change screen
 		if (on_pant != n_pant) {
 			prepare_scr ();
 			on_pant = n_pant;
 		}
-
-		#ifdef ENABLE_TIMER
-			#include "mainloop/timer.h"
-		#endif
 
 		#ifdef ACTIVATE_SCRIPTING
 			if (n_pant != 0xfe && on_pant != 0xfe) 
@@ -278,106 +270,117 @@ void game_loop (void) {
 		a_button = (pad_this_frame & PAD_A);
 		b_button = (pad_this_frame & PAD_B);
 
-		// Flick the screen
+		if (paused == 0) {
+			// Count frames		
+			if (ticker) ticker --; else ticker = 50;
+			half_life ^= 1;
+			frame_counter ++;
 
-		#include "mainloop/flickscreen.h"
+			#ifdef ENABLE_TIMER
+				#include "mainloop/timer.h"
+			#endif
 
-		// Finish him
+			// Flick the screen
 
-		if (pkill) player_kill ();
-		if (game_over) break;			
+			#include "mainloop/flickscreen.h"
 
-		// Change screen
-		
-		if (on_pant != n_pant) {
-			prepare_scr ();
-			on_pant = n_pant;
-		}
+			// Finish him
 
-		// Extra checks
-		#include "my/extra_checks.h"
+			if (pkill) player_kill ();
+			if (game_over) break;			
 
-		#if defined (WIN_LEVEL_CUSTOM)
-			if (win_level)
-		#elif defined (ACTIVATE_SCRIPTING)
-			if (script_result == 1) 
-		#elif defined (PLAYER_MAX_OBJECTS)
-			if (pobjs == PLAYER_MAX_OBJECTS) 
-		#elif defined (SCR_END)
-			if (
-				n_pant == SCR_END && 
-				((prx + 8) >> 4) == PLAYER_END_X &&
-				((pry + 8) >> 4) == PLAYER_END_Y
-			) 
-		#endif
-		{
-			music_stop ();
-			delay (50);
-			break;
-		}
-
-		if (pstate) {
-			pctstate --;
-			if (!pctstate) pstate = EST_NORMAL;
-		}
-
-		#ifdef ENABLE_PROPELLERS
-			if (propellers_on) propellers_do ();
-		#endif
-
-		#ifdef ENABLE_RESONATORS
-			#include "mainloop/resonators.h"
-		#endif
-
-		#ifdef ENABLE_INTERACTIVES
-			#include "mainloop/interactives.h"
-		#endif		
-
-		#include "mainloop/hotspots.h"
-
-		player_move ();
-		player_render ();
-
-		#ifdef ACTIVATE_SCRIPTING
-			#include "mainloop/scripting.h"
-		#endif
-
-		#ifdef PLAYER_CAN_FIRE
-			bullets_move ();
-		#endif
-
-		#ifdef ENABLE_COCOS
-			cocos_do ();
-		#endif
-	
-		enems_move ();
-
-		// Moved this here so they appear BEHIND the actors
-
-		if (hrt) hotspots_paint ();
-
-		#ifdef ENABLE_INTERACTIVES
-			interactives_paint ();
-		#endif
-
-		#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
-			if (do_process_breakable) breakable_do_anim ();
-		#endif
-
-		#ifdef ENABLE_SHINES
-			shines_do ();
-		#endif
-
-		#ifdef ENABLE_NO
-			if (no_ct) {
-				no_ct --;
-				oam_index = oam_meta_spr (
-					prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
-					oam_index,
-					NO_METASPRITE
-				);
+			// Change screen
+			
+			if (on_pant != n_pant) {
+				prepare_scr ();
+				on_pant = n_pant;
 			}
-		#endif
+
+			// Extra checks
+			#include "my/extra_checks.h"
+
+			#if defined (WIN_LEVEL_CUSTOM)
+				if (win_level)
+			#elif defined (ACTIVATE_SCRIPTING)
+				if (script_result == 1) 
+			#elif defined (PLAYER_MAX_OBJECTS)
+				if (pobjs == PLAYER_MAX_OBJECTS) 
+			#elif defined (SCR_END)
+				if (
+					n_pant == SCR_END && 
+					((prx + 8) >> 4) == PLAYER_END_X &&
+					((pry + 8) >> 4) == PLAYER_END_Y
+				) 
+			#endif
+			{
+				music_stop ();
+				delay (50);
+				break;
+			}
+
+			if (pstate) {
+				pctstate --;
+				if (!pctstate) pstate = EST_NORMAL;
+			}
+
+			#ifdef ENABLE_PROPELLERS
+				if (propellers_on) propellers_do ();
+			#endif
+
+			#ifdef ENABLE_RESONATORS
+				#include "mainloop/resonators.h"
+			#endif
+
+			#ifdef ENABLE_INTERACTIVES
+				#include "mainloop/interactives.h"
+			#endif		
+
+			#include "mainloop/hotspots.h"
+
+			player_move ();
+			player_render ();
+
+			#ifdef ACTIVATE_SCRIPTING
+				#include "mainloop/scripting.h"
+			#endif
+
+			#ifdef PLAYER_CAN_FIRE
+				bullets_move ();
+			#endif
+
+			#ifdef ENABLE_COCOS
+				cocos_do ();
+			#endif
+		
+			enems_move ();
+
+			// Moved this here so they appear BEHIND the actors
+
+			if (hrt) hotspots_paint ();
+
+			#ifdef ENABLE_INTERACTIVES
+				interactives_paint ();
+			#endif
+
+			#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
+				if (do_process_breakable) breakable_do_anim ();
+			#endif
+
+			#ifdef ENABLE_SHINES
+				shines_do ();
+			#endif
+
+			#ifdef ENABLE_NO
+				if (no_ct) {
+					no_ct --;
+					oam_index = oam_meta_spr (
+						prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
+						oam_index,
+						NO_METASPRITE
+					);
+				}
+			#endif
+		}
 
 		#include "mainloop/cheat.h"
 
