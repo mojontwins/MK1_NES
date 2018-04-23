@@ -763,7 +763,8 @@ void enems_move (void) {
 			// Collide with player (includes step over enemy)
 
 			// Step over enemy?
-			#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_SAFE_LANDING))
+			#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
+
 				if (
 					pregotten && 
 					pry < _en_y && 
@@ -792,12 +793,18 @@ void enems_move (void) {
 						if (_en_my < 0) _en_my = -_en_my;
 					#endif
 
-					if (i & PAD_A) {
+					#ifdef PLAYER_HAS_JUMP
+						if (i & PAD_A) {
+							jump_start ();
+						} else {
+							sfx_play (SFX_STEPON, 1);
+							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+						}
+					#endif
+
+					#ifdef PLAYER_AUTO_JUMP
 						jump_start ();
-					} else {
-						sfx_play (SFX_STEPON, 1);
-						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-					}
+					#endif
 
 					if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
 

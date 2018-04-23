@@ -3,3 +3,6 @@
 
 // extra_inits.h
 // Extra stuff you have to initialize before the level starts
+
+pal_cycle [0] = pal_cycle [1] = 0x0f;
+pal_cycle [2] = 0; 

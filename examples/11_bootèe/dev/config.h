@@ -127,7 +127,7 @@
 //#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
 //#define DIE_AND_REENTER				//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
@@ -251,7 +251,7 @@
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
-//#define PERSISTENT_ENEMIES
+#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
@@ -274,7 +274,7 @@
 
 #define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
-#define FANTY_COLLIDES
+#define FANTY_ºS
 #define FANTY_KILLED_BY_TILE
 //#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
@@ -448,15 +448,15 @@
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
-#define PLAYER_AUTO_JUMP					// Automatic jump when hitting the floor
+#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
-//#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
-//#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
+#define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
+#define PLAYER_STEPS_MIN_KILLABLE     	0xff    // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 
 // ============================================================================
 // III. Screen configuration
