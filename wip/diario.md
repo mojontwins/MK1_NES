@@ -3891,3 +3891,44 @@ Estoy empezando a escribir algunos tutoriales mientras juego y rejuego y pulo y 
 Voy a propagar.
 
 ~~
+
+Cosas de Bootee:
+
+- En el movimiento del player, el salto automático (sustituye al bloque `PLAYER_JUMPS`), y la detección de PAD_DOWN para frenar verticalmente.
+- Los gargajos, que probablemente reimplemente si veo que el código es un horror.
+
+Qué gracia, hace poco tiempo me follé el módulo gargajos.h del paquete porque pensaba descartarlo o dejarlo como ultra custom para este juego. 
+
+Por lo pronto veo una función con una jartá de código. Tengo un `MAX_GARGAJOS` que indica el número máximo de gargajos. Creo que esto debería generalizarlo con las balas para evitar que haya tantas constantes, ya que no voy a hacer coincidir balas y gargajos ¿no? Bueno, nunca se sabe ... Es un número bajo, 2.
+
+Hay un tiempo entre gargajos, `GARGAJO RELOAD`, controlado por `pgargajocounter`, en el que no se puede lanzar otro gargajo.
+
+Los gargajos tienen una vida que tiene que ver con `pfiring`. `pfiring` es un contador de frames a partir de que se pulsa `PAD_B`. cuando se suelta `PAD_B`, se mira si `pfiring` supera un umbral. Si esto pasa, se lanza un gargajo con el valor de `pfiring` como "vida".
+
+El gargajo colisiona con el fondo y con los enemigos.
+
+Originalmente el gargajo podía ser animado y tener facing. Creo que esto me lo puedo fumar para algo tan pequeño y que se mueve tan rápido. Con un `GARGAJO_PATTERN` me vale.
+
+El gargajo describe una trayectoria lineal y muere tras N frames, en realidad es como una puta bala simple ¿No?
+
+Una bala simple con gauge. Joder, es que podría generalizarlo y dejarme de hostierías. Voy a pensar.
+
+~~
+
+A ver, si metiese a las balas:
+
+- Tiempo de "recarga": un tiempo en el que no puedes disparar. Se establece tras un disparo y se decrementa automáticamente.
+- Tiempo de "vida", a establecer de forma externa.
+- Charge & release: forma de disparar que se basa en dejar pulsado, cargar, y soltar.
+
+HMMM...
+
+Creo que sería mucho más mejol.
+
+~~
+
+Ya lo tengo, es muy sencillo y total win. Y la barra de carga es custom y va en el código del marcador, creando un nuevo código de inserción: `my/extra_hud_update.h` (también he cambiado levemente `my/game_frame.h`).
+
+~~
+
+Creo que lo he añadido todo a ciegas XD Ya lo probaré cuando tenga el resto montado.
