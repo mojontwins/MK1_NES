@@ -3932,3 +3932,11 @@ Ya lo tengo, es muy sencillo y total win. Y la barra de carga es custom y va en 
 ~~
 
 Creo que lo he añadido todo a ciegas XD Ya lo probaré cuando tenga el resto montado.
+
+~~
+
+Cambio algunos tiles para optimizar el mapa. Luego meteré mierdas custom para que quede bonico.
+
+Antes 2244, después 2126. Oye, que casi 100 bytes está muy bien, macanaqui.
+
+~~

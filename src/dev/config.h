@@ -57,7 +57,7 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-#define HOTSPOT_TYPE_TIME		5		// For time refills
+//#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
@@ -89,7 +89,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-8
+#define PLAYER_COLLISION_VSTRETCH_BG	-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -403,7 +403,6 @@
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
-#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
 #define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 
 // Special shooting

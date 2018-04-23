@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
-//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_MIDDLE
+#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -12,11 +12,11 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					4		// Map dimensions in screens
+#define MAP_W 					6		//
+#define MAP_H					5		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Max / Initial life
+#define PLAYER_LIFE				9		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
 
 //#define MULTI_LEVEL					// Comment for single level
@@ -28,7 +28,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
+	#define SCR_INI					1		// Initial screen
 	#define PLAYER_INI_X			2		//
 	#define PLAYER_INI_Y			2		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -57,16 +57,18 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-#define HOTSPOT_TYPE_TIME		5		// For time refills
+//#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
-//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+#define HOTSPOT_TYPE_STAR 		4		// Custom for this game
+
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 //#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
@@ -89,7 +91,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-8
+#define PLAYER_COLLISION_VSTRETCH_BG	-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -120,9 +122,9 @@
 
 //#define DEACTIVATE_KEYS				// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-//#define PLAYER_BOUNCES
+#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
-#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+//#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
 //#define DIE_AND_REENTER				//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
@@ -201,8 +203,8 @@
 
 // No!
 
-//#define ENABLE_NO 
-#define NO_METASPRITE					ssit_06
+#define ENABLE_NO 
+#define NO_METASPRITE					ssit_04
 #define NO_OFFS_X						0
 #define NO_OFFS_Y						-24
 
@@ -397,29 +399,26 @@
 
 // Shooting behaviour
 // ------------------
-/*
 #define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
-#define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
+#define MAX_BULLETS 					2	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
-#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
-#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
+//#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
 
 // Special shooting
-//#define PLAYER_FIRE_RELOAD			16	// If defined # of frames until next shoot
-//#define PLAYER_CHARGE_AND_FIRE			// If defined, press B to charge, release to fire
+#define PLAYER_FIRE_RELOAD				16	// If defined # of frames until next shoot
+#define PLAYER_CHARGE_AND_FIRE				// If defined, press B to charge, release to fire
 	#define PLAYER_CHARGE_MIN			8
 	#define PLAYER_CHARGE_MAX			48	// Min/max frames for charging
-//#define PLAYER_BULLET_LIFE			pfiregauge	// Max life. Can be whatever.
+#define PLAYER_BULLET_LIFE				pfiregauge	// Max life. Can be whatever.
 
 //#define MAX_AMMO						99	// If defined, ammo is not infinite!
 	#define AMMO_REFILL					50	// type 3 hotspots refill amo, using tile 20
 	//#define INITIAL_AMMO 				0	// If defined, ammo = X when entering game.
 
 #define BULLET_PALETTE					3
-#define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
-*/
+#define BULLET_PATTERN					64	// To paint the bullet. Can be an expresion.
 
 // Scripting
 // ---------
@@ -449,9 +448,9 @@
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
-//#define PLAYER_AUTO_JUMP					// Automatic jump when hitting the floor
+#define PLAYER_AUTO_JUMP					// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
@@ -465,14 +464,14 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
+#define LIFE_X					4		//
 #define LIFE_Y					3		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
+#define OBJECTS_X				28		//
 #define OBJECTS_Y				3		// Objects counter character coordinates
 #define OBJECTS_REMAINING				// Show # remaining instead of got
 
-#define KEYS_X					28		//
+#define KEYS_X					16		//
 #define KEYS_Y					3		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
@@ -507,9 +506,9 @@
 #define PLAYER_VY_SINKING		2
 #define PLAYER_G				16		// Gravity
 
-#define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_INITIAL	96
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
