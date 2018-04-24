@@ -28,6 +28,8 @@
 #include "assets/behs.h"
 #include "assets/map0.h"
 #include "assets/enems0.h"
+#include "assets/map1.h"
+#include "assets/enems1.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
@@ -47,6 +49,7 @@
 #include "assets/hud_rle.h"
 #include "assets/title_rle.h"
 #include "assets/cuts0_rle.h"
+#include "assets/ending_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];
@@ -119,7 +122,7 @@ void main(void) {
 		pres (palts0, scr_title);
 		rda = 0; pres (palcuts, scr_cutscene);
 
-		level = 0;
+		level = 1;
 		plife = PLAYER_LIFE;
 
 		// Game loop
@@ -133,7 +136,9 @@ void main(void) {
 				pres (palts0, scr_game_over);
 				break;
 			} else {
+				bank_bg (1);
 				rda = 1; pres (palcuts, scr_cutscene);
+				bank_bg (0);
 				break;
 			}
 		}

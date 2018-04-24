@@ -43,7 +43,7 @@ void scr_game_over (void) {
 
 const unsigned char * const cuts_rle [] = {
 //	level 0    level 1    level 2    level 3    level 4    ending
-	cuts0_rle, cuts0_rle
+	cuts0_rle, ending_rle
 };
 
 
