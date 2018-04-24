@@ -55,7 +55,7 @@ void player_init (void) {
 			#endif
 		#endif
 		#ifdef PLAYER_CHARGE_AND_FIRE
-			pfiregauge = 0;
+			pfiregauge = pfiregauge = 0;
 		#endif
 	#endif
 

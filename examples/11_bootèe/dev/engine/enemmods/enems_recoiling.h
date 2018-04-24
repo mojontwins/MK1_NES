@@ -3,7 +3,10 @@
 
 // Enems recoiling
 
-if (en_life [gpit]) {
+#ifdef NEEDS_LIFE_GAUGE_LOGIC
+if (en_life [gpit]) 
+#endif
+{
 	rdx = _en_x; _en_x += en_rmx [gpit];
 
 	#ifdef WALLS_STOP_ENEMIES
@@ -19,7 +22,56 @@ if (en_life [gpit]) {
 		en_collx = at1 | at2;
 	#endif
 
-	if (_en_x <= _en_x1 || _en_x >= _en_x2 || en_collx) _en_x = rdx;
+	if ( 0
+	#ifndef ENEMS_RECOIL_OVER_BOUNDARIES
+		|| (
+			(_en_x <= _en_x1 || _en_x >= _en_x2)
+			#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)				
+				&& _en_t != 6
+			#endif
+			#if defined (ENABLE_PEZONS)
+				&& _en_t != 9
+			#endif
+		)	
+	#endif
+	#ifdef WALLS_STOP_ENEMIES
+		|| en_collx
+	#endif
+	) { _en_x = rdx; }
+
+	#ifdef PLAYER_TOP_DOWN
+		rdy = _en_y; _en_y += en_rmy [gpit];
+
+		#ifdef WALLS_STOP_ENEMIES
+			cx1 = _en_x >> 4;
+			cy1 = (_en_y + 15) >> 4;
+
+			if (_en_my < 0) {
+				cy1 = cy2 = _en_y >> 4;
+			} else {
+				cy1 = cy2 = (_en_y + 15) >> 4;
+			}
+			cm_two_points ();
+			en_colly = at1 | at2;
+		#endif
+
+		if ( 0
+		#ifndef ENEMS_RECOIL_OVER_BOUNDARIES
+			|| (
+				(_en_y <= _en_y1 || _en_y >= _en_y2)
+				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)				
+					&& _en_t != 6
+				#endif
+				#if defined (ENABLE_PEZONS)
+					&& _en_t != 9
+				#endif
+			)
+		#endif
+		#ifdef WALLS_STOP_ENEMIES
+			|| en_colly
+		#endif
+		) _en_y = rdy;
+	#endif
 }
 
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)

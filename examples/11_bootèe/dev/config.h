@@ -3,8 +3,8 @@
 
 //#define GAME_AREA_TOP
 //#define GAME_AREA_MIDDLE
-#define GAME_AREA_BOTTOM
-//#define GAME_AREA_CUSTOM
+//#define GAME_AREA_BOTTOM
+#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -28,13 +28,13 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					1		// Initial screen
-	#define PLAYER_INI_X			2		//
+	#define SCR_INI					0		// Initial screen
+	#define PLAYER_INI_X			10		//
 	#define PLAYER_INI_Y			2		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
-	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
+	#define PLAYER_MAX_OBJECTS		20		// Objects to finish game
 
 #else
 
@@ -61,7 +61,7 @@
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
-#define HOTSPOT_TYPE_STAR 		4		// Custom for this game
+#define HOTSPOT_TYPE_STAR 		4		// Stars are extra collectibles
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -131,6 +131,8 @@
 
 // Extra special tiles
 // -------------------
+
+#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
 
 // Quicksands, beh == 2.
 // For player movement values, see section 4
@@ -247,15 +249,16 @@
 //#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
-//#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
-//#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
+#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
+#define ENEMS_FLICKER_ONLY_ON_DYING			// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 #define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
-//#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
+#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
+#define ENEMS_RECOIL_OVER_BOUNDARIES		// (x1,y1), (x2,y2) boundaries don't stop a recoil
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
@@ -404,21 +407,23 @@
 #define MAX_BULLETS 					2	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
-//#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
+//#define PLAYER_BULLETS_MIN_KILLABLE 	4	// If defined, only enemies >= N can be killed.
+#define BULLETS_DONT_KILL					// Bullets don't kill, but affect enemies otherwise
 
 // Special shooting
 #define PLAYER_FIRE_RELOAD				16	// If defined # of frames until next shoot
 #define PLAYER_CHARGE_AND_FIRE				// If defined, press B to charge, release to fire
 	#define PLAYER_CHARGE_MIN			8
-	#define PLAYER_CHARGE_MAX			48	// Min/max frames for charging
+	#define PLAYER_CHARGE_MAX			47	// Min/max frames for charging
 #define PLAYER_BULLET_LIFE				pfiregauge	// Max life. Can be whatever.
+#define PLAYER_BULLET_FLICKERS			8	// Bullets flickers for N frames before dying, if defined
 
 //#define MAX_AMMO						99	// If defined, ammo is not infinite!
 	#define AMMO_REFILL					50	// type 3 hotspots refill amo, using tile 20
 	//#define INITIAL_AMMO 				0	// If defined, ammo = X when entering game.
 
 #define BULLET_PALETTE					3
-#define BULLET_PATTERN					64	// To paint the bullet. Can be an expresion.
+#define BULLET_PATTERN					63	// To paint the bullet. Can be an expresion.
 
 // Scripting
 // ---------
@@ -456,7 +461,7 @@
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 #define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
-#define PLAYER_STEPS_MIN_KILLABLE     	0xff    // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+#define PLAYER_STEPS_MIN_KILLABLE     	0xff    // Only kill enemies with id >= PLAYER_BULLETS_MIN_KILLABLE
 
 // ============================================================================
 // III. Screen configuration
@@ -465,14 +470,14 @@
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
 #define LIFE_X					4		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+#define LIFE_Y					4		// Life gauge counter character coordinates
 
 #define OBJECTS_X				28		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+#define OBJECTS_Y				4		// Objects counter character coordinates
 #define OBJECTS_REMAINING				// Show # remaining instead of got
 
 #define KEYS_X					16		//
-#define KEYS_Y					3		// Keys counter character coordinates
+#define KEYS_Y					4		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates

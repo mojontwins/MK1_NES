@@ -847,9 +847,6 @@ void enems_move (void) {
 
 			if (
 				touched
-				#ifdef PLAYER_MIN_KILLABLE
-					|| _en_t < PLAYER_MIN_KILLABLE
-				#endif
 				#ifndef STEADY_SHOOTER_KILLABLE
 					|| _en_t == 5
 				#endif					
@@ -872,7 +869,10 @@ void enems_move (void) {
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
 						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL;
+							en_rmx [gpit] = ENEMS_RECOIL_X;
+							#ifdef PLAYER_TOP_DOWN
+								en_rmy [gpit] = ENEMS_RECOIL_Y;
+							#endif
 						#endif
 					}
 				} 
@@ -888,10 +888,23 @@ void enems_move (void) {
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
 						sfx_play (SFX_ENHIT, 1);
 						bullets_destroy ();
-						enems_hit ();
-						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL;
+
+						#ifdef BULLETS_DONT_KILL
+							en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
+						#else
+							#ifdef PLAYER_BULLETS_MIN_KILLABLE
+								if (_en_t >= PLAYER_BULLETS_MIN_KILLABLE)
+							#endif
+							enems_hit ();
 						#endif
+
+						#ifdef ENEMS_RECOIL_ON_HIT
+							en_rmx [gpit] = ENEMS_RECOIL_X;
+							#ifdef PLAYER_TOP_DOWN
+								en_rmy [gpit] = ENEMS_RECOIL_Y;
+							#endif
+						#endif
+
 						break;
 					}
 				}

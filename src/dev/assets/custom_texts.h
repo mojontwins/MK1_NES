@@ -5,6 +5,8 @@ const unsigned char custom_text0 [] =
 	
 const unsigned char * const custom_texts [] = {
 	custom_text0
+};
+
 /*
 // Dummy templates for dialogues with portraits
 
@@ -17,4 +19,3 @@ const unsigned char * const dialogue_texts [] = {
 };
 
 */
-};

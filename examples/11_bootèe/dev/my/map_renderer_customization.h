@@ -14,3 +14,6 @@ gpit = 192; while (gpit --) {
 
 	map_buff [gpit] = rda;
 }
+
+// Clear monkey when all coins got
+if (n_pant == 0 && pobjs == MAX_HOTSPOTS_TYPE_1_0) map_buff [0x68] = 29;

@@ -11,6 +11,18 @@
 // Whenever you want to WIN the game just set win_level = 1
 // (Don't forget to define WIN_LEVEL_CUSTOM in config.h)
 
+win_level = pstars;
+
+// Custom sprite
+
+if (n_pant == 0 && pobjs < MAX_HOTSPOTS_TYPE_1_0) {
+	oam_index = oam_meta_spr (
+		0x78, 0x64 + SPRITE_ADJUST,
+		oam_index,
+		ssit_05
+	);
+}
+
 // Palette cycling
 
 if ((frame_counter & 3) == 0) {

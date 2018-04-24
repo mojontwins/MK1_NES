@@ -6,17 +6,14 @@
 // Player metasprites
 const unsigned char * const spr_player [] = {
 	// Facing right (offset 0)
-	sspl_00_a,										// Standing (offset 0)
-	sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-	sspl_05_a, sspl_06_a,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
-	
+	sspl_00_a, sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,	// Bounding animation
+	sspl_05_a, 												// Crouching (offset 5)
+	sspl_06_a, sspl_07_a,									// Spitting (offsets 6, 7)
 
 	// Facing left (offset 8)
-	sspl_00_b,										// Standing (offset 0)
-	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
-	sspl_05_b, sspl_06_b,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
+	sspl_00_b, sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,	// Bounding animation
+	sspl_05_b, 												// Crouching (offset 5)
+	sspl_06_b, sspl_07_b,									// Spitting (offsets 6, 7)
 	
 };
 
@@ -35,8 +32,8 @@ const unsigned char * const spr_enems0 [] = {
 };
 
 // Item metasprites
-// nothing, object, key, refill
+// nothing, object, key, refill, star
 const unsigned char * const spr_hs [] = {
-	0, ssit_00, ssit_01, ssit_02
+	0, ssit_00, ssit_01, ssit_02, ssit_03
 };
 

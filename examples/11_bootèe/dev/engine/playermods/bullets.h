@@ -66,6 +66,9 @@ void bullets_move (void) {
 			bx [bi] += bmx [bi];
 			by [bi] += bmy [bi];
 
+			#ifdef PLAYER_BULLET_FLICKERS
+			if (bst [bi] > PLAYER_BULLET_FLICKERS || half_life)
+			#endif
 			oam_index = oam_spr (
 				bx [bi], SPRITE_ADJUST + by [bi], 
 				BULLET_PATTERN, BULLET_PALETTE,

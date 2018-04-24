@@ -30,7 +30,7 @@ MAPFILE ..\dev\assets\tiledata.h
 
 # ts0
 OPEN ts0.png
-PALS palts0.png
+PALS palts0-import.png
 LABEL ts0
 MAPPED 0, 0, 2, 2, 16, 3, 41
 

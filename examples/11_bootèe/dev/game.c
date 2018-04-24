@@ -44,6 +44,10 @@
 	#include "assets/levelset.h"
 #endif
 
+#include "assets/hud_rle.h"
+#include "assets/title_rle.h"
+#include "assets/cuts_rle.h"
+
 // Music
 extern const unsigned char m_ingame [];
 
@@ -112,11 +116,10 @@ void main(void) {
 
 	while (1) {	
 
-		//title ();
+		pres (palts0, scr_title);
+		rda = 0; pres (palcuts, scr_cutscene);
 
-#ifdef MULTI_LEVEL		
 		level = 0;
-#endif
 		plife = PLAYER_LIFE;
 
 		// Game loop
@@ -127,17 +130,11 @@ void main(void) {
 			game_loop ();
 
 			if (game_over) {
-				// game_over ();
+				pres (palts0, scr_game_over);
 				break;
 			} else {
-#ifdef MULTI_LEVEL
-				level ++;
-				if (level == MAX_LEVELS) 
-#endif
-				{
-					// game_ending ();
-					break;
-				}
+				rda = 1; pres (palcuts, scr_cutscene);
+				break;
 			}
 		}
 

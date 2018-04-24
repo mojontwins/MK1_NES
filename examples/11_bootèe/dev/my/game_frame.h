@@ -5,5 +5,5 @@
 // Custom code to draw the frame around your HUD
 
 void draw_game_frame (void) {
-
+	unrle_vram (hud_rle, 0x2000);
 }
