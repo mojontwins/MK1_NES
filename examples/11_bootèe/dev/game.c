@@ -31,9 +31,9 @@
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
-#ifdef ENABLE_TEXT_BOX
+//#ifdef ENABLE_TEXT_BOX
 	#include "assets/custom_texts.h"
-#endif
+//#endif
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
 #endif
@@ -46,7 +46,7 @@
 
 #include "assets/hud_rle.h"
 #include "assets/title_rle.h"
-#include "assets/cuts_rle.h"
+#include "assets/cuts0_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];

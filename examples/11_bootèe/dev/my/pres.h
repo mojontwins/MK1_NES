@@ -43,7 +43,7 @@ void scr_game_over (void) {
 
 const unsigned char * const cuts_rle [] = {
 //	level 0    level 1    level 2    level 3    level 4    ending
-	cuts_rle, cuts_rle
+	cuts0_rle, cuts0_rle
 };
 
 
@@ -51,5 +51,5 @@ void scr_cutscene (void) {
 	// show cuts + text in level;
 	
 	unrle_vram (cuts_rle [rda], 0x2000);
-	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [rda]);	
+	_x = 2; _y = 16; pr_str ((unsigned char *) cutscenes [rda]);	
 }
