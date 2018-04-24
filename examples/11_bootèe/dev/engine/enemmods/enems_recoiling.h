@@ -24,7 +24,7 @@ if (en_life [gpit])
 
 	if (
 	#ifdef ENEMS_RECOIL_OVER_BOUNDARIES
-		(_en_x == 0 || en_x >= 240)
+		(_en_x == 0 || _en_x >= 240)
 	#else
 		(
 			(_en_x <= _en_x1 || _en_x >= _en_x2)
@@ -59,7 +59,7 @@ if (en_life [gpit])
 
 		if (
 		#ifdef ENEMS_RECOIL_OVER_BOUNDARIES
-			(_en_y == 0 || en_x >= 192)
+			(_en_y == 0 || _en_y >= 192)
 		#else
 			(
 				(_en_y <= _en_y1 || _en_y >= _en_y2)

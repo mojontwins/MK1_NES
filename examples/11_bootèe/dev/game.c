@@ -30,6 +30,8 @@
 #include "assets/enems0.h"
 #include "assets/map1.h"
 #include "assets/enems1.h"
+#include "assets/map2.h"
+#include "assets/enems2.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
@@ -122,7 +124,7 @@ void main(void) {
 		pres (palts0, scr_title);
 		rda = 0; pres (palcuts, scr_cutscene);
 
-		level = 1;
+		level = 2;
 		plife = PLAYER_LIFE;
 
 		// Game loop
