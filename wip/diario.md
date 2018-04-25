@@ -3947,6 +3947,7 @@ Asín un TODO, como rápido:
 - Músicas y más testing para Cheril the Writer / Apúntalo. ¿Activar `NO_HORIZONTAL_EVIL_TILE`?
 - Reusar una música "que pegue" para Bootèe, menú de selección de GAME A/B/C y los dos textos finales que faltan.
 - Propagar Bootèe y activar el recoiling para Sgt. Helmet, y así se prueba en top-down.
+- Scan horizontal al reaparecer si tenemos activado el reenter on respawn y los breakables buscando un hueco, en tester_sideview y propagar.
 
 He empezado con el recoil top-down y no funciona bien. Tendré que fix, propagar a src, propagar a bootèe, retest, y luego de src a todos.
 

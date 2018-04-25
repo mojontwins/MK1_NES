@@ -12,7 +12,15 @@ void fire_bullet (void) {
 	if (b_slots_i == 0) return;
 	b_slots_i --; bi = b_slots [b_slots_i];
 
-	bst [bi] = 1;
+	#ifdef PLAYER_BULLET_LIFE
+		bst [bi] = PLAYER_BULLET_LIFE;
+	#else
+		bst [bi] = 1;
+	#endif
+
+	#ifdef PLAYER_FIRE_RELOAD
+		pfirereload = PLAYER_FIRE_RELOAD;
+	#endif
 	
 	switch (pfacing) {
 		case CELL_FACING_LEFT:
@@ -58,6 +66,9 @@ void bullets_move (void) {
 			bx [bi] += bmx [bi];
 			by [bi] += bmy [bi];
 
+			#ifdef PLAYER_BULLET_FLICKERS
+			if (bst [bi] > PLAYER_BULLET_FLICKERS || half_life)
+			#endif
 			oam_index = oam_spr (
 				bx [bi], SPRITE_ADJUST + by [bi], 
 				BULLET_PATTERN, BULLET_PALETTE,
@@ -68,6 +79,11 @@ void bullets_move (void) {
 			cy1 = ((by [bi] + 4 - 16) >> 4);
 			rdm = map_attr [COORDS (cx1, cy1)];
 
+			#ifdef PLAYER_BULLET_LIFE
+				bst [bi] --; 
+				if (bst [bi] == 0) bullets_destroy (); 
+				else
+			#endif
 			#ifdef ENABLE_BREAKABLE
 				if (rdm & 16) {
 					breakable_break (cx1, cy1);

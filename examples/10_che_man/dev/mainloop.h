@@ -42,6 +42,10 @@ void game_init (void) {
 		pobjs = 0;
 	#endif
 
+	#ifdef HOTSPOT_TYPE_STAR
+		pstars = 0;
+	#endif
+
 	#ifndef DEACTIVATE_KEYS	
 		pkeys = 0;
 	#endif

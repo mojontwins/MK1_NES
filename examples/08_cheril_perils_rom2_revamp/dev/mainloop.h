@@ -4,6 +4,7 @@
 // Main loop & helpers
 
 void game_init (void) {
+
 	win_level = game_over = 0;
 
 	// Assets setup. Selects tileset, map, palettes, etc.
@@ -39,6 +40,10 @@ void game_init (void) {
 
 	#ifndef DEACTIVATE_OBJECTS
 		pobjs = 0;
+	#endif
+
+	#ifdef HOTSPOT_TYPE_STAR
+		pstars = 0;
 	#endif
 
 	#ifndef DEACTIVATE_KEYS	

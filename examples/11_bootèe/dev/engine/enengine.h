@@ -869,10 +869,19 @@ void enems_move (void) {
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
 						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL_X;
-							#ifdef PLAYER_TOP_DOWN
-								en_rmy [gpit] = ENEMS_RECOIL_Y;
-							#endif
+							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+								#ifdef PLAYER_TOP_DOWN
+									if (bmx [bi]) {
+										en_rmy [gpit] = 0;
+								#endif
+									en_rmx [gpit] = ENEMS_RECOIL_X;
+								#ifdef PLAYER_TOP_DOWN
+									} else {
+										en_rmx [gpit] = 0;
+										en_rmy [gpit] = ENEMS_RECOIL_Y;
+									}
+								#endif
+							}
 						#endif
 					}
 				} 
@@ -887,8 +896,7 @@ void enems_move (void) {
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
 						sfx_play (SFX_ENHIT, 1);
-						bullets_destroy ();
-
+						
 						#ifdef BULLETS_DONT_KILL
 							en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
 						#else
@@ -899,12 +907,22 @@ void enems_move (void) {
 						#endif
 
 						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL_X;
-							#ifdef PLAYER_TOP_DOWN
-								en_rmy [gpit] = ENEMS_RECOIL_Y;
-							#endif
+							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+								#ifdef PLAYER_TOP_DOWN
+									if (bmx [bi]) {
+										en_rmy [gpit] = 0;
+								#endif
+									en_rmx [gpit] = ENEMS_RECOIL_X;
+								#ifdef PLAYER_TOP_DOWN
+									} else {
+										en_rmx [gpit] = 0;
+										en_rmy [gpit] = ENEMS_RECOIL_Y;
+									}
+								#endif
+							}
 						#endif
 
+						bullets_destroy ();
 						break;
 					}
 				}

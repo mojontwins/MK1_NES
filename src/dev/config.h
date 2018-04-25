@@ -250,8 +250,8 @@
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
-
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
+
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 //#define PERSISTENT_ENEMIES

@@ -1,6 +1,5 @@
 @echo off
-path=%path%;c:\cc65\bin\
-set CC65_HOME=c:\cc65\
+
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts.png out=work\palbg0.h label=mypal_game_bg0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2.png out=work\palbg1.h label=mypal_game_bg1 silent
