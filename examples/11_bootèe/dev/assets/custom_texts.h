@@ -19,6 +19,7 @@ const unsigned char dialogue_portraits [] = {
 const unsigned char * const dialogue_texts [] = {
 
 };
+
 */
 
 const unsigned char cutscene_0 [] = 
@@ -41,3 +42,4 @@ const unsigned char cutscene_1 [] =
 const unsigned char * const cutscenes [] = {
 	cutscene_0, cutscene_1
 };
+

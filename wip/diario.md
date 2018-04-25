@@ -3939,4 +3939,15 @@ Cambio algunos tiles para optimizar el mapa. Luego meteré mierdas custom para q
 
 Antes 2244, después 2126. Oye, que casi 100 bytes está muy bien, macanaqui.
 
-~~
+20180425
+========
+
+Asín un TODO, como rápido:
+
+- Músicas y más testing para Cheril the Writer / Apúntalo. ¿Activar `NO_HORIZONTAL_EVIL_TILE`?
+- Reusar una música "que pegue" para Bootèe, menú de selección de GAME A/B/C y los dos textos finales que faltan.
+- Propagar Bootèe y activar el recoiling para Sgt. Helmet, y así se prueba en top-down.
+
+He empezado con el recoil top-down y no funciona bien. Tendré que fix, propagar a src, propagar a bootèe, retest, y luego de src a todos.
+
+

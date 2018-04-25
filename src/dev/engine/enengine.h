@@ -763,7 +763,8 @@ void enems_move (void) {
 			// Collide with player (includes step over enemy)
 
 			// Step over enemy?
-			#if defined (PLAYER_HAS_JUMP) && (defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_SAFE_LANDING))
+			#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
+
 				if (
 					pregotten && 
 					pry < _en_y && 
@@ -792,12 +793,18 @@ void enems_move (void) {
 						if (_en_my < 0) _en_my = -_en_my;
 					#endif
 
-					if (i & PAD_A) {
+					#ifdef PLAYER_HAS_JUMP
+						if (i & PAD_A) {
+							jump_start ();
+						} else {
+							sfx_play (SFX_STEPON, 1);
+							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+						}
+					#endif
+
+					#ifdef PLAYER_AUTO_JUMP
 						jump_start ();
-					} else {
-						sfx_play (SFX_STEPON, 1);
-						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-					}
+					#endif
 
 					if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
 
@@ -840,9 +847,6 @@ void enems_move (void) {
 
 			if (
 				touched
-				#ifdef PLAYER_MIN_KILLABLE
-					|| _en_t < PLAYER_MIN_KILLABLE
-				#endif
 				#ifndef STEADY_SHOOTER_KILLABLE
 					|| _en_t == 5
 				#endif					
@@ -865,7 +869,19 @@ void enems_move (void) {
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
 						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL;
+							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+								#ifdef PLAYER_TOP_DOWN
+									if (bmx [bi]) {
+										en_rmy [gpit] = 0;
+								#endif
+									en_rmx [gpit] = ENEMS_RECOIL_X;
+								#ifdef PLAYER_TOP_DOWN
+									} else {
+										en_rmx [gpit] = 0;
+										en_rmy [gpit] = ENEMS_RECOIL_Y;
+									}
+								#endif
+							}
 						#endif
 					}
 				} 
@@ -880,11 +896,33 @@ void enems_move (void) {
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
 						sfx_play (SFX_ENHIT, 1);
-						bullets_destroy ();
-						enems_hit ();
-						#ifdef ENEMS_RECOIL_ON_HIT
-							en_rmx [gpit] = ENEMS_RECOIL;
+						
+						#ifdef BULLETS_DONT_KILL
+							en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
+						#else
+							#ifdef PLAYER_BULLETS_MIN_KILLABLE
+								if (_en_t >= PLAYER_BULLETS_MIN_KILLABLE)
+							#endif
+							enems_hit ();
 						#endif
+
+						#ifdef ENEMS_RECOIL_ON_HIT
+							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+								#ifdef PLAYER_TOP_DOWN
+									if (bmx [bi]) {
+										en_rmy [gpit] = 0;
+								#endif
+									en_rmx [gpit] = ENEMS_RECOIL_X;
+								#ifdef PLAYER_TOP_DOWN
+									} else {
+										en_rmx [gpit] = 0;
+										en_rmy [gpit] = ENEMS_RECOIL_Y;
+									}
+								#endif
+							}
+						#endif
+
+						bullets_destroy ();
 						break;
 					}
 				}

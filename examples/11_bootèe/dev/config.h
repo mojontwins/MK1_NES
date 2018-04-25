@@ -277,7 +277,7 @@
 
 #define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
-#define FANTY_ºS
+#define FANTY_COLLIDES
 #define FANTY_KILLED_BY_TILE
 //#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
@@ -462,6 +462,7 @@
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 #define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
 #define PLAYER_STEPS_MIN_KILLABLE     	0xff    // Only kill enemies with id >= PLAYER_BULLETS_MIN_KILLABLE
+												// 0xff = Nobody
 
 // ============================================================================
 // III. Screen configuration

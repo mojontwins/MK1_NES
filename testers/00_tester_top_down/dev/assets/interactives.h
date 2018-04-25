@@ -5,8 +5,6 @@
 
 // For each interactive: NP YX F.
 const unsigned char interactives_0 [] = {
-	0, 0, 0,
-
 	0xff
 };
 
