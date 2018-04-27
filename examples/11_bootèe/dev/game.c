@@ -114,21 +114,20 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
+	level = 0;
 
 	// Main loop
 
 	while (1) {	
-
-		pres (palts0, scr_title);
+		scroll (0, SCROLL_Y);
+		title ();
 		rda = 0; pres (palcuts, scr_cutscene);
 
-		level = 2;
 		plife = PLAYER_LIFE;
 
 		// Game loop
 
 		while (1) {
-			scroll (0, SCROLL_Y);
 			game_init (); 
 			game_loop ();
 
@@ -137,8 +136,7 @@ void main(void) {
 				break;
 			} else {
 				bank_bg (1);
-				rda = 1; pres (palcuts, scr_cutscene);
-				bank_bg (0);
+				rda = 1 + level; pres (palcuts, scr_cutscene);
 				break;
 			}
 		}
