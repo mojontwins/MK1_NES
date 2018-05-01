@@ -119,14 +119,14 @@ const unsigned int map_03_scr_offsets [] = {
 	MAP_03_BASE + 0x019B, MAP_03_BASE + 0x01E1, 
 	MAP_03_BASE + 0x021C, MAP_03_BASE + 0x0253, 
 	MAP_03_BASE + 0x0290, MAP_03_BASE + 0x02C1, 
-	MAP_03_BASE + 0x02F5, MAP_03_BASE + 0x0330, 
-	MAP_03_BASE + 0x0366, MAP_03_BASE + 0x03A3, 
-	MAP_03_BASE + 0x03C9, MAP_03_BASE + 0x0406, 
-	MAP_03_BASE + 0x043F, MAP_03_BASE + 0x047B, 
-	MAP_03_BASE + 0x04AA, MAP_03_BASE + 0x04E3
+	MAP_03_BASE + 0x02F6, MAP_03_BASE + 0x0331, 
+	MAP_03_BASE + 0x0367, MAP_03_BASE + 0x03A4, 
+	MAP_03_BASE + 0x03CA, MAP_03_BASE + 0x0407, 
+	MAP_03_BASE + 0x0440, MAP_03_BASE + 0x047C, 
+	MAP_03_BASE + 0x04AB, MAP_03_BASE + 0x04E4
 };
 
-// Total screens size in bytes is 1314
+// Total screens size in bytes is 1315
 
 // Locks
 // These tiles are locks:  15
@@ -139,7 +139,7 @@ const unsigned char map_03_locks [] = {
 // Definitions
 
 #define MAP_04_CHRROM    3
-#define MAP_04_BASE      0x1D7B
+#define MAP_04_BASE      0x1D7C
 #define MAP_04_W         6
 #define MAP_04_H         2
 #define MAP_04_MAXPANTS  12

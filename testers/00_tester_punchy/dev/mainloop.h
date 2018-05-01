@@ -226,7 +226,11 @@ void prepare_scr (void) {
 }
 
 void game_loop (void) {
-	music_play (MUSIC_INGAME);
+	#ifdef MULTI_LEVEL
+		music_play (l_music [level]);
+	#else
+		music_play (MUSIC_INGAME);
+	#endif
 
 	clear_update_list ();
 	set_vram_update (UPDATE_LIST_SIZE, update_list);

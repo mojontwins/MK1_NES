@@ -665,9 +665,11 @@ void player_move (void) {
 	
 	phit = 0;
 	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-	#ifndef NO_HORIZONTAL_EVIL_TILE	
-		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
-	#endif	
+	if (hith) { phit = 1; 
+		#ifndef NO_HORIZONTAL_EVIL_TILE	
+			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
+		#endif	
+	}
 	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 
 	// **************

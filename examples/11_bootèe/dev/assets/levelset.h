@@ -98,3 +98,7 @@ const unsigned char * const l_hotspots [] = 	{ hotspots_0, hotspots_1, hotspots_
 	const unsigned char * const l_interactives [] = 
 												{ interactives0, interactives1, interactives2 };
 #endif
+
+// Music track
+
+const unsigned char l_music [] = 				{ MUSIC_INGAME, MUSIC_INGAME, MUSIC_INGAME };
