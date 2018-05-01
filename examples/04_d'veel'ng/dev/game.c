@@ -56,6 +56,7 @@ unsigned char update_list [UPDATE_LIST_SIZE * 3];
 #include "assets/cuts1.h"
 #include "assets/mapa0.h"
 #include "assets/enems.h"
+#include "assets/spr_logo.h"
 
 #ifdef ACTIVATE_SCRIPTING
 extern const unsigned char *e_scripts [];

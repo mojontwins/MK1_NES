@@ -1,0 +1,29 @@
+# Tileset 1, bank 0
+
+OPEN font_full.png
+PALS palcuts.png
+CHARSET 0, 0, 32, 2
+
+OPEN title.omv
+PALS palcuts.png
+LABEL dummy0
+MAPFILE ..\dev\work\dummy0.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+OPEN cuts.omv
+PALS palcuts.png
+LABEL dummy1
+MAPFILE ..\dev\work\dummy1.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Rest is empty
+
+FILL 4096
+RESETPOOL
+
+# Tileset 1, bank 1
+OPEN logo.png
+PALS palcuts.png
+CHARSET 0, 0, 6, 2
+
+FILL 8192

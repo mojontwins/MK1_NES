@@ -179,11 +179,6 @@ void title (void) {
 }
 
 // Mojontwins logo
-const unsigned char spr_mt_logo [] = {
-	0, 0, 0xae, 3, 8, 0, 0xaf, 3, 16, 0, 0xb0, 2, 24, 0, 0xb1, 2, 32, 0, 0xb2, 3, 40, 0, 0xb3, 3,
-	0, 8, 0xb4, 3, 8, 8, 0xb5, 3, 16, 8, 0xb6, 2, 24, 8, 0xb7, 2, 32, 8, 0xb8, 3, 40, 8, 0xb9, 3,
-	128	
-};
 signed int lower_end;
 void __fastcall__ credits (void) {
 	pal_bg (mypal_cuts);
@@ -204,7 +199,7 @@ void __fastcall__ credits (void) {
 	fade_delay = 4;
 	fade_in ();
 	while (!(pad_poll (0) & PAD_START) && lower_end < 300) {
-		oam_meta_spr (102, rdy, 0, spr_mt_logo);
+		oam_meta_spr (102, rdy, 0, spr_logo_00);
 		if (rdy > 112) rdy --;
 		ppu_waitnmi ();
 		lower_end ++;
