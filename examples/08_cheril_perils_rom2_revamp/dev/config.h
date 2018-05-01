@@ -599,6 +599,7 @@
 // Music
 
 #define MUSIC_INGAME 			0
+#define MUSIC_CUTS				4
 
 // SFX
 

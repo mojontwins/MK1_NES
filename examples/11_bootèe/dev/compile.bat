@@ -12,10 +12,6 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts.png out=work\palcuts.h label=palcuts silent
 copy /b work\palts0.h + work\palss0.h + work\palts1.h + work\palts2.h + work\paltsl.h + work\palssl.h + work\palcuts.h assets\palettes.h > nul
 
-echo Exporting chr
-cd ..\gfx
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
-
 echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
@@ -49,11 +45,30 @@ cd ..\script
 ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 25
 cd ..\dev
 
+echo * Creating official version *
+echo Exporting chr
+cd ..\gfx
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
+cd ..\dev
+
 :noscript
 cc65 -Oi game.c --add-source
 ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+
+echo * Creating sfw version *
+echo Exporting chr
+cd ..\gfx
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns-sfw.spt out=..\dev\tileset.chr silent
+cd ..\dev
+
+:noscript
+cc65 -Oi game.c --add-source
+ca65 crt0.s -o crt0.o -D CNROM=0
+ca65 game.s
+ld65 -v -C nes.cfg -o cart-sfw.nes crt0.o game.o runtime.lib -m labels.txt
+
 
 del *.o
 del game.s

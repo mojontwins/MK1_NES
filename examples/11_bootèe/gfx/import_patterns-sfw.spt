@@ -19,7 +19,7 @@ MAPFILE ..\dev\work\dummy0.h
 MAPPED 0, 0, 2, 2, 16, 15
 
 # Cutscene
-OPEN cuts.png
+OPEN cuts-sfw.png
 PALS palcuts.png
 LABEL tsdummy1
 MAPFILE ..\dev\work\dummy1.h
@@ -46,7 +46,7 @@ PALS palts0.png
 CHARSET 0, 0, 32, 2
 
 # All sprites are in the same file, and use the same palette
-OPEN ss.png
+OPEN ss-sfw.png
 PALS palss0.png
 MAPFILE ..\dev\assets\spritedata.h
 
@@ -74,7 +74,7 @@ LABEL ssplat
 METASPRITESET 12, 6, 2, 2, 2, 1, 0, 0
 
 # Cutscene
-OPEN ending.png
+OPEN ending-sfw.png
 PALS palcuts.png
 LABEL tsdummy1
 MAPFILE ..\dev\work\dummy2.h

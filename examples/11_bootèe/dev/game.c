@@ -50,6 +50,7 @@
 #include "assets/title_rle.h"
 #include "assets/cuts0_rle.h"
 #include "assets/ending_rle.h"
+#include "assets/logo.h"
 
 // Music
 extern const unsigned char m_ingame [];
@@ -116,12 +117,15 @@ void main(void) {
 	first_game = 1;
 	level = 0;
 
+	credits ();
+
 	// Main loop
 
 	while (1) {	
 		scroll (0, SCROLL_Y);
 		title ();
 		rda = 0; pres (palcuts, scr_cutscene);
+		rda = 0; pres (palcuts, scr_instructions);
 
 		plife = PLAYER_LIFE;
 

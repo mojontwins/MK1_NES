@@ -12,6 +12,7 @@ void bat_in (void) {
 }
 
 void bat_out (void) {
+	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -46,6 +47,14 @@ void scr_game_over (void) {
 	_x = 11; _y = 15; pr_str ("GAME OVER!");
 }
 
+void scr_the_end (void) {
+	_x = 12; _y = 15; pr_str ("THE END");
+}
+
+void scr_level (void) {
+	_x = 12; _y = 15; pr_str ("LEVEL 0"); vram_put (level + 17);
+}
+
 const unsigned char * const cuts_rle [] = {
 //	level 0    level 1    level 2    level 3    level 4    ending
 	cuts0_rle, cuts0_rle, cuts1_rle, cuts2_rle, cuts3_rle, cuts3_rle
@@ -55,4 +64,5 @@ void scr_cutscene (void) {
 	// show cuts + text in level;
 	unrle_vram (cuts_rle [level], 0x2000);
 	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [level]);
+	music_play (MUSIC_CUTS);
 }

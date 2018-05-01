@@ -12,6 +12,7 @@ void bat_in (void) {
 }
 
 void bat_out (void) {
+	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -75,8 +76,56 @@ const unsigned char * const cuts_rle [] = {
 
 void scr_cutscene (void) {
 	// show cuts + text in level;
-	unrle_vram (cuts_rle [rda], 0x2000);
+	unrle_vram (cuts_rle [!!rda], 0x2000);
 	_x = 2; _y = 16; pr_str ((unsigned char *) cutscenes [rda]);	
 
 	_x = 13; _y = 4; pr_str ("GAME "); vram_put (level + 33);
+
+	music_play (1);
+}
+
+#define TOP 68
+void scr_instructions (void) {
+	_x = 4; _y = 6; pr_str (
+		"     INSTRUCTIONS%%%%"
+		"CHERIL IS IN A BOOT SO SHE%"
+		"CAN'T STOP JUMPING!%%%%"
+		"PRESS [DOWN] TO MAKE CHERIL%"
+		"CROUCH AND JUMP LOWER%%%%"
+		"PRESS [B] TO CHARGE, THEN%"
+		"RELEASE TO SPIT!%%%%%"
+		"   PRESS ANY BUTTON"
+	);
+	oam_index = oam_meta_spr (12, TOP, 0, sspl_00_a);
+	oam_index = oam_meta_spr (12, TOP + 40, oam_index, sspl_05_a);
+	oam_index = oam_meta_spr (12, TOP + 80, oam_index, sspl_06_a);
+}
+
+void credits (void) {
+	bankswitch (1);
+	pal_bg (palts0);
+	pal_spr (palss0);
+	cls ();
+	oam_clear (); scroll (0, 0);
+	
+	rds16 = 0; rdy = 240;
+
+	_x = 0; _y = 22; 
+	pr_str ("    BOOTEE - STARRING CHERIL%%COPYLEFT 2018 BY THE MOJON TWINS%DESIGN & PORT BY THE MOJON TWINS%   NESLIB & FAMITONE BY SHIRU%       NES OGT BY DAVIDIAN");
+	
+	pal_bright (0);
+	ppu_on_all ();
+	fade_delay = 4;
+	fade_in ();
+	while (!(pad_poll (0) & PAD_START) && rds16 < 300) {
+		oam_meta_spr (102, rdy, 0, logo_00);
+		if (rdy > 112) rdy --;
+		ppu_waitnmi ();
+		rds16 ++;
+	};
+	fade_out ();
+	
+	ppu_off ();
+	oam_clear ();
+	bankswitch (0);
 }

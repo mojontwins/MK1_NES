@@ -148,6 +148,7 @@ void main(void) {
 		while (1) {
 			bankswitch (2); 
 			pres (palcuts0, scr_cutscene);
+			pres (palcuts0, scr_level);
 			game_init (); 
 			game_loop ();
 
@@ -162,6 +163,7 @@ void main(void) {
 				{
 					bankswitch (2);
 					pres (palcuts0, scr_cutscene);
+					pres (palcuts0, scr_the_end);
 					break;
 				}
 			}
