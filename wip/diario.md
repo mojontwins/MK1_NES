@@ -3883,6 +3883,7 @@ El juego está terminado, creo, a falta de probar mil y de meter las músicas qu
 
 Habrá que propagar los cambios. Pero antes tengo que probarlo bien, que he cambiado muchas cosas y a lo mejor me he cargado algo.
 
+<<<<<<< HEAD
 20180505
 ========
 
@@ -3897,5 +3898,74 @@ Joder, hace un siglo que no escribo por aquí. Esto está ya casi listo:
 - Escribir el principio del tutorial: describir los componentes básicos de un juego AGNES, como interactúan, etc. Luego empezar con los conversores. Y montar el proyecto Ababol DX primero en modo básico.
 
 
+=======
+20180423
+========
+
+Estoy empezando a escribir algunos tutoriales mientras juego y rejuego y pulo y repulo el Cheril. Ahora mismo voy a propagar los últimos cambios en el motor con vistas de añadir **Bootèe** a la ecuación (es sencillo). Aún estoy a vueltas con qué voy a hacer para el tutorial. **Bootèe** es un juego un poco raro para hacer de tutorial. No sé si empezar con **Sir Ababol DX** como tenía pensado, pero empezando por lo super básico (el juego pelado sin ampliaciones) y luego ir construyéndolas.
+
+Voy a propagar.
+
+~~
+
+Cosas de Bootee:
+
+- En el movimiento del player, el salto automático (sustituye al bloque `PLAYER_JUMPS`), y la detección de PAD_DOWN para frenar verticalmente.
+- Los gargajos, que probablemente reimplemente si veo que el código es un horror.
+
+Qué gracia, hace poco tiempo me follé el módulo gargajos.h del paquete porque pensaba descartarlo o dejarlo como ultra custom para este juego. 
+
+Por lo pronto veo una función con una jartá de código. Tengo un `MAX_GARGAJOS` que indica el número máximo de gargajos. Creo que esto debería generalizarlo con las balas para evitar que haya tantas constantes, ya que no voy a hacer coincidir balas y gargajos ¿no? Bueno, nunca se sabe ... Es un número bajo, 2.
+
+Hay un tiempo entre gargajos, `GARGAJO RELOAD`, controlado por `pgargajocounter`, en el que no se puede lanzar otro gargajo.
+
+Los gargajos tienen una vida que tiene que ver con `pfiring`. `pfiring` es un contador de frames a partir de que se pulsa `PAD_B`. cuando se suelta `PAD_B`, se mira si `pfiring` supera un umbral. Si esto pasa, se lanza un gargajo con el valor de `pfiring` como "vida".
+
+El gargajo colisiona con el fondo y con los enemigos.
+
+Originalmente el gargajo podía ser animado y tener facing. Creo que esto me lo puedo fumar para algo tan pequeño y que se mueve tan rápido. Con un `GARGAJO_PATTERN` me vale.
+
+El gargajo describe una trayectoria lineal y muere tras N frames, en realidad es como una puta bala simple ¿No?
+
+Una bala simple con gauge. Joder, es que podría generalizarlo y dejarme de hostierías. Voy a pensar.
+
+~~
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
+
+A ver, si metiese a las balas:
+
+- Tiempo de "recarga": un tiempo en el que no puedes disparar. Se establece tras un disparo y se decrementa automáticamente.
+- Tiempo de "vida", a establecer de forma externa.
+- Charge & release: forma de disparar que se basa en dejar pulsado, cargar, y soltar.
+
+HMMM...
+
+Creo que sería mucho más mejol.
+
+~~
+
+Ya lo tengo, es muy sencillo y total win. Y la barra de carga es custom y va en el código del marcador, creando un nuevo código de inserción: `my/extra_hud_update.h` (también he cambiado levemente `my/game_frame.h`).
+
+~~
+
+Creo que lo he añadido todo a ciegas XD Ya lo probaré cuando tenga el resto montado.
+
+~~
+
+Cambio algunos tiles para optimizar el mapa. Luego meteré mierdas custom para que quede bonico.
+
+Antes 2244, después 2126. Oye, que casi 100 bytes está muy bien, macanaqui.
+
+20180425
+========
+
+Asín un TODO, como rápido:
+
+- Músicas y más testing para Cheril the Writer / Apúntalo. ¿Activar `NO_HORIZONTAL_EVIL_TILE`?
+- Reusar una música "que pegue" para Bootèe, menú de selección de GAME A/B/C y los dos textos finales que faltan.
+- Propagar Bootèe y activar el recoiling para Sgt. Helmet, y así se prueba en top-down.
+- Scan horizontal al reaparecer si tenemos activado el reenter on respawn y los breakables buscando un hueco, en tester_sideview y propagar.
+
+He empezado con el recoil top-down y no funciona bien. Tendré que fix, propagar a src, propagar a bootèe, retest, y luego de src a todos.
 
 

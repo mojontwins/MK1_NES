@@ -182,6 +182,11 @@ if (hrt) {
 								#endif
 								break;
 						#endif
+						#ifdef HOTSPOT_TYPE_STAR
+							case HOTSPOT_TYPE_STAR:
+								pstars ++; rda = SFX_OBJECT;
+								break;
+						#endif
 					}
 					if (rda) {
 						sfx_play (rda, 1);

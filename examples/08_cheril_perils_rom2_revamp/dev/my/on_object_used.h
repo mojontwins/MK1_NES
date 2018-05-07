@@ -11,6 +11,7 @@
 if (level == 3 && ht [9] == 6 + 2*HS_USE_OFFS) {
 	propellers_on = 1;
 	// Make player know 
+	oam_hide_rest (0);
 	gp_gen = text_propellers;
 	textbox_do ();
 }

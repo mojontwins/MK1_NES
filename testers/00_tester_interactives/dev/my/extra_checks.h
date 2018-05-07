@@ -11,3 +11,6 @@
 // Whenever you want to WIN the game just set win_level = 1
 // (Don't forget to define WIN_LEVEL_CUSTOM in config.h)
 
+#ifndef ACTIVATE_SCRIPTING
+	if (n_pant == 0 && prx >= 240) win_level = 1;
+#endif

@@ -55,6 +55,9 @@ unsigned char en_life [3], en_alive [3], en_status [3], en_rawv [3], en_ct [3];
 
 #ifdef ENEMS_RECOIL_ON_HIT
 	signed char en_rmx [3];
+	#ifdef PLAYER_TOP_DOWN
+		signed char en_rmy [3];
+	#endif
 #endif
 
 #ifdef ENABLE_COMPILED_ENEMS
@@ -73,8 +76,7 @@ unsigned char a_button, b_button;
 #endif
 
 unsigned char pj, pctj, pjb, pgotten, ppossee, psprint;
-unsigned char pushed_any;
-unsigned char pstate, pctstate, pskip;
+unsigned char pstate, pctstate;
 unsigned char phit;
 signed int pgtmx, pgtmy;
 

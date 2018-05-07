@@ -65,7 +65,7 @@
 #define MAX_ENEMS_TYPE_3_3 18
 #define MAX_ENEMS_TYPE_4_3 13
 #define MAX_ENEMS_TYPE_6_3 3
-#define MAX_ENEMS_TYPE_8_3 10
+#define MAX_ENEMS_TYPE_8_3 9
 #define MAX_ENEMS_TYPE_177_3 1
 
 #define KILLABLE_ENEMS_3 36

@@ -34,9 +34,7 @@
 #include "assets/tiledata.h"
 #include "assets/tiledata2.h"
 #include "assets/metasprites.h"
-#ifdef ENABLE_TEXT_BOX
-	#include "assets/custom_texts.h"
-#endif
+#include "assets/custom_texts.h"
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
 #endif
@@ -150,6 +148,7 @@ void main(void) {
 		while (1) {
 			bankswitch (2); 
 			pres (palcuts0, scr_cutscene);
+			pres (palcuts0, scr_level);
 			game_init (); 
 			game_loop ();
 
@@ -164,6 +163,7 @@ void main(void) {
 				{
 					bankswitch (2);
 					pres (palcuts0, scr_cutscene);
+					pres (palcuts0, scr_the_end);
 					break;
 				}
 			}

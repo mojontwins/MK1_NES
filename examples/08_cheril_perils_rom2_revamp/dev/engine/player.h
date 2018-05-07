@@ -53,7 +53,10 @@ void player_init (void) {
 			#else
 				pammo = MAX_AMMO;
 			#endif
-		#endif	
+		#endif
+		#ifdef PLAYER_CHARGE_AND_FIRE
+			pfiregauge = pfiregauge = 0;
+		#endif
 	#endif
 
 	pstate = EST_NORMAL;
@@ -487,6 +490,36 @@ void player_move (void) {
 		#endif
 	#endif
 
+	#ifdef PLAYER_AUTO_JUMP
+		if (
+			!pj
+			&& (
+				pgotten || ppossee || hitv
+				#ifdef ENABLE_LADDERS
+					|| ponladder
+				#endif
+			)
+		) {
+			jump_start ();
+
+			#ifdef DIE_AND_RESPAWN
+				if (!(pgotten || hitv || pnotsafe)) {
+					player_register_safe_spot ();
+				}
+			#endif	
+		}
+
+		if (pj) {
+			if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+			if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+			pctj ++; if (pctj == 16) pj = 0;	
+		}
+		
+		if (i & PAD_DOWN) {
+			if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+		}
+	#endif
+
 	// **********
 	// Horizontal
 	// **********
@@ -632,9 +665,11 @@ void player_move (void) {
 	
 	phit = 0;
 	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-	#ifndef NO_HORIZONTAL_EVIL_TILE	
-		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
-	#endif	
+	if (hith) { phit = 1; 
+		#ifndef NO_HORIZONTAL_EVIL_TILE	
+			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
+		#endif	
+	}
 	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 
 	// **************
@@ -642,6 +677,21 @@ void player_move (void) {
 	// **************
 
 	// (fire bullets, run scripting w/animation, do interactives)
+
+	#ifdef PLAYER_CHARGE_AND_FIRE
+		#ifdef PLAYER_FIRE_RELOAD
+			if (pfirereload) pfirereload --; 
+			else
+		#endif
+		if (!b_button && (i & PAD_B)) {
+			if (pfiregauge < PLAYER_CHARGE_MAX) pfiregauge ++;
+		}
+
+		if (0 == (i & PAD_B)) {
+			if (pfiregauge >= PLAYER_CHARGE_MIN) fire_bullet ();
+			pfiregauge = 0;
+		}
+	#endif
 
 	#if defined (ACTIVATE_SCRIPTING) || defined (ENABLE_INTERACTIVES) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_PUNCHES)
 		if (
@@ -654,7 +704,12 @@ void player_move (void) {
 				#include "engine/playermods/scripting.h"
 			#endif
 
-			#ifdef PLAYER_CAN_FIRE				
+			#if defined (PLAYER_CAN_FIRE) && !defined (PLAYER_CHARGE_AND_FIRE)
+				#ifdef PLAYER_FIRE_RELOAD
+					if (pfirereload) pfirereload --; 
+					else
+				#endif
+			
 				if (b_button) fire_bullet ();
 			#endif		
 			

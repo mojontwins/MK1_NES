@@ -74,7 +74,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type

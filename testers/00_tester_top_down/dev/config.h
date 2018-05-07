@@ -61,6 +61,8 @@
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
+//#define HOTSPOT_TYPE_STAR 		4	// Stars are extra collectibles
+
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
@@ -130,6 +132,8 @@
 // Extra special tiles
 // -------------------
 
+//#define NO_HORIZONTAL_EVIL_TILE		// Only check for evil tiles vertically
+
 // Quicksands, beh == 2.
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
@@ -197,7 +201,7 @@
 
 //#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID
-#define SIMPLE_WARPERS_FIRE_BUTTON
+//#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!
 
@@ -253,7 +257,8 @@
 //#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
-//#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
+#define ENEMS_RECOIL_ON_HIT  			1	// horizontal recoil when hit, #ifdef, value is speed in pixels!
+//#define ENEMS_RECOIL_OVER_BOUNDARIES		// (x1,y1), (x2,y2) boundaries don't stop a recoil
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
@@ -397,18 +402,25 @@
 
 // Shooting behaviour
 // ------------------
-
 #define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-3	// vertical offset from the player's left/right.
-#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
 #define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
+//#define BULLETS_DONT_KILL					// Bullets don't kill, but affect enemies otherwise
+
+// Special shooting
+//#define PLAYER_FIRE_RELOAD			16	// If defined # of frames until next shoot
+//#define PLAYER_CHARGE_AND_FIRE			// If defined, press B to charge, release to fire
+	#define PLAYER_CHARGE_MIN			8
+	#define PLAYER_CHARGE_MAX			48	// Min/max frames for charging
+//#define PLAYER_BULLET_LIFE			pfiregauge	// Max life. Can be whatever.
+//#define PLAYER_BULLET_FLICKERS		8	// Bullets flickers for N frames before dying, if defined
 
 #define MAX_AMMO						99	// If defined, ammo is not infinite!
-#define AMMO_REFILL						50	// type 3 hotspots refill amo, using tile 20
-//#define INITIAL_AMMO 					0	// If defined, ammo = X when entering game.
+	#define AMMO_REFILL					50	// type 3 hotspots refill amo, using tile 20
+	//#define INITIAL_AMMO 				0	// If defined, ammo = X when entering game.
 
 #define BULLET_PALETTE					3
 #define BULLET_PATTERN					0	// To paint the bullet. Can be an expresion.
@@ -443,12 +455,14 @@
 
 //#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
+//#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
-//#define PLAYER_SAFE_LANDING			// Like KILLS_ENEMIES but without the killing.
-//#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+//#define PLAYER_STEPS_ON_ENEMIES		// If defined, stepping on enemies kills them
+//#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
+//#define PLAYER_STEPS_MIN_KILLABLE     3	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+											// 0xff = Nobody
 
 // ============================================================================
 // III. Screen configuration
@@ -513,6 +527,8 @@
 #define PLAYER_AY_FLOAT			16	
 #define PLAYER_VY_FLOAT_MAX		256
 
+#define PLAYER_AY_UNTHRUST 		8 		// Used in the Autojump engine.
+
 // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
 // (Used if PLAYER_JUMP_TYPE_MK2 is defined)
 #define PLAYER_G_MK2_JUMPING		4
@@ -575,6 +591,7 @@
 	#define CELL_KICKING		9
 
 	#define CELL_CLIMB_CYCLE	20
+	#define CELL_CLIMB_HALF		29
 #endif
 
 // Music

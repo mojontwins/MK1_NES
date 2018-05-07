@@ -10,6 +10,10 @@ unsigned char first_game;
 unsigned char half_life, frame_counter;
 unsigned char n_pant, on_pant;
 unsigned char olife, okeys, oobjs, oammo, okilled;
+#ifdef HOTSPOT_TYPE_STAR
+	unsigned char pstars, opstars;
+#endif
+	
 #ifdef ENABLE_USE_ANIM
 	unsigned char use_ct, use_sub_ct;
 	#ifdef ACTIVATE_SCRIPTING
@@ -20,7 +24,7 @@ unsigned char olife, okeys, oobjs, oammo, okilled;
 #ifdef ENABLE_NO
 	unsigned char no_ct;
 #endif
-unsigned char level, game_over, win_level;
+unsigned char level, game_over, win_level, paused;
 
 unsigned char c_max_enems;
 
@@ -42,6 +46,14 @@ unsigned char map_buff [192];
 	unsigned char bst [MAX_BULLETS], bx [MAX_BULLETS], by [MAX_BULLETS];
 	signed char bmx [MAX_BULLETS];
 	signed char bmy [MAX_BULLETS];
+
+	#ifdef PLAYER_CHARGE_AND_FIRE
+		unsigned char pfiregauge, opfiregauge;
+	#endif
+
+	#ifdef PLAYER_FIRE_RELOAD
+		unsigned char pfirereload;
+	#endif
 #endif
 
 // Cocos

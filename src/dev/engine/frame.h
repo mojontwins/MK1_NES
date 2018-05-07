@@ -71,4 +71,6 @@ void hud_update (void) {
 		_x = TIMER_X; _y = TIMER_Y; _n = timer; p_t ();
 	}
 #endif
+
+#include "my/extra_hud_update.h"
 }

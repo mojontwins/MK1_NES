@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"cuts",
+				"cutscene_0"
+			],
+			[
+				"ENEMS_REOC",
+				"ENEMS_RECOIL_Y\t(definitions.h)"
+			],
+			[
+				"PLAYER_CHARGE",
+				"PLAYER_CHARGE_AND_FIRE"
+			],
+			[
+				"bul",
+				"bullets_destroy"
+			],
+			[
+				"LIFE_GA",
+				"FANTY_LIFE_GAUGE"
+			],
+			[
+				"HOTSPOT",
+				"HOTSPOT_TYPE_RESONATOR"
+			],
+			[
 				"TEXTB",
 				"TEXT_BOX_WITH_PORTRAITS"
 			],
@@ -419,7 +443,29 @@
 			"file": "wip/diario.md",
 			"settings":
 			{
+<<<<<<< HEAD
 				"buffer_size": 0,
+=======
+				"buffer_size": 149920,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/05_cheril_the_goddess_v1/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 2424,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/04_d'veel'ng/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 4078,
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
 				"line_ending": "Windows"
 			}
 		}
@@ -500,6 +546,7 @@
 	},
 	"expanded_folders":
 	[
+<<<<<<< HEAD
 		"/C/Cosas/git/MK1_NES",
 		"/C/Cosas/git/MK1_NES/wip"
 	],
@@ -508,52 +555,126 @@
 		"/C/Cosas/git/MK1_NES/testers/00_tester_punchy/gfx/import_patterns-omv.spt",
 		"/C/Cosas/git/MK1_NES/testers/00_tester_punchy/dev/compile.bat",
 		"/C/Cosas/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/pause.h",
+=======
+		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/04_d'veel'ng",
+		"/D/git/MK1_NES/examples/04_d'veel'ng/dev",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev",
+		"/D/git/MK1_NES/examples/06_lala_prologue",
+		"/D/git/MK1_NES/examples/06_lala_prologue/dev"
+	],
+	"file_history":
+	[
+		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/components/nsConsigna.js",
+		"/D/git/MK1_NES/testers/00_tester_interactives/README.md",
+		"/D/git/MK1_NES/testers/00_tester_interactives/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/testers/00_tester_interactives/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/testers/00_tester_interactives/dev/config.h",
+		"/D/git/MK1_NES/testers/00_tester_top_down/dev/engine/enemmods/enems_recoiling.h",
+		"/D/git/MK1_NES/testers/00_tester_top_down/dev/game.c",
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
 		"/D/git/MK1_NES/wip/diario.md",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/src/dev/definitions.h",
+		"/D/git/MK1_NES/testers/00_tester_top_down/dev/engine/enengine.h",
+		"/D/Proyectos/2017/20170327a--Actualización certificado APNS en servidor Push de Mensajería/instrucciones.txt",
+		"/D/Proyectos/2018/20180409a--Actualización certificado APNS en servidor Push de Mensajería/instrucciones.txt",
+		"/D/git/MK1_NES/examples/11_bootèe/trash/substyun2.txt",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/enemmods/enems_recoiling.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/work/palts1.h",
+		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/pres.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/11_bootèe/trash/substyun1.txt",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/cuts0_rle.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
+		"/D/git/MK1_NES/src/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/extra_hud_update.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/game_frame.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/player.h",
+		"/D/git/MK1_NES/src/utils/namgen.bas",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/definitions.h",
+		"/D/git/MK1_NES/examples/11_bootèe/gfx/ss.png",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/src/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/my/game_frame.h",
+		"/D/git/MK1_NES/src/dev/ram/bss.h",
+		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/src/dev/engine/frame.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/engine/gargajos.h",
+		"/D/git/MK1_NES/src/dev/my/extra_hud_update.h",
+		"/D/git/MK1_NES/examples/06_lala_prologue/dev/config.h",
+		"/D/git/MK1_NES/wip/tut03esp.md",
+		"/D/git/MK1_NES/wip/tut02eng.md",
+		"/D/git/MK1_NES/wip/tut02esp.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/pause.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/ext_utils/Mappy/DOCS/mapdefs.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns2.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/interactives.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/on_interactive.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_fanty.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_renderer_fast.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns2.spt",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_compiled.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enems_recoiling.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_linear.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_fanty.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_homing_fanty.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_monococo.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/printer.h",
-		"/D/git/MK1_NES/README.md",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.s",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_checks.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.s",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/crt0.s",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/frame.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/definitions.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/cocos.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_shooty.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/playermods/process_tile.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/bolts.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/interactives.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/linear_cocos.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/on_interactive.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/palettes.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/cart-sp.nes",
 		"/D/git/MK1_NES/examples/10_che_man/dev/game.c",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/cuts0_rle.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/interactives.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/palcuts0.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization_orig.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/hotspots.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/chr_rom_maps.h",
@@ -561,8 +682,6 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/interactives.h",
 		"/D/git/MK1_NES/features.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/textbox.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_vars.h",
 		"/D/Proyectos/remote/p3sdes/DEADJOE",
 		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/ws/SmsWS.java",
@@ -576,6 +695,7 @@
 		"/D/perfiles/jcastano/Desktop/TransmisorSimple.java",
 		"/D/Proyectos/2018/20180213--Subida nivel de LOG en el transmisor iOS de p3s/instrucciones_limpo.txt",
 		"/D/Proyectos/dump.xml",
+<<<<<<< HEAD
 		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/impl/RegistroJDBC.java",
 		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/Factoria_unix.xml",
 		"/D/Proyectos/2018/20180209--ampliación queryTimeout en P3S/instrucciones.txt",
@@ -633,16 +753,30 @@
 		"/D/perfiles/jcastano/Desktop/pages_template.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/app/app.js",
 		"/D/perfiles/jcastano/AppData/Local/Temp/7zE45AB6577/index_panel.html"
+=======
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/impl/RegistroJDBC.java"
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe\\dev",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe",
+			"D:\\git\\MK1_NES\\testers\\00_tester_punchy",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe",
+			"D:\\git\\MK1_NES",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine",
 			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev",
 			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev"
@@ -653,6 +787,44 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"RECOIL",
+			"NO_HORIZONTAL_EVIL_TILE",
+			"phit",
+			"GAUGE",
+			"pfiregauge",
+			"en_life",
+			"en_cttouched",
+			"explosion",
+			"PLAYER_MIN_KILLABLE",
+			"recoil",
+			"ENEMS_RECOIL",
+			"recoil",
+			"ENEMS_RECOIL",
+			"PLAYER_MIN_KILLABLE",
+			"_a",
+			"PLAYER_BOOTEE",
+			"..\\utils",
+			"b_button",
+			"PLAYER_RELOAD",
+			"bst",
+			"Scripting",
+			"...",
+			"enems_update_unsigned_char_arrays",
+			"LIFE_GAUGE",
+			"#if (ENEMS_LIFE_GAUGE > 1) || ((defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE) && (FANTY_LIFE_GAUGE > 1))",
+			"en_life",
+			"LIFE_GAUGE",
+			"en_life [gpit] --; \n\t\t\tif (en_life [gpit] == 0) ",
+			"GENERATOR_LIFE_GAU",
+			"ENEMS_LIFE_GAUGE",
+			"ENABLE_SPRINGS",
+			"ENABLE_SLIPPERY",
+			"pnotsafe",
+			"pushed_any",
+			"pskip",
+			">> FIXBITS",
+			"pry = py >> FIXBITS;",
+			"prx = px >> FIXBITS;",
 			"map_attr",
 			"fac",
 			"_en_facing",
@@ -683,6 +855,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"PLAYER_BULLETS_MIN_KILLABLE",
+			"_b",
+			"PLAYER_AUTO_JUMP",
+			"..\\..\\..\\src\\utils",
+			"PLAYER_FIRE_RELOAD",
+			"#ifdef NEEDS_LIFE_GAUGE_LOGIC",
 			"ep_dead",
 			"bolts_clear",
 			"Amador"
@@ -705,7 +883,95 @@
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 0,
+=======
+						"buffer_size": 149920,
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+<<<<<<< HEAD
+								0,
+								0
+=======
+								149777,
+								149777
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
+							]
+						],
+						"settings":
+						{
+<<<<<<< HEAD
+=======
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+<<<<<<< HEAD
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+=======
+						"translation.y": 66754.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+>>>>>>> 83c7722dae2364e9f241fbb9ed83aae08e1996c8
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "examples/05_cheril_the_goddess_v1/dev/compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2424,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/04_d'veel'ng/dev/compile.bat",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 4078,
 						"regions":
 						{
 						},
@@ -718,8 +984,10 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -728,11 +996,6 @@
 					"stack_index": 0,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -786,7 +1049,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -820,7 +1083,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

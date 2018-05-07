@@ -71,9 +71,15 @@ void draw_scr (void) {
 
 		while (rdm < 192) {
 			rdt = *gp_gen ++;
-			rdct = 1 + (rdt >> 5);
 			rda = rdt & 0x1f;
+			/*
+			rdct = 1 + (rdt >> 5);
 			while (rdct --) add_tile (); 
+			*/
+			rdct = rdt;
+			while (rdct >= 32) {
+				add_tile (); rdct -= 32;
+			} add_tile ();
 		}
 	#endif
 
@@ -85,9 +91,15 @@ void draw_scr (void) {
 		// UNRLE into scr_buff
 		while (rdm < 192) {
 			rdt = VRAM_READ;
-			rdct = 1 + (rdt >> 5);
 			rda = rdt & 0x1f;
+			/*
+			rdct = 1 + (rdt >> 5);
 			while (rdct --) add_tile (); 
+			*/
+			rdct = rdt;
+			while (rdct >= 32) {
+				add_tile (); rdct -= 32;
+			} add_tile ();
 		}
 	#endif
 

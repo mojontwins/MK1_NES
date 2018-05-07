@@ -14,7 +14,8 @@ if (MONOCOCO_STATE == 2 && MONOCOCO_COUNTER == MONOCOCO_FIRE_COCO_AT) {
 }
 
 // Sprite
-_en_facing = (prx < rdx) ? 4 : 0;
+//_en_facing = (prx < rdx) ? 4 : 0;
+rda = (prx < rdx); enems_facing ();
 #ifdef MONOCOCO_TYPE_A
 	if (
 		((MONOCOCO_STATE == 1 || MONOCOCO_STATE == 3) && half_life) ||

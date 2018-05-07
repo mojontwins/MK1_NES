@@ -105,3 +105,7 @@ const unsigned char * const * const l_spr_enems [] =
 	const unsigned char * const l_interactives [] = 
 												{ interactives0, interactives1, interactives2, interactives3, interactives4 };
 #endif
+
+// Music track
+
+const unsigned char l_music [] = 				{ 0, 0, 1, 2, 3 };

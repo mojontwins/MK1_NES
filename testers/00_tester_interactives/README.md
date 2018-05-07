@@ -116,6 +116,8 @@ Here we will implement the game using scripting.
 To use interactives and scripting...
 
 ```c
+    //#define WIN_LEVEL_CUSTOM  
+    [...]
     #define ACTIVATE_SCRIPTING
     [...]
     #define ENABLE_INTERACTIVES
@@ -341,6 +343,8 @@ Here we will implement the game using just C code.
 To use interactives from C code...
 
 ```c
+    #define WIN_LEVEL_CUSTOM  
+    [...]
     //#define ACTIVATE_SCRIPTING
     [...]
     #define ENABLE_INTERACTIVES
@@ -442,5 +446,33 @@ Which translates to:
 - If the user interacted with sprite '8' (Cheril), display a textbox with `custom_text0`.
 
 - If the user interacted with container '5' (the pedestal), display a textbox with `custom_text1`.
+
+Clearing the monkey
+-------------------
+
+We have to get rid of the monkey if the skull is in the altar. This is achieved via a simple map rendereder customization in `map_renderer_customization.h` (don't forget `MAP_RENDERER_COMPLEX`):
+
+```c
+    #ifndef ACTIVATE_SCRIPTING
+        if (n_pant == 0 && flags [5] == 6) {
+            map_buff [0x68] = 3;
+        }
+    #endif
+```
+
+*(the `#ifndef ACTIVATE_SCRIPTING` is there so the code doesn't interfere with the scripting solution, just for this example).*
+
+Exit condition
+--------------
+
+Make the game end when the player touches the right side of screen 0. 
+
+```c 
+    #ifndef ACTIVATE_SCRIPTING
+        if (n_pant == 0 && prx >= 240) win_level = 1;
+    #endif
+```
+
+*(the `#ifndef ACTIVATE_SCRIPTING` is there so the code doesn't interfere with the scripting solution, just for this example).*
 
 And that's it!.

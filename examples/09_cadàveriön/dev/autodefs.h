@@ -82,3 +82,8 @@
 #if defined (ENEMS_FLICKER_ONLY_ON_DYING)
 	#define ENEMS_FLICKER
 #endif
+
+#if (ENEMS_LIFE_GAUGE > 1) || ((defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE) && (FANTY_LIFE_GAUGE > 1))
+	#define NEEDS_LIFE_GAUGE_LOGIC
+#endif
+
