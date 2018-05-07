@@ -3883,22 +3883,6 @@ El juego está terminado, creo, a falta de probar mil y de meter las músicas qu
 
 Habrá que propagar los cambios. Pero antes tengo que probarlo bien, que he cambiado muchas cosas y a lo mejor me he cargado algo.
 
-<<<<<<< HEAD
-20180505
-========
-
-Joder, hace un siglo que no escribo por aquí. Esto está ya casi listo:
-
-- Voy a implementar una solución para el respawn con reenter y breakable tiles: una búsqueda circular horizontal hasta encontrar un tile libre. Por suerte tengo el tester punchy para probarlo.
-
-- Eliminar la carpeta de Sir Ababol DX - En realidad moverla a otro sitio porque es el proyecto que iré usando para hacer el tutorial. 
-
-- Probar Bootee porque es lo primero que va a salir.
-
-- Escribir el principio del tutorial: describir los componentes básicos de un juego AGNES, como interactúan, etc. Luego empezar con los conversores. Y montar el proyecto Ababol DX primero en modo básico.
-
-
-=======
 20180423
 ========
 
@@ -3967,5 +3951,19 @@ Asín un TODO, como rápido:
 - Scan horizontal al reaparecer si tenemos activado el reenter on respawn y los breakables buscando un hueco, en tester_sideview y propagar.
 
 He empezado con el recoil top-down y no funciona bien. Tendré que fix, propagar a src, propagar a bootèe, retest, y luego de src a todos.
+
+
+20180505
+========
+
+Joder, hace un siglo que no escribo por aquí. Esto está ya casi listo:
+
+- Voy a implementar una solución para el respawn con reenter y breakable tiles: una búsqueda circular horizontal hasta encontrar un tile libre. Por suerte tengo el tester punchy para probarlo.
+
+- Eliminar la carpeta de Sir Ababol DX - En realidad moverla a otro sitio porque es el proyecto que iré usando para hacer el tutorial. 
+
+- Probar Bootee porque es lo primero que va a salir.
+
+- Escribir el principio del tutorial: describir los componentes básicos de un juego AGNES, como interactúan, etc. Luego empezar con los conversores. Y montar el proyecto Ababol DX primero en modo básico.
 
 

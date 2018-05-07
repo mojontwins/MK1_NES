@@ -111,6 +111,11 @@ void player_kill (void) {
 		delay (60);
 		player_stop ();
 		music_pause (0);
+
+		// May be necessary to find a proper cell later on
+		#if defined (ENABLE_BREAKABLE)
+			pmayneedrelocation = 1;
+		#endif
 	#endif	
 
 	#ifdef DIE_AND_REENTER

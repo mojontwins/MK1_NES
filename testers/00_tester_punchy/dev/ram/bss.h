@@ -76,6 +76,7 @@ unsigned char map_buff [192];
 		unsigned char brkx [BREAKABLE_MAX];
 		unsigned char brky [BREAKABLE_MAX];
 	#endif
+	unsigned char pmayneedrelocation;
 #endif
 
 // Fader
