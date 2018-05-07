@@ -408,10 +408,19 @@
 	"buffers":
 	[
 		{
-			"file": "wip/diario.md",
+			"file": "examples/11_bootèe/dev/my/pres.h",
 			"settings":
 			{
-				"buffer_size": 150651,
+				"buffer_size": 2774,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/11_bootèe/dev/assets/custom_texts.h",
+			"settings":
+			{
+				"buffer_size": 1837,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -494,10 +503,25 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/wip"
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/11_bootèe",
+		"/D/git/MK1_NES/examples/11_bootèe/dev",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
+		"/C/cc65--latest/asminc/zeropage.inc",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/wip/tut03esp.md",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/general.h",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/player.h",
 		"/D/perfiles/jcastano/Desktop/Limbo/descarga",
 		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/locale/es-ES/settings.dtd",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/ldap_search/ldap_search.php",
@@ -614,18 +638,7 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/SQL/v3.sql",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/index.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/_deactivated/responses/responses.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/bc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube_utils.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/index.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/vacation/lib/vacationdriver.class.php.bak",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/sandetel_login/sandetel_login.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/program/utils.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/acl/acl.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/lib/enigma_ui.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/contextmenu_folder/contextmenu_folder.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/program/backend/caldav.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/classic/includes/messagetoolbar.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/styles.css"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/bc.php"
 	],
 	"find":
 	{
@@ -643,6 +656,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CONVEYORS",
+			"respawn"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -665,24 +680,24 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "wip/diario.md",
+					"file": "examples/11_bootèe/dev/my/pres.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 150651,
+						"buffer_size": 2774,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								150651,
-								150651
+								1524,
+								1524
 							]
 						],
 						"settings":
@@ -690,11 +705,43 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 67026.0,
+						"translation.y": 723.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/11_bootèe/dev/assets/custom_texts.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1837,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								774,
+								774
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -795,7 +842,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 182.0,
+	"side_bar_width": 148.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

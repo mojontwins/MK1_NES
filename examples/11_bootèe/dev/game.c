@@ -124,7 +124,7 @@ void main(void) {
 	while (1) {	
 		scroll (0, SCROLL_Y);
 		title ();
-		rda = 0; pres (palcuts, scr_cutscene);
+		rda = level; pres (palcuts, scr_cutscene);
 		rda = 0; pres (palcuts, scr_instructions);
 
 		plife = PLAYER_LIFE;
@@ -140,7 +140,7 @@ void main(void) {
 				break;
 			} else {
 				bank_bg (1);
-				rda = 1 + level; pres (palcuts, scr_cutscene);
+				rda = 3 + level; pres (palcuts, scr_cutscene);
 				break;
 			}
 		}

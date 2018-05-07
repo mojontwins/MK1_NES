@@ -22,7 +22,7 @@ const unsigned char * const dialogue_texts [] = {
 
 */
 
-const unsigned char cutscene_0 [] = 
+const unsigned char intro_0 [] = 
 //	 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	"STRANGE OLDE TELLS CHERIL:%%"
 	"'TRY THIS INCREDIBLE DEVICE,%%"
@@ -31,7 +31,23 @@ const unsigned char cutscene_0 [] =
 	"ACCEPTS. ONLY TO BE STUCK TO%%"
 	"THE DAMNED BOOT! HELP!";
 
-const unsigned char cutscene_1 [] = 
+const unsigned char intro_1 [] =
+    "'SO YOU KNOW ABOUT THE CURSE%%"
+    "YET YOU COME BACK AGAIN!'%%"
+    "SAYS THE OLDE. BUT CHERIL%%"
+    "SEEMS CONVINCED: 'THERE MUST%%"
+    "BE SOMETHING ELSE TO IT, I'M%%"
+    "SURE!', SHE CLAIMS.";
+
+const unsigned char intro_2 [] =
+	"'I'VE WORKED QUITE HARD, YOU%%"
+	"KNOW', SAYS CHERIL, 'I THINK%%"
+	"I'VE COME TO ENJOY THIS!%%"
+	"GIMME THAT GODDAMNED BOOT%%"
+	"AGAIN, DOOD!'. 'FAIR ENOUGH,%%"
+	"IT'S YOURS...', OLDE SAYS.";
+
+const unsigned char ending_0 [] = 
 	"AND THE STRANGE STAR HAPPENS%%"
 	"TO BE MAGIC, OR SO IT SEEMS,%%"
 	"BECAUSE CHERIL IS NOW FREE%%"
@@ -39,7 +55,7 @@ const unsigned char cutscene_1 [] =
 	"THE CAMERA: 'SERIOUSLY? YOU%%"
 	"PLAYED THRU' ALL THIS CRAP?'";
 
-const unsigned char cutscene_2 [] = 
+const unsigned char ending_1 [] = 
 	"AND THE STRANGE STAR HAPPENS%%"
 	"TO BE MAGIC, AND CHERIL IS%%"
 	"NOW FREE OF THE BOOT. 'ALL%%"
@@ -47,7 +63,7 @@ const unsigned char cutscene_2 [] =
 	"STAR? I SHOULD'VE SAVED IT%%"
 	"FOR THE ATTORNEYS!'";
 
-const unsigned char cutscene_3 [] = 
+const unsigned char ending_2 [] = 
 	"AND THE STRANGE STAR FREES%%"
 	"CHERIL FROM THE BOOT. 'THIS%%"
 	"WAS TOUGH, BUT I'M SURE THIS%%"
@@ -56,6 +72,7 @@ const unsigned char cutscene_3 [] =
 	"ANYWAYS, SO WHO CARES?%%";
 
 const unsigned char * const cutscenes [] = {
-	cutscene_0, cutscene_1, cutscene_2, cutscene_3
+	intro_0, intro_1, intro_2,
+	ending_0, ending_1, ending_2
 };
 

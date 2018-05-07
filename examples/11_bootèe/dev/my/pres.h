@@ -76,7 +76,7 @@ const unsigned char * const cuts_rle [] = {
 
 void scr_cutscene (void) {
 	// show cuts + text in level;
-	unrle_vram (cuts_rle [!!rda], 0x2000);
+	unrle_vram (cuts_rle [rda>2], 0x2000);
 	_x = 2; _y = 16; pr_str ((unsigned char *) cutscenes [rda]);	
 
 	_x = 13; _y = 4; pr_str ("GAME "); vram_put (level + 33);
