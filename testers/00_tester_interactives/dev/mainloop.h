@@ -255,7 +255,8 @@ void game_loop (void) {
 	
 	while (1) {
 
-		// Change screen
+		// Change screen ?
+
 		if (on_pant != n_pant) {
 			prepare_scr ();
 			on_pant = n_pant;
@@ -304,7 +305,25 @@ void game_loop (void) {
 				on_pant = n_pant;
 			}
 
+			// Relocate player ?
+
+			#if defined (ENABLE_BREAKABLE)
+			if (pmayneedrelocation) {
+				pmayneedrelocation = 0;
+				gpit = 16;
+				while (gpit --) {
+					cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
+					cy1 = cy2 = (pry + 15) >> 4;
+					cm_two_points ();
+					if ((at1 & 8) == 0 && (at2 & 8) == 0) break;
+					prx += 16;	// Try next cell
+				}
+				px = prx << FIXBITS;
+			}
+			#endif
+
 			// Extra checks
+
 			#include "my/extra_checks.h"
 
 			#if defined (WIN_LEVEL_CUSTOM)
