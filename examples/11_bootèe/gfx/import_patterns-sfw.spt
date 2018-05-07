@@ -1,0 +1,92 @@
+# import_patterns.spt
+# Imports patterns for Tester Punchy
+
+# This is a mkts.exe script file
+# Needs mkts v0.8.0 20180205
+
+# Bank 0 (patterns for bg)
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+# Hud
+OPEN hud.png
+PALS palts0.png
+LABEL tsdummy0
+MAPFILE ..\dev\work\dummy0.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Cutscene
+OPEN cuts-sfw.png
+PALS palcuts.png
+LABEL tsdummy1
+MAPFILE ..\dev\work\dummy1.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Tilesets are generated as tilemaps. They will be stored in this file:
+MAPFILE ..\dev\assets\tiledata.h
+
+# ts0
+OPEN ts0.png
+PALS palts0-import.png
+LABEL ts0
+MAPPED 0, 0, 2, 2, 16, 3, 41
+
+# Done with patterns for bg. Reset and fill with zeroes:
+RESETPOOL
+FILL 4096
+
+# Bank 1 (patterns for spr)
+
+# Font, because I will display the ending using this bank!
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+# All sprites are in the same file, and use the same palette
+OPEN ss-sfw.png
+PALS palss0.png
+MAPFILE ..\dev\assets\spritedata.h
+
+# Bits
+CHARSET 0, 0, 1, 1
+
+# Main player
+LABEL sspl
+
+# Player cells, 16x24. Box is 8x16 centered bottom:
+METASPRITESET 0, 0, 2, 3, 8, 1, -4, -8 FLIPPED
+
+# Items
+# Item, Key, Heart, Star, No, 20
+LABEL ssit
+METASPRITESET 0, 10, 2, 2, 6, 1, 0, 0
+
+# Enemies. Linear enemies, only 3 kinds, 2x2.
+# Box is 16x16 centered bottom
+LABEL ssen
+METASPRITESET 0, 6, 2, 2, 6, 1, 0, 0 FLIPPED
+
+# Platforms. Two cells
+LABEL ssplat
+METASPRITESET 12, 6, 2, 2, 2, 1, 0, 0
+
+# Cutscene
+OPEN ending-sfw.png
+PALS palcuts.png
+LABEL tsdummy1
+MAPFILE ..\dev\work\dummy2.h
+MAPPED 0, 0, 2, 2, 16, 15
+
+# Logo
+
+MAPFILE ..\dev\assets\logo.h
+OPEN logo.png
+PALS palss0.png
+LABEL logo
+METASPRITE 0, 0, 6, 2, 0, 0
+
+# And we are done!
+FILL 8192

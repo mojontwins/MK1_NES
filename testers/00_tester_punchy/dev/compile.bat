@@ -1,15 +1,9 @@
 @echo off
 
-if [%1]==[justcompile] goto :justcompile
-
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
 copy /b work\palts0.h + work\palss0.h assets\palettes.h > nul
-
-echo Exporting chr
-cd ..\gfx
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
 
 echo Exporting enems
 cd ..\enems
@@ -31,17 +25,17 @@ cd ..\dev
 copy ..\ogt\music.s > nul
 copy ..\ogt\sounds.s > nul
 
-cd ..\dev
+echo Exporting chr
+cd ..\gfx
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
 
-:justcompile
-if [%2]==[noscript] goto :noscript
+cd ..\dev
 
 rem echo Building script
 rem cd ..\script
 rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 5
 rem cd ..\dev
 
-:noscript
 cc65 -Oi game.c --add-source
 ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
@@ -51,5 +45,34 @@ del *.o
 del game.s
 
 copy cart.nes ..\..\tester_punchy.nes
+
+if [%1]==[omv] goto :omv
+goto :end
+
+:omv
+
+echo Exporting chr
+cd ..\gfx
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns-omv.spt out=..\dev\tileset.chr silent
+
+cd ..\dev
+
+rem echo Building script
+rem cd ..\script
+rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 5
+rem cd ..\dev
+
+cc65 -Oi game.c --add-source
+ca65 crt0.s -o crt0.o -D CNROM=0
+ca65 game.s
+ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+
+del *.o
+del game.s
+
+copy cart.nes ..\..\tester_punchy-omv.nes
+
+
+:end
 
 echo DONE!

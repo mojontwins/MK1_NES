@@ -415,6 +415,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "wip/diario.md",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -492,12 +500,14 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/wip"
+		"/C/Cosas/git/MK1_NES",
+		"/C/Cosas/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/C/Cosas/git/MK1_NES/testers/00_tester_punchy/gfx/import_patterns-omv.spt",
+		"/C/Cosas/git/MK1_NES/testers/00_tester_punchy/dev/compile.bat",
+		"/C/Cosas/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/pause.h",
 		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
@@ -622,10 +632,7 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/index.html",
 		"/D/perfiles/jcastano/Desktop/pages_template.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/app/app.js",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE45AB6577/index_panel.html",
-		"/D/perfiles/jcastano/Desktop/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_principal_panel.html"
+		"/D/perfiles/jcastano/AppData/Local/Temp/7zE45AB6577/index_panel.html"
 	],
 	"find":
 	{
@@ -689,8 +696,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "wip/diario.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
