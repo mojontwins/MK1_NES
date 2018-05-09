@@ -3967,3 +3967,11 @@ Joder, hace un siglo que no escribo por aquí. Esto está ya casi listo:
 - Escribir el principio del tutorial: describir los componentes básicos de un juego AGNES, como interactúan, etc. Luego empezar con los conversores. Y montar el proyecto Ababol DX primero en modo básico.
 
 
+20180508
+========
+
+Probando Bootèe, que lo sacamos para compo en 0.2, reviso TODOs...
+
+- Terminar de ordenar: Sir Ababol DX va fuera.
+- Traducir tutorial: componentes básicos al inglés.
+
