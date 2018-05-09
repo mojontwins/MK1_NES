@@ -115,7 +115,6 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
-	level = 0;
 
 	credits ();
 
@@ -124,14 +123,21 @@ void main(void) {
 	while (1) {	
 		scroll (0, SCROLL_Y);
 		title ();
-		rda = level; pres (palcuts, scr_cutscene);
-		rda = 0; pres (palcuts, scr_instructions);
 
+		if (first_game) {
+			rda = 0; pres (palcuts, scr_instructions);
+			first_game = 0;
+		}
+
+		level = 0;
 		plife = PLAYER_LIFE;
 
 		// Game loop
 
 		while (1) {
+			pres (palts0, scr_level);
+			rda = level; pres (palcuts, scr_cutscene);
+
 			game_init (); 
 			game_loop ();
 
@@ -141,10 +147,12 @@ void main(void) {
 			} else {
 				bank_bg (1);
 				rda = 3 + level; pres (palcuts, scr_cutscene);
-				break;
+				level ++;
+				if (level == MAX_LEVELS) {
+					pres (palts0, scr_the_end);
+					break;
+				}				
 			}
 		}
-
-		first_game = 0;
 	}
 }
