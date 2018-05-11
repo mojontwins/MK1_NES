@@ -12,8 +12,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					5		//
-#define MAP_H					4		// Map dimensions in screens
+#define MAP_W 					3		//
+#define MAP_H					3		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
@@ -470,15 +470,15 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+//#define LIFE_X				7		//
+//#define LIFE_Y				3		// Life gauge counter character coordinates
 
-#define OBJECTS_X				18		//
-#define OBJECTS_Y				3		// Objects counter character coordinates
+//#define OBJECTS_X				18		//
+//#define OBJECTS_Y				3		// Objects counter character coordinates
 #define OBJECTS_REMAINING				// Show # remaining instead of got
 
-#define KEYS_X					28		//
-#define KEYS_Y					3		// Keys counter character coordinates
+//#define KEYS_X				28		//
+//#define KEYS_Y				3		// Keys counter character coordinates
 
 //#define KILLED_X				16		//
 //#define KILLED_Y				2		// Kills counter character coordinates

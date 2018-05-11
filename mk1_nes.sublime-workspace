@@ -408,20 +408,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/11_bootèe/dev/my/pres.h",
+			"file": "src/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 2774,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/11_bootèe/dev/assets/custom_texts.h",
-			"settings":
-			{
-				"buffer_size": 1837,
-				"encoding": "UTF-8",
+				"buffer_size": 1297,
 				"line_ending": "Windows"
 			}
 		}
@@ -504,20 +494,31 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/11_bootèe",
-		"/D/git/MK1_NES/examples/11_bootèe/dev",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/my"
+		"/D/git/MK1_NES/src",
+		"/D/git/MK1_NES/src/dev",
+		"/D/git/MK1_NES/tutorial"
 	],
 	"file_history":
 	[
-		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
-		"/C/cc65--latest/asminc/zeropage.inc",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
+		"/D/git/MK1_NES/tutorial/tut05eng.md",
+		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/wip/tut03esp.md",
+		"/D/git/MK1_NES/tutorial/tut05esp.md",
+		"/D/git/MK1_NES/src/gfx/ss.png",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/src/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/tutorial/tut04esp.md",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/pres.h",
 		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/wip/tut03esp.md",
+		"/D/git/MK1_NES/wip/tut04eng.md",
+		"/D/git/MK1_NES/wip/tut03eng.md",
+		"/D/git/MK1_NES/wip/tut04esp.md",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h",
+		"/C/cc65--latest/asminc/zeropage.inc",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/ram/bss.h",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/mainloop.h",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/general.h",
@@ -626,29 +627,18 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/consigna_attachments/consigna_attachments.js",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/bootstrap.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/html.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/imap_utf7_local.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/README.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/lib/imap_utf7_local.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/lib/imap_utf7_local.php",
-		"/D/Proyectos/remote/desccobuz05/install.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube_db.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/SQL/mysql.sql",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/mypic.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/includes/appbar.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/SQL/v3.sql",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/index.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/_deactivated/responses/responses.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/bc.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/imap_utf7_local.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\11_bootèe"
 		]
 	},
 	"find_state":
@@ -656,6 +646,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ssit",
+			"c:\\git\\agnes",
+			"MAX_LEVELS",
+			"first_game",
+			"=",
+			"side-view",
 			"CONVEYORS",
 			"respawn"
 		],
@@ -665,6 +661,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"c:\\git\\MK1_NES",
+			"-",
+			"side view"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -680,24 +679,24 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/11_bootèe/dev/my/pres.h",
-					"semi_transient": false,
+					"file": "src/dev/compile.bat",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2774,
+						"buffer_size": 1297,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1524,
-								1524
+								0,
+								0
 							]
 						],
 						"settings":
@@ -705,40 +704,7 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 723.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "examples/11_bootèe/dev/assets/custom_texts.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1837,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								774,
-								774
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -756,7 +722,7 @@
 	},
 	"input":
 	{
-		"height": 36.0
+		"height": 37.0
 	},
 	"layout":
 	{
@@ -800,7 +766,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -820,7 +786,7 @@
 		[
 			[
 				"",
-				"D:\\Proyectos\\remote\\desres01.sublime-project"
+				"D:\\Proyectos\\remote\\desccobuz05.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -842,7 +808,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 148.0,
+	"side_bar_width": 183.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
