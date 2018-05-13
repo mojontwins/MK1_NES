@@ -109,8 +109,7 @@ void main(void) {
 	// Main loop
 
 	while (1) {	
-
-		//title ();
+		pres (palts0, scr_title);
 
 #ifdef MULTI_LEVEL		
 		level = 0;
@@ -125,7 +124,7 @@ void main(void) {
 			game_loop ();
 
 			if (game_over) {
-				// game_over ();
+				pres (palts0, scr_game_over);
 				break;
 			} else {
 #ifdef MULTI_LEVEL
@@ -133,7 +132,7 @@ void main(void) {
 				if (level == MAX_LEVELS) 
 #endif
 				{
-					// game_ending ();
+					pres (palts0, scr_the_end);
 					break;
 				}
 			}

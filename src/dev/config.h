@@ -34,7 +34,7 @@
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
-	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
+	#define PLAYER_MAX_OBJECTS		1		// Objects to finish game
 
 #else
 
@@ -67,8 +67,8 @@
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
+#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 //#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
@@ -120,7 +120,7 @@
 
 // General stuff
 
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE

@@ -8,15 +8,15 @@ const unsigned char * const spr_player [] = {
 	// Facing right (offset 0)
 	sspl_00_a,										// Standing (offset 0)
 	sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-	sspl_05_a, sspl_06_a,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
+	sspl_05_a, 										// Airborne, up/down (offset 5, 6)
+	0, 0,											// I like powers of two
 	
 
 	// Facing left (offset 8)
 	sspl_00_b,										// Standing (offset 0)
 	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
-	sspl_05_b, sspl_06_b,							// Airborne, up/down (offset 5, 6)
-	0,												// I like powers of two
+	sspl_05_b, 										// Airborne, up/down (offset 5, 6)
+	0, 0,											// I like powers of two
 	
 };
 
