@@ -408,11 +408,22 @@
 	"buffers":
 	[
 		{
-			"file": "src/dev/compile.bat",
+			"file": "tutorial/tut06esp.md",
 			"settings":
 			{
-				"buffer_size": 1297,
+				"buffer_size": 4094,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tutorial/tut06eng.md",
+			"settings":
+			{
+				"buffer_size": 3272,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "Building our first game: Sir Ababol DX"
 			}
 		}
 	],
@@ -496,15 +507,17 @@
 		"/D/git/MK1_NES/examples",
 		"/D/git/MK1_NES/src",
 		"/D/git/MK1_NES/src/dev",
+		"/D/git/MK1_NES/src/dev/assets",
 		"/D/git/MK1_NES/tutorial"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/tutorial/tut05esp.md",
+		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/tutorial/tut05eng.md",
 		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/tutorial/tut05esp.md",
 		"/D/git/MK1_NES/src/gfx/ss.png",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
 		"/D/git/MK1_NES/src/dev/assets/spritedata.h",
@@ -626,12 +639,11 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/avelsieve.php.bak",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/consigna_attachments/consigna_attachments.js",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/bootstrap.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/html.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/imap_utf7_local.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/html.php"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -674,8 +686,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "tutorial/tut06esp.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4094,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								791,
+								791
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -683,34 +725,33 @@
 			"sheets":
 			[
 				{
-					"buffer": 0,
-					"file": "src/dev/compile.bat",
-					"semi_transient": true,
+					"buffer": 1,
+					"file": "tutorial/tut06eng.md",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1297,
+						"buffer_size": 3272,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3226,
+								3226
 							]
 						],
 						"settings":
 						{
+							"auto_name": "Building our first game: Sir Ababol DX",
 							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -766,7 +807,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -800,7 +841,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -808,7 +849,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 183.0,
+	"side_bar_width": 182.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
