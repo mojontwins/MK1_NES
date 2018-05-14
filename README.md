@@ -15,6 +15,15 @@ I've decided to clean **MT Engine MK1 NES** up and make it useable - I've ended 
 
 Update 20180514: **v0.99.5 released, almost there, but there's still some stuff missing (mostly docs)**
 
+How to Build
+============
+
+The engine / framework resides in `src`. The code, as is, features a placeholder game you are supposed to *replace* with your own. You can compile it as-is, of course. To do so, fix `src/dev/setenv.bat` with the correct path to `cc65_2.13.2/bin` and run it and then `src/dev/compile.bat`. 
+
+To compile the tests, enter `tests` and run `make_tests.bat`. `cc65_2.13.2/bin` should be on the PATH.
+
+To compile the examples, enter `examples` and run `make_examples.bat`. `cc65_2.13.2/bin` should be on the PATH.
+
 Credits
 =======
 
