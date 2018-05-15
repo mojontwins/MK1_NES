@@ -45,7 +45,6 @@ cd ..\script
 ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 25
 cd ..\dev
 
-echo * Creating official version *
 echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
@@ -55,9 +54,8 @@ cd ..\dev
 cc65 -Oi game.c --add-source
 ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
-ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes.cfg -o cart-omv.nes crt0.o game.o runtime.lib -m labels.txt
 
-echo * Creating sfw version *
 echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns-sfw.spt out=..\dev\tileset.chr silent
@@ -67,7 +65,7 @@ cd ..\dev
 cc65 -Oi game.c --add-source
 ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
-ld65 -v -C nes.cfg -o cart-sfw.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 
 del *.o

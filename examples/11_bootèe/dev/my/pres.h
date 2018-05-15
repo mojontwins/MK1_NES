@@ -73,7 +73,8 @@ void scr_game_over (void) {
 }
 
 void scr_the_end (void) {
-	_x = 12; _y = 15; pr_str ("THE END");
+	_x = 12; _y = 16; pr_str ("THE  END");
+	oam_hide_rest (oam_meta_spr (112, 88, 0, ssending_00));
 }
 
 void scr_level (void) {

@@ -51,6 +51,7 @@
 #include "assets/cuts0_rle.h"
 #include "assets/ending_rle.h"
 #include "assets/logo.h"
+#include "assets/ending_spr.h"
 
 // Music
 extern const unsigned char m_ingame [];

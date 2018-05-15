@@ -88,5 +88,14 @@ PALS palss0.png
 LABEL logo
 METASPRITE 0, 0, 6, 2, 0, 0
 
+# Cheril ending
+
+MAPFILE ..\dev\assets\ending_spr.h
+OPEN ss.png
+PALS palss0.png
+LABEL ssending
+SKIPEMPTY
+METASPRITE 12, 11, 4, 5, 0, 0
+
 # And we are done!
 FILL 8192
