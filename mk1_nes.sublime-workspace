@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"TEXTB",
+				"TEXT_BOX_WITH_PORTRAITS"
+			],
+			[
+				"alert",
+				"alertCtrl"
+			],
+			[
 				"addressboo",
 				"addressbook_export\t(export.inc)"
 			],
@@ -408,22 +416,21 @@
 	"buffers":
 	[
 		{
-			"file": "tutorial/tut06esp.md",
+			"file": "examples/11_bootèe/dev/game.c",
 			"settings":
 			{
-				"buffer_size": 4094,
+				"buffer_size": 3032,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "tutorial/tut06eng.md",
+			"file": "/C/git/gbdev/AGNES-ideas.md",
 			"settings":
 			{
-				"buffer_size": 3272,
+				"buffer_size": 1071,
 				"encoding": "UTF-8",
-				"line_ending": "Windows",
-				"name": "Building our first game: Sir Ababol DX"
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -434,7 +441,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 132.0,
+		"height": 162.0,
 		"last_filter": "install",
 		"selected_items":
 		[
@@ -483,7 +490,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 382.0
+		"width": 462.0
 	},
 	"console":
 	{
@@ -503,76 +510,117 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/assets",
-		"/D/git/MK1_NES/tutorial"
+		"/C/git/MK1_NES",
+		"/C/git/MK1_NES/examples",
+		"/C/git/MK1_NES/examples/11_bootèe",
+		"/C/git/MK1_NES/examples/11_bootèe/dev",
+		"/C/git/MK1_NES/src",
+		"/C/git/MK1_NES/src/dev",
+		"/C/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
-		"/D/git/MK1_NES/tutorial/tut05esp.md",
-		"/D/git/MK1_NES/README.md",
-		"/D/git/MK1_NES/tutorial/tut05eng.md",
-		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/src/gfx/ss.png",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
-		"/D/git/MK1_NES/src/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/tutorial/tut04esp.md",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/my/pres.h",
+		"/C/git/nes_work/vault/CherilsR/bootee/dev/engine/player.h",
+		"/C/git/nes_work/vault/CherilsR/bootee/dev/config.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/my/player_frame_selector.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/assets/metasprites.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/my/map_renderer_customization.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/config.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/engine/player.h",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/assets/behs.h",
+		"/C/git/MK1_NES/src/dev/config.h",
+		"/C/git/MK1_NES/wip/diario.md",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/assets/map0.h",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
 		"/D/git/MK1_NES/wip/diario.md",
-		"/D/git/MK1_NES/wip/tut03esp.md",
-		"/D/git/MK1_NES/wip/tut04eng.md",
-		"/D/git/MK1_NES/wip/tut03eng.md",
-		"/D/git/MK1_NES/wip/tut04esp.md",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h",
-		"/C/cc65--latest/asminc/zeropage.inc",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/ram/bss.h",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/mainloop.h",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/general.h",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/player.h",
-		"/D/perfiles/jcastano/Desktop/Limbo/descarga",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/locale/es-ES/settings.dtd",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/ldap_search/ldap_search.php",
-		"/D/Proyectos/2018/20180427a--Modificación búsqueda en LDAP en Webmail/instrucciones.txt",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/chrome.manifest",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/content/chrome/management.xhtml",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/content/chrome/management.js",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/content/chrome/settings.js",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/content/chrome/settings.xhtml",
-		"/D/git/nes_work/gokumal/poc/neslib-pantanow.s",
-		"/D/Proyectos/CIs.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook_backend.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/simple_bedework_rest_client.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/password/drivers/ldap.php",
-		"/D/perfiles/jcastano/Desktop/mysql-corsqlmysql02-corsql01-20180315-roundcubemail.sql",
-		"/D/perfiles/jcastano/Desktop/04602134.edu.vcard",
-		"/D/Proyectos/2018/20180206--Actualización-GUIA-prepro/files_pro/WEB-INF/classes/DirectorioCorporativo.properties",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/config/main.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/lib/abook_webdav_client.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/agata_addressbook_backend.php",
-		"/D/perfiles/jcastano/Desktop/addressbook_export.php",
-		"/D/perfiles/jcastano/Desktop/malejandro.torres.vcard",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE8085B83F/mangel.aceituno.sspa.vcard",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE808EF751/mangel.alvarez.vcard",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE80813EC1/mangel.bombillar.ext.vcard",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE8084F910/mangel.calvillo.vcard",
-		"/D/perfiles/jcastano/Desktop/install.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/config.inc.php.desarrollo.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/config/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/automatic_addressbook/config/config.inc.php.dist",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/config/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/config.inc.php.dist",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/ijab/ijab.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/persistent_login/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/rc_smime/rc_smime.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/defaults.inc.php",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/pres.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns2.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_compiled.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enems_recoiling.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_linear.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_fanty.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_homing_fanty.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_monococo.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/README.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/printer.h",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/game.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/crt0.s",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/autodefs.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/frame.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/definitions.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/cocos.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/config.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_shooty.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/playermods/process_tile.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/bolts.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/interactives.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/linear_cocos.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/on_interactive.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/palettes.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/cart-sp.nes",
+		"/D/git/MK1_NES/examples/10_che_man/dev/game.c",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/cuts0_rle.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/interactives.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/palcuts0.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/my/pres.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/map_renderer_customization_orig.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/map/maplist.txt",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/chr_rom_maps.h",
+		"/D/git/MK1_NES/src/dev/engine/general.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/mainloop/interactives.h",
+		"/D/git/MK1_NES/features.md",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/textbox.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/my/extra_vars.h",
+		"/D/Proyectos/remote/p3sdes/DEADJOE",
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/ws/SmsWS.java",
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/datos/Intervalo.java",
+		"/D/perfiles/jcastano/Desktop/chap_2018.sql",
+		"/D/Proyectos/remote/p3sdes/soap-tests/request.xml",
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/impl/TransmisorSimple.java",
+		"/D/Proyectos/remote/p3sdes/config/unix.properties",
+		"/D/Proyectos/2018/20180213--Subida nivel de LOG en el transmisor iOS de p3s/instrucciones.txt",
+		"/D/perfiles/jcastano/Downloads/Telegram Desktop/msc.h",
+		"/D/perfiles/jcastano/Desktop/TransmisorSimple.java",
+		"/D/Proyectos/2018/20180213--Subida nivel de LOG en el transmisor iOS de p3s/instrucciones_limpo.txt",
+		"/D/Proyectos/dump.xml",
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/impl/RegistroJDBC.java",
+		"/D/Proyectos/remote/p3sdes/fuentes/sadesi/sms/Factoria_unix.xml",
+		"/D/Proyectos/2018/20180209--ampliación queryTimeout en P3S/instrucciones.txt",
+		"/D/Proyectos/2017/20170522a--Mejoras P3S/instrucciones.txt",
+		"/D/Proyectos/remote/p3sdes/sftp-config.json",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/app/app.component.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/pages/macanaqui/macanaqui.html",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/pages/login/login.html",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/pages/loading/loading.html",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/app/app.module.ts",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/providers/auth-service/auth-service.ts",
+		"/D/Proyectos/ionic/reservaRecursosMark0/src/pages/login/login.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/pages/macanaqui/macanaqui.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/pages/macanaqui/macanaqui.module.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/pages/list/list.html",
+		"/D/Proyectos/ionic/MyIonicProject/src/pages/list/list.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/app/app.module.ts",
+		"/D/Proyectos/ionic/MyIonicProject/src/app/app.component.ts",
+		"/D/git/nes_work/D'Veel'NgR/dev/definitions.h",
 		"/D/perfiles/jcastano/Desktop/log_20180206.log",
 		"/D/Proyectos/2016/20160217b--Actualización GestorUsuariosGUIA/instrucciones--20160223a.txt",
 		"/D/Proyectos/2018/20180206--Actualización-GUIA-prepro/instrucciones.txt",
@@ -586,9 +634,12 @@
 		"/D/Proyectos/remote/desccobuz05/diario.md",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/sandetel/lib/Contact_Vcard_Build.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/templates/addressbook.html",
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook_backend.php",
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/simple_bedework_rest_client.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/print.inc",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/agata_addressbook.php",
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/config.inc.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/My_Vcard_Build.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/Contact_Vcard_Parse.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/lib/vcard.php",
@@ -596,50 +647,7 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/config/config.inc.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/abook_webdav_client.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/tester1.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube_sandetel.php",
-		"/D/perfiles/jcastano/Desktop/playermove_alt.h",
-		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Dist/0.89/dev/engine.h",
-		"/D/Google Drive/Maritrini/dev/Speccy/MK2/Dist/0.89/dev/mtemk2.c",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedeworks_addressbook/lib/simple_bedework_rest_client.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedeworks_addressbook/bedework_addressbook.php",
-		"/D/perfiles/jcastano/Desktop/enviar_factura.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/smime/smime.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/index.html",
-		"/D/perfiles/jcastano/Desktop/pages_template.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/app/app.js",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE45AB6577/index_panel.html",
-		"/D/perfiles/jcastano/Desktop/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_principal_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_composicion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_utilidades_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_cliente_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_intro_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_configuracion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_seguridad_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/Touch.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/localization/es_ES/labels.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/en_US.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/es_ES.inc",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/index.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/js/app.js",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/roundpad/roundpad.js",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/ficheros.php",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/rcmail.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/calendar/calendar.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/database_attachments/database_attachments.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/filesystem_attachments/filesystem_attachments.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/templates/login.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/lib/filters.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/avelsieve/avelsieve.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/avelsieve.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/avelsieve/avelsieve.php.bak",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/consigna_attachments/consigna_attachments.js",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/bootstrap.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/html.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube_sandetel.php"
 	],
 	"find":
 	{
@@ -647,10 +655,14 @@
 	},
 	"find_in_files":
 	{
-		"height": 108.0,
+		"height": 111.0,
 		"where_history":
 		[
-			"D:\\git\\MK1_NES\\examples\\11_bootèe"
+			"C:\\git\\MK1_NES\\examples\\11_bootèe\\dev",
+			"C:\\git\\MK1_NES\\examples\\11_bootèe",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev\\engine\\enemmods",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_perils_rom2_revamp\\dev"
 		]
 	},
 	"find_state":
@@ -658,14 +670,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"ssit",
-			"c:\\git\\agnes",
-			"MAX_LEVELS",
-			"first_game",
-			"=",
-			"side-view",
-			"CONVEYORS",
-			"respawn"
+			"pfiring",
+			"rebound",
+			"respawn_on_enter",
+			"NO",
+			"map_attr",
+			"fac",
+			"_en_facing",
+			"scroll",
+			"cutscene_5",
+			"pal_col",
+			"tosudiv",
+			"tosumula",
+			"tosudiva",
+			"tosumula0",
+			"/",
+			"en_flags",
+			"ep_dead",
+			"ep_flags",
+			"persistent_load",
+			"cocos_shoot_linear",
+			"bolts",
+			"clear_cerrojo",
+			"bolts_load",
+			"interactives_create",
+			"CLEAR_FLAGS",
+			"rda",
+			"Jack"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -673,9 +704,9 @@
 		"regex": false,
 		"replace_history":
 		[
-			"c:\\git\\MK1_NES",
-			"-",
-			"side view"
+			"ep_dead",
+			"bolts_clear",
+			"Amador"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -686,72 +717,69 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "tutorial/tut06esp.md",
+					"file": "examples/11_bootèe/dev/game.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4094,
+						"buffer_size": 3032,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								791,
-								791
+								2605,
+								2605
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 1,
-					"file": "tutorial/tut06eng.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3272,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3226,
-								3226
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Building our first game: Sir Ababol DX",
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1676.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/git/gbdev/AGNES-ideas.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1071,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1071,
+								1071
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 15.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -763,7 +791,7 @@
 	},
 	"input":
 	{
-		"height": 37.0
+		"height": 36.0
 	},
 	"layout":
 	{
@@ -801,7 +829,7 @@
 	},
 	"output.sftp":
 	{
-		"height": 0.0
+		"height": 118.0
 	},
 	"pinned_build_system": "",
 	"project": "mk1_nes.sublime-project",
@@ -827,7 +855,7 @@
 		[
 			[
 				"",
-				"D:\\Proyectos\\remote\\desccobuz05.sublime-project"
+				"D:\\git\\newspectrum\\SirAbabol_R\\SirAbabol_R.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -841,7 +869,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -849,7 +877,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 182.0,
+	"side_bar_width": 172.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
