@@ -51,5 +51,6 @@ del *.o
 del game.s
 
 copy cart.nes ..\..\cadaverion.nes > nul
+del work\*.h /q > nul
 
 echo DONE!

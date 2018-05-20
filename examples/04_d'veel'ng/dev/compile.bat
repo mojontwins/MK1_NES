@@ -145,5 +145,6 @@ del game.s
 copy cart.nes ..\..\d'veel'ng-omv.nes > nul
 
 :end
+del work\*.h /q > nul
 
 echo DONE!

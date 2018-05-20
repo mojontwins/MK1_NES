@@ -89,4 +89,6 @@ del game.s
 copy cart.nes ..\..\cheril_the_goddess-omv.nes > nul
 
 :end
+del work\*.h /q > nul
+
 echo DONE!

@@ -416,19 +416,10 @@
 	"buffers":
 	[
 		{
-			"file": "src/utils/rle53mapMK1.bas",
+			"file": "examples/11_bootèe/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 9139,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/utils/eneexp3.bas",
-			"settings":
-			{
-				"buffer_size": 5049,
+				"buffer_size": 2707,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -511,11 +502,27 @@
 	"expanded_folders":
 	[
 		"/C/git/MK1_NES",
-		"/C/git/MK1_NES/src",
-		"/C/git/MK1_NES/src/utils"
+		"/C/git/MK1_NES/examples",
+		"/C/git/MK1_NES/examples/11_bootèe",
+		"/C/git/MK1_NES/examples/11_bootèe/dev",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/work"
 	],
 	"file_history":
 	[
+		"/C/git/MK1_NES/examples/10_che_man/dev/compile.bat",
+		"/C/git/MK1_NES/examples/06_lala_prologue/dev/compile.bat",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
+		"/C/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
+		"/C/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/compile.bat",
+		"/C/git/MK1_NES/examples/06_lala_prologue/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/04_d'veel'ng/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/04_d'veel'ng/dev/compile.bat",
+		"/C/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/03_cheril_of_the_bosque_v1/dev/compile.bat",
+		"/C/git/MK1_NES/src/utils/eneexp3.bas",
+		"/C/git/MK1_NES/src/utils/rle53mapMK1.bas",
 		"/C/git/tests/librarian/banks_00.h",
 		"/C/git/tests/librarian/banks_01.h",
 		"/C/git/tests/librarian/library.h",
@@ -524,8 +531,6 @@
 		"/C/git/gbdev/AGNES-ideas.md",
 		"/C/git/MK1_NES/src/dev-UNROM/README.md",
 		"/C/git/MK1_NES/src/utils/UNROM/librarian.bas",
-		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/placeholder",
-		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
 		"/C/git/nes_work/vault/CherilsR/bootee/dev/engine/player.h",
 		"/C/git/nes_work/vault/CherilsR/bootee/dev/config.h",
 		"/C/git/MK1_NES/examples/11_bootèe/dev/my/player_frame_selector.h",
@@ -631,23 +636,11 @@
 		"/D/Proyectos/2016/20160217b--Actualización GestorUsuariosGUIA/instrucciones--20160223a.txt",
 		"/D/Proyectos/2018/20180206--Actualización-GUIA-prepro/instrucciones.txt",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/password/password.php",
-		"/D/Proyectos/2018/20180206--Cambios-LOPD-Condiciones-Altas-CAND/instrucciones.txt",
-		"/D/Proyectos/2017/20171107a--Reparación comprobaciones incorrectas usuarios CCAA en WSDP/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/sandetel/sandetel.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/export.inc",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/pres.h",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/show.inc",
-		"/D/Proyectos/remote/desccobuz05/diario.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/sandetel/lib/Contact_Vcard_Build.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/skins/larry_sandetel/templates/addressbook.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook_backend.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/simple_bedework_rest_client.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/print.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook.php"
+		"/D/Proyectos/2018/20180206--Cambios-LOPD-Condiciones-Altas-CAND/instrucciones.txt"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -723,38 +716,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/utils/rle53mapMK1.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9139,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								151,
-								151
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		},
 		{
@@ -762,32 +725,31 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "src/utils/eneexp3.bas",
+					"buffer": 0,
+					"file": "examples/11_bootèe/dev/compile.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5049,
+						"buffer_size": 2707,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1825,
-								1825
+								2695,
+								2695
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 949.0,
+						"translation.y": 536.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -843,7 +805,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 76.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -877,7 +839,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -885,7 +847,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 172.0,
+	"side_bar_width": 175.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -51,5 +51,6 @@ del *.o
 del game.s
 
 copy cart.nes ..\..\che-man.nes
+del work\*.h /q > nul
 
 echo DONE!

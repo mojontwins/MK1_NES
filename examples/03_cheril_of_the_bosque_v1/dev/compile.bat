@@ -141,4 +141,6 @@ copy cart.nes ..\..\cheril_of_the_bosque-omv.nes > nul
 
 
 :end
+del work\*.h /q > nul
+
 echo DONE!

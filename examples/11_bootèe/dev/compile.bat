@@ -72,5 +72,6 @@ del *.o
 del game.s
 
 copy cart.nes ..\..\bootee.nes
+del work\*.h /q > nul
 
 echo DONE!

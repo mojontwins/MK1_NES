@@ -71,4 +71,6 @@ del *.o
 del game.s
 
 copy cart.nes ..\..\lala_prologue.nes
+del work\*.h /q > nul
+
 echo DONE!
