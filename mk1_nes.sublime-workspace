@@ -416,19 +416,19 @@
 	"buffers":
 	[
 		{
-			"file": "examples/11_bootèe/dev/game.c",
+			"file": "src/utils/rle53mapMK1.bas",
 			"settings":
 			{
-				"buffer_size": 3032,
+				"buffer_size": 9139,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/git/gbdev/AGNES-ideas.md",
+			"file": "src/utils/eneexp3.bas",
 			"settings":
 			{
-				"buffer_size": 1071,
+				"buffer_size": 5049,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -511,15 +511,21 @@
 	"expanded_folders":
 	[
 		"/C/git/MK1_NES",
-		"/C/git/MK1_NES/examples",
-		"/C/git/MK1_NES/examples/11_bootèe",
-		"/C/git/MK1_NES/examples/11_bootèe/dev",
 		"/C/git/MK1_NES/src",
-		"/C/git/MK1_NES/src/dev",
-		"/C/git/MK1_NES/wip"
+		"/C/git/MK1_NES/src/utils"
 	],
 	"file_history":
 	[
+		"/C/git/tests/librarian/banks_00.h",
+		"/C/git/tests/librarian/banks_01.h",
+		"/C/git/tests/librarian/library.h",
+		"/C/git/tests/librarian/librarian.bas",
+		"/C/git/MK1_NES/examples/11_bootèe/dev/game.c",
+		"/C/git/gbdev/AGNES-ideas.md",
+		"/C/git/MK1_NES/src/dev-UNROM/README.md",
+		"/C/git/MK1_NES/src/utils/UNROM/librarian.bas",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/work/placeholder",
+		"/C/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/compile.bat",
 		"/C/git/nes_work/vault/CherilsR/bootee/dev/engine/player.h",
 		"/C/git/nes_work/vault/CherilsR/bootee/dev/config.h",
 		"/C/git/MK1_NES/examples/11_bootèe/dev/my/player_frame_selector.h",
@@ -637,21 +643,11 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook_backend.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/simple_bedework_rest_client.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/print.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/agata_addressbook.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/My_Vcard_Build.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/Contact_Vcard_Parse.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/agata_addressbook/lib/vcard.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/vcard.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/config/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/abook_webdav_client.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/lib/tester1.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube_sandetel.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedework_addressbook/bedework_addressbook.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -670,6 +666,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"indents",
+			"curbank",
+			"identsidx",
+			"identsIdx",
+			"binary",
+			"librarian_48",
 			"pfiring",
 			"rebound",
 			"respawn_on_enter",
@@ -704,6 +706,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"idents",
+			"i",
+			"mainBin",
+			"librarian",
 			"ep_dead",
 			"bolts_clear",
 			"Amador"
@@ -717,69 +723,71 @@
 	"groups":
 	[
 		{
-			"sheets":
-			[
-			]
-		},
-		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/11_bootèe/dev/game.c",
+					"file": "src/utils/rle53mapMK1.bas",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3032,
+						"buffer_size": 9139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2605,
-								2605
+								151,
+								151
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1676.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 1,
-					"file": "/C/git/gbdev/AGNES-ideas.md",
+					"file": "src/utils/eneexp3.bas",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1071,
+						"buffer_size": 5049,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1071,
-								1071
+								1825,
+								1825
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 15.0,
+						"translation.y": 949.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -791,7 +799,7 @@
 	},
 	"input":
 	{
-		"height": 36.0
+		"height": 37.0
 	},
 	"layout":
 	{
@@ -835,7 +843,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 76.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -869,7 +877,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

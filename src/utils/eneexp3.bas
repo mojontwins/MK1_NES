@@ -4,7 +4,7 @@
 sub usage
 	Print "Usage:"
 	Print 
-	Print "$ eneexp3 enems.ene out.h [bin] prefix [yadjust] [nohotspots] [gencounter] [genallcounters] [bin]"
+	Print "$ eneexp3 enems.ene out.h prefix [yadjust] [nohotspots] [gencounter] [genallcounters] [bin]"
 	Print
 	Print "bin puts eneexp3 in binmode. out.h will contain constants and out.h.bin will contain the enemy data"
 End Sub
