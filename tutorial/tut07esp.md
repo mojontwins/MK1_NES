@@ -85,7 +85,7 @@ Cómo funciona mkts
 
 El script de recorte para **Sir Ababol DX** está en `/tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt`, pero lo iremos construyendo paso a paso.
 
-> Lo primero que deberías hacer es entrar en `/gfx/` de la carpeta del proyecto, ubicar el archivo `import_patterns.spt` y eliminar el contenido que trae por defecto.
+> Lo primero que deberías hacer es entrar en `/gfx/` de la carpeta del proyecto, ubicar el archivo `import_patterns.spt` y eliminar el contenido que trae por defecto. Elimina además todos los archivos `png` de `/gfx/` y copia los que hay en `/tutorial/assets/Sir Ababol DX/gfx`.
 
 **mkts** recorta basándose en rectángulos definidos por unas coordenadas de inicio y unas dimensiones, y lo hace de izquierda a derecha y de arriba a abajo.
 
@@ -359,6 +359,12 @@ Recortaremos un total de 5 metasprites con el ababol (item coleccionable), la ll
 	METASPRITESET 1, 9, 2, 2, 5, 1, 0, 0
 ```
 
+Los arrays generados serán:
+
+```
+	ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
+```
+
 Banco 1, cierre
 ---------------
 
@@ -390,6 +396,8 @@ Comprobemos que el contenido de `tileset.chr` (la imagen de la CHR-ROM de nuestr
 lo cual debe mostrar 
 
 [[contenido-de-tileset.png]]
+
+> En modo NROM (básico), el archivo con la imagen de CHR-ROM debe llamarse `tileset.chr`. En modo CNROM, debe haber cuatro archivos diferentes llamados `tilesetX.chr` con X de 0 a 3.
 
 -
 
