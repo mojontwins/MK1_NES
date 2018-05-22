@@ -46,5 +46,12 @@ Cuando lleguemos a este punto, implementaremos esta tira extra como un nivel apa
 
 En **Sir Ababol DX** además podemos recoger unas botas con las que podremos pisar y eliminar a los enemigos. Para esto habrá que activar la característica de "pisar" en el motor y luego modificarlo para poder activarlo y desactivarlo en tiempo de ejecución según el valor de una variable. Añadiremos las botas como un tipo de hotspot *custom* que sencillamente pondrá dicha variable a 1.
 
+Empezando un proyecto
+---------------------
+
+Para empezar copiaremos `src` a una nueva ubicación y cambiaremos el nombre del directiorio de `src` a `sir_ababol_dx`.
+
+--
+
 De nuevo, no os preocupéis si véis que hay demasiada información que no manejáis. Muchas cosas tomarán sentido a medida que vayamos construyendo la versión básica del juego.
 

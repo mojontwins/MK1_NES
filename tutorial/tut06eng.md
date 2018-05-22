@@ -42,6 +42,13 @@ So when we get to this point, we'll add an extra level to implement the undergro
 
 Besides, in **Sir Ababol DX** there's a special item we can get: a pair of boots which will grant Sir Ababol the ability to jump over the baddies to crush them. We'll implement the boots as a custom hotspot type which will set a custom variable to true. We will activate "jump over enemies" in the engine, and make it only active if such variable is set via a custom modification.
 
+Starting the project
+--------------------
+
+To start, just copy `src` to a new location and rename the folder to `sir_ababol_dx`.
+
+--
+
 Again, don't worry if there's too much information hovering around. Just keep going at a steady pace. Everything will fall in place soon.
 
 We'll cover the graphics in the next entry.

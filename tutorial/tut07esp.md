@@ -12,7 +12,7 @@ Aunque **mkts** hace muchas cosas, nosotros vamos a recortar básicamente cuatro
 - **Charsets**: en el modo más básico, la herramienta genera una serie de patrones de 8x8 a partir de un rectángulo de la imagen de entrada. Este tipo de entidad no genera metadatos.
 - **Metatilesets**: nos servirá para hacer los trozos que compondrán las pantallas del mapa de nuestro juego. Se trata de entidades de 2x2 patrones con su propia paleta. En este modo, **mkts** *reaprovecha* patrones ya recortados y genera metadatos: un *mapa* para cada tile indicando qué cuatro patrones lo componen y qué paleta debe usarse para imprimirlo.
 - Metasprites: como ya hemos dicho, la PPU de la NES mueve sprites a los que se asocia un único patrón de 8x8 (en el modo que emplea **AGNES**). Para hacer sprites más grandes, tenemos que asociar varios sprites de 8x8 que moveremos juntos. A estas asociaciones se les llama metasprites. **mkts** es capaz de importar metasprites, añadiendo nuevos patrones según los va encontrando, y generando como metadatos las estructuras que relacionan los diferentes sprites que lo componen y su colocación.
-- Metaspritesets: colecciones de metasprites con las mismas características.
+- **Metaspritesets**: colecciones de metasprites con las mismas características.
 
 Los metadatos generados estarán etiquetados por identificadores que luego emplearemos cuando estemos construyendo los spritesets. Si tienes prisas, puedes echar un vistazo al archivo `src/dev/assets/metasprites` y ver el mapeo de metasprites del proyecto *por defecto*, aunque a esto llegaremos más adelante. No debería preocuparte por ahora.
 
@@ -21,7 +21,9 @@ Antes de explicar cómo funciona **mkts**, echemos un vistazo a los gráficos qu
 El charset
 ----------
 
-**AGNES** soporta charsets de 64 caracteres que deben estar mapeados al principio del banco de CHR-ROM donde estén ubicados (esto es, deben tener los índices 0 a 63). El orden es el mismo que se define en ASCII, de forma que para obtener un caracter determinado se tomará su valor ASCII menos 32 para obtener el número de patrón. Los charsets incluyen símbolos, números, y el alfabeto en mayúsculas. Es normal sustituir algunos símbolos que no usarás por trozos de gráficos que vayas a necesitar. Este es el charset que usaremos en Sir Ababol, contenido en `font.png`. Como verás, hay algunos símbolos que en el futuro utilizaremos como bordes para pintar cajas de texto.
+> **AGNES** utiliza charsets de 64 caracteres que deben estar mapeados al principio del banco de CHR-ROM donde estén ubicados (esto es, deben tener los índices 0 a 63). El orden es el mismo que se define en ASCII, de forma que para obtener un caracter determinado se tomará su valor ASCII menos 32 para obtener el número de patrón. Los charsets incluyen símbolos, números, y el alfabeto en mayúsculas. Es normal sustituir algunos símbolos que no usarás por trozos de gráficos que vayas a necesitar. 
+
+Este es el charset que usaremos en **Sir Ababol**, contenido en `font.png`. Como verás, hay algunos símbolos que en el futuro utilizaremos como bordes para pintar cajas de texto.
 
 [[font.png]]
 
@@ -30,7 +32,7 @@ El tileset
 
 Dependiendo del tipo de codificación que vayamos a usar para almacenar los mapas (más sobre esto en el capítulo correspondiente), el tileset de un nivel podrá tener 16, 32, o hasta 256 tiles diferentes. Cada *tile*, en este contexto, se refiere a los trozos de 16x16 pixeles que componen las pantallas de nuestro mapa.
 
-Sir Ababol emplea mapas de 16 tiles. Además, hay cuatro tiles extra que se emplean desde un renderer custom que hará sustituciones dependiendo de una serie de reglas (más sobre esto más adelante). Finalmente, el tileset incluye 9 tiles a partir del tile número 32 que se emplearán en las cajas de texto en el futuro.
+**Sir Ababol** emplea mapas de 16 tiles. Además, hay cuatro tiles extra que se emplean desde un renderer custom que hará sustituciones dependiendo de una serie de reglas (más sobre esto más adelante). Finalmente, el tileset incluye 9 tiles a partir del tile número 32 que se emplearán en las cajas de texto en el futuro.
 
 [[ts0.png]]
 
@@ -39,13 +41,13 @@ El spriteset
 
 Los spritesets de **AGNES** están formados por tres tipos de entidades:
 
-- Sprites del protagonista, con animaciones para todas las acciones que pueda hacer. El mapeo de los diferentes cells de animación al estado del personaje en el juego es custom y se hace sobre el código de **AGNES**.
-- Sprites para los enemigos, cubriendo todos los tipos de enemigos que aparezcan en el juego. En este spriteset se incluyen los empleados para plataformas móviles.
-- Sprites para items e interactivos - coleccionables, llaves, recargas, objetos, personajes con los que hablar...
+- Sprites del **protagonista**, con animaciones para todas las acciones que pueda hacer. El mapeo de los diferentes cells de animación al estado del personaje en el juego es custom y se hace sobre el código de **AGNES**.
+- Sprites para los **enemigos**, cubriendo todos los tipos de enemigos que aparezcan en el juego. En este spriteset se incluyen los empleados para plataformas móviles.
+- Sprites para **items e interactivos** - coleccionables, llaves, recargas, objetos, personajes con los que hablar...
 
-> Para **AGNES**, el protagonista está representado por un rectángulo de 8x16, y los enemigos e items/etc por rectángulos de 16x16. Obviamente los gráficos mostrados en pantalla pueden ser mayores, como veremos pronto.
+> Para **AGNES**, el protagonista está representado por un rectángulo de 8x16, y los enemigos e items/etc por rectángulos de 16x16. Estos rectángulos se utilizan para la colocación y colisión de los actores en el juego, por eso los llamamos *rectángulos lógicos*. Obviamente los gráficos (metasprites) mostrados en pantalla pueden ser mayores, como veremos pronto.
 
-En el spriteset de Sir Ababol tenemos animaciones para Sir Ababol andando, saltando, y nadando. En esta primera encarganción no emplearemos los cells de Sir Ababol nadando, aunque los vayamos importando ya.
+En el spriteset de **Sir Ababol** tenemos animaciones para Sir Ababol andando, saltando, y nadando. En esta primera encarganción no emplearemos los cells de Sir Ababol nadando, aunque los vayamos importando ya.
 
 Seguidamente tenemos enemigos y plataformas. En la primera fila aparecen tres tipos de enemigos y una plataforma, seguidos por la explosión que se mostrará al eliminar los enemigos. De nuevo, esto no ocurrirá en la primera versión básica que vamos a construir, pero lo importaremos igualmente.
 
@@ -79,9 +81,11 @@ Cómo funciona mkts
 
 **mkts** puede funcionar de varias formas; la que emplearemos será el *modo scripting*. **mkts** leerá comandos de un script e irá construyendo el binario que empearemos como CHR-ROM, además de los archivos de código C con los metadatos asociados.
 
-**mkts** es capaz de generar bimarios completos para CHR-ROM (de 8K en dos bancos de 4K) o de generar binarios parciales (para emplear con otros mappers). Para generar binarios completos tendremos que emplear comandos extra que vayan rellenando. Asimismo, **mkts** va añadiendo los patrones que va importando a un *pool* que consulta cada vez que va a recortar para identificar patrones ya importados - y provée de un comando para *resetear* dicho pool y que emplearemos cuando hayamos terminado de recortar patrones para el banco 0 y vayamos a empezar con el banco 1.
+**mkts** es capaz de generar bimarios completos para CHR-ROM (de 8K en dos bancos de 4K, llamados banco 0 y banco 1) o de generar binarios parciales (para emplear con otros mappers). Para generar binarios completos tendremos que emplear comandos extra que vayan rellenando. Asimismo, **mkts** va añadiendo los patrones que va importando a un *pool* que consulta cada vez que va a recortar para identificar patrones ya importados - y provée de un comando para *resetear* dicho pool y que emplearemos cuando hayamos terminado de recortar patrones para el banco 0 y vayamos a empezar con el banco 1.
 
-El script de recorte para `Sir Ababol DX` está en `/tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt`, pero lo iremos construyendo paso a paso.
+El script de recorte para **Sir Ababol DX** está en `/tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt`, pero lo iremos construyendo paso a paso.
+
+> Lo primero que deberías hacer es entrar en `/gfx/` de la carpeta del proyecto, ubicar el archivo `import_patterns.spt` y eliminar el contenido que trae por defecto.
 
 **mkts** recorta basándose en rectángulos definidos por unas coordenadas de inicio y unas dimensiones, y lo hace de izquierda a derecha y de arriba a abajo.
 
@@ -137,11 +141,11 @@ Lo primero que importaremos serán los 64 patrones para escribir textos a partir
 	CHARSET x0, y0, w, h
 ```
 
-Donde `x0, y0` son las coordenadas dentro del png y `w, h` las dimensiones del rectángulo que estamos recortando. Como en `font.png` los 64 patrones aparecen en un arreglo de 32x2 a partir de la esquina superior.
+Donde `x0, y0` son las coordenadas origen dentro del png y `w, h` las dimensiones del rectángulo que estamos recortando. Como en `font.png` los 64 patrones aparecen en un arreglo de 32x2 a partir de la esquina superior.
 
 ```
 	OPEN font.png
-	PALS plats0.png
+	PALS palts0.png
 	CHARSET 0, 0, 32, 2
 ```
 
@@ -177,7 +181,7 @@ Posteriormente, el recorte:
 
 En este código abrimos `ts0.png`, establecemos la paleta activa leyéndola de `palts0.png`, indicamos que los próximos metadatos se generen con el prefijo `ts0`, y finalmente recortamos 41 tiles de 2x2 patrones de un rectángulo de 16x3 que empieza en (0, 0).
 
-En los metadatos almacenados en `tiledata.h`, **mkts** generará dos arrays por cada comando *MAPPED*: `<prefix>_pals`, con la paleta que emplea cada tile, y `<prefix>_tmaps`, indicando qué 4 patrones utiliza cada tile. En nuestro caso, serán `ts0_pals` y `ts0_tmaps`.
+En los metadatos almacenados en `tiledata.h`, **mkts** generará dos arrays por cada comando `MAPPED`: `<prefix>_pals`, con la paleta que emplea cada tile, y `<prefix>_tmaps`, indicando qué 4 patrones utiliza cada tile. En nuestro caso, serán `ts0_pals` y `ts0_tmaps`.
 
 > Si nuestro juego sólo va a tener un tileset y no queremos tocar demasiado, el prefijo especificado en `LABEL` debe ser `ts0`. 
 
@@ -211,7 +215,9 @@ Y esto será válido para todos los recortes siguientes:
 Banco 1, protagonista (Sir Ababol)
 ----------------------------------
 
-Para **AGNES**, el protagonista es a todos los efectos un rectángulo llamémosle *lógico* de 8x16 píxeles (aunque podamos configurar un poco la altura a la hora de colisionar). Obviamente, nuestro Sir Ababol es bastante más grande que eso, en concreto los cells son de 16x24 (aunque no es un requerimiento que todos los cells tengan el mismo tamaño, ni mucho menos).
+[[ss0-detalle-player.png]]
+
+Recordemos que, para **AGNES**, el protagonista es a todos los efectos un rectángulo llamémosle *lógico* de 8x16 píxeles (aunque podamos configurar un poco la altura a la hora de colisionar). Obviamente, nuestro Sir Ababol es bastante más grande que eso, en concreto los cells son de 16x24 (aunque no es un requerimiento que todos los cells tengan el mismo tamaño, ni mucho menos).
 
 Lo que ocurre es que el punto de origen del metasprite se sitúa con respecto a la esquina superior izquierda del rectángulo lógico de 8x16 empleando una pareja de offsets, como se puede ver en esta imagen:
 
@@ -220,7 +226,7 @@ Lo que ocurre es que el punto de origen del metasprite se sitúa con respecto a 
 Generalmente, querremos que el rectángulo *lógico* esté centrado en la parte inferior del gráfico. Los seis cells de animación (1 x "parado", 4 x "andando", 1 x "en el aire") del juego principal comparten offsets, por lo que podemos recortarlos todos de un tirón empleando el comando `METASPRITESET`, cuya sintaxis es:
 
 ```
-	METASPRITESET x0, y0, wm, hm, w, h, offs_x, offs_y[,MAX] [FLIPPED]
+	METASPRITESET x0, y0, wm, hm, w, h, offs_x, offs_y[, MAX] [FLIPPED]
 ```
 
 Donde `x0, y0` son las coordenadas dentro del png y `w, h` las dimensiones *en metasprites* (recordad: las dimensiones de los rectángulos que recortamos se miden *en entidades*) del rectángulo. Adicionalmente, `wm, hm` son las dimensiones *en patrones* de cada metasprite. En **AGNES** no hay límite para estas dimensiones más que los impuestos por el hardware y los recursos disponibles.
@@ -240,11 +246,13 @@ Atención a los offsets: `-4, -8` significa que el metasprite recortado debe pin
 
 Los metadatos generados para este comando serán doce arrays conteniendo los 6 cells recortados y sus versiones espejadas. `sspl` se tomará como prefijo, y los identificadores generados en el código tendrán un formato
 
-`sspl_XX_F`
+```
+	sspl_XX_F
+```
 
 donde `XX` será un índice incremental en hexadecimal y `F` valdrá `a` o `b` para las versiones normal y espejada (mirando a la derecha, mirando a la izquierda, por convención). Por tanto, el comando `METASPRITESET` de más arriba generará arrays con los identificadores:
 
-```
+```c
 	sspl_00_a, sspl_00_b, sspl_01_a, sspl_01_b, 
 	sspl_02_a, sspl_02_b, sspl_03_a, sspl_03_b, 
 	sspl_04_a, sspl_04_b, sspl_05_a, sspl_05_b
@@ -261,7 +269,7 @@ Fíjate de nuevo que las coordenadas de origen `x0, y0` están medidas en patron
 
 Este comando generará seis arrays en el archivo de metadatos (3 cells y sus versiones espejadas):
 
-```
+```c
 	sspl2_00_a, sspl2_00_b, 
 	sspl2_01_a, sspl2_01_b, 
 	sspl2_02_a, sspl2_02_b 
@@ -270,9 +278,119 @@ Este comando generará seis arrays en el archivo de metadatos (3 cells y sus ver
 Banco 1, enemigos
 -----------------
 
-Antes de empezar, comentaremos que, en **AGNES**, el rectángulo lógico para los enemigos es de 16x16 píxels, al igual que el del jugador era de 8x16 píxels.
+[[ss0-detalle-enems.png]]
+
+> Por lo general, en **AGNES**, los metaspritesets para cada enemigo deben contener 8 cells, 4 mirando en cada sentido (izquierda y derecha). De esas 4, las dos primeras forman la animación de desplazarse, la siguiente es el cell de "ataque" y la última "muriendo". Obviamente no es necesario tener 8 cells diferentes; de hecho, los cells de "ataque" y "muriendo" solo se emplean con configuraciones específicas.
+
+Antes de empezar recordemos que, en **AGNES**, el rectángulo lógico para los enemigos es de 16x16 píxels, al igual que el del jugador era de 8x16 píxels.
 
 Empleando `METASPRITESET`, iremos recortando los enemigos poco a poco. En primer lugar tenemos tres tipos de enemigos con dos cells de animación cada uno. en **AGNES**, se soporta dos cells de animación por orientación. Para estos enemigos no generaremos versiones espejadas horizontalmente sino que emplearemos los mismos cells para ambas direcciones (más adelante).
 
 Empezamos con dos enemigos de 2x3 y uno de 3x2, seguido por una plataforma móvil de 2x2 y una explosión. Como tenemos entidades de diferentes características, las recortaremos por separado.
 
+Primero los enemigos de 2x3, 2 en total, 4 cells:
+
+```
+	LABEL ssena
+	METASPRITESET 1, 4, 2, 3, 4, 1, 0, -8
+```
+
+Como el rectángulo lógico es de 16x16 y nuestros enemigos *altos* de 16x24, habrá que dibujar el metasprite 8 píxeles más arriba; de ahí el `0, -8`.
+
+El siguiente enemigo es el murciélago, de 3x2, 2 cells:
+
+```
+	LABEL ssenb
+	METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
+```
+
+Aquí al tener un metasprite de 24x16 y un rectángulo lógico de 16x16, habrá que pintar el metasprite 4 píxeles más a la izquierda; de ahí el `-4, 0`.
+
+Las plataformas son de 2x2.
+
+```
+	LABEL ssplat
+	METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
+```
+
+Aquí el tamaño lógico corresponde con el metasprite, de ahí que el offset sea `0, 0`.
+
+Cuando ampliemos a DX necesitaremos un pequeño set de enemigos para la fase subacuática, más un sprite para la explosión que aparece cuando Sir Ababol pisa a un malo.
+
+Los dos primeros enemigos acuáticos no necesitan espejado y son de 16x16. 4 cells en total:
+
+```
+	LABEL ssenc
+	METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+```
+
+El tercer enemigo acuático es un pez que sí se debe diferenciar a izquierda y derecha. Recortamos sus dos cells así:
+
+```
+	LABEL ssend
+	METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
+```
+
+Finalmente, la explosión es un único frame:
+
+```
+	LABEL ssexpl
+	METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
+```
+
+Todos estos comandos crearán un montón de arrays en el archivo de metadatos que usaremos cuando construyamos el metaspriteset:
+
+```c
+	ssena_00, ssena_01, ssena_02, ssena_03, 
+	ssenb_00, ssena_01, 
+	ssplat_00, ssplat_01,
+	ssenc_00, ssenc_01, ssenc_02, ssenc_03, 
+	ssend_00_a, ssend_00_b, ssend_01_a, ssend_01_b,
+	ssexpl
+```
+
+Banco 1, items/extra
+--------------------
+
+Recortaremos un total de 5 metasprites con el ababol (item coleccionable), la llave, una pata de pollo (recarga de vida), las botas (para DX) y el letrero (también para DX). Recordemos que los items también tienen un rectángulo lógico de 16x16.
+
+```
+	LABEL ssit
+	METASPRITESET 1, 9, 2, 2, 5, 1, 0, 0
+```
+
+Banco 1, cierre
+---------------
+
+Como ya no vamos a recortar más, cerramos:
+
+```
+	FILL 8192
+```
+
+Esto rellena el binario de salida hasta los 8Kb con 0. Con esto, el resultado nos sirve para importar directamente como CHR-ROM.
+
+Ejecutando mkts
+===============
+
+Vamos a probar que todo funcione correctamente. Desde una ventana de intérprete de comandos (¿has probado [conEmu](https://conemu.github.io/)?), nos desplazamos al directorio `/gfx/` de nuestro proyecto y ejecutamos:
+
+```batch
+	$ ..\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr
+```
+
+Esto generará una salida en la consola y además creará `tileset.chr` en `/dev/`, además de los archivos `/dev/assets/tiledata.h` y `dev/assets/spritedata.h`.
+
+Comprobemos que el contenido de `tileset.chr` (la imagen de la CHR-ROM de nuestro cartucho) es correcto:
+
+```batch
+	$ ..\utils\chrview.exe ..\dev\tileset.chr
+```
+
+lo cual debe mostrar 
+
+[[contenido-de-tileset.png]]
+
+-
+
+En la próxima entrada veremos como organizar todos los arrays de los metasprites que hemos recortado en el **metaspriteset de AGNES**. Hasta entonces puedes intentar [mantenerme despierto](https://www.buymeacoffee.com/nath) ;-) .
