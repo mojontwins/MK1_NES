@@ -8,3 +8,17 @@ In UNROM there's no CHR-RAM and 16Kb of PRG-ROM are switchable. We'll target UNR
 One of the main goals will be having this version directly ported to GB or SMS.
 
 See you in v2.0!
+
+~~
+
+I've putting a lil' package of toolchain applications for this, namely:
+
+- eneexp3.exe         - can export enemies as a binary file.
+- rle53mapMK1.exe     - can export map, map index, and locks as a binary file.
+- mscmk1.exe          - can put all the script pools to a binary file
+- UNROM/librarian.exe - creates libraries of binary assets as C files with constants and indexes.
+- UNROM/lzsscomp.exe  - used to compress pattern data (or anything that goes to VRAM).
+
+~~
+
+In UNROM (bin) mode, msc needs `locate_res` to page in the correct bank and retrieve the correct pointer in `gp_gen`. The resource is stored as `SCRIPTS_RES`, which must have the correct value at compile time.

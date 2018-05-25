@@ -7,7 +7,7 @@ Const STATE_STRING = 2
 Sub usage
 	Print "Usage:"
 	Print 
-	Print "$ rle53mapMK1.exe in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos]"
+	Print "$ rle53mapMK1.exe in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos] [bin]"
 End Sub
 
 Function even (i As Integer) As Integer 
@@ -24,10 +24,10 @@ Function inCommand (a As String) As Integer
 	Return 0
 End Function
 
-Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, mapsize, decosize, scrsize, founddecos
-Dim As Integer printscrsizes, nodecos, offset
+Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, fBin, mapsize, decosize, scrsize, founddecos
+Dim As Integer printscrsizes, nodecos, offset, binmode
 Dim As Integer mapWtiles, mapPants, tLock, locksI, state, tileStrI, decoT, decoCt, XYct
-Dim As Integer counter, totalBytes
+Dim As Integer counter, totalBytes, value
 Dim As String o, prefix
 Dim As uByte d, dp
 'Redim As uByte m (0, 0)
@@ -48,6 +48,7 @@ Dim As String cMapAmalgam (127)
 Dim As Integer scrSizes (127)
 Dim As Integer scrMaps (127)
 Dim As Integer screensum, n, cMapI, realPant, ctr
+Dim As Integer scrOffsets (127)
 
 Print "MK1 v1.0 rle53mapMK1 ~ ";
 
@@ -64,6 +65,9 @@ prefix = Command (6)
 'nodecos = (Command (7) = "nodecos" Or Command (8) = "nodecos")
 printscrsizes = inCommand ("scrsizes")
 nodecos = inCommand ("nodecos")
+binmode = inCommand ("bin")
+
+If binmode Then nodecos = -1
 
 For i = 7 To 9
 	If Val (Command (i)) Then offset = Val (Command (i))
@@ -84,6 +88,7 @@ For i = 0 To mapPants - 1
 	decosOI (i) = 0
 	mOutI (i) = 0
 	cMapAmalgam (i) = ""
+	scrOffsets (i) = 0
 Next i
 locksI = 0
 
@@ -177,6 +182,7 @@ For nPant = 0 To mapPants - 1
 
 	scrSizes (nPant) = cMapI
 	scrMaps (nPant) = realPant '' Fixe here
+	scrOffsets (nPant) = totalBytes
 	totalBytes = totalBytes + cMapI
 Next nPant
 
@@ -227,55 +233,95 @@ Print #f, "// Map Size Is " & mapW & "x" & mapH
 Print #f, "// Screen Size Is " & SCR_W & "x" & SCR_H
 Print #f, ""
 
+Print "Writing "; 
+
 mapsize = 0
 
+If binmode Then
+	Print "[bin] ";
+
+	Print #f, "// [binmode] - This file contains only constants."
+	Print #f, "// Actual map index + map binary + locks is in " + Command (2) + ".bin"
+	Print #f, ""
+
+	Print #f, "#define MAP_" & prefix & "_MAP_W        " & mapW 
+	Print #f, "#define MAP_" & prefix & "_MAP_H        " & mapH
+	Print #f, "#define MAP_" & prefix & "_MAP_SIZE     " & mapPants
+	Print #f, "#define MAP_" & prefix & "_MAP_BYTES    0x" & Hex (mapPants * 2 + totalBytes, 4)
+
+	Print #f, ""
+
+	fBin = Freefile
+	Open Command (2) + ".bin" For Binary As #fBin
+
+	' First write an index, little endian
+	For i = 0 To mapPants - 1
+		value = scrOffsets (i) + mapPants * 2
+		d = value And 255: Put #fBin, , d
+		d = value Shr 8: Put #fBin, , d
+		mapsize = mapsize + 2
+	Next i
+End If
+
+Print "~ ";
+
 ' Write screens
-Print #f, "// Compressed map structure, screens in RLE53, byte = NNNNNRRR, repeat R times tile #N"
-Print #f, ""
+If Not binmode Then
+	Print #f, "// Compressed map structure, screens in RLE53, byte = NNNNNRRR, repeat R times tile #N"
+	Print #f, ""
+End If
+
 For nPant = 0 To mapPants - 1
 	If scrMaps (nPant) = 255 Then
-		Print #f, "// Screen " & Lcase (Hex (nPant, 2)) & " is empty."
+		If Not binmode Then Print #f, "// Screen " & Lcase (Hex (nPant, 2)) & " is empty."
 	ElseIf scrSizes (nPant) Then
-		Print #f, "const unsigned char scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " [] = {";
+		If Not binmode Then Print #f, "const unsigned char scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " [] = {";
 		For i = 0 To scrSizes (nPant) - 1
-			Print #f, "0x" & Lcase (Hex (mOut (nPant, i), 2));
-			If i < scrSizes (nPant) - 1 Then Print #f, ", ";
+			If binmode Then 
+				d = mOut (nPant, i)
+				Put #fBin, , d
+			Else
+				Print #f, "0x" & Lcase (Hex (mOut (nPant, i), 2));
+			End If
+			If Not binmode Then If i < scrSizes (nPant) - 1 Then Print #f, ", ";
 		Next i
-		Print #f, "};"
-		If printscrsizes Then Print #f, "// Size = " & scrSizes (nPant) & " bytes."
+		If Not binmode Then Print #f, "};"
+		If printscrsizes And Not binmode Then Print #f, "// Size = " & scrSizes (nPant) & " bytes."
 		mapsize = mapsize + scrSizes (nPant)
 	Else
-		Print #f, "// Screen " & Lcase (Hex (nPant, 2)) & " is a copy of screen " & Lcase (Hex (scrMaps (nPant), 2)) & "."
+		If Not binmode Then Print #f, "// Screen " & Lcase (Hex (nPant, 2)) & " is a copy of screen " & Lcase (Hex (scrMaps (nPant), 2)) & "."
 	End If
 Next nPant
 Print #f, ""
 
 ' Write map index
-Print #f, "// Compressed map array"
-Print #f, ""
-Print #f, "const unsigned char * const map_" & prefix & " [] = {"
-ctr = 0
-For nPant = 0 To mapPants - 1
-	If ctr = 0 Then Print #f, "	";
-	If scrMaps (nPant) = 255 Then
-		Print #f, Space (Len ("scr_" & prefix & "_")) & " 0";
-	Else
-		Print #f, "scr_" & prefix & "_" & Lcase (Hex (scrMaps (nPant), 2));
-	Endif
-	If nPant < mapPants - 1 Then Print #f, ", ";
-	ctr = ctr + 1: If ctr = mapW And nPant < mapPants - 1 Then ctr = 0: Print #f, ""
-	mapsize = mapsize + 2
-Next nPant
-Print #f, ""
-Print #f, "};"
-Print #f, ""
-Print #f, "// Total map size in bytes is " & mapsize
-Print #f, ""
+If Not binmode Then
+	Print #f, "// Compressed map array"
+	Print #f, ""
+	Print #f, "const unsigned char * const map_" & prefix & " [] = {"
+	ctr = 0
+	For nPant = 0 To mapPants - 1
+		If ctr = 0 Then Print #f, "	";
+		If scrMaps (nPant) = 255 Then
+			Print #f, Space (Len ("scr_" & prefix & "_")) & " 0";
+		Else
+			Print #f, "scr_" & prefix & "_" & Lcase (Hex (scrMaps (nPant), 2));
+		Endif
+		If nPant < mapPants - 1 Then Print #f, ", ";
+		ctr = ctr + 1: If ctr = mapW And nPant < mapPants - 1 Then ctr = 0: Print #f, ""
+		mapsize = mapsize + 2
+	Next nPant
+	Print #f, ""
+	Print #f, "};"
+	Print #f, ""
+	Print #f, "// Total map size in bytes is " & mapsize
+	Print #f, ""
+End If
 
 Print "Wrote MAP (" & mapsize & " bytes) ~ ";
 
 ' Write decos
-If founddecos And Not nodecos Then 
+If founddecos And Not nodecos And Not binmode Then 
 	decosize = 0
 	Print #f, "// Decorations"
 	Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
@@ -316,20 +362,30 @@ End If
 
 ' Write locks
 If locksI Then
-	Print #f, "// Locks"
-	Print #f, "// Format: NP YX ..."
-	print #f, ""
-	Print #f, "#define N_BOLTS_" & Ucase (prefix) & " " & (locksI \ 2)
-	print #f, ""
-	Print #f, "const unsigned char map_" & prefix & "_locks [] = {"
-	Print #f, "	";
-	For i = 0 To locksI - 1
-		Print #f, "0x" & Lcase (Hex (locks (i), 2));
-		If i < locksI - 1 Then Print #f, ", ";
-	Next i
-	Print #f, ""
-	Print #f, "};"
-	Print #f, ""
+	If binmode Then
+		Print #f, "#define N_BOLTS_" & Ucase (prefix) & " " & (locksI \ 2)
+		Print #f, ""
+		Print #f, "#define MAP_" & prefix & "_BOLTS_OFFSET 0x" & Hex (mapPants * 2 + totalBytes, 4)
+		Print #f, "#define MAP_" & prefix & "_BOLTS_BYTES  " & locksI
+		For i = 0 To locksI - 1
+			d = locks (i): Put #fBin, , d
+		Next i
+	Else
+		Print #f, "// Locks"
+		Print #f, "// Format: NP YX ..."
+		print #f, ""
+		Print #f, "#define N_BOLTS_" & Ucase (prefix) & " " & (locksI \ 2)
+		print #f, ""
+		Print #f, "const unsigned char map_" & prefix & "_locks [] = {"
+		Print #f, "	";
+		For i = 0 To locksI - 1
+			Print #f, "0x" & Lcase (Hex (locks (i), 2));
+			If i < locksI - 1 Then Print #f, ", ";
+		Next i
+		Print #f, ""
+		Print #f, "};"
+		Print #f, ""
+	End If		
 else
 	Print #f, "#define N_BOLTS_" & Ucase (prefix) & " 0"	
 End If
