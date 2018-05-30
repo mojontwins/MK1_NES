@@ -408,37 +408,36 @@
 	"buffers":
 	[
 		{
-			"file": "tutorial/tut06esp.md",
+			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/assets/metasprites.h",
 			"settings":
 			{
-				"buffer_size": 4094,
+				"buffer_size": 1680,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "tutorial/tut07esp.md",
+			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 17918,
-				"encoding": "UTF-8",
+				"buffer_size": 20343,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt",
+			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
 			"settings":
 			{
-				"buffer_size": 2913,
-				"encoding": "UTF-8",
+				"buffer_size": 767,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/assets/metasprites.h",
+			"file": "/D/git/nes_work/Tutorial_MK1/tut08esp.md",
 			"settings":
 			{
-				"buffer_size": 1392,
+				"buffer_size": 9547,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -451,7 +450,7 @@
 	"command_palette":
 	{
 		"height": 132.0,
-		"last_filter": "install",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -523,15 +522,29 @@
 		"/D/git/MK1_NES/examples",
 		"/D/git/MK1_NES/src",
 		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/assets",
-		"/D/git/MK1_NES/src/dev-UNROM",
-		"/D/git/MK1_NES/tutorial",
-		"/D/git/MK1_NES/tutorial/assets",
-		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX",
-		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx"
+		"/D/git/MK1_NES/src/dev/assets"
 	],
 	"file_history":
 	[
+		"/D/git/nes_work/Tutorial_MK1/tut07esp.md",
+		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
+		"/D/perfiles/jcastano/Desktop/instrucciones.txt",
+		"/D/git/MK1_NES/src/dev-UNROM/README.md",
+		"/D/git/MK1_NES/src/utils/mscmk1.bas",
+		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
+		"/D/git/MK1_NES/wip/map0.h",
+		"/D/git/MK1_NES/wip/script.h",
+		"/D/git/nes_work/Tutorial_MK1/tut06esp.md",
+		"/D/git/nes_work/Tutorial_MK1/tut06eng.md",
+		"/D/git/nes_work/Tutorial_MK1/tut07eng.md",
+		"/D/git/nes_work/Tutorial_MK1/tut05esp.md",
+		"/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/tutorial/tut07esp.md",
+		"/D/git/MK1_NES/tutorial/tut07eng.md",
+		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx/ss.png",
+		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/tutorial/tut06esp.md",
+		"/D/git/MK1_NES/tutorial/tut06eng.md",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_monococo.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_steady_shooter.h",
@@ -543,13 +556,10 @@
 		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
 		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns-sfw.spt",
-		"/D/git/MK1_NES/tutorial/tut06eng.md",
-		"/D/git/MK1_NES/tutorial/tut06esp.md",
 		"/D/git/MK1_NES/tutorial/tut05esp.md",
 		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/tutorial/tut05eng.md",
 		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/src/gfx/ss.png",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
@@ -643,27 +653,11 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/index_panel.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_principal_panel.html",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_composicion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_utilidades_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_cliente_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_intro_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_configuracion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_seguridad_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/Touch.md",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/localization/es_ES/labels.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/en_US.inc",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/markasjunk2/localization/es_ES.inc",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/player.h",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/index.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/js/app.js",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/roundpad/roundpad.js",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/ficheros.php",
-		"/D/Proyectos/2017/20170724a--Actualización API REST Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/include/rcmail.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/lib/Roundcube/rcube.php"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_utilidades_panel.html"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -678,6 +672,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_b",
+			"_a",
+			"fbin",
+			"SCRIPT_POOL",
+			"whichs",
+			"fbin",
+			"fOut",
+			"1.0",
+			"incommand",
+			"script_pool",
+			"end_of",
+			"binmode",
+			"logic rectangle",
+			"rectángulo",
 			"AGNES",
 			"bankswitch",
 			"ssit",
@@ -690,11 +698,14 @@
 			"respawn"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"",
+			"1.1",
+			"logical rectangle",
 			"c:\\git\\MK1_NES",
 			"-",
 			"side view"
@@ -708,121 +719,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "tutorial/tut06esp.md",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 4094,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 312.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "tutorial/tut07esp.md",
+					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/assets/metasprites.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17918,
+						"buffer_size": 1680,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4538,
-								4538
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 5876.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2913,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1401,
-								1402
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 429.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/dev/assets/metasprites.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1392,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								1679,
+								1586
 							]
 						],
 						"settings":
@@ -841,10 +755,112 @@
 					"type": "text"
 				},
 				{
-					"file": "tutorial/assets/Sir Ababol DX/gfx/ss.png",
+					"buffer": 1,
+					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/config.h",
 					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20343,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19603,
+								19603
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7102.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 3,
-					"type": "image"
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								535,
+								377
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "/D/git/nes_work/Tutorial_MK1/tut08esp.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9546,
+								9546
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 1368,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2403.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
 				}
 			]
 		}
@@ -933,7 +949,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
