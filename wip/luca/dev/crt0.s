@@ -9,7 +9,11 @@ NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
 NES_CHR_BANKS			=4	;number of 8K CHR banks
 .else
 NES_MAPPER				=0	;mapper number
+.if NROM128
+NES_PRG_BANKS			=1	;number of 16K PRG banks, change to 2 for NROM256
+.else
 NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
+.endif
 NES_CHR_BANKS			=1	;number of 8K CHR banks
 .endif
 NES_MIRRORING			=0	;0 horizontal, 1 vertical, 8 four screen

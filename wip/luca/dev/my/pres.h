@@ -41,5 +41,5 @@ void scr_game_over (void) {
 }
 
 void scr_the_end (void) {
-	_x = 12; _y = 15; pr_str ("THE END");
+	_x = 7; _y = 15; pr_str ("LO HAS CONSEGUIDO!");
 }
