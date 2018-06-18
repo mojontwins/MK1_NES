@@ -408,26 +408,19 @@
 	"buffers":
 	[
 		{
-			"file": "testers/00_tester_punchy/dev/engine/breakable.h",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 1203,
+				"buffer_size": 3240,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_punchy/dev/engine/player.h",
+			"file": "wip/perils/enems/ponedor.bat",
 			"settings":
 			{
-				"buffer_size": 15817,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/08_cheril_the_writer/dev/compile.bat",
-			"settings":
-			{
-				"buffer_size": 3869,
+				"buffer_size": 33,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -510,16 +503,14 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/08_cheril_the_writer",
-		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev",
-		"/D/git/MK1_NES/testers",
-		"/D/git/MK1_NES/testers/00_tester_punchy",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine"
+		"/D/git/MK1_NES/wip",
+		"/D/git/MK1_NES/wip/perils",
+		"/D/git/MK1_NES/wip/perils/enems"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/compile.bat",
 		"/D/git/MK1_NES/wip/luca/dev/config.h",
 		"/D/git/MK1_NES/wip/luca/dev/my/pres.h",
 		"/D/git/MK1_NES/wip/luca/dev/compile.bat",
@@ -577,7 +568,6 @@
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/ram/bss.h",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/mainloop.h",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/general.h",
-		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/player.h",
 		"/D/perfiles/jcastano/Desktop/Limbo/descarga",
 		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/src/locale/es-ES/settings.dtd",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/ldap_search/ldap_search.php",
@@ -646,8 +636,7 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/bedeworks_addressbook/bedework_addressbook.php",
 		"/D/perfiles/jcastano/Desktop/enviar_factura.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/smime/smime.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/index.html",
-		"/D/perfiles/jcastano/Desktop/pages_template.html"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/index.html"
 	],
 	"find":
 	{
@@ -716,79 +705,32 @@
 	"groups":
 	[
 		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "testers/00_tester_punchy/dev/engine/breakable.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1203,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								731,
-								706
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 127,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
 			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "testers/00_tester_punchy/dev/engine/player.h",
+					"buffer": 0,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15817,
+						"buffer_size": 3240,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5482,
-								5482
+								606,
+								606
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 0,
-								"count": 1473,
+								"changes": 893,
+								"count": 477,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -797,39 +739,38 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3540.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "examples/08_cheril_the_writer/dev/compile.bat",
+					"buffer": 1,
+					"file": "wip/perils/enems/ponedor.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3869,
+						"buffer_size": 33,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3852,
-								3852
+								20,
+								20
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 11,
-								"count": 141,
+								"changes": 4,
+								"count": 4,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -841,12 +782,17 @@
 							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 975.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -934,7 +880,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
