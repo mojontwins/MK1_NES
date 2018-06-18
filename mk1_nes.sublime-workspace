@@ -408,35 +408,26 @@
 	"buffers":
 	[
 		{
-			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/assets/metasprites.h",
+			"file": "testers/00_tester_punchy/dev/engine/breakable.h",
 			"settings":
 			{
-				"buffer_size": 1680,
-				"encoding": "UTF-8",
+				"buffer_size": 1203,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/config.h",
+			"file": "testers/00_tester_punchy/dev/engine/player.h",
 			"settings":
 			{
-				"buffer_size": 20343,
+				"buffer_size": 15817,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
+			"file": "examples/08_cheril_the_writer/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 767,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/git/nes_work/Tutorial_MK1/tut08esp.md",
-			"settings":
-			{
-				"buffer_size": 9547,
+				"buffer_size": 3869,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -520,12 +511,23 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/assets"
+		"/D/git/MK1_NES/examples/08_cheril_the_writer",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev",
+		"/D/git/MK1_NES/testers",
+		"/D/git/MK1_NES/testers/00_tester_punchy",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/wip/luca/dev/config.h",
+		"/D/git/MK1_NES/wip/luca/dev/my/pres.h",
+		"/D/git/MK1_NES/wip/luca/dev/compile.bat",
+		"/D/git/MK1_NES/wip/luca/dev/assets/metasprites.h",
+		"/D/git/nes_work/Tutorial_MK1/tut08esp.md",
+		"/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/assets/metasprites.h",
+		"/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/config.h",
+		"/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
 		"/D/git/nes_work/Tutorial_MK1/tut07esp.md",
 		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
 		"/D/perfiles/jcastano/Desktop/instrucciones.txt",
@@ -538,7 +540,6 @@
 		"/D/git/nes_work/Tutorial_MK1/tut06eng.md",
 		"/D/git/nes_work/Tutorial_MK1/tut07eng.md",
 		"/D/git/nes_work/Tutorial_MK1/tut05esp.md",
-		"/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/tutorial/tut07esp.md",
 		"/D/git/MK1_NES/tutorial/tut07eng.md",
 		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx/ss.png",
@@ -646,14 +647,7 @@
 		"/D/perfiles/jcastano/Desktop/enviar_factura.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es-old/webmail/plugins/smime/smime.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/index.html",
-		"/D/perfiles/jcastano/Desktop/pages_template.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/app/app.js",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zE45AB6577/index_panel.html",
-		"/D/perfiles/jcastano/Desktop/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/index_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_principal_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_composicion_panel.html",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/ayuda/plantillas/correo_utilidades_panel.html"
+		"/D/perfiles/jcastano/Desktop/pages_template.html"
 	],
 	"find":
 	{
@@ -672,6 +666,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"kick",
+			"sfx_play",
+			"kick",
 			"_b",
 			"_a",
 			"fbin",
@@ -698,7 +695,7 @@
 			"respawn"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
@@ -724,91 +721,36 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/assets/metasprites.h",
-					"semi_transient": false,
+					"file": "testers/00_tester_punchy/dev/engine/breakable.h",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 1680,
+						"buffer_size": 1203,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1679,
-								1586
+								731,
+								706
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 127,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/dev/config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20343,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								19603,
-								19603
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7102.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/D/git/nes_work/Tutorial_MK1/Sir Ababol DX/gfx/import_patterns.spt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 767,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								535,
-								377
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -821,24 +763,24 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 3,
-					"file": "/D/git/nes_work/Tutorial_MK1/tut08esp.md",
+					"buffer": 1,
+					"file": "testers/00_tester_punchy/dev/engine/player.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9547,
+						"buffer_size": 15817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9546,
-								9546
+								5482,
+								5482
 							]
 						],
 						"settings":
@@ -846,17 +788,60 @@
 							"WordCount":
 							{
 								"changes": 0,
-								"count": 1368,
+								"count": 1473,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
 							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2403.0,
+						"translation.y": 3540.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/08_cheril_the_writer/dev/compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3852,
+								3852
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 11,
+								"count": 141,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 975.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

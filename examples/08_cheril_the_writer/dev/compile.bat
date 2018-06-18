@@ -84,6 +84,6 @@ rem del game.s > nul
 del work\*.h /q > nul
 del work\*.bin.* /q > nul
 
-copy cart.nes ..\..\cheril_perils_revamp.nes
+copy cart.nes ..\..\cheril_the_writer.nes
 
 echo DONE!

@@ -91,7 +91,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG		8
+#define PLAYER_COLLISION_VSTRETCH_BG	8
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -110,7 +110,7 @@
 
 // Push boxes
 
-//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 #define FIRE_TO_PUSH
 
 //#define ENABLE_PUSHED_SCRIPT

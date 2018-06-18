@@ -5743,7 +5743,7 @@ _hud_rle:
 	.byte	$45
 	.byte	$01
 	.byte	$1D
-	.byte	$49
+	.byte	$4A
 	.byte	$00
 	.byte	$01
 	.byte	$FE
@@ -5755,7 +5755,7 @@ _hud_rle:
 	.byte	$FE
 	.byte	$00
 	.byte	$01
-	.byte	$42
+	.byte	$02
 	.byte	$01
 	.byte	$00
 _cuts0_rle:
