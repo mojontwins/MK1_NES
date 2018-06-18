@@ -54,6 +54,8 @@ License
 
 The **games included in the `examples` folder** are now free to produce, which means **you can put them into carts and sell them, as long as you tell us first and send us a couple of copies**. You will eventually find assets (stickers and possibly cover art) alongside the game ROM in each game folder.
 
+The **game assets** included in the testers and examples (graphics, music, etc.) are [donationware](https://en.wikipedia.org/wiki/Donationware). 
+
 If you like this, you can [buy me a coffee](https://www.buymeacoffee.com/nath).
 
 Have fun.
