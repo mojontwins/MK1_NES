@@ -71,7 +71,7 @@
 	#define INTERACTIVES_FROM_CODE
 #endif
 
-#if defined (MAP_FORMAT_CHRROM)
+#if defined (MAP_FORMAT_RLE53_CHRROM)
 	#define MAP_RENDERER_COMPLEX
 #endif
 

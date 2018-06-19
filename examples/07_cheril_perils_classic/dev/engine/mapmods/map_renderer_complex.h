@@ -72,10 +72,7 @@ void draw_scr (void) {
 		while (rdm < 192) {
 			rdt = *gp_gen ++;
 			rda = rdt & 0x1f;
-			/*
-			rdct = 1 + (rdt >> 5);
-			while (rdct --) add_tile (); 
-			*/
+			
 			rdct = rdt;
 			while (rdct >= 32) {
 				add_tile (); rdct -= 32;
@@ -83,7 +80,22 @@ void draw_scr (void) {
 		}
 	#endif
 
-	#ifdef MAP_FORMAT_CHRROM
+	#ifdef MAP_FORMAT_RLE44
+		// Get pointer
+		gp_gen = c_map [n_pant];
+
+		while (rdm < 192) {
+			rdt = *gp_gen ++;
+			rda = rdt & 0x0f;
+			
+			rdct = rdt;
+			while (rdct >= 16) {
+				add_tile (); rdct -= 16;
+			} add_tile ();
+		}
+	#endif
+
+	#ifdef MAP_FORMAT_RLE53_CHRROM
 		bankswitch (c_map_chr_rom_bank);
 		vram_adr (c_map [n_pant]);
 		rda = VRAM_READ; 	// Dummy read.
@@ -92,13 +104,27 @@ void draw_scr (void) {
 		while (rdm < 192) {
 			rdt = VRAM_READ;
 			rda = rdt & 0x1f;
-			/*
-			rdct = 1 + (rdt >> 5);
-			while (rdct --) add_tile (); 
-			*/
+			
 			rdct = rdt;
 			while (rdct >= 32) {
 				add_tile (); rdct -= 32;
+			} add_tile ();
+		}
+	#endif
+
+	#ifdef MAP_FORMAT_RLE44_CHRROM
+		bankswitch (c_map_chr_rom_bank);
+		vram_adr (c_map [n_pant]);
+		rda = VRAM_READ; 	// Dummy read.
+		
+		// UNRLE into scr_buff
+		while (rdm < 192) {
+			rdt = VRAM_READ;
+			rda = rdt & 0x0f;
+			
+			rdct = rdt;
+			while (rdct >= 16) {
+				add_tile (); rdct -= 16;
 			} add_tile ();
 		}
 	#endif

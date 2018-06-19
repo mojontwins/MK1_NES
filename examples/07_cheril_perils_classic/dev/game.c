@@ -43,6 +43,7 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+#include "assets/hud_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];

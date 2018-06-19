@@ -2,9 +2,9 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
+//#define GAME_AREA_MIDDLE
 //#define GAME_AREA_BOTTOM
-//#define GAME_AREA_CUSTOM
+#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -12,8 +12,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
-#define MAP_H					3		// Map dimensions in screens
+#define MAP_W 					4		//
+#define MAP_H					6		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
@@ -69,8 +69,9 @@
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
-#define MAP_FORMAT_RLE44				// RLE'd by rle53mapMK1. 32 tiles max.
-//#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
+#define MAP_FORMAT_RLE44				// RLE'd by rle44mapMK1. 16 tiles max.
+//#define MAP_FORMAT_RLE53_CHRROM		// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
+//#define MAP_FORMAT_RLE44_CHRROM		// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
@@ -255,8 +256,8 @@
 
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
-//#define PERSISTENT_ENEMIES
-//#define PERSISTENT_DEATHS
+#define PERSISTENT_ENEMIES
+#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
 //#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
@@ -264,7 +265,7 @@
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
-#define ENEMS_EXPLODING_CELL 			36
+#define ENEMS_EXPLODING_CELL 			40
 #define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
 #define ENEMS_OCCLUDING_CELL			33	// If you use pezons or saws you need a flame for occlusion
@@ -471,18 +472,18 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define LIFE_X					7		//
-#define LIFE_Y					3		// Life gauge counter character coordinates
+#define LIFE_X					4		//
+#define LIFE_Y					4		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
 #define OBJECTS_REMAINING				// Show # remaining instead of got
 
-//#define KEYS_X				28		//
-//#define KEYS_Y				3		// Keys counter character coordinates
+#define KEYS_X					16		//
+#define KEYS_Y					4		// Keys counter character coordinates
 
-#define KILLED_X				16		//
-#define KILLED_Y				2		// Kills counter character coordinates
+#define KILLED_X				28		//
+#define KILLED_Y				4		// Kills counter character coordinates
 
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
@@ -514,8 +515,8 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
