@@ -25,7 +25,7 @@ To compile the examples, enter `examples` and run `make_examples.bat`. `cc65_2.1
 Documentation
 =============
 
-You can read about [engine features](https://github.com/mojontwins/MK1_NES/blob/master/features.md) and will find a detailed postmortem on every tester and examples #8 onwards. A tutorial is coming in the near future.
+You can read about [engine features](https://github.com/mojontwins/MK1_NES/blob/master/features.md) and will find a detailed postmortem on every tester and examples #7 onwards. A tutorial is coming in the near future.
 
 Evolution
 =========
