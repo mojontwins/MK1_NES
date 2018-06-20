@@ -12,9 +12,11 @@ PALS palts0.png
 CHARSET 0, 0, 32, 2
 
 # Title screen
-
-# Hud
-
+MAPFILE ..\dev\work\dummy.h
+OPEN title.png
+PALS palts1.png
+LABEL dummy0
+MAPPED 0, 0, 2, 2, 16, 15
 
 MAPFILE ..\dev\assets\tiledata.h
 

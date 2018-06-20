@@ -43,6 +43,7 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+#include "assets/title_rle.h"
 #include "assets/hud_rle.h"
 
 // Music
@@ -108,15 +109,13 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
+	level = 0;
 
 	// Main loop
 
 	while (1) {	
-		pres (palts0, scr_title);
+		title ();
 
-#ifdef MULTI_LEVEL		
-		level = 0;
-#endif
 		plife = PLAYER_LIFE;
 
 		// Game loop
@@ -130,14 +129,8 @@ void main(void) {
 				pres (palts0, scr_game_over);
 				break;
 			} else {
-#ifdef MULTI_LEVEL
-				level ++;
-				if (level == MAX_LEVELS) 
-#endif
-				{
-					pres (palts0, scr_the_end);
-					break;
-				}
+				pres (palts0, scr_the_end);
+				break;
 			}
 		}
 

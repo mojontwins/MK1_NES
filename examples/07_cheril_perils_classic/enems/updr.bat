@@ -1,2 +1,2 @@
-copy ..\trash\ts?.png
+copy ..\gfx\ts?.png
 copy ..\map\level?.map

@@ -31,9 +31,31 @@ void pres (const unsigned char *p, void (*func) (void)) {
 	bank_bg (0);
 }
 
-void scr_title (void) {
-	_x =  6; _y = 10; pr_str ("CONGRATS, IT WORKED!");
-	_x = 10; _y = 21; pr_str ("PRESS START!");
+void title (void) {
+	scroll (0,0);
+	pal_spr (palss0);
+	pal_bg (palts1);
+	unrle_vram (title_rle, 0x2000);
+
+	bat_in ();
+
+	while (1) {
+		oam_meta_spr (84, 170 + (level << 4), 0, sspl_00_a);
+		ppu_waitnmi ();
+		pad_read ();
+		rda = level;
+		if (pad_this_frame & (PAD_SELECT|PAD_DOWN)) {
+			level ++; if (level == 2) level = 0;
+		}
+		if (pad_this_frame & PAD_UP) {
+			if (level) level --; else level = 1;
+		}
+		if (level != rda) sfx_play (SFX_USE, 0);
+		if (pad_this_frame & PAD_START) break;
+	}
+	sfx_play (SFX_START, 0); delay (20);
+
+	bat_out ();
 }
 
 void scr_game_over (void) {
