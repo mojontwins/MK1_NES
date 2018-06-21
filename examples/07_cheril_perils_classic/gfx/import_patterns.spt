@@ -71,4 +71,9 @@ METASPRITE 14, 6, 2, 2, 1, 1, 0, 0
 LABEL ssit
 METASPRITESET 0, 6, 2, 2, 2, 1, 0, 0
 
+# Ending big cheril
+LABEL ssending
+OPEN ssending.png
+METASPRITE 0, 0, 8, 12, 0, 0
+
 FILL 8192

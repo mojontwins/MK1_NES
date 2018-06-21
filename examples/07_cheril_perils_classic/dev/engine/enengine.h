@@ -770,8 +770,11 @@ void enems_move (void) {
 					pry < _en_y && 
 					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 					pgotten == 0 &&	ppossee == 0
-					#ifdef ENABLE_RESONATORS
+					#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
 						&& pvy > 0
+					#endif
+					#ifdef PLAYER_STEPS_STRICT
+						&& pvy > PLAYER_VY_FALLING_MIN
 					#endif
 					#ifndef STEADY_SHOOTER_KILLABLE
 						&& _en_t != 5
@@ -796,11 +799,12 @@ void enems_move (void) {
 					#ifdef PLAYER_HAS_JUMP
 						if (i & PAD_A) {
 							jump_start ();
-						} else {
-							sfx_play (SFX_STEPON, 1);
-							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-						}
-					#endif
+						} else 
+					#endif						
+					{
+						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+					}
+					sfx_play (SFX_STEPON, 1);
 
 					#ifdef PLAYER_AUTO_JUMP
 						jump_start ();

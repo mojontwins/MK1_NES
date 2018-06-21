@@ -7,6 +7,7 @@
 // Reaching this point, map_buff has the decompressed map screen.
 // You can write as many modifications as you like here:
 
+set_rand (1 + n_pant);
 gpit = 192; while (gpit --) {
 	if (rand8 () & 1) map_buff [gpit] += 16;
 }

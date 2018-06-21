@@ -457,11 +457,12 @@
 // ----------
 
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
-//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
+#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
+#define PLAYER_STEPS_STRICT				// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 #define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
 //#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 												// 0xff = Nobody
@@ -510,13 +511,13 @@
 // IV.1. Vertical movement. Only for side-view.
 
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
-#define PLAYER_VY_FALLING_MIN	64		// Use for animating if you need
+#define PLAYER_VY_FALLING_MIN	32		// Use for animating if you need
 #define PLAYER_VY_SINKING		2
-#define PLAYER_G				16		// Gravity
+#define PLAYER_G				8		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_MAX		160		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
@@ -533,21 +534,18 @@
 
 // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
 // (Used if PLAYER_JUMP_TYPE_MK2 is defined)
-#define PLAYER_G_MK2_JUMPING		4
-#define PLAYER_VY_MK2_JUMP_INITIAL	208
-#define PLAYER_VY_MK2_JUMP_RELEASE	96
+#define PLAYER_G_MK2_JUMPING		2
+#define PLAYER_VY_MK2_JUMP_INITIAL	160
+#define PLAYER_VY_MK2_JUMP_RELEASE	80
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			128		// Max. horizontal speed
-#define PLAYER_VX_SPRINT_MAX	192
-#define PLAYER_VX_MAX_PODEWWWR	256
-#define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_VX_MAX			112		// Max. horizontal speed
+#define PLAYER_VX_CONVEYORS 	48
+#define PLAYER_AX				12		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_AX_SPRINT		12
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				12		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 1)

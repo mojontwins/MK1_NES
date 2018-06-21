@@ -30,9 +30,9 @@ const unsigned char * const spr_enems0 [] = {
 	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
 	ssen_0E_a, ssen_0F_a, 0, 0, ssen_0E_b, ssen_0F_b, 0, 0, // Platform (4)
 
-	ssen_0C_a, ssen_0C_a, 0, 0, ssen_0D_b, ssen_0D_b, 0, 0, // Fanty (offset 32)
+	ssen_0C_a, ssen_0D_a, 0, 0, ssen_0C_b, ssen_0D_b, 0, 0, // Fanty (offset 32)
 
-	// Explosion (offset 36)
+	// Explosion (offset 40)
 	ssen_10
 };
 
@@ -43,9 +43,9 @@ const unsigned char * const spr_enems1 [] = {
 	ssen_0A_a, ssen_0B_a, 0, 0, ssen_0A_b, ssen_0B_b, 0, 0, // 3
 	ssen_0E_a, ssen_0F_a, 0, 0, ssen_0E_b, ssen_0F_b, 0, 0, // Platform (4)
 
-	ssen_0C_a, ssen_0C_a, 0, 0, ssen_0D_b, ssen_0D_b, 0, 0, // Fanty (offset 32)
+	ssen_0C_a, ssen_0D_a, 0, 0, ssen_0C_b, ssen_0D_b, 0, 0, // Fanty (offset 32)
 
-	// Explosion (offset 36)
+	// Explosion (offset 40)
 	ssen_10
 };
 
