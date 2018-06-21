@@ -63,5 +63,6 @@ void scr_game_over (void) {
 }
 
 void scr_the_end (void) {
-	_x = 12; _y = 15; pr_str ("THE END");
+	oam_meta_spr (100, 64, 0, ssending_00);
+	_x = 12; _y = 22; pr_str ("THE  END");
 }

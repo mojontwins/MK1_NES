@@ -51,6 +51,8 @@ ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
+copy cart.nes ..\..\cheril_perils_classic.nes
+
 del *.o
 del game.s
 
