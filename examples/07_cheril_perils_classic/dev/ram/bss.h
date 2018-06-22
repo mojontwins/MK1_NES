@@ -196,7 +196,7 @@ unsigned char en_spr_id [3];
 // Resonators
 
 #ifdef ENABLE_RESONATORS
-	unsigned char res_on, res_ct, res_subct;
+	unsigned char res_on, res_disable, res_ct, res_subct;
 #endif
 
 // More conveyors

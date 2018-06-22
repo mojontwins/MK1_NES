@@ -5,3 +5,7 @@
 // Background is rendered, everything initialized.
 // Screen is ON.
 
+if (mode_no_resonators) {
+	res_disable = 1;
+	if (hrt == HOTSPOT_TYPE_RESONATOR) hrt = 0;
+}

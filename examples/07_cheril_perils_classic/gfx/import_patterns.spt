@@ -69,7 +69,7 @@ METASPRITE 14, 6, 2, 2, 1, 1, 0, 0
 
 # Items
 LABEL ssit
-METASPRITESET 0, 6, 2, 2, 2, 1, 0, 0
+METASPRITESET 0, 6, 2, 2, 5, 1, 0, 0
 
 # Ending big cheril
 LABEL ssending

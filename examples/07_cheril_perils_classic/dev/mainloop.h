@@ -52,6 +52,7 @@ void game_init (void) {
 
 	#ifdef ENABLE_RESONATORS
 		res_on = 0;
+		res_disable = 0;
 	#endif
 
 	#ifdef ENABLE_USE_ANIM

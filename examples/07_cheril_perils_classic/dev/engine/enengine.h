@@ -526,7 +526,7 @@ void enems_move (void) {
 		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
 		
 		// Clear selected sprite
-
+		// Means don't render (can/will be overwritten):
 		en_spr = 0xff;
 
 		// "touched" state control
@@ -574,8 +574,6 @@ void enems_move (void) {
 
 			// Select frame upon screen position:
 			en_fr = ((((_en_mx) ? _en_x : _en_y)+4) >> 3) & 1;
-
-			// Means don't render (can/will be overwritten):
 			
 			#ifdef ENABLE_RESONATORS
 				if (res_on 
@@ -785,7 +783,7 @@ void enems_move (void) {
 				) {
 				
 					#ifdef ENABLE_RESONATORS
-						if (res_on)
+						if (res_on || res_disable)
 					#endif
 					#ifdef PLAYER_STEPS_MIN_KILLABLE
 						if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)

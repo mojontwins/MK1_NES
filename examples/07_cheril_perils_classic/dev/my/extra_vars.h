@@ -3,3 +3,6 @@
 
 // extra_vars.h
 // If your customs need extra variables (in BSS) define them here
+
+unsigned char mode_no_resonators; 
+unsigned char game_mode;

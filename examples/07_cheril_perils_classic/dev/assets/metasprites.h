@@ -50,8 +50,8 @@ const unsigned char * const spr_enems1 [] = {
 };
 
 // Item metasprites
-// nothing, nothing, key, refill
+// nothing, nothing, key, refill, res_on, res_off
 const unsigned char * const spr_hs [] = {
-	0, 0, ssit_01, ssit_00
+	0, 0, ssit_01, ssit_00, ssit_02, ssit_03
 };
 

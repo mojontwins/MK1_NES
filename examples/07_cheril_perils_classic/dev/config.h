@@ -59,7 +59,8 @@
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
 
-//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
+#define HOTSPOT_TYPE_RESONATOR 	4		// An example of custom hotspot
+#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
 //#define HOTSPOT_TYPE_STAR 		4	// Stars are extra collectibles
 
@@ -190,7 +191,7 @@
 
 // Resonators. Not sure if you need this, but.
 
-//#define ENABLE_RESONATORS
+#define ENABLE_RESONATORS
 #define RESONATOR_BASE_PATTERN			0
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4
@@ -207,8 +208,8 @@
 
 // No!
 
-//#define ENABLE_NO 
-#define NO_METASPRITE					ssit_06
+#define ENABLE_NO 
+#define NO_METASPRITE					ssit_04
 #define NO_OFFS_X						0
 #define NO_OFFS_Y						-24
 

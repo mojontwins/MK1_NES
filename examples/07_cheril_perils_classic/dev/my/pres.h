@@ -37,23 +37,32 @@ void title (void) {
 	pal_bg (palts1);
 	unrle_vram (title_rle, 0x2000);
 
+	_x = 5; _y = 18; pr_str ("SELECT AND PUSH START!");
+
+	_x = 12; _y = 22; pr_str ("LEVEL A[R]");
+	         _y = 23; pr_str ("LEVEL B[R]");
+	         _y = 24; pr_str ("LEVEL A");
+	         _y = 25; pr_str ("LEVEL B");
+
 	bat_in ();
 
 	while (1) {
-		oam_meta_spr (84, 170 + (level << 4), 0, sspl_00_a);
+		oam_meta_spr (84, 170 + (game_mode << 3), 0, sspl_00_a);
 		ppu_waitnmi ();
 		pad_read ();
-		rda = level;
 		if (pad_this_frame & (PAD_SELECT|PAD_DOWN)) {
-			level ++; if (level == 2) level = 0;
+			game_mode ++; if (game_mode == 4) game_mode = 0;
 		}
 		if (pad_this_frame & PAD_UP) {
-			if (level) level --; else level = 1;
+			if (game_mode) game_mode --; else game_mode = 3;
 		}
-		if (level != rda) sfx_play (SFX_USE, 0);
+		if (game_mode != rda) sfx_play (SFX_USE, 0);
 		if (pad_this_frame & PAD_START) break;
 	}
 	sfx_play (SFX_START, 0); delay (20);
+	
+	level = game_mode & 1;
+	mode_no_resonators = (game_mode > 1);
 
 	bat_out ();
 }

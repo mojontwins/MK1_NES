@@ -110,7 +110,6 @@ void main(void) {
 	ppu_off ();
 	first_game = 1;
 	level = 0;
-
 	// Main loop
 
 	while (1) {	
