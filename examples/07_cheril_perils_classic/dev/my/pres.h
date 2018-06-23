@@ -50,6 +50,7 @@ void title (void) {
 		oam_meta_spr (84, 170 + (game_mode << 3), 0, sspl_00_a);
 		ppu_waitnmi ();
 		pad_read ();
+		rda = game_mode;
 		if (pad_this_frame & (PAD_SELECT|PAD_DOWN)) {
 			game_mode ++; if (game_mode == 4) game_mode = 0;
 		}
