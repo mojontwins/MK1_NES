@@ -16,7 +16,7 @@
 #define MAP_H					6		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				10		// Max / Initial life
+#define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
 
 #define MULTI_LEVEL						// Comment for single level
@@ -211,7 +211,7 @@
 #define ENABLE_NO 
 #define NO_METASPRITE					ssit_04
 #define NO_OFFS_X						0
-#define NO_OFFS_Y						-24
+#define NO_OFFS_Y						-20
 
 // Use animation.
 // Note: When activated hotspots need b_button press and, in side view, possee.
