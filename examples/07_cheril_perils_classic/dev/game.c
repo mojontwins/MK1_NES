@@ -109,13 +109,13 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
-	level = 0;
+	game_mode = 0;
 	// Main loop
 
 	while (1) {	
 		title ();
 
-		plife = PLAYER_LIFE;
+		//plife = PLAYER_LIFE;
 
 		// Game loop
 

@@ -315,8 +315,8 @@
 
 // Chac chacs
 
-//#define ENABLE_CHAC_CHAC
-#define CHAC_CHAC_BASE_TILE				16
+#define ENABLE_CHAC_CHAC
+#define CHAC_CHAC_BASE_TILE				32
 #define CHAC_CHAC_IDLE_2				16
 #define CHAC_CHAC_IDLE_3				1
 #define CHAC_CHAC_IDLE_4				50

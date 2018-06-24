@@ -3975,3 +3975,29 @@ Probando Bootèe, que lo sacamos para compo en 0.2, reviso TODOs...
 - Terminar de ordenar: Sir Ababol DX va fuera.
 - Traducir tutorial: componentes básicos al inglés.
 
+20180624
+========
+
+Creía que sí pero no ... Una nueva adición: sacar chac chacs de los enemigos y meter como entes aparte que se puedan generar desde escenario, script, etc.
+
+Los chac chacs tienen seis estados: 
+
+0.- Idle, con la duración establecida en `_en_my` . Esto es lo único que no sé muy bien como resolver si los coloco en el mapa.
+
+1.- Show teeth, duración establecida.
+
+2.- Closing, duración establecida.
+
+3.- Cerrados, duración establecida.
+
+4.- Abriendo 1, duración establecida.
+
+5.- Abriendo 2, duración establecida.
+
+Los puedo general fási desde el mapa, pero ¿Cómo definir las duraciones? Puedo seleccionar una base y añadir. BASE = 1 segundo, BASE+n = N+1 segundos, con 3 diferentes.
+
+No se pintará nada en pantalla. Se colocará en la esquina superior de donde se deba aparecer el chac chac. 
+
+Ya que estoy tengo que reorganizar los decos al final de cada pantalla cuando haya decos. Voy a ver si hay algún ejemplo / tester con decos.
+
+No hay ni uno. ¡Estupendo!

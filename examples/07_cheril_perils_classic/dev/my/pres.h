@@ -64,6 +64,7 @@ void title (void) {
 	
 	level = game_mode & 1;
 	mode_no_resonators = (game_mode > 1);
+	plife = mode_no_resonators ? 5 : 3;
 
 	bat_out ();
 }
