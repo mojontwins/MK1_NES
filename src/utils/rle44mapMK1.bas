@@ -143,6 +143,7 @@ Close #f
 
 Print "Compressing ~ ";
 totalBytes = 0
+decosize = 0
 For nPant = 0 To mapPants - 1
 	d = m (nPant, 0): n = 1: cMapI = 0
 	cMapAmalgam (nPant) = ""
@@ -152,7 +153,6 @@ For nPant = 0 To mapPants - 1
 		' Different: write, substitute
 		If m (nPant, i) <> d Or n = 16 Then
 			mOut (nPant, cMapI) = (d And 15) Or ((n - 1) Shl 4)
-			'?Hex (mOut (nPant, cMapI), 2) & " ";
 			cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
 			cMapI = cMapI + 1
 			n = 0
@@ -160,35 +160,11 @@ For nPant = 0 To mapPants - 1
 		d = m (nPant, i): n = n + 1
 	Next i
 	mOut (nPant, cMapI) = (d And 15) Or ((n - 1) Shl 4)
-	'?Hex (mOut (nPant, cMapI), 2) & " ";
 	cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
 	cMapI = cMapI + 1
 
-	realPant = nPant
-
-	' Detect empty screen
-	If screensum = 0 Then 
-		realPant = 255: cMapI = 0
-	Else
-		' Search for repeated screens
-		For j = 0 To nPant - 1
-			If cMapAmalgam (j) = cMapAmalgam (nPant) Then
-				realPant = j
-				cMapI = 0
-				Exit For
-			End If
-		Next j
-	End If
-
-	scrSizes (nPant) = cMapI
-	scrMaps (nPant) = realPant '' Fixe here
-	scrOffsets (nPant) = totalBytes
-	totalBytes = totalBytes + cMapI
-Next nPant
-
-' Process decos
-If founddecos And Not nodecos Then 
-	For nPant = 0 To mapPants - 1
+	' Process decos
+	If Not nodecos Then
 		If decosI (nPant) Then
 			For i = 0 To decosI (nPant) - 1
 				decoT = decos (nPant, i)
@@ -218,9 +194,44 @@ If founddecos And Not nodecos Then
 					End If
 				End If
 			Next i
+
+			If decosOI (nPant) Then
+				screensum = screensum + 1
+				For i = 0 To decosOI (nPant) - 1
+					mOut (nPant, cMapI) = decosO (nPant, i)
+					cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
+					cMapI = cMapI + 1
+				Next i
+			End If
+
 		End If
-	Next nPant
-End If
+
+		mOut (nPant, cMapI) = 0
+		cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
+		cMapI = cMapI + 1
+	End If
+
+	realPant = nPant
+
+	' Detect empty screen
+	If screensum = 0 Then 
+		realPant = 255: cMapI = 0
+	Else
+		' Search for repeated screens
+		For j = 0 To nPant - 1
+			If cMapAmalgam (j) = cMapAmalgam (nPant) Then
+				realPant = j
+				cMapI = 0
+				Exit For
+			End If
+		Next j
+	End If
+
+	scrSizes (nPant) = cMapI
+	scrMaps (nPant) = realPant '' Fixe here
+	scrOffsets (nPant) = totalBytes
+	totalBytes = totalBytes + cMapI
+Next nPant
 
 ' Write output
 f = Freefile
@@ -267,7 +278,9 @@ Print "~ ";
 
 ' Write screens
 If Not binmode Then
-	Print #f, "// Compressed map structure, screens in RLE44, byte = NNNNNRRR, repeat R times tile #N"
+	Print #f, "// Compressed map structure, screens in RLE44, byte = NNNNRRRR, repeat R times tile #N"
+	Print #f, "// Decos follow each screen, Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
+	
 	Print #f, ""
 End If
 
@@ -315,50 +328,14 @@ If Not binmode Then
 	Print #f, "};"
 	Print #f, ""
 	Print #f, "// Total map size in bytes is " & mapsize
+	If decosize Then Print #f, "// From which, decorations size in bytes is " & decosize
+
+	Print "Wrote decos (" & decosize & " bytes) ~ ";
+
 	Print #f, ""
 End If
 
 Print "Wrote MAP (" & mapsize & " bytes) ~ ";
-
-' Write decos
-If founddecos And Not nodecos And Not binmode Then 
-	decosize = 0
-	Print #f, "// Decorations"
-	Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
-	Print #f, ""
-	For nPant = 0 To mapPants - 1
-		If decosOI (nPant) Then
-			Print #f, "const unsigned char map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2)) & " [] = { ";
-			For i = 0 To decosOI (nPant) - 1
-				Print #f, "0x" & Lcase (Hex (decosO (nPant, i), 2)) & ", " ;
-				decosize = decosize + 1
-			Next i
-			Print #f, "0x00 }; "
-		End If
-	Next nPant
-	Print #f, ""
-	Print #f, "const unsigned char * const map_" & prefix & "_decos [] = {"
-	For y = 0 To mapH - 1
-		Print #f, "	";
-		For x = 0 To mapW - 1
-			nPant = x + y * mapW
-			If decosOI (nPant) Then
-				Print #f, "map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2));
-			Else 
-				Print #f, "0";
-			End If
-			decosize = decosize + 2
-			If x < mapW - 1 Or y < mapH - 1 Then Print #f, ", ";
-		Next x
-		Print #f, ""
-	Next y
-	Print #f, "};"
-	Print #f, ""
-	Print #f, "// Total decorations size in bytes is " & decosize
-	Print #f, ""
-
-	Print "Wrote decos (" & decosize & " bytes) ~ ";
-End If
 
 ' Write locks
 If locksI Then

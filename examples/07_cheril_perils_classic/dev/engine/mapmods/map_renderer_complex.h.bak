@@ -144,33 +144,18 @@ void draw_scr (void) {
 				{
 			#endif
 
-				#if defined (MAP_FORMAT_RLE44_CHRROM) || defined (MAP_FORMAT_RLE53)
-					while (rda = VRAM_READ) {
-						if (rda & 0x80) {
-							rda &= 0x7F;
-							rdct = 1;
-						} else {
-							rdct = VRAM_READº;
-						}
-						while (rdct --) {
-							rdm = VRAM_READ;
-							add_tile ();
-						}
+				while (rda = *gp_gen ++) {
+					if (rda & 0x80) {
+						rda &= 0x7F;
+						rdct = 1;
+					} else {
+						rdct = *gp_gen ++;
 					}
-				#else
-					while (rda = *gp_gen ++) {
-						if (rda & 0x80) {
-							rda &= 0x7F;
-							rdct = 1;
-						} else {
-							rdct = *gp_gen ++;
-						}
-						while (rdct --) {
-							rdm = *gp_gen ++;
-							add_tile ();
-						}
+					while (rdct --) {
+						rdm = *gp_gen ++;
+						add_tile ();
 					}
-				#endif
+				}
 			}
 		}
 	#endif

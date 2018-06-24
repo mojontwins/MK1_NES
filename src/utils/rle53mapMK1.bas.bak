@@ -329,14 +329,50 @@ If Not binmode Then
 	Print #f, "};"
 	Print #f, ""
 	Print #f, "// Total map size in bytes is " & mapsize
-	If decosize Then Print #f, "// From which, decorations size in bytes is " & decosize
-
-	Print "Wrote decos (" & decosize & " bytes) ~ ";
-
 	Print #f, ""
 End If
 
 Print "Wrote MAP (" & mapsize & " bytes) ~ ";
+
+' Write decos
+If founddecos And Not nodecos And Not binmode Then 
+	decosize = 0
+	Print #f, "// Decorations"
+	Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
+	Print #f, ""
+	For nPant = 0 To mapPants - 1
+		If decosOI (nPant) Then
+			Print #f, "const unsigned char map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2)) & " [] = { ";
+			For i = 0 To decosOI (nPant) - 1
+				Print #f, "0x" & Lcase (Hex (decosO (nPant, i), 2)) & ", " ;
+				decosize = decosize + 1
+			Next i
+			Print #f, "0x00 }; "
+		End If
+	Next nPant
+	Print #f, ""
+	Print #f, "const unsigned char * const map_" & prefix & "_decos [] = {"
+	For y = 0 To mapH - 1
+		Print #f, "	";
+		For x = 0 To mapW - 1
+			nPant = x + y * mapW
+			If decosOI (nPant) Then
+				Print #f, "map_" & prefix & "_decos_" & Lcase (Hex (nPant, 2));
+			Else 
+				Print #f, "0";
+			End If
+			decosize = decosize + 2
+			If x < mapW - 1 Or y < mapH - 1 Then Print #f, ", ";
+		Next x
+		Print #f, ""
+	Next y
+	Print #f, "};"
+	Print #f, ""
+	Print #f, "// Total decorations size in bytes is " & decosize
+	Print #f, ""
+
+	Print "Wrote decos (" & decosize & " bytes) ~ ";
+End If
 
 ' Write locks
 If locksI Then

@@ -103,7 +103,6 @@ void draw_scr (void) {
 	// Draw decorations
 
 	#ifdef MAP_WITH_DECORATIONS
-		// Draw decorations
 		if (c_decos) {
 			#if defined (MAP_FORMAT_PACKED) || #defined (MAP_FORMAT_RLE16)
 				if (c_decos [n_pant]) {
@@ -111,7 +110,7 @@ void draw_scr (void) {
 			# else 
 				{
 			#endif
-
+			
 				while (rdd = *gp_gen ++) {
 					if (rdd & 0x80) {
 						rdd &= 0x7F;
