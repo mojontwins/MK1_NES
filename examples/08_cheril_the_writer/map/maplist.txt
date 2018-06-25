@@ -1,5 +1,5 @@
-level0.map,6,4,15
-level1.map,8,3,99,fixmappy
-level2.map,6,4,99
-level3.map,4,6,15
-level4.map,6,2,99,fixmappy
+level0.map,6,4,15,nodecos
+level1.map,8,3,99,fixmappy,nodecos
+level2.map,6,4,99,nodecos
+level3.map,4,6,15,nodecos
+level4.map,6,2,99,fixmappy,nodecos

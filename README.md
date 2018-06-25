@@ -32,7 +32,6 @@ Evolution
 
 Although this isn't our main engine, we will be updating it in the future following a simple roadmap:
 
-- Add decos support for maps stored in CHR-ROM.
 - Create a working UNROM-based template.
 - Update to the latest version of the cc65 compiler.
 - Update to the latest version of neslib.

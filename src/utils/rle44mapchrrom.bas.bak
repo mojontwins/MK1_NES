@@ -83,7 +83,7 @@ Dim As uByte scrMaps (127)
 Dim As String mapFile
 Dim As Integer tlocks (31), tlocksIndex
 DIm As String tlocksString, tokens (10), linea
-Dim As Integer shows, nodecos
+Dim As Integer shows
 Dim As String fileName
 
 ' decos
@@ -132,9 +132,7 @@ While Not Eof (fListIn)
 	mapW = Val (tokens (1))
 	mapH = Val (tokens (2))
 	tlocksString = tokens (3)
-	'fixmappy = (tokens (4) = "fixmappy")
-	fixmappy = parserFindTokenInTokens ("fixmappy", tokens (), "lcase")
-	nodecos = parserFindTokenInTokens ("nodecos", tokens (), "lcase")
+	fixmappy = (tokens (4) = "fixmappy")
 	
 	parseCoordinatesStringCustom tlocksString, "-", coords ()
 	tlocksIndex = 0
@@ -144,10 +142,7 @@ While Not Eof (fListIn)
 	Wend
 
 	maxPants = mapW * mapH
-	Print "Processing " & mapFile & " (" & mapW & "x" & mapH & ")";
-	If fixmappy Then Print "[fixmappy]";
-	If nodecos Then Print "[nodecos]";
-	Print " ~ ";
+	Print "Processing " & mapFile & " (" & mapW & "x" & mapH & ") ~ ";
 
 	Print #fOut, "// Map # " & nMap & " read from " & mapFile & " (" & mapW & "x" & mapH & ")"
 	Print #fOut, ""
@@ -192,7 +187,7 @@ While Not Eof (fListIn)
 			' deco
 			If Not decosAre Then 
 				Print "Found T(s) OOR ";
-				If nodecos Then Print "(ignored)"; Else Print "(decos)";
+				If sclpGetValue ("nodecos") <> "" Then Print "(ignored)"; Else Print "(decos)";
 				decosAre = -1
 			End If			
 			' Write to decos
@@ -209,7 +204,6 @@ While Not Eof (fListIn)
 
 	Print "Compressing ~ ";
 	totalBytes = 0
-	decosize = 0
 	For nPant = 0 To maxPants - 1
 		d = BigMap (nPant, 0): n = 1: cMapI = 0
 		cMapAmalgam (nPant) = ""
@@ -228,54 +222,6 @@ While Not Eof (fListIn)
 		cMap (nPant, cMapI) = (d And 15) Or ((n - 1) Shl 4)
 		cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (cMap (nPant, cMapI), 2)
 		cMapI = cMapI + 1
-
-		' Process decos
-		If Not nodecos Then
-			If decosI (nPant) Then
-				For i = 0 To decosI (nPant) - 1
-					decoT = decos (nPant, i)
-					If decoT <> &Hff Then
-						decoCT = 1
-						YX (0) = decosYX (nPant, i)
-						' Find more:
-						For j = i + 1 To decosI (nPant) - 1
-							If decos (nPant, i) = decos (nPant, j) Then
-								' Found! DESTROY!
-								YX (decoCT) = decosYX (nPant, j)
-								decoCT = decoCT + 1
-								decos (nPant, j) = &Hff
-							End If
-						Next j
-						If decoCT = 1 Then
-							' T | 128, YX
-							decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
-							decosO (nPant, decosOI (nPant)) = YX (0): decosOI (nPant) = decosOI (nPant) + 1
-						Else
-							' T N YX YX YX YX...
-							decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
-							decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
-							For j = 0 To decoCT - 1
-								decosO (nPant, decosOI (nPant)) = YX (j): decosOI (nPant) = decosOI (nPant) + 1
-							Next j
-						End If
-					End If
-				Next i
-
-				If decosOI (nPant) Then
-					screensum = screensum + 1
-					For i = 0 To decosOI (nPant) - 1
-						cMap (nPant, cMapI) = decosO (nPant, i)
-						cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (cMap (nPant, cMapI), 2)
-						cMapI = cMapI + 1
-					Next i
-				End If
-
-			End If
-
-			cMap (nPant, cMapI) = 0
-			cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (cMap (nPant, cMapI), 2)
-			cMapI = cMapI + 1
-		End If
 
 		realPant = nPant
 
@@ -364,7 +310,6 @@ While Not Eof (fListIn)
 	Print #fOut, "};"
 	Print #fOut, ""
 	Print #fOut, "// Total screens size in bytes is " & partialBinIndex
-	If decosize Then Print #fOut, "// From which, decorations size in bytes is " & decosize
 	Print #fOut, ""
 
 	Print "Writing locks ~ ";
