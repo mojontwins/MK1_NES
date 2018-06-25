@@ -137,7 +137,7 @@ void draw_scr (void) {
 	#ifdef MAP_WITH_DECORATIONS
 		// Draw decorations
 		if (c_decos) {
-			#if defined (MAP_FORMAT_PACKED) || #defined (MAP_FORMAT_RLE16)
+			#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16)
 				if (c_decos [n_pant]) {
 					gp_gen = c_decos [n_pant];
 			# else 
@@ -150,7 +150,7 @@ void draw_scr (void) {
 							rda &= 0x7F;
 							rdct = 1;
 						} else {
-							rdct = VRAM_READº;
+							rdct = VRAM_READ;
 						}
 						while (rdct --) {
 							rdm = VRAM_READ;

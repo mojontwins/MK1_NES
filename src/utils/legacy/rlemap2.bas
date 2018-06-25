@@ -26,7 +26,7 @@ End Function
 
 Dim As Integer x, y, xx, yy, nPant, mapW, mapH, i, j, dat, f, mapsize, decosize, scrsize, founddecos
 Dim As Integer scrsizes, nodecos, offset
-Dim As Integer mapWtiles, mapPants, tLock, locksI, state, tileStrI, decoT, decoCt, XYct
+Dim As Integer mapWtiles, mapPants, tLock, locksI, state, tileStrI, decoT, decoCt, YXct
 Dim As Integer counter
 Dim As String o, prefix
 Dim As uByte d, dp
@@ -38,7 +38,7 @@ Dim As uByte locks (63), tilestr (32)
 ' Sorry, but this is acting weird
 Dim As uByte m (127, SCR_W * SCR_H - 1)
 Dim As uByte decos (127, 127)
-Dim As uByte decosXY (127, 127), XY (127)
+Dim As uByte decosYX (127, 127), YX (127)
 Dim As uByte decosO (127, 127)
 Dim As uByte decosI (127)
 Dim As uByte decosOI (127)
@@ -110,7 +110,7 @@ While Not Eof (f)
 			Print "Found decoss ~ ";
 		End If
 
-		decosXY (nPant, decosI (nPant)) = x * 16 + y
+		decosYX (nPant, decosI (nPant)) = y * 16 + x
 		decos (nPant, decosI (nPant)) = d
 		decosI (nPant) = decosI (nPant) + 1
 
@@ -270,26 +270,26 @@ If founddecos And Not nodecos Then
 				decoT = decos (nPant, i)
 				If decoT <> &Hff Then
 					decoCT = 1
-					XY (0) = decosXY (nPant, i)
+					YX (0) = decosYX (nPant, i)
 					' Find more:
 					For j = i + 1 To decosI (nPant) - 1
 						If decos (nPant, i) = decos (nPant, j) Then
 							' Found! DESTROY!
-							XY (decoCT) = decosXY (nPant, j)
+							YX (decoCT) = decosYX (nPant, j)
 							decoCT = decoCT + 1
 							decos (nPant, j) = &Hff
 						End If
 					Next j
 					If decoCT = 1 Then
-						' T | 128, XY
+						' T | 128, YX
 						decosO (nPant, decosOI (nPant)) = decoT Or 128: decosOI (nPant) = decosOI (nPant) + 1
-						decosO (nPant, decosOI (nPant)) = XY (0): decosOI (nPant) = decosOI (nPant) + 1
+						decosO (nPant, decosOI (nPant)) = YX (0): decosOI (nPant) = decosOI (nPant) + 1
 					Else
-						' T N XY XY XY XY...
+						' T N YX YX YX YX...
 						decosO (nPant, decosOI (nPant)) = decoT: decosOI (nPant) = decosOI (nPant) + 1
 						decosO (nPant, decosOI (nPant)) = decoCT: decosOI (nPant) = decosOI (nPant) + 1
 						For j = 0 To decoCT - 1
-							decosO (nPant, decosOI (nPant)) = XY (j): decosOI (nPant) = decosOI (nPant) + 1
+							decosO (nPant, decosOI (nPant)) = YX (j): decosOI (nPant) = decosOI (nPant) + 1
 						Next j
 					End If
 				End If
@@ -367,7 +367,7 @@ Print "Wrote MAP (" & mapsize & " bytes) ~ ";
 If founddecos And Not nodecos Then 
 	decosize = 0
 	Print #f, "// Decorations"
-	Print #f, "// Format: [T N XY XY XY XY... (T < 128) | T XY (T >= 128)]"
+	Print #f, "// Format: [T N YX YX YX YX... (T < 128) | T YX (T >= 128)]"
 	Print #f, ""
 	For nPant = 0 To mapPants - 1
 		If decosOI (nPant) Then

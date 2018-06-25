@@ -15,7 +15,7 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 16 1 99 0 1
+..\..\..\src\utils\legacy\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 16 1 99 0 1
 ..\..\..\src\utils\mapcnvnes2.exe ..\map\bg0.map ..\dev\assets\bg0.h 2 1 99 bg0 1
 
 echo Exporting music and sound

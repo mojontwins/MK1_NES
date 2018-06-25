@@ -4001,3 +4001,32 @@ No se pintará nada en pantalla. Se colocará en la esquina superior de donde se
 Ya que estoy tengo que reorganizar los decos al final de cada pantalla cuando haya decos. Voy a ver si hay algún ejemplo / tester con decos.
 
 No hay ni uno. ¡Estupendo!
+
+20170625
+========
+
+Creo que he apañado todos los conversores para guardar los decos como dios manda. Tengo que hacer una prueba general de decos, aunque sea con un mapa de una pantalla.
+
+Ahora mismo los modos PACKED y RLE16 creo que funcionan como siempre, de forma mierder, mientras que los modos nuevos RLE44 y RLE53, en PRG o CHR, funcionan de la forma nueva.
+
+PACKED No puede funcionar de la forma nueva por motivos obvios. RLE16 sí que podría, pero paso de cambiar nada más porque está deprecated. Creo que, de hecho, cuando monte los tutoriales sólo hablaré de RLE44 y RLE53. Incluso puede que quite los defines para PACKED y RLE16 de los config y mueva mapcnv2 y rlemap2 a legacy.
+
+Creo que voy a moverlos a legacy ya ¿Dónde los uso? En testers, supongo. Como tengo el cerebro friyío, hago esa tramolla ahora y así al menos hago algo.
+
+Prediseño chac chacs:
+
+El tema es sacarlos de los enemigos para poder poner ... enemigos :-D
+
+1.- Añadir la creación desde `map_detectors.h`
+2.- Crear un nuevo `tile_chac_chacs.h` que los actualice.
+3.- Se ejecutan cada 1, 2, o 3 segundos según se encuentre el tile `CHAC_CHAC_BASE`, `CHAC_CHAC_BASE + 1` o `CHAC_CHAC_BASE + 2`.
+4.- Tengo que ver cómo hacer para que, aunque coincidan dos actualizaciones en el mismo frame, sólo se actualice uno y se postergue la ejecución hasta el siguiente frame.
+
+- Tendre `chac_chac_yx` para almacenar la posición (del tile superior).
+- `chac_chac_idle_wait` dice el tiempo que habrá que esperar. Aproximamos con 48 ticks (<<4 + <<5).
+- `chac_chac_ct` tiene la cuenta atrás.
+- `chac_chac_st` tiene el estado
+
+Lo suyo es que para cada vez que un `chac_chac_ct` llegue a 0 se "encole" una actualización para el chac chac actual. La cola se va consumiendo cada frame: si hay encolados, se actualiza el chac chac que sea en su posición y estado y se elimina de la cola. Sólo se elimina un elemento de la cola cada vez.
+
+Esto va a funcionar perfe, a ver si tengo ánimo esta noche para hacerlo.

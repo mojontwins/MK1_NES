@@ -407,23 +407,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/utils/rle44mapMK1.bas",
-			"settings":
-			{
-				"buffer_size": 10142,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/utils/rle53mapchrrom.bas",
-			"settings":
-			{
-				"buffer_size": 10722,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -502,11 +485,27 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/utils"
+		"/D/git/MK1_NES/testers",
+		"/D/git/MK1_NES/testers/00_tester_sideview",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/config.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/compile.bat",
+		"/D/git/MK1_NES/testers/00_tester_punchy/dev/compile.bat",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/engine/mapmods/map_renderer_fast.h",
+		"/D/git/MK1_NES/src/utils/rlemap2.bas",
+		"/D/git/MK1_NES/src/utils/mapcnvnes2.bas",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/src/utils/rle44mapchrrom.bas",
+		"/D/git/MK1_NES/src/utils/rle44mapMK1.bas",
+		"/D/git/MK1_NES/src/utils/rle53mapchrrom.bas",
+		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/map/maplist.txt",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/extra_checks.h",
@@ -528,9 +527,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/behs.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
 		"/D/git/MK1_NES/src/dev/compile.bat",
-		"/D/git/MK1_NES/src/utils/rle44mapMK1.bas",
-		"/D/git/MK1_NES/src/utils/rle44mapchrrom.bas",
-		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/wip/perils/enems/ponedor.bat",
 		"/D/git/MK1_NES/testers/00_tester_punchy/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/compile.bat",
@@ -547,7 +543,6 @@
 		"/D/perfiles/jcastano/Desktop/instrucciones.txt",
 		"/D/git/MK1_NES/src/dev-UNROM/README.md",
 		"/D/git/MK1_NES/src/utils/mscmk1.bas",
-		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
 		"/D/git/MK1_NES/wip/map0.h",
 		"/D/git/MK1_NES/wip/script.h",
 		"/D/git/nes_work/Tutorial_MK1/tut06esp.md",
@@ -579,7 +574,6 @@
 		"/D/git/MK1_NES/src/dev/assets/spritedata.h",
 		"/D/git/MK1_NES/tutorial/tut04esp.md",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
-		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/wip/tut03esp.md",
 		"/D/git/MK1_NES/wip/tut04eng.md",
 		"/D/git/MK1_NES/wip/tut03eng.md",
@@ -624,17 +618,7 @@
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/config.inc.php.dist",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/ijab/ijab.php",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/persistent_login/config.inc.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/rc_smime/rc_smime.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/config/defaults.inc.php",
-		"/D/perfiles/jcastano/Desktop/log_20180206.log",
-		"/D/Proyectos/2016/20160217b--Actualización GestorUsuariosGUIA/instrucciones--20160223a.txt",
-		"/D/Proyectos/2018/20180206--Actualización-GUIA-prepro/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/password/password.php",
-		"/D/Proyectos/2018/20180206--Cambios-LOPD-Condiciones-Altas-CAND/instrucciones.txt",
-		"/D/Proyectos/2017/20171107a--Reparación comprobaciones incorrectas usuarios CCAA en WSDP/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/sandetel/sandetel.php",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/program/steps/addressbook/export.inc",
-		"/D/git/MK1_NES/examples/08_sgt_helmet_training_day_MK1_1.0_port/dev/engine/pres.h"
+		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/rc_smime/rc_smime.php"
 	],
 	"find":
 	{
@@ -645,6 +629,10 @@
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer\\dev\\engine",
+			"D:\\git\\MK1_NES\\examples",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\examples\\11_bootèe"
 		]
@@ -654,6 +642,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rlemap2.exe",
+			"mapcnvnes2",
+			"binpaster",
+			"text2carray",
+			"map_detectors",
+			"XY",
+			"chrrom",
+			"0.1 20171113",
+			"0.1",
+			"0.1 20171113",
+			"decosyx",
+			"XY",
+			"decosxy",
+			"XY",
+			"YX",
+			"XY",
+			"nodecos",
 			"decos",
 			"decosI",
 			"CUSTOM",
@@ -694,6 +699,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"YX",
+			"0.2 20180625",
+			"YX",
 			"44",
 			"..\\..\\..\\src\\utils",
 			"",
@@ -712,97 +720,13 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/utils/rle44mapMK1.bas",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 10142,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8192,
-								8192
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 1421,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 118.0,
-						"translation.y": 3878.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 1,
-					"file": "src/utils/rle53mapchrrom.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10722,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 64,
-								"count": 1384,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -856,7 +780,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":

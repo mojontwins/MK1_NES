@@ -77,7 +77,7 @@ void credits (void) {
 	_x = 3; _y = 22; pr_str ("SGT. HELMET - TRAINING DAY");
 	        _y = 26; pr_str ("NESLIB & SFX CODE BY SHIRU");
 	        _y = 27; pr_str ("TITLE TUNE ARR BY DAVIDIAN");
-	_x = 0; _y = 24; pr_str ("COPYLEFT 2013 BY THE MOJON TWINS");
+	_x = 0; _y = 24; pr_str ("(C) 2013,2018 BY THE MOJON TWINS");
 	        _y = 25; pr_str ("DESIGN:ANJUEL  NES PORT:NA-TH-AN");
 	
 	
