@@ -30,6 +30,8 @@
 #include "assets/enems0.h"
 #include "assets/map1.h"
 #include "assets/enems1.h"
+#include "assets/map2.h"
+#include "assets/enems2.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
@@ -78,6 +80,9 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_PROPELLERS
 	#include "engine/propellers.h"
 #endif
+#ifdef ENABLE_TILE_CHAC_CHAC
+	#include "engine/tile_chac_chac.h"
+#endif
 #ifdef ENABLE_SHINES
 	#include "engine/shines.h"
 #endif
@@ -113,7 +118,8 @@ void main(void) {
 	// Main loop
 
 	while (1) {	
-		title ();
+		//title ();
+		level = 2; mode_no_resonators = 0;
 
 		//plife = PLAYER_LIFE;
 

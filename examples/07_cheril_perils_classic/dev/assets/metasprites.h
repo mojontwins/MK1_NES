@@ -49,6 +49,19 @@ const unsigned char * const spr_enems1 [] = {
 	ssen_10
 };
 
+const unsigned char * const spr_enems2 [] = {
+	// Linear enems and platforms (ids 1-4)
+	ssen_11_a, ssen_12_a, 0, 0, ssen_11_b, ssen_12_b, 0, 0, // 1
+	ssen_13_a, ssen_14_a, 0, 0, ssen_13_b, ssen_14_b, 0, 0, // 2
+	ssen_15_a, ssen_16_a, 0, 0, ssen_15_b, ssen_16_b, 0, 0, // 3
+	ssen_0E_a, ssen_0F_a, 0, 0, ssen_0E_b, ssen_0F_b, 0, 0, // Platform (4)
+
+	ssen_0C_a, ssen_0D_a, 0, 0, ssen_0C_b, ssen_0D_b, 0, 0, // Fanty (offset 32)
+
+	// Explosion (offset 40)
+	ssen_10
+};
+
 // Item metasprites
 // nothing, nothing, key, refill, res_on, res_off
 const unsigned char * const spr_hs [] = {

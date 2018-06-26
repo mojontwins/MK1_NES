@@ -5,6 +5,7 @@ if [%1]==[justcompile] goto :justcompile
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2.png out=work\palts2.h label=palts2 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
 copy /b work\*.h assets\palettes.h > nul
 
@@ -16,6 +17,7 @@ echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
 ..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1 gencounter
+..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\assets\enems2.h 2 1 gencounter
 
 echo Compiling enembehs
 cd ..\script
@@ -23,8 +25,9 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rle44mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 4 6 15 0 1 scrsizes
-..\..\..\src\utils\rle44mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 4 6 15 1 1 scrsizes
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 4 6 15 0 1 scrsizes nodecos
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 4 6 15 1 1 scrsizes nodecos
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level2.map ..\dev\assets\map2.h 8 3 15 2 0 scrsizes
 
 echo Exporting music and sound
 cd ..\dev
@@ -54,7 +57,7 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 copy cart.nes ..\..\cheril_perils_classic.nes
 
 del *.o
-del game.s
+rem del game.s
 
 :end 
 del work\*.* /q

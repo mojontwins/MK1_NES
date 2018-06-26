@@ -36,7 +36,7 @@ MAPPED 0, 0, 2, 2, 16, 2
 OPEN ts2.png
 PALS palts2.png
 LABEL ts2
-MAPPED 0, 0, 2, 2, 16, 2, 38
+MAPPED 0, 0, 2, 2, 16, 3, 39
 
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
@@ -71,11 +71,14 @@ METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0 FLIPPED
 METASPRITESET 12, 2, 2, 2, 2, 1, 0, 0 FLIPPED
 
 # Explosion
-METASPRITE 14, 6, 2, 2, 1, 1, 0, 0
+METASPRITE 14, 8, 2, 2, 1, 1, 0, 0
+
+# set C
+METASPRITESET 0, 6, 2, 2, 6, 1, 0, 0 FLIPPED
 
 # Items
 LABEL ssit
-METASPRITESET 0, 6, 2, 2, 5, 1, 0, 0
+METASPRITESET 0, 8, 2, 2, 5, 1, 0, 0
 
 # Ending big cheril
 LABEL ssending

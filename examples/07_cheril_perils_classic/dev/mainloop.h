@@ -137,6 +137,11 @@ void prepare_scr (void) {
 		max_shines = 0;
 	#endif
 
+	#ifdef ENABLE_TILE_CHAC_CHAC
+		chac_chacs_top = 0;
+		max_chac_chacs = 0;
+	#endif
+
 		draw_scr ();
 
 	#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
@@ -271,6 +276,11 @@ void game_loop (void) {
 		// Finish frame and wait for NMI
 
 		oam_hide_rest (oam_index);
+
+		#ifdef ENABLE_SHAKER
+			#include "mainloop/shaker.h"
+		#endif
+
 		ppu_waitnmi ();
 		clear_update_list ();
 		oam_index = 4;
@@ -408,6 +418,10 @@ void game_loop (void) {
 						NO_METASPRITE
 					);
 				}
+			#endif
+
+			#ifdef ENABLE_TILE_CHAC_CHAC
+				chac_chacs_do ();
 			#endif
 		}
 

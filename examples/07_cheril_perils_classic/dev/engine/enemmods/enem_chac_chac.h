@@ -27,6 +27,7 @@ switch (en_alive [gpit]) {
 			_en_mx = CHAC_CHAC_IDLE_4;
 			en_alive [gpit] = 3;
 			sfx_play (SFX_STEPON, 1);
+			shaker_ct = 8;
 		}
 		break;
 	case 3:

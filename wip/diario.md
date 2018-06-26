@@ -4002,7 +4002,7 @@ Ya que estoy tengo que reorganizar los decos al final de cada pantalla cuando ha
 
 No hay ni uno. ¡Estupendo!
 
-20170625
+20180625
 ========
 
 Creo que he apañado todos los conversores para guardar los decos como dios manda. Tengo que hacer una prueba general de decos, aunque sea con un mapa de una pantalla.
@@ -4030,3 +4030,9 @@ El tema es sacarlos de los enemigos para poder poner ... enemigos :-D
 Lo suyo es que para cada vez que un `chac_chac_ct` llegue a 0 se "encole" una actualización para el chac chac actual. La cola se va consumiendo cada frame: si hay encolados, se actualiza el chac chac que sea en su posición y estado y se elimina de la cola. Sólo se elimina un elemento de la cola cada vez.
 
 Esto va a funcionar perfe, a ver si tengo ánimo esta noche para hacerlo.
+
+20180626
+========
+
+Un carajo tuve ayer. Preferí vegear viendo Xena.
+

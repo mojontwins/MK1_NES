@@ -201,6 +201,7 @@ For nPant = 0 To mapPants - 1
 					mOut (nPant, cMapI) = decosO (nPant, i)
 					cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
 					cMapI = cMapI + 1
+					decosize = decosize + 1
 				Next i
 			End If
 
@@ -209,6 +210,7 @@ For nPant = 0 To mapPants - 1
 		mOut (nPant, cMapI) = 0
 		cMapAmalgam (nPant) = cMapAmalgam (nPant) & Hex (mOut (nPant, cMapI), 2)
 		cMapI = cMapI + 1
+		decosize = decosize + 1
 	End If
 
 	realPant = nPant
@@ -330,7 +332,7 @@ If Not binmode Then
 	Print #f, "// Total map size in bytes is " & mapsize
 	If decosize Then Print #f, "// From which, decorations size in bytes is " & decosize
 
-	Print "Wrote decos (" & decosize & " bytes) ~ ";
+	If Not nodecos Then Print "Wrote decos (" & decosize & " bytes) ~ ";
 
 	Print #f, ""
 End If

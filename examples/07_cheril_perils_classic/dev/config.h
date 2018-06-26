@@ -74,7 +74,7 @@
 //#define MAP_FORMAT_RLE53_CHRROM		// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 //#define MAP_FORMAT_RLE44_CHRROM		// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
 
-//#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
+#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
@@ -320,6 +320,10 @@
 #define CHAC_CHAC_IDLE_2				16
 #define CHAC_CHAC_IDLE_3				1
 #define CHAC_CHAC_IDLE_4				50
+
+#define CHAC_CHAC_FROM_MAP					// Chac chacs are not placed as enemies but as tiles
+#define MAX_CHAC_CHACS					4
+#define CHAC_CHAC_DETECT_TILE			39
 
 // Monococos
 

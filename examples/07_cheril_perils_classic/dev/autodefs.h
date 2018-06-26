@@ -87,3 +87,12 @@
 	#define NEEDS_LIFE_GAUGE_LOGIC
 #endif
 
+#if defined (ENABLE_CHAC_CHAC) || defined (CHAC_CHAC_FROM_MAP)
+	#define ENABLE_SHAKER
+#endif
+
+#if defined (CHAC_CHAC_FROM_MAP)
+	#undef ENABLE_CHAC_CHAC
+	#define ENABLE_TILE_CHAC_CHAC
+#endif
+
