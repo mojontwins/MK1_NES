@@ -186,7 +186,11 @@ const unsigned char *c_pal_fg;
 #endif
 	
 #ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const *c_decos;
+	#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_PACKED)
+		const unsigned char * const *c_decos;
+	#else
+		unsigned char c_decos;
+	#endif
 #endif
 
 const unsigned char *c_locks;

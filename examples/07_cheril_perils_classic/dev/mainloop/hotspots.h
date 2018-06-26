@@ -142,14 +142,14 @@ if (hrt) {
 										}
 									#endif
 								#else
-									pobjs ++;
+									++ pobjs;
 									rda = SFX_OBJECT;
 								#endif
 								break;
 						#endif
 						#ifndef DEACTIVATE_KEYS
 							case HOTSPOT_TYPE_KEYS:
-								pkeys ++;
+								++ pkeys;
 								rda = SFX_OBJECT;
 								break;
 						#endif
@@ -184,7 +184,7 @@ if (hrt) {
 						#endif
 						#ifdef HOTSPOT_TYPE_STAR
 							case HOTSPOT_TYPE_STAR:
-								pstars ++; rda = SFX_OBJECT;
+								++ pstars; rda = SFX_OBJECT;
 								break;
 						#endif
 					}

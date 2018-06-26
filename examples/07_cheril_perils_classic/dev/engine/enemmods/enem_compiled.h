@@ -28,7 +28,7 @@ if (_en_ct) {
 			break;
 	}
 
-	_en_ct --;
+	-- _en_ct;
 
 } else {
 	// Choose. Beware, this assumes you will never consume

@@ -8,7 +8,7 @@ void chac_chacs_add (void) {
 	if (max_chac_chacs == MAX_CHAC_CHACS) return;
 	rda = 1 + (rdt - CHAC_CHAC_DETECT_TILE);
 	rdb = rda << 4;
-	(rdb << 1) + rdb;
+	rdc = (rdb << 1) + rdb;
 	
 	__asm__ ("ldy %v", max_chac_chacs);
 
@@ -24,13 +24,13 @@ void chac_chacs_add (void) {
 	__asm__ ("lda %v", rdc);
 	__asm__ ("sta %v,y", chac_chacs_ct);
 	
-	max_chac_chacs ++;
+	++ max_chac_chacs;
 }
 
 void chac_chacs_do (void) {
 	gpit = max_chac_chacs; while (gpit --) {
-		if (chac_chacs_ct [gpit]) chac_chacs_ct [gpit] --; else {
-			chac_chacs_state [gpit] ++;
+		if (chac_chacs_ct [gpit]) -- chac_chacs_ct [gpit]; else {
+			++ chac_chacs_state [gpit];
 			if (chac_chacs_state [gpit] == 6) chac_chacs_state [gpit] = 0;
 			chac_chacs_ct [gpit] = chac_chacs_state [gpit] ? 
 				(chac_chacs_times [chac_chacs_state [gpit]]) :
@@ -38,7 +38,7 @@ void chac_chacs_do (void) {
 
 			// Add to update list
 			chac_chacs_stack [chac_chacs_top] = gpit;
-			chac_chacs_top ++;				
+			++ chac_chacs_top;				
 		}
 	}
 

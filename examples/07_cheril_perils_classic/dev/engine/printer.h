@@ -103,7 +103,7 @@ void map_set (void) {
 }
 
 unsigned char get_byte (void) {
-	rdit --; return *gp_gen ++;
+	-- rdit; return *gp_gen ++;
 }
 
 #ifdef MAP_RENDERER_COMPLEX
@@ -117,7 +117,7 @@ void pr_str (unsigned char *s) {
 	vram_adr (((_y << 5) | _x) + 0x2000);
 	while (gpit = *s++) {
 		if (gpit == '%') {
-			_y ++; vram_adr (((_y << 5) | _x) + 0x2000);
+			++ _y; vram_adr (((_y << 5) | _x) + 0x2000);
 		}
 		else vram_put (gpit - 32); 
 	}

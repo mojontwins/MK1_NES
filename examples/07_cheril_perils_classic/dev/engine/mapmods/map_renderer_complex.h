@@ -10,9 +10,9 @@
 
 void add_tile (void) {
 	map_buff [rdm] = rda;
-	rdm ++;
+	++ rdm;
 	// Need to do this to keep track of where I am
-	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+	rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 }
 
 void draw_scr (void) {
@@ -202,7 +202,7 @@ void draw_scr (void) {
 
 		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 		draw_tile ();
-		rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+		rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 	}
 
 	vram_write (attr_table, 0x23c0, 64);

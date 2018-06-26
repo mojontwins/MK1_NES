@@ -293,9 +293,9 @@ void game_loop (void) {
 
 		if (paused == 0) {
 			// Count frames		
-			if (ticker) ticker --; else ticker = 50;
+			if (ticker) -- ticker; else ticker = 50;
 			half_life ^= 1;
-			frame_counter ++;
+			++ frame_counter;
 
 			#ifdef ENABLE_TIMER
 				#include "mainloop/timer.h"
@@ -358,7 +358,7 @@ void game_loop (void) {
 			}
 
 			if (pstate) {
-				pctstate --;
+				-- pctstate;
 				if (!pctstate) pstate = EST_NORMAL;
 			}
 
@@ -411,7 +411,7 @@ void game_loop (void) {
 
 			#ifdef ENABLE_NO
 				if (no_ct) {
-					no_ct --;
+					-- no_ct;
 					oam_index = oam_meta_spr (
 						prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
 						oam_index,

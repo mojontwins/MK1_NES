@@ -9,7 +9,7 @@
 		do_process_breakable = 0;
 		gpit = BREAKABLE_MAX; while (gpit --) {
 			if (brkf [gpit]) {
-				brkf [gpit] ++;
+				++ brkf [gpit];
 				if (brkf [gpit] == BREAKABLE_MAX_FRAMES) {
 					brkf [gpit] = 0;
 					_x = brkx [gpit]; _y = brky [gpit]; _t = BREAKABLE_ERASE;
@@ -26,7 +26,7 @@ void breakable_break (unsigned char x, unsigned char y) {
 	gpaux = COORDS (x, y);
 	#ifndef BREAKABLES_SOFT
 		if (brk_buff [gpaux] < BREAKABLE_LIFE) {
-			brk_buff [gpaux] ++;
+			++ brk_buff [gpaux];
 		} else 
 	#endif
 	{

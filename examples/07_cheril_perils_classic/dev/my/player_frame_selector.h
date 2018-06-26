@@ -13,7 +13,7 @@
 	// Frame selection for top-down view games
 
 	if (pvx != 0 || pvy != 0) {
-		pctfr ++;
+		++ pctfr;
 		if (pctfr == 4) {
 			pctfr = 0;
 			pfr = !pfr;

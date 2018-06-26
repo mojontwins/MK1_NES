@@ -4,9 +4,9 @@
 // time advance in the mainloop
 
 if (timer_on && timer) {
-	if (timer_frames) timer_frames --; else {
+	if (timer_frames) -- timer_frames; else {
 		timer_frames = 50;
-		timer --; 
+		-- timer; 
 
 		#ifdef TIMER_SOUND
 			if (timer < TIMER_SOUND) sfx_play (SFX_COUNT, 2);

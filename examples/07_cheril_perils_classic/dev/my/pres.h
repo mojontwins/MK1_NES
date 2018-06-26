@@ -52,10 +52,10 @@ void title (void) {
 		pad_read ();
 		rda = game_mode;
 		if (pad_this_frame & (PAD_SELECT|PAD_DOWN)) {
-			game_mode ++; if (game_mode == 4) game_mode = 0;
+			++ game_mode; if (game_mode == 4) game_mode = 0;
 		}
 		if (pad_this_frame & PAD_UP) {
-			if (game_mode) game_mode --; else game_mode = 3;
+			if (game_mode) -- game_mode; else game_mode = 3;
 		}
 		if (game_mode != rda) sfx_play (SFX_USE, 0);
 		if (pad_this_frame & PAD_START) break;
