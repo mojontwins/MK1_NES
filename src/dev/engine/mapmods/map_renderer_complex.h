@@ -10,9 +10,9 @@
 
 void add_tile (void) {
 	map_buff [rdm] = rda;
-	rdm ++;
+	++ rdm;
 	// Need to do this to keep track of where I am
-	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+	rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 }
 
 void draw_scr (void) {
@@ -72,10 +72,7 @@ void draw_scr (void) {
 		while (rdm < 192) {
 			rdt = *gp_gen ++;
 			rda = rdt & 0x1f;
-			/*
-			rdct = 1 + (rdt >> 5);
-			while (rdct --) add_tile (); 
-			*/
+			
 			rdct = rdt;
 			while (rdct >= 32) {
 				add_tile (); rdct -= 32;
@@ -83,7 +80,22 @@ void draw_scr (void) {
 		}
 	#endif
 
-	#ifdef MAP_FORMAT_CHRROM
+	#ifdef MAP_FORMAT_RLE44
+		// Get pointer
+		gp_gen = c_map [n_pant];
+
+		while (rdm < 192) {
+			rdt = *gp_gen ++;
+			rda = rdt & 0x0f;
+			
+			rdct = rdt;
+			while (rdct >= 16) {
+				add_tile (); rdct -= 16;
+			} add_tile ();
+		}
+	#endif
+
+	#ifdef MAP_FORMAT_RLE53_CHRROM
 		bankswitch (c_map_chr_rom_bank);
 		vram_adr (c_map [n_pant]);
 		rda = VRAM_READ; 	// Dummy read.
@@ -92,13 +104,27 @@ void draw_scr (void) {
 		while (rdm < 192) {
 			rdt = VRAM_READ;
 			rda = rdt & 0x1f;
-			/*
-			rdct = 1 + (rdt >> 5);
-			while (rdct --) add_tile (); 
-			*/
+			
 			rdct = rdt;
 			while (rdct >= 32) {
 				add_tile (); rdct -= 32;
+			} add_tile ();
+		}
+	#endif
+
+	#ifdef MAP_FORMAT_RLE44_CHRROM
+		bankswitch (c_map_chr_rom_bank);
+		vram_adr (c_map [n_pant]);
+		rda = VRAM_READ; 	// Dummy read.
+		
+		// UNRLE into scr_buff
+		while (rdm < 192) {
+			rdt = VRAM_READ;
+			rda = rdt & 0x0f;
+			
+			rdct = rdt;
+			while (rdct >= 16) {
+				add_tile (); rdct -= 16;
 			} add_tile ();
 		}
 	#endif
@@ -111,21 +137,40 @@ void draw_scr (void) {
 	#ifdef MAP_WITH_DECORATIONS
 		// Draw decorations
 		if (c_decos) {
-			if (c_decos [n_pant]) {
-				gp_gen = c_decos [n_pant];
-			
-				while (rda = *gp_gen ++) {
-					if (rda & 0x80) {
-						rda &= 0x7F;
-						rdct = 1;
-					} else {
-						rdct = *gp_gen ++;
+			#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16)
+				if (c_decos [n_pant]) {
+					gp_gen = c_decos [n_pant];
+			# else 
+				{
+			#endif
+
+				#if defined (MAP_FORMAT_RLE44_CHRROM) || defined (MAP_FORMAT_RLE53)
+					while (rda = VRAM_READ) {
+						if (rda & 0x80) {
+							rda &= 0x7F;
+							rdct = 1;
+						} else {
+							rdct = VRAM_READ;
+						}
+						while (rdct --) {
+							rdm = VRAM_READ;
+							add_tile ();
+						}
 					}
-					while (rdct --) {
-						rdm = *gp_gen ++;
-						add_tile ();
+				#else
+					while (rda = *gp_gen ++) {
+						if (rda & 0x80) {
+							rda &= 0x7F;
+							rdct = 1;
+						} else {
+							rdct = *gp_gen ++;
+						}
+						while (rdct --) {
+							rdm = *gp_gen ++;
+							add_tile ();
+						}
 					}
-				}
+				#endif
 			}
 		}
 	#endif
@@ -157,7 +202,7 @@ void draw_scr (void) {
 
 		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 		draw_tile ();
-		rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+		rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 	}
 
 	vram_write (attr_table, 0x23c0, 64);

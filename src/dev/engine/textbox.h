@@ -25,7 +25,7 @@ void textbox_frame (void) {
 			update_list_tile (); 
 		}
 		_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
-		rdct ++; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
+		++ rdct; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
 	}
 }
 
@@ -45,7 +45,7 @@ void textbox_draw_text (void) {
 			if (rda) { clear_update_list (); rda = 0; gp_addr = 0x2000 + 6 + (rdy << 5); }
 		#endif
 		if (rdt == '%') rda = 1; else { _n = rdt - 32; ul_putc (); }
-		if (rda) { ppu_waitnmi (); rdy ++; }
+		if (rda) { ppu_waitnmi (); ++ rdy; }
 	}	
 }
 

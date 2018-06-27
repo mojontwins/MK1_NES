@@ -15,10 +15,10 @@ if (res_on) {
 	} 
 
 	// Resonator logic
-	if (res_subct) res_subct --; else {
+	if (res_subct) -- res_subct; else {
 		res_subct = 50;
 		if (res_ct) { 
-			res_ct --; 
+			-- res_ct; 
 			if (res_ct <= 5) sfx_play (SFX_COUNT, 2);
 		} else {
 			res_on = 0;

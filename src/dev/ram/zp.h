@@ -177,16 +177,20 @@ const unsigned char *c_pal_fg;
 #ifdef MAP_FORMAT_PACKED
 	const unsigned char *c_map;
 #endif
-#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_RLE53)
+#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_RLE53) || defined (MAP_FORMAT_RLE44)
 	const unsigned char * const *c_map;
 #endif
-#if defined (MAP_FORMAT_CHRROM)
+#if defined (MAP_FORMAT_RLE53_CHRROM) || defined (MAP_FORMAT_RLE44_CHRROM)
 	const unsigned int *c_map;
 	unsigned char c_map_chr_rom_bank;
 #endif
 	
 #ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const *c_decos;
+	#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_PACKED)
+		const unsigned char * const *c_decos;
+	#else
+		unsigned char c_decos;
+	#endif
 #endif
 
 const unsigned char *c_locks;

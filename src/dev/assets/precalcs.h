@@ -22,3 +22,21 @@
 	const signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};
 	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
 #endif
+
+#if defined (ENABLE_TILE_CHAC_CHAC) 
+	const unsigned char chac_chacs_times [] = {
+		0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3
+	};
+
+	const unsigned char chac_chacs_t1 [] = {
+		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE
+	};
+
+	const unsigned char chac_chacs_t2 [] = {
+		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6
+	};
+
+	const unsigned char chac_chacs_t3 [] = {
+		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 1
+	};
+#endif

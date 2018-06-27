@@ -58,8 +58,13 @@ const unsigned char * const * const l_spr_enems [] =
 												
 
 #ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const * const l_decos [] =
+	#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16) 
+		const unsigned char * const * const l_decos [] =
 												{ map_0_decos, map_1_decos };
+	#else
+		// 0 = no decos in this level's map, 1 = decos.
+		const unsigned char l_decos [] = 		{ 1, 1 };												
+	#endif
 #endif
 
 #ifndef DEACTIVATE_KEYS

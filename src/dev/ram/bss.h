@@ -193,10 +193,22 @@ unsigned char en_spr_id [3];
 	unsigned char shine_active_ct;
 #endif
 
+// Tile Chac Chacs
+
+#ifdef ENABLE_TILE_CHAC_CHAC
+	unsigned char max_chac_chacs;
+	unsigned char chac_chacs_yx [MAX_CHAC_CHACS];
+	unsigned char chac_chacs_state [MAX_CHAC_CHACS];
+	unsigned char chac_chacs_idlewait [MAX_CHAC_CHACS];
+	unsigned char chac_chacs_ct [MAX_CHAC_CHACS];
+	unsigned char chac_chacs_stack [MAX_CHAC_CHACS];
+	unsigned char chac_chacs_top;
+#endif
+
 // Resonators
 
 #ifdef ENABLE_RESONATORS
-	unsigned char res_on, res_ct, res_subct;
+	unsigned char res_on, res_disable, res_ct, res_subct;
 #endif
 
 // More conveyors
@@ -217,4 +229,10 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_SPRINGS
 	unsigned char springs_on;
+#endif
+
+// Shaker
+
+#ifdef ENABLE_SHAKER
+	unsigned char shaker_ct;
 #endif

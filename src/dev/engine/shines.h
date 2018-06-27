@@ -10,7 +10,7 @@ void shines_add (void) {
 
 void shines_do (void) {
 	if (shine_active_ct) {
-		shine_active_ct --;
+		-- shine_active_ct;
 		if (shine_active_ct >= 48) {
 			oam_index = oam_spr (
 				shine_active_x, 

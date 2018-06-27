@@ -32,6 +32,8 @@ copy ..\ogt\sounds.s > nul
 
 cd ..\dev
 
+if [%1]==[nocompile] goto :end
+
 :justcompile
 if [%2]==[noscript] goto :noscript
 

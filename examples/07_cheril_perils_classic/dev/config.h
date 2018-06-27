@@ -321,7 +321,7 @@
 #define CHAC_CHAC_IDLE_3				1
 #define CHAC_CHAC_IDLE_4				50
 
-#define CHAC_CHAC_FROM_MAP					// Chac chacs are not placed as enemies but as tiles
+#define CHAC_CHAC_FROM_MAP				// Chac chacs are not placed as enemies but as tiles
 #define MAX_CHAC_CHACS					4
 #define CHAC_CHAC_DETECT_TILE			39
 

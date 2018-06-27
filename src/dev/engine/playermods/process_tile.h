@@ -2,11 +2,11 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 void player_process_tile (at, x0, y0, x1, y1) {
-	if (y0) y0 --;
+	if (y0) -- y0;
 	// Boxes
 
 	#ifdef PLAYER_PUSH_BOXES
-		if (y1) y1 --;
+		if (y1) -- y1;
 		if (
 			at == 11 
 			#ifdef FIRE_TO_PUSH
@@ -57,7 +57,7 @@ void player_process_tile (at, x0, y0, x1, y1) {
 				}
 			}
 
-			pkeys --;
+			-- pkeys;
 			sfx_play (SFX_TILE, 1);
 		} else {
 			#ifdef ENABLE_NO
