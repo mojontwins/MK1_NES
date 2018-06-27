@@ -64,12 +64,20 @@ void draw_tile (void) {
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + 0x2000);
 	vram_adr (gp_addr++);
+	/*
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap++);
+	*/
+	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
+	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
 	gp_addr += 31;
 	vram_adr (gp_addr++);
+	/*
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap);	
+	*/
+	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
+	SET_FROM_PTR (_z, gp_tmap);             vram_put (_z);
 }
 
 // Needs _x, _y, _t set.
@@ -86,11 +94,19 @@ void update_list_tile (void) {
 	//tl = (16 + tl) << 2;
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + 0x2000);
+	/*
 	_n = *gp_tmap ++; ul_putc ();
 	_n = *gp_tmap ++; ul_putc ();
+	*/
+	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 	gp_addr += 30;
+	/*
 	_n = *gp_tmap ++; ul_putc ();
 	_n = *gp_tmap   ; ul_putc ();
+	*/
+	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+	SET_FROM_PTR (_n, gp_tmap);             ul_putc ();
 }
 
 // Needs _x, _y, _t set.

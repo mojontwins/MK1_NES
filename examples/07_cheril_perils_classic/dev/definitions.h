@@ -30,7 +30,7 @@
 #define ENEMS_RECOIL_X 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_x, prx, ENEMS_RECOIL_ON_HIT))
 #define ENEMS_RECOIL_Y 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_y, pry, ENEMS_RECOIL_ON_HIT))
 #define VRAM_READ				(*((unsigned char *) (0x2007)))
-
+#define SET_FROM_PTR(v,p)		{__asm__("ldy #0");__asm__("lda (%v),y",p);__asm__("sta %v",v);}
 
 // Wall hits
 

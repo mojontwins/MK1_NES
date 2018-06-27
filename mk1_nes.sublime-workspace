@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"inte",
+				"interactives_index"
+			],
+			[
+				"interactives",
+				"interactives_yx"
+			],
+			[
 				"MAP_",
 				"MAP_FORMAT_PACKED"
 			],
@@ -436,19 +444,19 @@
 	"buffers":
 	[
 		{
-			"file": "README.md",
+			"file": "examples/07_cheril_perils_classic/dev/engine/player.h",
 			"settings":
 			{
-				"buffer_size": 3343,
-				"encoding": "UTF-8",
+				"buffer_size": 15817,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/07_cheril_perils_classic/dev/assets/precalcs.h",
+			"file": "examples/07_cheril_perils_classic/dev/engine/textbox.h",
 			"settings":
 			{
-				"buffer_size": 1544,
+				"buffer_size": 2609,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -529,17 +537,25 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods",
-		"/D/git/MK1_NES/wip"
+		"/C/Users/na_th/Desktop/git/MK1_NES",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram"
 	],
 	"file_history":
 	[
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/interactives.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/hotspots.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_complex.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.s",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/definitions.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/printer.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/zp.h",
+		"/C/Users/na_th/Desktop/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/asset_setup.h",
@@ -658,16 +674,7 @@
 		"/D/git/MK1_NES/tutorial/tut05eng.md",
 		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/src/gfx/ss.png",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
-		"/D/git/MK1_NES/src/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/tutorial/tut04esp.md",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
-		"/D/git/MK1_NES/wip/tut03esp.md",
-		"/D/git/MK1_NES/wip/tut04eng.md",
-		"/D/git/MK1_NES/wip/tut03eng.md",
-		"/D/git/MK1_NES/wip/tut04esp.md",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/custom_texts.h"
+		"/D/git/MK1_NES/src/gfx/ss.png"
 	],
 	"find":
 	{
@@ -675,9 +682,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 108.0,
+		"height": 135.0,
 		"where_history":
 		[
+			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES",
@@ -693,6 +701,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"*gp_gen",
+			"gp_gen",
+			"get_byte",
+			"gp_gen",
+			"*gp_gen",
+			"draw_scr",
 			"\\S+ --",
 			"chac_chac",
 			"\\S+ \\+\\+",
@@ -756,7 +770,7 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"YX",
@@ -780,85 +794,33 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3343,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1539,
-								1539
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 19,
-								"count": 477,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "examples/07_cheril_perils_classic/dev/assets/precalcs.h",
+					"file": "examples/07_cheril_perils_classic/dev/engine/player.h",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 1544,
+						"buffer_size": 15817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								973,
-								986
+								13617,
+								13617
 							]
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 139,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8238.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -867,8 +829,38 @@
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "examples/07_cheril_perils_classic/dev/engine/textbox.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1410,
+								1417
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -956,7 +948,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
