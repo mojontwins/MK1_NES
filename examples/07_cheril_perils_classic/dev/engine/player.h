@@ -667,14 +667,23 @@ void player_move (void) {
 	// *************
 	// Killing tiles
 	// *************
-	
+
 	phit = 0;
+	
 	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
 	if (hith) { phit = 1; 
 		#ifndef NO_HORIZONTAL_EVIL_TILE	
 			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
 		#endif	
 	}
+
+	#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+		cx1 = cx2 = (prx + 4) >> 4;
+		cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+		cm_two_points ();
+		if ((at1 & 1) || (at2 & 1)) phit = 1;
+	#endif
+
 	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 
 	// **************
