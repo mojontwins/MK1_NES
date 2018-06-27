@@ -1,3 +1,5 @@
+![AGNES logo](https://raw.githubusercontent.com/mojontwins/MK1_NES/master/wip/img/AGNES_logo_web.png)
+
 MT Engine MK1 NES / AGNES
 =========================
 
