@@ -436,11 +436,19 @@
 	"buffers":
 	[
 		{
-			"file": "examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 1496,
+				"buffer_size": 3343,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_cheril_perils_classic/dev/assets/precalcs.h",
+			"settings":
+			{
+				"buffer_size": 1544,
 				"line_ending": "Windows"
 			}
 		}
@@ -527,15 +535,13 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enemmods",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/asset_setup.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/zp.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/cocos.h",
@@ -566,7 +572,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/behs.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/player_frame_selector.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/textbox.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/propellers.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_fast.h.bak",
@@ -576,7 +581,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/hotspots.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/breakable.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/config.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
@@ -667,7 +671,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -776,32 +780,72 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1496,
+						"buffer_size": 3343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								729,
-								729
+								1539,
+								1539
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 16,
-								"count": 146,
+								"changes": 19,
+								"count": 477,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/07_cheril_perils_classic/dev/assets/precalcs.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								973,
+								986
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 139,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -912,7 +956,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

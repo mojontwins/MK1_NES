@@ -121,7 +121,7 @@ void main(void) {
 		//title ();
 		level = 2; mode_no_resonators = 0;
 
-		//plife = PLAYER_LIFE;
+		plife = PLAYER_LIFE;
 
 		// Game loop
 
