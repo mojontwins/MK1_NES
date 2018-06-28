@@ -138,7 +138,7 @@ void prepare_scr (void) {
 	#endif
 
 	#ifdef ENABLE_TILE_CHAC_CHAC
-		chac_chacs_top = 0;
+		chac_chacs_queue_write = chac_chacs_queue_read = 0;
 		max_chac_chacs = 0;
 	#endif
 
@@ -366,10 +366,6 @@ void game_loop (void) {
 				if (propellers_on) propellers_do ();
 			#endif
 
-			#ifdef ENABLE_RESONATORS
-				#include "mainloop/resonators.h"
-			#endif
-
 			#ifdef ENABLE_INTERACTIVES
 				#include "mainloop/interactives.h"
 			#endif		
@@ -392,6 +388,10 @@ void game_loop (void) {
 			#endif
 		
 			enems_move ();
+
+			#ifdef ENABLE_RESONATORS
+				#include "mainloop/resonators.h"
+			#endif
 
 			// Moved this here so they appear BEHIND the actors
 

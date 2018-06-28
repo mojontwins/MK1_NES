@@ -5,7 +5,7 @@
 
 // Avoid parameters using these in critical functions.
 
-unsigned char _x, _y, _n, _t;
+unsigned char _x, _y, _n, _t, _z;
 
 // General, all-purpose variables
 

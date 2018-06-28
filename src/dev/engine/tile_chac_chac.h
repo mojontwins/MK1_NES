@@ -37,13 +37,14 @@ void chac_chacs_do (void) {
 				chac_chacs_idlewait [gpit];
 
 			// Add to update list
-			chac_chacs_stack [chac_chacs_top] = gpit;
-			++ chac_chacs_top;				
+			chac_chacs_queue [chac_chacs_queue_write] = gpit;
+			chac_chacs_queue_write = (chac_chacs_queue_write + 1) & (MAX_CHAC_CHACKS_QUEUED-1);
 		}
 	}
 
-	if (chac_chacs_top) {
-		gpit = chac_chacs_stack [-- chac_chacs_top];
+	if (chac_chacs_queue_write != chac_chacs_queue_read) {
+		gpit = chac_chacs_queue [chac_chacs_queue_read];
+		chac_chacs_queue_read = (chac_chacs_queue_read + 1) & (MAX_CHAC_CHACKS_QUEUED-1);
 		rdm = chac_chacs_state [gpit];
 		if (rdm == 3) { shaker_ct = 8; sfx_play (SFX_STEPON, 1); }
 		rdx = chac_chacs_yx [gpit]; rdy = rdx >> 4; rdx &= 0xf;

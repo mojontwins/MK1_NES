@@ -43,19 +43,14 @@ const unsigned char * const * const l_spr_enems [] =
 #ifdef MAP_FORMAT_PACKED
 	const unsigned char * const l_map [] =		{ map_0, map_1 };
 #endif
-#ifdef MAP_FORMAT_RLE16
+#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_RLE53) || defined (MAP_FORMAT_RLE44)
 	const unsigned char * const * const l_map [] =	
 												{ map_0, map_1 };
 #endif
-#ifdef MAP_FORMAT_RLE53
-	const unsigned char * const * const l_map [] =	
-												{ map_0, map_1 };
-#endif
-#ifdef MAP_FORMAT_CHRROM
+#if defined (MAP_FORMAT_RLE53_CHRROM) || defined (MAP_FORMAT_RLE44_CHRROM)
 	const unsigned char l_map_chr_rom_bank [] = { MAP_00_CHRROM, MAP_01_CHRROM };
 	const unsigned int * const l_map [] = 		{ map_00_scr_offsets, map_01_scr_offsets };
 #endif
-												
 
 #ifdef MAP_WITH_DECORATIONS
 	#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16) 

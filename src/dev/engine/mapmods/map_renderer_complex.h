@@ -70,7 +70,9 @@ void draw_scr (void) {
 		gp_gen = c_map [n_pant];
 
 		while (rdm < 192) {
-			rdt = *gp_gen ++;
+			// rdt = *gp_gen ++;
+			SET_FROM_PTR (rdt, gp_gen); 
+			gp_gen ++;
 			rda = rdt & 0x1f;
 			
 			rdct = rdt;
@@ -85,7 +87,9 @@ void draw_scr (void) {
 		gp_gen = c_map [n_pant];
 
 		while (rdm < 192) {
-			rdt = *gp_gen ++;
+			// rdt = *gp_gen ++;
+			SET_FROM_PTR (rdt, gp_gen); 
+			gp_gen ++;
 			rda = rdt & 0x0f;
 			
 			rdct = rdt;
@@ -163,10 +167,14 @@ void draw_scr (void) {
 							rda &= 0x7F;
 							rdct = 1;
 						} else {
-							rdct = *gp_gen ++;
+							// rdct = *gp_gen ++;
+							SET_FROM_PTR (rdct, gp_gen); 
+							gp_gen ++;
 						}
 						while (rdct --) {
-							rdm = *gp_gen ++;
+							// rdm = *gp_gen ++;
+							SET_FROM_PTR (rdm, gp_gen); 
+							gp_gen ++;
 							add_tile ();
 						}
 					}
@@ -180,7 +188,10 @@ void draw_scr (void) {
 	#ifndef DEACTIVATE_KEYS	
 		gp_gen = c_locks; rda = 0;
 		gpit = c_max_bolts; while (gpit --) {
-			rdb = *gp_gen ++; rdm = *gp_gen ++;
+			// rdb = *gp_gen ++;
+			SET_FROM_PTR (rdb, gp_gen); gp_gen ++;
+			// rdm = *gp_gen ++;
+			SET_FROM_PTR (rdm, gp_gen); gp_gen ++;
 			if (n_pant == rdb) {
 				if (!lkact [gpit]) add_tile ();
 			}
@@ -189,9 +200,11 @@ void draw_scr (void) {
 
 	// Now blit the buffer
 
-	rdx = 0; rdy = 0; gp_ram = map_buff;
+	_x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
+	//rdx = 0; rdy = 0; gp_ram = map_buff;
 	for (rdm = 0; rdm < 192; rdm ++) {
-		rdt = *gp_ram ++;
+		// rdt = *gp_ram ++;
+		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
 		map_attr [rdm] = c_behs [rdt];
 
 		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
@@ -200,10 +213,27 @@ void draw_scr (void) {
 
 		#include "engine/mapmods/map_detectors.h"
 
+		/*
 		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 		draw_tile ();
 		rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
+		*/
+		_t = rdt; draw_tile ();
+		_x = (_x + 2) & 0x1f; if (!_x) _y += 2;
 	}
+
+	#if defined (ENABLE_TILE_CHAC_CHAC) && defined (CHAC_CHACS_CLEAR)
+		gpit = max_chac_chacs; while (gpit --) {
+			_t = CHAC_CHAC_BASE_TILE + 6;
+			_x = (chac_chacs_yx [gpit] & 0xf) << 1;
+			_y = ((chac_chacs_yx [gpit] & 0xf0) >> 3) + TOP_ADJUST;
+			draw_tile ();
+			_y += 2;
+			draw_tile ();
+			_y += 2;
+			draw_tile ();
+		}
+	#endif
 
 	vram_write (attr_table, 0x23c0, 64);
 }

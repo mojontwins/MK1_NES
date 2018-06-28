@@ -201,8 +201,8 @@ unsigned char en_spr_id [3];
 	unsigned char chac_chacs_state [MAX_CHAC_CHACS];
 	unsigned char chac_chacs_idlewait [MAX_CHAC_CHACS];
 	unsigned char chac_chacs_ct [MAX_CHAC_CHACS];
-	unsigned char chac_chacs_stack [MAX_CHAC_CHACS];
-	unsigned char chac_chacs_top;
+	unsigned char chac_chacs_queue [MAX_CHAC_CHACKS_QUEUED];
+	unsigned char chac_chacs_queue_read, chac_chacs_queue_write;
 #endif
 
 // Resonators

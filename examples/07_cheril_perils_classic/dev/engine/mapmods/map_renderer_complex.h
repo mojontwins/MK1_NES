@@ -200,7 +200,8 @@ void draw_scr (void) {
 
 	// Now blit the buffer
 
-	rdx = 0; rdy = 0; gp_ram = map_buff;
+	_x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
+	//rdx = 0; rdy = 0; gp_ram = map_buff;
 	for (rdm = 0; rdm < 192; rdm ++) {
 		// rdt = *gp_ram ++;
 		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
@@ -212,10 +213,27 @@ void draw_scr (void) {
 
 		#include "engine/mapmods/map_detectors.h"
 
+		/*
 		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 		draw_tile ();
 		rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
+		*/
+		_t = rdt; draw_tile ();
+		_x = (_x + 2) & 0x1f; if (!_x) _y += 2;
 	}
+
+	#if defined (ENABLE_TILE_CHAC_CHAC) && defined (CHAC_CHACS_CLEAR)
+		gpit = max_chac_chacs; while (gpit --) {
+			_t = CHAC_CHAC_BASE_TILE + 6;
+			_x = (chac_chacs_yx [gpit] & 0xf) << 1;
+			_y = ((chac_chacs_yx [gpit] & 0xf0) >> 3) + TOP_ADJUST;
+			draw_tile ();
+			_y += 2;
+			draw_tile ();
+			_y += 2;
+			draw_tile ();
+		}
+	#endif
 
 	vram_write (attr_table, 0x23c0, 64);
 }

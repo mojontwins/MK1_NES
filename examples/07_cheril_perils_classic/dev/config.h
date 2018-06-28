@@ -323,7 +323,9 @@
 
 #define CHAC_CHAC_FROM_MAP				// Chac chacs are not placed as enemies but as tiles
 #define MAX_CHAC_CHACS					4
+#define MAX_CHAC_CHACKS_QUEUED			8 // Make the closest power of 2 >= (MAX_CHAC_CHACS*2)
 #define CHAC_CHAC_DETECT_TILE			39
+#define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
 
 // Monococos
 
