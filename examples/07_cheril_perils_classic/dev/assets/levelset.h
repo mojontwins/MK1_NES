@@ -101,4 +101,4 @@ const unsigned char * const l_hotspots [] = 	{ hotspots_0, hotspots_1, hotspots_
 
 // Music track
 
-const unsigned char l_music [] = 				{ 0, 1, 0 };
+const unsigned char l_music [] = 				{ 0, 1, 2 };

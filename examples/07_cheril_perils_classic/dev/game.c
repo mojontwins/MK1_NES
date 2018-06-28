@@ -114,12 +114,13 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
-	game_mode = 0;
+	//game_mode = 0;
+	mode_no_resonators = 0;
 	// Main loop
 
 	while (1) {	
-		//title ();
-		level = 2; mode_no_resonators = 0;
+		title ();
+		//level = 2; mode_no_resonators = 0;
 
 		plife = PLAYER_LIFE;
 
@@ -127,6 +128,7 @@ void main(void) {
 
 		while (1) {
 			scroll (0, SCROLL_Y);
+			pres (palts0, scr_level);
 			game_init (); 
 			game_loop ();
 
@@ -134,8 +136,11 @@ void main(void) {
 				pres (palts0, scr_game_over);
 				break;
 			} else {
-				pres (palts0, scr_the_end);
-				break;
+				level ++;
+				if (level == MAX_LEVELS) {
+					pres (palts0, scr_the_end);
+					break;
+				}
 			}
 		}
 

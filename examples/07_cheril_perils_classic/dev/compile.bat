@@ -60,6 +60,6 @@ del *.o
 rem del game.s
 
 :end 
-del work\*.* /q
+del work\*.h /q
 
 echo DONE!

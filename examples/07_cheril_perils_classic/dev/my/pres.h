@@ -39,31 +39,29 @@ void title (void) {
 
 	_x = 5; _y = 18; pr_str ("SELECT AND PUSH START!");
 
-	_x = 12; _y = 22; pr_str ("LEVEL A[R]");
-	         _y = 23; pr_str ("LEVEL B[R]");
-	         _y = 24; pr_str ("LEVEL A");
-	         _y = 25; pr_str ("LEVEL B");
+	_x = 12; _y = 22; pr_str ("RESONATORS");
+	         _y = 24; pr_str ("EASY MODE");
 
 	bat_in ();
 
 	while (1) {
-		oam_meta_spr (84, 170 + (game_mode << 3), 0, sspl_00_a);
+		oam_meta_spr (84, 170 + (mode_no_resonators << 4), 0, sspl_00_a);
 		ppu_waitnmi ();
 		pad_read ();
-		rda = game_mode;
+		rda = mode_no_resonators;
 		if (pad_this_frame & (PAD_SELECT|PAD_DOWN)) {
-			++ game_mode; if (game_mode == 4) game_mode = 0;
+			++ mode_no_resonators; if (mode_no_resonators == 2) mode_no_resonators = 0;
 		}
 		if (pad_this_frame & PAD_UP) {
-			if (game_mode) -- game_mode; else game_mode = 3;
+			if (mode_no_resonators) -- mode_no_resonators; else mode_no_resonators = 1;
 		}
-		if (game_mode != rda) sfx_play (SFX_USE, 0);
+		if (mode_no_resonators != rda) sfx_play (SFX_USE, 0);
 		if (pad_this_frame & PAD_START) break;
 	}
 	sfx_play (SFX_START, 0); delay (20);
 	
-	level = game_mode & 1;
-	mode_no_resonators = (game_mode > 1);
+	//level = game_mode & 1;
+	//mode_no_resonators = (game_mode > 1);
 	plife = mode_no_resonators ? 5 : 3;
 
 	bat_out ();
@@ -74,6 +72,17 @@ void scr_game_over (void) {
 }
 
 void scr_the_end (void) {
-	oam_meta_spr (100, 64, 0, ssending_00);
-	_x = 12; _y = 22; pr_str ("THE  END");
+	_x = 6; _y = 6; pr_str (" CHERIL VANQUISHED%    ALL ZOMBIES%AND RETURNED SAFELY%   TO THE BOSQUE");
+	oam_meta_spr (100, 80, 0, ssending_00);
+	_x = 12; _y = 25; pr_str ("THE  END");
+}
+
+const unsigned char level0name [] = "  THE CITY";
+const unsigned char level1name [] = "THE FACTORY";
+const unsigned char level2name [] = " THE FOREST";
+const unsigned char *const levelnames [] = { level0name, level1name, level2name };
+
+void scr_level (void) {
+	_x = 12; _y = 14; pr_str ("LEVEL 0"); vram_put (17+level);
+	_x = 10; _y = 16; pr_str ((unsigned char *) levelnames [level]);
 }
