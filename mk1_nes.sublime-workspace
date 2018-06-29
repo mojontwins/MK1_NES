@@ -439,9 +439,18 @@
 			"file": "examples/07_cheril_perils_classic/README.md",
 			"settings":
 			{
-				"buffer_size": 4760,
+				"buffer_size": 4918,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "á",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Windows",
+				"name": "á"
 			}
 		},
 		{
@@ -454,10 +463,10 @@
 			}
 		},
 		{
-			"file": "examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 364,
+				"buffer_size": 3343,
 				"line_ending": "Windows"
 			}
 		}
@@ -544,6 +553,7 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/trash",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
@@ -679,7 +689,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -790,7 +800,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -799,33 +809,74 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4760,
+						"buffer_size": 4918,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4760,
-								4760
+								464,
+								464
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 4542,
-								"count": 650,
+								"changes": 111,
+								"count": 654,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
 							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1794.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								1
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 1,
+								"count": 1,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_name": "á",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -838,7 +889,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "examples/10_che_man/README.md",
 					"semi_transient": false,
 					"settings":
@@ -876,24 +927,24 @@
 						"translation.y": 39.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
+					"buffer": 3,
+					"file": "README.md",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 364,
+						"buffer_size": 3343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								364,
-								268
+								101,
+								13
 							]
 						],
 						"settings":
@@ -901,7 +952,7 @@
 							"WordCount":
 							{
 								"changes": 0,
-								"count": 44,
+								"count": 477,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -910,13 +961,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
