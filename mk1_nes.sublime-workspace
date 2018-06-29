@@ -435,6 +435,32 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/07_cheril_perils_classic/README.md",
+			"settings":
+			{
+				"buffer_size": 4760,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/10_che_man/README.md",
+			"settings":
+			{
+				"buffer_size": 8686,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
+			"settings":
+			{
+				"buffer_size": 364,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -514,10 +540,15 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
 		"/D/git/MK1_NES/examples/10_che_man/dev/compile.bat",
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
@@ -531,7 +562,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/mapmods/map_renderer_fast.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
-		"/D/git/MK1_NES/README.md",
 		"/D/Proyectos/remote/desccobuz05/sftp-config.json",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/asset_setup.h",
@@ -671,6 +701,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"resonator",
 			"ENEMIES",
 			"\\S+ --",
 			"chac_chac",
@@ -759,13 +790,135 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/07_cheril_perils_classic/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4760,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4760,
+								4760
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 4542,
+								"count": 650,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1794.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "examples/10_che_man/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8686,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								795,
+								795
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 1167,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 39.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 364,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								364,
+								268
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 44,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
