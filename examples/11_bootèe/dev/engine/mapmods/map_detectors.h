@@ -29,3 +29,10 @@
 #ifdef ENABLE_SHINES
 	if (rdt == SHINING_TILE) shines_add ();
 #endif
+
+#ifdef ENABLE_TILE_CHAC_CHAC
+	if (rdt >= CHAC_CHAC_DETECT_TILE && rdt <= CHAC_CHAC_DETECT_TILE + 2) {
+		chac_chacs_add ();
+		rdt = map_attr [rdm] = 0;
+	}
+#endif

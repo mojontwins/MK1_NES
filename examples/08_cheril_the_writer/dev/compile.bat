@@ -80,9 +80,9 @@ ld65 -v -C nes-CNROM.cfg -o cart-sp.nes crt0.o game.o runtime.lib -m labels.txt
 
 
 del *.o > nul
-rem del game.s > nul
-del work\*.h /q > nul
-del work\*.bin.* /q > nul
+del game.s > nul
+del work\*.h /q 2> nul
+del work\*.bin.* /q 2> nul
 
 copy cart.nes ..\..\cheril_the_writer.nes
 

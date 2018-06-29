@@ -4,13 +4,13 @@
 void fire_bullet (void) {
 	#ifdef MAX_AMMO
 		if (!pammo) return;
-		pammo --;
+		-- pammo;
 	#endif
 
 	// Creates a new bullet (if possible):
 
 	if (b_slots_i == 0) return;
-	b_slots_i --; bi = b_slots [b_slots_i];
+	-- b_slots_i; bi = b_slots [b_slots_i];
 
 	#ifdef PLAYER_BULLET_LIFE
 		bst [bi] = PLAYER_BULLET_LIFE;
@@ -56,7 +56,7 @@ void fire_bullet (void) {
 
 void bullets_destroy (void) {
 	bst [bi] = 0;
-	b_slots [b_slots_i] = bi; b_slots_i ++;
+	b_slots [b_slots_i] = bi; ++ b_slots_i;
 	sfx_play (SFX_DUMMY1, 2);
 }
 
@@ -80,7 +80,7 @@ void bullets_move (void) {
 			rdm = map_attr [COORDS (cx1, cy1)];
 
 			#ifdef PLAYER_BULLET_LIFE
-				bst [bi] --; 
+				-- bst [bi]; 
 				if (bst [bi] == 0) bullets_destroy (); 
 				else
 			#endif

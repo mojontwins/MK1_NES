@@ -9,7 +9,7 @@ if (_en_t & 0x80) {
 		// Is in shooting animation
 		_en_x = rdx; _en_y = rdy;
 		en_spr = _en_s + _en_facing + 2;
-		_en_ct --;
+		-- _en_ct;
 	} else {
 		// Attempt to shoot
 		if (SHOOT_FREQ) {

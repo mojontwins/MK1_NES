@@ -4,7 +4,7 @@
 // mx is state. my is counter.
 
 // Counter & state change
-MONOCOCO_COUNTER --; if (!MONOCOCO_COUNTER) {
+-- MONOCOCO_COUNTER; if (!MONOCOCO_COUNTER) {
 	MONOCOCO_STATE = (MONOCOCO_STATE + 1) & 3; MONOCOCO_COUNTER = monococo_state_times [MONOCOCO_STATE] - (rand8 () & 0x15);
 }
 

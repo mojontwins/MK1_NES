@@ -59,6 +59,7 @@ const unsigned char * const map_0 [] = {
 };
 
 // Total map size in bytes is 1768
+// From which, decorations size in bytes is 20
 
 // Locks
 // Format: NP YX ...

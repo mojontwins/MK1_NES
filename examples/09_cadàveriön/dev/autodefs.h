@@ -71,7 +71,7 @@
 	#define INTERACTIVES_FROM_CODE
 #endif
 
-#if defined (MAP_FORMAT_CHRROM)
+#if defined (MAP_FORMAT_RLE53_CHRROM)
 	#define MAP_RENDERER_COMPLEX
 #endif
 
@@ -87,3 +87,11 @@
 	#define NEEDS_LIFE_GAUGE_LOGIC
 #endif
 
+#if defined (CHAC_CHAC_FROM_MAP)
+	#undef ENABLE_CHAC_CHAC
+	#define ENABLE_TILE_CHAC_CHAC
+#endif
+
+#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+	#define ENABLE_SHAKER
+#endif

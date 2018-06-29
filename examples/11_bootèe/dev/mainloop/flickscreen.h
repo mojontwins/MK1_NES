@@ -11,7 +11,7 @@ if (prx == 4 &&
 		(cfx + pvx) < 0
 	#endif
 ) {
-	n_pant --;
+	-- n_pant;
 	px = 244 << FIXBITS;
 } else if (prx == 244 && 
 	#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)
@@ -20,7 +20,7 @@ if (prx == 4 &&
 		(cfx + pvx) > 0
 	#endif
 ) {
-	n_pant ++;
+	++ n_pant;
 	px = 4 << FIXBITS;
 #ifdef PLAYER_TOP_DOWN				
 

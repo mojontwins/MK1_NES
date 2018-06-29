@@ -4,7 +4,7 @@
 // Steady Shooters. Don't move and shoot from time to time.
 
 if (ticker == 0) {
-	if (_en_ct) _en_ct --; else {
+	if (_en_ct) -- _en_ct; else {
 		_en_ct = _en_mx;	// reset counter
 		rda = _en_my; 		// direction
 		rdx = _en_x + 4;

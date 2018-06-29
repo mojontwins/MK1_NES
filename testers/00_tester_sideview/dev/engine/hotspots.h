@@ -62,7 +62,9 @@ void hotspots_create (void) {
 #else
 
 	gp_gen = (unsigned char *) (c_hotspots + (n_pant << 1));
-	hrt = *gp_gen ++; rda = *gp_gen; 
+	//hrt = *gp_gen ++; rda = *gp_gen; 
+	SET_FROM_PTR (hrt, gp_gen); gp_gen ++;
+	SET_FROM_PTR (rda, gp_gen);
 	if (hrt && hact [n_pant]) {
 		hry = rda & 0xf0; hrx = rda << 4;
 	} else hrt = 0;

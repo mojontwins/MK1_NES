@@ -18,7 +18,7 @@ void cocos_init (void) {
 		rdct = distance ();
 
 		if (rdct > COCO_FAIR_D && coco_slots_i) {
-			coco_slots_i --; coco_it = coco_slots [coco_slots_i];
+			-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
 			coco_x [coco_it] = rdx << 6;
 			coco_y [coco_it] = rdy << 6;
@@ -40,7 +40,7 @@ void cocos_init (void) {
 	void cocos_shoot_linear (void) {
 		if (coco_slots_i == 0) return;
 
-		coco_slots_i --; coco_it = coco_slots [coco_slots_i];
+		-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
 		coco_x [coco_it] = rdx << 6;
 		coco_y [coco_it] = rdy << 6;

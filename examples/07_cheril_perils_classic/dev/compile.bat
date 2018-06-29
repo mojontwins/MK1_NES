@@ -60,6 +60,7 @@ del *.o
 rem del game.s
 
 :end 
-del work\*.h /q
+del work\*.h /q 2> nul
+del work\*.bin /q 2> nul
 
 echo DONE!

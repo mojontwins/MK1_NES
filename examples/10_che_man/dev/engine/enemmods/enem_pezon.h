@@ -13,7 +13,7 @@ oam_index = oam_meta_spr (
 switch (en_alive [gpit]) {
 	case 0:	// Idling
 		if (_en_mx) {
-			_en_mx --;
+			-- _en_mx;
 		} else {
 			en_alive [gpit] = 1;
 			_enf_y = _en_y1 << 6;

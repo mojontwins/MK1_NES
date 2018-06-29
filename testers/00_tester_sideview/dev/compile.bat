@@ -51,4 +51,6 @@ del game.s
 
 copy cart.nes ..\..\tester_sideview.nes > nul
 
+del work\*.h /q
+
 echo DONE!

@@ -62,15 +62,15 @@
 #define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
 #define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
-//#define HOTSPOT_TYPE_STAR 		4	// Stars are extra collectibles
-
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
-#define MAP_FORMAT_CHRROM				// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
+//#define MAP_FORMAT_RLE44				// RLE'd by rle44mapMK1. 16 tiles max.
+#define MAP_FORMAT_RLE53_CHRROM			// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
+//#define MAP_FORMAT_RLE44_CHRROM		// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
@@ -251,7 +251,6 @@
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
-
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
@@ -318,6 +317,12 @@
 #define CHAC_CHAC_IDLE_2				16
 #define CHAC_CHAC_IDLE_3				1
 #define CHAC_CHAC_IDLE_4				50
+
+//#define CHAC_CHAC_FROM_MAP			// Chac chacs are not placed as enemies but as tiles
+#define MAX_CHAC_CHACS					4
+#define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
+#define CHAC_CHAC_DETECT_TILE			39
+#define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
 
 // Monococos
 
@@ -459,12 +464,12 @@
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
-//#define ENABLE_CONVEYORS				// Conveyors
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
+//#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
-//#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
-										// 0xff = Nobody
+//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+												// 0xff = Nobody
 
 // ============================================================================
 // III. Screen configuration
@@ -541,12 +546,9 @@
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
-#define PLAYER_VX_SPRINT_MAX	192
-#define PLAYER_VX_MAX_PODEWWWR	256
 #define PLAYER_VX_CONVEYORS 	64
 #define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_AX_SPRINT		12
 #define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 

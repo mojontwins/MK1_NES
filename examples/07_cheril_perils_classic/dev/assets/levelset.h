@@ -1,7 +1,7 @@
 
 // Initial screen & position, per level
 
-const unsigned char l_scr_ini [] = 				{ 20, 20, 8 };
+const unsigned char l_scr_ini [] = 				{ 20, 20, 6/*8*/ };
 const unsigned char l_ini_x [] = 				{ 2, 2, 2 };
 const unsigned char l_ini_y [] = 				{ 7, 10, 3 };
 const unsigned char l_map_w [] = 				{ 4, 4, 8 };

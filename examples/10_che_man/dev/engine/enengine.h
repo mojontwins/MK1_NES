@@ -44,20 +44,24 @@
 			gp_gen = (unsigned char *) (c_enems);
 			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
 				// Skip t
-				rdt = *gp_gen ++; 
+				// rdt = *gp_gen ++; 
+				SET_FROM_PTR (rdt, gp_gen); gp_gen ++;
 
 				// YX1
-				rda = *gp_gen ++;
+				//rda = *gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
 				ep_y [gpjt] = rda & 0xf0;
 				ep_x [gpjt] = rda << 4;
 
 				// YX2
-				rda = *gp_gen ++;
+				//rda = *gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
 				rdc = rda & 0xf0;
 				rdb = rda << 4;
 
 				// P, here used for speed
-				rda = (*gp_gen ++) & 0x0f;
+				//rda = (*gp_gen ++) & 0x0f;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++; rda &= 0x0f;
 				if (rda > 1) rda >>= 1;	// Store converted!
 				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
@@ -84,7 +88,7 @@
 				__asm__ ("lda %v,x", en_my);
 				__asm__ ("sta %v,y", ep_my);
 
-				gpjt ++;		
+				++ gpjt;	
 			}	
 		}
 	}
@@ -192,23 +196,27 @@ void enems_load (void) {
 				rda = VRAM_READ;
 			#else
 				// First get T, then do whatever I need
-				_en_t = *gp_gen ++;
+				// _en_t = *gp_gen ++;
+				SET_FROM_PTR (_en_t, gp_gen); gp_gen ++;
 
 				// General...
 				en_alive [gpit] = 0;
 
 				// YX1
-				rda = *gp_gen ++;
+				// rda = *gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
 				_en_y1 = rda & 0xf0;
 				_en_x1 = rda << 4;
 
 				// YX2
-				rda = *gp_gen ++;
+				// rda = *gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
 				_en_y2 = rda & 0xf0;
 				_en_x2 = rda << 4;
 			
 				// P, here used for speed
-				rda = *gp_gen ++;
+				// rda = *gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
 			#endif
 
 			// clean nibbles
@@ -325,7 +333,7 @@ void enems_load (void) {
 
 						// emerging sense
 						rda = ABS (_en_mx); if (!rda) rda = ABS (_en_my);
-						rda --;
+						-- rda;
 
 						// Sense
 						rdb = (_en_x1 != _en_x2) ? 
@@ -406,7 +414,7 @@ void enems_load (void) {
 			en_flags [gpit] = 0;
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-			rdc ++;
+			++ rdc;
 		#endif
 
 		enems_update_unsigned_char_arrays ();
@@ -432,9 +440,9 @@ void enems_load (void) {
 			if (_en_t != 5)
 		#endif
 		{
-			pkilled ++;
+			++ pkilled;
 			#ifdef COUNT_KILLED_IN_FLAG
-				flags [COUNT_KILLED_IN_FLAG] ++;
+				++ flags [COUNT_KILLED_IN_FLAG];
 			#endif
 		}
 	}
@@ -443,7 +451,7 @@ void enems_load (void) {
 		_en_facing = ((_en_x < prx) ? 0 : 4);
 		en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
 		#ifdef NEEDS_LIFE_GAUGE_LOGIC
-			en_life [gpit] --; 
+			-- en_life [gpit]; 
 			if (en_life [gpit] == 0) 
 		#endif
 		{
@@ -470,7 +478,7 @@ void enems_move (void) {
 	
 	// Updates sprites
 	touched = 0;
-	en_initial ++; if (en_initial >= 3) en_initial = 0;
+	++ en_initial; if (en_initial >= 3) en_initial = 0;
 	gpit = en_initial;
 	gpjt = 3; while (gpjt --) {
 		gpit += 2; if (gpit > 2) gpit -=3;
@@ -526,14 +534,14 @@ void enems_move (void) {
 		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
 		
 		// Clear selected sprite
-
+		// Means don't render (can/will be overwritten):
 		en_spr = 0xff;
 
 		// "touched" state control
 
 		#ifdef ENEMS_MAY_DIE
 			if (en_cttouched [gpit]) {
-				en_cttouched [gpit] --;
+				-- en_cttouched [gpit];
 				#ifdef ENEMS_FLICKER
 					if (
 						half_life
@@ -574,8 +582,6 @@ void enems_move (void) {
 
 			// Select frame upon screen position:
 			en_fr = ((((_en_mx) ? _en_x : _en_y)+4) >> 3) & 1;
-
-			// Means don't render (can/will be overwritten):
 			
 			#ifdef ENABLE_RESONATORS
 				if (res_on 
@@ -770,8 +776,11 @@ void enems_move (void) {
 					pry < _en_y && 
 					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 					pgotten == 0 &&	ppossee == 0
-					#ifdef ENABLE_RESONATORS
+					#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
 						&& pvy > 0
+					#endif
+					#ifdef PLAYER_STEPS_STRICT
+						&& pvy > PLAYER_VY_FALLING_MIN
 					#endif
 					#ifndef STEADY_SHOOTER_KILLABLE
 						&& _en_t != 5
@@ -782,7 +791,7 @@ void enems_move (void) {
 				) {
 				
 					#ifdef ENABLE_RESONATORS
-						if (res_on)
+						if (res_on || res_disable)
 					#endif
 					#ifdef PLAYER_STEPS_MIN_KILLABLE
 						if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
@@ -796,11 +805,12 @@ void enems_move (void) {
 					#ifdef PLAYER_HAS_JUMP
 						if (i & PAD_A) {
 							jump_start ();
-						} else {
-							sfx_play (SFX_STEPON, 1);
-							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-						}
-					#endif
+						} else 
+					#endif						
+					{
+						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+					}
+					sfx_play (SFX_STEPON, 1);
 
 					#ifdef PLAYER_AUTO_JUMP
 						jump_start ();
@@ -932,7 +942,7 @@ void enems_move (void) {
 		#ifdef ENEMS_CAN_RESPAWN
 			else {
 				if (en_respawn [gpit]) {
-					if (_en_ct ) _en_ct --; else {
+					if (_en_ct ) -- _en_ct; else {
 						// Respawn
 						
 						_en_x = en_resx [gpit]; _en_mx = en_resmx [gpit];

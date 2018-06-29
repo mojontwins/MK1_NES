@@ -88,7 +88,7 @@ void player_kill (void) {
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
 	
-	if (plife) plife --; else game_over = 1;
+	if (plife) -- plife; else game_over = 1;
 
 	#ifdef PLAYER_FLICKERS
 		pstate = EST_PARP;
@@ -134,7 +134,7 @@ void player_kill (void) {
 void player_move (void) {
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
-			pfrozen --; 
+			-- pfrozen; 
 			if (pfrozen == 0) {
 			#ifdef PLAYER_PUNCHES
 				ppunching = 0;
@@ -148,16 +148,16 @@ void player_move (void) {
 
 	#ifdef ENABLE_USE_ANIM
 		if (use_ct) {
-			if (use_sub_ct) use_sub_ct --; else {
+			if (use_sub_ct) -- use_sub_ct; else {
 				if (use_ct < USE_ANIM_MAX_FRAMES) {
-					use_ct ++;
+					++ use_ct;
 					use_sub_ct = (use_ct == USE_ANIM_MAX_FRAMES) ? 50 : USE_ANIM_FRAMES_PER_STEP;
 					#ifdef ACTIVATE_SCRIPTING
 						if (
 							use_type == USE_TYPE_SCRIPTING && 
 							fire_script_success == 0 && 
 							use_ct == USE_ANIM_MAX_FRAMES
-						) use_ct ++;
+						) ++ use_ct;
 					#endif
 				} else use_ct = 0;
 			}
@@ -456,7 +456,7 @@ void player_move (void) {
 
 			if (pj) {
 				if (i & PAD_A) {
-					pctj ++; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
+					++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
 				} else {
 					pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
 				}
@@ -487,7 +487,7 @@ void player_move (void) {
 				if (pj) {
 					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 					if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-					pctj ++; if (pctj == 16) pj = 0;	
+					++ pctj; if (pctj == 16) pj = 0;	
 				}
 			} else {
 				pj = 0; 
@@ -517,7 +517,7 @@ void player_move (void) {
 		if (pj) {
 			if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 			if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-			pctj ++; if (pctj == 16) pj = 0;	
+			++ pctj; if (pctj == 16) pj = 0;	
 		}
 		
 		if (i & PAD_DOWN) {
@@ -667,14 +667,23 @@ void player_move (void) {
 	// *************
 	// Killing tiles
 	// *************
-	
+
 	phit = 0;
+	
 	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
 	if (hith) { phit = 1; 
 		#ifndef NO_HORIZONTAL_EVIL_TILE	
 			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
 		#endif	
 	}
+
+	#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+		cx1 = cx2 = (prx + 4) >> 4;
+		cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+		cm_two_points ();
+		if ((at1 & 1) || (at2 & 1)) phit = 1;
+	#endif
+
 	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 
 	// **************
@@ -685,11 +694,11 @@ void player_move (void) {
 
 	#ifdef PLAYER_CHARGE_AND_FIRE
 		#ifdef PLAYER_FIRE_RELOAD
-			if (pfirereload) pfirereload --; 
+			if (pfirereload) -- pfirereload; 
 			else
 		#endif
 		if (!b_button && (i & PAD_B)) {
-			if (pfiregauge < PLAYER_CHARGE_MAX) pfiregauge ++;
+			if (pfiregauge < PLAYER_CHARGE_MAX) ++ pfiregauge;
 		}
 
 		if (0 == (i & PAD_B)) {
@@ -711,7 +720,7 @@ void player_move (void) {
 
 			#if defined (PLAYER_CAN_FIRE) && !defined (PLAYER_CHARGE_AND_FIRE)
 				#ifdef PLAYER_FIRE_RELOAD
-					if (pfirereload) pfirereload --; 
+					if (pfirereload) -- pfirereload; 
 					else
 				#endif
 			
@@ -730,7 +739,7 @@ void player_move (void) {
 
 	#ifdef PLAYER_PUNCHES
 		if (ppunching) {
-			ppunching --; if (ppunching < 12) phitteract = 0;
+			-- ppunching; if (ppunching < 12) phitteract = 0;
 			phitterx = pfacing ? prx - PLAYER_PUNCH_OFFS_X : prx + PLAYER_PUNCH_OFFS_X;
 			phittery = pry + PLAYER_PUNCH_OFFS_Y;
 		} 
@@ -738,7 +747,7 @@ void player_move (void) {
 
 	#ifdef PLAYER_KICKS
 		if (pkicking) {
-			pkicking --; if (pkicking < 12) phitteract = 0;
+			-- pkicking; if (pkicking < 12) phitteract = 0;
 			phitterx = pfacing ? prx - PLAYER_KICK_OFFS_X : prx + PLAYER_KICK_OFFS_X;
 			phittery = pry + PLAYER_KICK_OFFS_Y;
 			if (ppossee) pkicking = 0;

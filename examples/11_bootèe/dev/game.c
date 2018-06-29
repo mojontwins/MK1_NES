@@ -85,6 +85,9 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_PROPELLERS
 	#include "engine/propellers.h"
 #endif
+#ifdef ENABLE_TILE_CHAC_CHAC
+	#include "engine/tile_chac_chac.h"
+#endif
 #ifdef ENABLE_SHINES
 	#include "engine/shines.h"
 #endif

@@ -43,23 +43,23 @@ const unsigned char * const * const l_spr_enems [] =
 #ifdef MAP_FORMAT_PACKED
 	const unsigned char * const l_map [] =		{ map_4, map_1, map_3, map_0, map_2 };
 #endif
-#ifdef MAP_FORMAT_RLE16
+#if defined (MAP_FORMAT_RLE16) || defined (MAP_FORMAT_RLE53) || defined (MAP_FORMAT_RLE44)
 	const unsigned char * const * const l_map [] =
 												{ map_4, map_1, map_3, map_0, map_2 };
 #endif
-#ifdef MAP_FORMAT_RLE53
-	const unsigned char * const * const l_map [] =	
-												{ map_4, map_1, map_3, map_0, map_2 };
-#endif
-#ifdef MAP_FORMAT_CHRROM
+#if defined (MAP_FORMAT_RLE53_CHRROM) || defined (MAP_FORMAT_RLE44_CHRROM)
 	const unsigned char l_map_chr_rom_bank [] = { MAP_04_CHRROM, MAP_01_CHRROM, MAP_03_CHRROM, MAP_00_CHRROM, MAP_02_CHRROM };
 	const unsigned int * const l_map [] = 		{ map_04_scr_offsets, map_01_scr_offsets, map_03_scr_offsets, map_00_scr_offsets, map_02_scr_offsets };
-#endif
-												
+#endif										
 
 #ifdef MAP_WITH_DECORATIONS
-	const unsigned char * const * const l_decos [] =
-												{ 0, 0, 0, 0, 0 };
+	#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16) 
+		const unsigned char * const * const l_decos [] =
+												{ map_0_decos, map_1_decos };
+	#else
+		// 0 = no decos in this level's map, 1 = decos.
+		const unsigned char l_decos [] = 		{ 1, 1 };												
+	#endif
 #endif
 
 #ifndef DEACTIVATE_KEYS

@@ -63,7 +63,7 @@ const unsigned char * const * const l_spr_enems [] =
 #endif
 
 #ifndef DEACTIVATE_KEYS
-	const unsigned char * const l_locks [] = 	{ map_0_locks, 0 };
+	const unsigned char * const l_locks [] = 	{ map_0_locks, map_1_locks };
 	const unsigned char l_n_bolts [] = 			{ N_BOLTS_0, N_BOLTS_1 };
 #endif
 

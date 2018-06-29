@@ -8,7 +8,7 @@ switch (en_alive [gpit]) {
 		// IDLE
 
 		if (_en_ct) {
-			_en_ct --; _en_y = 240;
+			-- _en_ct; _en_y = 240;
 		} else {
 			en_alive [gpit] = 1;
 			_en_x = _en_x1;
@@ -22,7 +22,7 @@ switch (en_alive [gpit]) {
 	case 1:
 		// Appearing
 		en_spr = ENEMS_EXPLODING_CELL;
-		if (_en_ct) _en_ct --; else en_alive [gpit] = 2;
+		if (_en_ct) -- _en_ct; else en_alive [gpit] = 2;
 		break;
 	case 2:
 		// Pursuing

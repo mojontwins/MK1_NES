@@ -12,7 +12,7 @@ void draw_map_tile (void) {
 
 	#include "engine/mapmods/map_detectors.h"
 
-	rdm ++;
+	++ rdm;
 	_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 	draw_tile ();
 	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
@@ -75,10 +75,7 @@ void draw_scr (void) {
 		while (rdm < 192) {
 			rdd = *gp_gen ++;
 			rdt = rdd & 0x1f;
-			/*
-			rdct = 1 + (rdd >> 5);
-			while (rdct --) draw_map_tile (); 
-			*/
+
 			rdct = rdd;
 			while (rdct >= 32) {
 				draw_map_tile (); 
@@ -87,13 +84,34 @@ void draw_scr (void) {
 		}
 	#endif	
 
+	#ifdef MAP_FORMAT_RLE44
+		// Get pointer
+		gp_gen = c_map [n_pant];
+
+		while (rdm < 192) {
+			rdd = *gp_gen ++;
+			rdt = rdd & 0x0f;
+
+			rdct = rdd;
+			while (rdct >= 16) {
+				draw_map_tile (); 
+				rdct -= 16;
+			} draw_map_tile (); 
+		}
+	#endif
+
 	// Draw decorations
 
 	#ifdef MAP_WITH_DECORATIONS
+		// Draw decorations
 		if (c_decos) {
-			if (c_decos [n_pant]) {
-				gp_gen = c_decos [n_pant];
-			
+			#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16)
+				if (c_decos [n_pant]) {
+					gp_gen = c_decos [n_pant];
+			# else 
+				{
+			#endif
+
 				while (rdd = *gp_gen ++) {
 					if (rdd & 0x80) {
 						rdd &= 0x7F;

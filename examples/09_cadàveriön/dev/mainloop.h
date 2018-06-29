@@ -52,6 +52,7 @@ void game_init (void) {
 
 	#ifdef ENABLE_RESONATORS
 		res_on = 0;
+		res_disable = 0;
 	#endif
 
 	#ifdef ENABLE_USE_ANIM
@@ -134,6 +135,11 @@ void prepare_scr (void) {
 	#ifdef ENABLE_SHINES
 		shine_active_ct = 0;
 		max_shines = 0;
+	#endif
+
+	#ifdef ENABLE_TILE_CHAC_CHAC
+		chac_chacs_queue_write = chac_chacs_queue_read = 0;
+		max_chac_chacs = 0;
 	#endif
 
 		draw_scr ();
@@ -270,6 +276,11 @@ void game_loop (void) {
 		// Finish frame and wait for NMI
 
 		oam_hide_rest (oam_index);
+
+		#ifdef ENABLE_SHAKER
+			#include "mainloop/shaker.h"
+		#endif
+
 		ppu_waitnmi ();
 		clear_update_list ();
 		oam_index = 4;
@@ -282,9 +293,9 @@ void game_loop (void) {
 
 		if (paused == 0) {
 			// Count frames		
-			if (ticker) ticker --; else ticker = 50;
+			if (ticker) -- ticker; else ticker = 50;
 			half_life ^= 1;
-			frame_counter ++;
+			++ frame_counter;
 
 			#ifdef ENABLE_TIMER
 				#include "mainloop/timer.h"
@@ -347,16 +358,12 @@ void game_loop (void) {
 			}
 
 			if (pstate) {
-				pctstate --;
+				-- pctstate;
 				if (!pctstate) pstate = EST_NORMAL;
 			}
 
 			#ifdef ENABLE_PROPELLERS
 				if (propellers_on) propellers_do ();
-			#endif
-
-			#ifdef ENABLE_RESONATORS
-				#include "mainloop/resonators.h"
 			#endif
 
 			#ifdef ENABLE_INTERACTIVES
@@ -382,6 +389,10 @@ void game_loop (void) {
 		
 			enems_move ();
 
+			#ifdef ENABLE_RESONATORS
+				#include "mainloop/resonators.h"
+			#endif
+
 			// Moved this here so they appear BEHIND the actors
 
 			if (hrt) hotspots_paint ();
@@ -400,13 +411,17 @@ void game_loop (void) {
 
 			#ifdef ENABLE_NO
 				if (no_ct) {
-					no_ct --;
+					-- no_ct;
 					oam_index = oam_meta_spr (
 						prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
 						oam_index,
 						NO_METASPRITE
 					);
 				}
+			#endif
+
+			#ifdef ENABLE_TILE_CHAC_CHAC
+				chac_chacs_do ();
 			#endif
 		}
 

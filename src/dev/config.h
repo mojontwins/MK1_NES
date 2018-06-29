@@ -61,8 +61,6 @@
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
-//#define HOTSPOT_TYPE_STAR 		4	// Stars are extra collectibles
-
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
@@ -253,7 +251,6 @@
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
-
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
 //#define PERSISTENT_ENEMIES
@@ -322,7 +319,7 @@
 
 //#define CHAC_CHAC_FROM_MAP			// Chac chacs are not placed as enemies but as tiles
 #define MAX_CHAC_CHACS					4
-#define MAX_CHAC_CHACKS_QUEUED			8 // Make the closest power of 2 >= (MAX_CHAC_CHACS*2)
+#define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
 
@@ -457,7 +454,7 @@
 // ---------
 
 //#define PLAYER_TOP_DOWN            	// Enable top view.
-//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
+//#define TOP_OVER_SIDE              	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
@@ -468,7 +465,7 @@
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 //#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
-#define PLAYER_STEPS_STRICT				// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
+//#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
 //#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 												// 0xff = Nobody

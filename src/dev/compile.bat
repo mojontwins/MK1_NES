@@ -48,8 +48,9 @@ ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
-del *.o
-del game.s
-del work\*.* /q
+del *.o > nul
+del game.s > nul
+del work\*.h /q > nul
+del work\*.bin.* /q > nul
 
 echo DONE!

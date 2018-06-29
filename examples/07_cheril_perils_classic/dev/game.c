@@ -120,8 +120,8 @@ void main(void) {
 
 	while (1) {	
 		title ();
-		//level = 2; mode_no_resonators = 0;
-
+		
+		level = 0;
 		plife = PLAYER_LIFE;
 
 		// Game loop

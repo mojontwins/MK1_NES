@@ -111,7 +111,7 @@ Activate scripting. All scripting options off
 Player has jump, player steps on enemies, but only make enemies type 3 (the batucadas) killable. As there are enemies which you can't kill, make them **jumpable-over**:
 
 ```c
-    #define PLAYER_STEPS_ON_ENEMIES
+    #define PLAYER_STEPS_ON_ENEMS
     #define PLAYER_STEPS_MIN_KILLABLE       3
     #define PLAYER_SAFE_LANDING 
 ```
