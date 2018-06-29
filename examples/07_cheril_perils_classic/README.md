@@ -5,6 +5,8 @@ As mentioned elsewhere, the third game made with MK1 but never finished was a po
 
 Assets from the abandoned branch are scattered accross many of our releases. Very recently, I found the original project folder with the untouched, first version. I was touched with the visuals, but decided not to release it as it was crap, specially the sprite work (which consists on the original ZX Spectrum sprites).
 
+![The original Cheril Perils](https://raw.githubusercontent.com/mojontwins/MK1_NES/master/examples/07_cheril_perils_classic/trash/original_perils.png)
+
 I decided to reuse the levels with new visuals and port it to MK1_NES/AGNES 1.0 as an example, so here it is.
 
 Resonators
