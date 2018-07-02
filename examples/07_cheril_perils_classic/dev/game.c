@@ -118,6 +118,8 @@ void main(void) {
 	mode_no_resonators = 0;
 	// Main loop
 
+	credits ();
+
 	while (1) {	
 		title ();
 		

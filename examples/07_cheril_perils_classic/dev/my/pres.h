@@ -86,3 +86,32 @@ void scr_level (void) {
 	_x = 12; _y = 14; pr_str ("LEVEL 0"); vram_put (17+level);
 	_x = 10; _y = 16; pr_str ((unsigned char *) levelnames [level]);
 }
+
+void credits (void) {
+	bankswitch (1);
+	pal_bg (palts0);
+	pal_spr (palss0);
+	cls ();
+	oam_clear (); scroll (0, 0);
+	
+	rds16 = 0; rdy = 240;
+
+	_x = 0; _y = 22; 
+	pr_str ("     CHERIL PERIL CLASSIC%%         ORIGINAL GAME%   @ 2011 BY THE MOJON TWINS%       REPROGRAMMED GAME%@ 2014, 2018 BY THE MOJON TWINS");
+	
+	pal_bright (0);
+	ppu_on_all ();
+	fade_delay = 4;
+	fade_in ();
+	while (!(pad_poll (0) & PAD_START) && rds16 < 300) {
+		oam_meta_spr (102, rdy, 0, logo_00);
+		if (rdy > 112) rdy --;
+		ppu_waitnmi ();
+		rds16 ++;
+	};
+	fade_out ();
+	
+	ppu_off ();
+	oam_clear ();
+	bankswitch (0);
+}

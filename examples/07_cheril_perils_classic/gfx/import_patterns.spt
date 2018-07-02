@@ -80,6 +80,10 @@ METASPRITESET 0, 6, 2, 2, 6, 1, 0, 0 FLIPPED
 LABEL ssit
 METASPRITESET 0, 8, 2, 2, 5, 1, 0, 0
 
+# Logo
+LABEL logo
+METASPRITE 0, 10, 6, 2, 0, 0
+
 # Ending big cheril
 LABEL ssending
 OPEN ssending.png
