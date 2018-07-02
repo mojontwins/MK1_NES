@@ -196,6 +196,7 @@ void player_move (void) {
 
 	#ifdef ENABLE_SPRINGS
 		if (springs_on && cy1 < 12) {
+			if (cy1) -- cy1;
 			_t = SPRING_SPIKE_TILE; 
 			if (QTILE (cx1, cy1 + 1) == SPRING_TILE) { _x = cx1; _y = cy1; map_set (); }
 			if (QTILE (cx2, cy1 + 1) == SPRING_TILE) { _x = cx2; _y = cy1; map_set (); }

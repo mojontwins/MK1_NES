@@ -241,9 +241,9 @@
 
 // Springs
 
-//#define ENABLE_SPRINGS
-#define SPRING_TILE 					10
-#define SPRING_SPIKE_TILE 				11
+#define ENABLE_SPRINGS
+#define SPRING_TILE 					31
+#define SPRING_SPIKE_TILE 				10
 //#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions

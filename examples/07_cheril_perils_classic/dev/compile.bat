@@ -26,7 +26,7 @@ cd ..\script
 echo Making map
 cd ..\map
 ..\..\..\src\utils\rle44mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 4 6 15 0 1 scrsizes nodecos
-..\..\..\src\utils\rle44mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 4 6 15 1 1 scrsizes nodecos
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 4 6 15 1 1 scrsizes
 ..\..\..\src\utils\rle44mapMK1.exe ..\map\level2.map ..\dev\assets\map2.h 8 3 15 2 0 scrsizes
 
 echo Exporting music and sound
