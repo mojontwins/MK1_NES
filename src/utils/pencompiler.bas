@@ -1,4 +1,6 @@
 '' pencompiler.bas
+'' fbc pencompiler.bas mtparser.bas 
+
 
 #include "mtparser.bi"
 
