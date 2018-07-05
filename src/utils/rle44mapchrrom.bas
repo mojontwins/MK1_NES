@@ -2,7 +2,7 @@
 ' Creates a packed map plus decorations ready to be written to CHR ROM.
 ' Copyleft 2017 by The Mojon Twins
 
-' fbc rle44map.bas cmdlineparser.bas mtparser.bas
+' fbc rle44mapchrrom.bas cmdlineparser.bas mtparser.bas
 
 #include "cmdlineparser.bi"
 #include "mtparser.bi"

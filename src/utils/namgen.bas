@@ -1,7 +1,7 @@
 ' namgen 0.2 - Converts a .png into a nametable with attributes
 ' Using a fixed palette and CHR files.
 ' Copyleft 2016, 2017 The Mojon Twins
-
+' fbc namgen.bas cmdlineparser.bas mtparser.bas
 #include "file.bi"
 #include "fbpng.bi"
 #include "fbgfx.bi"
