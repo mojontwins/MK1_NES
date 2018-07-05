@@ -18,6 +18,10 @@ ENTERING GAME
 	END
 END
 
+# We need the same script for both levels.
+# so we add this command which defines script 0 as the script for each level
+CUSTOM_SCRIPT_ORDER 0, 0
+
 # #######################
 # Para cualquier pantalla
 # #######################

@@ -30,6 +30,8 @@ Dim Shared As Integer maxItem
 Dim Shared As Integer itemSetx, itemSety, itemSetStep, itemSetOr, itemFlag, slotFlag
 Dim Shared As Integer itemSelectClr, itemSelectC1, itemSelectC2, itemEmpty
 Dim Shared As Integer debug, binmode, fullBinOffset
+Dim Shared As uByte customScriptOrder(127)
+Dim Shared As uByte customScriptMax
 
 Sub usage
 	Print "Usage:"
@@ -726,6 +728,7 @@ Dim As Integer maxidx, i, j, binPt, clin
 Dim As Integer keepGoing, sDone
 Dim As String thisLevelConstantName, linea, clausulas
 Dim As uByte d
+Dim As Integer coords (127)
 
 Print "MK1 v1.0 mscmk1 1.1 ~ ";
 If Len (Command (3)) = 0 Then usage: End
@@ -775,6 +778,7 @@ decoInclude = ""
 thisLevelConstantName = ""
 resetScript maxidx + 5
 fullBinOffset = 0
+customScriptMax = 0
 
 While keepGoing
 	If Eof (fIn) Then
@@ -795,6 +799,7 @@ While keepGoing
 		Case "LEVELID":
 			thisLevelConstantName = lP (1)
 			? "L" & scriptCount & " = " & thisLevelConstantName & " ~ ";
+			? "** WARNING ** LEVELID is ignored in MK1_NES/AGNES!"
 		Case "INC_DECORATIONS":
 			decoInclude = lP (1)
 			? "L" & scriptCount & " decos @ " & decoInclude & " ~ ";
@@ -802,6 +807,12 @@ While keepGoing
 			ProcessItems fIn
 		Case "DEFALIAS":
 			processAlias fIn
+		Case "CUSTOM_SCRIPT_ORDER":
+			parseCoordinatesString Trim (Right (linea, Len (linea) - Len (lp (0)))), coords ()
+			customScriptMax = parseGetLatestNumberOfTokens ()
+			For i = 0 To customScriptMax - 1
+				customScriptOrder (i) = coords (i)
+			Next i
 		Case "ENTERING":
 			sDone = -1
 			If lP (1) <> "GAME" And lP (1) <> "ANY" And decoInclude <> "" Then
@@ -940,18 +951,32 @@ Wend
 If binmode Then
 	Print #fOut, ""
 	Print #fOut, "const unsigned int script_pool_offsets [] = {"
-	For i = 0 To scriptCount - 1
-		Print #fOut, "    SCRIPT_POOL_" & i & "_OFFSET";
-		If i < scriptCount - 1 Then Print #fOut, ", " Else Print #fOut, ""
-	Next i
+	If customScriptMax = 0 Then
+		For i = 0 To scriptCount - 1
+			Print #fOut, "    SCRIPT_POOL_" & i & "_OFFSET";
+			If i < scriptCount - 1 Then Print #fOut, ", " Else Print #fOut, ""
+		Next i
+	Else
+		For i = 0 To customScriptMax - 1
+			Print #fOut, "    SCRIPT_POOL_" & customScriptOrder (i) & "_OFFSET";
+			If i < customScriptMax - 1 Then Print #fOut, ", " Else Print #fOut, ""
+		Next i
+	End If
 	Print #fOut, "};"
 	Print #fOut, ""
 Else
 	Print #fOut, "const unsigned char * const script_pool [] = {"
-	For i = 0 To scriptCount - 1
-		Print #fOut, "    script_pool_" & i;
-		If i < scriptCount - 1 Then Print #fOut, ", " Else Print #fOut, ""
-	Next i
+	If customScriptMax = 0 Then
+		For i = 0 To scriptCount - 1
+			Print #fOut, "    script_pool_" & i;
+			If i < scriptCount - 1 Then Print #fOut, ", " Else Print #fOut, ""
+		Next i
+	Else
+		For i = 0 To customScriptMax - 1
+			Print #fOut, "    script_pool_" & customScriptOrder (i);
+			If i < customScriptMax - 1 Then Print #fOut, ", " Else Print #fOut, ""
+		Next i
+	End If
 	Print #fOut, "};"
 	Print #fOut, ""
 End If

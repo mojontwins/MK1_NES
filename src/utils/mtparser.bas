@@ -6,12 +6,20 @@
 
 #include "mtparser.bi"
 
+Dim Shared As Integer latestNumberOfTokens
+
+Function parseGetLatestNumberOfTokens () As Integer
+	Return latestNumberOfTokens
+End Function
+
 Sub clearCoords (coords () As Integer)
 	Dim As Integer i
 		
 	For i = lBound (coords) To uBound (coords)
 		coords (i) = -1
 	Next i
+
+	latestNumberOfTokens = 0
 End Sub
 
 Sub parseCoordinatesString (coordsString as String, coords () As Integer)
@@ -32,6 +40,8 @@ Sub parseCoordinatesString (coordsString as String, coords () As Integer)
 			coordString = coordString & m
 		End If
 	Next i
+
+	latestNumberOfTokens = idx
 End Sub
 
 Sub parseCoordinatesStringCustom (coordsString as String, separator As String, coords () As Integer)
@@ -52,6 +62,8 @@ Sub parseCoordinatesStringCustom (coordsString as String, separator As String, c
 			coordString = coordString & m
 		End If
 	Next i
+
+	latestNumberOfTokens = idx
 End Sub
 
 Sub parseCleanTokens (tokens () As String)
@@ -60,6 +72,8 @@ Sub parseCleanTokens (tokens () As String)
 	For i = 0 To l
 		tokens (i) = ""
 	Next i
+
+	latestNumberOfTokens = 0
 End Sub
 
 Function parseGlueTokens (tokens () As String) As String
@@ -129,6 +143,8 @@ Sub parseTokenizeString (inString As String, tokens () As String, ignore As Stri
 			End If
 		End If
 	Next i
+
+	latestNumberOfTokens = windex
 End Sub
 
 Function parserFindTokenInTokens (token As String, tokens () As String, modifier As String) As Integer

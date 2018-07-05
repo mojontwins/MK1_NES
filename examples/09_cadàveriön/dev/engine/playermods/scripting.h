@@ -13,6 +13,6 @@
 	#else
 		if (b_button) {
 			run_fire_script ();
-			if (sc_continuar) b_button = 0;
+			if (fire_script_success) b_button = 0;
 		}
 	#endif

@@ -4036,3 +4036,21 @@ Esto va a funcionar perfe, a ver si tengo ánimo esta noche para hacerlo.
 
 Un carajo tuve ayer. Preferí vegear viendo Xena.
 
+20180705
+========
+
+Me ha dado por jugar a Sgt. Helmet's Training Day (versión MK1 1.0) y he catao dos fallos: uno de config (no estaba actualizada una directiva renombrada), y otra en el scripting. Por alguna razón supedita la liberación de `b_button` en el scripting a `sc_continuar`, pero esta variable solo se resetea si hay script para esa pantalla. Así que si ha habido un script "que ha salido bien" en la pantalla anterior `sc_continuar` sigue valiendo 1 en la nueva pantalla y no se puede disparar.
+
+Tengo `fire_script_success` que se pone a 1 siempre que hay un `fire_script` que triunfa, y se pone a 0 cada vez que se ejecuta un `fire_script`, por tanto, siemrpe que se pulse B primero se pone a 0, luego se llama al script (donde puede ponerse a 1), y luego ya si eso se invalida. En el siguiente disparo pasará lo mismo.
+
+He tocado `engine/player_mods/scripting.h`, a propagar y probar. Tengo que compilar el tester de interactivos para que use scripting, y probaré también en cadaverion.
+
+La primera en la frente. En el tester de interactives la interacción con Cheril ocurre dos veces :-/ Este tiene animations.
+
+~~
+
+Ahora he visto algo que se me había pasado por completo: Sgt Helmet tiene dos niveles que deben usar el mismo script. Ahora mismo el compilador lee los niveles definidos en el script y los mapea a los niveles por orden, por lo que solo hay script para el nivel 0. Tengo que añadir una directiva `CUSTOM_SCRIPT_ORDER` para definir una lista custom que se use para generar el array `script_pool`. Usando esta directiva se tomará el orden definido sea cual sea, y no se generará automáticamente como ahora. Voy a ello y de paso lo documento en el postmortem.
+
+~~
+
+Arogas entregagas y funcionando de muerte!

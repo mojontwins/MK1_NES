@@ -468,7 +468,7 @@
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
-//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
 												// 0xff = Nobody
 
 // ============================================================================

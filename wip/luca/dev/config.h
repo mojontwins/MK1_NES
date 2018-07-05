@@ -461,7 +461,7 @@
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 //#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
-//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
 												// 0xff = Nobody
 
 // ============================================================================

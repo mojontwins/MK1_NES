@@ -37,6 +37,7 @@ const unsigned char script_pool_0 [] = {
 };
 
 const unsigned char * const script_pool [] = {
+    script_pool_0, 
     script_pool_0
 };
 

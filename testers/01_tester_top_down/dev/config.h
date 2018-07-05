@@ -16,7 +16,7 @@
 #define MAP_H					24		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				15		// Max / Initial life
+#define PLAYER_LIFE				9		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
 
 #define MULTI_LEVEL						// Comment for single level
@@ -413,7 +413,7 @@
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-3	// vertical offset from the player's left/right.
-#define PLAYER_MIN_KILLABLE 			3	// If defined, only enemies >= N can be killed.
+#define PLAYER_BULLETS_MIN_KILLABLE 	3	// If defined, only enemies >= N can be killed.
 //#define BULLETS_DONT_KILL					// Bullets don't kill, but affect enemies otherwise
 
 // Special shooting
@@ -467,7 +467,7 @@
 //#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
-//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
 												// 0xff = Nobody
 
 // ============================================================================

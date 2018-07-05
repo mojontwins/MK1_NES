@@ -9,4 +9,4 @@ Declare Sub parseCleanTokens (tokens () As String)
 Declare Function parseGlueTokens (tokens () As String) As String
 Declare Function initialWhiteSpace (line As String) As String
 Declare Function parserGetTokenIndex (token As String, tokens () As String, modifier As String) As Integer
-
+Declare Function parseGetLatestNumberOfTokens () As Integer
