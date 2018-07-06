@@ -54,7 +54,7 @@ fillto
 Pads a binary file with zeroes until it gets to the specified size.
 
 ```
-	$ fillto.exe file.bin size
+	$ fillto file.bin size
 ```
 
 mapcnvnes2
@@ -88,7 +88,7 @@ mscmk1
 Scripts compiler. Reads a custom MK1_NES / AGNES script and generates a bytecode an a specified interpreter.
 
 ```
-	$ mscmk1.exe input.spt output.h maxpants [debug] [bin]
+	$ mscmk1 input.spt output.h maxpants [debug] [bin]
 ```
 
 * `input.spt` is the input script.
@@ -102,7 +102,7 @@ namgen
 Converts a png file into a nametable using an already defined `tileset.chr` (CHR-ROM image)
 
 ```
-	$ namgen.exe in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B]
+	$ namgen in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B]
 ```
 
 * `in` - the input filename. Should be 256x240 png.
@@ -117,7 +117,7 @@ pencompiler
 Compiles programable enemy behaviours.
 
 ```
-	$ pencompiler.exe in.spt out.h
+	$ pencompiler in.spt out.h
 ```
 
 * `in.spt` is the filename of the script with the enemy behaviours.
@@ -134,8 +134,8 @@ rle44mapMK1 & rle54mapMK1
 Map converters. Convert Mappy's raw .MAP files to data using RLE-like algorithms (4 bit runs of 4 bit tile indexes, or 3 bit runs of 5 bit tile indexes). Outputs decorations, if present and active, in the new format (appended to each screen's RLE string).
 
 ```
-	$ rle44mapMK1.exe in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos] [bin]
-	$ rle53mapMK1.exe in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos] [bin]
+	$ rle44mapMK1 in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos] [bin]
+	$ rle53mapMK1 in.map out.h w h tlock prefix [offset] [scrsizes] [nodecos] [bin]
 ```
 
 * `in.map` is the raw output of Mappy.
