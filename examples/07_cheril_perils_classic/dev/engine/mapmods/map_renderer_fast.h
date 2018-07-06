@@ -105,7 +105,7 @@ void draw_scr (void) {
 	#ifdef MAP_WITH_DECORATIONS
 		// Draw decorations
 		if (c_decos) {
-			#if defined (MAP_FORMAT_PACKED) || #defined (MAP_FORMAT_RLE16)
+			#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16)
 				if (c_decos [n_pant]) {
 					gp_gen = c_decos [n_pant];
 			# else 

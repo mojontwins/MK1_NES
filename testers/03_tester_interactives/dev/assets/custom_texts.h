@@ -13,7 +13,12 @@ const unsigned char custom_text1 [] =
 	"IF YOU ARE NOT SURE%"
 	"JUST TALK TO CHERIL.%"
 	"TESTER AHOY!";
+
+const unsigned char custom_text2 [] =
+	"THIS IS AN EMPTY%"
+	"PEDESTAL. PLEASE%"
+	"PLACE AN OFFER!";
 	
 const unsigned char * const custom_texts [] = {
-	custom_text0, custom_text1
+	custom_text0, custom_text1, custom_text2
 };

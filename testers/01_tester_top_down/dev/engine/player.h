@@ -168,7 +168,6 @@ void player_move (void) {
 
 	hitv = hith = 0;
 	pnotsafe = 0;
-	ppossee = 0;
 	#ifdef ENABLE_SLIPPERY
 		pice = 0;
 	#endif
@@ -198,11 +197,17 @@ void player_move (void) {
 		if (springs_on && cy1 < 12) {
 			if (cy1) -- cy1;
 			_t = SPRING_SPIKE_TILE; 
-			if (QTILE (cx1, cy1 + 1) == SPRING_TILE) { _x = cx1; _y = cy1; map_set (); }
-			if (QTILE (cx2, cy1 + 1) == SPRING_TILE) { _x = cx2; _y = cy1; map_set (); }
-			sfx_play (SFX_SPRING, 1);
+			#ifdef SPRINGS_NEED_POSSEE
+			if (ppossee)
+			#endif
+			{
+				if (QTILE (cx1, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx1; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
+				if (QTILE (cx2, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx2; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
+			}
 		}
 	#endif
+
+	ppossee = 0;
 
 	// ********
 	// Vertical

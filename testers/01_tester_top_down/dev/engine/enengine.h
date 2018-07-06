@@ -870,12 +870,13 @@ void enems_move (void) {
 			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 				if (phitteract) {
 					if (
-						phitterx + 7 >= _en_x &&
-						phitterx <= _en_x + 7 &&
+						phitterx + 6 >= _en_x &&
+						phitterx <= _en_x + 14 &&
 						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 						phittery <= _en_y + 12
 					) {
 						enems_hit ();
+						sfx_play (SFX_STEPON, 1);
 						phitteract = 0;
 						pfrozen = PLAYER_FROZEN_FRAMES;
 						#ifdef ENEMS_RECOIL_ON_HIT

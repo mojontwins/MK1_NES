@@ -244,6 +244,7 @@
 #define ENABLE_SPRINGS
 #define SPRING_TILE 					31
 #define SPRING_SPIKE_TILE 				10
+#define SPRINGS_NEED_POSSEE					// You have to actually STEP on the tile for the spikes to show
 //#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
