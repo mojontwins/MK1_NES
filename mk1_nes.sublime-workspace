@@ -436,37 +436,27 @@
 	"buffers":
 	[
 		{
-			"file": "examples/07_cheril_perils_classic/README.md",
+			"file": "src/utils/README.md",
 			"settings":
 			{
-				"buffer_size": 4918,
+				"buffer_size": 8712,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "á",
+			"file": "testers/02_tester_punchy/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 1,
-				"line_ending": "Windows",
-				"name": "á"
-			}
-		},
-		{
-			"file": "examples/10_che_man/README.md",
-			"settings":
-			{
-				"buffer_size": 8686,
-				"encoding": "UTF-8",
+				"buffer_size": 22429,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "src/utils/legacy/enemscutter.bas",
 			"settings":
 			{
-				"buffer_size": 3343,
+				"buffer_size": 2655,
 				"line_ending": "Windows"
 			}
 		}
@@ -548,28 +538,41 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/trash",
-		"/D/git/MK1_NES/wip"
+		"/D/git/MK1_NES/src",
+		"/D/git/MK1_NES/src/dev",
+		"/D/git/MK1_NES/src/utils",
+		"/D/git/MK1_NES/src/utils/legacy",
+		"/D/git/MK1_NES/testers",
+		"/D/git/MK1_NES/testers/02_tester_punchy",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/src/utils/eneexp3.bas",
+		"/D/git/MK1_NES/CONTRIBUTING.md",
 		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/pres.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/behs.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/config.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/levelset.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/config.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/on_interactive.h",
+		"/D/git/MK1_NES/examples/10_che_man/README.md",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/README.md",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
 		"/D/git/MK1_NES/examples/10_che_man/dev/compile.bat",
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/compile.bat",
 		"/D/git/MK1_NES/examples/10_che_man/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/config.h",
-		"/D/git/MK1_NES/examples/10_che_man/README.md",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/config.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/levelset.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/mapmods/map_renderer_fast.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
 		"/D/Proyectos/remote/desccobuz05/sftp-config.json",
@@ -578,7 +581,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/zp.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/cocos.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.s",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/timer.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/shaker.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/resonators.h",
@@ -588,7 +590,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/printer.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/playermods/process_tile.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enemmods/enem_steady_shooter.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enemmods/enem_shooty.h",
@@ -601,7 +602,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/autodefs.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/crt0.s",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/behs.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/player_frame_selector.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/hotspots.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/textbox.h",
@@ -612,13 +612,11 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_complex.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/hotspots.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/breakable.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/map1.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/map2.h",
 		"/D/git/MK1_NES/src/utils/rle44mapMK1.bas",
 		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/spritedata.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/precalcs.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/prototypes.h",
 		"/D/git/MK1_NES/wip/diario.md",
@@ -678,24 +676,21 @@
 		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/ending_spr.h",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop/cheat.h",
 		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns-sfw.spt",
-		"/D/git/MK1_NES/tutorial/tut05esp.md",
-		"/D/git/MK1_NES/tutorial/tut05eng.md",
-		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/src/gfx/ss.png",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/gfx/import_patterns0.spt",
-		"/D/git/MK1_NES/src/dev/assets/spritedata.h"
+		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns-sfw.spt"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES",
@@ -711,6 +706,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"binmode",
+			"bin",
+			"binmode",
+			"script",
+			"ENABLE_SPRINGS",
+			"#define ENABLE_SPRINGS",
+			"ENABLE_SPRINGS",
+			"springs",
 			"resonator",
 			"ENEMIES",
 			"\\S+ --",
@@ -776,7 +779,7 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"YX",
@@ -800,80 +803,39 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/07_cheril_perils_classic/README.md",
+					"file": "src/utils/README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4918,
+						"buffer_size": 8712,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								464,
-								464
+								8705,
+								8705
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 111,
-								"count": 654,
+								"changes": 8910,
+								"count": 1257,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
 							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 1,
-								"count": 1,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"auto_name": "á",
-							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -881,70 +843,69 @@
 					},
 					"stack_index": 0,
 					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "testers/02_tester_punchy/dev/engine/enengine.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 22429,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5430,
+								5430
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 2001,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4329.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 2,
-					"file": "examples/10_che_man/README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8686,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								795,
-								795
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 1167,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 39.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "README.md",
+					"file": "src/utils/legacy/enemscutter.bas",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3343,
+						"buffer_size": 2655,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								101,
-								13
+								0,
+								0
 							]
 						],
 						"settings":
@@ -952,7 +913,7 @@
 							"WordCount":
 							{
 								"changes": 0,
-								"count": 477,
+								"count": 438,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -961,13 +922,14 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
