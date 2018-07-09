@@ -2,8 +2,8 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
-//#define GAME_AREA_BOTTOM
+//#define GAME_AREA_MIDDLE
+#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
 // ============================================================================
@@ -12,8 +12,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
-#define MAP_H					3		// Map dimensions in screens
+#define MAP_W 					5		//
+#define MAP_H					4		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
@@ -22,7 +22,7 @@
 //#define MULTI_LEVEL					// Comment for single level
 #define MAX_LEVELS				1
 
-#define MAX_FLAGS 				2		// Keep it low if you don't need flags
+#define MAX_FLAGS 				17		// Keep it low if you don't need flags
 
 #ifndef MULTI_LEVEL
 
@@ -34,7 +34,7 @@
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
-	#define PLAYER_MAX_OBJECTS		1		// Objects to finish game
+	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
 
 #else
 
@@ -57,7 +57,7 @@
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-//#define HOTSPOT_TYPE_TIME		5		// For time refills
+#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
 
@@ -91,7 +91,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-4
+#define PLAYER_COLLISION_VSTRETCH_BG	-8
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -110,10 +110,10 @@
 
 // Push boxes
 
-//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
 #define FIRE_TO_PUSH
 
-//#define ENABLE_PUSHED_SCRIPT
+#define ENABLE_PUSHED_SCRIPT
 #define PUSHED_TILE_FLAG				1
 #define PUSHED_TO_X_FLAG				2
 #define PUSHED_TO_Y_FLAG				3
@@ -121,18 +121,18 @@
 // General stuff
 
 #define DEACTIVATE_KEYS					// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				//     ... also, reenter screen on death
+#define DIE_AND_REENTER					//     ... also, reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
+//#define NO_HORIZONTAL_EVIL_TILE		// Only check for evil tiles vertically
 
 // Quicksands, beh == 2.
 // For player movement values, see section 4
@@ -199,7 +199,7 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-//#define ENABLE_SIMPLE_WARPERS
+#define ENABLE_SIMPLE_WARPERS
 #define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
 //#define SIMPLE_WARPERS_FIRE_BUTTON
 
@@ -213,7 +213,7 @@
 // Use animation.
 // Note: When activated hotspots need b_button press and, in side view, possee.
 
-//#define ENABLE_USE_ANIM
+#define ENABLE_USE_ANIM
 #define USE_ANIM_MAX_FRAMES				13
 #define USE_ANIM_INTERACT_ON			7
 #define USE_ANIM_FRAMES_PER_STEP		4
@@ -227,7 +227,7 @@
 
 // Timer. 
 
-//#define ENABLE_TIMER
+#define ENABLE_TIMER
 #define TIMER_INITIAL					99
 #define TIMER_START_ON
 #define TIMER_REFILL					30
@@ -241,7 +241,6 @@
 //#define ENABLE_SPRINGS
 #define SPRING_TILE 					10
 #define SPRING_SPIKE_TILE 				11
-//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
 //#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
@@ -249,7 +248,7 @@
 
 //#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
 
-#define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+#define ENEMS_LIFE_GAUGE				2	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
@@ -435,13 +434,13 @@
 // Scripting
 // ---------
 
-//#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
-//#define CLEAR_FLAGS					// Zero all flags when entering a level
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define CLEAR_FLAGS						// Zero all flags when entering a level
 
 //#define FIRE_ON_KILL					// run fire script on enemy kill
 
-//#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
-//#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
+#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
+#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
 
 // Interactives
 // ------------
@@ -454,13 +453,13 @@
 // Top view:
 // ---------
 
-//#define PLAYER_TOP_DOWN            	// Enable top view.
-//#define TOP_OVER_SIDE              	// UP/DOWN has priority over LEFT/RIGHT
+#define PLAYER_TOP_DOWN            		// Enable top view.
+//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
@@ -477,12 +476,12 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-//#define LIFE_X				7		//
-//#define LIFE_Y				3		// Life gauge counter character coordinates
+#define LIFE_X					5		//
+#define LIFE_Y					3		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
-#define OBJECTS_REMAINING				// Show # remaining instead of got
+//#define OBJECTS_REMAINING				// Show # remaining instead of got
 
 //#define KEYS_X				28		//
 //#define KEYS_Y				3		// Keys counter character coordinates
@@ -493,15 +492,15 @@
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
-//#define HS_INV_X				136		//
-//#define HS_INV_Y				11		// Object you are carrying
+//#define HS_INV_X				160		//
+//#define HS_INV_Y				15		// Object you are carrying
 
-//#define TIMER_X				0		//
-//#define TIMER_Y				5		// Current timer value
+#define TIMER_X					27		//
+#define TIMER_Y					3		// Current timer value
 
 // Text
-//#define LINE_OF_TEXT			26		// If defined, scripts can show text @ Y = #
-//#define LINE_OF_TEXT_X		1		// X coordinate.
+#define LINE_OF_TEXT			5		// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT_X			1		// X coordinate.
 
 // ============================================================================
 // IV. Player movement configuration
@@ -547,12 +546,12 @@
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				32		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				32		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
-#define PLAYER_VX_MIN (PLAYER_AX << 1)
+#define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
 
@@ -601,6 +600,8 @@
 // Music
 
 #define MUSIC_INGAME 			0
+#define MUSIC_CUTS				1
+#define MUSIC_TITLE				2
 
 // SFX
 

@@ -3183,7 +3183,8 @@ _scr_1_06:
 	.byte	$04
 	.byte	$40
 	.byte	$D4
-	.byte	$E0
+	.byte	$07
+	.byte	$D0
 	.byte	$04
 	.byte	$E0
 	.byte	$04
@@ -5016,7 +5017,7 @@ _scr_2_00:
 	.byte	$D8
 	.byte	$06
 	.byte	$28
-	.byte	$09
+	.byte	$0A
 	.byte	$38
 	.byte	$39
 	.byte	$28
@@ -6034,19 +6035,23 @@ _scr_2_12:
 	.byte	$0B
 	.byte	$E4
 	.byte	$05
-	.byte	$22
-	.byte	$50
+	.byte	$12
+	.byte	$03
+	.byte	$00
+	.byte	$03
+	.byte	$30
 	.byte	$52
 	.byte	$05
 	.byte	$12
-	.byte	$70
+	.byte	$03
+	.byte	$00
+	.byte	$03
+	.byte	$40
 	.byte	$42
 	.byte	$05
 	.byte	$02
 	.byte	$00
-	.byte	$0B
-	.byte	$0A
-	.byte	$0B
+	.byte	$2A
 	.byte	$60
 	.byte	$12
 	.byte	$00
@@ -6068,7 +6073,8 @@ _scr_2_12:
 	.byte	$03
 	.byte	$10
 	.byte	$05
-	.byte	$10
+	.byte	$0A
+	.byte	$00
 	.byte	$52
 	.byte	$30
 	.byte	$03
@@ -6710,8 +6716,8 @@ _hotspots_2:
 	.byte	$77
 	.byte	$04
 	.byte	$32
-	.byte	$00
-	.byte	$10
+	.byte	$04
+	.byte	$B2
 	.byte	$04
 	.byte	$B6
 	.byte	$04
@@ -8776,7 +8782,7 @@ _spr_hs:
 _l_scr_ini:
 	.byte	$14
 	.byte	$14
-	.byte	$06
+	.byte	$08
 _l_ini_x:
 	.byte	$02
 	.byte	$02
@@ -9939,7 +9945,7 @@ _attr_table:
 ;
 	lda     _max_chac_chacs
 	cmp     #$04
-	beq     L2511
+	beq     L2517
 ;
 ; rda = 1 + (rdt - CHAC_CHAC_DETECT_TILE);
 ;
@@ -9961,9 +9967,9 @@ _attr_table:
 ; rdc = (rdb << 1) + rdb;
 ;
 	asl     a
-	bcc     L2E77
+	bcc     L2E96
 	clc
-L2E77:	adc     _rdb
+L2E96:	adc     _rdb
 	sta     _rdc
 ;
 ; __asm__ ("ldy %v", max_chac_chacs);
@@ -10008,7 +10014,7 @@ L2E77:	adc     _rdb
 ;
 ; }
 ;
-L2511:	rts
+L2517:	rts
 
 .endproc
 
@@ -10027,28 +10033,28 @@ L2511:	rts
 ;
 	lda     _cy1
 	cmp     #$0D
-	bcs     L229B
+	bcs     L22A1
 	lda     _cy2
 	cmp     #$0D
-	bcc     L229A
-L229B:	lda     #$00
+	bcc     L22A0
+L22A1:	lda     #$00
 	sta     _at2
 	sta     _at1
 	rts
 ;
 ; at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
 ;
-L229A:	lda     _cy1
-	beq     L22A7
+L22A0:	lda     _cy1
+	beq     L22AD
 	ldx     #$00
 	lda     _cy1
 	sec
 	sbc     #$01
-	bcs     L22AA
+	bcs     L22B0
 	dex
-	jmp     L22AA
-L22A7:	tax
-L22AA:	jsr     shlax4
+	jmp     L22B0
+L22AD:	tax
+L22B0:	jsr     shlax4
 	ora     _cx1
 	sta     ptr1
 	txa
@@ -10062,16 +10068,16 @@ L22AA:	jsr     shlax4
 ; at2 = map_attr [COORDS (cx2, cy2 ? cy2 - 1 : 0)];
 ;
 	lda     _cy2
-	beq     L22B3
+	beq     L22B9
 	ldx     #$00
 	lda     _cy2
 	sec
 	sbc     #$01
-	bcs     L22B6
+	bcs     L22BC
 	dex
-	jmp     L22B6
-L22B3:	tax
-L22B6:	jsr     shlax4
+	jmp     L22BC
+L22B9:	tax
+L22BC:	jsr     shlax4
 	ora     _cx2
 	sta     ptr1
 	txa
@@ -10113,7 +10119,7 @@ L22B6:	jsr     shlax4
 	dey
 	lda     (sp),y
 	jsr     tosicmp
-	bmi     L22BB
+	bmi     L22C1
 	ldy     #$07
 	lda     (sp),y
 	tax
@@ -10127,12 +10133,12 @@ L22B6:	jsr     shlax4
 	lda     (sp),y
 	clc
 	adc     #$0F
-	bcc     L22BC
+	bcc     L22C2
 	inx
-L22BC:	jsr     tosicmp
-	beq     L2E78
-	bpl     L22BB
-L2E78:	ldy     #$05
+L22C2:	jsr     tosicmp
+	beq     L2E97
+	bpl     L22C1
+L2E97:	ldy     #$05
 	lda     (sp),y
 	tax
 	dey
@@ -10144,7 +10150,7 @@ L2E78:	ldy     #$05
 	dey
 	lda     (sp),y
 	jsr     tosicmp
-	bmi     L22BB
+	bmi     L22C1
 	ldy     #$05
 	lda     (sp),y
 	tax
@@ -10158,15 +10164,15 @@ L2E78:	ldy     #$05
 	lda     (sp),y
 	clc
 	adc     #$0F
-	bcc     L22BD
+	bcc     L22C3
 	inx
-L22BD:	jsr     tosicmp
-	bmi     L22BA
-	beq     L22BA
-L22BB:	ldx     #$00
+L22C3:	jsr     tosicmp
+	bmi     L22C0
+	beq     L22C0
+L22C1:	ldx     #$00
 	txa
 	jmp     incsp8
-L22BA:	ldx     #$00
+L22C0:	ldx     #$00
 	lda     #$01
 ;
 ; }
@@ -10192,12 +10198,12 @@ L22BA:	ldx     #$00
 	lda     _prx
 	clc
 	adc     #$03
-	bcc     L22C2
+	bcc     L22C8
 	inx
-L22C2:	cmp     __en_x
+L22C8:	cmp     __en_x
 	txa
 	sbc     #$00
-	bcc     L22C3
+	bcc     L22C9
 ;
 ; prx <= _en_x + 11 && 
 ;
@@ -10206,22 +10212,22 @@ L22C2:	cmp     __en_x
 	lda     __en_x
 	clc
 	adc     #$0B
-	bcc     L22C4
+	bcc     L22CA
 	ldx     #$01
-L22C4:	jsr     tosicmp
-	beq     L2E7B
-	bcs     L22C3
+L22CA:	jsr     tosicmp
+	beq     L2E9A
+	bcs     L22C9
 ;
 ; pry + 13 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 ;
-L2E7B:	ldx     #$00
+L2E9A:	ldx     #$00
 	lda     _pry
 	clc
 	adc     #$0D
-	bcc     L2E79
+	bcc     L2E98
 	inx
 	clc
-L2E79:	adc     #$FE
+L2E98:	adc     #$FE
 	pha
 	txa
 	adc     #$FF
@@ -10230,7 +10236,7 @@ L2E79:	adc     #$FE
 	cmp     __en_y
 	txa
 	sbc     #$00
-	bcc     L22C3
+	bcc     L22C9
 ;
 ; pry <= _en_y + 13 + PLAYER_COLLISION_VSTRETCH_FG
 ;
@@ -10239,25 +10245,25 @@ L2E79:	adc     #$FE
 	lda     __en_y
 	clc
 	adc     #$0D
-	bcc     L2E7A
+	bcc     L2E99
 	ldx     #$01
 ;
 ; );
 ;
 	clc
-L2E7A:	adc     #$FC
+L2E99:	adc     #$FC
 	pha
 	txa
 	adc     #$FF
 	tax
 	pla
 	jsr     tosicmp
-	bcc     L22C1
-	beq     L22C1
-L22C3:	ldx     #$00
+	bcc     L22C7
+	beq     L22C7
+L22C9:	ldx     #$00
 	txa
 	rts
-L22C1:	ldx     #$00
+L22C7:	ldx     #$00
 	lda     #$01
 ;
 ; }
@@ -10285,14 +10291,14 @@ L22C1:	ldx     #$00
 	dey
 	lda     (sp),y
 	cpx     #$00
-	bne     L22CB
+	bne     L22D1
 	cmp     #$00
 	jeq     incsp4
-L22CB:	iny
+L22D1:	iny
 	lda     (sp),y
 	tax
 	cpx     #$80
-	bcc     L22CF
+	bcc     L22D5
 	ldy     #$01
 	lda     (sp),y
 	tax
@@ -10300,7 +10306,7 @@ L22CB:	iny
 	lda     (sp),y
 	jsr     negax
 	jmp     incsp4
-L22CF:	ldy     #$01
+L22D5:	ldy     #$01
 	lda     (sp),y
 	tax
 	dey
@@ -10327,7 +10333,7 @@ L22CF:	ldy     #$01
 ;
 	ldy     #$03
 	lda     (sp),y
-	bmi     L22D5
+	bmi     L22DB
 	lda     (sp),y
 	tax
 	dey
@@ -10339,11 +10345,11 @@ L22CF:	ldy     #$01
 	dey
 	lda     (sp),y
 	jsr     tosicmp
-	bmi     L22DF
-	beq     L22DF
+	bmi     L22E5
+	beq     L22E5
 	ldy     #$01
-	jmp     L2E82
-L22D5:	lda     (sp),y
+	jmp     L2EA1
+L22DB:	lda     (sp),y
 	tax
 	dey
 	lda     (sp),y
@@ -10355,7 +10361,7 @@ L22D5:	lda     (sp),y
 	lda     (sp),y
 	jsr     negax
 	jsr     tosicmp
-	bpl     L22DF
+	bpl     L22E5
 	ldy     #$01
 	lda     (sp),y
 	tax
@@ -10363,8 +10369,8 @@ L22D5:	lda     (sp),y
 	lda     (sp),y
 	jsr     negax
 	jmp     incsp4
-L22DF:	ldy     #$03
-L2E82:	lda     (sp),y
+L22E5:	ldy     #$03
+L2EA1:	lda     (sp),y
 	tax
 	dey
 	lda     (sp),y
@@ -10427,48 +10433,48 @@ L2E82:	lda     (sp),y
 	ldx     #$00
 	lda     _prx
 	cmp     _rdx
-	bcs     L22F2
+	bcs     L22F8
 	lda     _rdx
 	sec
 	sbc     _prx
-	jmp     L2E89
-L22F2:	lda     _prx
+	jmp     L2EA8
+L22F8:	lda     _prx
 	sec
 	sbc     _rdx
-L2E89:	sta     _rda
+L2EA8:	sta     _rda
 ;
 ; rdb = DELTA (pry, rdy); // dy
 ;
 	lda     _pry
 	cmp     _rdy
-	bcs     L22FF
+	bcs     L2305
 	lda     _rdy
 	sec
 	sbc     _pry
-	jmp     L2E8A
-L22FF:	lda     _pry
+	jmp     L2EA9
+L2305:	lda     _pry
 	sec
 	sbc     _rdy
-L2E8A:	sta     _rdb
+L2EA9:	sta     _rdb
 ;
 ; rdc = MIN (rda, rdb);
 ;
 	lda     _rda
 	cmp     _rdb
-	bcs     L230C
+	bcs     L2312
 	lda     _rda
-	jmp     L2E86
-L230C:	lda     _rdb
-L2E86:	sta     _rdc
+	jmp     L2EA5
+L2312:	lda     _rdb
+L2EA5:	sta     _rdc
 ;
 ; return (rda + rdb - (rdc >> 1) - (rdc >> 2) + (rdc >> 4));
 ;
 	lda     _rda
 	clc
 	adc     _rdb
-	bcc     L2E83
+	bcc     L2EA2
 	inx
-L2E83:	jsr     pushax
+L2EA2:	jsr     pushax
 	ldx     #$00
 	lda     _rdc
 	jsr     asrax1
@@ -10549,9 +10555,9 @@ L2E83:	jsr     pushax
 ; for (fader = 4; fader > -1; fader --) {
 ;
 	lda     #$04
-L2E8B:	sta     _fader
+L2EAA:	sta     _fader
 	tax
-	bmi     L2323
+	bmi     L2329
 ;
 ; pal_bright (fader);
 ;
@@ -10568,11 +10574,11 @@ L2E8B:	sta     _fader
 	lda     _fader
 	sec
 	sbc     #$01
-	jmp     L2E8B
+	jmp     L2EAA
 ;
 ; }
 ;
-L2323:	rts
+L2329:	rts
 
 .endproc
 
@@ -10590,12 +10596,12 @@ L2323:	rts
 ; for (fader = 0; fader < 5; fader ++) {
 ;
 	lda     #$00
-L2E8C:	sta     _fader
+L2EAB:	sta     _fader
 	sec
 	sbc     #$05
-	bvc     L2339
+	bvc     L233F
 	eor     #$80
-L2339:	bpl     L2332
+L233F:	bpl     L2338
 ;
 ; pal_bright (fader);
 ;
@@ -10612,11 +10618,11 @@ L2339:	bpl     L2332
 	lda     _fader
 	clc
 	adc     #$01
-	jmp     L2E8C
+	jmp     L2EAB
 ;
 ; }
 ;
-L2332:	rts
+L2338:	rts
 
 .endproc
 
@@ -10731,9 +10737,9 @@ L2332:	rts
 	sta     regsave
 	clc
 	adc     #$01
-	bcc     L235A
+	bcc     L2360
 	inx
-L235A:	sta     _gp_addr
+L2360:	sta     _gp_addr
 	stx     _gp_addr+1
 	lda     regsave
 	ldy     #$00
@@ -10787,9 +10793,9 @@ L235A:	sta     _gp_addr
 	ldx     tmp1
 	clc
 	adc     __x
-	bcc     L2E8D
+	bcc     L2EAC
 	inx
-L2E8D:	sta     _gp_addr
+L2EAC:	sta     _gp_addr
 	txa
 	clc
 	adc     #$20
@@ -10859,9 +10865,9 @@ L2E8D:	sta     _gp_addr
 	jsr     asrax1
 	and     #$01
 	asl     a
-	bcc     L2E91
+	bcc     L2EB0
 	clc
-L2E91:	adc     ptr1
+L2EB0:	adc     ptr1
 	sta     _rdb
 ;
 ; rda = attr_table [rdc];
@@ -10939,9 +10945,9 @@ L2E91:	adc     ptr1
 	ldx     tmp1
 	clc
 	adc     __x
-	bcc     L2E92
+	bcc     L2EB1
 	inx
-L2E92:	pha
+L2EB1:	pha
 	txa
 	clc
 	adc     #$20
@@ -10956,9 +10962,9 @@ L2E92:	pha
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L239D
+	bcc     L23A3
 	inx
-L239D:	sta     _gp_addr
+L23A3:	sta     _gp_addr
 	stx     _gp_addr+1
 	lda     regsave
 	ldx     regsave+1
@@ -10973,9 +10979,9 @@ L239D:	sta     _gp_addr
 	ldx     _gp_tmap+1
 	clc
 	adc     #$01
-	bcc     L23A2
+	bcc     L23A8
 	inx
-L23A2:	sta     _gp_tmap
+L23A8:	sta     _gp_tmap
 	stx     _gp_tmap+1
 	lda     __z
 	jsr     _vram_put
@@ -10989,9 +10995,9 @@ L23A2:	sta     _gp_tmap
 	ldx     _gp_tmap+1
 	clc
 	adc     #$01
-	bcc     L23A9
+	bcc     L23AF
 	inx
-L23A9:	sta     _gp_tmap
+L23AF:	sta     _gp_tmap
 	stx     _gp_tmap+1
 	lda     __z
 	jsr     _vram_put
@@ -11002,20 +11008,20 @@ L23A9:	sta     _gp_tmap
 	clc
 	adc     _gp_addr
 	sta     _gp_addr
-	bcc     L23AE
+	bcc     L23B4
 	inc     _gp_addr+1
 ;
 ; vram_adr (gp_addr++);
 ;
-L23AE:	lda     _gp_addr
+L23B4:	lda     _gp_addr
 	ldx     _gp_addr+1
 	sta     regsave
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L23B1
+	bcc     L23B7
 	inx
-L23B1:	sta     _gp_addr
+L23B7:	sta     _gp_addr
 	stx     _gp_addr+1
 	lda     regsave
 	ldx     regsave+1
@@ -11030,9 +11036,9 @@ L23B1:	sta     _gp_addr
 	ldx     _gp_tmap+1
 	clc
 	adc     #$01
-	bcc     L23B6
+	bcc     L23BC
 	inx
-L23B6:	sta     _gp_tmap
+L23BC:	sta     _gp_tmap
 	stx     _gp_tmap+1
 	lda     __z
 	jsr     _vram_put
@@ -11100,28 +11106,13 @@ L23B6:	sta     _gp_tmap
 	ldx     tmp1
 	clc
 	adc     __x
-	bcc     L2E93
+	bcc     L2EB2
 	inx
-L2E93:	sta     _gp_addr
+L2EB2:	sta     _gp_addr
 	txa
 	clc
 	adc     #$20
 	sta     _gp_addr+1
-;
-; SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
-;
-	ldy     #0
-	lda     (_gp_tmap),y
-	sta     __n
-	lda     _gp_tmap
-	ldx     _gp_tmap+1
-	clc
-	adc     #$01
-	bcc     L23D0
-	inx
-L23D0:	sta     _gp_tmap
-	stx     _gp_tmap+1
-	jsr     _ul_putc
 ;
 ; SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 ;
@@ -11138,27 +11129,42 @@ L23D6:	sta     _gp_tmap
 	stx     _gp_tmap+1
 	jsr     _ul_putc
 ;
-; gp_addr += 30;
-;
-	lda     #$1E
-	clc
-	adc     _gp_addr
-	sta     _gp_addr
-	bcc     L23DA
-	inc     _gp_addr+1
-;
 ; SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 ;
-L23DA:	ldy     #0
+	ldy     #0
 	lda     (_gp_tmap),y
 	sta     __n
 	lda     _gp_tmap
 	ldx     _gp_tmap+1
 	clc
 	adc     #$01
-	bcc     L23DF
+	bcc     L23DC
 	inx
-L23DF:	sta     _gp_tmap
+L23DC:	sta     _gp_tmap
+	stx     _gp_tmap+1
+	jsr     _ul_putc
+;
+; gp_addr += 30;
+;
+	lda     #$1E
+	clc
+	adc     _gp_addr
+	sta     _gp_addr
+	bcc     L23E0
+	inc     _gp_addr+1
+;
+; SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+;
+L23E0:	ldy     #0
+	lda     (_gp_tmap),y
+	sta     __n
+	lda     _gp_tmap
+	ldx     _gp_tmap+1
+	clc
+	adc     #$01
+	bcc     L23E5
+	inx
+L23E5:	sta     _gp_tmap
 	stx     _gp_tmap+1
 	jsr     _ul_putc
 ;
@@ -11228,9 +11234,9 @@ L23DF:	sta     _gp_tmap
 	sta     __x
 	lda     __y
 	asl     a
-	bcc     L2E96
+	bcc     L2EB5
 	clc
-L2E96:	adc     #$06
+L2EB5:	adc     #$06
 	sta     __y
 ;
 ; update_list_tile (); 
@@ -11259,9 +11265,9 @@ L2E96:	adc     #$06
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L23FF
+	bcc     L2405
 	inx
-L23FF:	sta     _gp_gen
+L2405:	sta     _gp_gen
 	stx     _gp_gen+1
 	ldx     #$00
 	lda     (regsave,x)
@@ -11301,12 +11307,12 @@ L23FF:	sta     _gp_gen
 	and     #$0F
 	sta     _rdx
 	lda     _rdx
-	bne     L240A
+	bne     L2410
 	inc     _rdy
 ;
 ; }
 ;
-L240A:	rts
+L2410:	rts
 
 .endproc
 
@@ -11333,10 +11339,10 @@ L240A:	rts
 	tax
 	lda     _n_pant
 	asl     a
-	bcc     L2E9B
+	bcc     L2EBA
 	inx
 	clc
-L2E9B:	adc     _c_map
+L2EBA:	adc     _c_map
 	sta     ptr1
 	txa
 	adc     _c_map+1
@@ -11350,9 +11356,9 @@ L2E9B:	adc     _c_map
 ;
 ; while (rdm < 192) {
 ;
-L2415:	lda     _rdm
+L241B:	lda     _rdm
 	cmp     #$C0
-	bcs     L2416
+	bcs     L241C
 ;
 ; SET_FROM_PTR (rdt, gp_gen); 
 ;
@@ -11366,9 +11372,9 @@ L2415:	lda     _rdm
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L241C
+	bcc     L2422
 	inx
-L241C:	sta     _gp_gen
+L2422:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; rda = rdt & 0x0f;
@@ -11380,12 +11386,12 @@ L241C:	sta     _gp_gen
 ; rdct = rdt;
 ;
 	lda     _rdt
-L2E9A:	sta     _rdct
+L2EB9:	sta     _rdct
 ;
 ; while (rdct >= 16) {
 ;
 	cmp     #$10
-	bcc     L2422
+	bcc     L2428
 ;
 ; add_tile (); rdct -= 16;
 ;
@@ -11396,41 +11402,41 @@ L2E9A:	sta     _rdct
 ;
 ; } add_tile ();
 ;
-	jmp     L2E9A
-L2422:	jsr     _add_tile
+	jmp     L2EB9
+L2428:	jsr     _add_tile
 ;
 ; }
 ;
-	jmp     L2415
+	jmp     L241B
 ;
 ; set_rand (1 + n_pant);
 ;
-L2416:	ldx     #$00
+L241C:	ldx     #$00
 	lda     _n_pant
 	clc
 	adc     #$01
-	bcc     L242A
+	bcc     L2430
 	inx
-L242A:	jsr     _set_rand
+L2430:	jsr     _set_rand
 ;
 ; gpit = 192; while (gpit --) {
 ;
 	lda     #$C0
 	sta     _gpit
-L242D:	lda     _gpit
+L2433:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	beq     L242E
+	beq     L2434
 ;
 ; if (rand8 () & 1) {
 ;
 	jsr     _rand8
 	and     #$01
-	beq     L242D
+	beq     L2433
 ;
 ; rda = map_buff [gpit];
 ;
@@ -11441,7 +11447,7 @@ L242D:	lda     _gpit
 ; if (rda < 15) rda += 16;
 ;
 	cmp     #$0F
-	bcs     L2436
+	bcs     L243C
 	lda     #$10
 	clc
 	adc     _rda
@@ -11449,42 +11455,42 @@ L242D:	lda     _gpit
 ;
 ; map_buff [gpit] = rda;
 ;
-L2436:	ldy     _gpit
+L243C:	ldy     _gpit
 	lda     _rda
 	sta     _map_buff,y
 ;
 ; }
 ;
-	jmp     L242D
+	jmp     L2433
 ;
 ; if (c_decos) {
 ;
-L242E:	lda     _c_decos
-	beq     L2441
+L2434:	lda     _c_decos
+	beq     L2447
 ;
 ; while (rda = *gp_gen ++) {
 ;
-L2440:	lda     _gp_gen
+L2446:	lda     _gp_gen
 	ldx     _gp_gen+1
 	sta     regsave
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L2444
+	bcc     L244A
 	inx
-L2444:	sta     _gp_gen
+L244A:	sta     _gp_gen
 	stx     _gp_gen+1
 	ldy     #$00
 	lda     (regsave),y
 	sta     _rda
 	tax
-	beq     L2441
+	beq     L2447
 ;
 ; if (rda & 0x80) {
 ;
 	lda     _rda
 	and     #$80
-	beq     L2445
+	beq     L244B
 ;
 ; rda &= 0x7F;
 ;
@@ -11499,11 +11505,11 @@ L2444:	sta     _gp_gen
 ;
 ; } else {
 ;
-	jmp     L244B
+	jmp     L2451
 ;
 ; SET_FROM_PTR (rdct, gp_gen); 
 ;
-L2445:	lda     (_gp_gen),y
+L244B:	lda     (_gp_gen),y
 	sta     _rdct
 ;
 ; gp_gen ++;
@@ -11512,21 +11518,21 @@ L2445:	lda     (_gp_gen),y
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2450
+	bcc     L2456
 	inx
-L2450:	sta     _gp_gen
+L2456:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; while (rdct --) {
 ;
-L244B:	lda     _rdct
+L2451:	lda     _rdct
 	pha
 	sec
 	sbc     #$01
 	sta     _rdct
 	pla
 	tax
-	beq     L2440
+	beq     L2446
 ;
 ; SET_FROM_PTR (rdm, gp_gen); 
 ;
@@ -11540,9 +11546,9 @@ L244B:	lda     _rdct
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2458
+	bcc     L245E
 	inx
-L2458:	sta     _gp_gen
+L245E:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; add_tile ();
@@ -11551,11 +11557,11 @@ L2458:	sta     _gp_gen
 ;
 ; }
 ;
-	jmp     L244B
+	jmp     L2451
 ;
 ; gp_gen = c_locks; rda = 0;
 ;
-L2441:	lda     _c_locks
+L2447:	lda     _c_locks
 	sta     _gp_gen
 	lda     _c_locks+1
 	sta     _gp_gen+1
@@ -11565,14 +11571,14 @@ L2441:	lda     _c_locks
 ;
 	lda     _c_max_bolts
 	sta     _gpit
-L2460:	lda     _gpit
+L2466:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	beq     L2461
+	beq     L2467
 ;
 ; SET_FROM_PTR (rdb, gp_gen); gp_gen ++;
 ;
@@ -11583,9 +11589,9 @@ L2460:	lda     _gpit
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2467
+	bcc     L246D
 	inx
-L2467:	sta     _gp_gen
+L246D:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; SET_FROM_PTR (rdm, gp_gen); gp_gen ++;
@@ -11596,31 +11602,31 @@ L2467:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L246C
+	bcc     L2472
 	inx
-L246C:	sta     _gp_gen
+L2472:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; if (n_pant == rdb) {
 ;
 	lda     _rdb
 	cmp     _n_pant
-	bne     L2460
+	bne     L2466
 ;
 ; if (!lkact [gpit]) add_tile ();
 ;
 	ldy     _gpit
 	lda     _lkact,y
-	bne     L2460
+	bne     L2466
 	jsr     _add_tile
 ;
 ; } 
 ;
-	jmp     L2460
+	jmp     L2466
 ;
 ; _x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
 ;
-L2461:	sta     __x
+L2467:	sta     __x
 	lda     #$06
 	sta     __y
 	lda     #<(_map_buff)
@@ -11631,9 +11637,9 @@ L2461:	sta     __x
 ; for (rdm = 0; rdm < 192; rdm ++) {
 ;
 	txa
-L2E9C:	sta     _rdm
+L2EBB:	sta     _rdm
 	cmp     #$C0
-	jcs     L247B
+	jcs     L2481
 ;
 ; SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
 ;
@@ -11644,9 +11650,9 @@ L2E9C:	sta     _rdm
 	ldx     _gp_ram+1
 	clc
 	adc     #$01
-	bcc     L2486
+	bcc     L248C
 	inx
-L2486:	sta     _gp_ram
+L248C:	sta     _gp_ram
 	stx     _gp_ram+1
 ;
 ; map_attr [rdm] = c_behs [rdt];
@@ -11655,9 +11661,9 @@ L2486:	sta     _gp_ram
 	ldx     #>(_map_attr)
 	clc
 	adc     _rdm
-	bcc     L2489
+	bcc     L248F
 	inx
-L2489:	jsr     pushax
+L248F:	jsr     pushax
 	lda     _c_behs
 	ldx     _c_behs+1
 	ldy     _rdt
@@ -11671,10 +11677,10 @@ L2489:	jsr     pushax
 ;
 	lda     _rdt
 	cmp     #$27
-	bcc     L248C
+	bcc     L2492
 	lda     _rdt
 	cmp     #$2A
-	bcs     L248C
+	bcs     L2492
 ;
 ; chac_chacs_add ();
 ;
@@ -11689,7 +11695,7 @@ L2489:	jsr     pushax
 ;
 ; _t = rdt; draw_tile ();
 ;
-L248C:	lda     _rdt
+L2492:	lda     _rdt
 	sta     __t
 	jsr     _draw_tile
 ;
@@ -11701,7 +11707,7 @@ L248C:	lda     _rdt
 	and     #$1F
 	sta     __x
 	lda     __x
-	bne     L247C
+	bne     L2482
 	lda     #$02
 	clc
 	adc     __y
@@ -11709,23 +11715,23 @@ L248C:	lda     _rdt
 ;
 ; for (rdm = 0; rdm < 192; rdm ++) {
 ;
-L247C:	lda     _rdm
+L2482:	lda     _rdm
 	clc
 	adc     #$01
-	jmp     L2E9C
+	jmp     L2EBB
 ;
 ; gpit = max_chac_chacs; while (gpit --) {
 ;
-L247B:	lda     _max_chac_chacs
+L2481:	lda     _max_chac_chacs
 	sta     _gpit
-L24A3:	lda     _gpit
+L24A9:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	beq     L24A4
+	beq     L24AA
 ;
 ; _t = CHAC_CHAC_BASE_TILE + 6;
 ;
@@ -11780,11 +11786,11 @@ L24A3:	lda     _gpit
 ;
 ; }
 ;
-	jmp     L24A3
+	jmp     L24A9
 ;
 ; vram_write (attr_table, 0x23c0, 64);
 ;
-L24A4:	jsr     decsp4
+L24AA:	jsr     decsp4
 	lda     #<(_attr_table)
 	ldy     #$02
 	sta     (sp),y
@@ -11815,7 +11821,7 @@ L24A4:	jsr     decsp4
 ;
 ; vram_adr (((_y << 5) | _x) + 0x2000);
 ;
-L2EAC:	ldx     #$00
+L2ECB:	ldx     #$00
 	lda     __y
 	jsr     aslax4
 	stx     tmp1
@@ -11834,7 +11840,7 @@ L2EAC:	ldx     #$00
 ;
 ; while (gpit = *s++) {
 ;
-L24C4:	ldy     #$01
+L24CA:	ldy     #$01
 	lda     (sp),y
 	tax
 	dey
@@ -11843,9 +11849,9 @@ L24C4:	ldy     #$01
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L24C8
+	bcc     L24CE
 	inx
-L24C8:	jsr     stax0sp
+L24CE:	jsr     stax0sp
 	ldy     #$00
 	lda     (regsave),y
 	sta     _gpit
@@ -11856,7 +11862,7 @@ L24C8:	jsr     stax0sp
 ;
 	lda     _gpit
 	cmp     #$25
-	bne     L24C9
+	bne     L24CF
 ;
 ; ++ _y; vram_adr (((_y << 5) | _x) + 0x2000);
 ;
@@ -11864,15 +11870,15 @@ L24C8:	jsr     stax0sp
 ;
 ; else vram_put (gpit - 32); 
 ;
-	jmp     L2EAC
-L24C9:	lda     _gpit
+	jmp     L2ECB
+L24CF:	lda     _gpit
 	sec
 	sbc     #$20
 	jsr     _vram_put
 ;
 ; }
 ;
-	jmp     L24C4
+	jmp     L24CA
 
 .endproc
 
@@ -11897,9 +11903,9 @@ L24C9:	lda     _gpit
 ; for (gpit = 0; gpit < MAP_SIZE; gpit ++) {
 ;
 	lda     #$00
-L2EAD:	sta     _gpit
+L2ECC:	sta     _gpit
 	cmp     #$18
-	bcs     L24D8
+	bcs     L24DE
 ;
 ; hact [gpit] = 1;
 ;
@@ -11912,11 +11918,11 @@ L2EAD:	sta     _gpit
 	lda     _gpit
 	clc
 	adc     #$01
-	jmp     L2EAD
+	jmp     L2ECC
 ;
 ; }
 ;
-L24D8:	rts
+L24DE:	rts
 
 .endproc
 
@@ -11940,15 +11946,15 @@ L24D8:	rts
 ;
 	lda     _hrt
 	cmp     #$04
-	bne     L24E6
+	bne     L24EC
 	lda     _res_on
-	beq     L24E6
+	beq     L24EC
 	lda     #$05
 	sta     _rda
 ;
 ; hrx, hry + SPRITE_ADJUST, 
 ;
-L24E6:	jsr     decsp3
+L24EC:	jsr     decsp3
 	lda     _hrx
 	ldy     #$02
 	sta     (sp),y
@@ -11957,12 +11963,12 @@ L24E6:	jsr     decsp3
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2EAF
+	bcs     L2ECE
 	sec
-L2EAF:	sbc     #$10
-	bcs     L2EB0
+L2ECE:	sbc     #$10
+	bcs     L2ECF
 	sec
-L2EB0:	sbc     #$01
+L2ECF:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -11977,10 +11983,10 @@ L2EB0:	sbc     #$01
 	ldx     #$00
 	lda     _rda
 	asl     a
-	bcc     L2EB1
+	bcc     L2ED0
 	inx
 	clc
-L2EB1:	adc     #<(_spr_hs)
+L2ED0:	adc     #<(_spr_hs)
 ;
 ; );
 ;
@@ -12024,10 +12030,10 @@ L2EB1:	adc     #<(_spr_hs)
 	ldx     #$00
 	lda     _n_pant
 	asl     a
-	bcc     L2EB3
+	bcc     L2ED2
 	inx
 	clc
-L2EB3:	adc     _c_hotspots
+L2ED2:	adc     _c_hotspots
 	sta     _gp_gen
 	txa
 	adc     _c_hotspots+1
@@ -12042,9 +12048,9 @@ L2EB3:	adc     _c_hotspots
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2500
+	bcc     L2506
 	inx
-L2500:	sta     _gp_gen
+L2506:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; SET_FROM_PTR (rda, gp_gen);
@@ -12055,10 +12061,10 @@ L2500:	sta     _gp_gen
 ; if (hrt && hact [n_pant]) {
 ;
 	lda     _hrt
-	beq     L2504
+	beq     L250A
 	ldy     _n_pant
 	lda     _hact,y
-	beq     L2504
+	beq     L250A
 ;
 ; hry = rda & 0xf0; hrx = rda << 4;
 ;
@@ -12075,7 +12081,7 @@ L2500:	sta     _gp_gen
 ; } else hrt = 0;
 ;
 	rts
-L2504:	lda     #$00
+L250A:	lda     #$00
 	sta     _hrt
 ;
 ; }
@@ -12099,44 +12105,44 @@ L2504:	lda     #$00
 ;
 	lda     _max_chac_chacs
 	sta     _gpit
-L252B:	lda     _gpit
+L2531:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	jeq     L252C
+	jeq     L2532
 ;
 ; if (chac_chacs_ct [gpit]) -- chac_chacs_ct [gpit]; else {
 ;
 	ldy     _gpit
 	lda     _chac_chacs_ct,y
-	beq     L252E
+	beq     L2534
 	lda     #<(_chac_chacs_ct)
 	ldx     #>(_chac_chacs_ct)
 	clc
 	adc     _gpit
-	bcc     L2534
+	bcc     L253A
 	inx
-L2534:	sta     ptr1
+L253A:	sta     ptr1
 	stx     ptr1+1
 	ldy     #$00
 	lda     (ptr1),y
 	sec
 	sbc     #$01
 	sta     (ptr1),y
-	jmp     L252B
+	jmp     L2531
 ;
 ; ++ chac_chacs_state [gpit];
 ;
-L252E:	lda     #<(_chac_chacs_state)
+L2534:	lda     #<(_chac_chacs_state)
 	ldx     #>(_chac_chacs_state)
 	clc
 	adc     _gpit
-	bcc     L2538
+	bcc     L253E
 	inx
-L2538:	sta     ptr1
+L253E:	sta     ptr1
 	stx     ptr1+1
 	ldy     #$00
 	lda     #$01
@@ -12149,27 +12155,27 @@ L2538:	sta     ptr1
 	ldy     _gpit
 	lda     _chac_chacs_state,y
 	cmp     #$06
-	bne     L2539
+	bne     L253F
 	ldy     _gpit
 	lda     #$00
 	sta     _chac_chacs_state,y
 ;
 ; chac_chacs_ct [gpit] = chac_chacs_state [gpit] ? 
 ;
-L2539:	lda     #<(_chac_chacs_ct)
+L253F:	lda     #<(_chac_chacs_ct)
 	ldx     #>(_chac_chacs_ct)
 	clc
 	adc     _gpit
-	bcc     L2543
+	bcc     L2549
 	inx
-L2543:	sta     sreg
+L2549:	sta     sreg
 	stx     sreg+1
 	ldy     _gpit
 	lda     _chac_chacs_state,y
 ;
 ; (chac_chacs_times [chac_chacs_state [gpit]]) :
 ;
-	beq     L2547
+	beq     L254D
 	ldy     _gpit
 	lda     _chac_chacs_state,y
 	sta     ptr1
@@ -12182,10 +12188,10 @@ L2543:	sta     sreg
 ;
 ; chac_chacs_idlewait [gpit];
 ;
-	jmp     L2EB5
-L2547:	ldy     _gpit
+	jmp     L2ED4
+L254D:	ldy     _gpit
 	lda     _chac_chacs_idlewait,y
-L2EB5:	ldy     #$00
+L2ED4:	ldy     #$00
 	sta     (sreg),y
 ;
 ; chac_chacs_queue [chac_chacs_queue_write] = gpit;
@@ -12204,13 +12210,13 @@ L2EB5:	ldy     #$00
 ;
 ; }
 ;
-	jmp     L252B
+	jmp     L2531
 ;
 ; if (chac_chacs_queue_write != chac_chacs_queue_read) {
 ;
-L252C:	lda     _chac_chacs_queue_read
+L2532:	lda     _chac_chacs_queue_read
 	cmp     _chac_chacs_queue_write
-	bne     L2EB6
+	bne     L2ED5
 ;
 ; }
 ;
@@ -12218,7 +12224,7 @@ L252C:	lda     _chac_chacs_queue_read
 ;
 ; gpit = chac_chacs_queue [chac_chacs_queue_read];
 ;
-L2EB6:	ldy     _chac_chacs_queue_read
+L2ED5:	ldy     _chac_chacs_queue_read
 	lda     _chac_chacs_queue,y
 	sta     _gpit
 ;
@@ -12239,7 +12245,7 @@ L2EB6:	ldy     _chac_chacs_queue_read
 ; if (rdm == 3) { shaker_ct = 8; sfx_play (SFX_STEPON, 1); }
 ;
 	cmp     #$03
-	bne     L2569
+	bne     L256F
 	lda     #$08
 	sta     _shaker_ct
 	lda     #$0F
@@ -12249,7 +12255,7 @@ L2EB6:	ldy     _chac_chacs_queue_read
 ;
 ; rdx = chac_chacs_yx [gpit]; rdy = rdx >> 4; rdx &= 0xf;
 ;
-L2569:	ldy     _gpit
+L256F:	ldy     _gpit
 	lda     _chac_chacs_yx,y
 	sta     _rdx
 	ldx     #$00
@@ -12433,14 +12439,14 @@ L2569:	ldy     _gpit
 ; if (pstate == EST_NORMAL || half_life) 
 ;
 	lda     _pstate
-	beq     L25B9
+	beq     L25BF
 	lda     _half_life
-	bne     L25B9
+	bne     L25BF
 	rts
 ;
 ; prx, pry + SPRITE_ADJUST, 
 ;
-L25B9:	jsr     decsp3
+L25BF:	jsr     decsp3
 	lda     _prx
 	ldy     #$02
 	sta     (sp),y
@@ -12449,12 +12455,12 @@ L25B9:	jsr     decsp3
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2EB8
+	bcs     L2ED7
 	sec
-L2EB8:	sbc     #$10
-	bcs     L2EB9
+L2ED7:	sbc     #$10
+	bcs     L2ED8
 	sec
-L2EB9:	sbc     #$01
+L2ED8:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -12469,10 +12475,10 @@ L2EB9:	sbc     #$01
 	ldx     #$00
 	lda     _psprid
 	asl     a
-	bcc     L2EBA
+	bcc     L2ED9
 	inx
 	clc
-L2EBA:	adc     #<(_spr_player)
+L2ED9:	adc     #<(_spr_player)
 ;
 ; );
 ;
@@ -12560,15 +12566,15 @@ L2EBA:	adc     #<(_spr_player)
 ; if (plife) -- plife; else game_over = 1;
 ;
 	lda     _plife
-	beq     L25D2
+	beq     L25D8
 	dec     _plife
-	jmp     L25D5
-L25D2:	lda     #$01
+	jmp     L25DB
+L25D8:	lda     #$01
 	sta     _game_over
 ;
 ; pstate = EST_PARP;
 ;
-L25D5:	lda     #$02
+L25DB:	lda     #$02
 	sta     _pstate
 ;
 ; pctstate = 100; 
@@ -12637,14 +12643,14 @@ L25D5:	lda     #$02
 	lda     (sp),y
 	dey
 	ora     (sp),y
-	beq     L25EB
+	beq     L25F1
 	ldx     #$00
 	lda     #$01
 	jsr     subeqysp
 ;
 ; y1=x1;//Shutup, compiler!
 ;
-L25EB:	ldy     #$03
+L25F1:	ldy     #$03
 	lda     (sp),y
 	tax
 	dey
@@ -12659,14 +12665,14 @@ L25EB:	ldy     #$03
 	dey
 	lda     (sp),y
 	cpx     #$00
-	jne     L25F0
+	jne     L25F6
 	cmp     #$0A
-	jne     L25F0
+	jne     L25F6
 ;
 ; ) {
 ;
 	lda     _pkeys
-	jeq     L25F0
+	jeq     L25F6
 ;
 ; _x = x0; _y = y0; _t = 0; map_set ();
 ;
@@ -12690,14 +12696,14 @@ L25EB:	ldy     #$03
 ;
 	lda     _c_max_bolts
 	sta     _gpit
-L2600:	lda     _gpit
+L2606:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	beq     L2601
+	beq     L2607
 ;
 ; rda = *gp_gen ++; rdb = *gp_gen ++;
 ;
@@ -12707,9 +12713,9 @@ L2600:	lda     _gpit
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L2605
+	bcc     L260B
 	inx
-L2605:	sta     _gp_gen
+L260B:	sta     _gp_gen
 	stx     _gp_gen+1
 	ldy     #$00
 	lda     (regsave),y
@@ -12720,9 +12726,9 @@ L2605:	sta     _gp_gen
 	stx     regsave+1
 	clc
 	adc     #$01
-	bcc     L2608
+	bcc     L260E
 	inx
-L2608:	sta     _gp_gen
+L260E:	sta     _gp_gen
 	stx     _gp_gen+1
 	lda     (regsave),y
 	sta     _rdb
@@ -12731,7 +12737,7 @@ L2608:	sta     _gp_gen
 ;
 	lda     _rda
 	cmp     _n_pant
-	bne     L2600
+	bne     L2606
 	ldy     #$05
 	lda     (sp),y
 	tax
@@ -12747,9 +12753,9 @@ L2608:	sta     _gp_gen
 	tax
 	pla
 	cpx     #$00
-	bne     L2600
+	bne     L2606
 	cmp     _rdb
-	bne     L2600
+	bne     L2606
 ;
 ; lkact [gpit] = 0;
 ;
@@ -12759,11 +12765,11 @@ L2608:	sta     _gp_gen
 ;
 ; }
 ;
-	jmp     L2600
+	jmp     L2606
 ;
 ; -- pkeys;
 ;
-L2601:	dec     _pkeys
+L2607:	dec     _pkeys
 ;
 ; sfx_play (SFX_TILE, 1);
 ;
@@ -12773,16 +12779,16 @@ L2601:	dec     _pkeys
 ;
 ; } else {
 ;
-	jmp     L2619
+	jmp     L261F
 ;
 ; no_ct = 100;
 ;
-L25F0:	lda     #$64
+L25F6:	lda     #$64
 	sta     _no_ct
 ;
 ; }
 ;
-L2619:	ldy     #$0A
+L261F:	ldy     #$0A
 	jmp     addysp
 
 .endproc
@@ -12808,10 +12814,6 @@ L2619:	ldy     #$0A
 ;
 	sta     _pnotsafe
 ;
-; ppossee = 0;
-;
-	sta     _ppossee
-;
 ; cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
 ;
 	tax
@@ -12822,9 +12824,9 @@ L2619:	ldy     #$0A
 	lda     _prx
 	clc
 	adc     #$07
-	bcc     L2629
+	bcc     L262D
 	inx
-L2629:	jsr     shrax4
+L262D:	jsr     shrax4
 	sta     _cx2
 ;
 ; cy1 = cy2 = (pry + 15) >> 4;
@@ -12833,9 +12835,9 @@ L2629:	jsr     shrax4
 	lda     _pry
 	clc
 	adc     #$0F
-	bcc     L262E
+	bcc     L2632
 	inx
-L262E:	jsr     shrax4
+L2632:	jsr     shrax4
 	sta     _cy2
 	sta     _cy1
 ;
@@ -12846,31 +12848,36 @@ L262E:	jsr     shrax4
 ; if (springs_on && cy1 < 12) {
 ;
 	lda     _springs_on
-	jeq     L2630
+	jeq     L265C
 	lda     _cy1
 	cmp     #$0C
-	bcs     L2630
+	jcs     L265C
 ;
 ; if (cy1) -- cy1;
 ;
 	lda     _cy1
-	beq     L2634
+	beq     L2638
 	dec     _cy1
 ;
 ; _t = SPRING_SPIKE_TILE; 
 ;
-L2634:	lda     #$0A
+L2638:	lda     #$0A
 	sta     __t
 ;
-; if (QTILE (cx1, cy1 + 1) == SPRING_TILE) { _x = cx1; _y = cy1; map_set (); }
+; if (ppossee)
+;
+	lda     _ppossee
+	jeq     L265C
+;
+; if (QTILE (cx1, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx1; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
 ;
 	ldx     #$00
 	lda     _cy1
 	clc
 	adc     #$01
-	bcc     L2643
+	bcc     L2649
 	inx
-L2643:	jsr     shlax4
+L2649:	jsr     shlax4
 	ora     _cx1
 	sta     ptr1
 	txa
@@ -12880,22 +12887,39 @@ L2643:	jsr     shlax4
 	ldy     #<(_map_buff)
 	lda     (ptr1),y
 	cmp     #$1F
-	bne     L2639
+	bne     L263F
+	ldx     #$00
+	lda     _cy1
+	jsr     aslax4
+	ora     _cx1
+	sta     ptr1
+	txa
+	clc
+	adc     #>(_map_buff)
+	sta     ptr1+1
+	ldy     #<(_map_buff)
+	lda     (ptr1),y
+	cmp     #$0A
+	beq     L263F
 	lda     _cx1
 	sta     __x
 	lda     _cy1
 	sta     __y
 	jsr     _map_set
+	lda     #$0B
+	jsr     pusha
+	lda     #$01
+	jsr     _sfx_play
 ;
-; if (QTILE (cx2, cy1 + 1) == SPRING_TILE) { _x = cx2; _y = cy1; map_set (); }
+; if (QTILE (cx2, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx2; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
 ;
-L2639:	ldx     #$00
+L263F:	ldx     #$00
 	lda     _cy1
 	clc
 	adc     #$01
-	bcc     L2653
+	bcc     L2666
 	inx
-L2653:	jsr     shlax4
+L2666:	jsr     shlax4
 	ora     _cx2
 	sta     ptr1
 	txa
@@ -12905,29 +12929,44 @@ L2653:	jsr     shlax4
 	ldy     #<(_map_buff)
 	lda     (ptr1),y
 	cmp     #$1F
-	bne     L2649
+	bne     L265C
+	ldx     #$00
+	lda     _cy1
+	jsr     aslax4
+	ora     _cx1
+	sta     ptr1
+	txa
+	clc
+	adc     #>(_map_buff)
+	sta     ptr1+1
+	ldy     #<(_map_buff)
+	lda     (ptr1),y
+	cmp     #$0A
+	beq     L265C
 	lda     _cx2
 	sta     __x
 	lda     _cy1
 	sta     __y
 	jsr     _map_set
-;
-; sfx_play (SFX_SPRING, 1);
-;
-L2649:	lda     #$0B
+	lda     #$0B
 	jsr     pusha
 	lda     #$01
 	jsr     _sfx_play
 ;
+; ppossee = 0;
+;
+L265C:	lda     #$00
+	sta     _ppossee
+;
 ; ) {
 ;
-L2630:	lda     _pgotten
-	bne     L2667
+	lda     _pgotten
+	bne     L2686
 ;
 ; if (!pj) {
 ;
 	lda     _pj
-	bne     L265E
+	bne     L267D
 ;
 ; pvy += PLAYER_G;
 ;
@@ -12935,23 +12974,23 @@ L2630:	lda     _pgotten
 ;
 ; } else pvy += PLAYER_G_MK2_JUMPING;
 ;
-	jmp     L2ED0
-L265E:	lda     #$02
-L2ED0:	clc
+	jmp     L2EEF
+L267D:	lda     #$02
+L2EEF:	clc
 	adc     _pvy
 	sta     _pvy
-	bcc     L2666
+	bcc     L2685
 	inc     _pvy+1
 ;
 ; if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 ;
-L2666:	lda     _pvy
+L2685:	lda     _pvy
 	cmp     #$01
 	lda     _pvy+1
 	sbc     #$01
-	bvs     L2669
+	bvs     L2688
 	eor     #$80
-L2669:	bpl     L2667
+L2688:	bpl     L2686
 	ldx     #$01
 	lda     #$00
 	sta     _pvy
@@ -12959,15 +12998,15 @@ L2669:	bpl     L2667
 ;
 ; if (pgotten) pvy = 0;   
 ;
-L2667:	lda     _pgotten
-	beq     L266C
+L2686:	lda     _pgotten
+	beq     L268B
 	lda     #$00
 	sta     _pvy
 	sta     _pvy+1
 ;
 ; cx1 = prx >> 4;
 ;
-L266C:	tax
+L268B:	tax
 	lda     _prx
 	jsr     asrax4
 	sta     _cx1
@@ -12978,9 +13017,9 @@ L266C:	tax
 	lda     _prx
 	clc
 	adc     #$07
-	bcc     L2675
+	bcc     L2694
 	inx
-L2675:	jsr     shrax4
+L2694:	jsr     shrax4
 	sta     _cx2
 ;
 ; py += pvy;
@@ -12997,14 +13036,14 @@ L2675:	jsr     shrax4
 ;
 	ldx     _py+1
 	cpx     #$80
-	bcc     L2678
+	bcc     L2697
 	lda     #$00
 	sta     _py
 	sta     _py+1
 ;
 ; player_to_pixels ();
 ;
-L2678:	jsr     _player_to_pixels
+L2697:	jsr     _player_to_pixels
 ;
 ; rds16 = pvy + pgtmy;
 ;
@@ -13020,7 +13059,7 @@ L2678:	jsr     _player_to_pixels
 ; if (rds16 < 0)
 ;
 	cpx     #$80
-	bcc     L267F
+	bcc     L269E
 ;
 ; cy1 = cy2 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;   
 ;
@@ -13044,20 +13083,20 @@ L2678:	jsr     _player_to_pixels
 ;
 	lda     _at1
 	and     #$08
-	bne     L2687
+	bne     L26A6
 	lda     _at2
 	and     #$08
-	jeq     L26AA
+	jeq     L26C9
 ;
 ; pry = ((cy1 + 1) << 4) + PLAYER_COLLISION_VSTRETCH_BG;
 ;
-L2687:	ldx     #$00
+L26A6:	ldx     #$00
 	lda     _cy1
 	clc
 	adc     #$01
-	bcc     L268F
+	bcc     L26AE
 	inx
-L268F:	jsr     shlax4
+L26AE:	jsr     shlax4
 	clc
 	adc     #$FC
 	sta     _pry
@@ -13088,17 +13127,17 @@ L268F:	jsr     shlax4
 ;
 ; } else if ((at1 & 1) || (at2 & 1)) {
 ;
-	jmp     L26EF
+	jmp     L270E
 ;
 ; } else if (rds16 > 0)
 ;
-L267F:	lda     _rds16
+L269E:	lda     _rds16
 	cmp     #$01
 	lda     _rds16+1
 	sbc     #$00
-	bvs     L26A3
+	bvs     L26C2
 	eor     #$80
-L26A3:	jpl     L26EF
+L26C2:	jpl     L270E
 ;
 ; cy1 = cy2 = (pry + 16) >> 4; 
 ;
@@ -13106,9 +13145,9 @@ L26A3:	jpl     L26EF
 	lda     _pry
 	clc
 	adc     #$10
-	bcc     L26A8
+	bcc     L26C7
 	inx
-L26A8:	jsr     shrax4
+L26C7:	jsr     shrax4
 	sta     _cy2
 	sta     _cy1
 ;
@@ -13123,31 +13162,31 @@ L26A8:	jsr     shrax4
 	lda     _cy1
 	sec
 	sbc     #$01
-	bcs     L26AE
+	bcs     L26CD
 	ldx     #$FF
-L26AE:	jsr     shlax4
+L26CD:	jsr     shlax4
 	clc
 	adc     #$04
-	bcc     L26AF
+	bcc     L26CE
 	inx
-L26AF:	jsr     tosicmp
-	jcs     L26AA
+L26CE:	jsr     tosicmp
+	jcs     L26C9
 ;
 ; (at1 & 12) || (at2 & 12)
 ;
 	lda     _at1
 	and     #$0C
-	bne     L26AB
+	bne     L26CA
 	lda     _at2
 	and     #$0C
 ;
 ; )
 ;
-	jeq     L26AA
+	jeq     L26C9
 ;
 ; pvy = 0; pry = ((cy1 - 1) << 4);py = pry << FIXBITS;
 ;
-L26AB:	ldx     #$00
+L26CA:	ldx     #$00
 	txa
 	sta     _pvy
 	sta     _pvy+1
@@ -13188,16 +13227,16 @@ L26AB:	ldx     #$00
 	lda     _at1
 	and     #$28
 	cmp     #$28
-	bne     L26C7
+	bne     L26E6
 	lda     _at1
 	and     #$01
-	beq     L26CB
+	beq     L26EA
 	ldx     #$00
 	lda     #$30
-	jmp     L2EC9
-L26CB:	ldx     #$FF
+	jmp     L2EE8
+L26EA:	ldx     #$FF
 	lda     #$D0
-L2EC9:	sta     _pgtmx
+L2EE8:	sta     _pgtmx
 	stx     _pgtmx+1
 	sta     _cfx
 	lda     #$01
@@ -13205,22 +13244,22 @@ L2EC9:	sta     _pgtmx
 ;
 ; if (cx1 != cx2) if ((at2 & 40) == 40) { if (at2 & 1) cfx = pgtmx = PLAYER_VX_CONVEYORS; else cfx = pgtmx = -PLAYER_VX_CONVEYORS; pgotten = 1; } 
 ;
-L26C7:	lda     _cx2
+L26E6:	lda     _cx2
 	cmp     _cx1
-	beq     L26D8
+	beq     L26F7
 	lda     _at2
 	and     #$28
 	cmp     #$28
-	bne     L26D8
+	bne     L26F7
 	lda     _at2
 	and     #$01
-	beq     L26DC
+	beq     L26FB
 	ldx     #$00
 	lda     #$30
-	jmp     L2ECA
-L26DC:	ldx     #$FF
+	jmp     L2EE9
+L26FB:	ldx     #$FF
 	lda     #$D0
-L2ECA:	sta     _pgtmx
+L2EE9:	sta     _pgtmx
 	stx     _pgtmx+1
 	sta     _cfx
 	lda     #$01
@@ -13228,67 +13267,67 @@ L2ECA:	sta     _pgtmx
 ;
 ; if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
 ;
-L26D8:	lda     _at1
+L26F7:	lda     _at1
 	and     #$01
-	bne     L26E8
+	bne     L2707
 	lda     _at2
 	and     #$01
-	beq     L26EF
-L26E8:	lda     #$01
+	beq     L270E
+L2707:	lda     #$01
 	sta     _pnotsafe
 ;
 ; } else if ((at1 & 1) || (at2 & 1)) {
 ;
-	jmp     L26EF
-L26AA:	lda     _at1
+	jmp     L270E
+L26C9:	lda     _at1
 	and     #$01
-	bne     L26F0
+	bne     L270F
 	lda     _at2
 	and     #$01
-	beq     L26EF
+	beq     L270E
 ;
 ; hitv = 1;
 ;
-L26F0:	lda     #$01
+L270F:	lda     #$01
 	sta     _hitv
 ;
 ; && !pj
 ;
-L26EF:	lda     _a_button
-	beq     L26FD
+L270E:	lda     _a_button
+	beq     L271C
 ;
 ; && (
 ;
 	lda     _pj
-	bne     L26FD
+	bne     L271C
 ;
 ; pgotten || ppossee || hitv
 ;
 	lda     _pgotten
-	bne     L26F7
+	bne     L2716
 	lda     _ppossee
-	bne     L26F7
+	bne     L2716
 ;
 ; )
 ;
 	lda     _hitv
-	beq     L26FD
+	beq     L271C
 ;
 ; jump_start ();
 ;
-L26F7:	jsr     _jump_start
+L2716:	jsr     _jump_start
 ;
 ; if (!(pgotten || hitv || pnotsafe)) {
 ;
 	lda     _pgotten
-	bne     L26FF
+	bne     L271E
 	lda     _hitv
-	bne     L26FF
+	bne     L271E
 	lda     _pnotsafe
-	beq     L2700
-L26FF:	lda     #$01
-L2700:	jsr     bnega
-	beq     L26FD
+	beq     L271F
+L271E:	lda     #$01
+L271F:	jsr     bnega
+	beq     L271C
 ;
 ; player_register_safe_spot ();
 ;
@@ -13296,38 +13335,38 @@ L2700:	jsr     bnega
 ;
 ; if (pj) {
 ;
-L26FD:	lda     _pj
-	beq     L270E
+L271C:	lda     _pj
+	beq     L272D
 ;
 ; if (i & PAD_A) {
 ;
 	lda     _i
 	and     #$01
-	beq     L2704
+	beq     L2723
 ;
 ; ++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
 ;
 	inc     _pctj
 	lda     _pctj
 	cmp     #$10
-	bne     L270E
+	bne     L272D
 	lda     #$00
 	sta     _pj
 ;
 ; } else {
 ;
-	jmp     L270E
+	jmp     L272D
 ;
 ; pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
 ;
-L2704:	sta     _pj
+L2723:	sta     _pj
 	lda     _pvy
 	cmp     #$B0
 	lda     _pvy+1
 	sbc     #$FF
-	bvc     L2710
+	bvc     L272F
 	eor     #$80
-L2710:	bpl     L270E
+L272F:	bpl     L272D
 	ldx     #$FF
 	lda     #$B0
 	sta     _pvy
@@ -13335,15 +13374,15 @@ L2710:	bpl     L270E
 ;
 ; if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
 ;
-L270E:	lda     _i
+L272D:	lda     _i
 	and     #$40
-	bne     L2715
+	bne     L2734
 	lda     _i
 	and     #$80
-	beq     L2716
-L2715:	lda     #$01
-L2716:	jsr     bnega
-	beq     L2727
+	beq     L2735
+L2734:	lda     #$01
+L2735:	jsr     bnega
+	beq     L2746
 ;
 ; if (pvx > 0) {
 ;
@@ -13351,9 +13390,9 @@ L2716:	jsr     bnega
 	cmp     #$01
 	lda     _pvx+1
 	sbc     #$00
-	bvs     L2719
+	bvs     L2738
 	eor     #$80
-L2719:	bpl     L2717
+L2738:	bpl     L2736
 ;
 ; pvx -= PLAYER_RX;
 ;
@@ -13361,21 +13400,21 @@ L2719:	bpl     L2717
 	sec
 	sbc     #$0C
 	sta     _pvx
-	bcs     L271C
+	bcs     L273B
 	dec     _pvx+1
 ;
 ; if (pvx < 0) pvx = 0;
 ;
-L271C:	ldx     _pvx+1
+L273B:	ldx     _pvx+1
 	cpx     #$80
-	bcc     L2727
+	bcc     L2746
 ;
 ; } else if (pvx < 0) {
 ;
-	jmp     L2ECB
-L2717:	ldx     _pvx+1
+	jmp     L2EEA
+L2736:	ldx     _pvx+1
 	cpx     #$80
-	bcc     L2727
+	bcc     L2746
 ;
 ; pvx += PLAYER_RX;
 ;
@@ -13383,27 +13422,27 @@ L2717:	ldx     _pvx+1
 	clc
 	adc     _pvx
 	sta     _pvx
-	bcc     L2726
+	bcc     L2745
 	inc     _pvx+1
 ;
 ; if (pvx > 0) pvx = 0;
 ;
-L2726:	lda     _pvx
+L2745:	lda     _pvx
 	cmp     #$01
 	lda     _pvx+1
 	sbc     #$00
-	bvs     L2729
+	bvs     L2748
 	eor     #$80
-L2729:	bpl     L2727
-L2ECB:	lda     #$00
+L2748:	bpl     L2746
+L2EEA:	lda     #$00
 	sta     _pvx
 	sta     _pvx+1
 ;
 ; if (i & PAD_LEFT) {
 ;
-L2727:	lda     _i
+L2746:	lda     _i
 	and     #$40
-	beq     L2730
+	beq     L274F
 ;
 ; pfacing = CELL_FACING_LEFT;  
 ;
@@ -13416,9 +13455,9 @@ L2727:	lda     _i
 	cmp     #$91
 	lda     _pvx+1
 	sbc     #$FF
-	bvs     L2732
+	bvs     L2751
 	eor     #$80
-L2732:	bpl     L2730
+L2751:	bpl     L274F
 ;
 ; pvx -= PLAYER_AX;
 ;
@@ -13426,14 +13465,14 @@ L2732:	bpl     L2730
 	sec
 	sbc     #$0C
 	sta     _pvx
-	bcs     L2730
+	bcs     L274F
 	dec     _pvx+1
 ;
 ; if (i & PAD_RIGHT) {
 ;
-L2730:	lda     _i
+L274F:	lda     _i
 	and     #$80
-	beq     L273A
+	beq     L2759
 ;
 ; pfacing = CELL_FACING_RIGHT;
 ;
@@ -13446,9 +13485,9 @@ L2730:	lda     _i
 	cmp     #$70
 	lda     _pvx+1
 	sbc     #$00
-	bvc     L273C
+	bvc     L275B
 	eor     #$80
-L273C:	bpl     L273A
+L275B:	bpl     L2759
 ;
 ; pvx += PLAYER_AX;
 ;
@@ -13456,12 +13495,12 @@ L273C:	bpl     L273A
 	clc
 	adc     _pvx
 	sta     _pvx
-	bcc     L273A
+	bcc     L2759
 	inc     _pvx+1
 ;
 ; px += pvx;
 ;
-L273A:	lda     _pvx
+L2759:	lda     _pvx
 	clc
 	adc     _px
 	sta     _px
@@ -13472,7 +13511,7 @@ L273A:	lda     _pvx
 ; if (pgotten) px += pgtmx;
 ;
 	lda     _pgotten
-	beq     L2742
+	beq     L2761
 	lda     _pgtmx
 	clc
 	adc     _px
@@ -13483,37 +13522,37 @@ L273A:	lda     _pvx
 ;
 ; if (px < (4<<FIXBITS)) prx = 4;
 ;
-L2742:	lda     _px
+L2761:	lda     _px
 	cmp     #$00
 	lda     _px+1
 	sbc     #$01
-	bvc     L2749
+	bvc     L2768
 	eor     #$80
-L2749:	bpl     L2746
+L2768:	bpl     L2765
 	lda     #$04
 	sta     _prx
 ;
 ; else if (px > (244<<FIXBITS)) prx = 244; 
 ;
-	jmp     L2753
-L2746:	lda     _px
+	jmp     L2772
+L2765:	lda     _px
 	cmp     #$01
 	lda     _px+1
 	sbc     #$3D
-	bvs     L2750
+	bvs     L276F
 	eor     #$80
-L2750:	bpl     L274D
+L276F:	bpl     L276C
 	lda     #$F4
 	sta     _prx
 ;
 ; else player_to_pixels ();
 ;
-	jmp     L2753
-L274D:	jsr     _player_to_pixels
+	jmp     L2772
+L276C:	jsr     _player_to_pixels
 ;
 ; cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
 ;
-L2753:	lda     _pry
+L2772:	lda     _pry
 	sec
 	sbc     #$FC
 	pha
@@ -13530,9 +13569,9 @@ L2753:	lda     _pry
 	lda     _pry
 	clc
 	adc     #$0F
-	bcc     L275B
+	bcc     L277A
 	inx
-L275B:	jsr     shrax4
+L277A:	jsr     shrax4
 	sta     _cy2
 ;
 ; rds16 = pvx + pgtmx;
@@ -13549,13 +13588,13 @@ L275B:	jsr     shrax4
 ;
 	lda     _rds16
 	ora     _rds16+1
-	jeq     L279B
+	jeq     L27BA
 ;
 ; if (rds16 < 0) {
 ;
 	ldx     _rds16+1
 	cpx     #$80
-	bcc     L2760
+	bcc     L277F
 ;
 ; cx1 = cx2 = prx >> 4; 
 ;
@@ -13580,21 +13619,21 @@ L275B:	jsr     shrax4
 	lda     _cx1
 	sec
 	sbc     #$01
-	bcs     L277A
+	bcs     L2799
 ;
 ; } else {
 ;
-	jmp     L277A
+	jmp     L2799
 ;
 ; cx1 = cx2 = (prx + 8) >> 4;
 ;
-L2760:	ldx     #$00
+L277F:	ldx     #$00
 	lda     _prx
 	clc
 	adc     #$08
-	bcc     L2771
+	bcc     L2790
 	inx
-L2771:	jsr     shrax4
+L2790:	jsr     shrax4
 	sta     _cx2
 	sta     _cx1
 ;
@@ -13604,9 +13643,9 @@ L2771:	jsr     shrax4
 	lda     _cx1
 	sec
 	sbc     #$01
-	bcs     L2776
+	bcs     L2795
 	dex
-L2776:	jsr     shlax4
+L2795:	jsr     shlax4
 	clc
 	adc     #$08
 	sta     _rda
@@ -13616,7 +13655,7 @@ L2776:	jsr     shlax4
 	lda     _cx1
 	clc
 	adc     #$01
-L277A:	sta     _rdm
+L2799:	sta     _rdm
 ;
 ; cm_two_points ();
 ;
@@ -13626,14 +13665,14 @@ L277A:	sta     _rdm
 ;
 	lda     _at1
 	and     #$08
-	bne     L277D
+	bne     L279C
 	lda     _at2
 	and     #$08
-	jeq     L277C
+	jeq     L279B
 ;
 ; pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 ;
-L277D:	ldx     #$00
+L279C:	ldx     #$00
 	txa
 	sta     _pvx
 	sta     _pvx+1
@@ -13651,7 +13690,7 @@ L277D:	ldx     #$00
 	lda     _at1
 	ldx     #$00
 	and     #$02
-	beq     L2789
+	beq     L27A8
 	ldy     #$0A
 	jsr     subysp
 	lda     _at1
@@ -13688,15 +13727,15 @@ L277D:	ldx     #$00
 ;
 ; if (cy1 != cy2) if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 ;
-L2789:	lda     _cy1
+L27A8:	lda     _cy1
 	jsr     pusha0
 	lda     _cy2
 	jsr     tosicmp0
-	beq     L279B
+	beq     L27BA
 	lda     _at2
 	ldx     #$00
 	and     #$02
-	beq     L279B
+	beq     L27BA
 	ldy     #$0A
 	jsr     subysp
 	lda     _at2
@@ -13733,28 +13772,28 @@ L2789:	lda     _cy1
 ;
 ; } else {
 ;
-	jmp     L279B
+	jmp     L27BA
 ;
 ; hith = ((at1 & 1) || (at2 & 1));
 ;
-L277C:	lda     _at1
+L279B:	lda     _at1
 	and     #$01
-	bne     L279E
+	bne     L27BD
 	lda     _at2
 	and     #$01
-	beq     L27A1
-L279E:	lda     #$01
-L27A1:	sta     _hith
+	beq     L27C0
+L27BD:	lda     #$01
+L27C0:	sta     _hith
 ;
 ; phit = 0;
 ;
-L279B:	lda     #$00
+L27BA:	lda     #$00
 	sta     _phit
 ;
 ; if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
 ;
 	lda     _hitv
-	beq     L27A4
+	beq     L27C3
 	lda     #$01
 	sta     _phit
 	lda     _pvy
@@ -13762,30 +13801,30 @@ L279B:	lda     #$00
 	jsr     negax
 	stx     tmp1
 	ora     tmp1
-	beq     L27AC
+	beq     L27CB
 	lda     _pvy
 	ldx     _pvy+1
 	jsr     negax
 	cmp     #$01
 	txa
 	sbc     #$00
-	bvs     L27B1
+	bvs     L27D0
 	eor     #$80
-L27B1:	bpl     L27B2
+L27D0:	bpl     L27D1
 	ldx     #$00
 	lda     #$E0
-	jmp     L27B9
-L27B2:	ldx     #$FF
+	jmp     L27D8
+L27D1:	ldx     #$FF
 	lda     #$20
-	jmp     L27B9
-L27AC:	tax
-L27B9:	sta     _pvy
+	jmp     L27D8
+L27CB:	tax
+L27D8:	sta     _pvy
 	stx     _pvy+1
 ;
 ; if (hith) { phit = 1; 
 ;
-L27A4:	lda     _hith
-	beq     L27BC
+L27C3:	lda     _hith
+	beq     L27DB
 	lda     #$01
 	sta     _phit
 ;
@@ -13796,35 +13835,35 @@ L27A4:	lda     _hith
 	jsr     negax
 	stx     tmp1
 	ora     tmp1
-	beq     L27C4
+	beq     L27E3
 	lda     _pvx
 	ldx     _pvx+1
 	jsr     negax
 	cmp     #$01
 	txa
 	sbc     #$00
-	bvs     L27C9
+	bvs     L27E8
 	eor     #$80
-L27C9:	bpl     L27CA
+L27E8:	bpl     L27E9
 	ldx     #$00
 	lda     #$E0
-	jmp     L27D1
-L27CA:	ldx     #$FF
+	jmp     L27F0
+L27E9:	ldx     #$FF
 	lda     #$20
-	jmp     L27D1
-L27C4:	tax
-L27D1:	sta     _pvx
+	jmp     L27F0
+L27E3:	tax
+L27F0:	sta     _pvx
 	stx     _pvx+1
 ;
 ; cx1 = cx2 = (prx + 4) >> 4;
 ;
-L27BC:	ldx     #$00
+L27DB:	ldx     #$00
 	lda     _prx
 	clc
 	adc     #$04
-	bcc     L27D8
+	bcc     L27F7
 	inx
-L27D8:	jsr     shrax4
+L27F7:	jsr     shrax4
 	sta     _cx2
 	sta     _cx1
 ;
@@ -13838,9 +13877,9 @@ L27D8:	jsr     shrax4
 	lda     _pry
 	clc
 	adc     #$0F
-	bcc     L27DE
+	bcc     L27FD
 	inx
-L27DE:	jsr     shrax4
+L27FD:	jsr     shrax4
 	sta     _cy2
 ;
 ; cm_two_points ();
@@ -13851,74 +13890,74 @@ L27DE:	jsr     shrax4
 ;
 	lda     _at1
 	and     #$01
-	bne     L27E1
+	bne     L2800
 	lda     _at2
 	and     #$01
-	beq     L27E0
-L27E1:	lda     #$01
+	beq     L27FF
+L2800:	lda     #$01
 	sta     _phit
 ;
 ; if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
 ;
-L27E0:	lda     _pstate
+L27FF:	lda     _pstate
 	cmp     #$02
-	beq     L27E9
+	beq     L2808
 	lda     _phit
-	beq     L27E9
+	beq     L2808
 	jsr     _player_to_pixels
 	lda     #$01
 	sta     _pkill
 ;
 ; if (ppossee || pgotten) {
 ;
-L27E9:	lda     _ppossee
-	bne     L27EF
+L2808:	lda     _ppossee
+	bne     L280E
 	lda     _pgotten
-	beq     L27EE
+	beq     L280D
 ;
 ; if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
 ;
-L27EF:	lda     _pvx
+L280E:	lda     _pvx
 	cmp     #$19
 	lda     _pvx+1
 	sbc     #$00
-	bvs     L27F4
+	bvs     L2813
 	eor     #$80
-L27F4:	bmi     L27F2
+L2813:	bmi     L2811
 	lda     _pvx
 	cmp     #$E8
 	lda     _pvx+1
 	sbc     #$FF
-	bvc     L27F6
+	bvc     L2815
 	eor     #$80
-L27F6:	bpl     L27F1
+L2815:	bpl     L2810
 ;
 ; psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
 ;
-L27F2:	ldx     #$00
+L2811:	ldx     #$00
 	lda     _prx
 	jsr     asrax3
 	and     #$03
 	clc
 	adc     #$01
-	bcc     L2EC2
+	bcc     L2EE1
 ;
 ; } else {
 ;
-	jmp     L2EC2
+	jmp     L2EE1
 ;
 ; psprid = CELL_IDLE;
 ;
-L27F1:	lda     #$00
+L2810:	lda     #$00
 ;
 ; } else {
 ;
-	jmp     L2EC2
+	jmp     L2EE1
 ;
 ; psprid = CELL_AIRBORNE;
 ;
-L27EE:	lda     #$05
-L2EC2:	sta     _psprid
+L280D:	lda     #$05
+L2EE1:	sta     _psprid
 ;
 ; psprid += pfacing;
 ;
@@ -13964,9 +14003,9 @@ L2EC2:	sta     _psprid
 ; for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
 ;
 	lda     #$00
-L2ED8:	sta     _gpjt
+L2EF7:	sta     _gpjt
 	cmp     #$48
-	bcc     L2ED9
+	bcc     L2EF8
 ;
 ; }
 ;
@@ -13974,16 +14013,16 @@ L2ED8:	sta     _gpjt
 ;
 ; SET_FROM_PTR (rdt, gp_gen); gp_gen ++;
 ;
-L2ED9:	ldy     #0
+L2EF8:	ldy     #0
 	lda     (_gp_gen),y
 	sta     _rdt
 	lda     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2819
+	bcc     L2838
 	inx
-L2819:	sta     _gp_gen
+L2838:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; SET_FROM_PTR (rda, gp_gen); gp_gen ++;
@@ -13994,9 +14033,9 @@ L2819:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L281E
+	bcc     L283D
 	inx
-L281E:	sta     _gp_gen
+L283D:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; ep_y [gpjt] = rda & 0xf0;
@@ -14005,9 +14044,9 @@ L281E:	sta     _gp_gen
 	ldx     #>(_ep_y)
 	clc
 	adc     _gpjt
-	bcc     L2821
+	bcc     L2840
 	inx
-L2821:	sta     ptr1
+L2840:	sta     ptr1
 	stx     ptr1+1
 	lda     _rda
 	and     #$F0
@@ -14019,9 +14058,9 @@ L2821:	sta     ptr1
 	ldx     #>(_ep_x)
 	clc
 	adc     _gpjt
-	bcc     L2825
+	bcc     L2844
 	inx
-L2825:	sta     ptr1
+L2844:	sta     ptr1
 	stx     ptr1+1
 	lda     _rda
 	asl     a
@@ -14038,9 +14077,9 @@ L2825:	sta     ptr1
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L282B
+	bcc     L284A
 	inx
-L282B:	sta     _gp_gen
+L284A:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; rdc = rda & 0xf0;
@@ -14066,9 +14105,9 @@ L282B:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L2834
+	bcc     L2853
 	inx
-L2834:	sta     _gp_gen
+L2853:	sta     _gp_gen
 	stx     _gp_gen+1
 	lda     _rda
 	and     #$0F
@@ -14077,39 +14116,39 @@ L2834:	sta     _gp_gen
 ; if (rda > 1) rda >>= 1; // Store converted!
 ;
 	cmp     #$02
-	bcc     L2837
+	bcc     L2856
 	lda     _rda
 	lsr     a
 	sta     _rda
 ;
 ; ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 ;
-L2837:	lda     #<(_ep_mx)
+L2856:	lda     #<(_ep_mx)
 	ldx     #>(_ep_mx)
 	clc
 	adc     _gpjt
-	bcc     L283D
+	bcc     L285C
 	inx
-L283D:	jsr     pushax
+L285C:	jsr     pushax
 	ldy     _gpjt
 	lda     _ep_x,y
 	cmp     _rdb
-	bne     L2844
+	bne     L2863
 	lda     #$00
-	jmp     L2852
-L2844:	lda     _rdb
+	jmp     L2871
+L2863:	lda     _rdb
 	jsr     pusha0
 	ldy     _gpjt
 	lda     _ep_x,y
 	jsr     tosicmp0
-	bcc     L284F
-	beq     L284F
+	bcc     L286E
+	beq     L286E
 	lda     _rda
-	jmp     L2852
-L284F:	ldx     #$00
+	jmp     L2871
+L286E:	ldx     #$00
 	lda     _rda
 	jsr     negax
-L2852:	ldy     #$00
+L2871:	ldy     #$00
 	jsr     staspidx
 ;
 ; ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);  
@@ -14118,28 +14157,28 @@ L2852:	ldy     #$00
 	ldx     #>(_ep_my)
 	clc
 	adc     _gpjt
-	bcc     L2858
+	bcc     L2877
 	inx
-L2858:	jsr     pushax
+L2877:	jsr     pushax
 	ldy     _gpjt
 	lda     _ep_y,y
 	cmp     _rdc
-	bne     L285F
+	bne     L287E
 	lda     #$00
-	jmp     L286D
-L285F:	lda     _rdc
+	jmp     L288C
+L287E:	lda     _rdc
 	jsr     pusha0
 	ldy     _gpjt
 	lda     _ep_y,y
 	jsr     tosicmp0
-	bcc     L286A
-	beq     L286A
+	bcc     L2889
+	beq     L2889
 	lda     _rda
-	jmp     L286D
-L286A:	ldx     #$00
+	jmp     L288C
+L2889:	ldx     #$00
 	lda     _rda
 	jsr     negax
-L286D:	ldy     #$00
+L288C:	ldy     #$00
 	jsr     staspidx
 ;
 ; for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
@@ -14147,7 +14186,7 @@ L286D:	ldy     #$00
 	lda     _gpjt
 	clc
 	adc     #$01
-	jmp     L2ED8
+	jmp     L2EF7
 
 .endproc
 
@@ -14166,24 +14205,24 @@ L286D:	ldy     #$00
 ;
 	lda     _on_pant
 	cmp     #$63
-	beq     L2877
+	beq     L2896
 ;
 ; gpjt = on_pant + on_pant + on_pant;
 ;
 	lda     _on_pant
 	clc
 	adc     _on_pant
-	bcc     L2EDC
+	bcc     L2EFB
 	clc
-L2EDC:	adc     _on_pant
+L2EFB:	adc     _on_pant
 	sta     _gpjt
 ;
 ; for (gpit = 0; gpit < 3; gpit ++) {
 ;
 	lda     #$00
-L2EDD:	sta     _gpit
+L2EFC:	sta     _gpit
 	cmp     #$03
-	bcs     L2877
+	bcs     L2896
 ;
 ; __asm__ ("ldx %v", gpit);
 ;
@@ -14234,11 +14273,11 @@ L2EDD:	sta     _gpit
 	lda     _gpit
 	clc
 	adc     #$01
-	jmp     L2EDD
+	jmp     L2EFC
 ;
 ; }
 ;
-L2877:	rts
+L2896:	rts
 
 .endproc
 
@@ -14448,18 +14487,18 @@ L2877:	rts
 ;
 	lda     _n_pant
 	asl     a
-	bcc     L2EE5
+	bcc     L2F04
 	clc
-L2EE5:	adc     _n_pant
+L2F04:	adc     _n_pant
 	sta     _rdc
 	sta     _en_offs
 ;
 ; for (gpit = 0; gpit < 3; gpit ++) {
 ;
 	lda     #$00
-L2EEA:	sta     _gpit
+L2F09:	sta     _gpit
 	cmp     #$03
-	bcc     L2EEB
+	bcc     L2F0A
 ;
 ; }
 ;
@@ -14467,9 +14506,9 @@ L2EEA:	sta     _gpit
 ;
 ; if (ep_dead [rdc]) {
 ;
-L2EEB:	ldy     _rdc
+L2F0A:	ldy     _rdc
 	lda     _ep_dead,y
-	beq     L28BD
+	beq     L28DC
 ;
 ; _en_t = 0;
 ;
@@ -14482,25 +14521,25 @@ L2EEB:	ldy     _rdc
 	clc
 	adc     _gp_gen
 	sta     _gp_gen
-	jcc     L28C6
+	jcc     L28E5
 	inc     _gp_gen+1
 ;
 ; } else 
 ;
-	jmp     L28C6
+	jmp     L28E5
 ;
 ; SET_FROM_PTR (_en_t, gp_gen); gp_gen ++;
 ;
-L28BD:	tay
+L28DC:	tay
 	lda     (_gp_gen),y
 	sta     __en_t
 	lda     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L28CB
+	bcc     L28EA
 	inx
-L28CB:	sta     _gp_gen
+L28EA:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; en_alive [gpit] = 0;
@@ -14518,9 +14557,9 @@ L28CB:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L28D4
+	bcc     L28F3
 	inx
-L28D4:	sta     _gp_gen
+L28F3:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; _en_y1 = rda & 0xf0;
@@ -14546,9 +14585,9 @@ L28D4:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L28DD
+	bcc     L28FC
 	inx
-L28DD:	sta     _gp_gen
+L28FC:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; _en_y2 = rda & 0xf0;
@@ -14574,9 +14613,9 @@ L28DD:	sta     _gp_gen
 	ldx     _gp_gen+1
 	clc
 	adc     #$01
-	bcc     L28E6
+	bcc     L2905
 	inx
-L28E6:	sta     _gp_gen
+L2905:	sta     _gp_gen
 	stx     _gp_gen+1
 ;
 ; rdd = rda & 0xf0;  // Used for respawn speed!
@@ -14611,20 +14650,20 @@ L28E6:	sta     _gp_gen
 ; }
 ;
 	cmp     #$01
-	beq     L28F7
+	beq     L2916
 	cmp     #$02
-	beq     L28F7
+	beq     L2916
 	cmp     #$03
-	beq     L28F7
+	beq     L2916
 	cmp     #$04
-	beq     L28F7
+	beq     L2916
 	cmp     #$06
-	jeq     L2928
-	jmp     L28F5
+	jeq     L2947
+	jmp     L2914
 ;
 ; _en_ct = 0;   
 ;
-L28F7:	lda     #$00
+L2916:	lda     #$00
 	sta     __en_ct
 ;
 ; _en_s = (_en_t - 1) << 3;
@@ -14643,9 +14682,9 @@ L28F7:	lda     #$00
 	ldx     #>(_ep_mx)
 	clc
 	adc     _rdc
-	bcc     L2907
+	bcc     L2926
 	inx
-L2907:	ldy     #$00
+L2926:	ldy     #$00
 	jsr     ldaidx
 	sta     __en_mx
 ;
@@ -14655,16 +14694,16 @@ L2907:	ldy     #$00
 	ldx     #>(_ep_my)
 	clc
 	adc     _rdc
-	bcc     L290B
+	bcc     L292A
 	inx
-L290B:	jsr     ldaidx
+L292A:	jsr     ldaidx
 	sta     __en_my
 ;
 ; if (rdm == 1) {
 ;
 	lda     _rdm
 	cmp     #$01
-	bne     L290C
+	bne     L292B
 ;
 ; en_status [gpit] = 1; 
 ;
@@ -14672,21 +14711,21 @@ L290B:	jsr     ldaidx
 ;
 ; } else {
 ;
-	jmp     L2EE4
+	jmp     L2F03
 ;
 ; en_status [gpit] = 0;
 ;
-L290C:	ldy     _gpit
+L292B:	ldy     _gpit
 	lda     #$00
-L2EE4:	sta     _en_status,y
+L2F03:	sta     _en_status,y
 ;
 ; if (_en_x1 > _en_x2) { rda = _en_x1; _en_x1 = _en_x2; _en_x2 = rda; }
 ;
 	lda     __en_x1
 	sec
 	sbc     __en_x2
-	bcc     L2917
-	beq     L2917
+	bcc     L2936
+	beq     L2936
 	lda     __en_x1
 	sta     _rda
 	lda     __en_x2
@@ -14696,11 +14735,11 @@ L2EE4:	sta     _en_status,y
 ;
 ; if (_en_y1 > _en_y2) { rda = _en_y1; _en_y1 = _en_y2; _en_y2 = rda; }
 ;
-L2917:	lda     __en_y1
+L2936:	lda     __en_y1
 	sec
 	sbc     __en_y2
-	jcc     L28F5
-	jeq     L28F5
+	jcc     L2914
+	jeq     L2914
 	lda     __en_y1
 	sta     _rda
 	lda     __en_y2
@@ -14710,17 +14749,17 @@ L2917:	lda     __en_y1
 ;
 ; break;
 ;
-	jmp     L28F5
+	jmp     L2914
 ;
 ; enf_x [gpit] = _en_x << 6;
 ;
-L2928:	ldx     #$00
+L2947:	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2EE6
+	bcc     L2F05
 	inx
 	clc
-L2EE6:	adc     #<(_enf_x)
+L2F05:	adc     #<(_enf_x)
 	sta     ptr1
 	txa
 	adc     #>(_enf_x)
@@ -14740,10 +14779,10 @@ L2EE6:	adc     #<(_enf_x)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2EE7
+	bcc     L2F06
 	inx
 	clc
-L2EE7:	adc     #<(_enf_y)
+L2F06:	adc     #<(_enf_y)
 	sta     ptr1
 	txa
 	adc     #>(_enf_y)
@@ -14763,10 +14802,10 @@ L2EE7:	adc     #<(_enf_y)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2EE8
+	bcc     L2F07
 	inx
 	clc
-L2EE8:	adc     #<(_enf_vx)
+L2F07:	adc     #<(_enf_vx)
 	tay
 	txa
 	adc     #>(_enf_vx)
@@ -14776,10 +14815,10 @@ L2EE8:	adc     #<(_enf_vx)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2EE9
+	bcc     L2F08
 	inx
 	clc
-L2EE9:	adc     #<(_enf_vy)
+L2F08:	adc     #<(_enf_vy)
 	tay
 	txa
 	adc     #>(_enf_vy)
@@ -14799,7 +14838,7 @@ L2EE9:	adc     #<(_enf_vy)
 ;
 ; en_cttouched [gpit] = 0;
 ;
-L28F5:	ldy     _gpit
+L2914:	ldy     _gpit
 	lda     #$00
 	sta     _en_cttouched,y
 ;
@@ -14810,7 +14849,7 @@ L28F5:	ldy     _gpit
 ;
 ; ++ rdc;
 ;
-L28C6:	inc     _rdc
+L28E5:	inc     _rdc
 ;
 ; enems_update_unsigned_char_arrays ();
 ;
@@ -14821,7 +14860,7 @@ L28C6:	inc     _rdc
 	lda     _gpit
 	clc
 	adc     #$01
-	jmp     L2EEA
+	jmp     L2F09
 
 .endproc
 
@@ -14842,9 +14881,9 @@ L28C6:	inc     _rdc
 	ldx     #>(_en_flags)
 	clc
 	adc     _gpit
-	bcc     L2943
+	bcc     L2962
 	inx
-L2943:	sta     ptr1
+L2962:	sta     ptr1
 	stx     ptr1+1
 	ldy     #$00
 	lda     (ptr1),y
@@ -14857,10 +14896,10 @@ L2943:	sta     ptr1
 	lda     _en_offs
 	clc
 	adc     _gpit
-	bcc     L2EED
+	bcc     L2F0C
 	inx
 	clc
-L2EED:	adc     #<(_ep_dead)
+L2F0C:	adc     #<(_ep_dead)
 	sta     ptr1
 	txa
 	adc     #>(_ep_dead)
@@ -14893,11 +14932,11 @@ L2EED:	adc     #<(_ep_dead)
 ;
 	lda     __en_x
 	cmp     _prx
-	bcs     L294E
+	bcs     L296D
 	lda     #$00
-	jmp     L2950
-L294E:	lda     #$04
-L2950:	sta     __en_facing
+	jmp     L296F
+L296D:	lda     #$04
+L296F:	sta     __en_facing
 ;
 ; en_cttouched [gpit] = ENEMS_TOUCHED_FRAMES;
 ;
@@ -14940,27 +14979,27 @@ L2950:	sta     __en_facing
 	inc     _en_initial
 	lda     _en_initial
 	cmp     #$03
-	bcc     L295F
+	bcc     L297E
 	lda     #$00
 	sta     _en_initial
 ;
 ; gpit = en_initial;
 ;
-L295F:	lda     _en_initial
+L297E:	lda     _en_initial
 	sta     _gpit
 ;
 ; gpjt = 3; while (gpjt --) {
 ;
 	lda     #$03
 	sta     _gpjt
-L2967:	lda     _gpjt
+L2986:	lda     _gpjt
 	pha
 	sec
 	sbc     #$01
 	sta     _gpjt
 	pla
 	tax
-	bne     L2F23
+	bne     L2F42
 ;
 ; }
 ;
@@ -14968,12 +15007,12 @@ L2967:	lda     _gpjt
 ;
 ; gpit += 2; if (gpit > 2) gpit -=3;
 ;
-L2F23:	lda     #$02
+L2F42:	lda     #$02
 	clc
 	adc     _gpit
 	sta     _gpit
 	cmp     #$03
-	bcc     L296C
+	bcc     L298B
 	lda     _gpit
 	sec
 	sbc     #$03
@@ -14981,7 +15020,7 @@ L2F23:	lda     #$02
 ;
 ; __asm__ ("ldy %v", gpit);
 ;
-L296C:	ldy     _gpit
+L298B:	ldy     _gpit
 ;
 ; __asm__ ("lda %v, y", en_t);
 ;
@@ -15084,10 +15123,10 @@ L296C:	ldy     _gpit
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F0D
+	bcc     L2F2C
 	inx
 	clc
-L2F0D:	adc     #<(_enf_x)
+L2F2C:	adc     #<(_enf_x)
 	sta     ptr1
 	txa
 	adc     #>(_enf_x)
@@ -15101,10 +15140,10 @@ L2F0D:	adc     #<(_enf_x)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F0E
+	bcc     L2F2D
 	inx
 	clc
-L2F0E:	adc     #<(_enf_vx)
+L2F2D:	adc     #<(_enf_vx)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vx)
@@ -15121,10 +15160,10 @@ L2F0E:	adc     #<(_enf_vx)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F0F
+	bcc     L2F2E
 	inx
 	clc
-L2F0F:	adc     #<(_enf_y)
+L2F2E:	adc     #<(_enf_y)
 	sta     ptr1
 	txa
 	adc     #>(_enf_y)
@@ -15138,10 +15177,10 @@ L2F0F:	adc     #<(_enf_y)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F10
+	bcc     L2F2F
 	inx
 	clc
-L2F10:	adc     #<(_enf_vy)
+L2F2F:	adc     #<(_enf_vy)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vy)
@@ -15156,7 +15195,7 @@ L2F10:	adc     #<(_enf_vy)
 ; if (_en_t == 0) continue;
 ;
 	lda     __en_t
-	jeq     L2967
+	jeq     L2986
 ;
 ; en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
 ;
@@ -15175,7 +15214,7 @@ L2F10:	adc     #<(_enf_vy)
 ;
 	ldy     _gpit
 	lda     _en_cttouched,y
-	beq     L299E
+	beq     L29BD
 ;
 ; -- en_cttouched [gpit];
 ;
@@ -15183,9 +15222,9 @@ L2F10:	adc     #<(_enf_vy)
 	ldx     #>(_en_cttouched)
 	clc
 	adc     _gpit
-	bcc     L29A4
+	bcc     L29C3
 	inx
-L29A4:	sta     ptr1
+L29C3:	sta     ptr1
 	stx     ptr1+1
 	ldy     #$00
 	lda     (ptr1),y
@@ -15204,12 +15243,12 @@ L29A4:	sta     ptr1
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2F11
+	bcs     L2F30
 	sec
-L2F11:	sbc     #$10
-	bcs     L2F12
+L2F30:	sbc     #$10
+	bcs     L2F31
 	sec
-L2F12:	sbc     #$01
+L2F31:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -15244,12 +15283,12 @@ L2F12:	sbc     #$01
 ;
 ; } else
 ;
-	jmp     L2B77
+	jmp     L2B96
 ;
 ; if (en_is_alive) {
 ;
-L299E:	lda     _en_is_alive
-	jeq     L2B77
+L29BD:	lda     _en_is_alive
+	jeq     L2B96
 ;
 ; pregotten = (prx + 7 >= _en_x && prx <= _en_x + 15);
 ;
@@ -15257,53 +15296,53 @@ L299E:	lda     _en_is_alive
 	lda     _prx
 	clc
 	adc     #$07
-	bcc     L29B6
+	bcc     L29D5
 	inx
-L29B6:	cmp     __en_x
+L29D5:	cmp     __en_x
 	txa
 	sbc     #$00
-	bcc     L29B7
+	bcc     L29D6
 	lda     _prx
 	jsr     pusha0
 	lda     __en_x
 	clc
 	adc     #$0F
-	bcc     L29B8
+	bcc     L29D7
 	ldx     #$01
-L29B8:	jsr     tosicmp
-	bcc     L29B5
-	beq     L29B5
-L29B7:	lda     #$00
-	jmp     L29B9
-L29B5:	lda     #$01
-L29B9:	sta     _pregotten
+L29D7:	jsr     tosicmp
+	bcc     L29D4
+	beq     L29D4
+L29D6:	lda     #$00
+	jmp     L29D8
+L29D4:	lda     #$01
+L29D8:	sta     _pregotten
 ;
 ; en_fr = ((((_en_mx) ? _en_x : _en_y)+4) >> 3) & 1;
 ;
 	lda     __en_mx
-	beq     L29C0
+	beq     L29DF
 	lda     __en_x
-	jmp     L2F04
-L29C0:	lda     __en_y
-L2F04:	ldx     #$00
+	jmp     L2F23
+L29DF:	lda     __en_y
+L2F23:	ldx     #$00
 	clc
 	adc     #$04
-	bcc     L29C4
+	bcc     L29E3
 	inx
-L29C4:	jsr     shrax3
+L29E3:	jsr     shrax3
 	and     #$01
 	sta     _en_fr
 ;
 ; && _en_t != 4
 ;
 	lda     _res_on
-	beq     L29C5
+	beq     L29E4
 	lda     __en_t
 ;
 ; ) {
 ;
 	cmp     #$04
-	beq     L29C5
+	beq     L29E4
 ;
 ; en_spr = en_spr_id [gpit];
 ;
@@ -15313,38 +15352,38 @@ L29C4:	jsr     shrax3
 ;
 ; } else
 ;
-	jmp     L29CD
+	jmp     L29EC
 ;
 ; switch (_en_t & 63) {
 ;
-L29C5:	lda     __en_t
+L29E4:	lda     __en_t
 	and     #$3F
 ;
 ; }
 ;
 	cmp     #$01
-	beq     L29D8
+	beq     L29F7
 	cmp     #$02
-	beq     L29D8
+	beq     L29F7
 	cmp     #$03
-	beq     L29D8
+	beq     L29F7
 	cmp     #$04
-	beq     L29D8
+	beq     L29F7
 	cmp     #$06
-	jeq     L29FE
-	jmp     L29D0
+	jeq     L2A1D
+	jmp     L29EF
 ;
 ; if (!en_status [gpit] || half_life) {
 ;
-L29D8:	ldy     _gpit
+L29F7:	ldy     _gpit
 	lda     _en_status,y
-	beq     L29DA
+	beq     L29F9
 	lda     _half_life
-	beq     L29EA
+	beq     L2A09
 ;
 ; _en_x += _en_mx;
 ;
-L29DA:	lda     __en_mx
+L29F9:	lda     __en_mx
 	clc
 	adc     __en_x
 	sta     __en_x
@@ -15360,40 +15399,40 @@ L29DA:	lda     __en_mx
 ;
 	lda     __en_x1
 	cmp     __en_x
-	beq     L29E5
+	beq     L2A04
 	lda     __en_x2
 	cmp     __en_x
-	bne     L29E4
-L29E5:	ldx     #$00
+	bne     L2A03
+L2A04:	ldx     #$00
 	lda     __en_mx
-	bpl     L29E9
+	bpl     L2A08
 	dex
-L29E9:	jsr     negax
+L2A08:	jsr     negax
 	sta     __en_mx
 ;
 ; if (_en_y == _en_y1 || _en_y == _en_y2) _en_my = -_en_my;      
 ;
-L29E4:	lda     __en_y1
+L2A03:	lda     __en_y1
 	cmp     __en_y
-	beq     L29EB
+	beq     L2A0A
 	lda     __en_y2
 	cmp     __en_y
-	bne     L29EA
-L29EB:	ldx     #$00
+	bne     L2A09
+L2A0A:	ldx     #$00
 	lda     __en_my
-	bpl     L29EF
+	bpl     L2A0E
 	dex
-L29EF:	jsr     negax
+L2A0E:	jsr     negax
 	sta     __en_my
 ;
 ; rda = _en_mx ? (_en_mx < 0) : (_en_my < 0); enems_facing ();
 ;
-L29EA:	lda     __en_mx
-	beq     L29F2
+L2A09:	lda     __en_mx
+	beq     L2A11
 	lda     __en_mx
-	jmp     L2F20
-L29F2:	lda     __en_my
-L2F20:	asl     a
+	jmp     L2F3F
+L2A11:	lda     __en_my
+L2F3F:	asl     a
 	lda     #$00
 	rol     a
 	sta     _rda
@@ -15407,11 +15446,11 @@ L2F20:	asl     a
 ;
 ; break;
 ;
-	jmp     L2F22
+	jmp     L2F41
 ;
 ; rdx = _en_x; rdy = _en_y; rdt = distance ();
 ;
-L29FE:	lda     __en_x
+L2A1D:	lda     __en_x
 	sta     _rdx
 	lda     __en_y
 	sta     _rdy
@@ -15425,74 +15464,74 @@ L29FE:	lda     __en_x
 ;
 ; }
 ;
-	beq     L2A0B
+	beq     L2A2A
 	cmp     #$01
-	beq     L2A3D
-	jmp     L2A09
+	beq     L2A5C
+	jmp     L2A28
 ;
 ; _enf_vx = ADD_SIGN2 (_en_x1, _en_x, FANTY_V_RETREAT);
 ;
-L2A0B:	lda     __en_x
+L2A2A:	lda     __en_x
 	cmp     __en_x1
-	bne     L2A11
+	bne     L2A30
 	ldx     #$00
 	txa
-	jmp     L2A1D
-L2A11:	ldx     #$00
+	jmp     L2A3C
+L2A30:	ldx     #$00
 	lda     __en_x1
 	sec
 	sbc     __en_x
-	bcc     L2A1A
-	beq     L2A1A
+	bcc     L2A39
+	beq     L2A39
 	lda     #$10
-	jmp     L2A1D
-L2A1A:	dex
+	jmp     L2A3C
+L2A39:	dex
 	lda     #$F0
-L2A1D:	sta     __enf_vx
+L2A3C:	sta     __enf_vx
 	stx     __enf_vx+1
 ;
 ; _enf_vy = ADD_SIGN2 (_en_y1, _en_y, FANTY_V_RETREAT);
 ;
 	lda     __en_y
 	cmp     __en_y1
-	bne     L2A26
+	bne     L2A45
 	ldx     #$00
 	txa
-	jmp     L2A32
-L2A26:	ldx     #$00
+	jmp     L2A51
+L2A45:	ldx     #$00
 	lda     __en_y1
 	sec
 	sbc     __en_y
-	bcc     L2A2F
-	beq     L2A2F
+	bcc     L2A4E
+	beq     L2A4E
 	lda     #$10
-	jmp     L2A32
-L2A2F:	dex
+	jmp     L2A51
+L2A4E:	dex
 	lda     #$F0
-L2A32:	sta     __enf_vy
+L2A51:	sta     __enf_vy
 	stx     __enf_vy+1
 ;
 ; if (rdt < FANTY_DISTANCE) en_alive [gpit] = 1;
 ;
 	lda     _rdt
 	cmp     #$60
-	jcs     L2A09
+	jcs     L2A28
 	ldy     _gpit
 	lda     #$01
 ;
 ; break;
 ;
-	jmp     L2F07
+	jmp     L2F26
 ;
 ; if (px < _enf_x) {
 ;
-L2A3D:	lda     _px
+L2A5C:	lda     _px
 	cmp     __enf_x
 	lda     _px+1
 	sbc     __enf_x+1
-	bvc     L2F00
+	bvc     L2F1F
 	eor     #$80
-L2F00:	bpl     L2A3E
+L2F1F:	bpl     L2A5D
 ;
 ; _enf_vx -= FANTY_A; if (_enf_vx < -FANTY_MAXV) _enf_vx = -FANTY_MAXV;
 ;
@@ -15500,51 +15539,51 @@ L2F00:	bpl     L2A3E
 	sec
 	sbc     #$02
 	sta     __enf_vx
-	bcs     L2A42
+	bcs     L2A61
 	dec     __enf_vx+1
-L2A42:	lda     __enf_vx
+L2A61:	lda     __enf_vx
 	cmp     #$E0
 	lda     __enf_vx+1
 	sbc     #$FF
-	bvc     L2A45
+	bvc     L2A64
 	eor     #$80
-L2A45:	bpl     L2A4C
+L2A64:	bpl     L2A6B
 	ldx     #$FF
 	lda     #$E0
 ;
 ; } else {
 ;
-	jmp     L2F1E
+	jmp     L2F3D
 ;
 ; _enf_vx += FANTY_A; if (_enf_vx > FANTY_MAXV) _enf_vx = FANTY_MAXV;
 ;
-L2A3E:	lda     #$02
+L2A5D:	lda     #$02
 	clc
 	adc     __enf_vx
 	sta     __enf_vx
-	bcc     L2A4B
+	bcc     L2A6A
 	inc     __enf_vx+1
-L2A4B:	lda     __enf_vx
+L2A6A:	lda     __enf_vx
 	cmp     #$21
 	lda     __enf_vx+1
 	sbc     #$00
-	bvs     L2A4E
+	bvs     L2A6D
 	eor     #$80
-L2A4E:	bpl     L2A4C
+L2A6D:	bpl     L2A6B
 	ldx     #$00
 	lda     #$20
-L2F1E:	sta     __enf_vx
+L2F3D:	sta     __enf_vx
 	stx     __enf_vx+1
 ;
 ; if (py < _enf_y) {
 ;
-L2A4C:	lda     _py
+L2A6B:	lda     _py
 	cmp     __enf_y
 	lda     _py+1
 	sbc     __enf_y+1
-	bvc     L2F01
+	bvc     L2F20
 	eor     #$80
-L2F01:	bpl     L2A51
+L2F20:	bpl     L2A70
 ;
 ; _enf_vy -= FANTY_A; if (_enf_vy < -FANTY_MAXV) _enf_vy = -FANTY_MAXV;
 ;
@@ -15552,47 +15591,47 @@ L2F01:	bpl     L2A51
 	sec
 	sbc     #$02
 	sta     __enf_vy
-	bcs     L2A55
+	bcs     L2A74
 	dec     __enf_vy+1
-L2A55:	lda     __enf_vy
+L2A74:	lda     __enf_vy
 	cmp     #$E0
 	lda     __enf_vy+1
 	sbc     #$FF
-	bvc     L2A58
+	bvc     L2A77
 	eor     #$80
-L2A58:	bpl     L2A5F
+L2A77:	bpl     L2A7E
 	ldx     #$FF
 	lda     #$E0
 ;
 ; } else {
 ;
-	jmp     L2F1F
+	jmp     L2F3E
 ;
 ; _enf_vy += FANTY_A; if (_enf_vy > FANTY_MAXV) _enf_vy = FANTY_MAXV;
 ;
-L2A51:	lda     #$02
+L2A70:	lda     #$02
 	clc
 	adc     __enf_vy
 	sta     __enf_vy
-	bcc     L2A5E
+	bcc     L2A7D
 	inc     __enf_vy+1
-L2A5E:	lda     __enf_vy
+L2A7D:	lda     __enf_vy
 	cmp     #$21
 	lda     __enf_vy+1
 	sbc     #$00
-	bvs     L2A61
+	bvs     L2A80
 	eor     #$80
-L2A61:	bpl     L2A5F
+L2A80:	bpl     L2A7E
 	ldx     #$00
 	lda     #$20
-L2F1F:	sta     __enf_vy
+L2F3E:	sta     __enf_vy
 	stx     __enf_vy+1
 ;
 ; if (rdt > FANTY_DISTANCE) {
 ;
-L2A5F:	lda     _rdt
+L2A7E:	lda     _rdt
 	cmp     #$61
-	bcc     L2A09
+	bcc     L2A28
 ;
 ; _enf_x = _en_x << FIXBITS;
 ;
@@ -15616,11 +15655,11 @@ L2A5F:	lda     _rdt
 ;
 	ldy     _gpit
 	lda     #$00
-L2F07:	sta     _en_alive,y
+L2F26:	sta     _en_alive,y
 ;
 ; _enf_x += _enf_vx; 
 ;
-L2A09:	lda     __enf_vx
+L2A28:	lda     __enf_vx
 	clc
 	adc     __enf_x
 	sta     __enf_x
@@ -15632,20 +15671,20 @@ L2A09:	lda     __enf_vx
 ;
 	ldx     __enf_x+1
 	cpx     #$80
-	bcc     L2A70
+	bcc     L2A8F
 	lda     #$00
 	sta     __enf_x
 	sta     __enf_x+1
 ;
 ; if (_enf_x > 15360) _enf_x = 15360;
 ;
-L2A70:	lda     __enf_x
+L2A8F:	lda     __enf_x
 	cmp     #$01
 	lda     __enf_x+1
 	sbc     #$3C
-	bvs     L2A76
+	bvs     L2A95
 	eor     #$80
-L2A76:	bpl     L2A74
+L2A95:	bpl     L2A93
 	ldx     #$3C
 	lda     #$00
 	sta     __enf_x
@@ -15653,7 +15692,7 @@ L2A76:	bpl     L2A74
 ;
 ; _en_x = _enf_x >> 6;
 ;
-L2A74:	lda     __enf_x
+L2A93:	lda     __enf_x
 	ldx     __enf_x+1
 	jsr     asrax4
 	jsr     asrax2
@@ -15663,7 +15702,7 @@ L2A74:	lda     __enf_x
 ;
 	lda     __enf_vx
 	ora     __enf_vx+1
-	jeq     L2AA0
+	jeq     L2ABF
 ;
 ; cy1 = (_en_y + 4) >> 4;
 ;
@@ -15671,9 +15710,9 @@ L2A74:	lda     __enf_x
 	lda     __en_y
 	clc
 	adc     #$04
-	bcc     L2A80
+	bcc     L2A9F
 	inx
-L2A80:	jsr     shrax4
+L2A9F:	jsr     shrax4
 	sta     _cy1
 ;
 ; cy2 = (_en_y + 11) >> 4;
@@ -15682,9 +15721,9 @@ L2A80:	jsr     shrax4
 	lda     __en_y
 	clc
 	adc     #$0B
-	bcc     L2A84
+	bcc     L2AA3
 	inx
-L2A84:	jsr     shrax4
+L2AA3:	jsr     shrax4
 	sta     _cy2
 ;
 ; if (_enf_vx > 0) {
@@ -15693,9 +15732,9 @@ L2A84:	jsr     shrax4
 	cmp     #$01
 	lda     __enf_vx+1
 	sbc     #$00
-	bvs     L2A87
+	bvs     L2AA6
 	eor     #$80
-L2A87:	bpl     L2A85
+L2AA6:	bpl     L2AA4
 ;
 ; cx1 = cx2 = (_en_x + 11) >> 4;
 ;
@@ -15703,9 +15742,9 @@ L2A87:	bpl     L2A85
 	lda     __en_x
 	clc
 	adc     #$0B
-	bcc     L2A8C
+	bcc     L2AAB
 	inx
-L2A8C:	jsr     shrax4
+L2AAB:	jsr     shrax4
 	sta     _cx2
 	sta     _cx1
 ;
@@ -15715,25 +15754,25 @@ L2A8C:	jsr     shrax4
 	lda     _cx2
 	sec
 	sbc     #$01
-	bcs     L2A91
+	bcs     L2AB0
 	dex
-L2A91:	jsr     shlax4
+L2AB0:	jsr     shlax4
 	clc
 	adc     #$04
 ;
 ; } else {
 ;
-	jmp     L2F0A
+	jmp     L2F29
 ;
 ; cx1 = cx2 = (_en_x + 4) >> 4;
 ;
-L2A85:	ldx     #$00
+L2AA4:	ldx     #$00
 	lda     __en_x
 	clc
 	adc     #$04
-	bcc     L2A98
+	bcc     L2AB7
 	inx
-L2A98:	jsr     shrax4
+L2AB7:	jsr     shrax4
 	sta     _cx2
 	sta     _cx1
 ;
@@ -15743,12 +15782,12 @@ L2A98:	jsr     shrax4
 	lda     _cx1
 	clc
 	adc     #$01
-	bcc     L2A9D
+	bcc     L2ABC
 	inx
-L2A9D:	jsr     shlax4
+L2ABC:	jsr     shlax4
 	sec
 	sbc     #$04
-L2F0A:	sta     _rda
+L2F29:	sta     _rda
 ;
 ; cm_two_points ();
 ;
@@ -15758,14 +15797,14 @@ L2F0A:	sta     _rda
 ;
 	lda     _at1
 	cmp     #$02
-	bcs     L2AA1
+	bcs     L2AC0
 	lda     _at2
 	cmp     #$02
-	bcc     L2AA0
+	bcc     L2ABF
 ;
 ; _enf_vx = -_enf_vx;
 ;
-L2AA1:	lda     __enf_vx
+L2AC0:	lda     __enf_vx
 	ldx     __enf_vx+1
 	jsr     negax
 	sta     __enf_vx
@@ -15787,7 +15826,7 @@ L2AA1:	lda     __enf_vx
 ;
 ; _enf_y += _enf_vy; 
 ;
-L2AA0:	lda     __enf_vy
+L2ABF:	lda     __enf_vy
 	clc
 	adc     __enf_y
 	sta     __enf_y
@@ -15799,20 +15838,20 @@ L2AA0:	lda     __enf_vy
 ;
 	ldx     __enf_y+1
 	cpx     #$80
-	bcc     L2AAF
+	bcc     L2ACE
 	lda     #$00
 	sta     __enf_y
 	sta     __enf_y+1
 ;
 ; if (_enf_y > 11264) _enf_y = 11264;
 ;
-L2AAF:	lda     __enf_y
+L2ACE:	lda     __enf_y
 	cmp     #$01
 	lda     __enf_y+1
 	sbc     #$2C
-	bvs     L2AB5
+	bvs     L2AD4
 	eor     #$80
-L2AB5:	bpl     L2AB3
+L2AD4:	bpl     L2AD2
 	ldx     #$2C
 	lda     #$00
 	sta     __enf_y
@@ -15820,7 +15859,7 @@ L2AB5:	bpl     L2AB3
 ;
 ; _en_y = _enf_y >> 6;
 ;
-L2AB3:	lda     __enf_y
+L2AD2:	lda     __enf_y
 	ldx     __enf_y+1
 	jsr     asrax4
 	jsr     asrax2
@@ -15830,7 +15869,7 @@ L2AB3:	lda     __enf_y
 ;
 	lda     __enf_vy
 	ora     __enf_vy+1
-	jeq     L2ADF
+	jeq     L2AFE
 ;
 ; cx1 = (_en_x + 4) >> 4;
 ;
@@ -15838,9 +15877,9 @@ L2AB3:	lda     __enf_y
 	lda     __en_x
 	clc
 	adc     #$04
-	bcc     L2ABF
+	bcc     L2ADE
 	inx
-L2ABF:	jsr     shrax4
+L2ADE:	jsr     shrax4
 	sta     _cx1
 ;
 ; cx2 = (_en_x + 11) >> 4;
@@ -15849,9 +15888,9 @@ L2ABF:	jsr     shrax4
 	lda     __en_x
 	clc
 	adc     #$0B
-	bcc     L2AC3
+	bcc     L2AE2
 	inx
-L2AC3:	jsr     shrax4
+L2AE2:	jsr     shrax4
 	sta     _cx2
 ;
 ; if (_enf_vy > 0) { 
@@ -15860,9 +15899,9 @@ L2AC3:	jsr     shrax4
 	cmp     #$01
 	lda     __enf_vy+1
 	sbc     #$00
-	bvs     L2AC6
+	bvs     L2AE5
 	eor     #$80
-L2AC6:	bpl     L2AC4
+L2AE5:	bpl     L2AE3
 ;
 ; cy1 = cy2 = (_en_y + 11) >> 4;
 ;
@@ -15870,9 +15909,9 @@ L2AC6:	bpl     L2AC4
 	lda     __en_y
 	clc
 	adc     #$0B
-	bcc     L2ACB
+	bcc     L2AEA
 	inx
-L2ACB:	jsr     shrax4
+L2AEA:	jsr     shrax4
 	sta     _cy2
 	sta     _cy1
 ;
@@ -15882,25 +15921,25 @@ L2ACB:	jsr     shrax4
 	lda     _cy2
 	sec
 	sbc     #$01
-	bcs     L2AD0
+	bcs     L2AEF
 	dex
-L2AD0:	jsr     shlax4
+L2AEF:	jsr     shlax4
 	clc
 	adc     #$04
 ;
 ; } else {
 ;
-	jmp     L2F0B
+	jmp     L2F2A
 ;
 ; cy1 = cy2 = (_en_y + 4) >> 4;
 ;
-L2AC4:	ldx     #$00
+L2AE3:	ldx     #$00
 	lda     __en_y
 	clc
 	adc     #$04
-	bcc     L2AD7
+	bcc     L2AF6
 	inx
-L2AD7:	jsr     shrax4
+L2AF6:	jsr     shrax4
 	sta     _cy2
 	sta     _cy1
 ;
@@ -15910,12 +15949,12 @@ L2AD7:	jsr     shrax4
 	lda     _cy1
 	clc
 	adc     #$01
-	bcc     L2ADC
+	bcc     L2AFB
 	inx
-L2ADC:	jsr     shlax4
+L2AFB:	jsr     shlax4
 	sec
 	sbc     #$04
-L2F0B:	sta     _rda
+L2F2A:	sta     _rda
 ;
 ; cm_two_points ();
 ;
@@ -15925,14 +15964,14 @@ L2F0B:	sta     _rda
 ;
 	lda     _at1
 	cmp     #$02
-	bcs     L2AE0
+	bcs     L2AFF
 	lda     _at2
 	cmp     #$02
-	bcc     L2ADF
+	bcc     L2AFE
 ;
 ; _enf_vy = -_enf_vy;
 ;
-L2AE0:	lda     __enf_vy
+L2AFF:	lda     __enf_vy
 	ldx     __enf_vy+1
 	jsr     negax
 	sta     __enf_vy
@@ -15954,13 +15993,13 @@ L2AE0:	lda     __enf_vy
 ;
 ; cx1 = (_en_x + 8) >> 4;
 ;
-L2ADF:	ldx     #$00
+L2AFE:	ldx     #$00
 	lda     __en_x
 	clc
 	adc     #$08
-	bcc     L2AEF
+	bcc     L2B0E
 	inx
-L2AEF:	jsr     shrax4
+L2B0E:	jsr     shrax4
 	sta     _cx1
 ;
 ; cy1 = (_en_y + 8) >> 4;
@@ -15969,9 +16008,9 @@ L2AEF:	jsr     shrax4
 	lda     __en_y
 	clc
 	adc     #$08
-	bcc     L2AF3
+	bcc     L2B12
 	inx
-L2AF3:	jsr     shrax4
+L2B12:	jsr     shrax4
 	sta     _cy1
 ;
 ; cm_two_points ();
@@ -15982,7 +16021,7 @@ L2AF3:	jsr     shrax4
 ;
 	lda     _at1
 	and     #$01
-	beq     L2AF5
+	beq     L2B14
 ;
 ; en_cttouched [gpit] = 8;
 ;
@@ -15996,7 +16035,7 @@ L2AF3:	jsr     shrax4
 ;
 ; en_fr = (_en_x >> 3) & 1;
 ;
-L2AF5:	ldx     #$00
+L2B14:	ldx     #$00
 	lda     __en_x
 	jsr     asrax3
 	and     #$01
@@ -16015,33 +16054,33 @@ L2AF5:	ldx     #$00
 	lda     _en_fr
 	clc
 	adc     #$20
-L2F22:	bcc     L2F14
+L2F41:	bcc     L2F33
 	clc
-L2F14:	adc     __en_facing
+L2F33:	adc     __en_facing
 	sta     _en_spr
 ;
 ; en_spr_id [gpit] = en_spr;
 ;
-L29D0:	ldy     _gpit
+L29EF:	ldy     _gpit
 	lda     _en_spr
 	sta     _en_spr_id,y
 ;
 ; if (_en_t == 4 && pregotten && !pgotten && !pj) {
 ;
-L29CD:	lda     __en_t
+L29EC:	lda     __en_t
 	cmp     #$04
-	jne     L2B24
+	jne     L2B43
 	lda     _pregotten
-	jeq     L2B24
+	jeq     L2B43
 	lda     _pgotten
-	jne     L2B24
+	jne     L2B43
 	lda     _pj
-	jne     L2B24
+	jne     L2B43
 ;
 ; if (_en_mx) {
 ;
 	lda     __en_mx
-	beq     L2B10
+	beq     L2B2F
 ;
 ; if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
 ;
@@ -16049,149 +16088,36 @@ L29CD:	lda     __en_t
 	lda     _pry
 	clc
 	adc     #$10
-	bcc     L2B12
+	bcc     L2B31
 	inx
-L2B12:	cmp     __en_y
+L2B31:	cmp     __en_y
 	txa
 	sbc     #$00
-	bcc     L2B10
+	bcc     L2B2F
 	ldx     #$00
 	lda     _pry
 	clc
 	adc     #$0C
-	bcc     L2B14
+	bcc     L2B33
 	inx
-L2B14:	sec
+L2B33:	sec
 	sbc     __en_y
 	sta     tmp1
 	txa
 	sbc     #$00
 	ora     tmp1
-	bcc     L2B11
-	bne     L2B10
+	bcc     L2B30
+	bne     L2B2F
 ;
 ; pgotten = 1;
 ;
-L2B11:	lda     #$01
+L2B30:	lda     #$01
 	sta     _pgotten
 ;
 ; pgtmx = _en_mx << (6 - en_status [gpit]);
 ;
 	ldx     #$00
 	lda     __en_mx
-	bpl     L2B1A
-	dex
-L2B1A:	jsr     pushax
-	lda     #$06
-	jsr     pusha0
-	ldy     _gpit
-	lda     _en_status,y
-	jsr     tossuba0
-	jsr     tosaslax
-	sta     _pgtmx
-	stx     _pgtmx+1
-;
-; py = (_en_y - 16) << 6; pry = py >> 6;
-;
-	ldx     #$00
-	lda     __en_y
-	sec
-	sbc     #$10
-	bcs     L2B21
-	dex
-L2B21:	jsr     shlax4
-	jsr     shlax2
-	sta     _py
-	stx     _py+1
-	jsr     asrax4
-	jsr     asrax2
-	sta     _pry
-;
-; (_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
-;
-L2B10:	lda     __en_my
-	asl     a
-	bcc     L2F02
-	ldx     #$00
-	lda     _pry
-	clc
-	adc     #$11
-	bcc     L2B29
-	inx
-L2B29:	cmp     __en_y
-	txa
-	sbc     #$00
-	bcc     L2F02
-	ldx     #$00
-	lda     _pry
-	clc
-	adc     #$0C
-	bcc     L2B2A
-	inx
-L2B2A:	sec
-	sbc     __en_y
-	sta     tmp1
-	txa
-	sbc     #$00
-	ora     tmp1
-	bcc     L2B25
-	beq     L2B25
-;
-; (_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
-;
-L2F02:	lda     __en_my
-	sec
-	sbc     #$01
-	bvs     L2B2E
-	eor     #$80
-L2B2E:	jpl     L2B24
-	ldx     #$00
-	lda     _pry
-	clc
-	adc     #$10
-	bcc     L2B30
-	inx
-L2B30:	sta     ptr1
-	stx     ptr1+1
-	ldx     #$00
-	lda     __en_my
-	bpl     L2B31
-	dex
-L2B31:	clc
-	adc     ptr1
-	pha
-	txa
-	adc     ptr1+1
-	tax
-	pla
-	cmp     __en_y
-	txa
-	sbc     #$00
-	bcc     L2B24
-	ldx     #$00
-	lda     _pry
-	clc
-	adc     #$0C
-	bcc     L2B32
-	inx
-L2B32:	sec
-	sbc     __en_y
-	sta     tmp1
-	txa
-	sbc     #$00
-	ora     tmp1
-	bcc     L2B25
-	bne     L2B24
-;
-; pgotten = 1;
-;
-L2B25:	lda     #$01
-	sta     _pgotten
-;
-; pgtmy = _en_my << (6 - en_status [gpit]);
-;
-	ldx     #$00
-	lda     __en_my
 	bpl     L2B39
 	dex
 L2B39:	jsr     pushax
@@ -16201,8 +16127,8 @@ L2B39:	jsr     pushax
 	lda     _en_status,y
 	jsr     tossuba0
 	jsr     tosaslax
-	sta     _pgtmy
-	stx     _pgtmy+1
+	sta     _pgtmx
+	stx     _pgtmx+1
 ;
 ; py = (_en_y - 16) << 6; pry = py >> 6;
 ;
@@ -16220,6 +16146,119 @@ L2B40:	jsr     shlax4
 	jsr     asrax2
 	sta     _pry
 ;
+; (_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
+;
+L2B2F:	lda     __en_my
+	asl     a
+	bcc     L2F21
+	ldx     #$00
+	lda     _pry
+	clc
+	adc     #$11
+	bcc     L2B48
+	inx
+L2B48:	cmp     __en_y
+	txa
+	sbc     #$00
+	bcc     L2F21
+	ldx     #$00
+	lda     _pry
+	clc
+	adc     #$0C
+	bcc     L2B49
+	inx
+L2B49:	sec
+	sbc     __en_y
+	sta     tmp1
+	txa
+	sbc     #$00
+	ora     tmp1
+	bcc     L2B44
+	beq     L2B44
+;
+; (_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
+;
+L2F21:	lda     __en_my
+	sec
+	sbc     #$01
+	bvs     L2B4D
+	eor     #$80
+L2B4D:	jpl     L2B43
+	ldx     #$00
+	lda     _pry
+	clc
+	adc     #$10
+	bcc     L2B4F
+	inx
+L2B4F:	sta     ptr1
+	stx     ptr1+1
+	ldx     #$00
+	lda     __en_my
+	bpl     L2B50
+	dex
+L2B50:	clc
+	adc     ptr1
+	pha
+	txa
+	adc     ptr1+1
+	tax
+	pla
+	cmp     __en_y
+	txa
+	sbc     #$00
+	bcc     L2B43
+	ldx     #$00
+	lda     _pry
+	clc
+	adc     #$0C
+	bcc     L2B51
+	inx
+L2B51:	sec
+	sbc     __en_y
+	sta     tmp1
+	txa
+	sbc     #$00
+	ora     tmp1
+	bcc     L2B44
+	bne     L2B43
+;
+; pgotten = 1;
+;
+L2B44:	lda     #$01
+	sta     _pgotten
+;
+; pgtmy = _en_my << (6 - en_status [gpit]);
+;
+	ldx     #$00
+	lda     __en_my
+	bpl     L2B58
+	dex
+L2B58:	jsr     pushax
+	lda     #$06
+	jsr     pusha0
+	ldy     _gpit
+	lda     _en_status,y
+	jsr     tossuba0
+	jsr     tosaslax
+	sta     _pgtmy
+	stx     _pgtmy+1
+;
+; py = (_en_y - 16) << 6; pry = py >> 6;
+;
+	ldx     #$00
+	lda     __en_y
+	sec
+	sbc     #$10
+	bcs     L2B5F
+	dex
+L2B5F:	jsr     shlax4
+	jsr     shlax2
+	sta     _py
+	stx     _py+1
+	jsr     asrax4
+	jsr     asrax2
+	sta     _pry
+;
 ; pvy = 0;
 ;
 	lda     #$00
@@ -16228,39 +16267,39 @@ L2B40:	jsr     shlax4
 ;
 ; en_is_alive == 0 // General condition.
 ;
-L2B24:	lda     _en_is_alive
+L2B43:	lda     _en_is_alive
 ;
 ; || _en_t == 4
 ;
-	jeq     L2B77
+	jeq     L2B96
 	lda     __en_t
 ;
 ; ) goto skipdo;
 ;
 	cmp     #$04
-	jeq     L2B77
+	jeq     L2B96
 ;
 ; pregotten && 
 ;
 	lda     _pregotten
-	jeq     L2B49
+	jeq     L2B68
 ;
 ; pry < _en_y && 
 ;
 	ldx     #$00
 	lda     _pry
 	cmp     __en_y
-	jcs     L2B49
+	jcs     L2B68
 ;
 ; pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 ;
 	lda     _pry
 	clc
 	adc     #$0F
-	bcc     L2F15
+	bcc     L2F34
 	inx
 	clc
-L2F15:	adc     #$FE
+L2F34:	adc     #$FE
 	pha
 	txa
 	adc     #$FF
@@ -16269,17 +16308,17 @@ L2F15:	adc     #$FE
 	cmp     __en_y
 	txa
 	sbc     #$00
-	jcc     L2B49
+	jcc     L2B68
 ;
 ; pgotten == 0 && ppossee == 0
 ;
 	lda     _pgotten
-	jne     L2B49
+	jne     L2B68
 	lda     _ppossee
 ;
 ; && pvy > PLAYER_VY_FALLING_MIN
 ;
-	jne     L2B49
+	jne     L2B68
 	lda     _pvy
 ;
 ; ) {
@@ -16293,38 +16332,38 @@ L2F15:	adc     #$FE
 ; ) {
 ;
 	sbc     #$00
-	bvs     L2B4D
+	bvs     L2B6C
 	eor     #$80
-L2B4D:	bpl     L2B49
+L2B6C:	bpl     L2B68
 ;
 ; if (res_on || res_disable)
 ;
 	lda     _res_on
-	bne     L2B50
+	bne     L2B6F
 	lda     _res_disable
-	beq     L2B4F
+	beq     L2B6E
 ;
 ; enems_hit ();
 ;
-L2B50:	jsr     _enems_hit
+L2B6F:	jsr     _enems_hit
 ;
 ; if (_en_my < 0) _en_my = -_en_my;
 ;
-L2B4F:	lda     __en_my
+L2B6E:	lda     __en_my
 	asl     a
-	bcc     L2B53
+	bcc     L2B72
 	ldx     #$00
 	lda     __en_my
-	bpl     L2B58
+	bpl     L2B77
 	dex
-L2B58:	jsr     negax
+L2B77:	jsr     negax
 	sta     __en_my
 ;
 ; if (i & PAD_A) {
 ;
-L2B53:	lda     _i
+L2B72:	lda     _i
 	and     #$01
-	beq     L2B59
+	beq     L2B78
 ;
 ; jump_start ();
 ;
@@ -16332,18 +16371,18 @@ L2B53:	lda     _i
 ;
 ; } else 
 ;
-	jmp     L2B5C
+	jmp     L2B7B
 ;
 ; pvy = -PLAYER_VY_JUMP_INITIAL << 1;
 ;
-L2B59:	ldx     #$FF
+L2B78:	ldx     #$FF
 	lda     #$80
 	sta     _pvy
 	stx     _pvy+1
 ;
 ; sfx_play (SFX_STEPON, 1);
 ;
-L2B5C:	lda     #$0F
+L2B7B:	lda     #$0F
 	jsr     pusha
 	lda     #$01
 	jsr     _sfx_play
@@ -16355,11 +16394,11 @@ L2B5C:	lda     #$0F
 	lda     __en_y
 	sec
 	sbc     #$0C
-	bcs     L2B64
+	bcs     L2B83
 	ldx     #$FF
-L2B64:	jsr     tosicmp
-	bcc     L2B62
-	beq     L2B62
+L2B83:	jsr     tosicmp
+	bcc     L2B81
+	beq     L2B81
 	lda     __en_y
 	sec
 	sbc     #$0C
@@ -16373,27 +16412,27 @@ L2B64:	jsr     tosicmp
 ;
 ; touched = 1;
 ;
-L2B62:	lda     #$01
+L2B81:	lda     #$01
 ;
 ; } else
 ;
-	jmp     L2F0C
+	jmp     L2F2B
 ;
 ; touched == 0 &&
 ;
-L2B49:	lda     _touched
-	bne     L2B77
+L2B68:	lda     _touched
+	bne     L2B96
 ;
 ; pstate == EST_NORMAL &&
 ;
 	lda     _pstate
-	bne     L2B77
+	bne     L2B96
 ;
 ; ) {
 ;
 	jsr     _collide
 	tax
-	beq     L2B77
+	beq     L2B96
 ;
 ; res_on == 0 
 ;
@@ -16401,7 +16440,7 @@ L2B49:	lda     _touched
 ;
 ; )
 ;
-	bne     L2B77
+	bne     L2B96
 ;
 ; pkill = 1;
 ;
@@ -16410,13 +16449,13 @@ L2B49:	lda     _touched
 ;
 ; touched = 1;
 ;
-L2F0C:	sta     _touched
+L2F2B:	sta     _touched
 ;
 ; if (en_spr != 0xff) {
 ;
-L2B77:	lda     _en_spr
+L2B96:	lda     _en_spr
 	cmp     #$FF
-	beq     L2B79
+	beq     L2B98
 ;
 ; _en_x, _en_y + SPRITE_ADJUST, 
 ;
@@ -16429,12 +16468,12 @@ L2B77:	lda     _en_spr
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2F16
+	bcs     L2F35
 	sec
-L2F16:	sbc     #$10
-	bcs     L2F17
+L2F35:	sbc     #$10
+	bcs     L2F36
 	sec
-L2F17:	sbc     #$01
+L2F36:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -16449,10 +16488,10 @@ L2F17:	sbc     #$01
 	ldx     #$00
 	lda     _en_spr
 	asl     a
-	bcc     L2F18
+	bcc     L2F37
 	inx
 	clc
-L2F18:	adc     _spr_enems
+L2F37:	adc     _spr_enems
 ;
 ; );
 ;
@@ -16476,17 +16515,17 @@ L2F18:	adc     _spr_enems
 ;
 ; enems_update_unsigned_char_arrays ();
 ;
-L2B79:	jsr     _enems_update_unsigned_char_arrays
+L2B98:	jsr     _enems_update_unsigned_char_arrays
 ;
 ; enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
 ;
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F19
+	bcc     L2F38
 	inx
 	clc
-L2F19:	adc     #<(_enf_x)
+L2F38:	adc     #<(_enf_x)
 	sta     ptr1
 	txa
 	adc     #>(_enf_x)
@@ -16500,10 +16539,10 @@ L2F19:	adc     #<(_enf_x)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F1A
+	bcc     L2F39
 	inx
 	clc
-L2F1A:	adc     #<(_enf_vx)
+L2F39:	adc     #<(_enf_vx)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vx)
@@ -16520,10 +16559,10 @@ L2F1A:	adc     #<(_enf_vx)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F1B
+	bcc     L2F3A
 	inx
 	clc
-L2F1B:	adc     #<(_enf_y)
+L2F3A:	adc     #<(_enf_y)
 	sta     ptr1
 	txa
 	adc     #>(_enf_y)
@@ -16537,10 +16576,10 @@ L2F1B:	adc     #<(_enf_y)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2F1C
+	bcc     L2F3B
 	inx
 	clc
-L2F1C:	adc     #<(_enf_vy)
+L2F3B:	adc     #<(_enf_vy)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vy)
@@ -16554,7 +16593,7 @@ L2F1C:	adc     #<(_enf_vy)
 ;
 ; } 
 ;
-	jmp     L2967
+	jmp     L2986
 
 .endproc
 
@@ -16595,7 +16634,7 @@ L2F1C:	adc     #<(_enf_vy)
 ;
 	lda     _pkilled
 	cmp     _okilled
-	beq     L2B98
+	beq     L2BB7
 ;
 ; okilled = pkilled;
 ;
@@ -16616,9 +16655,9 @@ L2F1C:	adc     #<(_enf_vy)
 ;
 ; if (okeys != pkeys) {
 ;
-L2B98:	lda     _pkeys
+L2BB7:	lda     _pkeys
 	cmp     _okeys
-	beq     L2BA3
+	beq     L2BC2
 ;
 ; okeys = pkeys;
 ;
@@ -16637,9 +16676,9 @@ L2B98:	lda     _pkeys
 ;
 ; if (olife != plife) {
 ;
-L2BA3:	lda     _plife
+L2BC2:	lda     _plife
 	cmp     _olife
-	beq     L2BAE
+	beq     L2BCD
 ;
 ; olife = plife;
 ;
@@ -16657,7 +16696,7 @@ L2BA3:	lda     _plife
 ;
 ; }
 ;
-L2BAE:	rts
+L2BCD:	rts
 
 .endproc
 
@@ -16683,10 +16722,10 @@ L2BAE:	rts
 ;
 ; while (pad_poll (0));
 ;
-L2BBD:	lda     #$00
+L2BDC:	lda     #$00
 	jsr     _pad_poll
 	tax
-	bne     L2BBD
+	bne     L2BDC
 ;
 ; fade_delay = 4;
 ;
@@ -16767,13 +16806,13 @@ L2BBD:	lda     #$00
 ;
 ; pad_read ();
 ;
-L2BD0:	jsr     _pad_read
+L2BEF:	jsr     _pad_read
 ;
 ; if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;
 ;
 	lda     _pad_this_frame
 	and     #$0B
-	beq     L2BD0
+	beq     L2BEF
 ;
 ; bat_out ();
 ;
@@ -16864,7 +16903,7 @@ L2BD0:	jsr     _pad_read
 ;
 ; oam_meta_spr (84, 170 + (mode_no_resonators << 4), 0, sspl_00_a);
 ;
-L2BF6:	jsr     decsp3
+L2C15:	jsr     decsp3
 	lda     #$54
 	ldy     #$02
 	sta     (sp),y
@@ -16899,37 +16938,37 @@ L2BF6:	jsr     decsp3
 ;
 	lda     _pad_this_frame
 	and     #$24
-	beq     L2C08
+	beq     L2C27
 ;
 ; ++ mode_no_resonators; if (mode_no_resonators == 2) mode_no_resonators = 0;
 ;
 	inc     _mode_no_resonators
 	lda     _mode_no_resonators
 	cmp     #$02
-	bne     L2C08
+	bne     L2C27
 	lda     #$00
 	sta     _mode_no_resonators
 ;
 ; if (pad_this_frame & PAD_UP) {
 ;
-L2C08:	lda     _pad_this_frame
+L2C27:	lda     _pad_this_frame
 	and     #$10
-	beq     L2C11
+	beq     L2C30
 ;
 ; if (mode_no_resonators) -- mode_no_resonators; else mode_no_resonators = 1;
 ;
 	lda     _mode_no_resonators
-	beq     L2C0E
+	beq     L2C2D
 	dec     _mode_no_resonators
-	jmp     L2C11
-L2C0E:	lda     #$01
+	jmp     L2C30
+L2C2D:	lda     #$01
 	sta     _mode_no_resonators
 ;
 ; if (mode_no_resonators != rda) sfx_play (SFX_USE, 0);
 ;
-L2C11:	lda     _rda
+L2C30:	lda     _rda
 	cmp     _mode_no_resonators
-	beq     L2C14
+	beq     L2C33
 	lda     #$03
 	jsr     pusha
 	lda     #$00
@@ -16937,9 +16976,9 @@ L2C11:	lda     _rda
 ;
 ; if (pad_this_frame & PAD_START) break;
 ;
-L2C14:	lda     _pad_this_frame
+L2C33:	lda     _pad_this_frame
 	and     #$08
-	beq     L2BF6
+	beq     L2C15
 ;
 ; sfx_play (SFX_START, 0); delay (20);
 ;
@@ -16952,11 +16991,11 @@ L2C14:	lda     _pad_this_frame
 ; plife = mode_no_resonators ? 5 : 3;
 ;
 	lda     _mode_no_resonators
-	beq     L2C22
+	beq     L2C41
 	lda     #$05
-	jmp     L2C24
-L2C22:	lda     #$03
-L2C24:	sta     _plife
+	jmp     L2C43
+L2C41:	lda     #$03
+L2C43:	sta     _plife
 ;
 ; bat_out ();
 ;
@@ -17073,10 +17112,10 @@ L2C24:	sta     _plife
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F29
+	bcc     L2F48
 	inx
 	clc
-L2F29:	adc     #<(_levelnames)
+L2F48:	adc     #<(_levelnames)
 	sta     ptr1
 	txa
 	adc     #>(_levelnames)
@@ -17171,17 +17210,17 @@ L2F29:	adc     #<(_levelnames)
 ;
 ; while (!(pad_poll (0) & PAD_START) && rds16 < 300) {
 ;
-L2C70:	lda     #$00
+L2C8F:	lda     #$00
 	jsr     _pad_poll
 	and     #$08
-	bne     L2C71
+	bne     L2C90
 	lda     _rds16
 	cmp     #$2C
 	lda     _rds16+1
 	sbc     #$01
-	bvc     L2C76
+	bvc     L2C95
 	eor     #$80
-L2C76:	bpl     L2C71
+L2C95:	bpl     L2C90
 ;
 ; oam_meta_spr (102, rdy, 0, logo_00);
 ;
@@ -17203,7 +17242,7 @@ L2C76:	bpl     L2C71
 ;
 	lda     _rdy
 	cmp     #$71
-	bcc     L2C7D
+	bcc     L2C9C
 	lda     _rdy
 	sec
 	sbc     #$01
@@ -17211,7 +17250,7 @@ L2C76:	bpl     L2C71
 ;
 ; ppu_waitnmi ();
 ;
-L2C7D:	jsr     _ppu_waitnmi
+L2C9C:	jsr     _ppu_waitnmi
 ;
 ; rds16 ++;
 ;
@@ -17219,18 +17258,18 @@ L2C7D:	jsr     _ppu_waitnmi
 	ldx     _rds16+1
 	clc
 	adc     #$01
-	bcc     L2C82
+	bcc     L2CA1
 	inx
-L2C82:	sta     _rds16
+L2CA1:	sta     _rds16
 	stx     _rds16+1
 ;
 ; };
 ;
-	jmp     L2C70
+	jmp     L2C8F
 ;
 ; fade_out ();
 ;
-L2C71:	jsr     _fade_out
+L2C90:	jsr     _fade_out
 ;
 ; ppu_off ();
 ;
@@ -17269,10 +17308,10 @@ L2C71:	jsr     _fade_out
 	tax
 	lda     _level
 	asl     a
-	bcc     L2F34
+	bcc     L2F53
 	inx
 	clc
-L2F34:	adc     #<(_l_pal_bg)
+L2F53:	adc     #<(_l_pal_bg)
 	sta     ptr1
 	txa
 	adc     #>(_l_pal_bg)
@@ -17289,10 +17328,10 @@ L2F34:	adc     #<(_l_pal_bg)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F35
+	bcc     L2F54
 	inx
 	clc
-L2F35:	adc     #<(_l_pal_fg)
+L2F54:	adc     #<(_l_pal_fg)
 	sta     ptr1
 	txa
 	adc     #>(_l_pal_fg)
@@ -17309,10 +17348,10 @@ L2F35:	adc     #<(_l_pal_fg)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F36
+	bcc     L2F55
 	inx
 	clc
-L2F36:	adc     #<(_l_ts_tmaps)
+L2F55:	adc     #<(_l_ts_tmaps)
 	sta     ptr1
 	txa
 	adc     #>(_l_ts_tmaps)
@@ -17329,10 +17368,10 @@ L2F36:	adc     #<(_l_ts_tmaps)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F37
+	bcc     L2F56
 	inx
 	clc
-L2F37:	adc     #<(_l_ts_pals)
+L2F56:	adc     #<(_l_ts_pals)
 	sta     ptr1
 	txa
 	adc     #>(_l_ts_pals)
@@ -17349,10 +17388,10 @@ L2F37:	adc     #<(_l_ts_pals)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F38
+	bcc     L2F57
 	inx
 	clc
-L2F38:	adc     #<(_l_behs)
+L2F57:	adc     #<(_l_behs)
 	sta     ptr1
 	txa
 	adc     #>(_l_behs)
@@ -17369,10 +17408,10 @@ L2F38:	adc     #<(_l_behs)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F39
+	bcc     L2F58
 	inx
 	clc
-L2F39:	adc     #<(_l_spr_enems)
+L2F58:	adc     #<(_l_spr_enems)
 	sta     ptr1
 	txa
 	adc     #>(_l_spr_enems)
@@ -17389,10 +17428,10 @@ L2F39:	adc     #<(_l_spr_enems)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F3A
+	bcc     L2F59
 	inx
 	clc
-L2F3A:	adc     #<(_l_map)
+L2F59:	adc     #<(_l_map)
 	sta     ptr1
 	txa
 	adc     #>(_l_map)
@@ -17415,10 +17454,10 @@ L2F3A:	adc     #<(_l_map)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F3B
+	bcc     L2F5A
 	inx
 	clc
-L2F3B:	adc     #<(_l_locks)
+L2F5A:	adc     #<(_l_locks)
 	sta     ptr1
 	txa
 	adc     #>(_l_locks)
@@ -17441,10 +17480,10 @@ L2F3B:	adc     #<(_l_locks)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F3C
+	bcc     L2F5B
 	inx
 	clc
-L2F3C:	adc     #<(_l_enems)
+L2F5B:	adc     #<(_l_enems)
 	sta     ptr1
 	txa
 	adc     #>(_l_enems)
@@ -17461,10 +17500,10 @@ L2F3C:	adc     #<(_l_enems)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L2F3D
+	bcc     L2F5C
 	inx
 	clc
-L2F3D:	adc     #<(_l_hotspots)
+L2F5C:	adc     #<(_l_hotspots)
 	sta     ptr1
 	txa
 	adc     #>(_l_hotspots)
@@ -17542,9 +17581,9 @@ L2F3D:	adc     #<(_l_hotspots)
 	jsr     aslax4
 	clc
 	adc     #$04
-	bcc     L2CD1
+	bcc     L2CF0
 	inx
-L2CD1:	jsr     aslax4
+L2CF0:	jsr     aslax4
 	jsr     aslax2
 	sta     _px
 	stx     _px+1
@@ -17640,15 +17679,15 @@ L2CD1:	jsr     aslax4
 ; if (!ft) fade_out (); else ft = 0;
 ;
 	lda     _ft
-	bne     L2CF4
+	bne     L2D13
 	jsr     _fade_out
-	jmp     L2CF7
-L2CF4:	lda     #$00
+	jmp     L2D16
+L2D13:	lda     #$00
 	sta     _ft
 ;
 ; ppu_off ();
 ;
-L2CF7:	jsr     _ppu_off
+L2D16:	jsr     _ppu_off
 ;
 ; enems_persistent_update ();
 ;
@@ -17683,7 +17722,7 @@ L2CF7:	jsr     _ppu_off
 ; if (mode_no_resonators) {
 ;
 	lda     _mode_no_resonators
-	beq     L2D09
+	beq     L2D28
 ;
 ; res_disable = 1;
 ;
@@ -17694,39 +17733,39 @@ L2CF7:	jsr     _ppu_off
 ;
 	lda     _hrt
 	cmp     #$04
-	bne     L2D09
+	bne     L2D28
 	lda     #$00
 	sta     _hrt
 ;
 ; gpit = 3; while (gpit --) en_spr_id [gpit] = en_s [gpit];
 ;
-L2D09:	lda     #$03
+L2D28:	lda     #$03
 	sta     _gpit
-L2D0F:	lda     _gpit
+L2D2E:	lda     _gpit
 	pha
 	sec
 	sbc     #$01
 	sta     _gpit
 	pla
 	tax
-	beq     L2D10
+	beq     L2D2F
 	lda     #<(_en_spr_id)
 	ldx     #>(_en_spr_id)
 	clc
 	adc     _gpit
-	bcc     L2D14
+	bcc     L2D33
 	inx
-L2D14:	sta     ptr1
+L2D33:	sta     ptr1
 	stx     ptr1+1
 	ldy     _gpit
 	lda     _en_s,y
 	ldy     #$00
 	sta     (ptr1),y
-	jmp     L2D0F
+	jmp     L2D2E
 ;
 ; oam_index = 4;
 ;
-L2D10:	lda     #$04
+L2D2F:	lda     #$04
 	sta     _oam_index
 ;
 ; prx = px >> FIXBITS; pry = py >> FIXBITS;
@@ -17757,12 +17796,12 @@ L2D10:	lda     #$04
 ; if (hrt) hotspots_paint ();
 ;
 	lda     _hrt
-	beq     L2D21
+	beq     L2D40
 	jsr     _hotspots_paint
 ;
 ; oam_hide_rest (oam_index);
 ;
-L2D21:	lda     _oam_index
+L2D40:	lda     _oam_index
 	jsr     _oam_hide_rest
 ;
 ; hud_update ();
@@ -17843,9 +17882,9 @@ L2D21:	lda     _oam_index
 ;
 ; if (on_pant != n_pant) {
 ;
-L2D42:	lda     _n_pant
+L2D61:	lda     _n_pant
 	cmp     _on_pant
-	beq     L2D45
+	beq     L2D64
 ;
 ; prepare_scr ();
 ;
@@ -17858,7 +17897,7 @@ L2D42:	lda     _n_pant
 ;
 ; hud_update ();
 ;
-L2D45:	jsr     _hud_update
+L2D64:	jsr     _hud_update
 ;
 ; oam_hide_rest (oam_index);
 ;
@@ -17868,7 +17907,7 @@ L2D45:	jsr     _hud_update
 ; if (shaker_ct) {
 ;
 	lda     _shaker_ct
-	beq     L2D57
+	beq     L2D76
 ;
 ; -- shaker_ct;
 ;
@@ -17881,29 +17920,29 @@ L2D45:	jsr     _hud_update
 	and     #$03
 	clc
 	adc     #$FE
-	bcc     L2D53
+	bcc     L2D72
 	inx
-L2D53:	jsr     pushax
+L2D72:	jsr     pushax
 	jsr     _rand8
 	ldx     #$00
 	and     #$03
 	clc
 	adc     #$0A
-	bcc     L2D56
+	bcc     L2D75
 	inx
-L2D56:	jsr     _scroll
+L2D75:	jsr     _scroll
 ;
 ; if (shaker_ct == 0) scroll (0, SCROLL_Y);
 ;
 	lda     _shaker_ct
-	bne     L2D57
+	bne     L2D76
 	jsr     push0
 	lda     #$0C
 	jsr     _scroll
 ;
 ; ppu_waitnmi ();
 ;
-L2D57:	jsr     _ppu_waitnmi
+L2D76:	jsr     _ppu_waitnmi
 ;
 ; clear_update_list ();
 ;
@@ -17933,20 +17972,20 @@ L2D57:	jsr     _ppu_waitnmi
 ; if (paused == 0) {
 ;
 	lda     _paused
-	jne     L2D67
+	jne     L2D86
 ;
 ; if (ticker) -- ticker; else ticker = 50;
 ;
 	lda     _ticker
-	beq     L2D69
+	beq     L2D88
 	dec     _ticker
-	jmp     L2D6C
-L2D69:	lda     #$32
+	jmp     L2D8B
+L2D88:	lda     #$32
 	sta     _ticker
 ;
 ; half_life ^= 1;
 ;
-L2D6C:	lda     _half_life
+L2D8B:	lda     _half_life
 	eor     #$01
 	sta     _half_life
 ;
@@ -17958,15 +17997,15 @@ L2D6C:	lda     _half_life
 ;
 	lda     _prx
 	cmp     #$04
-	bne     L2D72
+	bne     L2D91
 ;
 ; (cfx + pvx) < 0
 ;
 	ldx     #$00
 	lda     _cfx
-	bpl     L2D76
+	bpl     L2D95
 	dex
-L2D76:	clc
+L2D95:	clc
 	adc     _pvx
 	txa
 	adc     _pvx+1
@@ -17975,7 +18014,7 @@ L2D76:	clc
 ; ) {
 ;
 	cpx     #$80
-	bcc     L2D72
+	bcc     L2D91
 ;
 ; -- n_pant;
 ;
@@ -17990,18 +18029,18 @@ L2D76:	clc
 ;
 ; } else if (prx == 244 && 
 ;
-	jmp     L2D95
-L2D72:	lda     _prx
+	jmp     L2DB4
+L2D91:	lda     _prx
 	cmp     #$F4
-	bne     L2D7C
+	bne     L2D9B
 ;
 ; (cfx + pvx) > 0
 ;
 	ldx     #$00
 	lda     _cfx
-	bpl     L2D80
+	bpl     L2D9F
 	dex
-L2D80:	clc
+L2D9F:	clc
 	adc     _pvx
 	pha
 	txa
@@ -18014,9 +18053,9 @@ L2D80:	clc
 	cmp     #$01
 	txa
 	sbc     #$00
-	bvs     L2D81
+	bvs     L2DA0
 	eor     #$80
-L2D81:	bpl     L2D7C
+L2DA0:	bpl     L2D9B
 ;
 ; ++ n_pant;
 ;
@@ -18031,15 +18070,15 @@ L2D81:	bpl     L2D7C
 ;
 ; } else if (pry == 0 && pvy < 0 && n_pant >= c_map_w) {
 ;
-	jmp     L2D95
-L2D7C:	lda     _pry
-	bne     L2D87
+	jmp     L2DB4
+L2D9B:	lda     _pry
+	bne     L2DA6
 	ldx     _pvy+1
 	cpx     #$80
-	bcc     L2D87
+	bcc     L2DA6
 	lda     _n_pant
 	cmp     _c_map_w
-	bcc     L2D87
+	bcc     L2DA6
 ;
 ; n_pant -= c_map_w;
 ;
@@ -18062,9 +18101,9 @@ L2D7C:	lda     _pry
 	cmp     #$61
 	lda     _pvy+1
 	sbc     #$FF
-	bvs     L2D91
+	bvs     L2DB0
 	eor     #$80
-L2D91:	bpl     L2D95
+L2DB0:	bpl     L2DB4
 	ldx     #$FF
 	lda     #$60
 	sta     _pvy
@@ -18072,17 +18111,17 @@ L2D91:	bpl     L2D95
 ;
 ; } else if (pry >= 192 && pvy > 0) {
 ;
-	jmp     L2D95
-L2D87:	lda     _pry
+	jmp     L2DB4
+L2DA6:	lda     _pry
 	cmp     #$C0
-	bcc     L2D95
+	bcc     L2DB4
 	lda     _pvy
 	cmp     #$01
 	lda     _pvy+1
 	sbc     #$00
-	bvs     L2D98
+	bvs     L2DB7
 	eor     #$80
-L2D98:	bpl     L2D95
+L2DB7:	bpl     L2DB4
 ;
 ; n_pant += c_map_w;
 ;
@@ -18099,20 +18138,20 @@ L2D98:	bpl     L2D95
 ;
 ; if (pkill) player_kill ();
 ;
-L2D95:	lda     _pkill
-	beq     L2D9E
+L2DB4:	lda     _pkill
+	beq     L2DBD
 	jsr     _player_kill
 ;
 ; if (game_over) break;   
 ;
-L2D9E:	lda     _game_over
-	jne     L2D43
+L2DBD:	lda     _game_over
+	jne     L2D62
 ;
 ; if (on_pant != n_pant) {
 ;
 	lda     _n_pant
 	cmp     _on_pant
-	beq     L2DA3
+	beq     L2DC2
 ;
 ; prepare_scr ();
 ;
@@ -18125,19 +18164,19 @@ L2D9E:	lda     _game_over
 ;
 ; if (c_max_enems == pkilled) {
 ;
-L2DA3:	lda     _pkilled
+L2DC2:	lda     _pkilled
 	cmp     _c_max_enems
-	bne     L2DAA
+	bne     L2DC9
 ;
 ; en_cttouched [0] == 0 &&
 ;
 	lda     _en_cttouched
-	bne     L2DAA
+	bne     L2DC9
 ;
 ; en_cttouched [1] == 0 &&
 ;
 	lda     _en_cttouched+1
-	bne     L2DAA
+	bne     L2DC9
 ;
 ; en_cttouched [2] == 0
 ;
@@ -18145,14 +18184,14 @@ L2DA3:	lda     _pkilled
 ;
 ; ) win_level = 1;
 ;
-	bne     L2DAA
+	bne     L2DC9
 	lda     #$01
 	sta     _win_level
 ;
 ; if (win_level)
 ;
-L2DAA:	lda     _win_level
-	beq     L2DB3
+L2DC9:	lda     _win_level
+	beq     L2DD2
 ;
 ; music_stop ();
 ;
@@ -18165,12 +18204,12 @@ L2DAA:	lda     _win_level
 ;
 ; break;
 ;
-	jmp     L2D43
+	jmp     L2D62
 ;
 ; if (pstate) {
 ;
-L2DB3:	lda     _pstate
-	beq     L2DBB
+L2DD2:	lda     _pstate
+	beq     L2DDA
 ;
 ; -- pctstate;
 ;
@@ -18179,13 +18218,13 @@ L2DB3:	lda     _pstate
 ; if (!pctstate) pstate = EST_NORMAL;
 ;
 	lda     _pctstate
-	bne     L2DBB
+	bne     L2DDA
 	sta     _pstate
 ;
 ; if (hrt) {
 ;
-L2DBB:	lda     _hrt
-	jeq     L2DED
+L2DDA:	lda     _hrt
+	jeq     L2E0C
 ;
 ; if (collide_in (prx + 4, pry + 8, hrx, hry)) {
 ;
@@ -18194,9 +18233,9 @@ L2DBB:	lda     _hrt
 	lda     _prx
 	clc
 	adc     #$04
-	bcc     L2DC4
+	bcc     L2DE3
 	inx
-L2DC4:	ldy     #$06
+L2DE3:	ldy     #$06
 	sta     (sp),y
 	iny
 	txa
@@ -18205,9 +18244,9 @@ L2DC4:	ldy     #$06
 	lda     _pry
 	clc
 	adc     #$08
-	bcc     L2DC6
+	bcc     L2DE5
 	inx
-L2DC6:	ldy     #$04
+L2DE5:	ldy     #$04
 	sta     (sp),y
 	iny
 	txa
@@ -18226,13 +18265,13 @@ L2DC6:	ldy     #$04
 	sta     (sp),y
 	jsr     _collide_in
 	tax
-	beq     L2DED
+	beq     L2E0C
 ;
 ; if (hrt == HOTSPOT_TYPE_RESONATOR) {
 ;
 	lda     _hrt
 	cmp     #$04
-	bne     L2DC9
+	bne     L2DE8
 ;
 ; if (pvy > 0 && pry < hry) {
 ;
@@ -18240,17 +18279,17 @@ L2DC6:	ldy     #$04
 	cmp     #$01
 	lda     _pvy+1
 	sbc     #$00
-	bvs     L2DCD
+	bvs     L2DEC
 	eor     #$80
-L2DCD:	bpl     L2DED
+L2DEC:	bpl     L2E0C
 	lda     _pry
 	cmp     _hry
-	bcs     L2DED
+	bcs     L2E0C
 ;
 ; if (res_on == 0) {
 ;
 	lda     _res_on
-	bne     L2DED
+	bne     L2E0C
 ;
 ; res_on = 1; res_ct = 9; res_subct = 50;
 ;
@@ -18274,11 +18313,11 @@ L2DCD:	bpl     L2DED
 ;
 ; } else
 ;
-	jmp     L2DED
+	jmp     L2E0C
 ;
 ; rda = 0;
 ;
-L2DC9:	lda     #$00
+L2DE8:	lda     #$00
 	sta     _rda
 ;
 ; switch (hrt) {
@@ -18288,31 +18327,31 @@ L2DC9:	lda     #$00
 ; }
 ;
 	cmp     #$02
-	beq     L2DE3
+	beq     L2E02
 	cmp     #$03
-	beq     L2DE8
-	jmp     L2DE1
+	beq     L2E07
+	jmp     L2E00
 ;
 ; ++ pkeys;
 ;
-L2DE3:	inc     _pkeys
+L2E02:	inc     _pkeys
 ;
 ; break;
 ;
-	jmp     L2F41
+	jmp     L2F60
 ;
 ; plife += PLAYER_REFILL;
 ;
-L2DE8:	inc     _plife
+L2E07:	inc     _plife
 ;
 ; rda = SFX_USE;
 ;
-L2F41:	sta     _rda
+L2F60:	sta     _rda
 ;
 ; if (rda) {
 ;
-L2DE1:	lda     _rda
-	beq     L2DED
+L2E00:	lda     _rda
+	beq     L2E0C
 ;
 ; sfx_play (rda, 1);
 ;
@@ -18333,7 +18372,7 @@ L2DE1:	lda     _rda
 ;
 ; player_move ();
 ;
-L2DED:	jsr     _player_move
+L2E0C:	jsr     _player_move
 ;
 ; player_render ();
 ;
@@ -18346,13 +18385,13 @@ L2DED:	jsr     _player_move
 ; if (res_on) {
 ;
 	lda     _res_on
-	beq     L2E1A
+	beq     L2E39
 ;
 ; if (hrt == HOTSPOT_TYPE_RESONATOR) {
 ;
 	lda     _hrt
 	cmp     #$04
-	bne     L2DFD
+	bne     L2E1C
 ;
 ; hrx + RESONATOR_COUNTER_OFFS_X, 
 ;
@@ -18368,17 +18407,17 @@ L2DED:	jsr     _player_move
 	lda     _hry
 	clc
 	adc     #$07
-	bcc     L2F43
+	bcc     L2F62
 	clc
-L2F43:	adc     #$30
+L2F62:	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2F44
+	bcs     L2F63
 	sec
-L2F44:	sbc     #$10
-	bcs     L2F45
+L2F63:	sbc     #$10
+	bcs     L2F64
 	sec
-L2F45:	sbc     #$01
+L2F64:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -18402,20 +18441,20 @@ L2F45:	sbc     #$01
 ;
 ; if (res_subct) -- res_subct; else {
 ;
-L2DFD:	lda     _res_subct
-	beq     L2E0C
+L2E1C:	lda     _res_subct
+	beq     L2E2B
 	dec     _res_subct
-	jmp     L2E1A
+	jmp     L2E39
 ;
 ; res_subct = 50;
 ;
-L2E0C:	lda     #$32
+L2E2B:	lda     #$32
 	sta     _res_subct
 ;
 ; if (res_ct) { 
 ;
 	lda     _res_ct
-	beq     L2E12
+	beq     L2E31
 ;
 ; -- res_ct; 
 ;
@@ -18425,34 +18464,34 @@ L2E0C:	lda     #$32
 ;
 	lda     _res_ct
 	cmp     #$06
-	bcs     L2E1A
+	bcs     L2E39
 	lda     #$0C
 ;
 ; } else {
 ;
-	jmp     L2F49
+	jmp     L2F68
 ;
 ; res_on = 0;
 ;
-L2E12:	sta     _res_on
+L2E31:	sta     _res_on
 ;
 ; sfx_play (SFX_SPRING ,2); 
 ;
 	lda     #$0B
-L2F49:	jsr     pusha
+L2F68:	jsr     pusha
 	lda     #$02
 	jsr     _sfx_play
 ;
 ; if (hrt) hotspots_paint ();
 ;
-L2E1A:	lda     _hrt
-	beq     L2E20
+L2E39:	lda     _hrt
+	beq     L2E3F
 	jsr     _hotspots_paint
 ;
 ; if (no_ct) {
 ;
-L2E20:	lda     _no_ct
-	beq     L2E23
+L2E3F:	lda     _no_ct
+	beq     L2E42
 ;
 ; -- no_ct;
 ;
@@ -18475,12 +18514,12 @@ L2E20:	lda     _no_ct
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2F46
+	bcs     L2F65
 	sec
-L2F46:	sbc     #$10
-	bcs     L2F47
+L2F65:	sbc     #$10
+	bcs     L2F66
 	sec
-L2F47:	sbc     #$01
+L2F66:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -18499,25 +18538,25 @@ L2F47:	sbc     #$01
 ;
 ; chac_chacs_do ();
 ;
-L2E23:	jsr     _chac_chacs_do
+L2E42:	jsr     _chac_chacs_do
 ;
 ; if ((i & PAD_B) && (i & PAD_SELECT) && (i & PAD_UP)) break;
 ;
-L2D67:	lda     _i
+L2D86:	lda     _i
 	and     #$02
-	beq     L2E31
+	beq     L2E50
 	lda     _i
 	and     #$04
-	beq     L2E31
+	beq     L2E50
 	lda     _i
 	and     #$10
-	bne     L2D43
+	bne     L2D62
 ;
 ; if (pad_this_frame & PAD_START) {
 ;
-L2E31:	lda     _pad_this_frame
+L2E50:	lda     _pad_this_frame
 	and     #$08
-	jeq     L2D42
+	jeq     L2D61
 ;
 ; paused ^= 1;
 ;
@@ -18539,11 +18578,11 @@ L2E31:	lda     _pad_this_frame
 ;
 ; }
 ;
-	jmp     L2D42
+	jmp     L2D61
 ;
 ; fade_delay = 4;
 ;
-L2D43:	lda     #$04
+L2D62:	lda     #$04
 	sta     _fade_delay
 ;
 ; music_stop ();
@@ -18612,7 +18651,7 @@ L2D43:	lda     #$04
 ;
 ; title ();
 ;
-L2E54:	jsr     _title
+L2E73:	jsr     _title
 ;
 ; level = 0;
 ;
@@ -18626,7 +18665,7 @@ L2E54:	jsr     _title
 ;
 ; scroll (0, SCROLL_Y);
 ;
-L2E5C:	jsr     push0
+L2E7B:	jsr     push0
 	lda     #$0C
 	jsr     _scroll
 ;
@@ -18658,7 +18697,7 @@ L2E5C:	jsr     push0
 ; if (game_over) {
 ;
 	lda     _game_over
-	beq     L2E67
+	beq     L2E86
 ;
 ; pres (palts0, scr_game_over);
 ;
@@ -18677,11 +18716,11 @@ L2E5C:	jsr     push0
 ;
 ; break;
 ;
-	jmp     L2F4B
+	jmp     L2F6A
 ;
 ; level ++;
 ;
-L2E67:	lda     _level
+L2E86:	lda     _level
 	clc
 	adc     #$01
 	sta     _level
@@ -18689,7 +18728,7 @@ L2E67:	lda     _level
 ; if (level == MAX_LEVELS) {
 ;
 	cmp     #$03
-	bne     L2E5C
+	bne     L2E7B
 ;
 ; pres (palts0, scr_the_end);
 ;
@@ -18705,7 +18744,7 @@ L2E67:	lda     _level
 	sta     (sp),y
 	iny
 	lda     #>(_scr_the_end)
-L2F4B:	sta     (sp),y
+L2F6A:	sta     (sp),y
 	jsr     _pres
 ;
 ; first_game = 0;
@@ -18715,7 +18754,7 @@ L2F4B:	sta     (sp),y
 ;
 ; }
 ;
-	jmp     L2E54
+	jmp     L2E73
 
 .endproc
 

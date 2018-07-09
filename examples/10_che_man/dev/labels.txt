@@ -7,88 +7,88 @@ crt0.o:
     VECTORS           Offs = 000000   Size = 000006
     CHARS             Offs = 000000   Size = 002000
 game.o:
-    CODE              Offs = 000000   Size = 001F30
+    CODE              Offs = 000000   Size = 001F31
     RODATA            Offs = 000696   Size = 001034
     BSS               Offs = 000000   Size = 0002CB
     ZEROPAGE          Offs = 000000   Size = 0000B9
 runtime.lib(addysp.o):
-    CODE              Offs = 001F30   Size = 00000E
+    CODE              Offs = 001F31   Size = 00000E
 runtime.lib(aslax2.o):
-    CODE              Offs = 001F3E   Size = 00000B
+    CODE              Offs = 001F3F   Size = 00000B
 runtime.lib(aslax3.o):
-    CODE              Offs = 001F49   Size = 00000E
+    CODE              Offs = 001F4A   Size = 00000E
 runtime.lib(aslax4.o):
-    CODE              Offs = 001F57   Size = 000011
+    CODE              Offs = 001F58   Size = 000011
 runtime.lib(asrax1.o):
-    CODE              Offs = 001F68   Size = 00000A
+    CODE              Offs = 001F69   Size = 00000A
 runtime.lib(asrax2.o):
-    CODE              Offs = 001F72   Size = 00000F
+    CODE              Offs = 001F73   Size = 00000F
 runtime.lib(asrax3.o):
-    CODE              Offs = 001F81   Size = 000014
+    CODE              Offs = 001F82   Size = 000014
 runtime.lib(asrax4.o):
-    CODE              Offs = 001F95   Size = 000019
+    CODE              Offs = 001F96   Size = 000019
 runtime.lib(bneg.o):
-    CODE              Offs = 001FAE   Size = 00000E
+    CODE              Offs = 001FAF   Size = 00000E
 runtime.lib(call.o):
-    CODE              Offs = 001FBC   Size = 000007
+    CODE              Offs = 001FBD   Size = 000007
 runtime.lib(condes.o):
-    CODE              Offs = 001FC3   Size = 00000C
+    CODE              Offs = 001FC4   Size = 00000C
     DATA              Offs = 000000   Size = 000025
     INIT              Offs = 000000   Size = 00000C
 runtime.lib(copydata.o):
-    CODE              Offs = 001FCF   Size = 00002D
+    CODE              Offs = 001FD0   Size = 00002D
 runtime.lib(decsp3.o):
-    CODE              Offs = 001FFC   Size = 00000D
+    CODE              Offs = 001FFD   Size = 00000D
 runtime.lib(decsp4.o):
-    CODE              Offs = 002009   Size = 00000D
+    CODE              Offs = 00200A   Size = 00000D
 runtime.lib(decsp8.o):
-    CODE              Offs = 002016   Size = 00000D
+    CODE              Offs = 002017   Size = 00000D
 runtime.lib(icmp.o):
-    CODE              Offs = 002023   Size = 00002E
+    CODE              Offs = 002024   Size = 00002E
 runtime.lib(incsp1.o):
-    CODE              Offs = 002051   Size = 000007
+    CODE              Offs = 002052   Size = 000007
 runtime.lib(incsp2.o):
-    CODE              Offs = 002058   Size = 000016
+    CODE              Offs = 002059   Size = 000016
 runtime.lib(incsp4.o):
-    CODE              Offs = 00206E   Size = 000005
+    CODE              Offs = 00206F   Size = 000005
 runtime.lib(incsp8.o):
-    CODE              Offs = 002073   Size = 000005
+    CODE              Offs = 002074   Size = 000005
 runtime.lib(makebool.o):
-    CODE              Offs = 002078   Size = 000031
+    CODE              Offs = 002079   Size = 000031
 runtime.lib(neg.o):
-    CODE              Offs = 0020A9   Size = 00000E
+    CODE              Offs = 0020AA   Size = 00000E
 runtime.lib(or.o):
-    CODE              Offs = 0020B7   Size = 000012
+    CODE              Offs = 0020B8   Size = 000012
 runtime.lib(popa.o):
-    CODE              Offs = 0020C9   Size = 00000C
+    CODE              Offs = 0020CA   Size = 00000C
 runtime.lib(popsreg.o):
-    CODE              Offs = 0020D5   Size = 000010
+    CODE              Offs = 0020D6   Size = 000010
 runtime.lib(pusha.o):
-    CODE              Offs = 0020E5   Size = 000016
+    CODE              Offs = 0020E6   Size = 000016
 runtime.lib(pushax.o):
-    CODE              Offs = 0020FB   Size = 00001A
+    CODE              Offs = 0020FC   Size = 00001A
 runtime.lib(shl.o):
-    CODE              Offs = 002115   Size = 00002B
+    CODE              Offs = 002116   Size = 00002B
 runtime.lib(shrax1.o):
-    CODE              Offs = 002140   Size = 000008
+    CODE              Offs = 002141   Size = 000008
 runtime.lib(shrax3.o):
-    CODE              Offs = 002148   Size = 00000E
+    CODE              Offs = 002149   Size = 00000E
 runtime.lib(shrax4.o):
-    CODE              Offs = 002156   Size = 000011
+    CODE              Offs = 002157   Size = 000011
 runtime.lib(staspidx.o):
-    CODE              Offs = 002167   Size = 000016
+    CODE              Offs = 002168   Size = 000016
 runtime.lib(staxsp.o):
-    CODE              Offs = 00217D   Size = 00000B
+    CODE              Offs = 00217E   Size = 00000B
 runtime.lib(sub.o):
-    CODE              Offs = 002188   Size = 000015
+    CODE              Offs = 002189   Size = 000015
 runtime.lib(subeqsp.o):
-    CODE              Offs = 00219D   Size = 000015
+    CODE              Offs = 00219E   Size = 000015
 runtime.lib(subysp.o):
-    CODE              Offs = 0021B2   Size = 00000D
+    CODE              Offs = 0021B3   Size = 00000D
 runtime.lib(udiv.o):
-    CODE              Offs = 0021BF   Size = 00004F
+    CODE              Offs = 0021C0   Size = 00004F
 runtime.lib(umod.o):
-    CODE              Offs = 00220E   Size = 000011
+    CODE              Offs = 00220F   Size = 000011
 runtime.lib(zerobss.o):
     INIT              Offs = 00000C   Size = 000023
 runtime.lib(zeropage.o):
@@ -106,8 +106,8 @@ DATA                  000300  000324  000025
 BSS                   000325  0005EF  0002CB
 STARTUP               008000  008C81  000C82
 INIT                  008C82  008CB1  000030
-CODE                  008CB2  00AED0  00221F
-RODATA                00AED1  00C59A  0016CA
+CODE                  008CB2  00AED1  002220
+RODATA                00AED2  00C59B  0016CA
 VECTORS               00FFFA  00FFFF  000006
 
 
@@ -115,12 +115,12 @@ Exports list:
 -------------
 __BSS_RUN__               000325 RLA    __BSS_SIZE__              0002CB REA    
 __CONSTRUCTOR_COUNT__     000000 REA    __CONSTRUCTOR_TABLE__     008CB2 RLA    
-__DATA_LOAD__             00C59B RLA    __DATA_RUN__              000300 RLA    
+__DATA_LOAD__             00C59C RLA    __DATA_RUN__              000300 RLA    
 __DATA_SIZE__             000025 REA    __DESTRUCTOR_COUNT__      000000 REA    
-__DESTRUCTOR_TABLE__      00C59B RLA    __RAM_SIZE__              000500 REA    
+__DESTRUCTOR_TABLE__      00C59C RLA    __RAM_SIZE__              000500 REA    
 __RAM_START__             000300 RLA    __STARTUP__               000001 REA    
 _bank_bg                  0083E6 RLA    _bank_spr                 0083D6 RLA    
-_delay                    00858B RLA    _main                     00AB73 RLA    
+_delay                    00858B RLA    _main                     00AB74 RLA    
 _memfill                  00855C RLA    _music_pause              008771 REA    
 _music_play               008704 REA    _music_stop               0086C6 REA    
 _oam_clear                0082AB RLA    _oam_hide_rest            00833D RLA    
@@ -132,33 +132,33 @@ _scroll                   0083A3 RLA    _set_vram_update          0084E0 RLA
 _sfx_play                 00845A RLA    _unrle_vram               008363 RLA    
 _vram_adr                 0084EA RLA    _vram_fill                0084F5 RLA    
 _vram_put                 0084F1 RLA    _vram_write               00842A RLA    
-addysp                    00ABE3 RLA    addysp1                   00ABE2 RLA    
-aslax2                    00ABF0 RLA    aslax3                    00ABFB RLA    
-aslax4                    00AC09 RLA    asrax1                    00AC1A RLA    
-asrax2                    00AC24 RLA    asrax3                    00AC33 RLA    
-asrax4                    00AC47 RLA    bnega                     00AC64 RLA    
-boolne                    00AD2A RLA    callax                    00AC6E RLA    
-copydata                  00AC81 RLA    decsp3                    00ACAE RLA    
-decsp4                    00ACBB RLA    decsp8                    00ACC8 RLA    
-incsp1                    00AD03 RLA    incsp2                    00AD12 RLA    
-incsp4                    00AD20 RLA    incsp8                    00AD25 RLA    
-initlib                   008C82 RLA    negax                     00AD5B RLA    
-popa                      00AD7B RLA    popax                     00AD0A RLA    
-popsreg                   00AD87 RLA    ptr1                      0000E9 RLZ    
+addysp                    00ABE4 RLA    addysp1                   00ABE3 RLA    
+aslax2                    00ABF1 RLA    aslax3                    00ABFC RLA    
+aslax4                    00AC0A RLA    asrax1                    00AC1B RLA    
+asrax2                    00AC25 RLA    asrax3                    00AC34 RLA    
+asrax4                    00AC48 RLA    bnega                     00AC65 RLA    
+boolne                    00AD2B RLA    callax                    00AC6F RLA    
+copydata                  00AC82 RLA    decsp3                    00ACAF RLA    
+decsp4                    00ACBC RLA    decsp8                    00ACC9 RLA    
+incsp1                    00AD04 RLA    incsp2                    00AD13 RLA    
+incsp4                    00AD21 RLA    incsp8                    00AD26 RLA    
+initlib                   008C82 RLA    negax                     00AD5C RLA    
+popa                      00AD7C RLA    popax                     00AD0B RLA    
+popsreg                   00AD88 RLA    ptr1                      0000E9 RLZ    
 ptr2                      0000EB RLZ    ptr4                      0000EF RLZ    
-push0                     00ADAD RLA    pusha                     00AD9B RLA    
-pusha0                    00ADAF RLA    pushax                    00ADB1 RLA    
-regsave                   0000E5 RLZ    shlax2                    00ABF0 RLA    
-shlax4                    00AC09 RLA    shrax1                    00ADF2 RLA    
-shrax3                    00ADFA RLA    shrax4                    00AE08 RLA    
+push0                     00ADAE RLA    pusha                     00AD9C RLA    
+pusha0                    00ADB0 RLA    pushax                    00ADB2 RLA    
+regsave                   0000E5 RLZ    shlax2                    00ABF1 RLA    
+shlax4                    00AC0A RLA    shrax1                    00ADF3 RLA    
+shrax3                    00ADFB RLA    shrax4                    00AE09 RLA    
 sp                        0000E1 RLZ    sreg                      0000E3 RLZ    
-staspidx                  00AE19 RLA    stax0sp                   00AE2F RLA    
-subeqysp                  00AE51 RLA    subysp                    00AE64 RLA    
-tmp1                      0000F1 RLZ    tosaslax                  00ADC7 RLA    
-tosicmp                   00ACD7 RLA    tosicmp0                  00ACD5 RLA    
-tosorax                   00AD6B RLA    tossuba0                  00AE3A RLA    
-tosudiva0                 00AE71 RLA    tosumoda0                 00AEC0 RLA    
-udiv16                    00AE82 RLA    zerobss                   008C8E RLA    
+staspidx                  00AE1A RLA    stax0sp                   00AE30 RLA    
+subeqysp                  00AE52 RLA    subysp                    00AE65 RLA    
+tmp1                      0000F1 RLZ    tosaslax                  00ADC8 RLA    
+tosicmp                   00ACD8 RLA    tosicmp0                  00ACD6 RLA    
+tosorax                   00AD6C RLA    tossuba0                  00AE3B RLA    
+tosudiva0                 00AE72 RLA    tosumoda0                 00AEC1 RLA    
+udiv16                    00AE83 RLA    zerobss                   008C8E RLA    
 
 
 

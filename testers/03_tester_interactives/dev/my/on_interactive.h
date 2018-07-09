@@ -14,7 +14,11 @@
 	}
 
 	if (rdc == (0x80 | 5)) {
-		gp_gen = custom_text1; textbox_do (); 
+		if (flags [5] == 0)
+			gp_gen = custom_text2;
+		else
+			gp_gen = custom_text1; 
+		textbox_do (); 
 	}
 #endif
 	

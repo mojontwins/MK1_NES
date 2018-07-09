@@ -2,9 +2,9 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
+//#define GAME_AREA_MIDDLE
 //#define GAME_AREA_BOTTOM
-//#define GAME_AREA_CUSTOM
+#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -12,15 +12,15 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
-#define MAP_H					3		// Map dimensions in screens
+#define MAP_W 					6		//
+#define MAP_H					4		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define PLAYER_LIFE				5		// Max / Initial life
-#define PLAYER_REFILL			1		// Life refill
+#define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL			1		// Recarga de vida.
 
-//#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				1
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				5
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
@@ -28,13 +28,13 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
+	#define SCR_INI					18		// Initial screen
 	#define PLAYER_INI_X			2		//
-	#define PLAYER_INI_Y			2		// Initial position
+	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
 	#define PLAYER_END_X			99		//
 	#define PLAYER_END_Y			99		// Ending position
-	#define PLAYER_MAX_OBJECTS		1		// Objects to finish game
+	#define PLAYER_MAX_OBJECTS		25		// Objects to finish game
 
 #else
 
@@ -56,19 +56,20 @@
 #define HOTSPOT_TYPE_OBJECT		1
 #define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
-//#define HOTSPOT_TYPE_AMMO		4
+//#define HOTSPOT_TYPE_AMMO		4		// For ammo refills
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
 
-//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
+#define HOTSPOT_TYPE_RESONATOR	4		// Custom for this game.
+#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
-//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 //#define MAP_FORMAT_RLE44				// RLE'd by rle44mapMK1. 16 tiles max.
-//#define MAP_FORMAT_RLE53_CHRROM		// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
+#define MAP_FORMAT_RLE53_CHRROM			// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
 //#define MAP_FORMAT_RLE44_CHRROM		// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
@@ -76,7 +77,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -91,7 +92,7 @@
 // -----------------
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
-#define PLAYER_COLLISION_VSTRETCH_BG	-4
+#define PLAYER_COLLISION_VSTRETCH_BG		-4
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -99,7 +100,7 @@
 // So if you define it as -8, the collision box will be 8x8 bottom centerd.
 // And if you define it as 4 the collision box will be 8x20 bottom centered.
 // For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.
-#define PLAYER_COLLISION_VSTRETCH_FG 	-4
+#define PLAYER_COLLISION_VSTRETCH_FG 	4
 
 // Same for enemies.
 // I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.
@@ -110,8 +111,8 @@
 
 // Push boxes
 
-//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
-#define FIRE_TO_PUSH
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
+//#define FIRE_TO_PUSH
 
 //#define ENABLE_PUSHED_SCRIPT
 #define PUSHED_TILE_FLAG				1
@@ -120,12 +121,12 @@
 
 // General stuff
 
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				//     ... also, reenter screen on death
+//#define DIE_AND_REENTER				// Reenter screen on death
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
@@ -138,7 +139,7 @@
 // For player movement values, see section 4
 // (PLAYER_VY_SINKING)
 
-//#define ENABLE_QUICKSANDS
+#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
 //#define ENABLE_BREAKABLE				// Breakable walls
@@ -154,7 +155,7 @@
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
-//#define ENABLE_CONVEYORS
+#define ENABLE_CONVEYORS
 
 // Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4
@@ -164,23 +165,23 @@
 
 // Ladders, beh == 32
 
-//#define ENABLE_LADDERS
+#define ENABLE_LADDERS
 
 // Extra special stuff
 // -------------------
 
 // Propellers
 
-//#define ENABLE_PROPELLERS
-#define PROPELLERS_MAX 					4
+#define ENABLE_PROPELLERS
+#define PROPELLERS_MAX 					6
 #define PROPELLERS_BASE_PATTERN			64	// First of 4 patterns to draw/animate propellers
-#define PROPELLERS_MAX_LENGTH			6	// In tiles; undef for infinite
-#define PROPELLER_TILE					14	// Tile # in map to detect a propeller
-#define PROPELLERS_ON_BY_DEFAULT			// Define so propellers are on by default
+#define PROPELLERS_MAX_LENGTH			5	// In tiles; undef for infinite
+#define PROPELLER_TILE					24	// Tile # in map to detect a propeller
+//#define PROPELLERS_ON_BY_DEFAULT			// Define so propellers are on by default
 
 // Killing tiles shine, beware!
 
-//#define ENABLE_SHINES
+#define ENABLE_SHINES
 #define SHINES_MAX 						8
 #define SHINES_BASE_PATTERN				10	// In the sprite bank, two patterns needed
 #define SHINES_PALETTE					3
@@ -188,24 +189,24 @@
 
 // Resonators. Not sure if you need this, but.
 
-//#define ENABLE_RESONATORS
+#define ENABLE_RESONATORS
 #define RESONATOR_BASE_PATTERN			0
 #define RESONATOR_PALETTE				3
 #define RESONATOR_COUNTER_OFFS_X		4
 #define RESONATOR_COUNTER_OFFS_Y		7
 //#define RESONATOR_CHANGE_BG_PAL		paltsgrey	// Define to change pal for this palette
-//#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
+#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
 
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
 //#define ENABLE_SIMPLE_WARPERS
-#define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
-//#define SIMPLE_WARPERS_FIRE_BUTTON
+#define SIMPLE_WARPERS_BASE_SPRID
+#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!
 
-//#define ENABLE_NO 
+#define ENABLE_NO 
 #define NO_METASPRITE					ssit_06
 #define NO_OFFS_X						0
 #define NO_OFFS_Y						-24
@@ -213,25 +214,25 @@
 // Use animation.
 // Note: When activated hotspots need b_button press and, in side view, possee.
 
-//#define ENABLE_USE_ANIM
+#define ENABLE_USE_ANIM
 #define USE_ANIM_MAX_FRAMES				13
 #define USE_ANIM_INTERACT_ON			7
 #define USE_ANIM_FRAMES_PER_STEP		4
 
 // Text boxes. If you need them, you call them
 
-//#define ENABLE_TEXT_BOX
+#define ENABLE_TEXT_BOX
 #define TEXT_BOX_FRAME_TILE_OFFSET		0x20	// We need tiles in the active metatileset to draw the frame
-//#define TEXT_BOX_WITH_PORTRAITS				// Draw spr_hs [rdd] if != 0 in the text box if defined
-//#define TEXT_BOX_DIALOGUES					// Add code for dialogues
+#define TEXT_BOX_WITH_PORTRAITS					// Draw spr_hs [rdd] if != 0 in the text box if defined
+#define TEXT_BOX_DIALOGUES						// Add code for dialogues
 
 // Timer. 
 
 //#define ENABLE_TIMER
-#define TIMER_INITIAL					99
-#define TIMER_START_ON
-#define TIMER_REFILL					30
-//#define TIMER_RESET_ON_ENTER
+#define TIMER_INITIAL					5
+//#define TIMER_START_ON
+#define TIMER_REFILL					0
+#define TIMER_RESET_ON_ENTER
 //#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 #define TIMER_SOUND						10  // play a sound if timer < value
@@ -241,39 +242,38 @@
 //#define ENABLE_SPRINGS
 #define SPRING_TILE 					10
 #define SPRING_SPIKE_TILE 				11
-//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
 //#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
 // ---------------------------
 
-//#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
+#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
-//#define PERSISTENT_ENEMIES
-//#define PERSISTENT_DEATHS
+#define PERSISTENT_ENEMIES
+#define PERSISTENT_DEATHS
 
 #define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
 //#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
 //#define ENEMS_RECOIL_OVER_BOUNDARIES		// (x1,y1), (x2,y2) boundaries don't stop a recoil
 
-//#define ENEMS_ENABLE_DYING_FRAME
+#define ENEMS_ENABLE_DYING_FRAME
 
-#define ENEMS_EXPLODING_CELL 			32
+#define ENEMS_EXPLODING_CELL 			43
 #define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
-#define ENEMS_OCCLUDING_CELL			33	// If you use pezons or saws you need a flame for occlusion
+#define ENEMS_OCCLUDING_CELL			42	// If you use pezons or saws you need a flame for occlusion
 
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
 
 // Fanties / Homing fanties
 
-//#define ENABLE_FANTY
+#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
 
 #define FANTY_BASE_SPRID				32
@@ -296,8 +296,8 @@
 
 // Saws
 
-//#define ENABLE_SAW
-#define SAW_BASE_SPRID					48
+#define ENABLE_SAW
+#define SAW_BASE_SPRID					40
 #define SAW_V_DISPL						4
 #define SAW_EMERGING_STEPS				10
 
@@ -352,15 +352,15 @@
 
 // Steady shooters
 
-//#define ENABLE_STEADY_SHOOTERS
+#define ENABLE_STEADY_SHOOTERS
 #define STEADY_SHOOTERS_BASE_SPRID		44
-#define STEADY_SHOOTER_KILLABLE
-#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
-//#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
+//#define STEADY_SHOOTER_KILLABLE
+//#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
 
 // Compiled enemies
 
-//#define ENABLE_COMPILED_ENEMS
+#define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
 #define COMPILED_ENEMS_BASE_SPRID		48
 
@@ -369,10 +369,10 @@
 //#define ENABLE_COCOS
 #define COCOS_MAX						4
 #define COCO_V							128
-//#define COCO_COLLIDES
+#define COCO_COLLIDES
 
-#define COCO_PATTERN					0
-#define COCO_PALETTE 					0
+#define COCO_PATTERN					12
+#define COCO_PALETTE 					3
 #define COCO_FAIR_D						32
 
 // Carry directives
@@ -384,14 +384,14 @@
 // 'objects'. The user can carry one of those. Contents of hotspots
 // can change in this mode.
 
-//#define ENABLE_EASY_OBJECTS
+#define ENABLE_EASY_OBJECTS
 
-#define HS_OBJ_EMPTY					4
-#define HS_OBJ_MIN						5
-#define HS_OBJ_MAX						6
-#define HS_USE_OFFS						2
+#define HS_OBJ_EMPTY					1
+#define HS_OBJ_MIN						6
+#define HS_OBJ_MAX						13
+#define HS_USE_OFFS						8
 
-#define HS_TYPE_A 						// If defined, render receptors = HS_OBJ_EMPTY, object used = object
+//#define HS_TYPE_A 					// If defined, render receptors = HS_OBJ_EMPTY, object used = object
 										// Otherwise, use its own graphics.
 #define HS_FIX_ON_USE					// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2
 
@@ -446,16 +446,16 @@
 // Interactives
 // ------------
 
-//#define ENABLE_INTERACTIVES				// Graphical flag representations!
+#define ENABLE_INTERACTIVES					// Graphical flag representations!
 #define INTERACTIVES_MAX 				4	// As per screen
-#define FLAG_INVENTORY					0
-//#define INTERACTIVES_ONLY_SPRITES			// If you are using other means for items and just need sprites
+//#define FLAG_INVENTORY					0
+#define INTERACTIVES_ONLY_SPRITES			// If you are using other means for items and just need sprites
 
 // Top view:
 // ---------
 
 //#define PLAYER_TOP_DOWN            	// Enable top view.
-//#define TOP_OVER_SIDE              	// UP/DOWN has priority over LEFT/RIGHT
+//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
@@ -465,7 +465,7 @@
 //#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-//#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
+#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
 //#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
@@ -477,24 +477,24 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-//#define LIFE_X				7		//
-//#define LIFE_Y				3		// Life gauge counter character coordinates
+#define LIFE_X					4		//
+#define LIFE_Y					4		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
-#define OBJECTS_REMAINING				// Show # remaining instead of got
+//#define OBJECTS_REMAINING				// Show # remaining instead of got
 
-//#define KEYS_X				28		//
-//#define KEYS_Y				3		// Keys counter character coordinates
+#define KEYS_X					12		//
+#define KEYS_Y					4		// Keys counter character coordinates
 
-//#define KILLED_X				16		//
-//#define KILLED_Y				2		// Kills counter character coordinates
+#define KILLED_X				28		//
+#define KILLED_Y				4		// Kills counter character coordinates
 
 //#define AMMO_X				8		// 
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
-//#define HS_INV_X				136		//
-//#define HS_INV_Y				11		// Object you are carrying
+#define HS_INV_X				160		//
+#define HS_INV_Y				15		// Object you are carrying
 
 //#define TIMER_X				0		//
 //#define TIMER_Y				5		// Current timer value
@@ -520,8 +520,8 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
@@ -547,12 +547,12 @@
 
 #define PLAYER_VX_MAX			128		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
-#define PLAYER_VX_MIN (PLAYER_AX << 1)
+#define PLAYER_VX_MIN (PLAYER_AX << 2)
 
 #define PLAYER_V_REBOUND		224
 
@@ -578,7 +578,7 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	6
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
@@ -589,18 +589,19 @@
 
 	#define CELL_SWIM_CYCLE		6
 
-	#define CELL_USE			6
+	#define CELL_USE			12
 
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
 
-	#define CELL_CLIMB_CYCLE	20
+	#define CELL_CLIMB_CYCLE	25
 	#define CELL_CLIMB_HALF		29
 #endif
 
 // Music
 
 #define MUSIC_INGAME 			0
+#define MUSIC_CUTS				4
 
 // SFX
 
