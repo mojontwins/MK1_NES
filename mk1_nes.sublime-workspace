@@ -435,6 +435,15 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "Obviamente, falta el trozo donde estaban las chicas. Lo completamos usando la herramienta de trazado de lineas (U) y el cubo de pintura con contiguous desactivado para colorear de una vez de blanco todo el transparente. Técnica: si una vez empecemos a trazar una linea pulsamos MAYÚSCULAS conseguiremos que la linea sea perfectamente vertical u horizontal. \n\nObviously, the chunk with the girl is now missing & transparent. Just complete it using the line (U) and paint bucket (G) tools. Tip: using SHIFT you'll make the line your are drawing 100% horizontal or vertical.",
+			"settings":
+			{
+				"buffer_size": 571,
+				"line_ending": "Windows",
+				"name": "Obviamente, falta el trozo donde estaban las chica"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -513,17 +522,16 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/utils",
-		"/D/git/MK1_NES/src/utils/legacy",
-		"/D/git/MK1_NES/testers",
-		"/D/git/MK1_NES/testers/02_tester_punchy",
-		"/D/git/MK1_NES/testers/02_tester_punchy/dev",
-		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine"
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/testers"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/features.md",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/config.h",
+		"/D/git/MK1_NES/examples/10_che_man/README.md",
+		"/D/git/MK1_NES/testers/02_tester_punchy/README.md",
+		"/D/git/MK1_NES/src/README.md",
 		"/D/git/MK1_NES/src/utils/README.md",
 		"/D/git/MK1_NES/src/utils/eneexp3.bas",
 		"/D/git/MK1_NES/CONTRIBUTING.md",
@@ -541,7 +549,6 @@
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/map_renderer_customization.h",
 		"/D/git/MK1_NES/testers/03_tester_interactives/dev/config.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/on_interactive.h",
-		"/D/git/MK1_NES/examples/10_che_man/README.md",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/README.md",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
 		"/D/git/MK1_NES/examples/10_che_man/dev/compile.bat",
@@ -647,11 +654,7 @@
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_monococo.h",
 		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/engine/enemmods/enem_steady_shooter.h",
-		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.s",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/ending_spr.h",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop/cheat.h",
-		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt"
+		"/D/git/MK1_NES/examples/08_cheril_perils_rom2_revamp/dev/neslib.s"
 	],
 	"find":
 	{
@@ -662,6 +665,10 @@
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\testers",
 			"D:\\git\\MK1_NES\\examples",
@@ -681,6 +688,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"chrrom",
+			"cnrom",
+			"CNROM",
+			"6680",
+			"enems",
+			"tall",
+			"pezons",
+			"CHAC_CHACS_CLEAR",
 			"exe",
 			"binmode",
 			"bin",
@@ -779,8 +794,47 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 571,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								571,
+								359
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 12683,
+								"count": 92,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"auto_name": "Obviamente, falta el trozo donde estaban las chica",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -881,7 +935,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 222.0,
+	"side_bar_width": 219.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
