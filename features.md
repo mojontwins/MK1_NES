@@ -3,6 +3,11 @@ Engine features
 
 Sorry, this is all you have as documentation until I write the tutorials or something better.
 
+Tile Behaviours
+===============
+
+These features refer to special behaviours of map tiles.
+
 Quicksands
 ----------
 
@@ -59,10 +64,122 @@ Slippery
 
 Tiles for side-view which are slippery when walked over. Use beh & 64.
 
-The occluding frame
--------------------
+Ladders
+-------
 
-Saws and Pezons need an "occluding frame" to do the sprite priority trick. It should be one frame using the darkest colour in the selected palette to mask areas of the sprite which should be hidden when appearing. Every 8x8 sprite in the metasprite should have at lease 1 #FF00FF pixel for the converter to autodetect it. See example 00.
+- beh == 32, strict.
+
+Propellers
+----------
+
+Enable and configure.
+
+```c
+    #define ENABLE_PROPELLERS
+    #define PROPELLERS_MAX                  4
+    #define PROPELLERS_BASE_PATTERN         64
+    #define PROPELLERS_MAX_LENGTH           6
+    #define PROPELLER_TILE                  14
+```
+
+Place in your map using tile `PROPELLER_TILE`. Propeller animation will alternate two 2x1 patterns cells defined in the bg tileset from pattern `PROPELLERS_BASE_PATTERN`. Place as much as `PROPELLERS_MAX` per screen.
+
+If you define `PROPELLERS_MAX_LENGTH` the propeller will affect an area max N tiles high, otherwise it will reach the top of the game area.
+
+Vertical movement is then controlled by these:
+
+```c
+    #define PLAYER_AY_FLOAT         16  
+    #define PLAYER_VY_FLOAT_MAX     256
+```
+
+Shines
+------
+
+Create small shines on killing objects, up to a maximum. Shines are rendered using two different patterns in bank 1:
+
+```c
+    #define ENABLE_SHINES
+    #define SHINES_MAX                      8
+    #define SHINES_BASE_PATTERN             10  // In the sprite bank, two patterns needed
+    #define SHINES_PALETTE                  3
+    #define SHINING_TILE                    23  // Tile # in map to add shines
+```
+
+Shines are added automaticly to the scene when rendering a new screen and `SHINING_TILE` is detected.
+
+Springs
+-------
+
+```c
+    #define ENABLE_SPRINGS
+    #define SPRING_TILE                     10
+    #define SPRING_SPIKE_TILE               11
+    //#define SPRINGS_ON_BY_DEFAULT 
+```
+
+- When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.
+- Springs will only work if `springs_on`. `springs_on` is set from the beginning if `SPRINGS_ON_BY_DEFAULT` is set.
+
+Chac-Chacs
+----------
+
+Originally (still supported but deprecated!) chac-chacs were implemented as enemies. They are now a different entity and are set from the map.
+
+```c
+// Chac chacs
+
+    #define ENABLE_CHAC_CHAC
+    #define CHAC_CHAC_BASE_TILE             32
+    #define CHAC_CHAC_IDLE_2                16
+    #define CHAC_CHAC_IDLE_3                1
+    #define CHAC_CHAC_IDLE_4                50
+
+    #define CHAC_CHAC_FROM_MAP              // Chac chacs are not placed as enemies but as tiles
+    #define MAX_CHAC_CHACS                  4
+    #define MAX_CHAC_CHACKS_QUEUED          16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
+    #define CHAC_CHAC_DETECT_TILE           39
+    #define CHAC_CHACS_CLEAR                // You are placing chac chacks from map but need the path to be clear
+```
+
+Notice that as of v1.0 you have to `#define CHAC_CHAC_FROM_MAP`. On future versions this won't be necessary as enemy-based chac-chacs will be removed.
+
+Chac-Chacs need 7 metatiles in the metatileset (`check 00_tester_sideview` or `07_cheril_perils_classic` metatilesets) starting on # `CHAC_CHAC_BASE_TILE`.
+
+`MAX_CHAC_CHACS` refer to the maximum amount of chac-chacs on screen at the same time. Calculate `MAX_CHAC_CHACKS_QUEUED` accordingly using the formula.
+
+Chac-chacs can have three different speeds, close to 1, 2 or 3 seconds periods. To place a chac-chack of speed N, just place tile # `CHAC_CHAC_DETECT_TILE + N - 1` in the map. 
+
+Pushable
+--------
+
+Check `README.md` in **Cadàveriön**.
+
+Enemy types
+===========
+
+Besides basic linear patrollers there's a number of different kind of enemies / perils
+
+Steady Shooters
+---------------
+
+```c
+    #define ENABLE_STEADY_SHOOTERS
+    #define STEADY_SHOOTERS_BASE_SPRID      44
+    #define STEADY_SHOOTER_KILLABLE
+```
+
+- Type 5 (0x5).
+- Place them. Relation between (x1, y1) and (x2, y2) defines direction. Attribute defines # of seconds between shoots.
+- Cells are from `STEADY_SHOOTERS_BASE_SPRID` onwards, from left, clockwise: left up right down.
+- `STEADY_SHOOTER_KILLABLE` make steady shooters destructible. But beware! They are not counted as killable by `eneexp3.exe`'s option `gencounter`. You can count them in using the `genallcounters` option in addition to `gencounter` and adding `KILLABLE_ENEMS_prefix + MAX_ENEMS_TYPE_5_prefix`.
+
+Fanties / Homing fanties
+------------------------
+
+- Type 6
+- Just define the position in ponedor.
+- Use two frames from `FANTY_BASE_SPRID`, or four (right1, right2, left1, left2) if you define `FANTY_WITH_FACING`.
 
 Saws
 ----
@@ -72,16 +189,22 @@ Saws
 - It will emerge left/up if the attribute is `0`, right down if it is `2`.
 - It needs two, not flipped frames, from `SAW_BASE_SPRID`.
 
-Fanties / Homing fanties
-------------------------
+Pezons
+------
 
-- Type 6
-- Just define the position in ponedor.
-- Use two frames from `FANTY_BASE_SPRID`, or four (right1, right2, left1, left2) if you define `FANTY_WITH_FACING`.
+- Type 9
+- When placing, the attribute value times 8 plus `PEZON_WAIT` define the idle time.
+- It needs two, not flipped frames, from `PEZONS_BASE_SPRID` (emerging, biting & down)
+
+The occluding frame
+-------------------
+
+Saws and Pezons need an "occluding frame" to do the sprite priority trick. It should be one frame using the darkest colour in the selected palette to mask areas of the sprite which should be hidden when appearing. Every 8x8 sprite in the metasprite should have at lease 1 #FF00FF pixel for the converter to autodetect it. See example 00.
 
 Chac-Chacs
 ----------
 
+- **Deprecated** - use map-based chac-chacs instead.
 - Type 10 (0xA)
 - 3 tiles tall, placed in ponedor marking the topmost tile.
 - Attribute in ponedor is delay between shutter
@@ -90,6 +213,9 @@ Chac-Chacs
 
 Monococos
 ---------
+
+- Type 11 (0xB)
+- Just define the position in ponedor.
 
 This was really bad implemented in Yun (very patchy). Let's do this properly this time.
 
@@ -118,121 +244,65 @@ const unsigned char monococo_state_times [] = {
 };
 ```
 
-- Type 11 (0xB)
-- Just define the position in ponedor.
-
 Cocos frames are (order may be off, but helps with saving bytes)
 
 (RIGHT)  `FRAME_A`, `FRAME_B`, (LEFT)   `FRAME_A`, `FRAME_B`,
 [(RIGHT) `APPEARING`, `HIDDEN`, (LEFT) `APPEARING`, `HIDDEN`]
 
-Easy objects
-------------
+Compiled enemies
+----------------
 
-Provides infraestructure to place N objects in hotspots, N places to use such objects, and places to add custom code that is executed everytime you get an object and everytime you use an object.
+- Type 20 (0x14)
+- Just define the position in ponedor. Behaviour (program) # on the attr field.
 
-Objects and places to use such objects are represented by hotspots, so just 1 per screen. 
+Compiled enemies follow a programmed path from a set. Such set is generated compiling the `script/enembehs.spt` script. The language is pretty straightforward, just check the simple examples provided. 
 
-hotspot values representing objects must fit in a range, defined by `HS_OBJ_MIN` and `HS_OBJ_MAX`.
+Behaviours included in the script are compiled in order, the first one is #0. When adding enenmies in `ponedor.exe`, just add your enemy in its starting position as type 0x14 and especify the behaviour number in the attr field. The ending position is discarded.
 
-hotspot values representing where to use each object must fit in the range defined by `HS_OBJ_MIN + HS_USE_OFFS` and `HS_OBJ_MAX + HS_USE_OFFS`.
+```c
+    #define ENABLE_COMPILED_ENEMS
+    #define COMPILED_ENEMS_SHOOT
+    #define COMPILED_ENEMS_BASE_SPRID       48
+```
 
-So if you get object `N` you have to use it in the hotspot with value `N + HS_USE_OFFS`.
+If your enemies shoot, define `COMPILED_ENEMS_SHOOT`. Leave it commented out if none of them do, as you will save space (`COCOS` won't get added). 
 
-Every time you get an object, code included in `mainloop/on_object_got.h` (empty by default) is executed.
+Enemmies are rendered facing left or right. There are two animation cells for when they are moving around and two extra animation cells for when they are idling (not moving). Cells are in the active `spr_enems` array starting at index `COMPILED_ENEMS_BASE_SPRID`:
 
-Every time you use an object successfully, code included in `mainloop/on_object_used.h` (empty by default) is executed.
+```
+    WALK_RIGHT_0
+    WALK_RIGHT_1
+    IDLE_RIGHT_0
+    IDLE_RIGHT_1
+    WALK_LEFT_0
+    WALK_LEFT_1
+    IDLE_LEFT_0
+    IDLE_LEFT_1
+```
 
-There are two types of behaviour: Type A and Type B. If you define `HS_TYPE_A`, you enable Type A. If you undefine it, you enable Type B.
-
-With type A, hotposts where you use objects are represented by the empty item, that is, `HS_OBJ_EMPTY`. When you use an object, the hotspot will use the objects's graphic.
-
-With type B, everything must have its own graphic: objects, place to use them, and objects used on places. If object is item `N`, then where to use is `N + HS_USE_OFFS` and object used = `N + 2*HS_USE_OFFS`. Very important when define the `spr_it` array.
-
-Combine this with `WIN_LEVEL_CUSTOM`! if you define `WIN_LEVEL_CUSTOM`, the level with end as soon as you make `win_level = 1`.
-
-You can check the ending condition at  `mainloop/on_object_got.h` or `mainloop/on_object_used.h`, for instance, and raise `win_level`. You can use the `level` variable in multilevel games for different conditions.
-
-Tall player
------------
-
-- Makes bounding boxes from 17 to 32 pixels tall for players.
-- Sprite handle NOT ALTERED, still 8x16 bottom-centered. This is a hack, remember?
-- Horizontal collision points will be three: `(X, pry)`, `(X, pry + 15)` and `(X, pry - 16 + PLAYER_COLLISION_TOP)`.
-- **When cutting metasprites, remember that the player box is still 8x16, bottom-centered**
-
-Tall enemies
-------------
-
-- There are three kind of enemy collisions for now. For more granularity, you should customize the engine.
-- SMALL_COLLISION (8x8) and undef (12x12) as always.
-- New hacky TALL_COLLISION (8x24), from within the 16x16 enemy rectangle.
-
-Shooties
---------
-
-- `#define ENABLE_SHOOTIES`.
-- 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
-- Type 12, 13, 14, 15, (0xC, 0xD, 0xE, 0xF) place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
-- Imply linear cocos.
-- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot when looking RIGHT. Notice bullets are 8 pixels wide (top-left origin), and enemies are always 16 pixels wide (top-left origin).
-- Shoot when player is "in range" using `PUNCH_FREQ` (en expresion which will produce a coco when evaluates to true).
 
 Punchies
 --------
 
 - `#define ENABLE_PUNCHIES`.
 - 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
-- Type 16, 17, 18, 19, (0x10, 0x11, 0x12, 0x13) place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
+- Type 0x41, 0x42, 0x43, 0x44,  place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
 - ` PUNCHIES_PUNCH_OFFS_X` and `PUNCHIES_PUNCH_OFFS_Y`, offset from top-left of sprite bounding box to punch when looking RIGHT. Notice punching hitbox is 8x8, top-left origin, and enemies are always 16 pixels wide (top-left origin).
 - Punch when player is "in range" using `PUNCH_FREQ` (an expresion which will produce a punch when evaluates to true).
 
-Player punches, player kicks
-----------------------------
+**Note that Punchies = Linear | 0x40**
 
-```c
-    // Silly Brawlers
-    // --------------
-    #define PLAYER_PUNCHES                  // When on floor
-    #define PLAYER_PUNCH_OFFS_X             15
-    #define PLAYER_PUNCH_OFFS_Y             -7
+Shooties
+--------
 
-    #define PLAYER_KICKS                    // While airborne
-    #define PLAYER_KICK_OFFS_X              12
-    #define PLAYER_KICK_OFFS_Y              -3
-```
+- `#define ENABLE_SHOOTIES`.
+- 6 frames, 3 right, 3 left; two walk frames, 1 shooting frame.
+- Type 0x81, 0x82, 0x82, 0x84, place exactly like normal type 1-4 enemies/platforms. The number means you can select different sprite faces (up to 4), from `SHOOTIES_BASE_SPRID` onwards.
+- Imply linear cocos.
+- `SHOOTIES_SHOOT_OFFS_X` and `SHOOTIES_SHOOT_OFFS_Y`, offset from top-left of sprite bounding box to shoot when looking RIGHT. Notice bullets are 8 pixels wide (top-left origin), and enemies are always 16 pixels wide (top-left origin).
+- Shoot when player is "in range" using `PUNCH_FREQ` (en expresion which will produce a coco when evaluates to true).
 
-- Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
-
-Ladders
--------
-
-- Full ladders. must start and end on obstacle.
-- beh == 32, strict.
-
-Propellers
-----------
-
-Enable and configure.
-
-```c
-    #define ENABLE_PROPELLERS
-    #define PROPELLERS_MAX                  4
-    #define PROPELLERS_BASE_PATTERN         64
-    #define PROPELLERS_MAX_LENGTH           6
-    #define PROPELLER_TILE                  14
-```
-
-Place in your map using tile `PROPELLER_TILE`. Propeller animation will alternate two 2x1 patterns cells defined in the bg tileset from pattern `PROPELLERS_BASE_PATTERN`. Place as much as `PROPELLERS_MAX` per screen.
-
-If you define `PROPELLERS_MAX_LENGTH` the propeller will affect an area max N tiles high, otherwise it will reach the top of the game area.
-
-Vertical movement is then controlled by these:
-
-```c
-    #define PLAYER_AY_FLOAT         16  
-    #define PLAYER_VY_FLOAT_MAX     256
-```
+**Note that Shooties = Linear | 0x80**
 
 Simple Warpers
 --------------
@@ -251,35 +321,48 @@ They are placed *as enemies*, type = 0xff. Use `attr` for the destination screen
 
 If `SIMPLE_WARPERS_FIRE_BUTTON` is defined, you have to press B to activate the portal.
 
-Shines
-------
+Tall enemies
+------------
 
-Create small shines on killing objects, up to a maximum. Shines are rendered using two different patterns in bank 1:
-
-```c
-    #define ENABLE_SHINES
-    #define SHINES_MAX                      8
-    #define SHINES_BASE_PATTERN             10  // In the sprite bank, two patterns needed
-    #define SHINES_PALETTE                  3
-    #define SHINING_TILE                    23  // Tile # in map to add shines
-```
-
-Shines are added automaticly to the scene when rendering a new screen and `SHINING_TILE` is detected.
-
-Resonators
-----------
-
-These make up the gameplay in Cheril Perils. If you press them, enemies freeze and are killable by means of jumping on them. Resonators are placed as hotspots, and need two metasprites in the items array.
+Likewise you can do with player's height, but extending the top of the enemies' collision box with the player.
 
 ```c
-    #define ENABLE_RESONATORS
-    #define RESONATOR_BASE_PATTERN          0
-    #define RESONATOR_PALETTE               3
-    #define RESONATOR_COUNTER_OFFS_X        4
-    #define RESONATOR_COUNTER_OFFS_Y        7
+#define ENEMS_COLLISION_VSTRETCH_FG     4
 ```
 
-They also need 10 patterns with all the digits 0-9 in bank 1, from `RESONATOR_BASE_PATTERN` onwards. Those are used to draw the counter, which is rendered at offset `(RESONATOR_COUNTER_OFFS_X, RESONATOR_COUNTER_OFFS_Y)` from the hotspot's top-left corner.
+Player features
+===============
+
+Player height
+-------------
+
+By default, player's collision box is 8x16. The top limit of such box can be modified to make the player taller or shorter.
+
+```c
+#define PLAYER_COLLISION_VSTRETCH_BG    4
+#define PLAYER_COLLISION_VSTRETCH_FG    4
+```
+
+Will move the top of the player's collision box UP by the amount of pixels specified (will move it down if it is negative).
+
+`PLAYER_COLLISION_VSTRETCH_BG` is for collisions with the background and `PLAYER_COLLISION_VSTRETCH_FG` is for collisions with actors.
+
+Player punches, player kicks
+----------------------------
+
+```c
+    // Silly Brawlers
+    // --------------
+    #define PLAYER_PUNCHES                  // When on floor
+    #define PLAYER_PUNCH_OFFS_X             15
+    #define PLAYER_PUNCH_OFFS_Y             -7
+
+    #define PLAYER_KICKS                    // While airborne
+    #define PLAYER_KICK_OFFS_X              12
+    #define PLAYER_KICK_OFFS_Y              -3
+```
+
+- Offsets define 8x8 hit boxes from the top-left of the sprite bounding box when looking RIGHT. Remember that the player's bounding box is a 8x16 rectangle bottom-centered.
 
 No!
 ---
@@ -317,87 +400,208 @@ You are in charge of preparing your `my/player_frame_selector.h` to support this
 
 Where `CELL_USE` is the index of the first "use animation" metasprite in the `spr_player` array. Check the Cheril Perils ROM2 revamp example to se this in action!
 
-Timer
+Hotspots
+========
+
+Usually hotspots may contain collectibles, keys or life refills.
+
+Resonators
+----------
+
+These make up the gameplay in Cheril Perils. If you press them, enemies freeze and are killable by means of jumping on them. Resonators are placed as hotspots, and need two metasprites in the items array.
+
+```c
+    #define ENABLE_RESONATORS
+    #define RESONATOR_BASE_PATTERN          0
+    #define RESONATOR_PALETTE               3
+    #define RESONATOR_COUNTER_OFFS_X        4
+    #define RESONATOR_COUNTER_OFFS_Y        7
+```
+
+They also need 10 patterns with all the digits 0-9 in bank 1, from `RESONATOR_BASE_PATTERN` onwards. Those are used to draw the counter, which is rendered at offset `(RESONATOR_COUNTER_OFFS_X, RESONATOR_COUNTER_OFFS_Y)` from the hotspot's top-left corner.
+
+Inventory Systems
+=================
+
+**MK1/AGNES** supports several types of behaviours related to objects (or items), as you may know:
+
+- The **basic**, legacy *collect'em'all* stype: There's a bunch of identical items scattered around the map. They are all placed using hotspots of type 1 (one per screen). When the player gets one, the `pobjs` counter is increased. In the default configuration, the player will win the game if all items are collected. "items" are traditionally called "objects" (hence the `pobjs` variable name, for instance).
+
+- **One at a time**: items are still placed as hotspots of type 1, but the player can only carry one of them at a time. The player can't get a new item until its *inventory* is cleared, by external means. This method is not complete, therefore, as the coder must provide a way to free the player's *inventory*. We'll be discussing this behaviour in this document.
+
+- **Easy objects**: items are still placed using hotspots, but there are several kind of objects, and the player can swap the one he or she is carrying for a new one, which will stay in place, or use them elsewhere (also using hotspots). This behaviour is better seen in action in `00_tester_sideview` or `08_cheril_perils_rom2_revamp`.
+
+- **Interactives**: items are placed inside *interactives* of type *container*. Learn about them in `00_tester_interactives`.
+
+Only One Object (at a time)
+---------------------------
+
+The **One at a time** behaviour relies on an *external* actor to remove the item from the player inventory. This can be performed in a number of ways: from injected code or from the script. This game uses scripting to do so.
+
+To activate this behaviour:
+
+```c
+    #define ENABLE_ONLY_ONE_OBJECT
+```
+
+You will need some preparations: first of all, you have to define a metasprite to represent "empty", and store it at index 0 in the `spr_hs` metasprite array. Also, you need to define where in the hud to display the player's *inventory* via the `HS_INV_X` and `HS_INV_Y` directives in `config.h`.
+
+This is what happens when the player collides with a hotspot of type 1:
+
+- If the player is carrying nothing, the player gets the item (hotspot is cleared). The code in `my/on_object_got.h` is executed.
+
+- If the player is carrying an item, nothing happens.
+
+By default, current object is stored to variable `pinv`. You can then use code injection to detect / react. To free up the player's *inventory* after doing *something*, you can add this code to `my/extra_checks.h`:
+
+```c
+    if (<some condition>) {
+        // Free the player's inventory
+        pinv = 0;
+
+        // Do some stuff, for example...
+        pobjs ++;
+    }
+```
+
+In this game will be using the script to remove the item from the player's *inventory*. To make that possible, the object the player is carrying must be made available in a flag, so you can read or set it from your script.
+
+```c
+    #define ONLY_ONE_OBJECT_FLAG            0
+```
+
+If you define this, the engine will use the specified flag *instead of* `pinv`. Of course, you can still access the contents of the flag from injected code: it will be on `flags [ONLY_ONE_OBJECT_FLAG]`.
+
+Easy objects
+------------
+
+Provides infraestructure to place N objects in hotspots, N places to use such objects, and places to add custom code that is executed everytime you get an object and everytime you use an object.
+
+Objects and places to use such objects are represented by hotspots, so just 1 per screen. 
+
+hotspot values representing objects must fit in a range, defined by `HS_OBJ_MIN` and `HS_OBJ_MAX`.
+
+hotspot values representing where to use each object must fit in the range defined by `HS_OBJ_MIN + HS_USE_OFFS` and `HS_OBJ_MAX + HS_USE_OFFS`.
+
+So if you get object `N` you have to use it in the hotspot with value `N + HS_USE_OFFS`.
+
+Every time you get an object, code included in `mainloop/on_object_got.h` (empty by default) is executed.
+
+Every time you use an object successfully, code included in `mainloop/on_object_used.h` (empty by default) is executed.
+
+There are two types of behaviour: Type A and Type B. If you define `HS_TYPE_A`, you enable Type A. If you undefine it, you enable Type B.
+
+With type A, hotposts where you use objects are represented by the empty item, that is, `HS_OBJ_EMPTY`. When you use an object, the hotspot will use the objects's graphic.
+
+With type B, everything must have its own graphic: objects, place to use them, and objects used on places. If object is item `N`, then where to use is `N + HS_USE_OFFS` and object used = `N + 2*HS_USE_OFFS`. Very important when define the `spr_it` array.
+
+Combine this with `WIN_LEVEL_CUSTOM`! if you define `WIN_LEVEL_CUSTOM`, the level with end as soon as you make `win_level = 1`.
+
+You can check the ending condition at  `mainloop/on_object_got.h` or `mainloop/on_object_used.h`, for instance, and raise `win_level`. You can use the `level` variable in multilevel games for different conditions.
+
+Check **Cheril the Writer** to see full-fledged easy objects in action
+
+Interactives
+============
+
+**Interactives** are a much more powerful system of managing objects and can be used alongside the scripting system or from code, depending on your needs.
+
+You may use interactives *and* **easy_objects** if you plan to use interactives just for *sprites* (see below). In such case, save code leaving `#define INTERACTIVES_ONLY_SPRITES` uncommented.
+
+Flags
 -----
 
-Runs a timer which you can display. It detects when it reaches zero. You can integrate this with the scripting engine, or react to it adding C code to `my/extra_checks.h`.
+There is a `flags []` array in the engine which is mainly used by the scripting system and other minor things. The amount of flags available depends on your needs so you can configure it using `MAX_FLAGS` in `config.h`.
 
-```c
-    #define ENABLE_TIMER
-    #define TIMER_INITIAL                   5
-    #define TIMER_START_ON
-    #define TIMER_REFILL                    10
-    #define TIMER_TIME_FLAG                 0
-    #define TIMER_ZERO_FLAG                 1
-    #define TIMER_RESET_ON_ENTER
-    #define HOTSPOT_TYPE_TIME               5
-```
+Flags are value containers. They can contain values from 0 to 127 (values 128 to 255 may have special *internal* meanings, as you will eventually see).
 
-- `timer` equals `TIMER_INITIAL` at the beginning.
-- `timer` decrements each seconds if `timer_on`.
-- `timer_on` is set at the beginning if `TIMER_START_ON` is defined.
-- When `timer == 0`, `timer_zero` is set. It's up to you to reset it.
-- if you define a `HOTSPOT_TYPE_TIME` you can use refills. Those will add `TIMER_REFILL` seconds to `timer`; if `TIMER_REFILL` equals 0, then timer will be set to `TIMER_INITIAL`.
+Interaction
+-----------
 
-If you are using scripting, use `TIMER_TIME_FLAG` and `TIMER_ZERO_FLAG` to copy the values of `timer` and `timer_zero` to a couple of flags.
+We'll be using this concept a lot. "To interact" means that the player metasprite overlaps with the interactive object and the player presses B.
 
-Steady Shooters
----------------
+Types of interactives
+---------------------
 
-```c
-    #define ENABLE_STEADY_SHOOTERS
-    #define STEADY_SHOOTERS_BASE_SPRID      44
-    #define STEADY_SHOOTER_KILLABLE
-```
+Interactives are just stuff on screen you can interact with. They are rendered as metasprites using definitions in the `spr_hs` array. As of v1.0, there are TWO types of interactives:
 
-- Type 5 (0x5).
-- Place them. Relation between (x1, y1) and (x2, y2) defines direction. Attribute defines # of seconds between shoots.
-- Cells are from `STEADY_SHOOTERS_BASE_SPRID` onwards, from left, clockwise: left up right down.
-- `STEADY_SHOOTER_KILLABLE` make steady shooters destructible. But beware! They are not counted as killable by `eneexp3.exe`'s option `gencounter`. You can count them in using the `genallcounters` option in addition to `gencounter` and adding `KILLABLE_ENEMS_prefix + MAX_ENEMS_TYPE_5_prefix`.
+- Simple interactives (called *sprites*): Just sprites you can interact with.
 
-Springs
+- *Containers*: They are bound to a flag, and the displayed metasprite is that corresponding to the value stored in the flag. On interaction, the object you carry (which is a value) and the value stored in the flag are swapped.
+
+If you know about **easy objects**, you probably know that the object you are carrying is stored in the `pinv` variable. When using interactives, the object you are carrying is stored in a flag. Which flag is again configured in `config.h` via the `FLAG_INVENTORY` directive.
+
+So when you interact with a container, the value in the flag bound with the container and the value of `flags [FLAG_INVENTORY]` are swapped.
+
+If you only need interactive *sprites* (if you are using **easy_objects** for object management, or nothing at all, for instance), don't forget to define `INTERACTIVES_ONLY_SPRITES`. To see that in action, be sure to check `08_cheril_perils_rom2_revamp`. 
+
+Display
 -------
 
+Interactives are created when you enter a new screen. They will exist on that screen only. The maximum number of interactives you can create in a screen is defined in `config.h` using `INTERACTIVES_MAX`. Note that this isn't a limit on how many interactives you have in your level.
+
+Interactives have three attributes: X, Y and F. 
+
+All interactives are defined to appear at a fixed position using tile coordinates (X, Y).
+
+The graphic they display (from the `spr_hs` metatile array) depends on the type of interactive:
+
+- *Sprites* will show the metasprite defined as `spr_hs [F]`.
+- *Containers* will show the metasprite defined as `spr_hs [flags [F]]`.
+
+Initialization
+--------------
+
+**Containers make flags interactuable**. You can use containers and flags to place objects around the map you can get and carry, and also places where you can drop what you are carrying.
+
+So everytime the game starts you must give initial values to the flags you are planning to bind with containers.
+
+For example, if you want a rock to appear in screen 7, tile coordinates (3, 4) and the metasprite of such rock is on `spr_hs [5]`, you have to:
+
+- Choose a free flag to bind with the container. Let's say `flag [2]`.
+- When the game starts, put the rock in the container: *assign "5" to `flag [2]`*.
+- When entering screen 7, you create a new container with X = 3, Y = 4, and F = 2.
+
+That way, when the player enters screen 7 for the first time, the engine will render `spr_hs [flags [F]] = spr_hs [flags [2]] = spr_hs [5]` = the rock at (3, 4).
+
+If the player is carrying a flower, which is the metasprite on `spr_hs [6]`, and the player interacts with the container, the values of flags [2] and flags [FLAG_INVENTORY] will be swapped, and the engine will render `spr_hs [flags [2]] = spr_hs [6]` = the flower at (3, 4).
+
+And this is how it works.
+
+In config.h
+-----------
+
 ```c
-    #define ENABLE_SPRINGS
-    #define SPRING_TILE                     10
-    #define SPRING_SPIKE_TILE               11
-    //#define SPRINGS_ON_BY_DEFAULT 
+    #define ENABLE_INTERACTIVES 
+    #define INTERACTIVES_MAX        4
+    #define FLAG_INVENTORY          0
 ```
 
-- When the player touches the cell above a placed `SPRING_TILE`, a `SPRING_SPIKE_TILE` is put in that cell.
-- Springs will only work if `springs_on`. `springs_on` is set from the beginning if `SPRINGS_ON_BY_DEFAULT` is set.
+As mentioned, the object the player carries is stored in `flag [FLAG_INVENTORY]` instead of `pinv`. 
 
-Compiled enemies
+`INTERACTIVES_MAX` means the maximum amount of interactives present *on screen* at the same time. It's good practice to adjust this number as low as possible (i.e. if the screen in your game which contains the most interactives contains just 2, set `INTERACTIVES_MAX` to 2).
+
+```c
+    #define HS_INV_X                136 
+    #define HS_INV_Y                11  
+```
+
+If you want that the object you are carrying appears on screen (in the HUD), define these two directives. Their values are the (X, Y) coordinates (in pixels) of the sprite.
+
+In metasprites.h
 ----------------
 
-Compiled enemies follow a programmed path from a set. Such set is generated compiling the `script/enembehs.spt` script. The language is pretty straightforward, just check the simple examples provided. 
+Interactives are rendered on screen using metasprites in the `spr_hs` array defined in `assets/metasprites.h`. The numbers used are the actual index of the metasprite in the array.
 
-Behaviours included in the script are compiled in order, the first one is #0. When adding enenmies in `ponedor.exe`, just add your enemy in its starting position as type 0x14 and especify the behaviour number in the attr field. The ending position is discarded.
+Empty containers
+----------------
 
-```c
-    #define ENABLE_COMPILED_ENEMS
-    #define COMPILED_ENEMS_SHOOT
-    #define COMPILED_ENEMS_BASE_SPRID       48
-```
+There's no special case to represent "empty" containers. The "empty" state is just simulated using a normal value. Just define an "empty" metasprite in `spr_hs` and its index in the array will mean "empty container" or "empty carried object".
 
-If your enemies shoot, define `COMPILED_ENEMS_SHOOT`. Leave it commented out if none of them do, as you will save space (`COCOS` won't get added). 
-
-Enemmies are rendered facing left or right. There are two animation cells for when they are moving around and two extra animation cells for when they are idling (not moving). Cells are in the active `spr_enems` array starting at index `COMPILED_ENEMS_BASE_SPRID`:
-
-```
-    WALK_RIGHT_0
-    WALK_RIGHT_1
-    IDLE_RIGHT_0
-    IDLE_RIGHT_1
-    WALK_LEFT_0
-    WALK_LEFT_1
-    IDLE_LEFT_0
-    IDLE_LEFT_1
-```
+Be sure to check the implementation of interactives in `03_tester_interactives`.
 
 CNROM
------
+=====
 
 To make CNROM games you have to:
 
@@ -499,3 +703,101 @@ And hat's it. Don'r forget to setup the map format in `config.h`, of course:
 ```
 
 Note that `MAP_FORMAT_CHRROM` will autodefine `MAP_RENDERER_COMPLEX`.
+
+Enemies in CNROM
+-----------------
+
+You can use the provided utils to store *anything* in CHR-ROM. But one of the things the engine directly supports to be stored in CHR-ROM is enemies.
+
+- First of all, enemies must be exported in the so called *bin mode* of `eneexp3` (notice the `bin` at the end):
+
+```cmd
+    ..\utils\eneexp3.exe level0.ene ..\dev\work\enems0.h 0 1 gencounter bin
+```
+
+- This will generate a pair of files per level: `enems0.h` with a bunch of constants, and `enems0.h.bin` containing the data.
+- Combine all `enems?.h` in a single `assets\enem_constants.h` file which will be the one you will be importing (optional, of course):
+
+```cmd
+    copy /b work\enems?.h assets\enem_constants.h
+    del work\enems?.h /q 2>nul
+```
+
+- Now you need to paste all the `enems?.h.bin` together so they can be stuffed in CHR-ROM, plus you need an index to address the beginning of each binary. This is done with the `binpaster` utility:
+
+```cmd
+    ..\utils\binpaster.exe index=..\assets\enem_index.h out=..\enems.bin files=enems0.h.bin,enems1.h.bin,enems2.h.bin,enems3.h.bin,enems4.h.bin
+```
+
+Just list all your `enems?.h.bin` files in order, comma-separated. This will generate `enems.bin` and `assets\enem_index.h`.
+
+There are multiple ways of getting enems.bin into CHR-ROM. For example, in **Cheril the Writer**, it is stuffed after actual pattern data. Be sure to calculate the right address of the enems binary for each level in `levelset.h`. Check the mentioned Cheril game for more insight. 
+
+Once you have everything in place, just configure the engine in `config.h`: 
+
+```c
+    #define ENEMS_IN_CHRROM
+```
+
+Scripting
+=========
+
+The package contains a scripts compiler which generates compact byte-code and self-container interpreter which works within AGNES via hooks. A proper documentation is yet to be written.
+
+Code injection
+==============
+
+An alternative (or complement) to the scripting engine is the set of code injection points, where you can add your own code to make your game happen. Post mortems for several games contain good example of code injections. To inject your code just modify the files in the `my` folder For the moment, there's a list and short explanation:
+
+`extra_checks.h` - Add extra conditions or simply code to be executed each frame.
+
+`extra_hud_update.h` - Add extra stuff to your hud.
+
+`extra_vars.h` - Maybe your custom features need some variables? Stuffed in BSS.
+
+`extra_inits.h` - Initialize your custom added variables, or modify the standard behaviour as this gets injected right after everythign is initializated for the new game.
+
+`game_frame.h` - Code to draw the static part of your game frame or hud.
+
+`interactives_setup.h` - Set up your interactives (see the section about interactives).
+
+`map_renderer_customization.h` - Once the current screen has been decoded, you can modify the 16x12 array of tiles before it is shown. This is used extensively in most examples.
+
+`on_entering_screen.h` - Last thing to be executed when the player enters a new screen and before starting the game loop.
+
+`on_interactive.h` - Player has interacted (see the section about interactives).
+
+`on_object_got.h` - Executed every time the player gets an object from a hotspot (see the section about easy objects).
+
+`on_object_used.h` - Executed every time the player uses an object in a hotspot (see the section about easy objects).
+
+`player_frame_selector.h` - Selects an animation cell for the player based upon the game state.
+
+`pres.h` - Your custom screens (title, game over, ending...).
+
+Miscellaneous
+=============
+
+Timer
+-----
+
+Runs a timer which you can display. It detects when it reaches zero. You can integrate this with the scripting engine, or react to it adding C code to `my/extra_checks.h`.
+
+```c
+    #define ENABLE_TIMER
+    #define TIMER_INITIAL                   5
+    #define TIMER_START_ON
+    #define TIMER_REFILL                    10
+    #define TIMER_TIME_FLAG                 0
+    #define TIMER_ZERO_FLAG                 1
+    #define TIMER_RESET_ON_ENTER
+    #define HOTSPOT_TYPE_TIME               5
+```
+
+- `timer` equals `TIMER_INITIAL` at the beginning.
+- `timer` decrements each seconds if `timer_on`.
+- `timer_on` is set at the beginning if `TIMER_START_ON` is defined.
+- When `timer == 0`, `timer_zero` is set. It's up to you to reset it.
+- if you define a `HOTSPOT_TYPE_TIME` you can use refills. Those will add `TIMER_REFILL` seconds to `timer`; if `TIMER_REFILL` equals 0, then timer will be set to `TIMER_INITIAL`.
+
+If you are using scripting, use `TIMER_TIME_FLAG` and `TIMER_ZERO_FLAG` to copy the values of `timer` and `timer_zero` to a couple of flags.

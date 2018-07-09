@@ -21,20 +21,28 @@ All fixed.
 Things to note for possible documentation
 =========================================
 
-Tall player
------------
+Player height
+-------------
 
-- Makes bounding boxes from 17 to 32 pixels tall for players.
-- Sprite handle NOT ALTERED, still 8x16 bottom-centered. This is a hack, remember?
-- Horizontal collision points will be three: `(X, pry)`, `(X, pry + 15)` and `(X, pry - 16 + PLAYER_COLLISION_VSTRETCH_BG)`.
-- **When cutting metasprites, remember that the player box is still 8x16, bottom-centered**
+By default, player's collision box is 8x16. The top limit of such box can be modified to make the player taller or shorter.
+
+```c
+#define PLAYER_COLLISION_VSTRETCH_BG    4
+#define PLAYER_COLLISION_VSTRETCH_FG    4
+```
+
+Will move the top of the player's collision box UP by the amount of pixels specified (will move it down if it is negative).
+
+`PLAYER_COLLISION_VSTRETCH_BG` is for collisions with the background and `PLAYER_COLLISION_VSTRETCH_FG` is for collisions with actors.
 
 Tall enemies
 ------------
 
-- There are three kind of enemy collisions for now. For more granularity, you should customize the engine.
-- SMALL_COLLISION (8x8) and undef (12x12) as always.
-- New hacky TALL_COLLISION (8x24), from within the 16x16 enemy rectangle.
+Likewise you can do with player's height, but extending the top of the enemies' collision box with the player.
+
+```c
+#define ENEMS_COLLISION_VSTRETCH_FG     4
+```
 
 Punchies
 --------

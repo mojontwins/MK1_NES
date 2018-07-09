@@ -435,31 +435,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/utils/README.md",
-			"settings":
-			{
-				"buffer_size": 8712,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/02_tester_punchy/dev/engine/enengine.h",
-			"settings":
-			{
-				"buffer_size": 22429,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/utils/legacy/enemscutter.bas",
-			"settings":
-			{
-				"buffer_size": 2655,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -549,6 +524,7 @@
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/src/utils/README.md",
 		"/D/git/MK1_NES/src/utils/eneexp3.bas",
 		"/D/git/MK1_NES/CONTRIBUTING.md",
 		"/D/git/MK1_NES/README.md",
@@ -675,8 +651,7 @@
 		"/D/git/MK1_NES/examples/11_bootèe/dev/game.c",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/ending_spr.h",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop/cheat.h",
-		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns-sfw.spt"
+		"/D/git/MK1_NES/examples/11_bootèe/gfx/import_patterns.spt"
 	],
 	"find":
 	{
@@ -706,6 +681,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"exe",
 			"binmode",
 			"bin",
 			"binmode",
@@ -803,135 +779,13 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/utils/README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8712,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8705,
-								8705
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 8910,
-								"count": 1257,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "testers/02_tester_punchy/dev/engine/enengine.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 22429,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5430,
-								5430
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 2001,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4329.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 2,
-					"file": "src/utils/legacy/enemscutter.bas",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2655,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 438,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
