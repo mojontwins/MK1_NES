@@ -98,7 +98,7 @@ Function pValR (s As String) As Integer
 	ElseIf s = "ITEM_SELECTED" Then
 		res = 128 + itemFlag
 	ElseIf Left (s, 1) = "#" Then
-		res = 128 + Val (Right (s, Len (s) - 1))
+		res = 128 + pValR (Right (s, Len (s) - 1))
 	ElseIf Left (s, 1) = "$" Then
 		For i = 0 To LIST_ALIAS_SIZE
 			If s = listAlias (i) Then res = 128 + i: Exit For
@@ -162,7 +162,7 @@ Sub ProcessAlias (f As Integer)
 	While Not terminado
 		Line input #f, linea
 		linea = Trim (linea, Any chr (32) + chr (9))
-		parseTokenizeString linea, lP (), ",;()" & chr (9), "'"
+		parseTokenizeString linea, lP (), ",;()=" & chr (9), "'"
 		If lP (0) = "END" Then terminado = Not 0
 		If Left (lP (0), 1) = "$" Then
 			AddAlias lP (0), pValR (lP (1))
@@ -179,6 +179,24 @@ Sub lPshiftLeft (first As Integer)
 		lP (i - 1) = lP (i)
 	Next i
 End Sub
+
+Function strictNumeric (word As String) As Integer
+	Dim As Integer res, i
+	Dim As String m
+	If word = "" Then
+		res = 0
+	Else
+		res = -1
+		For i = 1 To Len (word)
+			m = Mid (word, i, 1)
+			If m < "0" Or m > "9" Then
+				res = 0: Exit For
+			End If
+		Next i
+	End If
+
+	Return res
+End Function
 
 Function strictMscNumeric (word As String) As Integer
 	Dim As Integer res, i
@@ -570,10 +588,13 @@ Function procesaClausulas (f As Integer) As String
 						clausula = clausula + Chr (opCode) + Chr (lValue) +  Chr (rValue)
 						actionsUsed (opCode) = -1
 					Case "SWAP"
-						clausula = clausula + Chr (&H14) + Chr (pVal (lP (1))) + Chr (pVal (lP (2)))
+						If strictNumeric (lp (1)) Then lp (1) = "#" & lp (1)
+						If strictNumeric (lp (2)) Then lp (2) = "#" & lp (2)
+						clausula = clausula + Chr (&H14) + Chr (pValL (lP (1))) + Chr (pValL (lP (2)))
 						actionsUsed (&H14) = -1
 					Case "FLIPFLOP"
-						clausula = clausula + Chr (&H15) + Chr (pVal (lP (1)))
+						If strictNumeric (lp (1)) Then lp (1) = "#" & lp (1)
+						clausula = clausula + Chr (&H15) + Chr (pValL (lP (1)))
 						actionsUsed (&H15) = -1
 
 					Case "INC_LIFE"
