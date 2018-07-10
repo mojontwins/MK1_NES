@@ -797,7 +797,7 @@ Runs a timer which you can display. It detects when it reaches zero. You can int
 - `timer` equals `TIMER_INITIAL` at the beginning.
 - `timer` decrements each seconds if `timer_on`.
 - `timer_on` is set at the beginning if `TIMER_START_ON` is defined.
-- When `timer == 0`, `timer_zero` is set. It's up to you to reset it.
+- When `timer == 0`, `timer_zero` is set. It's up to you to reset it. If scripting is on, it will run the `ON_TIMER_OFF` section.
 - if you define a `HOTSPOT_TYPE_TIME` you can use refills. Those will add `TIMER_REFILL` seconds to `timer`; if `TIMER_REFILL` equals 0, then timer will be set to `TIMER_INITIAL`.
 
 If you are using scripting, use `TIMER_TIME_FLAG` and `TIMER_ZERO_FLAG` to copy the values of `timer` and `timer_zero` to a couple of flags.
