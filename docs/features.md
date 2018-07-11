@@ -742,7 +742,7 @@ Once you have everything in place, just configure the engine in `config.h`:
 Scripting
 =========
 
-The package contains a scripts compiler which generates compact byte-code and self-container interpreter which works within AGNES via hooks. A proper documentation is yet to be written.
+The package contains a scripts compiler which generates compact byte-code and self-container interpreter which works within AGNES via hooks. Check [the reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mscmk1.md).
 
 Code injection
 ==============
@@ -774,6 +774,8 @@ An alternative (or complement) to the scripting engine is the set of code inject
 `player_frame_selector.h` - Selects an animation cell for the player based upon the game state.
 
 `pres.h` - Your custom screens (title, game over, ending...).
+
+Check [the reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/code_injection.md).
 
 Miscellaneous
 =============

@@ -31,6 +31,7 @@ Documentation
 * [MKTS (GFX cutter & importer) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mkts.md).
 * [MSCMK1 (script compiler) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mscmk1.md).
 * [MK1_NES / AGNES utilities](https://github.com/mojontwins/MK1_NES/blob/master/src/UTILS.md).
+* [Code injection points](https://github.com/mojontwins/MK1_NES/blob/master/src/code_injection.md)
 * There's a detailed postmortem on every tester and examples #7 onwards. 
 * A tutorial is coming in the near future.
 
