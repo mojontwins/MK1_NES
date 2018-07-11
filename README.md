@@ -27,7 +27,12 @@ To compile the examples, enter `examples` and run `make_examples.bat`. `cc65_2.1
 Documentation
 =============
 
-You can read about [engine features](https://github.com/mojontwins/MK1_NES/blob/master/docs/features.md) and will find a detailed postmortem on every tester and examples #7 onwards. A tutorial is coming in the near future.
+* You can read about [engine features](https://github.com/mojontwins/MK1_NES/blob/master/docs/features.md) .
+* [MKTS (GFX cutter & importer) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mkts.md).
+* [MSCMK1 (script compiler) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mscmk1.md).
+* [MK1_NES / AGNES utilities](https://github.com/mojontwins/MK1_NES/blob/master/src/UTILS.md).
+* There's a detailed postmortem on every tester and examples #7 onwards. 
+* A tutorial is coming in the near future.
 
 Evolution
 =========
