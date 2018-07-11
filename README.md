@@ -13,7 +13,7 @@ I've decided to clean **MT Engine MK1 NES** up and make it useable - I've ended 
 
 **Notice: current code in /src may not work as it is being revised for a final v1.0. Use releases->tags for old working code. Watch for this notice to be removed**
 
-Update 20180703: **[v0.99.8-rc4](https://github.com/mojontwins/MK1_NES/releases/tag/v0.99.8-rc4) released, almost there, but there's still some stuff missing (mostly docs)**
+Update 20180711: **[v0.99.8-rc4](https://github.com/mojontwins/MK1_NES/releases/tag/v0.99.8-rc4) released, almost there, but there's still some stuff missing (mostly docs)**
 
 How to Build
 ============
