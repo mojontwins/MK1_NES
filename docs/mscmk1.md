@@ -111,7 +111,7 @@ The interpreter will keep consuming all the clausules in the section in order, u
 
 BREAK is quite useful if you don't need more checks after the current clausule successes. 
 
-```
+```spt
     IF $SOMEVAL = 0
     THEN
         SET TILE (2, 4) = 2
@@ -130,7 +130,7 @@ BREAK is quite useful if you don't need more checks after the current clausule s
 
 Notice how, in this situation, you can save a `BREAK` just being clever when organizing your clausules:
 
-```
+```spt
     IF $SOMEVAL = 1
     THEN
         SET TILE (2, 4) = 3
@@ -149,7 +149,7 @@ The scripting engine works with a set of *flags*, which are *value containers*. 
 
 For example those are equivalent.
 
-```
+```spt
     IF FLAG 5 = #3
     IF #5 = FLAG 3
     IF #5 = #3
@@ -163,13 +163,13 @@ Having to keep track of which flags contains what can be a chore. That's why it'
 
 Aliases begin with character $ followed by an identifier. For example, we can bind alias $LLAVE to flag 2 and use this:
 
-```
+```spt
     IF $LLAVE = 1
 ```
 
 Or even
 
-```
+```spt
     IF $STATUES_IN_PLACE = $STATUES_TO_PLACE
 ```
 
@@ -194,7 +194,7 @@ Sometimes there are several ways to achieve the same goal. Don't take this as a 
 
 There's a condition which always evaluates to true:
 
-```
+```spt
     IF TRUE
 ```
 
@@ -204,7 +204,7 @@ Most of your script will have to do with checking the values in flags and settin
 
 ### Conditions
 
-```
+```spt
     IF VALUE1 = VALUE2          Will be true if VALUE1 and VALUE2 are equal.
 
     IF VALUE1 < VALUE2          Will be true if VALUE1 is less than VALUE2.
@@ -219,7 +219,7 @@ VALUE1 and VALUE2 can be numbers or flags. Flags can be expressed as FLAG N, #N 
 
 For example:
 
-```
+```spt
     IF $APPLES = 4
     IF FLAG 2 = FLAG 3
     IF $TIMES_PLAYED > $MINIMUM
@@ -227,7 +227,7 @@ For example:
 
 ### Commands
 
-```
+```spt
     SET FLAG = VALUE            Will put VALUE inside FLAG.
 
     INC|ADD FLAG, VALUE         Will increment the value inside FLAG VALUE times.
@@ -244,7 +244,7 @@ Where FLAG can be either FLAG N, #N or $ALIAS. VALUE can be a number or a FLAG.
 
 For example:
 
-```
+```spt
     SET $BOILER = 2
     SET $STATE = $OLD_STATE
     INC $RABBITS, 2
@@ -293,7 +293,7 @@ More on interactives later.
 
 Related to the count of collected items (hotspots type 1), you have these conditions:
 
-```
+```spt
     IF PLAYER_HAS_OBJECTS       Will be true if the player has *any* objects.
 
     IF OBJECT_COUNT = VALUE     Will be true if the count of collectible
@@ -304,7 +304,7 @@ VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 
 There's also some commands:
 
-```
+```spt
     INC OBJECTS, VALUE          Increases the collectible items count by VALUE
 
     DEC OBJECTS, VALUE          Decreases the collectible items count by VALUE
@@ -314,17 +314,29 @@ There's also some commands:
 
 If the player can kill enemies, there's a couple of conditions available:
 
-```
+```spt
     IF ALL_ENEMIES_DEAD         True if player killed all enemies on level.
 
     IF ENEMS_KILLED = VALUE     True if player killed VALUE enemies.
+```
+
+### Player life
+
+There are commands to increase, decrease, or completely refill the player's life:
+
+```spt
+    INC LIFE, VALUE             Increments player's life by VALUE
+
+    DEC LIFE, VALUE             Decrements player's life by VALUE
+
+    REFILL                      plife = PLAYER_LIFE (full refill)
 ```
 
 ## Conditions and commands related to position
 
 ### Conditions about coordinates
 
-```
+```spt
     IF PLAYER_TOUCHES (x, y)    True if player touches tile at (x, y)
                                 x and/or y can be either numbers of flags
 
@@ -339,7 +351,7 @@ If the player can kill enemies, there's a couple of conditions available:
 
 ### Commands to change position
 
-```
+```spt
     SET X = VALUE               Changes the player to tile coordinate X,
                                 horizontally.
 
@@ -354,7 +366,7 @@ VALUE, VALUE1 and VALUE2 can be either numbers or flags. Flags can be expressed 
 
 ### Conditions related to the current screen
 
-```
+```spt
     IF NPANT = VALUE            True if player is on screen VALUE.
 
     IF NPANT <>|!= VALUE        True if player is NOT on screen VALUE.
@@ -364,12 +376,24 @@ VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 
 ### Changing to a different screen
 
-```
+```spt
     WARP_TO N, X, Y             Changes the player to screen N at tile
                                 coordinates X, Y.
 ```
 
 Either N, X, or Y can be numbers or flags. Flags can be expressed as FLAG N, #N or $ALIAS.
+
+### Which level?
+
+This may look redundant, but it's not. In normal situations you *know* which level you are in, but the same script *can* be shared by several levels, so,
+
+```spt
+    IF LEVEL = VALUE            True if level is N.
+
+    IF LEVEL <>|!= VALUE        True if level is not N.
+```
+
+VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 
 ### Changing levels
 
@@ -379,7 +403,7 @@ Not ready yet!
 
 You have the ability to redraw the screen as it is stored in the current screen buffer `scr_buff`. Note that breaking or pushing tiles around actually modify `scr_buff`, so this command will NOT revert the screen.
 
-```
+```spt
     REDRAW
 ```
 
@@ -387,7 +411,7 @@ You have the ability to redraw the screen as it is stored in the current screen 
 
 This command will indeed reenter the screen: the background will be drawn from map data (thus broken or pushed tiles will be reverted), and enemies will be reloaded, etc.
 
-```
+```spt
     REENTER
 ```
 
@@ -397,7 +421,7 @@ This command will indeed reenter the screen: the background will be drawn from m
 
 Printing tiles in the game area actually modifies the screen, as printed tiles will set its behaviour on the cell they are printed to. Note that `REDRAW` will conserve the changes, `REENTER` will destroy them.
 
-```
+```spt
     SET TILE (X, Y) = VALUE     Puts tile VALUE at coordinates X, Y.
 ```
 
@@ -405,7 +429,7 @@ Either VALUE, X, or Y can be numbers or flags. Flags can be expressed as FLAG N,
 
 If you have several (three or more) tiles to print, you can save space using decorations, which are triads of numeric values X, Y, T. Each triad will set tile T at (X, Y) and lies on a separate line. The end of the list is marked by `END`.
 
-```
+```spt
     DECORATIONS
         X, Y, T
         ...
@@ -420,7 +444,7 @@ Not ready yet!
 
 This facilty let's you print anytile anywhere in the screen, not just the game area, and uses character coordinates. Obviously, those print don't put anything on the game area, so cell behaviours will not be affected at all.
 
-```
+```spt
     PRINT_TILE_AT (x, y) = n    Prints tile n at CHARACTER coordinates x, y
 ```
 
@@ -428,24 +452,310 @@ This can be useful for many tasks, but for example you can hide secret passages 
 
 ### Show changes
 
-```
+```spt
     SHOW
 ```
 
 This will make changes visible. This is may be desirable as `SET TILE` won't send the changes to the screen until next NMI.
 
-## Player life
-
 ## The timer
+
+The timer will count down in seconds from an initial value if it is on, and is able to execute things when it reaches zero. From the script, you can set and read the timer. There's also a special section which is executed when the timer reaches zero, `ON_TIMER_OFF`.
+
+In the future: `ON_TIMER_TICK` section, not ready yet.
+
+### Conditions
+
+```spt
+    IF TIMER = VALUE            True if TIMER equals VALUE
+
+    IF TIMER <>|!= VALUE        True if TIMER does not equal VALUE
+
+    IF TIMER >= VALUE           True if TIMER >= VALUE
+
+    IF TIMER <= VALUE           True if TIMER <= VALUE
+```
+
+VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
+
+### Commands
+
+```spt
+    SET TIMER = VALUE           Sets the TIMER to VALUE
+
+    TIMER START                 Starts the timer.
+
+    TIMER STOP                  Stops the timer.
+```
+
+VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 
 ## Interactives 
 
+As mentioned, Interactives are graphicas stuff (in fact, metasprites) you can put on screen and interact with. There are two kinds of interactives:
+
+* Simple interactives (called *sprites*): Just sprites you can interact with.
+* *Containers*: Graphical representation of flags - Containers are bound to flags and show its contents. On interaction, the object the player is carrying (which is a value) and the value stored in the flag are swapped.
+
+The object the player is carrying is stored in a flag, as defined by the constant `FLAG_INVENTORY` in `config.h`. It's good practice to have this in your `config.h`:
+
+```c
+    #define FLAG_INVENTORY 1
+```
+
+And this in your script:
+
+```spt
+    DEFALIAS
+        $PINV 1
+        ...
+    END
+```
+
+And always reference the object the player is carrying using `$PINV`.
+
+### Display
+
+Interactives are created when you enter a new screen. They will exist on that screen only. The maximum number of interactives you can create in a screen is defined in `config.h` using `INTERACTIVES_MAX`. Note that this isn't a limit on how many interactives you have in your level.
+
+Interactives have three attributes: X, Y and F. (X, Y) defines where they appear in the game area. F is related to the displayed metasprite, which always comes from the `spr_hs` metasprite array:
+
+- *Sprites* will show the metasprite `spr_hs [F]`.
+- *Containers* will show the metasprite `spr_hs [flags [F]]`.
+
+### Initialization
+
+**Containers make flags interactuable**. You can use containers and flags to place objects around the map you can get and carry, and also places where you can drop what you are carrying.
+
+So everytime the game starts you must give initial values to the flags you are planning to bind with containers. That's usually done in the `ENTERING_GAME` section in the current level.
+
+```spt
+    DEFALIAS
+        $CONT1 1
+        $CONT2 2
+    END
+
+    ENTERING GAME
+        IF TRUE
+        THEN
+            # Initialize containers to initially contain
+            # a flower (metasprite 8) and a quill (metasprite 9)
+            SET $CONT1 = 8
+            SET $CONT2 = 9
+        END
+    END
+```
+
+### Placement
+
+Interactives (both plain sprites and containers) have to be placed on screen. That is generally done in the `ENTERING SCREEN x` section in the script, but may be added anywhere (imagine you have to make a sprite appear when some condition is met in the `PRESS_FIRE_AT SCREEN x` section, for example).
+
+To place a sprite:
+
+```spt
+    ADD_SPRITE S, X, Y
+```
+
+Where S is the metasprite index in `spr_hs` and (X, Y) the coordinates (tile coordinates, X = 0..15; Y = 0..12).
+
+To place a container:
+
+```spt
+    ADD_CONTAINER F, X, Y
+```
+
+Where F is the flag bound to the container (or an alias to it), and (X, Y) the coordinates (tile coordinates, X = 0..15; Y = 0..12).
+
+### Checks with containers
+
+As containers are bound to flags, you just have to check the contents of the appropriate flags. For example, if you are using $CONT_CHEST to implement a chest, you can check if it contains the quill (metasprite 9, for example) as easy as:
+
+```spt
+    IF $CONT_CHEST = 9
+```
+
+### Interaction
+
+When the player interacts with an interactive, the interactive will be referenced by the special script variable `ARG`, `JUST_INTERACTED` will evaluate to `TRUE` and the `PRESS_FIRE` sections in the script will be run. Sprites and containers are checked for differently.
+
+To check if the player interacted with sprite S:
+
+```spt
+    IF JUST_INTERACTED
+    IF ARG = S
+```
+
+For example:
+
+```spt
+    IF JUST_INTERACTED
+    IF ARG = 7
+```
+
+Will evaluate to true if the player just interacted with sprite with F = 7 (showing spr_hs [7]).
+
+To check if the player interacted with container F (executed **after the objects have been swapped**):
+
+```spt
+    IF JUST_INTERACTED
+    IF ARG ~ F
+```
+
+For example:
+
+```spt
+    IF JUST_INTERACTED
+    IF ARG ~ $CONT_CHEST
+```
+
+So if the player interacted with the chest, `PRESS_FIRE` is run, and there, the above code will evaluate to true as `ARG` will *reference* `$CONT_CHEST`. If the script was fired 'cause the player interacted with a different container, `IF ARG ~ $CONT_CHEST` will evaluate to false.
+
+You can check [Tester interactives](https://github.com/mojontwins/MK1_NES/tree/master/testers/03_tester_interactives) for a good example on using interactives from the script.
+
 ## End of game
+
+You can finish the game from the script in two ways:
+
+```spt
+    GAME OVER                   Make the player lose the game
+
+    WIN GAME                    Make the player win the game
+```
+
+The `WIN GAME` command will end the current level successfully.
 
 ## The fire zone
 
+The *fire zone* is a rectangle on screen which will launch the `PRESS_FIRE` script if the player overlaps it. You have to enable them in `config.h`:
+
+```c
+    #define ENABLE_FIRE_ZONE
+```
+
+To define a fire zone you can do it in pixel or tile coordinates. This can be done in any commands section. The fire zone will be active until the player moves to a different screen.
+
+```spt
+    SET FIRE_ZONE x1, y1, x2, y2
+
+    SET FIRE_ZONE_TILES x1, y1, x2, y2
+```
+
+Note that `SET FIRE_ZONE_TILES` will be internally converted to a play `SET FIRE_ZONE` by the compiler.
+
+To clear the fire zone, just move it to an unreachable area, for example:
+
+```spt
+    SET_FIRE_ZONE 255, 255, 255, 255
+```
+
 ## Extern code
+
+If you need to do something which can't be directly achieved from the script, you can use the extern code facility. Extern code support has to be enabled in `config.h`.
+
+```spt
+    ENABLE_EXTERN_CODE
+```
+
+That will make the contents of `my/extern.h` to be included in your game. In that file, there's a main entry point:
+
+```c
+    void do_extern_action (unsigned char n) {
+        //
+    }
+```
+
+When the interpreter finds this command in the script:
+
+```spt
+    EXTERN N
+```
+
+It will call `do_extern_action (n)`, with n = N a number. You can then add your own c code to `do_extern_action` to perform tasks depending on `n`. 
+
+For example, in [Cadàveriön](https://github.com/mojontwins/MK1_NES/tree/master/examples/09_cad%C3%A0veri%C3%B6n) it is called from `ON_TIMER_OF` to do the *time over* sequence (hide the sprites, show 'TIME OVER!' on screen, wait for input, and reload the hotspots).
 
 ## Safe spots
 
+If `DIE_AND_RESPAWN` is defined in `config.h`, whenever the player jumps (while on a safe spot), the coordinates will be stored as 'safe', and when the player dies, it will be respawned on such coordinates.
+
+You can set such spot manually from the script:
+
+```spt
+    SET SAFE HERE               Store current player coordinates as 
+                                'safe spot'.
+
+    SET SAFE N, X, Y            Set the 'safe spot' at screen N, coordinates
+                                (X, Y).
+```
+
+## Text output
+
+There are two ways to display text, the legacy "line of text" and the new text box.
+
+```spt
+    TEXT "SOME TEXT"            Shows some text in the line of text area
+```
+
+The location of the line of text area is defined by the constants `LINE_OF_TEXT` (Y coordinate) and `LINE_OF_TEXT_X` (X coordinate) in `config.h`.
+
+As this is quite limited, we added a proper text box:
+
+```spt
+    TEXTBOX N                   Display a text box showing text N.
+```
+
+Texts are defined in `assets/custom_texts.h`:
+
+```c
+    const unsigned char custom_text0 [] = 
+        "THIS IS A FILLER!%";
+        
+    const unsigned char * const custom_texts [] = {
+        custom_text0
+    };
+```
+
+Add your strings as `custom_textN` arrays, then reference them in the `custom_texts` list. The value N in the script references to this array. So if you have:
+
+```c
+    const unsigned char custom_text0 [] = 
+        "HELLO, MY FRIEND!%"
+        "IT'S A NICE DAY!%";
+
+    const unsigned char custom_text1 [] = 
+        "BEWARE!!!%"
+        "HUNGRY PIRANHAS%";
+        
+    const unsigned char * const custom_texts [] = {
+        custom_text0
+    };
+```
+
+Then this:
+
+```spt
+    TEXTBOX 1
+```
+
+Will display a text box with the text:
+
+```
+    BEWARE!!!
+    HUNGRY PIRANHAS
+```
+
+In the strings, % is a line break. Lines shouldn't be longer than 18 characters (excluding the line break). Strings should end with a line break.
+
 ## Miscellaneous
+
+```spt
+    FLICKER                     Makes the player flicker for a while
+
+    PAUSE|DELAY VALUE           Will pause for VALUE frames.
+
+    MUSIC OFF|STOP              Stops the background music.
+
+    MUSIC VALUE                 Plays the music VALUE
+
+    SOUND VALUE                 Plays the sound effect VALUE
+```
