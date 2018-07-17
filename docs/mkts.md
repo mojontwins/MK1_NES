@@ -67,37 +67,37 @@ Basic commands
 This is a list of the basic commands:
 
 ```
-	OPEN image.png
+    OPEN image.png
 ```
 
 Will load `image.png`. Every cutting command from now on will refer to this image until a new image is loaded.
 
 ```
-	PALS pal.png
+    PALS pal.png
 ```
 
 Will open the *palette image* `pal.png` and will extract the palette data from it. Every cutting command from now on will use the extracted palette until a new palette is loaded.
 
 ```
-	MAPFILE metadata.h
+    MAPFILE metadata.h
 ```
 
 Defines the output file for the generated metadata. All metadata generated while cutting graphics will be written to that file, until a new output file is especified.
 
 ```
-	LABEL label
+    LABEL label
 ```
 
 Metadata is generated as C arrays. The identifiers of such arrays will use the defined string as a prefix. 
 
 ```
-	RESETPOOL
+    RESETPOOL
 ```
 
 Clears the used patterns pool. We will use it when we finish cutting patterns for bank 0 and are about to start bank 1.
 
 ```
-	FILL to
+    FILL to
 ```
 
 Pads with zeroes until the output binary length is `to` bytes. We'll be using it to pad until the end of bank 0 (`FILL 4096`) and to the end of bank 1 (`FILL 8192`).
@@ -108,15 +108,15 @@ Bank 0, charset
 First thing we'll be importing is the set of 64 patterns **AGNES** uses to display text from `font.png`. The command used is `CHARSET`, whose syntax is:
 
 ```
-	CHARSET x0, y0, w, h
+    CHARSET x0, y0, w, h
 ```
 
 Where `x0, y0` are the origin coordinates inside the png and `w, h` are the dimensions of the rectangle we want to cut. In the example `font.png` the 64 patterns are arranged as a 32x2 rectangle, so:
 
 ```
-	OPEN font.png
-	PALS palts0.png
-	CHARSET 0, 0, 32, 2
+    OPEN font.png
+    PALS palts0.png
+    CHARSET 0, 0, 32, 2
 ```
 
 As charset don't generate metadata, we won't need `MAPFILE` or `LABEL`.
@@ -127,7 +127,7 @@ Bank 0, tileset
 In this initial version we'll be completing bank 0 with the patterns extracted from the tileset contained in `ts0.png`. To cut tilesets we use the `MAPPED` command, whose syntax is:
 
 ```
-	MAPPED x0, y0, wm, hm, w, h [, max]
+    MAPPED x0, y0, wm, hm, w, h [, max]
 ```
 
 here `x0, y0` are the origin coordinates inside the png and `w, h` are the dimensions of the rectangle we want to cut **in tiles**. `wm, hw` are the size *in patterns* of each entity - in **AGNES** such dimmensins are **always** `2, 2`, as map tiles are 2x2 patterns. `max` is used if we want to cut fewer tiles than the rectangle contains.
@@ -135,17 +135,17 @@ here `x0, y0` are the origin coordinates inside the png and `w, h` are the dimen
 For example we want to cut 16 tiles from `ts0.png` which contains an array of 16x1 tiles. Before we start cutting, we need to set the file which will store the metadata first. As **mkts** will be called from the `/gfx/` folder, we add a relative path to the file leading to the `/dev/assets/` folder, which is where **AGNES** expects the metadata to reside.
 
 ```
-	MAPFILE ..\dev\assets\tiledata.h
+    MAPFILE ..\dev\assets\tiledata.h
 ```
 
 And them the cutting command:
 
 ```
-	# Tileset 0
-	OPEN ts0.png
-	PALS palts0.png
-	LABEL ts0
-	MAPPED 0, 0, 2, 2, 16, 1
+    # Tileset 0
+    OPEN ts0.png
+    PALS palts0.png
+    LABEL ts0
+    MAPPED 0, 0, 2, 2, 16, 1
 ```
 
 This code makes **mkts** open `ts0.png`, read the palette from `palts0.png`, take `ts0` as the prefix to generate metadata, and cut 41 2x2 patterns tiles from `0, 0` from a rectangle of 16x3 tiles.
@@ -160,8 +160,8 @@ Bank 0, closure
 We won't need anything else on bank 0, so we pad with zeroes, then reset the pool
 
 ```
-	RESETPOOL
-	FILL 4096
+    RESETPOOL
+    FILL 4096
 ```
 
 By now the output binary is 4Kb and contains a whole first bank of CHR-ROM.
@@ -172,9 +172,9 @@ Bank 1, preparations
 As all metadata related to sprites will go into the same file, all sprites are in `ss.png`, and all of them use the same palette `palss0.png`, this section starts with:
 
 ```
-	OPEN ss.png
-	PALS palss0.png
-	MAPFILE ..\dev\assets\spritedata.h	
+    OPEN ss.png
+    PALS palss0.png
+    MAPFILE ..\dev\assets\spritedata.h  
 ```
 
 Bank 1, main character
@@ -191,7 +191,7 @@ What **AGNES** does is having an offset to know where to place the actual metasp
 Generally, we want the *logical rectangle* bottom-centered in the metasprite. The six cells used to animate the main character (1 x *idle*, 4 * *walking*, 1 * *airborne*) share the same offsets and the same size, so we can cut them all in one go using the command `METASPRITESET`, whose syntax is:
 
 ```
-	METASPRITESET x0, y0, wm, hm, w, h, offs_x, offs_y[, MAX] [FLIPPED]
+    METASPRITESET x0, y0, wm, hm, w, h, offs_x, offs_y[, MAX] [FLIPPED]
 ```
 
 here `x0, y0` are the origin coordinates inside the png and `w, h` are the dimensions of the rectangle we want to cut *in metasprites*. `wm, hm` are the dimmensions of each metasprite *in patterns*.
@@ -203,8 +203,8 @@ here `x0, y0` are the origin coordinates inside the png and `w, h` are the dimen
 So:
 
 ```
-	LABEL sspl
-	METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
+    LABEL sspl
+    METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
 ```
 
 The `-4, -8` offset mean that the metasprite will be drawn 4 pixels left, 8 pixels over the actual coordinates of the *logical rectangle*.
@@ -212,15 +212,15 @@ The `-4, -8` offset mean that the metasprite will be drawn 4 pixels left, 8 pixe
 Metadata generated by this command consists in a set of 12 arrays containing the 6 cells we have cut plus their flipped versions. `sspl`will be used as a prefix, and the generated identifiers will have the format:
 
 ```
-	sspl_XX_F
+    sspl_XX_F
 ```
 
 Where `XX` is an index and `F` is `a` for the normal version (by convention, facing right) and `b` for the horizontally flipped version (by convention, facing left). Therefore, the list of generated arrays will have these identifiers:
 
 ```c
-	sspl_00_a, sspl_00_b, sspl_01_a, sspl_01_b, 
-	sspl_02_a, sspl_02_b, sspl_03_a, sspl_03_b, 
-	sspl_04_a, sspl_04_b, sspl_05_a, sspl_05_b
+    sspl_00_a, sspl_00_b, sspl_01_a, sspl_01_b, 
+    sspl_02_a, sspl_02_b, sspl_03_a, sspl_03_b, 
+    sspl_04_a, sspl_04_b, sspl_05_a, sspl_05_b
 ```
 
 Bank 1, enemies
@@ -233,8 +233,8 @@ Remember that **AGNES** uses a 16x16 pixels *logical rectangle* for enemies and 
 We have three different enemies with two animation cells each, measuring 2x3 patterns (or 16x24 pixels). 
 
 ```
-	LABEL ssen
-	METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
+    LABEL ssen
+    METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
 ```
 
 The *logical rectangle* is 16x16 and our enemies are 16x24. The metasprite should be painted 8 pixels above the actual coordinates, hence the `0, -8`.
@@ -242,8 +242,8 @@ The *logical rectangle* is 16x16 and our enemies are 16x24. The metasprite shoul
 Platforms are 2x2 patterns:
 
 ```
-	LABEL ssplat
-	METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0
+    LABEL ssplat
+    METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0
 ```
 
 In this case, the *logical rectangle* is the same size of the metasprite, so the offsets are `0, 0`.
@@ -251,11 +251,11 @@ In this case, the *logical rectangle* is the same size of the metasprite, so the
 All those commands will generate quite a few arrays in the metadata file:
 
 ```c
-	ssena_00_a, ssena_00_b,	ssena_01_a, ssena_01_b,
-	ssena_02_a, ssena_02_b,	ssena_03_a, ssena_03_b,
-	ssena_04_a, ssena_04_b,	ssena_05_a, ssena_05_b,
-	ssplat_00, ssplat_01,
-	
+    ssena_00_a, ssena_00_b, ssena_01_a, ssena_01_b,
+    ssena_02_a, ssena_02_b, ssena_03_a, ssena_03_b,
+    ssena_04_a, ssena_04_b, ssena_05_a, ssena_05_b,
+    ssplat_00, ssplat_01,
+    
 ```
 
 Bank 1, items / extra
@@ -266,14 +266,14 @@ We'll be cutting 3 metasprites in this section: the *object* (collectible item),
 Remember that items/extra stuff have a *logical rectangle* of 16x16 pixels, so:
 
 ```
-	LABEL ssit
-	METASPRITESET 0, 6, 2, 2, 3, 1, 0, 0
+    LABEL ssit
+    METASPRITESET 0, 6, 2, 2, 3, 1, 0, 0
 ```
 
 And the generated arrays are:
 
 ```
-	ssit_00, ssit_01, ssit_02
+    ssit_00, ssit_01, ssit_02
 ```
 
 Bank 1, closure
@@ -282,7 +282,7 @@ Bank 1, closure
 We just need to pad until the 8K mark:
 
 ```
-	FILL 8192
+    FILL 8192
 ```
 
 With this last command, the output binary is exactly 8192 bytes long, with pattern data aligned to two sections of 4096 bytes each.
@@ -293,7 +293,7 @@ Running mkts
 Let's try and run **mkts** to check that everything is alright. Open a command line interpreter window (have you tried [conEmu](https://conemu.github.io/)?), move to the `/gfx/` folder in our project and run:
 
 ```batch
-	$ ..\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr
+    $ ..\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr
 ```
 
 This will output some text in the console (that's **mkts** working and being verbose; you can prevent that adding `silent` to the end of the command line) and will generate `tileset.chr` in `/dev/` and the metadata files `/dev/assets/tiledata.h` and `/dev/assets/spritedata.h`, which is where **AGNES** expects them.
@@ -301,7 +301,7 @@ This will output some text in the console (that's **mkts** working and being ver
 Let's check if the generated `tileset.chr` is correct by running:
 
 ```batch
-	$ ..\utils\chrview.exe ..\dev\tileset.chr
+    $ ..\utils\chrview.exe ..\dev\tileset.chr
 ```
 
 You should get this:

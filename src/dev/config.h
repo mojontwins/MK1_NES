@@ -59,7 +59,8 @@
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
 
-//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
+//#define HOTSPOT_TYPE_RESONATOR 	4		// An example of custom hotspot
+//#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -110,7 +111,7 @@
 
 // Push boxes
 
-//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+//#define PLAYER_PUSH_BOXES 				// If defined, tile beh 11 is pushable
 #define FIRE_TO_PUSH
 
 //#define ENABLE_PUSHED_SCRIPT
@@ -196,6 +197,14 @@
 //#define RESONATOR_CHANGE_BG_PAL		paltsgrey	// Define to change pal for this palette
 //#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
 
+// Springs
+
+//#define ENABLE_SPRINGS
+#define SPRING_TILE 					10
+#define SPRING_SPIKE_TILE 				11
+//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
+//#define SPRINGS_ON_BY_DEFAULT
+
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
@@ -236,13 +245,6 @@
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 #define TIMER_SOUND						10  // play a sound if timer < value
 
-// Springs
-
-//#define ENABLE_SPRINGS
-#define SPRING_TILE 					10
-#define SPRING_SPIKE_TILE 				11
-//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
-//#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
 // ---------------------------
