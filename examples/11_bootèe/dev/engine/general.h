@@ -70,9 +70,9 @@ signed int saturate (signed int v, signed int max) {
 void pad_read (void) {
 	// Thanks for this, Nicole & nesdev!
 	// https://forums.nesdev.com/viewtopic.php?p=179315#p179315
-	pad_this_frame = i;
-	i = pad_poll (0);			// Read pads here.
-	pad_this_frame = (pad_this_frame ^ i) & i;
+	pad_this_frame = pad0;
+	pad0 = pad_poll (0);			// Read pads here.
+	pad_this_frame = (pad_this_frame ^ pad0) & pad0;
 }
 
 #if defined (ENABLE_HOMING_FANTY) || defined (ENABLE_COCOS)

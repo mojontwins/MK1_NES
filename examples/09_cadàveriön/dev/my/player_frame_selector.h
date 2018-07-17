@@ -15,7 +15,7 @@
 		psprid = CELL_USE + use_ct - 1;
 	} else 
 #endif
-if (i & PAD_B) {
+if (pad0 & PAD_B) {
 	psprid = pfacing + CELL_PUSHING;
 } else if (pvx) {
 	psprid = pfacing + CELL_WALK_CYCLE + ((prx >> 4) & 3);

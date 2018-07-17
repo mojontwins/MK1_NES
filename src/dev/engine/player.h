@@ -162,7 +162,7 @@ void player_move (void) {
 				} else use_ct = 0;
 			}
 			// Invalidate pad input
-			a_button = b_button = i = 0;
+			a_button = b_button = pad0 = 0;
 		}
 	#endif
 
@@ -216,7 +216,7 @@ void player_move (void) {
 	#ifdef PLAYER_TOP_DOWN		
 		// Controller 
 
-		if (!(i & PAD_UP || i & PAD_DOWN)) {
+		if (!(pad0 & PAD_UP || pad0 & PAD_DOWN)) {
 			pfacingv = 0xff;
 			if (pvy > 0) {
 				pvy -= PLAYER_RX;
@@ -229,14 +229,14 @@ void player_move (void) {
 			}
 		}
 		
-		if (i & PAD_UP) {
+		if (pad0 & PAD_UP) {
 			pfacingv = CELL_FACING_UP;
 			if (pvy > -PLAYER_VX_MAX) {
 				pvy -= PLAYER_AX;
 			}
 		}
 		
-		if (i & PAD_DOWN) {
+		if (pad0 & PAD_DOWN) {
 			pfacingv = CELL_FACING_DOWN;
 			if (pvy < PLAYER_VX_MAX) {
 				pvy += PLAYER_AX;
@@ -250,19 +250,19 @@ void player_move (void) {
 			// Special cases: in and out the ladder.
 
 			if (ponladder == 0) {
-				if (i & PAD_DOWN) {
+				if (pad0 & PAD_DOWN) {
 					cy1 = cy2 = (pry + 16) >> 4;
 					cm_two_points ();
 					ponladder = (!pj && at1 == 32 && at2 == 32);
 				}
 
-				if ((i & PAD_UP) && rdb) pvy = 0;
+				if ((pad0 & PAD_UP) && rdb) pvy = 0;
 			}
 
 			if (ponladder) {
-				if (i & PAD_UP) {
+				if (pad0 & PAD_UP) {
 					pvy = -PLAYER_VY_LADDERS;
-				} else if (i & PAD_DOWN) {
+				} else if (pad0 & PAD_DOWN) {
 					pvy = PLAYER_VY_LADDERS;
 				} else pvy = 0;
 
@@ -311,7 +311,7 @@ void player_move (void) {
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (i & PAD_A) {
+		if (pad0 & PAD_A) {
 			pvy -= PLAYER_AY_JETPAC;
 			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
 		}
@@ -320,10 +320,10 @@ void player_move (void) {
 	#ifdef PLAYER_SWIMS
 		// Controller 
 
-		if (!(i & (PAD_DOWN|PAD_A))) {
+		if (!(pad0 & (PAD_DOWN|PAD_A))) {
 			pvy -= PLAYER_AY_SWIM >> 1;
 		} else {
-			if (i & (PAD_DOWN|PAD_A)) {
+			if (pad0 & (PAD_DOWN|PAD_A)) {
 				pvy += PLAYER_AY_SWIM;
 			}
 	
@@ -461,7 +461,7 @@ void player_move (void) {
 			}
 
 			if (pj) {
-				if (i & PAD_A) {
+				if (pad0 & PAD_A) {
 					++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
 				} else {
 					pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
@@ -489,7 +489,7 @@ void player_move (void) {
 				#endif	
 			}
 			
-			if (i & PAD_A) {
+			if (pad0 & PAD_A) {
 				if (pj) {
 					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 					if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
@@ -526,7 +526,7 @@ void player_move (void) {
 			++ pctj; if (pctj == 16) pj = 0;	
 		}
 		
-		if (i & PAD_DOWN) {
+		if (pad0 & PAD_DOWN) {
 			if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
 		}
 	#endif
@@ -536,7 +536,7 @@ void player_move (void) {
 	// **********
 	
 	// Poll pad
-	if (!(i & PAD_LEFT || i & PAD_RIGHT)) {
+	if (!(pad0 & PAD_LEFT || pad0 & PAD_RIGHT)) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = 0xff;
 		#endif
@@ -562,7 +562,7 @@ void player_move (void) {
 		}
 	}
 
-	if (i & PAD_LEFT) {
+	if (pad0 & PAD_LEFT) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = CELL_FACING_LEFT;
 		#else
@@ -579,7 +579,7 @@ void player_move (void) {
 		}
 	}
 	
-	if (i & PAD_RIGHT) {
+	if (pad0 & PAD_RIGHT) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = CELL_FACING_RIGHT;
 		#else
@@ -703,11 +703,11 @@ void player_move (void) {
 			if (pfirereload) -- pfirereload; 
 			else
 		#endif
-		if (!b_button && (i & PAD_B)) {
+		if (!b_button && (pad0 & PAD_B)) {
 			if (pfiregauge < PLAYER_CHARGE_MAX) ++ pfiregauge;
 		}
 
-		if (0 == (i & PAD_B)) {
+		if (0 == (pad0 & PAD_B)) {
 			if (pfiregauge >= PLAYER_CHARGE_MIN) fire_bullet ();
 			pfiregauge = 0;
 		}

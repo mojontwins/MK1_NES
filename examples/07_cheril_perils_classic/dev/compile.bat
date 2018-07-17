@@ -57,7 +57,7 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 copy cart.nes ..\..\cheril_perils_classic.nes
 
 del *.o
-rem del game.s
+del game.s
 
 :end 
 del work\*.h /q 2> nul

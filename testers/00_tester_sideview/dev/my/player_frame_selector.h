@@ -26,7 +26,7 @@
 	// Frame selection for side view games
 
 	#ifdef PLAYER_SWIMS
-		if (i && (rdx != prx || rdy != pry)) {
+		if (pad0 && (rdx != prx || rdy != pry)) {
 			if (pvx) {
 				psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
 			} else {

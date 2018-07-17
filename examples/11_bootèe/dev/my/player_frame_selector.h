@@ -18,7 +18,7 @@ if (pstate == EST_REBOUND) {
 	} else if (pfirereload) {
 		psprid = 7;
 	} else {
-		if (i & PAD_DOWN)
+		if (pad0 & PAD_DOWN)
 			psprid = 5;
 		else if (pvy < -128)
 			psprid = 2;

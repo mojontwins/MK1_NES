@@ -21,9 +21,9 @@ unsigned char pres_title (void) {
 
 	gpit = 0;
 	while (1) {
-		i = pad_poll (0);
-		if (i & PAD_START) break;
-		if (i & PAD_SELECT) {
+		pad0 = pad_poll (0);
+		if (pad0 & PAD_START) break;
+		if (pad0 & PAD_SELECT) {
 			sfx_play (0, 1);
 			gpit = 1 - gpit;
 			while (pad_poll (0));

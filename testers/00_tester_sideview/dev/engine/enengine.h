@@ -803,7 +803,7 @@ void enems_move (void) {
 					#endif
 
 					#ifdef PLAYER_HAS_JUMP
-						if (i & PAD_A) {
+						if (pad0 & PAD_A) {
 							jump_start ();
 						} else 
 					#endif						

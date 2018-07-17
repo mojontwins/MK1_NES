@@ -2,4 +2,4 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Skip?
-if ((i & PAD_B) && (i & PAD_SELECT) && (i & PAD_UP)) break;
+if ((pad0 & PAD_B) && (pad0 & PAD_SELECT) && (pad0 & PAD_UP)) break;

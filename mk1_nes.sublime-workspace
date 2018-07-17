@@ -436,36 +436,18 @@
 	"buffers":
 	[
 		{
-			"file": "docs/mkts.md",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 14411,
-				"encoding": "UTF-8",
+				"buffer_size": 3830,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "docs/mscmk1.md",
+			"file": "/D/Google Drive/Maritrini/dev/genesis/EspTieR/gen/vane.bex",
 			"settings":
 			{
-				"buffer_size": 5865,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/utils/mscmk1.bas",
-			"settings":
-			{
-				"buffer_size": 41186,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/git/MK2/docs/scripting.md",
-			"settings":
-			{
-				"buffer_size": 60754,
+				"buffer_size": 28916,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
@@ -547,38 +529,33 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/docs",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/09_cadàveriön",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev",
-		"/D/git/MK1_NES/examples/09_cadàveriön/script",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/mainloop",
-		"/D/git/MK1_NES/src/utils",
-		"/D/git/MK1_NES/testers",
-		"/D/git/MK1_NES/testers/01_tester_top_down",
-		"/D/git/MK1_NES/wip",
-		"/D/git/MK1_NES/wip/fonts",
-		"/D/git/MK1_NES/wip/img",
-		"/D/git/MK1_NES/wip/luca",
-		"/D/git/MK1_NES/wip/trash"
+		"/D/git/MK1_NES"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/docs/features.md",
+		"/D/git/MK1_NES/docs/code_injection.md",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/src/dev/autodefs.h",
 		"/D/git/MK2/docs/scripting.md",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/config.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/script/script.spt",
+		"/D/git/MK1_NES/testers/03_tester_interactives/README.md",
+		"/D/git/MK1_NES/src/trash/test.spt",
+		"/D/git/MK1_NES/docs/mscmk1.md",
+		"/D/git/MK1_NES/src/README.md",
+		"/D/git/MK1_NES/docs/mkts.md",
+		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt",
 		"/D/git/MK1_NES/src/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/src/dev/mainloop/interactives.h",
-		"/D/git/MK1_NES/docs/features.md",
 		"/D/git/MK1_NES/src/utils/mscmk1.bas",
 		"/D/git/MK1_NES/src/dev/engine/enengine.h",
-		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/features.md",
 		"/D/git/MK1_NES/testers/02_tester_punchy/dev/config.h",
 		"/D/git/MK1_NES/examples/10_che_man/README.md",
 		"/D/git/MK1_NES/testers/02_tester_punchy/README.md",
-		"/D/git/MK1_NES/src/README.md",
 		"/D/git/MK1_NES/src/utils/README.md",
 		"/D/git/MK1_NES/src/utils/eneexp3.bas",
 		"/D/git/MK1_NES/CONTRIBUTING.md",
@@ -683,18 +660,7 @@
 		"/D/git/nes_work/Tutorial_MK1/tut07esp.md",
 		"/D/git/MK1_NES/src/dev/assets/metasprites.h",
 		"/D/perfiles/jcastano/Desktop/instrucciones.txt",
-		"/D/git/MK1_NES/src/dev-UNROM/README.md",
-		"/D/git/MK1_NES/wip/map0.h",
-		"/D/git/MK1_NES/wip/script.h",
-		"/D/git/nes_work/Tutorial_MK1/tut06esp.md",
-		"/D/git/nes_work/Tutorial_MK1/tut06eng.md",
-		"/D/git/nes_work/Tutorial_MK1/tut07eng.md",
-		"/D/git/nes_work/Tutorial_MK1/tut05esp.md",
-		"/D/git/MK1_NES/tutorial/tut07esp.md",
-		"/D/git/MK1_NES/tutorial/tut07eng.md",
-		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx/ss.png",
-		"/D/git/MK1_NES/tutorial/assets/Sir Ababol DX/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/tutorial/tut06esp.md"
+		"/D/git/MK1_NES/src/dev-UNROM/README.md"
 	],
 	"find":
 	{
@@ -705,6 +671,7 @@
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
 			"D:\\git\\MK1_NES\\examples",
 			"D:\\git\\MK1_NES\\src",
 			"D:\\git\\MK1_NES\\src\\dev",
@@ -732,6 +699,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"loadImageFromMem",
+			"on_object_used",
+			"ENABLE_EASY_OBJECTS",
+			"on_object_got",
+			"LEVEL",
+			"Interactives",
+			"TIMER",
+			"PLAYER_LIFE",
 			"INC_DECORATIONS",
 			"decorations",
 			"alias",
@@ -857,135 +832,11 @@
 			[
 				{
 					"buffer": 0,
-					"file": "docs/mkts.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14411,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14411,
-								14411
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 626,
-								"count": 2119,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "docs/mscmk1.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5865,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5863,
-								5863
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 7136,
-								"count": 900,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2390.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "src/utils/mscmk1.bas",
+					"file": "README.md",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 41186,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								22203,
-								22203
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 4735,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 10014.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/D/git/MK2/docs/scripting.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 60754,
+						"buffer_size": 3830,
 						"regions":
 						{
 						},
@@ -1001,7 +852,7 @@
 							"WordCount":
 							{
 								"changes": 0,
-								"count": 9376,
+								"count": 487,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1010,16 +861,61 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 4680.0,
+						"translation.y": 819.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/Google Drive/Maritrini/dev/genesis/EspTieR/gen/vane.bex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20689,
+								20705
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 3216,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 15781.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -1051,7 +947,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.627184466019,
 			1.0
 		],
 		"rows":
@@ -1073,7 +969,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1115,7 +1011,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 219.0,
+	"side_bar_width": 250.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
