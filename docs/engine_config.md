@@ -935,7 +935,7 @@ The base index in `spr_enems?`. Pezons need two cells: "up" and "down". For fish
     #define PEZON_WAIT                      50
 ```
 
-Base idle time. The value of the attr field in **pnedor** multiplied by 8 will be added to `PEZON_WAIT`.
+Base idle time. The value of the attr field in **ponedor** multiplied by 8 will be added to `PEZON_WAIT`.
 
 ```c
     #define PEZON_THRUST                    384
@@ -943,9 +943,17 @@ Base idle time. The value of the attr field in **pnedor** multiplied by 8 will b
     #define PEZON_G                         16
 ```
 
+Movement values (Initial VY when jumping, maximum VY when falling and gravity, respectively).
+
 ### Enemy type: Chac-chacs (deprecated)
 
+The support for "chac chacs as enemies" is deprecated. It's still there 'cause this was the original implementation.
+
 ### Enemy type: Monococo
+
+Monococos are hiden, appear from time to time, shoot a coco to the player, then disappear again.
+
+
 
 ### Enemy type: Shooties & Punchies
 
