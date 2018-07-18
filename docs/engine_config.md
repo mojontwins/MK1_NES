@@ -108,7 +108,7 @@ Basic hotspot types are collectible items, keys and refills. As mentioned, if yo
     //#define HOTSPOT_TYPE_TIME     5
 ```
 
-Note that the numbers here are those you use in `ponedor` when placing the hotspots, so there's room for some customization. The numbers are also used to render the objects on screen: the number is also an index to the `spr_hs` metasprite array defined in `assets/metasprites.h`.
+Note that the numbers here are those you use in **ponedor** when placing the hotspots, so there's room for some customization. The numbers are also used to render the objects on screen: the number is also an index to the `spr_hs` metasprite array defined in `assets/metasprites.h`.
 
 ### Extended types
 
@@ -555,17 +555,401 @@ Not really interesting. They are used in [Cheril Perils Classic](https://github.
 They can make appear a spike or some sort of killing tile if the player steps on or jumps over a certain tile index, like a booby trap.
 
 ```c
-//#define ENABLE_SPRINGS
-#define SPRING_TILE                     10
-#define SPRING_SPIKE_TILE               11
-//#define SPRINGS_NEED_POSSEE               // You have to actually STEP on the tile for the spikes to show
-//#define SPRINGS_ON_BY_DEFAULT
+    #define ENABLE_SPRINGS
 ```
+
+Configuration:
+
+```c
+    #define SPRING_TILE                     10
+```
+
+`SPRING_TILE` is the number of the tile the engine should detect as "spring".
+
+```c
+    #define SPRING_SPIKE_TILE               11
+```
+
+`SPRING_SPIKE_TILE` is the number of the tile which appears once the spring trap is activated.
+
+```c
+    #define SPRINGS_NEED_POSSEE
+```
+
+If defined, `SPRINGS_NEED_POSSEE` means that the player has to actually land on the tile to activate the trap. Otherwise the trap appears once the player overlaps the tile cell above the trap.
+
+```c
+    #define SPRINGS_ON_BY_DEFAULT
+```
+
+Springs only work if the variable `springs_on` is set. If `SPRINGS_ON_BY_DEFAULT` is defined, `springs_on` is set automaticly.
+
+This kind of booby traps are used in [Cheril Perils Classic](https://github.com/mojontwins/MK1_NES/tree/master/examples/07_cheril_perils_classic). In this game, `SPRINGS_ON_BY_DEFAULT` is undefined. Via custom initialziations in `my/extra_inits.h`, `springs_on` is 1 only on level 1.
 
 ## Warpers
 
+Warpers are entities which, when interacted with, take the player elsewhere. They are placed as enemies with **ponedor**. `attr` is the destination screen (room) number, and `s1` should contain the destination coordinates (packed 0xYX).
+
+```c
+    #define ENABLE_SIMPLE_WARPERS
+```
+
+Configuration:
+
+```c
+    #define SIMPLE_WARPERS_BASE_SPRID       (32+((frame_counter>>2)&3))
+```
+
+Warpers are rendered using metasprites in the active `spr_enems?` array. `SIMPLE_WARPERS_BASE_SPRID` is used to determine which metasprite. It can be an expression, like the example above, which cycles four different cells from index 32 using `frame_counter` divided by four (one cell change every four frames).
+
+```c
+    #define SIMPLE_WARPERS_FIRE_BUTTON
+```
+
+Define this if you require the player to press B to activate the warper. If it is undefined, the warpers will be activated just by touching them.
+
 ## No!
+
+```c
+    #define ENABLE_NO 
+```
+
+This feature was designed to show a small text balloon with a "NO!" icon above the player for a while. It is triggered when 
+
+* The player attempts to open a lock without a key.
+* Using easy objects, the player attempts to use an item in the wrong hotspot.
+
+It can be triggered anywhere just by setting `no_ct` with a frame count (50 = 1 second).
+
+```c
+    #define NO_METASPRITE                   ssit_06
+    #define NO_OFFS_X                       0
+    #define NO_OFFS_Y                       -24
+```
+
+The metasprite used is `NO_METASPRITE`, at `(prx + NO_OFFS_X, pry + NO_OFFS_Y)`.
 
 ## Use animation
 
+```c
+    #define ENABLE_USE_ANIM
+```
+
+The "use animation" is a subset of cells in the `spr_player` array which will be started once the player:
+
+- Interacts with a hotspot.
+- Presses B to run a fire script (when using scripting).
+- Interacts with an interactive.
+
+The actual "action" will be performed when the sequence reaches a determined value:
+
+```c
+    #define USE_ANIM_MAX_FRAMES             13
+    #define USE_ANIM_INTERACT_ON            7
+    #define USE_ANIM_FRAMES_PER_STEP        4
+```
+
+The animation counter, or `use_ct`, will iterate from 1 to `USE_ANIM_MAX_FRAMES` if the interaction was successful, or from 1 to `USE_ANIM_MAX_FRAMES + 1` (skipping `USE_ANIM_MAX_FRAMES`) if it wasn't.
+
+Each cell will be displayed for `USE_ANIM_FRAMES_PER_STEP` frames but the last, which will be displayed for one second.
+
+You are in charge of preparing your `my/player_frame_selector.h` to select the correct cell from `spr_player` if `use_ct` is != 0. If `CELL_USE` is the first frame in the sequence, then:
+
+```c
+    if (use_ct) {
+        psprid = CELL_USE + use_ct - 1;
+    } else // ...
+```
+
+`use_ct` should have priority over other player states in `my/player_frame_selector.h`. Check those games for inspiration:
+
+* [Cheril the Writter](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer)
+* [Cadàveriön](https://github.com/mojontwins/MK1_NES/tree/master/examples/09_cad%C3%A0veri%C3%B6n)
+* [Tester interactives](https://github.com/mojontwins/MK1_NES/tree/master/testers/03_tester_interactives)
+
 ## Timer
+
+```c
+    #define ENABLE_TIMER
+```
+
+The timer starts from the initial value and is decremented each second. When it reaches zero, a flag variable is risen (but you are in charge to zero it back!) and, if scripting is active, the `ON_TIMER_OFF` section is executed.
+
+```c
+    #define TIMER_INITIAL                   99
+    #define TIMER_START_ON
+    #define TIMER_REFILL                    30
+```
+
+`TIMER_INITIAL` is the timer's initial value. When it reaches zero, it will cycle back to `TIMER_INITIAL`.
+
+The variable `timer_on` determines if the timer is running or not. `TIMER_START_ON` makes `timer_on = 1` when the game starts. If it is left out commented, you are in charge of starting the timer.
+
+`TIMER_REFILL` is the amount of seconds added to the timer if the player gets a `HOTSPOT_TYPE_TIME`.
+
+```c 
+#define TIMER_RESET_ON_ENTER
+#define TIMER_SOUND                     10
+```
+
+If `TIMER_RESET_ON_ENTER` is defined, the timer will be reset every time the player enters a new screen. `TIMER_SOUND`, if defined, will play a special sound if timer < the defined value.
+
+Deprecated (because they are pretty useless):
+
+```c
+    #define TIMER_TIME_FLAG               0   // Useful with scripting. Copies time to flag
+    #define TIMER_ZERO_FLAG               1   // Useful with scripting. raises flag when time zero
+```
+
+## Enemies
+
+### General & global definitions
+
+```c
+    #define ENEMS_IN_CHRROM
+```
+
+Enemies are stored somewhere in CHR-ROM. You must tell the engine *where* in `assets/levelset.h`. The arrays `l_enems_chr_rombank`, `l_enems` and `l_hotspots` should contain valid data for every level in the game:
+
+* `l_enems_chr_rombank` contains which CHR-ROM bank contains the enemies + hotspots data for each level.
+* `l_enems` is the address of the enemy data for each level, in PPU addresses. 
+* `l_hotspots` is the address of the hotspots data for each level, in PPU addresses.
+
+If you use `eneexp3` in bin mode and `binpaster` to glue all binaries together, you should have offsets to the beginning of the enemy block (`ENEMS?_H_BIN_OFFS`) and offsets to the beginning of the hotspots block (`ENEMS0_?_BIN_OFFS + HOTSPOTS_OFFSET_?`).
+
+A more detailed explanation is comming in form of tutorial in the near future. You can check [Cheril the Writter](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer) meanwhile.
+
+```c
+    #define ENEMS_LIFE_GAUGE                1
+```
+
+Amount of shots/punches/kicks needed to kill enemies.
+
+```c
+    #define ENEMS_FLICKER
+```
+
+If `ENEMS_FLICKER` is defined, enemies will flicker for a while when hit. If it is left commented out, a explosion will show instead.
+
+```c
+    #define ENEMS_FLICKER_ONLY_ON_DYING
+```
+
+If defined, the flicker will only happen on the last hit (if `ENEMS_LIFE_GAUGE` > 1, that is).
+
+```c
+    //#define ENEMS_CAN_RESPAWN
+```
+
+Not yet complete. Needs documentation + further tests.
+
+```c
+    #define PERSISTENT_ENEMIES
+    #define PERSISTENT_DEATHS
+```
+
+Those two are important. 
+
+* `PERSISTENT_ENEMIES` makes the engine remember the position and direction of enemies when you exit the screen and come back later. It may be needed for some gameplays, but be warned that it eats RAM as it needs 4 bytes per enemy in the level, which means `MAP_W*MAP_H*4*3` bytes.
+* `PERSISTENT_DEATH` remembers which enemies are killed. If not defined, enemies will respawn every time you reenter a screen. It takes `MAP_W*MAP_H` bytes.
+
+```c
+    #define ENEMS_TOUCHED_FRAMES            8
+```
+
+Stay "touched" (blinking or with the explosion sprite) for `ENEMS_TOUCHED_FRAMES` frames.
+
+```c
+    #define ENEMS_RECOIL_ON_HIT           2
+    #define ENEMS_RECOIL_OVER_BOUNDARIES 
+```
+
+If `ENEMS_RECOIL_ON_HIT` is defined, enems will recoil a bit when hit. For every frame they are in the "touched" state, they will recoil `ENEMS_RECOIL_ON_HIT` pixels.
+
+For linear enemies, the (X1, Y1) and (X2, Y2) boundaries will stop the recoiling. define `ENEMS_RECOIL_OVER_BOUNDARIES` if you don't want this to happen. 
+
+```c
+    #define ENEMS_ENABLE_DYING_FRAME
+```
+
+If defined, when enemies are hit, the "dying frame" cell is displayed. Remember that, generally, enemies' metaspritesets are:
+
+```
+    RIGHT_WALK_1, RIGHT_WALK_2, RIGHT_HITTING, RIGHT_DYING,
+    LEFT_WALK_1, LEFT_WALK_2, LEFT_HITTING, LEFT_DYING
+```
+
+If you are using explosions (`ENEMS_FLICKER` is undefined):
+
+```c
+#define ENEMS_EXPLODING_CELL            32
+#define ENEMS_EXPLODING_CELLS_HIDES
+```
+
+The value of `ENEMS_EXPLODING_CELL` refers to the index in the `spr_enems?` arrays of a explision metasprite. If `ENEMS_EXPLODING_CELLS_HIDES` is left commented out, the explision overlaps the enemy sprite. If it is defined, it substitutes it.
+
+The enemies types "Saw" and "Pezons" eventually emerge from behind the background. To achieve the effect, the "occluding sprite" trick is used. The occluding metasprite should be in the `spr_enems?` arrays. Its index should be programmed into this constant:
+
+```c
+    #define ENEMS_OCCLUDING_CELL            33
+```
+
+[Cheril the Writter](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer) implements saws, for example. You can see the occluding frame in the spriteset next to the saw.
+
+![Cheril the Writer spriteset](https://raw.githubusercontent.com/mojontwins/MK1_NES/master/examples/08_cheril_the_writer/gfx/ss.png)
+
+`mkts` will make metasprites *low priority* if the colour #FF00FF is found in the graphic. #FF00FF always encodes as colour 0 (background), by the way. 
+
+```c
+    #define ENEMIES_SUFFER_ON_PLAYER_COLLISION
+```
+
+Substracts life from enemies when they collide the player. Warning! This will only work if the engine is prepared for enemies to die, this is, if the player shoots, can step on enemies, or hits.
+
+### Enemy type: Fanty & Homing Fanty
+
+Fanties (type 6 enemies) hover around chasing the player. Homing Fanties only do it if the player is close enough, tho, and return "home" (the starting position) otherwise:
+
+```c
+    #define ENABLE_FANTY
+    #define ENABLE_HOMING_FANTY
+```
+
+Define only one. **You can't have both**.
+
+Fanties are further configured by:
+
+```c
+    #define FANTY_BASE_SPRID                32
+```
+
+The base index in `spr_enems?`.
+
+```c
+    #define FANTY_WITH_FACING
+```
+
+If defined, Fanty will look left / right. You will need four cells for fanties in `spr_enems?`:
+
+```
+    RIGHT_FANTY_A, RIGHT_FANTY_B, LEFT_FANTY_A, LEFT_FANTY_B
+```
+
+The engine will alternate between A & B for each direction while Fanty moves around. If `FANTY_WITH_FACING` is undefined you just need two cells.
+
+```c
+    #define FANTY_COLLIDES
+```
+
+Leave this undefined if you want Fanties to fly through walls.
+
+```c
+    #define FANTY_KILLED_BY_TILE
+```
+
+If defined, Fanties can be killed by killing tiles (beh & 1).
+
+```c
+    #define FANTY_LIFE_GAUGE              5 
+```
+
+If defined, Fanties will have their own life gauge. If not defined, fanties will share the same life gauge as the rest of the enemies.
+
+```c
+    #define FANTY_A                         4
+    #define FANTY_MAXV                      48
+```
+
+Movement values for acceleration and maximum velocity. The lower the acceleration, the slower the fanty will react to the player movement.
+
+Only for Homing Fanties:
+
+```c
+    #define FANTY_DISTANCE                  80
+    #define FANTY_V_RETREAT                 16
+```
+
+Fanties will only notice the player if it is closer than `FANTY_DISTANCE` in pixels. `FANTY_V_RETREAT` is the speed at which Fanties return "home".
+
+### Enemy type: Pursuers
+
+```c
+    #define ENABLE_PURSUERS
+```
+
+Type 7 enemies. Only really usable in top-down games. Pursuers are spawned from the initial position and chase the player. If the player kills a pursuer, a new one will be spawned after a while. Further configuration:
+
+```c
+    #define DEATH_COUNT_EXPRESSION          50+(rand8()&63)
+```
+
+When a pursuer is killed, the next one will be spawned after `DEATH_COUNT_EXPRESSION` frames. Of course (as pictured) you can use a complex expresion or a constant number.
+
+```c
+    #define TYPE_7_FIXED_SPRITE             4
+```
+
+If defined, all spawned enemies are of type `TYPE_7_FIXED_SPRITE`. Otherwise, they can be 1, 2, 3 or 4 at random.
+
+### Enemy type: Saw
+
+```c
+    #define ENABLE_SAW
+```
+
+Saws (type 8 enemies) have 4 states: emerging, advancing, hiding, retreating. They can kill the player only while emerging. You define the travelling direction with start/end points in ponedor. They will emerge left or up if the attr is 0, or right or down if it is 2. 
+
+```c
+    #define SAW_BASE_SPRID                  48
+```
+
+The base index in `spr_enems?`. Saws need two cells which alternate very fast.
+
+```c
+    #define SAW_V_DISPL                     4
+```
+
+Speed when advancing or retreating, in pixels per frame.
+
+```c
+    #define SAW_EMERGING_STEPS              10
+```
+
+How many pixels saws pop out.
+
+### Enemy type: Pezons
+
+```c
+    #define ENABLE_PEZONS
+```
+
+Pezons are usually fish which jump out of water or fire balls which jump out of lava. The frequency is defined in the attr field in **ponedor**. 
+
+```c
+    #define PEZONS_BASE_SPRID               40
+```
+
+The base index in `spr_enems?`. Pezons need two cells: "up" and "down". For fish or jumping animals, "mouth open" and "mouth closed" works quite nicely. For fire balls, "trail down" then "trail up" also looks great.
+
+```c
+    #define PEZON_WAIT                      50
+```
+
+Base idle time. The value of the attr field in **pnedor** multiplied by 8 will be added to `PEZON_WAIT`.
+
+```c
+    #define PEZON_THRUST                    384
+    #define PEZON_VY_FALLING_MAX            256
+    #define PEZON_G                         16
+```
+
+### Enemy type: Chac-chacs (deprecated)
+
+### Enemy type: Monococo
+
+### Enemy type: Shooties & Punchies
+
+### Enemy type: Steady shooters
+
+### Enemy type: Compiled
+
