@@ -1003,29 +1003,170 @@ Remember that the first three groups of cells in the `spr_enems?` arrays are res
 
 When shooties shoot or punchies punch, the `RIGHT_HITTING` or `LEFT_HITTING` frame is displayed.
 
-Shooties configuration:
+#### Shooties configuration:
 
 ```c 
-    #define SHOOTIES_BASE_SPRID             40
+    #define SHOOTIES_BASE_SPRID             32
 ```
 
 If you want your shooties to look different from normal patrollers, add an offset here. For example, you can have three different shooties this way:
 
 ```c
     unsigned char spr_enems0 [] = {
-        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Type 1
-        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Type 2
-        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Type 3
+        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Patroller 1
+        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Patroller 2
+        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Patroller 3
         pl1, pl2, 0, 0, pl1, pl2, 0, 0,                     // Platform
-        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Type 1
-        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Type 2
-        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Type 3
+        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Shooty 1
+        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Shooty 2
+        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Shooty 3
     }
 ```
 
-Punchies configuration:
+Using `SHOOTIES_BASE_SPRID` with value 32 will make this work. A type 0x42 enemy is being loaded, the base index would be that of enemy type 2 plus 32: (2-1)*8 + 32 = 40, which points to `e2rw1`.
+
+```c
+    #define SHOOTIES_SHOOT_OFFS_X           16
+    #define SHOOTIES_SHOOT_OFFS_Y           -2
+```
+
+The coco will be shot from these offsets added to the enemy's origin of coordinates when facing right. The horizontal offset when facing left is autocalculated to match.
+
+```c
+    #define SHOOT_FREQ                      (pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)
+```
+
+The shootie will shoot when the expresion contained in `SHOOT_FREQ` is true, so there's a lot of room for customization here. The above example makes the shootie shoot if the player is in front of him, roughly, with a random factor added to the mix.
+
+#### Punchies configuration:
+
+```c
+    #define PUNCHIES_BASE_SPRID             32
+```
+
+Works the same way `SHOOTIES_BASE_SPRID` does.
+
+```c
+    #define PUNCHIES_PUNCH_OFFS_X           16
+    #define PUNCHIES_PUNCH_OFFS_Y           -7
+```
+
+These define where the hitbox is located. The values are offsets from the enemy's origin of coordinates when facing right. The horizontal offset when facing left is autocalculated to match. The hitbox is 8x8.
+
+```c
+    #define PUNCH_FREQ                      (pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)
+```
+
+As with shooties' `SHOOT_FREQ`, punchies will punch when the expression in `PUNCH_FREQ` evaluates to true. The above example makes use of the `DELTA` macro to determine if the player is close enough.
 
 ### Enemy type: Steady shooters
 
+```c
+    #define ENABLE_STEADY_SHOOTERS
+```
+
+Steady shooters (type 5) are just cannons. They shoot a coco in the direction they are facing. The direction is determined by the relation between (X1, Y1) and (X2, Y2). The `attr` field in **ponedor** is used to define the number of seconds between shoots.
+
+```c
+    #define STEADY_SHOOTERS_BASE_SPRID      44
+```
+
+Steady shooters need 4 cells in your `spr_enems?` arrays, one for each direction left, up, right, down, in that order. `STEADY_SHOOTERS_BASE_SPRID` points to the sequence.
+
+```c
+    #define STEADY_SHOOTER_KILLABLE
+```
+
+This makes steady shooters killable. But beware: they are not counted as killable by `eneexp3`'s option `gencounter`.  If you want to take them in account you should compare `pkilled` to `KILLABLE_ENEMS_prefix + MAX_ENEMS_TYPE_5_prefix`.
+
 ### Enemy type: Compiled
 
+```c
+    #define ENABLE_COMPILED_ENEMS
+```
+
+Compiled enems (Type 0x14) follow a programmed pattern. A future tutorial or article will describe them in more depth.
+
+```c
+    #define COMPILED_ENEMS_SHOOT
+```
+
+If defined, compiled enems can shoot. Leave it out if they don't to save space.
+
+```c
+    #define COMPILED_ENEMS_BASE_SPRID       48
+```
+
+Compiled enems are rendered facing left or right, and need four cells per direction:
+
+```
+    WALK_RIGHT_0
+    WALK_RIGHT_1
+    IDLE_RIGHT_0
+    IDLE_RIGHT_1
+    WALK_LEFT_0
+    WALK_LEFT_1
+    IDLE_LEFT_0
+    IDLE_LEFT_1
+```
+
+The constant `COMPILED_ENEMS_BASE_SPRID` points to the first cell in the list.
+
+## Cocos
+
+Cocos are activated when needed (which means that you don't have to define `ENABLE_COCOS` yourself). But you should configure these values:
+
+```c
+    #define COCOS_MAX                       4
+```
+
+The maximum number of cocos on screen. 4 is usually good, but if you notice that sometimes your enemies don't fire when they should, increase this value.
+
+```c
+    #define COCO_V                          128
+```
+
+Velocity in 1/64ths of pixel per frame. That 128 means 2 pixels per frame.
+
+```c
+    #define COCO_COLLIDES
+```
+
+If defined, cocos collide with the background. If not, cocos will go through everything until they exit the game area.
+
+```c
+    #define COCO_PATTERN                    0
+    #define COCO_PALETTE                    0
+```
+
+Used to draw cocos.
+
+```c
+    #define COCO_FAIR_D                     32
+```
+
+*Fair distance* - Cocos won't be shoot if the player's distance to the shooter is less than `COCO_FAIR_D`. If you want this feature off leave it at 0.
+
+## Only one object
+
+## Easy objects
+
+## Player capabilities: brawlers
+
+## Player capabilities: shooting
+
+## Scripting
+
+## Interactives
+
+## Top view specific
+
+## Player capabilities: miscellaneous
+
+## Screen layout
+
+## Player movement
+
+## Player cells
+
+## Sound effects
