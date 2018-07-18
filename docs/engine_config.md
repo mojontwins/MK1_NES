@@ -1199,6 +1199,12 @@ When the player lands a kick or puch, it (and the actor which was hit) will be f
 
 ## Player capabilities: shooting
 
+```c
+    #define PLAYER_CAN_FIRE
+```
+
+
+
 ## Scripting
 
 ## Interactives
