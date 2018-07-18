@@ -1149,9 +1149,53 @@ Used to draw cocos.
 
 ## Only one object
 
+```c
+    #define ENABLE_ONLY_ONE_OBJECT
+```
+
+If defined, you can only carry one "collectible item" (hotspots type 1). Once you are carrying one, only an external factor can clear your inventory (and possibly increment a counter). This external factor can be injected code or the scripting system.
+
+```c
+    #define ONLY_ONE_OBJECT_FLAG          0
+```
+
+In this mode, if the player got an object, then `pinv == 1`, 0 otherwise. If you define `ONLY_ONE_OBJECT_FLAG`, then `flags [ONLY_ONE_OBJECT_FLAG]` will be used instead of pinv.
+
+You usually use pinv if you are implementing your extended game logic via code injection, or flags if you are using scripting.
+
+[Che Man](https://github.com/mojontwins/MK1_NES/tree/master/examples/10_che_man) uses `ENABLE_ONLY_ONE_OBJECT` and scripting.
+
 ## Easy objects
 
+```c
+    #define ENABLE_EASY_OBJECTS
+```
+
+To get a proper explanation on how Easy Objects work, check the README.md of [Cheril the Writter](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer)
+
 ## Player capabilities: brawlers
+
+(only for side view)
+
+The player can be given the ability to kick (while jumping) or punch (on floor) (separately).
+
+```c
+    #define PLAYER_PUNCHES                  // When on floor
+    #define PLAYER_PUNCH_OFFS_X             15
+    #define PLAYER_PUNCH_OFFS_Y             -7
+
+    #define PLAYER_KICKS                    // While airborne
+    #define PLAYER_KICK_OFFS_X              12
+    #define PLAYER_KICK_OFFS_Y              -3
+```
+
+The `*_OFFS_?` constants define offsets for the hit box from the player's origin of coordinates when facing right. The correct horizontal offset when facing left is auto-calculated to match.
+
+```c
+    #define PLAYER_FROZEN_FRAMES            16
+```
+
+When the player lands a kick or puch, it (and the actor which was hit) will be fronzen for `PLAYER_FROZEN_FRAMES` frames.
 
 ## Player capabilities: shooting
 
