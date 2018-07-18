@@ -923,7 +923,7 @@ How many pixels saws pop out.
     #define ENABLE_PEZONS
 ```
 
-Pezons are usually fish which jump out of water or fire balls which jump out of lava. The frequency is defined in the attr field in **ponedor**. 
+Pezons (Type 9) are usually fish which jump out of water or fire balls which jump out of lava. The frequency is defined in the attr field in **ponedor**. 
 
 ```c
     #define PEZONS_BASE_SPRID               40
@@ -951,11 +951,79 @@ The support for "chac chacs as enemies" is deprecated. It's still there 'cause t
 
 ### Enemy type: Monococo
 
-Monococos are hiden, appear from time to time, shoot a coco to the player, then disappear again.
+```c
+    #define ENABLE_MONOCOCOS
+```
 
+Monococos (Type 0xB enemies) are hiden, appear from time to time, shoot a coco to the player, then disappears again. Monococos cycle through 4 states:
 
+* Idle, for A frames.
+* Appearing, for B frames.
+* On, it shoots a coco, then waits for C frames.
+* Disappearing for B frames.
+
+The values of A, B, C are defined using these constants:
+
+```c
+    #define MONOCOCO_BASE_TIME_HIDDEN       150 // A
+    #define MONOCOCO_BASE_TIME_APPEARING    50  // B
+    #define MONOCOCO_BASE_TIME_ONBOARD      50  // C
+```
+
+Once in the state "On", the coco will be shoot after `MONOCOCO_FIRE_COCO_AT` frames:
+
+```c
+    #define MONOCOCO_FIRE_COCO_AT           MONOCOCO_BASE_TIME_ONBOARD/2
+```
+
+There are two kinds of monococos: **type A** (define `MONOCOCO_TYPE_A`) and **type B** (comment `MONOCOCO_TYPE_A` out).
+
+* **Type A**: they use two cells which alternate continuously. Hidden during the *idle* state, flickering during *appearing / disappearing*.
+* **Type B**: they use four cells: A "hidden" cell during *idle*, an "appear / disappear" cell during *appearing / disappearing*, and the alternative two animation cells during the *on* state.
+
+So you need to provide 2 or 4 cells of animation in the `spr_enems?` arrays depending on the type configured:
+
+* **Type A**, two cells: `FRAME_A, FRAME_B`.
+* **Type B**, four cells: `FRAME_A, FRAME_B, APPEARING/DISAPPEARING, HIDDEN`.
 
 ### Enemy type: Shooties & Punchies
+
+(only for side view)
+
+Shooties and Punchies are additions to patrollers. Patroller enemies are types 1-3. You can turn a patroller into a shootie by adding 0x80 and into a punchie adding 0x40 (so a type 2 punchie would be 0x42, for example).
+
+Shooties will shoot when the player enters its line of sight. Punchies will hit the player when it comes close.
+
+Remember that the first three groups of cells in the `spr_enems?` arrays are reserved for type 1, 2 and 3 patrollers. They will be used for related punchies and shooties. The cell groups are:
+
+```
+    RIGHT_WALK_1, RIGHT_WALK_2, RIGHT_HITTING, RIGHT_DYING,
+    LEFT_WALK_1, LEFT_WALK_2, LEFT_HITTING, LEFT_DYING
+```
+
+When shooties shoot or punchies punch, the `RIGHT_HITTING` or `LEFT_HITTING` frame is displayed.
+
+Shooties configuration:
+
+```c 
+    #define SHOOTIES_BASE_SPRID             40
+```
+
+If you want your shooties to look different from normal patrollers, add an offset here. For example, you can have three different shooties this way:
+
+```c
+    unsigned char spr_enems0 [] = {
+        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Type 1
+        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Type 2
+        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Type 3
+        pl1, pl2, 0, 0, pl1, pl2, 0, 0,                     // Platform
+        e1rw1, e1rw2, e1rh, e1rd, e1lw1, e1lw2, e1lh, e1ld, // Type 1
+        e2rw1, e2rw2, e2rh, e2rd, e2lw1, e2lw2, e2lh, e2ld, // Type 2
+        e3rw1, e3rw2, e3rh, e3rd, e3lw1, e3lw2, e3lh, e3ld, // Type 3
+    }
+```
+
+Punchies configuration:
 
 ### Enemy type: Steady shooters
 
