@@ -1360,7 +1360,7 @@ End If
 If actionsUsed (&H6C) Then
 	' WARP_TO_LEVEL l n x y
 	' &H6C l n x y
-	Print #fOut, "                    case 0x6c: level = read_vbyte (); n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;"
+	Print #fOut, "                    case 0x6c: level = read_vbyte (); on_pant = n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;"
 End If
 If actionsUsed (&H6D) Then
 	' WARP_TO n x y
