@@ -440,8 +440,6 @@
 //#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
-//#define FIRE_ON_KILL					// run fire script on enemy kill
-
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
 

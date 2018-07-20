@@ -1324,16 +1324,277 @@ By default, if you define an ammo limit, the player will start the game with suc
 
 ## Scripting
 
+```c
+    #define ACTIVATE_SCRIPTING
+```
+
+Includes the scripts, the interpreter, and enables the hooks. There's additional configuration:
+
+```c
+    #define CLEAR_FLAGS
+```
+
+If defined, the engine will zero all flags when initializing each level. You don't want this, for example, if you have several levels and need to carry values from one script to the next.
+
+```c
+    #define ENABLE_EXTERN_CODE
+```
+
+If defined, `EXTERN n` in the script will make a call to `do_extern_action (n)`. The function is defined in `my/extern.h`. You can extend the script capabilities easily making this function react to the passed value.
+
+```c
+    #define ENABLE_FIRE_ZONE
+```
+
+Define `ENABLE_FIRE_ZONE` if you use fire zones in your script.
+
 ## Interactives
 
-## Top view specific
+```c
+    #define ENABLE_INTERACTIVES
+```
 
-## Player capabilities: miscellaneous
+Remember interactives are created when entering the screen. 
+
+```c
+    #define INTERACTIVES_MAX                4
+```
+
+The maximum number of interactives in a single screen. Use the lowest number possible!
+
+```c
+    #define FLAG_INVENTORY                  0
+```
+
+Which flag will contain the item the player is carrying.
+
+```c
+    #define INTERACTIVES_ONLY_SPRITES
+```
+
+If you are only using interactives to show sprites (like, for example, [Cheril the Writer](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer)), defininig `INTERACTIVES_ONLY_SPRITES` will save tons of space.
+
+## Top view
+
+```c
+    #define PLAYER_TOP_DOWN
+```
+
+Define `PLAYER_TOP_DOWN` to enable top-down mode. **This overrides all side-view related settings.**
+
+```c
+    #define TOP_OVER_SIDE
+```
+
+If defined, on diagonals, UP/DOWN has priority over LEFT/RIGHT.
+
+## Side view
+
+The game will be a side-view platformer if `PLAYER_TOP_DOWN` is commented out. Then you can configure which kind of platformer:
+
+```c
+    #define PLAYER_HAS_JUMP
+    //#define PLAYER_JUMP_TYPE_MK2
+```
+
+`PLAYER_HAS_JUMP` binds the jumping action to the A button. If, *additionally*, `PLAYER_JUMP_TYPE_MK2` is defined, alternate (less floaty) jump physics are used. 
+
+```c
+    #define PLAYER_AUTO_JUMP
+```
+
+Jumping is not bound to the A button, but it's performed automaticly. Whenever the player lands on a platform or walkable floor, it will jump.
+
+```c
+    #define PLAYER_SWIMS
+```
+
+Very basic swimming engine. Player will naturally float up. Press A or DOWN to make it sink.
+
+```c
+    #define PLAYER_HAS_JETPAC
+```
+
+Basic Jet Pack. Player has to press A to thrust.
+
+```c
+    #define PLAYER_STEPS_ON_ENEMS
+    //#define PLAYER_STEPS_STRICT
+```
+
+Jump on enemies to crush them. If `PLAYER_STEPS_STRICT` is defined, `pvy > PLAYER_VY_MIN` to crush the enemies.
+
+```c
+    #define PLAYER_SAFE_LANDING
+```
+
+If defined, if you step on a patroller which is going up it will change directions and go down.
+
+```c
+    #define PLAYER_STEPS_MIN_KILLABLE     0xff
+```
+
+If defined, only kill enemies with `id >= PLAYER_STEPS_MIN_KILLABLE`. You can use 0xff to make all enemies invulnerable.
 
 ## Screen layout
 
+Determine where to display info. Note that if you don't want a certain piece of info to appear on screen, you should comment out the `#define`:
+
+```c
+    //#define LIFE_X                7       //
+    //#define LIFE_Y                3       // Life gauge counter character coordinates
+
+    //#define OBJECTS_X             18      //
+    //#define OBJECTS_Y             3       // Objects counter character coordinates
+    #define OBJECTS_REMAINING               // Show # remaining instead of got
+
+    //#define KEYS_X                28      //
+    //#define KEYS_Y                3       // Keys counter character coordinates
+
+    //#define KILLED_X              16      //
+    //#define KILLED_Y              2       // Kills counter character coordinates
+
+    //#define AMMO_X                8       // 
+    //#define AMMO_Y                2       // Ammo counter character coordinates
+
+    //#define HS_INV_X              136     //
+    //#define HS_INV_Y              11      // Object you are carrying
+
+    //#define TIMER_X               0       //
+    //#define TIMER_Y               5       // Current timer value
+
+    // Text
+    //#define LINE_OF_TEXT          26      // If defined, scripts can show text @ Y = #
+    //#define LINE_OF_TEXT_X        1       // X coordinate.
+```
+
 ## Player movement
+
+Determine how the player moves. There's a lot to tweak here.
+
+Vertical axis has quite a lot of values:
+
+```c
+    #define PLAYER_VY_FALLING_MAX   256     // Max. velocity when falling
+    #define PLAYER_VY_FALLING_MIN   64      // Use for animating if you need
+    #define PLAYER_VY_SINKING       2
+    #define PLAYER_G                16      // Gravity
+
+    #define PLAYER_VY_JUMP_INITIAL  64
+    #define PLAYER_VY_JUMP_MAX      192     // Max. velocity when jumping
+    #define PLAYER_AY_JUMP          12      // Jumpin acceleration 
+
+    #define PLAYER_AY_JETPAC        32      // Jetpac increment
+    #define PLAYER_VY_JETPAC_MAX    256     // Max jetpac vertical speed
+
+    #define PLAYER_AY_SWIM          8       // Swimming acceleration.
+    #define PLAYER_VY_SWIM_MAX      64      // Swimming max. speed
+
+    #define PLAYER_VY_LADDERS       96
+
+    #define PLAYER_AY_FLOAT         16  
+    #define PLAYER_VY_FLOAT_MAX     256
+
+    #define PLAYER_AY_UNTHRUST      8       // Used in the Autojump engine.
+```
+
+If you are using `PLAYER_JUMP_TYPE_MK2`, these constants are used instead of `PLAYER_?Y_JUMP_*`.
+
+```c
+    // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
+    // (Used if PLAYER_JUMP_TYPE_MK2 is defined)
+    #define PLAYER_G_MK2_JUMPING        4
+    #define PLAYER_VY_MK2_JUMP_INITIAL  208
+    #define PLAYER_VY_MK2_JUMP_RELEASE  96
+    #define PLAYER_VY_MK2_JUMP_A_STEPS  16
+```
+
+And for the horizontal movement (**and vertical**, in top-down style games)
+
+```c
+    // IV.2. Horizontal (side view) or general (top view) movement.
+
+    #define PLAYER_VX_MAX           128     // Max. horizontal speed
+    #define PLAYER_VX_CONVEYORS     64
+    #define PLAYER_AX               16      // Horizontal acceleration
+    #define PLAYER_AX_ICE           4
+    #define PLAYER_RX               16      // Horizontal friction
+    #define PLAYER_RX_ICE           2
+
+    #define PLAYER_VX_MIN (PLAYER_AX << 1)
+
+    #define PLAYER_V_REBOUND        224
+```
 
 ## Player cells
 
+Maps indexes in the `spr_player` array to player states. You have to tweak these values to match your metasprite array and animations in `my/player_frame_selector.h`.
+
+```c
+    #ifdef PLAYER_TOP_DOWN
+
+        // Cell definitions for top-down view
+
+        #define CELL_FACING_RIGHT   0
+        #define CELL_FACING_LEFT    6
+        #define CELL_FACING_UP      18
+        #define CELL_FACING_DOWN    12
+
+        #define CELL_IDLE           0
+        #define CELL_WALK_CYCLE     1
+        #define CELL_PUSHING        5
+
+        #define CELL_USE            24
+
+    #else
+
+        // Cell definitions for side view
+
+        #define CELL_FACING_RIGHT   0
+        #define CELL_FACING_LEFT    8
+
+        #define CELL_IDLE           0
+        #define CELL_WALK_INIT      1
+        #define CELL_WALK_CYCLE     1
+        #define CELL_AIRBORNE       5
+        #define CELL_ASCENDING      5
+        #define CELL_DESCENDING     6
+
+        #define CELL_SWIM_CYCLE     6
+
+        #define CELL_USE            6
+
+        #define CELL_PUNCHING       8
+        #define CELL_KICKING        9
+
+        #define CELL_CLIMB_CYCLE    20
+        #define CELL_CLIMB_HALF     29
+    #endif
+```
+
 ## Sound effects
+
+You may want to alter the values if you use your own set of sounds.
+
+```c
+    // SFX
+
+    #define SFX_START               0
+    #define SFX_TILE                1
+    #define SFX_OBJECT              2
+    #define SFX_USE                 3
+    #define SFX_PHIT                4
+    #define SFX_DUMMY1              5
+    #define SFX_ENHIT               6
+    #define SFX_DUMMY2              7
+    #define SFX_JUMP                8
+    #define SFX_BULLET              9
+    #define SFX_COCO                10
+    #define SFX_SPRING              11
+    #define SFX_COUNT               12
+    #define SFX_BREAKH              13
+    #define SFX_HITTER              14
+    #define SFX_STEPON              15
+    #define SFX_FLOAT               16
+    #define SFX_BREAKB              17
+```
