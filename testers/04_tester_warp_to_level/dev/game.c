@@ -28,6 +28,8 @@
 #include "assets/behs.h"
 #include "assets/map0.h"
 #include "assets/enems0.h"
+#include "assets/map1.h"
+#include "assets/enems1.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"

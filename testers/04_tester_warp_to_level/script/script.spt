@@ -1,0 +1,65 @@
+# Script file
+
+#####################################################################
+# Level 0
+#####################################################################
+
+ENTERING GAME
+	IF TRUE
+	THEN
+	END IF
+END
+
+ENTERING SCREEN 2
+	IF TRUE
+	THEN
+		SET FIRE_ZONE_TILES 15, 0, 15, 11
+	END
+END
+
+PRESS_FIRE ON SCREEN 2
+	IF PLAYER_IN_X_TILES 15, 15
+	THEN
+		WARP_TO_LEVEL 1, 0, 1, 2
+	END
+
+	IF PLAYER_TOUCHES (7, 10)
+	THEN
+		WARP_TO_LEVEL 1, 2, 14, 8
+	END
+END
+
+END_OF_LEVEL
+
+#####################################################################
+# Level 1
+#####################################################################
+
+ENTERING GAME
+	IF TRUE
+	THEN
+	END IF
+END
+
+ENTERING SCREEN 0
+	IF TRUE
+	THEN
+		SET_FIRE_ZONE_TILES 0, 0, 0, 11
+	END
+END
+
+PRESS_FIRE ON SCREEN 0
+	IF PLAYER_IN_X_TILES 0, 0
+	THEN
+		WARP_TO_LEVEL 0, 2, 14, 2
+	END
+END
+
+PRESS_FIRE ON SCREEN 2
+	IF PLAYER_TOUCHES 14, 8
+	THEN
+		WARP_TO_LEVEL 0, 2, 7, 10
+	END
+END
+
+END_OF_LEVEL

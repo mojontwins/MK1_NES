@@ -664,6 +664,9 @@ Function procesaClausulas (f As Integer) As String
 					Case "WARP_TO"
 						clausula = clausula + Chr (&H6D) + Chr (pValR (lP (1))) + Chr (pval (lP (2))) + Chr (pval (lP (3)))
 						actionsUsed (&H6D) = -1
+					Case "WARP_TO_LEVEL"
+						clausula = clausula + Chr (&H6C) + Chr (pValR (lP (1))) + Chr (pval (lP (2))) + Chr (pval (lP (3))) + Chr (pval (lP (4)))
+						actionsUsed (&H6C) = -1
 					
 					' Timer
 					Case "TIMER_START"
@@ -1354,6 +1357,11 @@ If actionsUsed (&HF4) Then
 End If
 ' Screen invalidation
 
+If actionsUsed (&H6C) Then
+	' WARP_TO_LEVEL l n x y
+	' &H6C l n x y
+	Print #fOut, "                    case 0x6c: level = read_vbyte (); n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;"
+End If
 If actionsUsed (&H6D) Then
 	' WARP_TO n x y
 	' &H6D n x y
