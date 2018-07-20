@@ -24,13 +24,13 @@ void fire_bullet (void) {
 	
 	switch (pfacing) {
 		case CELL_FACING_LEFT:
-			bx [bi] = prx - 4;
+			bx [bi] = prx - 8;
 			bmx [bi] = -PLAYER_BULLET_SPEED;
 			by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 			bmy [bi] = 0;
 			break;	
 		case CELL_FACING_RIGHT:
-			bx [bi] = prx + 12;
+			bx [bi] = prx + 8;
 			bmx [bi] = PLAYER_BULLET_SPEED;
 			by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 			bmy [bi] = 0;
