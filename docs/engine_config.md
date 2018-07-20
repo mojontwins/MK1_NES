@@ -144,7 +144,7 @@ There are several map formats. You may define one and only one format, leaving a
     //#define MAP_FORMAT_RLE44_CHRROM
 ```
 
-### `MAP_FORMAT_PACKED`
+### Format `MAP_FORMAT_PACKED`
 
 This is a legacy format. Each tile takes one nibble. Screens are 16x12 = 192 tiles so they take 96 bytes each. As nibbles are used to store tile indexes, the maximum number of different tiles is 16.
 
@@ -152,7 +152,7 @@ To convert .MAP files into packed maps use `mapcnvnes2`.
 
 If you use decorations (i.e., tiles out of range which are stored separately) they use the old format (which needs a pointer index taking `2*MAP_W*MAP_H` bytes).
 
-### `MAP_FORMAT_RLE16`
+### Format `MAP_FORMAT_RLE16`
 
 This is a legacy format. Map screens are stored using a not very efficient RLE algorithm.
 
@@ -160,7 +160,7 @@ To convert .MAP files into RLE16 maps use `legacy/rlemap2`.
 
 If you use decorations (i.e., tiles out of range which are stored separately) they use the old format (which needs a pointer index taking `2*MAP_W*MAP_H` bytes).
 
-### `MAP_FORMAT_RLE53` and `MAP_FORMAT_RLE44`
+### Formats `MAP_FORMAT_RLE53` and `MAP_FORMAT_RLE44`
 
 Maps are stored using RLE. The 53 variant uses 5 bits for tile number and 3 bits for run length, which allows for 32 different tiles. The 44 variant uses 4 bits for tile number and 4 bit for run length. If you have 16 different tiles or less, 44 compresses a tad better.
 
@@ -168,7 +168,7 @@ To convert .MAP files into RLE53 maps use `rle53mapMK1`. To convert .MAP files i
 
 If you use decorations (i.e., tiles out of range which are stored separately) they use the new format which doesn't require an extra bytes (they take less space!).
 
-### `MAP_FORMAT_RLE53_CHROM` and `MAP_FORMAT_RLE44_CHROM`
+### Formats `MAP_FORMAT_RLE53_CHROM` and `MAP_FORMAT_RLE44_CHROM`
 
 Exactly like `MAP_FORMAT_RLE53` and `MAP_FORMAT_RLE44`, but read from `CHR-ROM` instead.
 
