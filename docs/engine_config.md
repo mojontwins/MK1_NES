@@ -1203,7 +1203,124 @@ When the player lands a kick or puch, it (and the actor which was hit) will be f
     #define PLAYER_CAN_FIRE
 ```
 
+Shooting can be heavily customized. For basic shooting:
 
+```c
+    #define PLAYER_BULLET_SPEED             4
+```
+
+Bullets speed, on pixels per frame.
+
+```c
+    #define MAX_BULLETS                     4
+```
+
+Max # of simultaneous bullets on screen. Slower speeds may require a bigger number than 4.
+
+```c
+    #define PLAYER_BULLET_Y_OFFSET          6
+    #define PLAYER_BULLET_X_OFFSET          -4
+```
+
+Bullet offset from the player sprite. `PLAYER_BULLET_X_OFFSET` is used only on top-down games. Here's an explanation on the values.
+
+```
+    Shooting left or right
+
+               prx-8   prx     prx+8
+            /          O------+··········pry
+            |          |      |
+    Y_OFFSET\    O----+|      |O----+····pry + Y_OFFSET
+                 | <- ||      || -> |
+                 |    ||      ||    |
+                 +----+|      |+----+
+                       |      |
+                       +------+
+
+    Shooting up or down (top-down)
+
+            pry-4···O----+ UP
+                    |    |
+            pry·····|  O-|----+
+                    +----+    |
+                       |      |
+                       |      |
+                       |      |
+                       |      |
+            pry+12·····|    O-|--+
+                       +------+  |
+                            |    |
+                            +----+ DOWN
+
+                    |
+                    prx - X_OFFSET
+                       |
+                       prx
+                            |
+                            prx + X_OFFSET
+```
+
+Appart from the basic configuration, there are some options available you may choose to activate or not:
+
+```c
+    #define PLAYER_BULLETS_MIN_KILLABLE   3
+```
+
+If defined, only enemies of type >= `PLAYER_BULLETS_MIN_KILLABLE` can be killed.
+
+```c
+    #define BULLETS_DONT_KILL
+```
+
+Bullets hit on enemies, but don't kill them. They still affect enemies: for example, if `ENEMS_RECOIL_ON_HIT` is defined, enemies will recoil without dying.
+
+```c
+    #define PLAYER_FIRE_RELOAD          16
+```
+
+If defined, player can't shoot again until `PLAYER_FIRE_RELOAD` frames have passed since last shoot.
+
+```c
+    #define PLAYER_CHARGE_AND_FIRE
+    #define PLAYER_CHARGE_MIN           8
+    #define PLAYER_CHARGE_MAX           48
+```
+
+These three go together. If `PLAYER_CHARGE_AND_FIRE` is defined, player has to hit B to charge and shoot when the button is released. 
+
+When this happens, `pfiregauge` is incremented by 1 each frame while B is pressed while `pfiregauge < PLAYER_CHARGE_MAX`. If B is released and `pfiregauge >= PLAYER_CHARGE_MIN`, a bullet will be shoot.
+
+```c
+    #define PLAYER_BULLET_LIFE          16
+    #define PLAYER_BULLET_FLICKERS      8
+```
+
+If defined, bullets will only live for `PLAYER_BUFFER_LIFE` frames. Note that you can use an expression instead of a constant value. That way, you can make some use of `PLAYER_CHARGE_AND_FIRE`. For example:
+
+```c
+    #define PLAYER_BULLET_LIFE          pfiregauge
+```
+
+Will bind the fire gauge and the bullets life directly.
+
+If `PLAYER_BULLET_FLICKERS` is defined, bullets will blink for `PLAYER_BULLET_FLICKERS` frames before disappearing.
+
+### Ammonition
+
+By default, there's no ammo limit. You can add one easily:
+
+```c
+    #define MAX_AMMO                    99
+    #define AMMO_REFILL                 50
+```
+
+If defined, the player can only shoot MAX_AMMO bullets. If the player gets a `HOTSPOT_TYPE_AMMO` hotspot, `AMMO_REFILL` bullets will be added.
+
+By default, if you define an ammo limit, the player will start the game with such amount of bullets, but you can define a different value if you need:
+
+```c
+    #define INITIAL_AMMO                8
+```
 
 ## Scripting
 
