@@ -4,7 +4,7 @@ if [%1]==[justcompile] goto :justcompile
 
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
-..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts1.h label=palts1 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
 copy /b work\*.h assets\palettes.h > nul
 

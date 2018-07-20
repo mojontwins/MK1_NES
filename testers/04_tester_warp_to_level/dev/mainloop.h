@@ -60,6 +60,9 @@ void game_init (void) {
 	#endif
 
 	#ifdef ENABLE_USE_ANIM
+		#ifdef ACTIVATE_SCRIPTING
+		if (!warp_to_level)
+		#endif
 		use_ct = 0;
 	#endif
 
@@ -357,14 +360,17 @@ void game_loop (void) {
 					((pry + 8) >> 4) == PLAYER_END_Y
 				) 
 			#endif
-			#ifdef ACTIVATE_SCRIPTING
-				|| warp_to_level
-			#endif
 			) {
 				music_stop ();
 				delay (50);
 				break;
 			}
+
+			#ifdef ACTIVATE_SCRIPTING
+				if (warp_to_level) {
+					music_stop (); break;
+				}
+			#endif
 
 			if (pstate) {
 				-- pctstate;

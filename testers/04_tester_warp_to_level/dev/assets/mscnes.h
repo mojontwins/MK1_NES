@@ -78,7 +78,7 @@ void run_script (unsigned char whichs) {
             while (!sc_terminado) {
                 switch (read_byte ()) {
                     case 0x51: f_zone_ac = 1; fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;
-                    case 0x6c: level = read_vbyte (); n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;
+                    case 0x6c: level = read_vbyte (); on_pant = n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;
                     case 0xff: sc_terminado = 1; break;
                 }
             }
