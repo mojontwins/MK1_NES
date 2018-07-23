@@ -19,7 +19,7 @@ void player_stop (void) {
 void player_init (void) {
 	// Init player data
 
-	player_stop ();
+	if (!warp_to_level) player_stop ();
 
 	#ifdef PLAYER_TOP_DOWN	
 		pfacing = CELL_FACING_DOWN;
@@ -132,6 +132,11 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
+	if (pstate) {
+		-- pctstate;
+		if (!pctstate) pstate = EST_NORMAL;
+	}
+
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
 			-- pfrozen; 

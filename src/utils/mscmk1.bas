@@ -355,6 +355,7 @@ Function procesaClausulas (f As Integer) As String
 			fixTokens
 
 			If debug Then 
+				If estado = 1 Or Ucase (lP (0)) <> "END" Then Print "    ";
 				Print parseGlueTokens (lP ())
 			End If
 
@@ -438,6 +439,19 @@ Function procesaClausulas (f As Integer) As String
 										clausula = clausula + chr (opCode) + chr (pValR (lP (3)))
 										clausulasUsed (opCode) = -1
 
+									' Conditions about movement
+									Case "VX", "VY":
+										If (lP (1)) = "VX" Then i = &HE0 Else i = &HE4
+										Select Case lP (2)
+											Case "=": opCode = i
+											Case "<": opCode = i+1
+											Case ">": opCode = i+2
+											Case "<>", "!=": opCode = i+3
+											Case Else:
+												Print "ERROR - Wrong operand": End
+										End Select
+										clausula = clausula + Chr (opCode) + chr (pValR (lP (3)))
+										clausulasUsed (opCode) = -1
 									' Conditions about enemies killed
 									Case "ALL_ENEMIES_DEAD":
 										clausula = clausula + chr (&H30)
@@ -662,10 +676,18 @@ Function procesaClausulas (f As Integer) As String
 						clausula = clausula + Chr (&H6F)
 						actionsUsed (&H6F) = -1
 					Case "WARP_TO"
-						clausula = clausula + Chr (&H6D) + Chr (pValR (lP (1))) + Chr (pval (lP (2))) + Chr (pval (lP (3)))
+						If lP (3) <> "" Then							
+							clausula = clausula + Chr (&H68) + Chr (pValR (lP (2))) + Chr (pValR (lP (3)))
+							actionsUsed (&H68) = -1
+						End If
+						clausula = clausula + Chr (&H6D) + Chr (pValR (lP (1)))							
 						actionsUsed (&H6D) = -1
 					Case "WARP_TO_LEVEL"
-						clausula = clausula + Chr (&H6C) + Chr (pValR (lP (1))) + Chr (pval (lP (2))) + Chr (pval (lP (3))) + Chr (pval (lP (4)))
+						If lP (4) <> "" Then							
+							clausula = clausula + Chr (&H68) + Chr (pValR (lP (3))) + Chr (pValR (lP (4)))
+							actionsUsed (&H68) = -1
+						End If
+						clausula = clausula + Chr (&H6C) + Chr (pValR (lP (1))) + Chr (pval (lP (2)))
 						actionsUsed (&H6C) = -1
 					
 					' Timer
@@ -694,6 +716,14 @@ Function procesaClausulas (f As Integer) As String
 					Case "PAUSE", "DELAY"
 						clausula = clausula + Chr (&HE5) + Chr (pValR (lP (1)))
 						actionsUsed (&HE5) = -1
+					Case "STOP_PLAYER"
+						clausula = clausula + Chr (&H74)
+						actionsUsed (&H74) = -1
+					Case "STOP"
+						If (lP (1) = "PLAYER") Then
+							clausula = clausula + Chr (&H74)
+							actionsUsed (&H74) = -1
+						End If
 
 					' OGT
 					Case "MUSIC"
@@ -725,10 +755,12 @@ Function procesaClausulas (f As Integer) As String
 						clausula = Chr (len (clausula)) + clausula
 						
 						If debug Then
+						Print "    [";
 							For i = 1 To Len (clausula) 
 								Print Hex (Asc (Mid (clausula, i, 1)), 2); " ";
 							Next i
-							Print 
+							Print "]"
+							Print
 						End If
 
 						clausulas = clausulas + clausula
@@ -817,6 +849,8 @@ While keepGoing
 		parseTokenizeString linea, lP (), ",;()" & chr (9), "'"
 	End If
 
+	If debug Then Print parseGlueTokens (lP ())
+
 	doIncludeDecos = 0
 
 	Select Case lP (0)
@@ -902,11 +936,13 @@ While keepGoing
 				Next i 
 			End If
 
+			If debug then print "-------------------------------------------------------------------------------"
 			If killing Then 	
-				? "Finished. Sections: " & nSections & " ~ ";
+				? "Finished.";: If nSections Then ? " Sections: " & nSections & " ~ "; Else ? " ~ ";
 			Else
 				? "Level finished. Sections: " & nSections & " ~ ";
 			End If
+			If debug then print: print "-------------------------------------------------------------------------------": Print
 
 			If sDone Then
 				' Write and reset
@@ -1032,7 +1068,6 @@ If actionsUsed (&H68) Or actionsUsed (&H6A) Or actionsUsed (&H6B) Or actionsUsed
 	Print #fOut, "void reloc_player (void) {"
 	Print #fOut, "    prx = read_vbyte () << 4;        px = prx << FIXBITS;"
 	Print #fOut, "    pry = (read_vbyte () << 4) + 16; py = pry << FIXBITS;"
-	Print #fOut, "    player_stop ();"
 	Print #fOut, "}"
 End If
 Print #fOut, ""
@@ -1123,6 +1158,49 @@ If clausulasUsed (&H80) Then
 	' IF LEVEL <> n
 	' &H81 n
 	Print #fOut, "                case 0x81: sc_terminado = (level == read_vbyte ()); break;"
+End If
+
+' Conditions about movement
+
+If clausulasUsed (&HE0) Then
+	' IF VX = n
+	' &HE0 n
+	Print #fOut, "                case 0xe0: sc_terminado = (pvx != (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE1) Then
+	' IF VX < n
+	' &HE1 n
+	Print #fOut, "                case 0xe1: sc_terminado = (pvx >= (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE2) Then
+	' IF VX > n
+	' &HE2 n
+	Print #fOut, "                case 0xe2: sc_terminado = (pvx <= (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE3) Then
+	' IF VX > n
+	' &HE3 n
+	Print #fOut, "                case 0xe3: sc_terminado = (pvx == (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE4) Then
+	' IF VY = n
+	' &HE0 n
+	Print #fOut, "                case 0xe4: sc_terminado = (pvy != (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE5) Then
+	' IF VY < n
+	' &HE1 n
+	Print #fOut, "                case 0xe5: sc_terminado = (pvy >= (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE6) Then
+	' IF VY > n
+	' &HE2 n
+	Print #fOut, "                case 0xe6: sc_terminado = (pvy <= (signed char) read_vbyte ()); break;"
+End If
+If clausulasUsed (&HE7) Then
+	' IF VY > n
+	' &HE3 n
+	Print #fOut, "                case 0xe7: sc_terminado = (pvy == (signed char) read_vbyte ()); break;"
 End If
 
 ' Conditions about enemies DEAD
@@ -1246,12 +1324,17 @@ End If
 If actionsUsed (&H6A) Then
 	' SET_Y x
 	' &H6A x
-	Print #fOut, "                    case 0x6a: py = read_vbyte () << 10; player_stop (); break;"
+	Print #fOut, "                    case 0x6a: py = read_vbyte () << 10; break;"
 End If
 If actionsUsed (&H6B) Then
 	' SET_X x
 	' &H6B x
-	Print #fOut, "                    case 0x6b: px = read_vbyte () << 10; player_stop (); break;"
+	Print #fOut, "                    case 0x6b: px = read_vbyte () << 10; break;"
+End If
+If actionsUsed (&H74) Then
+	' STOP_PLAYER
+	' &H74
+	Print #fOut, "                    case 0x74: stop_player (); break;"
 End If
 
 If actionsUsed (&H70) Then
@@ -1360,12 +1443,12 @@ End If
 If actionsUsed (&H6C) Then
 	' WARP_TO_LEVEL l n x y
 	' &H6C l n x y
-	Print #fOut, "                    case 0x6c: level = read_vbyte (); on_pant = n_pant = read_vbyte (); reloc_player (); warp_to_level = 1; break;"
+	Print #fOut, "                    case 0x6c: level = read_vbyte (); n_pant = read_vbyte (); warp_to_level = 1; break;"
 End If
 If actionsUsed (&H6D) Then
 	' WARP_TO n x y
 	' &H6D n x y
-	Print #fOut, "                    case 0x6d: n_pant = read_vbyte (); on_pant = 0xfe; reloc_player (); break;"
+	Print #fOut, "                    case 0x6d: n_pant = read_vbyte (); on_pant = 0xfe; break;"
 End If
 If actionsUsed (&H6E) then
 	' REDRAW
@@ -1387,7 +1470,7 @@ If actionsUsed (&H71) Then
 End If
 If actionsUsed (&H72) Then
 	' TIMER_STOP
-	' &H71
+	' &H72
 	Print #fOut, "                    case 0x72: timer_on = 0; break;"
 End If
 

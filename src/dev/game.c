@@ -131,9 +131,7 @@ void main(void) {
 				break;
 			} else {
 				#ifdef MULTI_LEVEL
-					#ifdef ACTIVATE_SCRIPTING
 					if (warp_to_level) continue;
-					#endif
 					level ++;
 					if (level == MAX_LEVELS) 
 				#endif

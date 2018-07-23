@@ -36,6 +36,8 @@ unsigned char frame_counter;            // Game grame counter, wraps 255->0
 unsigned char paused;                   // True if the game is paused.
 unsigned char win_level;                // If WIN_LEVEL_CUSTOM is defined, set to true to win the level.
 unsigned char game_over;                // True if the player lost the game.
+unsigned char warp_to_level;            // True if the player is jumping to a different level 
+unsigned char flick_override;           // If set, code to flick screen is overriden for current frame
 
 // General player values, last frame copies
 

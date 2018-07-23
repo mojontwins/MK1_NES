@@ -18,16 +18,18 @@ void game_init (void) {
 	draw_game_frame ();
 	//clean_gauge ();
 
-	n_pant = SCR_INI;
-	
 	hotspots_load ();
 	#ifndef DEACTIVATE_KEYS		
 		// bolts_load
 		memfill (lkact, 1, c_max_bolts);
 	#endif		
 
-	px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
-	py = (PLAYER_INI_Y << 4) << FIXBITS;
+	if (!warp_to_level)	{
+		n_pant = SCR_INI;
+		px = (4 + (PLAYER_INI_X << 4)) << FIXBITS;
+		py = (PLAYER_INI_Y << 4) << FIXBITS;
+	}
+	player_to_pixels ();
 	player_init ();
 		
 	#ifdef PERSISTENT_ENEMIES
@@ -56,7 +58,7 @@ void game_init (void) {
 	#endif
 
 	#ifdef ENABLE_USE_ANIM
-		use_ct = 0;
+		if (!warp_to_level) use_ct = 0;
 	#endif
 
 	#ifdef ENABLE_NO
@@ -257,30 +259,61 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
-	oam_index = 0; ticker = 50;
+	warp_to_level = 0; oam_index = 0; ticker = 50;
 	
 	while (1) {
 
+		// Finish him
+
+		if (pkill) player_kill ();
+		if (game_over) break;			
+
+		// Flick the screen
+
+		flick_override = 0;
+		#include "my/custom_flickscreen.h"
+		#include "mainloop/flickscreen.h"
+		
 		// Change screen ?
 
-		if (on_pant != n_pant) {
+		if (on_pant != n_pant && !warp_to_level) {
 			prepare_scr ();
 			on_pant = n_pant;
 		}
+
+		// Relocate player if spawned on a broken tile
+
+		#if defined (ENABLE_BREAKABLE)
+		if (pmayneedrelocation) {
+			pmayneedrelocation = 0;
+			gpit = 16;
+			while (gpit --) {
+				cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
+				cy1 = cy2 = (pry + 15) >> 4;
+				cm_two_points ();
+				if ((at1 & 8) == 0 && (at2 & 8) == 0) break;
+				prx += 16;	// Try next cell
+			}
+			px = prx << FIXBITS;
+		}
+		#endif
+
+		// Update hud
 
 		#ifdef ACTIVATE_SCRIPTING
 			if (n_pant != 0xfe && on_pant != 0xfe) 
 		#endif
 			hud_update ();
 
-		// Finish frame and wait for NMI
-
-		oam_hide_rest (oam_index);
+		// Shake the screen ? 
 
 		#ifdef ENABLE_SHAKER
 			#include "mainloop/shaker.h"
 		#endif
 
+		// Finish frame and wait for NMI
+
+		oam_hide_rest (oam_index);
 		ppu_waitnmi ();
 		clear_update_list ();
 		oam_index = 4;
@@ -291,141 +324,143 @@ void game_loop (void) {
 		a_button = (pad_this_frame & PAD_A);
 		b_button = (pad_this_frame & PAD_B);
 
+		// Update actors if not paused...
+
 		if (paused == 0) {
 			// Count frames		
 			if (ticker) -- ticker; else ticker = 50;
 			half_life ^= 1;
 			++ frame_counter;
 
+			// Timer
+
 			#ifdef ENABLE_TIMER
 				#include "mainloop/timer.h"
-			#endif
-
-			// Flick the screen
-
-			#include "mainloop/flickscreen.h"
-
-			// Finish him
-
-			if (pkill) player_kill ();
-			if (game_over) break;			
-
-			// Change screen
-			
-			if (on_pant != n_pant) {
-				prepare_scr ();
-				on_pant = n_pant;
-			}
-
-			// Relocate player ?
-
-			#if defined (ENABLE_BREAKABLE)
-			if (pmayneedrelocation) {
-				pmayneedrelocation = 0;
-				gpit = 16;
-				while (gpit --) {
-					cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
-					cy1 = cy2 = (pry + 15) >> 4;
-					cm_two_points ();
-					if ((at1 & 8) == 0 && (at2 & 8) == 0) break;
-					prx += 16;	// Try next cell
-				}
-				px = prx << FIXBITS;
-			}
 			#endif
 
 			// Extra checks
 
 			#include "my/extra_checks.h"
 
+			// Win level condition
+
+			if (
 			#if defined (WIN_LEVEL_CUSTOM)
-				if (win_level)
+				win_level
 			#elif defined (ACTIVATE_SCRIPTING)
-				if (script_result == 1) 
+				script_result == 1
 			#elif defined (PLAYER_MAX_OBJECTS)
-				if (pobjs == PLAYER_MAX_OBJECTS) 
+				pobjs == PLAYER_MAX_OBJECTS
 			#elif defined (SCR_END)
-				if (
+				(
 					n_pant == SCR_END && 
 					((prx + 8) >> 4) == PLAYER_END_X &&
 					((pry + 8) >> 4) == PLAYER_END_Y
 				) 
 			#endif
-			{
+			) {
 				music_stop ();
 				delay (50);
 				break;
 			}
 
-			if (pstate) {
-				-- pctstate;
-				if (!pctstate) pstate = EST_NORMAL;
+			// Warp to level
+
+			if (warp_to_level) {
+				music_stop (); break;
 			}
+
+			// Update propellers
 
 			#ifdef ENABLE_PROPELLERS
 				if (propellers_on) propellers_do ();
 			#endif
 
+			// Detect interactions
+
 			#ifdef ENABLE_INTERACTIVES
 				#include "mainloop/interactives.h"
 			#endif		
 
+			// Update / collide hotspots
+
 			#include "mainloop/hotspots.h"
 
-			player_move ();
-			player_render ();
+			// Update player
+
+			if (!warp_to_level) {
+				player_move ();
+				player_render ();
+			}
+
+			// Automatic scripting calls (USE_ANIM & fire zone)
 
 			#ifdef ACTIVATE_SCRIPTING
 				#include "mainloop/scripting.h"
 			#endif
 
+			// Update bullets
+
 			#ifdef PLAYER_CAN_FIRE
 				bullets_move ();
 			#endif
 
+			// Update cocos
+
 			#ifdef ENABLE_COCOS
 				cocos_do ();
 			#endif
+
+			// Update enemies
 		
 			enems_move ();
+
+			// Do resonators
 
 			#ifdef ENABLE_RESONATORS
 				#include "mainloop/resonators.h"
 			#endif
 
-			// Moved this here so they appear BEHIND the actors
+			// Paint hotspots
 
 			if (hrt) hotspots_paint ();
+
+			// Paint interactives
 
 			#ifdef ENABLE_INTERACTIVES
 				interactives_paint ();
 			#endif
 
+			// Do breakable tiles
+
 			#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)
 				if (do_process_breakable) breakable_do_anim ();
 			#endif
+
+			// Update shines
 
 			#ifdef ENABLE_SHINES
 				shines_do ();
 			#endif
 
+			// Update no
+
 			#ifdef ENABLE_NO
-				if (no_ct) {
-					-- no_ct;
-					oam_index = oam_meta_spr (
-						prx + NO_OFFS_X, pry + NO_OFFS_Y + SPRITE_ADJUST,
-						oam_index,
-						NO_METASPRITE
-					);
-				}
+				#include "mainloop/no.h"
 			#endif
+
+			// Update chac-chacs
 
 			#ifdef ENABLE_TILE_CHAC_CHAC
 				chac_chacs_do ();
 			#endif
 		}
 
+		// Cheat to skip level
+
 		#include "mainloop/cheat.h"
+
+		// Pause
 
 		#include "mainloop/pause.h"
 	}

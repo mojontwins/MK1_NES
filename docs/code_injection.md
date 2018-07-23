@@ -123,6 +123,12 @@ Remember that the contents of containers equals the contents of the flag they ar
     }
 ```
 
+## Changing rooms
+
+You can override the normal changing of rooms by injecting code to `my/custom_flickscreen`, which gets executed before the normal "player exits the current room" code. This helps you creating custom connections. 
+
+Setting `flick_override` to 1 will override the normal "player exits the current room" code for the current frame.
+
 ## Things you may want to do in code injections
 
 ### Display text boxes:
@@ -178,3 +184,18 @@ The current, active hotspot is in `hrt`, located at `hrx, hry`. You can read or 
 * `pkilled` the amount of enemies killed.
 
 Of course, the more you know the inner works of the engine the more you can do using code injection points. If you think of something you don't know exactly how to do yo can always [buy me a coffee](https://www.buymeacoffee.com/nath) and ask me ;)
+
+### Warp to another level
+
+Setting `warp_to_level` will make the engine to restart the main loop, reloading all level assets. That means that if you change n_pant, px, py or level you can actually warp to another level, or to another location in the same level. For example, warp to level 2 at screen 5, tile location (3, 4) when interacting with sprite ID = 6, `my/on_interactive.h`:
+
+```c
+    if (rdc == 6) {
+        level = 2;
+        n_pant = 5;
+        px = 3 << 10;
+        py = 4 << 10;
+        warp_to_level = 1;
+    }
+```
+

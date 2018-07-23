@@ -62,7 +62,7 @@
 //#define HOTSPOT_TYPE_RESONATOR 	4		// An example of custom hotspot
 //#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
-//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
@@ -437,7 +437,7 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n

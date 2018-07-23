@@ -246,6 +246,5 @@ unsigned char c_max_bolts;              // Number of locks in current level
     unsigned char *next_script;
     unsigned char *script;
     unsigned char script_result, sc_terminado, sc_continuar;
-    unsigned char warp_to_level;
 #endif
     

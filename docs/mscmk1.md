@@ -377,11 +377,19 @@ VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 ### Changing to a different screen
 
 ```spt
-    WARP_TO N, X, Y             Changes the player to screen N at tile
-                                coordinates X, Y.
+    WARP_TO N             Changes the player to screen N
 ```
 
-Either N, X, or Y can be numbers or flags. Flags can be expressed as FLAG N, #N or $ALIAS.
+N may be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
+
+Note that `WARP_TO` doesn't reposition the player! To do so, use `SET X`, `SET Y` or `SET XY` alongside `WARP_TO`.
+
+Note that the construction `WARP_TO N, X, Y` is accepted, but it generates a sequence of:
+
+```spt
+    SET XY = X, Y
+    WARP_TO N
+```
 
 ### Which level?
 
@@ -397,7 +405,20 @@ VALUE can be a number or a flag. Flags can be expressed as FLAG N, #N or $ALIAS.
 
 ### Changing levels
 
-Not ready yet!
+```spt
+    WARP_TO_LEVEL L, N          Changes the player to screen N of level L
+```
+
+Either L or N are numbers or flags. Flags can be expressed as FLAG N, #N or $ALIAS.
+
+Note that `WARP_TO_LEVEL` doesn't reposition the player! To do so, use `SET X`, `SET Y` or `SET XY` alongside `WARP_TO`.
+
+Note that the construction `WARP_TO_LEVEL L, N, X, Y` is accepted, but it generates a sequence of:
+
+```spt
+    SET XY = X, Y
+    WARP_TO N
+```
 
 ### Redraw the screen
 
@@ -414,6 +435,20 @@ This command will indeed reenter the screen: the background will be drawn from m
 ```spt
     REENTER
 ```
+
+## Conditions about movement
+
+```spt
+    IF VX|VY < VALUE            True if VX / VY is less than VALUE
+
+    IF VX|VY > VALUE            True if VX / VY is more than VALUE
+
+    IF VX|VY = VALUE            True if VX / VY is VALUE
+
+    IF VX|VY !=|<> VALUE        True if VX / VY is not VALUE
+```
+
+VALUE can be a number or a flag.  Flags can be expressed as FLAG N, #N or $ALIAS.
 
 ## Modifying current screen
 
