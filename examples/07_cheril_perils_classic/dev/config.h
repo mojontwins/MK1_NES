@@ -415,6 +415,7 @@
 // Shooting behaviour
 // ------------------
 //#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+//#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.

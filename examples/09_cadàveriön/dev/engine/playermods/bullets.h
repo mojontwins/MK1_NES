@@ -50,6 +50,37 @@ void fire_bullet (void) {
 				break;	
 		#endif
 	}	
+	
+	// Diagonals
+	#ifdef PLAYER_CAN_FIRE_8_WAY
+		#ifdef PLAYER_TOP_DOWN
+		if (pfacing == CELL_FACING_LEFT || pfacing == CELL_FACING_RIGHT)
+		#endif
+		{
+			if (pad0 & PAD_UP) {
+				#ifndef PLAYER_TOP_DOWN
+					if (0 == (pad0 & (PAD_LEFT|PAD_RIGHT))) bmx [bi] = 0;
+				#endif
+				bmy [bi] = -PLAYER_BULLET_SPEED;
+				bx [bi] = prx;
+			} else if (pad0 & PAD_DOWN) {
+				#ifndef PLAYER_TOP_DOWN
+					if (0 == (pad0 & (PAD_LEFT|PAD_RIGHT))) bmx [bi] = 0;
+				#endif
+				bmy [bi] = PLAYER_BULLET_SPEED;
+				bx [bi] = prx;
+			}
+		}
+		#ifdef PLAYER_TOP_DOWN
+		else {
+			if (pad0 & PAD_LEFT) {
+				bmx [bi] = -PLAYER_BULLET_SPEED;
+			} else if (pad0 & PAD_RIGHT) {
+				bmx [bi] = PLAYER_BULLET_SPEED;
+			}
+		}
+		#endif
+	#endif
 
 	sfx_play (SFX_BULLET, 2);
 }
