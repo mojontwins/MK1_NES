@@ -26,34 +26,34 @@ For example, suppose we have imported 9 animation cells facing right and 9 more 
 We just put them all together in an array, first facing right, then facing left:
 
 ```c
-	// Player metasprites
-	const unsigned char * const spr_player [] = {
-		// Facing right (offset 0)
-		sspl_00_a,										// Standing (offset 0)
-		sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-		sspl_05_a, 										// Airborne (offset 5)
-		sspl2_00_a, sspl2_01_a, sspl2_02_a,				// Swimming cycle (offset 6) (for DX)
-		
+    // Player metasprites
+    const unsigned char * const spr_player [] = {
+        // Facing right (offset 0)
+        sspl_00_a,                                      // Standing (offset 0)
+        sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,     // Walk cycle (offset 1)
+        sspl_05_a,                                      // Airborne (offset 5)
+        sspl2_00_a, sspl2_01_a, sspl2_02_a,             // Swimming cycle (offset 6) (for DX)
+        
 
-		// Facing left (offset 9)
-		sspl_00_b,										// Standing (offset 0)
-		sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
-		sspl_05_b, 										// Airborne (offset 5)
-		sspl2_00_b, sspl2_01_b, sspl2_02_b				// Swimming cycle (offset 6) (for DX)
-	};
+        // Facing left (offset 9)
+        sspl_00_b,                                      // Standing (offset 0)
+        sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,     // Walk cycle (offset 1)
+        sspl_05_b,                                      // Airborne (offset 5)
+        sspl2_00_b, sspl2_01_b, sspl2_02_b              // Swimming cycle (offset 6) (for DX)
+    };
 ```
 
 As you see, we take note of the relative offsets of each metasprite representing the first cell of each state. We will need such offsets to write the code which maps metasprites to actions / states, so it's a good idea to write constants for them. Such constants are defined in `config.h`, near the end, in a list of `#define`s in the form `CELL_*`. Let's define a list for our games (you will find more in the default `config.h`. You can delete the ones you won't be using if you like):
  
 ```c 
-	// config.h, line ~574
-	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	9
+    // config.h, line ~574
+    #define CELL_FACING_RIGHT   0
+    #define CELL_FACING_LEFT    9
 
-	#define CELL_IDLE			0
-	#define CELL_WALK_CYCLE		1
-	#define CELL_AIRBORNE		5
-	#define CELL_SWIM_CYCLE		6
+    #define CELL_IDLE           0
+    #define CELL_WALK_CYCLE     1
+    #define CELL_AIRBORNE       5
+    #define CELL_SWIM_CYCLE     6
 ```
 
 Enemies metaspritesets
@@ -77,13 +77,13 @@ The first enemies metasprite array is as follows:
 > If you are making a single-level game and don't want to fiddle too much with the default code in `src` just name this array `spr_enems0`.
 
 ```c
-	const unsigned char * const spr_enems0 [] = {
-		// Linear enems and platforms (ids 1-4)
-		ssena_00, ssena_01, 0, 0, ssena_00, ssena_01, 0, 0, // 1
-		ssena_02, ssena_03, 0, 0, ssena_02, ssena_03, 0, 0, // 2
-		ssenb_00, ssenb_01, 0, 0, ssenb_00, ssenb_01, 0, 0, // 3
-		ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0, // Platform (4)
-	};
+    const unsigned char * const spr_enems0 [] = {
+        // Linear enems and platforms (ids 1-4)
+        ssena_00, ssena_01, 0, 0, ssena_00, ssena_01, 0, 0, // 1
+        ssena_02, ssena_03, 0, 0, ssena_02, ssena_03, 0, 0, // 2
+        ssenb_00, ssenb_01, 0, 0, ssenb_00, ssenb_01, 0, 0, // 3
+        ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0, // Platform (4)
+    };
 ```
 
 Note how, as we didn't generate horizontally flipped versions for these entities, we just repeat cells in the 'facing right' subset (first four entries in each line) and the `facing left` subset (last four entries in each line). As mentioned, we used zeroes to cover the entries we won't be using.
@@ -99,12 +99,12 @@ Let's suppose the enemies we imported for the second level are all 16x16 pixels 
 So the array for this level would be:
 
 ```c
-	const unsigned char * const spr_enems1 [] = {
-		// Linear enems and platforms (ids 1-4)
-		ssenc_00, ssenc_01, 0, 0, ssenc_00, ssenc_01, 0, 0, // 1
-		ssenc_02, ssenc_03, 0, 0, ssenc_02, ssenc_03, 0, 0, // 2
-		ssend_00_a, ssend_01_a, 0, 0, ssend_00_b, ssend_01_b, 0, 0, // 3
-	};
+    const unsigned char * const spr_enems1 [] = {
+        // Linear enems and platforms (ids 1-4)
+        ssenc_00, ssenc_01, 0, 0, ssenc_00, ssenc_01, 0, 0, // 1
+        ssenc_02, ssenc_03, 0, 0, ssenc_02, ssenc_03, 0, 0, // 2
+        ssend_00_a, ssend_01_a, 0, 0, ssend_00_b, ssend_01_b, 0, 0, // 3
+    };
 ```
 
 Note how the third row contains `_a` cells first (facing right), and `_b` cells second (facing left). Rows 1 and 2 have the same metasprites for both directions.
@@ -119,7 +119,7 @@ This last set is somewhat custom, up to a degree at least. Anyways, if you don't
 After the fourth entry, we can do more or less whatever we want. In our case we'll save positions 5 and 6 for extra, custom items related to hotspots:
 
 ```c
-	const unsigned char * const spr_hs [] = {
-		0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
-	};
+    const unsigned char * const spr_hs [] = {
+        0, ssit_00, ssit_01, ssit_02, ssit_03, ssit_04
+    };
 ```
