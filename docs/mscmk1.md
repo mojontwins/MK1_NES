@@ -436,7 +436,7 @@ This command will indeed reenter the screen: the background will be drawn from m
     REENTER
 ```
 
-## Conditions about movement
+## Conditions & Commands about movement
 
 ```spt
     IF VX|VY < VALUE            True if VX / VY is less than VALUE
@@ -449,6 +449,10 @@ This command will indeed reenter the screen: the background will be drawn from m
 ```
 
 VALUE can be a number or a flag.  Flags can be expressed as FLAG N, #N or $ALIAS.
+
+```spt
+    STOP_PLAYER                 Sets pvx = pvy = 0.
+```
 
 ## Modifying current screen
 

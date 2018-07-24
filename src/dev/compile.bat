@@ -51,6 +51,6 @@ ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 del *.o > nul
 del game.s > nul
 del work\*.h /q > nul
-del work\*.bin.* /q > nul
+del work\*.bin.* /q > nul  2> nul
 
 echo DONE!

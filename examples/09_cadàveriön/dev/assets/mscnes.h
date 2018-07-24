@@ -121,7 +121,7 @@ void run_script (unsigned char whichs) {
                     case 0x20: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); map_set (); break;
                     case 0x51: f_zone_ac = 1; fzx1 = read_byte (); fzy1 = read_byte (); fzx2 = read_byte (); fzy2 = read_byte (); break;
                     case 0x68: reloc_player (); break;
-                    case 0x74: stop_player (); break;
+                    case 0x74: player_stop (); break;
                     case 0x70: timer = read_vbyte (); break;
                     case 0x10: readxy (); flags [sc_x] += sc_y; break;
                     case 0x31: plife -= read_vbyte (); break;

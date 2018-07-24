@@ -60,7 +60,7 @@ if (interactives_index) {
 			#include "my/on_interactive.h"
 
 			#ifdef ACTIVATE_SCRIPTING
-				// Run script; script_arg is set, alwyas success
+				// Run script; script_arg is set, always success
 				just_interacted = 1;
 				run_fire_script ();
 				fire_script_success = 1;

@@ -196,6 +196,14 @@
 //#define RESONATOR_CHANGE_BG_PAL		paltsgrey	// Define to change pal for this palette
 //#define RESONATOR_CHANGE_SPR_PAL		palssgrey	// Define to change pal for this palette
 
+// Springs
+
+//#define ENABLE_SPRINGS
+#define SPRING_TILE 					10
+#define SPRING_SPIKE_TILE 				11
+//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
+//#define SPRINGS_ON_BY_DEFAULT
+
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
@@ -236,13 +244,6 @@
 //#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
 #define TIMER_SOUND						10  // play a sound if timer < value
 
-// Springs
-
-//#define ENABLE_SPRINGS
-#define SPRING_TILE 					10
-#define SPRING_SPIKE_TILE 				11
-//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
-//#define SPRINGS_ON_BY_DEFAULT
 
 // Enemy types and definitions
 // ---------------------------
@@ -437,8 +438,6 @@
 
 #define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
-
-//#define FIRE_ON_KILL					// run fire script on enemy kill
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 #define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"

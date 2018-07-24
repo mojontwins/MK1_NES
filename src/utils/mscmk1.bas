@@ -1334,7 +1334,7 @@ End If
 If actionsUsed (&H74) Then
 	' STOP_PLAYER
 	' &H74
-	Print #fOut, "                    case 0x74: stop_player (); break;"
+	Print #fOut, "                    case 0x74: player_stop (); break;"
 End If
 
 If actionsUsed (&H70) Then
