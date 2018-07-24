@@ -1206,6 +1206,12 @@ When the player lands a kick or puch, it (and the actor which was hit) will be f
 Shooting can be heavily customized. For basic shooting:
 
 ```c
+    #define PLAYER_CAN_FIRE_8_WAY
+```
+
+Leave it undefined for 4-way (top-down) or 2-way (side view) shooting. If defined, player can shoot in all 8 directions (top-down and side view) using the D-PAD alongisde B to shoot.
+
+```c
     #define PLAYER_BULLET_SPEED             4
 ```
 
