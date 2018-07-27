@@ -412,6 +412,7 @@
 // Shooting behaviour
 // ------------------
 //#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+//#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
@@ -437,7 +438,7 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
@@ -460,15 +461,21 @@
 // Side view:
 // ----------
 
+// Choose ONE or SEVERAL of those. 
+// If you choose several, use the vertical_engine_type variable to select
+
 #define PLAYER_HAS_JUMP					// If defined, player is able to jump.
+#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
+#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
+#define PLAYER_HAS_JETPAC				// If defined, player can thrust a vertical jetpac
+
+// Extra configuration for side view:
+
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
-//#define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
-//#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
-//#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 //#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
-//#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
+//#define PLAYER_STEPS_MIN_KILLABLE		0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
 												// 0xff = Nobody
 
 // ============================================================================

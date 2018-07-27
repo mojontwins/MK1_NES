@@ -68,6 +68,19 @@ void player_init (void) {
 	#ifdef CARRY_ONE_HS_OBJECT
 		pinv = HS_OBJ_EMPTY; 
 	#endif
+
+	// Default engine type
+	#ifndef PLAYER_TOP_DOWN
+		#ifdef PLAYER_HAS_JUMP
+			vertical_engine_type = ENGINE_TYPE_JUMP;
+		#elif defined (PLAYER_HAS_JETPAC)
+			vertical_engine_type = ENGINE_TYPE_JET_PAC;
+		#elif defined (PLAYER_AUTO_JUMP)
+			vertical_engine_type = ENGINE_TYPE_AUTO_JUMP;
+		#elif defined (PLAYER_SWIMS)
+			vertical_engine_type = ENGINE_TYPE_SWIM;
+		#endif
+	#endif
 }
 
 void player_render (void) {
@@ -284,7 +297,7 @@ void player_move (void) {
 			} else
 		#endif
 
-		#ifndef PLAYER_SWIMS
+		if (vertical_engine_type != ENGINE_TYPE_SWIM) {
 			#ifdef PLAYER_JUMP_TYPE_MK2
 				if (
 					!pgotten
@@ -300,14 +313,11 @@ void player_move (void) {
 					if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 				}
 			#endif
-		#endif
+		}
 
 		// Moving platforms invalidate pvy
 
-		#ifdef PLAYER_CUMULATIVE_JUMP
-			if (!pj)
-		#endif
-			if (pgotten) pvy = 0;			
+		if (pgotten) pvy = 0;			
 	#endif
 
 	cx1 = prx >> 4;
@@ -316,31 +326,34 @@ void player_move (void) {
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (pad0 & PAD_A) {
-			pvy -= PLAYER_AY_JETPAC;
-			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
+		if (vertical_engine_type == ENGINE_TYPE_JET_PAC) {
+			if (pad0 & PAD_A) {
+				pvy -= PLAYER_AY_JETPAC;
+				if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
+			}
 		}
 	#endif
 
 	#ifdef PLAYER_SWIMS
 		// Controller 
 
-		if (!(pad0 & (PAD_DOWN|PAD_A))) {
-			pvy -= PLAYER_AY_SWIM >> 1;
-		} else {
-			if (pad0 & (PAD_DOWN|PAD_A)) {
-				pvy += PLAYER_AY_SWIM;
+		if (vertical_engine_type == ENGINE_TYPE_SWIM) {
+			if (!(pad0 & (PAD_DOWN|PAD_A))) {
+				pvy -= PLAYER_AY_SWIM >> 1;
+			} else {
+				if (pad0 & (PAD_DOWN|PAD_A)) {
+					pvy += PLAYER_AY_SWIM;
+				}
+		
+				// Limit
+				if (pvy > PLAYER_VY_SWIM_MAX) {
+					pvy = PLAYER_VY_SWIM_MAX;
+				}
 			}
-	
-			// Limit
-			if (pvy > PLAYER_VY_SWIM_MAX) {
-				pvy = PLAYER_VY_SWIM_MAX;
+			if (pvy < -PLAYER_VY_SWIM_MAX) {
+				pvy = -PLAYER_VY_SWIM_MAX;
 			}
 		}
-		if (pvy < -PLAYER_VY_SWIM_MAX) {
-			pvy = -PLAYER_VY_SWIM_MAX;
-		}
-
 	#endif
 
 	// Move
@@ -444,40 +457,74 @@ void player_move (void) {
 		// Jump: PAD_A, change when needed
 		// *******************************
 
-		#ifdef PLAYER_JUMP_TYPE_MK2
+		if (vertical_engine_type == ENGINE_TYPE_JUMP) {
+			#ifdef PLAYER_JUMP_TYPE_MK2
 
-			if (
-				a_button 
-				&& !pj
-				&& (
-					pgotten || ppossee || hitv
-					#ifdef ENABLE_LADDERS
-						|| ponladder
+				if (
+					a_button 
+					&& !pj
+					&& (
+						pgotten || ppossee || hitv
+						#ifdef ENABLE_LADDERS
+							|| ponladder
+						#endif					
+					)
+				) {
+					jump_start ();
+					
+					#ifdef DIE_AND_RESPAWN
+						if (!(pgotten || hitv || pnotsafe)) {
+							player_register_safe_spot ();
+						}
 					#endif					
-				)
-			) {
-				jump_start ();
-				
-				#ifdef DIE_AND_RESPAWN
-					if (!(pgotten || hitv || pnotsafe)) {
-						player_register_safe_spot ();
-					}
-				#endif					
-			}
-
-			if (pj) {
-				if (pad0 & PAD_A) {
-					++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
-				} else {
-					pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
 				}
-			}
 
-		#else
-			
+				if (pj) {
+					if (pad0 & PAD_A) {
+						++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
+					} else {
+						pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
+					}
+				}
+
+			#else
+				
+				if (
+					a_button 
+					&& !pj
+					&& (
+						pgotten || ppossee || hitv
+						#ifdef ENABLE_LADDERS
+							|| ponladder
+						#endif
+					)
+				) {
+					jump_start ();
+					
+					#ifdef DIE_AND_RESPAWN
+						if (!(pgotten || hitv || pnotsafe)) {
+							player_register_safe_spot ();
+						}
+					#endif	
+				}
+				
+				if (pad0 & PAD_A) {
+					if (pj) {
+						if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+						if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+						++ pctj; if (pctj == 16) pj = 0;	
+					}
+				} else {
+					pj = 0; 
+				}
+			#endif
+		}
+	#endif
+
+	#ifdef PLAYER_AUTO_JUMP
+		if (vertical_engine_type == ENGINE_TYPE_AUTO_JUMP) {
 			if (
-				a_button 
-				&& !pj
+				!pj
 				&& (
 					pgotten || ppossee || hitv
 					#ifdef ENABLE_LADDERS
@@ -486,53 +533,23 @@ void player_move (void) {
 				)
 			) {
 				jump_start ();
-				
+
 				#ifdef DIE_AND_RESPAWN
 					if (!(pgotten || hitv || pnotsafe)) {
 						player_register_safe_spot ();
 					}
 				#endif	
 			}
-			
-			if (pad0 & PAD_A) {
-				if (pj) {
-					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-					if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-					++ pctj; if (pctj == 16) pj = 0;	
-				}
-			} else {
-				pj = 0; 
+
+			if (pj) {
+				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+				++ pctj; if (pctj == 16) pj = 0;	
 			}
-		#endif
-	#endif
-
-	#ifdef PLAYER_AUTO_JUMP
-		if (
-			!pj
-			&& (
-				pgotten || ppossee || hitv
-				#ifdef ENABLE_LADDERS
-					|| ponladder
-				#endif
-			)
-		) {
-			jump_start ();
-
-			#ifdef DIE_AND_RESPAWN
-				if (!(pgotten || hitv || pnotsafe)) {
-					player_register_safe_spot ();
-				}
-			#endif	
-		}
-
-		if (pj) {
-			if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-			if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-			++ pctj; if (pctj == 16) pj = 0;	
-		}
-		
-		if (pad0 & PAD_DOWN) {
-			if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+			
+			if (pad0 & PAD_DOWN) {
+				if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+			}
 		}
 	#endif
 

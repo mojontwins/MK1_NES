@@ -1,4 +1,4 @@
-# Engine Configuration
+# Game Configuration Reference
 
 The way your game will behave is configured in `config.h` via the definition / undefinition of a bunch of compiler directives and constants.
 
@@ -1422,6 +1422,17 @@ Very basic swimming engine. Player will naturally float up. Press A or DOWN to m
 ```
 
 Basic Jet Pack. Player has to press A to thrust.
+
+Note that you can activate more than one of those compiler directives. Then, you can choose the active engine for vertical movement using the `vertical_engine_type` variable, which may take these values:
+
+```c
+    ENGINE_TYPE_JUMP
+    ENGINE_TYPE_JET_PAC
+    ENGINE_TYPE_SWIM
+    ENGINE_TYPE_AUTO_JUMP
+```
+
+This can help you change engines between levels or even mid-level.
 
 ```c
     #define PLAYER_STEPS_ON_ENEMS

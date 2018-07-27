@@ -75,11 +75,11 @@ enexpander2.exe de MK1 parece más compleja. ¿Está en MK2? - Sí, es la misma 
 ¡enemscutter.exe! Si es que tengo de todo para no trabajar XD Vamos a ver qué tal.
 
 ```cmd
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
-	> ..\utils\legacy\enemscutter.exe orig.ene orig0.ene 0 0 20 2
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
+    > ..\utils\legacy\enemscutter.exe orig.ene orig0.ene 0 0 20 2
 
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
-	> ..\utils\legacy\enemscutter.exe orig.ene orig1.ene 0 2 20 1
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
+    > ..\utils\legacy\enemscutter.exe orig.ene orig1.ene 0 2 20 1
 ```
 
 ~~
@@ -89,9 +89,9 @@ Esto tiene que tener algún buguillo. El tamaño del mapa resultante no está bi
 En efecto, hay un buguillo:
 
 ```freebasic0
-	' mapw, maph, scrw, scrh, nenems
-	Get #fIn, , d: map_w = d: d = w: Put #fOut, , d
-	Get #fIn, , d: map_h = d: d = w: Put #fOut, , d
+    ' mapw, maph, scrw, scrh, nenems
+    Get #fIn, , d: map_w = d: d = w: Put #fOut, , d
+    Get #fIn, , d: map_h = d: d = w: Put #fOut, , d
 ```
  
 
@@ -104,88 +104,88 @@ Mierda, hay más cosas mal. Vamos a revisar el cutter y empezamos de nuevo.
 OK - Me faltaba contemplar que los hotspots fueran de 2 bytes.
 
 ```cmd
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
-	> ..\utils\legacy\enemscutter.exe orig.ene orig0.ene 0 0 20 2 2bytes
-	....................
-	....................
-	Bytes per hotspot = 2
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
+    > ..\utils\legacy\enemscutter.exe orig.ene orig0.ene 0 0 20 2 2bytes
+    ....................
+    ....................
+    Bytes per hotspot = 2
 
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
-	> ..\utils\legacy\enemscutter.exe orig.ene orig1.ene 0 2 20 1 2bytes
-	....................
-	Bytes per hotspot = 2
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems
+    > ..\utils\legacy\enemscutter.exe orig.ene orig1.ene 0 2 20 1 2bytes
+    ....................
+    Bytes per hotspot = 2
 
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems    
-	> ..\utils\legacy\enexpander2.exe orig0.ene level0.ene ts0.png level0.map 2bytes debug             
-	v0.2 20160729                                                                                      
-	map size (20, 2)                                                                                   
-	08 08 01.. [00]: (8, 8) -> (9, 10).                                                                
-	00 08 00.. [01]: (0, 8) -> (0, 10).                                                                
-	05 08 01.. [02]: (5, 8) -> (5, 10).                                                                
-	07 05 02.. [03]: (7, 5) -> (8, 5).                                                                 
-	08 07 01.. [04]: (8, 7) -> (9, 9).                                                                 
-	00 00 00.. [05]: (0, 0) -> (0, 0).                                                                 
-	07 08 01.. [06]: (7, 8) -> (8, 10).                                                                
-	00 00 00.. [07]: (0, 0) -> (0, 0).                                                                 
-	0D 08 01.. [08]: (13, 8) -> (14, 10).                                                              
-	00 00 00.. [09]: (0, 0) -> (0, 0).                                                                 
-	06 06 01.. [0A]: (6, 6) -> (6, 8).                                                                 
-	08 06 01.. [0B]: (8, 6) -> (9, 8).                                                                 
-	0A 01 01.. [0C]: (10, 1) -> (11, 1).                                                               
-	0B 03 01.. [0D]: (11, 3) -> (12, 3).                                                               
-	0B 08 01.. [0E]: (11, 8) -> (12, 10).                                                              
-	0C 01 01.. [0F]: (12, 1) -> (13, 1).                                                               
-	0C 07 01.. [10]: (12, 7) -> (13, 9).                                                               
-	00 00 00.. [11]: (0, 0) -> (0, 0).                                                                 
-	0A 08 01.. [12]: (10, 8) -> (11, 10).                                                              
-	01 02 01.. [13]: (1, 2) -> (1, 2).                                                                 
-	02 07 02.. [14]: (2, 7) -> (2, 9).                                                                 
-	0D 08 01.. [15]: (13, 8) -> (14, 10).                                                              
-	01 08 01.. [16]: (1, 8) -> (1, 10).                                                                
-	0D 05 01.. [17]: (13, 5) -> (14, 5).                                                               
-	04 03 02.. [18]: (4, 3) -> (4, 3).                                                                 
-	04 07 01.. [19]: (4, 7) -> (4, 9).                                                                 
-	00 00 00.. [1A]: (0, 0) -> (0, 0).                                                                 
-	0B 08 01.. [1B]: (11, 8) -> (12, 10).                                                              
-	08 06 01.. [1C]: (8, 6) -> (9, 8).                                                                 
-	06 06 01.. [1D]: (6, 6) -> (6, 8).                                                                 
-	01 06 02.. [1E]: (1, 6) -> (1, 8).                                                                 
-	08 01 02.. [1F]: (8, 1) -> (9, 1).                                                                 
-	06 06 01.. [20]: (6, 6) -> (6, 8).                                                                 
-	06 01 01.. [21]: (6, 1) -> (6, 1).                                                                 
-	0A 05 01.. [22]: (10, 5) -> (11, 5).                                                               
-	01 02 02.. [23]: (1, 2) -> (1, 2).                                                                 
-	0B 02 00.. [24]: (11, 2) -> (12, 2).                                                               
-	00 00 00.. [25]: (0, 0) -> (0, 0).                                                                 
-	00 00 00.. [26]: (0, 0) -> (0, 0).                                                                 
-	0D 06 01.. [27]: (13, 6) -> (14, 8).                                                               
-	DONE!                                                                                              
-	                                                                                                   
-	na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems    
-	> ..\utils\legacy\enexpander2.exe orig1.ene level1.ene ts1.png level1.map 2bytes debug             
-	v0.2 20160729                                                                                      
-	map size (20, 1)                                                                                   
-	00 00 00.. [00]: (0, 0) -> (0, 0).                                                                 
-	06 08 03.. [01]: (6, 8) -> (6, 10).                                                                
-	00 00 00.. [02]: (0, 0) -> (0, 0).                                                                 
-	08 08 03.. [03]: (8, 8) -> (9, 10).                                                                
-	00 00 00.. [04]: (0, 0) -> (0, 0).                                                                 
-	00 00 00.. [05]: (0, 0) -> (0, 0).                                                                 
-	00 00 00.. [06]: (0, 0) -> (0, 0).                                                                 
-	09 02 03.. [07]: (9, 2) -> (10, 2).                                                                
-	00 00 00.. [08]: (0, 0) -> (0, 0).                                                                 
-	04 08 03.. [09]: (4, 8) -> (4, 10).                                                                
-	00 00 00.. [0A]: (0, 0) -> (0, 0).                                                                 
-	07 07 03.. [0B]: (7, 7) -> (8, 9).                                                                 
-	00 00 00.. [0C]: (0, 0) -> (0, 0).                                                                 
-	02 08 03.. [0D]: (2, 8) -> (2, 10).                                                                
-	00 00 00.. [0E]: (0, 0) -> (0, 0).                                                                 
-	00 00 00.. [0F]: (0, 0) -> (0, 0).                                                                 
-	00 00 00.. [10]: (0, 0) -> (0, 0).                                                                 
-	01 08 03.. [11]: (1, 8) -> (1, 10).                                                                
-	00 00 00.. [12]: (0, 0) -> (0, 0).                                                                 
-	06 05 03.. [13]: (6, 5) -> (6, 5).                                                                 
-	DONE!                                                                                              
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems    
+    > ..\utils\legacy\enexpander2.exe orig0.ene level0.ene ts0.png level0.map 2bytes debug             
+    v0.2 20160729                                                                                      
+    map size (20, 2)                                                                                   
+    08 08 01.. [00]: (8, 8) -> (9, 10).                                                                
+    00 08 00.. [01]: (0, 8) -> (0, 10).                                                                
+    05 08 01.. [02]: (5, 8) -> (5, 10).                                                                
+    07 05 02.. [03]: (7, 5) -> (8, 5).                                                                 
+    08 07 01.. [04]: (8, 7) -> (9, 9).                                                                 
+    00 00 00.. [05]: (0, 0) -> (0, 0).                                                                 
+    07 08 01.. [06]: (7, 8) -> (8, 10).                                                                
+    00 00 00.. [07]: (0, 0) -> (0, 0).                                                                 
+    0D 08 01.. [08]: (13, 8) -> (14, 10).                                                              
+    00 00 00.. [09]: (0, 0) -> (0, 0).                                                                 
+    06 06 01.. [0A]: (6, 6) -> (6, 8).                                                                 
+    08 06 01.. [0B]: (8, 6) -> (9, 8).                                                                 
+    0A 01 01.. [0C]: (10, 1) -> (11, 1).                                                               
+    0B 03 01.. [0D]: (11, 3) -> (12, 3).                                                               
+    0B 08 01.. [0E]: (11, 8) -> (12, 10).                                                              
+    0C 01 01.. [0F]: (12, 1) -> (13, 1).                                                               
+    0C 07 01.. [10]: (12, 7) -> (13, 9).                                                               
+    00 00 00.. [11]: (0, 0) -> (0, 0).                                                                 
+    0A 08 01.. [12]: (10, 8) -> (11, 10).                                                              
+    01 02 01.. [13]: (1, 2) -> (1, 2).                                                                 
+    02 07 02.. [14]: (2, 7) -> (2, 9).                                                                 
+    0D 08 01.. [15]: (13, 8) -> (14, 10).                                                              
+    01 08 01.. [16]: (1, 8) -> (1, 10).                                                                
+    0D 05 01.. [17]: (13, 5) -> (14, 5).                                                               
+    04 03 02.. [18]: (4, 3) -> (4, 3).                                                                 
+    04 07 01.. [19]: (4, 7) -> (4, 9).                                                                 
+    00 00 00.. [1A]: (0, 0) -> (0, 0).                                                                 
+    0B 08 01.. [1B]: (11, 8) -> (12, 10).                                                              
+    08 06 01.. [1C]: (8, 6) -> (9, 8).                                                                 
+    06 06 01.. [1D]: (6, 6) -> (6, 8).                                                                 
+    01 06 02.. [1E]: (1, 6) -> (1, 8).                                                                 
+    08 01 02.. [1F]: (8, 1) -> (9, 1).                                                                 
+    06 06 01.. [20]: (6, 6) -> (6, 8).                                                                 
+    06 01 01.. [21]: (6, 1) -> (6, 1).                                                                 
+    0A 05 01.. [22]: (10, 5) -> (11, 5).                                                               
+    01 02 02.. [23]: (1, 2) -> (1, 2).                                                                 
+    0B 02 00.. [24]: (11, 2) -> (12, 2).                                                               
+    00 00 00.. [25]: (0, 0) -> (0, 0).                                                                 
+    00 00 00.. [26]: (0, 0) -> (0, 0).                                                                 
+    0D 06 01.. [27]: (13, 6) -> (14, 8).                                                               
+    DONE!                                                                                              
+                                                                                                       
+    na_th_an@DESKTOP-F2O9141 C:\Users\na_th\Desktop\git\MK1_NES\examples\07_sir_ababol_dx_it1\enems    
+    > ..\utils\legacy\enexpander2.exe orig1.ene level1.ene ts1.png level1.map 2bytes debug             
+    v0.2 20160729                                                                                      
+    map size (20, 1)                                                                                   
+    00 00 00.. [00]: (0, 0) -> (0, 0).                                                                 
+    06 08 03.. [01]: (6, 8) -> (6, 10).                                                                
+    00 00 00.. [02]: (0, 0) -> (0, 0).                                                                 
+    08 08 03.. [03]: (8, 8) -> (9, 10).                                                                
+    00 00 00.. [04]: (0, 0) -> (0, 0).                                                                 
+    00 00 00.. [05]: (0, 0) -> (0, 0).                                                                 
+    00 00 00.. [06]: (0, 0) -> (0, 0).                                                                 
+    09 02 03.. [07]: (9, 2) -> (10, 2).                                                                
+    00 00 00.. [08]: (0, 0) -> (0, 0).                                                                 
+    04 08 03.. [09]: (4, 8) -> (4, 10).                                                                
+    00 00 00.. [0A]: (0, 0) -> (0, 0).                                                                 
+    07 07 03.. [0B]: (7, 7) -> (8, 9).                                                                 
+    00 00 00.. [0C]: (0, 0) -> (0, 0).                                                                 
+    02 08 03.. [0D]: (2, 8) -> (2, 10).                                                                
+    00 00 00.. [0E]: (0, 0) -> (0, 0).                                                                 
+    00 00 00.. [0F]: (0, 0) -> (0, 0).                                                                 
+    00 00 00.. [10]: (0, 0) -> (0, 0).                                                                 
+    01 08 03.. [11]: (1, 8) -> (1, 10).                                                                
+    00 00 00.. [12]: (0, 0) -> (0, 0).                                                                 
+    06 05 03.. [13]: (6, 5) -> (6, 5).                                                                 
+    DONE!                                                                                              
 ```
 
 ~~
@@ -197,131 +197,131 @@ Ya que tengo todos los gráficos, vamos con el compile.bat.
 Primero hacemos las paletas. Sólo hay tres, con mkts.exe:
 
 ```cmd
-	echo Generating pals
-	..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
-	..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
-	..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
-	copy /b work\palts0.h + work\palts1.h + work\palss0.h assets\palettes.h > nul
+    echo Generating pals
+    ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
+    ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
+    ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
+    copy /b work\palts0.h + work\palts1.h + work\palss0.h assets\palettes.h > nul
 ```
 
 Lo siguiente es hacer el script para construir tileset.chr. Aquí lo suyo es que vaya explicando cada orden, qué hace, y tal, empezando con que tenemos que rellenar 8192 bytes, 4096 para tiles de fondo y 4096 para los sprites, en dos secciones. Mencionar por qué el recorte de los frames de nadal está centrado diferente y tal.
 
 ```
-	# import_patterns.spt
-	# Imports patterns for Sir Ababol DX NES
+    # import_patterns.spt
+    # Imports patterns for Sir Ababol DX NES
 
-	# This is a mkts.exe script file
-	# Needs mkts v0.7.0 20170725
+    # This is a mkts.exe script file
+    # Needs mkts v0.7.0 20170725
 
-	# Bank 0 (patterns for bg)
+    # Bank 0 (patterns for bg)
 
-	# Font
-	OPEN font.png
-	PALS palts0.png
-	CHARSET 0, 0, 32, 2
+    # Font
+    OPEN font.png
+    PALS palts0.png
+    CHARSET 0, 0, 32, 2
 
-	# Tilesets are generated as tilemaps. They will be stored in this file:
-	MAPFILE ..\dev\assets\tiledata.h
+    # Tilesets are generated as tilemaps. They will be stored in this file:
+    MAPFILE ..\dev\assets\tiledata.h
 
-	# ts0
-	OPEN ts0.png
-	PALS palts0.png
-	LABEL ts0
-	MAPPED 0, 0, 2, 2, 16, 2, 20
+    # ts0
+    OPEN ts0.png
+    PALS palts0.png
+    LABEL ts0
+    MAPPED 0, 0, 2, 2, 16, 2, 20
 
-	# ts1
-	OPEN ts1.png
-	PALS palts1.png
-	LABEL ts1
-	MAPPED 0, 0, 2, 2, 16, 1
+    # ts1
+    OPEN ts1.png
+    PALS palts1.png
+    LABEL ts1
+    MAPPED 0, 0, 2, 2, 16, 1
 
-	# Done with patterns for bg. Reset and fill with zeroes:
-	RESETPOOL
-	FILL 4096
+    # Done with patterns for bg. Reset and fill with zeroes:
+    RESETPOOL
+    FILL 4096
 
-	# Bank 1 (patterns for spr)
+    # Bank 1 (patterns for spr)
 
-	# All sprites are in the same file, and use the same palette
-	OPEN ss.png
-	PALS palss0.png
+    # All sprites are in the same file, and use the same palette
+    OPEN ss.png
+    PALS palss0.png
 
-	# Metasprites will be stored in this file:
-	MAPFILE ..\dev\assets\spritedata.h
+    # Metasprites will be stored in this file:
+    MAPFILE ..\dev\assets\spritedata.h
 
-	# Main player, 6 frames, 2x3 patterns, generate flipped versions
-	# hot point (where oam_meta_spr places its origin) is (-4, -8).
-	# (player active rectangle is 8x16, centered bottom).
-	LABEL sspl
-	METASPRITESET 1, 1, 2, 3, 6, 1, -4, -8 FLIPPED
+    # Main player, 6 frames, 2x3 patterns, generate flipped versions
+    # hot point (where oam_meta_spr places its origin) is (-4, -8).
+    # (player active rectangle is 8x16, centered bottom).
+    LABEL sspl
+    METASPRITESET 1, 1, 2, 3, 6, 1, -4, -8 FLIPPED
 
-	# Main player swim, 3 frames, 2x3 patterns, generate flipped versions
-	# hot point (where oam_meta_spr places its origin) is (-4, -4).
-	# (player active rectangle is 8x16, centered).
-	LABEL sspl2
-	METASPRITESET 13, 1, 2, 3, 3, 1, -4, -4 FLIPPED
+    # Main player swim, 3 frames, 2x3 patterns, generate flipped versions
+    # hot point (where oam_meta_spr places its origin) is (-4, -4).
+    # (player active rectangle is 8x16, centered).
+    LABEL sspl2
+    METASPRITESET 13, 1, 2, 3, 3, 1, -4, -4 FLIPPED
 
-	# Enemies, 
-	# Tall enemies, 4 frames, 2x3 patterns. No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) is (0, -8).
-	# (enems rectangle is 16x16, centered bottom).
-	LABEL ssena
-	METASPRITESET 1, 4, 2, 3, 4, 1, 0, -8
+    # Enemies, 
+    # Tall enemies, 4 frames, 2x3 patterns. No need for flipped versions
+    # Hot point (where oam_meta_spr places its origin) is (0, -8).
+    # (enems rectangle is 16x16, centered bottom).
+    LABEL ssena
+    METASPRITESET 1, 4, 2, 3, 4, 1, 0, -8
 
-	# Wide enemies, 2 frames, 3x2 patterns. No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) (is -4, 0).
-	# (enems rectangle is 16x16, centered bottom).
-	LABEL ssenb
-	METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
+    # Wide enemies, 2 frames, 3x2 patterns. No need for flipped versions
+    # Hot point (where oam_meta_spr places its origin) (is -4, 0).
+    # (enems rectangle is 16x16, centered bottom).
+    LABEL ssenb
+    METASPRITESET 9, 4, 3, 2, 2, 1, -4, 0
 
-	# Platforms, 2 frames, 2x2 patterns. No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) is (0, 0).
-	# (enems rectangle is 16x16, centered bottom).
-	LABEL ssplat
-	METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
+    # Platforms, 2 frames, 2x2 patterns. No need for flipped versions
+    # Hot point (where oam_meta_spr places its origin) is (0, 0).
+    # (enems rectangle is 16x16, centered bottom).
+    LABEL ssplat
+    METASPRITESET 15, 4, 2, 2, 2, 1, 0, 0
 
-	# Water enems 1, 4 frames, 2x2 patterns, No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) is (0, 0).
-	# (enems rectangle is 16x16, centered bottom).
-	LABEL ssenc
-	METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
+    # Water enems 1, 4 frames, 2x2 patterns, No need for flipped versions
+    # Hot point (where oam_meta_spr places its origin) is (0, 0).
+    # (enems rectangle is 16x16, centered bottom).
+    LABEL ssenc
+    METASPRITESET 1, 7, 2, 2, 4, 1, 0, 0
 
-	# Water enems 2, 2 frames, 2x2 patterns, generate flipped versions
-	# Hot point (where oam_meta_spr places its origin) is (0, 0).
-	# (enems rectangle is 16x16, centered bottom).
-	LABEL ssend
-	METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
+    # Water enems 2, 2 frames, 2x2 patterns, generate flipped versions
+    # Hot point (where oam_meta_spr places its origin) is (0, 0).
+    # (enems rectangle is 16x16, centered bottom).
+    LABEL ssend
+    METASPRITESET 9, 7, 2, 2, 2, 1, 0, 0 FLIPPED
 
-	# Explosion frame, 2x2 patterns. No need for flipped version
-	# Hot point (where oam_meta_spr places its origin) is (0, 0)
-	LABEL ssexpl
-	METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
+    # Explosion frame, 2x2 patterns. No need for flipped version
+    # Hot point (where oam_meta_spr places its origin) is (0, 0)
+    LABEL ssexpl
+    METASPRITESET 19, 4, 2, 2, 1, 1, 0, 0
 
-	# Items, 4 faces, 2x2 patterns. No need for flipped versions
-	# Hot point (where oam_meta_spr places its origin) (is 0, 0).
-	# (items rectangle is 16x16, centered bottom).
-	LABEL ssit
-	METASPRITESET 1, 9, 2, 2, 4, 1, 0, 0
+    # Items, 4 faces, 2x2 patterns. No need for flipped versions
+    # Hot point (where oam_meta_spr places its origin) (is 0, 0).
+    # (items rectangle is 16x16, centered bottom).
+    LABEL ssit
+    METASPRITESET 1, 9, 2, 2, 4, 1, 0, 0
 
-	# Done with patterns for spr. Fill with zeroes:
-	FILL 8192
+    # Done with patterns for spr. Fill with zeroes:
+    FILL 8192
 
 ```
 
 Y en compile.bat...
 
 ```cmd
-	echo Exporting chr
-	cd ..\gfx
-	..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset0.chr silent
+    echo Exporting chr
+    cd ..\gfx
+    ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset0.chr silent
 ```
 
 Los dos sets de enemigos... Explicar el parámetro yadjust y por qué se pone a 1.
 
 ```
-	echo Exporting enems
-	cd ..\enems
-	..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1
-	..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1
+    echo Exporting enems
+    cd ..\enems
+    ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1
+    ..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1
 ```
 
 Los dos mapas. Voy a probar cual de packed o rle (versión MK1) ocupa menos... Espera que rlemap2 me está escribiendo decos. Su puta madre. A esto le falta un hervor... Fixed
@@ -329,8 +329,8 @@ Los dos mapas. Voy a probar cual de packed o rle (versión MK1) ocupa menos... E
 rlemap:
 
 ```
-	..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 20 2 15 0
-	..\..\..\src\utils\rlemap2.exe ..\map\level1.map ..\dev\assets\map1.h 20 1 15 1
+    ..\..\..\src\utils\rlemap2.exe ..\map\level0.map ..\dev\assets\map0.h 20 2 15 0
+    ..\..\..\src\utils\rlemap2.exe ..\map\level1.map ..\dev\assets\map1.h 20 1 15 1
 ```
 
 2915 y 2020 bytes (4935 para map data)
@@ -338,8 +338,8 @@ rlemap:
 packmap:
 
 ```
-	..\..\..\src\utils\mapcnvnes2.exe ..\map\level0.map 20 2 16 12 15 0 packed
-	..\..\..\src\utils\mapcnvnes2.exe ..\map\level0.map 20 1 16 12 15 0 packed
+    ..\..\..\src\utils\mapcnvnes2.exe ..\map\level0.map 20 2 16 12 15 0 packed
+    ..\..\..\src\utils\mapcnvnes2.exe ..\map\level0.map 20 1 16 12 15 0 packed
 ```
 
 3840 y 1920 bytes (5760 para map data)
@@ -349,27 +349,27 @@ Bueno, elegimos rlemap2. Copiamos las lineas en compile.bat
 Lo siguiente son las lineas fijas de compilar. Esto dará errores, pero vamos a compilar ya para ver las cosas generadas y si van guay.
 
 ```
-	cd ..\dev
+    cd ..\dev
 
-	:justcompile
-	if [%2]==[noscript] goto :noscript
+    :justcompile
+    if [%2]==[noscript] goto :noscript
 
-	echo Building script
-	cd ..\script
-	..\..\..\src\utils\msc3nes.exe script.spt 30
-	copy mscnes.h ..\dev\assets\ > nul
-	cd ..\dev
+    echo Building script
+    cd ..\script
+    ..\..\..\src\utils\msc3nes.exe script.spt 30
+    copy mscnes.h ..\dev\assets\ > nul
+    cd ..\dev
 
-	:noscript
-	cc65 -Oi game.c --add-source
-	ca65 ..\..\crt0.s -o crt0.o
-	ca65 game.s
-	ld65 -v -C ..\..\nes.cfg -o cart.nes crt0.o game.o runtime.lib
+    :noscript
+    cc65 -Oi game.c --add-source
+    ca65 ..\..\crt0.s -o crt0.o
+    ca65 game.s
+    ld65 -v -C ..\..\nes.cfg -o cart.nes crt0.o game.o runtime.lib
 
-	del *.o
-	del game.s
+    del *.o
+    del game.s
 
-	echo DONE!
+    echo DONE!
 ```
 
 Comprobamos tiestos:
@@ -388,22 +388,22 @@ Y por ahora lo dejamos. Bye - Cha
 Lo siguiente es meter todos estos assets como includes en game.c:
 
 ```c
-	// **************
-	// * const data *
-	// **************
+    // **************
+    // * const data *
+    // **************
 
-	#include "assets/palettes.h"
-	#include "assets/behs.h"
-	#include "assets/map0.h"
-	#include "assets/map1.h"
-	#include "assets/enems0.h"
-	#include "assets/enems1.h"
-	#include "assets/spritedata.h"
-	#include "assets/tiledata.h"
-	#include "assets/metasprites.h"
-	#ifdef MULTI_LEVEL
-		#include "assets/levelset.h"
-	#endif
+    #include "assets/palettes.h"
+    #include "assets/behs.h"
+    #include "assets/map0.h"
+    #include "assets/map1.h"
+    #include "assets/enems0.h"
+    #include "assets/enems1.h"
+    #include "assets/spritedata.h"
+    #include "assets/tiledata.h"
+    #include "assets/metasprites.h"
+    #ifdef MULTI_LEVEL
+        #include "assets/levelset.h"
+    #endif
 ```
 
 Ese metasprites.h hay que hacerlo, con los arrays de los sprites. Vamos al lío:
@@ -411,29 +411,29 @@ Ese metasprites.h hay que hacerlo, con los arrays de los sprites. Vamos al lío:
 Creamos el array para el player. Primero facing right, luego facing left. Los cells son, en este orden: 
 
 ```
-	Standing,
-	Walk0, Walk1, Walk2, Walk3,
-	Jump,
-	Swim0, Swim1, Swim2
+    Standing,
+    Walk0, Walk1, Walk2, Walk3,
+    Jump,
+    Swim0, Swim1, Swim2
 ```
 
 Para el ciclo de nadar repetiremos el cell 7, Swim1, para que sean 4 y alternen 0 1 2 1.
 
 ```c
-	// Player metasprites
-	const unsigned char *spr_player [] = {
-		// Facing right (offset 0)
-		sspl_00_a,										// Standing (offset 0)
-		sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-		sspl_05_a,										// Airborne (offset 5)
-		sspl_06_a, sspl_07_a, sspl_08_a, sspl_07_a,		// Swim cycle (offset 6)
+    // Player metasprites
+    const unsigned char *spr_player [] = {
+        // Facing right (offset 0)
+        sspl_00_a,                                      // Standing (offset 0)
+        sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,     // Walk cycle (offset 1)
+        sspl_05_a,                                      // Airborne (offset 5)
+        sspl_06_a, sspl_07_a, sspl_08_a, sspl_07_a,     // Swim cycle (offset 6)
 
-		// Facing left (offset 10)
-		sspl_00_b,
-		sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,
-		sspl_05_b,
-		sspl_06_b, sspl_07_b, sspl_08_b, sspl_07_b,	
-	};
+        // Facing left (offset 10)
+        sspl_00_b,
+        sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,
+        sspl_05_b,
+        sspl_06_b, sspl_07_b, sspl_08_b, sspl_07_b, 
+    };
 ```
 
 Anotaremos todos los offsets para luego crearlos como defines.
@@ -443,39 +443,39 @@ Ahora creamos el array para los enemigos. El motor espera 4 cells por enemigo, c
 Después ponemos la explosión (ssexpl), que debe estar en el array de los metasprites de los enemigos. Habrá uno por nivel.
 
 ```c
-	// Enemy metasprites
-	const unsigned char * const spr_enems0 [] = {
-		// Linear enems and platforms (ids 1-4)
-		ssena_00, ssena_01, ssena_00, ssena_01,			// Enem id 1, right, left, two cells (duplicated)
-		ssena_02, ssena_03, ssena_02, ssena_03,			// Enem id 2, right, left, two cells (duplicated)
-		ssenb_00, ssenb_01, ssenb_00, ssenb_01,			// Enem id 3, right, left, two cells (duplicated)
-		ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+    // Enemy metasprites
+    const unsigned char * const spr_enems0 [] = {
+        // Linear enems and platforms (ids 1-4)
+        ssena_00, ssena_01, ssena_00, ssena_01,         // Enem id 1, right, left, two cells (duplicated)
+        ssena_02, ssena_03, ssena_02, ssena_03,         // Enem id 2, right, left, two cells (duplicated)
+        ssenb_00, ssenb_01, ssenb_00, ssenb_01,         // Enem id 3, right, left, two cells (duplicated)
+        ssplat_00, ssplat_01, ssplat_00, ssplat_01,     // Platform, right, left, two cells (duplicated)
 
-		// Explosion (offset 16)
-		ssexpl
-	};
+        // Explosion (offset 16)
+        ssexpl
+    };
 
-	
-	const unsigned char * const spr_enems1 [] = {
-		// Linear enems and platforms (ids 1-4)
-		ssenc_00, ssenc_01, ssenc_00, ssenc_01,			// Enem id 1, right, left, two cells (duplicated)
-		ssenc_02, ssenc_03, ssenc_02, ssenc_03,			// Enem id 2, right, left, two cells (duplicated)
-		ssend_00_a, ssend_01_a, ssend_00_b, ssend_01_b,	// Enem id 3, right, left, two cells 
-		ssplat_00, ssplat_01, ssplat_00, ssplat_01,		// Platform, right, left, two cells (duplicated)
+    
+    const unsigned char * const spr_enems1 [] = {
+        // Linear enems and platforms (ids 1-4)
+        ssenc_00, ssenc_01, ssenc_00, ssenc_01,         // Enem id 1, right, left, two cells (duplicated)
+        ssenc_02, ssenc_03, ssenc_02, ssenc_03,         // Enem id 2, right, left, two cells (duplicated)
+        ssend_00_a, ssend_01_a, ssend_00_b, ssend_01_b, // Enem id 3, right, left, two cells 
+        ssplat_00, ssplat_01, ssplat_00, ssplat_01,     // Platform, right, left, two cells (duplicated)
 
-		// Explosion (offset 16)
-		ssexpl
-	};	
+        // Explosion (offset 16)
+        ssexpl
+    };  
 ```
 
 Por último, el array de metasprites de los items (hotspots). Dejaremos el id 0 vacío, porque el primer hotspot es el 1, y así ahorramos código. Se podría haber hecho con los enemigos pero meh.
 
 ```c
-	// Item metasprites
-	// nothing, object, key, refill, boots
-	const char *spr_hs [] = {
-		0, ssit_00, ssit_01, ssit_02, ssit_03
-	};
+    // Item metasprites
+    // nothing, object, key, refill, boots
+    const char *spr_hs [] = {
+        0, ssit_00, ssit_01, ssit_02, ssit_03
+    };
 ```
 
 Y con esto hemos terminado los metasprites.
@@ -485,15 +485,15 @@ Seguimos montando sprites. Vamos a dar valores correctos a las constantes `CELL_
 **definitions.h**
 
 ```c
-	// Cell definitions for side view
-	
-	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	10
+    // Cell definitions for side view
+    
+    #define CELL_FACING_RIGHT   0
+    #define CELL_FACING_LEFT    10
 
-	#define CELL_IDLE			0
-	#define CELL_WALK_CYCLE		1
-	#define CELL_AIRBORNE		5
-	#define CELL_SWIM_CYCLE		6
+    #define CELL_IDLE           0
+    #define CELL_WALK_CYCLE     1
+    #define CELL_AIRBORNE       5
+    #define CELL_SWIM_CYCLE     6
 ```
 
 Ahora nos vamos a player.h y revisamos la selección de cell de animación. Este juego "empieza" siendo bastante estándar, pero habrá que modificarlo luego, cuando montemos el cambio salto / nadar.
@@ -501,22 +501,22 @@ Ahora nos vamos a player.h y revisamos la selección de cell de animación. Este
 **player.h**
 
 ```c
-	// Frame selection for side view games
+    // Frame selection for side view games
 
-	if (ppossee || pgotten) {
+    if (ppossee || pgotten) {
 
-		// On floor
+        // On floor
 
-		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-		} else {
-			psprid = CELL_IDLE;
-		}
-	} else {
-		psprid = CELL_AIRBORNE
-	}
+        if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+            psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+        } else {
+            psprid = CELL_IDLE;
+        }
+    } else {
+        psprid = CELL_AIRBORNE
+    }
 
-	psprid += pfacing;
+    psprid += pfacing;
 ```
 
 Ahora voy a hacer una serie de compilaciones para tapar agujeros. Lo que sea "arreglar las patas" con tanto cambio no lo pondré aquí porque no es del tutorial.
@@ -528,27 +528,27 @@ Aún no he terminado, pero...
 Es la hora de meter la música. Copio los m_* del sir ababol original y los referencio en music.s
 
 ```c
-	.export _m_title
-	.export _m_ingame
-	.export _m_gameover
-	.export _m_ending
-	
-	.include "m_instruments.s"
-	
-_m_title:			.include "m_title.s"
-_m_ingame:			.include "m_ingame.s"
-_m_gameover:		.include "m_gameover.s"
-_m_ending:			.include "m_ending.s"
+    .export _m_title
+    .export _m_ingame
+    .export _m_gameover
+    .export _m_ending
+    
+    .include "m_instruments.s"
+    
+_m_title:           .include "m_title.s"
+_m_ingame:          .include "m_ingame.s"
+_m_gameover:        .include "m_gameover.s"
+_m_ending:          .include "m_ending.s"
 ```
 
 Luego importo los símbolos en game.c
 
 ```c
-	// Music
-	extern const unsigned char m_title [];
-	extern const unsigned char m_ingame [];
-	extern const unsigned char m_gameover [];
-	extern const unsigned char m_ending [];
+    // Music
+    extern const unsigned char m_title [];
+    extern const unsigned char m_ingame [];
+    extern const unsigned char m_gameover [];
+    extern const unsigned char m_ending [];
 ```
 
 Ahora mismo sólo "m_ingame" está referenciada en el motor, ya que el motor a pelo no trae pantallas fijas.
@@ -564,17 +564,17 @@ Veamos. Abrimos config.h.
 Dimensión del mapa más grande, en pantallas:
 
 ```c
-	#define MAP_SIZE				40
+    #define MAP_SIZE                40
 ```
 
 Definimos los tipos para los hotspots:
 
 ```c
-	#define HOTSPOTS_WONT_CHANGE			// types of hotspots won't change
-	#define HOTSPOT_TYPE_OBJECT		1
-	#define HOTSPOT_TYPE_KEYS		2
-	#define HOTSPOT_TYPE_REFILL		3
-	#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
+    #define HOTSPOTS_WONT_CHANGE            // types of hotspots won't change
+    #define HOTSPOT_TYPE_OBJECT     1
+    #define HOTSPOT_TYPE_KEYS       2
+    #define HOTSPOT_TYPE_REFILL     3
+    #define HOTSPOT_TYPE_BOOT       4       // Custom for this game.
 ```
 
 Nótese que el tipo "BOOT" no funcionará todavía, hay que introducirlo más adelante.
@@ -582,9 +582,9 @@ Nótese que el tipo "BOOT" no funcionará todavía, hay que introducirlo más ad
 Nuestro mapa es RLE16 (rlemap2), y no tiene decoraciones. Luego habrá que meter código custom para las pantallas de exterior (montaña, estrellas y luna, además de variación random en las hierbas):
 
 ```c 
-	//#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
-	#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-	//#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
+    //#define MAP_FORMAT_PACKED             // Each byte in map data = 2 tiles, 16 tiles max.
+    #define MAP_FORMAT_RLE16                // RLE'd by rlemap2. 16 tiles max.
+    //#define MAP_WITH_DECORATIONS          // Add decorations when use a 16 tiles mode.
 ```
 
 Enemigos
@@ -593,30 +593,30 @@ Enemigos
 El id del cell de "sprite muriendo" es el 16, según definimos en metasprites.h, por tanto:
 
 ```c
-	#define SPRITE_BADDIE_DYING 			16
+    #define SPRITE_BADDIE_DYING             16
 ```
 
 No vamos a usar ningún tipo de enemigo además del lineal (por ahora), por lo que comentamos todas las definiciones que tienen que ver con los tipos extra de enemigos:
 
 ```c
-	//#define ENABLE_FANTY
-	//#define ENABLE_HOMING_FANTY
-	[...]
+    //#define ENABLE_FANTY
+    //#define ENABLE_HOMING_FANTY
+    [...]
 
-	//#define ENABLE_SAW
-	[...]
+    //#define ENABLE_SAW
+    [...]
 
-	//#define ENABLE_MONOCOCO
-	[...]
+    //#define ENABLE_MONOCOCO
+    [...]
 
-	//#define ENABLE_COCOS
-	[...]
+    //#define ENABLE_COCOS
+    [...]
 
-	//#define ENABLE_PEZONS
-	[...]
+    //#define ENABLE_PEZONS
+    [...]
 
-	//#define ENABLE_CHAC_CHAC
-	[...]
+    //#define ENABLE_CHAC_CHAC
+    [...]
 ```
 
 Player
@@ -625,8 +625,8 @@ Player
 Por ahora sólo activaremos
 
 ```c
-	#define PLAYER_HAS_JUMP
-	#define PLAYER_STEPS_ON_ENEMIES
+    #define PLAYER_HAS_JUMP
+    #define PLAYER_STEPS_ON_ENEMIES
 ```
 
 Y posteriormente supeditaremos de forma custom el que se pueda matar enemigos a que se haya pillado el hotspot tipo 4 (las botas).
@@ -830,10 +830,10 @@ Veamos como era el swim de Ninjajar!:
 
 Los valores son:
 
-	PLAYER_G 				48
-	PLAYER_VY_FALLING_MAX	512
-	PLAYER_AY_SWIM 			32
-	PLAYER_VY_SWIM_MAX 		128
+    PLAYER_G                48
+    PLAYER_VY_FALLING_MAX   512
+    PLAYER_AY_SWIM          32
+    PLAYER_VY_SWIM_MAX      128
 
 Con esto se consigue que, efectivamente, si no se pulsa nada vy reciba una aceleración de 48-16 = 32, o sea, caiga más despacio que en gravedad. Además, la velocidad máxima de caer será 128, no 512.
 
@@ -844,7 +844,7 @@ El pequeño bloque de código se coloca tras el maneje de la G. Vamos a probarlo
 Para probar se pone level = 1 en game.c, remember! Además, este nivel no tiene objetos. Para probarlo y tal, le vamos a poner a manaca 1 objeto (que no existe), para que no salga automáticamente, en levelset.h:
 
 ```c
-const unsigned char l_player_max_objects [] =	{ MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_HOTSPOTS_TYPE_1_1*/ };
+const unsigned char l_player_max_objects [] =   { MAX_HOTSPOTS_TYPE_1_0, 1 /*MAX_HOTSPOTS_TYPE_1_1*/ };
 ```
 
 ~~
@@ -861,7 +861,7 @@ Lo próximo es:
 - Añadir un array `remember_pant [1]`, para acordarse de la pantalla donde se estaba. Al final de `game_loop`, se hace:
 
 ```c
-	remember_pant [level] = n_pant;
+    remember_pant [level] = n_pant;
 ```
 
 - Al asignar n_pant en `game_init` se asigna el valor de `remember_pant [level]`.
@@ -902,31 +902,31 @@ Voy a ver si puedo hacer el fullero.
 Ya está todo importado, voy a hacer metasprites.h.
 
 ```c
-	// Player metasprites
-	const unsigned char * const spr_player [] = {
-		sspl_00, sspl_01,	// Right, 2 cells
-		sspl_02, sspl_03,	// Left, 2 cells
-		sspl_04, sspl_05,	// Up, 2 cells
-		sspl_06, sspl_07	// Down, 2 cells
-	};
+    // Player metasprites
+    const unsigned char * const spr_player [] = {
+        sspl_00, sspl_01,   // Right, 2 cells
+        sspl_02, sspl_03,   // Left, 2 cells
+        sspl_04, sspl_05,   // Up, 2 cells
+        sspl_06, sspl_07    // Down, 2 cells
+    };
 
-	// Enemy metasprites
-	const unsigned char * const spr_enems0 [] = {
-		// Linear enems and platforms (ids 1-4)
-		ssen_00, ssen_01, ssen_00, ssen_01, 			// Enem id 1, right, left, two cells (duplicated)
-		ssen_02, ssen_03, ssen_02, ssen_03,				// Enem id 2, right, left, two cells (duplicated)
-		ssen_04, ssen_05, ssen_04, ssen_05, 			// Enem id 3, right, left, two cells (duplicated)
-		ssen_06, ssen_07, ssen_06, ssen_07,				// Enem id 4, right, left, two cells (duplicated)
+    // Enemy metasprites
+    const unsigned char * const spr_enems0 [] = {
+        // Linear enems and platforms (ids 1-4)
+        ssen_00, ssen_01, ssen_00, ssen_01,             // Enem id 1, right, left, two cells (duplicated)
+        ssen_02, ssen_03, ssen_02, ssen_03,             // Enem id 2, right, left, two cells (duplicated)
+        ssen_04, ssen_05, ssen_04, ssen_05,             // Enem id 3, right, left, two cells (duplicated)
+        ssen_06, ssen_07, ssen_06, ssen_07,             // Enem id 4, right, left, two cells (duplicated)
 
-		// Explosion (offset 16)
-		ssexpl
-	};
+        // Explosion (offset 16)
+        ssexpl
+    };
 
-	// Item metasprites
-	// nothing, object, key, refill, ammo
-	const unsigned char * const spr_hs [] = {
-		0, ssit_00, ssit_01, ssit_02, ssit_03
-	};
+    // Item metasprites
+    // nothing, object, key, refill, ammo
+    const unsigned char * const spr_hs [] = {
+        0, ssit_00, ssit_01, ssit_02, ssit_03
+    };
 ```
 
 Ahora config.h, a ver si recuerdo todo.
@@ -1101,27 +1101,27 @@ Lo he hecho muy guay. Hay un archivo *vacío* en /src/ que tienes que rellenar s
 // Modifications for Sir Ababol DX
 
 for (gpit = 0; gpit < 192; gpit ++) {
-	rdt = map_buff [gpit];
+    rdt = map_buff [gpit];
 
-	// Precalc this random which will be used all around
-	rda = ((rand8 () & 15) == 1);
+    // Precalc this random which will be used all around
+    rda = ((rand8 () & 15) == 1);
 
-	// Level 0, top row has many features
-	if (level == 0 && n_pant < 20 && gpit < 112) {
-		if (rdt == 0 && gpit == 68) { 
-			rdt = 17;
-		} else if (rdt == 0 && gpit >= 96) {
-			rdt = 16;
-		} else if (rda) {
-			if (rdt == 0) rdt = 19;
-			else if (rdt == 6) rdt = 18;
-		}
-	}
+    // Level 0, top row has many features
+    if (level == 0 && n_pant < 20 && gpit < 112) {
+        if (rdt == 0 && gpit == 68) { 
+            rdt = 17;
+        } else if (rdt == 0 && gpit >= 96) {
+            rdt = 16;
+        } else if (rda) {
+            if (rdt == 0) rdt = 19;
+            else if (rdt == 6) rdt = 18;
+        }
+    }
 
-	// Level 1, random bubbles
-	if (level == 1 && rdt == 10 && rda) rdt = 4;
+    // Level 1, random bubbles
+    if (level == 1 && rdt == 10 && rda) rdt = 4;
 
-	map_buff [gpit] = rdt;
+    map_buff [gpit] = rdt;
 }
 ```
 
@@ -1140,38 +1140,38 @@ Sigamos el método (completándolo un poco):
 Esto, básicamente, comentar esto en mainloop.h, linea ~27:
 
 ```c
-	// CUSTOM {
-	/*
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-	*/
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    /*
+    px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+    py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+    */
+    // } END_OF_CUSTOM
 ```
 
 y linea ~63
 
 ```c
-	// CUSTOM {
-	/*
-	pobjs = 0;
-	pkeys = 0;
-	*/
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    /*
+    pobjs = 0;
+    pkeys = 0;
+    */
+    // } END_OF_CUSTOM
 ```
 
 Y añadir este bloque en game.c, justo donde inicializamos `level` (por ejemplo) (el bloque `#ifdef` que empieza en ~103):
 
 ```c
-	#ifdef MULTI_LEVEL
-			level = 0;
-			// CUSTOM {
-				pobjs = 0;
-				pkeys = 0;
+    #ifdef MULTI_LEVEL
+            level = 0;
+            // CUSTOM {
+                pobjs = 0;
+                pkeys = 0;
 
-				px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-				py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-			// } END_OF_CUSTOM
-	#endif
+                px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+                py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+            // } END_OF_CUSTOM
+    #endif
 ```
 
 2.- **Añadir adónde cambiar**
@@ -1180,32 +1180,32 @@ Sirve para que el inicializador del nivel sepa en qué pantalla hay que empezar.
 
 ```c
 // CUSTOM {
-	unsigned char n_pant_switch;
+    unsigned char n_pant_switch;
 // } END_OF_CUSTOM
 ```
 
 Añadimos una variable `level_switching` (en ram/bss.h) y la ponemos a cero en la inicialización del juego que empezamos antes eb game.c:
 
 ```c
-		level = 0;
-		// CUSTOM {
-			pobjs = 0;
-			pkeys = 0;
+        level = 0;
+        // CUSTOM {
+            pobjs = 0;
+            pkeys = 0;
 
-			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+            px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+            py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
 
-			level_switching = 0;
-		// } END_OF_CUSTOM
+            level_switching = 0;
+        // } END_OF_CUSTOM
 ```
 
 Al asignar n_pant en `game_init` (mainloop.h, ~20) se asigna el valor de `n_pant_switch`, si `level_switching` no es 0.
 
 ```c
-	// CUSTOM {
-	if (level_switching) n_pant = n_pant_switch; else
-	// } END_OF_CUSTOM
-	n_pant = SCR_INI;
+    // CUSTOM {
+    if (level_switching) n_pant = n_pant_switch; else
+    // } END_OF_CUSTOM
+    n_pant = SCR_INI;
 ```
 
 ** Modificaciones al movimiento si venimos de otro nivel **
@@ -1215,25 +1215,25 @@ Tras inicializar al jugador, si `level = 0 && n_pant >= 20` hay que dar a pvy el
 Además, si `level = 0 && n_pant >= 20`, `py = 192 << FIXBITS`; y si `level == 1`, `py = 16 >> FIX_BITS`;
 
 ```c
-	player_init ();
-	// CUSTOM {
-	/*
-	px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-	py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-	*/
-	switch (level) {
-		case 0:
-			if (n_pant >= 20) {
-				pvy = -PLAYER_VY_FALLING_MAX;
-				py = 176 << FIXBITS;
-			}
-			break;
-		case 1:
-			pvy = PLAYER_VY_SWIM_MAX << 1;
-			py = 16 << FIXBITS;
-			break;
-	}
-	// } END_OF_CUSTOM
+    player_init ();
+    // CUSTOM {
+    /*
+    px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+    py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+    */
+    switch (level) {
+        case 0:
+            if (n_pant >= 20) {
+                pvy = -PLAYER_VY_FALLING_MAX;
+                py = 176 << FIXBITS;
+            }
+            break;
+        case 1:
+            pvy = PLAYER_VY_SWIM_MAX << 1;
+            py = 16 << FIXBITS;
+            break;
+    }
+    // } END_OF_CUSTOM
 ```
 
 En el propio player.h, en `player_init`, tenemos que quitar `pfacing` y moverlo fuera, con los otros, para que al cambiar de nivel siga mirando en la misma dirección. 
@@ -1241,34 +1241,34 @@ En el propio player.h, en `player_init`, tenemos que quitar `pfacing` y moverlo 
 player_init.h:
 
 ```c
-	// CUSTOM {
-	/*
-	#ifdef PLAYER_TOP_DOWN	
-		pfacing = CELL_FACING_DOWN;
-	#else
-		pfacing = 0;
-	#endif	
-	*/
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    /*
+    #ifdef PLAYER_TOP_DOWN  
+        pfacing = CELL_FACING_DOWN;
+    #else
+        pfacing = 0;
+    #endif  
+    */
+    // } END_OF_CUSTOM
 ```
 
 game.c:
 
 ```c
-	#ifdef MULTI_LEVEL
-		level = 0;
-		// CUSTOM {
-			pobjs = 0;
-			pkeys = 0;
+    #ifdef MULTI_LEVEL
+        level = 0;
+        // CUSTOM {
+            pobjs = 0;
+            pkeys = 0;
 
-			px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-			py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-			pfacing = 0;
+            px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+            py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+            pfacing = 0;
 
-			level_switching = 0;
-			has_boots = 0;
-		// } END_OF_CUSTOM
-	#endif
+            level_switching = 0;
+            has_boots = 0;
+        // } END_OF_CUSTOM
+    #endif
 ```
 
 ** Detección de cambios de nivel **
@@ -1276,43 +1276,43 @@ game.c:
 Modificar en flickscreen.h: Si `pry == 0 && pvy < 0` con `n_pant < MAP_W `, en `level == 1`, hacer `level_switching = 1; break;` y calculamos a qué pantalla vamos con `n_pant_switch`. Si `pvy >= 192 && pvy > 0` con `n_pant >= MAP_W` en `level == 0`, lo mismo:
 
 ```c
-	if (prx == 4 && pvx < 0) {
-		n_pant --;
-		px = 244 << FIXBITS;
-	} else if (prx == 244 && pvx > 0) {
-		n_pant ++;
-		px = 4 << FIXBITS;
-	} else if (pry == 0 && pvy < 0) {
-		if (level == 1 && n_pant < MAP_W) {
-			n_pant_switch = n_pant + MAP_W;
-			level_switching = 1; break;
-		} else {
-			n_pant -= MAP_W;
-			py = 192 << FIXBITS;
-			if (pvy > -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;		
-		}
-	} else if (pry >= 192 && pvy > 0) {
-		if (level == 0 && n_pant >= MAP_W) {
-			n_pant_switch = n_pant - MAP_W;
-			level_switching = 1; break;
-		} else {
-			n_pant += MAP_W;
-			py = 0;
-		}
-	}
+    if (prx == 4 && pvx < 0) {
+        n_pant --;
+        px = 244 << FIXBITS;
+    } else if (prx == 244 && pvx > 0) {
+        n_pant ++;
+        px = 4 << FIXBITS;
+    } else if (pry == 0 && pvy < 0) {
+        if (level == 1 && n_pant < MAP_W) {
+            n_pant_switch = n_pant + MAP_W;
+            level_switching = 1; break;
+        } else {
+            n_pant -= MAP_W;
+            py = 192 << FIXBITS;
+            if (pvy > -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;       
+        }
+    } else if (pry >= 192 && pvy > 0) {
+        if (level == 0 && n_pant >= MAP_W) {
+            n_pant_switch = n_pant - MAP_W;
+            level_switching = 1; break;
+        } else {
+            n_pant += MAP_W;
+            py = 0;
+        }
+    }
 ```
 
 En game.c, controlar `level_switching == 1` tras salir de `game_loop ()`, en ~118. Si está a 1, reset, hacer `level = 1 - level` y seguir el loop:
 
 ```c
-	game_loop ();
+    game_loop ();
 
-	// CUSTOM {
-	if (level_switching) {
-		level_switching = 0;
-		level = 1 - level;
-	} else
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    if (level_switching) {
+        level_switching = 0;
+        level = 1 - level;
+    } else
+    // } END_OF_CUSTOM
 ```
 
 ** Selección del tipo de motor (vertical) **
@@ -1320,117 +1320,117 @@ En game.c, controlar `level_switching == 1` tras salir de `game_loop ()`, en ~11
 Activar *a la vez* `PLAYER_HAS_JUMP` y `PLAYER_SWIMS`. En `player.h`, guardamos el bloque `#ifdef PLAYER_SWIMS` con un if normal, pero con `if (level == 1)`, y lo contrario con la gravedad y el salto:
 
 ```c
-	// Gravity
+    // Gravity
 
-	// CUSTOM {
-	//#ifndef PLAYER_SWIMS
-	if (level != 1) {
-	// } END_OF_CUSTOM
-		if (!pj) {
-			pvy += PLAYER_G;
-			if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
-		}
-	// CUSTOM {
-	}
-	//#endif
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    //#ifndef PLAYER_SWIMS
+    if (level != 1) {
+    // } END_OF_CUSTOM
+        if (!pj) {
+            pvy += PLAYER_G;
+            if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
+        }
+    // CUSTOM {
+    }
+    //#endif
+    // } END_OF_CUSTOM
 
-	[...]
+    [...]
 
-	// CUSTOM {
-	//#ifdef PLAYER_SWIMS
-	if (level == 1) {
-	// } END_OF_CUSTOM	
-		// Controller 
+    // CUSTOM {
+    //#ifdef PLAYER_SWIMS
+    if (level == 1) {
+    // } END_OF_CUSTOM  
+        // Controller 
 
-		if (!(i & (PAD_DOWN|PAD_UP))) {
-			pvy -= PLAYER_AY_SWIM >> 1;
-		}
+        if (!(i & (PAD_DOWN|PAD_UP))) {
+            pvy -= PLAYER_AY_SWIM >> 1;
+        }
 
-		if (i & PAD_DOWN) {
-			pvy += PLAYER_AY_SWIM;
-		}
+        if (i & PAD_DOWN) {
+            pvy += PLAYER_AY_SWIM;
+        }
 
-		if (i & PAD_UP) {
-			pvy -= PLAYER_AY_SWIM;
-		}
+        if (i & PAD_UP) {
+            pvy -= PLAYER_AY_SWIM;
+        }
 
-		// Limit
-		if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
-			pvy = -PLAYER_VY_SWIM_MAX;
-		} else if (pvy > PLAYER_VY_SWIM_MAX) {
-			pvy = PLAYER_VY_SWIM_MAX;
-		}
-	// CUSTOM {
-	//#endif
-	}
-	// } END_OF_CUSTOM
+        // Limit
+        if (pvy < 0 && pvy < -PLAYER_VY_SWIM_MAX) {
+            pvy = -PLAYER_VY_SWIM_MAX;
+        } else if (pvy > PLAYER_VY_SWIM_MAX) {
+            pvy = PLAYER_VY_SWIM_MAX;
+        }
+    // CUSTOM {
+    //#endif
+    }
+    // } END_OF_CUSTOM
 
-	[...]
+    [...]
 
 ```
 
 No se olviden de la selección de frame!
 
 ```c
-		// Frame selection for side view games
+        // Frame selection for side view games
 
-		// CUSTOM {
-		//#ifdef PLAYER_SWIMS
-		if (level == 1) {
-		// } END_OF_CUSTOM 
-			if (i && (rdx != prx || rdy != pry)) {
-				if (pvx) {
-					psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
-				} else {
-					psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
-				}
-			} else psprid = CELL_SWIM_CYCLE + 1;
-		// CUSTOM {
-		//#else
-		} else {
-		// } END_OF_CUSTOM 
-			if (ppossee || pgotten) {
+        // CUSTOM {
+        //#ifdef PLAYER_SWIMS
+        if (level == 1) {
+        // } END_OF_CUSTOM 
+            if (i && (rdx != prx || rdy != pry)) {
+                if (pvx) {
+                    psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
+                } else {
+                    psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
+                }
+            } else psprid = CELL_SWIM_CYCLE + 1;
+        // CUSTOM {
+        //#else
+        } else {
+        // } END_OF_CUSTOM 
+            if (ppossee || pgotten) {
 
-				// On floor
+                // On floor
 
-				if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-					psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-				} else {
-					psprid = CELL_IDLE;
-				}
-			} else {
-				psprid = CELL_AIRBORNE;
-			}
-		// CUSTOM {
-		//#endif
-		}
-		// } END_OF_CUSTOM 
+                if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+                    psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+                } else {
+                    psprid = CELL_IDLE;
+                }
+            } else {
+                psprid = CELL_AIRBORNE;
+            }
+        // CUSTOM {
+        //#endif
+        }
+        // } END_OF_CUSTOM 
 
-		psprid += pfacing;
-	#endif
+        psprid += pfacing;
+    #endif
 ```
 
 ¡Y este rollo en mainloop.h ~113 sobre registrar el safe spot, importante!
 
 ```c
-	// CUSTOM {
-	//#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
-	if (level == 1) {
-		// } END_OF_CUSTOM
-		player_register_safe_spot ();
-	// CUSTOM {
-	//#endif
-	}
-	// } END_OF_CUSTOM
+    // CUSTOM {
+    //#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))
+    if (level == 1) {
+        // } END_OF_CUSTOM
+        player_register_safe_spot ();
+    // CUSTOM {
+    //#endif
+    }
+    // } END_OF_CUSTOM
 ```
 
 No se debería poder pisar a los enemigos, en enengine.h, en el if de "step over enemy", linea ~413:
 
 ```c
-	// CUSTOM {
-	level != 1 && 
-	// } END_OF_CUSTOM		
+    // CUSTOM {
+    level != 1 && 
+    // } END_OF_CUSTOM      
 ```
 
 ~~
@@ -1458,30 +1458,30 @@ Hum - es pequeño y sexy, pero lo he programado demasiado rápido. Tengo que pro
 Vamos añadiendo textos para intro y para coger las botas. Lo haremos en un archivo nuevo `assets/custom_texts.h` que incluiremos en game.c, al final de todos los assets...
 
 ```c
-	#include "assets/custom_texts.h"
+    #include "assets/custom_texts.h"
 ```
 
 En custom_texts.h crearemos ambos textos así:
 
 ```c
-	// Custom texts
+    // Custom texts
 
-	const unsigned char text_intro [] = 
-		"THE RARE ABABOL%"
-		"FLOWER GROWS AROUND%"
-		"HERE. AN UNDERGROUND%"
-		"RIVER, THERE IS. AND%"
-		"THE LEGENDARY POWER%"
-		"BOOTS YOU MAY FIND!";
+    const unsigned char text_intro [] = 
+        "THE RARE ABABOL%"
+        "FLOWER GROWS AROUND%"
+        "HERE. AN UNDERGROUND%"
+        "RIVER, THERE IS. AND%"
+        "THE LEGENDARY POWER%"
+        "BOOTS YOU MAY FIND!";
 
-	const unsigned char text_boots [] =
-		"AND HERE THEY ARE!%"
-		"NOW I'M INVINCIBLE.%"
-		"WITH THOSE BOOTS,%"
-		"CRUSH THE BADDIES I%"
-		"CAN. FEAR ME, YOU%"
-		"WIMPY MONSTERS!"
-	;
+    const unsigned char text_boots [] =
+        "AND HERE THEY ARE!%"
+        "NOW I'M INVINCIBLE.%"
+        "WITH THOSE BOOTS,%"
+        "CRUSH THE BADDIES I%"
+        "CAN. FEAR ME, YOU%"
+        "WIMPY MONSTERS!"
+    ;
 ```
 
 ~~ 
@@ -1489,39 +1489,39 @@ En custom_texts.h crearemos ambos textos así:
 Definimos `has_boots` en nuestra zona custom de ram/bss.h:
 
 ```c
-	// CUSTOM {
-		unsigned char remember_pant [MAX_LEVELS];
-		unsigned char level_switching;
-		unsigned char has_boots;
-	// } END_OF_CUSTOM
+    // CUSTOM {
+        unsigned char remember_pant [MAX_LEVELS];
+        unsigned char level_switching;
+        unsigned char has_boots;
+    // } END_OF_CUSTOM
 ```
 
 La inicializamos al empezar el juego, justo después de asignar `level`, por ejemplo, en la zona custom que ya tenemos:
 
 ```c
-	// CUSTOM {
-		px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
-		py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
-		level_switching = 0;
-		has_boots = 0;
-	// } END_OF_CUSTOM
+    // CUSTOM {
+        px = (signed int) (PLAYER_INI_X << 4) << FIXBITS;
+        py = (signed int) (PLAYER_INI_Y << 4) << FIXBITS;
+        level_switching = 0;
+        has_boots = 0;
+    // } END_OF_CUSTOM
 ```
 
 en config.h tenemos hotspots de tipo custom
 
 ```c
-	#define HOTSPOT_TYPE_BOOT		4		// Custom for this game.
-	#define HOTSPOT_TYPE_SIGN		5		// Custom for this game.
+    #define HOTSPOT_TYPE_BOOT       4       // Custom for this game.
+    #define HOTSPOT_TYPE_SIGN       5       // Custom for this game.
 ```
 
 Añadimos soporte para el tipo de hotspot custom (que ya tenemos definido en config.h con el valor 4, por poner), en mainloop/hotspots.h @ ~70:
 
 ```c
-	// CUSTOM {
-		case HOTSPOT_TYPE_BOOT:
-			has_boots = 1;
-			break;
-	// } END_OF_CUSTOM
+    // CUSTOM {
+        case HOTSPOT_TYPE_BOOT:
+            has_boots = 1;
+            break;
+    // } END_OF_CUSTOM
 ```
 
 ~~
@@ -1534,34 +1534,34 @@ Este hotspot solo se debe activar si al tocarlo se pulsa FIRE.
 
 
 ```c
-		// CUSTOM {
-			case HOTSPOT_TYPE_BOOT:
-				gp_gen = text_boots;
-				textbox_do ();
-				has_boots = 1;
-				break;
+        // CUSTOM {
+            case HOTSPOT_TYPE_BOOT:
+                gp_gen = text_boots;
+                textbox_do ();
+                has_boots = 1;
+                break;
 
-			case HOTSPOT_TYPE_SIGN:
-				if (pad_this_frame & (PAD_B|PAD_DOWN)) {
-					gp_gen = text_intro;
-					textbox_do ();
-				}
-				break;
-		// } END_OF_CUSTOM
-	}
+            case HOTSPOT_TYPE_SIGN:
+                if (pad_this_frame & (PAD_B|PAD_DOWN)) {
+                    gp_gen = text_intro;
+                    textbox_do ();
+                }
+                break;
+        // } END_OF_CUSTOM
+    }
 
-	// CUSTOM {
-		/*
-		sfx_play (rda, 1);
-		hrt = 0;
-		hact [n_pant] = 0;
-		*/
-		if (hrt != HOTSPOT_TYPE_SIGN) {
-			sfx_play (rda, 1);
-			hrt = 0;
-			hact [n_pant] = 0;	
-		}
-	// } END_OF_CUSTOM	
+    // CUSTOM {
+        /*
+        sfx_play (rda, 1);
+        hrt = 0;
+        hact [n_pant] = 0;
+        */
+        if (hrt != HOTSPOT_TYPE_SIGN) {
+            sfx_play (rda, 1);
+            hrt = 0;
+            hact [n_pant] = 0;  
+        }
+    // } END_OF_CUSTOM  
 ```
 
 ~~
@@ -1577,10 +1577,10 @@ Obviamente no funfuña XD
 Fixed esto y otras cosas más. Fala añadir que sólo se pueda matar a los enemigos cuando tienes las botas. En el mismo bloque custom de enengine.h, en ~414, añadimos para que quede:
 
 ```c
-	// CUSTOM {
-	level != 1 && 
-	has_boots &&
-	// } END_OF_CUSTOM	
+    // CUSTOM {
+    level != 1 && 
+    has_boots &&
+    // } END_OF_CUSTOM  
 ```
 
 Y con esto, si mal no me equivoco, ¡tendríamos listo el juego! Nada más que lo pruebe pongo un nuevo snapshot. Ahora hay que:
@@ -1641,9 +1641,9 @@ Lo añado todo. Tengo `HS_USE_OFFS`.
 Por ejemplo, si:
 
 ```
-	HS_INV_MIN = 10
-	HS_INV_MAX = 19
-	HS_USE_OFFS = 10
+    HS_INV_MIN = 10
+    HS_INV_MAX = 19
+    HS_USE_OFFS = 10
 ```
 
 Y llevamos el objeto 14 a un hotspot con valor 24, el valor del hotspot pasará a ser 34 (¡y se pintará el objeto 14!).
@@ -1809,13 +1809,13 @@ Tareas asín:
 Más divagaciones escaleras: Las escaleras pueden complicarse ad infinitum pero no es mi intención hacerlo en MK1. Vamos a hacer las escaleras más sencillas posibles: las que no tienen principio o fin "en el aire", sino en obstáculos:
 
 ```
-	XXXXXXXXXXXX
-	    H
-	    H
-	XXXXH  XXXXX
-	    H
-	    H
-	XXXXXXXXXXXX
+    XXXXXXXXXXXX
+        H
+        H
+    XXXXH  XXXXX
+        H
+        H
+    XXXXXXXXXXXX
 ```
 
 Aquí no hay casos límites, y todo se reduce a una detección de lo que pasa en el centro inferior del rectángulo de colisión del muñaco. Si este pixel está dentro de un tile escalera (que debe ser walkable!), se pasa al modo escalera:
@@ -1904,21 +1904,21 @@ Todo funcionando.
 Vamos a hacer un esqueleto de lo que tendría que ser el módulo de enemigos (la estructura). Además, sacaré a variables normales los arrays principales y tal, y luego miraré cuanto ahorro. Así que antes de empezar vendría bien capturar de nessc.exe
 
 Para todos los enemigos
-	- Elegir uno fuera de orden.
-	- en_spr = 0xff;
-	- Gestión de "tocado". Esto está bien.
-	- Si en_t y no está tocado,
-		- Cálculo de pregotten y `en_fr` común. **(revisar `en_fr` redundantes)**
-		- Mover según en_t.
-		- `en_spr_id [gpit] = en_spr;`.
-		- Detectar plataformas móviles.
-		- Si el enemigo no es colisionable, salir
-		- Colisionar con el player / Pisar enemigo
-		- Si el enemigo no es matable, salir
-		- Golpear enemigo
-		- Balear enemigo
+    - Elegir uno fuera de orden.
+    - en_spr = 0xff;
+    - Gestión de "tocado". Esto está bien.
+    - Si en_t y no está tocado,
+        - Cálculo de pregotten y `en_fr` común. **(revisar `en_fr` redundantes)**
+        - Mover según en_t.
+        - `en_spr_id [gpit] = en_spr;`.
+        - Detectar plataformas móviles.
+        - Si el enemigo no es colisionable, salir
+        - Colisionar con el player / Pisar enemigo
+        - Si el enemigo no es matable, salir
+        - Golpear enemigo
+        - Balear enemigo
 
-	- Si en_spr != 0xff, pintar frame en_spr.
+    - Si en_spr != 0xff, pintar frame en_spr.
 
 Esto asume que si no es colisionable, no es matable, lo cual es cierto.
 
@@ -1977,21 +1977,21 @@ La cosa es que esto parece que (aparte del archivo en la carpeta engine) está t
 En config.h tenía esto:
 
 ```c
-	#define ENABLE_PROPELLERS
-	#define PROPELLER_AY			16	
-	#define PROPELLER_VY_MAX		256
-	#define PROPELLER_TILE			32
+    #define ENABLE_PROPELLERS
+    #define PROPELLER_AY            16  
+    #define PROPELLER_VY_MAX        256
+    #define PROPELLER_TILE          32
 ```
 
 En player.h, dentro de la parte donde hay gravedad, y justo antes de la gravedad, esto:
 
 ```c
-	#ifdef ENABLE_PROPELLERS
-		if (ppropelled) {
-			pvy -= PROPELLER_AY;
-			if (pvy < -PROPELLER_VY_MAX) pvy = -PROPELLER_VY_MAX;
-		} else
-	#endif
+    #ifdef ENABLE_PROPELLERS
+        if (ppropelled) {
+            pvy -= PROPELLER_AY;
+            if (pvy < -PROPELLER_VY_MAX) pvy = -PROPELLER_VY_MAX;
+        } else
+    #endif
 ```
 
 O sea, que cancela la gravedad.
@@ -1999,11 +1999,11 @@ O sea, que cancela la gravedad.
 Y en printer.h, durante el render de la pantalla, la detección:
 
 ```c
-	#ifdef ENABLE_PROPELLERS
-		if (rdt == PROPELLER_TILE) {
-			add_propeller (rdx, rdy);
-		} else
-	#endif
+    #ifdef ENABLE_PROPELLERS
+        if (rdt == PROPELLER_TILE) {
+            add_propeller (rdx, rdy);
+        } else
+    #endif
 ```
 
 Joder, es justo como yo pensaba. Si es que me conozco como si me hubiera parío.
@@ -2013,16 +2013,16 @@ Joder, es justo como yo pensaba. Si es que me conozco como si me hubiera parío.
 Espera, mano, que en vez de gastar espacio en RAM y tener que precalcularlo todo, puedo meterlo en ROM junto con la info del mapa, no?
 
 ```c
-	unsigned char propellers_scr_XX [] = {
-		x1, y1, y2, ...
-		0x0ff
-	};
+    unsigned char propellers_scr_XX [] = {
+        x1, y1, y2, ...
+        0x0ff
+    };
 
-	...
+    ...
 
-	unsigned char propellers_map_0 [] = {
-		0, 0, propellers_scr_02, 0, 0, ...
-	}
+    unsigned char propellers_map_0 [] = {
+        0, 0, propellers_scr_02, 0, 0, ...
+    }
 ```
 
 Eso lo detecto al convertir el mapa y listo, menos ram, menos código, menos ejecución. 
@@ -2081,16 +2081,16 @@ Lo rellenamos al vuelo al detectar un tile `PROPELLER_TILE` en el mapa.
 **Tengo que actualiar todos los ejemplos a partir de src**
 
 ```
-	Overwrite 
-		/mainloop.h
-		/mainloop/
-		/engine/
-		/ram/
+    Overwrite 
+        /mainloop.h
+        /mainloop/
+        /engine/
+        /ram/
 
-	Compare
-		/game.c
-		/config.h
-		/assets/levelset.h
+    Compare
+        /game.c
+        /config.h
+        /assets/levelset.h
 ```
 
 20180214
@@ -2108,48 +2108,48 @@ A la hora de gestionarlos, únicamente se pintan con el sprite que sea y se gest
 En config:
 
 ```c
-	#define ENABLE_SIMPLE_WARPERS
-	#define SIMPLE_WARPERS_BASE_SPRID
-	#define SIMPLE_WARPERS_FIRE_BUTTON
+    #define ENABLE_SIMPLE_WARPERS
+    #define SIMPLE_WARPERS_BASE_SPRID
+    #define SIMPLE_WARPERS_FIRE_BUTTON
 ```
 
 En la inicialización, simplemente copiamos el valor de 'rda' en algún sitio (por ejemplo, mx):
 
 ```c
-	#ifdef ENABLE_SIMPLE_WARPERS
-		case 0xff:
-			en_mx [gpit] = rda;
-			break;
-	#endif
+    #ifdef ENABLE_SIMPLE_WARPERS
+        case 0xff:
+            en_mx [gpit] = rda;
+            break;
+    #endif
 ```
 
 Al actualizar, x e y no habrán cambiado, y nos vale con esto:
 
 ```c
-	#ifdef ENABLE_SIMPLE_WARPERS
-		case 0xff:
-			en_spr = SIMPLE_WARPERS_BASE_SPRID;
-			break;
-	#endif
+    #ifdef ENABLE_SIMPLE_WARPERS
+        case 0xff:
+            en_spr = SIMPLE_WARPERS_BASE_SPRID;
+            break;
+    #endif
 ```
 
 Justo antes de las plataformas, por ejemplo, hacemos la detección. Así podemos romper el loop de los enemigos y salir inmediatamente con un  break...
 
 ```c
-	#ifdef ENABLE_SIMPLE_WARPERS
-		if (
-			_en_t == 0xff && 
-			collide (prx, pry, _en_x, _en_y)
-			#ifdef SIMPLE_WARPERS_FIRE_BUTTON
-				&& (pad_this_frame & PAD_B)
-			#endif
-		) {
-			n_pant = _en_mx; on_pant = 0xff;
-			prx = (_en_y2 << 4); px = prx << FIXBITS;
-			pry = (_en_y2 & 0xf0); py = pry << FIXBITS;
-			break;
-		}
-	#endif
+    #ifdef ENABLE_SIMPLE_WARPERS
+        if (
+            _en_t == 0xff && 
+            collide (prx, pry, _en_x, _en_y)
+            #ifdef SIMPLE_WARPERS_FIRE_BUTTON
+                && (pad_this_frame & PAD_B)
+            #endif
+        ) {
+            n_pant = _en_mx; on_pant = 0xff;
+            prx = (_en_y2 << 4); px = prx << FIXBITS;
+            pry = (_en_y2 & 0xf0); py = pry << FIXBITS;
+            break;
+        }
+    #endif
 ```
 
 Esto debería funcionar tal cual.
@@ -2164,35 +2164,35 @@ Estos son los enemigos que salen en Commandow que tienen programación. Recordem
 Tenemos pencompiler.exe, que compila scripts que tienen esta pinta:
 
 ```
-	# Place this enemy behind the middle tile of a 3 characters barrier
-	# Here:
-	#   o
-	#  XXX
+    # Place this enemy behind the middle tile of a 3 characters barrier
+    # Here:
+    #   o
+    #  XXX
 
-	:BACK
-	IDLE 6
-	RIGHT 2
-	IDLE 1
-	FIRE PLAYER
-	IDLE 1
-	FIRE PLAYER
-	LEFT 4
-	IDLE 1
-	FIRE PLAYER
-	IDLE 1
-	FIRE PLAYER
-	RIGHT 2
-	RETURN BACK
+    :BACK
+    IDLE 6
+    RIGHT 2
+    IDLE 1
+    FIRE PLAYER
+    IDLE 1
+    FIRE PLAYER
+    LEFT 4
+    IDLE 1
+    FIRE PLAYER
+    IDLE 1
+    FIRE PLAYER
+    RIGHT 2
+    RETURN BACK
 ```
 
 Y que resultan en arrays de datos:
 
 ```c
-	// Place behind a three tiles wide barrier
-	const unsigned char enbeh8 [] = {
-		0x0e, 0x62, 0x09, 0x82, 0x09, 0x82, 0x44, 0x09, 
-		0x82, 0x09, 0x82, 0x62, 0xcc, 0x00
-	};
+    // Place behind a three tiles wide barrier
+    const unsigned char enbeh8 [] = {
+        0x0e, 0x62, 0x09, 0x82, 0x09, 0x82, 0x44, 0x09, 
+        0x82, 0x09, 0x82, 0x62, 0xcc, 0x00
+    };
 ```
 
 Supongo que los enemigos están consumiendo el script poco a poco según van cumpliendo las ordenes. 
@@ -2202,11 +2202,11 @@ Originalmente los personajes se dejaban a su libre albedrío cuando acabase el s
 Pencompiler admite los comandos:
 
 ```
-	:LABEL, 
-	LEFT, DOWN_LEFT, DOWN, DOWN_RIGHT, RIGHT, UP_RIGHT, UP, UP_LEFT,
-	IDLE
-	FIRE [PLAYER],
-	RETURN
+    :LABEL, 
+    LEFT, DOWN_LEFT, DOWN, DOWN_RIGHT, RIGHT, UP_RIGHT, UP, UP_LEFT,
+    IDLE
+    FIRE [PLAYER],
+    RETURN
 ```
 
 Las direcciones llevan el número de celdas que avanzar. Idle lleva un número de mediosegundos que esperar. FIRE dispara en la dirección en la que se mira o al PLAYER, y RETURN está seguido de una etiqueta a la que volver.
@@ -2259,8 +2259,8 @@ La animación será lineal y por diseño el último frame se quedará 1 segundo.
 Mi animación es (el primer cell es con use_ct = 1, cuidado con esto!): 
 
 ```
-	1 2 3 4 5 6 7 8 9 A B C D <- use_ct
-	0 1 2 3 4 5 5 4 3 2 1 0 6 <- frame
+    1 2 3 4 5 6 7 8 9 A B C D <- use_ct
+    0 1 2 3 4 5 5 4 3 2 1 0 6 <- frame
 ```
 
 En mi caso la interacción es cuando `(use_ct == 7 && use_sub_ct == USE_ANIM_FRAMES)`. El número de frames es 0xD, de forma que al incrementar use_ct, cuando valga este valor, `use_sub_ct = 50`, y si al incrementarlo es mayor que ese valor, `use_ct = 0`. 
@@ -2361,11 +2361,11 @@ Bueno, todo propagado. Voy a ver si puedo avanzar un poco en el "todo" dentro de
 Tocando:
 
 ```
-	config.h
-	engine/textbox.h
-	engine/enengine.h
-	engine/printer.h
-	engine/enemmods/enem_linear.h
+    config.h
+    engine/textbox.h
+    engine/enengine.h
+    engine/printer.h
+    engine/enemmods/enem_linear.h
 ```
 
 ~~
@@ -2386,15 +2386,15 @@ Nah, es muy parecido, pero permitía codificar enemigos de velocidades de medio,
 A ver, si levanto el bit 4, tendría el valor 17: 00010001. (el bit 7 es el que lleva el signo, por eso me voy a otro que "no moleste"). Ahora tengo:
 
 ```c
-	if (!en_status [gpit] || half_life) { }
+    if (!en_status [gpit] || half_life) { }
 ```
 
 Podría poner algo así como:
 
 ```c
-	if (!(_en_mx & 0x10) || half_life) {
-		_en_x += (_en_mx & 0xef);
-	}
+    if (!(_en_mx & 0x10) || half_life) {
+        _en_x += (_en_mx & 0xef);
+    }
 ```
 
 Y eso luego me ahorra un montón de manejes ¿no? Puedo almacenar y recuparar siempre el valor de `_en_mx` directamente. ¡Voy a probar!
@@ -2415,73 +2415,73 @@ El código origina que voy a cambiar es este:
 ;
 ; ep_x [ep_it] = en_x [gpit];
 ;
-L268C:	lda     #<(_ep_x)
-	clc
-	adc     _ep_it
-	sta     ptr1
-	lda     #>(_ep_x)
-	adc     _ep_it+1
-	sta     ptr1+1
-	ldy     _gpit
-	lda     _en_x,y
-	ldy     #$00
-	sta     (ptr1),y
+L268C:  lda     #<(_ep_x)
+    clc
+    adc     _ep_it
+    sta     ptr1
+    lda     #>(_ep_x)
+    adc     _ep_it+1
+    sta     ptr1+1
+    ldy     _gpit
+    lda     _en_x,y
+    ldy     #$00
+    sta     (ptr1),y
 ;
 ; ep_y [ep_it] = en_y [gpit];
 ;
-	lda     #<(_ep_y)
-	clc
-	adc     _ep_it
-	sta     ptr1
-	lda     #>(_ep_y)
-	adc     _ep_it+1
-	sta     ptr1+1
-	ldy     _gpit
-	lda     _en_y,y
-	ldy     #$00
-	sta     (ptr1),y
+    lda     #<(_ep_y)
+    clc
+    adc     _ep_it
+    sta     ptr1
+    lda     #>(_ep_y)
+    adc     _ep_it+1
+    sta     ptr1+1
+    ldy     _gpit
+    lda     _en_y,y
+    ldy     #$00
+    sta     (ptr1),y
 ;
 ; ep_mx [ep_it] = en_mx [gpit];// << (1 - en_status [gpit]);
 ;
-	lda     #<(_ep_mx)
-	clc
-	adc     _ep_it
-	tay
-	lda     #>(_ep_mx)
-	adc     _ep_it+1
-	tax
-	tya
-	jsr     pushax
-	lda     #<(_en_mx)
-	ldx     #>(_en_mx)
-	clc
-	adc     _gpit
-	bcc     L1FA8
-	inx
-L1FA8:	ldy     #$00
-	jsr     ldaidx
-	jsr     staspidx
+    lda     #<(_ep_mx)
+    clc
+    adc     _ep_it
+    tay
+    lda     #>(_ep_mx)
+    adc     _ep_it+1
+    tax
+    tya
+    jsr     pushax
+    lda     #<(_en_mx)
+    ldx     #>(_en_mx)
+    clc
+    adc     _gpit
+    bcc     L1FA8
+    inx
+L1FA8:  ldy     #$00
+    jsr     ldaidx
+    jsr     staspidx
 ;
 ; ep_my [ep_it] = en_my [gpit];// << (1 - en_status [gpit]); 
 ;
-	lda     #<(_ep_my)
-	clc
-	adc     _ep_it
-	tay
-	lda     #>(_ep_my)
-	adc     _ep_it+1
-	tax
-	tya
-	jsr     pushax
-	lda     #<(_en_my)
-	ldx     #>(_en_my)
-	clc
-	adc     _gpit
-	bcc     L1FAD
-	inx
-L1FAD:	ldy     #$00
-	jsr     ldaidx
-	jsr     staspidx
+    lda     #<(_ep_my)
+    clc
+    adc     _ep_it
+    tay
+    lda     #>(_ep_my)
+    adc     _ep_it+1
+    tax
+    tya
+    jsr     pushax
+    lda     #<(_en_my)
+    ldx     #>(_en_my)
+    clc
+    adc     _gpit
+    bcc     L1FAD
+    inx
+L1FAD:  ldy     #$00
+    jsr     ldaidx
+    jsr     staspidx
 ```
 
 Sinceramente, no tengo ni idea de por qué la lía tan parda cuando tiene que hacer el cambio de signo. O por qué hace todas esas sumas. ¡Si los arrays son todos `unsigned char`!
@@ -2524,18 +2524,18 @@ Voy a intentar deshacer más llamadas con parámetros. Las siguientes tienen cas
 Tocando:
 
 ```
-	config.h
-	mainloop.h
-	engine/textbox.h
-	engine/breakable.h
-	engine/enengine.h
-	engine/frame.h
-	engine/printer.h
-	engine/textbox.h
-	engine/propellers.h
-	engine/enemmods/enem_linear.h
-	engine/playermods/process_tile.h
-	engine/mapmods/*
+    config.h
+    mainloop.h
+    engine/textbox.h
+    engine/breakable.h
+    engine/enengine.h
+    engine/frame.h
+    engine/printer.h
+    engine/textbox.h
+    engine/propellers.h
+    engine/enemmods/enem_linear.h
+    engine/playermods/process_tile.h
+    engine/mapmods/*
 ```
 
 `draw_tile` lo primero que hace es llamar a upd_attr_table, por lo que puedo traspasar `_x, _y, _t` directamente. Probando -> ok.
@@ -2583,23 +2583,23 @@ Voy a probar el warper rápidamente y luego me pongo a integrar bien los enemigo
 Tocando:
 
 ```
-	mainloop.h
-	engine/enengine.h
-	engine/player.h
-	ram/bss.h
+    mainloop.h
+    engine/enengine.h
+    engine/player.h
+    ram/bss.h
 ```
 
 Se me olvidaba por completo que MK1/MK2 tenían un timer. Quizá sea el momento de integrarlo también :-S.
 
 ```c 
-	#define ENABLE_TIMER
-	#define TIMER_INITIAL
-	#define TIMER_START_ON
-	#define TIMER_REFILL		10
-	#define TIMER_TIME_FLAG		0
-	#define TIMER_ZERO_FLAG 	1
-	#define TIMER_RESET_ON_ENTER
-	#define HOTSPOT_TYPE_TIME	5
+    #define ENABLE_TIMER
+    #define TIMER_INITIAL
+    #define TIMER_START_ON
+    #define TIMER_REFILL        10
+    #define TIMER_TIME_FLAG     0
+    #define TIMER_ZERO_FLAG     1
+    #define TIMER_RESET_ON_ENTER
+    #define HOTSPOT_TYPE_TIME   5
 ```
 
 Deberían ser más sencillos que en la churrera:
@@ -2621,12 +2621,12 @@ Deberían ser más sencillos que en la churrera:
 [X] Timers
 
 ```
-	config.h
-	mainloop.h
-	mainloop/hotspots.h
-	mainloop/timer.h
-	engine/frame.h
-	ram/bss.h
+    config.h
+    mainloop.h
+    mainloop/hotspots.h
+    mainloop/timer.h
+    engine/frame.h
+    ram/bss.h
 ```
 
 Piensa en steady shooters. No pienses mucho, cópialos de MK2.
@@ -2634,13 +2634,13 @@ Piensa en steady shooters. No pienses mucho, cópialos de MK2.
 ~~
 
 ```
-	config.h
-	mainloop.h
-	assets/precalcs.h
-	engine/enems.h
-	engine/cocos.h
-	engine/enemmods/enem_steady_shooter.h
-	ram/zp.h
+    config.h
+    mainloop.h
+    assets/precalcs.h
+    engine/enems.h
+    engine/cocos.h
+    engine/enemmods/enem_steady_shooter.h
+    ram/zp.h
 ```
 
 [X] Probar steady shooters
@@ -2690,9 +2690,9 @@ Sigo teniendo que probar que no he roto los shooties pero ahora no puedor.
 Los springs consistene en un tile que se detecta al pasar sobre él y que saca unos pinchos. En MK2 se detectaba un rectángulo calculado sobre el spring, creo, pero yo lo voy a hacer más sencillo: sólo si estamos posados y pisamos el tile con el punto central del player.
 
 ```c
-	#define ENABLE_SPRINGS
-	#define SPRING_TILE 				10
-	#define SPRING_SPIKE_TILE 			11
+    #define ENABLE_SPRINGS
+    #define SPRING_TILE                 10
+    #define SPRING_SPIKE_TILE           11
 ```
 
 Se me acaba el espacio en los testers así que lo suyo es que lo monte en el tentativo tercer nivel de Cheril que incluirá warpers, steady shooters... y Springs.
@@ -2741,11 +2741,11 @@ Creo que debería simplificar y tirar por el camino de facing left/right aunque 
 Recordemos que necesitamos endx, endy en precalcs:
 
 ```c
-	// Directions are
-	// LEFT DOWNLEFT DOWN DOWNRIGHT RIGHT UPRIGHT UP UPLEFT
-	// 0    1        2    3         4     5       6  7
-	const signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};
-	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
+    // Directions are
+    // LEFT DOWNLEFT DOWN DOWNRIGHT RIGHT UPRIGHT UP UPLEFT
+    // 0    1        2    3         4     5       6  7
+    const signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
 ```
 
 Así es sencillo. Al seleccionar, si `_en_mx < 0`, entonces `_en_facing = 4`; si `_en_mx > 0` entonces `_en_facing = 0`. En otro caso no se toca.
@@ -2757,21 +2757,21 @@ He visto que solo se mueve a un pixel por frame pero creo que esto, por ahora, m
 Puedo hacer una animación de idle para las posiciones 2 y 3 de cada orientación.
 
 ```
-	compile.bat
-	game.c
-	autodefs.h
-	config.h
-	mainloop.h
-	assets/compiled_enems.h
-	assets/precalcs.h
-	engine/enengine.h
-	engine/enemmods/enem_compiled.h
-	ram/zp.h
+    compile.bat
+    game.c
+    autodefs.h
+    config.h
+    mainloop.h
+    assets/compiled_enems.h
+    assets/precalcs.h
+    engine/enengine.h
+    engine/enemmods/enem_compiled.h
+    ram/zp.h
 ```
 
 ```c
-	#define ENABLE_COMPILED_ENEMS
-	#define COMPILED_ENEMS_SHOOT
+    #define ENABLE_COMPILED_ENEMS
+    #define COMPILED_ENEMS_SHOOT
 ```
 
 Tengo que generalizar pencompiler.exe para que pille todos los comportamientos y genere `compiled_enems.h` automáticamente.
@@ -2779,8 +2779,8 @@ Tengo que generalizar pencompiler.exe para que pille todos los comportamientos y
 Puedo poner 
 
 ```
-	BEGIN label
-	END 
+    BEGIN label
+    END 
 ```
 
 Por ejemplo. Voy a probar.
@@ -2826,23 +2826,23 @@ También puedo hacer que haya que incluir la rutina de paginación de forma espe
 Vaya... Si ya estaba (aunque en modo que no tiene en cuenta los bus conflicts). Modificada es así:
 
 ```s
-	_bankswitch:
-		tax
-		sta bankList, x
-		rts
+    _bankswitch:
+        tax
+        sta bankList, x
+        rts
 
-	bankList:
-		.byte $00, $01, $02, $03
+    bankList:
+        .byte $00, $01, $02, $03
 ```
 
 ¿Qué son, 10 bytes? meh, la dejo por defecto!
 
 ```
-	nes-CNROM.cfg
-	crt0.s
-	neslib.s
-	mainloop.h
-	assets/levelset.h
+    nes-CNROM.cfg
+    crt0.s
+    neslib.s
+    mainloop.h
+    assets/levelset.h
 ```
 
 He roto Sir Ababol: por alguna razón al pasar de level1 a level0 se reinicia. Lo miraré. Pero:
@@ -2912,19 +2912,19 @@ Veamos todo.
 Lo fasi está ya; lo difísi parece que ocurre cuando el mensaje general "cambia". Este es el código del script que controla eso:
 
 ```
-	ENTERING ANY
-		IF FLAG 1 = 0
-		THEN
-			#TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
-			TEXT _SET_5_BOMBS_IN_EVIL_COMPUTER_
-		END
-		
-		IF FLAG 1 = 1
-		THEN
-			#TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
-			TEXT BOMBS_ARE_SET!_RETURN_TO_BASE!
-		END
-	END
+    ENTERING ANY
+        IF FLAG 1 = 0
+        THEN
+            #TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
+            TEXT _SET_5_BOMBS_IN_EVIL_COMPUTER_
+        END
+        
+        IF FLAG 1 = 1
+        THEN
+            #TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
+            TEXT BOMBS_ARE_SET!_RETURN_TO_BASE!
+        END
+    END
 ```
 
 Tampoco tiene mucha historia, no :-?
@@ -2932,10 +2932,10 @@ Tampoco tiene mucha historia, no :-?
 Voy a ver dónde se detiene esto. Seguramente "algo" esté invalidando `b_button` y tengo que encontrar qué es. Exacto, `b_button == 0` en la pantalla 1 tras colocar las bombas... Eso justo antes de detectar para disparar; lo que se hace antes es ejecutar la detección de FIRE para lanzar scripts. Eso invalidaría `b_button` bajo algunas circunstancias:
 
 ```c
-	if (b_button) {
-		run_fire_script ();
-		if (sc_continuar) b_button = 0;
-	}
+    if (b_button) {
+        run_fire_script ();
+        if (sc_continuar) b_button = 0;
+    }
 ```
 
 ¿Qué fire script se ejecuta ahí? Vuelvo al script. Respuesta: NINGUNO.
@@ -2962,43 +2962,43 @@ Las constantes `FT_DPCM_OFF` y `FX_SFX_STREAMS` están presentes en ambos. Los d
 De estos tres en FT2 sólo FT_THREAD parece usarse en FT1.
 
 ```s
-	.define FT_THREAD       1	;undefine if you call sound effects in the same thread as sound update
-	.define FT_PAL_SUPPORT	1   ;undefine to exclude PAL support
-	.define FT_NTSC_SUPPORT	1   ;undefine to exclude NTSC support
+    .define FT_THREAD       1   ;undefine if you call sound effects in the same thread as sound update
+    .define FT_PAL_SUPPORT  1   ;undefine to exclude PAL support
+    .define FT_NTSC_SUPPORT 1   ;undefine to exclude NTSC support
 ```
 
 Luego vienen las inicializaciones. Para FT1:
 
 ```s
-		lda <NTSCMODE
-		jsr FamiToneInit
+        lda <NTSCMODE
+        jsr FamiToneInit
 
-		.if(FT_DPCM_ENABLE)
-		ldx #<music_dpcm
-		ldy #>music_dpcm
-		jsr FamiToneSampleInit
-		.endif
+        .if(FT_DPCM_ENABLE)
+        ldx #<music_dpcm
+        ldy #>music_dpcm
+        jsr FamiToneSampleInit
+        .endif
 
-		.if(FT_SFX_ENABLE)
-		ldx #<sounds_data
-		ldy #>sounds_data
-		jsr FamiToneSfxInit
-		.endif
+        .if(FT_SFX_ENABLE)
+        ldx #<sounds_data
+        ldy #>sounds_data
+        jsr FamiToneSfxInit
+        .endif
 ```
 
 Para FT2:
 
 ```s
-		ldx #<MUSIC_data
-		ldy #>MUSIC_data
-		lda <NTSC_MODE
-		jsr FamiToneInit
+        ldx #<MUSIC_data
+        ldy #>MUSIC_data
+        lda <NTSC_MODE
+        jsr FamiToneInit
 
-		.if(FT_SFX_ENABLE)
-		ldx #<sounds_data
-		ldy #>sounds_data
-		jsr FamiToneSfxInit
-		.endif
+        .if(FT_SFX_ENABLE)
+        ldx #<sounds_data
+        ldy #>sounds_data
+        jsr FamiToneSfxInit
+        .endif
 ```
 
 La inicialización para los SFX es igual, pero en FT1 se pasa el resultado de la detección de NTSC y se inicializa el DPCM.
@@ -3006,32 +3006,32 @@ La inicialización para los SFX es igual, pero en FT1 se pasa el resultado de la
 La carga de datos es también diferente; FT1:
 
 ```s 
-	.segment "RODATA"
+    .segment "RODATA"
 
-		.include "music.s"
+        .include "music.s"
 
-		.if(FT_SFX_ENABLE)
-	sounds_data:
-		.include "sounds.s"
-		.endif
+        .if(FT_SFX_ENABLE)
+    sounds_data:
+        .include "sounds.s"
+        .endif
 
-	.segment "SAMPLES"
+    .segment "SAMPLES"
 
-		;.incbin "music_dpcm.bin"
+        ;.incbin "music_dpcm.bin"
 ```
 
 FT2:
 
 ```s
-	.segment "RODATA"
+    .segment "RODATA"
 
-	MUSIC_data:
-		.include "music.s"
+    MUSIC_data:
+        .include "music.s"
 
-		.if(FT_SFX_ENABLE)
-	sounds_data:
-		.include "sounds.s"
-		.endif
+        .if(FT_SFX_ENABLE)
+    sounds_data:
+        .include "sounds.s"
+        .endif
 ```
 
 Los samples no aparecen por ningún lado en FT2 y se carga la música exportada tras una etiqueta. La adaptación en este archivo parece sencilla.
@@ -3042,109 +3042,109 @@ neslib.s
 El la NMI, para FT1 se llama a `FamiToneUpdate` justo al final:
 
 ```s 
-	@skipNtsc:
+    @skipNtsc:
 
-		jsr FamiToneUpdate
+        jsr FamiToneUpdate
 
-		pla
-		tay
-		pla
-		tax
-		pla
+        pla
+        tay
+        pla
+        tax
+        pla
 
-	irq:
-	    rti
+    irq:
+        rti
 ```
 
 En FT2 es exactamente igual:
 
 ```s
-	@skipNtsc:
+    @skipNtsc:
 
-		jsr FamiToneUpdate
+        jsr FamiToneUpdate
 
-		pla
-		tay
-		pla
-		tax
-		pla
+        pla
+        tay
+        pla
+        tax
+        pla
 
-	irq:
-	    rti
+    irq:
+        rti
 ```
 
 Las funciones que integran; FT1:
 
 ```s
-	;void __fastcall__ music_play(const unsigned char *data);
+    ;void __fastcall__ music_play(const unsigned char *data);
 
-	_music_play:
-		stx <PTR
-		tax
-		ldy <PTR
-		jmp FamiToneMusicStart
-
-
-
-	;void __fastcall__ music_stop(void);
-
-	_music_stop=FamiToneMusicStop
+    _music_play:
+        stx <PTR
+        tax
+        ldy <PTR
+        jmp FamiToneMusicStart
 
 
 
-	;void __fastcall__ music_pause(unsigned char pause);
+    ;void __fastcall__ music_stop(void);
 
-	_music_pause=FamiToneMusicPause
+    _music_stop=FamiToneMusicStop
 
 
 
-	;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+    ;void __fastcall__ music_pause(unsigned char pause);
 
-	_sfx_play:
-		and #$03
-		tax
-		lda @sfxPriority,x
-		tax
-		jsr popa
-		jmp FamiToneSfxStart
+    _music_pause=FamiToneMusicPause
 
-	@sfxPriority:
-		.byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
+
+
+    ;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+
+    _sfx_play:
+        and #$03
+        tax
+        lda @sfxPriority,x
+        tax
+        jsr popa
+        jmp FamiToneSfxStart
+
+    @sfxPriority:
+        .byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
 ```
 
 Y FT2:
 
 ```s
-	;void __fastcall__ music_play(unsigned char song);
+    ;void __fastcall__ music_play(unsigned char song);
 
-	_music_play=FamiToneMusicPlay
-
-
-
-	;void __fastcall__ music_stop(void);
-
-	_music_stop=FamiToneMusicStop
+    _music_play=FamiToneMusicPlay
 
 
 
-	;void __fastcall__ music_pause(unsigned char pause);
+    ;void __fastcall__ music_stop(void);
 
-	_music_pause=FamiToneMusicPause
+    _music_stop=FamiToneMusicStop
 
 
 
-	;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+    ;void __fastcall__ music_pause(unsigned char pause);
 
-	_sfx_play:
-		and #$03
-		tax
-		lda @sfxPriority,x
-		tax
-		jsr popa
-		jmp FamiToneSfxPlay
+    _music_pause=FamiToneMusicPause
 
-	@sfxPriority:
-		.byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
+
+
+    ;void __fastcall__ sfx_play(unsigned char sound,unsigned char channel);
+
+    _sfx_play:
+        and #$03
+        tax
+        lda @sfxPriority,x
+        tax
+        jsr popa
+        jmp FamiToneSfxPlay
+
+    @sfxPriority:
+        .byte FT_SFX_CH0,FT_SFX_CH1,FT_SFX_CH2,FT_SFX_CH3
 ```
 
 `music_stop`, `music_pause` y `sfxplay` parece exactamente iguales. `music_play` es más sencilla, supongo que porque se maneja una biblioteca de canciones indexada por un byte.
@@ -3193,7 +3193,7 @@ Voy a revisar (sin probar realmente, necesito tester) de nuevo a ojal los contai
 También voy a pensar en una forma de hacerlo desde código, aunque lo más sencillo es hacer una especie de estructura rollo locks:
 
 ```
-	{ NP, YX, F, ... };
+    { NP, YX, F, ... };
 ```
 
 Al entrar en cada pantalla se recorrería y tal y cual. Tampoco serán listas muy largas, y si algún día lo son, ya me apañaré para acelerar.
@@ -3228,19 +3228,19 @@ Veamos, voy a hablar un poco sobre configuración.
 Podríamos definir `ENABLE_NORMAL_OBJECTS`... Hum.
 
 ```c
-	#ifdef ENABLE_EASY_OBJECTS
-	#define HOTSPOTS_DYNAMIC
-	#define CARRY_ONE_HS_OBJECT
-	#endif
+    #ifdef ENABLE_EASY_OBJECTS
+    #define HOTSPOTS_DYNAMIC
+    #define CARRY_ONE_HS_OBJECT
+    #endif
 ```
 
 Podríamos hacer
 
 ```c
-	#ifdef ENABLE_NORMAL_OBJECTS
-	#define ENABLE_CONTAINERS
-	#define CONTAINERS_FROM_CODE
-	#endif
+    #ifdef ENABLE_NORMAL_OBJECTS
+    #define ENABLE_CONTAINERS
+    #define CONTAINERS_FROM_CODE
+    #endif
 ```
 
 Aunque no creo que sea necesario. Ahora no me puedo concentrar para decidir qué es lo mejor, porque tenemos tres opciones (de nuevo):
@@ -3434,7 +3434,7 @@ También tengo que documentar el tema de los mapas en CHR_ROM.
 'soft breakables' listos. ¿Hit con recoil? Es retroceder N pasos (por ejemplo, durante el tiempo en el que está parpadeando / explotao). Tengo que ver cómo calcular la dirección.
 
 ```c
-	#define ENEMS_RECOIL_ON_HIT
+    #define ENEMS_RECOIL_ON_HIT
 ```
 
 ¡Hecho! Pero no me da tiempo de propagar. Total, da igual: tengo que implementar los tipo 7 en vista lateral.
@@ -3499,9 +3499,9 @@ A tomar por culo, `en_spawning` nasió.
 spawn sería:
 
 ```c
-	en_cttouched [gpit] = 50;
-	en_spawning [gpit] = 1;
-	en_life [gpit] = Lo que tengan al principio;
+    en_cttouched [gpit] = 50;
+    en_spawning [gpit] = 1;
+    en_life [gpit] = Lo que tengan al principio;
 ```
 
 Hace algo raro y eso es porque me queda algo sin inicializar...
@@ -3685,11 +3685,11 @@ Voy a hacer una fase intro reaprovechando pepinoni (TS) y con texto introductori
 Ya estoy otra vez con fases desordenadas por mierdas de no pensar y diseñar antes de hacer. W.
 
 ```
-	0 - assets*4 (pepinoni intro)
-	1 - assets*1 (pepinoni)
-	2 - assets*0 (factory)
-	3 - assets*3 (cementerio)
-	4 - assets*2 (barco pirata)
+    0 - assets*4 (pepinoni intro)
+    1 - assets*1 (pepinoni)
+    2 - assets*0 (factory)
+    3 - assets*3 (cementerio)
+    4 - assets*2 (barco pirata)
 ```
 
 AFU PICHA.
@@ -3710,11 +3710,11 @@ Anjuel es un amor y me ha pasado esta idea para argumento que voy a desarrollar 
 Mancantao candela. Ahora tengo que cambiar las fases de orden:
 
 ```
-	- Intro (4)
-	- Pepinoni (1)
-	- Cementerio (3)
-	- Fábrica (0)
-	- Barco pirata (2)
+    - Intro (4)
+    - Pepinoni (1)
+    - Cementerio (3)
+    - Fábrica (0)
+    - Barco pirata (2)
 ```
 
 Pero eso es cosa fásil. De `4 1 0 3 2` a `4 1 3 0 2`. No te qué, no te qué, no te quejes, nene.
@@ -4054,3 +4054,33 @@ Ahora he visto algo que se me había pasado por completo: Sgt Helmet tiene dos n
 ~~
 
 Arogas entregagas y funcionando de muerte!
+
+20180727
+========
+
+Seguimos añadiendo mierdas y posponiendo el 1.0 forever. Pero antes de Agosto está esto blindado.
+
+Quiero `TILE_GET`, hostias, y la posibilidad de poder activar *nadar* a la vez que otro engine y controlarlo por una variable.
+
+Podría tener una variable `vertical_engine_type` que pueda tomar un valor de estos:
+
+```c
+    ENGINE_TYPE_JUMP
+    ENGINE_TYPE_JET_PAC
+    ENGINE_TYPE_SWIM
+    ENGINE_TYPE_AUTO_JUMP
+```
+
+Esto permitiría al programador activar a la vez más de una de estas:
+
+```c
+    PLAYER_HAS_JUMP
+    PLAYER_HAS_JETPAC
+    PLAYER_AUTO_JUMP
+    PLAYER_SWIMS
+```
+
+Y controlar el motor activo con la variable. Esta es fácil, voy a ello aunque no pueda probar inmediatamente (aunque podría probarlo en el tester de `WARP_TO_LEVEL`).
+
+Hecho. Voy a probarlo teniendo un engine type diferente en cada uno de los niveles de este tester.
+

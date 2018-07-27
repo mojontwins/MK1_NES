@@ -85,6 +85,7 @@ signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
 // Main player
 
+unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
 signed int px, py;                      // Player X, Y coordinates, fixed point 12.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 12.6
 unsigned char prx, pry;                 // Player pixel coordinates, calculated from px, py.

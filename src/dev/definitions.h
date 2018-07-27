@@ -50,3 +50,10 @@
 
 #define EN_STATE_DEAD			1
 #define EN_STATE_SPAWNING		2
+
+// Vertical engine type for side_view
+
+#define ENGINE_TYPE_JUMP		0
+#define ENGINE_TYPE_JET_PAC 	1
+#define ENGINE_TYPE_SWIM 		2
+#define ENGINE_TYPE_AUTO_JUMP	3
