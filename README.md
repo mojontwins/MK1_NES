@@ -29,9 +29,11 @@ Documentation
 
 * You can read about [engine features](https://github.com/mojontwins/MK1_NES/blob/master/docs/features.md) .
 * [MKTS (GFX cutter & importer) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mkts.md).
+* Short description of [ANGES Metaspriteset](https://github.com/mojontwins/MK1_NES/blob/master/docs/metaspriteset.md)
+* [Game configuration reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/engine_config.md)
 * [MSCMK1 (script compiler) reference](https://github.com/mojontwins/MK1_NES/blob/master/docs/mscmk1.md).
-* [MK1_NES / AGNES utilities](https://github.com/mojontwins/MK1_NES/blob/master/src/UTILS.md).
 * [Code injection points](https://github.com/mojontwins/MK1_NES/blob/master/docs/code_injection.md)
+* [MK1_NES / AGNES utilities](https://github.com/mojontwins/MK1_NES/blob/master/src/UTILS.md).
 * There's a detailed postmortem on every tester and examples #7 onwards. 
 * A tutorial is coming in the near future.
 
