@@ -4174,3 +4174,15 @@ Para aprovechar lo que hay lo suyo es que `PERSISTENT_TILE_GET` fuerce `MAP_REND
 
 Con estas notas debería tenerlo implementado fasi y sencillo, pero ahora no me apetece. Portar Sonic Mal a AGNES para probar esto no es mala idea. La versión completa.
 
+~~
+
+Ahora que lo pienso, tengo 1K en una nametable que no estoy usando para nada. Quizá podría guardar ahí el tile_got y no tener que recurrir a la pérdida de granularidad (usar 24 bytes por pantalla). Para 25 pantallas son 600 bytes, ojal. El máximo así son 40 pantallas.
+
+Debería tener un array de 24 bytes en RAM y copiarlo a VRAM al salir de la pantalla. Igualmente, traerlo de VRAM al entrar en una nueva. Copiar / leer 24 bytes de VRAM es fácil: tengo `vram_read` y `vram_write` en neslib.
+
+40 pantallas por nivel es bastante, y siempre se puede dividir los niveles y conectarlos con puntos de warp, así que me parece un límite bastante razonable.
+
+Nótese que con esto tendría solucionada la persistencia en los niveles pantalla por pantalla de un posible Ninjajar de NES.
+
+~~
+

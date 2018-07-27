@@ -22,9 +22,8 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 
 .define SPEED_FIX		1	;zero if you want to handle PAL/NTSC speed difference by yourself
 
-
     .export _exit,__STARTUP__:absolute=1
-	.import initlib,push0,popa,popax,_main,zerobss,copydata
+	.import push0,popa,popax,_main,zerobss,copydata
 
 ; Linker generated symbols
 	.import __RAM_START__   ,__RAM_SIZE__
@@ -177,8 +176,6 @@ clearRAM:
     sta	sp
     lda	#>(__RAM_START__+__RAM_SIZE__)
     sta	sp+1            ; Set argument stack ptr
-
-	jsr	initlib
 
 	lda #%10000000
 	sta <PPU_CTRL_VAR

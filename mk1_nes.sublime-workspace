@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"ENGINE",
+				"ENGINE_TYPE_SWIM\t(player.h)"
+			],
+			[
+				"ENGINE_",
+				"ENGINE_TYPE_JET_PAC\t(player.h)"
+			],
+			[
+				"vertica",
+				"vertical_engine_type\t(player.h)"
+			],
+			[
+				"PLAYER_JE",
+				"PLAYER_HAS_JETPAC"
+			],
+			[
+				"ENGINE_TYPE_",
+				"ENGINE_TYPE_AUTO_JUMP\t(engine_config.md)"
+			],
+			[
+				"ENG",
+				"ENGINE_TYPE_JUMP\t(engine_config.md)"
+			],
+			[
+				"engine_t",
+				"vertical_engine_type"
+			],
+			[
+				"vertical",
+				"vertical_engine_type"
+			],
+			[
 				"PLAYER_CAN_FI",
 				"PLAYER_CAN_FIRE_8_WAY\t(config.h)"
 			],
@@ -448,12 +480,56 @@
 	"buffers":
 	[
 		{
-			"contents": "\"Apúntalo, Cheril\" o \"Cheril The Writer\" es un juego concebido para ilustrar algunas de las cosas que pueden lograrse con MK1_NES / AGNES, con algunas decisiones de diseño puramente didácticas (de hecho, junto al código fuente hay un detallado postmortem donde se explica cómo se ha construido el juego).\n\nRealmente se trata del gameplay de Cheril Perils en otros niveles diferentes, donde se ha tratado de dar un poco más de variedad. La dinámica básica es la misma: activar los resonadores para paralizar a los enemigos y poder eliminarlos, pero se ha intentado jugar con los elementos de MK1_NES / AGNES para que cada fase sea diferente. Así, en las playas de Pepinoni tenemos arenas movedizas y un sencillo puzzle de objetos, en el Cementerio hay sierras y otros elementos bastante peligrosos, en la Fábrica tenemos ventiladores que te hacen flotar, un par de objetos que hay que encontrar y utilizar, y mucho plataformeo sobre cintas transportadoras, y en la fase final del barco hay superficies resbaladizas, escaleras, cañones, y mucha mala leche. En todas las fases hay personajes con los que hablar. Los fans de Mojon Twins recordarán a algunos personajes de otros juegos, y también se puede hablar con un par de figuras muy conocidas de la escena retro.\n\nComo curiosidades, a incluir la que se quiera:\n\n- La Playa de Pepinoni apareció por primera vez como ubicación de una de las fases finales de Ninjajar! y volvió a partir de la versión 3 de Yun, donde se explora una parte diferente. En \"Apúntalo, Cheril\" visitamos otra más.\n- El Cementerio se creó para la versión NES inédita de \"Cheril Perils\". Como Yun empezó siendo un hack / broma basada en \"Cheril Perils\" (como se explica en el artículo de la revista Retromaniac sobre Yun), el Cementerio se incluyó como tercera fase, espejado horizontalmente, y con otros gráficos.\n- La fábrica fue concebida por Anjuel como tercera fase del mencionado y malogrado \"Cheril Perils\" de NES y fue la causa original de que nos pusiéramos a hacer este juego: no podíamos dejar un tileset tan bonito cogiendo polvo en el disco duro.\n- El barco pirata lo conoceréis algunos por aparecer en Yun v5, aunque aquí está mucho más bonito y se recorre de otra forma.\n- El juego incluye un pequeñísimo secreto en forma de diálogo sangrón ¿lo encontraréis?\n- El gran Guindako nos ha ayudado mucho con el testing cazando un par de gazapos (y uno de ellos de motor, así que ¡gracias!)\n\nEl juego cuenta con el hilado argumental de fases más extremo del mundo, obra de Anjuel.\n",
+			"file": "wip/diario.md",
 			"settings":
 			{
-				"buffer_size": 2513,
-				"line_ending": "Windows",
-				"name": "\"Apúntalo, Cheril\" o \"Cheril The Writer\" es un jue"
+				"buffer_size": 164306,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "wip/roadmap.md",
+			"settings":
+			{
+				"buffer_size": 877,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "docs/code_injection.md",
+			"settings":
+			{
+				"buffer_size": 7564,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/mainloop/hotspots.h",
+			"settings":
+			{
+				"buffer_size": 4702,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/my/extra_hotspots.h",
+			"settings":
+			{
+				"buffer_size": 408,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/mainloop/cheat.h",
+			"settings":
+			{
+				"buffer_size": 149,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -533,14 +609,25 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES"
+		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/docs"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/wip/roadmap.md",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/engine/player.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/config.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/src/dev/ram/zp.h",
+		"/D/git/MK1_NES/src/dev/engine/player.h",
+		"/D/git/MK1_NES/docs/engine_config.md",
+		"/D/git/MK1_NES/src/dev/definitions.h",
+		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/docs/metaspriteset.md",
 		"/D/git/nes_work/Tutorial_MK1/tut08eng.md",
 		"/D/git/nes_work/Tutorial_MK1/tut07eng.md",
-		"/D/git/MK1_NES/docs/engine_config.md",
 		"/D/perfiles/jcastano/AppData/Local/Temp/7zO06B1E5F3/DrawBG.s",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/config.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/config.h",
@@ -550,7 +637,6 @@
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/bullets.h",
 		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
 		"/D/git/MK1_NES/docs/mscmk1.md",
@@ -559,10 +645,8 @@
 		"/D/git/MK1_NES/src/dev/compile.bat",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop.h",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/no.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/engine/player.h",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/assets/mscnes.h",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/config.h",
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
 		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt",
 		"/D/git/MK1_NES/docs/code_injection.md",
@@ -585,10 +669,8 @@
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/gfx/import_patterns.spt",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/assets/metasprites.h",
 		"/D/git/MK1_NES/testers/03_tester_interactives/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/src/dev/ram/zp.h",
 		"/D/git/MK1_NES/src/dev/game.c",
 		"/D/git/MK1_NES/src/dev/engine/enengine.h",
-		"/D/git/MK1_NES/src/dev/engine/player.h",
 		"/D/git/MK1_NES/wip/multicopy.bas",
 		"/D/git/MK1_NES/docs/features.md",
 		"/D/git/MK1_NES/src/dev/autodefs.h",
@@ -659,12 +741,7 @@
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/tileset1.chr",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/tileset3.chr",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/bss.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/cart.nes",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/general.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/player.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.s"
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat"
 	],
 	"find":
 	{
@@ -734,6 +811,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ENGINE_TYPE_AUTO_JUMP",
+			"PLAYER_CUMULATIVE_JUMP",
 			"CAN_FIRE",
 			"stop_player",
 			"springs_on",
@@ -859,9 +938,7 @@
 			"tall",
 			"pezons",
 			"CHAC_CHACS_CLEAR",
-			"exe",
-			"binmode",
-			"bin"
+			"exe"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -898,39 +975,125 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "wip/diario.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2513,
+						"buffer_size": 164306,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								2513
+								163412,
+								163412
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 3241,
-								"count": 423,
+								"changes": 2227,
+								"count": 23061,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
-							"auto_name": "\"Apúntalo, Cheril\" o \"Cheril The Writer\" es un jue",
 							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 71368.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "wip/roadmap.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 877,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								747,
+								747
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 155,
+								"count": 141,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "docs/code_injection.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2247,
+								2247
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 394,
+								"count": 1024,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -938,12 +1101,132 @@
 					},
 					"stack_index": 0,
 					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/dev/mainloop/hotspots.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4702,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4446,
+								4446
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 45,
+								"count": 374,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2077.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 4,
+					"file": "src/dev/my/extra_hotspots.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								264,
+								195
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 395,
+								"count": 62,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/dev/mainloop/cheat.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 11,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
 			]
 		}
 	],
