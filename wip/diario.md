@@ -4186,3 +4186,30 @@ Nótese que con esto tendría solucionada la persistencia en los niveles pantall
 
 ~~
 
+Veamos, tendría 
+
+```c
+    unsigned char tile_got [24];
+```
+
+Para ver donde tocar, tendría que mirar el byte en `((Y*2) + (X>7))`, y de ahí, el bit `(X&7)`.
+
+Antes de seguir voy a ver el mejor sitio para integrar la detección. También debería codificarlo todo en un beh (cogiscible) y no enlazarlo a un tipo concreto de tile, para así poder tener varios tipos, con su punto de code injection listo para usar y distinguir, y actuar en consecuencia: `my/on_tile_got.h`.
+
+He metido una nueva sección guardada por `NEEDS_CENTER_DETECTION` para este y otros manejes.
+
+Lo complicado va a ser encontrar un beh que me sirva ~_~ ¡¡OVERBOOKING!!
+
+Voy a usar 34 (que sería en realidad "conveyor quicksand"). No hay problemas porque a) los conveyors solo se detectan en colisión con tile 4 u 8 y b) los quicksands se detectan con `== 2`.
+
+~~
+
+Creo que lo he hecho, pero no tengo forma de probarlo. Portaré Sonic Bad como `05_tester_tile_get` y a tomar porculer. Pero ahora no. Exhausted.
+
+~~
+
+En vez de Sonic Bad puedo hacer Pequeña Espina en chino y reírnos. Hay que hacer una bola rosa.
+
+~~
+
+

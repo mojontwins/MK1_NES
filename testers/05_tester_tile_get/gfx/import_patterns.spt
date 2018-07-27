@@ -1,0 +1,43 @@
+# Dummy placeholder for the empty project
+
+# Bank 0: Background
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+MAPFILE ..\dev\assets\tiledata.h
+
+# Tileset 0
+OPEN ts0.png
+PALS palts0.png
+LABEL ts0
+MAPPED 0, 0, 2, 2, 16, 1
+
+FILL 4096
+RESETPOOL
+
+# Bank 1: Foreground
+
+OPEN ss.png
+PALS palss0.png
+MAPFILE ..\dev\assets\spritedata.h
+
+# Player sprites
+LABEL sspl
+METASPRITESET 0, 0, 2, 3, 6, 1, -4, -8 FLIPPED
+
+# Enemies
+LABEL ssen
+METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
+
+# Platforms
+LABEL ssplat
+METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0
+
+# Items
+LABEL ssit
+METASPRITESET 0, 6, 2, 2, 3, 1, 0, 0
+
+FILL 8192
