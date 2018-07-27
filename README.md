@@ -58,7 +58,7 @@ Credits
 License
 =======
 
-**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a CC BY-NC-SA 3.0 license.
+**MT Engine MK1 NES** is copyleft The Mojon Twins and is distributed under a [LGPL license](https://github.com/mojontwins/MK1_NES/blob/master/LICENSE).
 
 **But** if you make a game with the engine we understand you'll want to make it into a cart. **In such case, just tell us!** Write to mojontwins@gmail.com - just as a matter of courtesy.
 
