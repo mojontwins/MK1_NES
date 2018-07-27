@@ -10,3 +10,4 @@ Apunto cosas que se me van ocurriendo y quiero añadir, y las voy tachando segú
 
 > Sonic Mal codificaba cada fila de tiles con 1 byte, lo que nos daba la posibilidad de NO pintar el `TILE_GET` si aparecía un 1 en el bit correspondiente a dos tiles adyacentes. Este arreglo es *suficiente* y sólo toma 12 bytes de RAM por pantalla -> Equivale a activar `PERSISTENT_ENEMIES`.
 
+[X] Crear un code injection point para meter soporte de nuevos tipos de hotspots, y así eliminar la necesidad de tocar el core.

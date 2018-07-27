@@ -67,6 +67,19 @@ if (level < 2 && (frame_counter & 7) == 0 ) {
 }
 ```
 
+## Adding support for new hotspot types.
+
+You can add your own custom hotspot types easily by adding code to `my/extra_hotspots.h`. For each custom hotspot type you want to create, just add a code block like this:
+
+```c
+    case HOTSPOT_TYPE_MY_OWN:
+        rda = SFX_OBJECT;
+        // do stuff
+        break;
+```
+
+If `rda != 0`, the engine will play such sound on interaction.
+
 ## Related to objects
 
 ### on object got

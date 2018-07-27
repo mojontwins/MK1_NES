@@ -4085,3 +4085,92 @@ Y controlar el motor activo con la variable. Esta es fácil, voy a ello aunque n
 Hecho. Voy a probarlo teniendo un engine type diferente en cada uno de los niveles de este tester.
 
 Funciona. El port de Sir Ababol cada vez es más sencillo: ¡me estoy quitando una a una las necesidades de toqueteamiento tripil!
+
+Apuntes sobre la implementación de `TILE_GET` en MK2
+----------------------------------------------------
+
+En principio tengo esta serie de defines:
+
+```c
+    #define ENABLE_TILE_GET
+    #define TILE_GET_BIT                    2
+    //#define TILE_GET_COUNT_ON_FLAG        1   // If not defined, count on tile_get_ctr
+    #define PERSISTENT_TILE_GET                 // Memory hog.
+```
+
+Tenemos una variable `tile_get_ctr` donde almacenamos las monedas. Opcionalmente, las podemos copiar además en `flags [TILE_GET_COUNT_ON_FLAG]`.
+
+La detección es en la función que mueve el player, como una "center point detection". Creo que en MK1 no tengo esa sección pero tengo donde apañar algo parecido:
+
+```c
+    #ifdef ENABLE_TILE_GET
+        if (at1 & TILE_GET_BIT) {
+
+            set_map_tile (cx1, cy1 - 1, 0);
+            sfx_play (SFX_RING, SC_LEVEL);
+
+    #ifdef TILE_GET_COUNT_ON_FLAG
+            flags [TILE_GET_COUNT_ON_FLAG] ++;
+    #else 
+            tile_get_ctr ++;
+
+            // CUSTOM {
+            if (tile_get_ctr == 100) {
+                tile_get_ctr = 1; 
+                plife ++;
+                sfx_play (SFX_START, SC_PLAYER);
+            }
+            // } END_OF_CUSTOM
+    #endif  
+
+    // Add persistence **HERE**
+    }
+#endif            
+```
+
+**Persistencia**
+
+```c
+    unsigned char tile_got [MAX_PANTS*12];
+```
+
+Tenemos un array para estas mierdas que lo primero que tenemos que hacer es inicializar:
+
+```c
+    #ifdef PERSISTENT_TILE_GET
+        gpint = MAX_PANTS*12; while (gpint --) tile_got [gpint] = 0;
+    #endif
+```
+
+Nótense 12 bytes por pantalla.
+
+Cuando cogemos uno de estos tiles, se hace persistente así de fácilmente:
+
+```c
+    #ifdef PERSISTENT_TILE_GET
+        gpint = tile_got_offset + (cy1 - 1);
+        rda = tile_got [gpint];
+        tile_got [gpint] = rda | bitmask [cx1 >> 1];
+    #endif
+```
+
+Nótese que `tile_got_offset` vale `n_pant * 12` y se precalcula al entrar en la pantalla.
+
+Al entrar en la pantalla hay que "borrar" los tiles que se han cogido. Como hemos dicho, la granularidad es de 2 tiles (a coordenada X par). Lo que se hace es explorar el array de la pantalla ya renderizada, de pareja de tile en pareja de tile. Si el bit correspondiente está levantado, se borra cualquier `TILE_GET` en la pareja de tiles.
+
+```c
+    // This should be performed differently...
+    #ifdef PERSISTENT_TILE_GET
+        if (rda & TILE_GET_BIT) {
+            // Get which byte to check. 1 byte per row means gpit >> 4
+            rdb = tile_got [tile_got_offset + (gpit >> 4)];
+            // Get which bit to check. 2 columns per bit is ((gpit & 15) >> 1)
+            if (rdb & bitmask [(gpit & 15) >> 1]) { rdt = rda = 0; }
+        }
+    #endif
+```
+
+Para aprovechar lo que hay lo suyo es que `PERSISTENT_TILE_GET` fuerce `MAP_RENDERER_COMPLEX`.
+
+Con estas notas debería tenerlo implementado fasi y sencillo, pero ahora no me apetece. Portar Sonic Mal a AGNES para probar esto no es mala idea. La versión completa.
+
