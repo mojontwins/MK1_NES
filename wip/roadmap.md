@@ -2,7 +2,7 @@ Apunto cosas que se me van ocurriendo y quiero añadir, y las voy tachando segú
 
 [ ] Hostias en genital.
 
-[ ] Integrar swimming mediante switch y no mediante define excluyente.
+[X] Integrar swimming mediante switch y no mediante define excluyente.
 
 > Símplemente proteger con una guarda sobre flag y que se pueda activar a la vez que cualquier tipo de salto/jet pac. Diseñar cómo podría hacer funcionar esto de forma sencilla.
 

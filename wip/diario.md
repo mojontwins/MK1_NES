@@ -4084,3 +4084,4 @@ Y controlar el motor activo con la variable. Esta es fácil, voy a ello aunque n
 
 Hecho. Voy a probarlo teniendo un engine type diferente en cada uno de los niveles de este tester.
 
+Funciona. El port de Sir Ababol cada vez es más sencillo: ¡me estoy quitando una a una las necesidades de toqueteamiento tripil!
