@@ -12,15 +12,15 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
+#define MAP_W 					10		//
 #define MAP_H					3		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
 
-//#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				1
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				3
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
@@ -54,7 +54,7 @@
 
 // Some flexibility
 #define HOTSPOT_TYPE_OBJECT		1
-#define HOTSPOT_TYPE_KEYS		2
+//#define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
@@ -67,10 +67,10 @@
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
-#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
+//#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
 //#define MAP_FORMAT_RLE44				// RLE'd by rle44mapMK1. 16 tiles max.
 //#define MAP_FORMAT_RLE53_CHRROM		// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.
-//#define MAP_FORMAT_RLE44_CHRROM		// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
+#define MAP_FORMAT_RLE44_CHRROM			// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.
 
 //#define MAP_WITH_DECORATIONS			// Add decorations when use a 16 tiles mode.
 
@@ -123,11 +123,12 @@
 
 #define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-//#define PLAYER_BOUNCES
+#define PLAYER_BOUNCES
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				//     ... also, reenter screen on death
-#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
+	//#define DIE_AND_REENTER			//     ... also, reenter screen on death
+	#define DIE_AND_REINIT				//     ... or start the level over!
+//#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
 
 // Extra special tiles
@@ -166,6 +167,17 @@
 // Ladders, beh == 32
 
 //#define ENABLE_LADDERS
+
+// Special, "collectable" map tiles.
+// beh == 34
+
+#define ENABLE_TILE_GET
+#define PERSISTENT_TILE_GET
+
+// Trampolines. Needs PLAYER_VY_TRAMPOLINE
+// beh == 66
+
+#define ENABLE_TRAMPOLINES
 
 // Extra special stuff
 // -------------------
@@ -249,7 +261,7 @@
 // Enemy types and definitions
 // ---------------------------
 
-//#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
+#define ENEMS_IN_CHRROM						// Enems are stored somewhere in CHR-ROM
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
@@ -328,9 +340,9 @@
 
 // Monococos
 
-//#define ENABLE_MONOCOCOS
-//#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				56
+#define ENABLE_MONOCOCOS
+#define MONOCOCO_TYPE_A					// Comment for 4 cells monococo (appearing/disappearing & hidden)
+#define MONOCOCO_BASE_SPRID				33
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -471,12 +483,13 @@
 
 // Extra configuration for side view:
 
-//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
+#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 //#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
 //#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE
 												// 0xff = Nobody
+#define PLAYER_SPINS					// Spins on DOWN and JUMP and kills baddies
 
 // ============================================================================
 // III. Screen configuration
@@ -527,8 +540,9 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed
@@ -549,14 +563,16 @@
 #define PLAYER_VY_MK2_JUMP_INITIAL	208
 #define PLAYER_VY_MK2_JUMP_RELEASE	96
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
+#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 312
+#define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32	// For trampolines
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			128		// Max. horizontal speed
+#define PLAYER_VX_MAX			256		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				16		// Horizontal acceleration
+#define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_RX				16		// Horizontal friction
+#define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 1)
@@ -585,12 +601,15 @@
 	// Cell definitions for side view
 
 	#define CELL_FACING_RIGHT	0
-	#define CELL_FACING_LEFT	8
+	#define CELL_FACING_LEFT	10
 
 	#define CELL_IDLE			0
 	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		1
-	#define CELL_AIRBORNE		5
+	#define CELL_AIRBORNE		4
+
+	#define CELL_SPIN_CYCLE		5
+
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
 
@@ -600,6 +619,8 @@
 
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
+
+	#define CELL_HIT 			9
 
 	#define CELL_CLIMB_CYCLE	20
 	#define CELL_CLIMB_HALF		29
@@ -615,6 +636,7 @@
 #define SFX_TILE				1
 #define SFX_OBJECT				2
 #define SFX_USE					3
+#define SFX_TRAMPOLINE			3
 #define SFX_PHIT				4
 #define SFX_DUMMY1				5
 #define SFX_ENHIT 				6

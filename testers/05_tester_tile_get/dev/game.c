@@ -26,8 +26,9 @@
 #include "assets/precalcs.h"
 #include "assets/palettes.h"
 #include "assets/behs.h"
-#include "assets/map0.h"
-#include "assets/enems0.h"
+#include "assets/chr_rom_maps.h"
+#include "assets/enem_constants.h"
+#include "assets/enem_index.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
@@ -57,13 +58,16 @@ extern const unsigned char m_ingame [];
 
 #include "ram/bss.h"
 
+// Custom
+#include "my/ring.h"
+
 // *************
 // Main includes
 // *************
 
 #include "engine/prototypes.h"
-#include "engine/general.h"
 #include "engine/printer.h"
+#include "engine/general.h"
 #ifdef ENABLE_TEXT_BOX
 	#include "engine/textbox.h"
 #endif
@@ -129,6 +133,8 @@ void main(void) {
 			if (game_over) {
 				pres (palts0, scr_game_over);
 				break;
+			} else if (level_reset) {
+				// 
 			} else {
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;

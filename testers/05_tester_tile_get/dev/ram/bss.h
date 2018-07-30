@@ -37,6 +37,7 @@ unsigned char paused;                   // True if the game is paused.
 unsigned char win_level;                // If WIN_LEVEL_CUSTOM is defined, set to true to win the level.
 unsigned char game_over;                // True if the player lost the game.
 unsigned char warp_to_level;            // True if the player is jumping to a different level 
+unsigned char level_reset;              // True if the level should be reset.
 unsigned char flick_override;           // If set, code to flick screen is overriden for current frame
 
 // General player values, last frame copies
@@ -127,7 +128,8 @@ unsigned char okilled;                  // Player # of killed enems., last frame
 
 // Hotspots
 
-#ifdef HOTSPOTS_DYNAMIC                 // If HOTSPOTS_DYNAMIC is defined, hotspots are copied to RAM and may be modified
+#if defined (HOTSPOTS_DYNAMIC) || defined (ENEMS_IN_CHRROM)       
+                                        // If HOTSPOTS_DYNAMIC is defined, hotspots are copied to RAM and may be modified
                                         // Otherwise they are read from ROM when entering each screen.
     unsigned char hyx [MAP_SIZE];       // Hotspot position per screen (room), packed 0xYX
     unsigned char ht [MAP_SIZE];        // Hotspot type per screen (room)
@@ -333,6 +335,14 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_SHAKER
     unsigned char shaker_ct;            // If != 0, shake the screen & decrement.
+#endif
+
+// Collectible map tiles
+
+#ifdef ENABLE_TILE_GET
+    #ifdef PERSISTENT_TILE_GET
+        unsigned char tile_got [24];        // Buffer for current screen
+    #endif
 #endif
 
 #include "my/extra_vars.h"              // Custom extra variables

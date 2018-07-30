@@ -4,16 +4,29 @@ if [%1]==[justcompile] goto :justcompile
 
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2.png out=work\palts2.h label=palts2 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
-copy /b work\*.h assets\palettes.h > nul
+copy /b work\pal*.h assets\palettes.h > nul
 
 echo Exporting chr
 cd ..\gfx
-..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns0.spt out=..\dev\tileset0.chr silent
+..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns1.spt out=..\dev\tileset1.chr silent
 
 echo Exporting enems
 cd ..\enems
-..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
+..\..\..\src\utils\eneexp3.exe level00.ene ..\dev\work\enems00.h 00 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level01.ene ..\dev\work\enems01.h 01 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level02.ene ..\dev\work\enems02.h 02 1 gencounter bin
+
+..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\work\enems1.h 1 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\work\enems2.h 2 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level3.ene ..\dev\work\enems3.h 3 1 gencounter bin
+cd ..\dev
+copy /b work\enems*.h assets\enem_constants.h > nul
+..\..\..\src\utils\binpaster.exe index=assets\enem_index.h out=work\enems.bin files=work\enems00.h.bin,work\enems01.h.bin,work\enems02.h.bin
 
 echo Compiling enembehs
 cd ..\script
@@ -21,7 +34,12 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 3 3 15 0 1 scrsizes
+..\..\..\src\utils\rle44mapchrrom.exe in=maplist.txt bin=..\dev\work\mapchr.bin out=..\dev\assets\chr_rom_maps.h chr=2
+cd ..\dev
+..\..\..\src\utils\fillto.exe work\mapchr.bin.3 4096
+..\..\..\src\utils\fillto.exe work\enems.bin 4096
+copy work\mapchr.bin.2 tileset2.chr
+copy /b work\mapchr.bin.3 + work\enems.bin tileset3.chr
 
 echo Exporting music and sound
 cd ..\dev
@@ -43,10 +61,10 @@ cd ..\script
 cd ..\dev
 
 :noscript
-cc65 -Oi game.c --add-source
-ca65 crt0.s -o crt0.o -D CNROM=0
+cc65 -Oi game.c --add-source -D CNROM
+ca65 crt0.s -o crt0.o -D CNROM=1
 ca65 game.s
-ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 del *.o > nul
 del game.s > nul

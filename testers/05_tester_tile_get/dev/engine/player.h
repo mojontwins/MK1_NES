@@ -81,6 +81,14 @@ void player_init (void) {
 			vertical_engine_type = ENGINE_TYPE_SWIM;
 		#endif
 	#endif
+
+	#ifdef ENABLE_TRAMPOLINES
+		ptrampoline = 0;
+	#endif
+
+	#ifdef PLAYER_SPINS	
+		pspin = 0;
+	#endif	
 }
 
 void player_render (void) {
@@ -98,6 +106,9 @@ void player_to_pixels (void) {
 }
 
 void player_kill (void) {
+	player_render ();
+	update_cycle ();
+
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
 	
@@ -116,14 +127,19 @@ void player_kill (void) {
 	#endif
 
 	#ifdef DIE_AND_RESPAWN
-		px = px_safe; 
-		py = py_safe; 
-		player_to_pixels ();
-		n_pant = n_pant_safe;
 		music_pause (1);
 		delay (60);
-		player_stop ();
-		music_pause (0);
+		
+		#ifdef DIE_AND_REINIT
+			level_reset = 1;
+		#else
+			px = px_safe; 
+			py = py_safe; 
+			player_to_pixels ();
+			n_pant = n_pant_safe;		
+			player_stop ();
+			music_pause (0);
+		#endif
 
 		// May be necessary to find a proper cell later on
 		#if defined (ENABLE_BREAKABLE)
@@ -222,6 +238,15 @@ void player_move (void) {
 				if (QTILE (cx1, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx1; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
 				if (QTILE (cx2, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx2; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
 			}
+		}
+	#endif
+
+	#ifdef ENABLE_TRAMPOLINES
+		if (at1 == 66 || at2 == 66) {
+			a_button = 1; ptrampoline = 1;
+			#ifdef PLAYER_SPINS	
+				pspin = 0;
+			#endif
 		}
 	#endif
 
@@ -476,10 +501,23 @@ void player_move (void) {
 						if (!(pgotten || hitv || pnotsafe)) {
 							player_register_safe_spot ();
 						}
-					#endif					
+					#endif
+
+					#ifdef PLAYER_SPINS
+						#ifdef ENABLE_TRAMPOLINES
+							if (!ptrampoline)
+						#endif
+						pspin = 1;
+					#endif
 				}
 
 				if (pj) {
+					#ifdef ENABLE_TRAMPOLINES
+						if (ptrampoline) {
+							++ pctj; if (pctj == PLAYER_VY_MK2_TRAMPOLINE_A_STEPS)
+							{ pj = 0; ptrampoline = 0; }
+						} else 
+					#endif
 					if (pad0 & PAD_A) {
 						++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
 					} else {
@@ -506,11 +544,25 @@ void player_move (void) {
 							player_register_safe_spot ();
 						}
 					#endif	
+
+					#ifdef PLAYER_SPINS
+						#ifdef ENABLE_TRAMPOLINES
+							if (!ptrampoline)
+						#endif
+						pspin = 1;
+					#endif
 				}
 				
+				#ifdef ENABLE_TRAMPOLINES
+				if (pj && ptrampoline) {
+
+					++ pctj; if (pctj == 32) pj = 0;
+					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+				} else
+				#endif
 				if (pad0 & PAD_A) {
 					if (pj) {
-						if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+						if (pctj < PLAYER_AY_JUMP) pvy -= (32 - (pctj));
 						if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
 						++ pctj; if (pctj == 16) pj = 0;	
 					}
@@ -549,6 +601,14 @@ void player_move (void) {
 			
 			if (pad0 & PAD_DOWN) {
 				if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+			}
+		}
+	#endif
+
+	#ifdef PLAYER_SPINS
+		if (pad0 & PAD_DOWN) {
+			if (ppossee && ABS (pvx) > PLAYER_VX_MIN) {
+				pspin = 1; sfx_play (SFX_DUMMY2, 0);
 			}
 		}
 	#endif
@@ -692,6 +752,10 @@ void player_move (void) {
 		#endif
 	#endif
 
+	#ifdef PLAYER_SPINS
+		if (!pvx && (ppossee || pgotten) && !pj) pspin = 0;
+	#endif
+
 	// *************
 	// Killing tiles
 	// *************
@@ -712,7 +776,18 @@ void player_move (void) {
 		if ((at1 & 1) || (at2 & 1)) phit = 1;
 	#endif
 
-	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
+	if (pstate == EST_NORMAL) if (phit) { 
+		player_to_pixels ();
+		en_sg_2 = 1;
+
+		#include "my/on_player_spike.h"
+
+		if (en_sg_2)
+			pkill = 1; 
+		#ifdef PLAYER_SPINS
+			pspin = 0;
+		#endif
+	}
 
 	// ***********************
 	// Center point detections

@@ -830,26 +830,51 @@ void enems_move (void) {
 				pstate == EST_NORMAL &&
 				collide ()
 			) {
-				#ifdef PLAYER_BOUNCES
-					pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-					pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+				// en_sg_1 => kill enemy
+				#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
+					en_sg_1 = 1;
+				#else
+					en_sg_1 = 0;
 				#endif
-
-				#if defined ENEMIES_SUFFER_ON_PLAYER_COLLISION
-					enems_hit ();
-				#endif
+				
+				// en_sg_2 => kill player.
+				en_sg_2 = 1;
 
 				#ifdef ENABLE_RESONATORS
+					// If resonators are on and not a saw, don't kill player
 					if (
-						res_on == 0 
+						res_on == 1
 						#ifdef ENABLE_SAW
-						|| _en_t == 8
+						&& _en_t != 8
 						#endif
-					)
+					) en_sg_2 = 0;
 				#endif
-				{
-					pkill = 1;
-					touched = 1;
+
+				#ifdef PLAYER_SPINS
+					// If spinning and not a saw or a steady shooter, kill enemy, don't kill player
+					if (pspin
+						#ifndef STEADY_SHOOTER_KILLABLE
+							&& _en_t != 5
+						#endif	
+						#ifdef ENABLE_SAW
+							&& _en_t != 8
+						#endif						
+					) {
+						en_sg_2 = 0;
+						en_sg_1 = 1;
+						pvy = -pvy;
+					}
+				#endif				
+
+				#include "my/on_player_hit.h"
+
+				if (en_sg_1) enems_hit ();
+				if (en_sg_2) { 
+					pkill = 1; touched = 1; 
+					#ifdef PLAYER_BOUNCES
+						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+					#endif	
 				}
 			}
 

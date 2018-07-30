@@ -3,3 +3,12 @@
 
 // extra_vars.h
 // If your customs need extra variables (in BSS) define them here
+
+signed int ring_x, ring_y;
+signed int ring_vx, ring_vy;
+unsigned char ring_timer;
+unsigned char prings, oprings;
+
+const unsigned char *const spr_ring [] = {
+	ssit_00, ssit_04, ssit_05, ssit_06
+};

@@ -1,0 +1,15 @@
+# Dummy placeholder for the empty project
+
+# Bank 0: Background
+
+# Font
+OPEN font.png
+PALS palts0.png
+CHARSET 0, 0, 32, 2
+
+MAPFILE ..\dev\assets\tiledata2.h
+
+FILL 4096
+RESETPOOL
+
+FILL 8192

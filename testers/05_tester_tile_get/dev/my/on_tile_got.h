@@ -5,3 +5,5 @@
 // You may add checks and set variables and stuff.
 
 // The value of the tile just got is QTILE (cx1, cy1)
+
+prings ++;

@@ -4210,6 +4210,13 @@ Creo que lo he hecho, pero no tengo forma de probarlo. Portaré Sonic Bad como `
 
 En vez de Sonic Bad puedo hacer Pequeña Espina en chino y reírnos. Hay que hacer una bola rosa.
 
-~~
+20180730
+========
 
+Estoy intentando ampliar AGNES para que hacer Sonic Mal sea posible sólo con inyección de código y cosas custom. Por lo pronto he metido unos cuantos puntos de inyección más y no sé si ya me estaré colando.
 
+Ahora mismo no está fino / no está hecho / tengo que resolver:
+
+* Que al morir vuelva al principio de la fase, reiniciándolo todo. Tengo que ver cómo podría hacerlo con lo que hay / modificando lo mínimo (siempre de forma "legal").
+* Que recoja la moneda.
+* Un hud minimal, que me aclare con los valores.

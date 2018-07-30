@@ -83,6 +83,10 @@ signed char _en_mx, _en_my;
 unsigned char _en_ct, _en_facing;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
+// Signals, all purpose, for enemies
+
+unsigned char en_sg_1, en_sg_2;
+
 // Main player
 
 unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
@@ -117,6 +121,14 @@ signed int pgtmx, pgtmy;                // X, Y components of velocity in "playe
     unsigned char ponladderctr;         // Counter used for animation when player is on ladders in my/player_frame_selector.h
 #endif
 
+#ifdef ENABLE_TRAMPOLINES
+    unsigned char ptrampoline;          // "Player got propelled by a trampoline" flag
+#endif
+
+#ifdef PLAYER_SPINS 
+    unsigned char pspin;                // "Player is spinning" flag
+#endif  
+
 #ifdef PLAYER_TOP_DOWN
     unsigned char pfacingv, pfacingh;   // Player facing variables in each axis for top-down games
 #endif
@@ -127,9 +139,7 @@ unsigned char hitv, hith;               // True if the player collided with a ki
     unsigned char pfloating;            // Player is floating (for example, when on a propeller)
 #endif
 
-
 unsigned char prx_old, pry_old;
-
 
 unsigned char pkill;                    // Set to 1 to kill player
 unsigned char pice;                     // Player is walking on ice

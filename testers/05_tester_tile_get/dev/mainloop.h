@@ -97,8 +97,8 @@ void game_init (void) {
 
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Clear tile_got persistence
-		vram_adr (0x2400);
-		vram_fill (0, MAX_PANTS*24);
+		vram_adr (0x2c00);
+		vram_fill (0, MAP_SIZE*24);
 	#endif
 
 	half_life = 0;
@@ -114,16 +114,18 @@ void game_init (void) {
 }
 
 void prepare_scr (void) {
-	if (!ft) {
+	if (!ft) {		
 		fade_out (); 
+		ppu_off ();
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 			// Update tile_got persistence
-			rda = n_pant << 3;
-			vram_write (tile_got, 0x2400 + (rda << 1) + rda, 24);
+			rda = on_pant << 3;
+			vram_write (tile_got, 0x2c00 + (rda << 1) + rda, 24);
 		#endif
-	}else ft = 0;
-
-	ppu_off ();
+	} else {
+		ft = 0;
+		ppu_off ();
+	}
 
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
@@ -160,7 +162,7 @@ void prepare_scr (void) {
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Read tile_got persistence
 		rda = n_pant << 3;
-		vram_read (tile_got, 0x2400 + (rda << 1) + rda, 24);
+		vram_read (tile_got, 0x2c00 + (rda << 1) + rda, 24);
 	#endif
 
 		draw_scr ();
@@ -278,14 +280,14 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
-	warp_to_level = 0; oam_index = 0; ticker = 50;
+	level_reset = warp_to_level = 0; oam_index = 0; ticker = 50;
 	
 	while (1) {
 
 		// Finish him
 
 		if (pkill) player_kill ();
-		if (game_over) break;			
+		if (game_over || level_reset) break;			
 
 		// Flick the screen
 
@@ -332,10 +334,7 @@ void game_loop (void) {
 
 		// Finish frame and wait for NMI
 
-		oam_hide_rest (oam_index);
-		ppu_waitnmi ();
-		clear_update_list ();
-		oam_index = 4;
+		update_cycle ();
 
 		// Poll pads
 
@@ -473,6 +472,8 @@ void game_loop (void) {
 			#ifdef ENABLE_TILE_CHAC_CHAC
 				chac_chacs_do ();
 			#endif
+
+			#include "my/extra_routines.h"
 		}
 
 		// Cheat to skip level
