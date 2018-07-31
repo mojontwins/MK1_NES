@@ -827,7 +827,6 @@ void enems_move (void) {
 					_en_t != 5 &&
 				#endif
 				touched == 0 &&
-				pflickering == 0 &&
 				collide ()
 			) {
 				// en_sg_1 => kill enemy
@@ -838,7 +837,7 @@ void enems_move (void) {
 				#endif
 				
 				// en_sg_2 => kill player.
-				en_sg_2 = 1;
+				en_sg_2 = (pflickering == 0);
 
 				#ifdef ENABLE_RESONATORS
 					// If resonators are on and not a saw, don't kill player

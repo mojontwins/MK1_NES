@@ -11,20 +11,23 @@
 // - Player will suffer (hit registered, not spinning): en_sg_2
 // - Player has rings (prings)
 // Then create animated ring, and simulate hit but don't hurt player!
-if (en_sg_2 && prings) {
 
-	// Create animated ring:
-	ring_create ();
-	prings = 0;
+if (en_sg_2) {
+	if (prings) {
 
-	// Simulate hit
-	pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-	pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
-	touched = 1; 
-	sfx_play (SFX_PHIT, 0);
-	pbouncing = 16;
-	pflickering = 100;
+		// Create animated ring:
+		ring_create ();
+		prings = 0;
 
-	// But don't hurt player!
-	en_sg_2 = 0;
-} else psprid = pfacing + CELL_HIT;
+		// Simulate hit
+		pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+		pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+		touched = 1; 
+		sfx_play (SFX_PHIT, 0);
+		pbouncing = 16;
+		pflickering = 100;
+
+		// But don't hurt player!
+		en_sg_2 = 0;
+	} else psprid = pfacing + CELL_HIT;
+}

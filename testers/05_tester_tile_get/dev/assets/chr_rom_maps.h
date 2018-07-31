@@ -104,29 +104,29 @@ const unsigned int map_02_scr_offsets [] = {
 const unsigned int map_03_scr_offsets [] = {
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x000C, 
-	MAP_03_BASE + 0x0019, MAP_03_BASE + 0x0034, 
-	MAP_03_BASE + 0x006A, MAP_03_BASE + 0x009F, 
+	MAP_03_BASE + 0x001C, MAP_03_BASE + 0x0035, 
+	MAP_03_BASE + 0x006B, MAP_03_BASE + 0x00A0, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x00AC, MAP_03_BASE + 0x0000, 
+	MAP_03_BASE + 0x00AD, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00BF, 
-	MAP_03_BASE + 0x00D9, MAP_03_BASE + 0x0103, 
-	MAP_03_BASE + 0x015A, MAP_03_BASE + 0x01B7, 
-	MAP_03_BASE + 0x01E4, MAP_03_BASE + 0x0212, 
-	MAP_03_BASE + 0x0240, MAP_03_BASE + 0x0275, 
-	MAP_03_BASE + 0x02A1, MAP_03_BASE + 0x02B9, 
-	MAP_03_BASE + 0x02ED, MAP_03_BASE + 0x031C, 
-	MAP_03_BASE + 0x0347, MAP_03_BASE + 0x036F
+	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00C0, 
+	MAP_03_BASE + 0x00DA, MAP_03_BASE + 0x0105, 
+	MAP_03_BASE + 0x015C, MAP_03_BASE + 0x01BC, 
+	MAP_03_BASE + 0x01E8, MAP_03_BASE + 0x0216, 
+	MAP_03_BASE + 0x0244, MAP_03_BASE + 0x0279, 
+	MAP_03_BASE + 0x02A5, MAP_03_BASE + 0x02BD, 
+	MAP_03_BASE + 0x02F1, MAP_03_BASE + 0x0320, 
+	MAP_03_BASE + 0x034B, MAP_03_BASE + 0x0373
 };
 
-// Total screens size in bytes is 914
+// Total screens size in bytes is 918
 
 // Map # 4 read from level11.map (25x1)
 
 // Definitions
 
 #define MAP_04_CHRROM    2
-#define MAP_04_BASE      0x0B4B
+#define MAP_04_BASE      0x0B4F
 #define MAP_04_W         25
 #define MAP_04_H         1
 #define MAP_04_MAXPANTS  25
@@ -157,7 +157,7 @@ const unsigned int map_04_scr_offsets [] = {
 // Definitions
 
 #define MAP_05_CHRROM    2
-#define MAP_05_BASE      0x107D
+#define MAP_05_BASE      0x1081
 #define MAP_05_W         1
 #define MAP_05_H         20
 #define MAP_05_MAXPANTS  20
@@ -185,7 +185,7 @@ const unsigned int map_05_scr_offsets [] = {
 // Definitions
 
 #define MAP_06_CHRROM    2
-#define MAP_06_BASE      0x15C1
+#define MAP_06_BASE      0x15C5
 #define MAP_06_W         4
 #define MAP_06_H         5
 #define MAP_06_MAXPANTS  20
