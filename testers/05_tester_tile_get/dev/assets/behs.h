@@ -26,6 +26,11 @@ const unsigned char behs0 [] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
+const unsigned char behs1 [] = {
+	0, 0, 4, 4,66,20, 0, 0, 0, 8, 4,34, 0, 4, 0, 1,
+	0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+
 // 68 = 4 + 64, slippery platform
 // 24 = 8 + 16, breakable obstacle
 // 40 = 8 + 32, conveyor platform, pushes left.

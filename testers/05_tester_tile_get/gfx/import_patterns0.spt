@@ -19,7 +19,7 @@ MAPPED 0, 0, 2, 2, 16, 2, 18
 OPEN ts1.png
 PALS palts1.png
 LABEL ts1
-MAPPED 0, 0, 2, 2, 16, 2, 18
+MAPPED 0, 0, 2, 2, 16, 2, 19
 
 # Tileset 2
 OPEN ts2.png
@@ -42,6 +42,9 @@ OPEN ss.png
 PALS palss0.png
 MAPFILE ..\dev\assets\spritedata.h
 
+# Bits
+CHARSET 14, 0, 2, 1
+
 # Player sprites
 LABEL sspl
 METASPRITESET 0, 0, 2, 3, 4, 1, -4, -8 FLIPPED
@@ -59,6 +62,14 @@ METASPRITESET 8, 5, 2, 3, 2, 1, 0, -8 FLIPPED
 
 LABEL sstrunk
 METASPRITESET 10, 9, 2, 2, 3, 1, 0, 0
+
+LABEL sspez
+METASPRITESET 8, 16, 2, 2, 2, 1, 0, 0
+
+# Boss
+
+LABEL ssboss
+METASPRITESET 0, 16, 4, 4, 2, 1, -8, -12 FLIPPED
 
 # Platforms
 LABEL ssplat

@@ -2,9 +2,9 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
-#define GAME_AREA_MIDDLE
+//#define GAME_AREA_MIDDLE
 //#define GAME_AREA_BOTTOM
-//#define GAME_AREA_CUSTOM
+#define GAME_AREA_CUSTOM
 
 // ============================================================================
 // I. General configuration
@@ -62,7 +62,7 @@
 //#define HOTSPOT_TYPE_RESONATOR 	4		// An example of custom hotspot
 //#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
-//#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
+#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
@@ -121,20 +121,20 @@
 
 // General stuff
 
-#define DEACTIVATE_KEYS					// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-#define PLAYER_BOUNCES
+#define DEACTIVATE_KEYS						// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+#define PLAYER_BOUNCES					16
 //#define DOUBLE_BOUNCE
-#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
-	//#define DIE_AND_REENTER			//     ... also, reenter screen on death
-	#define DIE_AND_REINIT				//     ... or start the level over!
-//#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+#define DIE_AND_RESPAWN						// If defined, dying = respawn on latest safe.
+	//#define DIE_AND_REENTER				//     ... also, reenter screen on death
+	#define DIE_AND_REINIT					//     ... or start the level over!
+#define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
+//#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
+#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
 
 // Quicksands, beh == 2.
 // For player movement values, see section 4
@@ -143,14 +143,14 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
-#define BREAKABLE_ANIM					// Show explosion when breaking
-#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
-//#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
+//#define ENABLE_BREAKABLE					// Breakable walls
+#define BREAKABLE_LIFE					2	// Amount of hits to break wall
+#define BREAKABLE_ANIM						// Show explosion when breaking
+#define BREAKABLE_MAX 					4	// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES			8	// Frames to show explosion
+#define BREAKABLE_ERASE					0	// Tile to erase broken tiles
+#define BREAKABLE_BREAKING				8	// Tile to display while breaking
+//#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
@@ -264,6 +264,9 @@
 #define ENEMS_IN_CHRROM						// Enems are stored somewhere in CHR-ROM
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+#define NEEDS_LIFE_GAUGE_LOGIC				// This is activated automaticly when needed, but you can 
+											// do it yourself if you need it to do customs...
+
 //#define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
@@ -288,12 +291,12 @@
 // Fanties / Homing fanties
 
 //#define ENABLE_FANTY
-//#define ENABLE_HOMING_FANTY
+#define ENABLE_HOMING_FANTY
 
-#define FANTY_BASE_SPRID				32
+#define FANTY_BASE_SPRID				48
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
-#define FANTY_KILLED_BY_TILE
+//#define FANTY_KILLED_BY_TILE
 //#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
 #define FANTY_A 						4
@@ -317,8 +320,8 @@
 
 // Pezons
 
-//#define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID				40
+#define ENABLE_PEZONS
+#define PEZONS_BASE_SPRID				57
 #define PEZON_WAIT						50
 #define PEZON_THRUST					384
 #define PEZON_VY_FALLING_MAX			256
@@ -374,9 +377,9 @@
 
 // Compiled enemies
 
-//#define ENABLE_COMPILED_ENEMS
+#define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
-#define COMPILED_ENEMS_BASE_SPRID		48
+#define COMPILED_ENEMS_BASE_SPRID		41
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
@@ -497,8 +500,8 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-//#define LIFE_X				7		//
-//#define LIFE_Y				3		// Life gauge counter character coordinates
+#define LIFE_X					6		//
+#define LIFE_Y					4		// Life gauge counter character coordinates
 
 //#define OBJECTS_X				18		//
 //#define OBJECTS_Y				3		// Objects counter character coordinates
@@ -577,7 +580,7 @@
 
 #define PLAYER_VX_MIN (PLAYER_AX << 1)
 
-#define PLAYER_V_REBOUND		224
+#define PLAYER_V_REBOUND		288
 
 // Animation cells 
 
@@ -651,3 +654,5 @@
 #define SFX_STEPON				15
 #define SFX_FLOAT				16
 #define SFX_BREAKB				17
+#define SFX_RING 				18
+#define SFX_FANFARE				19

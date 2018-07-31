@@ -58,9 +58,6 @@ extern const unsigned char m_ingame [];
 
 #include "ram/bss.h"
 
-// Custom
-#include "my/ring.h"
-
 // *************
 // Main includes
 // *************
@@ -71,6 +68,7 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_TEXT_BOX
 	#include "engine/textbox.h"
 #endif
+#include "my/extra_modules.h"
 #ifdef ENABLE_BREAKABLE
 	#include "engine/breakable.h"
 #endif
@@ -123,22 +121,43 @@ void main(void) {
 		#endif
 		plife = PLAYER_LIFE;
 
+		// Custom for this game
+		level_world = level_act = 0;	
+		pemmeralds = 0;
+		//
+
+//DEBUG
+level = 3; level_world = 1; level_act = 0; pemmeralds = 1;
+
 		// Game loop
 
 		while (1) {
 			scroll (0, SCROLL_Y);
+
+			pres (paltstitle, scr_level);
 			game_init (); 
 			game_loop ();
 
 			if (game_over) {
 				pres (palts0, scr_game_over);
 				break;
-			} else if (level_reset) {
-				// 
-			} else {
+			} 
+			#ifdef DIE_AND_REINIT
+				else if (level_reset) {
+					// 
+				} 
+			#endif
+			else {
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;
+
+					// Custom for this game
 					level ++;
+					level_act ++; if (level_act == 3) {
+						level_world ++; level_act = 0;
+					}
+					//
+
 					if (level == MAX_LEVELS) 
 				#endif
 				{

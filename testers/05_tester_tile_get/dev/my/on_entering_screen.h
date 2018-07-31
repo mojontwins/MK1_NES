@@ -5,3 +5,8 @@
 // Background is rendered, everything initialized.
 // Screen is ON.
 
+// Turn off ring if it is on
+ring_timer = 0;
+
+// Make bosses more resistant
+gpit = 3; while (gpit --) if (en_t [gpit] == 0x14) en_life [gpit] = 8;

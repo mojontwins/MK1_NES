@@ -6,3 +6,4 @@
 void propellers_add (void);
 void shines_add (void);
 void chac_chacs_add (void);
+void player_render (void);

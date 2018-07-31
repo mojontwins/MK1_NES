@@ -246,8 +246,8 @@ const unsigned char monococo_state_times [] = {
 
 Cocos frames are (order may be off, but helps with saving bytes)
 
-(RIGHT)  `FRAME_A`, `FRAME_B`, (LEFT)   `FRAME_A`, `FRAME_B`,
-[(RIGHT) `APPEARING`, `HIDDEN`, (LEFT) `APPEARING`, `HIDDEN`]
+(RIGHT)  `FRAME_A`, `FRAME_B`, 0, 0, (LEFT)   `FRAME_A`, `FRAME_B`, 0, 0,
+[(RIGHT) `APPEARING`, `HIDDEN`, 0, 0, (LEFT) `APPEARING`, `HIDDEN`], 0, 0,
 
 Compiled enemies
 ----------------

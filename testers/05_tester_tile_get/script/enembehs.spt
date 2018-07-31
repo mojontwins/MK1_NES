@@ -1,32 +1,20 @@
 # Compiled enems (sample)
+# Max. values is 8, that's why I have to break some displacements
 
-# Enemy type 0 makes a square firing on cycle completed
-
+# Boss 0: roam and not much else.
 BEGIN beh0
 	:START
-	IDLE 4
-	RIGHT 2
-	IDLE 1
-	DOWN 2
-	IDLE 1
-	LEFT 2
-	IDLE 1
-	UP 2
-	IDLE 1
+	LEFT 7
+	LEFT 6
+	RIGHT 7
+	RIGHT 6
 	FIRE
-	RETURN START
-END
-
-# Enemy type 1 makes a diamond firing in the last step.
-
-BEGIN beh1
-	:START
+	LEFT 7
+	LEFT 6
 	IDLE 2
-	DOWN RIGHT 2
-	DOWN LEFT 2
-	UP LEFT 2
-	UP RIGHT 2
-	IDLE 2
-	FIRE
+	DOWN 6
+	RIGHT 7
+	RIGHT 6
+	UP 6
 	RETURN START
 END

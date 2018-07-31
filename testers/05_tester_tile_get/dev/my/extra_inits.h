@@ -5,4 +5,3 @@
 // Extra stuff you have to initialize before the level starts
 
 prings = 0; oprings = 0xff;
-ring_timer = 0;

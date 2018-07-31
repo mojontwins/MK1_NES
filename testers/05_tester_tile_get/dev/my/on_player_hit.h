@@ -22,9 +22,9 @@ if (en_sg_2 && prings) {
 	pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
 	touched = 1; 
 	sfx_play (SFX_PHIT, 0);
-	pstate = EST_REBOUND;
-	pctstate = 16;	
+	pbouncing = 16;
+	pflickering = 100;
 
 	// But don't hurt player!
 	en_sg_2 = 0;
-}
+} else psprid = pfacing + CELL_HIT;

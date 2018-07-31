@@ -90,8 +90,8 @@ unsigned char en_sg_1, en_sg_2;
 // Main player
 
 unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
-signed int px, py;                      // Player X, Y coordinates, fixed point 12.6
-signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 12.6
+signed int px, py;                      // Player X, Y coordinates, fixed point 10.6
+signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
 unsigned char prx, pry;                 // Player pixel coordinates, calculated from px, py.
 unsigned char pfacing;                  // Player facing left, right
 unsigned char pfr;                      // Player frame
@@ -107,7 +107,9 @@ unsigned char pj;                       // "Player is jumping" flag
 unsigned char pctj;                     // "Player is jumping" counter
 unsigned char pgotten;                  // "Player is on moving platform or similiar" flag
 unsigned char ppossee;                  // "Player is on walkable scenery" flag
-unsigned char pstate, pctstate;         // Player state and state counter
+unsigned char oppossee;                 // Same, but prev. frame
+unsigned char pflickering;              // "Player is flickering", also a frame counter.
+unsigned char pbouncing;                // "Player is bouncing", also a frame counter.
 unsigned char phit;                     // "Player was hit by killing tile" flag
 signed int pgtmx, pgtmy;                // X, Y components of velocity in "player is being moved by external entity" conditions
 
@@ -152,7 +154,7 @@ unsigned char plife;                    // Player life gauge
 #endif
 unsigned char pobjs;                    // Player # of collected (collectible) items
 unsigned char pammo;                    // Player ammo
-#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (ENEMS_MAY_DIE)
     unsigned char pkilled;              // Player # of killed enemies
 #endif
 

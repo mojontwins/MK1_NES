@@ -827,7 +827,7 @@ void enems_move (void) {
 					_en_t != 5 &&
 				#endif
 				touched == 0 &&
-				pstate == EST_NORMAL &&
+				pflickering == 0 &&
 				collide ()
 			) {
 				// en_sg_1 => kill enemy
@@ -863,12 +863,15 @@ void enems_move (void) {
 						en_sg_2 = 0;
 						en_sg_1 = 1;
 						pvy = -pvy;
+						sfx_play (SFX_STEPON, 1);
 					}
 				#endif				
 
 				#include "my/on_player_hit.h"
 
-				if (en_sg_1) enems_hit ();
+				#ifdef ENEMS_MAY_DIE
+					if (en_sg_1) enems_hit ();
+				#endif
 				if (en_sg_2) { 
 					pkill = 1; touched = 1; 
 					#ifdef PLAYER_BOUNCES

@@ -97,7 +97,7 @@ void game_init (void) {
 
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Clear tile_got persistence
-		vram_adr (0x2c00);
+		vram_adr (0x2c20);
 		vram_fill (0, MAP_SIZE*24);
 	#endif
 
@@ -120,7 +120,7 @@ void prepare_scr (void) {
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 			// Update tile_got persistence
 			rda = on_pant << 3;
-			vram_write (tile_got, 0x2c00 + (rda << 1) + rda, 24);
+			vram_write (tile_got, 0x2c20 + (rda << 1) + rda, 24);
 		#endif
 	} else {
 		ft = 0;
@@ -162,7 +162,7 @@ void prepare_scr (void) {
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Read tile_got persistence
 		rda = n_pant << 3;
-		vram_read (tile_got, 0x2c00 + (rda << 1) + rda, 24);
+		vram_read (tile_got, 0x2c20 + (rda << 1) + rda, 24);
 	#endif
 
 		draw_scr ();
@@ -229,8 +229,8 @@ void prepare_scr (void) {
 	#endif	
 
 	player_move ();
-	player_render ();
 	enems_move ();
+	player_render ();
 	if (hrt) hotspots_paint ();
 	
 	#ifdef ENABLE_INTERACTIVES	
@@ -297,27 +297,14 @@ void game_loop (void) {
 		
 		// Change screen ?
 
-		if (on_pant != n_pant && !warp_to_level) {
+		if (on_pant != n_pant) {
 			prepare_scr ();
 			on_pant = n_pant;
 		}
 
 		// Relocate player if spawned on a broken tile
 
-		#if defined (ENABLE_BREAKABLE)
-		if (pmayneedrelocation) {
-			pmayneedrelocation = 0;
-			gpit = 16;
-			while (gpit --) {
-				cx1 = prx >> 4; cx2 = (prx + 7) >> 4;
-				cy1 = cy2 = (pry + 15) >> 4;
-				cm_two_points ();
-				if ((at1 & 8) == 0 && (at2 & 8) == 0) break;
-				prx += 16;	// Try next cell
-			}
-			px = prx << FIXBITS;
-		}
-		#endif
+		#include "mainloop/relocate_player.h"
 
 		// Update hud
 
@@ -362,31 +349,7 @@ void game_loop (void) {
 
 			// Win level condition
 
-			if (
-			#if defined (WIN_LEVEL_CUSTOM)
-				win_level
-			#elif defined (ACTIVATE_SCRIPTING)
-				script_result == 1
-			#elif defined (PLAYER_MAX_OBJECTS)
-				pobjs == PLAYER_MAX_OBJECTS
-			#elif defined (SCR_END)
-				(
-					n_pant == SCR_END && 
-					((prx + 8) >> 4) == PLAYER_END_X &&
-					((pry + 8) >> 4) == PLAYER_END_Y
-				) 
-			#endif
-			) {
-				music_stop ();
-				delay (50);
-				break;
-			}
-
-			// Warp to level
-
-			if (warp_to_level) {
-				music_stop (); break;
-			}
+			#include "mainloop/win_level_condition.h"
 
 			// Update propellers
 
@@ -408,7 +371,6 @@ void game_loop (void) {
 
 			if (!warp_to_level) {
 				player_move ();
-				player_render ();
 			}
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
@@ -432,6 +394,16 @@ void game_loop (void) {
 			// Update enemies
 		
 			enems_move ();
+
+			// Paint player
+
+			player_render ();
+
+			// Warp to level
+
+			if (warp_to_level) {
+				update_cycle (); music_stop (); break;
+			}
 
 			// Do resonators
 

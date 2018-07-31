@@ -64,7 +64,7 @@ Sub usage
 	Print ""
 	Print "list file format: Each line must look like this:"
 	Print ""
-	Print "filename.map,w,h,l0[-...][,fixmappy]"
+	Print "filename.map,w,h,l0[-...][,fixmappy][,nodecos][,genempty]"
 	Print ""
 	Print "Where filename.map is the map filename, and w and h are each map's size"
 	Print "lX are lock tile #s, '-' separated."
@@ -83,7 +83,7 @@ Dim As uByte scrMaps (127)
 Dim As String mapFile
 Dim As Integer tlocks (31), tlocksIndex
 DIm As String tlocksString, tokens (10), linea
-Dim As Integer shows, nodecos
+Dim As Integer shows, nodecos, genempty
 Dim As String fileName
 
 ' decos
@@ -135,6 +135,7 @@ While Not Eof (fListIn)
 	'fixmappy = (tokens (4) = "fixmappy")
 	fixmappy = parserFindTokenInTokens ("fixmappy", tokens (), "lcase")
 	nodecos = parserFindTokenInTokens ("nodecos", tokens (), "lcase")
+	genempty = parserFindTokenInTokens ("genempty", tokens (), "lcase")
 	
 	parseCoordinatesStringCustom tlocksString, "-", coords ()
 	tlocksIndex = 0
@@ -280,7 +281,7 @@ While Not Eof (fListIn)
 		realPant = nPant
 
 		' Detect empty screen
-		If screensum = 0 Then 
+		If screensum = 0 And Not genempty Then 
 			realPant = 255: cMapI = 0
 		Else
 			' Search for repeated screens

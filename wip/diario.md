@@ -4217,6 +4217,26 @@ Estoy intentando ampliar AGNES para que hacer Sonic Mal sea posible sólo con in
 
 Ahora mismo no está fino / no está hecho / tengo que resolver:
 
-* Que al morir vuelva al principio de la fase, reiniciándolo todo. Tengo que ver cómo podría hacerlo con lo que hay / modificando lo mínimo (siempre de forma "legal").
-* Que recoja la moneda.
-* Un hud minimal, que me aclare con los valores.
+[X] Que al morir vuelva al principio de la fase, reiniciándolo todo. Tengo que ver cómo podría hacerlo con lo que hay / modificando lo mínimo (siempre de forma "legal"). -> He añadido una nueva configuración para que el motor soporte esto de forma nativa: `DIE_AND_RESPAWN -> DIE_AND_REINIT`.
+[ ] Que recoja la moneda.
+[ ] Un hud minimal, que me aclare con los valores.
+
+20180731
+========
+
+Creo que debería emplear cierto tiempo en revisar `mainloop.h`, hacer un esquema de llamadas, qué condiciones cambian en cada una posiblemente, y diseñar bien el orden de las cosas que se hace, porque creo que lo estoy embarrando demasiado y cada vez tengo más miedo de que los juegos anteriores dejen de funcionar.
+
+Pero antes voy a terminar las tareas que me quedan por marcar que son sencillas.
+
+~~
+
+He empezado el postmortem. El primer nivel va bastante fino pero necesito hacer que el motor pueda tener activos flickering in bouncing a la vez. Creo que es hora de hacer la separación, dejar pstate, y cambiar por pflickering y pbouncing. Espero no cargarme demasiado.
+
+~~
+
+Tengo que documentar las esmeraldas, que ya las tengo hechas. Estoy con el boss. No sé si hay bugs en el intérprete pero me hace diagonales que yo NO he programado :D A revisar tocan.
+
+Vale, es algo que tengo que documentar: como es obvio, al tener 3 bits para "value", el mayor valor de desplazamiento es 7. Se rompen los 13 en 7+6 y listo :)
+
+~~
+

@@ -10,8 +10,15 @@
 set_rand (n_pant + 1);
 
 switch (level) {
+	case 3:
+	case 4:
+	case 5:
+		if (level != 3 || n_pant > 14) {
+			for (gpit = 176; gpit < 192; gpit ++) map_buff [gpit] = 18;
+		}
 	case 0:
 	case 1:
+	case 2:
 		gpit = 4; while (gpit --) {
 			gpjt = 4; while (gpjt --) {
 				rdx = rand8 () & 0xf;

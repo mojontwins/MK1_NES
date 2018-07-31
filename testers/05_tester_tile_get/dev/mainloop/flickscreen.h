@@ -4,7 +4,7 @@
 // Change screen
 // Very basic. Extend when needed.
 
-if (flick_override == 0 && warp_to_level == 0) {
+if (flick_override == 0) {
 
 	if (prx == 4 && 
 		#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)

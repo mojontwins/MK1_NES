@@ -59,7 +59,7 @@ void player_init (void) {
 		#endif
 	#endif
 
-	pstate = EST_NORMAL;
+	pflickering = pbouncing = 0;
 
 	#ifdef DIE_AND_RESPAWN
 		player_register_safe_spot ();
@@ -92,7 +92,7 @@ void player_init (void) {
 }
 
 void player_render (void) {
-	if (pstate == EST_NORMAL || half_life) 
+	if (0 == pflickering || half_life) 
 		oam_index = oam_meta_spr (
 			prx, pry + SPRITE_ADJUST, 
 			oam_index, 
@@ -115,11 +115,11 @@ void player_kill (void) {
 	if (plife) -- plife; else game_over = 1;
 
 	#ifdef PLAYER_FLICKERS
-		pstate = EST_PARP;
-		pctstate = 100;	
-	#else
-		pstate = EST_REBOUND;
-		pctstate = 16;	
+		pflickering = PLAYER_FLICKERS;
+	#endif
+
+	#ifdef PLAYER_BOUNCES
+		pbouncing = PLAYER_BOUNCES;
 	#endif
 
 	#ifdef ENABLE_USE_ANIM
@@ -161,10 +161,8 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
-	if (pstate) {
-		-- pctstate;
-		if (!pctstate) pstate = EST_NORMAL;
-	}
+	if (pflickering) -- pflickering;
+	if (pbouncing) -- pbouncing;
 
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
@@ -250,6 +248,7 @@ void player_move (void) {
 		}
 	#endif
 
+	oppossee = ppossee;
 	ppossee = 0;
 
 	// ********
@@ -753,7 +752,7 @@ void player_move (void) {
 	#endif
 
 	#ifdef PLAYER_SPINS
-		if (!pvx && (ppossee || pgotten) && !pj) pspin = 0;
+		if ((!pvx && (ppossee || pgotten) && !pj) || (ppossee && !oppossee)) pspin = 0;
 	#endif
 
 	// *************
@@ -762,12 +761,12 @@ void player_move (void) {
 
 	phit = 0;
 	
-	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-	if (hith) { phit = 1; 
-		#ifndef NO_HORIZONTAL_EVIL_TILE	
-			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
-		#endif	
-	}
+	#ifdef NO_HORIZONTAL_EVIL_TILE
+		if (hitv || hith) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
+	#else
+		if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
+		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
+	#endif
 
 	#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
 		cx1 = cx2 = (prx + 4) >> 4;
@@ -776,7 +775,7 @@ void player_move (void) {
 		if ((at1 & 1) || (at2 & 1)) phit = 1;
 	#endif
 
-	if (pstate == EST_NORMAL) if (phit) { 
+	if (!pflickering && !pbouncing) if (phit) { 
 		player_to_pixels ();
 		en_sg_2 = 1;
 
@@ -804,7 +803,7 @@ void player_move (void) {
 			-- cy1;
 			
 			_x = cx1; _y = cy1; _t = 0; map_set ();
-			sfx_play (SFX_OBJECT, 2);
+			sfx_play (SFX_RING, 2);
 			
 			#include "my/on_tile_got.h"
 

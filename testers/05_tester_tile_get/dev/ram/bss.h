@@ -105,8 +105,8 @@ unsigned char okilled;                  // Player # of killed enems., last frame
 
     unsigned char coco_on [COCOS_MAX];  // Cocos states
     
-    signed int coco_x [COCOS_MAX];      // Cocos, X coordinates (fixed point 12.6)
-    signed int coco_y [COCOS_MAX];      // Cocos, Y coordinates (fixed point 12.6)
+    signed int coco_x [COCOS_MAX];      // Cocos, X coordinates (fixed point 10.6)
+    signed int coco_y [COCOS_MAX];      // Cocos, Y coordinates (fixed point 10.6)
     signed int coco_vx [COCOS_MAX];     // Cocos, direction + speed in the X axis.
     signed int coco_vy [COCOS_MAX];     // Cocos, direction + speed in the Y axis.
 #endif  

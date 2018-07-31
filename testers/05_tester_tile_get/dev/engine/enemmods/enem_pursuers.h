@@ -27,7 +27,7 @@ switch (en_alive [gpit]) {
 	case 2:
 		// Pursuing
 
-		if (pstate == EST_NORMAL && (!en_status [gpit] || half_life)) {
+		if (pflickering == 0 && pbouncing == 0 && (!en_status [gpit] || half_life)) {
 			_en_mx = add_sign (((prx >> 2) << 2) - _en_x, en_rawv [gpit]);
 			_en_my = add_sign (((pry >> 2) << 2) - _en_y, en_rawv [gpit]);
 

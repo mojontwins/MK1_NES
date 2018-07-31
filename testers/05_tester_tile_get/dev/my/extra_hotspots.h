@@ -15,3 +15,12 @@
 // the hotspot.
 
 // hrt contains the hotspot type, in case you need it.
+
+	case HOTSPOT_TYPE_EMMERALD:
+		rda = SFX_FANFARE;
+
+		// Fill in the correct bit. Levels with emmeralds
+		// are 1, 4, 7 and 10.
+		pemmeralds |= bits [level_world];
+
+		break;

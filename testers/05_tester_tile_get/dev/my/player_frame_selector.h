@@ -8,7 +8,7 @@
 // Use player variables p* and end up with a correct value
 // in psprid.
 
-	if (pstate == EST_REBOUND) {
+	if (pbouncing || phit) {
 		psprid = CELL_HIT;
 	} else if (pspin) {
 		psprid = CELL_SPIN_CYCLE + ((frame_counter >> 4) & 3);

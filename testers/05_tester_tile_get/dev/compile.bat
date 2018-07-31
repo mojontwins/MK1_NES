@@ -8,6 +8,7 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2.png out=work\palts2.h label=palts2 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltstitle.png out=work\paltstitle.h label=paltstitle silent
 copy /b work\pal*.h assets\palettes.h > nul
 
 echo Exporting chr
@@ -21,16 +22,19 @@ cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level01.ene ..\dev\work\enems01.h 01 1 gencounter bin
 ..\..\..\src\utils\eneexp3.exe level02.ene ..\dev\work\enems02.h 02 1 gencounter bin
 
-..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\work\enems1.h 1 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level10.ene ..\dev\work\enems10.h 10 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level11.ene ..\dev\work\enems11.h 11 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level12.ene ..\dev\work\enems12.h 12 1 gencounter bin
+
 ..\..\..\src\utils\eneexp3.exe level2.ene ..\dev\work\enems2.h 2 1 gencounter bin
 ..\..\..\src\utils\eneexp3.exe level3.ene ..\dev\work\enems3.h 3 1 gencounter bin
 cd ..\dev
 copy /b work\enems*.h assets\enem_constants.h > nul
-..\..\..\src\utils\binpaster.exe index=assets\enem_index.h out=work\enems.bin files=work\enems00.h.bin,work\enems01.h.bin,work\enems02.h.bin
+..\..\..\src\utils\binpaster.exe index=assets\enem_index.h out=work\enems.bin files=work\enems00.h.bin,work\enems01.h.bin,work\enems02.h.bin,work\enems10.h.bin,work\enems11.h.bin,work\enems12.h.bin
 
 echo Compiling enembehs
 cd ..\script
-..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h
+..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h debug
 
 echo Making map
 cd ..\map

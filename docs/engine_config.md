@@ -986,6 +986,13 @@ So you need to provide 2 or 4 cells of animation in the `spr_enems?` arrays depe
 * **Type A**, two cells: `FRAME_A, FRAME_B`.
 * **Type B**, four cells: `FRAME_A, FRAME_B, APPEARING/DISAPPEARING, HIDDEN`.
 
+In the spriteset, those are the animation cells:
+
+```
+    (RIGHT)  `FRAME_A`, `FRAME_B`, 0, 0, (LEFT)   `FRAME_A`, `FRAME_B`, 0, 0,   // All types
+    [(RIGHT) `APPEARING`, `HIDDEN`, 0, 0, (LEFT) `APPEARING`, `HIDDEN`], 0, 0,  // Only type B
+```
+
 ### Enemy type: Shooties & Punchies
 
 (only for side view)
