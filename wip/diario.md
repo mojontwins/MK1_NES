@@ -4238,5 +4238,10 @@ Tengo que documentar las esmeraldas, que ya las tengo hechas. Estoy con el boss.
 
 Vale, es algo que tengo que documentar: como es obvio, al tener 3 bits para "value", el mayor valor de desplazamiento es 7. Se rompen los 13 en 7+6 y listo :)
 
-~~
+20180801
+========
+
+Documento lo que me queda por documentar antes de seguir (estoy con Fridge Zone).
+
+
 

@@ -212,3 +212,18 @@ Setting `warp_to_level` will make the engine to restart the main loop, reloading
     }
 ```
 
+### Enemies exploding
+
+If you set your `win_level` condition depending on killing enemies, it's ugly that the screen fades out as soon as you hit the last enemy. To delay that a bit (and show the enemy's *dying animation*) you can use `en_cttouched`, which is an array which stores a count for each enemy on screen if the enemy is exploding. If we wait until all `en_cttouched` are 0 the effect of finishing the game is more pleasant to the eye. We can see this in action in [Cheril the writer](https://github.com/mojontwins/MK1_NES/tree/master/examples/08_cheril_the_writer):
+
+```c
+    if (c_max_enems == pkilled) {
+        if (
+            en_cttouched [0] == 0 &&
+            en_cttouched [1] == 0 &&
+            en_cttouched [2] == 0
+        ) win_level = 1;
+    }
+```
+
+Note how if all enemies have been killed, `win_level` wont be set while there's a exploding animation going on.

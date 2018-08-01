@@ -149,10 +149,10 @@ level = 3; level_world = 1; level_act = 0; pemmeralds = 1;
 			#endif
 			else {
 				#ifdef MULTI_LEVEL
-					if (warp_to_level) continue;
-
-					// Custom for this game
+					if (warp_to_level) continue;					
 					level ++;
+					
+					// Custom for this game
 					level_act ++; if (level_act == 3) {
 						level_world ++; level_act = 0;
 					}

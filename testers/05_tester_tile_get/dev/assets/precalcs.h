@@ -41,8 +41,6 @@
 	};
 #endif
 
-#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
-	const unsigned char bits [] = {
-		1, 2, 4, 8, 16, 32, 64, 128
-	};
-#endif
+const unsigned char bits [] = {
+	1, 2, 4, 8, 16, 32, 64, 128
+};

@@ -8,5 +8,14 @@
 // Turn off ring if it is on
 ring_timer = 0;
 
+// Invalidate emmeralds
+if (
+	hrt == HOTSPOT_TYPE_EMMERALD && 
+	pemmeralds & bits [level_world]
+) hrt = 0;
+
 // Make bosses more resistant
+/*
 gpit = 3; while (gpit --) if (en_t [gpit] == 0x14) en_life [gpit] = 8;
+*/
+if (en_t [0] == 0x14) en_life [0] = 8;
