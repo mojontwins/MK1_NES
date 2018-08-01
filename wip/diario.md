@@ -4218,8 +4218,8 @@ Estoy intentando ampliar AGNES para que hacer Sonic Mal sea posible sólo con in
 Ahora mismo no está fino / no está hecho / tengo que resolver:
 
 [X] Que al morir vuelva al principio de la fase, reiniciándolo todo. Tengo que ver cómo podría hacerlo con lo que hay / modificando lo mínimo (siempre de forma "legal"). -> He añadido una nueva configuración para que el motor soporte esto de forma nativa: `DIE_AND_RESPAWN -> DIE_AND_REINIT`.
-[ ] Que recoja la moneda.
-[ ] Un hud minimal, que me aclare con los valores.
+[X] Que recoja la moneda.
+[X] Un hud minimal, que me aclare con los valores.
 
 20180731
 ========
@@ -4242,6 +4242,65 @@ Vale, es algo que tengo que documentar: como es obvio, al tener 3 bits para "val
 ========
 
 Documento lo que me queda por documentar antes de seguir (estoy con Fridge Zone).
+
+Hecho. Lo que me da es mieduow cuando tenga que ponerme a propagar los cambios a `src` y luego al resto de los testers primero y los ejemplos después y comprobar que no se ha roto nada :*)
+
+~~
+
+Hoy no podré hacer gran cosa, pero voy a ver como están implementados los tronquitos que caen con vistas a cuando me ponga con el siguiente mundow.
+
+```c
+// MT MK2 NES v0.86 - Sonic Bad is bad
+// Copyleft 2017 by The Mojon Twins
+
+    // Catacrock. Appears, falls, and catacrocks.
+
+    switch (_en_state) {
+        case 0:
+            if (_CATACROCK_COUNTER) _CATACROCK_COUNTER --; else {
+                _en_state = 1;
+                enf_y [gpit] = _en_y << FIX_BITS; enf_vy [gpit] = 0; }
+            break;
+        case 1:
+            enf_vy [gpit] += CATACROCK_G; if (enf_vy [gpit] > CATACROCK_MAXV) enf_vy [gpit] = CATACROCK_MAXV;
+            enf_y [gpit] += enf_vy [gpit];
+            _en_y = enf_y [gpit] >> FIX_BITS;
+            if (_en_y > _en_y2) {
+                _en_state = 2;
+                _CATACROCK_COUNTER = CATACROCK_CROCK_FRAMES;
+                _en_y = _en_y2;
+            }
+            break;
+        case 2:
+            if (_CATACROCK_COUNTER) _CATACROCK_COUNTER --; else {
+                _en_state = 0;
+                _CATACROCK_COUNTER = _CATACROCK_WAIT;
+                _en_y = _en_y1;
+            }
+            break;
+    }
+
+    spr_id = CATACROCK_CELL_BASE + _en_state;
+    // enems_spr ();
+```
+
+Pensaba que me lo había currado más XD Muy sencillo, aunque usa fixed point. Tres estados, el primero "idle" esperando cierto tiempo. Siguiente, cae hasta el final de la trayectoria (Y2). Tercero, está en estado "roto" un tiempo antes de reposicionarse en (Y1).
+
+Los catacrocks en el original eran tipo 0x40. Al inicializar, Y=Y1 (si hay persistencia; si no es redundante). "Counter" y "Wait" se establecen a el "arg" de ponedor multiplicado por 32 (<<5).
+
+`CATACROCK_COUNTER` apunta a `en_mx`, `CATACROCK_WAIT` a `en_my`. En la configuración tenemos:
+
+* `CATACROCK_G` - Gravedad para el Catacrock.
+* `CATACROCK_MAXV` - Máxima velocidad para el Caracrock.
+* `CATACROCK_CROCK_FRAMES` - Número de frames para el estado crock.
+
+~~
+
+Creo que podré meter los fantis con temporizador que necesito para este juego. Son fantis normales pero llevan un rato paraos antes de empezar a hacer nada.
+
+¿Qué usar para el contador? `_en_ct`.
+
+[ ] Se me olvidaba que tengo que meter un control de velocidad (por ejemplo, 1, 2, 4, 8 pixels) en los compiled. Puedo hacerlo con opcodes  0xff, 0xfe, 0xfd, 0xfc, teniendo en cuenta que eso no me permitirá hacer saltos de longitud >59 (antes era >63).
 
 
 

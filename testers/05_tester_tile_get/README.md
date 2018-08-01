@@ -84,6 +84,16 @@ When `ENABLE_TILE_GET` is on, the player can *get* tiles of behaviour 34 from th
     prings ++;
 ```
 
+But we need to refine this a bit further: whenever the player gets 100 coins, the counter should be reset and an extra life earned:
+
+```c
+    if (prings == 100) {
+        prings = 0;
+        plife ++;
+        sfx_play (SFX_USE, 0);
+    }
+```
+
 Player hit with and without rings
 ---------------------------------
 

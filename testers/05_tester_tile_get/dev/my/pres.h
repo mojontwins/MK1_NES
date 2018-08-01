@@ -56,7 +56,7 @@ void scr_level (void) {
 }
 
 void scr_title (void) {
-	_x =  6; _y = 10; pr_str ("CONGRATS, IT WORKED!");
+	_x =  9; _y = 10; pr_str ("E S P I T E N E");
 	_x = 10; _y = 21; pr_str ("PRESS START!");
 }
 

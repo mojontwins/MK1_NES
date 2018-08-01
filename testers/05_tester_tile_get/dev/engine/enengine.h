@@ -298,12 +298,16 @@ void enems_load (void) {
 						break;
 				#endif
 
-				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
 					case 6:
 						// Fantys
 						enf_x [gpit] = _en_x << 6;
 						enf_y [gpit] = _en_y << 6;
 						enf_vx [gpit] = enf_vy [gpit] = 0;
+						#ifdef ENABLE_TIMED_FANTY
+							_en_ct = FANTY_BASE_TIMER;
+						#endif
+
 						_en_s = FANTY_BASE_SPRID;
 						break;
 				#endif
@@ -632,6 +636,12 @@ void enems_move (void) {
 					#ifdef ENABLE_HOMING_FANTY
 						case 6:
 							#include "engine/enemmods/enem_homing_fanty.h"
+							break;
+					#endif
+
+					#ifdef ENABLE_TIMED_FANTY
+						case 6:
+							#include "engine/enemmods/enem_timed_fanty.h"
 							break;
 					#endif
 

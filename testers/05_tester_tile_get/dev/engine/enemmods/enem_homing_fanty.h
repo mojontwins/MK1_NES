@@ -115,7 +115,11 @@ _en_y = _enf_y >> 6;
 	}
 #endif
 
-en_fr = (_en_x >> 3) & 1;
+#ifdef FANTY_FAST_ANIM
+	en_fr = half_life;
+#else
+	en_fr = (_en_x >> 3) & 1;
+#endif
 
 #ifdef FANTY_WITH_FACING
 	//_en_facing = ((_en_x < prx) ? 0 : 4);

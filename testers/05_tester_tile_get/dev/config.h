@@ -143,14 +143,14 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE					// Breakable walls
-#define BREAKABLE_LIFE					2	// Amount of hits to break wall
+#define ENABLE_BREAKABLE					// Breakable walls
+#define BREAKABLE_LIFE					4	// Amount of hits to break wall
 #define BREAKABLE_ANIM						// Show explosion when breaking
-#define BREAKABLE_MAX 					4	// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES			8	// Frames to show explosion
+#define BREAKABLE_MAX 					12	// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES			24	// Frames to show explosion
 #define BREAKABLE_ERASE					0	// Tile to erase broken tiles
-#define BREAKABLE_BREAKING				8	// Tile to display while breaking
-//#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
+#define BREAKABLE_BREAKING				19	// Tile to display while breaking
+#define BREAKABLE_WALKABLE					// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
@@ -288,12 +288,13 @@
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
 
-// Fanties / Homing fanties
+// Fanties / Homing fanties / Timed fanties
 
 //#define ENABLE_FANTY
-#define ENABLE_HOMING_FANTY
+//#define ENABLE_HOMING_FANTY
+#define ENABLE_TIMED_FANTY
 
-#define FANTY_BASE_SPRID				48
+#define FANTY_BASE_SPRID				50
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 //#define FANTY_KILLED_BY_TILE
@@ -301,9 +302,12 @@
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
+#define FANTY_FAST_ANIM						// If defined, cells A/B are changed every frame (for transparency effects)
 
 #define FANTY_DISTANCE					80
 #define FANTY_V_RETREAT					16
+
+#define FANTY_BASE_TIMER				120	// Timed fanties use this
 
 // Pursuers (for top-down)
 
@@ -321,9 +325,9 @@
 // Pezons
 
 #define ENABLE_PEZONS
-#define PEZONS_BASE_SPRID				57
+#define PEZONS_BASE_SPRID				58
 #define PEZON_WAIT						50
-#define PEZON_THRUST					384
+#define PEZON_THRUST					512
 #define PEZON_VY_FALLING_MAX			256
 #define PEZON_G							16
 
@@ -345,7 +349,7 @@
 
 #define ENABLE_MONOCOCOS
 #define MONOCOCO_TYPE_A					// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				33
+#define MONOCOCO_BASE_SPRID				34
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -379,7 +383,7 @@
 
 #define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
-#define COMPILED_ENEMS_BASE_SPRID		41
+#define COMPILED_ENEMS_BASE_SPRID		42
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
@@ -566,21 +570,21 @@
 #define PLAYER_VY_MK2_JUMP_INITIAL	208
 #define PLAYER_VY_MK2_JUMP_RELEASE	96
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
-#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 312
+#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296
 #define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32	// For trampolines
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
 #define PLAYER_VX_MAX			256		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
-#define PLAYER_AX				8		// Horizontal acceleration
+#define PLAYER_AX				12		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
 #define PLAYER_RX				8		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 1)
 
-#define PLAYER_V_REBOUND		288
+#define PLAYER_V_REBOUND		256
 
 // Animation cells 
 

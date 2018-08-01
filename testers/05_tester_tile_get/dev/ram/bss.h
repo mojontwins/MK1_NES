@@ -220,12 +220,12 @@ unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = faci
 
 // Fixed point variables (coordiantes, velocity) for some kinds of enemies.
 
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
     signed int enf_x [3];
     signed int enf_vx [3];
 #endif
     
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
     signed int enf_y [3];
     signed int enf_vy [3];
 #endif

@@ -19,7 +19,7 @@ MAPPED 0, 0, 2, 2, 16, 2, 18
 OPEN ts1.png
 PALS palts1.png
 LABEL ts1
-MAPPED 0, 0, 2, 2, 16, 2, 19
+MAPPED 0, 0, 2, 2, 16, 2, 20
 
 # Tileset 2
 OPEN ts2.png
@@ -79,6 +79,10 @@ METASPRITESET 12, 7, 2, 2, 2, 1, 0, 0
 # Explosion
 LABEL ssexpl
 METASPRITE 6, 5, 2, 2, 0, 0
+
+# Occluding frame
+LABEL ssoccl
+METASPRITE 14, 1, 2, 2, 0, 0
 
 # Items
 LABEL ssit

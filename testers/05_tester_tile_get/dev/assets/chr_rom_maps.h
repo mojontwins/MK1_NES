@@ -23,24 +23,24 @@ const unsigned int map_00_scr_offsets [] = {
 	MAP_00_BASE + 0x000F, 0                   , 
 	0                   , 0                   , 
 	0                   , 0                   , 
-	MAP_00_BASE + 0x002A, MAP_00_BASE + 0x005E, 
-	0                   , MAP_00_BASE + 0x0083, 
-	MAP_00_BASE + 0x00B1, 0                   , 
-	MAP_00_BASE + 0x00ED, MAP_00_BASE + 0x0133, 
-	MAP_00_BASE + 0x0160, MAP_00_BASE + 0x01A1, 
-	MAP_00_BASE + 0x01CF, MAP_00_BASE + 0x020E, 
-	MAP_00_BASE + 0x0231, MAP_00_BASE + 0x0260, 
-	MAP_00_BASE + 0x0280, MAP_00_BASE + 0x02B5
+	MAP_00_BASE + 0x002A, MAP_00_BASE + 0x005F, 
+	0                   , MAP_00_BASE + 0x0084, 
+	MAP_00_BASE + 0x00B2, 0                   , 
+	MAP_00_BASE + 0x00EE, MAP_00_BASE + 0x0134, 
+	MAP_00_BASE + 0x0161, MAP_00_BASE + 0x01A2, 
+	MAP_00_BASE + 0x01D0, MAP_00_BASE + 0x020F, 
+	MAP_00_BASE + 0x0232, MAP_00_BASE + 0x0261, 
+	MAP_00_BASE + 0x0281, MAP_00_BASE + 0x02B6
 };
 
-// Total screens size in bytes is 749
+// Total screens size in bytes is 750
 
 // Map # 1 read from level01.map (10x3)
 
 // Definitions
 
 #define MAP_01_CHRROM    2
-#define MAP_01_BASE      0x02ED
+#define MAP_01_BASE      0x02EE
 #define MAP_01_W         10
 #define MAP_01_H         3
 #define MAP_01_MAXPANTS  30
@@ -73,7 +73,7 @@ const unsigned int map_01_scr_offsets [] = {
 // Definitions
 
 #define MAP_02_CHRROM    2
-#define MAP_02_BASE      0x06DD
+#define MAP_02_BASE      0x06DE
 #define MAP_02_W         3
 #define MAP_02_H         1
 #define MAP_02_MAXPANTS  3
@@ -93,7 +93,7 @@ const unsigned int map_02_scr_offsets [] = {
 // Definitions
 
 #define MAP_03_CHRROM    2
-#define MAP_03_BASE      0x07B9
+#define MAP_03_BASE      0x07BA
 #define MAP_03_W         15
 #define MAP_03_H         2
 #define MAP_03_MAXPANTS  30
@@ -104,29 +104,29 @@ const unsigned int map_02_scr_offsets [] = {
 const unsigned int map_03_scr_offsets [] = {
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x000C, 
-	MAP_03_BASE + 0x001C, MAP_03_BASE + 0x0035, 
-	MAP_03_BASE + 0x006B, MAP_03_BASE + 0x00A0, 
+	MAP_03_BASE + 0x001C, MAP_03_BASE + 0x0036, 
+	MAP_03_BASE + 0x006C, MAP_03_BASE + 0x00A1, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x00AD, MAP_03_BASE + 0x0000, 
+	MAP_03_BASE + 0x00AE, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00C0, 
-	MAP_03_BASE + 0x00DA, MAP_03_BASE + 0x0105, 
-	MAP_03_BASE + 0x015C, MAP_03_BASE + 0x01BC, 
-	MAP_03_BASE + 0x01E8, MAP_03_BASE + 0x0216, 
-	MAP_03_BASE + 0x0244, MAP_03_BASE + 0x0279, 
-	MAP_03_BASE + 0x02A5, MAP_03_BASE + 0x02BD, 
-	MAP_03_BASE + 0x02F1, MAP_03_BASE + 0x0320, 
-	MAP_03_BASE + 0x034B, MAP_03_BASE + 0x0373
+	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00C1, 
+	MAP_03_BASE + 0x00DB, MAP_03_BASE + 0x0107, 
+	MAP_03_BASE + 0x0160, MAP_03_BASE + 0x01C1, 
+	MAP_03_BASE + 0x01EE, MAP_03_BASE + 0x021C, 
+	MAP_03_BASE + 0x024A, MAP_03_BASE + 0x0281, 
+	MAP_03_BASE + 0x02AE, MAP_03_BASE + 0x02C7, 
+	MAP_03_BASE + 0x02FE, MAP_03_BASE + 0x032D, 
+	MAP_03_BASE + 0x0358, MAP_03_BASE + 0x0380
 };
 
-// Total screens size in bytes is 918
+// Total screens size in bytes is 931
 
 // Map # 4 read from level11.map (25x1)
 
 // Definitions
 
 #define MAP_04_CHRROM    2
-#define MAP_04_BASE      0x0B4F
+#define MAP_04_BASE      0x0B5D
 #define MAP_04_W         25
 #define MAP_04_H         1
 #define MAP_04_MAXPANTS  25
@@ -137,27 +137,27 @@ const unsigned int map_03_scr_offsets [] = {
 const unsigned int map_04_scr_offsets [] = {
 	MAP_04_BASE + 0x0000, MAP_04_BASE + 0x0033, 
 	MAP_04_BASE + 0x0062, MAP_04_BASE + 0x008A, 
-	MAP_04_BASE + 0x00B8, MAP_04_BASE + 0x00F6, 
-	MAP_04_BASE + 0x013E, MAP_04_BASE + 0x017B, 
-	MAP_04_BASE + 0x01AD, MAP_04_BASE + 0x01E7, 
-	MAP_04_BASE + 0x0208, MAP_04_BASE + 0x023C, 
-	MAP_04_BASE + 0x026B, MAP_04_BASE + 0x02B0, 
-	MAP_04_BASE + 0x02E9, MAP_04_BASE + 0x0332, 
-	MAP_04_BASE + 0x0383, MAP_04_BASE + 0x039E, 
-	MAP_04_BASE + 0x03D9, MAP_04_BASE + 0x041A, 
-	MAP_04_BASE + 0x044C, MAP_04_BASE + 0x0486, 
-	MAP_04_BASE + 0x04BD, MAP_04_BASE + 0x04DE, 
-	MAP_04_BASE + 0x04FB
+	MAP_04_BASE + 0x00B2, MAP_04_BASE + 0x00F0, 
+	MAP_04_BASE + 0x0138, MAP_04_BASE + 0x0175, 
+	MAP_04_BASE + 0x01A7, MAP_04_BASE + 0x01E1, 
+	MAP_04_BASE + 0x01FE, MAP_04_BASE + 0x0232, 
+	MAP_04_BASE + 0x0261, MAP_04_BASE + 0x02A4, 
+	MAP_04_BASE + 0x02DD, MAP_04_BASE + 0x0326, 
+	MAP_04_BASE + 0x0377, MAP_04_BASE + 0x0393, 
+	MAP_04_BASE + 0x03CE, MAP_04_BASE + 0x040D, 
+	MAP_04_BASE + 0x043F, MAP_04_BASE + 0x0479, 
+	MAP_04_BASE + 0x04B0, MAP_04_BASE + 0x04CB, 
+	MAP_04_BASE + 0x04EA
 };
 
-// Total screens size in bytes is 1330
+// Total screens size in bytes is 1313
 
 // Map # 5 read from level20.map (1x20)
 
 // Definitions
 
 #define MAP_05_CHRROM    2
-#define MAP_05_BASE      0x1081
+#define MAP_05_BASE      0x107E
 #define MAP_05_W         1
 #define MAP_05_H         20
 #define MAP_05_MAXPANTS  20
@@ -185,7 +185,7 @@ const unsigned int map_05_scr_offsets [] = {
 // Definitions
 
 #define MAP_06_CHRROM    2
-#define MAP_06_BASE      0x15C5
+#define MAP_06_BASE      0x15C2
 #define MAP_06_W         4
 #define MAP_06_H         5
 #define MAP_06_MAXPANTS  20

@@ -6,6 +6,9 @@
 #define MONOCOCO_COUNTER 		_en_my
 #define MONOCOCO_STATE 			_en_mx
 
+#define CATACROCK_COUNTER		_en_mx
+#define CATACROCK_WAIT			_en_my
+
 #if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
 #define ENABLE_COCOS
 #define COCOS_ENABLE_AIMED
@@ -25,7 +28,7 @@
 #define PLAYER_CAN_FLOAT
 #endif
 
-#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS) || defined (ENABLE_SPRINGS)
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS) || defined (ENABLE_SPRINGS) /*|| defined (ENABLE_TRAMPOLINES)*/
 #define NEEDS_INITIAL_DETECTION
 #endif
 

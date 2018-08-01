@@ -239,15 +239,6 @@ void player_move (void) {
 		}
 	#endif
 
-	#ifdef ENABLE_TRAMPOLINES
-		if (at1 == 66 || at2 == 66) {
-			a_button = 1; ptrampoline = 1;
-			#ifdef PLAYER_SPINS	
-				pspin = 0;
-			#endif
-		}
-	#endif
-
 	oppossee = ppossee;
 	ppossee = 0;
 
@@ -380,7 +371,8 @@ void player_move (void) {
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
-	
+	pry = py >> FIXBITS;
+
 	// Collision
 	player_to_pixels ();
 
@@ -441,7 +433,7 @@ void player_move (void) {
 				pgotten = 0;
 				pfiring = 1;
 				ppossee = 1;
-				
+
 				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					                if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
 					if (cx1 != cx2) if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
@@ -449,6 +441,18 @@ void player_move (void) {
 
 				#ifdef ENABLE_SLIPPERY
 					pice = (at1 & 64) || (at2 & 64);
+				#endif
+
+				#if defined (ENABLE_TRAMPOLINES)
+					if (at1 == 74 || at2 == 74) {
+						a_button = 1; ptrampoline = 1;
+						#ifdef PLAYER_SPINS
+							pspin = 0;
+						#endif
+						#ifdef ENABLE_SLIPPERY
+							pice = 0;
+						#endif
+					}
 				#endif
 
 				#ifdef ENABLE_CONVEYORS

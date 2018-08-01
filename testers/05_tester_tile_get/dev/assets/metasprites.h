@@ -33,10 +33,13 @@ const unsigned char * const spr_enems0 [] = {
 	// Explosion (offset 32)
 	ssexpl_00, 
 
-	// Monococo (type A) (offset 33)
+	// Occluding (offset 33)
+	ssoccl_00,
+
+	// Monococo (type A) (offset 34)
 	ssmc_00_a, ssmc_01_a, 0, 0, ssmc_00_b, ssmc_01_b, 0, 0,
 
-	// Boss (offset 41)
+	// Boss (offset 42)
 	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
 	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 
 };
@@ -51,17 +54,20 @@ const unsigned char * const spr_enems1 [] = {
 	// Explosion (offset 32)
 	ssexpl_00, 
 
-	// Monococo (type A) (offset 33)
+	// Occluding (offset 33)
+	ssoccl_00,
+
+	// Monococo (type A) (offset 34)
 	ssmc_00_a, ssmc_01_a, 0, 0, ssmc_00_b, ssmc_01_b, 0, 0,
 
-	// Boss (offset 41)
+	// Boss (offset 42)
 	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
 	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 
 
-	// Fanty (offset 49)
+	// Fanty (offset 50)
 	ssfant_00_a, ssfant_01_a, 0, 0, ssfant_00_b, ssfant_01_b, 0, 0,
 
-	// Pezon (offset 57)
+	// Pezon (offset 58)
 	sspez_00, sspez_01
 };
 

@@ -7,3 +7,8 @@
 // The value of the tile just got is QTILE (cx1, cy1)
 
 prings ++;
+if (prings == 100) {
+	prings = 0;
+	plife ++;
+	sfx_play (SFX_USE, 0);
+}

@@ -21,7 +21,8 @@ if (en_sg_2) {
 
 		// Simulate hit
 		pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-		pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+		if (_en_my) pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); else pvy = -(PLAYER_V_REBOUND >> 1);
+		if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
 		touched = 1; 
 		sfx_play (SFX_PHIT, 0);
 		pbouncing = 16;
