@@ -138,6 +138,13 @@ void enems_update_unsigned_char_arrays (void) {
 
 	__asm__ ("lda %v", _en_facing);
 	__asm__ ("sta %v, y", en_facing);
+
+	#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+		enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
+	#endif
+	#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
+		enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
+	#endif
 }
 
 void enems_facing () {
@@ -301,9 +308,9 @@ void enems_load (void) {
 				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
 					case 6:
 						// Fantys
-						enf_x [gpit] = _en_x << 6;
-						enf_y [gpit] = _en_y << 6;
-						enf_vx [gpit] = enf_vy [gpit] = 0;
+						_enf_x = _en_x << 6;
+						_enf_y = _en_y << 6;
+						_enf_vx = _enf_vy = 0;
 						#ifdef ENABLE_TIMED_FANTY
 							_en_ct = FANTY_BASE_TIMER;
 						#endif
@@ -396,7 +403,7 @@ void enems_load (void) {
 						_en_ct = 0;
 						_en_s = COMPILED_ENEMS_BASE_SPRID;
 						en_behptr [gpit] = en_behptrs [rda];
-						_en_x1 = 0; 	// Repurpose for speed
+						_en_x1 = 1; 	// Repurpose for speed
 						break;
 				#endif
 
@@ -528,10 +535,10 @@ void enems_move (void) {
 		__asm__ ("lda %v, y", en_facing);
 		__asm__ ("sta %v", _en_facing);
 
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
 		#endif
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
 
@@ -885,8 +892,17 @@ void enems_move (void) {
 				if (en_sg_2) { 
 					pkill = 1; touched = 1; 
 					#ifdef PLAYER_BOUNCES
-						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
+						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
+						
+						#ifdef ENABLE_COMPILED_ENEMS
+						if (_en_t != 20)
+						#endif
+						{
+							if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+							_en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+						}
+
 					#endif	
 				}
 			}
@@ -1021,13 +1037,5 @@ skipdo:
 		// Update arrays
 
 		enems_update_unsigned_char_arrays ();
-
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
-			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
-		#endif
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
-			enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
-		#endif
-
 	}	
 }

@@ -146,7 +146,7 @@
 #define ENABLE_BREAKABLE					// Breakable walls
 #define BREAKABLE_LIFE					4	// Amount of hits to break wall
 #define BREAKABLE_ANIM						// Show explosion when breaking
-#define BREAKABLE_MAX 					12	// Max # of concurrent explosions
+#define BREAKABLE_MAX 					16	// Max # of concurrent explosions
 #define BREAKABLE_MAX_FRAMES			24	// Frames to show explosion
 #define BREAKABLE_ERASE					0	// Tile to erase broken tiles
 #define BREAKABLE_BREAKING				19	// Tile to display while breaking
@@ -394,7 +394,7 @@
 
 #define COCO_PATTERN					0
 #define COCO_PALETTE 					0
-#define COCO_FAIR_D						32
+//#define COCO_FAIR_D					32
 
 // Carry directives
 
