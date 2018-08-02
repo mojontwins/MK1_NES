@@ -17,6 +17,10 @@ const unsigned char l_map_w [] = 				{
 													10, 10, 3,	// Benny Hill Zone 
 													15, 25, 3,	// Broken Fridge Zone
 												};
+const unsigned char l_map_h [] = 				{
+													3, 3, 1,	// Benny Hill Zone
+													2, 1, 1, 	// Broken Fridge Zone
+												};
 
 // Ending screen & position, per level (comment if N/A)
 

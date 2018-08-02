@@ -38,7 +38,7 @@ if (flick_override == 0) {
 			n_pant -= c_map_w;
 			py = 192 << FIXBITS;
 			if (pvy > -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-		} else if (pry >= 192 && pvy > 0) {
+		} else if (pry >= 192 && pvy > 0 && n_pant < c_map_size - c_map_w) {
 			n_pant += c_map_w;
 			py = 0;
 	#endif				

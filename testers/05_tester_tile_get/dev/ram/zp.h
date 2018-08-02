@@ -205,6 +205,8 @@ unsigned char ft;                       // "This is the first time rendering a s
 // Current level
 
 unsigned char c_map_w;                  // Map width for current level
+unsigned char c_map_h;                  // Map height for current level
+unsigned char c_map_size;               // Map size for current level
 
 const unsigned char *c_ts_pals;         // Pointer to metatile palettes array
 const unsigned char *c_ts_tmaps;        // Pointer to metatile tilemaps array

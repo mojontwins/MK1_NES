@@ -105,28 +105,28 @@ const unsigned int map_03_scr_offsets [] = {
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x000C, 
 	MAP_03_BASE + 0x001C, MAP_03_BASE + 0x0036, 
-	MAP_03_BASE + 0x006C, MAP_03_BASE + 0x00A1, 
+	MAP_03_BASE + 0x006C, MAP_03_BASE + 0x009C, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x00AE, MAP_03_BASE + 0x0000, 
+	MAP_03_BASE + 0x00A9, MAP_03_BASE + 0x0000, 
 	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x0000, 
-	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00C1, 
-	MAP_03_BASE + 0x00DB, MAP_03_BASE + 0x0107, 
-	MAP_03_BASE + 0x0160, MAP_03_BASE + 0x01C1, 
-	MAP_03_BASE + 0x01EE, MAP_03_BASE + 0x021C, 
-	MAP_03_BASE + 0x024A, MAP_03_BASE + 0x0281, 
-	MAP_03_BASE + 0x02AE, MAP_03_BASE + 0x02C7, 
-	MAP_03_BASE + 0x02FE, MAP_03_BASE + 0x032D, 
-	MAP_03_BASE + 0x0358, MAP_03_BASE + 0x0380
+	MAP_03_BASE + 0x0000, MAP_03_BASE + 0x00BC, 
+	MAP_03_BASE + 0x00D6, MAP_03_BASE + 0x0102, 
+	MAP_03_BASE + 0x015B, MAP_03_BASE + 0x01BC, 
+	MAP_03_BASE + 0x01E9, MAP_03_BASE + 0x0217, 
+	MAP_03_BASE + 0x0250, MAP_03_BASE + 0x0288, 
+	MAP_03_BASE + 0x02B6, MAP_03_BASE + 0x02CF, 
+	MAP_03_BASE + 0x0306, MAP_03_BASE + 0x0336, 
+	MAP_03_BASE + 0x035D, MAP_03_BASE + 0x0385
 };
 
-// Total screens size in bytes is 931
+// Total screens size in bytes is 936
 
 // Map # 4 read from level11.map (25x1)
 
 // Definitions
 
 #define MAP_04_CHRROM    2
-#define MAP_04_BASE      0x0B75
+#define MAP_04_BASE      0x0B7A
 #define MAP_04_W         25
 #define MAP_04_H         1
 #define MAP_04_MAXPANTS  25
@@ -157,7 +157,7 @@ const unsigned int map_04_scr_offsets [] = {
 // Definitions
 
 #define MAP_05_CHRROM    2
-#define MAP_05_BASE      0x1096
+#define MAP_05_BASE      0x109B
 #define MAP_05_W         1
 #define MAP_05_H         20
 #define MAP_05_MAXPANTS  20
@@ -185,7 +185,7 @@ const unsigned int map_05_scr_offsets [] = {
 // Definitions
 
 #define MAP_06_CHRROM    2
-#define MAP_06_BASE      0x15DA
+#define MAP_06_BASE      0x15DF
 #define MAP_06_W         4
 #define MAP_06_H         5
 #define MAP_06_MAXPANTS  20

@@ -40,7 +40,7 @@ void ring_do (void) {
 
 		if (ring_vy > 0) {
 			cy1 = (_en_y - 1); // _en_y + 15 - 16
-			if (map_attr [(cy1 & 0xf0) | cx1] & 9) {
+			if (map_attr [(cy1 & 0xf0) | cx1] & 13) {
 				_en_y = cy1 & 0xf0; ring_vy = - ((ring_vy >> 1) + (ring_vy >> 2)) ;
 			}
 		} else if (ring_vy < 0) {
