@@ -611,7 +611,8 @@ void player_move (void) {
 	#ifdef PLAYER_SPINS
 		if (pad0 & PAD_DOWN) {
 			if (ppossee && ABS (pvx) > PLAYER_VX_MIN) {
-				pspin = 1; sfx_play (SFX_DUMMY2, 0);
+				if (!pspin) sfx_play (SFX_DUMMY2, 0);
+				pspin = 1; 
 			}
 		}
 	#endif

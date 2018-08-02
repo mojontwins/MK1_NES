@@ -1,5 +1,5 @@
-level00.map,10,3,99,fixmappy,nodecos
-level01.map,10,3,99,fixmappy,nodecos
+level00.map,10,3,99,fixmappy,nodecos,genempty
+level01.map,10,3,99,fixmappy,nodecos,genempty
 level02.map,3,1,99,fixmappy,nodecos
 level10.map,15,2,99,fixmappy,nodecos,genempty
 level11.map,25,1,99,fixmappy,nodecos

@@ -396,6 +396,7 @@ void enems_load (void) {
 						_en_ct = 0;
 						_en_s = COMPILED_ENEMS_BASE_SPRID;
 						en_behptr [gpit] = en_behptrs [rda];
+						_en_x1 = 0; 	// Repurpose for speed
 						break;
 				#endif
 

@@ -137,9 +137,18 @@ While Not Eof (fIn)
 			parm2 = 0
 			If Instr ("PLAYER", Ucase (tokens (1))) Then parm2 = 2
 
+		case "SPEED"
+			Select Case tokens (1)
+				Case "1": op = 3: parm1 = 7: parm2 = 7 
+				Case "2": op = 3: parm1 = 7: parm2 = 6 
+				Case "4": op = 3: parm1 = 7: parm2 = 5  
+				Case "8": op = 3: parm1 = 7: parm2 = 4  
+			End Select
+
 		Case "RETURN":
 			op = 3
 			parm1 = byteCodeI - findPos (tokens (1))
+			parm2 = 0
 
 		'Case Else:			op = 0: parm1 = 0: parm2 = 0
 	End Select
@@ -150,9 +159,14 @@ While Not Eof (fIn)
 		If debug Then Print Bin ((op Shl 6) Or (parm1 Shl 3) Or parm2, 8), Hex ((op Shl 6) Or (parm1 Shl 3) Or parm2, 2)
 		writeByte (op Shl 6) Or (parm1 Shl 3) Or parm2
 	ElseIf op <> &HFF then
-	'?op,parm1
-		If debug Then Print Bin ((op Shl 6) Or parm1, 8), Hex ((op Shl 6) Or parm1, 2) , "-> " & Hex (byteCodeI - parm1, 2)
-		writeByte (op Shl 6) Or parm1
+		
+		If op = 3 And parm1 = 7 And parm2 > 3 Then
+			If debug Then Print Bin ((op Shl 6) Or (parm1 Shl 3) Or parm2, 8), Hex ((op Shl 6) Or (parm1 Shl 3) Or parm2, 2)
+			writeByte (op Shl 6) Or (parm1 Shl 3) Or parm2
+		Else
+			If debug Then Print Bin ((op Shl 6) Or parm1, 8), Hex ((op Shl 6) Or parm1, 2) , "-> " & Hex (byteCodeI - parm1, 2)
+			writeByte (op Shl 6) Or parm1
+		End If
 	Else 
 		If debug Then Print
 	End If

@@ -49,7 +49,7 @@ if (_en_ct) {
 
 		case 0x40:
 			// ADVANCE
-			_en_mx = endx [rdc]; _en_my = endy [rdc];
+			_en_mx = endx [rdc] << _en_x1; _en_my = endy [rdc] << _en_x1;
 			
 			rda = (_en_mx < 0); enems_facing ();
 
@@ -57,7 +57,7 @@ if (_en_ct) {
 			else if (_en_mx > 0) _en_facing = 0;
 			// If _en_mx == 0, no change!
 			
-			_en_ct = rdt << 4; en_alive [gpit] = 1;
+			_en_ct = (rdt << 4) >> _en_x1; en_alive [gpit] = 1;
 			break;
 
 		case 0x80:
@@ -66,8 +66,15 @@ if (_en_ct) {
 			break;
 
 		case 0xC0:
-			// RETURN
-			en_behptr [gpit] -= ((rda & 0x3f) + 1);
+			// RETURN & SPEED
+			if ((rda & 0x3f) < 60) {
+				// RETURN
+				en_behptr [gpit] -= ((rda & 0x3f) + 1);
+			} else {
+				// SPEED
+				_en_x1 =0xff - rda; // 0 for 1, 1 for 2, 2 for 4, 3 for 8
+			}
+
 			break;
 	}
 
