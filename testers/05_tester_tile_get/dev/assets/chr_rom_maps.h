@@ -23,24 +23,24 @@ const unsigned int map_00_scr_offsets [] = {
 	MAP_00_BASE + 0x000F, 0                   , 
 	0                   , 0                   , 
 	0                   , 0                   , 
-	MAP_00_BASE + 0x002A, MAP_00_BASE + 0x005F, 
-	0                   , MAP_00_BASE + 0x0084, 
-	MAP_00_BASE + 0x00B2, 0                   , 
-	MAP_00_BASE + 0x00EE, MAP_00_BASE + 0x0134, 
-	MAP_00_BASE + 0x0161, MAP_00_BASE + 0x01A2, 
-	MAP_00_BASE + 0x01D0, MAP_00_BASE + 0x020F, 
+	MAP_00_BASE + 0x0028, MAP_00_BASE + 0x005D, 
+	0                   , MAP_00_BASE + 0x0082, 
+	MAP_00_BASE + 0x00B9, 0                   , 
+	MAP_00_BASE + 0x00E9, MAP_00_BASE + 0x012F, 
+	MAP_00_BASE + 0x015C, MAP_00_BASE + 0x019D, 
+	MAP_00_BASE + 0x01CB, MAP_00_BASE + 0x020A, 
 	MAP_00_BASE + 0x0232, MAP_00_BASE + 0x0261, 
-	MAP_00_BASE + 0x0281, MAP_00_BASE + 0x02B6
+	MAP_00_BASE + 0x0283, MAP_00_BASE + 0x02B2
 };
 
-// Total screens size in bytes is 750
+// Total screens size in bytes is 748
 
 // Map # 1 read from level01.map (10x3)
 
 // Definitions
 
 #define MAP_01_CHRROM    2
-#define MAP_01_BASE      0x02EE
+#define MAP_01_BASE      0x02EC
 #define MAP_01_W         10
 #define MAP_01_H         3
 #define MAP_01_MAXPANTS  30
@@ -73,7 +73,7 @@ const unsigned int map_01_scr_offsets [] = {
 // Definitions
 
 #define MAP_02_CHRROM    2
-#define MAP_02_BASE      0x06DE
+#define MAP_02_BASE      0x06DC
 #define MAP_02_W         3
 #define MAP_02_H         1
 #define MAP_02_MAXPANTS  3
@@ -93,7 +93,7 @@ const unsigned int map_02_scr_offsets [] = {
 // Definitions
 
 #define MAP_03_CHRROM    2
-#define MAP_03_BASE      0x07BA
+#define MAP_03_BASE      0x07B8
 #define MAP_03_W         15
 #define MAP_03_H         2
 #define MAP_03_MAXPANTS  30
@@ -126,7 +126,7 @@ const unsigned int map_03_scr_offsets [] = {
 // Definitions
 
 #define MAP_04_CHRROM    2
-#define MAP_04_BASE      0x0B5D
+#define MAP_04_BASE      0x0B5B
 #define MAP_04_W         25
 #define MAP_04_H         1
 #define MAP_04_MAXPANTS  25
@@ -157,7 +157,7 @@ const unsigned int map_04_scr_offsets [] = {
 // Definitions
 
 #define MAP_05_CHRROM    2
-#define MAP_05_BASE      0x107E
+#define MAP_05_BASE      0x107C
 #define MAP_05_W         1
 #define MAP_05_H         20
 #define MAP_05_MAXPANTS  20
@@ -185,7 +185,7 @@ const unsigned int map_05_scr_offsets [] = {
 // Definitions
 
 #define MAP_06_CHRROM    2
-#define MAP_06_BASE      0x15C2
+#define MAP_06_BASE      0x15C0
 #define MAP_06_W         4
 #define MAP_06_H         5
 #define MAP_06_MAXPANTS  20

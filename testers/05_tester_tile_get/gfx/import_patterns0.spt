@@ -48,7 +48,7 @@ CHARSET 14, 0, 2, 1
 # Player sprites
 LABEL sspl
 METASPRITESET 0, 0, 2, 3, 4, 1, -4, -8 FLIPPED
-METASPRITESET 8, 1, 2, 2, 3, 1, 0, 0 
+METASPRITESET 8, 1, 2, 2, 3, 1, -4, 0 
 
 # Enemies
 LABEL ssen
