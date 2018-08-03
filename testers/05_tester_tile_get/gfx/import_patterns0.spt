@@ -25,7 +25,7 @@ MAPPED 0, 0, 2, 2, 16, 2, 20
 OPEN ts2.png
 PALS palts2.png
 LABEL ts2
-MAPPED 0, 0, 2, 2, 16, 2, 21
+MAPPED 0, 0, 2, 2, 16, 2, 22
 
 # Tileset 3
 OPEN ts3.png
@@ -65,6 +65,9 @@ METASPRITESET 10, 9, 2, 2, 3, 1, 0, 0
 
 LABEL sspez
 METASPRITESET 8, 16, 2, 2, 2, 1, 0, 0
+
+LABEL ssbomb
+METASPRITESET 2, 8, 2, 2, 2, 1, 0, 0
 
 # Boss
 

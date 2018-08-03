@@ -19,3 +19,7 @@ unsigned char level_act;
 const unsigned char *const spr_ring [] = {
 	ssit_00, ssit_04, ssit_05, ssit_06
 };
+
+// And a palette cycle for the Bosque de Badajoz
+
+unsigned char pal_cycle [3];

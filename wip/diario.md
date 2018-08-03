@@ -4300,7 +4300,38 @@ Creo que podré meter los fantis con temporizador que necesito para este juego. 
 
 ¿Qué usar para el contador? `_en_ct`.
 
-[ ] Se me olvidaba que tengo que meter un control de velocidad (por ejemplo, 1, 2, 4, 8 pixels) en los compiled. Puedo hacerlo con opcodes  0xff, 0xfe, 0xfd, 0xfc, teniendo en cuenta que eso no me permitirá hacer saltos de longitud >59 (antes era >63).
+[X] Se me olvidaba que tengo que meter un control de velocidad (por ejemplo, 1, 2, 4, 8 pixels) en los compiled. Puedo hacerlo con opcodes  0xff, 0xfe, 0xfd, 0xfc, teniendo en cuenta que eso no me permitirá hacer saltos de longitud >59 (antes era >63).
 
+20180803
+========
 
+Otra extensión: poder llamar a `do_extern_action` desde los scripts de los enemigos compilados. Esto es SUPER POTENTE. Para ello he vuelto a ampliar el bytecode y el intérprete. El compilador está también modificado:
+
+```
+    For each byte:
+
+    00 000 000 : Read n = next byte, call do_extern_action (n).
+    00 AAA BBB : Wait for BBB seconds (1-7).
+    01 DDD VVV : Advance in the direction DDD for VVV tiles.
+    10 111 111 : SPEED 1
+    10 111 110 : SPEED 2
+    10 111 101 : SPEED 4
+    10 111 100 : SPEED 8
+    10 xxx xxx : Fire
+    11 RRR RRR : RETURN R
+```
+
+¿Para qué quiero esto? Para el boss de la fase del bosque de Badajoz zone. En el Sonic de SMS, hay una "pequeña U" y robotnik baja para soltar bombas que ruedan por la "pequeña U". Como no puedo hacer cuestas, voy a hacer un nuevo tipo de enemigo rebotón con temporizador. El enemigo rebotará como una pelota por el escenario hasta que se le acabe el temporizador, y además sólo funcionará si el estado vale 1. 
+
+De esta forma creo dos enemigos destos en la pantalla. Por definición los enemigos empiezan "apagados". En el extern pongo que se ubiquen en la posición que yo quiero y que se activen. Y cuando el boss llame a `EXTERN 0` o `EXTERN 1` se crearán a uno u otro lado del área de juego, como si Somari los disparase desde la nave.
+
+¡Voy a programarlo!
+
+~~
+
+Para la fase del bosque de badajoz tengo enemigos lineales, monococs, boss, catacrocks (que tengo que programar), pezons y boioiongs. OJAL: NO FANTIS.
+
+La primera fase de jungla puedo hacerla con otra ambientación (nocturna), o dejar la fase de jungla actual como fase primera y luego hacer la nueva como segunda nocturna. En este caso tendría que eliminar la esmeralda para recolocarla.
+
+~~
 

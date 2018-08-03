@@ -5,3 +5,7 @@
 // Extra stuff you have to initialize before the level starts
 
 prings = 0; oprings = 0xff;
+
+pal_cycle [0] = c_pal_bg [13];
+pal_cycle [1] = c_pal_bg [14];
+pal_cycle [2] = c_pal_bg [15];

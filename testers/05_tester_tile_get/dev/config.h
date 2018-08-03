@@ -385,6 +385,22 @@
 #define COMPILED_ENEMS_SHOOT
 #define COMPILED_ENEMS_BASE_SPRID		42
 
+// Boioiongs
+
+#define ENABLE_BOIOIONG
+#define BOIOIONG_G 						16
+#define BOIOIONG_BASE_SPRID				54
+//#define BOIOIONG_ACTIVE_BY_DEFAULT		// Define and they are active by default
+//#define BOIOIONG_INITIAL_TIMER		200	// If active by default, time to be active in frames
+//#define BOIOIONG_AUTO_RESPAWN
+
+// Catacrocks
+#define ENABLE_CATACROCKS
+#define CATACROCK_G						16
+#define CATACROCK_MAX_V					256
+#define CATACROCK_CROCK_FRAMES			50
+#define CATACROCK_BASE_SPRID			50
+
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
@@ -575,7 +591,7 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			256		// Max. horizontal speed
+#define PLAYER_VX_MAX			224		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
 #define PLAYER_AX				12		// Horizontal acceleration
 #define PLAYER_AX_ICE			4

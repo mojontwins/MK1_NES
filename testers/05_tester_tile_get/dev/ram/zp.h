@@ -61,7 +61,6 @@ unsigned char en_status [3];            // Enemies statused, repurposed per enem
 unsigned char en_ct [3];                // Enemies General repurposeable counter
 
 unsigned char en_rawv [3];              // Speed, used for pursuer-type enemies
-unsigned char en_alive [3];             // Alive, used for pursuer-type enemies
 
 #ifdef ENEMS_RECOIL_ON_HIT
     signed char en_rmx [3];             // If recoiling, recoil direction in the X axis.
@@ -80,7 +79,7 @@ unsigned char _en_t, _en_s;
 unsigned char _en_x, _en_y;
 unsigned char _en_x1, _en_y1, _en_x2, _en_y2;
 signed char _en_mx, _en_my;
-unsigned char _en_ct, _en_facing;
+unsigned char _en_ct, _en_facing, _en_state;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
 // Signals, all purpose, for enemies

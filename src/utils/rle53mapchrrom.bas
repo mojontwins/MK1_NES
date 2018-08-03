@@ -64,7 +64,7 @@ Sub usage
 	Print ""
 	Print "list file format: Each line must look like this:"
 	Print ""
-	Print "filename.map,w,h,l0[-...][,fixmappy][,nodecos][,genempty]"
+	Print "filename.map,w,h,l0[-...][,fixmappy][,nodecos][,genempty][,prefix=PREFIX]"
 	Print ""
 	Print "Where filename.map is the map filename, and w and h are each map's size"
 	Print "lX are lock tile #s, '-' separated."
@@ -85,6 +85,7 @@ Dim As Integer tlocks (31), tlocksIndex
 DIm As String tlocksString, tokens (10), linea
 Dim As Integer shows, nodecos, genempty
 Dim As String fileName
+Dim As String prefix
 
 ' decos
 Dim As Integer decosAre, decosize
@@ -136,6 +137,14 @@ While Not Eof (fListIn)
 	fixmappy = parserFindTokenInTokens ("fixmappy", tokens (), "lcase")
 	nodecos = parserFindTokenInTokens ("nodecos", tokens (), "lcase")
 	genempty = parserFindTokenInTokens ("genempty", tokens (), "lcase")
+
+	prefix = "MAP_" & Hex (nMap, 2)
+	For i = 0 To 10
+		If Lcase (Left (tokens (i), 6)) = "prefix" Then
+			prefix = Right (tokens (i), Len (tokens (i)) - 7)
+			Exit For
+		End If
+	Next i
 	
 	parseCoordinatesStringCustom tlocksString, "-", coords ()
 	tlocksIndex = 0
@@ -161,6 +170,7 @@ While Not Eof (fListIn)
 	For i = 0 To 127
 		decosI (i) = 0
 		decosOI (i) = 0
+		cMapAmalgam (i) = ""
 	Next i
 
 	i = 0: dp = 0
@@ -333,17 +343,17 @@ While Not Eof (fListIn)
 
 	Print #fOut, "// Definitions"
 	Print #fOut, ""
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_CHRROM    " & chrRom
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_BASE      0x" & Hex (lBase, 4)
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_W         " & mapW
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_H         " & mapH
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_MAXPANTS  " & (mapW*mapH)
-	Print #fOut, "#define MAP_" & Hex (nMap, 2) & "_N_LOCKS   " & locksI
+	Print #fOut, "#define " & uCase (prefix) & "_CHRROM    " & chrRom
+	Print #fOut, "#define " & uCase (prefix) & "_BASE      0x" & Hex (lBase, 4)
+	Print #fOut, "#define " & uCase (prefix) & "_W         " & mapW
+	Print #fOut, "#define " & uCase (prefix) & "_H         " & mapH
+	Print #fOut, "#define " & uCase (prefix) & "_MAXPANTS  " & (mapW*mapH)
+	Print #fOut, "#define " & uCase (prefix) & "_N_LOCKS   " & locksI
 	Print #fOut, ""
 
 	Print #fOut, "// Screens index"
 	Print #fOut, ""
-	Print #fOut, "const unsigned int map_" & Hex (nMap, 2) & "_scr_offsets [] = {"
+	Print #fOut, "const unsigned int " & lCase (prefix) & "_scr_offsets [] = {"
 	j = 0: first = -1
 
 	For nPant = 0 To maxPants - 1
@@ -354,9 +364,9 @@ While Not Eof (fListIn)
 		If scrMaps (nPant) = 255 Then
 			Print #fOut, "0                   ";
 		ElseIf scrSizes (nPant) Then
-			Print #fOut, "MAP_" & Hex (nMap, 2) & "_BASE + 0x" & Hex (scrBinOffs (nPant), 4);
+			Print #fOut, "" & uCase (prefix) & "_BASE + 0x" & Hex (scrBinOffs (nPant), 4);
 		Else
-			Print #fOut, "MAP_" & Hex (nMap, 2) & "_BASE + 0x" & Hex (scrBinOffs (scrMaps (nPant)), 4);
+			Print #fOut, "" & uCase (prefix) & "_BASE + 0x" & Hex (scrBinOffs (scrMaps (nPant)), 4);
 		End if
 		j = j + 1
 	Next nPant
@@ -377,7 +387,7 @@ While Not Eof (fListIn)
 			Print #fOut, tlocks (i); 
 		Next i
 		Print #fOut, ""
-		Print #fOut, "const unsigned char map_" & Hex (nMap, 2) & "_locks [] = {"
+		Print #fOut, "const unsigned char " & lCase (prefix) & "_locks [] = {"
 		Print #fOut, "	";
 
 		For i = 0 To locksI - 1
@@ -392,6 +402,7 @@ While Not Eof (fListIn)
 
 	' Update base
 	lBase = lBase + partialBinIndex
+	Print partialBinIndex & " bytes ~ ";
 
 	Close #fIn
 

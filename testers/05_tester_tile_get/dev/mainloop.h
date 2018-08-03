@@ -126,7 +126,6 @@ void prepare_scr (void) {
 		ft = 0;
 		ppu_off ();
 	}
-
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
 		prp_idx = 0;
@@ -221,7 +220,7 @@ void prepare_scr (void) {
 	#include "my/on_entering_screen.h"
 
 	gpit = 3; while (gpit --) en_spr_id [gpit] = en_s [gpit];
-	
+
 	oam_index = 4;
 	prx = px >> FIXBITS; pry = py >> FIXBITS;
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
@@ -230,7 +229,7 @@ void prepare_scr (void) {
 
 	player_move ();
 	enems_move ();
-	player_render ();
+
 	if (hrt) hotspots_paint ();
 	
 	#ifdef ENABLE_INTERACTIVES	
@@ -293,7 +292,10 @@ void game_loop (void) {
 
 		flick_override = 0;
 		#include "my/custom_flickscreen.h"
-		#include "mainloop/flickscreen.h"
+		if (flick_override == 0) {
+			flickscreen_do_horizontal ();
+			flickscreen_do_vertical ();
+		}
 		
 		// Change screen ?
 

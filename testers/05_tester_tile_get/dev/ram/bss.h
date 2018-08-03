@@ -210,6 +210,8 @@ signed char en_my [3];                  // Enemy direction + speed in the Y axis
 unsigned char en_s [3];                 // Enemy base sprite index in spr_enems.
 unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = facing left.
 
+unsigned char en_state [3];             // Enemy State
+
 #ifdef ENEMS_CAN_RESPAWN
     unsigned char en_respawn [3];       // If true, enems can respawn.
     unsigned char en_resx [3];
@@ -220,12 +222,9 @@ unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = faci
 
 // Fixed point variables (coordiantes, velocity) for some kinds of enemies.
 
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+#ifdef ENEMS_NEED_FP
     signed int enf_x [3];
     signed int enf_vx [3];
-#endif
-    
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
     signed int enf_y [3];
     signed int enf_vy [3];
 #endif

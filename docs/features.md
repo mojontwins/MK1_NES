@@ -255,7 +255,28 @@ Compiled enemies
 - Type 20 (0x14)
 - Just define the position in ponedor. Behaviour (program) # on the attr field.
 
-Compiled enemies follow a programmed path from a set. Such set is generated compiling the `script/enembehs.spt` script. The language is pretty straightforward, just check the simple examples provided. 
+Compiled enemies follow a programmed path from a set. Such set is generated compiling the `script/enembehs.spt` script. The language is pretty straightforward, just check the simple examples provided.
+
+Commands are:
+
+```
+    UP n
+    UP RIGHT n
+    RIGHT n
+    DOWN RIGHT n
+    DOWN n
+    DOWN LEFT n
+    LEFT n
+    UP LEFT n           Move "n" tiles in each direction
+
+    IDLE n              Wait for "n" seconds.
+
+    FIRE                Fires a coco towards the player.
+
+    SPEED n             Sets speed "n", n = 1, 2, 4 or 8.
+
+    EXTERN n            Calls `do_extern_action (n)` in `my/extern.h`
+```
 
 Behaviours included in the script are compiled in order, the first one is #0. When adding enenmies in `ponedor.exe`, just add your enemy in its starting position as type 0x14 and especify the behaviour number in the attr field. The ending position is discarded.
 
@@ -280,6 +301,21 @@ Enemmies are rendered facing left or right. There are two animation cells for wh
     IDLE_LEFT_1
 ```
 
+You don't need this info but I do, opcodes:
+
+```
+    For each byte:
+
+    00 000 000 : Read n = next byte, call do_extern_action (n).
+    00 AAA BBB : Wait for BBB seconds (1-7).
+    01 DDD VVV : Advance in the direction DDD for VVV tiles.
+    10 111 111 : SPEED 1
+    10 111 110 : SPEED 2
+    10 111 101 : SPEED 4
+    10 111 100 : SPEED 8
+    10 xxx xxx : Fire
+    11 RRR RRR : RETURN R
+```
 
 Punchies
 --------

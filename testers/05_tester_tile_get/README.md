@@ -1,10 +1,8 @@
-Espinete Bad
-============
+# Espinete Bad
 
 A rather interesting port of Sonic Bad (which originally runs on a rather modified MK2 engine) using only "legal" techniques to expand functionality, i.e., code injection points, even a 100% custom module.
 
-How I made this
-===============
+# How I made this
 
 One of the things I like about **AGNES** is that it's fun (well, at least for me) thinking about how to implement what you have in mind using what the engine offers. **Sonic Bad** was a joke game which tried to mimmick the gameplay in Sonic (well, kind of). It has those gameplay items:
 
@@ -14,8 +12,8 @@ One of the things I like about **AGNES** is that it's fun (well, at least for me
 * The player "throws" a ring when hit, and such ring should bounce around the screen and can be taken.
 * Levels are organized in worlds/acts, and there's a special item (an emmerald) in the second act of each world.
 
-Creating the ring
------------------
+## Creating the ring
+
 
 The ring has been implemented using a custom module written for this game. The module is `my/ring.h`. To make **AGNES** include extra code you have to write `#includes` in `my/extra_modules.h`:
 
@@ -75,8 +73,7 @@ The implementation of the ring is a fairly simple one, just a bouncing object wh
 
 Now it's time to add hooks for those functions in the engine.
 
-Getting rings
--------------
+## Getting rings
 
 When `ENABLE_TILE_GET` is on, the player can *get* tiles of behaviour 34 from the screen. The engine only takes care of deleting the tile and granting persistence (if activated), but does nothing else. If we want the engine to react to the player collecting rings, we have to inject code via `my/on_tile_got.h`. We are going to simply increase the rings counter:
 
@@ -94,8 +91,7 @@ But we need to refine this a bit further: whenever the player gets 100 coins, th
     }
 ```
 
-Player hit with and without rings
----------------------------------
+## Player hit with and without rings
 
 The main gameplay hook is that you can save your life if you are carrying rings when hit. To achieve this custom behaviour we have to make use of two code injection points: `my/on_player_hit.h` and `my/on_player_spike.h`.
 
@@ -142,8 +138,7 @@ if (prings) {
 }
 ```
 
-Make the ring move!
--------------------
+## Make the ring move!
 
 We have already created the ring, but we have to tell the engine it should call its update function to make it, well, happen. There's a code injection point which gets included right after every actor has updated. As our ring is an actor, we'll add the hook to the `ring_do` function in `my/extra_routines.h`:
 
@@ -151,8 +146,7 @@ We have already created the ring, but we have to tell the engine it should call 
     ring_do ();
 ```
 
-Emmeralds
----------
+## Emmeralds
 
 Another special feature are emmeralds. Game levels are divided into "worlds" and "acts" (this division is purely arbitrary and the engine doesn't really know about it). In the second act of every world there's a hidden emmerald. If you get all emmeralds, the real ending will show when you finish the game.
 
@@ -245,8 +239,7 @@ What we will do is add a simple check to `my/on_entering_screen.h`. If the hotsp
 
 There's also code to show which emmeralds have been collected in the "level title" screens, you can check it out at `my/pres.h`.
 
-Bosses
-------
+## Bosses
 
 Bosses are implemented as simple compiled enemies. Dull, but it works and you don't have to modify the engine or add your own enemy types.
 
@@ -268,8 +261,13 @@ Or, assuming (correctly) that the boss will be enemy 0 on the screen:
     if (en_t [0] == 0x14) en_life [0] = 8;
 ```
 
-Also of interest
-----------------
+The boss in the Bosque de Badajoz Zone (third world) is specially interesting as it uses the `EXTERN N` keyword in the script. This keyword makes the engine to make a call to `do_extern_action` in `my/extern.h` passing the number N as a parameter.
+
+In the screen there are two Boioiong type enemies. The engine is configured so Boioiong are not active. Whenever the boss gets to the lowest points of its trajectory, it will call `EXTERN 0` or `EXTERN 1` which will reinit and activate one of the Boioiongs in the correct spot so it seems that the ship with Somari is throwing the bombs.
+
+## Also of interest
+
+### Custom renderer
 
 The game features a nice custom renderer, like most AGNES games. For worlds 0 and 1 (all acts) it adds clouds to the background selecting a random location and checking if there's room (but it doesn't try very hard).
 
@@ -303,6 +301,8 @@ switch (level) {
     }
 ```
 
+### Win level condition
+
 Then **win level condition** is also pretty custom. In normal levels, the level is finished when the player touches the sign, which has been coded as collectible objects (hotspots of type 1). So in `my/extra_checks.h`:
 
 ```c
@@ -322,3 +322,19 @@ We will use `pkilled`, which contains the number of enemies the player has kille
 ```c
     if (level_act == 2 && pkilled && en_cttouched [0] == 0) win_level = 1;
 ```
+
+### Special rules for flicking the screen
+
+The first act in World 3 (level 6) is a 1-screen wide level. We have to add code to `my/custom_flickscreen.h` to override the normal connection between screens so you can't exit the screens on the left or right sides.
+
+```c
+    if (level == 6) {
+        flick_override = 1;
+
+        // Just detect up/down connections
+        flickscreen_do_vertical ();
+    }
+```
+
+(if you don't set `flick_override`, the engine will call `flickscreen_do_horizontal` and `flickscreen_do_vertical`).
+

@@ -3,3 +3,19 @@
 
 // Add here your code.  This gets run right before checking
 // for screen boundaries. Do your custom screen flicking here.
+// Set flick_override to invalidate normal behaviour
+
+// On level 6, we don't let the player exit the screen left/right:
+
+if (level == 6) {
+	flick_override = 1;
+
+	// We have to stop player on left/right
+	if (
+		(prx == 4 && pvx < 0) ||
+		(prx == 244 && pvx > 0) 
+	) pvx = 0;
+
+	// Just detect up/down connections
+	flickscreen_do_vertical ();
+}

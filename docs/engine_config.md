@@ -1119,6 +1119,29 @@ Compiled enems are rendered facing left or right, and need four cells per direct
 
 The constant `COMPILED_ENEMS_BASE_SPRID` points to the first cell in the list.
 
+## Boioings
+
+Boioiongs are bouncing things which fall from (x1, y1) and move forward (in the direction x1->x2) and bouncing off the floor and walls until a timer is off. Think of bouncing barrels. You can make them active by default or off by default.
+
+```c
+    #define BOIOIONG_G                      16
+```
+
+Defines gravity for the boioiong entities. To make them heavier than the player, use a higher number than `PLAYER_G`.
+
+```c
+    #define BOIOIONG_ACTIVE_BY_DEFAULT
+    #define BOIOIONG_INITIAL_TIMER          200
+```
+
+Make boioiong entities active by default, and make them last `BOIOING_INITIAL_TIMER` frames.
+
+```c
+    #define BOIOIONG_AUTO_RESPAWN
+```
+
+When the timer is 0, create a new entity at (x1, y1).
+
 ## Cocos
 
 Cocos are activated when needed (which means that you don't have to define `ENABLE_COCOS` yourself). But you should configure these values:

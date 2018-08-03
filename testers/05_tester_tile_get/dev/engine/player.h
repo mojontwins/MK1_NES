@@ -688,8 +688,8 @@ void player_move (void) {
 		if (pgotten) px += pgtmx;
 	#endif
 		
-	if (px < (4<<FIXBITS)) prx = 4;
-	else if (px > (244<<FIXBITS)) prx = 244; 
+	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
+	else if (px > (244<<FIXBITS)) { px = 244 << FIXBITS; prx = 244; }
 	else player_to_pixels ();
 	
 	// Collision

@@ -88,16 +88,17 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_COCOS
 	#include "engine/cocos.h"
 #endif
+#if (defined (ACTIVATE_SCRIPTING) && defined (ENABLE_EXTERN_CODE)) || defined (ENABLE_COMPILED_ENEMS)
+	#include "my/extern.h"
+#endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #include "engine/frame.h"
 #include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
-	#ifdef ENABLE_EXTERN_CODE
-		#include "my/extern.h"
-	#endif
 	#include "assets/mscnes.h"
 #endif
+#include "mainloop/flickscreen.h"
 #include "mainloop.h"
 
 // *************
@@ -127,7 +128,7 @@ void main(void) {
 		//
 
 //DEBUG
-level = 5; level_world = 1; level_act = 2; pemmeralds = 3;
+level = 6; level_world = 2; level_act = 0; pemmeralds = 3;
 
 		// Game loop
 

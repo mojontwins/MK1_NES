@@ -121,6 +121,10 @@ While Not Eof (fIn)
 	op = &HFF
 
 	Select Case myCommand
+		Case "IDLE":		op = 0: parm1 = 1: parm2 = Val (tokens (1))
+
+		Case "EXTERN": 		op = 0: parm1 = Val (tokens (1)): parm2 = 0
+
 		Case "LEFT": 		op = 1: parm1 = 0: parm2 = Val (tokens (1))
 		Case "DOWN_LEFT": 	op = 1: parm1 = 1: parm2 = Val (tokens (1))
 		Case "DOWN":		op = 1: parm1 = 2: parm2 = Val (tokens (1))
@@ -130,8 +134,6 @@ While Not Eof (fIn)
 		Case "UP":			op = 1: parm1 = 6: parm2 = Val (tokens (1))
 		Case "UP_LEFT":		op = 1: parm1 = 7: parm2 = Val (tokens (1))
 
-		Case "IDLE":		op = 0: parm1 = 1: parm2 = Val (tokens (1))
-
 		Case "FIRE":		
 			op = 2: parm1 = 0
 			parm2 = 0
@@ -139,10 +141,10 @@ While Not Eof (fIn)
 
 		case "SPEED"
 			Select Case tokens (1)
-				Case "1": op = 3: parm1 = 7: parm2 = 7 
-				Case "2": op = 3: parm1 = 7: parm2 = 6 
-				Case "4": op = 3: parm1 = 7: parm2 = 5  
-				Case "8": op = 3: parm1 = 7: parm2 = 4  
+				Case "1": op = 2: parm1 = 7: parm2 = 7 
+				Case "2": op = 2: parm1 = 7: parm2 = 6 
+				Case "4": op = 2: parm1 = 7: parm2 = 5  
+				Case "8": op = 2: parm1 = 7: parm2 = 4  
 			End Select
 
 		Case "RETURN":
@@ -155,18 +157,17 @@ While Not Eof (fIn)
 
 	' Build
 	
-	If op < 3 Then 
+	If op = 0 And parm2 = 0 Then
+		If debug Then Print "00000000", "00"
+		? "", "", "", Bin (parm1, 8), Hex (parm1, 2)
+		writeByte 0
+		writeByte parm1
+	ElseIf op < 3 Then 
 		If debug Then Print Bin ((op Shl 6) Or (parm1 Shl 3) Or parm2, 8), Hex ((op Shl 6) Or (parm1 Shl 3) Or parm2, 2)
 		writeByte (op Shl 6) Or (parm1 Shl 3) Or parm2
 	ElseIf op <> &HFF then
-		
-		If op = 3 And parm1 = 7 And parm2 > 3 Then
-			If debug Then Print Bin ((op Shl 6) Or (parm1 Shl 3) Or parm2, 8), Hex ((op Shl 6) Or (parm1 Shl 3) Or parm2, 2)
-			writeByte (op Shl 6) Or (parm1 Shl 3) Or parm2
-		Else
-			If debug Then Print Bin ((op Shl 6) Or parm1, 8), Hex ((op Shl 6) Or parm1, 2) , "-> " & Hex (byteCodeI - parm1, 2)
-			writeByte (op Shl 6) Or parm1
-		End If
+		If debug Then Print Bin ((op Shl 6) Or parm1, 8), Hex ((op Shl 6) Or parm1, 2) , "-> " & Hex (byteCodeI - parm1, 2)
+		writeByte (op Shl 6) Or parm1		
 	Else 
 		If debug Then Print
 	End If

@@ -3,11 +3,7 @@
 
 // Inner workings. Don't touch.
 
-#define MONOCOCO_COUNTER 		_en_my
-#define MONOCOCO_STATE 			_en_mx
-
-#define CATACROCK_COUNTER		_en_mx
-#define CATACROCK_WAIT			_en_my
+#define CATACROCK_WAIT			_en_mx
 
 #if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
 #define ENABLE_COCOS
@@ -105,4 +101,8 @@
 
 #if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
 	#define ENABLE_SHAKER
+#endif
+
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_BOIOIONG) || defined (ENABLE_CATACROCKS)
+	#define ENEMS_NEED_FP
 #endif

@@ -8,7 +8,7 @@
 if (_en_ct) {
 	// Do 
 
-	switch (en_alive [gpit]) {
+	switch (_en_state) {
 		case 0:
 			// Idling
 
@@ -35,16 +35,22 @@ if (_en_ct) {
 	// the whole array and that a proper RETURN is issued!
 
 	rda = *en_behptr [gpit] ++;
-	en_alive [gpit] = 0;
+	_en_state = 0;
 
 	rdc = (rda & 0x38) >> 3;
 	rdt = rda & 0x07;
 
 	switch (rda & 0xc0) {	// Command
 		case 0x00:
-			// IDLE
-			rdb = 1; while (rdt --) rdb += 25;
-			_en_ct = rdb;
+			// IDLE / EXTERN
+			if (rdt == 0) {
+				// EXTERN
+				do_extern_action (*en_behptr [gpit] ++);
+			} else {
+				// IDLE
+				rdb = 1; while (rdt --) rdb += 25;
+				_en_ct = rdb;
+			}
 			break;
 
 		case 0x40:
@@ -57,23 +63,24 @@ if (_en_ct) {
 			else if (_en_mx > 0) _en_facing = 0;
 			// If _en_mx == 0, no change!
 			
-			_en_ct = (rdt << 4) >> _en_x1; en_alive [gpit] = 1;
+			_en_ct = (rdt << 4) >> _en_x1; _en_state = 1;
 			break;
 
 		case 0x80:
-			// FIRE
-			rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
+			// FIRE & SPEED
+			rdb = rda & 0x3f;
+			if (rdb > 0x3b) {
+				// SPEED
+				_en_x1 =0x3f - rda; // 0 for 1, 1 for 2, 2 for 4, 3 for 8
+			} else {
+				// FIRE
+				rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
+			}
 			break;
 
 		case 0xC0:
-			// RETURN & SPEED
-			if ((rda & 0x3f) < 60) {
-				// RETURN
-				en_behptr [gpit] -= ((rda & 0x3f) + 1);
-			} else {
-				// SPEED
-				_en_x1 =0xff - rda; // 0 for 1, 1 for 2, 2 for 4, 3 for 8
-			}
+			// RETURN
+			en_behptr [gpit] -= ((rda & 0x3f) + 1);
 
 			break;
 	}

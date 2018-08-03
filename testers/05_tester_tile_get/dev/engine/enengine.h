@@ -139,16 +139,33 @@ void enems_update_unsigned_char_arrays (void) {
 	__asm__ ("lda %v", _en_facing);
 	__asm__ ("sta %v, y", en_facing);
 
-	#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+	__asm__ ("lda %v", _en_state);
+	__asm__ ("sta %v, y", en_state);
+
+	#ifdef ENEMS_NEED_FP
 		enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
-	#endif
-	#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
 		enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
 	#endif
 }
 
-void enems_facing () {
+void enems_facing (void) {
 	_en_facing = rda << 2;
+}
+
+void enems_init_fp (void) {
+	_enf_x = _en_x << 6;
+	_enf_y = _en_y << 6;
+}
+
+void enems_boioiong_init (void) {
+	enems_init_fp ();
+	_enf_vy = 0; 
+	_enf_vx = ADD_SIGN2 (_en_x2, _en_x1, rdm << FIXBITS);
+	#ifdef BOIOIONG_ACTIVE_BY_DEFAULT
+		_en_ct = BOIOIONG_INITIAL_TIMER;
+	#else
+		_en_ct = 0;
+	#endif
 }
 
 void enems_load (void) {
@@ -187,7 +204,7 @@ void enems_load (void) {
 				_en_t = VRAM_READ;
 
 				// General...
-				en_alive [gpit] = 0;
+				_en_state = 0;
 
 				// YX1
 				rda = VRAM_READ;
@@ -207,7 +224,7 @@ void enems_load (void) {
 				SET_FROM_PTR (_en_t, gp_gen); gp_gen ++;
 
 				// General...
-				en_alive [gpit] = 0;
+				_en_state = 0;
 
 				// YX1
 				// rda = *gp_gen ++;
@@ -308,8 +325,7 @@ void enems_load (void) {
 				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
 					case 6:
 						// Fantys
-						_enf_x = _en_x << 6;
-						_enf_y = _en_y << 6;
+						enems_init_fp ();
 						_enf_vx = _enf_vy = 0;
 						#ifdef ENABLE_TIMED_FANTY
 							_en_ct = FANTY_BASE_TIMER;
@@ -355,7 +371,7 @@ void enems_load (void) {
 						_en_my = rda; // EMERGING SENSE
 						_en_mx = rdb; // MOVING SENSE
 
-						en_alive [gpit] = 1;
+						_en_state = 1;
 						_en_ct = SAW_EMERGING_STEPS;
 
 						break;
@@ -388,10 +404,30 @@ void enems_load (void) {
 				#ifdef ENABLE_MONOCOCOS
 					case 11:
 						// Monococos
-						_en_mx = 0; _en_my = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
+						_en_state = 0; _en_ct = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
 						_en_s = MONOCOCO_BASE_SPRID;
 						break;
-				#endif	
+				#endif
+
+				#ifdef ENABLE_CATACROCKS
+					case 12:
+						// Catacrocks
+						enems_init_fp ();
+						_en_state = 0;
+						CATACROCK_WAIT = _en_ct = rdm << 5;
+						break;
+
+				#ifdef ENABLE_BOIOIONG
+					case 13:
+						// Boioiongs
+						#ifdef PERSISTENT_ENEMIES
+							// Initialize position from ROM
+							_en_x = _en_x1;
+							_en_y = _en_y1;							
+						#endif
+						enems_boioiong_init ();
+						_en_s = BOIOIONG_BASE_SPRID;
+						break;
 
 				#ifdef ENABLE_COMPILED_ENEMS
 					case 20:
@@ -469,7 +505,7 @@ void enems_load (void) {
 		{
 			#ifdef ENABLE_PURSUERS
 				if (_en_t == 7) {
-					en_alive [gpit] = 0;
+					_en_state = 0;
 					_en_ct = DEATH_COUNT_EXPRESSION;
 					#ifdef NEEDS_LIFE_GAUGE_LOGIC
 						en_life [gpit] = ENEMS_LIFE_GAUGE;	
@@ -535,10 +571,11 @@ void enems_move (void) {
 		__asm__ ("lda %v, y", en_facing);
 		__asm__ ("sta %v", _en_facing);
 
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+		__asm__ ("lda %v, y", en_state);
+		__asm__ ("sta %v", _en_state);
+
+		#ifdef ENEMS_NEED_FP
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
-		#endif
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS) || defined (ENABLE_TIMED_FANTY)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
 
@@ -683,6 +720,18 @@ void enems_move (void) {
 							break;
 					#endif	
 
+					#ifdef ENABLE_CATACROCKS
+						case 12:
+							#include "engine/enemmods/enem_catacrock.h"
+							break;
+					#endif
+
+					#ifdef ENABLE_BOIOIONG
+						case 13:
+							#include "engine/enemmods/enem_boioiong.h"
+							break;
+					#endif
+
 					#ifdef ENABLE_SIMPLE_WARPERS
 						case 0x3f:
 							en_spr = SIMPLE_WARPERS_BASE_SPRID;
@@ -768,13 +817,13 @@ void enems_move (void) {
 					|| _en_t == 4
 				#endif
 				#ifdef ENABLE_PURSUERS
-					|| (_en_t == 7 && en_alive [gpit] != 2)
+					|| (_en_t == 7 && _en_state != 2)
 				#endif
 				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && en_alive [gpit] != 2)
+					|| (_en_t == 8 && _en_state != 2)
 				#endif
 				#ifdef ENABLE_PEZONS
-					|| (_en_t == 9 && en_alive [gpit] == 0)
+					|| (_en_t == 9 && _en_state == 0)
 				#endif
 				#ifdef ENABLE_CHAC_CHAC
 					|| _en_t == 10
@@ -956,7 +1005,7 @@ void enems_move (void) {
 				// Bullets
 				bi = MAX_BULLETS; while (bi --) if (bst [bi]) {
 					#ifdef ENABLE_PURSUERS
-						if (_en_t != 7 || en_alive [gpit] == 2)
+						if (_en_t != 7 || _en_state == 2)
 					#endif
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
@@ -1004,8 +1053,7 @@ void enems_move (void) {
 						_en_y = en_resy [gpit]; _en_my = en_resmy [gpit];
 						
 						#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY))
-							_enf_x = _en_x << FIXBITS;
-							_enf_y = _en_y << FIXBITS;
+							enems_init_fp ();
 							#ifdef NEEDS_LIFE_GAUGE_LOGIC
 								en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 							#endif

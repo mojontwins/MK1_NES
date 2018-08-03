@@ -14,12 +14,12 @@ rdx = _en_x; rdy = _en_y; rdt = distance ();
 
 // Modify v - always upon state
 
-switch (en_alive [gpit]) {
+switch (_en_state) {
 	case 0:
 		// Retreating
 		_enf_vx = ADD_SIGN2 (_en_x1, _en_x, FANTY_V_RETREAT);
 		_enf_vy = ADD_SIGN2 (_en_y1, _en_y, FANTY_V_RETREAT);
-		if (rdt < FANTY_DISTANCE) en_alive [gpit] = 1;
+		if (rdt < FANTY_DISTANCE) _en_state = 1;
 		break;
 	case 1:
 		// Pursuing
@@ -39,7 +39,7 @@ switch (en_alive [gpit]) {
 			// Adjust to pixel
 			_enf_x = _en_x << FIXBITS;
 			_enf_y = _en_y << FIXBITS;
-			en_alive [gpit] = 0;
+			_en_state = 0;
 		}
 		break;
 }
