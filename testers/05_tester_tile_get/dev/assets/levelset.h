@@ -57,7 +57,7 @@ const unsigned char l_player_max_enems [] = 	{
 const unsigned char * const l_pal_bg [] = 		{ 
 													palts0, palts0, palts0, // Benny Hill Zone
 													palts1, palts1, palts1, // Broken Fridge Zone
-													palts2, palts2, palts2, // Bosque de Badajoz Zone
+													palts2, palts2a, palts2, // Bosque de Badajoz Zone
 													palts3, palts3, palts3,
 												};
 const unsigned char * const l_pal_fg [] = 		{ 
