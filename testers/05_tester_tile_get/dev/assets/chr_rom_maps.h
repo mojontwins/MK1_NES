@@ -247,18 +247,18 @@ const unsigned int map_12_scr_offsets [] = {
 // Screens index
 
 const unsigned int map_22_scr_offsets [] = {
-	MAP_22_BASE + 0x0000, MAP_22_BASE + 0x001E, 
-	MAP_22_BASE + 0x0033
+	MAP_22_BASE + 0x0000, MAP_22_BASE + 0x0028, 
+	MAP_22_BASE + 0x0053
 };
 
-// Total screens size in bytes is 90
+// Total screens size in bytes is 129
 
 // Map # 9 read from level30.map (4x5)
 
 // Definitions
 
 #define MAP_30_CHRROM    2
-#define MAP_30_BASE      0x192E
+#define MAP_30_BASE      0x1955
 #define MAP_30_W         4
 #define MAP_30_H         5
 #define MAP_30_MAXPANTS  20

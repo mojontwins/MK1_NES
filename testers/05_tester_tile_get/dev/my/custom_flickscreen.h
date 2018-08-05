@@ -5,9 +5,9 @@
 // for screen boundaries. Do your custom screen flicking here.
 // Set flick_override to invalidate normal behaviour
 
-// On level 6, we don't let the player exit the screen left/right:
+// On levels 6 or 8, we don't let the player exit the screen left/right:
 
-if (level == 6) {
+if (level == 6 || level == 8) {
 	flick_override = 1;
 
 	// We have to stop player on left/right
