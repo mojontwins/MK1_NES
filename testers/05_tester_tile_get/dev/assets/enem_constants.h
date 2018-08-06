@@ -123,29 +123,43 @@
 
 // level22.ene
 
-#define HOTSPOTS_OFFSET_22 0x0000
+#define HOTSPOTS_OFFSET_22 0x0024
 
+#define MAX_ENEMS_TYPE_13_22 2
+#define MAX_ENEMS_TYPE_20_22 1
 
-#define KILLABLE_ENEMS_22 0
+#define KILLABLE_ENEMS_22 1
 
+#define MAX_HOTSPOTS_TYPE_0_22	3
 #define MAX_HOTSPOTS_TYPE_1_22	0
 
-// level3.ene
+// level30.ene
 
-#define HOTSPOTS_OFFSET_3 0x00f0
+#define HOTSPOTS_OFFSET_30 0x012c
 
-#define MAX_ENEMS_TYPE_1_3 6
-#define MAX_ENEMS_TYPE_2_3 3
-#define MAX_ENEMS_TYPE_3_3 8
-#define MAX_ENEMS_TYPE_6_3 2
-#define MAX_ENEMS_TYPE_11_3 4
-#define MAX_ENEMS_TYPE_12_3 9
-#define MAX_ENEMS_TYPE_38_3 3
+#define MAX_ENEMS_TYPE_3_30 1
 
-#define KILLABLE_ENEMS_3 23
+#define KILLABLE_ENEMS_30 1
 
-#define MAX_HOTSPOTS_TYPE_0_3	17
-#define MAX_HOTSPOTS_TYPE_1_3	1
-#define MAX_HOTSPOTS_TYPE_3_3	1
-#define MAX_HOTSPOTS_TYPE_4_3	1
+#define MAX_HOTSPOTS_TYPE_0_30	23
+#define MAX_HOTSPOTS_TYPE_1_30	1
+#define MAX_HOTSPOTS_TYPE_5_30	1
+
+// level31.ene
+
+#define HOTSPOTS_OFFSET_31 0x0000
+
+
+#define KILLABLE_ENEMS_31 0
+
+#define MAX_HOTSPOTS_TYPE_1_31	0
+
+// level32.ene
+
+#define HOTSPOTS_OFFSET_32 0x0000
+
+
+#define KILLABLE_ENEMS_32 0
+
+#define MAX_HOTSPOTS_TYPE_1_32	0
 

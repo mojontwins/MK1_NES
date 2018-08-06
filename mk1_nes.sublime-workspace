@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"HOTP",
+				"HOTSPOT_TYPE_AMMO\t(config.h)"
+			],
+			[
+				"BOI",
+				"BOIOIONG_VY_MAX"
+			],
+			[
+				"CATACR",
+				"CATACROCK_BASE_SPRID\t(config.h)"
+			],
+			[
+				"CATACO",
+				"CATACROCK_G\t(enem_catacrock.h)"
+			],
+			[
+				"CATA",
+				"CATACROCK_MAX_V"
+			],
+			[
+				"flci",
+				"flickscreen_do_vertical\t(mainloop.h)"
+			],
+			[
+				"flick",
+				"flickscreen_do_horizontal\t(mainloop.h)"
+			],
+			[
+				"BOIOIN",
+				"BOIOIONG_G\t(config.h)"
+			],
+			[
+				"enems_",
+				"enems_init_fp"
+			],
+			[
+				"EXTERN",
+				"ENABLE_EXTERN_CODE"
+			],
+			[
 				"SLIP",
 				"ENABLE_SLIPPERY"
 			],
@@ -474,44 +514,43 @@
 			[
 				"TI_B",
 				"TI_BACKGROUNDS"
-			],
-			[
-				"update",
-				"update_list_index"
-			],
-			[
-				"SMS_setTile",
-				"SMS_setTileatXY"
-			],
-			[
-				"VDPS",
-				"VDPStatusPort"
-			],
-			[
-				"overfl",
-				"VDPSpriteOverflow"
-			],
-			[
-				"fra",
-				"frame_counter"
-			],
-			[
-				"PLAYER_",
-				"PLAYER_GENITAL"
-			],
-			[
-				"PLAYER_HA",
-				"PLAYER_HAS_JUMP"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "testers/05_tester_tile_get/dev/my/pres.h",
+			"file": "testers/05_tester_tile_get/dev/my/extra_vars.h",
 			"settings":
 			{
-				"buffer_size": 1548,
+				"buffer_size": 917,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "testers/05_tester_tile_get/dev/my/on_timer_tick.h",
+			"settings":
+			{
+				"buffer_size": 284,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "testers/05_tester_tile_get/dev/config.h",
+			"settings":
+			{
+				"buffer_size": 22695,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "testers/05_tester_tile_get/dev/my/extra_routines.h",
+			"settings":
+			{
+				"buffer_size": 1110,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -593,88 +632,98 @@
 	},
 	"expanded_folders":
 	[
-		"/E/git/MK1_NES",
-		"/E/git/MK1_NES/testers",
-		"/E/git/MK1_NES/testers/05_tester_tile_get",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/assets",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/engine",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/my",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/gfx"
+		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/docs",
+		"/D/git/MK1_NES/testers",
+		"/D/git/MK1_NES/testers/05_tester_tile_get",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/gfx",
+		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/assets/spritedata.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_hit.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/engine/player.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
-		"/E/git/MK1_NES/testers/05_tester_tile_get/dev/config.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_tile_got.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/README.md",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/palettes.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/hotspots.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_interactive.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/config.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_timed_fanty.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/autodefs.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
-		"/D/git/MK1_NES/wip/diario.md",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/timer.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_timer_tick.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_constants.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_vars.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_entering_screen.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/README.md",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/script/enembehs.spt",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extern.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/precalcs.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_boioiong.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/compiled_enems.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_compiled.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/prototypes.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/custom_flickscreen.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_catacrock.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/src/utils/rle44mapchrrom.bas",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/player.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_index.h",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/ram/zp.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_monococo.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_chac_chac.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_homing_fanty.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_pezon.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_pursuers.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_saw.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/docs/engine_config.md",
+		"/D/git/MK1_NES/src/utils/pencompiler.bas",
+		"/D/git/MK1_NES/docs/features.md",
+		"/D/git/MK1_NES/src/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_hit.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_tile_got.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_timed_fanty.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/general.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_fanty.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_homing_fanty.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/precalcs.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_entering_screen.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_checks.h",
 		"/D/git/MK1_NES/docs/code_injection.md",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/ram/zp.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/map_renderer_customization.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/spritedata.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h",
-		"/D/git/MK1_NES/src/utils/rle44mapchrrom.bas",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/script/enembehs.spt",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_inits.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
-		"/D/git/MK1_NES/src/utils/pencompiler.bas",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/autodefs.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/game_frame.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/ring.h",
-		"/D/git/MK1_NES/docs/features.md",
-		"/D/git/MK1_NES/docs/engine_config.md",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_hit.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_spike.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_coco.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/definitions.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/prototypes.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/cocos.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_vars.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_hotspots.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_pursuers.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/flickscreen.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/win_level_condition.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/relocate_player.h",
 		"/D/git/MK1_NES/testers/02_tester_punchy/dev/mainloop/relocate_player.h",
 		"/D/git/MK1_NES/testers/02_tester_punchy/dev/mainloop.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_hud_update.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_modules.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/config.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/general.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_constants.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_index.h",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/enems/updr.bat",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/trash/eneupdr.bas",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/work/enems3.h",
@@ -684,11 +733,9 @@
 		"/D/git/MK1_NES/src/dev/my/on_tile_got.h",
 		"/D/git/MK1_NES/src/dev/engine/player.h",
 		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_complex.h",
-		"/D/git/MK1_NES/src/dev/autodefs.h",
 		"/D/git/MK1_NES/src/dev/engine/playermods/process_tile.h",
 		"/D/git/MK1_NES/src/dev/engine/printer.h",
 		"/D/git/MK1_NES/src/dev/assets/precalcs.h",
-		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/src/dev/mainloop.h",
 		"/D/git/MK1_NES/src/dev/definitions.h",
 		"/D/git/MK1_NES/src/dev/neslib.h",
@@ -724,24 +771,22 @@
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/no.h",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/assets/mscnes.h",
 		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
-		"/D/git/MK1_NES/examples/09_cadàveriön/script/script.spt",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/interactives.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/my/extra_checks.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/my/custom_flickscreen.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/ram/bss.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/definitions.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/script/script.spt"
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
 			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\ram",
@@ -813,6 +858,42 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"buby",
+			"bubx",
+			"TIMER_REFILL",
+			"BOIOI",
+			"en_flags",
+			"ep_dead",
+			"en_flags",
+			"boioiong_init",
+			"_en_facing",
+			"en_spr",
+			"extern",
+			"cmapamalgam",
+			"scr_buff",
+			"fix",
+			"case 13:",
+			"en_state",
+			"en_state [gpit]",
+			"MONOCOCO_COUNTER",
+			"MONOCOCO_STATE",
+			"en_state",
+			"en_alive",
+			"en_state",
+			"prefix",
+			"MAP_\" & Hex (nMap, 2)",
+			"case 12",
+			"BOIOIONG_",
+			"boioi",
+			"\n\t",
+			"enf_x",
+			"boioi",
+			"rdy",
+			"en_ct",
+			"TIMED_FANTY",
+			"timed_fanty",
+			"en_state",
+			"extern.h",
 			"TRAMPOLINE",
 			"player_ax",
 			"ptrampoline",
@@ -904,43 +985,7 @@
 			"player_to_pixels",
 			"warp_to_level",
 			"activate_",
-			"pvx = 0",
-			"pvx =",
-			"player_init",
-			"warp_to_level",
-			"interacti",
-			"safe",
-			"fire_zone",
-			"set",
-			"set_fire_zone",
-			"0xe0",
-			"pvx",
-			"VX",
-			"warp_to_level",
-			"SET_X",
-			"setxy",
-			"debug",
-			"use_ct",
-			"0xfe",
-			"WARP_TO_LEVEL",
-			"CELL_FACING",
-			"..\\utils\\",
-			"reloc_player",
-			"&H6C",
-			"FIRE_ON_KILL",
-			"PLAYER_CHARGE_MIN",
-			"UP",
-			"easy objects",
-			"COCO_FAIR_D",
-			"e1",
-			"e0",
-			"SHOOTIES_BASE_SPRID",
-			"PEZON_WAIT",
-			"RIGHT",
-			"ENEMS_ENABLE_DYING_FRAME",
-			"animation",
-			"use_ct",
-			"ENABLE_NO"
+			"pvx = 0"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -948,6 +993,16 @@
 		"regex": false,
 		"replace_history":
 		[
+			"bubble_y",
+			"bubble_x",
+			"map_buff",
+			"_en_state",
+			"_en_ct",
+			"en_state [gpit]",
+			"en_state",
+			"uCase (prefix)",
+			"\" & prefix",
+			"_en_y",
 			"Benny Hill Zone",
 			"10.6",
 			"_en_y",
@@ -984,8 +1039,130 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "testers/05_tester_tile_get/dev/my/extra_vars.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								917,
+								917
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 82,
+								"count": 119,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "testers/05_tester_tile_get/dev/my/on_timer_tick.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 284,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								253,
+								253
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 55,
+								"count": 39,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "testers/05_tester_tile_get/dev/config.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8491,
+								8491
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 2,
+								"count": 2086,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2812.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -993,32 +1170,44 @@
 			"sheets":
 			[
 				{
-					"buffer": 0,
-					"file": "testers/05_tester_tile_get/dev/my/pres.h",
+					"buffer": 3,
+					"file": "testers/05_tester_tile_get/dev/my/extra_routines.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1548,
+						"buffer_size": 1110,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								804,
+								817
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 78,
+								"count": 131,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 273.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1026,7 +1215,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1074,7 +1263,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1108,7 +1297,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1116,7 +1305,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 210.0,
+	"side_bar_width": 217.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

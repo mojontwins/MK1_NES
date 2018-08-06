@@ -261,9 +261,15 @@ Or, assuming (correctly) that the boss will be enemy 0 on the screen:
     if (en_t [0] == 0x14) en_life [0] = 8;
 ```
 
+Something else is required: The engine is wired in a way so that if the enemies life gauge is defined as 1, code related to substracting life and checking if it reached 0 is simply not included. We have life gauge defined as 1, so the engine doesn't support en_life = 8! We can explicitly tell the engine to include life gauge management by defining `NEEDS_LIFE_GAUGE_LOGIC` in config.h.
+
 The boss in the Bosque de Badajoz Zone (third world) is specially interesting as it uses the `EXTERN N` keyword in the script. This keyword makes the engine to make a call to `do_extern_action` in `my/extern.h` passing the number N as a parameter.
 
 In the screen there are two Boioiong type enemies. The engine is configured so Boioiong are not active. Whenever the boss gets to the lowest points of its trajectory, it will call `EXTERN 0` or `EXTERN 1` which will reinit and activate one of the Boioiongs in the correct spot so it seems that the ship with Somari is throwing the bombs.
+
+## Underwater
+
+Level 4 has underwater sections. In those (when `n_pant >= 10` on 5x5 screens levels), the timer is on and counting down. Time refills are "oxygen recharges" and will be custom-respawned everytime the player enters a screen. On timer off, the player will be killed. 
 
 ## Also of interest
 
@@ -325,10 +331,10 @@ We will use `pkilled`, which contains the number of enemies the player has kille
 
 ### Special rules for flicking the screen
 
-The first act in World 3 (level 6) is a 1-screen wide level. We have to add code to `my/custom_flickscreen.h` to override the normal connection between screens so you can't exit the screens on the left or right sides.
+The first and third acts in World 3 (level 6) are 1-screen wide levels. We have to add code to `my/custom_flickscreen.h` to override the normal connection between screens so you can't exit the screens on the left or right sides.
 
 ```c
-    if (level == 6) {
+    if (level == 6 || level == 8) {
         flick_override = 1;
 
         // Just detect up/down connections

@@ -9,7 +9,7 @@ if (_en_ct) {
 	// Vertical movement & collision
 	// -----------------------------
 
-	_enf_vy += BOIOIONG_G;
+	_enf_vy += BOIOIONG_G; if (_enf_vy > BOIOIONG_VY_MAX) _enf_vy = BOIOIONG_VY_MAX;
 	_enf_y += _enf_vy;
 
 	if (_enf_y < 0) _enf_y = 0;
@@ -21,16 +21,16 @@ if (_en_ct) {
 
 	if (_enf_vy > 0) {
 		cy1 = cy2 = (_en_y + 15) >> 4;
-		rda = 13; rdb = 0;
+		rda = 13; rds = -16;
 	} else if (_enf_vy < 0) {
 		cy1 = cy2 = _en_y >> 4;
-		rda = 9; rdb = 32;
+		rda = 9; rds = 16;
 	}
 
 	if (rda) {
 		cm_two_points ();
 		if ((at1 & rda) || (at2 & rda)) {
-			_en_y = rdb + (cy1 & 0xf0);
+			_en_y = rds + (cy1 << 4);
 			_enf_vy = -_enf_vy;
 		}
 	}
@@ -48,18 +48,16 @@ if (_en_ct) {
 
 	cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4; rda = 0;
 
-	if (_enf_vx > 0) {
-		rda = 9;
-		cx1 = cx2 = (_en_x + 15) >> 4; rdb = 0;
-	} else if (_enf_vx < 0) {
-		rda = 9;
-		cx1 = cx2 = _en_x >> 4; rdb = 32;
-	}
+	if (_enf_vx) {
+		if (_enf_vx > 0) {
+			cx1 = cx2 = (_en_x + 15) >> 4; rds = -16;
+		} else {
+			cx1 = cx2 = _en_x >> 4; rds = 16;
+		}
 
-	if (rda) {
 		cm_two_points ();
-		if ((at1 & rda) || (at2 & rda)) {
-			_en_x = rdb + (cx1 & 0xf0);
+		if ((at1 & 9) || (at2 & 9)) {
+			_en_x = rds + (cx1 << 4);
 			_enf_vx = -_enf_vx;
 		}
 	}
@@ -69,8 +67,7 @@ if (_en_ct) {
 	// Sprite
 
 	if (_en_ct > 50 || half_life) {
-		rda = (_enf_vx < 0); enems_facing ();
-		en_spr = _en_s + _en_facing + ((frame_counter >> 2) & 1);
+		en_spr = _en_s + ((frame_counter >> 2) & 1);
 	}
 } 
 #ifdef BOIOIONG_AUTO_RESPAWN
@@ -79,4 +76,3 @@ else {
 	enems_boioiong_init ();
 }
 #endif
-

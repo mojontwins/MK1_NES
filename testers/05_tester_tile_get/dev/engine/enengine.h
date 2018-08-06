@@ -335,7 +335,7 @@ void enems_load (void) {
 						break;
 				#endif
 
-				#ifdef ENABLE_PURSUERS		
+				#ifdef ENABLE_PURSUERS
 					case 7:
 						// Pursuers
 						_en_ct = DEATH_COUNT_EXPRESSION;	
@@ -416,6 +416,7 @@ void enems_load (void) {
 						_en_state = 0;
 						CATACROCK_WAIT = _en_ct = rdm << 5;
 						break;
+				#endif
 
 				#ifdef ENABLE_BOIOIONG
 					case 13:
@@ -426,8 +427,10 @@ void enems_load (void) {
 							_en_y = _en_y1;							
 						#endif
 						enems_boioiong_init ();
+						_en_mx = rdm; // Store
 						_en_s = BOIOIONG_BASE_SPRID;
 						break;
+				#endif
 
 				#ifdef ENABLE_COMPILED_ENEMS
 					case 20:
@@ -437,7 +440,7 @@ void enems_load (void) {
 							_en_y = _en_y1;							
 						#endif
 						_en_ct = 0;
-						_en_s = COMPILED_ENEMS_BASE_SPRID;
+						en_rawv [gpit] = _en_s = COMPILED_ENEMS_BASE_SPRID;
 						en_behptr [gpit] = en_behptrs [rda];
 						_en_x1 = 1; 	// Repurpose for speed
 						break;
@@ -581,7 +584,7 @@ void enems_move (void) {
 
 		if (_en_t == 0) continue;
 		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
-		
+	
 		// Clear selected sprite
 		// Means don't render (can/will be overwritten):
 		en_spr = 0xff;
@@ -606,8 +609,10 @@ void enems_move (void) {
 						en_spr = en_spr_id [gpit];	
 					} 
 				#else
+					rda = frame_counter & 0xf;
 					oam_index = oam_meta_spr (
-						_en_x, _en_y + SPRITE_ADJUST, 
+						_en_x + jitter [rda],
+						_en_y + jitter [15 - rda] + SPRITE_ADJUST, 
 						oam_index, 
 						spr_enems [ENEMS_EXPLODING_CELL]
 					);
@@ -831,6 +836,9 @@ void enems_move (void) {
 				#ifdef ENABLE_MONOCOCOS
 					|| (_en_t == 11 && _en_mx != 2)
 				#endif
+				#ifdef ENABLE_BOIOIONG
+					|| (_en_t == 13 && _en_ct == 0)
+				#endif
 			) goto skipdo;
 
 			// Collide with player (includes step over enemy)
@@ -917,14 +925,15 @@ void enems_move (void) {
 				#endif
 
 				#ifdef PLAYER_SPINS
-					// If spinning and not a saw or a steady shooter, kill enemy, don't kill player
+					// If spinning and not a saw or a steady shooter 
+					// kill enemy, don't kill player
 					if (pspin
 						#ifndef STEADY_SHOOTER_KILLABLE
 							&& _en_t != 5
 						#endif	
 						#ifdef ENABLE_SAW
 							&& _en_t != 8
-						#endif						
+						#endif
 					) {
 						en_sg_2 = 0;
 						en_sg_1 = 1;
@@ -939,7 +948,7 @@ void enems_move (void) {
 					if (en_sg_1) enems_hit ();
 				#endif
 				if (en_sg_2) { 
-					pkill = 1; touched = 1; 
+					pkill = 1; 
 					#ifdef PLAYER_BOUNCES
 						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
 						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
@@ -954,6 +963,7 @@ void enems_move (void) {
 
 					#endif	
 				}
+				touched = 1; 
 			}
 
 			// Is enemy killable? If not, exit

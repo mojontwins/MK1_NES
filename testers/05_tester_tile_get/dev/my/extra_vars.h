@@ -13,6 +13,9 @@ unsigned char prings, oprings;	// Rings collected.
 unsigned char pemmeralds;		// Emmeralds collected, bitwise.
 unsigned char level_world;		// We need those
 unsigned char level_act;
+unsigned char underwater;		// To make our life easier in Wet Ruins Zone
+unsigned char bubble_x; 
+unsigned char bubble_y;			// Eye candy
 
 // To animate the ring we will use those metasprites:
 

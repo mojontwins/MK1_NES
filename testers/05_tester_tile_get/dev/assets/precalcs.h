@@ -44,3 +44,8 @@
 const unsigned char bits [] = {
 	1, 2, 4, 8, 16, 32, 64, 128
 };
+
+#ifdef ENEMS_MAY_DIE
+	const unsigned char jitter [] = { 0,1,1,0,0,1,0,1,1,0,0,0,1,0,1,1 };
+#endif
+

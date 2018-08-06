@@ -101,9 +101,31 @@ const unsigned char * const spr_enems2 [] = {
 	sspez_00, sspez_01
 };
 
+const unsigned char * const spr_enems3 [] = {
+	// Linear enems and platforms (ids 1-4)
+	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
+	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
+	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
+	ssplat_02, ssplat_03, 0, 0, ssplat_02, ssplat_03, 0, 0, // Platform (4)
+
+	// Explosion (offset 32)
+	ssexpl_00, 
+
+	// Occluding (offset 33)
+	ssoccl_00,
+
+	// Steady Shooter (offset 34)
+	0, 0, 0, 0,
+	0, 0, 0, 0,
+
+	// Boss (offset 42)
+	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
+	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 	
+};
+
 // Item metasprites
-// nothing, object, key, refill, emmerald
+// nothing, object, key, refill, emmerald, timer
 const unsigned char * const spr_hs [] = {
-	0, ssit_08, 0, ssit_02, ssit_07
+	0, ssit_08, 0, ssit_02, ssit_07, ssit_01
 };
 

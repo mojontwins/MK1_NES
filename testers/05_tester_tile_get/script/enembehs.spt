@@ -46,3 +46,28 @@ BEGIN beh1
 	SPEED 1
 	RETURN START
 END
+
+# Boss 2: Hover around and produces boioiongs (via EXTERN)
+BEGIN beh2
+	:START
+	SPEED 4
+	RIGHT 6
+	SPEED 1
+	DOWN 3
+	IDLE 1
+	EXTERN 1
+	IDLE 1
+	UP 3
+	SPEED 4
+	LEFT 6
+	LEFT 5
+	SPEED 1
+	DOWN 3
+	IDLE 1
+	EXTERN 0
+	IDLE 1
+	UP 3
+	SPEED 4
+	RIGHT 5
+	RETURN START
+END

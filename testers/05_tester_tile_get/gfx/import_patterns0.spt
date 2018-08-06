@@ -31,7 +31,7 @@ MAPPED 0, 0, 2, 2, 16, 2, 22
 OPEN ts3.png
 PALS palts3.png
 LABEL ts3
-MAPPED 0, 0, 2, 2, 16, 2, 23
+MAPPED 0, 0, 2, 2, 16, 2
 
 FILL 4096
 RESETPOOL
@@ -44,6 +44,7 @@ MAPFILE ..\dev\assets\spritedata.h
 
 # Bits
 CHARSET 14, 0, 2, 1
+CHARSET 0, 20, 12, 1
 
 # Player sprites
 LABEL sspl

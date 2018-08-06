@@ -4333,5 +4333,40 @@ Para la fase del bosque de badajoz tengo enemigos lineales, monococs, boss, cata
 
 La primera fase de jungla puedo hacerla con otra ambientación (nocturna), o dejar la fase de jungla actual como fase primera y luego hacer la nueva como segunda nocturna. En este caso tendría que eliminar la esmeralda para recolocarla.
 
+20180806
+========
+
+Aunque hay mucho que probar, validar y afinar, estoy pensando fumarme la fase "rawra", que no ofrece nada, y tratar de seguir implementando el juego original. No cabrá, pero llegaré hasta donde pueda.
+
+La fase "Labyrinth" tiene el tema de que hay pantallas inundadas. En las pantallas inundadas cambia la física y hay que recoger oxígeno.
+
+¿Cómo podría replicar todo esto en el motor?. El cambio de la física lo veo difícil, sin tocar core, que es la idea. Pero el tema de aguantar la respiración lo veo más sencillo:
+
+* Tengo un timer que puedo arrancar y reiniciar cuando quiera. Tengo una forma de detectar que el timer llega a cero muy sencilla. 
+* Para "recargar" oxígeno puedo poner hotspots. Además, puedo hacer que estos hotspots se regeneren continuamente, por si hubiera que coger oxígeno más veces.
+
+Tengo que detectar que llego a la zona del mapa donde empieza a estar inundado y:
+
+1.- Cambiar la paleta y poner una versión "más verdosa".
+2.- Iniciar el timer.
+3.- Usar recargas de tiempo como "recargas de oxígeno"
+4.- Añadir al marcador la cuenta atrás, pero sólo para esta fase y si las pantallas estás sumergidas. ¿30 segundos?
+5.- Matar al jugador cuando el timer llegue a 0.
+6.- Añadir respawners para las recargas de tiempo.
+
+Pero antes voy a probar una cosa. ¡Funciona!
+
+Si en `my/extra_routines.h` pongo limitadores de velocidad, puedo medio modificar la física, al menos lo suficiente para moverse más lento. No puedo tocar las aceleraciones, pero bueno, algo es algo:
+
+```c
+    if (pvx < -128) pvx = -128;
+    if (pvx > 128) pvx = 128;
+    if (pvy > 128) pvy = 128;
+```
+
+(Por ejemplo).
+
 ~~
+
+Pero ahora hay un millón de gráficos y mapas que hacer, y eso es lo chungo.
 

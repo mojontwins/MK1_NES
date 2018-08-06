@@ -19,3 +19,10 @@ if (
 gpit = 3; while (gpit --) if (en_t [gpit] == 0x14) en_life [gpit] = 8;
 */
 if (en_t [0] == 0x14) en_life [0] = 8;
+
+if (level_world == 3) {
+	// Set underwater screens
+	timer_on = underwater = (level_act == 2 || n_pant >= 10);
+
+	pal_bg (underwater ? palts3a : palts3);
+}

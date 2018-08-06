@@ -37,27 +37,49 @@ switch (level) {
 	case 6:
 	case 7:
 	case 8:
-		// Bosque de Badajoz Zone embellishments
+	case 9:
+	case 10:
+	case 11:
+		
 		for (gpit = 0; gpit < 192; gpit ++) {
 			rdt = map_buff [gpit];
+			rdb = rand8 ();
 
-			if (gpit > 16) {
-				rda = map_buff [gpit - 16];
-				if (rdt == 8) {
-					if (rda == 4) rdt = 16;
-					else if (rda == 6) rdt = 17;
-				} else if (rdt == 10 && rda == 13) rdt = 20;
-				else if (rdt == 2 && rda != 2 && rda != 19) rdt = 3;
-			}
-			if (gpit < 176) {
-				rda = map_buff [gpit + 16];
-				if (rdt == 0 && rda == 2) rdt = 19;
-				else if (rdt == 2 && rda != 2) rdt = 18;
+			if (level < 9) {
+				// Bosque de Badajoz Zone embellishments
+
+				if (gpit > 16) {
+					rda = map_buff [gpit - 16];
+					if (rdt == 8) {
+						if (rda == 4) rdt = 16;
+						else if (rda == 6) rdt = 17;
+					} else if (rdt == 10 && rda == 13) rdt = 20;
+					else if (rdt == 2 && rda != 2 && rda != 19) rdt = 3;
+				}
+				if (gpit < 176) {
+					rda = map_buff [gpit + 16];
+					if (rdt == 0 && rda == 2) rdt = 19;
+					else if (rdt == 2 && rda != 2) rdt = 18;
+				}
+			} else {
+				// Wet Ruins Zone embellishments				
+
+				switch (rdt) {
+					case 1:
+						rdt = 16 + (rdb & 3);
+						break;
+					case 8:
+					case 12:
+						rdt = 16 + rdt + (gpit & 1) + ((gpit >> 3) & 2);
+						break;
+				}
 			}
 		
-			if (rdt == 0 && (rand8 () & 7) == 1) rdt = 21;
+			if (rdt == 0 && (rdb & 7) == 1) rdt = 21;
 
 			map_buff [gpit] = rdt;
 		}
 		break;
+	
+
 }

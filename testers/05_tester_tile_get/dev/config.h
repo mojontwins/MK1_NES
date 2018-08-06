@@ -57,7 +57,7 @@
 //#define HOTSPOT_TYPE_KEYS		2
 #define HOTSPOT_TYPE_REFILL		3
 //#define HOTSPOT_TYPE_AMMO		4
-//#define HOTSPOT_TYPE_TIME		5		// For time refills
+#define HOTSPOT_TYPE_TIME		5		// For time refills
 
 //#define HOTSPOT_TYPE_RESONATOR 	4		// An example of custom hotspot
 //#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
@@ -248,13 +248,13 @@
 
 // Timer. 
 
-//#define ENABLE_TIMER
-#define TIMER_INITIAL					99
-#define TIMER_START_ON
-#define TIMER_REFILL					30
+#define ENABLE_TIMER
+#define TIMER_INITIAL					20
+//#define TIMER_START_ON
+#define TIMER_REFILL					0	// Set to 0 and time refills will set timer = TIMER_INITIAL
 //#define TIMER_RESET_ON_ENTER
-//#define TIMER_TIME_FLAG				0	// Useful with scripting. Copies time to flag
-//#define TIMER_ZERO_FLAG 				1	// Useful with scripting. raises flag when time zero
+//#define TIMER_TIME_FLAG				0	// [DEPRECATED] Useful with scripting. Copies time to flag
+//#define TIMER_ZERO_FLAG 				1	// [DEPRECATED] Useful with scripting. raises flag when time zero
 #define TIMER_SOUND						10  // play a sound if timer < value
 
 
@@ -274,14 +274,14 @@
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
-#define ENEMS_TOUCHED_FRAMES			8	// # frames to stay frozen after hit
+#define ENEMS_TOUCHED_FRAMES			16	// # frames to stay frozen after hit
 //#define ENEMS_RECOIL_ON_HIT  			2	// horizontal recoil when hit, #ifdef, value is speed in pixels!
 //#define ENEMS_RECOIL_OVER_BOUNDARIES		// (x1,y1), (x2,y2) boundaries don't stop a recoil
 
 //#define ENEMS_ENABLE_DYING_FRAME
 
 #define ENEMS_EXPLODING_CELL 			32
-#define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
+//#define ENEMS_EXPLODING_CELLS_HIDES			// Define and the baddie will be substituted by the explosion
 
 #define ENEMS_OCCLUDING_CELL			33	// If you use pezons or saws you need a flame for occlusion
 
@@ -389,6 +389,7 @@
 
 #define ENABLE_BOIOIONG
 #define BOIOIONG_G 						16
+#define BOIOIONG_VY_MAX					256
 #define BOIOIONG_BASE_SPRID				54
 //#define BOIOIONG_ACTIVE_BY_DEFAULT		// Define and they are active by default
 //#define BOIOIONG_INITIAL_TIMER		200	// If active by default, time to be active in frames
