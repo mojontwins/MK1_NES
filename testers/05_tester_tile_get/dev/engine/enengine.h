@@ -618,7 +618,7 @@ void enems_move (void) {
 						spr_enems [ENEMS_EXPLODING_CELL]
 					);
 					#ifndef ENEMS_EXPLODING_CELLS_HIDES
-						en_spr = en_spr_id [gpit];
+						if (en_life [gpit]) en_spr = en_spr_id [gpit];
 					#endif
 				#endif
 
@@ -823,6 +823,9 @@ void enems_move (void) {
 
 			if (
 					en_is_alive == 0	// General condition.
+				#ifdef ENEMS_MAY_DIE
+					|| en_cttouched [gpit]
+				#endif
 				#ifndef PLAYER_TOP_DOWN				
 					|| _en_t == 4
 				#endif

@@ -375,11 +375,11 @@
 
 // Steady shooters
 
-//#define ENABLE_STEADY_SHOOTERS
-#define STEADY_SHOOTERS_BASE_SPRID		44
-#define STEADY_SHOOTER_KILLABLE
-#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
-//#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
+#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		34
+//#define STEADY_SHOOTER_KILLABLE
+//#define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
+#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
 
 // Compiled enemies
 

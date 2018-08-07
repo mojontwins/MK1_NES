@@ -115,7 +115,7 @@ const unsigned char * const spr_enems3 [] = {
 	ssoccl_00,
 
 	// Steady Shooter (offset 34)
-	0, 0, 0, 0,
+	sscan_00, sscan_01, sscan_02, sscan_03,
 	0, 0, 0, 0,
 
 	// Boss (offset 42)
