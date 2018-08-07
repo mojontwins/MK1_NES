@@ -12,6 +12,10 @@ The file `my/extra_vars.h` lets you define new variables in the BSS segment. For
     unsigned char myvar;
 ```
 
+### extra modules
+
+We can add our own library of functions to the project by `#include`ing the code directly in `my/extra_modules.h`.
+
 ### extra inits
 
 The file `my/extra_inits.h` is included right after the code which initializes the level before playing. You can use this code injection point to initialize your custom variables:
@@ -41,17 +45,11 @@ For example, [Cheril Perils Classic](https://github.com/mojontwins/MK1_NES/tree/
 
 `hrt` is the value of the current, active hotspot.
 
-### extra checks
+### extra routines
 
-The file `my/extra_checks.h` is included in the main loop, so the code you add here will be run each game frame. This is the place, for example, to add the "win level" condition if you defined `WIN_LEVEL_CUSTOM` in `config.h`. Just set `win_level` to true if the win level condition is met. For example:
+If you need to call extra functions of perform tasks every frame, add your code to `my/extra_routines.h`. This code is included right after every actor has updated and changes made there will be output in the current frame.
 
-```c
-    win_level = (c_max_enems == pkilled);
-```
-
-Will end the level if the player has killed all enemies in this level.
-
-As it is run each game frame, you can use it for stuff that are not strictly conditions, for example cycle a palette:
+As it is run each game frame, you can use it for example to cycle a palette:
 
 ```c
 if (level < 2 && (frame_counter & 7) == 0 ) {
@@ -67,6 +65,16 @@ if (level < 2 && (frame_counter & 7) == 0 ) {
 }
 ```
 
+### extra checks
+
+The file `my/extra_checks.h` is included in the main loop, so the code you add here will be run each game frame. This is the place, for example, to add the "win level" condition if you defined `WIN_LEVEL_CUSTOM` in `config.h`. Just set `win_level` to true if the win level condition is met. For example:
+
+```c
+    win_level = (c_max_enems == pkilled);
+```
+
+Will end the level if the player has killed all enemies in this level.
+
 ## Adding support for new hotspot types.
 
 You can add your own custom hotspot types easily by adding code to `my/extra_hotspots.h`. For each custom hotspot type you want to create, just add a code block like this:
@@ -79,6 +87,24 @@ You can add your own custom hotspot types easily by adding code to `my/extra_hot
 ```
 
 If `rda != 0`, the engine will play such sound on interaction.
+
+## Related to collisions
+
+If the player is collided by cocos, enemies or spikes, special code can be executed.
+
+### Colliding with cocos
+
+When the player collides with cocos, `en_sg_2` will be set and the code in `my/on_player_coco.h` will be executed. You can do extra checks or perform extra actinons. If you reset `en_sg_2`, the player won't get hurt.
+
+### Colliding with enemies
+
+When the player collides with enemies, `en_sg_2` will be set and `en_sg_1` will be reset, then the code in `my/on_player_hit.h` is executed. You can do extra checks or perform extra actions. If you reset `en_sg_2` the player won't get hurt. If you set `en_sg_1`, the enemy will get hurt.
+
+### Colliding with spikes
+
+When the player collides with spikes, `en_sg_2` will be set and the code in `my/on_player_spike.h` will be executed. You can do extra checks or perform extra actinons. If you reset `en_sg_2`, the player won't get hurt.
+
+In sum, `en_sg_1` controls the enemy being hurt (if applies) and `en_sg_2` controls the player getting hurt.
 
 ## Related to objects
 
@@ -109,6 +135,12 @@ For example, in [Cheril the writer](https://github.com/mojontwins/MK1_NES/tree/m
 ```
 
 `ht [9]` is *the contents of the hotspot in screen 9*; `6` is the number of the object, so `6 + 2*HS_USE_OFFS` means *object 6 used*.
+
+## Timer
+
+If you have the timer on, everytime the timer ticks the code in `my/on_timer_ticks.h` will be executed. 
+
+The timer current value is in `timer`. `timer_zero` will be set when the timer reaches zero.
 
 ## Related to interactives
 

@@ -271,6 +271,96 @@ In the screen there are two Boioiong type enemies. The engine is configured so B
 
 Level 4 has underwater sections. In those (when `n_pant >= 10` on 5x5 screens levels), the timer is on and counting down. Time refills are "oxygen recharges" and will be custom-respawned everytime the player enters a screen. On timer off, the player will be killed. 
 
+We have created an `underwater` variable in `my/extra_vars.h` to make detection easier between different modules. We also add variables to move around a little bubble, which helps the player knowing we are underwater.
+
+```c
+    unsigned char underwater;
+    unsigned char bubble_x; 
+    unsigned char bubble_y;
+```
+
+The variable is to be given a value everytime time player enters a new screen, so we add this to `my/on_entering_screen.h`:
+
+```c
+    if (level_world == 3) {
+        // Set underwater screens
+        timer_on = underwater = (level_act == 2 || n_pant >= 10);
+
+        pal_bg (underwater ? palts3a : palts3);
+    }
+```
+
+In `level_world` 3, in the whole act 2 or in screens >= 10 in acts 0 and 1, `underwater` is on. Also the timer, which we will use as an oxygen indicator. Also, the palette is changed if we are under water.
+
+Speaking of the timer, this is the configuration in `config.h`:
+
+```c
+#define ENABLE_TIMER
+#define TIMER_INITIAL                   20
+//#define TIMER_START_ON
+#define TIMER_REFILL                    0 
+//#define TIMER_RESET_ON_ENTER
+#define TIMER_SOUND                     10 
+```
+
+Note how we have configured the timer to be 20 initially. Also, it won't start automaticly (`TIMER_START_ON` is commented out). Time refills should refill the timer completely (back to `TIMER_INITIAL`, or 20), so `TIMER_REFIL` has been given a value of 0. `TIMER_SOUND` will make ticks audible for the last 10 seconds.
+
+To work with timer, a very appropriate place to add or code is in the `my/on_timer_tick.h` code injection point. Code added there will be executed everytime the timer ticks, that is, when its value changes.
+
+If underwater, we'll spawn a bubble (for eye candy) and check if the timer reached 0, in such case we kill the player:
+
+```c
+    if (underwater) {
+        // spawn a bubble
+        bubble_x = prx; bubble_y = pry - 8; 
+
+        // Kill player.
+        if (timer_zero) {
+            psprid = CELL_HIT;
+            pkill = 1;
+        }
+    }
+```
+
+Finally, we want the bubble to animate, and we also want to make Espitene move slower. To make the main character move slower, we are using a rather cheesy sollution which seems to work quite nicely for this game: arbitrarily limiting the maximum speed in both axes. Remember the code injection point for routines that have to run every frame is `my/extra_routines.h`. We add this:
+
+```c
+    // Underwater
+    if (underwater) {
+        // slower movements. Cheesy but kinda works!
+        if (pvx < -96) pvx = -96;
+        else if (pvx > 96) pvx = 96;
+
+        if (pvy > 96) pvy = 96;
+        if (pvy < -160 && !ptrampoline) pvy = -160;
+
+        // Update bubble
+        if (bubble_y) {
+            rda = rand8 ();
+
+            bubble_y --;            
+            bubble_x += ((rda & 2) - 1);
+
+            oam_index = oam_spr (
+                bubble_x, bubble_y + SPRITE_ADJUST, 
+                0x0c + (rda & 1),
+                2, 
+                oam_index
+            );
+        }
+
+        // Update countdown
+        if (timer && timer < 10) oam_index = oam_spr (
+            prx, pry - 16 + SPRITE_ADJUST - (12 - (timer_frames >> 2)), 
+            2 + timer, 
+            2, 
+            oam_index
+        );
+    }
+```
+
+We added a nice countdown if the timer is < 10, using sprites.
+
 ## Also of interest
 
 ### Custom renderer
@@ -279,17 +369,32 @@ The game features a nice custom renderer, like most AGNES games. For worlds 0 an
 
 Worlds 0 and 1 correspond to levels 0 to 5. Levels 3 to 5 (world 1) also feature a strip if water tiles at the bottom of each screen in the bottom row of the map.
 
+Levels 6 to 8 and 9 to 11 have several tile substitutions for embellishments. Levels 9 to 11 substitute single tiles by 2x2 tiles clusters automaticly. This saves tons of bytes in RLE compressed maps, but such 2x2 tiles are always rendered in coordinates which are multiples of two.
+
 ```c
+// NES MK1 v1.0
+// Copyleft Mojon Twins 2013, 2015, 2017, 2018
+
+// Use this alongisde map_renderer_complex.h
+// (#define MAP_RENDERER_COMPLEX)
+
+// Reaching this point, map_buff has the decompressed map screen.
+// You can write as many modifications as you like here:
+
+set_rand (n_pant + 1);
+
 switch (level) {
     case 3:
     case 4:
     case 5:
+        // Strip of water at the bottom of the level
         if (level != 3 || n_pant > 14) {
             for (gpit = 176; gpit < 192; gpit ++) map_buff [gpit] = 18;
         }
     case 0:
     case 1:
     case 2:
+        // Random clouds, find a nice spot but don't try hard
         gpit = 4; while (gpit --) {
             gpjt = 4; while (gpjt --) {
                 rdx = rand8 () & 0xf;
@@ -303,8 +408,52 @@ switch (level) {
             }
         }
         break;
-    [...]
-    }
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+        for (gpit = 0; gpit < 192; gpit ++) {
+            rdt = map_buff [gpit];
+            rdb = rand8 ();
+
+            if (level < 9) {
+                // Bosque de Badajoz Zone embellishments
+
+                if (gpit > 16) {
+                    rda = map_buff [gpit - 16];
+                    if (rdt == 8) {
+                        if (rda == 4) rdt = 16;
+                        else if (rda == 6) rdt = 17;
+                    } else if (rdt == 10 && rda == 13) rdt = 20;
+                    else if (rdt == 2 && rda != 2 && rda != 19) rdt = 3;
+                }
+                if (gpit < 176) {
+                    rda = map_buff [gpit + 16];
+                    if (rdt == 0 && rda == 2) rdt = 19;
+                    else if (rdt == 2 && rda != 2) rdt = 18;
+                }
+            } else {
+                // Wet Ruins Zone embellishments                
+
+                switch (rdt) {
+                    case 1:
+                        rdt = 16 + (rdb & 3);
+                        break;
+                    case 8:
+                    case 12:
+                        rdt = 16 + rdt + (gpit & 1) + ((gpit >> 3) & 2);
+                        break;
+                }
+            }
+        
+            if (rdt == 0 && (rdb & 7) == 1) rdt = 21;
+
+            map_buff [gpit] = rdt;
+        }
+        break;
+}
 ```
 
 ### Win level condition

@@ -339,6 +339,12 @@ void game_loop (void) {
 			half_life ^= 1;
 			++ frame_counter;
 
+			// Update player
+
+			if (!warp_to_level) {
+				player_move ();
+			}
+
 			// Timer
 
 			#ifdef ENABLE_TIMER
@@ -368,12 +374,6 @@ void game_loop (void) {
 			// Update / collide hotspots
 
 			#include "mainloop/hotspots.h"
-
-			// Update player
-
-			if (!warp_to_level) {
-				player_move ();
-			}
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
 

@@ -40,7 +40,7 @@
 		}
 
 		// Update countdown
-		if (timer < 10) oam_index = oam_spr (
+		if (timer && timer < 10) oam_index = oam_spr (
 			prx, pry - 16 + SPRITE_ADJUST - (12 - (timer_frames >> 2)), 
 			2 + timer, 
 			2, 
