@@ -4370,3 +4370,14 @@ Si en `my/extra_routines.h` pongo limitadores de velocidad, puedo medio modifica
 
 Pero ahora hay un millón de gráficos y mapas que hacer, y eso es lo chungo.
 
+20180807
+========
+
+Parece increíble lo bien que está resultando todo. Está quedando un juego super apañado, y supuestamente esto era un tester. Voy a tener que promocionarlo a ejemplo.
+
+Creo que me va a dar para hacer el Scrap Brain Zone (nombre a inventar), con cintas transportadoras (configuradas para que arrastren más rápido de lo que suelo ponerlas) y chac chacs (si eso). Pero antes tengo que terminar el laberinto e idear una forma de hacer el boss.
+
+Como hay 20 segundos para matarlo a lo mejor basta con hacer algo muy sencillo (recorrido rollo fase 1) pero dejar al personaje trepar e ir a buscar al malo bajo el agua.
+
+~~
+

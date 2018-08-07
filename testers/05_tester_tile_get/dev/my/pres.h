@@ -35,7 +35,7 @@ void pres (const unsigned char *p, void (*func) (void)) {
 const unsigned char level_name_0 [] = "BENNY HILL[]]]]]";
 const unsigned char level_name_1 [] = "BROKEN FRIDGE[]]";
 const unsigned char level_name_2 [] = "BOSQUE BADAJOZ[]";
-const unsigned char level_name_3 [] = "ESTO ES RAWRO[]]";
+const unsigned char level_name_3 [] = "WET RUINS[]]]]]]";
 
 const unsigned char * const level_names [] = {
 	level_name_0, level_name_1, level_name_2, level_name_3

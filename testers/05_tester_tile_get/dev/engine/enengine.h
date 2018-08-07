@@ -590,6 +590,7 @@ void enems_move (void) {
 		en_spr = 0xff;
 
 		// "touched" state control
+		en_spr_x_mod = 0;
 
 		#ifdef ENEMS_MAY_DIE
 			if (en_cttouched [gpit]) {
@@ -619,6 +620,10 @@ void enems_move (void) {
 					#ifndef ENEMS_EXPLODING_CELLS_HIDES
 						en_spr = en_spr_id [gpit];
 					#endif
+				#endif
+
+				#ifdef ENEMS_TREMBLE
+					en_spr_x_mod = half_life;
 				#endif
 
 				#ifdef ENEMS_RECOIL_ON_HIT
@@ -1086,7 +1091,7 @@ skipdo:
 
 		if (en_spr != 0xff) {
 			oam_index = oam_meta_spr (
-				_en_x, _en_y + SPRITE_ADJUST, 
+				_en_x + en_spr_x_mod, _en_y + SPRITE_ADJUST, 
 				oam_index, 
 				spr_enems [en_spr]
 			);

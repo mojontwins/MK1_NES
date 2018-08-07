@@ -271,6 +271,8 @@
 //#define ENEMS_FLICKER_ONLY_ON_DYING		// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
 
+#define ENEMS_TREMBLE						// Make enemies tremble when hit
+
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 

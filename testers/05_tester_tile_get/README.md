@@ -267,6 +267,10 @@ The boss in the Bosque de Badajoz Zone (third world) is specially interesting as
 
 In the screen there are two Boioiong type enemies. The engine is configured so Boioiong are not active. Whenever the boss gets to the lowest points of its trajectory, it will call `EXTERN 0` or `EXTERN 1` which will reinit and activate one of the Boioiongs in the correct spot so it seems that the ship with Somari is throwing the bombs.
 
+Scripting compiled enemies is pretty straightforward. You define a section for each, then they map to the ARG you define when placing the enemy in `ponedor` (0 is the first).
+
+Compiled enemies script must be loops: they should start with a label and end with `RETURN label`. Commands in between instruct the enemy to move around, wait for N half-seconds, shoot, or change speed.
+
 ## Underwater
 
 Level 4 has underwater sections. In those (when `n_pant >= 10` on 5x5 screens levels), the timer is on and counting down. Time refills are "oxygen recharges" and will be custom-respawned everytime the player enters a screen. On timer off, the player will be killed. 

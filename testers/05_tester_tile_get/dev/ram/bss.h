@@ -212,6 +212,8 @@ unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = faci
 
 unsigned char en_state [3];             // Enemy State
 
+unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
+
 #ifdef ENEMS_CAN_RESPAWN
     unsigned char en_respawn [3];       // If true, enems can respawn.
     unsigned char en_resx [3];
