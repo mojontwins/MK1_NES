@@ -71,3 +71,40 @@ BEGIN beh2
 	RIGHT 5
 	RETURN START
 END
+
+# Boss 3: The key is to finish this one quickly. It's not very hard.
+BEGIN beh3
+	:START
+	SPEED 4
+	DOWN 5
+	DOWN 5
+	LEFT 6
+	SPEED 2
+	UP 4
+	IDLE 2
+	FIRE
+	IDLE 2
+	DOWN 4
+	SPEED 4
+	LEFT 6
+	UP 5
+	UP 5
+	RIGHT 3
+	SPEED 2
+	DOWN 4
+	IDLE 1
+	FIRE 
+	IDLE 2
+	UP 4
+	SPEED 4
+	RIGHT 6
+	SPEED 2
+	DOWN 4
+	IDLE 1
+	FIRE
+	IDLE 2
+	UP 4
+	SPEED 4
+	RIGHT 3
+	RETURN START
+END

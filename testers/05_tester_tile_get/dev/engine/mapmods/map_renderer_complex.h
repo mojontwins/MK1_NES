@@ -11,15 +11,13 @@
 void add_tile (void) {
 	map_buff [rdm] = rda;
 	++ rdm;
-	// Need to do this to keep track of where I am
-	rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 }
 
 void draw_scr (void) {
 
 	// Draw Map
 
-	rdx = rdy = rdm = 0;
+	rdm = 0;
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer
@@ -119,13 +117,13 @@ void draw_scr (void) {
 	#ifdef MAP_FORMAT_RLE44_CHRROM
 		bankswitch (c_map_chr_rom_bank);
 		vram_adr (c_map [n_pant]);
-		rda = VRAM_READ; 	// Dummy read.
+		rdt = VRAM_READ; 	// Dummy read.
 		
 		// UNRLE into scr_buff
 		while (rdm < 192) {
 			rdt = VRAM_READ;
 			rda = rdt & 0x0f;
-			
+
 			rdct = rdt;
 			while (rdct >= 16) {
 				add_tile (); rdct -= 16;

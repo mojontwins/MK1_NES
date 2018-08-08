@@ -108,6 +108,7 @@ extern const unsigned char m_ingame [];
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
+	set_vram_update (0, 0);
 
 	ppu_off ();
 	first_game = 1;
@@ -128,7 +129,7 @@ void main(void) {
 		//
 
 //DEBUG
-level = 9; level_world = 3; level_act = 0; pemmeralds = 7;
+level = 11; level_world = 3; level_act = 2; pemmeralds = 15;
 
 		// Game loop
 

@@ -360,10 +360,28 @@ Finally, we want the bubble to animate, and we also want to make Espitene move s
             2, 
             oam_index
         );
+
+        [...]
     }
 ```
 
 We added a nice countdown if the timer is < 10, using sprites.
+
+We also want to respawn type 5 hotspots (time refills) automaticly:
+
+```c
+    // Underwater
+    if (underwater) {
+        
+        [...]
+
+        // Respawn time refills
+        if (ht [n_pant] == HOTSPOT_TYPE_TIME && timer < 10) {
+            hrt = HOTSPOT_TYPE_TIME;
+            hact [n_pant] = 1;
+        }
+    }
+```
 
 ## Also of interest
 

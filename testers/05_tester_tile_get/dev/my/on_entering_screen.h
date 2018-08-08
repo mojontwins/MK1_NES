@@ -15,9 +15,7 @@ if (
 ) hrt = 0;
 
 // Make bosses more resistant
-/*
-gpit = 3; while (gpit --) if (en_t [gpit] == 0x14) en_life [gpit] = 8;
-*/
+// Boss is always enemy on screen
 if (en_t [0] == 0x14) en_life [0] = 8;
 
 if (level_world == 3) {

@@ -46,4 +46,11 @@
 			2, 
 			oam_index
 		);
+
+		// Respawn time refills
+		if (ht [n_pant] == HOTSPOT_TYPE_TIME && timer < 10) {
+			hrt = HOTSPOT_TYPE_TIME;
+			hact [n_pant] = 1;
+		}
 	}
+	

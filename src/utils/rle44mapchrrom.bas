@@ -173,6 +173,12 @@ While Not Eof (fListIn)
 		cMapAmalgam (i) = ""
 	Next i
 
+	Clear bigMap (0,0), , 256*128*sizeOf (uByte)
+	Clear cMap (0,0), , 256*128*sizeOf (uByte)
+	Clear scrSizes (0), , 128*sizeOf (uByte)
+	Clear locks (0), , 64*sizeOf (uByte)
+	Clear scrMaps (0), , 128*sizeOf(uByte)
+
 	i = 0: dp = 0
 	locksI = 0
 	decosAre = 0

@@ -17,7 +17,7 @@ const unsigned char l_ini_y [] = 				{
 													3, 3, 3,	// Benny Hill Zone
 													3, 3, 3,	// Broken Fridge Zone
 													3, 3, 3, 	// Bosque de Badajoz Zone
-													6, 3, 3, 	// Wet Ruins Zone
+													6, 6, 6, 	// Wet Ruins Zone
 												};
 const unsigned char l_map_w [] = 				{ 
 													MAP_00_W, MAP_01_W, MAP_02_W,	// Benny Hill Zone 
