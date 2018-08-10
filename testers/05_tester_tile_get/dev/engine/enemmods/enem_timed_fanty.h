@@ -5,12 +5,6 @@
 
 if (_en_ct) _en_ct --; else {
 
-	#ifdef FANTY_KILLED_BY_TILE
-		#define FANTY_OBSTACLE(a) ((a)>1)
-	#else
-		#define FANTY_OBSTACLE(a) (a)
-	#endif
-
 	// Modify v
 
 	if (px < _enf_x) {
@@ -46,10 +40,10 @@ if (_en_ct) _en_ct --; else {
 				rda = ((cx1 + 1) << 4) - 4;
 			}
 			cm_two_points ();
-			if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
+			if ((at1 & 8) || (at2 & 8)) {
 				_enf_vx = -_enf_vx;
 				_en_x = rda; 
-				_enf_x = rda << 6;
+				_enf_x = rda << FIXBITS;
 			}
 		}
 
@@ -67,20 +61,22 @@ if (_en_ct) _en_ct --; else {
 		if (_enf_vy) {
 			cx1 = (_en_x + 4) >> 4;
 			cx2 = (_en_x + 11) >> 4;
-			
+
 			if (_enf_vy > 0) {
+				rdb = 12;
 				cy1 = cy2 = (_en_y + 11) >> 4;
 				rda = ((cy2 - 1) << 4) + 4;
 			} else {
+				rdb = 8;
 				cy1 = cy2 = (_en_y + 4) >> 4;
 				rda = ((cy1 + 1) << 4) - 4;
 			}
 
 			cm_two_points ();
-			if (FANTY_OBSTACLE (at1) || FANTY_OBSTACLE (at2)) {
+			if ((at1 & rdb) || (at2 & rdb)) {
 				_enf_vy = -_enf_vy;
 				_en_y = rda;
-				_enf_y = rda << 6;
+				_enf_y = rda << FIXBITS;
 			}
 		}
 
@@ -110,3 +106,4 @@ if (_en_ct) _en_ct --; else {
 #else
 	en_spr = _en_s + en_fr;
 #endif
+

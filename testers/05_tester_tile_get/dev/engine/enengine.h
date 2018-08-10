@@ -844,6 +844,9 @@ void enems_move (void) {
 				#ifdef ENABLE_MONOCOCOS
 					|| (_en_t == 11 && _en_mx != 2)
 				#endif
+				#ifdef ENABLE_CATACROCKS
+					|| (_en_t == 12 && _en_state != 1)
+				#endif
 				#ifdef ENABLE_BOIOIONG
 					|| (_en_t == 13 && _en_ct == 0)
 				#endif

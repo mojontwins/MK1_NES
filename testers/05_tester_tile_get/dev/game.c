@@ -112,6 +112,7 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
+	ntsc = ppu_system ();
 
 	// Main loop
 
@@ -129,7 +130,7 @@ void main(void) {
 		//
 
 //DEBUG
-level = 11; level_world = 3; level_act = 2; pemmeralds = 15;
+level = 12; level_world = 4; level_act = 0; pemmeralds = 15;
 
 		// Game loop
 

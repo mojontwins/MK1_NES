@@ -9,17 +9,13 @@
 
 set_rand (n_pant + 1);
 
-switch (level) {
-	case 3:
-	case 4:
-	case 5:
+switch (level_world) {
+	case 1:
 		// Strip of water at the bottom of the level
 		if (level != 3 || n_pant > 14) {
 			for (gpit = 176; gpit < 192; gpit ++) map_buff [gpit] = 18;
 		}
 	case 0:
-	case 1:
-	case 2:
 		// Random clouds, find a nice spot but don't try hard
 		gpit = 4; while (gpit --) {
 			gpjt = 4; while (gpjt --) {
@@ -34,18 +30,16 @@ switch (level) {
 			}
 		}
 		break;
-	case 6:
-	case 7:
-	case 8:
-	case 9:
-	case 10:
-	case 11:
-		
+	case 4:
+		rdc = (map_buff [0] != 4);	// Cheap way to distinguish between outside / inside
+	case 2:
+	case 3:
+			
 		for (gpit = 0; gpit < 192; gpit ++) {
 			rdt = map_buff [gpit];
 			rdb = rand8 ();
 
-			if (level < 9) {
+			if (level_world == 2) {
 				// Bosque de Badajoz Zone embellishments
 
 				if (gpit > 16) {
@@ -61,13 +55,24 @@ switch (level) {
 					if (rdt == 0 && rda == 2) rdt = 19;
 					else if (rdt == 2 && rda != 2) rdt = 18;
 				}
-			} else {
-				// Wet Ruins Zone embellishments				
+			} else {				
+				if (level_world == 3) {
+					// Wet Ruins Zone embellishments
+					if (rdt == 1) rdt = 16 + (rdb & 3);
+				} else {
+					// Crap Brains embellishments
+					if (rdt == 1 || rdt == 3) {
+						rda = map_buff [gpit - 1];
+						if (rda != rdt && rda < 16) rdt = rdt + 16;
+						else {
+							rda = map_buff [gpit + 1];
+							if (rda != rdt && rda < 16) rdt = rdt + 17;
+						}
+					}
+				}
 
-				switch (rdt) {
-					case 1:
-						rdt = 16 + (rdb & 3);
-						break;
+				// Wet Ruins Zone & Crap Brains embellishments
+				switch (rdt) {					
 					case 8:
 					case 12:
 						rdt = 16 + rdt + (gpit & 1) + ((gpit >> 3) & 2);
@@ -75,7 +80,7 @@ switch (level) {
 				}
 			}
 		
-			if (rdt == 0 && (rdb & 7) == 1) rdt = 21;
+			if (rdt == 0 && (rdb & 7) == 1 && (rdc || level_world < 4)) rdt = 21;
 
 			map_buff [gpit] = rdt;
 		}

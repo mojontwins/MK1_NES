@@ -33,6 +33,12 @@ PALS palts3.png
 LABEL ts3
 MAPPED 0, 0, 2, 2, 16, 2
 
+# Tileset 4
+OPEN ts4.png
+PALS palts4.png
+LABEL ts4
+MAPPED 0, 0, 2, 2, 16, 2
+
 FILL 4096
 RESETPOOL
 

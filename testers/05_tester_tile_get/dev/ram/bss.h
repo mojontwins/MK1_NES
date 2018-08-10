@@ -3,6 +3,10 @@
 
 // bss
 
+// NTSC system
+
+unsigned char ntsc, ntsc_frame;
+
 // Update list (neslib)
 
 #define UPDATE_LIST_SIZE 32

@@ -515,3 +515,53 @@ The first and third acts in World 3 (level 6) are 1-screen wide levels. We have 
 
 (if you don't set `flick_override`, the engine will call `flickscreen_do_horizontal` and `flickscreen_do_vertical`).
 
+### Moving water in Broken Fridge Zone
+
+This is achieved by a sprite-0 based split. You can read about it in the [nesdev wiki](https://wiki.nesdev.com/w/index.php?title=PPU_OAM&redirect=no#Sprite_zero_hits). The sprite is set up in `my/on_entering_screen.h`. The following line puts it in place if there's a water strip on screen (see the custom renderer code above), or "invisible" (with y = 240) otherwise:
+
+```c
+    water_strip = (level_world == 1 && (level != 3 || n_pant > 14));
+    oam_spr (128, water_strip ? 211 : 240, 1, 2, 0);
+```
+
+The actual split is performed at `my/effects.h`, which gets included right before waiting for the next frame:
+
+```c
+    // Do a split in the fridge
+    if (water_strip) split (frame_counter, 0);   
+```
+
+Of course you need to define `water_strip` in `my/extra_vars.h`:
+
+```c
+    unsigned char underwater;       // To make our life easier in Wet Ruins Zone
+```
+
+### Moving water in Bosque de Badajoz Zone
+
+This is achieved via a palette cycle. We need an array to copy the three colours in the subpalette we want to cycle, defined as always in `my/extra_vars.h`:
+
+```c
+    unsigned char pal_cycle [3];
+```
+
+First thing to do is copy the last subpalette to our array. In `my/extra_inits.h`:
+
+```c
+    pal_cycle [0] = c_pal_bg [13];
+    pal_cycle [1] = c_pal_bg [14];
+    pal_cycle [2] = c_pal_bg [15];
+```
+
+The actual palette cycling is performed in `my/effects.h`. This ensure the effect is smooth and doesn't artifact in NTSC systems:
+
+```c
+    // Do a palette cycle in the jungle
+    if (level_world == 2 && (frame_counter & 7) == 0) {
+        rda = pal_cycle [2];
+        pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
+        pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);
+        pal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);
+    }
+```
+ss

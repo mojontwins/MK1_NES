@@ -20,7 +20,7 @@
 #define PLAYER_REFILL			1		// Life refill
 
 #define MULTI_LEVEL						// Comment for single level
-#define MAX_LEVELS				12
+#define MAX_LEVELS				15
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
@@ -156,7 +156,7 @@
 // For player movement values, see section 4
 // (PLAYER_VX_CONVEYORS)
 
-//#define ENABLE_CONVEYORS
+#define ENABLE_CONVEYORS
 
 // Slippery, beh & 64. (must be & 12!)
 // For player movement values, see section 4

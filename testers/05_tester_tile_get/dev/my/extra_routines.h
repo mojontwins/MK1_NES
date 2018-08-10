@@ -7,14 +7,6 @@
 	// Animate ring if active
 	ring_do ();
 
-	// Do a palette cycle in the jungle
-	if (level_world == 2 && (frame_counter & 7) == 0) {
-		rda = pal_cycle [2];
-		pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
-		pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);
-		pal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);
-	}
-
 	// Underwater
 	if (underwater) {
 		// slower movements. Cheesy but kinda works!
@@ -48,8 +40,8 @@
 		);
 
 		// Respawn time refills
-		if (ht [n_pant] == HOTSPOT_TYPE_TIME && timer < 10) {
-			hrt = HOTSPOT_TYPE_TIME;
+		if (ht [n_pant] == HOTSPOT_TYPE_TIME) {
+			if (timer < 10) hrt = HOTSPOT_TYPE_TIME;	// Reappear if needed w/o having to reenter
 			hact [n_pant] = 1;
 		}
 	}

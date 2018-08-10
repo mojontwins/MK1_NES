@@ -279,7 +279,8 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
-	level_reset = warp_to_level = 0; oam_index = 0; ticker = 50;
+	ntsc_frame = level_reset = warp_to_level = 0; 
+	oam_index = 4; ticker = 50;
 	
 	while (1) {
 
@@ -321,6 +322,10 @@ void game_loop (void) {
 			#include "mainloop/shaker.h"
 		#endif
 
+		// Effects
+
+		#include "my/effects.h"
+
 		// Finish frame and wait for NMI
 
 		update_cycle ();
@@ -333,7 +338,9 @@ void game_loop (void) {
 
 		// Update actors if not paused...
 
-		if (paused == 0) {
+		ntsc_frame ++; if (ntsc_frame == 6) ntsc_frame = 0;
+
+		if (paused == 0 && (ntsc == 0 || ntsc_frame)) {
 			// Count frames		
 			if (ticker) -- ticker; else ticker = 50;
 			half_life ^= 1;

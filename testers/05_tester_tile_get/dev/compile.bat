@@ -9,8 +9,10 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts2a.png out=work\palts2a.h label=palts2a silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3a.png out=work\palts3a.h label=palts3a silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts4.png out=work\palts4.h label=palts4 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0a.png out=work\palss0a.h label=palss0a silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss1.png out=work\palss1.h label=palss1 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltstitle.png out=work\paltstitle.h label=paltstitle silent
 copy /b work\pal*.h assets\palettes.h > nul
 
@@ -37,9 +39,13 @@ cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level31.ene ..\dev\work\enems31.h 31 1 gencounter bin
 ..\..\..\src\utils\eneexp3.exe level32.ene ..\dev\work\enems32.h 32 1 gencounter bin
 
+..\..\..\src\utils\eneexp3.exe level40.ene ..\dev\work\enems40.h 40 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level41.ene ..\dev\work\enems41.h 41 1 gencounter bin
+..\..\..\src\utils\eneexp3.exe level42.ene ..\dev\work\enems42.h 42 1 gencounter bin
+
 cd ..\dev
 copy /b work\enems*.h assets\enem_constants.h > nul
-..\..\..\src\utils\binpaster.exe index=assets\enem_index.h out=work\enems.bin files=work\enems00.h.bin,work\enems01.h.bin,work\enems02.h.bin,work\enems10.h.bin,work\enems11.h.bin,work\enems12.h.bin,work\enems20.h.bin,work\enems21.h.bin,work\enems22.h.bin,work\enems30.h.bin,work\enems31.h.bin,work\enems32.h.bin
+..\..\..\src\utils\binpaster.exe index=assets\enem_index.h out=work\enems.bin files=work\enems00.h.bin,work\enems01.h.bin,work\enems02.h.bin,work\enems10.h.bin,work\enems11.h.bin,work\enems12.h.bin,work\enems20.h.bin,work\enems21.h.bin,work\enems22.h.bin,work\enems30.h.bin,work\enems31.h.bin,work\enems32.h.bin,work\enems40.h.bin,work\enems41.h.bin,work\enems42.h.bin
 
 echo Compiling enembehs
 cd ..\script
