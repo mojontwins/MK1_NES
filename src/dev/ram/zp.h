@@ -61,7 +61,6 @@ unsigned char en_status [3];            // Enemies statused, repurposed per enem
 unsigned char en_ct [3];                // Enemies General repurposeable counter
 
 unsigned char en_rawv [3];              // Speed, used for pursuer-type enemies
-unsigned char en_alive [3];             // Alive, used for pursuer-type enemies
 
 #ifdef ENEMS_RECOIL_ON_HIT
     signed char en_rmx [3];             // If recoiling, recoil direction in the X axis.
@@ -80,14 +79,18 @@ unsigned char _en_t, _en_s;
 unsigned char _en_x, _en_y;
 unsigned char _en_x1, _en_y1, _en_x2, _en_y2;
 signed char _en_mx, _en_my;
-unsigned char _en_ct, _en_facing;
+unsigned char _en_ct, _en_facing, _en_state;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
+
+// Signals, all purpose, for enemies
+
+unsigned char en_sg_1, en_sg_2;
 
 // Main player
 
 unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
-signed int px, py;                      // Player X, Y coordinates, fixed point 12.6
-signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 12.6
+signed int px, py;                      // Player X, Y coordinates, fixed point 10.6
+signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
 unsigned char prx, pry;                 // Player pixel coordinates, calculated from px, py.
 unsigned char pfacing;                  // Player facing left, right
 unsigned char pfr;                      // Player frame
@@ -103,7 +106,9 @@ unsigned char pj;                       // "Player is jumping" flag
 unsigned char pctj;                     // "Player is jumping" counter
 unsigned char pgotten;                  // "Player is on moving platform or similiar" flag
 unsigned char ppossee;                  // "Player is on walkable scenery" flag
-unsigned char pstate, pctstate;         // Player state and state counter
+unsigned char oppossee;                 // Same, but prev. frame
+unsigned char pflickering;              // "Player is flickering", also a frame counter.
+unsigned char pbouncing;                // "Player is bouncing", also a frame counter.
 unsigned char phit;                     // "Player was hit by killing tile" flag
 signed int pgtmx, pgtmy;                // X, Y components of velocity in "player is being moved by external entity" conditions
 
@@ -117,6 +122,14 @@ signed int pgtmx, pgtmy;                // X, Y components of velocity in "playe
     unsigned char ponladderctr;         // Counter used for animation when player is on ladders in my/player_frame_selector.h
 #endif
 
+#ifdef ENABLE_TRAMPOLINES
+    unsigned char ptrampoline;          // "Player got propelled by a trampoline" flag
+#endif
+
+#ifdef PLAYER_SPINS 
+    unsigned char pspin;                // "Player is spinning" flag
+#endif  
+
 #ifdef PLAYER_TOP_DOWN
     unsigned char pfacingv, pfacingh;   // Player facing variables in each axis for top-down games
 #endif
@@ -127,9 +140,7 @@ unsigned char hitv, hith;               // True if the player collided with a ki
     unsigned char pfloating;            // Player is floating (for example, when on a propeller)
 #endif
 
-
 unsigned char prx_old, pry_old;
-
 
 unsigned char pkill;                    // Set to 1 to kill player
 unsigned char pice;                     // Player is walking on ice
@@ -142,7 +153,7 @@ unsigned char plife;                    // Player life gauge
 #endif
 unsigned char pobjs;                    // Player # of collected (collectible) items
 unsigned char pammo;                    // Player ammo
-#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (FANTY_KILLED_BY_TILE)
+#if defined (ENEMS_MAY_DIE)
     unsigned char pkilled;              // Player # of killed enemies
 #endif
 
@@ -193,6 +204,8 @@ unsigned char ft;                       // "This is the first time rendering a s
 // Current level
 
 unsigned char c_map_w;                  // Map width for current level
+unsigned char c_map_h;                  // Map height for current level
+unsigned char c_map_size;               // Map size for current level
 
 const unsigned char *c_ts_pals;         // Pointer to metatile palettes array
 const unsigned char *c_ts_tmaps;        // Pointer to metatile tilemaps array

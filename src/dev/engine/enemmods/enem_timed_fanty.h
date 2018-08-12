@@ -1,8 +1,10 @@
 // NES MK1 v1.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
-	// Fanties
-	
+// Timed fanties
+
+if (_en_ct) _en_ct --; else {
+
 	// Modify v
 
 	if (px < _enf_x) {
@@ -89,6 +91,7 @@
 			enems_kill ();
 		}
 	#endif
+}
 
 #ifdef FANTY_FAST_ANIM
 	en_fr = half_life;

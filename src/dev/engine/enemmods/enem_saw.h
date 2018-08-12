@@ -8,18 +8,18 @@
 
 rda = (_en_x1 == _en_x2);
 
-switch (en_alive [gpit]) {
+switch (_en_state) {
 	case 0: // Idling. Goes from 2->1 (backwards).
 		if (rda) {
 			_en_y -= _en_mx;
 			if (_en_y == _en_y1) {
-				en_alive [gpit] = 1;
+				_en_state = 1;
 				_en_ct = SAW_EMERGING_STEPS;
 			}
 		} else {
 			_en_x -= _en_mx;
 			if (_en_x == _en_x1) {
-				en_alive [gpit] = 1;
+				_en_state = 1;
 				_en_ct = SAW_EMERGING_STEPS;
 			}
 		}
@@ -34,7 +34,7 @@ switch (en_alive [gpit]) {
 					_en_y += _en_my;
 				}
 			} else {
-				en_alive [gpit] = 2;
+				_en_state = 2;
 			}
 		}
 		break;
@@ -42,13 +42,13 @@ switch (en_alive [gpit]) {
 		if (rda) {
 			_en_y += _en_mx;
 			if (_en_y == _en_y2) {
-				en_alive [gpit] = 3;
+				_en_state = 3;
 				_en_ct = SAW_EMERGING_STEPS;
 			}
 		} else {
 			_en_x += _en_mx;
 			if (_en_x == _en_x2) {
-				en_alive [gpit] = 3;
+				_en_state = 3;
 				_en_ct = SAW_EMERGING_STEPS;
 			}
 		}
@@ -63,7 +63,7 @@ switch (en_alive [gpit]) {
 					_en_y -= _en_my;
 				}
 			} else {
-				en_alive [gpit] = 0;
+				_en_state = 0;
 			}
 		}
 		break;

@@ -108,7 +108,6 @@ extern const unsigned char m_ingame [];
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
-	set_vram_update (0, 0);
 
 	ppu_off ();
 	first_game = 1;
@@ -152,7 +151,7 @@ level = 12; level_world = 4; level_act = 0; pemmeralds = 15;
 			#endif
 			else {
 				#ifdef MULTI_LEVEL
-					if (warp_to_level) continue;					
+					if (warp_to_level) continue;
 					level ++;
 					
 					// Custom for this game

@@ -2,14 +2,15 @@
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // CHAC CHAC!
+// DEPRECATED
 
-switch (en_alive [gpit]) {
+switch (_en_state) {
 	case 0:
 		// Wait for idle.
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
 			_en_mx = CHAC_CHAC_IDLE_2;
-			en_alive [gpit] = 1;
+			_en_state = 1;
 		}
 		break;
 	case 1:
@@ -17,7 +18,7 @@ switch (en_alive [gpit]) {
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
 			_en_mx = CHAC_CHAC_IDLE_3;
-			en_alive [gpit] = 2;
+			_en_state = 2;
 		}
 		break;
 	case 2:
@@ -25,7 +26,7 @@ switch (en_alive [gpit]) {
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 5);
 			_en_mx = CHAC_CHAC_IDLE_4;
-			en_alive [gpit] = 3;
+			_en_state = 3;
 			sfx_play (SFX_STEPON, 1);
 			shaker_ct = 8;
 		}
@@ -35,7 +36,7 @@ switch (en_alive [gpit]) {
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 3);
 			_en_mx = CHAC_CHAC_IDLE_3;
-			en_alive [gpit] = 4;
+			_en_state = 4;
 		}
 		break;
 	case 4:
@@ -43,7 +44,7 @@ switch (en_alive [gpit]) {
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1);
 			_en_mx = CHAC_CHAC_IDLE_3;
-			en_alive [gpit] = 5;
+			_en_state = 5;
 		}
 		break;
 	case 5:
@@ -51,7 +52,7 @@ switch (en_alive [gpit]) {
 		if (_en_mx) -- _en_mx; else {
 			enems_draw_chac_chac (CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6);
 			_en_mx = _en_my;
-			en_alive [gpit] = 0;
+			_en_state = 0;
 		}
 		break;
 }

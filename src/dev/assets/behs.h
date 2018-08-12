@@ -19,6 +19,7 @@
 // 32 ladder   (== 32, no obstacle!)
 // 34 tile_get (== 34, no obstacle!)
 // 64 float    (== 64, no obstacle!)
+// 74 trampol. (== 74,    obstacle!)
 
 const unsigned char behs0 [] = {
 	0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 8, 8, 8, 1,10,

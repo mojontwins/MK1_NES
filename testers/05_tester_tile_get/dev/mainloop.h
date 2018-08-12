@@ -114,7 +114,7 @@ void game_init (void) {
 }
 
 void prepare_scr (void) {
-	if (!ft) {		
+	if (!ft) {
 		fade_out (); 
 		ppu_off ();
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)

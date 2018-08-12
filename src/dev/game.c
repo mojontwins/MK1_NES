@@ -62,11 +62,12 @@ extern const unsigned char m_ingame [];
 // *************
 
 #include "engine/prototypes.h"
-#include "engine/general.h"
 #include "engine/printer.h"
+#include "engine/general.h"
 #ifdef ENABLE_TEXT_BOX
 	#include "engine/textbox.h"
 #endif
+#include "my/extra_modules.h"
 #ifdef ENABLE_BREAKABLE
 	#include "engine/breakable.h"
 #endif
@@ -88,14 +89,15 @@ extern const unsigned char m_ingame [];
 #endif
 #include "engine/player.h"
 #include "engine/enengine.h"
+#if (defined (ACTIVATE_SCRIPTING) && defined (ENABLE_EXTERN_CODE)) || defined (ENABLE_COMPILED_ENEMS)
+	#include "my/extern.h"
+#endif
 #include "engine/frame.h"
 #include "my/pres.h"
 #ifdef ACTIVATE_SCRIPTING
-	#ifdef ENABLE_EXTERN_CODE
-		#include "my/extern.h"
-	#endif
 	#include "assets/mscnes.h"
 #endif
+#include "mainloop/flickscreen.h"
 #include "mainloop.h"
 
 // *************
@@ -108,6 +110,7 @@ void main(void) {
 
 	ppu_off ();
 	first_game = 1;
+	ntsc = ppu_system ();
 
 	// Main loop
 
@@ -129,7 +132,13 @@ void main(void) {
 			if (game_over) {
 				pres (palts0, scr_game_over);
 				break;
-			} else {
+			} 
+			#ifdef DIE_AND_REINIT
+				else if (level_reset) {
+					// 
+				} 
+			#endif
+			else {
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;
 					level ++;

@@ -3,8 +3,7 @@
 
 // Inner workings. Don't touch.
 
-#define MONOCOCO_COUNTER 		_en_my
-#define MONOCOCO_STATE 			_en_mx
+#define CATACROCK_WAIT			_en_mx
 
 #if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
 #define ENABLE_COCOS
@@ -25,7 +24,7 @@
 #define PLAYER_CAN_FLOAT
 #endif
 
-#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS) || defined (ENABLE_SPRINGS)
+#if defined (ENABLE_LADDERS) || defined (ENABLE_PROPELLERS) || defined (ENABLE_SPRINGS) /*|| defined (ENABLE_TRAMPOLINES)*/
 #define NEEDS_INITIAL_DETECTION
 #endif
 
@@ -33,7 +32,7 @@
 #define NEEDS_CENTER_DETECTION
 #endif
 
-#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE)
+#if defined (PLAYER_STEPS_ON_ENEMS) || defined (PLAYER_CAN_FIRE) || defined (PLAYER_KICKS) || defined (PLAYER_PUNCHES) || defined (ENEMIES_SUFFER_ON_PLAYER_COLLISION) || defined (FANTY_KILLED_BY_TILE) || defined (PLAYER_SPINS)
 #define ENEMS_MAY_DIE
 #endif
 
@@ -102,4 +101,8 @@
 
 #if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
 	#define ENABLE_SHAKER
+#endif
+
+#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_BOIOIONG) || defined (ENABLE_CATACROCKS)
+	#define ENEMS_NEED_FP
 #endif

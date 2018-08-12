@@ -398,6 +398,7 @@
 //#define BOIOIONG_AUTO_RESPAWN
 
 // Catacrocks
+
 #define ENABLE_CATACROCKS
 #define CATACROCK_G						16
 #define CATACROCK_MAX_V					256
