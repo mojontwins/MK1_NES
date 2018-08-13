@@ -406,7 +406,7 @@ void game_loop (void) {
 
 			// Update enemies
 		
-			enems_move ();
+			enems_move (); 
 
 			// Warp to level
 

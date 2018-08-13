@@ -523,8 +523,7 @@
 			"file": "wip/diario.md",
 			"settings":
 			{
-				"buffer_size": 174657,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -532,7 +531,7 @@
 			"file": "testers/05_tester_tile_get/dev/engine/enengine.h",
 			"settings":
 			{
-				"buffer_size": 24629,
+				"buffer_size": 24709,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -541,7 +540,7 @@
 			"file": "testers/05_tester_tile_get/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 3856,
+				"buffer_size": 4367,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -550,8 +549,7 @@
 			"file": "testers/05_tester_tile_get/README.md",
 			"settings":
 			{
-				"buffer_size": 20513,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -559,8 +557,7 @@
 			"file": "testers/05_tester_tile_get/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 22756,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -568,8 +565,7 @@
 			"file": "testers/05_tester_tile_get/dev/game.c",
 			"settings":
 			{
-				"buffer_size": 3301,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -577,8 +573,7 @@
 			"file": "testers/05_tester_tile_get/dev/my/on_entering_screen.h",
 			"settings":
 			{
-				"buffer_size": 704,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -586,7 +581,7 @@
 			"file": "testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
 			"settings":
 			{
-				"buffer_size": 9312,
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -594,7 +589,7 @@
 			"file": "testers/05_tester_tile_get/map/maplist.txt",
 			"settings":
 			{
-				"buffer_size": 641,
+				"buffer_size": 793,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -603,8 +598,7 @@
 			"file": "testers/05_tester_tile_get/dev/assets/metasprites.h",
 			"settings":
 			{
-				"buffer_size": 3887,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -612,8 +606,7 @@
 			"file": "testers/05_tester_tile_get/dev/ram/bss.h",
 			"settings":
 			{
-				"buffer_size": 14307,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -694,12 +687,7 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/docs",
-		"/D/git/MK1_NES/testers",
-		"/D/git/MK1_NES/testers/05_tester_tile_get",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/map",
-		"/D/git/MK1_NES/wip"
+		"/C/git/MK1_NES"
 	],
 	"file_history":
 	[
@@ -834,7 +822,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -1107,15 +1095,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 174657,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174207,
-								174207
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1137,7 +1125,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 76256.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 10,
@@ -1149,15 +1137,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24629,
+						"buffer_size": 24709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18622,
-								18622
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1190,15 +1178,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3856,
+						"buffer_size": 4367,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								830,
-								830
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1236,15 +1224,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20513,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10592,
-								10592
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1266,7 +1254,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4171.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 9,
@@ -1278,15 +1266,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22756,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13013,
-								13013
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1307,7 +1295,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4463.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
@@ -1319,15 +1307,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3301,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2675,
-								2675
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1348,7 +1336,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1404.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -1360,15 +1348,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 704,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								701,
-								701
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1400,7 +1388,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9312,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -1429,7 +1417,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3353.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1441,15 +1429,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 641,
+						"buffer_size": 793,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								641,
-								641
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1481,15 +1469,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3887,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3581,
-								3581
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1510,7 +1498,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1131.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
@@ -1522,15 +1510,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14307,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8168,
-								8168
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1552,7 +1540,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2123.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 8,
