@@ -284,6 +284,13 @@ void game_loop (void) {
 	
 	while (1) {
 
+		// Update hud
+
+		#ifdef ACTIVATE_SCRIPTING
+			if (n_pant != 0xfe && on_pant != 0xfe) 
+		#endif
+			hud_update ();
+
 		// Finish him
 
 		if (pkill) player_kill ();
@@ -308,13 +315,6 @@ void game_loop (void) {
 		// Relocate player if spawned on a broken tile
 
 		#include "mainloop/relocate_player.h"
-
-		// Update hud
-
-		#ifdef ACTIVATE_SCRIPTING
-			if (n_pant != 0xfe && on_pant != 0xfe) 
-		#endif
-			hud_update ();
 
 		// Shake the screen ? 
 
@@ -400,13 +400,13 @@ void game_loop (void) {
 				cocos_do ();
 			#endif
 
-			// Update enemies
-		
-			enems_move ();
-
 			// Paint player
 
 			player_render ();
+
+			// Update enemies
+		
+			enems_move ();
 
 			// Warp to level
 
