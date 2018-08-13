@@ -40,3 +40,12 @@
 		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 1
 	};
 #endif
+
+const unsigned char bits [] = {
+	1, 2, 4, 8, 16, 32, 64, 128
+};
+
+#ifdef ENEMS_MAY_DIE
+	const unsigned char jitter [] = { 0,1,1,0,0,1,0,1,1,0,0,0,1,0,1,1 };
+#endif
+

@@ -127,7 +127,7 @@
 //#define DOUBLE_BOUNCE
 #define DIE_AND_RESPAWN						// If defined, dying = respawn on latest safe.
 	//#define DIE_AND_REENTER				//     ... also, reenter screen on death
-	#define DIE_AND_REINIT					//     ... or start the level over!
+	//#define DIE_AND_REINIT				//     ... or start the level over!
 #define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 

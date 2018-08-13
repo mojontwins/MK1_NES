@@ -11,15 +11,13 @@
 void add_tile (void) {
 	map_buff [rdm] = rda;
 	++ rdm;
-	// Need to do this to keep track of where I am
-	rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 }
 
 void draw_scr (void) {
 
 	// Draw Map
 
-	rdx = rdy = rdm = 0;
+	rdm = 0;
 
 	#ifdef MAP_FORMAT_PACKED
 		// Get pointer
@@ -119,13 +117,13 @@ void draw_scr (void) {
 	#ifdef MAP_FORMAT_RLE44_CHRROM
 		bankswitch (c_map_chr_rom_bank);
 		vram_adr (c_map [n_pant]);
-		rda = VRAM_READ; 	// Dummy read.
+		rdt = VRAM_READ; 	// Dummy read.
 		
 		// UNRLE into scr_buff
 		while (rdm < 192) {
 			rdt = VRAM_READ;
 			rda = rdt & 0x0f;
-			
+
 			rdct = rdt;
 			while (rdct >= 16) {
 				add_tile (); rdct -= 16;
@@ -200,11 +198,19 @@ void draw_scr (void) {
 
 	// Now blit the buffer
 
+	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
+		rdd = 0;
+	#endif
+
 	_x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
-	//rdx = 0; rdy = 0; gp_ram = map_buff;
 	for (rdm = 0; rdm < 192; rdm ++) {
-		// rdt = *gp_ram ++;
 		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
+
+		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)			
+			if (tile_got [rdd] & bits [rdm & 7]) rdt = 0;
+			if ((rdm & 7) == 7) ++ rdd;
+		#endif
+
 		map_attr [rdm] = c_behs [rdt];
 
 		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
@@ -213,11 +219,6 @@ void draw_scr (void) {
 
 		#include "engine/mapmods/map_detectors.h"
 
-		/*
-		_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
-		draw_tile ();
-		rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
-		*/
 		_t = rdt; draw_tile ();
 		_x = (_x + 2) & 0x1f; if (!_x) _y += 2;
 	}
