@@ -541,7 +541,7 @@
 //#define AMMO_Y				2		// Ammo counter character coordinates
 
 #define HS_INV_X				56		//
-#define HS_INV_Y				15		// Object you are carrying
+#define HS_INV_Y				7		// Object you are carrying
 
 //#define TIMER_X				0		//
 //#define TIMER_Y				5		// Current timer value

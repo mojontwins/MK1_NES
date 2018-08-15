@@ -12,6 +12,7 @@ if (level == 1) {
 		rda = map_buff [gpit];
 		rdb = map_buff [gpit - 1];
 		rdc = map_buff [gpit + 1];
+		rdd = rand8();
 		switch (rda) {
 			case 7:
 				if (rdb != 7) rda = 24;
@@ -22,7 +23,10 @@ if (level == 1) {
 				else if (rdc != 8 && rdc != 27) rda = 27;
 				break;
 			case 14:
-				rda = 30 + (rand8() & 1);
+				rda = 30 + (rdd & 1);
+				break;
+			case 2:
+				if (rand8 () & 1) rda = 21 + (rdd & 1);
 				break;
 		}
 		map_buff [gpit] = rda;
