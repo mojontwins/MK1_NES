@@ -5,8 +5,11 @@ if [%1]==[justcompile] goto :justcompile
 echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts0.png out=work\palts0.h label=palts0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts1.png out=work\palts1.h label=palts1 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss1.png out=work\palss1.h label=palss1 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltscuts.png out=work\paltscuts.h label=paltscuts silent
-copy /b work\palts0.h + work\palss0.h + work\paltscuts.h assets\palettes.h > nul
+copy /b work\pal*.h assets\palettes.h > nul
+del work\pal*.h /q > nul 2> nul
 
 echo Exporting chr
 cd ..\gfx
@@ -15,6 +18,7 @@ cd ..\gfx
 echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
+..\..\..\src\utils\eneexp3.exe level1.ene ..\dev\assets\enems1.h 1 1 gencounter
 
 echo Compiling enembehs
 cd ..\script
@@ -23,6 +27,7 @@ cd ..\script
 echo Making map
 cd ..\map
 ..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 5 4 15 0 1
+..\..\..\src\utils\rle53mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 4 5 15 1 0
 
 echo Exporting music and sound
 cd ..\dev

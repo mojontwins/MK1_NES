@@ -28,6 +28,8 @@
 #include "assets/behs.h"
 #include "assets/map0.h"
 #include "assets/enems0.h"
+#include "assets/map1.h"
+#include "assets/enems1.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
 #include "assets/metasprites.h"
@@ -123,7 +125,7 @@ void main(void) {
 		pres_title ();
 
 #ifdef MULTI_LEVEL		
-		level = 0;
+		level = 1;
 #endif
 		plife = PLAYER_LIFE;
 

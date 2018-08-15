@@ -10,3 +10,5 @@ first_batucada = 1;
 first_medallion = 1;
 first_totem = 1;
 c_max_enems = MAX_ENEMS_TYPE_3_0;
+
+springs_on = (level == 1);

@@ -19,8 +19,8 @@
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			3		// Life refill
 
-//#define MULTI_LEVEL					// Comment for single level
-#define MAX_LEVELS				1
+#define MULTI_LEVEL						// Comment for single level
+#define MAX_LEVELS				2
 
 #define MAX_FLAGS 				16		// Keep it low if you don't need flags
 
@@ -77,7 +77,7 @@
 // Use the complex renderer if you need to post-process the map buffer before
 // printing.
 
-//#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
+#define MAP_RENDERER_COMPLEX			// Comment for the simple, old renderer
 
 // ============================================================================
 // II. Engine type
@@ -171,8 +171,8 @@
 // Special, "collectable" map tiles.
 // beh == 34
 
-//#define ENABLE_TILE_GET
-//#define PERSISTENT_TILE_GET
+#define ENABLE_TILE_GET
+#define PERSISTENT_TILE_GET
 
 // Trampolines. Needs PLAYER_VY_TRAMPOLINE
 // beh == 66
@@ -211,10 +211,10 @@
 
 // Springs
 
-//#define ENABLE_SPRINGS
-#define SPRING_TILE 					10
-#define SPRING_SPIKE_TILE 				11
-//#define SPRINGS_NEED_POSSEE				// You have to actually STEP on the tile for the spikes to show
+#define ENABLE_SPRINGS
+#define SPRING_TILE 					23
+#define SPRING_SPIKE_TILE 				13
+#define SPRINGS_NEED_POSSEE					// You have to actually STEP on the tile for the spikes to show
 //#define SPRINGS_ON_BY_DEFAULT
 
 // Simple warpers. Put as 0xff type enemies.

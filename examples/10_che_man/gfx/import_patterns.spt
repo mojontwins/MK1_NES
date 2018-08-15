@@ -41,6 +41,12 @@ PALS palts0.png
 LABEL ts0
 MAPPED 0, 0, 2, 2, 8, 6, 41
 
+# ts1
+OPEN ts1.png
+PALS palts1.png
+LABEL ts1
+MAPPED 0, 0, 2, 2, 8, 6, 41
+
 # Done with patterns for bg. Reset and fill with zeroes:
 RESETPOOL
 FILL 4096
