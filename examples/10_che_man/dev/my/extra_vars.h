@@ -8,3 +8,5 @@ unsigned char first_text;
 unsigned char first_batucada;
 unsigned char first_medallion;
 unsigned char first_totem;
+
+unsigned char pjewels, opjewels;

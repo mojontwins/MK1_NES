@@ -5,3 +5,9 @@
 // You may add checks and set variables and stuff.
 
 // The value of the tile just got is QTILE (cx1, cy1)
+
+pjewels ++;
+if (pjewels == 50) {
+	plife ++; pjewels = 0;
+	sfx_play (SFX_FANFARE, 0);
+}

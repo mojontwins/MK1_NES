@@ -10,5 +10,10 @@ first_batucada = 1;
 first_medallion = 1;
 first_totem = 1;
 c_max_enems = MAX_ENEMS_TYPE_3_0;
+pjewels = 0;
+opjewels = 0xff;
 
 springs_on = (level == 1);
+
+// Remove part of the hud for level 0
+if (level == 0) { _x = 1; _y = 4; pr_str ("        "); }
