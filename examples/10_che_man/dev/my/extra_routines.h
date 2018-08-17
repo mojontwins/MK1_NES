@@ -22,22 +22,22 @@ if (first_game) {
 
 	if (ppossee && first_text) {
 		first_text = 0;
-		gp_gen = custom_text0;
+		gp_gen = custom_texts [lang_offs];
 	}
 
 	if (pkilled && first_batucada) {
 		first_batucada = 0;
-		gp_gen = custom_text1;
+		gp_gen = custom_texts [lang_offs + 1];
 	}
 
 	if (flags [ONLY_ONE_OBJECT_FLAG] && first_medallion) {
 		first_medallion = 0;
-		gp_gen = custom_text2;
+		gp_gen = custom_texts [lang_offs + 2];
 	}
 
 	if (pobjs && first_totem) {
 		first_totem = 0;
-		gp_gen = custom_text3;
+		gp_gen = custom_texts [lang_offs + 3];
 	}
 
 	if (gp_gen) {

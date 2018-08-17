@@ -35,22 +35,31 @@ void pres_title (void) {
 	
 	oam_hide_rest (
 		oam_meta_spr (
-			144, 103, 4, sspl_05_a
+			144, 95, 4, sspl_05_a
 		)
 	);
 
-	_x = 10; _y = 19; pr_str ("PRESS START!"); 
+
+	_x = 5; _y = 18; pr_str ("SELECT AND PUSH START!");
+	_x = 14; _y = 21; pr_str ("GAME A%%GAME B");
 	_x = 5;  _y = 26; pr_str ("@ 2018 THE MOJON TWINS"); 
 
 	pal_bg (paltscuts);
 	bat_in ();
 
-	//music_play (MUSIC_TITLE);
+	while (1) {
+		oam_spr (12*8, 159 + (level << 4), 0, 0, 0);
+		ppu_waitnmi ();
+		pad_read ();
+		rda = level;
+		if (pad_this_frame & (PAD_SELECT|PAD_DOWN|PAD_UP)) {
+			level = 1 - level;
+			sfx_play (SFX_USE, 0);
+		}
+		if (pad_this_frame & (PAD_START|PAD_A)) break;
+	}
+	sfx_play (SFX_START, 0); delay (20);
 
-	while (!(pad_poll (0) & PAD_START)) ppu_waitnmi ();
-	while ((pad_poll (0) & PAD_START)) ppu_waitnmi ();
-
-	music_stop ();
 	bat_out ();
 }
 
@@ -90,5 +99,34 @@ void scr_game_ending (void) {
 }
 
 void language_select (void) {
+	pal_bg (pallang);
+	pal_spr (palss0);	
+	unrle_vram (lang_rle, 0x2000);
+	lang_offs = 0;
 
+	bat_in ();
+
+	while (1) {
+		pad_read ();
+
+		if (pad_this_frame & PAD_UP) {
+			if (lang_offs) lang_offs -= 4; else lang_offs = 8;
+		}
+		if (pad_this_frame & (PAD_DOWN|PAD_SELECT)) {
+			if (lang_offs < 8) lang_offs += 4; else lang_offs = 0;
+		}
+
+		if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;
+
+		oam_hide_rest (
+			oam_spr (
+				80, 12*8 + (lang_offs << 2),
+				0, 0, 0
+			)
+		);
+
+		ppu_waitnmi ();
+	}
+
+	bat_out ();	
 }

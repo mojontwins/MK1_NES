@@ -92,7 +92,7 @@ const unsigned char custom_text11 [] =
 	"GUCK MAL ALTER! DAS%"
 	"HAT'S VOLL GESNACKT!%"
 	"NOCH 15 MEHR DAVON,%"
-	"DAMIT JAS OPFER VOLL-%"
+	"DAMIT DAS OPFER VOLL-%"
 	"BRACHT IST. SO, NICH%"
 	"MEHR SCHNACKEN. LOS!!%";
 

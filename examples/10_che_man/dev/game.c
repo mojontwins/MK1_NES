@@ -47,6 +47,7 @@
 #include "assets/title_rle.h"
 #include "assets/hud_rle.h"
 #include "assets/ending_rle.h"
+#include "assets/lang_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];
@@ -118,21 +119,24 @@ void main(void) {
 	first_game = 1;
 	ntsc = ppu_system ();
 
+	language_select ();
+
 	// Main loop
+	level = 0;
 
 	while (1) {	
 
+		scroll (0, SCROLL_Y);
 		pres_title ();
 
 #ifdef MULTI_LEVEL		
-		level = 1;
+		//level = 0;
 #endif
 		plife = PLAYER_LIFE;
 
 		// Game loop
 
 		while (1) {
-			scroll (0, SCROLL_Y);
 			game_init (); 
 			game_loop ();
 
@@ -146,6 +150,7 @@ void main(void) {
 				} 
 			#endif
 			else {
+				/*
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;
 					level ++;
@@ -157,6 +162,9 @@ void main(void) {
 					music_stop ();
 					break;
 				}
+				*/
+				pres (paltscuts, scr_game_ending);
+				break;
 			}
 		}
 
