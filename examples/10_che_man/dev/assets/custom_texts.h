@@ -34,7 +34,7 @@ const unsigned char custom_text3 [] =
 
 const unsigned char custom_text4 [] = 
 	"OMG HOW BADLY DO I%"
-	"NEED A BEER… BUT%"
+	"NEED A BEER... BUT%"
 	"THERE IS WORK TO DO%"
 	"THAT CANNOT WAIT!!!%"
 	"BLOODY HELL!!! DAMN%"

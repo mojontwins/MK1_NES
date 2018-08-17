@@ -73,7 +73,7 @@ METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
 
 # Platforms
 LABEL ssplat
-METASPRITE 12, 4, 2, 2, 1, 1, 0, 0
+METASPRITE 12, 4, 2, 2, 0, 0
 
 # Items / special
 LABEL ssit

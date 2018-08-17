@@ -400,13 +400,13 @@ void game_loop (void) {
 				cocos_do ();
 			#endif
 
-			// Paint player
-
-			player_render ();
-
 			// Update enemies
 		
 			enems_move (); 
+
+			// Paint player
+
+			player_render ();
 
 			// Warp to level
 
