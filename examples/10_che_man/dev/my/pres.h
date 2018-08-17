@@ -67,8 +67,28 @@ void scr_game_ending (void) {
 		)
 	);
 
-	_x =3; _y = 18; pr_str ("PUTOS BATUCADAS, PENSE QUE");
-	       _y = 20; pr_str ("NO LLEGABA AL CONCIERTO DE");
-	       _y = 22; pr_str ("LOS MAS GRANDES, CAGUEN...");
-	       _y = 24; pr_str ("A VER SI ESTOS SE PORTAN!!");
+	switch (lang_offs) {
+		case 0:
+			_x =3; _y = 18; pr_str ("PUTOS BATUCADAS, PENSE QUE");
+			       _y = 20; pr_str ("NO LLEGABA AL CONCIERTO DE");
+			       _y = 22; pr_str ("LOS MAS GRANDES, CAGUEN...");
+			       _y = 24; pr_str ("A VER SI ESTOS SE PORTAN!!");
+			break;
+		case 4:
+			_x =3; _y = 18; pr_str ("BLOODY BATUCADAS, THEY");
+			       _y = 20; pr_str ("ALMOST MADE ME LATE FOR");
+			       _y = 22; pr_str ("THE GREATEST BAND ON EARTH");
+			       _y = 24; pr_str ("I HOPE THEY ROCK DA PLACE!");
+			break;
+		case 8:
+			_x =3; _y = 18; pr_str ("KACK BATUCADAS, ICH DACHTE,");
+			       _y = 20; pr_str ("ICH KAEM NICHT ZUM KONZERT");
+			       _y = 22; pr_str ("DER ALLERGROESSTEN, YEAH!!");
+			       _y = 24; pr_str ("MAL SEHEN OB SIE ROCKEN!");
+			break;
+	}
+}
+
+void language_select (void) {
+
 }

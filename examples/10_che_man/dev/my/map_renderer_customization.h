@@ -30,6 +30,9 @@ if (level == 1) {
 			case 2:
 				if (rand8 () & 1) rda = 21 + (rdd & 1);
 				break;
+			case 29:
+				if (rdd & 1) rda = 16;
+				break;
 		}
 		map_buff [gpit] = rda;
 	}
