@@ -468,7 +468,7 @@ void player_move (void) {
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
 			} else if ((at1 & 1) || (at2 & 1)) {
-				hitv = 1;
+				if ((pry & 15) > 4) hitv = 1;
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
@@ -766,31 +766,33 @@ void player_move (void) {
 
 	phit = 0;
 	
-	#ifdef NO_HORIZONTAL_EVIL_TILE
-		if (hitv || hith) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-	#else
-		if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-		if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
-	#endif
-
-	#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
-		cx1 = cx2 = (prx + 4) >> 4;
-		cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
-		cm_two_points ();
-		if ((at1 & 1) || (at2 & 1)) phit = 1;
-	#endif
-
-	if (!pflickering && !pbouncing) if (phit) { 
-		player_to_pixels ();
-		en_sg_2 = 1;
-
-		#include "my/on_player_spike.h"
-
-		if (en_sg_2)
-			pkill = 1; 
-		#ifdef PLAYER_SPINS
-			pspin = 0;
+	if (pgotten == 0) {
+		#ifdef NO_HORIZONTAL_EVIL_TILE
+			if (hitv || hith) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
+		#else
+			if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
+			if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
 		#endif
+
+		#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+			cx1 = cx2 = (prx + 4) >> 4;
+			cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+			cm_two_points ();
+			if ((at1 & 1) || (at2 & 1)) phit = 1;
+		#endif
+
+		if (!pflickering && !pbouncing) if (phit) { 
+			player_to_pixels ();
+			en_sg_2 = 1;
+
+			#include "my/on_player_spike.h"
+
+			if (en_sg_2)
+				pkill = 1; 
+			#ifdef PLAYER_SPINS
+				pspin = 0;
+			#endif
+		}
 	}
 
 	// ***********************
