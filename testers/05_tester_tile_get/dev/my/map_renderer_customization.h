@@ -63,10 +63,10 @@ switch (level_world) {
 					// Crap Brains embellishments
 					if (rdt == 1 || rdt == 3) {
 						rda = map_buff [gpit - 1];
-						if (rda != rdt && rda < 16) rdt = rdt + 16;
+						if (rda != rdt && rda != rdt + 16) rdt = rdt + 16;
 						else {
 							rda = map_buff [gpit + 1];
-							if (rda != rdt && rda < 16) rdt = rdt + 17;
+							if (rda != rdt) rdt = rdt + 17;
 						}
 					}
 				}

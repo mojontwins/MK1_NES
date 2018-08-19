@@ -179,11 +179,15 @@
 
 // level40.ene
 
-#define HOTSPOTS_OFFSET_40 0x0000
+#define HOTSPOTS_OFFSET_40 0x0168
 
+#define MAX_ENEMS_TYPE_2_40 2
+#define MAX_ENEMS_TYPE_3_40 1
+#define MAX_ENEMS_TYPE_5_40 6
 
-#define KILLABLE_ENEMS_40 0
+#define KILLABLE_ENEMS_40 3
 
+#define MAX_HOTSPOTS_TYPE_0_40	30
 #define MAX_HOTSPOTS_TYPE_1_40	0
 
 // level41.ene
