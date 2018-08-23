@@ -30,3 +30,6 @@ if (level_world == 3) {
 // For the split effect in the fridge zone
 water_strip = (level_world == 1 && (level != 3 || n_pant > 14));
 oam_spr (128, water_strip ? 211 : 240, 1, 2, 0);
+
+// Reset toggle timer
+toggle_timer = 0;

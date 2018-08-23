@@ -383,6 +383,70 @@ We also want to respawn type 5 hotspots (time refills) automaticly:
     }
 ```
 
+## Toggle switches in Crap Brain Zone Act 2
+
+I've implemented simple toggle switches which open/close gates labelled "A" and "B". The implementation is simple: Gates "A" and "B" are painted or not depending on the value of toggle_switch (0 means "A" is open, 1 means "B" is open), so gates and toggle switches can't coexist in the same room (as gate fiddling is performed off-room).
+
+Toggle switches will be implemented using hotspots. We need two states, so we'll use two hotspot values: `HOTSPOT_TYPE_SWITCH_OFF` and `HOTSPOT_TYPE_SWITCH_ON`.
+
+In ponedor, switches are set using the value `HOTSPOT_TYPE_SWITCH_OFF`. `HOTSPOT_TYPE_SWITCH_ON` will be ignored by the engine. When the player gets a `HOTSPOT_TYPE_SWITCH_OFF` hotspot, the value changes to `HOTSPOT_TYPE_SWITCH_ON` (on screen) and a timer is started. When the timer goes off, the value is changed back to `HOTSPOT_TYPE_SWITCH_OFF`.
+
+On `extra_hotspots.h`:
+
+```c
+    case HOTSPOT_TYPE_TOGGLE_OFF:
+        hrt = HOTSPOT_TYPE_TOGGLE_ON;
+        toggle_timer = 50;
+        toggle_switch = !toggle_switch;     // Toggle!
+        sfx_play (SFX_STEPON, 0);
+    case HOTSPOT_TYPE_TOGGLE_ON:
+        rda = 0;                            // Do not clear hotspot!
+        break;
+```
+
+`toggle_timer` is managed in `extra_routines.h`:
+
+```c    
+    // toggle switch timer:
+    if (toggle_timer) {
+        toggle_timer --;
+        if (toggle_timer == 0) {
+            hrt = HOTSPOT_TYPE_TOGGLE_OFF;
+            sfx_play (SFX_STEPON, 0);
+        }
+    }  
+```
+
+Make sure `toggle_timer` is reset when entering a new room, `on_entering_screen.h`:
+
+```c
+    // Reset toggle timer
+    toggle_timer = 0;
+```
+
+And add an extra rule to `map_renderer_customization.h` so Gates "A" and "B" are drawn or not upon the value of `toggle_switch`. Tiles are 2 (gate "A") or 4 (gate "B"):
+
+```c
+        case 4:
+        case 2:
+        case 3:
+            [...]
+
+                if (level_world == 3) {
+                    // Wet Ruins Zone embellishments
+                    [...]   
+
+                } else {
+                    // Crap Brains embellishments
+                    [...]
+
+                    if (level_act == 1) {
+                        if (rdt == 2 && toggle_switch == 0) rdt = 0;
+                        if (rdt == 4 && toggle_switch) rdt = 0;
+                    }
+                }
+```
+
 ## Also of interest
 
 ### Custom renderer

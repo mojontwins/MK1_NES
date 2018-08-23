@@ -6,7 +6,7 @@ const unsigned char l_scr_ini [] = 				{
 													15, 24, 0, 	// Broken Fridge Zone
 													19, 15, 2, 	// Bosque de Badajoz Zone
 													0, 0, 0,	// Wet Ruins Zone
-													15, 10, 0,  // Crap Brain Zone
+													15, 20, 0,  // Crap Brain Zone
 												};
 const unsigned char l_ini_x [] = 				{ 
 													3, 2, 3,	// Benny Hill Zone
@@ -89,21 +89,21 @@ const unsigned char * const l_ts_tmaps [] = 	{
 													ts1_tmaps, ts1_tmaps, ts1_tmaps, // Broken Fridge Zone
 													ts2_tmaps, ts2_tmaps, ts2_tmaps, // Bosque de Badajoz Zone
 													ts3_tmaps, ts3_tmaps, ts3_tmaps, // Wet Ruins Zone
-													ts4_tmaps, ts4_tmaps, ts4_tmaps, // Crap Brain Zone
+													ts4_tmaps, ts4b_tmaps, ts4_tmaps, // Crap Brain Zone
 												};
 const unsigned char * const l_ts_pals [] = 		{ 
 													ts0_pals, ts0_pals, ts0_pals, // Benny Hill Zone
 													ts1_pals, ts1_pals, ts1_pals, // Broken Fridge Zone
 													ts2_pals, ts2_pals, ts2_pals, // Bosque de Badajoz Zone
 													ts3_pals, ts3_pals, ts3_pals, // Wet Ruins Zone
-													ts4_pals, ts4_pals, ts4_pals, // Crap Brain Zone
+													ts4_pals, ts4b_pals, ts4_pals, // Crap Brain Zone
 												};
 const unsigned char * const l_behs [] = 		{
 													behs0, behs0, behs0, // Benny Hill Zone
 													behs1, behs1, behs1, // Broken Fridge Zone
 													behs2, behs2, behs2, // Bosque de Badajoz Zone
 													behs3, behs3, behs3, // Wet Ruins Zone
-													behs4, behs4, behs4, // Crap Brain Zone
+													behs4, behs4b, behs4, // Crap Brain Zone
 												};
 
 // Enemy spriteset

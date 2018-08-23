@@ -124,8 +124,8 @@ const unsigned char * const spr_enems3 [] = {
 };
 
 // Item metasprites
-// nothing, object, key, refill, emmerald, timer
+// nothing, object, key, refill, emmerald, timer, toggle off, toggle on
 const unsigned char * const spr_hs [] = {
-	0, ssit_08, 0, ssit_02, ssit_07, ssit_01
+	0, ssit_08, 0, ssit_02, ssit_07, ssit_01, ssit_09, ssit_0A
 };
 

@@ -46,3 +46,12 @@
 		}
 	}
 	
+	// toggle switch timer:
+	if (toggle_timer) {
+		toggle_timer --;
+		if (toggle_timer == 0) {
+			hrt = HOTSPOT_TYPE_TOGGLE_OFF;
+			sfx_play (SFX_STEPON, 0);
+		}
+	}
+	

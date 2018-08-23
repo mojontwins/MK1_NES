@@ -69,6 +69,11 @@ switch (level_world) {
 							if (rda != rdt) rdt = rdt + 17;
 						}
 					}
+
+					if (level_act == 1) {
+						if (rdt == 2 && toggle_switch == 0) rdt = 0;
+						if (rdt == 4 && toggle_switch) rdt = 0;
+					}
 				}
 
 				// Wet Ruins Zone & Crap Brains embellishments
