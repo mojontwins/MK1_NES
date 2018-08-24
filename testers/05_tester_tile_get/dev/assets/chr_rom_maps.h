@@ -412,9 +412,9 @@ const unsigned int map_41_scr_offsets [] = {
 // Screens index
 
 const unsigned int map_42_scr_offsets [] = {
-	0                   , 0                   , 
-	0                   
+	MAP_42_BASE + 0x0000, MAP_42_BASE + 0x0034, 
+	MAP_42_BASE + 0x006E
 };
 
-// Total screens size in bytes is 0
+// Total screens size in bytes is 152
 

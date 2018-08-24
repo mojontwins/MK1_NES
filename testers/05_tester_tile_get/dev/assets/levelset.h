@@ -72,7 +72,7 @@ const unsigned char * const l_pal_bg [] = 		{
 													palts1, palts1, palts1,  // Broken Fridge Zone
 													palts2, palts2a, palts2, // Bosque de Badajoz Zone
 													palts3, palts3, palts3,	 // Wet Ruins Zone	
-													palts4, palts4, palts4,	 // Crap Brain Zone
+													palts4, palts4, palts4a, // Crap Brain Zone
 												};
 const unsigned char * const l_pal_fg [] = 		{ 
 													palss0, palss0, palss0,  // Benny Hill Zone
@@ -114,7 +114,7 @@ const unsigned char * const * const l_spr_enems [] =
 													spr_enems1, spr_enems1, spr_enems1, // Broken Fridge Zone
 													spr_enems2, spr_enems2, spr_enems2, // Bosque de Badajoz Zone
 													spr_enems3, spr_enems3, spr_enems3, // Wet Ruins Zone
-													spr_enems3, spr_enems3, spr_enems3, // Crap Brain Zone
+													spr_enems4, spr_enems4, spr_enems4, // Crap Brain Zone
 												};
 
 // Map data

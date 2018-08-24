@@ -10,6 +10,7 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3.png out=work\palts3.h label=palts3 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts3a.png out=work\palts3a.h label=palts3a silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts4.png out=work\palts4.h label=palts4 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palts4a.png out=work\palts4a.h label=palts4a silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0.png out=work\palss0.h label=palss0 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0a.png out=work\palss0a.h label=palss0a silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss1.png out=work\palss1.h label=palss1 silent

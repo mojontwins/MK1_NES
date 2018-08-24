@@ -94,6 +94,7 @@ METASPRITESET 0, 16, 4, 4, 2, 1, -8, -12 FLIPPED
 LABEL ssplat
 METASPRITESET 12, 3, 2, 2, 2, 1, 0, 0
 METASPRITESET 12, 7, 2, 2, 2, 1, 0, 0
+METASPRITE 6, 8, 2, 2, 0, 0
 
 # Explosion
 LABEL ssexpl
