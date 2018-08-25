@@ -520,93 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "wip/diario.md",
+			"file": "testers/05_tester_tile_get/gfx/import_patterns0.spt",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/engine/enengine.h",
-			"settings":
-			{
-				"buffer_size": 24709,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/compile.bat",
-			"settings":
-			{
-				"buffer_size": 4367,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/README.md",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/config.h",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/game.c",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/my/on_entering_screen.h",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/map/maplist.txt",
-			"settings":
-			{
-				"buffer_size": 793,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/assets/metasprites.h",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_tile_get/dev/ram/bss.h",
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 1768,
 				"line_ending": "Windows"
 			}
 		}
@@ -687,10 +604,24 @@
 	},
 	"expanded_folders":
 	[
-		"/C/git/MK1_NES"
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/gfx"
 	],
 	"file_history":
 	[
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/README.md",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/config.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/game.c",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/my/on_entering_screen.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/ram/bss.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/wip/diario.md",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
+		"/C/Users/NaThan/Desktop/Git Projects/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns0.spt",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
@@ -807,18 +738,7 @@
 		"/D/git/MK1_NES/examples/09_cadàveriön/dev/config.h",
 		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/config.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
-		"/D/git/MK1_NES/docs/mscmk1.md",
-		"/D/git/MK1_NES/src/utils/mscmk1.bas",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/compile.bat",
-		"/D/git/MK1_NES/src/dev/compile.bat",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/no.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/assets/mscnes.h",
-		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/flickscreen.h",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat"
+		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h"
 	],
 	"find":
 	{
@@ -1086,16 +1006,21 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "wip/diario.md",
-					"semi_transient": false,
+					"file": "testers/05_tester_tile_get/gfx/import_patterns0.spt",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1768,
 						"regions":
 						{
 						},
@@ -1108,442 +1033,13 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": 738,
-								"count": 24658,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "testers/05_tester_tile_get/dev/engine/enengine.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 24709,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 166,
-								"count": 2182,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 10716.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "testers/05_tester_tile_get/dev/compile.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4367,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 5,
-								"count": 128,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 187.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 5,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "testers/05_tester_tile_get/README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 559,
-								"count": 2838,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "testers/05_tester_tile_get/dev/config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 109,
-								"count": 2093,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "testers/05_tester_tile_get/dev/game.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 10,
-								"count": 241,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "testers/05_tester_tile_get/dev/my/on_entering_screen.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 80,
-								"count": 86,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 1,
-								"count": 765,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "testers/05_tester_tile_get/map/maplist.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 793,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 13,
-								"count": 0,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 153.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "testers/05_tester_tile_get/dev/assets/metasprites.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 24,
-								"count": 456,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "testers/05_tester_tile_get/dev/ram/bss.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 70,
-								"count": 1574,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1641,7 +1137,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 217.0,
+	"side_bar_width": 145.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

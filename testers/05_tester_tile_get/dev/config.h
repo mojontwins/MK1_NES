@@ -587,7 +587,7 @@
 // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
 // (Used if PLAYER_JUMP_TYPE_MK2 is defined)
 #define PLAYER_G_MK2_JUMPING		4
-#define PLAYER_VY_MK2_JUMP_INITIAL	208
+#define PLAYER_VY_MK2_JUMP_INITIAL	224
 #define PLAYER_VY_MK2_JUMP_RELEASE	96
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
 #define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296
@@ -595,11 +595,11 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			224		// Max. horizontal speed
+#define PLAYER_VX_MAX			192		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
 #define PLAYER_AX				12		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
-#define PLAYER_RX				8		// Horizontal friction
+#define PLAYER_RX				12		// Horizontal friction
 #define PLAYER_RX_ICE			2
 
 #define PLAYER_VX_MIN (PLAYER_AX << 1)
