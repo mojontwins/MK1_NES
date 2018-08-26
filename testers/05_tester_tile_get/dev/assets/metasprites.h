@@ -46,7 +46,7 @@ const unsigned char * const spr_enems0 [] = {
 
 const unsigned char * const spr_enems1 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
+	ssen_08_a, ssen_09_a, 0, 0, ssen_08_b, ssen_09_b, 0, 0, // 1
 	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
 	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
 	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0, // Platform (4)
@@ -74,7 +74,7 @@ const unsigned char * const spr_enems1 [] = {
 const unsigned char * const spr_enems2 [] = {
 	// Linear enems and platforms (ids 1-4)
 	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
-	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0, // 2
 	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
 	ssplat_02, ssplat_03, 0, 0, ssplat_02, ssplat_03, 0, 0, // Platform (4)
 
@@ -103,9 +103,9 @@ const unsigned char * const spr_enems2 [] = {
 
 const unsigned char * const spr_enems3 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
-	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
-	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0, // 1
+	ssen_08_a, ssen_09_a, 0, 0, ssen_08_b, ssen_09_b, 0, 0, // 2
+	ssen_0A_a, ssen_0B_a, 0, 0, ssen_0A_b, ssen_0B_b, 0, 0, // 3
 	ssplat_02, ssplat_03, 0, 0, ssplat_02, ssplat_03, 0, 0, // Platform (4)
 
 	// Explosion (offset 32)
@@ -125,9 +125,9 @@ const unsigned char * const spr_enems3 [] = {
 
 const unsigned char * const spr_enems4 [] = {
 	// Linear enems and platforms (ids 1-4)
-	ssen_00_a, ssen_01_a, 0, 0, ssen_00_b, ssen_01_b, 0, 0, // 1
+	ssen_06_a, ssen_07_a, 0, 0, ssen_06_b, ssen_07_b, 0, 0, // 1
 	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
-	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
+	ssen_0A_a, ssen_0B_a, 0, 0, ssen_0A_b, ssen_0B_b, 0, 0, // 3
 	ssplat_04, ssplat_04, 0, 0, ssplat_04, ssplat_04, 0, 0, // Platform (4)
 
 	// Explosion (offset 32)
@@ -143,6 +143,33 @@ const unsigned char * const spr_enems4 [] = {
 	// Boss (offset 42)
 	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
 	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 	
+};
+
+const unsigned char * const spr_enems5 [] = {
+	// Linear enems and platforms (ids 1-4)
+	ssen_08_a, ssen_09_a, 0, 0, ssen_08_b, ssen_09_b, 0, 0, // 1
+	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
+	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
+	ssplat_04, ssplat_04, 0, 0, ssplat_04, ssplat_04, 0, 0, // Platform (4)
+
+	// Explosion (offset 32)
+	ssexpl_00, 
+
+	// Occluding (offset 33)
+	ssoccl_00,
+
+	// Monococo (type A) (offset 34)
+	ssmc_00_a, ssmc_01_a, 0, 0, ssmc_00_b, ssmc_01_b, 0, 0,
+
+	// Boss (offset 42)
+	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
+	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 
+
+	// Fanty (offset 50)
+	ssfant_00_a, ssfant_01_a, 0, 0, ssfant_00_b, ssfant_01_b, 0, 0,
+
+	// Pezon (offset 58)
+	sspez_00, sspez_01
 };
 
 // Item metasprites

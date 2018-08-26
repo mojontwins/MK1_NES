@@ -79,7 +79,7 @@ const unsigned char * const l_pal_fg [] = 		{
 													palss1, palss1, palss0,  // Broken Fridge Zone
 													palss0, palss0, palss0,	 // Bosque de Badajoz Zone
 													palss0, palss0, palss0,  // Wet Ruins Zone
-													palss0, palss0, palss0,  // Crap Brain Zone
+													palss0, palss0, palss2,  // Crap Brain Zone
 												};
 
 // Metatiles

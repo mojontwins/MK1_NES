@@ -45,6 +45,12 @@ PALS palts4.png
 LABEL ts4b
 MAPPED 0, 0, 2, 2, 16, 2
 
+# Tileset 5
+OPEN ts5.png
+PALS palts5.png
+LABEL ts5
+MAPPED 0, 0, 2, 2, 16, 2
+
 FILL 4096
 RESETPOOL
 
@@ -66,6 +72,7 @@ METASPRITESET 8, 1, 2, 2, 3, 1, -4, 0
 # Enemies
 LABEL ssen
 METASPRITESET 0, 3, 2, 2, 6, 1, 0, 0 FLIPPED
+METASPRITESET 0, 21, 2, 2, 6, 1, 0, 0 FLIPPED
 
 LABEL ssfant
 METASPRITESET 12, 5, 2, 2, 2, 1, 0, 0, FLIPPED

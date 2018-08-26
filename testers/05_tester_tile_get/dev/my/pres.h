@@ -49,11 +49,11 @@ void scr_level (void) {
 	         _y = 16; pr_str ("]]]]^ZONE, ACT ");
 	vram_put (level_act + 17);
 
-	oam_index = 0; rdx = 128-44; for (gpit = 0; gpit < 4; gpit ++) {
+	oam_index = 0; rdx = 128-32; rdy = 17*8; for (gpit = 0; gpit < 6; gpit ++) {
 		oam_index = oam_meta_spr (
-			rdx, 18*8, oam_index, pemmeralds & bits [gpit] ? ssit_07 : ssit_03
+			rdx, rdy, oam_index, pemmeralds & bits [gpit] ? ssit_07 : ssit_03
 		);
-		rdx += 24;
+		rdx += 24; if (gpit == 2) { rdx = 128-32; rdy += 24; }
 	}
 }
 
