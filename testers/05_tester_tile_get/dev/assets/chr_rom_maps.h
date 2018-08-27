@@ -418,3 +418,87 @@ const unsigned int map_42_scr_offsets [] = {
 
 // Total screens size in bytes is 152
 
+// Map # 15 read from level50.map (15x2)
+
+// Definitions
+
+#define MAP_50_CHRROM    3
+#define MAP_50_BASE      0x0928
+#define MAP_50_W         15
+#define MAP_50_H         2
+#define MAP_50_MAXPANTS  30
+#define MAP_50_N_LOCKS   0
+
+// Screens index
+
+const unsigned int map_50_scr_offsets [] = {
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , MAP_50_BASE + 0x0000, 
+	MAP_50_BASE + 0x0036, MAP_50_BASE + 0x0087, 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   , 
+	0                   , 0                   
+};
+
+// Total screens size in bytes is 148
+
+// Map # 16 read from level51.map (5x5)
+
+// Definitions
+
+#define MAP_51_CHRROM    3
+#define MAP_51_BASE      0x09BC
+#define MAP_51_W         5
+#define MAP_51_H         5
+#define MAP_51_MAXPANTS  25
+#define MAP_51_N_LOCKS   0
+
+// Screens index
+
+const unsigned int map_51_scr_offsets [] = {
+	0                   , MAP_51_BASE + 0x0000, 
+	MAP_51_BASE + 0x0024, MAP_51_BASE + 0x004B, 
+	MAP_51_BASE + 0x0067, 0                   , 
+	MAP_51_BASE + 0x0082, MAP_51_BASE + 0x0024, 
+	MAP_51_BASE + 0x00B4, MAP_51_BASE + 0x00E7, 
+	0                   , MAP_51_BASE + 0x0000, 
+	MAP_51_BASE + 0x0024, MAP_51_BASE + 0x00B4, 
+	MAP_51_BASE + 0x00E7, 0                   , 
+	MAP_51_BASE + 0x0082, MAP_51_BASE + 0x0024, 
+	MAP_51_BASE + 0x00B4, MAP_51_BASE + 0x00E7, 
+	MAP_51_BASE + 0x0136, MAP_51_BASE + 0x0154, 
+	MAP_51_BASE + 0x0165, MAP_51_BASE + 0x017E, 
+	MAP_51_BASE + 0x019F
+};
+
+// Total screens size in bytes is 461
+
+// Map # 17 read from level52.map (3x1)
+
+// Definitions
+
+#define MAP_52_CHRROM    3
+#define MAP_52_BASE      0x0B89
+#define MAP_52_W         3
+#define MAP_52_H         1
+#define MAP_52_MAXPANTS  3
+#define MAP_52_N_LOCKS   0
+
+// Screens index
+
+const unsigned int map_52_scr_offsets [] = {
+	MAP_52_BASE + 0x0000, MAP_52_BASE + 0x0034, 
+	MAP_52_BASE + 0x006E
+};
+
+// Total screens size in bytes is 152
+

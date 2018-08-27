@@ -219,3 +219,31 @@
 #define MAX_HOTSPOTS_TYPE_0_42	3
 #define MAX_HOTSPOTS_TYPE_1_42	0
 
+// level50.ene
+
+#define HOTSPOTS_OFFSET_50 0x0168
+
+
+#define KILLABLE_ENEMS_50 0
+
+#define MAX_HOTSPOTS_TYPE_0_50	29
+#define MAX_HOTSPOTS_TYPE_1_50	1
+
+// level51.ene
+
+#define HOTSPOTS_OFFSET_51 0x0000
+
+
+#define KILLABLE_ENEMS_51 0
+
+#define MAX_HOTSPOTS_TYPE_1_51	0
+
+// level52.ene
+
+#define HOTSPOTS_OFFSET_52 0x0000
+
+
+#define KILLABLE_ENEMS_52 0
+
+#define MAX_HOTSPOTS_TYPE_1_52	0
+

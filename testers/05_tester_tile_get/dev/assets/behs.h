@@ -51,6 +51,12 @@ const unsigned char behs4b [] = {
 	0,40,40,41,41, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8
 };
 
+// Custom beh for rays = 66 (float + 2)
+const unsigned char behs5 [] = {
+	0, 8, 8, 8, 0,34,74, 1, 8, 4, 8, 0, 0, 0,66,66,
+	0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0
+};
+
 // 68 = 4 + 64, slippery platform
 // 24 = 8 + 16, breakable obstacle
 // 40 = 8 + 32, conveyor platform, pushes left.

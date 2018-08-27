@@ -13,3 +13,6 @@ level32.map,2,1,99,fixmappy,nodecos,prefix=MAP_32
 level40.map,15,2,99,fixmappy,nodecos,prefix=MAP_40
 level41.map,5,5,99,fixmappy,nodecos,prefix=MAP_41
 level42.map,3,1,99,fixmappy,nodecos,prefix=MAP_42
+level50.map,15,2,99,fixmappy,nodecos,prefix=MAP_50
+level51.map,5,5,99,fixmappy,nodecos,prefix=MAP_51
+level52.map,3,1,99,fixmappy,nodecos,prefix=MAP_52

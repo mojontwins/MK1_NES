@@ -37,9 +37,10 @@ const unsigned char level_name_1 [] = "BROKEN FRIDGE[]]";
 const unsigned char level_name_2 [] = "BOSQUE BADAJOZ[]";
 const unsigned char level_name_3 [] = "WET RUINS[]]]]]]";
 const unsigned char level_name_4 [] = "CRAP BRAIN[]]]]]";
+const unsigned char level_name_5 [] = "OLA K ASE[]]]]]]";
 
 const unsigned char * const level_names [] = {
-	level_name_0, level_name_1, level_name_2, level_name_3, level_name_4
+	level_name_0, level_name_1, level_name_2, level_name_3, level_name_4, level_name_5
 };
 
 void scr_level (void) {

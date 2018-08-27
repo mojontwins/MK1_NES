@@ -47,7 +47,7 @@ MAPPED 0, 0, 2, 2, 16, 2
 
 # Tileset 5
 OPEN ts5.png
-PALS palts5.png
+PALS palts5import.png
 LABEL ts5
 MAPPED 0, 0, 2, 2, 16, 2
 
