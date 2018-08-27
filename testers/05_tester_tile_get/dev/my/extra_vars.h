@@ -21,6 +21,9 @@ unsigned char bubble_x;
 unsigned char bubble_y;			// Eye candy
 unsigned char toggle_switch;	// Value of the toggle switch for Crap Brain Zone 2
 unsigned char toggle_timer; 	// To 'depress' the switch.
+unsigned char elec_state; 		// Electricity state in Ola K Ase Zone
+unsigned char elec_state_ct; 	// Counter for state
+const unsigned char elec_state_max_ct [] = { 6, 1, 4 };
 
 // To animate the ring we will use those metasprites:
 
@@ -31,3 +34,10 @@ const unsigned char *const spr_ring [] = {
 // And a palette cycle for the Bosque de Badajoz
 
 unsigned char pal_cycle [3];
+
+// Custom bg for Ola K Ase Zone
+
+const unsigned char level5_bg [] = {
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 17, 0, 0, 0, 0, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 16, 16, 17, 0, 0, 17, 0, 0, 0, 0, 0, 16, 16, 0, 17, 0, 0, 16, 16, 0, 0, 0, 0, 0, 17, 0, 0, 0, 16, 17, 16, 16, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0
+};
+

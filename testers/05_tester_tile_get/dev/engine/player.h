@@ -807,6 +807,8 @@ void player_move (void) {
 		cx1 = cx2 = (prx + 4) >> 4;
 		cy1 = cy2 = (pry + 8) >> 4;
 		cm_two_points ();
+
+		#include "my/custom_center_detections.h"
 	#endif
 
 	#ifdef ENABLE_TILE_GET

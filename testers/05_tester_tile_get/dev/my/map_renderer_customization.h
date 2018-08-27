@@ -90,6 +90,17 @@ switch (level_world) {
 			map_buff [gpit] = rdt;
 		}
 		break;
-	
 
+	case 5:
+		for (gpit = 0; gpit < 192; gpit ++) {
+			rdt = map_buff [gpit];
+
+			if (rdt == 0) rdt = level5_bg [gpit]; 
+			else {
+				if ((rdt == 8 || rdt == 10) && map_buff [gpit - 1] == rdt) rdt += 17;
+			}
+
+			map_buff [gpit] = rdt;
+		}
+		break;
 }

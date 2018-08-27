@@ -13,3 +13,6 @@ pal_cycle [2] = c_pal_bg [15];
 timer = 20;
 
 toggle_switch = 0;
+
+elec_state_ct = 5;
+elec_state = 0;

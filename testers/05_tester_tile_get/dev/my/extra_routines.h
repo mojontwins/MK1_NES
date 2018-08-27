@@ -55,3 +55,20 @@
 		}
 	}
 	
+	// Electricity
+	if (level_world == 5) {
+		if (ticker == 0 || ticker == 25) {
+			if (elec_state_ct) -- elec_state_ct; else {
+				++ elec_state; if (elec_state == 3) elec_state = 0;
+				elec_state_ct = elec_state_max_ct [elec_state];
+				if (elec_state == 0) pal_bg (palts5);
+				else if (elec_state == 1) pal_col (11, 0x18);
+			}
+		}
+		if (elec_state == 2) {
+			pal_bg (half_life ? palts5 : palts5a);
+			ppu_mask (0x1e);
+		} else {
+			ppu_mask (0xfe); 
+		}
+	}
