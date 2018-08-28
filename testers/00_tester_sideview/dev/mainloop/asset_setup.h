@@ -35,6 +35,7 @@
 	c_max_enems = 	l_player_max_enems [level];
 
 	c_map_w = 		l_map_w [level];
+	c_map_h = 		l_map_h [level];
 
 	#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 		c_interactives = 
@@ -79,6 +80,7 @@
 	#endif
 
 	c_map_w = MAP_W;
+	c_map_h = MAP_H;
 
 	#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)
 		c_interactives =
@@ -86,3 +88,5 @@
 	#endif
 
 #endif
+
+rda = c_map_h; c_map_size = 0; while (rda --) c_map_size += c_map_w;

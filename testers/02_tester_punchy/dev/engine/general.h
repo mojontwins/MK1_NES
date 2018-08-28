@@ -88,12 +88,31 @@ void pad_read (void) {
 
 #ifndef PLAYER_TOP_DOWN
 	void jump_start (void) {
-		sfx_play (SFX_JUMP, 0);
 		pj = 1; pctj = 0; 
-		#ifdef PLAYER_JUMP_TYPE_MK2
-			pvy = -PLAYER_VY_MK2_JUMP_INITIAL;
-		#else
-			pvy = -PLAYER_VY_JUMP_INITIAL;
+		#ifdef ENABLE_TRAMPOLINES
+		if (ptrampoline) {
+			sfx_play (SFX_TRAMPOLINE, 0);
+			#ifdef PLAYER_JUMP_TYPE_MK2
+				pvy = -PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE;
+			#else
+				pvy = -PLAYER_VY_JUMP_INITIAL_TRAMPOLINE;
+			#endif
+		} else
 		#endif
+		{
+			sfx_play (SFX_JUMP, 0);
+			#ifdef PLAYER_JUMP_TYPE_MK2
+				pvy = -PLAYER_VY_MK2_JUMP_INITIAL;
+			#else
+				pvy = -PLAYER_VY_JUMP_INITIAL;
+			#endif
+		}
 	}
 #endif
+
+void update_cycle (void) {
+	oam_hide_rest (oam_index);
+	ppu_waitnmi ();
+	clear_update_list ();
+	oam_index = 4;
+}

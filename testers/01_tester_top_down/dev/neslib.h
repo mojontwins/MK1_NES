@@ -47,9 +47,9 @@ void __fastcall__ ppu_on_spr(void);
 
 //set PPU_MASK directly
 
-;void __fastcall__ ppu_mask(unsigned char mask);
+void __fastcall__ ppu_mask(unsigned char mask);
 
-
+unsigned char __fastcall__ ppu_system(void);
 
 //clear OAM buffer, all the sprites are hidden
 
@@ -121,6 +121,7 @@ unsigned char __fastcall__ pad_state(unsigned char pad);
 
 void __fastcall__ scroll(unsigned int x,unsigned int y);
 
+void __fastcall__ split(unsigned int x,unsigned int y);
 
 
 //select current chr bank for sprites, 0..1

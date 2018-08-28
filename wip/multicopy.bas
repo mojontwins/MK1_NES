@@ -33,10 +33,14 @@ Do
 	fileDest = Command (cmdIt)
 
 	' is directory?
-	dirSpec = Dir (fileDest, &H77, outAttrib)
-	If outAttrib And fbDirectory Then
-		If Right (fileDest, 1) <> "\" Then fileDest = fileDest & "\"
+	If Right (fileDest, 1) = "\" Then 
 		fileDest = fileDest & fileName
+	Else
+		dirSpec = Dir (fileDest, &H77, outAttrib)
+		If outAttrib And fbDirectory Then
+			If Right (fileDest, 1) <> "\" Then fileDest = fileDest & "\"
+			fileDest = fileDest & fileName
+		End If
 	End If
 	
 	If FileCopy (Command (1), fileDest) Then

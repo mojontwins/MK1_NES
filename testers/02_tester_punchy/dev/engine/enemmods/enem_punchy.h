@@ -23,7 +23,13 @@ if (_en_t & 0x40) {
 			sfx_play (SFX_HITTER, 1);
 
 			// Collide w/player
-			if (pstate == EST_NORMAL && 
+			if (
+				#ifdef PLAYER_FLICKERS
+					!pflickering &&
+				#endif
+				#ifdef PLAYER_BOUNCES
+					!pbouncing && 
+				#endif
 				rdx + 7 >= prx && rdx <= prx + 7 && 
 				rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
 				rdy <= pry + 13

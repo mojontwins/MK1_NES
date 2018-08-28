@@ -8,7 +8,7 @@
 // Use player variables p* and end up with a correct value
 // in psprid.
 
-	if (pbouncing || phit) {
+	if (pbouncing || phit || pkill) {
 		psprid = CELL_HIT;
 	} else if (pspin) {
 		psprid = CELL_SPIN_CYCLE + ((frame_counter >> 4) & 3);
@@ -21,12 +21,6 @@
 		}
 	} else {
 		psprid = CELL_AIRBORNE;
-		/*
-		if (pvy < PLAYER_VY_FALLING_MIN)
-			psprid = CELL_ASCENDING;
-		else
-			psprid = CELL_DESCENDING;
-		*/	
 	}
 
 	psprid += pfacing;

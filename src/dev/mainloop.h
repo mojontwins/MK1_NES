@@ -346,6 +346,12 @@ void game_loop (void) {
 			half_life ^= 1;
 			++ frame_counter;
 
+			// Detect interactions
+
+			#ifdef ENABLE_INTERACTIVES
+				#include "mainloop/interactives.h"
+			#endif	
+
 			// Update player
 
 			if (!warp_to_level) {
@@ -372,12 +378,6 @@ void game_loop (void) {
 				if (propellers_on) propellers_do ();
 			#endif
 
-			// Detect interactions
-
-			#ifdef ENABLE_INTERACTIVES
-				#include "mainloop/interactives.h"
-			#endif		
-
 			// Update / collide hotspots
 
 			#include "mainloop/hotspots.h"
@@ -402,7 +402,7 @@ void game_loop (void) {
 
 			// Paint player
 
-			player_render ();
+			if (!warp_to_level)	player_render ();
 
 			// Update enemies
 		

@@ -187,6 +187,7 @@ if (hrt) {
 								++ pstars; rda = SFX_OBJECT;
 								break;
 						#endif
+						#include "my/extra_hotspots.h"
 					}
 					if (rda) {
 						sfx_play (rda, 1);

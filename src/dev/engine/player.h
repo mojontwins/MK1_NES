@@ -626,25 +626,29 @@ void player_move (void) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = 0xff;
 		#endif
-		
-		if (pvx > 0) {
+		#ifdef PLAYER_SPINS
+			if (!pspin)
+		#endif
+		{
+			if (pvx > 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else			
-				pvx -= PLAYER_RX;
-			#endif			
-			
-			if (pvx < 0) pvx = 0;
-		} else if (pvx < 0) {
+				#ifdef ENABLE_SLIPPERY
+					pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else			
+					pvx -= PLAYER_RX;
+				#endif			
+				
+				if (pvx < 0) pvx = 0;
+			} else if (pvx < 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else
-				pvx += PLAYER_RX;
-			#endif
+				#ifdef ENABLE_SLIPPERY
+					pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else
+					pvx += PLAYER_RX;
+				#endif
 
-			if (pvx > 0) pvx = 0;
+				if (pvx > 0) pvx = 0;
+			}
 		}
 	}
 
@@ -803,6 +807,8 @@ void player_move (void) {
 		cx1 = cx2 = (prx + 4) >> 4;
 		cy1 = cy2 = (pry + 8) >> 4;
 		cm_two_points ();
+
+		#include "my/custom_center_detections.h"
 	#endif
 
 	#ifdef ENABLE_TILE_GET

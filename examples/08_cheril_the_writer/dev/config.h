@@ -521,6 +521,7 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
+#define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128
 #define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
 #define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
@@ -543,6 +544,8 @@
 #define PLAYER_VY_MK2_JUMP_INITIAL	208
 #define PLAYER_VY_MK2_JUMP_RELEASE	96
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
+#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296
+#define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32	// For trampolines
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 

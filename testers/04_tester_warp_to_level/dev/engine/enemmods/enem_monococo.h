@@ -4,12 +4,12 @@
 // mx is state. my is counter.
 
 // Counter & state change
--- MONOCOCO_COUNTER; if (!MONOCOCO_COUNTER) {
-	MONOCOCO_STATE = (MONOCOCO_STATE + 1) & 3; MONOCOCO_COUNTER = monococo_state_times [MONOCOCO_STATE] - (rand8 () & 0x15);
+-- _en_ct; if (!_en_ct) {
+	_en_state = (_en_state + 1) & 3; _en_ct = monococo_state_times [_en_state] - (rand8 () & 0x15);
 }
 
 // Shoot
-if (MONOCOCO_STATE == 2 && MONOCOCO_COUNTER == MONOCOCO_FIRE_COCO_AT) {
+if (_en_state == 2 && _en_ct == MONOCOCO_FIRE_COCO_AT) {
 	rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
 }
 
@@ -18,14 +18,14 @@ if (MONOCOCO_STATE == 2 && MONOCOCO_COUNTER == MONOCOCO_FIRE_COCO_AT) {
 rda = (prx < rdx); enems_facing ();
 #ifdef MONOCOCO_TYPE_A
 	if (
-		((MONOCOCO_STATE == 1 || MONOCOCO_STATE == 3) && half_life) ||
-		MONOCOCO_STATE == 2
+		((_en_state == 1 || _en_state == 3) && half_life) ||
+		_en_state == 2
 	) {
 		en_spr = MONOCOCO_BASE_SPRID + _en_facing + ((frame_counter >> 5) & 1);
 	} 
 #else
 	en_spr = MONOCOCO_BASE_SPRID + _en_facing;
-	switch (MONOCOCO_STATE) {
+	switch (_en_state) {
 		case 0:
 			en_spr += 9;
 			break;

@@ -138,10 +138,34 @@ void enems_update_unsigned_char_arrays (void) {
 
 	__asm__ ("lda %v", _en_facing);
 	__asm__ ("sta %v, y", en_facing);
+
+	__asm__ ("lda %v", _en_state);
+	__asm__ ("sta %v, y", en_state);
+
+	#ifdef ENEMS_NEED_FP
+		enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
+		enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
+	#endif
 }
 
-void enems_facing () {
+void enems_facing (void) {
 	_en_facing = rda << 2;
+}
+
+void enems_init_fp (void) {
+	_enf_x = _en_x << 6;
+	_enf_y = _en_y << 6;
+}
+
+void enems_boioiong_init (void) {
+	enems_init_fp ();
+	_enf_vy = 0; 
+	_enf_vx = ADD_SIGN2 (_en_x2, _en_x1, rdm << FIXBITS);
+	#ifdef BOIOIONG_ACTIVE_BY_DEFAULT
+		_en_ct = BOIOIONG_INITIAL_TIMER;
+	#else
+		_en_ct = 0;
+	#endif
 }
 
 void enems_load (void) {
@@ -180,7 +204,7 @@ void enems_load (void) {
 				_en_t = VRAM_READ;
 
 				// General...
-				en_alive [gpit] = 0;
+				_en_state = 0;
 
 				// YX1
 				rda = VRAM_READ;
@@ -200,7 +224,7 @@ void enems_load (void) {
 				SET_FROM_PTR (_en_t, gp_gen); gp_gen ++;
 
 				// General...
-				en_alive [gpit] = 0;
+				_en_state = 0;
 
 				// YX1
 				// rda = *gp_gen ++;
@@ -298,17 +322,20 @@ void enems_load (void) {
 						break;
 				#endif
 
-				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+				#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
 					case 6:
 						// Fantys
-						enf_x [gpit] = _en_x << 6;
-						enf_y [gpit] = _en_y << 6;
-						enf_vx [gpit] = enf_vy [gpit] = 0;
+						enems_init_fp ();
+						_enf_vx = _enf_vy = 0;
+						#ifdef ENABLE_TIMED_FANTY
+							_en_ct = FANTY_BASE_TIMER;
+						#endif
+
 						_en_s = FANTY_BASE_SPRID;
 						break;
 				#endif
 
-				#ifdef ENABLE_PURSUERS		
+				#ifdef ENABLE_PURSUERS
 					case 7:
 						// Pursuers
 						_en_ct = DEATH_COUNT_EXPRESSION;	
@@ -344,7 +371,7 @@ void enems_load (void) {
 						_en_my = rda; // EMERGING SENSE
 						_en_mx = rdb; // MOVING SENSE
 
-						en_alive [gpit] = 1;
+						_en_state = 1;
 						_en_ct = SAW_EMERGING_STEPS;
 
 						break;
@@ -377,10 +404,33 @@ void enems_load (void) {
 				#ifdef ENABLE_MONOCOCOS
 					case 11:
 						// Monococos
-						_en_mx = 0; _en_my = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
+						_en_state = 0; _en_ct = MONOCOCO_BASE_TIME_HIDDEN - (rand8 () & 0x15);
 						_en_s = MONOCOCO_BASE_SPRID;
 						break;
-				#endif	
+				#endif
+
+				#ifdef ENABLE_CATACROCKS
+					case 12:
+						// Catacrocks
+						enems_init_fp ();
+						_en_state = 0;
+						CATACROCK_WAIT = _en_ct = rdm << 5;
+						break;
+				#endif
+
+				#ifdef ENABLE_BOIOIONG
+					case 13:
+						// Boioiongs
+						#ifdef PERSISTENT_ENEMIES
+							// Initialize position from ROM
+							_en_x = _en_x1;
+							_en_y = _en_y1;							
+						#endif
+						enems_boioiong_init ();
+						_en_mx = rdm; // Store
+						_en_s = BOIOIONG_BASE_SPRID;
+						break;
+				#endif
 
 				#ifdef ENABLE_COMPILED_ENEMS
 					case 20:
@@ -390,8 +440,9 @@ void enems_load (void) {
 							_en_y = _en_y1;							
 						#endif
 						_en_ct = 0;
-						_en_s = COMPILED_ENEMS_BASE_SPRID;
+						en_rawv [gpit] = _en_s = COMPILED_ENEMS_BASE_SPRID;
 						en_behptr [gpit] = en_behptrs [rda];
+						_en_x1 = 1; 	// Repurpose for speed
 						break;
 				#endif
 
@@ -457,7 +508,7 @@ void enems_load (void) {
 		{
 			#ifdef ENABLE_PURSUERS
 				if (_en_t == 7) {
-					en_alive [gpit] = 0;
+					_en_state = 0;
 					_en_ct = DEATH_COUNT_EXPRESSION;
 					#ifdef NEEDS_LIFE_GAUGE_LOGIC
 						en_life [gpit] = ENEMS_LIFE_GAUGE;	
@@ -523,21 +574,23 @@ void enems_move (void) {
 		__asm__ ("lda %v, y", en_facing);
 		__asm__ ("sta %v", _en_facing);
 
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+		__asm__ ("lda %v, y", en_state);
+		__asm__ ("sta %v", _en_state);
+
+		#ifdef ENEMS_NEED_FP
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
-		#endif
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
 		#endif		
 
 		if (_en_t == 0) continue;
 		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
-		
+	
 		// Clear selected sprite
 		// Means don't render (can/will be overwritten):
 		en_spr = 0xff;
 
 		// "touched" state control
+		en_spr_x_mod = 0;
 
 		#ifdef ENEMS_MAY_DIE
 			if (en_cttouched [gpit]) {
@@ -557,14 +610,20 @@ void enems_move (void) {
 						en_spr = en_spr_id [gpit];	
 					} 
 				#else
+					rda = frame_counter & 0xf;
 					oam_index = oam_meta_spr (
-						_en_x, _en_y + SPRITE_ADJUST, 
+						_en_x + jitter [rda],
+						_en_y + jitter [15 - rda] + SPRITE_ADJUST, 
 						oam_index, 
 						spr_enems [ENEMS_EXPLODING_CELL]
 					);
 					#ifndef ENEMS_EXPLODING_CELLS_HIDES
-						en_spr = en_spr_id [gpit];
+						if (en_life [gpit]) en_spr = en_spr_id [gpit];
 					#endif
+				#endif
+
+				#ifdef ENEMS_TREMBLE
+					en_spr_x_mod = half_life;
 				#endif
 
 				#ifdef ENEMS_RECOIL_ON_HIT
@@ -635,6 +694,12 @@ void enems_move (void) {
 							break;
 					#endif
 
+					#ifdef ENABLE_TIMED_FANTY
+						case 6:
+							#include "engine/enemmods/enem_timed_fanty.h"
+							break;
+					#endif
+
 					#ifdef ENABLE_PURSUERS					
 						case 7:					
 							#include "engine/enemmods/enem_pursuers.h"
@@ -664,6 +729,18 @@ void enems_move (void) {
 							#include "engine/enemmods/enem_monococo.h"
 							break;
 					#endif	
+
+					#ifdef ENABLE_CATACROCKS
+						case 12:
+							#include "engine/enemmods/enem_catacrock.h"
+							break;
+					#endif
+
+					#ifdef ENABLE_BOIOIONG
+						case 13:
+							#include "engine/enemmods/enem_boioiong.h"
+							break;
+					#endif
 
 					#ifdef ENABLE_SIMPLE_WARPERS
 						case 0x3f:
@@ -746,23 +823,32 @@ void enems_move (void) {
 
 			if (
 					en_is_alive == 0	// General condition.
+				#ifdef ENEMS_MAY_DIE
+					|| en_cttouched [gpit]
+				#endif
 				#ifndef PLAYER_TOP_DOWN				
 					|| _en_t == 4
 				#endif
 				#ifdef ENABLE_PURSUERS
-					|| (_en_t == 7 && en_alive [gpit] != 2)
+					|| (_en_t == 7 && _en_state != 2)
 				#endif
 				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && en_alive [gpit] != 2)
+					|| (_en_t == 8 && _en_state != 2)
 				#endif
 				#ifdef ENABLE_PEZONS
-					|| (_en_t == 9 && en_alive [gpit] == 0)
+					|| (_en_t == 9 && _en_state == 0)
 				#endif
 				#ifdef ENABLE_CHAC_CHAC
 					|| _en_t == 10
 				#endif
 				#ifdef ENABLE_MONOCOCOS
 					|| (_en_t == 11 && _en_mx != 2)
+				#endif
+				#ifdef ENABLE_CATACROCKS
+					|| (_en_t == 12 && _en_state != 1)
+				#endif
+				#ifdef ENABLE_BOIOIONG
+					|| (_en_t == 13 && _en_ct == 0)
 				#endif
 			) goto skipdo;
 
@@ -827,30 +913,68 @@ void enems_move (void) {
 					_en_t != 5 &&
 				#endif
 				touched == 0 &&
-				pstate == EST_NORMAL &&
 				collide ()
 			) {
-				#ifdef PLAYER_BOUNCES
-					pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); _en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-					pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+				// en_sg_1 => kill enemy
+				#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
+					en_sg_1 = 1;
+				#else
+					en_sg_1 = 0;
 				#endif
-
-				#if defined ENEMIES_SUFFER_ON_PLAYER_COLLISION
-					enems_hit ();
-				#endif
+				
+				// en_sg_2 => kill player.
+				en_sg_2 = (pflickering == 0);
 
 				#ifdef ENABLE_RESONATORS
+					// If resonators are on and not a saw, don't kill player
 					if (
-						res_on == 0 
+						res_on == 1
 						#ifdef ENABLE_SAW
-						|| _en_t == 8
+						&& _en_t != 8
 						#endif
-					)
+					) en_sg_2 = 0;
 				#endif
-				{
-					pkill = 1;
-					touched = 1;
+
+				#ifdef PLAYER_SPINS
+					// If spinning and not a saw or a steady shooter 
+					// kill enemy, don't kill player
+					if (pspin
+						#ifndef STEADY_SHOOTER_KILLABLE
+							&& _en_t != 5
+						#endif	
+						#ifdef ENABLE_SAW
+							&& _en_t != 8
+						#endif
+					) {
+						en_sg_2 = 0;
+						en_sg_1 = 1;
+						pvy = -pvy;
+						sfx_play (SFX_STEPON, 1);
+					}
+				#endif				
+
+				#include "my/on_player_hit.h"
+
+				#ifdef ENEMS_MAY_DIE
+					if (en_sg_1) enems_hit ();
+				#endif
+				if (en_sg_2) { 
+					pkill = 1; 
+					#ifdef PLAYER_BOUNCES
+						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
+						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
+						
+						#ifdef ENABLE_COMPILED_ENEMS
+						if (_en_t != 20)
+						#endif
+						{
+							if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+							_en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+						}
+
+					#endif	
 				}
+				touched = 1; 
 			}
 
 			// Is enemy killable? If not, exit
@@ -902,7 +1026,7 @@ void enems_move (void) {
 				// Bullets
 				bi = MAX_BULLETS; while (bi --) if (bst [bi]) {
 					#ifdef ENABLE_PURSUERS
-						if (_en_t != 7 || en_alive [gpit] == 2)
+						if (_en_t != 7 || _en_state == 2)
 					#endif
 					
 					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
@@ -950,8 +1074,7 @@ void enems_move (void) {
 						_en_y = en_resy [gpit]; _en_my = en_resmy [gpit];
 						
 						#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY))
-							_enf_x = _en_x << FIXBITS;
-							_enf_y = _en_y << FIXBITS;
+							enems_init_fp ();
 							#ifdef NEEDS_LIFE_GAUGE_LOGIC
 								en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 							#endif
@@ -974,7 +1097,7 @@ skipdo:
 
 		if (en_spr != 0xff) {
 			oam_index = oam_meta_spr (
-				_en_x, _en_y + SPRITE_ADJUST, 
+				_en_x + en_spr_x_mod, _en_y + SPRITE_ADJUST, 
 				oam_index, 
 				spr_enems [en_spr]
 			);
@@ -983,13 +1106,5 @@ skipdo:
 		// Update arrays
 
 		enems_update_unsigned_char_arrays ();
-
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
-			enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
-		#endif
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
-			enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
-		#endif
-
 	}	
 }

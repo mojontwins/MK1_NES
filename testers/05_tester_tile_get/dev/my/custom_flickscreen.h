@@ -19,3 +19,12 @@ if (level == 6 || level == 8) {
 	// Just detect up/down connections
 	flickscreen_do_vertical ();
 }
+
+// On level world 5, get killed by the bottom of the map
+
+if ((level == 15 && n_pant >= c_map_w)) {
+	if (pry >= 192 && pvy > 0) {
+		pkill = 1;
+		flick_override = 1;
+	}
+}

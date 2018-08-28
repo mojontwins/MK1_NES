@@ -28,6 +28,7 @@ if (interactives_index) {
 					}
 				#endif
 				interactives_interact_with = gpit;
+
 				b_button = 0;
 				break;
 			}

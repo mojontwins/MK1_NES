@@ -14,7 +14,6 @@ One of the things I like about **AGNES** is that it's fun (well, at least for me
 
 ## Creating the ring
 
-
 The ring has been implemented using a custom module written for this game. The module is `my/ring.h`. To make **AGNES** include extra code you have to write `#includes` in `my/extra_modules.h`:
 
 ```c
@@ -447,39 +446,96 @@ And add an extra rule to `map_renderer_customization.h` so Gates "A" and "B" are
                 }
 ```
 
+## Electric barriers in Ola K Ase Zone
+
+Electric barriers are wires of lighting which turn or on off periodically. They are harmfull when on. We have implemented them via a custom tile detection and a custom routine which uses the ticker to switch states.
+
+The ticker ticks 50 times every second (regardless of PAL/NTSC). Everytime the ticker equals 0, a second has passed. Everytime the ticker equals 0 or 25, half a second has passed. We use this to time the tates of the wires.
+
+First of all, we define some variables and constant arrays in `extra_vars.h`:
+
+```c
+    unsigned char elec_state;
+    unsigned char elec_state_ct;
+    const unsigned char elec_state_max_ct [] = { 6, 1, 4 };
+```
+
+The array contains the amount of half seconds every state will be active before stepping to the next. State control is performed in `extra_routines.h`:
+   
+```c 
+    // Electricity
+    if (level_world == 5) {
+        if (ticker == 0 || ticker == 25) {
+            if (elec_state_ct) -- elec_state_ct; else {
+                ++ elec_state; if (elec_state == 3) elec_state = 0;
+                elec_state_ct = elec_state_max_ct [elec_state];
+                if (elec_state == 0) pal_bg (palts5);
+                else if (elec_state == 1) pal_col (11, 0x18);
+            }
+        }
+    }
+```
+
+When `elec_state` equals 2, the electric barriers are "active" - harmful. There's also a blinking effect achieved alternating palettes and colour emphasis bits. `effects.h` gets executed every TV frame (50 or 60 times per second), not every game frame, (which is always running at 50 fps), so it's the place to add this kind of effects:
+
+```c
+    // Level 5 flashing should be 50Hz in PAL and 60Hz in NTSC
+    // So we put it here.
+    if (level_world == 5) {
+        if (elec_state == 2) {
+            pal_bg (half_life ? palts5 : palts5a);
+            ppu_mask (0x1e);
+        } else {
+            ppu_mask (0xfe); 
+        }
+    }
+```
+
+Finally, to make them really harmful, we inject code via `custom_center_detections.h`, which let's you add code to react to the tile detected at the dot located in the middle of the player's collision rectangle. We have chose beh 66 as it's unused and does not interfere with existing tile behaviours.
+
+```c
+    if (at1 == 66) {
+        // Custom: electricity rays
+        if (elec_state == 2) {
+            
+            if (prings) {
+                ring_create ();
+                prings = 0;
+
+                // Simulate hit
+                pvx = -pvx; pvy = -64; 
+                pbouncing = 16;
+                pflickering = 100;
+            } else pkill = 1;
+
+        } 
+    }
+```
+
+This code is not included automaticly, we have to enable `CUSTOM_CENTER_DETECTIONS` in `config.h`.
+
 ## Also of interest
 
 ### Custom renderer
 
 The game features a nice custom renderer, like most AGNES games. For worlds 0 and 1 (all acts) it adds clouds to the background selecting a random location and checking if there's room (but it doesn't try very hard).
 
-Worlds 0 and 1 correspond to levels 0 to 5. Levels 3 to 5 (world 1) also feature a strip if water tiles at the bottom of each screen in the bottom row of the map.
+world 1 also feature a strip if water tiles at the bottom of each screen in the bottom row of the map.
 
-Levels 6 to 8 and 9 to 11 have several tile substitutions for embellishments. Levels 9 to 11 substitute single tiles by 2x2 tiles clusters automaticly. This saves tons of bytes in RLE compressed maps, but such 2x2 tiles are always rendered in coordinates which are multiples of two.
+Worlds 2 to 4 have several tile substitutions for embellishments. Worlds 3 and 4 substitute single tiles by 2x2 tiles clusters automaticly. This saves tons of bytes in RLE compressed maps, but such 2x2 tiles are always rendered in coordinates which are multiples of two.
+
+World 5 has a custom bg: a 192 bytes array with 1 byte per tile. Everytime a 0 is found in the map, it is substituted by the value of the corresponding tile in the bg array.
 
 ```c
-// NES MK1 v1.0
-// Copyleft Mojon Twins 2013, 2015, 2017, 2018
-
-// Use this alongisde map_renderer_complex.h
-// (#define MAP_RENDERER_COMPLEX)
-
-// Reaching this point, map_buff has the decompressed map screen.
-// You can write as many modifications as you like here:
-
 set_rand (n_pant + 1);
 
-switch (level) {
-    case 3:
-    case 4:
-    case 5:
+switch (level_world) {
+    case 1:
         // Strip of water at the bottom of the level
         if (level != 3 || n_pant > 14) {
             for (gpit = 176; gpit < 192; gpit ++) map_buff [gpit] = 18;
         }
     case 0:
-    case 1:
-    case 2:
         // Random clouds, find a nice spot but don't try hard
         gpit = 4; while (gpit --) {
             gpjt = 4; while (gpjt --) {
@@ -494,17 +550,16 @@ switch (level) {
             }
         }
         break;
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
+    case 4:
+        rdc = (map_buff [0] != 4);  // Cheap way to distinguish between outside / inside
+    case 2:
+    case 3:
+            
         for (gpit = 0; gpit < 192; gpit ++) {
             rdt = map_buff [gpit];
             rdb = rand8 ();
 
-            if (level < 9) {
+            if (level_world == 2) {
                 // Bosque de Badajoz Zone embellishments
 
                 if (gpit > 16) {
@@ -520,13 +575,29 @@ switch (level) {
                     if (rdt == 0 && rda == 2) rdt = 19;
                     else if (rdt == 2 && rda != 2) rdt = 18;
                 }
-            } else {
-                // Wet Ruins Zone embellishments                
+            } else {                
+                if (level_world == 3) {
+                    // Wet Ruins Zone embellishments
+                    if (rdt == 1) rdt = 16 + (rdb & 3);
+                } else {
+                    // Crap Brains embellishments
+                    if (rdt == 1 || rdt == 3) {
+                        rda = map_buff [gpit - 1];
+                        if (rda != rdt && rda != rdt + 16) rdt = rdt + 16;
+                        else {
+                            rda = map_buff [gpit + 1];
+                            if (rda != rdt) rdt = rdt + 17;
+                        }
+                    }
 
-                switch (rdt) {
-                    case 1:
-                        rdt = 16 + (rdb & 3);
-                        break;
+                    if (level_act == 1) {
+                        if (rdt == 2 && toggle_switch == 0) rdt = 0;
+                        if (rdt == 4 && toggle_switch) rdt = 0;
+                    }
+                }
+
+                // Wet Ruins Zone & Crap Brains embellishments
+                switch (rdt) {                  
                     case 8:
                     case 12:
                         rdt = 16 + rdt + (gpit & 1) + ((gpit >> 3) & 2);
@@ -534,7 +605,20 @@ switch (level) {
                 }
             }
         
-            if (rdt == 0 && (rdb & 7) == 1) rdt = 21;
+            if (rdt == 0 && (rdb & 7) == 1 && (rdc || level_world < 4)) rdt = 21;
+
+            map_buff [gpit] = rdt;
+        }
+        break;
+
+    case 5:
+        for (gpit = 0; gpit < 192; gpit ++) {
+            rdt = map_buff [gpit];
+
+            if (rdt == 0) rdt = level5_bg [gpit]; 
+            else {
+                if ((rdt == 8 || rdt == 10) && map_buff [gpit - 1] == rdt) rdt += 17;
+            }
 
             map_buff [gpit] = rdt;
         }
@@ -578,6 +662,23 @@ The first and third acts in World 3 (level 6) are 1-screen wide levels. We have 
 ```
 
 (if you don't set `flick_override`, the engine will call `flickscreen_do_horizontal` and `flickscreen_do_vertical`).
+
+### Bottom of the map kills in some levels
+
+This was achieved pretty easily via a custom flickscreen rule:
+
+```c
+    // On level world 5, get killed by the bottom of the map
+
+    if ((level == 15 && n_pant >= c_map_w)
+        [...]
+        ) {
+        if (pry >= 192 && pvy > 0) {
+            pkill = 1;
+            flick_override = 1;
+        }
+    }
+```
 
 ### Moving water in Broken Fridge Zone
 

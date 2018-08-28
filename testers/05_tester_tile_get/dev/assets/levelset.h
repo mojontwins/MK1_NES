@@ -179,11 +179,11 @@ const unsigned char * const * const l_spr_enems [] =
 	// change 'base_address' for the actual base address in CHR-ROM
 
 	const unsigned char l_enems_chr_rombank [] = 	{ 
-														3, 3, 3, // Benny Hill Zone
-														3, 3, 3, // Broken Fridge Zone
-														3, 3, 3, // Bosque de Badajoz Zone
-														3, 3, 3, // Wet Ruins Zone
-														3, 3, 3, // Crap Brain Zone
+														1, 1, 1, // Benny Hill Zone
+														1, 1, 1, // Broken Fridge Zone
+														1, 1, 1, // Bosque de Badajoz Zone
+														1, 1, 1, // Wet Ruins Zone
+														1, 1, 1, // Crap Brain Zone
 														3, 3, 3, // Ola K Ase Zone
 													};
 	const unsigned int l_enems [] = 				{ 
@@ -202,9 +202,9 @@ const unsigned char * const * const l_spr_enems [] =
 														4096 + WORK_ENEMS40_H_BIN_OFFS,	// Crap Brain Zone
 														4096 + WORK_ENEMS41_H_BIN_OFFS,
 														4096 + WORK_ENEMS42_H_BIN_OFFS,
-														4096 + WORK_ENEMS50_H_BIN_OFFS,	// Ola K Ase Zone
-														4096 + WORK_ENEMS51_H_BIN_OFFS,
-														4096 + WORK_ENEMS52_H_BIN_OFFS,
+														6144 + WORK_ENEMS50_H_BIN_OFFS,	// Ola K Ase Zone
+														6144 + WORK_ENEMS51_H_BIN_OFFS,
+														6144 + WORK_ENEMS52_H_BIN_OFFS,
 													};
 	const unsigned int l_hotspots [] = 				{ 
 	 													4096 + WORK_ENEMS00_H_BIN_OFFS + HOTSPOTS_OFFSET_00, // Benny Hill Zone
@@ -222,9 +222,9 @@ const unsigned char * const * const l_spr_enems [] =
 														4096 + WORK_ENEMS40_H_BIN_OFFS + HOTSPOTS_OFFSET_40, // Crap Brain Zone
 														4096 + WORK_ENEMS41_H_BIN_OFFS + HOTSPOTS_OFFSET_41,
 														4096 + WORK_ENEMS42_H_BIN_OFFS + HOTSPOTS_OFFSET_42,
-														4096 + WORK_ENEMS50_H_BIN_OFFS + HOTSPOTS_OFFSET_50, // Ola K Ase Zone
-														4096 + WORK_ENEMS51_H_BIN_OFFS + HOTSPOTS_OFFSET_51,
-														4096 + WORK_ENEMS52_H_BIN_OFFS + HOTSPOTS_OFFSET_52,
+														6144 + WORK_ENEMS50_H_BIN_OFFS + HOTSPOTS_OFFSET_50, // Ola K Ase Zone
+														6144 + WORK_ENEMS51_H_BIN_OFFS + HOTSPOTS_OFFSET_51,
+														6144 + WORK_ENEMS52_H_BIN_OFFS + HOTSPOTS_OFFSET_52,
 													};
 #else
 const unsigned char * const l_enems [] = 		{ enems_0, enems_1 };

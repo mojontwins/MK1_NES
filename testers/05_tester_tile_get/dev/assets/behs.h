@@ -53,7 +53,7 @@ const unsigned char behs4b [] = {
 
 // Custom beh for rays = 66 (float + 2)
 const unsigned char behs5 [] = {
-	0, 8, 8, 8, 0,34,74, 1, 8, 4, 8, 0, 0, 0,66,66,
+	0, 8, 8, 8, 0,34,74, 1, 8, 4, 8, 0, 0,66,66,66,
 	0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0
 };
 

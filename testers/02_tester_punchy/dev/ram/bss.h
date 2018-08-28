@@ -3,6 +3,10 @@
 
 // bss
 
+// NTSC system
+
+unsigned char ntsc, ntsc_frame;
+
 // Update list (neslib)
 
 #define UPDATE_LIST_SIZE 32
@@ -36,6 +40,9 @@ unsigned char frame_counter;            // Game grame counter, wraps 255->0
 unsigned char paused;                   // True if the game is paused.
 unsigned char win_level;                // If WIN_LEVEL_CUSTOM is defined, set to true to win the level.
 unsigned char game_over;                // True if the player lost the game.
+unsigned char warp_to_level;            // True if the player is jumping to a different level 
+unsigned char level_reset;              // True if the level should be reset.
+unsigned char flick_override;           // If set, code to flick screen is overriden for current frame
 
 // General player values, last frame copies
 
@@ -102,8 +109,8 @@ unsigned char okilled;                  // Player # of killed enems., last frame
 
     unsigned char coco_on [COCOS_MAX];  // Cocos states
     
-    signed int coco_x [COCOS_MAX];      // Cocos, X coordinates (fixed point 12.6)
-    signed int coco_y [COCOS_MAX];      // Cocos, Y coordinates (fixed point 12.6)
+    signed int coco_x [COCOS_MAX];      // Cocos, X coordinates (fixed point 10.6)
+    signed int coco_y [COCOS_MAX];      // Cocos, Y coordinates (fixed point 10.6)
     signed int coco_vx [COCOS_MAX];     // Cocos, direction + speed in the X axis.
     signed int coco_vy [COCOS_MAX];     // Cocos, direction + speed in the Y axis.
 #endif  
@@ -125,7 +132,8 @@ unsigned char okilled;                  // Player # of killed enems., last frame
 
 // Hotspots
 
-#ifdef HOTSPOTS_DYNAMIC                 // If HOTSPOTS_DYNAMIC is defined, hotspots are copied to RAM and may be modified
+#if defined (HOTSPOTS_DYNAMIC) || defined (ENEMS_IN_CHRROM)       
+                                        // If HOTSPOTS_DYNAMIC is defined, hotspots are copied to RAM and may be modified
                                         // Otherwise they are read from ROM when entering each screen.
     unsigned char hyx [MAP_SIZE];       // Hotspot position per screen (room), packed 0xYX
     unsigned char ht [MAP_SIZE];        // Hotspot type per screen (room)
@@ -206,6 +214,10 @@ signed char en_my [3];                  // Enemy direction + speed in the Y axis
 unsigned char en_s [3];                 // Enemy base sprite index in spr_enems.
 unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = facing left.
 
+unsigned char en_state [3];             // Enemy State
+
+unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
+
 #ifdef ENEMS_CAN_RESPAWN
     unsigned char en_respawn [3];       // If true, enems can respawn.
     unsigned char en_resx [3];
@@ -216,12 +228,9 @@ unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = faci
 
 // Fixed point variables (coordiantes, velocity) for some kinds of enemies.
 
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)
+#ifdef ENEMS_NEED_FP
     signed int enf_x [3];
     signed int enf_vx [3];
-#endif
-    
-#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_PEZONS)
     signed int enf_y [3];
     signed int enf_vy [3];
 #endif
@@ -331,6 +340,14 @@ unsigned char en_spr_id [3];
 
 #ifdef ENABLE_SHAKER
     unsigned char shaker_ct;            // If != 0, shake the screen & decrement.
+#endif
+
+// Collectible map tiles
+
+#ifdef ENABLE_TILE_GET
+    #ifdef PERSISTENT_TILE_GET
+        unsigned char tile_got [24];        // Buffer for current screen
+    #endif
 #endif
 
 #include "my/extra_vars.h"              // Custom extra variables

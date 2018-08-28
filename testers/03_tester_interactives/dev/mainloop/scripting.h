@@ -7,7 +7,7 @@
 		use_ct == USE_ANIM_INTERACT_ON && 
 		use_sub_ct == USE_ANIM_FRAMES_PER_STEP &&
 		use_type == USE_TYPE_SCRIPTING
-	) {
+	) {		
 		run_fire_script ();
 		sfx_play (fire_script_success ? SFX_OBJECT : SFX_SPRING, 1);
 		run_fire_script_do = 0;

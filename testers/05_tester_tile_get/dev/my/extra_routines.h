@@ -65,10 +65,4 @@
 				else if (elec_state == 1) pal_col (11, 0x18);
 			}
 		}
-		if (elec_state == 2) {
-			pal_bg (half_life ? palts5 : palts5a);
-			ppu_mask (0x1e);
-		} else {
-			ppu_mask (0xfe); 
-		}
 	}

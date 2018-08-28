@@ -14,3 +14,14 @@
 
 	// Do a split in the fridge
 	if (water_strip) split (frame_counter, 0);
+
+	// Level 5 flashing should be 50Hz in PAL and 60Hz in NTSC
+	// So we put it here.
+	if (level_world == 5) {
+		if (elec_state == 2) {
+			pal_bg (half_life ? palts5 : palts5a);
+			ppu_mask (0x1e);
+		} else {
+			ppu_mask (0xfe); 
+		}
+	}

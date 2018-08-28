@@ -28,7 +28,7 @@
 #define NEEDS_INITIAL_DETECTION
 #endif
 
-#if defined (ENABLE_TILE_GET)
+#if defined (ENABLE_TILE_GET) || defined (CUSTOM_CENTER_DETECTIONS)
 #define NEEDS_CENTER_DETECTION
 #endif
 
