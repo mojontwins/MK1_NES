@@ -56,7 +56,7 @@
 	}
 	
 	// Electricity
-	if (level_world == 5) {
+	if (level == 15) {
 		if (ticker == 0 || ticker == 25) {
 			if (elec_state_ct) -- elec_state_ct; else {
 				++ elec_state; if (elec_state == 3) elec_state = 0;
@@ -64,5 +64,37 @@
 				if (elec_state == 0) pal_bg (palts5);
 				else if (elec_state == 1) pal_col (11, 0x18);
 			}
+		}
+	}
+
+	// Final boss
+	if (level == 17 && n_pant == 2) {
+		somari_do ();
+
+		// Sound
+		if (en_mx [0] < 0 && half_life) sfx_play (1, 2); 		
+
+		// Collision with somari:
+		if (prx > 216) {
+			prx = 216;
+			pvx = -512;			
+			pflickering = 30;
+			if (somari_life) {
+				somari_life --;
+				somari_state = 1;	
+			} else {
+				somari_state = 2;
+			}
+			somari_ct = 120;
+			sfx_play (SFX_BREAKB, 1);
+		}
+
+		// Collision with ray
+		if (pflickering == 0 &&
+			en_mx [0] < 0 &&
+			prx + 3 >= en_x [0] &&
+			prx <= en_x [0] + 7
+		) {
+			pkill = 1;
 		}
 	}

@@ -51,6 +51,12 @@ PALS palts5import.png
 LABEL ts5
 MAPPED 0, 0, 2, 2, 16, 2
 
+# Tileset 5b
+OPEN ts5b.png
+PALS palts5b.png
+LABEL ts5b
+MAPPED 0, 0, 2, 2, 16, 2
+
 FILL 4096
 RESETPOOL
 
@@ -117,5 +123,16 @@ METASPRITESET 0, 5, 2, 2, 3, 1, 0, 0
 METASPRITESET 8, 14, 2, 2, 4, 1, 0, 0
 METASPRITESET 12, 12, 2, 2, 2, 1, 0, 0
 METASPRITESET 12, 16, 2, 2, 2, 1, 0, 0
+
+# Final boss elements
+SKIPEMPTY
+OPEN ss_boss.png
+
+LABEL ssray
+METASPRITESET 0, 0, 2, 12, 3, 1, 0, 0
+LABEL sssom
+METASPRITESET 6, 0, 2, 3, 2, 3, 0, -8, 5
+LABEL ssmon
+METASPRITESET 6, 9, 2, 2, 2, 1, 0, 0
 
 FILL 8192

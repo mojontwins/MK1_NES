@@ -143,14 +143,16 @@ const unsigned char * const spr_enems4 [] = {
 	// Boss (offset 42)
 	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
 	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 	
+
+	// Fanty (offset 50)
+	ssfant_00_a, ssfant_01_a, 0, 0, ssfant_00_b, ssfant_01_b, 0, 0,
 };
 
 const unsigned char * const spr_enems5 [] = {
-	// Linear enems and platforms (ids 1-4)
-	ssen_08_a, ssen_09_a, 0, 0, ssen_08_b, ssen_09_b, 0, 0, // 1
-	ssen_02_a, ssen_03_a, 0, 0, ssen_02_b, ssen_03_b, 0, 0, // 2
-	ssen_04_a, ssen_05_a, 0, 0, ssen_04_b, ssen_05_b, 0, 0, // 3
-	ssplat_04, ssplat_04, 0, 0, ssplat_04, ssplat_04, 0, 0, // Platform (4)
+	ssray_02, ssray_02, 0, 0, ssray_00, ssray_01, 0, 0,		// Orb with rays
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
 
 	// Explosion (offset 32)
 	ssexpl_00, 
@@ -159,17 +161,11 @@ const unsigned char * const spr_enems5 [] = {
 	ssoccl_00,
 
 	// Monococo (type A) (offset 34)
-	ssmc_00_a, ssmc_01_a, 0, 0, ssmc_00_b, ssmc_01_b, 0, 0,
+	ssmon_00, ssmon_01, 0, 0, ssmon_00, ssmon_01, 0, 0,
 
-	// Boss (offset 42)
-	ssboss_00_a, ssboss_00_a, ssboss_01_a, ssboss_01_a, 
-	ssboss_00_b, ssboss_00_b, ssboss_01_b, ssboss_01_b, 
-
-	// Fanty (offset 50)
-	ssfant_00_a, ssfant_01_a, 0, 0, ssfant_00_b, ssfant_01_b, 0, 0,
-
-	// Pezon (offset 58)
-	sspez_00, sspez_01
+	// Boss (special) (offset 42)
+	sssom_00, sssom_01, sssom_02, sssom_03,
+	sssom_04
 };
 
 // Item metasprites

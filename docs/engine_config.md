@@ -588,7 +588,7 @@ This kind of booby traps are used in [Cheril Perils Classic](https://github.com/
 
 ## Warpers
 
-Warpers are entities which, when interacted with, take the player elsewhere. They are placed as enemies with **ponedor**. `attr` is the destination screen (room) number, and `s1` should contain the destination coordinates (packed 0xYX).
+Warpers are entities which, when interacted with, take the player elsewhere. They are placed as enemies with **ponedor** as type FF. `attr` is the destination screen (room) number, and `s1` should contain the destination coordinates (packed 0xYX).
 
 ```c
     #define ENABLE_SIMPLE_WARPERS

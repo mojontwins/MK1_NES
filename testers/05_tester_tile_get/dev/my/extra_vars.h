@@ -23,7 +23,9 @@ unsigned char toggle_switch;	// Value of the toggle switch for Crap Brain Zone 2
 unsigned char toggle_timer; 	// To 'depress' the switch.
 unsigned char elec_state; 		// Electricity state in Ola K Ase Zone
 unsigned char elec_state_ct; 	// Counter for state
-const unsigned char elec_state_max_ct [] = { 6, 1, 4 };
+unsigned char somari_state; 	// Somari state
+unsigned char somari_ct;		// Somari counter
+unsigned char somari_life;		// Somari life
 
 // To animate the ring we will use those metasprites:
 
@@ -41,3 +43,4 @@ const unsigned char level5_bg [] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 17, 0, 0, 0, 0, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 16, 16, 17, 0, 0, 17, 0, 0, 0, 0, 0, 16, 16, 0, 17, 0, 0, 16, 16, 0, 0, 0, 0, 0, 17, 0, 0, 0, 16, 17, 16, 16, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 17, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0
 };
 
+const unsigned char elec_state_max_ct [] = { 6, 1, 4 };

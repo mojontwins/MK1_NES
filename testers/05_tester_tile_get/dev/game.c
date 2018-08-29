@@ -129,7 +129,7 @@ void main(void) {
 		//
 
 //DEBUG
-level = 15; level_world = 5; level_act = 0; pemmeralds = 31;
+level = 17; level_world = 5; level_act = 2; pemmeralds = 63;
 
 		// Game loop
 

@@ -5,7 +5,7 @@
 // Add here palette cycles/etc, splits...
 
 	// Do a palette cycle in the jungle
-	if ((level_world == 2 || level_world == 4) && (frame_counter & 7) == 0) {
+	if ((level_world == 2 || level_world == 4 || level == 17) && (frame_counter & 7) == 0) {
 		rda = pal_cycle [2];
 		pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
 		pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);
@@ -17,10 +17,11 @@
 
 	// Level 5 flashing should be 50Hz in PAL and 60Hz in NTSC
 	// So we put it here.
-	if (level_world == 5) {
+	if (level == 15) {
 		if (elec_state == 2) {
 			pal_bg (half_life ? palts5 : palts5a);
 			ppu_mask (0x1e);
+			if (half_life) sfx_play (1, 2);
 		} else {
 			ppu_mask (0xfe); 
 		}

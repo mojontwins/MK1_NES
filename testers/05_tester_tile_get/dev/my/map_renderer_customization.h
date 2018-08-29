@@ -30,6 +30,33 @@ switch (level_world) {
 			}
 		}
 		break;
+	case 5:
+		if (level_act < 2) {
+			for (gpit = 0; gpit < 192; gpit ++) {
+				rdt = map_buff [gpit];
+
+				switch (level_act) {
+					case 0:
+						if (rdt == 0) rdt = level5_bg [gpit]; 
+						else {
+							if ((rdt == 8 || rdt == 10) && map_buff [gpit - 1] == rdt) rdt += 17;
+						}
+						break;
+					case 1:
+						if (rdt == 0) {
+							if (n_pant > 5 && n_pant != 16) rdt = level5_bg [gpit]; 
+						} else {
+							if ((rdt == 5 || rdt == 7) && map_buff [gpit - 1] == rdt) rdt += 17;
+						}
+						break;
+					case 2:
+						break;
+				}
+
+				map_buff [gpit] = rdt;
+			}
+			break;
+		} 
 	case 4:
 		rdc = (map_buff [0] != 4);	// Cheap way to distinguish between outside / inside
 	case 2:
@@ -86,19 +113,6 @@ switch (level_world) {
 			}
 		
 			if (rdt == 0 && (rdb & 7) == 1 && (rdc || level_world < 4)) rdt = 21;
-
-			map_buff [gpit] = rdt;
-		}
-		break;
-
-	case 5:
-		for (gpit = 0; gpit < 192; gpit ++) {
-			rdt = map_buff [gpit];
-
-			if (rdt == 0) rdt = level5_bg [gpit]; 
-			else {
-				if ((rdt == 8 || rdt == 10) && map_buff [gpit - 1] == rdt) rdt += 17;
-			}
 
 			map_buff [gpit] = rdt;
 		}

@@ -16,3 +16,6 @@ toggle_switch = 0;
 
 elec_state_ct = 5;
 elec_state = 0;
+
+somari_state = somari_ct = 0;
+somari_life = 8;

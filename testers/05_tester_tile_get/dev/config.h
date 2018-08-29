@@ -20,7 +20,7 @@
 #define PLAYER_REFILL			1		// Life refill
 
 #define MULTI_LEVEL						// Comment for single level
-#define MAX_LEVELS				15
+#define MAX_LEVELS				18
 
 #define MAX_FLAGS 				2		// Keep it low if you don't need flags
 
@@ -221,8 +221,8 @@
 // Simple warpers. Put as 0xff type enemies.
 // Destination is attr:s1 (n_pant:YX).
 
-//#define ENABLE_SIMPLE_WARPERS
-#define SIMPLE_WARPERS_BASE_SPRID		(32+((frame_counter>>2)&3))
+#define ENABLE_SIMPLE_WARPERS
+#define SIMPLE_WARPERS_BASE_SPRID		33
 //#define SIMPLE_WARPERS_FIRE_BUTTON
 
 // No!
