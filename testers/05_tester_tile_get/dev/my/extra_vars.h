@@ -27,6 +27,18 @@ unsigned char somari_state; 	// Somari state
 unsigned char somari_ct;		// Somari counter
 unsigned char somari_life;		// Somari life
 
+// Continue from act 0 always
+
+const unsigned char base_level [] = {
+	0, 0, 0, 3, 3, 3, 6, 6, 6, 9, 9, 9, 12, 12, 12, 15, 15, 15
+};
+const unsigned char base_world [] = {
+	0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5
+};
+const unsigned char base_act [] = {
+	0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2
+};
+
 // To animate the ring we will use those metasprites:
 
 const unsigned char *const spr_ring [] = {

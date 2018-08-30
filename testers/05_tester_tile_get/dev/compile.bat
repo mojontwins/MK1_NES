@@ -19,6 +19,9 @@ echo Generating pals
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss0a.png out=work\palss0a.h label=palss0a silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss1.png out=work\palss1.h label=palss1 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palss2.png out=work\palss2.h label=palss2 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts0.png out=work\palcuts0.h label=palcuts0 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts1.png out=work\palcuts1.h label=palcuts1 silent
+..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\palcuts2.png out=work\palcuts2.h label=palcuts2 silent
 ..\..\..\src\utils\mkts.exe mode=pals pals=..\gfx\paltstitle.png out=work\paltstitle.h label=paltstitle silent
 copy /b work\pal*.h assets\palettes.h > nul
 

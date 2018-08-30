@@ -76,17 +76,19 @@
 
 		// Collision with somari:
 		if (prx > 216) {
-			prx = 216;
-			pvx = -512;			
-			pflickering = 30;
-			if (somari_life) {
-				somari_life --;
-				somari_state = 1;	
-			} else {
-				somari_state = 2;
+			prx = 216; px = prx << FIXBITS; pvx = 0;
+			if (pspin) {
+				pvx = -512;			
+				pflickering = 30;
+				if (somari_life) {
+					somari_life --;
+					somari_state = 1;	
+				} else {
+					somari_state = 2;
+				}
+				somari_ct = 120;
+				sfx_play (SFX_BREAKB, 1);
 			}
-			somari_ct = 120;
-			sfx_play (SFX_BREAKB, 1);
 		}
 
 		// Collision with ray

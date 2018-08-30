@@ -28,7 +28,6 @@ void pres (const unsigned char *p, void (*func) (void)) {
 		if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;
 	}
 	bat_out ();
-	bank_bg (0);
 }
 
 //                                     XXXXXXXXXXXXXXXX
@@ -58,9 +57,33 @@ void scr_level (void) {
 	}
 }
 
-void scr_title (void) {
-	_x =  9; _y = 10; pr_str ("E S P I T E N E");
-	_x = 10; _y = 21; pr_str ("PRESS START!");
+void title (void) {
+	bankswitch (1);
+	unrle_vram (title_rle, 0x2000);
+	pal_bg (paltstitle);
+	if (first_game) {
+		_x = 10; _y = 20; pr_str ("PRESS START!");
+	} else {
+		_x = 4; _y = 19; pr_str ("PRESS START  TO BEGIN%%PRESS SELECT TO CONTINUE");
+	}
+	_x = 5;  _y = 26; pr_str ("@ 2018 THE MOJON TWINS"); 
+
+	bat_in ();
+	while (1) {
+		pad_read ();
+		if (pad_this_frame & PAD_START) {
+			level = 0;
+			pemmeralds = 0;
+			break;
+		}
+		if (pad_this_frame & PAD_SELECT) {
+			level = base_level [level];
+			break;
+		}
+	}
+	sfx_play (SFX_START, 0);
+	bat_out ();	
+	bankswitch (0);
 }
 
 void scr_game_over (void) {
@@ -69,4 +92,25 @@ void scr_game_over (void) {
 
 void scr_the_end (void) {
 	_x = 12; _y = 15; pr_str ("THE END");
+}
+
+const unsigned char * const cuts_rle [] = {
+	cuts0_rle, cuts2_rle, cuts2_rle, cuts1_rle, cuts1_rle
+};
+
+const unsigned char * const cuts_pal [] = {
+	palcuts0, palcuts2, palcuts2, palcuts1, palcuts1
+};
+
+void scr_cutscene (void) {
+	// show cuts + text in rda;
+	unrle_vram (cuts_rle [rdm], 0x2000);
+	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [rdm]);
+	//music_play (MUSIC_CUTS);
+}
+
+void cutscene (void) {
+	bankswitch (1);
+	pres (cuts_pal [rdm], scr_cutscene);
+	bankswitch (0);
 }

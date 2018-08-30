@@ -72,9 +72,9 @@ void player_init (void) {
 
 void player_render (void) {
 	if (pstate == EST_NORMAL || half_life) 
-		oam_index = oam_meta_spr (
+		oam_meta_spr (
 			prx, pry + SPRITE_ADJUST, 
-			oam_index, 
+			0, 
 			spr_player [psprid]
 		);
 }

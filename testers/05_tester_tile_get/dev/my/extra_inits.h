@@ -10,6 +10,7 @@ pal_cycle [0] = c_pal_bg [13];
 pal_cycle [1] = c_pal_bg [14];
 pal_cycle [2] = c_pal_bg [15];
 
+underwater = 0;
 timer = 20;
 
 toggle_switch = 0;

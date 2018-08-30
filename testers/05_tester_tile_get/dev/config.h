@@ -6,6 +6,8 @@
 //#define GAME_AREA_BOTTOM
 #define GAME_AREA_CUSTOM
 
+#define OAM_FIRST				24		// 4 * the max # of patters your player metasprite has.
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -134,7 +136,7 @@
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
+//#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
 #define CUSTOM_CENTER_DETECTIONS			// Define this if you need custom tile behs
 
 // Quicksands, beh == 2.

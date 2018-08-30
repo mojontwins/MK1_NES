@@ -122,7 +122,7 @@ const unsigned char * const l_behs [] = 		{
 
 const unsigned char * const * const l_spr_enems [] =
 												{
-													spr_enems0, spr_enems0, spr_enems0, // Benny Hill Zone
+													spr_enems1, spr_enems1, spr_enems1, // Benny Hill Zone
 													spr_enems1, spr_enems1, spr_enems1, // Broken Fridge Zone
 													spr_enems2, spr_enems2, spr_enems2, // Bosque de Badajoz Zone
 													spr_enems3, spr_enems3, spr_enems3, // Wet Ruins Zone

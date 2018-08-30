@@ -43,6 +43,11 @@
 	#include "assets/levelset.h"
 #endif
 
+#include "assets/cuts0_rle.h"
+#include "assets/cuts1_rle.h"
+#include "assets/cuts2_rle.h"
+#include "assets/title_rle.h"
+
 // Music
 extern const unsigned char m_ingame [];
 
@@ -116,25 +121,22 @@ void main(void) {
 	// Main loop
 
 	while (1) {	
-		pres (palts0, scr_title);
+		title ();	// level* vars are set there.
 
-		#ifdef MULTI_LEVEL		
-			level = 0;
-		#endif
 		plife = PLAYER_LIFE;
-
-		// Custom for this game
-		level_world = level_act = 0;	
-		pemmeralds = 0;
-		//
-
-//DEBUG
-level = 17; level_world = 5; level_act = 2; pemmeralds = 63;
 
 		// Game loop
 
 		while (1) {
 			scroll (0, SCROLL_Y);
+
+			level_world = base_world [level];
+			level_act = base_act [level];
+
+			if (level == 0) {
+				rdm = 0; cutscene ();
+				rdm = 1; cutscene ();
+			}
 
 			pres (paltstitle, scr_level);
 			game_init (); 
@@ -153,17 +155,14 @@ level = 17; level_world = 5; level_act = 2; pemmeralds = 63;
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;
 					level ++;
-					
-					// Custom for this game
-					level_act ++; if (level_act == 3) {
-						level_world ++; level_act = 0;
-					}
-					//
 
 					if (level == MAX_LEVELS) 
 				#endif
 				{
-					pres (palts0, scr_the_end);
+					rdm = 2; cutscene ();
+					rdm = (pemmeralds == 0x3f) ? 4 : 3; cutscene ();
+					if (pemmeralds == 0x3f) pres (palts0, scr_the_end);
+					first_game = 1;
 					break;
 				}
 			}

@@ -402,8 +402,7 @@ void game_loop (void) {
 
 			// Paint player
 
-			oam_index_player = oam_index; 
-			if (!warp_to_level)	player_render ();
+			player_render ();
 
 			// Update enemies
 		
