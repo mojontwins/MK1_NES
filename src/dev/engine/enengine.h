@@ -965,7 +965,7 @@ void enems_move (void) {
 				#endif
 				if (en_sg_2) { 
 					pkill = 1; 
-					#ifdef PLAYER_BOUNCES
+					#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
 						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
 						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
 						

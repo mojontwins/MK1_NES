@@ -10,12 +10,12 @@ oam_index = oam_meta_spr (
 	spr_enems [ENEMS_OCCLUDING_CELL]
 );
 
-switch (en_alive [gpit]) {
+switch (_en_state) {
 	case 0:	// Idling
 		if (_en_mx) {
 			-- _en_mx;
 		} else {
-			en_alive [gpit] = 1;
+			_en_state = 1;
 			_enf_y = _en_y1 << 6;
 			_enf_vy = -PEZON_THRUST;
 			sfx_play (SFX_FLOAT, 1);
@@ -29,7 +29,7 @@ switch (en_alive [gpit]) {
 		_en_y = _enf_y >> 6;
 
 		if (_en_y >= _en_y1) {
-			en_alive [gpit] = 0;
+			_en_state = 0;
 			_en_mx = _en_my;
 			
 		} else {

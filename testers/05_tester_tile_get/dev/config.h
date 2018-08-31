@@ -6,7 +6,9 @@
 //#define GAME_AREA_BOTTOM
 #define GAME_AREA_CUSTOM
 
-#define OAM_FIRST				24		// 4 * the max # of patters your player metasprite has.
+#define MAP_CLEAR_LIST_ADDRESS	0x2c40	// To store map persistence in VRAM.
+										// Each screen takes 24 bytes. move it where
+										// It fits. Below 2c40 you may "see" the buffer
 
 // ============================================================================
 // I. General configuration
@@ -659,6 +661,8 @@
 // Music
 
 #define MUSIC_INGAME 			0
+#define MUSIC_TITLE 			5
+#define MUSIC_CUTS				6
 
 // SFX
 

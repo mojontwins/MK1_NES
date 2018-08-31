@@ -6,6 +6,10 @@
 //#define GAME_AREA_BOTTOM
 #define GAME_AREA_CUSTOM
 
+#define MAP_CLEAR_LIST_ADDRESS	0x2c40	// To store map persistence in VRAM.
+										// Each screen takes 24 bytes. move it where
+										// It fits. Below 2c40 you may "see" the buffer
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -59,9 +63,10 @@
 //#define HOTSPOT_TYPE_AMMO		4
 //#define HOTSPOT_TYPE_TIME		5		// For time refills
 
-//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
-
 #define HOTSPOT_TYPE_STAR 		4		// Stars are extra collectibles
+
+//#define HOTSPOT_TYPE_RESONATOR	4	// An example of custom hotspot
+//#define HOTSPOT_TYPE_RESONATOR_ON 5		// Custom for this game.
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
@@ -112,7 +117,7 @@
 
 // Push boxes
 
-//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable
+//#define PLAYER_PUSH_BOXES 				// If defined, tile beh 11 is pushable
 #define FIRE_TO_PUSH
 
 //#define ENABLE_PUSHED_SCRIPT
@@ -122,19 +127,21 @@
 
 // General stuff
 
-//#define DEACTIVATE_KEYS				// If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
-#define PLAYER_BOUNCES
+//#define DEACTIVATE_KEYS					// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define PLAYER_BOUNCES				16
 //#define DOUBLE_BOUNCE
-//#define DIE_AND_RESPAWN				// If defined, dying = respawn on latest safe.
-//#define DIE_AND_REENTER				//     ... also, reenter screen on death
-#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define DIE_AND_RESPAWN					// If defined, dying = respawn on latest safe.
+	//#define DIE_AND_REENTER				//     ... also, reenter screen on death
+	//#define DIE_AND_REINIT				//     ... or start the level over!
+#define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
+#define WALLS_STOP_ENEMIES					// If defined, enemies react to the scenary
 
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
+//#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
+//#define CUSTOM_CENTER_DETECTIONS			// Define this if you need custom tile behs
 
 // Quicksands, beh == 2.
 // For player movement values, see section 4
@@ -143,14 +150,14 @@
 //#define ENABLE_QUICKSANDS
 
 // Breakable, beh & 16
-//#define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
-#define BREAKABLE_ANIM					// Show explosion when breaking
-#define BREAKABLE_MAX 			4		// Max # of concurrent explosions
-#define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
-#define BREAKABLE_ERASE			0		// Tile to erase broken tiles
-#define BREAKABLE_BREAKING		8		// Tile to display while breaking
-//#define BREAKABLE_WALKABLE			// If defined (side view), tiles break when stepped on
+//#define ENABLE_BREAKABLE					// Breakable walls
+#define BREAKABLE_LIFE					2	// Amount of hits to break wall
+#define BREAKABLE_ANIM						// Show explosion when breaking
+#define BREAKABLE_MAX					4	// Max # of concurrent explosions
+#define BREAKABLE_MAX_FRAMES			8	// Frames to show explosion
+#define BREAKABLE_ERASE					0	// Tile to erase broken tiles
+#define BREAKABLE_BREAKING				8	// Tile to display while breaking
+//#define BREAKABLE_WALKABLE				// If defined (side view), tiles break when stepped on
 
 // Conveyors, beh & 32 [+1] (must be & 8!)
 // For player movement values, see section 4
@@ -167,6 +174,17 @@
 // Ladders, beh == 32
 
 //#define ENABLE_LADDERS
+
+// Special, "collectable" map tiles.
+// beh == 34
+
+//#define ENABLE_TILE_GET
+//#define PERSISTENT_TILE_GET
+
+// Trampolines. Needs PLAYER_VY_TRAMPOLINE
+// beh == 66
+
+//#define ENABLE_TRAMPOLINES
 
 // Extra special stuff
 // -------------------
@@ -253,9 +271,14 @@
 //#define ENEMS_IN_CHRROM					// Enems are stored somewhere in CHR-ROM
 
 #define ENEMS_LIFE_GAUGE				1	// Amount of shots/punches/kicks needed to kill enemies.
+//#define NEEDS_LIFE_GAUGE_LOGIC			// This is activated automaticly when needed, but you can 
+											// do it yourself if you need it to do customs...
+
 #define ENEMS_FLICKER						// Ifdef: flicker, if not: explosion
 #define ENEMS_FLICKER_ONLY_ON_DYING			// Flicker, but only when life == 0
 //#define ENEMS_CAN_RESPAWN					// Read docs for this.
+
+//#define ENEMS_TREMBLE						// Make enemies tremble when hit
 
 #define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
@@ -274,22 +297,26 @@
 // Beware: only activate this if enemies are killable by any means:
 //#define ENEMIES_SUFFER_ON_PLAYER_COLLISION
 
-// Fanties / Homing fanties
+// Fanties / Homing fanties / Timed fanties
 
 //#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
+//#define ENABLE_TIMED_FANTY
 
 #define FANTY_BASE_SPRID				32
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
-#define FANTY_KILLED_BY_TILE
+//#define FANTY_KILLED_BY_TILE
 //#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
 
 #define FANTY_A 						4
 #define FANTY_MAXV 						48
+//#define FANTY_FAST_ANIM						// If defined, cells A/B are changed every frame (for transparency effects)
 
 #define FANTY_DISTANCE					80
 #define FANTY_V_RETREAT					16
+
+#define FANTY_BASE_TIMER				120	// Timed fanties use this
 
 // Pursuers (for top-down)
 
@@ -366,6 +393,24 @@
 //#define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
 #define COMPILED_ENEMS_BASE_SPRID		48
+
+// Boioiongs
+
+//#define ENABLE_BOIOIONG
+#define BOIOIONG_G 						16
+#define BOIOIONG_VY_MAX					256
+#define BOIOIONG_BASE_SPRID				54
+//#define BOIOIONG_ACTIVE_BY_DEFAULT		// Define and they are active by default
+//#define BOIOIONG_INITIAL_TIMER		200	// If active by default, time to be active in frames
+//#define BOIOIONG_AUTO_RESPAWN
+
+// Catacrocks
+
+//#define ENABLE_CATACROCKS
+#define CATACROCK_G						16
+#define CATACROCK_MAX_V					256
+#define CATACROCK_CROCK_FRAMES			50
+#define CATACROCK_BASE_SPRID			50
 
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
@@ -457,21 +502,28 @@
 // ---------
 
 //#define PLAYER_TOP_DOWN            	// Enable top view.
-//#define TOP_OVER_SIDE                	// UP/DOWN has priority over LEFT/RIGHT
+//#define TOP_OVER_SIDE              	// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
+// Choose ONE or SEVERAL of those. 
+// If you choose several, use the vertical_engine_type variable to select
+
 //#define PLAYER_HAS_JUMP				// If defined, player is able to jump.
-//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 #define PLAYER_AUTO_JUMP				// Automatic jump when hitting the floor
 //#define PLAYER_SWIMS					// If defined, player swims a la Ninjajar!
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
+
+// Extra configuration for side view:
+
+//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 #define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
 #define PLAYER_STEPS_MIN_KILLABLE     	0xff    // Only kill enemies with id >= PLAYER_BULLETS_MIN_KILLABLE
 												// 0xff = Nobody
+//#define PLAYER_SPINS					// Spins on DOWN and JUMP and kills baddies
 
 // ============================================================================
 // III. Screen configuration
@@ -522,6 +574,7 @@
 #define PLAYER_G				16		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	96
+#define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128
 #define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
 #define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
@@ -544,6 +597,8 @@
 #define PLAYER_VY_MK2_JUMP_INITIAL	208
 #define PLAYER_VY_MK2_JUMP_RELEASE	96
 #define PLAYER_VY_MK2_JUMP_A_STEPS 	16
+#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296
+#define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32	// For trampolines
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
@@ -586,6 +641,9 @@
 	#define CELL_WALK_INIT		1
 	#define CELL_WALK_CYCLE		1
 	#define CELL_AIRBORNE		5
+
+	#define CELL_SPIN_CYCLE		5
+
 	#define CELL_ASCENDING		5
 	#define CELL_DESCENDING		6
 
@@ -595,6 +653,8 @@
 
 	#define CELL_PUNCHING		8
 	#define CELL_KICKING		9
+
+	#define CELL_HIT 			9
 
 	#define CELL_CLIMB_CYCLE	20
 	#define CELL_CLIMB_HALF		29
@@ -610,6 +670,7 @@
 #define SFX_TILE				1
 #define SFX_OBJECT				2
 #define SFX_USE					3
+#define SFX_TRAMPOLINE			3
 #define SFX_PHIT				4
 #define SFX_DUMMY1				5
 #define SFX_ENHIT 				6
@@ -624,3 +685,5 @@
 #define SFX_STEPON				15
 #define SFX_FLOAT				16
 #define SFX_BREAKB				17
+#define SFX_RING 				18
+#define SFX_FANFARE				19

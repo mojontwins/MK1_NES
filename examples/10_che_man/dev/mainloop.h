@@ -97,7 +97,7 @@ void game_init (void) {
 
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Clear tile_got persistence
-		vram_adr (0x2c20);
+		vram_adr (MAP_CLEAR_LIST_ADDRESS);
 		vram_fill (0, MAP_SIZE*24);
 	#endif
 
@@ -120,12 +120,15 @@ void prepare_scr (void) {
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 			// Update tile_got persistence
 			rda = on_pant << 3;
-			vram_write (tile_got, 0x2c20 + (rda << 1) + rda, 24);
+			vram_write (tile_got, MAP_CLEAR_LIST_ADDRESS + (rda << 1) + rda, 24);
 		#endif
 	} else {
 		ft = 0;
 		ppu_off ();
 	}
+
+	clear_update_list ();
+
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
 		prp_idx = 0;
@@ -161,7 +164,7 @@ void prepare_scr (void) {
 	#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)
 		// Read tile_got persistence
 		rda = n_pant << 3;
-		vram_read (tile_got, 0x2c20 + (rda << 1) + rda, 24);
+		vram_read (tile_got, MAP_CLEAR_LIST_ADDRESS + (rda << 1) + rda, 24);
 	#endif
 
 		draw_scr ();
@@ -346,6 +349,22 @@ void game_loop (void) {
 			half_life ^= 1;
 			++ frame_counter;
 
+			// Detect interactions
+
+			#ifdef ENABLE_INTERACTIVES
+				#include "mainloop/interactives.h"
+			#endif	
+
+			// Update / collide hotspots
+
+			#include "mainloop/hotspots.h"
+
+			// Automatic scripting calls (USE_ANIM & fire zone)
+
+			#ifdef ACTIVATE_SCRIPTING
+				#include "mainloop/scripting.h"
+			#endif
+			
 			// Update player
 
 			if (!warp_to_level) {
@@ -372,22 +391,6 @@ void game_loop (void) {
 				if (propellers_on) propellers_do ();
 			#endif
 
-			// Detect interactions
-
-			#ifdef ENABLE_INTERACTIVES
-				#include "mainloop/interactives.h"
-			#endif		
-
-			// Update / collide hotspots
-
-			#include "mainloop/hotspots.h"
-
-			// Automatic scripting calls (USE_ANIM & fire zone)
-
-			#ifdef ACTIVATE_SCRIPTING
-				#include "mainloop/scripting.h"
-			#endif
-
 			// Update bullets
 
 			#ifdef PLAYER_CAN_FIRE
@@ -402,7 +405,8 @@ void game_loop (void) {
 
 			// Paint player
 
-			player_render ();
+			oam_index_player = oam_index; 
+			if (!warp_to_level)	player_render ();
 
 			// Update enemies
 		

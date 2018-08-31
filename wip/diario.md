@@ -4379,5 +4379,73 @@ Creo que me va a dar para hacer el Scrap Brain Zone (nombre a inventar), con cin
 
 Como hay 20 segundos para matarlo a lo mejor basta con hacer algo muy sencillo (recorrido rollo fase 1) pero dejar al personaje trepar e ir a buscar al malo bajo el agua.
 
+20180831
+========
+
+No he escrito nada en todo el mes, pero le he dado fran al Espitene todos los días. Está terminado, salvo por un glitch que aparece en la fase del boss del segundo mundo (el puente): parece relacionado con los breakable tiles. Los atributos de la siguiente pantalla aparecen corruptos. Hay algo que no he controlado (obviamente), ahora toca ponerse a buscar el bicho.
+
+La putada es seguir usando el compilador viejo. Creo que debería dejarme de hostieces y portar esto a la 2.17 YA (que tampoco tiene mucha historia y lo he hecho ya para otras miserias). Pero bueno, por ahora sigamos así.
+
 ~~
+
+Quizá sea buena idea parar la ejecución y ver donde se produce el glitch... Intentémoslo. De entrada parece ser que sólo ocurre si cambio de pantalla MIENTRAS hay una animación. Antes de poner esto patas arriba voy a comprobar ese supuesto.
+
+~~
+
+En la animación tenemos `do_process_breakable` y `brkf [gpit]` (si vale 1 se anima un tile). Veamos si estoy inicializando todo bien.
+
+Al entrar en una nueva pantalla hace 
+
+```c
+    do_process_breakable = 0;
+    gpit = BREAKABLE_MAX; while (gpit --) brkf [gpit] = 0;
+```
+
+Lo que parece correcto. Hm...
+
+De hecho, cuando aparece la pantalla nueva se actualiza con la animación de la anterior... Hm... Veamos el orden de los eventos en mainloop. `breakable_break` es quien se encarga de poner el tile `BREAKABLE_BREAKING`, y es `breakable_do_anim` quien pone el definitivo `BREAKABLE_ERASE`. El tile que aparece (jodiendo los atributos) es `BREAKABLE_BREAKING`, por lo que debe ser que `breakable_break` se ejecuta en un sitio mal.
+
+SITIO MAL.
+
+`breakable_break` se llama desde `player.h` (desde `player_move`) (y desde `bullets.h`, pero no en este juego).
+
+tenemos:
+
+```c
+    while (1) {
+        [...]
+
+        flick_screen;
+
+        [...]
+
+        if (NTSC bla bla) {
+            [...]
+
+            player_move ();
+
+            [...]
+
+            breakable_do_anim ();
+
+            [...]
+        }
+    }
+```
+
+En el proceso de `flick_screen` es donde se llama a `prepare_scr` que es donde se inicializa todo. `brk_buff` se inicializa correctamente cuando se pinta la pantalla nueva.
+
+Creo que lo que pasa es que al cambiar de pantalla estará todavía en el buffer de updates a VRAM... Va a ser eso. Entonces ha dado la cara con esto pero podría fallar con muchas cosas más.
+
+Menos mal que me he dado cuenta. Voy a arreglarlo. Cuando se entra en la nueva pantalla, tras el fade out, debería follarse el buffer.
+
+~~
+ 
+¡¡Arreglado!! Espitene terminado, a falta de pulir. Voy a replicar los cambios de la lib. Esta vez los pasaré a los ejemplos para una prueba más heavy.
+
+~~
+
+El cambio que hice para que no se pudiera entrar en los pinchos ha roto un millón de cosas en los otros testers, y con razón. No puedo tratar los pinchos como obstáculos, o procesar pinchos dentro de obstáculos.
+
+Voy a darle otra vuelta (más).
 

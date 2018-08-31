@@ -40,12 +40,9 @@ unsigned char caux;                     // Auxiliar variable
 
 // Sprite related (neslib)
 
-unsigned char oam_index, oam_index_player;
+unsigned char oam_index;
 
 // Enemies
-
-unsigned char en_initial;               // First enemy to process in current screen, current frame (cycles 0, 1, 2, ...)
-unsigned char en_offs;                  // Precalculated value: n_pant * 3; used to index data related to enemy persistence
 
 unsigned char en_fr;                    // (Temporal) enemies frame number
 unsigned char en_collx, en_colly;       // (Temporal) collision flags

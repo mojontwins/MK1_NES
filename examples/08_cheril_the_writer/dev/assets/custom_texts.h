@@ -6,31 +6,29 @@
 		"LA FABRICA VUELVE A%"
 		"LA VIDA. PUEDES OIR%"
 		"UN ZUMBIDO CONSTANTE.%"
-		"LOS VENTILADORES YA%"
+		"LOS VENTILADORES%"
 		"FUNCIONAN.%";
 
 	const unsigned char text_open_gate [] =
 		"PERFECTO. PARECE QUE%"
-		"YA ESTA TODO EN SU%"
+		"ESTA TODO EN SU%"
 		"SITIO. SE OYE UNA%"
 		"CANCELA OXIDADA QUE%"
 		"SE ABRE NO MUY LEJOS.%";
 
 	const unsigned char dialogue_0_0 [] =
 		"HOLA, CHERIL, QUE%"
-		"TAL TE VA TODO?%"
+		"TAL VA TODO?%"
 		"NO HAY CASI NADIE.%"
 		"NO ES EL PEPINONI%"
-		"AL QUE ESTAMOS%"
-		"ACOSTUMBRADOS";
+		"DE SIEMPRE.%";
 
 	const unsigned char dialogue_0_1 [] =
 		"AL PRINCIPIO PENSE%"
 		"QUE NO HABIA NADIE%"
 		"POR LA LLUVIA, PERO%"
 		"A LO MEJOR ES POR%"
-		"LOS ZOMBIES, NO?%"
-		"SI, ES POSIBLE.%";
+		"LOS ZOMBIES, NO?%";
 
 	const unsigned char dialogue_0_2 [] =
 		"PUEDEN MATARSE, YA%"
@@ -58,8 +56,7 @@
 		"ACUERDAS DE MI? SOY%"
 		"MANDEE LA MUSA. VEO%"
 		"QUE SIGUES EN ESO%"
-		"DE IR POR AHI PI-%"
-		"SANDO ZOMBIES.%";
+		"DE PISAR ZOMBIES.%";
 
 	const unsigned char dialogue_1_1 [] =
 		"CASI TODOS LOS MA-%"

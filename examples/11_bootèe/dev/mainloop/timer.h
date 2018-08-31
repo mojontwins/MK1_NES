@@ -22,6 +22,8 @@ if (timer_on && timer) {
 				run_script (2 * MAP_SIZE + 3);
 			#endif
 		}
+
+		#include "my/on_timer_tick.h"
 	}
 }
 #ifdef TIMER_TIME_FLAG

@@ -17,7 +17,12 @@ void cocos_init (void) {
 	void cocos_shoot_aimed (void) {		
 		rdct = distance ();
 
-		if (rdct > COCO_FAIR_D && coco_slots_i) {
+	#ifdef COCO_FAIR_D
+		if (rdct > COCO_FAIR_D && coco_slots_i) 
+	#else
+		if (coco_slots_i)
+	#endif
+		{
 			-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
 			coco_x [coco_it] = rdx << 6;
@@ -86,13 +91,15 @@ void cocos_do (void) {
 		#endif
 
 		// Collide w/player
-		if (pstate == EST_NORMAL && 
+		if (pflickering == 0 && 
 			rdx + 7 >= prx && 
 			rdx <= prx + 7 && 
 			rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
 			rdy <= pry + 12
 		) {
-			pkill = 1;
+			en_sg_2 = 1;
+			#include "my/on_player_coco.h"
+			pkill = !!en_sg_2;
 			cocos_destroy ();
 		}		
 	}

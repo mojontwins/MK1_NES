@@ -52,6 +52,8 @@ unsigned char oobjs;                    // Player items, last frame value (used 
 unsigned char oammo;                    // Player ammo, last frame value (used to detect changes)
 unsigned char okilled;                  // Player # of killed enems., last frame value (used to detect changes)
 
+unsigned char oam_index_player;         // Index copy
+
 // Custom hotspot type star (used as an extra collectible).
 
 #ifdef HOTSPOT_TYPE_STAR
@@ -196,6 +198,9 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
 #endif
 
 // More globals for baddies (for current screen)
+
+unsigned char en_initial;               // First enemy to process in current screen, current frame (cycles 0, 1, 2, ...)
+unsigned char en_offs;                  // Precalculated value: n_pant * 3; used to index data related to enemy persistence
 
 unsigned char en_t [3];                 // Enemy types.
 

@@ -46,13 +46,29 @@ if (!en_status [gpit] || half_life) {
 
 	// Change direction ?
 	
-	#ifdef WALLS_STOP_ENEMIES
-		if (_en_x == _en_x1 || _en_x == _en_x2 || en_collx) _en_mx = -_en_mx;
-		if (_en_y == _en_y1 || _en_y == _en_y2 || en_colly) _en_my = -_en_my;
-	#else	
-		if (_en_x == _en_x1 || _en_x == _en_x2) _en_mx = -_en_mx;
-		if (_en_y == _en_y1 || _en_y == _en_y2) _en_my = -_en_my;						
-	#endif						
+	#ifdef PLAYER_SAFE_LANDING
+		#ifdef WALLS_STOP_ENEMIES
+			if (_en_x == _en_x1 || _en_x == _en_x2 || en_collx) _en_mx = -_en_mx;
+		#else
+			if (_en_x == _en_x1 || _en_x == _en_x2) _en_mx = -_en_mx;
+		#endif
+		#ifdef WALLS_STOP_ENEMIES
+			if (en_colly) _en_my = -_en_my;
+			else 
+		#endif
+			{
+				if (_en_y <= _en_y1) { _en_y = _en_y1; _en_my = ABS (_en_my); }
+				else if (_en_y >= _en_y2) { _en_y = _en_y2; _en_my = -ABS (_en_my); }
+			}
+	#else
+		#ifdef WALLS_STOP_ENEMIES
+			if (_en_x == _en_x1 || _en_x == _en_x2 || en_collx) _en_mx = -_en_mx;
+			if (_en_y == _en_y1 || _en_y == _en_y2 || en_colly) _en_my = -_en_my;
+		#else	
+			if (_en_x == _en_x1 || _en_x == _en_x2) _en_mx = -_en_mx;
+			if (_en_y == _en_y1 || _en_y == _en_y2) _en_my = -_en_my;						
+		#endif
+	#endif
 }
 
 //_en_facing = (_en_mx > 0 || _en_my > 0) ? 0 : 4;

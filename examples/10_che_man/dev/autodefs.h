@@ -28,7 +28,7 @@
 #define NEEDS_INITIAL_DETECTION
 #endif
 
-#if defined (ENABLE_TILE_GET)
+#if defined (ENABLE_TILE_GET) || defined (CUSTOM_CENTER_DETECTIONS)
 #define NEEDS_CENTER_DETECTION
 #endif
 
@@ -106,3 +106,8 @@
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_BOIOIONG) || defined (ENABLE_CATACROCKS)
 	#define ENEMS_NEED_FP
 #endif
+
+#if defined (PLAYER_TOP_DOWN) && defined (NO_HORIZONTAL_EVIL_TILE)
+	#undef NO_HORIZONTAL_EVIL_TILE
+#endif
+

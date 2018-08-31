@@ -4,11 +4,11 @@
 
 
 	.export _pal_all,_pal_bg,_pal_spr,_pal_col,_pal_clear,_pal_bright
-	.export _ppu_off,_ppu_on_all,_ppu_on_bg,_ppu_on_spr,_ppu_mask
+	.export _ppu_off,_ppu_on_all,_ppu_on_bg,_ppu_on_spr,_ppu_mask, _ppu_system
 	.export _oam_clear,_oam_size,_oam_spr,_oam_meta_spr,_oam_hide_rest
 	.export _ppu_waitnmi
 	.export _unrle_vram
-	.export _scroll
+	.export _scroll, _split
 	.export _bank_spr,_bank_bg
 	.export _vram_read,_vram_write
 	.export _music_play,_music_stop,_music_pause
@@ -225,7 +225,11 @@ _ppu_off:
 	sta PPU_MASK
 	rts
 
+;unsigned char __fastcall__ ppu_system(void);
 
+_ppu_system:
+	lda <NTSCMODE
+	rts
 
 ;void __fastcall__ ppu_on_all(void);
 
@@ -514,6 +518,34 @@ _scroll:
 	sta <PPU_CTRL_VAR
 	rts
 
+;;void __fastcall__ split(unsigned int x,unsigned int y);
+
+_split:
+	jsr popax
+	sta <SCROLL_X1
+	txa
+	and #$01
+	sta <TEMP
+	lda <PPU_CTRL_VAR
+	and #$fc
+	ora <TEMP
+	sta <PPU_CTRL_VAR1
+
+@3:
+	bit PPU_STATUS
+	bvs @3
+@4:
+	bit PPU_STATUS
+	bvc @4
+
+	lda <SCROLL_X1
+	sta PPU_SCROLL
+	lda #0
+	sta PPU_SCROLL
+	lda <PPU_CTRL_VAR1
+	sta PPU_CTRL
+
+	rts
 
 
 ;void __fastcall__ bank_spr(unsigned char n);

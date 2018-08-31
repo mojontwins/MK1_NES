@@ -20,7 +20,7 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 .define FT_DPCM_ENABLE 	0	;zero to exclude all the DMC code
 .define FT_SFX_ENABLE  	1	;zero to exclude all the sound effects code
 
-.define SPEED_FIX		1	;zero if you want to handle PAL/NTSC speed difference by yourself
+.define SPEED_FIX		0	;zero if you want to handle PAL/NTSC speed difference by yourself
 
     .export _exit,__STARTUP__:absolute=1
 	.import push0,popa,popax,_main,zerobss,copydata
@@ -71,6 +71,8 @@ RAND_SEED	=$1a	;word
 PALUPDATE	=$1c
 
 TEMP		=$1d
+SCROLL_X1   =$1e	;Added by mojon twins
+PPU_CTRL_VAR1=$1f	;Added by mojon twins
 
 PAD_BUF		=TEMP+1
 

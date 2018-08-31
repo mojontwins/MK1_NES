@@ -40,7 +40,7 @@ unsigned char caux;                     // Auxiliar variable
 
 // Sprite related (neslib)
 
-unsigned char oam_index, oam_index_aux;
+unsigned char oam_index;
 
 // Enemies
 
@@ -92,6 +92,7 @@ unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* 
 signed int px, py;                      // Player X, Y coordinates, fixed point 10.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
 unsigned char prx, pry;                 // Player pixel coordinates, calculated from px, py.
+unsigned char pcx, pcy;                 // Coordinates prior to movement.
 unsigned char pfacing;                  // Player facing left, right
 unsigned char pfr;                      // Player frame
 unsigned char pctfr;                    // Player counter (for animation)

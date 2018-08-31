@@ -11,8 +11,7 @@ void bat_in (void) {
 	fade_in ();
 }
 
-void bat_out (void) {
-	music_stop ();
+void bat_out (void) {	
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -69,6 +68,7 @@ void title (void) {
 	_x = 5;  _y = 26; pr_str ("@ 2018 THE MOJON TWINS"); 
 
 	bat_in ();
+	music_play (MUSIC_TITLE);
 	while (1) {
 		pad_read ();
 		if (pad_this_frame & PAD_START) {

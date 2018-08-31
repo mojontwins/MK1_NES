@@ -6,6 +6,10 @@
 #define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
+#define MAP_CLEAR_LIST_ADDRESS	0x2c40	// To store map persistence in VRAM.
+										// Each screen takes 24 bytes. move it where
+										// It fits. Below 2c40 you may "see" the buffer
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -134,7 +138,8 @@
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
+//#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
+//#define CUSTOM_CENTER_DETECTIONS			// Define this if you need custom tile behs
 
 // Quicksands, beh == 2.
 // For player movement values, see section 4
@@ -568,8 +573,8 @@
 
 #define PLAYER_VY_JUMP_INITIAL	64
 #define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128
-#define PLAYER_VY_JUMP_MAX		192		// Max. velocity when jumping
-#define PLAYER_AY_JUMP 			12		// Jumpin acceleration 
+#define PLAYER_VY_JUMP_MAX		256		// Max. velocity when jumping
+#define PLAYER_AY_JUMP 			16		// Jumpin acceleration 
 
 #define PLAYER_AY_JETPAC		32		// Jetpac increment
 #define PLAYER_VY_JETPAC_MAX	256		// Max jetpac vertical speed

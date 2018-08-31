@@ -5,6 +5,7 @@ const unsigned char l_scr_ini [] = 				{ 20, 20, 8 };
 const unsigned char l_ini_x [] = 				{ 2, 2, 2 };
 const unsigned char l_ini_y [] = 				{ 7, 10, 3 };
 const unsigned char l_map_w [] = 				{ 4, 4, 8 };
+const unsigned char l_map_h [] =				{ 6, 6, 3 };
 
 // Ending screen & position, per level (comment if N/A)
 

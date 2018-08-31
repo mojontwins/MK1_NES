@@ -32,6 +32,8 @@ void draw_scr (void) {
 	#endif
 
 	#ifdef MAP_FORMAT_RLE16
+		rdx = rdy = 0;
+
 		// Get pointer
 		gp_gen = c_map [n_pant];
 

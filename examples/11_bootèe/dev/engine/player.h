@@ -59,7 +59,7 @@ void player_init (void) {
 		#endif
 	#endif
 
-	pstate = EST_NORMAL;
+	pflickering = pbouncing = 0;
 
 	#ifdef DIE_AND_RESPAWN
 		player_register_safe_spot ();
@@ -68,10 +68,31 @@ void player_init (void) {
 	#ifdef CARRY_ONE_HS_OBJECT
 		pinv = HS_OBJ_EMPTY; 
 	#endif
+
+	// Default engine type
+	#ifndef PLAYER_TOP_DOWN
+		#ifdef PLAYER_HAS_JUMP
+			vertical_engine_type = ENGINE_TYPE_JUMP;
+		#elif defined (PLAYER_HAS_JETPAC)
+			vertical_engine_type = ENGINE_TYPE_JET_PAC;
+		#elif defined (PLAYER_AUTO_JUMP)
+			vertical_engine_type = ENGINE_TYPE_AUTO_JUMP;
+		#elif defined (PLAYER_SWIMS)
+			vertical_engine_type = ENGINE_TYPE_SWIM;
+		#endif
+	#endif
+
+	#ifdef ENABLE_TRAMPOLINES
+		ptrampoline = 0;
+	#endif
+
+	#ifdef PLAYER_SPINS	
+		pspin = 0;
+	#endif	
 }
 
 void player_render (void) {
-	if (pstate == EST_NORMAL || half_life) 
+	if (0 == pflickering || half_life) 
 		oam_index = oam_meta_spr (
 			prx, pry + SPRITE_ADJUST, 
 			oam_index, 
@@ -85,17 +106,21 @@ void player_to_pixels (void) {
 }
 
 void player_kill (void) {
+	oam_index = oam_index_player;
+	player_render ();
+	ppu_waitnmi ();
+
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
 	
 	if (plife) -- plife; else game_over = 1;
 
 	#ifdef PLAYER_FLICKERS
-		pstate = EST_PARP;
-		pctstate = 100;	
-	#else
-		pstate = EST_REBOUND;
-		pctstate = 16;	
+		pflickering = PLAYER_FLICKERS;
+	#endif
+
+	#ifdef PLAYER_BOUNCES
+		pbouncing = PLAYER_BOUNCES;
 	#endif
 
 	#ifdef ENABLE_USE_ANIM
@@ -103,14 +128,19 @@ void player_kill (void) {
 	#endif
 
 	#ifdef DIE_AND_RESPAWN
-		px = px_safe; 
-		py = py_safe; 
-		player_to_pixels ();
-		n_pant = n_pant_safe;
 		music_pause (1);
 		delay (60);
-		player_stop ();
-		music_pause (0);
+		
+		#ifdef DIE_AND_REINIT
+			level_reset = 1;
+		#else
+			px = px_safe; 
+			py = py_safe; 
+			player_to_pixels ();
+			n_pant = n_pant_safe;		
+			player_stop ();
+			music_pause (0);
+		#endif
 
 		// May be necessary to find a proper cell later on
 		#if defined (ENABLE_BREAKABLE)
@@ -132,10 +162,8 @@ void player_kill (void) {
 #endif
 
 void player_move (void) {
-	if (pstate) {
-		-- pctstate;
-		if (!pctstate) pstate = EST_NORMAL;
-	}
+	if (pflickering) -- pflickering;
+	if (pbouncing) -- pbouncing;
 
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
@@ -172,6 +200,7 @@ void player_move (void) {
 	#endif
 
 	hitv = hith = 0;
+	pcx = prx; pcy = pry;
 	pnotsafe = 0;
 	#ifdef ENABLE_SLIPPERY
 		pice = 0;
@@ -207,11 +236,12 @@ void player_move (void) {
 			#endif
 			{
 				if (QTILE (cx1, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx1; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
-				if (QTILE (cx2, cy1 + 1) == SPRING_TILE && QTILE (cx1, cy1) != SPRING_SPIKE_TILE) { _x = cx2; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
+				if (QTILE (cx2, cy1 + 1) == SPRING_TILE && QTILE (cx2, cy1) != SPRING_SPIKE_TILE) { _x = cx2; _y = cy1; map_set (); sfx_play (SFX_SPRING, 1);}
 			}
 		}
 	#endif
 
+	oppossee = ppossee;
 	ppossee = 0;
 
 	// ********
@@ -284,7 +314,7 @@ void player_move (void) {
 			} else
 		#endif
 
-		#ifndef PLAYER_SWIMS
+		if (vertical_engine_type != ENGINE_TYPE_SWIM) {
 			#ifdef PLAYER_JUMP_TYPE_MK2
 				if (
 					!pgotten
@@ -300,55 +330,56 @@ void player_move (void) {
 					if (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; 
 				}
 			#endif
-		#endif
+		}
 
 		// Moving platforms invalidate pvy
 
-		#ifdef PLAYER_CUMULATIVE_JUMP
-			if (!pj)
-		#endif
-			if (pgotten) pvy = 0;			
+		if (pgotten) pvy = 0;			
 	#endif
-
-	cx1 = prx >> 4;
-	cx2 = (prx + 7) >> 4;
 
 	#ifdef PLAYER_HAS_JETPAC
 	    // Controller 
 
-		if (pad0 & PAD_A) {
-			pvy -= PLAYER_AY_JETPAC;
-			if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
+		if (vertical_engine_type == ENGINE_TYPE_JET_PAC) {
+			if (pad0 & PAD_A) {
+				pvy -= PLAYER_AY_JETPAC;
+				if (pvy < -PLAYER_VY_JETPAC_MAX) pvy = -PLAYER_VY_JETPAC_MAX;
+			}
 		}
 	#endif
 
 	#ifdef PLAYER_SWIMS
 		// Controller 
 
-		if (!(pad0 & (PAD_DOWN|PAD_A))) {
-			pvy -= PLAYER_AY_SWIM >> 1;
-		} else {
-			if (pad0 & (PAD_DOWN|PAD_A)) {
-				pvy += PLAYER_AY_SWIM;
+		if (vertical_engine_type == ENGINE_TYPE_SWIM) {
+			if (!(pad0 & (PAD_DOWN|PAD_A))) {
+				pvy -= PLAYER_AY_SWIM >> 1;
+			} else {
+				if (pad0 & (PAD_DOWN|PAD_A)) {
+					pvy += PLAYER_AY_SWIM;
+				}
+		
+				// Limit
+				if (pvy > PLAYER_VY_SWIM_MAX) {
+					pvy = PLAYER_VY_SWIM_MAX;
+				}
 			}
-	
-			// Limit
-			if (pvy > PLAYER_VY_SWIM_MAX) {
-				pvy = PLAYER_VY_SWIM_MAX;
+			if (pvy < -PLAYER_VY_SWIM_MAX) {
+				pvy = -PLAYER_VY_SWIM_MAX;
 			}
 		}
-		if (pvy < -PLAYER_VY_SWIM_MAX) {
-			pvy = -PLAYER_VY_SWIM_MAX;
-		}
-
 	#endif
 
 	// Move
 	py += pvy;
 	if (py < 0) py = 0;
-	
+	pry = py >> FIXBITS;
+
 	// Collision
 	player_to_pixels ();
+
+	cx1 = prx >> 4;
+	cx2 = (prx + 7) >> 4;
 
 	#ifdef PLAYER_TOP_DOWN		
 		if (pvy < 0)
@@ -404,7 +435,7 @@ void player_move (void) {
 				pgotten = 0;
 				pfiring = 1;
 				ppossee = 1;
-				
+
 				#if defined (PLAYER_TOP_DOWN) && (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
 					                if (at1 & 2) player_process_tile (at1, cx1, cy1, cx1, cy1 + 1);
 					if (cx1 != cx2) if (at2 & 2) player_process_tile (at2, cx2, cy1, cx2, cy1 + 1);			
@@ -412,6 +443,18 @@ void player_move (void) {
 
 				#ifdef ENABLE_SLIPPERY
 					pice = (at1 & 64) || (at2 & 64);
+				#endif
+
+				#if defined (ENABLE_TRAMPOLINES)
+					if (at1 == 74 || at2 == 74) {
+						a_button = 1; ptrampoline = 1;
+						#ifdef PLAYER_SPINS
+							pspin = 0;
+						#endif
+						#ifdef ENABLE_SLIPPERY
+							pice = 0;
+						#endif
+					}
 				#endif
 
 				#ifdef ENABLE_CONVEYORS
@@ -427,7 +470,7 @@ void player_move (void) {
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
 			} else if ((at1 & 1) || (at2 & 1)) {
-				hitv = 1;
+				if ((pry & 15) > 4) hitv = 1;
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
@@ -444,40 +487,101 @@ void player_move (void) {
 		// Jump: PAD_A, change when needed
 		// *******************************
 
-		#ifdef PLAYER_JUMP_TYPE_MK2
+		if (vertical_engine_type == ENGINE_TYPE_JUMP) {
+			#ifdef PLAYER_JUMP_TYPE_MK2
 
-			if (
-				a_button 
-				&& !pj
-				&& (
-					pgotten || ppossee || hitv
-					#ifdef ENABLE_LADDERS
-						|| ponladder
-					#endif					
-				)
-			) {
-				jump_start ();
-				
-				#ifdef DIE_AND_RESPAWN
-					if (!(pgotten || hitv || pnotsafe)) {
-						player_register_safe_spot ();
-					}
-				#endif					
-			}
+				if (
+					a_button 
+					&& !pj
+					&& (
+						pgotten || ppossee || hitv
+						#ifdef ENABLE_LADDERS
+							|| ponladder
+						#endif					
+					)
+				) {
+					jump_start ();
+					
+					#ifdef DIE_AND_RESPAWN
+						if (!(pgotten || hitv || pnotsafe)) {
+							player_register_safe_spot ();
+						}
+					#endif
 
-			if (pj) {
-				if (pad0 & PAD_A) {
-					++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
-				} else {
-					pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
+					#ifdef PLAYER_SPINS
+						#ifdef ENABLE_TRAMPOLINES
+							if (!ptrampoline)
+						#endif
+						pspin = 1;
+					#endif
 				}
-			}
 
-		#else
-			
+				if (pj) {
+					#ifdef ENABLE_TRAMPOLINES
+						if (ptrampoline) {
+							++ pctj; if (pctj == PLAYER_VY_MK2_TRAMPOLINE_A_STEPS)
+							{ pj = 0; ptrampoline = 0; }
+						} else 
+					#endif
+					if (pad0 & PAD_A) {
+						++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;
+					} else {
+						pj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;
+					}
+				}
+
+			#else
+				
+				if (
+					a_button 
+					&& !pj
+					&& (
+						pgotten || ppossee || hitv
+						#ifdef ENABLE_LADDERS
+							|| ponladder
+						#endif
+					)
+				) {
+					jump_start ();
+					
+					#ifdef DIE_AND_RESPAWN
+						if (!(pgotten || hitv || pnotsafe)) {
+							player_register_safe_spot ();
+						}
+					#endif	
+
+					#ifdef PLAYER_SPINS
+						#ifdef ENABLE_TRAMPOLINES
+							if (!ptrampoline)
+						#endif
+						pspin = 1;
+					#endif
+				}
+				
+				#ifdef ENABLE_TRAMPOLINES
+				if (pj && ptrampoline) {
+
+					++ pctj; if (pctj == 32) pj = 0;
+					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+				} else
+				#endif
+				if (pad0 & PAD_A) {
+					if (pj) {
+						if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+						if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+						++ pctj; if (pctj == 16) pj = 0;	
+					}
+				} else {
+					pj = 0; 
+				}
+			#endif
+		}
+	#endif
+
+	#ifdef PLAYER_AUTO_JUMP
+		if (vertical_engine_type == ENGINE_TYPE_AUTO_JUMP) {
 			if (
-				a_button 
-				&& !pj
+				!pj
 				&& (
 					pgotten || ppossee || hitv
 					#ifdef ENABLE_LADDERS
@@ -486,53 +590,32 @@ void player_move (void) {
 				)
 			) {
 				jump_start ();
-				
+
 				#ifdef DIE_AND_RESPAWN
 					if (!(pgotten || hitv || pnotsafe)) {
 						player_register_safe_spot ();
 					}
 				#endif	
 			}
-			
-			if (pad0 & PAD_A) {
-				if (pj) {
-					if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-					if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-					++ pctj; if (pctj == 16) pj = 0;	
-				}
-			} else {
-				pj = 0; 
+
+			if (pj) {
+				if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
+				if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
+				++ pctj; if (pctj == 16) pj = 0;	
 			}
-		#endif
+			
+			if (pad0 & PAD_DOWN) {
+				if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+			}
+		}
 	#endif
 
-	#ifdef PLAYER_AUTO_JUMP
-		if (
-			!pj
-			&& (
-				pgotten || ppossee || hitv
-				#ifdef ENABLE_LADDERS
-					|| ponladder
-				#endif
-			)
-		) {
-			jump_start ();
-
-			#ifdef DIE_AND_RESPAWN
-				if (!(pgotten || hitv || pnotsafe)) {
-					player_register_safe_spot ();
-				}
-			#endif	
-		}
-
-		if (pj) {
-			if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
-			if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
-			++ pctj; if (pctj == 16) pj = 0;	
-		}
-		
+	#ifdef PLAYER_SPINS
 		if (pad0 & PAD_DOWN) {
-			if (pvy < 0) pvy += PLAYER_AY_UNTHRUST;
+			if (ppossee && ABS (pvx) > PLAYER_VX_MIN) {
+				if (!pspin) sfx_play (SFX_DUMMY2, 0);
+				pspin = 1; 
+			}
 		}
 	#endif
 
@@ -545,25 +628,29 @@ void player_move (void) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = 0xff;
 		#endif
-		
-		if (pvx > 0) {
+		#ifdef PLAYER_SPINS
+			if (!pspin)
+		#endif
+		{
+			if (pvx > 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else			
-				pvx -= PLAYER_RX;
-			#endif			
-			
-			if (pvx < 0) pvx = 0;
-		} else if (pvx < 0) {
+				#ifdef ENABLE_SLIPPERY
+					pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else			
+					pvx -= PLAYER_RX;
+				#endif			
+				
+				if (pvx < 0) pvx = 0;
+			} else if (pvx < 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else
-				pvx += PLAYER_RX;
-			#endif
+				#ifdef ENABLE_SLIPPERY
+					pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else
+					pvx += PLAYER_RX;
+				#endif
 
-			if (pvx > 0) pvx = 0;
+				if (pvx > 0) pvx = 0;
+			}
 		}
 	}
 
@@ -607,8 +694,8 @@ void player_move (void) {
 		if (pgotten) px += pgtmx;
 	#endif
 		
-	if (px < (4<<FIXBITS)) prx = 4;
-	else if (px > (244<<FIXBITS)) prx = 244; 
+	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
+	else if (px > (244<<FIXBITS)) { px = 244 << FIXBITS; prx = 244; }
 	else player_to_pixels ();
 	
 	// Collision
@@ -640,7 +727,7 @@ void player_move (void) {
 					if (cy2 != cy3) if (at3 & 2) player_process_tile (at3, cx1, cy3, rdm, cy3);
 				#endif				
 			} else {
-				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));
+				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));				
 			}
 		#else
 			cm_two_points ();
@@ -656,6 +743,7 @@ void player_move (void) {
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		#endif
+		if (pvy > 0) hith &= ((pry & 15) > 4);
 	}
 
 	// Facing
@@ -675,27 +763,78 @@ void player_move (void) {
 		#endif
 	#endif
 
+	#ifdef PLAYER_SPINS
+		if ((!pvx && (ppossee || pgotten) && !pj) || (ppossee && !oppossee)) pspin = 0;
+	#endif
+
 	// *************
 	// Killing tiles
 	// *************
 
 	phit = 0;
 	
-	if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-	if (hith) { phit = 1; 
-		#ifndef NO_HORIZONTAL_EVIL_TILE	
-			pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); 
-		#endif	
+	if (pgotten == 0) {
+		#ifdef NO_HORIZONTAL_EVIL_TILE
+			if (hitv || hith) {
+				if (hith) { prx = pcx; px = prx << FIXBITS; }
+				if (hitv) { pry = pcy; py = pry << FIXBITS; }
+				if (pvy < 0) pvy = PLAYER_V_REBOUND; else pvy = -PLAYER_V_REBOUND;
+			} 
+		#else
+			if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); pry = pcy; py = pry << FIXBITS; } 
+			#ifndef PLAYER_TOP_DOWN
+			else
+			#endif
+			if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); prx = pcx; px = prx << FIXBITS; }
+		#endif
+
+		#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+			cx1 = cx2 = (prx + 4) >> 4;
+			cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+			cm_two_points ();
+			if ((at1 & 1) || (at2 & 1)) phit = 1;
+		#endif
+
+		if (!pflickering && !pbouncing) if (phit) { 
+			player_to_pixels ();
+			en_sg_2 = 1;
+
+			#include "my/on_player_spike.h"
+
+			if (en_sg_2)
+				pkill = 1; 
+			#ifdef PLAYER_SPINS
+				pspin = 0;
+			#endif
+		}
 	}
 
-	#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
+	// ***********************
+	// Center point detections
+	// ***********************
+
+	#ifdef NEEDS_CENTER_DETECTION
 		cx1 = cx2 = (prx + 4) >> 4;
-		cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+		cy1 = cy2 = (pry + 8) >> 4;
 		cm_two_points ();
-		if ((at1 & 1) || (at2 & 1)) phit = 1;
+
+		#include "my/custom_center_detections.h"
 	#endif
 
-	if (pstate != EST_PARP) if (phit) { player_to_pixels (); pkill = 1; }
+	#ifdef ENABLE_TILE_GET
+		if (cy1 && at1 == 34) {
+			-- cy1;
+			
+			_x = cx1; _y = cy1; _t = 0; map_set ();
+			sfx_play (SFX_RING, 2);
+			
+			#include "my/on_tile_got.h"
+
+			#ifdef PERSISTENT_TILE_GET
+				tile_got [(cy1 << 1) | (cx1 > 7)] |= bits [cx1 & 7];
+			#endif
+		}
+	#endif
 
 	// **************
 	// B Button stuff

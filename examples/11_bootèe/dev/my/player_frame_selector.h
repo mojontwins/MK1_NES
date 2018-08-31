@@ -10,7 +10,7 @@
 
 // For Bootèe
 
-if (pstate == EST_REBOUND) {
+if (pbouncing) {
 	psprid = 6; 
 } else {
 	if (pfiregauge) {

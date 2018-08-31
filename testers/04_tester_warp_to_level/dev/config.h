@@ -6,6 +6,10 @@
 //#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
+#define MAP_CLEAR_LIST_ADDRESS	0x2c40	// To store map persistence in VRAM.
+										// Each screen takes 24 bytes. move it where
+										// It fits. Below 2c40 you may "see" the buffer
+
 // ============================================================================
 // I. General configuration
 // ============================================================================

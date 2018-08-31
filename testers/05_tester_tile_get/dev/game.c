@@ -122,7 +122,6 @@ void main(void) {
 
 	while (1) {	
 		title ();	// level* vars are set there.
-
 		plife = PLAYER_LIFE;
 
 		// Game loop
@@ -134,8 +133,10 @@ void main(void) {
 			level_act = base_act [level];
 
 			if (level == 0) {
+				music_play (MUSIC_CUTS);
 				rdm = 0; cutscene ();
 				rdm = 1; cutscene ();
+				music_stop ();
 			}
 
 			pres (paltstitle, scr_level);
@@ -155,12 +156,13 @@ void main(void) {
 				#ifdef MULTI_LEVEL
 					if (warp_to_level) continue;
 					level ++;
-
 					if (level == MAX_LEVELS) 
 				#endif
 				{
+					music_play (MUSIC_CUTS);
 					rdm = 2; cutscene ();
 					rdm = (pemmeralds == 0x3f) ? 4 : 3; cutscene ();
+					music_stop ();
 					if (pemmeralds == 0x3f) pres (palts0, scr_the_end);
 					first_game = 1;
 					break;

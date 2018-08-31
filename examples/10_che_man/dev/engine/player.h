@@ -106,8 +106,9 @@ void player_to_pixels (void) {
 }
 
 void player_kill (void) {
+	oam_index = oam_index_player;
 	player_render ();
-	update_cycle ();
+	ppu_waitnmi ();
 
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
@@ -199,6 +200,7 @@ void player_move (void) {
 	#endif
 
 	hitv = hith = 0;
+	pcx = prx; pcy = pry;
 	pnotsafe = 0;
 	#ifdef ENABLE_SLIPPERY
 		pice = 0;
@@ -565,7 +567,7 @@ void player_move (void) {
 				#endif
 				if (pad0 & PAD_A) {
 					if (pj) {
-						if (pctj < PLAYER_AY_JUMP) pvy -= (32 - (pctj));
+						if (pctj < PLAYER_AY_JUMP) pvy -= (PLAYER_AY_JUMP - (pctj));
 						if (pvy < -PLAYER_VY_JUMP_MAX) pvy = -PLAYER_VY_JUMP_MAX;
 						++ pctj; if (pctj == 16) pj = 0;	
 					}
@@ -626,25 +628,29 @@ void player_move (void) {
 		#ifdef PLAYER_TOP_DOWN		
 			pfacingh = 0xff;
 		#endif
-		
-		if (pvx > 0) {
+		#ifdef PLAYER_SPINS
+			if (!pspin)
+		#endif
+		{
+			if (pvx > 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else			
-				pvx -= PLAYER_RX;
-			#endif			
-			
-			if (pvx < 0) pvx = 0;
-		} else if (pvx < 0) {
+				#ifdef ENABLE_SLIPPERY
+					pvx -= pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else			
+					pvx -= PLAYER_RX;
+				#endif			
+				
+				if (pvx < 0) pvx = 0;
+			} else if (pvx < 0) {
 
-			#ifdef ENABLE_SLIPPERY
-				pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
-			#else
-				pvx += PLAYER_RX;
-			#endif
+				#ifdef ENABLE_SLIPPERY
+					pvx += pice ? PLAYER_RX_ICE : PLAYER_RX;
+				#else
+					pvx += PLAYER_RX;
+				#endif
 
-			if (pvx > 0) pvx = 0;
+				if (pvx > 0) pvx = 0;
+			}
 		}
 	}
 
@@ -721,7 +727,7 @@ void player_move (void) {
 					if (cy2 != cy3) if (at3 & 2) player_process_tile (at3, cx1, cy3, rdm, cy3);
 				#endif				
 			} else {
-				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));
+				hith = ((at1 & 1) || (at2 & 1) || (at3 & 1));				
 			}
 		#else
 			cm_two_points ();
@@ -737,6 +743,7 @@ void player_move (void) {
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		#endif
+		if (pvy > 0) hith &= ((pry & 15) > 4);
 	}
 
 	// Facing
@@ -768,10 +775,17 @@ void player_move (void) {
 	
 	if (pgotten == 0) {
 		#ifdef NO_HORIZONTAL_EVIL_TILE
-			if (hitv || hith) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
+			if (hitv || hith) {
+				if (hith) { prx = pcx; px = prx << FIXBITS; }
+				if (hitv) { pry = pcy; py = pry << FIXBITS; }
+				if (pvy < 0) pvy = PLAYER_V_REBOUND; else pvy = -PLAYER_V_REBOUND;
+			} 
 		#else
-			if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); } 
-			if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); }
+			if (hitv) { phit = 1; pvy = ADD_SIGN (-pvy, PLAYER_V_REBOUND); pry = pcy; py = pry << FIXBITS; } 
+			#ifndef PLAYER_TOP_DOWN
+			else
+			#endif
+			if (hith) { phit = 1; pvx = ADD_SIGN (-pvx, PLAYER_V_REBOUND); prx = pcx; px = prx << FIXBITS; }
 		#endif
 
 		#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
@@ -803,6 +817,8 @@ void player_move (void) {
 		cx1 = cx2 = (prx + 4) >> 4;
 		cy1 = cy2 = (pry + 8) >> 4;
 		cm_two_points ();
+
+		#include "my/custom_center_detections.h"
 	#endif
 
 	#ifdef ENABLE_TILE_GET

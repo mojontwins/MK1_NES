@@ -52,6 +52,8 @@ unsigned char oobjs;                    // Player items, last frame value (used 
 unsigned char oammo;                    // Player ammo, last frame value (used to detect changes)
 unsigned char okilled;                  // Player # of killed enems., last frame value (used to detect changes)
 
+unsigned char oam_index_player;         // Index copy
+
 // Custom hotspot type star (used as an extra collectible).
 
 #ifdef HOTSPOT_TYPE_STAR

@@ -772,6 +772,7 @@ void enems_move (void) {
 						n_pant = _en_mx; on_pant = 0xff;
 						prx = _en_x2; px = prx << FIXBITS;
 						pry = _en_y2; py = pry << FIXBITS;
+						player_stop ();
 
 						#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
 							phitteract = 0;
@@ -817,6 +818,10 @@ void enems_move (void) {
 						pvy = 0;
 					}
 				}
+
+				#ifdef PLAYER_SPINS
+					if (pgotten) pspin = 0;
+				#endif
 			#endif
 
 			// Is enemy collidable? If not, exit
@@ -960,7 +965,7 @@ void enems_move (void) {
 				#endif
 				if (en_sg_2) { 
 					pkill = 1; 
-					#ifdef PLAYER_BOUNCES
+					#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
 						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
 						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
 						

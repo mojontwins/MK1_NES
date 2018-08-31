@@ -6,6 +6,10 @@
 //#define GAME_AREA_BOTTOM
 //#define GAME_AREA_CUSTOM
 
+#define MAP_CLEAR_LIST_ADDRESS	0x2c40	// To store map persistence in VRAM.
+										// Each screen takes 24 bytes. move it where
+										// It fits. Below 2c40 you may "see" the buffer
+
 // ============================================================================
 // I. General configuration
 // ============================================================================
@@ -134,7 +138,7 @@
 // Extra special tiles
 // -------------------
 
-#define NO_HORIZONTAL_EVIL_TILE				// Only check for evil tiles vertically
+//#define NO_HORIZONTAL_EVIL_TILE			// Only check for evil tiles vertically
 //#define CUSTOM_CENTER_DETECTIONS			// Define this if you need custom tile behs
 
 // Quicksands, beh == 2.
