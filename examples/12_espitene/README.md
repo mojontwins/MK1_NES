@@ -1,10 +1,10 @@
-# Espinete Bad
+# Espitene
 
-A rather interesting port of Sonic Bad (which originally runs on a rather modified MK2 engine) using only "legal" techniques to expand functionality, i.e., code injection points, even a 100% custom module.
+A rather interesting port of Sonic Bad (which originally runs on a rather modified MK2 engine) using only "legal" techniques to expand functionality, i.e., code injection points, even a couple of custom modules.
 
 # How I made this
 
-One of the things I like about **AGNES** is that it's fun (well, at least for me) thinking about how to implement what you have in mind using what the engine offers. **Sonic Bad** was a joke game which tried to mimmick the gameplay in Sonic (well, kind of). It has those gameplay items:
+One of the things I like about **AGNES** is that it's fun (well, at least for me) thinking about how to implement what you have in mind using what the engine offers. **Sonic Bad** was a joke game which tried to mimmick the gameplay in Sonic (well, kind of). It had these gameplay items:
 
 * The main character has low acceleration, low friction, but high max speed.
 * The main character collects rings, which are part of the background. The game has to remember which rings have been already collected. Luckily **AGNES** supports this, using the unused nametable to store which tiles have been "got" in each screen.
@@ -835,4 +835,3 @@ The actual palette cycling is performed in `my/effects.h`. This ensure the effec
         pal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);
     }
 ```
-ss

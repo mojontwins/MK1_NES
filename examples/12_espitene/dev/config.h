@@ -600,7 +600,7 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_VX_MAX			184		// Max. horizontal speed
+#define PLAYER_VX_MAX			160		// Max. horizontal speed
 #define PLAYER_VX_CONVEYORS 	64
 #define PLAYER_AX				8		// Horizontal acceleration
 #define PLAYER_AX_ICE			4
