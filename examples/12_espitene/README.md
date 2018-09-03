@@ -514,6 +514,112 @@ Finally, to make them really harmful, we inject code via `custom_center_detectio
 
 This code is not included automaticly, we have to enable `CUSTOM_CENTER_DETECTIONS` in `config.h`.
 
+## Last boss
+
+The boss for the last stage tries to mimmick the of Sonic for SMS. To do that, it uses a a combination of standard AGES features and custom coding.
+
+The last boss is composed by several elements:
+
+### The orbs and ray.
+
+The orbs which shoot a ray when advancing and seem to "recharge" while recoiling are created using a single linear enemy with a big vertical metasprite. The "facing left" sprites have a ray between the orbs, the "facing right" don't. The metasprite handle is located at the top, so the collision box is around the upper orb. This orb is inside non walkable tiles, so you can't really collide with this enemy.
+
+Collision is handled by a custom routine in `custom_routines.h`. If the orbs are moving left (mx = -2), it is collidable and will kill the player:
+
+```c
+    // Final boss
+    if (level == 17 && n_pant == 2) {
+
+        [...]
+
+        // Sound
+        if (en_mx [0] < 0 && half_life) sfx_play (1, 2);    
+
+        // Collision with ray
+        if (pflickering == 0 &&
+            en_mx [0] < 0 &&
+            prx + 3 >= en_x [0] &&
+            prx <= en_x [0] + 7
+        ) {
+            pkill = 1;
+        }
+    }
+
+```
+
+Note that we only check the horizontal axis as there's no way you can go over or under the orbs (as they cover the whole non-obstacle area of a corridor).
+
+### The shooters
+
+From time to time, two "cannons" appear and shoot towards the player. This one was simple: they are two monococos.
+
+### Somari
+
+With the three enemy slots already taken, The only way to feature somari on screen (and make it collidable) was via extra routines. First of all, a custom module `somari.h` is `#include`d from `extra_modules.h`. This module implements a simple fsm. Somari can have 4 states:
+
+- State 0: Normal. A cyclic animation is displayed.
+- State 1: Touched. Somari flashes showing his skeleton until a counter expires, then goes back to state 0.
+- State 2: Dying. Somari stays in skeleton form until a counter expires, then goes to state 3.
+- State 3: Dead. Only used so the engine can detect the level is finished.
+
+```c
+    void somari_do (void) {
+
+        switch (somari_state) {
+            case 0:
+                en_spr = 42 + ((frame_counter >> 3) & 3);
+                break;
+
+            case 1:
+                en_spr = half_life ? 44 : 46;
+                if (somari_ct) somari_ct --; else somari_state = 0;
+                break;
+
+            case 2:
+                en_spr = 46;
+                if (somari_ct) somari_ct --; else somari_state = 3;
+                break;
+        }
+
+        oam_index = oam_meta_spr (
+            232, SPRITE_ADJUST + 128, 
+            oam_index, 
+            spr_enems [en_spr]
+        );
+
+    }
+```
+
+The `somari_do` function is called from `extra_routines.h`. Collision with the player (which is the only way to change from state 0 to state 1) is handled there as well:
+
+```c
+    // Final boss
+    if (level == 17 && n_pant == 2) {
+        somari_do ();   
+
+        // Collision with somari:
+        if (prx > 216) {
+            prx = 216; px = prx << FIXBITS; pvx = 0;
+            if (pspin) {
+                pvx = -512;         
+                pflickering = 30;
+                if (somari_life) {
+                    somari_life --;
+                    somari_state = 1;   
+                } else {
+                    somari_state = 2;
+                }
+                somari_ct = 120;
+                sfx_play (SFX_BREAKB, 1);
+            }
+        }
+
+        [...]
+    }
+```
+
+Collision is detected checking if the player's X coordinate goes past 216. If the player is spinning, Somari will register a hit.
+
 ## Also of interest
 
 ### Custom renderer
