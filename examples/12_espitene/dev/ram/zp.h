@@ -44,6 +44,9 @@ unsigned char oam_index;
 
 // Enemies
 
+unsigned char en_initial;               // First enemy to process in current screen, current frame (cycles 0, 1, 2, ...)
+unsigned char en_offs;                  // Precalculated value: n_pant * 3; used to index data related to enemy persistence
+
 unsigned char en_fr;                    // (Temporal) enemies frame number
 unsigned char en_collx, en_colly;       // (Temporal) collision flags
 unsigned char en_spr;                   // Current enemy sprite index

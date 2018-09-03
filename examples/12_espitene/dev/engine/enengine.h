@@ -463,6 +463,10 @@ void enems_load (void) {
 			
 			en_cttouched [gpit] = 0;
 			en_flags [gpit] = 0;
+
+			#ifdef ENEMS_INVINCIBILITY
+				en_invincible [gpit] = 0;
+			#endif
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			++ rdc;
@@ -628,6 +632,11 @@ void enems_move (void) {
 
 				#ifdef ENEMS_RECOIL_ON_HIT
 					#include "engine/enemmods/enems_recoiling.h"
+				#endif
+
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_cttouched [gpit] == 0 && en_life [gpit])
+						en_invincible [gpit] = ENEMS_INVINCIBILITY;
 				#endif
 			} else
 		#endif
@@ -824,6 +833,14 @@ void enems_move (void) {
 				#endif
 			#endif
 
+			// Invincible
+			#ifdef ENEMS_INVINCIBILITY
+				if (en_invincible [gpit]) {
+					-- en_invincible [gpit];
+					if (half_life) en_spr = 0xff;
+				}
+			#endif
+
 			// Is enemy collidable? If not, exit
 
 			if (
@@ -878,6 +895,9 @@ void enems_move (void) {
 					#endif	
 					#ifdef ENABLE_SAW
 						&& _en_t != 8
+					#endif
+					#ifdef ENEMS_INVINCIBILITY
+						&& en_invincible [gpit] == 0
 					#endif
 				) {
 				
@@ -951,12 +971,16 @@ void enems_move (void) {
 							&& _en_t != 8
 						#endif
 					) {
-						en_sg_2 = 0;
 						en_sg_1 = 1;
+						en_sg_2 = 0;
 						pvy = -pvy;
 						sfx_play (SFX_STEPON, 1);
 					}
 				#endif				
+
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_invincible [gpit]) en_sg_1 = 0;
+				#endif
 
 				#include "my/on_player_hit.h"
 
@@ -991,6 +1015,9 @@ void enems_move (void) {
 				#endif					
 				#ifdef ENABLE_SAW
 					|| _en_t == 8
+				#endif
+				#ifdef ENEMS_INVINCIBILITY
+					|| en_invincible [gpit]
 				#endif
 			) goto skipdo;
 

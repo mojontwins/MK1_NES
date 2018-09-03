@@ -278,6 +278,8 @@
 
 #define ENEMS_TREMBLE						// Make enemies tremble when hit
 
+#define ENEMS_INVINCIBILITY				25	// If defined, make enemies invincible for N frames when hit.
+
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 

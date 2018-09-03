@@ -247,6 +247,12 @@ unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for
 
 unsigned char en_spr_id [3];
 
+// Temporal invincibility
+
+#ifdef ENEMS_INVINCIBILITY
+    unsigned char en_invincible [3];
+#endif
+
 // Persistent enemies (position / movement is remembered)
 
 #ifdef PERSISTENT_ENEMIES

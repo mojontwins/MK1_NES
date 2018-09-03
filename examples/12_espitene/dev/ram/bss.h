@@ -199,9 +199,6 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
 
 // More globals for baddies (for current screen)
 
-unsigned char en_initial;               // First enemy to process in current screen, current frame (cycles 0, 1, 2, ...)
-unsigned char en_offs;                  // Precalculated value: n_pant * 3; used to index data related to enemy persistence
-
 unsigned char en_t [3];                 // Enemy types.
 
 unsigned char en_x [3];                 // Enemy X coordinates.
@@ -249,6 +246,12 @@ unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for
 #endif
 
 unsigned char en_spr_id [3];
+
+// Temporal invincibility
+
+#ifdef ENEMS_INVINCIBILITY
+    unsigned char en_invincible [3];
+#endif
 
 // Persistent enemies (position / movement is remembered)
 
