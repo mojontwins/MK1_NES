@@ -75,6 +75,17 @@ The file `my/extra_checks.h` is included in the main loop, so the code you add h
 
 Will end the level if the player has killed all enemies in this level.
 
+## Hud customization
+
+By default, the hud can show general, built-in values. Adding code to `extra_hud_update.h` lets you place your own shit in the hud. For example, [Espitene](https://github.com/mojontwins/MK1_NES/tree/master/examples/12_espitene) shows the amount of rings collected:
+
+```c
+    if (oprings != prings) {
+        oprings = prings;
+        _x = 0x1d; _y = 4; _n = prings; p_t ();
+    }
+```
+
 ## Adding support for new hotspot types.
 
 You can add your own custom hotspot types easily by adding code to `my/extra_hotspots.h`. For each custom hotspot type you want to create, just add a code block like this:
@@ -138,7 +149,7 @@ For example, in [Cheril the writer](https://github.com/mojontwins/MK1_NES/tree/m
 
 ## Timer
 
-If you have the timer on, everytime the timer ticks the code in `my/on_timer_ticks.h` will be executed. 
+If you have the timer on, everytime the timer ticks the code in `my/on_timer_tick.h` will be executed. 
 
 The timer current value is in `timer`. `timer_zero` will be set when the timer reaches zero.
 
@@ -173,6 +184,10 @@ Remember that the contents of containers equals the contents of the flag they ar
 You can override the normal changing of rooms by injecting code to `my/custom_flickscreen`, which gets executed before the normal "player exits the current room" code. This helps you creating custom connections. 
 
 Setting `flick_override` to 1 will override the normal "player exits the current room" code for the current frame.
+
+## Custom center detections
+
+You can add custom reactions to custom tile behs using `custom_center_detection.h`. the `at1` variable contains the beh of the tile the center of the player's collision box is touching. You need to enable `CUSTOM_CENTER_DETECTIONS` in `config.h` to use this feature.
 
 ## Things you may want to do in code injections
 
@@ -259,3 +274,7 @@ If you set your `win_level` condition depending on killing enemies, it's ugly th
 ```
 
 Note how if all enemies have been killed, `win_level` wont be set while there's a exploding animation going on.
+
+### Raster & palette effects
+
+If you need a custom raster split or palette cycles, add your code to `my/effects.h`. The code in this module is executed every TV frame (which means 50 times per second in PAL and 60 in NTSC), while the game runs at 50 fps.
