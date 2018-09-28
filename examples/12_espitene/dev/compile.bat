@@ -113,7 +113,7 @@ ca65 game.s
 ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 del *.o > nul
-del game.s > nul
+rem del game.s > nul
 
 copy cart.nes ..\..\espitene.nes
 del work\*.h /q > nul

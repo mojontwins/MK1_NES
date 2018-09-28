@@ -39,9 +39,27 @@ void ul_putc (void) {
 
 // Needs _x, _y, _n set.
 void p_t (void) {
-	rda = _n; gp_addr = (_y << 5) + _x + 0x2000;
-	_n = ((rda/10)+16); ul_putc ();
-	_n = ((rda%10)+16); ul_putc ();
+	gp_addr = (_y << 5) + _x + 0x2000;
+
+	// Adapted from code by Bregalad
+
+		// A = number (0-99)
+		__asm__ ("lda %v", _n);
+
+	    __asm__ ("ldx #$ff");
+	    __asm__ ("sec");
+	p_t_loop:
+		__asm__ ("inx");
+	    __asm__ ("sbc #10");
+	    __asm__ ("bcs %g", p_t_loop);
+	    __asm__ ("adc #10");
+
+		// A = lower digit (0-9), X=upper digit(0-9)
+		__asm__ ("sta %v", rda);
+		__asm__ ("stx %v", _n);
+
+		_n += 16;      ul_putc ();
+		_n = rda + 16; ul_putc ();
 }
 
 const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};

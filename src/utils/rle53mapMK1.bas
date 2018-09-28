@@ -130,7 +130,7 @@ While Not Eof (f)
 	If d = tLock Then
 		locks (locksI) = nPant: locksI = locksI + 1
 		locks (locksI) = y * 16 + x: locksI = locksI + 1
-	End if
+	End if	
 	' Write to big array
 	m (nPant, x + y * SCR_W) = d
 	' Previous one
@@ -292,13 +292,13 @@ For nPant = 0 To mapPants - 1
 	If scrMaps (nPant) = 255 Then
 		If Not binmode Then Print #f, "// Screen " & Lcase (Hex (nPant, 2)) & " is empty."
 	ElseIf scrSizes (nPant) Then
-		If Not binmode Then Print #f, "const unsigned char scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " [] = {";
+		If Not binmode Then Print #f, "const unsigned char scr_" & prefix & "_" & Lcase (Hex (nPant, 2)) & " [] = {";		
 		For i = 0 To scrSizes (nPant) - 1
 			If binmode Then 
 				d = mOut (nPant, i)
 				Put #fBin, , d
 			Else
-				Print #f, "0x" & Lcase (Hex (mOut (nPant, i), 2));
+				Print #f, "0x" & Lcase (Hex (mOut (nPant, i), 2));				
 			End If
 			If Not binmode Then If i < scrSizes (nPant) - 1 Then Print #f, ", ";
 		Next i
