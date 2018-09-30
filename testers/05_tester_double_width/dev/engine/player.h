@@ -709,17 +709,17 @@ void player_move (void) {
 	if (rds16) 	{
 		if (rds16 < 0) {
 			cx1 = cx2 = prx >> 4; 
-			rda = (cx1 + 1) << 4;
+			PRXA = (cx1 + 1) << 4;
 			rdm = cx1 - 1;
 		} else {
 			cx1 = cx2 = (prx + 8) >> 4;
-			rda = ((cx1 - 1) << 4) + 8;
+			PRXA = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
 		#if PLAYER_COLLISION_VSTRETCH_BG > 0
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
@@ -732,7 +732,7 @@ void player_move (void) {
 		#else
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))

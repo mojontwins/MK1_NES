@@ -114,11 +114,21 @@
 #if defined (DOUBLE_WIDTH)
 	#define NAMETABLE_BASE	nametable_base
 	#define BUFF_SIZE		384
-	#define COORDS(x,y) 	(buff_offset + ((x) | ((y) << 4)))
+	#define COORDS(x,y) 	(x > 15 ? (192 + (((x) & 0xf) | ((y) << 4))) : ((x) | ((y) << 4)))
 	#define MAX_PRX			500
+	#define MAX_ENX			496
+	#define NENEMS 			6
+	#define EN_X_ABSOLUTE	rdaa
+	#define PRXA			gpint
+	#define ENXA 			gpint
 #else
 	#define NAMETABLE_BASE 	0x2000
 	#define BUFF_SIZE 		192
 	#define COORDS(x,y) 	((x) | ((y) << 4))
 	#define MAX_PRX			244
+	#define MAX_ENX			240
+	#define NENEMS 			3
+	#define EN_X_ABSOLUTE	_en_x
+	#define PRXA 			rda
+	#define ENXA 			rda
 #endif

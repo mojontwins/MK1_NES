@@ -14,6 +14,7 @@ unsigned char pad_this_frame;           // (neslib) pad 0 read, current frame pr
 unsigned char gpit, gpjt;               // General purpose iterators.
 unsigned char gpitu, gpaux;             // Auxiliary iterators.
 signed int rds16;                       // General purpose 16 bit signed variable.
+unsigned int gpint;                     // General purpose 16 bit unsinged variable.
 
 const unsigned char *gp_gen;            // General purpose pointer to read data in ROM.
 const unsigned char *gp_tmap, *gp_tma2; // Pointers used to read map data in ROM.
@@ -26,6 +27,11 @@ unsigned char rda, rdb, rdc, rdd, rdm;  // General purpose temporal value holder
 signed char rds;                        // General purpose temporal value holder, signed.
 unsigned char rdct;                     // General purpose counter
 unsigned char ticker;                   // Ticker. 0 for a frame every second.
+#ifdef DOUBLE_WIDTH
+    signed int rdaa;                    // Genearl purpose integer
+    signed int en_x_offs;               // Precalculated pixel offset
+    unsigned char on_screen;            // Current enemy in same virtual room as player
+#endif
 
 // Used for two-points collision
 
@@ -54,23 +60,20 @@ unsigned char touched;                  // (Temporal) an enemy collided with the
 unsigned char en_is_alive;              // (Temporal) current enemy is alive, used when enemies respawning is on.
 unsigned char pregotten;                // (Temporal) player <-> current enemy horizontal overlap flag.
 
-unsigned char en_cttouched [3];         // Counters used to show explosions / flickering
-unsigned char en_flags [3];             // Enemies flags
-unsigned char en_life [3];              // Enemies life gauges
-unsigned char en_status [3];            // Enemies statused, repurposed per enemy type
-unsigned char en_ct [3];                // Enemies General repurposeable counter
-
-unsigned char en_rawv [3];              // Speed, used for pursuer-type enemies
+unsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering
+unsigned char en_life [NENEMS];         // Enemies life gauges
+unsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type
+unsigned char en_ct [NENEMS];           // Enemies General repurposeable counter
 
 #ifdef ENEMS_RECOIL_ON_HIT
-    signed char en_rmx [3];             // If recoiling, recoil direction in the X axis.
+    signed char en_rmx [NENEMS];        // If recoiling, recoil direction in the X axis.
     #ifdef PLAYER_TOP_DOWN
-        signed char en_rmy [3];         // If recoiling, recoil direction in the Y axis.
+        signed char en_rmy [NENEMS];    // If recoiling, recoil direction in the Y axis.
     #endif
 #endif
 
 #ifdef ENABLE_COMPILED_ENEMS
-    const unsigned char *en_behptr [3]; // A pointer to curren enemy script for compiled enemies.
+    const unsigned char *en_behptr [NENEMS]; // A pointer to curren enemy script for compiled enemies.
 #endif
 
 // Those variables are used as temporal copies of general arrays defined in BSS (check bss.h)
@@ -89,7 +92,8 @@ unsigned char en_sg_1, en_sg_2;
 // Main player
 
 unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
-unsigned int px, py;                      // Player X, Y coordinates, fixed point 10.6
+unsigned int px;
+signed int py;                          // Player X, Y coordinates, fixed point 10.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
 #ifdef DOUBLE_WIDTH
     unsigned int prx;
@@ -184,7 +188,12 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 #endif
 
 #if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
-    unsigned char phitterx, phittery;   // If player is punching or kicking, hitbox coordinates
+    #ifdef DOUBLE_WIDTH
+        unsigned int phitterx;
+    #else
+        unsigned char phitterx;
+    #endif
+    unsigned char phittery;             // If player is punching or kicking, hitbox coordinates
     unsigned char phitteract;           // True if hitbox is active
     unsigned char pfrozen;              // != 0 if player is frozen (after landing a hit). Invalidate input & decrement
 #endif

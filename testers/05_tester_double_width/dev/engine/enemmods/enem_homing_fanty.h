@@ -3,15 +3,17 @@
 
 // Fanties that have a home
 
+// TODO -- Adapt for double width!
+
 	// Precalc distance
-	rdx = _en_x; rdy = _en_y; rdt = distance ();
+	rdx = EN_X_ABSOLUTE; rdy = _en_y; rdt = distance ();
 
 	// Modify v
 
 	switch (_en_state) {
 		case 0:
 			// Retreating
-			_enf_vx = ADD_SIGN2 (_en_x1, _en_x, FANTY_V_RETREAT);
+			_enf_vx = ADD_SIGN2 (_en_x1, EN_X_ABSOLUTE, FANTY_V_RETREAT);
 			_enf_vy = ADD_SIGN2 (_en_y1, _en_y, FANTY_V_RETREAT);
 			if (rdt < FANTY_DISTANCE) _en_state = 1;
 			break;
@@ -31,7 +33,7 @@
 	
 			if (rdt > FANTY_DISTANCE) {
 				// Adjust to pixel
-				_enf_x = _en_x << FIXBITS;
+				_enf_x = EN_X_ABSOLUTE << FIXBITS;
 				_enf_y = _en_y << FIXBITS;
 				_en_state = 0;
 			}
@@ -42,8 +44,8 @@
 
 	_enf_x += _enf_vx; 
 	if (_enf_x < 0) _enf_x = 0;
-	if (_enf_x > 15360) _enf_x = 15360;
-	_en_x = _enf_x >> 6;
+	if (_enf_x > MAX_ENX<<FIXBITS) _enf_x = MAX_ENX<<FIXBITS;
+	EN_X_ABSOLUTE = _enf_x >> 6;
 
 	#ifdef FANTY_COLLIDES
 
@@ -52,16 +54,16 @@
 			cy2 = (_en_y + 11) >> 4;
 
 			if (_enf_vx > 0) {
-				cx1 = cx2 = (_en_x + 11) >> 4;
+				cx1 = cx2 = (EN_X_ABSOLUTE + 11) >> 4;
 				rda = ((cx2 - 1) << 4) + 4;
 			} else {
-				cx1 = cx2 = (_en_x + 4) >> 4;
+				cx1 = cx2 = (EN_X_ABSOLUTE + 4) >> 4;
 				rda = ((cx1 + 1) << 4) - 4;
 			}
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
 				_enf_vx = -_enf_vx;
-				_en_x = rda; 
+				EN_X_ABSOLUTE = rda; 
 				_enf_x = rda << FIXBITS;
 			}
 		}
@@ -78,8 +80,8 @@
 	#ifdef FANTY_COLLIDES
 
 		if (_enf_vy) {
-			cx1 = (_en_x + 4) >> 4;
-			cx2 = (_en_x + 11) >> 4;
+			cx1 = (EN_X_ABSOLUTE + 4) >> 4;
+			cx2 = (EN_X_ABSOLUTE + 11) >> 4;
 
 			if (_enf_vy > 0) {
 				rdb = 12;
@@ -102,7 +104,7 @@
 	#endif
 
 	#ifdef FANTY_KILLED_BY_TILE
-		cx1 = (_en_x + 8) >> 4;
+		cx1 = (EN_X_ABSOLUTE + 8) >> 4;
 		cy1 = (_en_y + 8) >> 4;
 		cm_two_points ();
 		if (at1 & 1) {
@@ -114,12 +116,12 @@
 #ifdef FANTY_FAST_ANIM
 	en_fr = half_life;
 #else
-	en_fr = (_en_x >> 3) & 1;
+	en_fr = (EN_X_ABSOLUTE >> 3) & 1;
 #endif
 
 #ifdef FANTY_WITH_FACING
-	//_en_facing = ((_en_x < prx) ? 0 : 4);
-	rda = (prx < _en_x); enems_facing ();
+	//_en_facing = ((EN_X_ABSOLUTE < prx) ? 0 : 4);
+	rda = (prx < EN_X_ABSOLUTE); enems_facing ();
 	en_spr = _en_s + en_fr + _en_facing;
 #else
 	en_spr = _en_s + en_fr;

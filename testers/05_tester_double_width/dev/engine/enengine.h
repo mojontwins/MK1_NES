@@ -72,7 +72,7 @@
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
 			gpjt = on_pant + on_pant + on_pant;
-			for (gpit = 0; gpit < 3; gpit ++) {
+			for (gpit = 0; gpit < NENEMS; gpit ++) {
 				__asm__ ("ldx %v", gpit);
 				__asm__ ("ldy %v", gpjt);
 
@@ -96,7 +96,7 @@
 
 #ifdef PERSISTENT_DEATHS
 	void enems_persistent_deaths_load (void) {
-		memfill (ep_dead, 0, MAP_SIZE * 3);
+		memfill (ep_dead, 0, MAP_SIZE * NENEMS);
 	}
 #endif
 
@@ -153,6 +153,11 @@ void enems_facing (void) {
 }
 
 void enems_init_fp (void) {
+	#ifdef DOUBLE_WIDTH
+		if (gpit > 2) 
+			_enf_x = (256 + _en_x) << 6;
+		else
+	#endif
 	_enf_x = _en_x << 6;
 	_enf_y = _en_y << 6;
 }
@@ -172,17 +177,17 @@ void enems_load (void) {
 
 	#ifdef ENEMS_IN_CHRROM
 		bankswitch (l_enems_chr_rombank [level]);
-		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	
+		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	 // * 12
 		rda = VRAM_READ; 	// Dummy read.
 	#else
-		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3));
+		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3)); // * 12
 	#endif
 
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		en_offs = rdc = (n_pant << 1) + n_pant;
+		en_offs = rdc = (n_pant << 1) + n_pant;        // * 3
 	#endif
 
-	for (gpit = 0; gpit < 3; gpit ++) {
+	for (gpit = 0; gpit < NENEMS; gpit ++) {
 		
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
@@ -533,10 +538,13 @@ void enems_move (void) {
 	
 	// Updates sprites
 	touched = 0;
-	++ en_initial; if (en_initial >= 3) en_initial = 0;
+	++ en_initial; if (en_initial >= NENEMS) en_initial = 0;
 	gpit = en_initial;
-	gpjt = 3; while (gpjt --) {
-		gpit += 2; if (gpit > 2) gpit -=3;
+	gpjt = NENEMS; while (gpjt --) {
+		gpit += NENEMS-1; if (gpit > NENEMS-1) gpit -=NENEMS;
+		#ifdef DOUBLE_WIDTH
+			en_x_offs = (gpit < 3 ? 0 : 256);
+		#endif
 		
 		// Copy arrays -> temporal vars in ZP
 
@@ -596,6 +604,10 @@ void enems_move (void) {
 		// "touched" state control
 		en_spr_x_mod = 0;
 
+		#ifdef DOUBLE_WIDTH
+			calc_en_x_absolute ();
+		#endif
+
 		#ifdef ENEMS_MAY_DIE
 			if (en_cttouched [gpit]) {
 				-- en_cttouched [gpit];
@@ -615,8 +627,15 @@ void enems_move (void) {
 					} 
 				#else
 					rda = frame_counter & 0xf;
+					#ifdef DOUBLE_WIDTH
+						if (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240)
+					#endif					
 					oam_index = oam_meta_spr (
-						_en_x + jitter [rda],
+						#ifdef DOUBLE_WIDTH
+							EN_X_ABSOLUTE + jitter [rda] - scroll_x,
+						#else
+							_en_x + jitter [rda],
+						#endif
 						_en_y + jitter [15 - rda] + SPRITE_ADJUST, 
 						oam_index, 
 						spr_enems [ENEMS_EXPLODING_CELL]
@@ -646,10 +665,10 @@ void enems_move (void) {
 		if (en_is_alive) {
 
 			// Gotten preliminary:
-			pregotten = (prx + 7 >= _en_x && prx <= _en_x + 15);
-
+			pregotten = (prx + 7 >= EN_X_ABSOLUTE && prx <= EN_X_ABSOLUTE + 15);
+			
 			// Select frame upon screen position:
-			en_fr = ((((_en_mx) ? _en_x : _en_y)+4) >> 3) & 1;
+			en_fr = ((((_en_mx) ? _en_x : _en_y) + 4) >> 3) & 1;
 			
 			#ifdef ENABLE_RESONATORS
 				if (res_on 
@@ -691,7 +710,7 @@ void enems_move (void) {
 							break;
 					#endif
 
-					#ifdef ENABLE_FANTY					
+					#ifdef ENABLE_FANTY	
 						case 6:
 							#include "engine/enemmods/enem_fanty.h"
 							break;
@@ -769,6 +788,13 @@ void enems_move (void) {
 				en_spr_id [gpit] = en_spr;
 			}
 
+			#ifdef DOUBLE_WIDTH
+				calc_en_x_absolute ();
+
+				// And now prune:
+				if (EN_X_ABSOLUTE < scroll_x || EN_X_ABSOLUTE >= scroll_x + 240) goto skipall;
+			#endif
+
 			// Warp player?
 
 			#ifdef ENABLE_SIMPLE_WARPERS
@@ -834,11 +860,18 @@ void enems_move (void) {
 			#endif
 
 			// Invincible
+
 			#ifdef ENEMS_INVINCIBILITY
 				if (en_invincible [gpit]) {
 					-- en_invincible [gpit];
 					if (half_life) en_spr = 0xff;
 				}
+			#endif
+
+			// In double width mode, skip upon player position
+
+			#ifdef DOUBLE_WIDTH
+				on_screen = ((prx & 0x100) == en_x_offs);
 			#endif
 
 			// Is enemy collidable? If not, exit
@@ -998,7 +1031,7 @@ void enems_move (void) {
 						#endif
 						{
 							if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
-							_en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+							_en_mx = ADD_SIGN (EN_X_ABSOLUTE - prx, ABS (_en_mx));
 						}
 
 					#endif	
@@ -1026,8 +1059,8 @@ void enems_move (void) {
 			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 				if (phitteract) {
 					if (
-						phitterx + 6 >= _en_x &&
-						phitterx <= _en_x + 14 &&
+						phitterx + 6 >= EN_X_ABSOLUTE &&
+						phitterx <= EN_X_ABSOLUTE + 14 &&
 						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 						phittery <= _en_y + 12
 					) {
@@ -1129,12 +1162,18 @@ skipdo:
 
 		if (en_spr != 0xff) {
 			oam_index = oam_meta_spr (
-				_en_x + en_spr_x_mod, _en_y + SPRITE_ADJUST, 
+				#ifdef DOUBLE_WIDTH
+					EN_X_ABSOLUTE + en_spr_x_mod - scroll_x,
+				#else
+					_en_x + en_spr_x_mod, 
+				#endif
+				_en_y + SPRITE_ADJUST, 
 				oam_index, 
 				spr_enems [en_spr]
 			);
 		}
 
+skipall:
 		// Update arrays
 
 		enems_update_unsigned_char_arrays ();

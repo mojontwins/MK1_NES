@@ -7,13 +7,7 @@
 void cm_two_points (void) {
 	// Calculates at1 & at2 from cx1, cy1 & cx2, cy2
 	if (cy1 > 12 || cy2 > 12) { at1 = at2 = 0; return; }
-	#ifdef DOUBLE_WIDTH
-		buff_offset = cx1 > 15 ? 192 : 0;
-	#endif
 	at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
-	#ifdef DOUBLE_WIDTH
-		buff_offset = cx2 > 15 ? 192 : 0;
-	#endif
 	at2 = map_attr [COORDS (cx2, cy2 ? cy2 - 1 : 0)];
 }
 
@@ -21,9 +15,6 @@ void cm_two_points (void) {
 void cm_three_points (void) {
 	// Always vertical, upon pry and pre-calculated cx1.
 	cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
-	#ifdef DOUBLE_WIDTH
-		buff_offset = cx1 > 15 ? 192 : 0;
-	#endif
 	if (cy1 <= 12) at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
 	cy2 = pry >> 4;
 	if (cy2 <= 12) at2 = map_attr [COORDS (cx1, cy2 ? cy2 - 1 : 0)];
@@ -46,8 +37,8 @@ unsigned char collide (void) {
 	//     _en_y - ENEMS_COLLISION_VSTRETCH_FG to _en_y + 13
 
 	return (
-		prx + 3 >= _en_x && 
-		prx <= _en_x + 11 && 
+		prx + 3 >= EN_X_ABSOLUTE && 
+		prx <= EN_X_ABSOLUTE + 11 && 
 		pry + 13 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 		pry <= _en_y + 13 + PLAYER_COLLISION_VSTRETCH_FG
 	);
@@ -128,3 +119,24 @@ void update_cycle (void) {
 	clear_update_list ();
 	oam_index = 4;
 }
+
+#ifdef DOUBLE_WIDTH
+	void calc_scroll_pos (void) {
+		scroll_x = prx - 124;
+		if (scroll_x < 0) scroll_x = 0;
+		else if (scroll_x > 256) scroll_x = 256;	
+	}
+
+	void calc_en_x_absolute (void) {
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+			if (_en_t == 6) {
+				// Fanties are absolute
+				EN_X_ABSOLUTE = _enf_x >> FIXBITS;
+			} else 
+		#endif
+		{
+			// Other types are absolute
+			EN_X_ABSOLUTE = en_x_offs + _en_x;
+		}
+	}
+#endif

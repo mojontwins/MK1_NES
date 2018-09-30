@@ -231,6 +231,9 @@ void prepare_scr (void) {
 	#endif	
 
 	player_move ();
+	#ifdef DOUBLE_WIDTH
+		calc_scroll_pos ();
+	#endif
 	enems_move ();
 
 	if (hrt) hotspots_paint ();
@@ -248,11 +251,8 @@ void prepare_scr (void) {
 		#endif
 	#endif
 
-	oam_hide_rest (oam_index);
 	hud_update ();
-	ppu_waitnmi ();
-	clear_update_list ();
-	oam_index = 4;
+	update_cycle ();
 	fade_in ();
 }
 
@@ -374,9 +374,7 @@ void game_loop (void) {
 			// Scroll position
 
 			#ifdef DOUBLE_WIDTH
-				if (prx < 124) scroll_x = 0;
-				else if (prx < 380) scroll_x = prx - 124;
-				else scroll_x = 256;
+				calc_scroll_pos ();
 			#endif
 
 			// Timer

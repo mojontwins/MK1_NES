@@ -16,8 +16,8 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
-#define MAP_H					3		// Map dimensions in screens
+#define MAP_W 					4		//
+#define MAP_H					2		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
 #define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
@@ -301,11 +301,11 @@
 
 // Fanties / Homing fanties / Timed fanties
 
-//#define ENABLE_FANTY
+#define ENABLE_FANTY
 //#define ENABLE_HOMING_FANTY
 //#define ENABLE_TIMED_FANTY
 
-#define FANTY_BASE_SPRID				32
+#define FANTY_BASE_SPRID				16
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 //#define FANTY_KILLED_BY_TILE
@@ -520,7 +520,7 @@
 // Extra configuration for side view:
 
 //#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
-//#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
+#define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 //#define PLAYER_STEPS_STRICT			// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 //#define PLAYER_SAFE_LANDING			// Step over vertical inverts direction
 //#define PLAYER_STEPS_MIN_KILLABLE     0xff	// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE

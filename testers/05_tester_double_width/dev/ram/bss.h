@@ -36,10 +36,10 @@ unsigned char on_pant;                  // Current screen (room) numberm last fr
 #ifdef DOUBLE_WIDTH
     unsigned char w_pant;               // (Working) Current screen (backup).
     unsigned int nametable_base;        // 0x2000 or 0x2400
-    unsigned char buff_offset;          // 0 or 192
+    unsigned int buff_offset;           // 0 or 192
     unsigned char *buff_ptr;            // Points to parts of the buffer
     unsigned char *attr_ptr;            // Points to parts of the buffer
-    unsigned char scroll_x;             // Scroller position
+    signed int scroll_x;                // Scroller position
 #endif
 
 unsigned char half_life;                // 1-0 flip flop (each game frame)
@@ -208,73 +208,75 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
 
 // More globals for baddies (for current screen)
 
-unsigned char en_t [3];                 // Enemy types.
+unsigned char en_t [NENEMS];            // Enemy types.
 
-unsigned char en_x [3];                 // Enemy X coordinates.
-unsigned char en_y [3];                 // Enemy Y coordinates.
+unsigned char en_x [NENEMS];            // Enemy X coordinates.
+unsigned char en_y [NENEMS];            // Enemy Y coordinates.
 
-unsigned char en_x1 [3];
-unsigned char en_y1 [3];                // Enemy starting point coordinates (for patrollers, repurposed for other types)
+unsigned char en_x1 [NENEMS];
+unsigned char en_y1 [NENEMS];           // Enemy starting point coordinates (for patrollers, repurposed for other types)
 
-unsigned char en_x2 [3];
-unsigned char en_y2 [3];                // Enemy ending point coordinates (for patrollers, repurposed for other types)
+unsigned char en_x2 [NENEMS];
+unsigned char en_y2 [NENEMS];           // Enemy ending point coordinates (for patrollers, repurposed for other types)
 
-signed char en_mx [3];                  // Enemy direction + speed in the X axis.
-signed char en_my [3];                  // Enemy direction + speed in the Y axis.
+signed char en_mx [NENEMS];             // Enemy direction + speed in the X axis.
+signed char en_my [NENEMS];             // Enemy direction + speed in the Y axis.
 
-unsigned char en_s [3];                 // Enemy base sprite index in spr_enems.
-unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = facing left.
+unsigned char en_s [NENEMS];            // Enemy base sprite index in spr_enems.
+unsigned char en_facing [NENEMS];       // Generally, 0 = facing right, 4 = facing left.
 
-unsigned char en_state [3];             // Enemy State
+unsigned char en_state [NENEMS];        // Enemy State
+unsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies
+unsigned char en_flags [NENEMS];        // Enemies flags
 
 unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
 
 #ifdef ENEMS_CAN_RESPAWN
-    unsigned char en_respawn [3];       // If true, enems can respawn.
-    unsigned char en_resx [3];
-    unsigned char en_resy [3];          // Respawn coordinates.
-    signed char en_resmx [3];
-    signed char en_resmy [3];           // Respawn mx, my.
+    unsigned char en_respawn [NENEMS];  // If true, enems can respawn.
+    unsigned char en_resx [NENEMS];
+    unsigned char en_resy [NENEMS];     // Respawn coordinates.
+    signed char en_resmx [NENEMS];
+    signed char en_resmy [NENEMS];      // Respawn mx, my.
 #endif
 
 // Fixed point variables (coordiantes, velocity) for some kinds of enemies.
 
 #ifdef ENEMS_NEED_FP
-    signed int enf_x [3];
-    signed int enf_vx [3];
-    signed int enf_y [3];
-    signed int enf_vy [3];
+    signed int enf_x [NENEMS];
+    signed int enf_vx [NENEMS];
+    signed int enf_y [NENEMS];
+    signed int enf_vy [NENEMS];
 #endif
 
 // Generator for PURSUER type enemies.
 
 #ifdef ENABLE_GENERATORS
-    unsigned char en_generator_life [3];
+    unsigned char en_generator_life [NENEMS];
                                         // Generators life gauge.
-    unsigned char gen_was_hit [3];      // True if generator was hit.
+    unsigned char gen_was_hit [NENEMS];      // True if generator was hit.
 #endif
 
-unsigned char en_spr_id [3];
+unsigned char en_spr_id [NENEMS];
 
 // Temporal invincibility
 
 #ifdef ENEMS_INVINCIBILITY
-    unsigned char en_invincible [3];
+    unsigned char en_invincible [NENEMS];
 #endif
 
 // Persistent enemies (position / movement is remembered)
 
 #ifdef PERSISTENT_ENEMIES
-    unsigned char ep_x [3 * MAP_SIZE];  // Buffer for X coordinates.
-    unsigned char ep_y [3 * MAP_SIZE];  // Buffer for Y coordinates.
-    signed char ep_mx [3 * MAP_SIZE];   // Buffer for direction + speed in the X axis.
-    signed char ep_my [3 * MAP_SIZE];   // Buffer for direction + speed in the Y axis.
+    unsigned char ep_x [NENEMS * MAP_SIZE];  // Buffer for X coordinates.
+    unsigned char ep_y [NENEMS * MAP_SIZE];  // Buffer for Y coordinates.
+    signed char ep_mx [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the X axis.
+    signed char ep_my [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the Y axis.
 #endif
 
 // Persistent deaths (death enemies stay dead in current level)
 
 #ifdef PERSISTENT_DEATHS
-    unsigned char ep_dead [3 * MAP_SIZE];
+    unsigned char ep_dead [NENEMS * MAP_SIZE];
                                         // Buffer for dead enemies (true if dead).
 #endif
 

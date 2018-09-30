@@ -31,7 +31,7 @@ const unsigned char * const spr_enems0 [] = {
 	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0, // Platform (4)
 
 	// Explosion (offset 32)
-	// ssexpl
+	ssexpl_00
 };
 
 // Item metasprites
