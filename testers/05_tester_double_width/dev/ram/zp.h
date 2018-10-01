@@ -28,7 +28,7 @@ signed char rds;                        // General purpose temporal value holder
 unsigned char rdct;                     // General purpose counter
 unsigned char ticker;                   // Ticker. 0 for a frame every second.
 #ifdef DOUBLE_WIDTH
-    signed int rdaa;                    // Genearl purpose integer
+    signed int rdaa, rdbb;              // Genearl purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
     unsigned char on_screen;            // Current enemy in same virtual room as player
 #endif
@@ -59,11 +59,6 @@ unsigned char en_spr;                   // Current enemy sprite index
 unsigned char touched;                  // (Temporal) an enemy collided with the player
 unsigned char en_is_alive;              // (Temporal) current enemy is alive, used when enemies respawning is on.
 unsigned char pregotten;                // (Temporal) player <-> current enemy horizontal overlap flag.
-
-unsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering
-unsigned char en_life [NENEMS];         // Enemies life gauges
-unsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type
-unsigned char en_ct [NENEMS];           // Enemies General repurposeable counter
 
 #ifdef ENEMS_RECOIL_ON_HIT
     signed char en_rmx [NENEMS];        // If recoiling, recoil direction in the X axis.
@@ -202,6 +197,12 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 
 #ifdef PLAYER_CAN_FIRE
     unsigned char bi;                   // Iterator for player bullets (projectiles shot by the player)
+    #ifdef DOUBLE_WIDTH
+        unsigned int _bx;
+    #else
+        unsigned char _bx;
+    #endif
+    unsigned char _by;                  // Fast copies
 #endif
 
 // Cocos

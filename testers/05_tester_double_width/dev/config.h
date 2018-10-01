@@ -359,8 +359,8 @@
 // Monococos
 
 //#define ENABLE_MONOCOCOS
-//#define MONOCOCO_TYPE_A				// Comment for 4 cells monococo (appearing/disappearing & hidden)
-#define MONOCOCO_BASE_SPRID				56
+#define MONOCOCO_TYPE_A					// Comment for 4 cells monococo (appearing/disappearing & hidden)
+#define MONOCOCO_BASE_SPRID				40
 #define MONOCOCO_BASE_TIME_HIDDEN		150
 #define MONOCOCO_BASE_TIME_APPEARING	50
 #define MONOCOCO_BASE_TIME_ONBOARD		50
@@ -384,8 +384,8 @@
 
 // Steady shooters
 
-//#define ENABLE_STEADY_SHOOTERS
-#define STEADY_SHOOTERS_BASE_SPRID		44
+#define ENABLE_STEADY_SHOOTERS
+#define STEADY_SHOOTERS_BASE_SPRID		36
 #define STEADY_SHOOTER_KILLABLE
 #define STEADY_SHOOTER_COUNT				// If Killable, add to body count as well
 //#define STEADY_SHOOTERS_HARMLESS			// Don't kill on touch.
@@ -459,7 +459,7 @@
 
 // Shooting behaviour
 // ------------------
-//#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 //#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.

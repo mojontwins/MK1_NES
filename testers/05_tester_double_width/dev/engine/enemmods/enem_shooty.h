@@ -14,10 +14,10 @@ if (_en_t & 0x80) {
 		// Attempt to shoot
 		if (SHOOT_FREQ) {
 			if (_en_facing) {
-				rdx = _en_x + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
+				COCO_RDX = EN_X_ABSOLUTE + 16 - SHOOTIES_SHOOT_OFFS_X - 8;
 				rda = 0;
 			} else {
-				rdx = _en_x + SHOOTIES_SHOOT_OFFS_X;
+				COCO_RDX = EN_X_ABSOLUTE + SHOOTIES_SHOOT_OFFS_X;
 				rda = 2;
 			}
 			rdy = _en_y + SHOOTIES_SHOOT_OFFS_Y;

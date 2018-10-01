@@ -36,6 +36,14 @@ METASPRITESET 0, 3, 2, 3, 6, 1, 0, -8 FLIPPED
 LABEL ssplat
 METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0
 
+# Shootie
+LABEL ssshootie
+METASPRITESET 0, 8, 2, 3, 3, 1, 0, -8 FLIPPED
+
+# Steady Shooter
+LABEL ssss
+METASPRITESET 0, 11, 2, 2, 4, 1, 0, 0
+
 # Explosion
 LABEL ssexpl
 METASPRITE 6, 6, 2, 2, 0, 0

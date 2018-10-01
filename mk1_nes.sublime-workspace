@@ -520,127 +520,29 @@
 	"buffers":
 	[
 		{
-			"file": "testers/05_tester_double_width/dev/compile.bat",
+			"file": "wip/diario_aux.md",
 			"settings":
 			{
-				"buffer_size": 1471,
+				"buffer_size": 2380,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/05_tester_double_width/dev/crt0.s",
+			"file": "testers/05_tester_double_width/dev/engine/playermods/bullets.h",
 			"settings":
 			{
-				"buffer_size": 4531,
+				"buffer_size": 3256,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/utils/rle53mapMK1.bas",
+			"file": "testers/05_tester_double_width/dev/engine/cocos.h",
 			"settings":
 			{
-				"buffer_size": 10303,
+				"buffer_size": 2892,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/engine/mapmods/map_renderer_double.h",
-			"settings":
-			{
-				"buffer_size": 317,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/engine/general.h",
-			"settings":
-			{
-				"buffer_size": 3250,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/mainloop.h",
-			"settings":
-			{
-				"buffer_size": 8603,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/engine/player.h",
-			"settings":
-			{
-				"buffer_size": 19695,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/mainloop/flickscreen.h",
-			"settings":
-			{
-				"buffer_size": 1042,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/ram/bss.h",
-			"settings":
-			{
-				"buffer_size": 14978,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/autodefs.h",
-			"settings":
-			{
-				"buffer_size": 3224,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/README.md",
-			"settings":
-			{
-				"buffer_size": 950,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/ram/zp.h",
-			"settings":
-			{
-				"buffer_size": 11380,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/engine/mapmods/map_renderer_complex.h",
-			"settings":
-			{
-				"buffer_size": 5183,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "testers/05_tester_double_width/dev/assets/map0.h",
-			"settings":
-			{
-				"buffer_size": 3220,
 				"line_ending": "Windows"
 			}
 		}
@@ -722,24 +624,43 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/docs",
 		"/D/git/MK1_NES/testers",
 		"/D/git/MK1_NES/testers/05_tester_double_width",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/mapmods",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/mainloop",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram"
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/playermods",
+		"/D/git/MK1_NES/testers/05_tester_double_width/gfx",
+		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/zp.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/README.md",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/autodefs.h",
+		"/D/Proyectos/CIs.txt",
+		"/D/Proyectos/2018/20180912b--Actualización endpoint push Android en msg-push-server de Mensajería/instrucciones.txt",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/playermods/bullets.h",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/config.h",
+		"/D/git/MK1_NES/examples/10_che_man/dev/engine/breakable.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/map0.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/compile.bat",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/crt0.s",
+		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/mapmods/map_renderer_double.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/general.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/player.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/mainloop/flickscreen.h",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/printer.h",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/setenv.bat",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/definitions.h",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/zp.h",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/bss.h",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/compile.bat",
 		"/D/git/MK1_NES/examples/12_espitene/dev/engine/printer.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/compile.bat",
 		"/D/git/MK1_NES/examples/12_espitene/dev/labels.txt",
@@ -841,26 +762,7 @@
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/neslib.s",
 		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/mapmods/map_renderer_complex.h",
 		"/D/git/MK1_NES/src/dev/engine/printer.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/compiled_enems.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_timer_tick.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/hotspots.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_interactive.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/timer.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extern.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/precalcs.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_boioiong.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_compiled.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/prototypes.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_catacrock.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/autodefs.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/hotspots.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_index.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_monococo.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_chac_chac.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_homing_fanty.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_pezon.h",
-		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_pursuers.h"
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/compiled_enems.h"
 	],
 	"find":
 	{
@@ -871,6 +773,8 @@
 		"height": 108.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev\\ram",
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev\\engine\\enemmods",
 			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev",
 			"D:\\git\\MK1_NES\\examples\\12_espitene\\dev\\engine",
 			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer\\dev",
@@ -953,6 +857,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"coco_",
+			"rdx",
+			"_a",
+			"shooties",
+			"coco",
+			"bx",
+			"bc",
 			"px =",
 			"prx",
 			"244",
@@ -1073,14 +984,7 @@
 			"enems_hit",
 			"enems_may_die",
 			"PEZON",
-			"enems_hit",
-			"Benny Hill Zone",
-			"pezon",
-			"nodecos",
-			"2c00",
-			"debug",
-			"custom",
-			"#define ENABLE_MONOCOCO"
+			"enems_hit"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1088,6 +992,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_b",
 			"..\\..\\..\\src\\utils",
 			"MAP_CLEAR_LIST_ADDRESS",
 			"spr_enems4",
@@ -1138,444 +1043,32 @@
 	"groups":
 	[
 		{
-			"selected": 7,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "testers/05_tester_double_width/dev/compile.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1471,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1137,
-								1137
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 10,
-								"count": 86,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 71.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "testers/05_tester_double_width/dev/crt0.s",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4531,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								513,
-								513
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 2,
-								"count": 461,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/R/R.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/utils/rle53mapMK1.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10303,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3223,
-								3223
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 217,
-								"count": 1439,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1092.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "testers/05_tester_double_width/dev/engine/mapmods/map_renderer_double.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 317,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								183,
-								183
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 263,
-								"count": 31,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "testers/05_tester_double_width/dev/engine/general.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3250,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3124,
-								3124
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 307,
-								"count": 350,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1161.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "testers/05_tester_double_width/dev/mainloop.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8603,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6945,
-								6945
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 85,
-								"count": 735,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4658.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "testers/05_tester_double_width/dev/engine/player.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19695,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2264,
-								2268
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 190,
-								"count": 1807,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1356.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "testers/05_tester_double_width/dev/mainloop/flickscreen.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1042,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								658,
-								658
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 90,
-								"count": 100,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "testers/05_tester_double_width/dev/ram/bss.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14978,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1454,
-								1454
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 190,
-								"count": 1637,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 24.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "testers/05_tester_double_width/dev/autodefs.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3224,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2812,
-								2812
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 308,
-								"count": 254,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 945.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
 			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 10,
-					"file": "testers/05_tester_double_width/README.md",
+					"buffer": 0,
+					"file": "wip/diario_aux.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 950,
+						"buffer_size": 2380,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								887,
-								887
+								99,
+								98
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 1267,
-								"count": 147,
+								"changes": 1417,
+								"count": 413,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1590,74 +1083,32 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "testers/05_tester_double_width/dev/ram/zp.h",
+					"buffer": 1,
+					"file": "testers/05_tester_double_width/dev/engine/playermods/bullets.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11380,
+						"buffer_size": 3256,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4061,
-								4061
+								2774,
+								2774
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 144,
-								"count": 1282,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 771.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "testers/05_tester_double_width/dev/engine/mapmods/map_renderer_complex.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5183,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4627,
-								4642
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 395,
-								"count": 518,
+								"changes": 36,
+								"count": 314,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1670,50 +1121,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2730.0,
+						"translation.y": 1170.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 1,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
-					"buffer": 13,
-					"file": "testers/05_tester_double_width/dev/assets/map0.h",
+					"buffer": 2,
+					"file": "testers/05_tester_double_width/dev/engine/cocos.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3220,
+						"buffer_size": 2892,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1807,
+								1807
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 0,
-								"count": 47,
-								"modified": true,
-								"selection": true,
+								"changes": 692,
+								"count": 273,
+								"modified": false,
+								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 29.0,
+						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

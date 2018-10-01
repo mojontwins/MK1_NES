@@ -10,7 +10,7 @@
 
 // Shoot
 if (_en_state == 2 && _en_ct == MONOCOCO_FIRE_COCO_AT) {
-	rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
+	COCO_RDX = EN_X_ABSOLUTE + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
 }
 
 // Sprite

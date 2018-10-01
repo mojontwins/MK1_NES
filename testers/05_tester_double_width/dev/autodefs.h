@@ -121,6 +121,7 @@
 	#define EN_X_ABSOLUTE	rdaa
 	#define PRXA			gpint
 	#define ENXA 			gpint
+	#define COCO_RDX		rdbb
 #else
 	#define NAMETABLE_BASE 	0x2000
 	#define BUFF_SIZE 		192
@@ -131,4 +132,5 @@
 	#define EN_X_ABSOLUTE	_en_x
 	#define PRXA 			rda
 	#define ENXA 			rda
+	#define COCO_RDX		rdx
 #endif

@@ -1094,7 +1094,7 @@ void enems_move (void) {
 						if (_en_t != 7 || _en_state == 2)
 					#endif
 					
-					if (collide_in (bx [bi] + 3, by [bi] + 3, _en_x, _en_y)) {
+					if (collide_in (bx [bi] + 3, by [bi] + 3, EN_X_ABSOLUTE, _en_y)) {
 						sfx_play (SFX_ENHIT, 1);
 						
 						#ifdef BULLETS_DONT_KILL

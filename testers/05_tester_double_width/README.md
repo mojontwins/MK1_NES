@@ -18,6 +18,11 @@ Having double-width buffers may add tons of complexity as I would have to touch 
 
 Scroller simply follows player. No fancy stuff. Maybe in the future.
 
+## Enems rendering / collisions
 
+Kind of sorted out with (relative) ease. Collisions seems to be handled as well, bar collisions with bullets. In fact, I need to decide what I will do with bullets and cocos...
 
+## Bullets and cocos
+
+The easiest route is having the X coordinates turned to integers.
 

@@ -6,18 +6,18 @@
 // Player metasprites
 const unsigned char * const spr_player [] = {
 	// Facing right (offset 0)
-	sspl_00_a,										// Standing (offset 0)
-	sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,		// Walk cycle (offset 1)
-	sspl_05_a, 										// Airborne (offset 5)
-	0, 0,											// I like powers of two
-	
+	sspl_00_a,                                      // Standing (offset 0)
+	sspl_01_a, sspl_02_a, sspl_03_a, sspl_04_a,     // Walk cycle (offset 1)
+	sspl_05_a,                                      // Airborne (offset 5)
+	0, 0,                                           // I like powers of two
+
 
 	// Facing left (offset 8)
-	sspl_00_b,										// Standing (offset 0)
-	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,		// Walk cycle (offset 1)
-	sspl_05_b, 										// Airborne (offset 5)
-	0, 0,											// I like powers of two
-	
+	sspl_00_b,                                      // Standing (offset 0)
+	sspl_01_b, sspl_02_b, sspl_03_b, sspl_04_b,     // Walk cycle (offset 1)
+	sspl_05_b,                                      // Airborne (offset 5)
+	0, 0,                                           // I like powers of two
+
 };
 
 // Enemy metasprites
@@ -31,7 +31,19 @@ const unsigned char * const spr_enems0 [] = {
 	ssplat_00, ssplat_01, 0, 0, ssplat_00, ssplat_01, 0, 0, // Platform (4)
 
 	// Explosion (offset 32)
-	ssexpl_00
+	ssexpl_00,
+	0, 0, 0,                                                // Pad
+	
+	// Steady shooter (offset 36)
+	ssss_00, ssss_01, ssss_02, ssss_03,
+
+	// Shooties (offset 40)
+	ssshootie_00_a, ssshootie_01_a, ssshootie_02_a, 0,      
+	ssshootie_00_b, ssshootie_01_b, ssshootie_02_b, 0,      // 1
+	ssen_02_a, ssen_03_a, ssen_03_a, 0, 
+	ssen_02_b, ssen_03_b, ssen_03_b, 0,                     // 2
+	ssen_04_a, ssen_05_a, ssen_05_a, 0, 
+	ssen_04_b, ssen_05_b, ssen_05_b, 0,                     // 3
 };
 
 // Item metasprites

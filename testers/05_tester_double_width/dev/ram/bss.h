@@ -96,7 +96,12 @@ unsigned char oam_index_player;         // Index copy
 
     unsigned char bst [MAX_BULLETS];    // Bullets states
     
-    unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.
+    #ifdef DOUBLE_WIDTH
+        unsigned int bx [MAX_BULLETS];      // Bullets, X coordinates
+    #else
+        unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.
+    #endif
+
     unsigned char by [MAX_BULLETS];     // Bullets, Y coordinates.
     signed char bmx [MAX_BULLETS];      // Bullets, direction + speed in the X axis.
     signed char bmy [MAX_BULLETS];      // Bullets, direction + speed in the Y axis.
@@ -228,6 +233,11 @@ unsigned char en_facing [NENEMS];       // Generally, 0 = facing right, 4 = faci
 unsigned char en_state [NENEMS];        // Enemy State
 unsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies
 unsigned char en_flags [NENEMS];        // Enemies flags
+
+unsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering
+unsigned char en_life [NENEMS];         // Enemies life gauges
+unsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type
+unsigned char en_ct [NENEMS];           // Enemies General repurposeable counter
 
 unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
 
