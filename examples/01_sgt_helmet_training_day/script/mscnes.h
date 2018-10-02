@@ -121,6 +121,7 @@ void __fastcall__ run_script (void) {
                         // SHOW
                         // Opcode: E1
                         ppu_waitnmi ();
+                        clear_update_list ();
                         update_index = 0;
                         break;
                     case 0xE3:
