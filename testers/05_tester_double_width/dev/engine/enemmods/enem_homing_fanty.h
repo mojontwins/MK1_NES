@@ -13,7 +13,11 @@
 	switch (_en_state) {
 		case 0:
 			// Retreating
-			_enf_vx = ADD_SIGN2 (_en_x1, EN_X_ABSOLUTE, FANTY_V_RETREAT);
+			#ifdef DOUBLE_WIDTH
+				_enf_vx = ADD_SIGN2 (en_x_offs + _en_x1, EN_X_ABSOLUTE, FANTY_V_RETREAT);
+			#else
+				_enf_vx = ADD_SIGN2 (_en_x1, EN_X_ABSOLUTE, FANTY_V_RETREAT);
+			#endif
 			_enf_vy = ADD_SIGN2 (_en_y1, _en_y, FANTY_V_RETREAT);
 			if (rdt < FANTY_DISTANCE) _en_state = 1;
 			break;

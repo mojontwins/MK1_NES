@@ -15,28 +15,78 @@ void cocos_init (void) {
 	// Create a coco @ (COCO_RDX, rdy), shoot towards player
 
 	void cocos_shoot_aimed (void) {		
-		rdct = distance ();
+		// On screen?
+		#ifdef DOUBLE_WIDTH
+			if (COCO_RDX < scroll_x || COCO_RDX >= scroll_x + 248) return;
+		#endif
 
-	#ifdef COCO_FAIR_D
-		if (rdct > COCO_FAIR_D && coco_slots_i) 
-	#else
-		if (coco_slots_i)
-	#endif
-		{
-			-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
+		#ifdef COCOS_ROUGH_AIM
+			if (coco_slots_i) {
+				-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
-			coco_x [coco_it] = COCO_RDX << 6;
-			coco_y [coco_it] = rdy << 6;
+				coco_x [coco_it] = COCO_RDX << 6;
+				coco_y [coco_it] = rdy << 6;
 
-			// Apply formula. Looks awkward but it's optimized for space and shitty compiler
-			rds16 = COCO_V * rda / rdct; coco_vx [coco_it] = ADD_SIGN2 (px, coco_x [coco_it], rds16);
-			rds16 = COCO_V * rdb / rdct; coco_vy [coco_it] = ADD_SIGN2 (py, coco_y [coco_it], rds16);
+				// First prune: 8 directions.
 
-			coco_on [coco_it] = 1;
+				if (ROUGHLY_EQUAL (COCO_RDX, prx, 16)) {
+					coco_vx [coco_it] = 0;
+				} else if (COCO_RDX < prx) {
+					coco_vx [coco_it] = COCO_V;
+				} else {
+					coco_vx [coco_it] = -COCO_V;
+				}
 
-			sfx_play (SFX_COCO, 2);
-		}	
-	}
+				if (ROUGHLY_EQUAL (rdy, pry, 16)) {
+					coco_vy [coco_it] = 0;
+				} else if (rdy < pry) {
+					coco_vy [coco_it] = COCO_V;
+				} else {
+					coco_vy [coco_it] = -COCO_V;
+				}
+
+				// Second prune: 16 directions
+
+				// rda = dx; rdb = dy
+				rda = DELTA (COCO_RDX, prx);
+				rdb = DELTA (rdy, pry);
+				if (ROUGHLY_EQUAL (rda, rdb, 8)) {
+
+				} else if (rda > rdb) {
+					coco_vy [coco_it] >>= 1;
+				} else {
+					coco_vx [coco_it] >>= 1;
+				}
+
+				coco_on [coco_it] = 1;
+				sfx_play (SFX_COCO, 2);
+			}
+
+
+		#else
+			rdct = distance ();
+
+		#ifdef COCO_FAIR_D
+			if (rdct > COCO_FAIR_D && coco_slots_i) 
+		#else
+			if (coco_slots_i)
+		#endif
+			{
+				-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
+
+				coco_x [coco_it] = COCO_RDX << 6;
+				coco_y [coco_it] = rdy << 6;
+
+				// Apply formula. Looks awkward but it's optimized for space and shitty compiler
+				rds16 = COCO_V * rda / rdct; coco_vx [coco_it] = ADD_SIGN2 (px, coco_x [coco_it], rds16);
+				rds16 = COCO_V * rdb / rdct; coco_vy [coco_it] = ADD_SIGN2 (py, coco_y [coco_it], rds16);
+
+				coco_on [coco_it] = 1;
+
+				sfx_play (SFX_COCO, 2);
+			}
+		#endif
+	}	
 #endif
 
 #ifdef COCOS_ENABLE_LINEAR
@@ -107,7 +157,12 @@ void cocos_do (void) {
 		);
 
 		#ifdef COCO_COLLIDES
-			rdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			#ifdef DOUBLE_WIDTH
+				gpint = COCO_RDX + 4;
+				rdm = map_attr [(gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			#else
+				rdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			#endif
 			if (rdm & 8) {
 				cocos_destroy (); continue;
 			}

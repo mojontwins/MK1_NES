@@ -405,12 +405,6 @@ void game_loop (void) {
 				bullets_move ();
 			#endif
 
-			// Update cocos
-
-			#ifdef ENABLE_COCOS
-				cocos_do ();
-			#endif
-
 			// Paint player
 
 			oam_index_player = oam_index; 
@@ -419,6 +413,12 @@ void game_loop (void) {
 			// Update enemies
 		
 			enems_move ();
+
+			// Update cocos
+
+			#ifdef ENABLE_COCOS
+				cocos_do ();
+			#endif			
 
 			// Warp to level
 

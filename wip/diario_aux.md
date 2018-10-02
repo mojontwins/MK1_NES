@@ -36,7 +36,7 @@ Funciona guay y todo guay, pero cuando hay 4 disparos y 3 enemigos en pantalla l
 Voy a hacer ahora los cocos. Tengo que activar:
 
 [X] Monococos.
-[ ] Compiled.
+[X] Compiled.
 [X] Shooties.
 [X] Steady shooters.
 
@@ -47,3 +47,33 @@ Empezaré por los shooties que no dejan de ser lo más sencillo.
 {TODO}: [ ] Añadir la posibilidad de que los shooties sean timed y disparen al jugador como los de Ninjajar!
 
 Next -> Hitter
+
+2018102
+=======
+
+OK - Está pegando framazos. Ahora es el momento de fliparse un poco con el tiempo de proceso. Cuando hay todos los cocos a la vez en pantalla da picos bestiales. De hecho hay un pico cuando el compiled dispara - imagino que lo mismo pasará cuando lo hace un monococo. Esto es por el cálculo de trayectoria.
+
+Debería hacer algo: al menos, para liberar un poco, debería "invalidar" la ejecución del resto de los cocos para este frame. También me debería plantear hacer una implementación aparte para los cocos lineales porque es tontería estar aplicando cálculos de punto fijo con este tipo de cocos.
+
+Voy a hacer las dos cosas:
+
+[X] Disparar un coco_aimed invalida la ejecución de `cocos_do` este frame.
+
+la invalidación durante un frame de `cocos_do`  no parece ser muy efectiva. El cálculo de la dirección parece seguir pillándose todo el frame del demonio. Voy a tener que pensar en algo para reparar esto porque no le veo salida - bueno, no le veo salida que no sea "no usar"...
+
+O eso, o implementar otros disparadores direccionales menos precisos que disparen en 8 o 16 direcciones precalculadas según particiones del espacio. Pero que tengo que pensar. Con 8 no es suficiente.
+
+- Se me ha ocurrido una forma realmente rocambolesca.
+
+¡Y funciona bastante bien y ya no me pega tirón!
+
+Seguimos :)
+
+Hitters!
+========
+
+Esto necesita más infraestructura, necesito sprites que no tengo. Y ahora miran mucho. ¿Lo dejamos para luego luego?
+
+Ah, tengo pendientes los homing fanties.
+
+

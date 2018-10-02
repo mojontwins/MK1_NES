@@ -301,8 +301,8 @@
 
 // Fanties / Homing fanties / Timed fanties
 
-#define ENABLE_FANTY
-//#define ENABLE_HOMING_FANTY
+//#define ENABLE_FANTY
+#define ENABLE_HOMING_FANTY
 //#define ENABLE_TIMED_FANTY
 
 #define FANTY_BASE_SPRID				16
@@ -392,9 +392,9 @@
 
 // Compiled enemies
 
-//#define ENABLE_COMPILED_ENEMS
+#define ENABLE_COMPILED_ENEMS
 #define COMPILED_ENEMS_SHOOT
-#define COMPILED_ENEMS_BASE_SPRID		48
+#define COMPILED_ENEMS_BASE_SPRID		64
 
 // Boioiongs
 
@@ -417,6 +417,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES

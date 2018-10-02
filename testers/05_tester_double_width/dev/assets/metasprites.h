@@ -44,6 +44,10 @@ const unsigned char * const spr_enems0 [] = {
 	ssen_02_b, ssen_03_b, ssen_03_b, 0,                     // 2
 	ssen_04_a, ssen_05_a, ssen_05_a, 0, 
 	ssen_04_b, ssen_05_b, ssen_05_b, 0,                     // 3
+
+	// Compiled (offset 64)
+	ssen_04_a, ssen_05_a, ssen_04_a, ssen_05_a,
+	ssen_00_b, ssen_01_b, ssen_00_b, ssen_01_b,
 };
 
 // Item metasprites
