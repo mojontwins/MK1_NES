@@ -3,6 +3,8 @@
 
 // LUTs
 
+const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
+
 #ifdef ENABLE_MONOCOCOS
 	const unsigned char monococo_state_times [] = {
 		MONOCOCO_BASE_TIME_HIDDEN, MONOCOCO_BASE_TIME_APPEARING, MONOCOCO_BASE_TIME_ONBOARD, MONOCOCO_BASE_TIME_APPEARING

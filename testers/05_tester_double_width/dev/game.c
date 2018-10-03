@@ -87,9 +87,6 @@ extern const unsigned char m_ingame [];
 #ifdef ENABLE_COCOS
 	#include "engine/cocos.h"
 #endif
-#ifdef ENABLE_LINEAR_COCOS
-	#include "engine/linear_cocos.h"
-#endif
 #include "engine/player.h"
 #include "engine/enengine.h"
 #if (defined (ACTIVATE_SCRIPTING) && defined (ENABLE_EXTERN_CODE)) || defined (ENABLE_COMPILED_ENEMS)

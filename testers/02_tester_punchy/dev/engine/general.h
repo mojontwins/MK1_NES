@@ -37,8 +37,8 @@ unsigned char collide (void) {
 	//     _en_y - ENEMS_COLLISION_VSTRETCH_FG to _en_y + 13
 
 	return (
-		prx + 3 >= _en_x && 
-		prx <= _en_x + 11 && 
+		prx + 3 >= EN_X_ABSOLUTE && 
+		prx <= EN_X_ABSOLUTE + 11 && 
 		pry + 13 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 		pry <= _en_y + 13 + PLAYER_COLLISION_VSTRETCH_FG
 	);
@@ -111,8 +111,33 @@ void pad_read (void) {
 #endif
 
 void update_cycle (void) {
+	#ifdef DOUBLE_WIDTH
+		scroll (scroll_x, SCROLL_Y);
+	#endif
 	oam_hide_rest (oam_index);
 	ppu_waitnmi ();
 	clear_update_list ();
 	oam_index = 4;
 }
+
+#ifdef DOUBLE_WIDTH
+	void calc_scroll_pos (void) {
+		scroll_x = prx - 124;
+		if (scroll_x < 0) scroll_x = 0;
+		else if (scroll_x > 256) scroll_x = 256;	
+	}
+
+	void calc_en_x_absolute (void) {
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+			if (_en_t == 6) {
+				// Fanties are absolute
+				EN_X_ABSOLUTE = _enf_x >> FIXBITS;
+			} else 
+		#endif
+		{
+			// Other types are absolute
+			EN_X_ABSOLUTE = en_x_offs + _en_x;
+		}
+		on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);
+	}
+#endif

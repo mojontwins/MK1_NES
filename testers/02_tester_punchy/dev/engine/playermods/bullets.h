@@ -94,20 +94,45 @@ void bullets_destroy (void) {
 void bullets_move (void) {
 	for (bi = 0; bi < MAX_BULLETS; bi ++) {
 		if (bst [bi]) {
-			bx [bi] += bmx [bi];
-			by [bi] += bmy [bi];
+
+			_bx = bx [bi] + bmx [bi];
+			_by = by [bi] + bmy [bi];		
+
+			if (
+			#ifdef DOUBLE_WIDTH
+				_bx < scroll_x + PLAYER_BULLET_SPEED ||
+				_bx > scroll_x + 255 - PLAYER_BULLET_SPEED
+			#else
+				_bx < PLAYER_BULLET_SPEED ||
+				_bx > 255 - PLAYER_BULLET_SPEED
+			#endif
+			#ifdef PLAYER_TOP_DOWN				
+				|| _by < PLAYER_BULLET_SPEED
+				|| _by > 207 - PLAYER_BULLET_SPEED
+			#endif
+			) {
+				bullets_destroy ();
+				continue;
+			}
 
 			#ifdef PLAYER_BULLET_FLICKERS
 			if (bst [bi] > PLAYER_BULLET_FLICKERS || half_life)
 			#endif
-			oam_index = oam_spr (
-				bx [bi], SPRITE_ADJUST + by [bi], 
-				BULLET_PATTERN, BULLET_PALETTE,
-				oam_index
-			);
+			{
+				oam_index = oam_spr (
+					#ifdef DOUBLE_WIDTH
+						_bx - scroll_x, 
+					#else
+						_bx, 
+					#endif
+					SPRITE_ADJUST + _by, 
+					BULLET_PATTERN, BULLET_PALETTE,
+					oam_index
+				);
+			}
 
-			cx1 = ((bx [bi] + 4) >> 4);
-			cy1 = ((by [bi] + 4 - 16) >> 4);
+			cx1 = ((_bx + 4) >> 4);
+			cy1 = ((_by + 4 - 16) >> 4);
 			rdm = map_attr [COORDS (cx1, cy1)];
 
 			#ifdef PLAYER_BULLET_LIFE
@@ -119,15 +144,16 @@ void bullets_move (void) {
 				if (rdm & 16) {
 					breakable_break (cx1, cy1);
 					bullets_destroy ();
+					continue;
 				} else
 			#endif
-			if (
-				bx [bi] < PLAYER_BULLET_SPEED ||
-				bx [bi] > 255 - PLAYER_BULLET_SPEED ||
-				by [bi] < PLAYER_BULLET_SPEED ||
-				by [bi] > 207 - PLAYER_BULLET_SPEED ||
-				(rdm & 8)
-			) bullets_destroy (); 
+			if (rdm & 8) {
+				bullets_destroy (); 
+				continue;
+			}
+
+			bx [bi] = _bx;
+			by [bi] = _by;
 		}
 	}
 }

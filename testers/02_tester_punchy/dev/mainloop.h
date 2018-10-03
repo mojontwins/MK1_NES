@@ -231,6 +231,9 @@ void prepare_scr (void) {
 	#endif	
 
 	player_move ();
+	#ifdef DOUBLE_WIDTH
+		calc_scroll_pos ();
+	#endif
 	enems_move ();
 
 	if (hrt) hotspots_paint ();
@@ -248,11 +251,8 @@ void prepare_scr (void) {
 		#endif
 	#endif
 
-	oam_hide_rest (oam_index);
 	hud_update ();
-	ppu_waitnmi ();
-	clear_update_list ();
-	oam_index = 4;
+	update_cycle ();
 	fade_in ();
 }
 
@@ -332,7 +332,7 @@ void game_loop (void) {
 		// Finish frame and wait for NMI
 
 		update_cycle ();
-
+		
 		// Poll pads
 
 		pad_read ();
@@ -371,6 +371,12 @@ void game_loop (void) {
 				player_move ();
 			}
 
+			// Scroll position
+
+			#ifdef DOUBLE_WIDTH
+				calc_scroll_pos ();
+			#endif
+
 			// Timer
 
 			#ifdef ENABLE_TIMER
@@ -397,12 +403,6 @@ void game_loop (void) {
 				bullets_move ();
 			#endif
 
-			// Update cocos
-
-			#ifdef ENABLE_COCOS
-				cocos_do ();
-			#endif
-
 			// Paint player
 
 			oam_index_player = oam_index; 
@@ -411,6 +411,12 @@ void game_loop (void) {
 			// Update enemies
 		
 			enems_move ();
+
+			// Update cocos
+
+			#ifdef ENABLE_COCOS
+				cocos_do ();
+			#endif			
 
 			// Warp to level
 

@@ -21,7 +21,11 @@
 		#endif
 		{
 			rda -= 16;
-			if (map_attr [rda]) break; else map_attr [rda] = 64;
+			#ifdef DOUBLE_WIDTH
+				if (attr_ptr [rda]) break; else attr_ptr [rda] = 64;
+			#else
+				if (map_attr [rda]) break; else map_attr [rda] = 64;
+			#endif
 		}
 	}
 #endif

@@ -1,3 +1,5 @@
+Busca {TODO} y {TOFIX}
+
 Me falta un cacho, hacer merge luego.
 
 20180929
@@ -74,6 +76,48 @@ Hitters!
 
 Esto necesita más infraestructura, necesito sprites que no tengo. Y ahora miran mucho. ¿Lo dejamos para luego luego?
 
-Ah, tengo pendientes los homing fanties.
+Ah, tengo pendientes los homing fanties. <- Hechos
+
+20181003
+========
+
+He actualizado el tester 2 para implementar aquí los punchies, y de camino otras cosas como el respawn de enemigos o el escenario destructible.
+
+Por ahora he dejado los punchies funcionando. En este juego se nota que falta el split porque el hud se va con el scroll :-D Vamos con el respawn.
+
+El recoil falla. Parece que va mal si estoy en la pantalla de la derecha.
+
+{TOFIX}: [ ] Si estás en escalera con suelo no te deja golpear y debería.
+
+Breakables
+----------
+
+Problema (que sale ahora pero es global): Solo tengo un `attr_table` para la última pantalla que se dibujó. Necesito espacio para las dos pantallas y que se rellene todo correctamente.
+
+- Al dibujar la pantalla, añadir a `attr_table` con un offset.
+- Utilizar el offset en base al valor de `_x` en todos los accesos posteriores. 
+
+[SOLVED]
+
+Propellers
+----------
+
+Problema: se utiliza "yx" para guardar la posición empaquetada del propeller y eso no me sirve. Para juegos de doble pantalla tendré que usar arrays diferenciados. [SOLVED]
+
+~~
+ 
+He dejado estos temas funcionando. Luego tendré que pasar un mocho embonitificador de código porque a veces está quedando un poco trompero.
+
+Voy a probar el resto de cosas que tiene este tester y luego ver los {TOFIX} y los {TODO}.
+
+Warpers
+-------
+
+Hechos sin hacer nada XD
+
+~~
+
+Hmmmm ¿Qué hacer? ¿Me hago una tourné por todos los testers para ir adaptando las cosas una a una?
+
 
 
