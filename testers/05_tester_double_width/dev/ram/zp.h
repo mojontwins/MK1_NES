@@ -30,7 +30,6 @@ unsigned char ticker;                   // Ticker. 0 for a frame every second.
 #ifdef DOUBLE_WIDTH
     signed int rdaa, rdbb;              // Genearl purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
-    unsigned char on_screen;            // Current enemy in same virtual room as player
 #endif
 
 // Used for two-points collision

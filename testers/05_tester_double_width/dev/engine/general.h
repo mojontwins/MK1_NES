@@ -138,5 +138,6 @@ void update_cycle (void) {
 			// Other types are absolute
 			EN_X_ABSOLUTE = en_x_offs + _en_x;
 		}
+		on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);
 	}
 #endif

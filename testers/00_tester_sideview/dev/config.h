@@ -16,9 +16,11 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					3		//
+#define MAP_W 					4			//
 #define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
+
+#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.
@@ -32,7 +34,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					1		// Initial screen
+	#define SCR_INI					0		// Initial screen
 	#define PLAYER_INI_X			1		//
 	#define PLAYER_INI_Y			3		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -149,7 +151,7 @@
 
 // Breakable, beh & 16
 #define ENABLE_BREAKABLE				// Breakable walls
-#define BREAKABLE_LIFE	2				// Amount of hits to break wall
+#define BREAKABLE_LIFE	1				// Amount of hits to break wall
 #define BREAKABLE_ANIM					// Show explosion when breaking
 #define BREAKABLE_MAX 			4		// Max # of concurrent explosions
 #define BREAKABLE_MAX_FRAMES	8		// Frames to show explosion
@@ -413,7 +415,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
-#define COCOS_MAX						3
+#define COCOS_MAX						1
 #define COCO_V							192
 //#define COCO_COLLIDES
 
@@ -456,7 +458,7 @@
 // Shooting behaviour
 // ------------------
 #define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
-#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
+//#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			0	// vertical offset from the player's top.

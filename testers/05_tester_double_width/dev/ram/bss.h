@@ -37,9 +37,11 @@ unsigned char on_pant;                  // Current screen (room) numberm last fr
     unsigned char w_pant;               // (Working) Current screen (backup).
     unsigned int nametable_base;        // 0x2000 or 0x2400
     unsigned int buff_offset;           // 0 or 192
+    unsigned char attr_table_offset;    // 0 or 64
     unsigned char *buff_ptr;            // Points to parts of the buffer
     unsigned char *attr_ptr;            // Points to parts of the buffer
     signed int scroll_x;                // Scroller position
+    unsigned char on_screen;            // Flag used in enengine.h
 #endif
 
 unsigned char half_life;                // 1-0 flip flop (each game frame)
@@ -295,8 +297,8 @@ unsigned char en_spr_id [NENEMS];
 #ifdef ENABLE_PROPELLERS
     unsigned char prp_idx;              // Index of active propellers on current screen (room) (when creating)
                                         // Number of active propellers on current screen (room) (in the game loop)
-    unsigned char prp_yx [PROPELLERS_MAX];
-                                        // Coordinates of active propellers, packed 0xYX
+    unsigned int prp_addr [PROPELLERS_MAX];
+                                        // PPU Addresses of active propellers.
     unsigned char propellers_on;        // Propellers are on (animate & affect player)
 #endif
 
@@ -377,6 +379,13 @@ unsigned char en_spr_id [NENEMS];
     #ifdef PERSISTENT_TILE_GET
         unsigned char tile_got [24];        // Buffer for current screen
     #endif
+#endif
+
+// Attribute table
+#ifdef DOUBLE_WIDTH
+    unsigned char attr_table [128];
+#else
+    unsigned char attr_table [64];
 #endif
 
 #include "my/extra_vars.h"              // Custom extra variables

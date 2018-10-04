@@ -260,5 +260,9 @@ void draw_scr (void)
 		}
 	#endif
 
-	vram_write (attr_table, NAMETABLE_BASE + 0x3c0, 64);
+	#ifdef DOUBLE_WIDTH
+		vram_write (attr_table + attr_table_offset, NAMETABLE_BASE + 0x3c0, 64);
+	#else
+		vram_write (attr_table, 0x23c0, 64);
+	#endif
 }

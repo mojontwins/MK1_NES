@@ -331,10 +331,8 @@ void game_loop (void) {
 
 		// Finish frame and wait for NMI
 
-		*((unsigned char*)0x2001) = 0x1e;
 		update_cycle ();
-		*((unsigned char*)0x2001) = 0x1f;
-
+		
 		// Poll pads
 
 		pad_read ();

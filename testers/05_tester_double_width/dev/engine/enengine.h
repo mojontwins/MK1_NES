@@ -628,7 +628,7 @@ void enems_move (void) {
 				#else
 					rda = frame_counter & 0xf;
 					#ifdef DOUBLE_WIDTH
-						if (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240)
+						if (on_screen)
 					#endif					
 					oam_index = oam_meta_spr (
 						#ifdef DOUBLE_WIDTH
@@ -656,6 +656,10 @@ void enems_move (void) {
 				#ifdef ENEMS_INVINCIBILITY
 					if (en_cttouched [gpit] == 0 && en_life [gpit])
 						en_invincible [gpit] = ENEMS_INVINCIBILITY;
+				#endif
+
+				#ifdef DOUBLE_WIDTH
+					if (!on_screen) goto skipall;
 				#endif
 			} else
 		#endif
@@ -792,7 +796,7 @@ void enems_move (void) {
 				calc_en_x_absolute ();
 
 				// And now prune:
-				if (EN_X_ABSOLUTE < scroll_x || EN_X_ABSOLUTE >= scroll_x + 240) goto skipall;
+				if (!on_screen) goto skipall;
 			#endif
 
 			// Warp player?
@@ -866,12 +870,6 @@ void enems_move (void) {
 					-- en_invincible [gpit];
 					if (half_life) en_spr = 0xff;
 				}
-			#endif
-
-			// In double width mode, skip upon player position
-
-			#ifdef DOUBLE_WIDTH
-				on_screen = ((prx & 0x100) == en_x_offs);
 			#endif
 
 			// Is enemy collidable? If not, exit
@@ -1173,7 +1171,9 @@ skipdo:
 			);
 		}
 
+#ifdef DOUBLE_WIDTH
 skipall:
+#endif
 		// Update arrays
 
 		enems_update_unsigned_char_arrays ();

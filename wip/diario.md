@@ -4449,3 +4449,211 @@ El cambio que hice para que no se pudiera entrar en los pinchos ha roto un mill�
 
 Voy a darle otra vuelta (más).
 
+~~~~~~ 
+
+20180928
+========
+
+Tras muchos días con esto medio cerrado y sin ponerme a testear espitene, voy a apuntar algunas ideas sobre una posible ampliación de AGNES para usar dos pantallas horizontales como Lala the Magical.
+
+1.- Render e inicialización: habría que llamar dos veces, para `n_pant` y para `n_pant + 1`. `n_pant` siempre es par. 
+2.- Habría que meter los hotspots en un array porque hay dos en vez de uno.
+3.- El scripting se queda igual. Se ejecutaría el del `n_pant` correspondiente (sumando 1 al actual -siempre par- si prx > 255).
+4.- Habría que cargar y mover 6 enemigos. Sólo se pintan los que están en pantalla. Sólo colisionan los correspondientes a la pantalla donde está el jugador (los 0 a 2 si prx < 256, los 3 a 5 en caso contrario). Siguen estando confinados a su pantalla.
+5.- Las balas se mueven respecto a la pantalla. Puedo seguir usando las mismas variables siempre que ajuste la posición (las mueva) cuando se mueva el scroll.
+
+Ya pensaré más.
+
+Busca {TODO} y {TOFIX}
+
+Me falta un cacho, hacer merge luego.
+
+20180929
+========
+
+De camino a retrozaragoza aprovecho el tren para dar un poco de fran a la idea de hacer que AGNES soporte doble anchura.
+
+He resuelto cosas fáciles, pero ahora tengo que darle al módulo de los enemigos y eso implica darle fran incluso a la colisión.
+
+Veamos: los enemigos siguen estando en su propia pantalla y sus coordenadas X siguen siendo de 0 a 255. Sabemos estas cosas:
+
+- Los enemigos 0 a 2 pertenecen a la pantalla de la izquierda.
+- Los enemigos 3 a 5 pertenecen a la pantalla de la derecha.
+
+¿No resolví esto para Lala? Voy a revisar euse diario antes de seguir. Pero antes que nada tendré que ampliar los arrays a 6 espacios y procesar 6 enemigos en lugar de 3.
+
+Tengo este apunte:
+
+> - Enemigos funcionando -- me hice un poco la picha un lío pero es que no recordaba que las coordenadas de los enemigos funcionan dentro de su "pantalla virtual" y que a la hora de comparar con el prx tenía que añadir el offset de 256 si el enemigo era id >= 3.
+
+Pero me suena que esto dio más guerra... Sigo leyendo. Pues parece que no hay más chicha... Veamos.
+
+Me voy a dejar de mierdas y de historias para esto. La colisión ya me dará más quebraderos, así que a lo fácil.
+
+20180930
+========
+
+En el tren resolví colisión, display, y que los fanties pululen por toda la pantalla. Tengo que revisar los homing fanties, por cierto, porque hay que tener en cuenta de qué pantalla son para la posición a la que vuelven, y probablemente tenga que rehacer partes.
+
+No sé si hacer eso ahora o ponerme con balas y cocos. Pero antes quiero medir cómo voy de frame. Tengo que hacer un split de 32 lineas arriba (intentaré meter mierdas antes del split), por lo que quiero ver como va la cosa, porque la solución más sencilla para cocos y balas es usar enteros en las coordenadas X.
+
+Por ahora parece que tengo bastante frame libre (entre 1/2 y 1/3, más tirando para 1/2), así que creo que por lo pronto tiraré por lo fácil y luego ya veremos. Vamos a por los disparos!
+
+Funciona guay y todo guay, pero cuando hay 4 disparos y 3 enemigos en pantalla la franja gris baja peligrosamente hasta la parte inferior de la pantalla, quedándose a menos de un cuarto.
+
+Voy a hacer ahora los cocos. Tengo que activar:
+
+[X] Monococos.
+[X] Compiled.
+[X] Shooties.
+[X] Steady shooters.
+
+Empezaré por los shooties que no dejan de ser lo más sencillo.
+
+{TODO}: [ ] Estudiar la viabilidad de tener compiled y pursuers por toda la pantalla doble. Aunque creo que va a ser que no. [a menos que haga algún repurpose raro]
+
+{TODO}: [ ] Añadir la posibilidad de que los shooties sean timed y disparen al jugador como los de Ninjajar!
+
+Next -> Hitter
+
+2018102
+=======
+
+OK - Está pegando framazos. Ahora es el momento de fliparse un poco con el tiempo de proceso. Cuando hay todos los cocos a la vez en pantalla da picos bestiales. De hecho hay un pico cuando el compiled dispara - imagino que lo mismo pasará cuando lo hace un monococo. Esto es por el cálculo de trayectoria.
+
+Debería hacer algo: al menos, para liberar un poco, debería "invalidar" la ejecución del resto de los cocos para este frame. También me debería plantear hacer una implementación aparte para los cocos lineales porque es tontería estar aplicando cálculos de punto fijo con este tipo de cocos.
+
+Voy a hacer las dos cosas:
+
+[X] Disparar un coco_aimed invalida la ejecución de `cocos_do` este frame.
+
+la invalidación durante un frame de `cocos_do`  no parece ser muy efectiva. El cálculo de la dirección parece seguir pillándose todo el frame del demonio. Voy a tener que pensar en algo para reparar esto porque no le veo salida - bueno, no le veo salida que no sea "no usar"...
+
+O eso, o implementar otros disparadores direccionales menos precisos que disparen en 8 o 16 direcciones precalculadas según particiones del espacio. Pero que tengo que pensar. Con 8 no es suficiente.
+
+- Se me ha ocurrido una forma realmente rocambolesca.
+
+¡Y funciona bastante bien y ya no me pega tirón!
+
+Seguimos :)
+
+Hitters!
+========
+
+Esto necesita más infraestructura, necesito sprites que no tengo. Y ahora miran mucho. ¿Lo dejamos para luego luego?
+
+Ah, tengo pendientes los homing fanties. <- Hechos
+
+20181003
+========
+
+He actualizado el tester 2 para implementar aquí los punchies, y de camino otras cosas como el respawn de enemigos o el escenario destructible.
+
+Por ahora he dejado los punchies funcionando. En este juego se nota que falta el split porque el hud se va con el scroll :-D Vamos con el respawn.
+
+El recoil falla. Parece que va mal si estoy en la pantalla de la derecha.
+
+{TOFIX}: [ ] Si estás en escalera con suelo no te deja golpear y debería.
+
+Breakables
+----------
+
+Problema (que sale ahora pero es global): Solo tengo un `attr_table` para la última pantalla que se dibujó. Necesito espacio para las dos pantallas y que se rellene todo correctamente.
+
+- Al dibujar la pantalla, añadir a `attr_table` con un offset.
+- Utilizar el offset en base al valor de `_x` en todos los accesos posteriores. 
+
+[SOLVED]
+
+Propellers
+----------
+
+Problema: se utiliza "yx" para guardar la posición empaquetada del propeller y eso no me sirve. Para juegos de doble pantalla tendré que usar arrays diferenciados. [SOLVED]
+
+~~
+ 
+He dejado estos temas funcionando. Luego tendré que pasar un mocho embonitificador de código porque a veces está quedando un poco trompero.
+
+Voy a probar el resto de cosas que tiene este tester y luego ver los {TOFIX} y los {TODO}.
+
+Warpers
+-------
+
+Hechos sin hacer nada XD
+
+~~
+
+Hmmmm ¿Qué hacer? ¿Me hago una tourné por todos los testers para ir adaptando las cosas una a una?
+
+20181004
+========
+
+Vamos a poner esto en el primer tester, el de Side View, y así podré ir adaptando más cosas que vayan faltando, como los bloques empujables y los cerrojos. Estoy postergando demasiado los hotspots porque no tengo ni idea de cómo obrar.
+
+Por lo pronto el tester sideview necesita mucha RAM porque implementa buffer de breakables, así que tendré que cambiar eso por ahora en el tester para poder probar.
+
+Sigue pasándose 23 bytes. Joder mater.
+
+~~
+
+Empujables
+----------
+
+Por lo pronto no pilla los bloques empujables (al menos los de la pantalla de la derecha). Démosle fran. OK, limita x0 a 15. Fácil. 
+
+Los atributos no los actualiza bien, tengo que revisarlo. Pero me raya el por qué pilla colisiones con tiles que te matan en tiles que también tienen "8"... Algo cambié en Espinete Mal por alguna razón que lo rompí.
+
+En el movimiento vertical todo parece correcto, y `NO_HORIZONTAL_EVIL_TILE` está desactivado, así que lo que tengo que revisar está en el horizontal.
+
+No, la detección horizontal está bien. Lo que falla es la detección en los `CHAC_CHAC`. No estoy tomando la altura del hitbox en cuenta, parece ser. Voy a ver.
+
+Eso era. Voy a por los atributos. Arreglado. 
+
+Cerrojos
+--------
+
+Veamos si funcionan los cerrojos. No.
+
+[ ] Cuando actualiza, los atributos están mal. No sé si en general o solo los que no se actualizan (remember, hay 4 atributos en el byte, 3 más aparte del que se actualiza)
+[X] Cuando entra en la pantalla (derecha) no se elimina el cerrojo.
+
+¡Anda, me he dado cuenta de que ya no se llama a `clear_cerrojo` y sigue ahí! Obliterar.
+
+Sigo sin tener fina la actualización de atributos. Obviamente rdc está bien calculado porque se actualiza *en pantalla* el atributo correcto. Lo que no está bien es de dónde se están tomando los atributos. O bien el buffer está mal, o bien el cálculo de donde leer el buffer está mal. La putada es que ahora tengo -3 ganas de pelearme con estas miserias.
+
+- La pantalla se pinta bien, por lo que asumo que el contenido de `attr_table` tras pintar la pantalla es el correcto.
+- El color del tile que se actualiza está bien, por lo que el cálculo de bits es el correcto. Al menos los desplazamientos que ponen el par de bits con la paleta en su sitio.
+- Puede que esté fallando el bitmask. Y también puede que esté fallando la posición del buffer desde la que se lee.
+
+¿Es posible que me esté yendo demasiado arriba en RAM y por eso se esté pifiando la marruncia? 
+
+Lo muevo y funciona. Es eso. Tengo que ver cómo bajar el footprint de RAM, me estoy colando tela. Y eso requiere dar unas buenas pensadas.
+
+¿Realmente necesito el buffer de atributos? ¿No podría simplemente leerlos de VRAM para operar con ellos? Podría, pero sería bastante más lento. Necesito reducir. He pensado muchas veces en hacer indirección y usar un solo buffer de tiles, pero creo que el motor se apoya en usar atributos que no corresponden con tiles. De hecho, Espitene lo usa. Pero es que son 384 bytes por cada buffer. 768 bytes es la MITAD de la RAM.
+
+No deja de pasárseme por la cabeza que quizá es el momento de pasarse a cc65 2.17 y la última neslib. Ahora mismo tengo 96 bytes de `update_list` en RAM y podría reducir el tema BASTANTE.
+
+Chac Chacs (enems)
+------------------
+
+Veamos la versión original de los chac chacs, la que se codifica como enemigo. Utiliza `map_set` para dibujarse en base a las coordenadas en `en_x`y `en_y`, que están a nivel de tiles. Sólo tengo que pinchar en el cargador para que añada 16 a `en_x` si está en la pantalla de la derecha (creo). Y que se mueva sólo si está visible.
+
+¡Funcionando!
+
+Los tile chac chacs me dan más mal. Tendré que revisarlos porque ahora mismo los almaceno como `yx` y tendría que separarlos.
+
+Hotspots (el coco)
+------------------
+
+Veamos: Creemos arrays para almacenar los hotspots en pantalla y luego construyamos un iterador que copie de los arrays y a los arrays los valores pertinentes. Son solo tres: `hrx`, `hry` y `hrt`.
+
+Ha sido combersome pero creo que medio está, a falta de probar los `EASY_OBJECTS`, pero se pintan (y detectan) más abajo de la cuenta por alguna razón que aún no alcanzo a comprender...
+
+Vale, ya lo he visto. Qué hostia.
+
+OK - este tester está completo. Pero veo que cuando disparo mucho y hay tiles rompiéndose y otras gaitas me pega un pantallasaltazo, o sea, me estoy comiendo el tiempo de frame. Horrorw.
+
+¡Da miedo porque sólo sin disparar ya me está ocupando 2/3 de frame!
+
+He vuelto a incluir el render de los hotspots junto con el procesado. Pero he visto que cada bala ocupa unos 16 frames.
+

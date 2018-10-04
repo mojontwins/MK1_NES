@@ -122,6 +122,8 @@
 	#define PRXA			gpint
 	#define ENXA 			gpint
 	#define COCO_RDX		rdbb
+	#define PUNCH_RDX		rdbb
+	#define RECOIL_RDX		rdbb
 #else
 	#define NAMETABLE_BASE 	0x2000
 	#define BUFF_SIZE 		192
@@ -133,4 +135,6 @@
 	#define PRXA 			rda
 	#define ENXA 			rda
 	#define COCO_RDX		rdx
+	#define PUNCH_RDX		rdx
+	#define RECOIL_RDX 		rdx
 #endif

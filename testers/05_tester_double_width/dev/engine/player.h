@@ -94,7 +94,12 @@ void player_init (void) {
 void player_render (void) {
 	if (0 == pflickering || half_life) 
 		oam_index = oam_meta_spr (
-			prx - scroll_x, pry + SPRITE_ADJUST, 
+			#ifdef DOUBLE_WIDTH
+				prx - scroll_x, 
+			#else
+				prx,
+			#endif
+			pry + SPRITE_ADJUST, 
 			oam_index, 
 			spr_player [psprid]
 		);

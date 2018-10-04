@@ -50,12 +50,12 @@ void p_t (void) {
 	_n = ((rda%10)+16); ul_putc ();
 }
 
-const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
-unsigned char attr_table [64];
-
 // Needs _x, _y, _t set.
 void upd_attr_table (void) {
 	rdc = (_x >> 2) + ((_y >> 2) << 3);
+	#ifdef DOUBLE_WIDTH
+		rdc += attr_table_offset;
+	#endif
 	rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
 	rda = attr_table [rdc];
 	rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
@@ -88,6 +88,17 @@ void draw_tile (void) {
 
 // Needs _x, _y, _t set.
 void update_list_tile (void) {
+	#ifdef DOUBLE_WIDTH
+		if (_x > 31) {
+			_x -= 32;
+			NAMETABLE_BASE = 0x2400;
+			attr_table_offset = 64;
+		} else {
+			NAMETABLE_BASE = 0x2000;
+			attr_table_offset = 0;
+		}
+	#endif
+
 	// Pass _x, _y, _t directly.
 	upd_attr_table ();
 	// rda contains the attribute byte.
