@@ -4,7 +4,12 @@
 // Hotspot interaction
 
 if (hrt) {
-	if (collide_in (prx + 4, pry + 8, hrx, hry)) {
+	if (
+		prx + 4 >= hrx && 
+		prx <= hrx + 11 &&
+		pry + 8 >= hry && 
+		pry <= hry + 7
+	) {
 		#ifdef ENABLE_RESONATORS
 			if (hrt == HOTSPOT_TYPE_RESONATOR) {
 				if (pvy > 0 && pry < hry) {

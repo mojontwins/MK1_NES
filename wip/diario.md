@@ -4666,3 +4666,56 @@ Me acojona el tema de que cuando tenga que meter el marcador necesitaré añadir
 
 Por lo pronto voy a propagar el código al siguiente tester y a ver qué necesito. Obviamente no podré activar `DOUBLE_WIDTH` en el `tester_top_down` porque es el Sgt. Helmet y los mapas son de una pantalla de ancho, pero sí puedo probar a compilarlo y ver que todo sigue bien con `DOUBLE_WIDTH` desactivado.
 
+~~
+
+Antes de empezar, he probado a recompilar el tiesto. Y algo he liado porque los chac chacs, al actualizarse, meten un pico de ejecución bestial y la pantalla tiembla y todo.
+
+Creo que es el momento de pasar a cc65 latest y neslib new.
+
+He reprogramado los `chac_chacs` enemigos para que usen los assets y método de los `tile_chac_chacs` y se acabó el problema, pero manda cojones tocar cosas *deprecated* XD
+
+A lo mejor el paso gordo sería programar todo lo que hay en printer.h en ensamblador...
+
+~~
+
+Joder, sólamente escribiendo `ul_putc` en ensamblador el incremento de velocidad en el tema del chac chac es IMPRESIONANTE. Verás cuando los apañe todos :O
+
+```s
+
+    ldx _update_index
+    lda _gp_addr + 1
+    sta _update_list, x
+    inx
+    lda _gp_addr
+    sta _update_list, x 
+    inx
+    lda __n
+    sta update_list, x
+    inc _gp_addr
+    bne ul_putc_inc16_0
+    inc _gp_addr + 1
+ul_putc_inc16_0:
+    inc _update_index
+    inc _update_index
+    inc _update_index
+    
+```
+
+~~
+
+También he pasado (con más trabajo) la función que calcula el nuevo atributo al pintar un tile, y he solucionado el problema que tenía con los chac chacs.
+
+Sin embargo el problema de los disparos (y de todo en general) sigue ahí. 
+
+Mover los proyectiles o las colisiones a ASM podría ser una buena idea, pero me da una jiña mortal.
+
+~~
+
+He deshecho las dos llamadas a `collide_in` y ahora ni se acerca al borde inferior de la pantalla en modo scroller.
+
+Creo que por hoy lo dejo. El próximo día:
+
+1.- Transferiré el proyecto a `tester_top_down` y compilaré para ver que no se rompe nada en el modo "normal".
+2.- Transferiré el proyecto a `tester_punchy` de nuevo y lo probaré en los dos modos.
+3.- Transferiré el proyecto a `tester_interactives` y adaptaré scripting e interactivos.
+

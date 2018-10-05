@@ -4,11 +4,8 @@
 // Uses neslib and related tools by Shiru
 
 // Comment this when you are done
-//#define DEBUG
-#define DEBUG_LEVEL		0
-#define DEBUG_SCR_INI	20
-#define DEBUG_INI_X		14
-#define DEBUG_INI_Y		5
+#define DEBUG
+
 //
 
 #define MAX_BOLTS 16 // max 32, make it as small as possible.

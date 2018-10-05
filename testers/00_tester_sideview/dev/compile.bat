@@ -47,7 +47,7 @@ ca65 game.s
 ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
 
 del *.o
-del game.s
+rem del game.s
 
 copy cart.nes ..\..\tester_sideview.nes > nul
 

@@ -23,10 +23,6 @@ void cm_three_points (void) {
 }
 #endif
 
-unsigned char collide_in (x0, y0, x1, y1) {
-	return (x0 >= x1 && x0 <= x1 + 15 && y0 >= y1 && y0 <= y1 + 15);	
-}
-
 unsigned char collide (void) {
 
 	// Player bounding box is:

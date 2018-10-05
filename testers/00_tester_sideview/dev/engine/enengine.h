@@ -177,14 +177,14 @@ void enems_load (void) {
 
 	#ifdef ENEMS_IN_CHRROM
 		bankswitch (l_enems_chr_rombank [level]);
-		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	 // * 12
+		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	                  // * 12
 		rda = VRAM_READ; 	// Dummy read.
 	#else
 		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3)); // * 12
 	#endif
 
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		en_offs = rdc = (n_pant << 1) + n_pant;        // * 3
+		en_offs = rdc = (n_pant << 1) + n_pant;                               // * 3
 	#endif
 
 	for (gpit = 0; gpit < NENEMS; gpit ++) {
@@ -1104,7 +1104,12 @@ killdo:
 						if (_en_t != 7 || _en_state == 2)
 					#endif
 					
-					if (collide_in (bx [bi] + 3, by [bi] + 3, EN_X_ABSOLUTE, _en_y)) {
+					if (
+						bx [bi] + 3 >= EN_X_ABSOLUTE &&
+						bx [bi] <= EN_X_ABSOLUTE + 12 &&
+						by [bi] + 3 >= _en_y && 
+						by [bi] <= _en_y + 12
+					) {
 						sfx_play (SFX_ENHIT, 1);
 						
 						#ifdef BULLETS_DONT_KILL

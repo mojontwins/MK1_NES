@@ -32,6 +32,7 @@ unsigned char ticker;                   // Ticker. 0 for a frame every second.
     signed int rdaa, rdbb;              // Genearl purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
 #endif
+unsigned char ast1;                     // Temporal
 
 // Used for two-points collision
 
