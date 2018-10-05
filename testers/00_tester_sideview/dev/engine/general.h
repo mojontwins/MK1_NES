@@ -115,9 +115,13 @@ void update_cycle (void) {
 		scroll (scroll_x, SCROLL_Y);
 	#endif
 	oam_hide_rest (oam_index);
-	ppu_mask (0x1e);
+	#ifdef DEBUG
+		ppu_mask (0x1e);
+	#endif
 	ppu_waitnmi ();
-	ppu_mask (0x1f);
+	#ifdef DEBUG
+		ppu_mask (0x1f);
+	#endif
 	clear_update_list ();
 	oam_index = 4;
 }

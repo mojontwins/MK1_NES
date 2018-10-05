@@ -4657,3 +4657,12 @@ OK - este tester está completo. Pero veo que cuando disparo mucho y hay tiles r
 
 He vuelto a incluir el render de los hotspots junto con el procesado. Pero he visto que cada bala ocupa unos 16 frames.
 
+20181005
+========
+
+Ayer estuve optimizando como un loco, pero está claro que hay procesos que siguen durando demasiado tiempo. Como estoy destrozando bastante algunas partes, he congelado un branch con la v1.01 y estoy tocando esto aparte.
+
+Me acojona el tema de que cuando tenga que meter el marcador necesitaré añadir un split y perderé 32 frames de proceso. Tengo que revisar TODO y buscar arañar más ciclos.
+
+Por lo pronto voy a propagar el código al siguiente tester y a ver qué necesito. Obviamente no podré activar `DOUBLE_WIDTH` en el `tester_top_down` porque es el Sgt. Helmet y los mapas son de una pantalla de ancho, pero sí puedo probar a compilarlo y ver que todo sigue bien con `DOUBLE_WIDTH` desactivado.
+
