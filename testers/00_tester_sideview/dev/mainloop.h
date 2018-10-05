@@ -140,23 +140,7 @@ void prepare_scr (void) {
 	#endif
 
 	enems_load ();
-
-	#ifdef DOUBLE_WIDTH
-		for (gpit = 0; gpit < 2; gpit ++) {
-			hotspots_create ();
-
-			hrx &= 0x00ff;
-			if (gpit) hrx |= 0x0100;
-			d_hrx [gpit] = hrx;
-			d_hry [gpit] = hry;
-			d_hrt [gpit] = hrt;
-
-			*((unsigned char *) 0xfc + gpit*2) = MSB(d_hrx [gpit]);
-			*((unsigned char *) 0xfd + gpit*2) = LSB(d_hrx [gpit]);
-		}
-	#else
-		hotspots_create ();	
-	#endif
+	hotspots_create ();	
 
 	#ifdef ENABLE_COCOS
 		cocos_init ();
@@ -201,7 +185,7 @@ void prepare_scr (void) {
 
 	#ifdef PLAYER_CAN_FIRE
 		for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-			b_slots [gpit] = gpit; by [gpit] = 0;
+			b_slots [gpit] = gpit; bst [gpit] = 0;
 		}
 		b_slots_i = MAX_BULLETS;
 	#endif
@@ -247,24 +231,9 @@ void prepare_scr (void) {
 	#endif	
 
 	player_move ();
-	#ifdef DOUBLE_WIDTH
-		calc_scroll_pos ();
-	#endif
 	enems_move ();
 
-
-	#ifdef DOUBLE_WIDTH
-		for (gpit = 0; gpit < 2; gpit ++)  {
-			hrx = d_hrx [gpit];
-			hrt = d_hrt [gpit];
-			if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
-			hry = d_hry [gpit];
-
-			hotspots_paint ();
-		}
-	#else
-		if (hrt) hotspots_paint ();
-	#endif
+	if (hrt) hotspots_paint ();
 	
 	#ifdef ENABLE_INTERACTIVES	
 		interactives_paint ();
@@ -279,8 +248,11 @@ void prepare_scr (void) {
 		#endif
 	#endif
 
+	oam_hide_rest (oam_index);
 	hud_update ();
-	update_cycle ();
+	ppu_waitnmi ();
+	clear_update_list ();
+	oam_index = 4;
 	fade_in ();
 }
 
@@ -360,7 +332,7 @@ void game_loop (void) {
 		// Finish frame and wait for NMI
 
 		update_cycle ();
-		
+
 		// Poll pads
 
 		pad_read ();
@@ -385,21 +357,7 @@ void game_loop (void) {
 
 			// Update / collide hotspots
 
-			#ifdef DOUBLE_WIDTH
-				for (gpit = 0; gpit < 2; gpit ++)  {
-					hrx = d_hrx [gpit];
-					hrt = d_hrt [gpit];
-					if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
-					hry = d_hry [gpit];
-
-					#include "mainloop/hotspots.h"
-					hotspots_paint ();
-
-					d_hrt [gpit] = hrt;
-				}
-			#else
-				#include "mainloop/hotspots.h"
-			#endif
+			#include "mainloop/hotspots.h"
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
 
@@ -412,12 +370,6 @@ void game_loop (void) {
 			if (!warp_to_level) {
 				player_move ();
 			}
-
-			// Scroll position
-
-			#ifdef DOUBLE_WIDTH
-				calc_scroll_pos ();
-			#endif
 
 			// Timer
 
@@ -445,6 +397,12 @@ void game_loop (void) {
 				bullets_move ();
 			#endif
 
+			// Update cocos
+
+			#ifdef ENABLE_COCOS
+				cocos_do ();
+			#endif
+
 			// Paint player
 
 			oam_index_player = oam_index; 
@@ -453,12 +411,6 @@ void game_loop (void) {
 			// Update enemies
 		
 			enems_move ();
-
-			// Update cocos
-
-			#ifdef ENABLE_COCOS
-				cocos_do ();
-			#endif			
 
 			// Warp to level
 
@@ -474,9 +426,7 @@ void game_loop (void) {
 
 			// Paint hotspots
 
-			#ifndef DOUBLE_WIDTH
-				if (hrt) hotspots_paint ();
-			#endif
+			if (hrt) hotspots_paint ();
 
 			// Paint interactives
 

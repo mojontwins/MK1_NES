@@ -14,7 +14,6 @@ unsigned char pad_this_frame;           // (neslib) pad 0 read, current frame pr
 unsigned char gpit, gpjt;               // General purpose iterators.
 unsigned char gpitu, gpaux;             // Auxiliary iterators.
 signed int rds16;                       // General purpose 16 bit signed variable.
-unsigned int gpint;                     // General purpose 16 bit unsinged variable.
 
 const unsigned char *gp_gen;            // General purpose pointer to read data in ROM.
 const unsigned char *gp_tmap, *gp_tma2; // Pointers used to read map data in ROM.
@@ -24,14 +23,9 @@ unsigned char rdx, rdy;                 // General purpose coordinates
 unsigned char rdt;                      // General purpose "type"
 unsigned char rdit;                     // General purpose iterator
 unsigned char rda, rdb, rdc, rdd, rdm;  // General purpose temporal value holders.
-unsigned char rde;                      // General purpose temporal value holders.
 signed char rds;                        // General purpose temporal value holder, signed.
 unsigned char rdct;                     // General purpose counter
 unsigned char ticker;                   // Ticker. 0 for a frame every second.
-#ifdef DOUBLE_WIDTH
-    signed int rdaa, rdbb;              // Genearl purpose integer
-    signed int en_x_offs;               // Precalculated pixel offset
-#endif
 
 // Used for two-points collision
 
@@ -60,15 +54,23 @@ unsigned char touched;                  // (Temporal) an enemy collided with the
 unsigned char en_is_alive;              // (Temporal) current enemy is alive, used when enemies respawning is on.
 unsigned char pregotten;                // (Temporal) player <-> current enemy horizontal overlap flag.
 
+unsigned char en_cttouched [3];         // Counters used to show explosions / flickering
+unsigned char en_flags [3];             // Enemies flags
+unsigned char en_life [3];              // Enemies life gauges
+unsigned char en_status [3];            // Enemies statused, repurposed per enemy type
+unsigned char en_ct [3];                // Enemies General repurposeable counter
+
+unsigned char en_rawv [3];              // Speed, used for pursuer-type enemies
+
 #ifdef ENEMS_RECOIL_ON_HIT
-    signed char en_rmx [NENEMS];        // If recoiling, recoil direction in the X axis.
+    signed char en_rmx [3];             // If recoiling, recoil direction in the X axis.
     #ifdef PLAYER_TOP_DOWN
-        signed char en_rmy [NENEMS];    // If recoiling, recoil direction in the Y axis.
+        signed char en_rmy [3];         // If recoiling, recoil direction in the Y axis.
     #endif
 #endif
 
 #ifdef ENABLE_COMPILED_ENEMS
-    const unsigned char *en_behptr [NENEMS]; // A pointer to curren enemy script for compiled enemies.
+    const unsigned char *en_behptr [3]; // A pointer to curren enemy script for compiled enemies.
 #endif
 
 // Those variables are used as temporal copies of general arrays defined in BSS (check bss.h)
@@ -87,21 +89,10 @@ unsigned char en_sg_1, en_sg_2;
 // Main player
 
 unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
-unsigned int px;
-signed int py;                          // Player X, Y coordinates, fixed point 10.6
+signed int px, py;                      // Player X, Y coordinates, fixed point 10.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
-#ifdef DOUBLE_WIDTH
-    unsigned int prx;
-#else
-    unsigned char prx;
-#endif
-unsigned char pry;                      // Player pixel coordinates, calculated from px, py.
-#ifdef DOUBLE_WIDTH
-    unsigned int pcx;
-#else
-    unsigned char pcx;
-#endif
-unsigned char pcy;                      // Coordinates prior to movement.
+unsigned char prx, pry;                 // Player pixel coordinates, calculated from px, py.
+unsigned char pcx, pcy;                 // Coordinates prior to movement.
 unsigned char pfacing;                  // Player facing left, right
 unsigned char pfr;                      // Player frame
 unsigned char pctfr;                    // Player counter (for animation)
@@ -183,12 +174,7 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 #endif
 
 #if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
-    #ifdef DOUBLE_WIDTH
-        unsigned int phitterx;
-    #else
-        unsigned char phitterx;
-    #endif
-    unsigned char phittery;             // If player is punching or kicking, hitbox coordinates
+    unsigned char phitterx, phittery;   // If player is punching or kicking, hitbox coordinates
     unsigned char phitteract;           // True if hitbox is active
     unsigned char pfrozen;              // != 0 if player is frozen (after landing a hit). Invalidate input & decrement
 #endif
@@ -197,15 +183,6 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 
 #ifdef PLAYER_CAN_FIRE
     unsigned char bi;                   // Iterator for player bullets (projectiles shot by the player)
-    #ifdef DOUBLE_WIDTH
-        signed int _bx;
-    #else
-        unsigned char _bx;
-    #endif
-    unsigned char _by;                  // Fast copies
-    #ifdef DOUBLE_WIDTH
-        unsigned char bullets_disable;      // Disable bullets processing on current frame
-    #endif
 #endif
 
 // Cocos
@@ -215,13 +192,7 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 #endif
 
 // Hotspots
-
-#ifdef DOUBLE_WIDTH
-    unsigned int hrx;
-#else
-    unsigned char hrx;
-#endif
-unsigned char hry, hrt;                 // Current screen hotspot X, Y coordinates and type, respectively
+unsigned char hrx, hry, hrt;            // Current screen hotspot X, Y coordinates and type, respectively
 
 // Process breakable?
 #ifdef BREAKABLE_ANIM
@@ -292,15 +263,3 @@ unsigned char c_max_bolts;              // Number of locks in current level
     unsigned char script_result, sc_terminado, sc_continuar;
 #endif
     
-// Double screen helpers
-
-#ifdef DOUBLE_WIDTH
-    unsigned char w_pant;               // (Working) Current screen (backup).
-    unsigned int nametable_base;        // 0x2000 or 0x2400
-    unsigned int buff_offset;           // 0 or 192
-    unsigned char attr_table_offset;    // 0 or 64
-    unsigned char *buff_ptr;            // Points to parts of the buffer
-    unsigned char *attr_ptr;            // Points to parts of the buffer
-    signed int scroll_x;                // Scroller position
-    unsigned char on_screen;            // Flag used in enengine.h
-#endif

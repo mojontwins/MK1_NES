@@ -13,7 +13,7 @@ void fade_out (void) {
 }
 
 // fade in
-void fade_in (void) {
+void  fade_in (void) {
 	for (fader = 0; fader < 5; fader ++) {
 		pal_bright (fader);
 		delay (fade_delay);
@@ -27,13 +27,7 @@ void clear_update_list (void) {
 }
 
 void cls (void) {
-	vram_adr (0x2000); vram_fill(0x00, 
-		#ifdef DOUBLE_WIDTH
-			0x800
-		#else
-			0x400
-		#endif
-	);
+	vram_adr(0x2000); vram_fill(0x00,0x400);
 }
 
 // Needs gp_addr, _n set.
@@ -50,22 +44,16 @@ void p_t (void) {
 	_n = ((rda%10)+16); ul_putc ();
 }
 
+const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
+unsigned char attr_table [64];
+
 // Needs _x, _y, _t set.
 void upd_attr_table (void) {
-	#ifdef DOUBLE_WIDTH
-		rdc = (_x >> 2) + ((_y >> 2) << 3);
-		rde = rdc + attr_table_offset;
-		rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
-		rda = attr_table [rde];
-		rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
-		attr_table [rde] = rda;
-	#else
-		rdc = (_x >> 2) + ((_y >> 2) << 3);
-		rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
-		rda = attr_table [rdc];
-		rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
-		attr_table [rdc] = rda;
-	#endif
+	rdc = (_x >> 2) + ((_y >> 2) << 3);
+	rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
+	rda = attr_table [rdc];
+	rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
+	attr_table [rdc] = rda;
 }
 
 // Needs _x, _y, _t set.
@@ -74,7 +62,7 @@ void draw_tile (void) {
 	upd_attr_table ();
 	
 	gp_tmap = c_ts_tmaps + (_t << 2);
-	gp_addr = ((_y << 5) + _x + NAMETABLE_BASE);
+	gp_addr = ((_y << 5) + _x + 0x2000);
 	vram_adr (gp_addr++);
 	/*
 	vram_put (*gp_tmap++);
@@ -94,28 +82,18 @@ void draw_tile (void) {
 
 // Needs _x, _y, _t set.
 void update_list_tile (void) {
-	#ifdef DOUBLE_WIDTH
-		if (_x > 31) {
-			_x -= 32;
-			NAMETABLE_BASE = 0x2400;
-			attr_table_offset = 64;
-		} else {
-			NAMETABLE_BASE = 0x2000;
-			attr_table_offset = 0;
-		}
-	#endif
-
 	// Pass _x, _y, _t directly.
 	upd_attr_table ();
 	// rda contains the attribute byte.
 	// rdc contains the offset in the attribute nametable.
-	gp_addr = NAMETABLE_BASE + 0x03c0 + rdc;
+	
+	gp_addr = 0x23c0 + rdc;
 	_n = rda; ul_putc ();
 	
 	// tiles
 	//tl = (16 + tl) << 2;
 	gp_tmap = c_ts_tmaps + (_t << 2);
-	gp_addr = ((_y << 5) + _x + NAMETABLE_BASE);
+	gp_addr = ((_y << 5) + _x + 0x2000);
 	/*
 	_n = *gp_tmap ++; ul_putc ();
 	_n = *gp_tmap ++; ul_putc ();
@@ -144,14 +122,10 @@ unsigned char get_byte (void) {
 	-- rdit; return *gp_gen ++;
 }
 
-#if defined (MAP_RENDERER_COMPLEX)
+#ifdef MAP_RENDERER_COMPLEX
 	#include "engine/mapmods/map_renderer_complex.h"
 #else
 	#include "engine/mapmods/map_renderer_fast.h"
-#endif
-
-#ifdef DOUBLE_WIDTH
-	#include "engine/mapmods/map_renderer_double.h"
 #endif
 
 // Needs _x, _y set.

@@ -66,7 +66,7 @@ if (_en_ct) {
 				_en_x1 =0x3f - rda; // 0 for 1, 1 for 2, 2 for 4, 3 for 8
 			} else {
 				// FIRE
-				COCO_RDX = EN_X_ABSOLUTE + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
+				rdx = _en_x + 4; rdy = _en_y + 4; cocos_shoot_aimed ();
 			}
 			
 			break;

@@ -3,4 +3,3 @@
 
 // extra_inits.h
 // Extra stuff you have to initialize before the level starts
-pkeys=1;

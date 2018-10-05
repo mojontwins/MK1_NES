@@ -4,96 +4,140 @@
 		"selected_items":
 		[
 			[
-				"attr",
+				"atr",
 				"attr_table_offset"
 			],
 			[
-				"togg",
-				"toggle_switch\t(extra_vars.h)"
+				"on_",
+				"on_screen\t(enengine.h)"
 			],
 			[
-				"toggle",
-				"toggle_timer\t(extra_vars.h)"
+				"scroll",
+				"scroll_x\t(general.h)"
 			],
 			[
-				"HOTSPOT_TYPE_TO",
-				"HOTSPOT_TYPE_TOGGLE_OFF\t(extra_vars.h)"
+				"en_in",
+				"en_invincible"
 			],
 			[
-				"wate",
-				"water_strip\t(on_entering_screen.h)"
+				"run_fire",
+				"run_fire_script_do"
 			],
 			[
-				"PPU_CTRL",
-				"PPU_CTRL_VAR1\t(neslib.s)"
+				"en_ct",
+				"en_cttouched"
 			],
 			[
-				"frame",
-				"frame_counter"
+				"HOTP",
+				"HOTSPOT_TYPE_AMMO\t(config.h)"
 			],
 			[
-				"stri",
-				"strictMscNumeric"
+				"BOI",
+				"BOIOIONG_VY_MAX"
 			],
 			[
-				"e",
-				"e24to9"
+				"CATACR",
+				"CATACROCK_BASE_SPRID\t(config.h)"
 			],
 			[
-				"ImgIn",
-				"imgIn"
+				"CATACO",
+				"CATACROCK_G\t(enem_catacrock.h)"
 			],
 			[
-				"calcua",
-				"calculateHugePal"
+				"CATA",
+				"CATACROCK_MAX_V"
 			],
 			[
-				"ig",
-				"imgIn"
+				"flci",
+				"flickscreen_do_vertical\t(mainloop.h)"
 			],
 			[
-				"SPING",
-				"SPRING_SPIKE_TILE"
+				"flick",
+				"flickscreen_do_horizontal\t(mainloop.h)"
 			],
 			[
-				"custom",
-				"custom_text2\t(custom_texts.h)"
+				"BOIOIN",
+				"BOIOIONG_G\t(config.h)"
 			],
 			[
-				"customScr",
-				"customScriptOrder"
+				"enems_",
+				"enems_init_fp"
 			],
 			[
-				"customScir",
-				"customScriptOrder"
+				"EXTERN",
+				"ENABLE_EXTERN_CODE"
 			],
 			[
-				"CUSTOM",
-				"CUSTOM_SCRIPT_ORDER\t(diario.md)"
+				"SLIP",
+				"ENABLE_SLIPPERY"
 			],
 			[
-				"MAX_CHAC",
-				"MAX_CHAC_CHACKS_QUEUED"
+				"HOTSPOT_T",
+				"HOTSPOT_TYPE_EMMERALD\t(README.md)"
 			],
 			[
-				"chac_chacs_Q",
-				"chac_chacs_queue_read"
+				"pfl",
+				"pflickering"
 			],
 			[
-				"chac_chacs_queu",
-				"chac_chacs_queue_write\t(bss.h)"
+				"main",
+				"mainloop"
 			],
 			[
-				"chac",
-				"chac_chacs_read"
+				"EST_",
+				"EST_REBOUND\t(player.h)"
 			],
 			[
-				"inte",
-				"interactives_index"
+				"ps",
+				"pspin\t(player.h)"
 			],
 			[
-				"interactives",
-				"interactives_yx"
+				"PLAYER_VY_MK2_JUMP",
+				"PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE\t(general.h)"
+			],
+			[
+				"ENGINE",
+				"ENGINE_TYPE_SWIM\t(player.h)"
+			],
+			[
+				"ENGINE_",
+				"ENGINE_TYPE_JET_PAC\t(player.h)"
+			],
+			[
+				"vertica",
+				"vertical_engine_type\t(player.h)"
+			],
+			[
+				"PLAYER_JE",
+				"PLAYER_HAS_JETPAC"
+			],
+			[
+				"ENGINE_TYPE_",
+				"ENGINE_TYPE_AUTO_JUMP\t(engine_config.md)"
+			],
+			[
+				"ENG",
+				"ENGINE_TYPE_JUMP\t(engine_config.md)"
+			],
+			[
+				"engine_t",
+				"vertical_engine_type"
+			],
+			[
+				"vertical",
+				"vertical_engine_type"
+			],
+			[
+				"PLAYER_CAN_FI",
+				"PLAYER_CAN_FIRE_8_WAY\t(config.h)"
+			],
+			[
+				"warp",
+				"warp_to_level"
+			],
+			[
+				"action",
+				"actionsUsed"
 			],
 			[
 				"MAP_",
@@ -470,150 +514,103 @@
 			[
 				"show_",
 				"show_coins_vs"
-			],
-			[
-				"GP_",
-				"GM_2P_VS"
-			],
-			[
-				"PSTATE",
-				"PSTATE_DEAD"
-			],
-			[
-				"pf",
-				"pflickering"
-			],
-			[
-				"PF",
-				"PFACING_LEFT"
-			],
-			[
-				"A",
-				"TOP_ADJUST"
-			],
-			[
-				"TI_B",
-				"TI_BACKGROUNDS"
-			],
-			[
-				"update",
-				"update_list_index"
-			],
-			[
-				"SMS_setTile",
-				"SMS_setTileatXY"
-			],
-			[
-				"VDPS",
-				"VDPStatusPort"
-			],
-			[
-				"overfl",
-				"VDPSpriteOverflow"
-			],
-			[
-				"fra",
-				"frame_counter"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "testers/00_tester_sideview/dev/config.h",
+			"contents": "Busca {TODO} y {TOFIX}\n\nMe falta un cacho, hacer merge luego.\n\n20180929\n========\n\nDe camino a retrozaragoza aprovecho el tren para dar un poco de fran a la idea de hacer que AGNES soporte doble anchura.\n\nHe resuelto cosas fáciles, pero ahora tengo que darle al módulo de los enemigos y eso implica darle fran incluso a la colisión.\n\nVeamos: los enemigos siguen estando en su propia pantalla y sus coordenadas X siguen siendo de 0 a 255. Sabemos estas cosas:\n\n- Los enemigos 0 a 2 pertenecen a la pantalla de la izquierda.\n- Los enemigos 3 a 5 pertenecen a la pantalla de la derecha.\n\n¿No resolví esto para Lala? Voy a revisar euse diario antes de seguir. Pero antes que nada tendré que ampliar los arrays a 6 espacios y procesar 6 enemigos en lugar de 3.\n\nTengo este apunte:\n\n> - Enemigos funcionando -- me hice un poco la picha un lío pero es que no recordaba que las coordenadas de los enemigos funcionan dentro de su \"pantalla virtual\" y que a la hora de comparar con el prx tenía que añadir el offset de 256 si el enemigo era id >= 3.\n\nPero me suena que esto dio más guerra... Sigo leyendo. Pues parece que no hay más chicha... Veamos.\n\nMe voy a dejar de mierdas y de historias para esto. La colisión ya me dará más quebraderos, así que a lo fácil.\n\n20180930\n========\n\nEn el tren resolví colisión, display, y que los fanties pululen por toda la pantalla. Tengo que revisar los homing fanties, por cierto, porque hay que tener en cuenta de qué pantalla son para la posición a la que vuelven, y probablemente tenga que rehacer partes.\n\nNo sé si hacer eso ahora o ponerme con balas y cocos. Pero antes quiero medir cómo voy de frame. Tengo que hacer un split de 32 lineas arriba (intentaré meter mierdas antes del split), por lo que quiero ver como va la cosa, porque la solución más sencilla para cocos y balas es usar enteros en las coordenadas X.\n\nPor ahora parece que tengo bastante frame libre (entre 1/2 y 1/3, más tirando para 1/2), así que creo que por lo pronto tiraré por lo fácil y luego ya veremos. Vamos a por los disparos!\n\nFunciona guay y todo guay, pero cuando hay 4 disparos y 3 enemigos en pantalla la franja gris baja peligrosamente hasta la parte inferior de la pantalla, quedándose a menos de un cuarto.\n\nVoy a hacer ahora los cocos. Tengo que activar:\n\n[X] Monococos.\n[X] Compiled.\n[X] Shooties.\n[X] Steady shooters.\n\nEmpezaré por los shooties que no dejan de ser lo más sencillo.\n\n{TODO}: [ ] Estudiar la viabilidad de tener compiled y pursuers por toda la pantalla doble. Aunque creo que va a ser que no. [a menos que haga algún repurpose raro]\n\n{TODO}: [ ] Añadir la posibilidad de que los shooties sean timed y disparen al jugador como los de Ninjajar!\n\nNext -> Hitter\n\n2018102\n=======\n\nOK - Está pegando framazos. Ahora es el momento de fliparse un poco con el tiempo de proceso. Cuando hay todos los cocos a la vez en pantalla da picos bestiales. De hecho hay un pico cuando el compiled dispara - imagino que lo mismo pasará cuando lo hace un monococo. Esto es por el cálculo de trayectoria.\n\nDebería hacer algo: al menos, para liberar un poco, debería \"invalidar\" la ejecución del resto de los cocos para este frame. También me debería plantear hacer una implementación aparte para los cocos lineales porque es tontería estar aplicando cálculos de punto fijo con este tipo de cocos.\n\nVoy a hacer las dos cosas:\n\n[X] Disparar un coco_aimed invalida la ejecución de `cocos_do` este frame.\n\nla invalidación durante un frame de `cocos_do`  no parece ser muy efectiva. El cálculo de la dirección parece seguir pillándose todo el frame del demonio. Voy a tener que pensar en algo para reparar esto porque no le veo salida - bueno, no le veo salida que no sea \"no usar\"...\n\nO eso, o implementar otros disparadores direccionales menos precisos que disparen en 8 o 16 direcciones precalculadas según particiones del espacio. Pero que tengo que pensar. Con 8 no es suficiente.\n\n- Se me ha ocurrido una forma realmente rocambolesca.\n\n¡Y funciona bastante bien y ya no me pega tirón!\n\nSeguimos :)\n\nHitters!\n========\n\nEsto necesita más infraestructura, necesito sprites que no tengo. Y ahora miran mucho. ¿Lo dejamos para luego luego?\n\nAh, tengo pendientes los homing fanties. <- Hechos\n\n20181003\n========\n\nHe actualizado el tester 2 para implementar aquí los punchies, y de camino otras cosas como el respawn de enemigos o el escenario destructible.\n\nPor ahora he dejado los punchies funcionando. En este juego se nota que falta el split porque el hud se va con el scroll :-D Vamos con el respawn.\n\nEl recoil falla. Parece que va mal si estoy en la pantalla de la derecha.\n\n{TOFIX}: [ ] Si estás en escalera con suelo no te deja golpear y debería.\n\nBreakables\n----------\n\nProblema (que sale ahora pero es global): Solo tengo un `attr_table` para la última pantalla que se dibujó. Necesito espacio para las dos pantallas y que se rellene todo correctamente.\n\n- Al dibujar la pantalla, añadir a `attr_table` con un offset.\n- Utilizar el offset en base al valor de `_x` en todos los accesos posteriores. \n\n[SOLVED]\n\nPropellers\n----------\n\nProblema: se utiliza \"yx\" para guardar la posición empaquetada del propeller y eso no me sirve. Para juegos de doble pantalla tendré que usar arrays diferenciados. [SOLVED]\n\n~~\n \nHe dejado estos temas funcionando. Luego tendré que pasar un mocho embonitificador de código porque a veces está quedando un poco trompero.\n\nVoy a probar el resto de cosas que tiene este tester y luego ver los {TOFIX} y los {TODO}.\n\nWarpers\n-------\n\nHechos sin hacer nada XD\n\n~~\n\nHmmmm ¿Qué hacer? ¿Me hago una tourné por todos los testers para ir adaptando las cosas una a una?\n\n\n\n",
+			"file": "wip/diario_aux.md",
+			"file_size": 5808,
+			"file_write_time": 131830424286335406,
 			"settings":
 			{
-				"buffer_size": 22986,
+				"buffer_size": 5615,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/engine/player.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// printer.h\n// Draw map, print text, etcetera.\n\n// fade out\nvoid fade_out (void) {\n\tfor (fader = 4; fader > -1; fader --) {\n\t\tpal_bright (fader);\n\t\tdelay (fade_delay);\n\t}\t\n}\n\n// fade in\nvoid fade_in (void) {\n\tfor (fader = 0; fader < 5; fader ++) {\n\t\tpal_bright (fader);\n\t\tdelay (fade_delay);\n\t}\t\n}\n\n// Clear update list\nvoid clear_update_list (void) {\n\tmemfill (update_list, 0, UPDATE_LIST_SIZE*3);\n\tupdate_index = 0;\n}\n\nvoid cls (void) {\n\tvram_adr (0x2000); vram_fill(0x00, \n\t\t#ifdef DOUBLE_WIDTH\n\t\t\t0x800\n\t\t#else\n\t\t\t0x400\n\t\t#endif\n\t);\n}\n\n// Needs gp_addr, _n set.\nvoid ul_putc (void) {\n\tupdate_list [update_index++] = MSB (gp_addr);\n\tupdate_list [update_index++] = LSB (gp_addr++);\n\tupdate_list [update_index++] = _n;\n}\n\n// Needs _x, _y, _n set.\nvoid p_t (void) {\n\trda = _n; gp_addr = (_y << 5) + _x + 0x2000;\n\t_n = ((rda/10)+16); ul_putc ();\n\t_n = ((rda%10)+16); ul_putc ();\n}\n\n// Needs _x, _y, _t set.\nvoid upd_attr_table (void) {\n\trdc = (_x >> 2) + ((_y >> 2) << 3);\n\t#ifdef DOUBLE_WIDTH\n\t\trdc += attr_table_offset;\n\t#endif\n\trdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);\n\trda = attr_table [rdc];\n\trda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));\n\tattr_table [rdc] = rda;\n}\n\n// Needs _x, _y, _t set.\nvoid draw_tile (void) {\n\t// Pass _x, _y, _t directly.\n\tupd_attr_table ();\n\t\n\tgp_tmap = c_ts_tmaps + (_t << 2);\n\tgp_addr = ((_y << 5) + _x + NAMETABLE_BASE);\n\tvram_adr (gp_addr++);\n\t/*\n\tvram_put (*gp_tmap++);\n\tvram_put (*gp_tmap++);\n\t*/\n\tSET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);\n\tSET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);\n\tgp_addr += 31;\n\tvram_adr (gp_addr++);\n\t/*\n\tvram_put (*gp_tmap++);\n\tvram_put (*gp_tmap);\t\n\t*/\n\tSET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);\n\tSET_FROM_PTR (_z, gp_tmap);             vram_put (_z);\n}\n\n// Needs _x, _y, _t set.\nvoid update_list_tile (void) {\n\t#ifdef DOUBLE_WIDTH\n\t\tif (_x > 31) {\n\t\t\t_x -= 32;\n\t\t\tNAMETABLE_BASE = 0x2400;\n\t\t\tattr_table_offset = 64;\n\t\t} else {\n\t\t\tNAMETABLE_BASE = 0x2000;\n\t\t\tattr_table_offset = 0;\n\t\t}\n\t#endif\n\n\t// Pass _x, _y, _t directly.\n\tupd_attr_table ();\n\t// rda contains the attribute byte.\n\t// rdc contains the offset in the attribute nametable.\n\t\n\tgp_addr = NAMETABLE_BASE + 0x03c0 + rdc;\n\t_n = rda; ul_putc ();\n\t\n\t// tiles\n\t//tl = (16 + tl) << 2;\n\tgp_tmap = c_ts_tmaps + (_t << 2);\n\tgp_addr = ((_y << 5) + _x + NAMETABLE_BASE);\n\t/*\n\t_n = *gp_tmap ++; ul_putc ();\n\t_n = *gp_tmap ++; ul_putc ();\n\t*/\n\tSET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();\n\tSET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();\n\tgp_addr += 30;\n\t/*\n\t_n = *gp_tmap ++; ul_putc ();\n\t_n = *gp_tmap   ; ul_putc ();\n\t*/\n\tSET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();\n\tSET_FROM_PTR (_n, gp_tmap);             ul_putc ();\n}\n\n// Needs _x, _y, _t set.\n// Destroys _x, _y!.\nvoid map_set (void) {\n\tmap_buff [COORDS (_x, _y)] = _t;\n\tmap_attr [COORDS (_x, _y)] = c_behs [_t];\n\t_x = _x << 1; _y = TOP_ADJUST + (_y << 1);\n\tupdate_list_tile (); \n}\n\nunsigned char get_byte (void) {\n\t-- rdit; return *gp_gen ++;\n}\n\n#if defined (MAP_RENDERER_COMPLEX)\n\t#include \"engine/mapmods/map_renderer_complex.h\"\n#else\n\t#include \"engine/mapmods/map_renderer_fast.h\"\n#endif\n\n#ifdef DOUBLE_WIDTH\n\t#include \"engine/mapmods/map_renderer_double.h\"\n#endif\n\n// Needs _x, _y set.\nvoid pr_str (unsigned char *s) {\n\tvram_adr (((_y << 5) | _x) + 0x2000);\n\twhile (gpit = *s++) {\n\t\tif (gpit == '%') {\n\t\t\t++ _y; vram_adr (((_y << 5) | _x) + 0x2000);\n\t\t}\n\t\telse vram_put (gpit - 32); \n\t}\n}\n\n#ifdef ENABLE_UL_PRINTER\n\t// Needs _x, _y set and gp_gen pointing to the string\n\tvoid pr_ul_str () {\n\t\tppu_waitnmi (); clear_update_list ();\n\t\tgp_addr = 0x2000 + ((_y << 5) | _x);\n\t\twhile (_n = *gp_gen ++) { _n -= 32; ul_putc (); }\n\t\tppu_waitnmi (); clear_update_list ();\n\t}\n#endif\n\n#ifdef DEBUG\nunsigned char get_hex_digit (unsigned char n) {\n\tif (n < 10) return n + 16;\n\treturn n + 23;\n}\n\nvoid debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {\n\tclear_update_list ();\n\n\tgp_addr = (y << 5) + x + 0x2000;\n\t_n = get_hex_digit (n >> 12); \t\t\tul_putc ();\n\t_n = get_hex_digit ((n >> 8) & 0xf); \tul_putc ();\n\t_n = get_hex_digit ((n >> 4) & 0xf); \tul_putc ();\n\t_n = get_hex_digit ((n & 0xf)); \t\tul_putc ();\n\n\tppu_waitnmi ();\n}\n#endif\n\n",
+			"file": "testers/02_tester_punchy/dev/engine/printer.h",
+			"file_size": 4450,
+			"file_write_time": 131830421353946904,
 			"settings":
 			{
-				"buffer_size": 19788,
+				"buffer_size": 4259,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/engine/playermods/process_tile.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n//#define GAME_AREA_TOP\n#define GAME_AREA_MIDDLE\n//#define GAME_AREA_BOTTOM\n//#define GAME_AREA_CUSTOM\n\n#define MAP_CLEAR_LIST_ADDRESS\t0x2c40\t// To store map persistence in VRAM.\n\t\t\t\t\t\t\t\t\t\t// Each screen takes 24 bytes. move it where\n\t\t\t\t\t\t\t\t\t\t// It fits. Below 2c40 you may \"see\" the buffer\n\n// ============================================================================\n// I. General configuration\n// ============================================================================\n\n// In this section we define map dimmensions, initial and authomatic ending conditions, etc.\n\n#define MAP_W \t\t\t\t\t16\t\t//\n#define MAP_H\t\t\t\t\t1\t\t// Map dimensions in screens\n#define MAP_SIZE\t\t\t\tMAP_W*MAP_H\n\n//#define DOUBLE_WIDTH\t\t\t\t\t// Experimental 2x mode w/scroll\n\n#define PLAYER_LIFE\t\t\t\t5\t\t// Max / Initial life\n#define PLAYER_REFILL\t\t\t1\t\t// Life refill\n\n//#define MULTI_LEVEL\t\t\t\t\t// Comment for single level\n#define MAX_LEVELS\t\t\t\t1\n\n#define MAX_FLAGS \t\t\t\t2\t\t// Keep it low if you don't need flags\n\n#ifndef MULTI_LEVEL\n\n\t// If you aim for a single level ROM, fill in those:\n\n\t#define SCR_INI\t\t\t\t\t0\t\t// Initial screen\n\t#define PLAYER_INI_X\t\t\t2\t\t//\n\t#define PLAYER_INI_Y\t\t\t3\t\t// Initial position\n\t//#define SCR_END\t\t\t\t99\t\t// Final screen, undefine if N/A\n\t#define PLAYER_END_X\t\t\t99\t\t//\n\t#define PLAYER_END_Y\t\t\t99\t\t// Ending position\n\t#define PLAYER_MAX_OBJECTS\t\t25\t\t// Objects to finish game\n\n#else\n\n\t// If you want multiple levels, please don't touch this much. \n\t// Just comment SCR_END and / or PLAYER_MAX_OBJECTS if N/A.\n\t// You should be fiddling with assets/levelset.h\n\n\t#define SCR_INI \t\t\t\t(l_scr_ini [level])\n\t#define PLAYER_INI_X\t\t\t(l_ini_x [level])\n\t#define PLAYER_INI_Y\t\t\t(l_ini_y [level])\n\t//#define SCR_END\t\t\t\t(l_scr_end [level])\n\t#define PLAYER_END_X\t\t\t(l_end_x [level])\n\t#define PLAYER_END_Y\t\t\t(l_end_y [level])\n\t#define PLAYER_MAX_OBJECTS\t\t(l_player_max_objects [level])\n\n#endif\n\n// Some flexibility\n#define HOTSPOT_TYPE_OBJECT\t\t1\n#define HOTSPOT_TYPE_KEYS\t\t2\n#define HOTSPOT_TYPE_REFILL\t\t3\n//#define HOTSPOT_TYPE_AMMO\t\t4\n//#define HOTSPOT_TYPE_TIME\t\t5\t\t// For time refills\n\n//#define HOTSPOT_TYPE_RESONATOR \t4\t\t// An example of custom hotspot\n//#define HOTSPOT_TYPE_RESONATOR_ON 5\t\t// Custom for this game.\n\n//#define WIN_LEVEL_CUSTOM\t\t\t\t// A level ends when win_level == 1\n\t\t\t\t\t\t\t\t\t\t// And such a thing has to be setup by YOU\n\n//#define MAP_FORMAT_PACKED\t\t\t\t// Each byte in map data = 2 tiles, 16 tiles max.\n#define MAP_FORMAT_RLE16\t\t\t\t// RLE'd by rlemap2. 16 tiles max.\n//#define MAP_FORMAT_RLE53\t\t\t\t// RLE'd by rle53mapMK1. 32 tiles max.\n//#define MAP_FORMAT_RLE44\t\t\t\t// RLE'd by rle44mapMK1. 16 tiles max.\n//#define MAP_FORMAT_RLE53_CHRROM\t\t// RLE'd by rle53mapchrrom and stored in CHR-ROM. 32 tiles max.\n//#define MAP_FORMAT_RLE44_CHRROM\t\t// RLE'd by rle44mapchrrom and stored in CHR-ROM. 16 tiles max.\n\n//#define MAP_WITH_DECORATIONS\t\t\t// Add decorations when use a 16 tiles mode.\n\n// Use the complex renderer if you need to post-process the map buffer before\n// printing.\n\n#define MAP_RENDERER_COMPLEX\t\t\t// Comment for the simple, old renderer\n\n// ============================================================================\n// II. Engine type\n// ============================================================================\n\n// This section is used to define the game engine behaviour. Many directives are related,\n// and others are mutually exclusive. I think this will be pretty obvious when you look at them. \n\n// Right now the shooting engine is only compatible with the side-view engine.\n\n// Bounding box size\n// -----------------\n\n// Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter\n#define PLAYER_COLLISION_VSTRETCH_BG\t8\n\n// This defines how the player will collide with enemies. \n// Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.\n// this offset goes to the head. \n// So if you define it as -8, the collision box will be 8x8 bottom centerd.\n// And if you define it as 4 the collision box will be 8x20 bottom centered.\n// For 16x24 sprites it's safe to leave it at 0. For 16x16 should be better -2.\n#define PLAYER_COLLISION_VSTRETCH_FG \t8\n\n// Same for enemies.\n// I usually leave it at 0 for <=24 pixels tall, 8 for 32 pixels tall.\n#define ENEMS_COLLISION_VSTRETCH_FG\t\t8\n\n// General directives:\n// -------------------\n\n// Push boxes\n\n//#define PLAYER_PUSH_BOXES \t\t\t\t// If defined, tile beh 11 is pushable\n#define FIRE_TO_PUSH\n\n//#define ENABLE_PUSHED_SCRIPT\n#define PUSHED_TILE_FLAG\t\t\t\t1\n#define PUSHED_TO_X_FLAG\t\t\t\t2\n#define PUSHED_TO_Y_FLAG\t\t\t\t3\n\n// General stuff\n\n#define DEACTIVATE_KEYS\t\t\t\t\t\t// If defined, keys are not present.\n//#define DEACTIVATE_OBJECTS\t\t\t\t// If defined, objects are not present.\n//#define PLAYER_BOUNCES\t\t\t\t16\n//#define DOUBLE_BOUNCE\n#define DIE_AND_RESPAWN\t\t\t\t\t\t// If defined, dying = respawn on latest safe.\n\t#define DIE_AND_REENTER\t\t\t\t\t//     ... also, reenter screen on death\n\t//#define DIE_AND_REINIT\t\t\t\t//     ... or start the level over!\n#define PLAYER_FLICKERS \t\t\t\t100\t// If defined, collisions make player flicker for N frames\n//#define WALLS_STOP_ENEMIES\t\t\t\t// If defined, enemies react to the scenary\n\n// Extra special tiles\n// -------------------\n\n#define NO_HORIZONTAL_EVIL_TILE\t\t\t\t// Only check for evil tiles vertically\n//#define CUSTOM_CENTER_DETECTIONS\t\t\t// Define this if you need custom tile behs\n\n// Quicksands, beh == 2.\n// For player movement values, see section 4\n// (PLAYER_VY_SINKING)\n\n//#define ENABLE_QUICKSANDS\n\n// Breakable, beh & 16\n#define ENABLE_BREAKABLE\t\t\t\t\t// Breakable walls\n#define BREAKABLE_LIFE\t\t\t\t\t1\t// Amount of hits to break wall\n#define BREAKABLE_ANIM\t\t\t\t\t\t// Show explosion when breaking\n#define BREAKABLE_MAX\t\t\t\t\t4\t// Max # of concurrent explosions\n#define BREAKABLE_MAX_FRAMES\t\t\t16\t// Frames to show explosion\n#define BREAKABLE_ERASE\t\t\t\t\t0\t// Tile to erase broken tiles\n#define BREAKABLE_BREAKING\t\t\t\t31\t// Tile to display while breaking\n//#define BREAKABLE_WALKABLE\t\t\t\t// If defined (side view), tiles break when stepped on\n\n// Conveyors, beh & 32 [+1] (must be & 8!)\n// For player movement values, see section 4\n// (PLAYER_VX_CONVEYORS)\n\n//#define ENABLE_CONVEYORS\n\n// Slippery, beh & 64. (must be & 12!)\n// For player movement values, see section 4\n// (PLAYER_AX_ICE & PLAYER_RX_ICE)\n\n//#define ENABLE_SLIPPERY\n\n// Ladders, beh == 32\n\n#define ENABLE_LADDERS\n\n// Special, \"collectable\" map tiles.\n// beh == 34\n\n//#define ENABLE_TILE_GET\n//#define PERSISTENT_TILE_GET\n\n// Trampolines. Needs PLAYER_VY_TRAMPOLINE\n// beh == 66\n\n//#define ENABLE_TRAMPOLINES\n\n// Extra special stuff\n// -------------------\n\n// Propellers\n\n#define ENABLE_PROPELLERS\n#define PROPELLERS_MAX \t\t\t\t\t4\n#define PROPELLERS_BASE_PATTERN\t\t\t64\t// First of 4 patterns to draw/animate propellers\n#define PROPELLERS_MAX_LENGTH\t\t\t6\t// In tiles; undef for infinite\n#define PROPELLER_TILE\t\t\t\t\t14\t// Tile # in map to detect a propeller\n#define PROPELLERS_ON_BY_DEFAULT\t\t\t// Define so propellers are on by default\n\n// Killing tiles shine, beware!\n\n//#define ENABLE_SHINES\n#define SHINES_MAX \t\t\t\t\t\t8\n#define SHINES_BASE_PATTERN\t\t\t\t10\t// In the sprite bank, two patterns needed\n#define SHINES_PALETTE\t\t\t\t\t3\n#define SHINING_TILE\t\t\t\t\t23\t// Tile # in map to add shines\n\n// Resonators. Not sure if you need this, but.\n\n//#define ENABLE_RESONATORS\n#define RESONATOR_BASE_PATTERN\t\t\t0\n#define RESONATOR_PALETTE\t\t\t\t3\n#define RESONATOR_COUNTER_OFFS_X\t\t4\n#define RESONATOR_COUNTER_OFFS_Y\t\t7\n//#define RESONATOR_CHANGE_BG_PAL\t\tpaltsgrey\t// Define to change pal for this palette\n//#define RESONATOR_CHANGE_SPR_PAL\t\tpalssgrey\t// Define to change pal for this palette\n\n// Springs\n\n//#define ENABLE_SPRINGS\n#define SPRING_TILE \t\t\t\t\t10\n#define SPRING_SPIKE_TILE \t\t\t\t11\n//#define SPRINGS_NEED_POSSEE\t\t\t\t// You have to actually STEP on the tile for the spikes to show\n//#define SPRINGS_ON_BY_DEFAULT\n\n// Simple warpers. Put as 0xff type enemies.\n// Destination is attr:s1 (n_pant:YX).\n\n#define ENABLE_SIMPLE_WARPERS\n#define SIMPLE_WARPERS_BASE_SPRID\t\t(48+((frame_counter>>2)&3))\n#define SIMPLE_WARPERS_FIRE_BUTTON\n\n// No!\n\n//#define ENABLE_NO \n#define NO_METASPRITE\t\t\t\t\tssit_06\n#define NO_OFFS_X\t\t\t\t\t\t0\n#define NO_OFFS_Y\t\t\t\t\t\t-24\n\n// Use animation.\n// Note: When activated hotspots need b_button press and, in side view, possee.\n\n//#define ENABLE_USE_ANIM\n#define USE_ANIM_MAX_FRAMES\t\t\t\t13\n#define USE_ANIM_INTERACT_ON\t\t\t7\n#define USE_ANIM_FRAMES_PER_STEP\t\t4\n\n// Text boxes. If you need them, you call them\n\n//#define ENABLE_TEXT_BOX\n#define TEXT_BOX_FRAME_TILE_OFFSET\t\t0x20\t// We need tiles in the active metatileset to draw the frame\n//#define TEXT_BOX_WITH_PORTRAITS\t\t\t\t// Draw spr_hs [rdd] if != 0 in the text box if defined\n//#define TEXT_BOX_DIALOGUES\t\t\t\t\t// Add code for dialogues\n\n// Timer. \n\n//#define ENABLE_TIMER\n#define TIMER_INITIAL\t\t\t\t\t5\n#define TIMER_START_ON\n#define TIMER_REFILL\t\t\t\t\t0\n#define TIMER_RESET_ON_ENTER\n//#define TIMER_TIME_FLAG\t\t\t\t0\t// Useful with scripting. Copies time to flag\n//#define TIMER_ZERO_FLAG \t\t\t\t1\t// Useful with scripting. raises flag when time zero\n#define TIMER_SOUND\t\t\t\t\t\t10  // play a sound if timer < value\n\n\n// Enemy types and definitions\n// ---------------------------\n\n//#define ENEMS_IN_CHRROM\t\t\t\t\t// Enems are stored somewhere in CHR-ROM\n\n#define ENEMS_LIFE_GAUGE\t\t\t\t3\t// Amount of shots/punches/kicks needed to kill enemies.\n//#define NEEDS_LIFE_GAUGE_LOGIC\t\t\t// This is activated automaticly when needed, but you can \n\t\t\t\t\t\t\t\t\t\t\t// do it yourself if you need it to do customs...\n\n#define ENEMS_FLICKER\t\t\t\t\t\t// Ifdef: flicker, if not: explosion\n#define ENEMS_FLICKER_ONLY_ON_DYING\t\t\t// Flicker, but only when life == 0\n#define ENEMS_CAN_RESPAWN\t\t\t\t\t// Read docs for this.\n\n//#define ENEMS_TREMBLE\t\t\t\t\t\t// Make enemies tremble when hit\n\n//#define ENEMS_INVINCIBILITY\t\t\t25\t// If defined, make enemies invincible for N frames when hit.\n\n//#define PERSISTENT_ENEMIES\n//#define PERSISTENT_DEATHS\n\n#define ENEMS_TOUCHED_FRAMES\t\t\t8\t// # frames to stay frozen after hit\n#define ENEMS_RECOIL_ON_HIT  \t\t\t2\t// horizontal recoil when hit, #ifdef, value is speed in pixels!\n//#define ENEMS_RECOIL_OVER_BOUNDARIES\t\t// (x1,y1), (x2,y2) boundaries don't stop a recoil\n\n//#define ENEMS_ENABLE_DYING_FRAME\n\n#define ENEMS_EXPLODING_CELL \t\t\t32\n#define ENEMS_EXPLODING_CELLS_HIDES\t\t\t// Define and the baddie will be substituted by the explosion\n\n#define ENEMS_OCCLUDING_CELL\t\t\t33\t// If you use pezons or saws you need a flame for occlusion\n\n// Beware: only activate this if enemies are killable by any means:\n//#define ENEMIES_SUFFER_ON_PLAYER_COLLISION\n\n// Fanties / Homing fanties / Timed fanties\n\n//#define ENABLE_FANTY\n//#define ENABLE_HOMING_FANTY\n//#define ENABLE_TIMED_FANTY\n\n#define FANTY_BASE_SPRID\t\t\t\t32\n#define FANTY_WITH_FACING\n#define FANTY_COLLIDES\n//#define FANTY_KILLED_BY_TILE\n//#define FANTY_LIFE_GAUGE\t\t\t\t5\t// Define if you need these to be tougher\n\n#define FANTY_A \t\t\t\t\t\t4\n#define FANTY_MAXV \t\t\t\t\t\t48\n//#define FANTY_FAST_ANIM\t\t\t\t\t\t// If defined, cells A/B are changed every frame (for transparency effects)\n\n#define FANTY_DISTANCE\t\t\t\t\t80\n#define FANTY_V_RETREAT\t\t\t\t\t16\n\n#define FANTY_BASE_TIMER\t\t\t\t120\t// Timed fanties use this\n\n// Pursuers (for top-down)\n\n//#define ENABLE_PURSUERS\t\t\t\t// If defined, type 7 enemies are active\n#define DEATH_COUNT_EXPRESSION\t\t\t50+(rand8()&63)\n#define TYPE_7_FIXED_SPRITE \t\t\t4\t// If defined, type 7 enemies are always #\n\n// Saws\n\n//#define ENABLE_SAW\n#define SAW_BASE_SPRID\t\t\t\t\t48\n#define SAW_V_DISPL\t\t\t\t\t\t4\n#define SAW_EMERGING_STEPS\t\t\t\t10\n\n// Pezons\n\n//#define ENABLE_PEZONS\n#define PEZONS_BASE_SPRID\t\t\t\t40\n#define PEZON_WAIT\t\t\t\t\t\t50\n#define PEZON_THRUST\t\t\t\t\t384\n#define PEZON_VY_FALLING_MAX\t\t\t256\n#define PEZON_G\t\t\t\t\t\t\t16\n\n// Chac chacs\n\n//#define ENABLE_CHAC_CHAC\n#define CHAC_CHAC_BASE_TILE\t\t\t\t16\n#define CHAC_CHAC_IDLE_2\t\t\t\t16\n#define CHAC_CHAC_IDLE_3\t\t\t\t1\n#define CHAC_CHAC_IDLE_4\t\t\t\t50\n\n//#define CHAC_CHAC_FROM_MAP\t\t\t// Chac chacs are not placed as enemies but as tiles\n#define MAX_CHAC_CHACS\t\t\t\t\t4\n#define MAX_CHAC_CHACKS_QUEUED\t\t\t16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)\n#define CHAC_CHAC_DETECT_TILE\t\t\t39\n#define CHAC_CHACS_CLEAR\t\t\t\t// You are placing chac chacks from map but need the path to be clear\n\n// Monococos\n\n//#define ENABLE_MONOCOCOS\n//#define MONOCOCO_TYPE_A\t\t\t\t// Comment for 4 cells monococo (appearing/disappearing & hidden)\n#define MONOCOCO_BASE_SPRID\t\t\t\t56\n#define MONOCOCO_BASE_TIME_HIDDEN\t\t150\n#define MONOCOCO_BASE_TIME_APPEARING\t50\n#define MONOCOCO_BASE_TIME_ONBOARD\t\t50\n#define MONOCOCO_FIRE_COCO_AT\t\t\tMONOCOCO_BASE_TIME_ONBOARD/2\n\n// Shooties\n\n#define ENABLE_SHOOTIES\n#define SHOOTIES_BASE_SPRID\t\t\t\t40\n#define SHOOTIES_SHOOT_OFFS_X\t\t\t16\n#define SHOOTIES_SHOOT_OFFS_Y\t\t\t-2\n#define SHOOT_FREQ\t\t\t\t\t\t(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&(rand8()&0x1f)==0)\n\n// Punchies\n\n#define ENABLE_PUNCHIES\n#define PUNCHIES_BASE_SPRID\t\t\t\t32\n#define PUNCHIES_PUNCH_OFFS_X\t\t\t16\n#define PUNCHIES_PUNCH_OFFS_Y\t\t\t-7\n#define PUNCH_FREQ\t\t\t\t\t\t(pry+23>=en_y[gpit]&&pry<=en_y[gpit]+23&&((en_facing[gpit]&&en_x[gpit]>prx)||(en_facing[gpit]==0&&en_x[gpit]<prx))&&DELTA(prx,en_x [gpit]+4)<16)\n\n// Steady shooters\n\n//#define ENABLE_STEADY_SHOOTERS\n#define STEADY_SHOOTERS_BASE_SPRID\t\t44\n#define STEADY_SHOOTER_KILLABLE\n#define STEADY_SHOOTER_COUNT\t\t\t\t// If Killable, add to body count as well\n//#define STEADY_SHOOTERS_HARMLESS\t\t\t// Don't kill on touch.\n\n// Compiled enemies\n\n//#define ENABLE_COMPILED_ENEMS\n#define COMPILED_ENEMS_SHOOT\n#define COMPILED_ENEMS_BASE_SPRID\t\t48\n\n// Boioiongs\n\n//#define ENABLE_BOIOIONG\n#define BOIOIONG_G \t\t\t\t\t\t16\n#define BOIOIONG_VY_MAX\t\t\t\t\t256\n#define BOIOIONG_BASE_SPRID\t\t\t\t54\n//#define BOIOIONG_ACTIVE_BY_DEFAULT\t\t// Define and they are active by default\n//#define BOIOIONG_INITIAL_TIMER\t\t200\t// If active by default, time to be active in frames\n//#define BOIOIONG_AUTO_RESPAWN\n\n// Catacrocks\n\n//#define ENABLE_CATACROCKS\n#define CATACROCK_G\t\t\t\t\t\t16\n#define CATACROCK_MAX_V\t\t\t\t\t256\n#define CATACROCK_CROCK_FRAMES\t\t\t50\n#define CATACROCK_BASE_SPRID\t\t\t50\n\n// Cocos will get enabled automaticly on choosing monococos or shooties.\n\n//#define ENABLE_COCOS\n#define COCOS_ROUGH_AIM\t\t\t\t\t\t// Faster, less precise. Also longer code\n#define COCOS_MAX\t\t\t\t\t\t4\n#define COCO_V\t\t\t\t\t\t\t128\n//#define COCO_COLLIDES\n\n#define COCO_PATTERN\t\t\t\t\t0\n#define COCO_PALETTE \t\t\t\t\t0\n#define COCO_FAIR_D\t\t\t\t\t\t32\n\n// Carry directives\n\n//#define ENABLE_ONLY_ONE_OBJECT\t\t\t// Hotspots tupe 1 -> inventory (just 1)\n//#define ONLY_ONE_OBJECT_FLAG\t\t\t0\t// If def, use flag [.] instead of pinv\n\n// Easy objects mode: A range of hotspot id's are considered\n// 'objects'. The user can carry one of those. Contents of hotspots\n// can change in this mode.\n\n//#define ENABLE_EASY_OBJECTS\n\n#define HS_OBJ_EMPTY\t\t\t\t\t4\n#define HS_OBJ_MIN\t\t\t\t\t\t5\n#define HS_OBJ_MAX\t\t\t\t\t\t6\n#define HS_USE_OFFS\t\t\t\t\t\t2\n\n#define HS_TYPE_A \t\t\t\t\t\t// If defined, render receptors = HS_OBJ_EMPTY, object used = object\n\t\t\t\t\t\t\t\t\t\t// Otherwise, use its own graphics.\n#define HS_FIX_ON_USE\t\t\t\t\t// If defined, object N used at N+H_USE_OFFS becomes N+H_USE_OFFS*2\n\n// Silly Brawlers\n// --------------\n#define PLAYER_PUNCHES\t\t\t\t\t// When on floor\n#define PLAYER_PUNCH_OFFS_X\t\t\t\t15\n#define PLAYER_PUNCH_OFFS_Y\t\t\t\t-7\n\n#define PLAYER_KICKS\t\t\t\t\t// While airborne\n#define PLAYER_KICK_OFFS_X\t\t\t\t12\n#define PLAYER_KICK_OFFS_Y\t\t\t\t-3\n\n#define PLAYER_FROZEN_FRAMES\t\t\t16\t// Frames to be frozen when hit landed\n\n// Shooting behaviour\n// ------------------\n//#define PLAYER_CAN_FIRE \t\t\t\t\t// If defined, shooting engine is enabled.\n//#define PLAYER_CAN_FIRE_8_WAY\t\t\t\t// If defined, use diagonals\n#define PLAYER_BULLET_SPEED \t\t\t4\t// Pixels/frame. \n#define MAX_BULLETS \t\t\t\t\t4\t// Max number of bullets on screen. Be careful!.\n#define PLAYER_BULLET_Y_OFFSET\t\t\t6\t// vertical offset from the player's top.\n#define PLAYER_BULLET_X_OFFSET\t\t\t-4\t// vertical offset from the player's left/right.\n//#define PLAYER_BULLETS_MIN_KILLABLE \t3\t// If defined, only enemies >= N can be killed.\n//#define BULLETS_DONT_KILL\t\t\t\t\t// Bullets don't kill, but affect enemies otherwise\n\n// Special shooting\n//#define PLAYER_FIRE_RELOAD\t\t\t16\t// If defined # of frames until next shoot\n//#define PLAYER_CHARGE_AND_FIRE\t\t\t// If defined, press B to charge, release to fire\n\t#define PLAYER_CHARGE_MIN\t\t\t8\n\t#define PLAYER_CHARGE_MAX\t\t\t48\t// Min/max frames for charging\n//#define PLAYER_BULLET_LIFE\t\t\tpfiregauge\t// Max life. Can be whatever.\n//#define PLAYER_BULLET_FLICKERS\t\t8\t// Bullets flickers for N frames before dying, if defined\n\n//#define MAX_AMMO\t\t\t\t\t\t99\t// If defined, ammo is not infinite!\n\t#define AMMO_REFILL\t\t\t\t\t50\t// type 3 hotspots refill amo, using tile 20\n\t//#define INITIAL_AMMO \t\t\t\t0\t// If defined, ammo = X when entering game.\n\n#define BULLET_PALETTE\t\t\t\t\t3\n#define BULLET_PATTERN\t\t\t\t\t0\t// To paint the bullet. Can be an expresion.\n\n// Scripting\n// ---------\n\n//#define ACTIVATE_SCRIPTING\t\t\t// Activates msc scripting and flag related stuff.\n//#define CLEAR_FLAGS\t\t\t\t\t// Zero all flags when entering a level\n\n//#define ENABLE_EXTERN_CODE\t\t\t// Enables custom code to be run from the script using EXTERN n\n//#define ENABLE_FIRE_ZONE\t\t\t\t// Allows to define a zone which auto-triggers \"FIRE\"\n\n// Interactives\n// ------------\n\n//#define ENABLE_INTERACTIVES\t\t\t\t// Graphical flag representations!\n#define INTERACTIVES_MAX \t\t\t\t4\t// As per screen\n#define FLAG_INVENTORY\t\t\t\t\t0\n//#define INTERACTIVES_ONLY_SPRITES\t\t\t// If you are using other means for items and just need sprites\n\n// Top view:\n// ---------\n\n//#define PLAYER_TOP_DOWN            \t// Enable top view.\n//#define TOP_OVER_SIDE              \t// UP/DOWN has priority over LEFT/RIGHT\n\n// Side view:\n// ----------\n\n// Choose ONE or SEVERAL of those. \n// If you choose several, use the vertical_engine_type variable to select\n\n#define PLAYER_HAS_JUMP\t\t\t\t\t// If defined, player is able to jump.\n//#define PLAYER_AUTO_JUMP\t\t\t\t// Automatic jump when hitting the floor\n//#define PLAYER_SWIMS\t\t\t\t\t// If defined, player swims a la Ninjajar!\n//#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac\n\n// Extra configuration for side view:\n\n//#define PLAYER_JUMP_TYPE_MK2\t\t\t// Use MK2 method for jump / gravity / release\n//#define PLAYER_STEPS_ON_ENEMS\t\t\t// If defined, stepping on enemies kills them\n//#define PLAYER_STEPS_STRICT\t\t\t// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN\n//#define PLAYER_SAFE_LANDING\t\t\t// Step over vertical inverts direction\n//#define PLAYER_STEPS_MIN_KILLABLE     0xff\t// Only kill enemies with id >= PLAYER_STEPS_MIN_KILLABLE\n\t\t\t\t\t\t\t\t\t\t\t\t// 0xff = Nobody\n//#define PLAYER_SPINS\t\t\t\t\t// Spins on DOWN and JUMP and kills baddies\n\n// ============================================================================\n// III. Screen configuration\n// ============================================================================\n\n// This sections defines how stuff is rendered, where to show counters, etcetera\n\n#define LIFE_X\t\t\t\t\t7\t\t//\n#define LIFE_Y\t\t\t\t\t3\t\t// Life gauge counter character coordinates\n\n#define OBJECTS_X\t\t\t\t18\t\t//\n#define OBJECTS_Y\t\t\t\t3\t\t// Objects counter character coordinates\n#define OBJECTS_REMAINING\t\t\t\t// Show # remaining instead of got\n\n#define KEYS_X\t\t\t\t\t28\t\t//\n#define KEYS_Y\t\t\t\t\t3\t\t// Keys counter character coordinates\n\n//#define KILLED_X\t\t\t\t16\t\t//\n//#define KILLED_Y\t\t\t\t2\t\t// Kills counter character coordinates\n\n//#define AMMO_X\t\t\t\t8\t\t// \n//#define AMMO_Y\t\t\t\t2\t\t// Ammo counter character coordinates\n\n//#define HS_INV_X\t\t\t\t160\t\t//\n//#define HS_INV_Y\t\t\t\t15\t\t// Object you are carrying\n\n//#define TIMER_X\t\t\t\t0\t\t//\n//#define TIMER_Y\t\t\t\t5\t\t// Current timer value\n\n// Text\n//#define LINE_OF_TEXT\t\t\t26\t\t// If defined, scripts can show text @ Y = #\n//#define LINE_OF_TEXT_X\t\t1\t\t// X coordinate.\n\n// ============================================================================\n// IV. Player movement configuration\n// ============================================================================\n\n// This section is used to define which constants are used in the gravity/acceleration engine.\n// If a side-view engine is configured, we have to define vertical and horizontal constants\n// separately. If a top-view engine is configured instead, the horizontal values are also\n// applied to the vertical component, vertical values are ignored.\n\n// IV.1. Vertical movement. Only for side-view.\n\n#define PLAYER_VY_FALLING_MAX\t256\t\t// Max. velocity when falling\n#define PLAYER_VY_FALLING_MIN\t64\t\t// Use for animating if you need\n#define PLAYER_VY_SINKING\t\t2\n#define PLAYER_G\t\t\t\t16\t\t// Gravity\n\n#define PLAYER_VY_JUMP_INITIAL\t64\n#define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128\n#define PLAYER_VY_JUMP_MAX\t\t192\t\t// Max. velocity when jumping\n#define PLAYER_AY_JUMP \t\t\t12\t\t// Jumpin acceleration \n\n#define PLAYER_AY_JETPAC\t\t32\t\t// Jetpac increment\n#define PLAYER_VY_JETPAC_MAX\t256\t\t// Max jetpac vertical speed\n\n#define PLAYER_AY_SWIM\t\t\t8\t\t// Swimming acceleration.\n#define PLAYER_VY_SWIM_MAX\t\t64\t\t// Swimming max. speed\n\n#define PLAYER_VY_LADDERS\t\t96\n\n#define PLAYER_AY_FLOAT\t\t\t16\t\n#define PLAYER_VY_FLOAT_MAX\t\t256\n\n#define PLAYER_AY_UNTHRUST \t\t8 \t\t// Used in the Autojump engine.\n\n// IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)\n// (Used if PLAYER_JUMP_TYPE_MK2 is defined)\n#define PLAYER_G_MK2_JUMPING\t\t4\n#define PLAYER_VY_MK2_JUMP_INITIAL\t208\n#define PLAYER_VY_MK2_JUMP_RELEASE\t96\n#define PLAYER_VY_MK2_JUMP_A_STEPS \t16\n#define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296\n#define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32\t// For trampolines\n\n// IV.2. Horizontal (side view) or general (top view) movement.\n\n#define PLAYER_VX_MAX\t\t\t128\t\t// Max. horizontal speed\n#define PLAYER_VX_CONVEYORS \t64\n#define PLAYER_AX\t\t\t\t16\t\t// Horizontal acceleration\n#define PLAYER_AX_ICE\t\t\t4\n#define PLAYER_RX\t\t\t\t16\t\t// Horizontal friction\n#define PLAYER_RX_ICE\t\t\t2\n\n#define PLAYER_VX_MIN (PLAYER_AX << 2)\n\n#define PLAYER_V_REBOUND\t\t224\n\n// Animation cells \n\n#ifdef PLAYER_TOP_DOWN\n\n\t// Cell definitions for top-down view\n\n\t#define CELL_FACING_RIGHT \t0\n\t#define CELL_FACING_LEFT \t6\n\t#define CELL_FACING_UP \t\t18\n\t#define CELL_FACING_DOWN \t12\n\n\t#define CELL_IDLE\t\t\t0\n\t#define CELL_WALK_CYCLE\t\t1\n\t#define CELL_PUSHING\t\t5\n\n\t#define CELL_USE\t\t\t24\n\n#else\n\n\t// Cell definitions for side view\n\n\t#define CELL_FACING_RIGHT\t0\n\t#define CELL_FACING_LEFT\t10\n\n\t#define CELL_IDLE\t\t\t0\n\t#define CELL_WALK_INIT\t\t1\n\t#define CELL_WALK_CYCLE\t\t2\n\t#define CELL_AIRBORNE\t\t5\n\n\t#define CELL_SPIN_CYCLE\t\t5\n\n\t#define CELL_ASCENDING\t\t6\n\t#define CELL_DESCENDING\t\t7\n\n\t#define CELL_SWIM_CYCLE\t\t6\n\n\t#define CELL_USE\t\t\t6\n\n\t#define CELL_PUNCHING\t\t8\n\t#define CELL_KICKING\t\t9\n\n\t#define CELL_HIT \t\t\t9\n\n\t#define CELL_CLIMB_CYCLE\t20\n\t#define CELL_CLIMB_HALF\t\t29\n#endif\n\n// Music\n\n#define MUSIC_INGAME \t\t\t0\n\n// SFX\n\n#define SFX_START\t\t\t\t0\n#define SFX_TILE\t\t\t\t1\n#define SFX_OBJECT\t\t\t\t2\n#define SFX_USE\t\t\t\t\t3\n#define SFX_TRAMPOLINE\t\t\t3\n#define SFX_PHIT\t\t\t\t4\n#define SFX_DUMMY1\t\t\t\t5\n#define SFX_ENHIT \t\t\t\t6\n#define SFX_DUMMY2\t\t\t\t7\n#define SFX_JUMP\t\t\t\t8\n#define SFX_BULLET\t\t\t\t9\n#define SFX_COCO\t\t\t\t10\n#define SFX_SPRING\t\t\t\t11\n#define SFX_COUNT\t\t\t\t12\n#define SFX_BREAKH\t\t\t\t13\n#define SFX_HITTER\t\t\t\t14\n#define SFX_STEPON\t\t\t\t15\n#define SFX_FLOAT\t\t\t\t16\n#define SFX_BREAKB\t\t\t\t17\n#define SFX_RING \t\t\t\t18\n#define SFX_FANFARE\t\t\t\t19\n",
+			"file": "testers/02_tester_punchy/dev/config.h",
+			"file_size": 23858,
+			"file_write_time": 131830424789177460,
 			"settings":
 			{
-				"buffer_size": 1458,
+				"buffer_size": 23166,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/engine/bolts.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// Map renderer complex:\n\n// 1. render everything to map_buff.\n// 2. paint from map_buff\n\n// Between 1 and 2 you can stuff whatever modifications you like.\n\nvoid add_tile (void) {\n\t#ifdef DOUBLE_WIDTH\n\t\tbuff_ptr [rdm] = rda;\n\t#else\n\t\tmap_buff [rdm] = rda;\n\t#endif\n\t++ rdm;\n}\n\n#ifdef DOUBLE_WIDTH\nvoid draw_half_scr (void)\n#else\nvoid draw_scr (void)\n#endif\n{\n\t#ifdef DOUBLE_WIDTH\n\t\tbuff_ptr = map_buff + buff_offset;\n\t\tattr_ptr = map_attr + buff_offset;\n\t#endif\n\n\t// Draw Map\n\n\trdm = 0;\n\n\t#ifdef MAP_FORMAT_PACKED\n\t\t// Get pointer\n\t\tgp_gen = c_map + (n_pant << 6) + (n_pant << 5); \n\t\t\n\t\t// Draw packed\n\t\trdit = 96; while (rdit --) {\n\t\t\trdt = *gp_gen ++;\n\t\t\trda = rdt >> 4; add_tile ();\n\t\t\trda = rdt & 15; add_tile ();\n\t\t}\n\t#endif\n\n\t#ifdef MAP_FORMAT_RLE16\n\t\trdx = rdy = 0;\n\n\t\t// Get pointer\n\t\tgp_gen = c_map [n_pant];\n\n\t\t// Packed or RLE'd?\n\t\tif (rdit = *gp_gen ++) {\n\t\t\twhile (rdit) {\n\t\t\t\trdct = get_byte ();\n\t\t\t\tif (rdct & 0xf0) {\n\t\t\t\t\t// String\n\t\t\t\t\trdct = 1 + (rdct & 0x0f);\n\t\t\t\t\twhile (rdct --) {\n\t\t\t\t\t\trdt = get_byte ();\n\t\t\t\t\t\trda = rdt >> 4; add_tile ();\n\t\t\t\t\t\tif (rdy < 12) { rda = rdt & 15;\t add_tile (); }\n\t\t\t\t\t}\n\t\t\t\t} else {\n\t\t\t\t\t// Counter\n\t\t\t\t\trda = rdct & 0x0f;\n\t\t\t\t\trdct = get_byte ();\n\t\t\t\t\twhile (rdct --) add_tile ();\n\t\t\t\t}\n\t\t\t}\n\t\t} else {\n\t\t\trdit = 96; while (rdit --) {\n\t\t\t\trdt = *gp_gen ++;\n\t\t\t\trda = rdt >> 4; add_tile ();\n\t\t\t\trda = rdt & 15; add_tile ();\n\t\t\t}\n\t\t}\n\t#endif\n\n\t#ifdef MAP_FORMAT_RLE53\n\t\t// Get pointer\n\t\tgp_gen = c_map [n_pant];\n\n\t\twhile (rdm < 192) {\n\t\t\t// rdt = *gp_gen ++;\n\t\t\tSET_FROM_PTR (rdt, gp_gen); \n\t\t\tgp_gen ++;\n\t\t\trda = rdt & 0x1f;\n\t\t\t\n\t\t\trdct = rdt;\n\t\t\twhile (rdct >= 32) {\n\t\t\t\tadd_tile (); rdct -= 32;\n\t\t\t} add_tile ();\n\t\t}\n\t#endif\n\n\t#ifdef MAP_FORMAT_RLE44\n\t\t// Get pointer\n\t\tgp_gen = c_map [n_pant];\n\n\t\twhile (rdm < 192) {\n\t\t\t// rdt = *gp_gen ++;\n\t\t\tSET_FROM_PTR (rdt, gp_gen); \n\t\t\tgp_gen ++;\n\t\t\trda = rdt & 0x0f;\n\t\t\t\n\t\t\trdct = rdt;\n\t\t\twhile (rdct >= 16) {\n\t\t\t\tadd_tile (); rdct -= 16;\n\t\t\t} add_tile ();\n\t\t}\n\t#endif\n\n\t#ifdef MAP_FORMAT_RLE53_CHRROM\n\t\tbankswitch (c_map_chr_rom_bank);\n\t\tvram_adr (c_map [n_pant]);\n\t\trda = VRAM_READ; \t// Dummy read.\n\t\t\n\t\t// UNRLE into scr_buff\n\t\twhile (rdm < 192) {\n\t\t\trdt = VRAM_READ;\n\t\t\trda = rdt & 0x1f;\n\t\t\t\n\t\t\trdct = rdt;\n\t\t\twhile (rdct >= 32) {\n\t\t\t\tadd_tile (); rdct -= 32;\n\t\t\t} add_tile ();\n\t\t}\n\t#endif\n\n\t#ifdef MAP_FORMAT_RLE44_CHRROM\n\t\tbankswitch (c_map_chr_rom_bank);\n\t\tvram_adr (c_map [n_pant]);\n\t\trdt = VRAM_READ; \t// Dummy read.\n\t\t\n\t\t// UNRLE into scr_buff\n\t\twhile (rdm < 192) {\n\t\t\trdt = VRAM_READ;\n\t\t\trda = rdt & 0x0f;\n\n\t\t\trdct = rdt;\n\t\t\twhile (rdct >= 16) {\n\t\t\t\tadd_tile (); rdct -= 16;\n\t\t\t} add_tile ();\n\t\t}\n\t#endif\n\n\t// Edit this file to alter map_buff the way you need:\n\t#include \"my/map_renderer_customization.h\"\n\n\t// Draw decorations\n\n\t#ifdef MAP_WITH_DECORATIONS\n\t\t// Draw decorations\n\t\tif (c_decos) {\n\t\t\t#if defined (MAP_FORMAT_PACKED) || defined (MAP_FORMAT_RLE16)\n\t\t\t\tif (c_decos [n_pant]) {\n\t\t\t\t\tgp_gen = c_decos [n_pant];\n\t\t\t# else \n\t\t\t\t{\n\t\t\t#endif\n\n\t\t\t\t#if defined (MAP_FORMAT_RLE44_CHRROM) || defined (MAP_FORMAT_RLE53)\n\t\t\t\t\twhile (rda = VRAM_READ) {\n\t\t\t\t\t\tif (rda & 0x80) {\n\t\t\t\t\t\t\trda &= 0x7F;\n\t\t\t\t\t\t\trdct = 1;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\trdct = VRAM_READ;\n\t\t\t\t\t\t}\n\t\t\t\t\t\twhile (rdct --) {\n\t\t\t\t\t\t\trdm = VRAM_READ;\n\t\t\t\t\t\t\tadd_tile ();\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t#else\n\t\t\t\t\twhile (rda = *gp_gen ++) {\n\t\t\t\t\t\tif (rda & 0x80) {\n\t\t\t\t\t\t\trda &= 0x7F;\n\t\t\t\t\t\t\trdct = 1;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\t// rdct = *gp_gen ++;\n\t\t\t\t\t\t\tSET_FROM_PTR (rdct, gp_gen); \n\t\t\t\t\t\t\tgp_gen ++;\n\t\t\t\t\t\t}\n\t\t\t\t\t\twhile (rdct --) {\n\t\t\t\t\t\t\t// rdm = *gp_gen ++;\n\t\t\t\t\t\t\tSET_FROM_PTR (rdm, gp_gen); \n\t\t\t\t\t\t\tgp_gen ++;\n\t\t\t\t\t\t\tadd_tile ();\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t#endif\n\t\t\t}\n\t\t}\n\t#endif\n\n\t// Clear open locks\n\n\t#ifndef DEACTIVATE_KEYS\t\n\t\tgp_gen = c_locks; rda = 0;\n\t\tgpit = c_max_bolts; while (gpit --) {\n\t\t\t// rdb = *gp_gen ++;\n\t\t\tSET_FROM_PTR (rdb, gp_gen); gp_gen ++;\n\t\t\t// rdm = *gp_gen ++;\n\t\t\tSET_FROM_PTR (rdm, gp_gen); gp_gen ++;\n\t\t\tif (n_pant == rdb) {\n\t\t\t\tif (!lkact [gpit]) add_tile ();\n\t\t\t}\n\t\t}\t\n\t#endif\n\n\t// Now blit the buffer\n\n\t#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)\n\t\trdd = 0;\n\t#endif\n\n\t_x = 0; _y = TOP_ADJUST; \n\t#ifdef DOUBLE_WIDTH\n\t\tgp_ram = buff_ptr;\n\t#else\n\t\tgp_ram = map_buff;\n\t#endif\n\tfor (rdm = 0; rdm < 192; rdm ++) {\n\t\tSET_FROM_PTR (rdt, gp_ram); gp_ram ++;\n\n\t\t#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)\t\t\t\n\t\t\tif (tile_got [rdd] & bits [rdm & 7]) rdt = 0;\n\t\t\tif ((rdm & 7) == 7) ++ rdd;\n\t\t#endif\n\n\t\t#ifdef DOUBLE_WIDTH\n\t\t\tattr_ptr [rdm] = c_behs [rdt];\n\t\t#else\n\t\t\tmap_attr [rdm] = c_behs [rdt];\n\t\t#endif\n\n\t\t#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)\n\t\t\tbrk_buff [rdm] = 1;\n\t\t#endif\n\n\t\t#include \"engine/mapmods/map_detectors.h\"\n\n\t\t_t = rdt; draw_tile ();\n\t\t_x = (_x + 2) & 0x1f; if (!_x) _y += 2;\n\t}\n\n\t#if defined (ENABLE_TILE_CHAC_CHAC) && defined (CHAC_CHACS_CLEAR)\n\t\tgpit = max_chac_chacs; while (gpit --) {\n\t\t\t_t = CHAC_CHAC_BASE_TILE + 6;\n\t\t\t_x = (chac_chacs_yx [gpit] & 0xf) << 1;\n\t\t\t_y = ((chac_chacs_yx [gpit] & 0xf0) >> 3) + TOP_ADJUST;\n\t\t\tdraw_tile ();\n\t\t\t_y += 2;\n\t\t\tdraw_tile ();\n\t\t\t_y += 2;\n\t\t\tdraw_tile ();\n\t\t}\n\t#endif\n\n\t#ifdef DOUBLE_WIDTH\n\t\tvram_write (attr_table + attr_table_offset, NAMETABLE_BASE + 0x3c0, 64);\n\t#else\n\t\tvram_write (attr_table, 0x23c0, 64);\n\t#endif\n}\n",
+			"file": "testers/02_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
+			"file_size": 5547,
+			"file_write_time": 131830425304577572,
 			"settings":
 			{
-				"buffer_size": 224,
+				"buffer_size": 5279,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/engine/printer.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// Main loop & helpers\n\nvoid game_init (void) {\n\n\twin_level = game_over = 0;\n\n\t// Assets setup. Selects tileset, map, palettes, etc.\n\t#include \"mainloop/asset_setup.h\"\n\n\tpal_bg (c_pal_bg);\n\tpal_spr (c_pal_fg);\n\n\tcls ();\n\n\tdraw_game_frame ();\n\t//clean_gauge ();\n\n\thotspots_load ();\n\t#ifndef DEACTIVATE_KEYS\t\t\n\t\t// bolts_load\n\t\tmemfill (lkact, 1, c_max_bolts);\n\t#endif\t\t\n\n\tif (!warp_to_level)\t{\n\t\tn_pant = SCR_INI;\n\t\tpx = (4 + (PLAYER_INI_X << 4)) << FIXBITS;\n\t\tpy = (PLAYER_INI_Y << 4) << FIXBITS;\n\t}\n\tplayer_to_pixels ();\n\tplayer_init ();\n\t\t\n\t#ifdef PERSISTENT_ENEMIES\n\t\tenems_persistent_load ();\n\t#endif\t\t\n\n\t#ifdef PERSISTENT_DEATHS\n\t\tenems_persistent_deaths_load ();\n\t#endif\n\n\t#ifndef DEACTIVATE_OBJECTS\n\t\tpobjs = 0;\n\t#endif\n\n\t#ifdef HOTSPOT_TYPE_STAR\n\t\tpstars = 0;\n\t#endif\n\n\t#ifndef DEACTIVATE_KEYS\t\n\t\tpkeys = 0;\n\t#endif\n\n\t#ifdef ENABLE_RESONATORS\n\t\tres_on = 0;\n\t\tres_disable = 0;\n\t#endif\n\n\t#ifdef ENABLE_USE_ANIM\n\t\tif (!warp_to_level) use_ct = 0;\n\t#endif\n\n\t#ifdef ENABLE_NO\n\t\tno_ct = 0;\n\t#endif\t\n\n\t#ifdef ENABLE_PROPELLERS\n\t\t#ifdef PROPELLERS_ON_BY_DEFAULT\n\t\t\tpropellers_on = 1;\n\t\t#else\n\t\t\tpropellers_on = 0;\n\t\t#endif\n\t#endif\n\n\t#ifdef ENABLE_SPRINGS\n\t\t#ifdef SPRINGS_ON_BY_DEFAULT\n\t\t\tsprings_on = 1;\n\t\t#else\n\t\t\tsprings_on = 0;\n\t\t#endif\n\t#endif\n\n\t#ifdef ENABLE_TIMER\n\t\t#ifndef TIMER_RESET_ON_ENTER\n\t\t\ttimer = TIMER_INITIAL;\n\t\t\ttimer_frames = 50;\n\t\t\ttimer_zero = 0;\n\t\t\totimer = 0xff;\n\t\t#endif\n\t\t#ifdef TIMER_START_ON\n\t\t\ttimer_on = 1;\n\t\t#else\n\t\t\ttimer_on = 0;\n\t\t#endif\n\t#endif\n\n\t#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)\n\t\t// Clear tile_got persistence\n\t\tvram_adr (MAP_CLEAR_LIST_ADDRESS);\n\t\tvram_fill (0, MAP_SIZE*24);\n\t#endif\n\n\thalf_life = 0;\n\tframe_counter = 0;\n\tolife = oammo = oobjs = okeys = 0xff;\n\tokilled = 0xff;\n\n\t#include \"my/extra_inits.h\"\n\n\t#if defined (ENABLE_INTERACTIVES) && defined (INTERACTIVES_FROM_CODE)\n\t\t#include \"my/interactives_setup.h\"\n\t#endif\n}\n\nvoid prepare_scr (void) {\n\tif (!ft) {\n\t\tfade_out (); \n\t\tppu_off ();\n\t\t#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)\n\t\t\t// Update tile_got persistence\n\t\t\trda = on_pant << 3;\n\t\t\tvram_write (tile_got, MAP_CLEAR_LIST_ADDRESS + (rda << 1) + rda, 24);\n\t\t#endif\n\t} else {\n\t\tft = 0;\n\t\tppu_off ();\n\t}\n\n\tclear_update_list ();\n\n\t#ifdef ENABLE_PROPELLERS\n\t\t// Clear propellers\n\t\tprp_idx = 0;\n\t#endif\n\n\t#ifdef PERSISTENT_ENEMIES\n\t\t// Preserve enems\n\t\tenems_persistent_update ();\n\t#endif\n\n\tenems_load ();\n\thotspots_create ();\t\n\n\t#ifdef ENABLE_COCOS\n\t\tcocos_init ();\n\t#endif\t\n\n\t#if defined (ACTIVATE_SCRIPTING) && defined (ENABLE_FIRE_ZONE)\n\t\tf_zone_ac = 0;\n\t\tfzx1 = fzx2 = fzy1 = fzy2 = 240;\n\t#endif\n\n\t#ifdef ENABLE_SHINES\n\t\tshine_active_ct = 0;\n\t\tmax_shines = 0;\n\t#endif\n\n\t#ifdef ENABLE_TILE_CHAC_CHAC\n\t\tchac_chacs_queue_write = chac_chacs_queue_read = 0;\n\t\tmax_chac_chacs = 0;\n\t#endif\n\n\t#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)\n\t\t// Read tile_got persistence\n\t\trda = n_pant << 3;\n\t\tvram_read (tile_got, MAP_CLEAR_LIST_ADDRESS + (rda << 1) + rda, 24);\n\t#endif\n\n\t\tdraw_scr ();\n\n\t#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)\n\t\tdo_process_breakable = 0;\n\t\tgpit = BREAKABLE_MAX; while (gpit --) brkf [gpit] = 0;\n\t#endif\n\n\t#ifdef LINE_OF_TEXT\n\t\t_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT;\n\t\tpr_str (\"                              \");\n\t#endif\n\n\t#if defined (DIE_AND_RESPAWN) && (defined (PLAYER_SWIMS) || defined (PLAYER_TOP_DOWN))\n\t\tplayer_register_safe_spot ();\n\t#endif\n\n\t#ifdef PLAYER_CAN_FIRE\n\t\tfor (gpit = 0; gpit < MAX_BULLETS; gpit ++) {\n\t\t\tb_slots [gpit] = gpit; bst [gpit] = 0;\n\t\t}\n\t\tb_slots_i = MAX_BULLETS;\n\t#endif\n\n\t#ifdef ENABLE_INTERACTIVES\n\t\t#ifdef INTERACTIVES_FROM_CODE\n\t\t\tinteractives_create ();\n\t\t#else\n\t\t\tinteractives_index = 0;\n\t\t#endif\n\n\t\tinteractives_interact_with = 0xff;\n\t#endif\n\t\n\t// Reenable sprites and tiles now we are finished.\n\t#ifdef CNROM\n\t\tbankswitch (l_chr_rom_bank [level]);\n\t#endif\n\n\tppu_on_all ();\n\n\t#ifdef ACTIVATE_SCRIPTING\n\t\t#if defined (ENABLE_PUSHED_SCRIPT)\n\t\t\tjust_pushed = 0;\n\t\t#endif\n\t\t#if defined (ENABLE_INTERACTIVES)\n\t\t\tjust_interacted = 0;\n\t\t#endif\n\t\t// Entering any script\n\t\trun_script (2 * MAP_SIZE + 1);\n\t\t// This room script\n\t\trun_script (n_pant << 1);\n\t#endif\n\n\t#include \"my/on_entering_screen.h\"\n\n\tgpit = 3; while (gpit --) en_spr_id [gpit] = en_s [gpit];\n\n\toam_index = 4;\n\tprx = px >> FIXBITS; pry = py >> FIXBITS;\n\t#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)\n\t\tphitteract = 0;\n\t#endif\t\n\n\tplayer_move ();\n\t#ifdef DOUBLE_WIDTH\n\t\tcalc_scroll_pos ();\n\t#endif\n\tenems_move ();\n\n\tif (hrt) hotspots_paint ();\n\t\n\t#ifdef ENABLE_INTERACTIVES\t\n\t\tinteractives_paint ();\n\t#endif\n\n\t#ifdef ENABLE_TIMER\n\t\t#ifdef TIMER_RESET_ON_ENTER\n\t\t\ttimer = TIMER_INITIAL;\n\t\t\ttimer_frames = 50;\n\t\t\ttimer_zero = 0;\n\t\t\totimer = 0xff;\n\t\t#endif\n\t#endif\n\n\thud_update ();\n\tupdate_cycle ();\n\tfade_in ();\n}\n\nvoid game_loop (void) {\n\t#ifdef MULTI_LEVEL\n\t\tmusic_play (l_music [level]);\n\t#else\n\t\tmusic_play (MUSIC_INGAME);\n\t#endif\n\n\tclear_update_list ();\n\tset_vram_update (UPDATE_LIST_SIZE, update_list);\n\n\ton_pant = 99; ft = 1; fade_delay = 1;\n\n\t// MAIN LOOP\n\n\tpal_bright (0);\n\tppu_on_all ();\n\t\n\t#ifdef ACTIVATE_SCRIPTING\n\t\t#ifdef CLEAR_FLAGS\n\t\t\tmsc_clear_flags ();\n\t\t#endif\n\t\t\n\t\t// Entering game script\n\t\trun_script (2 * MAP_SIZE);\n\t#endif\n\n\tntsc_frame = level_reset = warp_to_level = 0; \n\toam_index = 4; ticker = 50;\n\t\n\twhile (1) {\n\n\t\t// Update hud\n\n\t\t#ifdef ACTIVATE_SCRIPTING\n\t\t\tif (n_pant != 0xfe && on_pant != 0xfe) \n\t\t#endif\n\t\t\thud_update ();\n\n\t\t// Finish him\n\n\t\tif (pkill) player_kill ();\n\t\tif (game_over || level_reset) break;\t\t\t\n\n\t\t// Flick the screen\n\n\t\tflick_override = 0;\n\t\t#include \"my/custom_flickscreen.h\"\n\t\tif (flick_override == 0) {\n\t\t\tflickscreen_do_horizontal ();\n\t\t\tflickscreen_do_vertical ();\n\t\t}\n\t\t\n\t\t// Change screen ?\n\n\t\tif (on_pant != n_pant) {\n\t\t\tprepare_scr ();\n\t\t\ton_pant = n_pant;\n\t\t}\n\n\t\t// Relocate player if spawned on a broken tile\n\n\t\t#include \"mainloop/relocate_player.h\"\n\n\t\t// Shake the screen ? \n\n\t\t#ifdef ENABLE_SHAKER\n\t\t\t#include \"mainloop/shaker.h\"\n\t\t#endif\n\n\t\t// Effects\n\n\t\t#include \"my/effects.h\"\n\n\t\t// Finish frame and wait for NMI\n\n\t\tupdate_cycle ();\n\t\t\n\t\t// Poll pads\n\n\t\tpad_read ();\n\t\ta_button = (pad_this_frame & PAD_A);\n\t\tb_button = (pad_this_frame & PAD_B);\n\n\t\t// Update actors if not paused...\n\n\t\tntsc_frame ++; if (ntsc_frame == 6) ntsc_frame = 0;\n\n\t\tif (paused == 0 && (ntsc == 0 || ntsc_frame)) {\n\t\t\t// Count frames\t\t\n\t\t\tif (ticker) -- ticker; else ticker = 50;\n\t\t\thalf_life ^= 1;\n\t\t\t++ frame_counter;\n\n\t\t\t// Detect interactions\n\n\t\t\t#ifdef ENABLE_INTERACTIVES\n\t\t\t\t#include \"mainloop/interactives.h\"\n\t\t\t#endif\t\n\n\t\t\t// Update / collide hotspots\n\n\t\t\t#include \"mainloop/hotspots.h\"\n\n\t\t\t// Automatic scripting calls (USE_ANIM & fire zone)\n\n\t\t\t#ifdef ACTIVATE_SCRIPTING\n\t\t\t\t#include \"mainloop/scripting.h\"\n\t\t\t#endif\n\t\t\t\n\t\t\t// Update player\n\n\t\t\tif (!warp_to_level) {\n\t\t\t\tplayer_move ();\n\t\t\t}\n\n\t\t\t// Scroll position\n\n\t\t\t#ifdef DOUBLE_WIDTH\n\t\t\t\tcalc_scroll_pos ();\n\t\t\t#endif\n\n\t\t\t// Timer\n\n\t\t\t#ifdef ENABLE_TIMER\n\t\t\t\t#include \"mainloop/timer.h\"\n\t\t\t#endif\n\n\t\t\t// Extra checks\n\n\t\t\t#include \"my/extra_checks.h\"\n\n\t\t\t// Win level condition\n\n\t\t\t#include \"mainloop/win_level_condition.h\"\n\n\t\t\t// Update propellers\n\n\t\t\t#ifdef ENABLE_PROPELLERS\n\t\t\t\tif (propellers_on) propellers_do ();\n\t\t\t#endif\n\n\t\t\t// Update bullets\n\n\t\t\t#ifdef PLAYER_CAN_FIRE\n\t\t\t\tbullets_move ();\n\t\t\t#endif\n\n\t\t\t// Paint player\n\n\t\t\toam_index_player = oam_index; \n\t\t\tif (!warp_to_level)\tplayer_render ();\n\n\t\t\t// Update enemies\n\t\t\n\t\t\tenems_move ();\n\n\t\t\t// Update cocos\n\n\t\t\t#ifdef ENABLE_COCOS\n\t\t\t\tcocos_do ();\n\t\t\t#endif\t\t\t\n\n\t\t\t// Warp to level\n\n\t\t\tif (warp_to_level) {\n\t\t\t\tupdate_cycle (); music_stop (); break;\n\t\t\t}\n\n\t\t\t// Do resonators\n\n\t\t\t#ifdef ENABLE_RESONATORS\n\t\t\t\t#include \"mainloop/resonators.h\"\n\t\t\t#endif\n\n\t\t\t// Paint hotspots\n\n\t\t\tif (hrt) hotspots_paint ();\n\n\t\t\t// Paint interactives\n\n\t\t\t#ifdef ENABLE_INTERACTIVES\n\t\t\t\tinteractives_paint ();\n\t\t\t#endif\n\n\t\t\t// Do breakable tiles\n\n\t\t\t#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_ANIM)\n\t\t\t\tif (do_process_breakable) breakable_do_anim ();\n\t\t\t#endif\n\n\t\t\t// Update shines\n\n\t\t\t#ifdef ENABLE_SHINES\n\t\t\t\tshines_do ();\n\t\t\t#endif\n\n\t\t\t// Update no\n\n\t\t\t#ifdef ENABLE_NO\n\t\t\t\t#include \"mainloop/no.h\"\n\t\t\t#endif\n\n\t\t\t// Update chac-chacs\n\n\t\t\t#ifdef ENABLE_TILE_CHAC_CHAC\n\t\t\t\tchac_chacs_do ();\n\t\t\t#endif\n\n\t\t\t#include \"my/extra_routines.h\"\n\t\t}\n\n\t\t// Cheat to skip level\n\n\t\t#include \"mainloop/cheat.h\"\n\n\t\t// Pause\n\n\t\t#include \"mainloop/pause.h\"\n\t}\n\n\tfade_delay = 4;\n\tmusic_stop ();\n\tfade_out ();\n\tset_vram_update (0, 0);\n\tppu_off ();\n\toam_clear ();\n}\n",
+			"file": "testers/02_tester_punchy/dev/mainloop.h",
+			"file_size": 8998,
+			"file_write_time": 131830425426993298,
 			"settings":
 			{
-				"buffer_size": 4479,
+				"buffer_size": 8513,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/ram/bss.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// Map renderer double uses map_renderer_complex.\n\nvoid draw_scr (void) {\n\tw_pant = n_pant;\n\tnametable_base = 0x2000;\n\tbuff_offset = attr_table_offset = 0;\n\tdraw_half_scr ();\n\tn_pant ++;\n\tnametable_base = 0x2400;\n\tbuff_offset = 192;\n\tattr_table_offset = 64;\n\tdraw_half_scr ();\n\tn_pant = w_pant; \n}\n",
+			"file": "testers/02_tester_punchy/dev/engine/mapmods/map_renderer_double.h",
+			"file_size": 379,
+			"file_write_time": 131830418611872400,
 			"settings":
 			{
-				"buffer_size": 15949,
+				"buffer_size": 362,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/na_th/Desktop/git/nes_work/gokumal/poc/neslib-pantanow.s",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// LUTs\n\nconst unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};\n\n#ifdef ENABLE_MONOCOCOS\n\tconst unsigned char monococo_state_times [] = {\n\t\tMONOCOCO_BASE_TIME_HIDDEN, MONOCOCO_BASE_TIME_APPEARING, MONOCOCO_BASE_TIME_ONBOARD, MONOCOCO_BASE_TIME_APPEARING\n\t};\n#endif\n\n#if defined (ENABLE_COCOS) && defined(COCOS_ENABLE_LINEAR)\n\t// left, up, right, down\n\tconst signed int coco_dx [] = { -COCO_V, 0, COCO_V, 0 };\n\tconst signed int coco_dy [] = { 0, -COCO_V, 0, COCO_V };\n#endif\n\n#if defined (ENABLE_COMPILED_ENEMS)\n\t// Directions are\n\t// LEFT DOWNLEFT DOWN DOWNRIGHT RIGHT UPRIGHT UP UPLEFT\n\t// 0    1        2    3         4     5       6  7\n\tconst signed char endx [] = {-1, -1, 0, 1, 1, 1, 0, -1};\n\tconst signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};\n#endif\n\n#if defined (ENABLE_TILE_CHAC_CHAC) \n\tconst unsigned char chac_chacs_times [] = {\n\t\t0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3\n\t};\n\n\tconst unsigned char chac_chacs_t1 [] = {\n\t\tCHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE\n\t};\n\n\tconst unsigned char chac_chacs_t2 [] = {\n\t\tCHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6\n\t};\n\n\tconst unsigned char chac_chacs_t3 [] = {\n\t\tCHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 1\n\t};\n#endif\n\nconst unsigned char bits [] = {\n\t1, 2, 4, 8, 16, 32, 64, 128\n};\n\n#ifdef ENEMS_MAY_DIE\n\tconst unsigned char jitter [] = { 0,1,1,0,0,1,0,1,1,0,0,0,1,0,1,1 };\n#endif\n\n",
+			"file": "testers/02_tester_punchy/dev/assets/precalcs.h",
+			"file_size": 1823,
+			"file_write_time": 131830414779798923,
 			"settings":
 			{
-				"buffer_size": 15040,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "wip/diario.md",
-			"settings":
-			{
-				"buffer_size": 185737,
+				"buffer_size": 1770,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "testers/00_tester_sideview/dev/my/extra_inits.h",
+			"contents": "// NES MK1 v1.0\n// Copyleft Mojon Twins 2013, 2015, 2017, 2018\n\n// bss\n\n// NTSC system\n\nunsigned char ntsc, ntsc_frame;\n\n// Update list (neslib)\n\n#define UPDATE_LIST_SIZE 32\nunsigned char update_index;\nunsigned char update_list [UPDATE_LIST_SIZE * 3];\n\n// Fader (neslib)\n\nsigned char fader;                      // Brightness level\nunsigned char fade_delay;               // # of frames per brightness level in fades\n\n// Current screen\n\nunsigned char map_attr [BUFF_SIZE];     // Current screen (room) tile behaviours\nunsigned char map_buff [BUFF_SIZE];     // Current screen (room) tile numbers\n\n// Game flow\n\nunsigned char first_game;               // True if it's the first time the game runs\n\nunsigned char level;                    // Current level number\n\nunsigned char c_max_enems;              // Number of killable enems. in current level.\n\nunsigned char n_pant;                   // Current screen (room) number.\nunsigned char on_pant;                  // Current screen (room) numberm last frame value (used to detect changes)\n#ifdef DOUBLE_WIDTH\n    unsigned char w_pant;               // (Working) Current screen (backup).\n    unsigned int nametable_base;        // 0x2000 or 0x2400\n    unsigned int buff_offset;           // 0 or 192\n    unsigned char attr_table_offset;    // 0 or 64\n    unsigned char *buff_ptr;            // Points to parts of the buffer\n    unsigned char *attr_ptr;            // Points to parts of the buffer\n    signed int scroll_x;                // Scroller position\n    unsigned char on_screen;            // Flag used in enengine.h\n#endif\n\nunsigned char half_life;                // 1-0 flip flop (each game frame)\nunsigned char frame_counter;            // Game grame counter, wraps 255->0\n\nunsigned char paused;                   // True if the game is paused.\nunsigned char win_level;                // If WIN_LEVEL_CUSTOM is defined, set to true to win the level.\nunsigned char game_over;                // True if the player lost the game.\nunsigned char warp_to_level;            // True if the player is jumping to a different level \nunsigned char level_reset;              // True if the level should be reset.\nunsigned char flick_override;           // If set, code to flick screen is overriden for current frame\n\n// General player values, last frame copies\n\nunsigned char olife;                    // Player life, last frame value (used to detect changes)\nunsigned char okeys;                    // Player keys, last frame value (used to detect changes)\nunsigned char oobjs;                    // Player items, last frame value (used to detect changes) \nunsigned char oammo;                    // Player ammo, last frame value (used to detect changes)\nunsigned char okilled;                  // Player # of killed enems., last frame value (used to detect changes)\n\nunsigned char oam_index_player;         // Index copy\n\n// Custom hotspot type star (used as an extra collectible).\n\n#ifdef HOTSPOT_TYPE_STAR\n    unsigned char pstars;               // Player # of collected stars\n    unsigned char opstars;              // Player # of collected stars, last frame value (used to detect changes) \n#endif\n    \n// Player \"use\" animation values.\n\n#ifdef ENABLE_USE_ANIM\n    unsigned char use_ct;               // General counter, serves as a state indicator.\n    unsigned char use_sub_ct;           // Subcounter.\n    #ifdef ACTIVATE_SCRIPTING\n        unsigned char run_fire_script_do;   \n                                        // If true, the PRESS_FIRE scripts should be run.\n    #endif\n    unsigned char use_type;             // Action type. May be USE_TYPE_HOTSPOT, USE_TYPE_INTERACTIVE or USE_TYPE_SCRIPTING\n#endif\n\n// A small sprite showing a text balloon with the NO! word,\n// Of course, may be repurposed for other uses.\n\n#ifdef ENABLE_NO\n    unsigned char no_ct;                // General counter. When != 0, display sprite & decrement.\n#endif\n\n// Bullets (projectiles shot by the player)\n\n#ifdef PLAYER_CAN_FIRE\n    unsigned char b_slots [MAX_BULLETS];\n    unsigned char b_slots_i;            // Array of free slots for active bullets & index.\n\n    unsigned char bst [MAX_BULLETS];    // Bullets states\n    \n    #ifdef DOUBLE_WIDTH\n        unsigned int bx [MAX_BULLETS];      // Bullets, X coordinates\n    #else\n        unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.\n    #endif\n\n    unsigned char by [MAX_BULLETS];     // Bullets, Y coordinates.\n    signed char bmx [MAX_BULLETS];      // Bullets, direction + speed in the X axis.\n    signed char bmy [MAX_BULLETS];      // Bullets, direction + speed in the Y axis.\n\n    #ifdef PLAYER_CHARGE_AND_FIRE\n        unsigned char pfiregauge;       // Fire gauge \n        unsigned char opfiregauge;      // Fire gauge, last frame value (used to detect changes)\n    #endif\n\n    #ifdef PLAYER_FIRE_RELOAD\n        unsigned char pfirereload;      // Reload time. When != 0, block B_BUTTON & decrement.\n    #endif\n#endif\n\n// Cocos (projectiles shot by enemies)\n\n#ifdef ENABLE_COCOS\n    unsigned char coco_slots [COCOS_MAX];\n    unsigned char coco_slots_i;         // Array of free slots for active cocos & index.\n\n    unsigned char coco_on [COCOS_MAX];  // Cocos states\n    \n    signed int coco_x [COCOS_MAX];      // Cocos, X coordinates (fixed point 10.6)\n    signed int coco_y [COCOS_MAX];      // Cocos, Y coordinates (fixed point 10.6)\n    signed int coco_vx [COCOS_MAX];     // Cocos, direction + speed in the X axis.\n    signed int coco_vy [COCOS_MAX];     // Cocos, direction + speed in the Y axis.\n#endif  \n\n// Breakable walls\n\n#ifdef ENABLE_BREAKABLE\n    #ifndef BREAKABLES_SOFT\n        unsigned char brk_buff [BUFF_SIZE];\n                                        // A \"life gauge\" for each tile on screen, used when BREAKABLES_SOFT is unset.\n    #endif\n    #ifdef BREAKABLE_ANIM\n        unsigned char brkf [BREAKABLE_MAX];\n        unsigned char brkx [BREAKABLE_MAX];\n        unsigned char brky [BREAKABLE_MAX];\n                                        // List of tiles to update when BREAKABLE_ANIM is set\n    #endif\n    unsigned char pmayneedrelocation;   // If 1, check if the coordinates to respawn the player are safe, relocate if not.\n#endif\n\n// Hotspots\n\n#if defined (HOTSPOTS_DYNAMIC) || defined (ENEMS_IN_CHRROM)       \n                                        // If HOTSPOTS_DYNAMIC is defined, hotspots are copied to RAM and may be modified\n                                        // Otherwise they are read from ROM when entering each screen.\n    unsigned char hyx [MAP_SIZE];       // Hotspot position per screen (room), packed 0xYX\n    unsigned char ht [MAP_SIZE];        // Hotspot type per screen (room)\n#endif\n\nunsigned char hact [MAP_SIZE];          // Hotspots active per screen (room)\n\n// Bolts (locks, unlockable with keys)\n\n#ifndef DEACTIVATE_KEYS\n    unsigned char lkact [MAX_BOLTS];    // If lkact [N], lock #N is \"locked\"\n#endif\n\n// Scripting system\n\n#ifdef ACTIVATE_SCRIPTING\n    void msc_clear_flags (void);\n    void run_script (unsigned char whichs);\n\n    #if defined (ENABLE_FIRE_ZONE) || defined (ENABLE_FAST_FIRE_ZONE)\n        unsigned char f_zone_ac;        // \"Fire zone\" is active in current screen (room)\n        unsigned char fzx1;\n        unsigned char fzx2;\n        unsigned char fzy1;\n        unsigned char fzy2;             // Coordinates of the \"fire zone\" rectangle's opposite corners.\n    #endif\n\n    #if defined (ENABLE_PUSHED_SCRIPT)\n        unsigned char just_pushed;      // True if a pushable has just been pushed. Used by the interpreter.\n    #endif\n\n    unsigned char fire_script_success;  // True if the command section of a clausule in a PRESS_FIRE script was run.\n\n    #if defined (ENABLE_INTERACTIVES)\n        unsigned char just_interacted;  // True if the player just interacted. Used by the interpreter.\n        unsigned char script_arg;       // Identifier of the interactive the used interacted with. Used by the interpreter.\n    #endif\n#endif\n\n// Flags\n\nunsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, the scripting system, etc.\n\n// Interactives\n\n#ifdef ENABLE_INTERACTIVES\n    unsigned char interactives_interact_with;\n                                        // The player pressed B on which interactive?\n    unsigned char interactives_index;\n                                        // Index of active interactives on current screen (room) (when creating),\n                                        // Number of active interactives (in the game loop)\n    unsigned char interactives_f [INTERACTIVES_MAX];\n                                        // Flag bound to the interactive | 0x80 (if container) or sprite number (if sprite).\n                                        // If this value & 0x80 => container. Sprite otherwise.\n    unsigned char interactives_yx [INTERACTIVES_MAX];\n    #ifdef INTERACTIVES_FROM_CODE\n        const unsigned char *c_interactives;\n                                        // Pointer to current level's interactive definitions array\n    #endif\n#endif\n\n// More globals for baddies (for current screen)\n\nunsigned char en_t [NENEMS];            // Enemy types.\n\nunsigned char en_x [NENEMS];            // Enemy X coordinates.\nunsigned char en_y [NENEMS];            // Enemy Y coordinates.\n\nunsigned char en_x1 [NENEMS];\nunsigned char en_y1 [NENEMS];           // Enemy starting point coordinates (for patrollers, repurposed for other types)\n\nunsigned char en_x2 [NENEMS];\nunsigned char en_y2 [NENEMS];           // Enemy ending point coordinates (for patrollers, repurposed for other types)\n\nsigned char en_mx [NENEMS];             // Enemy direction + speed in the X axis.\nsigned char en_my [NENEMS];             // Enemy direction + speed in the Y axis.\n\nunsigned char en_s [NENEMS];            // Enemy base sprite index in spr_enems.\nunsigned char en_facing [NENEMS];       // Generally, 0 = facing right, 4 = facing left.\n\nunsigned char en_state [NENEMS];        // Enemy State\nunsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies\nunsigned char en_flags [NENEMS];        // Enemies flags\n\nunsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering\nunsigned char en_life [NENEMS];         // Enemies life gauges\nunsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type\nunsigned char en_ct [NENEMS];           // Enemies General repurposeable counter\n\nunsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)\n\n#ifdef ENEMS_CAN_RESPAWN\n    unsigned char en_respawn [NENEMS];  // If true, enems can respawn.\n    unsigned char en_resx [NENEMS];\n    unsigned char en_resy [NENEMS];     // Respawn coordinates.\n    signed char en_resmx [NENEMS];\n    signed char en_resmy [NENEMS];      // Respawn mx, my.\n#endif\n\n// Fixed point variables (coordiantes, velocity) for some kinds of enemies.\n\n#ifdef ENEMS_NEED_FP\n    signed int enf_x [NENEMS];\n    signed int enf_vx [NENEMS];\n    signed int enf_y [NENEMS];\n    signed int enf_vy [NENEMS];\n#endif\n\n// Generator for PURSUER type enemies.\n\n#ifdef ENABLE_GENERATORS\n    unsigned char en_generator_life [NENEMS];\n                                        // Generators life gauge.\n    unsigned char gen_was_hit [NENEMS];      // True if generator was hit.\n#endif\n\nunsigned char en_spr_id [NENEMS];\n\n// Temporal invincibility\n\n#ifdef ENEMS_INVINCIBILITY\n    unsigned char en_invincible [NENEMS];\n#endif\n\n// Persistent enemies (position / movement is remembered)\n\n#ifdef PERSISTENT_ENEMIES\n    unsigned char ep_x [NENEMS * MAP_SIZE];  // Buffer for X coordinates.\n    unsigned char ep_y [NENEMS * MAP_SIZE];  // Buffer for Y coordinates.\n    signed char ep_mx [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the X axis.\n    signed char ep_my [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the Y axis.\n#endif\n\n// Persistent deaths (death enemies stay dead in current level)\n\n#ifdef PERSISTENT_DEATHS\n    unsigned char ep_dead [NENEMS * MAP_SIZE];\n                                        // Buffer for dead enemies (true if dead).\n#endif\n\n// Propellers\n\n#ifdef ENABLE_PROPELLERS\n    unsigned char prp_idx;              // Index of active propellers on current screen (room) (when creating)\n                                        // Number of active propellers on current screen (room) (in the game loop)\n    unsigned int prp_addr [PROPELLERS_MAX];\n                                        // PPU Addresses of active propellers.\n    unsigned char propellers_on;        // Propellers are on (animate & affect player)\n#endif\n\n// Shines\n\n#ifdef ENABLE_SHINES\n    unsigned char max_shines;           // Index of active shines on current screen (room) (when creating)\n                                        // Number of active shines on current screen (room) (in the game loop)\n\n    unsigned char shines [SHINES_MAX];  // Coordinates of active shines, packed 0xYX\n\n    unsigned char shine_active_x;\n    unsigned char shine_active_y;       // Animating shine X and Y coordinates.\n    unsigned char shine_active_ct;      // Animation frame counter. \n#endif\n\n// Tile Chac Chacs\n\n#ifdef ENABLE_TILE_CHAC_CHAC\n    unsigned char max_chac_chacs;       // Index of active chac-chac blades on current screen (room) (when creating)\n                                        // Number of active chac-chac blades on current screen (room) (in the game loop)\n    unsigned char chac_chacs_yx [MAX_CHAC_CHACS];\n                                        // Coordinates of active chac-chac blades, packed 0xYX\n    unsigned char chac_chacs_state [MAX_CHAC_CHACS];\n                                        // States of active chac-chac blades\n    unsigned char chac_chacs_idlewait [MAX_CHAC_CHACS];\n                                        // # of frames to wait in state 0 (idle)\n    unsigned char chac_chacs_ct [MAX_CHAC_CHACS];\n                                        // Frame counters\n    \n    // Those are used to implement a \"update queue\" to send changes to VRAM.\n    // Changes are sent \"one entity per frame\", therefore this queue is needed.\n    unsigned char chac_chacs_queue [MAX_CHAC_CHACKS_QUEUED];\n    unsigned char chac_chacs_queue_read, chac_chacs_queue_write;\n#endif\n\n// Resonators\n\n#ifdef ENABLE_RESONATORS\n    unsigned char res_disable;          // If true, resonators don't work (but show!)\n    unsigned char res_on;               // Resonators are \"on\" (player pressed one)\n    unsigned char res_ct;               // This holds resonators' count down\n    unsigned char res_subct;            // Frame counter for each \"tick\"\n#endif\n\n// More conveyors\n\n#ifdef ENABLE_CONVEYORS\n    signed char cfx;                    // Auxiliary variable, copy of the added speed when the player is on a conveyor,\n                                        // used to detect if the player is pushed out of the screen while on a conveyor belt.\n#endif\n\n// Timer\n\n#ifdef ENABLE_TIMER\n    unsigned char timer;                // Timer, current value.\n    unsigned char otimer;               // Timer, current value, last frame (to detect changes).\n    unsigned char timer_frames;         // Timer, frame counter for each \"ticke\"\n    unsigned char timer_zero;           // Set to true when timer == 0; must be reset manually!\n    unsigned char timer_on;             // If true, timer is running.\n#endif\n\n// Springs\n\n#ifdef ENABLE_SPRINGS\n    unsigned char springs_on;           // Springs are ON, level-wide setting.\n#endif\n\n// Shaker\n\n#ifdef ENABLE_SHAKER\n    unsigned char shaker_ct;            // If != 0, shake the screen & decrement.\n#endif\n\n// Collectible map tiles\n\n#ifdef ENABLE_TILE_GET\n    #ifdef PERSISTENT_TILE_GET\n        unsigned char tile_got [24];        // Buffer for current screen\n    #endif\n#endif\n\n// Attribute table\n#ifdef DOUBLE_WIDTH\n    unsigned char attr_table [128];\n#else\n    unsigned char attr_table [64];\n#endif\n\n#include \"my/extra_vars.h\"              // Custom extra variables\n",
+			"file": "testers/02_tester_punchy/dev/ram/bss.h",
+			"file_size": 16265,
+			"file_write_time": 131830418305140448,
 			"settings":
 			{
-				"buffer_size": 151,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 38 files for \"ATTR\"\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\cocos.h:\n  160  \t\t\t#ifdef DOUBLE_WIDTH\n  161  \t\t\t\tgpint = COCO_RDX + 4;\n  162: \t\t\t\trdm = map_attr [(gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0)];\n  163  \t\t\t#else\n  164: \t\t\t\trdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];\n  165  \t\t\t#endif\n  166  \t\t\tif (rdm & 8) {\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\enengine.h:\n  323  \t\t\t\t\t\t_en_s = STEADY_SHOOTERS_BASE_SPRID + _en_my;\n  324  \n  325: \t\t\t\t\t\t// _en_mx = frequency from the attr\n  326  \t\t\t\t\t\t_en_ct = _en_mx = rda;\n  327  \t\t\t\t\t\tbreak;\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\general.h:\n    8  \t// Calculates at1 & at2 from cx1, cy1 & cx2, cy2\n    9  \tif (cy1 > 12 || cy2 > 12) { at1 = at2 = 0; return; }\n   10: \tat1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];\n   11: \tat2 = map_attr [COORDS (cx2, cy2 ? cy2 - 1 : 0)];\n   12  }\n   13  \n   ..\n   16  \t// Always vertical, upon pry and pre-calculated cx1.\n   17  \tcy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;\n   18: \tif (cy1 <= 12) at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];\n   19  \tcy2 = pry >> 4;\n   20: \tif (cy2 <= 12) at2 = map_attr [COORDS (cx1, cy2 ? cy2 - 1 : 0)];\n   21  \tcy3 = (pry + 15) >> 4;\n   22: \tif (cy3 <= 12) at3 = map_attr [COORDS (cx1, cy3 ? cy3 - 1 : 0)];\n   23  }\n   24  #endif\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\mapmods\\map_detectors.h:\n   23  \t\t\trda -= 16;\n   24  \t\t\t#ifdef DOUBLE_WIDTH\n   25: \t\t\t\tif (attr_ptr [rda]) break; else attr_ptr [rda] = 64;\n   26  \t\t\t#else\n   27: \t\t\t\tif (map_attr [rda]) break; else map_attr [rda] = 64;\n   28  \t\t\t#endif\n   29  \t\t}\n   ..\n   38  \tif (rdt >= CHAC_CHAC_DETECT_TILE && rdt <= CHAC_CHAC_DETECT_TILE + 2) {\n   39  \t\tchac_chacs_add ();\n   40: \t\trdt = map_attr [rdm] = 0;\n   41  \t}\n   42  #endif\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\mapmods\\map_renderer_complex.h:\n   26  \t#ifdef DOUBLE_WIDTH\n   27  \t\tbuff_ptr = map_buff + buff_offset;\n   28: \t\tattr_ptr = map_attr + buff_offset;\n   29  \t#endif\n   30  \n   ..\n  233  \n  234  \t\t#ifdef DOUBLE_WIDTH\n  235: \t\t\tattr_ptr [rdm] = c_behs [rdt];\n  236  \t\t#else\n  237: \t\t\tmap_attr [rdm] = c_behs [rdt];\n  238  \t\t#endif\n  239  \n  ...\n  262  \n  263  \t#ifdef DOUBLE_WIDTH\n  264: \t\tvram_write (attr_table + attr_table_offset, NAMETABLE_BASE + 0x3c0, 64);\n  265  \t#else\n  266: \t\tvram_write (attr_table, 0x23c0, 64);\n  267  \t#endif\n  268  }\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\mapmods\\map_renderer_double.h:\n    7  \tw_pant = n_pant;\n    8  \tnametable_base = 0x2000;\n    9: \tbuff_offset = attr_table_offset = 0;\n   10  \tdraw_half_scr ();\n   11  \tn_pant ++;\n   12  \tnametable_base = 0x2400;\n   13  \tbuff_offset = 192;\n   14: \tattr_table_offset = 64;\n   15  \tdraw_half_scr ();\n   16  \tn_pant = w_pant; \n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\mapmods\\map_renderer_fast.h:\n    6  void draw_map_tile (void) {\n    7  \tmap_buff [rdm] = rdt;\t\t\n    8: \tmap_attr [rdm] = c_behs [rdt];\n    9  \t#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)\n   10  \t\tbrk_buff [rdm] = 1;\n   ..\n  146  \t#endif\n  147  \n  148: \tvram_write (attr_table, 0x23c0, 64);\n  149  }\n  150  \n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\player.h:\n  914  \t\t\tcx1 = (phitterx + 4) >> 4;\n  915  \t\t\tcy1 = (phittery + 4 - 16) >> 4;\n  916: \t\t\tif (ATTR(cx1, cy1) & 16) {\n  917  \t\t\t\tbreakable_break (cx1, cy1);\n  918  \t\t\t\tpfrozen = PLAYER_FROZEN_FRAMES;\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\playermods\\bullets.h:\n  134  \t\t\tcx1 = ((_bx + 4) >> 4);\n  135  \t\t\tcy1 = ((_by + 4 - 16) >> 4);\n  136: \t\t\trdm = map_attr [COORDS (cx1, cy1)];\n  137  \n  138  \t\t\t#ifdef PLAYER_BULLET_LIFE\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\playermods\\process_tile.h:\n   18  \t\t\tif (\n   19  \t\t\t\tx0 > 0 && x0 < MAX_TILE_X && y0 > 0 && y0 < 11 &&\n   20: \t\t\t\tATTR (x1, y1) == 0\n   21  \t\t\t) {\n   22  \t\t\t\t#ifdef ENABLE_PUSHED_SCRIPT\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\printer.h:\n   52  \n   53  // Needs _x, _y, _t set.\n   54: void upd_attr_table (void) {\n   55  \trdc = (_x >> 2) + ((_y >> 2) << 3);\n   56  \t#ifdef DOUBLE_WIDTH\n   57: \t\trdc += attr_table_offset;\n   58  \t#endif\n   59  \trdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);\n   60: \trda = attr_table [rdc];\n   61  \trda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));\n   62: \tattr_table [rdc] = rda;\n   63  }\n   64  \n   ..\n   66  void draw_tile (void) {\n   67  \t// Pass _x, _y, _t directly.\n   68: \tupd_attr_table ();\n   69  \t\n   70  \tgp_tmap = c_ts_tmaps + (_t << 2);\n   ..\n   93  \t\t\t_x -= 32;\n   94  \t\t\tNAMETABLE_BASE = 0x2400;\n   95: \t\t\tattr_table_offset = 64;\n   96  \t\t} else {\n   97  \t\t\tNAMETABLE_BASE = 0x2000;\n   98: \t\t\tattr_table_offset = 0;\n   99  \t\t}\n  100  \t#endif\n  101  \n  102  \t// Pass _x, _y, _t directly.\n  103: \tupd_attr_table ();\n  104: \t// rda contains the attribute byte.\n  105: \t// rdc contains the offset in the attribute nametable.\n  106  \t\n  107  \tgp_addr = NAMETABLE_BASE + 0x03c0 + rdc;\n  ...\n  131  void map_set (void) {\n  132  \tmap_buff [COORDS (_x, _y)] = _t;\n  133: \tmap_attr [COORDS (_x, _y)] = c_behs [_t];\n  134  \t_x = _x << 1; _y = TOP_ADJUST + (_y << 1);\n  135  \tupdate_list_tile (); \n\n38 matches across 11 files\n\n\nSearching 114 files for \"clear_cerrojo\"\n\nC:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine\\bolts.h:\n   12  }\n   13  \n   14: void clear_cerrojo (unsigned char yx) {\n   15  \tgp_gen = (unsigned char *) c_locks;\n   16  \tgpit = c_max_bolts; while (gpit --) {\n\n1 match in 1 file\n",
-			"settings":
-			{
-				"buffer_size": 5758,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "testers/00_tester_sideview/dev/autodefs.h",
-			"settings":
-			{
-				"buffer_size": 3686,
+				"buffer_size": 15874,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -695,171 +692,231 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/engine",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/my",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/ram",
-		"/C/Users/na_th/Desktop/git/MK1_NES/wip"
+		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/docs",
+		"/D/git/MK1_NES/testers",
+		"/D/git/MK1_NES/testers/02_tester_punchy",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine",
+		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/process_tile.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/custom_texts.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/ram/zp.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_inits.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/10_che_man/dev/engine/general.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_hit.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_the_writer/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/wip/luca/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_vars.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns1.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/namgen.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/map_renderer_customization.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns0.spt",
-		"/C/Users/na_th/Desktop/writer/presskit.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_entering_screen.h",
-		"/C/Users/na_th/Desktop/git/newspectrum/Ninjajar_M/dev-b/compile_cpc.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/effects.h",
-		"/C/Users/na_th/AppData/Local/Temp/Temp1_PRESZ134.ZIP/README.1ST",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/crt0.s",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/neslib.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/ram/bss.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/neslib.s",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_timed_fanty.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/general.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/script/enembehs.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enemmods/enem_compiled.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/pencompiler.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/cocos.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/breakable.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/flickscreen.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/ring.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/asset_setup.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/trash/out.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/mscmk1.bas",
-		"/C/Users/na_th/Desktop/git/MK2/docs/scripting.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/trash/test.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/docs/mscmk1.md",
-		"/C/Users/na_th/Desktop/git/MK2/src/utils/src/msc3.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/mainloop/hotspots.h",
-		"/C/Users/na_th/Google Drive/Maritrini/dev/genesis/Mist/util/q24to6bit.bas",
-		"/C/Users/na_th/Google Drive/Maritrini/dev/genesis/Mist/util/q3tone9bit.bas",
-		"/C/Users/na_th/Desktop/git/nes_work/D'Veel'NgR/utils/chrview.bas",
-		"/C/Users/na_th/Desktop/git/nes_work/D'Veel'NgR/utils/mkts.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_the_writer/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/11_bootèe/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/02_tester_punchy/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/10_che_man/dev/engine/mapmods/map_renderer_fast.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/02_tester_punchy/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/levelset.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/script/script.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/assets/custom_texts.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/my/on_interactive.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/CONTRIBUTING.md",
-		"/C/Users/na_th/AppData/Local/Temp/Temp1_Indivisible Release Pack.zip/Indivisible Release Pack/Emulator Setup.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/my/on_object_used.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/my/interactives_setup.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/wip/diario.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/mtparser.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/script/script.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/mainloop/asset_setup.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/assets/mscnes.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/engine/playermods/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/03_tester_interactives/dev/mainloop/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/mtparser.bi",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/scripting.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/engine/general.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/01_tester_top_down/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/wip/luca/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/02_tester_punchy/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/10_che_man/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/09_cadàveriön/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_the_writer/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/printer.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/bss.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/resonators.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_renderer_complex.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/pres.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/precalcs.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/textbox.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/interactives.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.s",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/definitions.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/zp.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/README.md",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/mapmods/map_detectors.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/tile_chac_chac.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/mainloop/asset_setup.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/ram/zp.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/cocos.h",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/game.s",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/my/pres.h"
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/printer.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/printer.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/propellers.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/enemmods/enem_punchy.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/ram/zp.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/enemmods/enem_shooty.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/enemmods/enems_recoiling.h",
+		"/D/git/MK1_NES/wip/diario_aux.md",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/propellers.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/enemmods/enem_steady_shooter.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/mapmods/map_detectors.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/definitions.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/engine/general.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/enemmods/enem_punchy.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/definitions.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/config.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enemmods/enem_homing_fanty.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/cocos.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enemmods/enem_steady_shooter.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enemmods/enem_shooty.h",
+		"/D/Google Drive/Maritrini/dev/PC/Zombie Calavera/code/engine.c",
+		"/D/git/MK1_NES/docs/engine_config.md",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/ram/zp.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/linear_cocos.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/precalcs.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/game.c",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enemmods/enem_monococo.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/enemmods/enem_compiled.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/README.md",
+		"/D/Proyectos/CIs.txt",
+		"/D/Proyectos/2018/20180912b--Actualización endpoint push Android en msg-push-server de Mensajería/instrucciones.txt",
+		"/D/git/MK1_NES/examples/10_che_man/dev/engine/breakable.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/map0.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/compile.bat",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/crt0.s",
+		"/D/git/MK1_NES/src/utils/rle53mapMK1.bas",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/mapmods/map_renderer_double.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/general.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/player.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/mainloop/flickscreen.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/engine/printer.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/setenv.bat",
+		"/D/git/MK1_NES/examples/12_espitene/dev/engine/printer.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/compile.bat",
+		"/D/git/MK1_NES/examples/12_espitene/dev/labels.txt",
+		"/D/git/MK1_NES/examples/12_espitene/dev/game.s",
+		"/D/git/MK1_NES/examples/12_espitene/dev/engine/enengine.h",
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/12_espitene/dev/config.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/ram/bss.h",
+		"/D/git/MK1_NES/examples/12_espitene/script/enembehs.spt",
+		"/D/git/MK1_NES/docs/code_injection.md",
+		"/D/git/MK1_NES/examples/12_espitene/README.md",
+		"/D/git/MK1_NES/examples/README.md",
+		"/D/git/MK1_NES/testers/README.md",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/mainloop/hotspots.h",
+		"/D/git/nes_work/standaloner/writer+perils/src/writer/dev/config.h",
+		"/D/git/nes_work/standaloner/writer+perils/src/writer/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/assets/custom_texts.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/config.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/my/pres.h",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/src/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/my/game_frame.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_vars.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_inits.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/ram/zp.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/config.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/player.h",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/src/dev/ram/zp.h",
+		"/D/git/MK1_NES/src/dev/ram/bss.h",
+		"/D/Google Drive/Maritrini/dev/cpc/Platformer Medley/dev/make.bat",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/config.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/my/pres.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/breakable.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h",
+		"/D/Google Drive/Maritrini/dev/cpc/Nanako Descends to Hell/dev/ndthcpc.c",
+		"/D/Google Drive/Maritrini/dev/cpc/Nanako Descends to Hell/dev/paletas.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h.bak",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/somari.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_checks.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_modules.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/spritedata.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/effects.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/map_renderer_customization.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/chr_rom_maps.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns0.spt",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/custom_flickscreen.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/assets/enem_constants.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/enems/updr.bat",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/player_frame_selector.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns1.spt",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/dev/my/custom_center_detections.h",
+		"/D/git/MK1_NES/testers/05_tester_tile_get/README.md",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/engine/playermods/scripting.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/mainloop.h"
 	],
 	"find":
 	{
-		"height": 49.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
-		"height": 135.0,
+		"height": 108.0,
 		"where_history":
 		[
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev\\engine",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\00_tester_sideview\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\my",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\05_tester_tile_get",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\src",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\03_tester_interactives",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\01_tester_top_down",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\testers\\01_tester_top_down\\dev",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES",
-			"C:\\Users\\na_th\\Desktop\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev\\ram",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev\\ram",
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width",
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev\\ram",
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev\\engine\\enemmods",
+			"D:\\git\\MK1_NES\\testers\\05_tester_double_width\\dev",
+			"D:\\git\\MK1_NES\\examples\\12_espitene\\dev\\engine",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine\\enemmods",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\engine\\enemmods",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev\\ram",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get",
+			"D:\\git\\MK1_NES\\testers\\05_tester_tile_get\\dev",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\testers\\04_tester_warp_to_level\\dev",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\testers\\04_tester_warp_to_level\\dev",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
+			"D:\\git\\MK1_NES\\testers\\03_tester_interactives\\dev",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy\\dev",
+			"D:\\git\\MK1_NES\\testers\\01_tester_top_down\\dev",
+			"D:\\git\\MK1_NES\\testers\\00_tester_sideview\\dev",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe\\dev",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe",
+			"D:\\git\\MK1_NES\\examples\\11_bootèe\\dev",
+			"D:\\git\\MK1_NES\\examples\\10_che_man\\dev",
+			"D:\\git\\MK1_NES\\examples\\09_cadàveriön\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
+			"D:\\git\\MK1_NES\\examples\\01_sgt_helmet_training_day\\dev",
+			"D:\\git\\MK1_NES",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\src",
+			"D:\\git\\MK1_NES\\examples\\08_cheril_the_writer",
+			"D:\\git\\MK1_NES\\testers\\02_tester_punchy",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
+			"D:\\git\\MK1_NES\\testers",
+			"D:\\git\\MK1_NES\\examples",
+			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic\\dev",
 			"D:\\git\\MK1_NES\\examples\\07_cheril_perils_classic",
 			"D:\\git\\MK1_NES",
@@ -875,134 +932,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"clear_cerrojo",
-			"rdc",
-			"CHAC",
-			"hitv",
-			"player_process_tile",
-			"ATTR",
-			"15",
-			"rawv",
-			"persistent",
-			"split",
-			"NO_HORIZONT",
-			"hith",
-			"hitv",
-			"phit",
-			"underwater",
-			"player_render",
-			"oam_index",
-			"OAM_FIRST",
-			"4 + 32",
-			"oam_index",
-			"oam_index_aux",
-			"player_render",
-			"pspin",
-			"catacr",
-			"palette",
-			"ppu_mask",
-			"ntsc",
-			"scroll",
-			"PPU_CTRL_VAR",
-			"_scroll",
-			"oam_spr",
-			"COCO_FAIR_D",
+			"attr_table",
+			"upd_attr_table",
+			"attr_table",
+			"update_list_tile",
+			"map_set",
+			"prp_yx",
+			"map_attr",
+			"en_rmx",
+			"en_cttouched",
+			"EN_STATE_SPAWNING",
+			"respawn",
+			"on_screen",
+			"_en_x",
+			"rdx",
+			"offs",
 			"COCOS",
-			"_enf_x",
-			"_en_ct",
-			"c_map_w",
-			"x1",
-			"PAD_DOWN",
-			"ENEMY",
-			"set_tile",
-			"FLAG",
-			"ONLY_ONE_OBJECT_FLAG",
-			"flag",
-			"timer",
-			"TIMER",
-			"stuff",
-			"flipflop",
-			"pvalueR",
-			"processalias",
-			"pval",
-			"SWAP",
-			"msc",
-			"puts",
-			"37",
-			"imageCreate",
-			"png_load",
-			"#defined",
-			"ppossee",
-			"enems_hit",
-			"phitter",
-			"run_fire_script_do",
-			"INTERACTIVES_FROM_CODE",
-			"LEVELID",
-			"thisLevelConstantName",
-			"coords",
-			"run_fire_script",
-			"fire_script_success",
-			"PLAYER_MIN_KILLABLE",
-			"chac_chacs_stack",
-			"*gp_gen",
-			"gp_gen",
-			"get_byte",
-			"gp_gen",
-			"*gp_gen",
-			"draw_scr",
-			"\\S+ --",
-			"chac_chac",
-			"\\S+ \\+\\+",
-			"chac_chacs",
-			"waitnmi",
-			"scroll",
-			"decosize",
-			"chac_chacs_add",
-			"2013",
-			"rlemap2.exe",
-			"mapcnvnes2",
-			"binpaster",
-			"text2carray",
-			"map_detectors",
-			"XY",
-			"chrrom",
-			"0.1 20171113",
-			"0.1",
-			"0.1 20171113",
-			"decosyx",
-			"XY",
-			"decosxy",
-			"XY",
-			"YX",
-			"XY",
-			"nodecos",
-			"decos",
-			"decosI",
-			"CUSTOM",
-			"scroll",
-			"53",
-			"..\\utils",
-			"kick",
-			"sfx_play",
-			"kick",
-			"_b",
+			"linear_coco_it",
+			"coco_",
+			"oam_index_player",
+			"coco_",
+			"rdx",
 			"_a",
-			"fbin",
-			"SCRIPT_POOL",
-			"whichs",
-			"fbin",
-			"fOut",
-			"1.0",
-			"incommand",
-			"script_pool",
-			"end_of",
-			"binmode",
-			"logic rectangle",
-			"rectángulo",
-			"AGNES",
-			"bankswitch",
-			"ssit",
-			"c:\\git\\agnes"
+			"shooties",
+			"coco",
+			"bx",
+			"bc",
+			"px =",
+			"prx",
+			"244",
+			"player_render",
+			"//",
+			"update_cycle",
+			"ppu_waitn",
+			"ppu_wait",
+			"cx2",
+			"cx1",
+			"prx =",
+			"map_buff",
+			"192",
+			"MAP_BUFF",
+			"prefix",
+			"0x2",
+			"n_pant",
+			"..\\utils",
+			"cocos_shoot_aimed",
+			"mul",
+			"umul",
+			"udiv",
+			"en_sg",
+			"en_cttouched",
+			"hud",
+			"hotspots",
+			"player_move",
+			"PLAYER_JUMP_TYPE_MK2",
+			"MK2",
+			"SPANISH",
+			"safe",
+			"enem",
+			"brk_buff",
+			"breakable_break",
+			"do_process_breakable",
+			"MAP_CLEAR_LIST_ADDRESS",
+			"OAM_FIRST",
+			"0x2c20",
+			"tile_got",
+			"pres",
+			"spr_enems",
+			"spr_enems5",
+			"0xff",
+			"warper",
+			"player_render",
+			"warp_to_",
+			"pal_col",
+			"scripting",
+			"use_ct",
+			"//#",
+			"c_map",
+			"pflick",
+			"pstate",
+			"vertical_engine_type",
+			"center",
+			"tmaps",
+			"NAME_UPD_LEN",
+			"set_vram_update",
+			"NAME_UPD_LEN",
+			"add_tile",
+			"rdx",
+			"c_map_chr_rom_bank",
+			"l_map_chr_rom_bank",
+			"tlocksindex",
+			"cttou",
+			"en_spr",
+			"explos",
+			"timer",
+			"buby",
+			"bubx",
+			"TIMER_REFILL",
+			"BOIOI",
+			"en_flags",
+			"ep_dead",
+			"en_flags",
+			"boioiong_init",
+			"_en_facing",
+			"en_spr",
+			"extern",
+			"cmapamalgam",
+			"scr_buff",
+			"fix",
+			"case 13:",
+			"en_state",
+			"en_state [gpit]",
+			"MONOCOCO_COUNTER",
+			"MONOCOCO_STATE",
+			"en_state",
+			"en_alive",
+			"en_state",
+			"prefix",
+			"MAP_\" & Hex (nMap, 2)",
+			"case 12",
+			"BOIOIONG_",
+			"boioi",
+			"\n\t",
+			"enf_x",
+			"boioi",
+			"rdy",
+			"en_ct",
+			"TIMED_FANTY",
+			"timed_fanty"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1010,12 +1067,40 @@
 		"regex": false,
 		"replace_history":
 		[
-			"4 + OAM_FIRST",
-			"palss1",
-			"qPal",
-			"18",
-			"defined",
-			"chac_chacs_queue",
+			"EN_X_ABSOLUTE",
+			"PUNCH_RDX",
+			"coco_it",
+			"linear_coco_",
+			"_b",
+			"..\\..\\..\\src\\utils",
+			"MAP_CLEAR_LIST_ADDRESS",
+			"spr_enems4",
+			"pals",
+			"bubble_y",
+			"bubble_x",
+			"map_buff",
+			"_en_state",
+			"_en_ct",
+			"en_state [gpit]",
+			"en_state",
+			"uCase (prefix)",
+			"\" & prefix",
+			"_en_y",
+			"Benny Hill Zone",
+			"10.6",
+			"_en_y",
+			"_en_x",
+			"_b",
+			"work",
+			"..\\..\\..\\src\\utils\\",
+			"pvy",
+			"VY",
+			"..\\..\\..\\src\\utils\\",
+			"e3",
+			"e2",
+			"e1",
+			"LEFT",
+			"pad0",
 			"YX",
 			"0.2 20180625",
 			"YX",
@@ -1037,86 +1122,121 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "testers/00_tester_sideview/dev/config.h",
+					"file": "wip/diario_aux.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22986,
+						"buffer_size": 5615,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5277,
-								5282
+								5613,
+								5613
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"WordCount":
+							{
+								"changes": 910,
+								"count": 943,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1408.0,
+						"translation.y": 1493.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "testers/00_tester_sideview/dev/engine/player.h",
+					"file": "testers/02_tester_punchy/dev/engine/printer.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19788,
+						"buffer_size": 4259,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7751,
-								7754
+								1932,
+								1932
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 213,
+								"count": 450,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4801.0,
+						"translation.y": 849.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "testers/00_tester_sideview/dev/engine/playermods/process_tile.h",
+					"file": "testers/02_tester_punchy/dev/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1458,
+						"buffer_size": 23166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1206,
-								1206
+								751,
+								751
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 6,
+								"count": 2138,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -1124,33 +1244,45 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "testers/00_tester_sideview/dev/engine/bolts.h",
+					"file": "testers/02_tester_punchy/dev/engine/mapmods/map_renderer_complex.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 224,
+						"buffer_size": 5279,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								224,
-								224
+								5276,
+								5276
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 104,
+								"count": 527,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 24.0,
+						"translation.y": 2994.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1158,61 +1290,83 @@
 				},
 				{
 					"buffer": 4,
-					"file": "testers/00_tester_sideview/dev/engine/printer.h",
+					"file": "testers/02_tester_punchy/dev/mainloop.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4479,
+						"buffer_size": 8513,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1250,
-								1250
+								6112,
+								6112
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 5,
+								"count": 720,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 650.0,
+						"translation.y": 3917.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "testers/00_tester_sideview/dev/ram/bss.h",
+					"file": "testers/02_tester_punchy/dev/engine/mapmods/map_renderer_double.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15949,
+						"buffer_size": 362,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10441,
-								10441
+								321,
+								321
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"WordCount":
+							{
+								"changes": 15,
+								"count": 34,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2617.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1223,315 +1377,85 @@
 			[
 				{
 					"buffer": 6,
-					"file": "/C/Users/na_th/Desktop/git/nes_work/gokumal/poc/neslib-pantanow.s",
+					"file": "testers/02_tester_punchy/dev/assets/precalcs.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15040,
+						"buffer_size": 1770,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8290,
-								8290
+								1669,
+								1669
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/User/6502.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 8591.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "wip/diario.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 185737,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								185713,
-								185713
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 67848.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "testers/00_tester_sideview/dev/my/extra_inits.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 151,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								151,
-								151
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"WordCount":
+							{
+								"changes": 3,
+								"count": 165,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 7,
+					"file": "testers/02_tester_punchy/dev/ram/bss.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5758,
+						"buffer_size": 15874,
 						"regions":
 						{
-							"match":
+						},
+						"selection":
+						[
+							[
+								1266,
+								1283
+							]
+						],
+						"settings":
+						{
+							"WordCount":
 							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										197,
-										201
-									],
-									[
-										318,
-										322
-									],
-									[
-										612,
-										616
-									],
-									[
-										894,
-										898
-									],
-									[
-										952,
-										956
-									],
-									[
-										1166,
-										1170
-									],
-									[
-										1263,
-										1267
-									],
-									[
-										1367,
-										1371
-									],
-									[
-										1595,
-										1599
-									],
-									[
-										1623,
-										1627
-									],
-									[
-										1679,
-										1683
-									],
-									[
-										1707,
-										1711
-									],
-									[
-										1885,
-										1889
-									],
-									[
-										2112,
-										2116
-									],
-									[
-										2127,
-										2131
-									],
-									[
-										2223,
-										2227
-									],
-									[
-										2283,
-										2287
-									],
-									[
-										2397,
-										2401
-									],
-									[
-										2410,
-										2414
-									],
-									[
-										2493,
-										2497
-									],
-									[
-										2727,
-										2731
-									],
-									[
-										2863,
-										2867
-									],
-									[
-										3121,
-										3125
-									],
-									[
-										3295,
-										3299
-									],
-									[
-										3514,
-										3518
-									],
-									[
-										3808,
-										3812
-									],
-									[
-										4066,
-										4070
-									],
-									[
-										4279,
-										4283
-									],
-									[
-										4387,
-										4391
-									],
-									[
-										4491,
-										4495
-									],
-									[
-										4588,
-										4592
-									],
-									[
-										4715,
-										4719
-									],
-									[
-										4852,
-										4856
-									],
-									[
-										4939,
-										4943
-									],
-									[
-										5045,
-										5049
-									],
-									[
-										5088,
-										5092
-									],
-									[
-										5146,
-										5150
-									],
-									[
-										5313,
-										5317
-									],
-									[
-										5614,
-										5627
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								5462,
-								5462
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2110.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "testers/00_tester_sideview/dev/autodefs.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3686,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3678,
-								3678
-							]
-						],
-						"settings":
-						{
+								"changes": 172,
+								"count": 1722,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1357.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1543,7 +1467,7 @@
 	},
 	"input":
 	{
-		"height": 43.0
+		"height": 37.0
 	},
 	"layout":
 	{
@@ -1581,13 +1505,13 @@
 	},
 	"output.sftp":
 	{
-		"height": 0.0
+		"height": 124.0
 	},
 	"pinned_build_system": "",
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1629,7 +1553,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 222.0,
+	"side_bar_width": 191.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

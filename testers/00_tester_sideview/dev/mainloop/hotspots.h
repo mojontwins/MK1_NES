@@ -51,7 +51,7 @@ if (hrt) {
 						if (b_button) 
 						#endif
 						{
-							hrt = ht [HS_CUR_PANT] = pinv;
+							hrt = ht [n_pant] = pinv;
 							pinv = HS_OBJ_EMPTY;
 
 							b_button = 0;
@@ -67,7 +67,7 @@ if (hrt) {
 						{
 							// Interchange pinv and hrt, and register in array.
 							rda = hrt;
-							hrt = ht [HS_CUR_PANT] = pinv;
+							hrt = ht [n_pant] = pinv;
 							pinv = rda;
 
 							b_button = 0;
@@ -88,9 +88,9 @@ if (hrt) {
 
 								// Update hotspot
 								#ifdef HS_FIX_ON_USE
-									hrt = ht [HS_CUR_PANT] = pinv + 2*HS_USE_OFFS;
+									hrt = ht [n_pant] = pinv + 2*HS_USE_OFFS;
 								#else
-									hrt = ht [HS_CUR_PANT] = pinv;
+									hrt = ht [n_pant] = pinv;
 								#endif
 
 								// Clear carried object
@@ -192,7 +192,7 @@ if (hrt) {
 					if (rda) {
 						sfx_play (rda, 1);
 						hrt = 0;
-						hact [HS_CUR_PANT] = 0;
+						hact [n_pant] = 0;
 					}
 				}
 

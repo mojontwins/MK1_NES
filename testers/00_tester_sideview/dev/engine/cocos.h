@@ -12,92 +12,42 @@ void cocos_init (void) {
 }
 
 #ifdef COCOS_ENABLE_AIMED
-	// Create a coco @ (COCO_RDX, rdy), shoot towards player
+	// Create a coco @ (rdx, rdy), shoot towards player
 
 	void cocos_shoot_aimed (void) {		
-		// On screen?
-		#ifdef DOUBLE_WIDTH
-			if (COCO_RDX < scroll_x || COCO_RDX >= scroll_x + 248) return;
-		#endif
+		rdct = distance ();
 
-		#ifdef COCOS_ROUGH_AIM
-			if (coco_slots_i) {
-				-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
+	#ifdef COCO_FAIR_D
+		if (rdct > COCO_FAIR_D && coco_slots_i) 
+	#else
+		if (coco_slots_i)
+	#endif
+		{
+			-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
-				coco_x [coco_it] = COCO_RDX << 6;
-				coco_y [coco_it] = rdy << 6;
+			coco_x [coco_it] = rdx << 6;
+			coco_y [coco_it] = rdy << 6;
 
-				// First prune: 8 directions.
+			// Apply formula. Looks awkward but it's optimized for space and shitty compiler
+			rds16 = COCO_V * rda / rdct; coco_vx [coco_it] = ADD_SIGN2 (px, coco_x [coco_it], rds16);
+			rds16 = COCO_V * rdb / rdct; coco_vy [coco_it] = ADD_SIGN2 (py, coco_y [coco_it], rds16);
 
-				if (ROUGHLY_EQUAL (COCO_RDX, prx, 16)) {
-					coco_vx [coco_it] = 0;
-				} else if (COCO_RDX < prx) {
-					coco_vx [coco_it] = COCO_V;
-				} else {
-					coco_vx [coco_it] = -COCO_V;
-				}
+			coco_on [coco_it] = 1;
 
-				if (ROUGHLY_EQUAL (rdy, pry, 16)) {
-					coco_vy [coco_it] = 0;
-				} else if (rdy < pry) {
-					coco_vy [coco_it] = COCO_V;
-				} else {
-					coco_vy [coco_it] = -COCO_V;
-				}
-
-				// Second prune: 16 directions
-
-				// rda = dx; rdb = dy
-				rda = DELTA (COCO_RDX, prx);
-				rdb = DELTA (rdy, pry);
-				if (ROUGHLY_EQUAL (rda, rdb, 8)) {
-
-				} else if (rda > rdb) {
-					coco_vy [coco_it] >>= 1;
-				} else {
-					coco_vx [coco_it] >>= 1;
-				}
-
-				coco_on [coco_it] = 1;
-				sfx_play (SFX_COCO, 2);
-			}
-
-
-		#else
-			rdct = distance ();
-
-		#ifdef COCO_FAIR_D
-			if (rdct > COCO_FAIR_D && coco_slots_i) 
-		#else
-			if (coco_slots_i)
-		#endif
-			{
-				-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
-
-				coco_x [coco_it] = COCO_RDX << 6;
-				coco_y [coco_it] = rdy << 6;
-
-				// Apply formula. Looks awkward but it's optimized for space and shitty compiler
-				rds16 = COCO_V * rda / rdct; coco_vx [coco_it] = ADD_SIGN2 (px, coco_x [coco_it], rds16);
-				rds16 = COCO_V * rdb / rdct; coco_vy [coco_it] = ADD_SIGN2 (py, coco_y [coco_it], rds16);
-
-				coco_on [coco_it] = 1;
-
-				sfx_play (SFX_COCO, 2);
-			}
-		#endif
-	}	
+			sfx_play (SFX_COCO, 2);
+		}	
+	}
 #endif
 
 #ifdef COCOS_ENABLE_LINEAR
-	// Create a coco @ (COCO_RDX, rdy), direction rda. LEFT UP RIGHT DOWN
+	// Create a coco @ (rdx, rdy), direction rda. LEFT UP RIGHT DOWN
 
 	void cocos_shoot_linear (void) {
 		if (coco_slots_i == 0) return;
 
 		-- coco_slots_i; coco_it = coco_slots [coco_slots_i];
 
-		coco_x [coco_it] = COCO_RDX << 6;
+		coco_x [coco_it] = rdx << 6;
 		coco_y [coco_it] = rdy << 6;
 
 		coco_vx [coco_it] = coco_dx [rda];
@@ -117,52 +67,24 @@ void cocos_destroy (void) {
 
 void cocos_do (void) {
 	coco_it = COCOS_MAX; while (coco_it --) if (coco_on [coco_it]) {
-		#ifdef DOUBLE_WIDTH
-			COCO_RDX = coco_x [coco_it] >> FIXBITS;
-		#endif
-		if (
-			#ifdef DOUBLE_WIDTH
-				COCO_RDX < scroll_x + 8 ||
-				COCO_RDX > scroll_x + 248 ||
-			#else
-				coco_x [coco_it] < coco_vx [coco_it] ||
-				coco_x [coco_it] > (248<<FIXBITS) - coco_vx [coco_it] ||
-			#endif
-
-			coco_y [coco_it] < coco_vy [coco_it] ||
-			coco_y [coco_it] > (200<<FIXBITS) - coco_vy [coco_it]
-		) {
-			cocos_destroy ();
-			continue;
-		}
-
 		// Move
 		coco_x [coco_it] += coco_vx [coco_it];
 		coco_y [coco_it] += coco_vy [coco_it];
 
-		COCO_RDX = coco_x [coco_it] >> FIXBITS;
-		rdy      = coco_y [coco_it] >> FIXBITS;
+		// Out of bounds
+		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 248<<FIXBITS || coco_y [coco_it] < 16<<FIXBITS || coco_y [coco_it] > 200<<FIXBITS) {
+			cocos_destroy ();
+			continue;
+		}
+
+		rdx = coco_x [coco_it] >> 6;
+		rdy = coco_y [coco_it] >> 6;
 
 		// Render
-		oam_index = oam_spr (
-			#ifdef DOUBLE_WIDTH
-				COCO_RDX - scroll_x,
-			#else
-				COCO_RDX, 
-			#endif
-			rdy + SPRITE_ADJUST, 
-			COCO_PATTERN, 
-			COCO_PALETTE, 
-			oam_index
-		);
+		oam_index = oam_spr (rdx, rdy + SPRITE_ADJUST, COCO_PATTERN, COCO_PALETTE, oam_index);
 
 		#ifdef COCO_COLLIDES
-			#ifdef DOUBLE_WIDTH
-				gpint = COCO_RDX + 4;
-				rdm = map_attr [(gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0)];
-			#else
-				rdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
-			#endif
+			rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
 			if (rdm & 8) {
 				cocos_destroy (); continue;
 			}
@@ -170,8 +92,8 @@ void cocos_do (void) {
 
 		// Collide w/player
 		if (pflickering == 0 && 
-			COCO_RDX + 7 >= prx && 
-			COCO_RDX <= prx + 7 && 
+			rdx + 7 >= prx && 
+			rdx <= prx + 7 && 
 			rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
 			rdy <= pry + 12
 		) {

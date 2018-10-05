@@ -74,7 +74,7 @@
 	#define INTERACTIVES_FROM_CODE
 #endif
 
-#if defined (MAP_FORMAT_RLE53_CHRROM) || defined (MAP_FORMAT_RLE44_CHRROM) || defined (DOUBLE_WIDTH)
+#if defined (MAP_FORMAT_RLE53_CHRROM)
 	#define MAP_RENDERER_COMPLEX
 #endif
 
@@ -105,36 +105,4 @@
 
 #if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_BOIOIONG) || defined (ENABLE_CATACROCKS)
 	#define ENEMS_NEED_FP
-#endif
-
-#if defined (PLAYER_TOP_DOWN) && defined (NO_HORIZONTAL_EVIL_TILE)
-	#undef NO_HORIZONTAL_EVIL_TILE
-#endif
-
-#if defined (DOUBLE_WIDTH)
-	#define NAMETABLE_BASE	nametable_base
-	#define BUFF_SIZE		384
-	#define COORDS(x,y) 	(x > 15 ? (192 + (((x) & 0xf) | ((y) << 4))) : ((x) | ((y) << 4)))
-	#define MAX_PRX			500
-	#define MAX_ENX			496
-	#define NENEMS 			6
-	#define EN_X_ABSOLUTE	rdaa
-	#define PRXA			gpint
-	#define ENXA 			gpint
-	#define COCO_RDX		rdbb
-	#define PUNCH_RDX		rdbb
-	#define RECOIL_RDX		rdbb
-#else
-	#define NAMETABLE_BASE 	0x2000
-	#define BUFF_SIZE 		192
-	#define COORDS(x,y) 	((x) | ((y) << 4))
-	#define MAX_PRX			244
-	#define MAX_ENX			240
-	#define NENEMS 			3
-	#define EN_X_ABSOLUTE	_en_x
-	#define PRXA 			rda
-	#define ENXA 			rda
-	#define COCO_RDX		rdx
-	#define PUNCH_RDX		rdx
-	#define RECOIL_RDX 		rdx
 #endif

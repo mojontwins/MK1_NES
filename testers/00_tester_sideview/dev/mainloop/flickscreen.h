@@ -12,24 +12,16 @@ void flickscreen_do_horizontal (void) {
 			(cfx + pvx) < 0
 		#endif
 	) {
-		#ifdef DOUBLE_WIDTH
-			n_pant -= 2;
-		#else
-			-- n_pant;
-		#endif
-		px = MAX_PRX << FIXBITS;
-	} else if (prx == MAX_PRX && 
+		-- n_pant;
+		px = 244 << FIXBITS;
+	} else if (prx == 244 && 
 		#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)
 			pvx > 0
 		#else
 			(cfx + pvx) > 0
 		#endif
 	) {
-		#ifdef DOUBLE_WIDTH
-			n_pant += 2;
-		#else
-			++ n_pant;
-		#endif
+		++ n_pant;
 		px = 4 << FIXBITS;
 	}
 }

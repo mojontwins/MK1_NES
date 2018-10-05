@@ -13,13 +13,6 @@ unsigned char ntsc, ntsc_frame;
 unsigned char update_index;
 unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
-// Attribute table
-#ifdef DOUBLE_WIDTH
-    unsigned char attr_table [128];
-#else
-    unsigned char attr_table [64];
-#endif
-
 // Fader (neslib)
 
 signed char fader;                      // Brightness level
@@ -27,8 +20,8 @@ unsigned char fade_delay;               // # of frames per brightness level in f
 
 // Current screen
 
-unsigned char map_attr [BUFF_SIZE];     // Current screen (room) tile behaviours
-unsigned char map_buff [BUFF_SIZE];     // Current screen (room) tile numbers
+unsigned char map_attr [192];           // Current screen (room) tile behaviours
+unsigned char map_buff [192];           // Current screen (room) tile numbers
 
 // Game flow
 
@@ -93,20 +86,9 @@ unsigned char oam_index_player;         // Index copy
     unsigned char b_slots [MAX_BULLETS];
     unsigned char b_slots_i;            // Array of free slots for active bullets & index.
 
-    #ifdef PLAYER_BULLET_LIFE
-        unsigned char bst [MAX_BULLETS];    // Bullets states
-    #endif
+    unsigned char bst [MAX_BULLETS];    // Bullets states
     
-    #ifdef DOUBLE_WIDTH
-        unsigned int bx [MAX_BULLETS];      // Bullets, X coordinates
-        #if !defined (PLAYER_TOP_DOWN) && !defined (PLAYER_CAN_FIRE_8_WAY)
-            unsigned char b_cy1 [MAX_BULLETS];  
-                                            // Precalculate cy1
-        #endif
-    #else
-        unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.
-    #endif
-
+    unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.
     unsigned char by [MAX_BULLETS];     // Bullets, Y coordinates.
     signed char bmx [MAX_BULLETS];      // Bullets, direction + speed in the X axis.
     signed char bmy [MAX_BULLETS];      // Bullets, direction + speed in the Y axis.
@@ -139,8 +121,7 @@ unsigned char oam_index_player;         // Index copy
 
 #ifdef ENABLE_BREAKABLE
     #ifndef BREAKABLES_SOFT
-        unsigned char brk_buff [BUFF_SIZE];
-                                        // A "life gauge" for each tile on screen, used when BREAKABLES_SOFT is unset.
+        unsigned char brk_buff [192];   // A "life gauge" for each tile on screen, used when BREAKABLES_SOFT is unset.
     #endif
     #ifdef BREAKABLE_ANIM
         unsigned char brkf [BREAKABLE_MAX];
@@ -161,13 +142,6 @@ unsigned char oam_index_player;         // Index copy
 #endif
 
 unsigned char hact [MAP_SIZE];          // Hotspots active per screen (room)
-
-// Hotspots for double width
-
-#ifdef DOUBLE_WIDTH
-    unsigned int d_hrx [2];
-    unsigned char d_hry [2], d_hrt [2]; // Store two screens worth of hotspots
-#endif
 
 // Bolts (locks, unlockable with keys)
 
@@ -225,83 +199,67 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
 
 // More globals for baddies (for current screen)
 
-unsigned char en_t [NENEMS];            // Enemy types.
+unsigned char en_t [3];                 // Enemy types.
 
-unsigned char en_x [NENEMS];            // Enemy X coordinates.
-unsigned char en_y [NENEMS];            // Enemy Y coordinates.
+unsigned char en_x [3];                 // Enemy X coordinates.
+unsigned char en_y [3];                 // Enemy Y coordinates.
 
-unsigned char en_x1 [NENEMS];
-unsigned char en_y1 [NENEMS];           // Enemy starting point coordinates (for patrollers, repurposed for other types)
+unsigned char en_x1 [3];
+unsigned char en_y1 [3];                // Enemy starting point coordinates (for patrollers, repurposed for other types)
 
-unsigned char en_x2 [NENEMS];
-unsigned char en_y2 [NENEMS];           // Enemy ending point coordinates (for patrollers, repurposed for other types)
+unsigned char en_x2 [3];
+unsigned char en_y2 [3];                // Enemy ending point coordinates (for patrollers, repurposed for other types)
 
-signed char en_mx [NENEMS];             // Enemy direction + speed in the X axis.
-signed char en_my [NENEMS];             // Enemy direction + speed in the Y axis.
+signed char en_mx [3];                  // Enemy direction + speed in the X axis.
+signed char en_my [3];                  // Enemy direction + speed in the Y axis.
 
-unsigned char en_s [NENEMS];            // Enemy base sprite index in spr_enems.
-unsigned char en_facing [NENEMS];       // Generally, 0 = facing right, 4 = facing left.
+unsigned char en_s [3];                 // Enemy base sprite index in spr_enems.
+unsigned char en_facing [3];            // Generally, 0 = facing right, 4 = facing left.
 
-unsigned char en_state [NENEMS];        // Enemy State
-unsigned char en_flags [NENEMS];        // Enemies flags
-
-unsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering
-unsigned char en_life [NENEMS];         // Enemies life gauges
-unsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type
-unsigned char en_ct [NENEMS];           // Enemies General repurposeable counter
-
-#if defined (ENABLE_COMPILED_ENEMS) || defined ENABLE_PURSUERS
-    unsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies
-#endif
+unsigned char en_state [3];             // Enemy State
 
 unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
 
 #ifdef ENEMS_CAN_RESPAWN
-    unsigned char en_respawn [NENEMS];  // If true, enems can respawn.
-    unsigned char en_resx [NENEMS];
-    unsigned char en_resy [NENEMS];     // Respawn coordinates.
-    signed char en_resmx [NENEMS];
-    signed char en_resmy [NENEMS];      // Respawn mx, my.
+    unsigned char en_respawn [3];       // If true, enems can respawn.
+    unsigned char en_resx [3];
+    unsigned char en_resy [3];          // Respawn coordinates.
+    signed char en_resmx [3];
+    signed char en_resmy [3];           // Respawn mx, my.
 #endif
 
 // Fixed point variables (coordiantes, velocity) for some kinds of enemies.
 
 #ifdef ENEMS_NEED_FP
-    signed int enf_x [NENEMS];
-    signed int enf_vx [NENEMS];
-    signed int enf_y [NENEMS];
-    signed int enf_vy [NENEMS];
+    signed int enf_x [3];
+    signed int enf_vx [3];
+    signed int enf_y [3];
+    signed int enf_vy [3];
 #endif
 
 // Generator for PURSUER type enemies.
 
 #ifdef ENABLE_GENERATORS
-    unsigned char en_generator_life [NENEMS];
+    unsigned char en_generator_life [3];
                                         // Generators life gauge.
-    unsigned char gen_was_hit [NENEMS];      // True if generator was hit.
+    unsigned char gen_was_hit [3];      // True if generator was hit.
 #endif
 
-unsigned char en_spr_id [NENEMS];
-
-// Temporal invincibility
-
-#ifdef ENEMS_INVINCIBILITY
-    unsigned char en_invincible [NENEMS];
-#endif
+unsigned char en_spr_id [3];
 
 // Persistent enemies (position / movement is remembered)
 
 #ifdef PERSISTENT_ENEMIES
-    unsigned char ep_x [NENEMS * MAP_SIZE];  // Buffer for X coordinates.
-    unsigned char ep_y [NENEMS * MAP_SIZE];  // Buffer for Y coordinates.
-    signed char ep_mx [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the X axis.
-    signed char ep_my [NENEMS * MAP_SIZE];   // Buffer for direction + speed in the Y axis.
+    unsigned char ep_x [3 * MAP_SIZE];  // Buffer for X coordinates.
+    unsigned char ep_y [3 * MAP_SIZE];  // Buffer for Y coordinates.
+    signed char ep_mx [3 * MAP_SIZE];   // Buffer for direction + speed in the X axis.
+    signed char ep_my [3 * MAP_SIZE];   // Buffer for direction + speed in the Y axis.
 #endif
 
 // Persistent deaths (death enemies stay dead in current level)
 
 #ifdef PERSISTENT_DEATHS
-    unsigned char ep_dead [NENEMS * MAP_SIZE];
+    unsigned char ep_dead [3 * MAP_SIZE];
                                         // Buffer for dead enemies (true if dead).
 #endif
 
@@ -310,8 +268,8 @@ unsigned char en_spr_id [NENEMS];
 #ifdef ENABLE_PROPELLERS
     unsigned char prp_idx;              // Index of active propellers on current screen (room) (when creating)
                                         // Number of active propellers on current screen (room) (in the game loop)
-    unsigned int prp_addr [PROPELLERS_MAX];
-                                        // PPU Addresses of active propellers.
+    unsigned char prp_yx [PROPELLERS_MAX];
+                                        // Coordinates of active propellers, packed 0xYX
     unsigned char propellers_on;        // Propellers are on (animate & affect player)
 #endif
 
@@ -390,7 +348,7 @@ unsigned char en_spr_id [NENEMS];
 
 #ifdef ENABLE_TILE_GET
     #ifdef PERSISTENT_TILE_GET
-        unsigned char tile_got [24];    // Buffer for current screen
+        unsigned char tile_got [24];        // Buffer for current screen
     #endif
 #endif
 

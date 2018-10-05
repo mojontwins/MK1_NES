@@ -94,12 +94,7 @@ void player_init (void) {
 void player_render (void) {
 	if (0 == pflickering || half_life) 
 		oam_index = oam_meta_spr (
-			#ifdef DOUBLE_WIDTH
-				prx - scroll_x, 
-			#else
-				prx,
-			#endif
-			pry + SPRITE_ADJUST, 
+			prx, pry + SPRITE_ADJUST, 
 			oam_index, 
 			spr_player [psprid]
 		);
@@ -700,7 +695,7 @@ void player_move (void) {
 	#endif
 		
 	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
-	else if (px > (MAX_PRX << FIXBITS)) { px = MAX_PRX << FIXBITS; prx = MAX_PRX; }
+	else if (px > (244<<FIXBITS)) { px = 244 << FIXBITS; prx = 244; }
 	else player_to_pixels ();
 	
 	// Collision
@@ -714,17 +709,17 @@ void player_move (void) {
 	if (rds16) 	{
 		if (rds16 < 0) {
 			cx1 = cx2 = prx >> 4; 
-			PRXA = (cx1 + 1) << 4;
+			rda = (cx1 + 1) << 4;
 			rdm = cx1 - 1;
 		} else {
 			cx1 = cx2 = (prx + 8) >> 4;
-			PRXA = ((cx1 - 1) << 4) + 8;
+			rda = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
 		#if PLAYER_COLLISION_VSTRETCH_BG > 0
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
-				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
@@ -737,7 +732,7 @@ void player_move (void) {
 		#else
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
