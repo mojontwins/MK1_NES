@@ -23,10 +23,6 @@ void cm_three_points (void) {
 }
 #endif
 
-unsigned char collide_in (x0, y0, x1, y1) {
-	return (x0 >= x1 && x0 <= x1 + 15 && y0 >= y1 && y0 <= y1 + 15);	
-}
-
 unsigned char collide (void) {
 
 	// Player bounding box is:
@@ -37,8 +33,8 @@ unsigned char collide (void) {
 	//     _en_y - ENEMS_COLLISION_VSTRETCH_FG to _en_y + 13
 
 	return (
-		prx + 3 >= _en_x && 
-		prx <= _en_x + 11 && 
+		prx + 3 >= EN_X_ABSOLUTE && 
+		prx <= EN_X_ABSOLUTE + 11 && 
 		pry + 13 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
 		pry <= _en_y + 13 + PLAYER_COLLISION_VSTRETCH_FG
 	);
@@ -53,7 +49,13 @@ signed int add_sign (signed int sign, signed int value) {
 void run_fire_script (void) {
 	fire_script_success = 0;
 	run_script (2 * MAP_SIZE + 2);
-	run_script ((n_pant << 1) + 1);
+	#ifdef DOUBLE_WIDTH
+		prx &= 0xff;
+		run_script (((n_pant + !!(prx & 0x100)) << 1) + 1);
+		player_to_pixels ();
+	#else
+		run_script ((n_pant << 1) + 1);
+	#endif
 	#ifdef ENABLE_PUSHED_SCRIPT
 		just_pushed = 0;
 	#endif
@@ -77,7 +79,7 @@ void pad_read (void) {
 
 #if defined (ENABLE_HOMING_FANTY) || defined (ENABLE_COCOS)
 	// Lame but fast and tiny
-	// Before the call: copy fanty's coordinates into rdx, rdy
+	// Before the call: copy objects's coordinates into rdx, rdy
 	unsigned char distance (void) {
 		rda = DELTA (prx, rdx); // dx
 		rdb = DELTA (pry, rdy); // dy
@@ -111,8 +113,39 @@ void pad_read (void) {
 #endif
 
 void update_cycle (void) {
+	#ifdef DOUBLE_WIDTH
+		scroll (scroll_x, SCROLL_Y);
+	#endif
 	oam_hide_rest (oam_index);
+	#ifdef DEBUG
+		ppu_mask (0x1e);
+	#endif
 	ppu_waitnmi ();
+	#ifdef DEBUG
+		ppu_mask (0x1f);
+	#endif
 	clear_update_list ();
 	oam_index = 4;
 }
+
+#ifdef DOUBLE_WIDTH
+	void calc_scroll_pos (void) {
+		scroll_x = prx - 124;
+		if (scroll_x < 0) scroll_x = 0;
+		else if (scroll_x > 256) scroll_x = 256;	
+	}
+
+	void calc_en_x_absolute (void) {
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+			if (_en_t == 6 || _en_t == 13) {
+				// Fanties and boioiongs are absolute
+				EN_X_ABSOLUTE = _enf_x >> FIXBITS;
+			} else 
+		#endif
+		{
+			// Other types are absolute
+			EN_X_ABSOLUTE = en_x_offs + _en_x;
+		}
+		on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);
+	}
+#endif

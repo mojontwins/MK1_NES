@@ -21,7 +21,7 @@ cd ..\script
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 1 5 99 0
+..\..\..\src\utils\rle53mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 2 5 99 0
 
 echo Exporting music and sound
 cd ..\dev
@@ -37,7 +37,7 @@ if [%2]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
-rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 5
+..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 10
 cd ..\dev
 
 :noscript

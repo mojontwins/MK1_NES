@@ -15,7 +15,6 @@
 
 // Macros
 
-#define COORDS(x,y) 			((x) | ((y) << 4))
 #define MSB(x)					(((x) >> 8))
 #define LSB(x)					(((x) & 0xff))
 #define SGNI(n)					((n) < 0 ? -1 : 1)
@@ -27,11 +26,12 @@
 #define DELTA(a,b)				((a) < (b) ? (b) - (a) : (a) - (b))
 #define ATTR(x,y)				(map_attr [COORDS((x),(y))])
 #define QTILE(x,y)				(map_buff [COORDS((x),(y))])
-#define ENEMS_RECOIL_X 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_x, prx, ENEMS_RECOIL_ON_HIT))
+#define ENEMS_RECOIL_X 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (EN_X_ABSOLUTE, prx, ENEMS_RECOIL_ON_HIT))
 #define ENEMS_RECOIL_Y 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_y, pry, ENEMS_RECOIL_ON_HIT))
 #define VRAM_READ				(*((unsigned char *) (0x2007)))
 #define SET_FROM_PTR(v,p)		{__asm__("ldy #0");__asm__("lda (%v),y",p);__asm__("sta %v",v);}
 #define IF_PLAYER_TOUCHES(x,y)	rdx=(x)<<4;rdy=16+((y)<<4);if(prx+7>=rdx&&prx<=rdx+15&&pry+15>=rdt&&pry<=rdy+15)
+#define ROUGHLY_EQUAL(a,b,n)	(((a)>(b))?(((a)-(b))<(n)):(((b)-(a))<(n)))
 
 // Wall hits
 

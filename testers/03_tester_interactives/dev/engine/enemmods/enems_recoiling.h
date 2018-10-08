@@ -11,7 +11,7 @@ if (en_life [gpit])
 	if (en_rmx [gpit])
 	#endif
 	{
-		rdx = _en_x; _en_x += en_rmx [gpit];
+		RECOIL_RDX = _en_x; _en_x += en_rmx [gpit];
 
 		cy1 = _en_y >> 4;
 		cy2 = (_en_y + 15) >> 4;
@@ -44,7 +44,7 @@ if (en_life [gpit])
 		#ifdef WALLS_STOP_ENEMIES
 			|| en_collx
 		#endif
-		) _en_x = rdx;
+		) _en_x = RECOIL_RDX;
 	}
 
 	#ifdef PLAYER_TOP_DOWN

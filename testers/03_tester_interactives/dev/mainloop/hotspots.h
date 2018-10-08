@@ -4,7 +4,12 @@
 // Hotspot interaction
 
 if (hrt) {
-	if (collide_in (prx + 4, pry + 8, hrx, hry)) {
+	if (
+		prx + 4 >= hrx && 
+		prx <= hrx + 11 &&
+		pry + 8 >= hry && 
+		pry <= hry + 7
+	) {
 		#ifdef ENABLE_RESONATORS
 			if (hrt == HOTSPOT_TYPE_RESONATOR) {
 				if (pvy > 0 && pry < hry) {
@@ -51,7 +56,7 @@ if (hrt) {
 						if (b_button) 
 						#endif
 						{
-							hrt = ht [n_pant] = pinv;
+							hrt = ht [HS_CUR_PANT] = pinv;
 							pinv = HS_OBJ_EMPTY;
 
 							b_button = 0;
@@ -67,7 +72,7 @@ if (hrt) {
 						{
 							// Interchange pinv and hrt, and register in array.
 							rda = hrt;
-							hrt = ht [n_pant] = pinv;
+							hrt = ht [HS_CUR_PANT] = pinv;
 							pinv = rda;
 
 							b_button = 0;
@@ -88,9 +93,9 @@ if (hrt) {
 
 								// Update hotspot
 								#ifdef HS_FIX_ON_USE
-									hrt = ht [n_pant] = pinv + 2*HS_USE_OFFS;
+									hrt = ht [HS_CUR_PANT] = pinv + 2*HS_USE_OFFS;
 								#else
-									hrt = ht [n_pant] = pinv;
+									hrt = ht [HS_CUR_PANT] = pinv;
 								#endif
 
 								// Clear carried object
@@ -192,7 +197,7 @@ if (hrt) {
 					if (rda) {
 						sfx_play (rda, 1);
 						hrt = 0;
-						hact [n_pant] = 0;
+						hact [HS_CUR_PANT] = 0;
 					}
 				}
 

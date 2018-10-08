@@ -8,3 +8,4 @@ void shines_add (void);
 void chac_chacs_add (void);
 void player_render (void);
 void do_extern_action (unsigned char);
+void player_to_pixels (void);

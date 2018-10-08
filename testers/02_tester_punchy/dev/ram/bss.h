@@ -13,6 +13,13 @@ unsigned char ntsc, ntsc_frame;
 unsigned char update_index;
 unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
+// Attribute table
+#ifdef DOUBLE_WIDTH
+    unsigned char attr_table [128];
+#else
+    unsigned char attr_table [64];
+#endif
+
 // Fader (neslib)
 
 signed char fader;                      // Brightness level
@@ -33,16 +40,6 @@ unsigned char c_max_enems;              // Number of killable enems. in current 
 
 unsigned char n_pant;                   // Current screen (room) number.
 unsigned char on_pant;                  // Current screen (room) numberm last frame value (used to detect changes)
-#ifdef DOUBLE_WIDTH
-    unsigned char w_pant;               // (Working) Current screen (backup).
-    unsigned int nametable_base;        // 0x2000 or 0x2400
-    unsigned int buff_offset;           // 0 or 192
-    unsigned char attr_table_offset;    // 0 or 64
-    unsigned char *buff_ptr;            // Points to parts of the buffer
-    unsigned char *attr_ptr;            // Points to parts of the buffer
-    signed int scroll_x;                // Scroller position
-    unsigned char on_screen;            // Flag used in enengine.h
-#endif
 
 unsigned char half_life;                // 1-0 flip flop (each game frame)
 unsigned char frame_counter;            // Game grame counter, wraps 255->0
@@ -96,10 +93,16 @@ unsigned char oam_index_player;         // Index copy
     unsigned char b_slots [MAX_BULLETS];
     unsigned char b_slots_i;            // Array of free slots for active bullets & index.
 
-    unsigned char bst [MAX_BULLETS];    // Bullets states
+    #ifdef PLAYER_BULLET_LIFE
+        unsigned char bst [MAX_BULLETS];    // Bullets states
+    #endif
     
     #ifdef DOUBLE_WIDTH
         unsigned int bx [MAX_BULLETS];      // Bullets, X coordinates
+        #if !defined (PLAYER_TOP_DOWN) && !defined (PLAYER_CAN_FIRE_8_WAY)
+            unsigned char b_cy1 [MAX_BULLETS];  
+                                            // Precalculate cy1
+        #endif
     #else
         unsigned char bx [MAX_BULLETS];     // Bullets, X coordinates.
     #endif
@@ -158,6 +161,13 @@ unsigned char oam_index_player;         // Index copy
 #endif
 
 unsigned char hact [MAP_SIZE];          // Hotspots active per screen (room)
+
+// Hotspots for double width
+
+#ifdef DOUBLE_WIDTH
+    unsigned int d_hrx [2];
+    unsigned char d_hry [2], d_hrt [2]; // Store two screens worth of hotspots
+#endif
 
 // Bolts (locks, unlockable with keys)
 
@@ -233,13 +243,16 @@ unsigned char en_s [NENEMS];            // Enemy base sprite index in spr_enems.
 unsigned char en_facing [NENEMS];       // Generally, 0 = facing right, 4 = facing left.
 
 unsigned char en_state [NENEMS];        // Enemy State
-unsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies
 unsigned char en_flags [NENEMS];        // Enemies flags
 
 unsigned char en_cttouched [NENEMS];    // Counters used to show explosions / flickering
 unsigned char en_life [NENEMS];         // Enemies life gauges
 unsigned char en_status [NENEMS];       // Enemies statused, repurposed per enemy type
 unsigned char en_ct [NENEMS];           // Enemies General repurposeable counter
+
+#if defined (ENABLE_COMPILED_ENEMS) || defined ENABLE_PURSUERS
+    unsigned char en_rawv [NENEMS];         // Speed, used for pursuer-type enemies
+#endif
 
 unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for effects)
 
@@ -377,15 +390,8 @@ unsigned char en_spr_id [NENEMS];
 
 #ifdef ENABLE_TILE_GET
     #ifdef PERSISTENT_TILE_GET
-        unsigned char tile_got [24];        // Buffer for current screen
+        unsigned char tile_got [24];    // Buffer for current screen
     #endif
-#endif
-
-// Attribute table
-#ifdef DOUBLE_WIDTH
-    unsigned char attr_table [128];
-#else
-    unsigned char attr_table [64];
 #endif
 
 #include "my/extra_vars.h"              // Custom extra variables

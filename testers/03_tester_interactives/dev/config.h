@@ -16,9 +16,11 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W 					1		//
+#define MAP_W 					2		//
 #define MAP_H					5		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
+
+#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
 
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
@@ -32,7 +34,7 @@
 
 	// If you aim for a single level ROM, fill in those:
 
-	#define SCR_INI					0		// Initial screen
+	#define SCR_INI					8		// Initial screen
 	#define PLAYER_INI_X			0xe		//
 	#define PLAYER_INI_Y			0x9		// Initial position
 	//#define SCR_END				99		// Final screen, undefine if N/A
@@ -413,6 +415,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES

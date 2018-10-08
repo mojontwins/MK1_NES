@@ -3,6 +3,8 @@
 
 // LUTs
 
+const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
+
 #ifdef ENABLE_MONOCOCOS
 	const unsigned char monococo_state_times [] = {
 		MONOCOCO_BASE_TIME_HIDDEN, MONOCOCO_BASE_TIME_APPEARING, MONOCOCO_BASE_TIME_ONBOARD, MONOCOCO_BASE_TIME_APPEARING
@@ -23,7 +25,7 @@
 	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
 #endif
 
-#if defined (ENABLE_TILE_CHAC_CHAC) 
+#if defined (ENABLE_TILE_CHAC_CHAC) || defined (ENABLE_CHAC_CHAC)
 	const unsigned char chac_chacs_times [] = {
 		0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3
 	};

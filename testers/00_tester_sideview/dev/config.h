@@ -20,7 +20,7 @@
 #define MAP_H					2		// Map dimmensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
+//#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
 
 #define PLAYER_LIFE				5		// Vida máxima (con la que empieza, además)
 #define PLAYER_REFILL			1		// Recarga de vida.

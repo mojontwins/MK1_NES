@@ -12,7 +12,7 @@ NES_MAPPER				=0	;mapper number
 NES_PRG_BANKS			=2	;number of 16K PRG banks, change to 2 for NROM256
 NES_CHR_BANKS			=1	;number of 8K CHR banks
 .endif
-NES_MIRRORING			=0	;0 horizontal, 1 vertical, 8 four screen
+NES_MIRRORING			=1	;0 horizontal, 1 vertical, 8 four screen
 
 FT_DPCM_OFF				=$ffc0	;samples offset, $c000 or higher, 64-byte steps
 FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (faster)

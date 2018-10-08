@@ -5,32 +5,33 @@
 
 // Avoid parameters using these in critical functions.
 
-unsigned char _x, _y, _n, _t, _z;
+unsigned char _x, _y, _n, _t;
 
 // General, all-purpose variables
 
 unsigned char pad0;                     // (neslib) pad 0 read.
 unsigned char pad_this_frame;           // (neslib) pad 0 read, current frame presses.
 unsigned char gpit, gpjt;               // General purpose iterators.
-unsigned char gpitu, gpaux;             // Auxiliary iterators.
 signed int rds16;                       // General purpose 16 bit signed variable.
 unsigned int gpint;                     // General purpose 16 bit unsinged variable.
 
 const unsigned char *gp_gen;            // General purpose pointer to read data in ROM.
-const unsigned char *gp_tmap, *gp_tma2; // Pointers used to read map data in ROM.
-unsigned char *gp_ram, *gp_ram_aux;     // General purpose pointers to read / write data in RAM.
+const unsigned char *gp_tmap;           // Pointers used to read map data in ROM.
+unsigned char *gp_ram;                  // General purpose pointers to read / write data in RAM.
 unsigned int gp_addr;                   // General purpose address, used for PPU addresses.
 unsigned char rdx, rdy;                 // General purpose coordinates
 unsigned char rdt;                      // General purpose "type"
 unsigned char rdit;                     // General purpose iterator
 unsigned char rda, rdb, rdc, rdd, rdm;  // General purpose temporal value holders.
+unsigned char rde;                      // General purpose temporal value holders.
 signed char rds;                        // General purpose temporal value holder, signed.
 unsigned char rdct;                     // General purpose counter
 unsigned char ticker;                   // Ticker. 0 for a frame every second.
 #ifdef DOUBLE_WIDTH
-    signed int rdaa, rdbb;              // Genearl purpose integer
+    signed int rdaa;                    // General purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
 #endif
+unsigned char ast1;                     // Temporal
 
 // Used for two-points collision
 
@@ -103,7 +104,6 @@ unsigned char pry;                      // Player pixel coordinates, calculated 
 unsigned char pcy;                      // Coordinates prior to movement.
 unsigned char pfacing;                  // Player facing left, right
 unsigned char pfr;                      // Player frame
-unsigned char pctfr;                    // Player counter (for animation)
 unsigned char psprid;                   // Player sprite ID set in my/player_frame_selector.h
 unsigned char a_button, b_button;       // True if A or B have been pressed *this* frame, respectively
 
@@ -197,11 +197,14 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 #ifdef PLAYER_CAN_FIRE
     unsigned char bi;                   // Iterator for player bullets (projectiles shot by the player)
     #ifdef DOUBLE_WIDTH
-        unsigned int _bx;
+        signed int _bx;
     #else
         unsigned char _bx;
     #endif
     unsigned char _by;                  // Fast copies
+    #ifdef DOUBLE_WIDTH
+        unsigned char bullets_disable;      // Disable bullets processing on current frame
+    #endif
 #endif
 
 // Cocos
@@ -211,7 +214,13 @@ unsigned char pfiring;                  // Flag to control actions spawned by th
 #endif
 
 // Hotspots
-unsigned char hrx, hry, hrt;            // Current screen hotspot X, Y coordinates and type, respectively
+
+#ifdef DOUBLE_WIDTH
+    unsigned int hrx;
+#else
+    unsigned char hrx;
+#endif
+unsigned char hry, hrt;                 // Current screen hotspot X, Y coordinates and type, respectively
 
 // Process breakable?
 #ifdef BREAKABLE_ANIM
@@ -282,3 +291,14 @@ unsigned char c_max_bolts;              // Number of locks in current level
     unsigned char script_result, sc_terminado, sc_continuar;
 #endif
     
+// Double screen helpers
+
+#ifdef DOUBLE_WIDTH
+    unsigned int nametable_base;        // 0x2000 or 0x2400
+    unsigned int buff_offset;           // 0 or 192
+    unsigned char attr_table_offset;    // 0 or 64
+    unsigned char *buff_ptr;            // Points to parts of the buffer
+    unsigned char *attr_ptr;            // Points to parts of the buffer
+    signed int scroll_x;                // Scroller position
+    unsigned char on_screen;            // Flag used in enengine.h
+#endif

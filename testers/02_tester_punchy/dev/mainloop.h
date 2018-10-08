@@ -140,7 +140,23 @@ void prepare_scr (void) {
 	#endif
 
 	enems_load ();
-	hotspots_create ();	
+
+	#ifdef DOUBLE_WIDTH
+		for (gpit = 0; gpit < 2; gpit ++) {
+			hotspots_create ();
+
+			hrx &= 0x00ff;
+			if (gpit) hrx |= 0x0100;
+			d_hrx [gpit] = hrx;
+			d_hry [gpit] = hry;
+			d_hrt [gpit] = hrt;
+
+			*((unsigned char *) 0xfc + gpit*2) = MSB(d_hrx [gpit]);
+			*((unsigned char *) 0xfd + gpit*2) = LSB(d_hrx [gpit]);
+		}
+	#else
+		hotspots_create ();	
+	#endif
 
 	#ifdef ENABLE_COCOS
 		cocos_init ();
@@ -185,7 +201,7 @@ void prepare_scr (void) {
 
 	#ifdef PLAYER_CAN_FIRE
 		for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-			b_slots [gpit] = gpit; bst [gpit] = 0;
+			b_slots [gpit] = gpit; by [gpit] = 0;
 		}
 		b_slots_i = MAX_BULLETS;
 	#endif
@@ -236,7 +252,19 @@ void prepare_scr (void) {
 	#endif
 	enems_move ();
 
-	if (hrt) hotspots_paint ();
+
+	#ifdef DOUBLE_WIDTH
+		for (gpit = 0; gpit < 2; gpit ++)  {
+			hrx = d_hrx [gpit];
+			hrt = d_hrt [gpit];
+			if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
+			hry = d_hry [gpit];
+
+			hotspots_paint ();
+		}
+	#else
+		if (hrt) hotspots_paint ();
+	#endif
 	
 	#ifdef ENABLE_INTERACTIVES	
 		interactives_paint ();
@@ -357,7 +385,21 @@ void game_loop (void) {
 
 			// Update / collide hotspots
 
-			#include "mainloop/hotspots.h"
+			#ifdef DOUBLE_WIDTH
+				for (gpit = 0; gpit < 2; gpit ++)  {
+					hrx = d_hrx [gpit];
+					hrt = d_hrt [gpit];
+					if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
+					hry = d_hry [gpit];
+
+					#include "mainloop/hotspots.h"
+					hotspots_paint ();
+
+					d_hrt [gpit] = hrt;
+				}
+			#else
+				#include "mainloop/hotspots.h"
+			#endif
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
 
@@ -432,7 +474,9 @@ void game_loop (void) {
 
 			// Paint hotspots
 
-			if (hrt) hotspots_paint ();
+			#ifndef DOUBLE_WIDTH
+				if (hrt) hotspots_paint ();
+			#endif
 
 			// Paint interactives
 

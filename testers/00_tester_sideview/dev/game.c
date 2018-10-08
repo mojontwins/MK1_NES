@@ -4,7 +4,7 @@
 // Uses neslib and related tools by Shiru
 
 // Comment this when you are done
-#define DEBUG
+//#define DEBUG
 
 //
 

@@ -14,9 +14,9 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			#endif
 		) {
 			b_button = 0;
-			
+
 			if (
-				x0 > 0 && x0 < 15 && y0 > 0 && y0 < 11 &&
+				x0 > 0 && x0 < MAX_TILE_X && y0 > 0 && y0 < 11 &&
 				ATTR (x1, y1) == 0
 			) {
 				#ifdef ENABLE_PUSHED_SCRIPT
@@ -52,7 +52,14 @@ void player_process_tile (at, x0, y0, x1, y1) {
 			gp_gen = (unsigned char *) c_locks;
 			gpit = c_max_bolts; while (gpit --) {
 				rda = *gp_gen ++; rdb = *gp_gen ++;
-				if (n_pant == rda && COORDS (x0, y0) == rdb) {
+				#ifdef DOUBLE_WIDTH
+					if ((x0 < 16 && n_pant == rda && COORDS (x0, y0) == rdb) ||
+						(x0 > 15 && n_pant + 1 == rda && COORDS (x0 - 16, y0) == rdb)
+					)
+				#else
+					if (n_pant == rda && COORDS (x0, y0) == rdb) 
+				#endif
+				{
 					lkact [gpit] = 0;
 				}
 			}

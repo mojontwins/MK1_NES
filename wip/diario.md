@@ -4719,3 +4719,119 @@ Creo que por hoy lo dejo. El próximo día:
 2.- Transferiré el proyecto a `tester_punchy` de nuevo y lo probaré en los dos modos.
 3.- Transferiré el proyecto a `tester_interactives` y adaptaré scripting e interactivos.
 
+20181008
+========
+
+1.- `tester_top_down` recompilado con el nuevo src y funcionando (aunque, como he dicho, no se activa `DOUBLE_WIDTH`, pero el resto parece ir limpio).
+
+2.- Transferido a `tester_punchy`: Se me jode ZP por 11 bytes. Se ve que las características de `tester_sideview` y `tester_punchy` hacen que el uso de las diferentes zonas de RAM sea muy diferente. Quizá esto sea algo en lo que tenga que trabajar. Lo cierto es que la RAM empieza a ser un problema.
+
+Como `tester_punchy` se sale 11 bytes de ZP, voy a intentar *reducir* el uso de esta zona, que no mover a BSS. Seguro que puedo reaprovechar globales reubicando (y haciendo que el spaghetti crezca).
+
+- `gp_tma2` no se usa, por ejemplo.
+- `gpitu` no se usa.
+- `gpaux` sólo se emplea en `breakable_break`, que se llama desde `player.h` y `bullets.h` y a su vez sólo llama a `map_set`. Puedo cambiarla por `gpit`.
+- `gp_ram_aux` no se usa.
+- `pctfr` no se usa.
+
+Además he eliminado otras variables y ya he conseguido ganar esos 11 bytes, pero sigo yendo al puto límite.
+
+Poco a poco dejaré esto muy optimizado.
+
+3.- Transgerir a `tester_interactives` - Y aquí viene lo divertido.
+
+¿Empiezo por el scripting, o por la versión *code injection*? XD
+
+Me cago en mi vida, el tester interactives tiene un mapa de una sola columna. Hostiaputa.
+
+Voy a tener que currarme otro mapa. O extender el que hay. Pero entonces hay que retocar todos los valores. Mejor empezar por ahí antes de activar nada.
+
+~~
+
+- Latest code, con `DOUBLE_WIDTH` desactivado, en modo scripting funcionando.
+- Latest code, con `DOUBLE_WIDTH` desactivado, en modo injection funcionando.
+
+Tengo que crear un interactivo/punto de script en la pantalla 9 (la última) que está en la derecha, y además debe sacar un textbox que se presente en esa pantalla.
+
+El tema del textbox es peliagudo: antes de mostrarlo hay que mover el scroll rápidamente a la pantalla donde se vaya a mostrar (izquierda o derecha).
+
+Es todo muy divertido. Pero antes voy a hacer funcionar el script o los interactivos en la pantalla de la derecha.
+
+Venga, va, empiezo con `ACTIVATE_SCRIPTING`.
+
+~~
+
+Primero, `ENTERING SCREEN` - debería ejecutarse para `n_pant` y para `n_pant + 1`. Además, `PRESS_FIRE ON SCREEN` debería ejecutarse para `n_pant + !!(prx & 0x100)`. Además, el prx que llega debe ir `and 0xff`. Supuestamente con eso tendría cubierto el tema del scripting.
+
+Para probarlo, tengo que hacer un ENTERING sencillo para la pantalla 9, y poner un punto de interacción en dicha pantalla para `PRESS_FIRE`.
+
+Hay que dejar documentado que en el modo `DOUBLE_WIDTH`, el scripting *también* va orientado a pantallas simples. Esto es *muy importante*. Las inyecciones de código son más locas, ahí ya el programador puede hacer lo que le venga en gana.
+
+~~
+
+Tengo que hacer que las ordenes que modifiquen la pantalla (añadan un interactivo, por ejemplo) tengan en cuenta que estamos en la pantalla de la derecha.
+
+Esto crece, amigos.
+
+~~
+
+Veamos primero qué funciones de pintado se llaman desde el script:
+
+- `map_set ()`.
+- `textbox_do ()` - tehehehehe.
+- `update_list_tile ()`.
+- `draw_tile ()`.
+- `interactives_add` - Esto ya lo iremos resolviendo.
+
+Aquí ya tenemos un problema: `map_set` funciona sobre espacio absoluto (X = 0..31), mientras que `draw_tile` no lo hace. Esto ya creo qe está llamando a una modificación de msc que sea capaz de detectar que la pantalla es impar y modifique al vuelo los comandos añadiendo 16 antes de llamar.
+
+Se me ocurre añadir esto al código que genera mscmk1.exe:
+
+```c
+    #ifdef DOUBLE_WIDTH
+        #define MAP_SET if (odd) _x += 16; map_set
+        #define UPDATE_LIST_TILE if (odd) _x += 31; update_list_tile
+    #else
+        #define MAP_SET map_set
+        #define UPDATE_LIST_TILE update_list_tile
+    #endif
+```
+
+Y calcular `odd` como `whichs & 1` al principio.
+
+No va, esta solución para detectar si estoy en la pantalla de la derecha no sirve. Quizá sea tan sencillo como establecer odd desde fuera a pelazo.
+
+Problema y limitación: Los entering any, de entrada, no son capaces de modificar la pantalla de la derecha. 
+
+Creo que lo suyo sería replantear todo esto para que el script se ejecute globalmente sobre la pantalla doble, con lo que habría que escribir los scripts acordemente.
+
+El único problema que puede tener esto es que quizá necesite desempaquetar algunos datos (tipo YX). Tengo que ver si hay, y cuáles son.
+
+A lo mejor lo más cómodo para no romper compatibilidades es establecer un modo `DOUBLE_WIDTH` también para msc.
+
+Por ahora, lo dejo macerar.
+
+~~
+
+Tengo datos empaquetados en:
+
+- `DECORATIONS`: Cada decoración son dos bytes: `{xy, t}`. Esto se puede apañar y dejarlo como está, añadiendo un keyword LEFT y otro RIGHT (codificando 0xff, 0x00 y 0xfe, 0x00 por ejemplo) que modifiquen el offset al vuelo.
+- `ADD_INTERACTIVE` / `ADD_SPRITE` codifican `yx, f` y luego llaman a `interactives_add`. Esto habría que modificarlo (intérprete, bytecode y función C).
+
+¡No parece que sea mucho!
+
+~~
+
+Recapitulando:
+
+- Habrá que decirle a `mscmk1.exe` que está generando para `DOUBLE_WIDTH`.
+- Los scripts para juegos de doble de ancho serán específicos, y contendrán sólamente entradas para `n_pant` pares, tratando las dos pantallas anexas como una sola.
+- Las detecciones serán globales, ¡teniendo cuidado con esto cuando se trate de pixeles! [*]
+- Las impresiones y creaciones de interactivos también serán globales, en un espacio de tiles de X = 0..31.
+
+[*] Vamos a comprobar esto.
+
+- En `PLAYER_TOUCHES (x, y)`, `sc_x` se multiplica por 16 para hacer la detección. Habrá que generar código específico para esto.
+- En `PLAYER_IN_X` tenemos el problema de que las coordenadas de 512 píxels necesitan 2 bytes o 9 bits. En modo `DOUBLE_WIDTH`, podemos hacer que `PLAYER_IN_X` no funcione, y haya que usar `PLAYER_IN_X_TILES`, que almacene directamente los tiles y genere código especial.
+
+Creo que esto lo cubriría todo. Bueno, ¡manos a la obra! Pero luego. Ahora café.
