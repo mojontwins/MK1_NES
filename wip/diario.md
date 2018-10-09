@@ -4833,5 +4833,37 @@ Recapitulando:
 
 - En `PLAYER_TOUCHES (x, y)`, `sc_x` se multiplica por 16 para hacer la detección. Habrá que generar código específico para esto.
 - En `PLAYER_IN_X` tenemos el problema de que las coordenadas de 512 píxels necesitan 2 bytes o 9 bits. En modo `DOUBLE_WIDTH`, podemos hacer que `PLAYER_IN_X` no funcione, y haya que usar `PLAYER_IN_X_TILES`, que almacene directamente los tiles y genere código especial.
+- `REDRAW` habrá que reimplementarla.
 
 Creo que esto lo cubriría todo. Bueno, ¡manos a la obra! Pero luego. Ahora café.
+
+20181009
+========
+
+[X] `mscmk1.exe` se puede poner en modo `DOUBLE_WIDTH`.
+[X] `DECORATIONS` para soporte `LEFT`/`RIGHT`. Puedo ser que sea 100% transparente, y meter yo estos keywords.
+[X] `ADD_INTERACTIVE`/`ADD_SPRITE`.
+[X] `PLAYER_TOUCHES`.
+[X] `PLAYER_IN_X`/`PLAYER_IN_X_TILES`.
+[X] `REDRAW`
+
+Ya está todo cambiado y tal. Ahora viene cuando no funciona un carajo. Pero tengo que adaptar el script.
+
+¡Hey! Pues la colocación de los sprites/contenedores y la impresión de tiles parece funcionar. Luego probaré el resto, porque la detección de interacción con los interactives está peísima. Arreglo eso y pruebo lo demás.
+
+¡ Qué hostias ! No está peísimo, lo que pasa es que el textbox se muestra en el otro sitio :-D
+
+No sé si probar el resto de msc o ponerme a modificar el tema de los textboxes. Meh, me apetece ver los textboxes!
+
+El tema está detectar con (prx & 0x100) en qué pantalla estamos para hacer scroll y luego presentar en el sitio correcto.
+
+~~
+
+Con mil problemas por las putas variables globales que se me acaban, lo he hecho, pero el código se engorrina cada vez más. Cuando acabe tendré que hacer una ronda de adecentamiento.
+
+Voy a probar todo este tester en modo scripting y me paso al modo injection.
+
+~~
+
+Esto parece funcionar todo. Creo que me pondré antes de cerrar a terminar de probar las nuevas adiciones al scripting y le daré carpetazo a este tester. Antes tengo que volverlo a la normalidad y comprobar que todo sigue siendo guay.
+

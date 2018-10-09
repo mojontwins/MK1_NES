@@ -29,7 +29,7 @@ Dim Shared As Integer macrosPtr
 Dim Shared As Integer maxItem
 Dim Shared As Integer itemSetx, itemSety, itemSetStep, itemSetOr, itemFlag, slotFlag
 Dim Shared As Integer itemSelectClr, itemSelectC1, itemSelectC2, itemEmpty
-Dim Shared As Integer debug, binmode, fullBinOffset
+Dim Shared As Integer debug, binmode, fullBinOffset, doubleWidth
 Dim Shared As uByte customScriptOrder(127)
 Dim Shared As uByte customScriptMax
 
@@ -43,7 +43,7 @@ Function inCommand (a As String) As Integer
 	Dim As Integer i
 	i = 1
 	While (Command (i) <> "")
-		If Command (i) = a Then Return -1
+		If lCase (Command (i)) = lCase (a) Then Return -1
 		i = i + 1
 	Wend
 	Return 0
@@ -263,7 +263,8 @@ Function procesaClausulas (f As Integer) As String
 	Dim As Integer sc_terminado, estado
 	Dim As Integer longitud
 	Dim As Integer ai, itt, dF, opCode, lvalue, rvalue, i, value
-	Dim As Integer fzx1, fzy1, fzx2, fzy2
+	Dim As Integer fzx1, fzy1, fzx2, fzy2, x
+	Dim As Integer side
 
 	longitud = 0
 	clausulas = ""
@@ -393,14 +394,23 @@ Function procesaClausulas (f As Integer) As String
 										clausula = clausula + chr (&H20) + chr (pValR (lP (2))) + chr (pValR (lP (3)))
 										clausulasUsed (&H20) = -1
 									Case "PLAYER_IN_X":
-										clausula = clausula + chr (&H21) + chr (val (lP (2))) + chr (val (lP (3)))
-										clausulasUsed (&H21) = -1
+										If doubleWidth Then
+											Print "WARNING - PLAYER_IN_X doesn't work in double width mode."
+											Print "          Use PLAYER_IN_X_TILES instead."
+										Else
+											clausula = clausula + chr (&H21) + chr (val (lP (2))) + chr (val (lP (3)))
+											clausulasUsed (&H21) = -1
+										End If
 									Case "PLAYER_IN_X_TILES":
-										fzx1 = val (lP (2)) * 16 - 15
-										If fzx1 < 0 Then fzx1 = 0
-										fzx2 = val (lP (3)) * 16 + 15
-										If fzx2 > 255 Then fzx2 = 255
-										clausula = clausula + chr (&H21) + chr (fzx1) + chr (fzx2)
+										If doubleWidth Then
+											clausula = clausula + chr (&H21) + chr (val (lP (2))) + chr (val (lP (3)))
+										Else
+											fzx1 = val (lP (2)) * 16 - 15
+											If fzx1 < 0 Then fzx1 = 0
+											fzx2 = val (lP (3)) * 16 + 15
+											If fzx2 > 255 Then fzx2 = 255
+											clausula = clausula + chr (&H21) + chr (fzx1) + chr (fzx2)
+										End If
 										clausulasUsed (&H21) = -1
 									Case "PLAYER_IN_Y":
 										clausula = clausula + chr (&H22) + chr (val (lP (2))) + chr (val (lP (3)))
@@ -657,14 +667,28 @@ Function procesaClausulas (f As Integer) As String
 					Case "DECORATIONS"
 						clausula = clausula + Chr (&HF4)
 						actionsUsed (&HF4) = -1
+						side = 0 ' left
 						Do
 							Line Input #f, linea
 							linea = Trim (linea, Any Chr (32) + Chr (9))
 							If Ucase (linea) = "END" Then Exit Do
 							parseCleanTokens lP ()
 							parseTokenizeString linea, lP (), ",;()" & chr (9), "'"
-							' X Y T -> XY T
-							clausula = clausula + Chr ((Val (lP(0)) Shl 4) + (Val (lP (1)) And 15)) + Chr (Val (lP (2)))
+							If doubleWidth Then
+								x = Val (lP (0))
+								If x < 16 And side = 1 Then
+									side = 0
+									clausula = clausula + Chr (&HFE)
+									x = x - 16
+								ElseIf x > 15 And side = 0 Then
+									side = 1
+									clausula = clausula + Chr (&HFD)
+								End If
+								clausula = clausula + Chr ((x Shl 4) + (Val (lP (1)) And 15)) + Chr (Val (lP (2)))
+							Else
+								' X Y T -> XY T
+								clausula = clausula + Chr ((Val (lP(0)) Shl 4) + (Val (lP (1)) And 15)) + Chr (Val (lP (2)))
+							End If
 						Loop
 						clausula = clausula + Chr (&HFF)
 
@@ -700,10 +724,18 @@ Function procesaClausulas (f As Integer) As String
 
 					' Spritey things
 					Case "ADD_CONTAINER"
-						clausula = clausula + Chr (&H86) + Chr (Val (lP (2)) + 16 * (1 + Val (lP (3)))) + Chr (128 + pVal (lP (1))) 
+						If doubleWidth Then
+							clausula = clausula + Chr (&H86) + Chr (Val (lP (2))) + Chr (1 + Val (lP (3))) + Chr (128 + pVal (lP (1)))
+						Else
+							clausula = clausula + Chr (&H86) + Chr (Val (lP (2)) + 16 * (1 + Val (lP (3)))) + Chr (128 + pVal (lP (1))) 
+						End If
 						actionsUsed (&H86) = -1
 					Case "ADD_SPRITE"
-						clausula = clausula + Chr (&H86) + Chr (Val (lP (2)) + 16 * (1 + Val (lP (3)))) + Chr (pVal (lP (1))) 
+						If doubleWidth Then
+							clausula = clausula + Chr (&H86) + Chr (Val (lP (2))) + Chr (1 + Val (lP (3))) + Chr (pVal (lP (1)))
+						Else
+							clausula = clausula + Chr (&H86) + Chr (Val (lP (2)) + 16 * (1 + Val (lP (3)))) + Chr (pVal (lP (1))) 
+						End If
 						actionsUsed (&H86) = -1
 
 					' Misc
@@ -790,6 +822,7 @@ Print "MK1 v1.0 mscmk1 1.1 ~ ";
 If Len (Command (3)) = 0 Then usage: End
 debug = inCommand ("debug")
 binmode = inCommand ("bin")
+doubleWidth = inCommand ("doublewidth")
 If binmode Then Print "[bin] ~ ";
 
 fIn = FreeFile
@@ -820,15 +853,9 @@ Else
 	Print #fOut, "// " & Command (2) & " - Script pools and scripts interpreter"
 End If
 Print #fOut, "// generated by mscMK1 1.1 by the Mojon Twins"
-Print #fOut, ""
-
-Print #fOut, "#ifdef DOUBLE_WIDTH"
-Print #fOut, "    #define MAP_SET if (odd) _x += 16; map_set"
-Print #fOut, "    #define UPDATE_LIST_TILE if (odd) _x += 31; update_list_tile"
-Print #fOut, "#else"
-Print #fOut, "    #define MAP_SET map_set"
-Print #fOut, "    #define UPDATE_LIST_TILE update_list_tile"
-Print #fOut, "#endif"
+If doubleWidth Then
+	Print #fOut, "// Double width version."
+End If
 Print #fOut, ""
 
 scriptCount = 0
@@ -868,8 +895,12 @@ While keepGoing
 			? "L" & scriptCount & " = " & thisLevelConstantName & " ~ ";
 			? "** WARNING ** LEVELID is ignored in MK1_NES/AGNES!"
 		Case "INC_DECORATIONS":
-			decoInclude = lP (1)
-			? "L" & scriptCount & " decos @ " & decoInclude & " ~ ";
+			If doubleWidth Then
+				Print "WARNING - INC_DECORATIONS is ignored in double width mode."
+			Else
+				decoInclude = lP (1)
+				? "L" & scriptCount & " decos @ " & decoInclude & " ~ ";
+			End If
 		Case "ITEMSET":
 			ProcessItems fIn
 		Case "DEFALIAS":
@@ -1081,9 +1112,6 @@ If actionsUsed (&H68) Or actionsUsed (&H6A) Or actionsUsed (&H6B) Or actionsUsed
 End If
 Print #fOut, ""
 Print #fOut, "void run_script (unsigned char whichs) {"
-Print #fOut, "    #ifdef DOUBLE_WIDTH"
-Print #fOut, "        odd = whichs & 1;"
-Print #fOut, "    #endif"
 Print #fOut, "    // read address offset from index"
 If binmode Then
 	Print #fOut, "    locate_res (SCRIPTS_RES);"
@@ -1137,12 +1165,20 @@ End If
 If clausulasUsed (&H20) Then
 	' IF PLAYER_TOUCHES (x, y)
 	' &H20 x y
-	Print #fOut, "                case 0x20: readxy (); sc_x <<= 4; sc_y = 16 + (sc_y << 4); sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15)); break;"
+	If doubleWidth Then
+		Print #fOut, "                case 0x20: readxy (); rdaa = sc_x << 4; sc_y = 16 + (sc_y << 4); sc_terminado = (!(prx + 7 >= rdaa && prx <= rdaa + 15 && pry + 15 >= sc_y && pry <= sc_y + 15)); break;"
+	Else
+		Print #fOut, "                case 0x20: readxy (); sc_x <<= 4; sc_y = 16 + (sc_y << 4); sc_terminado = (!(prx + 7 >= sc_x && prx <= sc_x + 15 && pry + 15 >= sc_y && pry <= sc_y + 15)); break;"
+	End If
 End If
 If clausulasUsed (&H21) Then
 	' IF PLAYER_IN_X ('x1', 'x2')
 	' &H21 'x' 'y'
-	Print #fOut, "                case 0x21: sc_terminado = (!(prx >= read_byte () && prx <= read_byte ())); break;"
+	If doubleWidth Then
+		Print #fOut, "                case 0x21: sc_terminado = (!(prx + 15 >= read_byte () << 4 && prx <= (read_byte () << 4) + 15)); break;"
+	Else
+		Print #fOut, "                case 0x21: sc_terminado = (!(prx >= read_byte () && prx <= read_byte ())); break;"
+	End If
 End If
 If clausulasUsed (&H22) Then
 	' IF PLAYER_IN_Y ('y1', 'y2')
@@ -1319,7 +1355,7 @@ End If
 If actionsUsed (&H20) Then
 	' SET_TILE x y t
 	' &H20 x y t
-	Print #fOut, "                    case 0x20: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); MAP_SET (); break;"
+	Print #fOut, "                    case 0x20: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); map_set (); break;"
 End If
 
 If actionsUsed (&H51) Then
@@ -1403,10 +1439,10 @@ If actionsUsed (&H31) Then
 	' &H31 n
 	Print #fOut, "                    case 0x31: plife -= read_vbyte (); break;"
 End If
-If actionsUsed (&H30) Then
+If actionsUsed (&HE2) Then
 	' RECHARGE
 	' &HE2
-	Print #fOut, "                    case 0x30: plife = PLAYER_LIFE; break;"
+	Print #fOut, "                    case 0xE2: plife = PLAYER_LIFE; break;"
 End If
 If actionsUsed (&H40) Then
 	' INC_OBJECTS n
@@ -1442,13 +1478,17 @@ End If
 If actionsUsed (&H50) Then
 	' PRINT_TILE_AT x, y, n
 	' &H50 x y n
-	Print #fOut, "                    case 0x50: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); UPDATE_LIST_TILE (); break;"
+	Print #fOut, "                    case 0x50: readxy (); _x = sc_x; _y = sc_y; _t = read_vbyte (); update_list_tile (); break;"
 End If
 
 If actionsUsed (&HF4) Then
 	' DECORATIONS {xy, t}* END
 	' &HF4 {xy, t}* &HFF
-	Print #fOut, "                    case 0xf4: while (0xff != (sc_x = read_byte ())) { _x = sc_x >> 4; _y = sc_x & 15; _t = read_byte (); MAP_SET (); ppu_waitnmi (); clear_update_list (); } break;"
+	If doubleWidth Then
+		Print #fOut, "                    case 0xf4: sc_n = 0; while (0xff != (sc_x = read_byte ())) { if (sc_x == 0xfe) { sc_n = 0x10; } else if (sc_x == 0xfd) { sc_n = 0x00; } else { _x = sc_x >> 4; _y = sc_x & 15; _t = read_byte () | sc_n; map_set (); update_cycle (); } } break;"
+	Else
+		Print #fOut, "                    case 0xf4: while (0xff != (sc_x = read_byte ())) { _x = sc_x >> 4; _y = sc_x & 15; _t = read_byte (); map_set (); ppu_waitnmi (); clear_update_list (); } break;"
+	End If
 End If
 ' Screen invalidation
 
@@ -1465,7 +1505,11 @@ End If
 If actionsUsed (&H6E) then
 	' REDRAW
 	' &H6E
-	Print #fOut, "                    case 0x6e: ppu_waitnmi (); clear_update_list (); ppu_off (); rdx = 0; rdy = TOP_ADJUST; for (gpit = 0; gpit < 192; gpit ++) { _t = map_buff [gpit]; draw_tile (); _x = (_x + 2) & 31; if (!_x) _y += 2; } break;"
+	If doubleWidth Then
+		Print #fOut, "                    case 0x6e: update_cycle (); ppu_off (); rdx = 0; rdy = TOP_ADJUST; NAMETABLE_BASE = 0x2000; attr_table_offset = 0; for (gpit = 0; gpit < 384; gpit ++) { if (gpit == 192) { rdx = 0; rdy = TOP_ADJUST; NAMETABLE_BASE = 0x2400; attr_table_offset = 64; } _t = map_buff [gpit]; draw_tile (); _x = (_x + 2) & 31; if (!_x) _y += 2; } break;"
+	Else
+		Print #fOut, "                    case 0x6e: update_cycle (); ppu_off (); rdx = 0; rdy = TOP_ADJUST; for (gpit = 0; gpit < 192; gpit ++) { _t = map_buff [gpit]; draw_tile (); _x = (_x + 2) & 31; if (!_x) _y += 2; } break;"
+	End If
 End If
 If actionsUsed (&H6F) Then
 	' REENTER
@@ -1489,9 +1533,14 @@ End If
 ' Spritey things
 
 If actionsUsed (&H86) Then
-	' ADD_INTERACTIVE / ADD_SPRITE f x y
-	' &H86 yx f
-	Print #fOut, "                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); interactives_add (); break;"
+	' ADD_CONTAINER / ADD_SPRITE f x y
+	If doubleWidth Then
+		' &H86 x y f 
+		Print #fOut, "                    case 0x86: readxy (); sc_n = read_byte (); interactives_add (); break;"
+	Else
+		' &H86 yx f
+		Print #fOut, "                    case 0x86: sc_x = read_byte (); sc_y = read_byte (); interactives_add (); break;"
+	End If
 End If
 
 ' Misc

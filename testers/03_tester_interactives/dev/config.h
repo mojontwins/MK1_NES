@@ -485,7 +485,7 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n

@@ -234,9 +234,6 @@ void prepare_scr (void) {
 		run_script (2 * MAP_SIZE + 1);
 		// This room script
 		run_script (n_pant << 1);
-		#ifdef DOUBLE_WIDTH
-			run_script ((n_pant << 1) + 1);
-		#endif
 	#endif
 
 	#include "my/on_entering_screen.h"

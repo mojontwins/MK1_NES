@@ -277,6 +277,7 @@ void draw_tile (void) {
 // Needs _x, _y, _t set.
 void update_list_tile (void) {
 	#ifdef DOUBLE_WIDTH
+		caux = _x;
 		if (_x > 31) {
 			_x -= 32;
 			NAMETABLE_BASE = 0x2400;
@@ -298,19 +299,17 @@ void update_list_tile (void) {
 	//tl = (16 + tl) << 2;
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + NAMETABLE_BASE);
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap ++; ul_putc ();
-	*/
+	
 	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 	gp_addr += 30;
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap   ; ul_putc ();
-	*/
+	
 	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
 	SET_FROM_PTR (_n, gp_tmap);             ul_putc ();
+
+	#ifdef DOUBLE_WIDTH
+		_x = caux;
+	#endif
 }
 
 // Needs _x, _y, _t set.

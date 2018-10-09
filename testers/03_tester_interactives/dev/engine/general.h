@@ -49,13 +49,7 @@ signed int add_sign (signed int sign, signed int value) {
 void run_fire_script (void) {
 	fire_script_success = 0;
 	run_script (2 * MAP_SIZE + 2);
-	#ifdef DOUBLE_WIDTH
-		prx &= 0xff;
-		run_script (((n_pant + !!(prx & 0x100)) << 1) + 1);
-		player_to_pixels ();
-	#else
-		run_script ((n_pant << 1) + 1);
-	#endif
+	run_script ((n_pant << 1) + 1);	
 	#ifdef ENABLE_PUSHED_SCRIPT
 		just_pushed = 0;
 	#endif
@@ -129,6 +123,16 @@ void update_cycle (void) {
 }
 
 #ifdef DOUBLE_WIDTH
+	void scroll_to (void) {
+		// Fast scroll to rds16, assume multiple of 8
+		scroll_x &= 0xfff8;	// Make multiple of 8
+		while (scroll_x != rds16) {
+			if (scroll_x < rds16) scroll_x += 8;
+			else scroll_x -= 8;
+			update_cycle ();
+		}
+	}
+
 	void calc_scroll_pos (void) {
 		scroll_x = prx - 124;
 		if (scroll_x < 0) scroll_x = 0;

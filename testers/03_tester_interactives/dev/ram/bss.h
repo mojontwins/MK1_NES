@@ -220,7 +220,11 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
     unsigned char interactives_f [INTERACTIVES_MAX];
                                         // Flag bound to the interactive | 0x80 (if container) or sprite number (if sprite).
                                         // If this value & 0x80 => container. Sprite otherwise.
-    unsigned char interactives_yx [INTERACTIVES_MAX];
+    #ifdef DOUBLE_WIDTH
+        unsigned char interactives_x [INTERACTIVES_MAX], interactives_y [INTERACTIVES_MAX];
+    #else
+        unsigned char interactives_yx [INTERACTIVES_MAX];
+    #endif
     #ifdef INTERACTIVES_FROM_CODE
         const unsigned char *c_interactives;
                                         // Pointer to current level's interactive definitions array
