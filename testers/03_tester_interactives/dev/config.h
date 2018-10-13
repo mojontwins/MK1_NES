@@ -20,7 +20,7 @@
 #define MAP_H					5		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
 
-#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
+//#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
 
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
@@ -485,7 +485,7 @@
 // Scripting
 // ---------
 
-//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n

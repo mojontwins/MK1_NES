@@ -87,7 +87,10 @@ void textbox_do (void) {
 		} else rdm = 6;
 	#endif	
 
-	NAMETABLE_BASE = rdit ? 0x2400 : 0x2000;
+	#ifdef DOUBLE_WIDTH
+		NAMETABLE_BASE = rdit ? 0x2400 : 0x2000;
+	#endif
+
 	textbox_draw_text ();
 	while (1) {
 		ppu_waitnmi ();
@@ -103,6 +106,7 @@ void textbox_do (void) {
 		rds16 = prx - 124;
 		if (rds16 < 0) rds16 = 0;
 		if (rds16 > 256) rds16 = 256;
+		rds16 &= 0xfff8;
 		scroll_to ();
 	#endif
 }

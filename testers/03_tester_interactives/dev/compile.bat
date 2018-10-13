@@ -37,18 +37,18 @@ if [%2]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
-rem ..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 10
-..\..\..\src\utils\mscmk1.exe script_d.spt ..\dev\assets\mscnes.h 10 doublewidth
+..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 10
+rem ..\..\..\src\utils\mscmk1.exe script_d.spt ..\dev\assets\mscnes.h 10 doublewidth
 cd ..\dev
 
 :noscript
 cc65 -Oi game.c --add-source
 ca65 crt0.s -o crt0.o -D CNROM=0
 ca65 game.s
-ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt -vm -Ln labels2.txt
 
 del *.o
-del game.s
+rem del game.s
 del work\*.h /q
 
 copy cart.nes ..\..\tester_interactives.nes
