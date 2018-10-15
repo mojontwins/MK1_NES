@@ -818,7 +818,7 @@ Dim As String thisLevelConstantName, linea, clausulas
 Dim As uByte d
 Dim As Integer coords (127)
 
-Print "MK1 v1.0 mscmk1 1.1 ~ ";
+Print "MK1 v2.0 mscmk1 1.1 ~ ";
 If Len (Command (3)) = 0 Then usage: End
 debug = inCommand ("debug")
 binmode = inCommand ("bin")
@@ -843,7 +843,7 @@ ReDim addresses (maxidx + 5)
 
 ' Output code & data
 
-Print #fOut, "// NES MK1 v1.0"
+Print #fOut, "// NES MK1 v2.0"
 Print #fOut, "// Copyleft Mojon Twins 2013, 2015, 2017, 2018"
 Print #fOut, ""
 If binmode Then

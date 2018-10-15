@@ -50,7 +50,7 @@ Dim As Integer scrMaps (127)
 Dim As Integer screensum, n, cMapI, realPant, ctr
 Dim As Integer scrOffsets (127)
 
-Print "MK1 v1.0 rle53mapMK1 ~ ";
+Print "MK1 v2.0 rle53mapMK1 ~ ";
 
 If Command (6) = "" Then usage: End
 

@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Change screen
@@ -12,16 +12,24 @@ void flickscreen_do_horizontal (void) {
 			(cfx + pvx) < 0
 		#endif
 	) {
-		-- n_pant;
-		px = 244 << FIXBITS;
-	} else if (prx == 244 && 
+		#ifdef DOUBLE_WIDTH
+			n_pant -= 2;
+		#else
+			-- n_pant;
+		#endif
+		px = MAX_PRX << FIXBITS;
+	} else if (prx == MAX_PRX && 
 		#if defined (PLAYER_TOP_DOWN) || !defined (ENABLE_CONVEYORS)
 			pvx > 0
 		#else
 			(cfx + pvx) > 0
 		#endif
 	) {
-		++ n_pant;
+		#ifdef DOUBLE_WIDTH
+			n_pant += 2;
+		#else
+			++ n_pant;
+		#endif
 		px = 4 << FIXBITS;
 	}
 }

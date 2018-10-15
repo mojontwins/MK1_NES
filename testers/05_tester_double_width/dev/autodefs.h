@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Inner workings. Don't touch.
@@ -121,9 +121,11 @@
 	#define EN_X_ABSOLUTE	rdaa
 	#define PRXA			gpint
 	#define ENXA 			gpint
-	#define COCO_RDX		rdbb
-	#define PUNCH_RDX		rdbb
-	#define RECOIL_RDX		rdbb
+	#define COCO_RDX		rds16
+	#define PUNCH_RDX		rds16
+	#define RECOIL_RDX		rds16
+	#define MAX_TILE_X 		31
+	#define HS_CUR_PANT		(n_pant + gpit)
 #else
 	#define NAMETABLE_BASE 	0x2000
 	#define BUFF_SIZE 		192
@@ -137,4 +139,6 @@
 	#define COCO_RDX		rdx
 	#define PUNCH_RDX		rdx
 	#define RECOIL_RDX 		rdx
+	#define MAX_TILE_X 		15
+	#define HS_CUR_PANT 	n_pant
 #endif

@@ -37,7 +37,7 @@ End Type
 
 Dim As MyBolt Bolts (100)
 
-Print "MK1 v1.0 mapcnvnes2 ~ ";
+Print "MK1 v2.0 mapcnvnes2 ~ ";
 
 if Command (6) = "" THen
 	usage ()

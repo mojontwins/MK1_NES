@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 void fire_bullet (void) {
@@ -14,8 +14,6 @@ void fire_bullet (void) {
 
 	#ifdef PLAYER_BULLET_LIFE
 		bst [bi] = PLAYER_BULLET_LIFE;
-	#else
-		bst [bi] = 1;
 	#endif
 
 	#ifdef PLAYER_FIRE_RELOAD
@@ -82,52 +80,99 @@ void fire_bullet (void) {
 		#endif
 	#endif
 
+	#if defined (DOUBLE_WIDTH) && !defined (PLAYER_TOP_DOWN) && !defined (PLAYER_CAN_FIRE_8_WAY)
+		b_cy1 [bi] = ((by [bi] + 4 - 16) >> 4);
+	#endif
+
 	sfx_play (SFX_BULLET, 2);
+	#ifdef DOUBLE_WIDTH
+		bullets_disable = 1;
+	#endif
 }
 
 void bullets_destroy (void) {
-	bst [bi] = 0;
+	by [bi] = 0;
 	b_slots [b_slots_i] = bi; ++ b_slots_i;
 	sfx_play (SFX_DUMMY1, 2);
 }
 
 void bullets_move (void) {
-	for (bi = 0; bi < MAX_BULLETS; bi ++) {
-		if (bst [bi]) {
-			bx [bi] += bmx [bi];
-			by [bi] += bmy [bi];
+	#ifdef DOUBLE_WIDTH
+		if (bullets_disable) {
+			bullets_disable = 0; return;
+		}
+	#endif
+
+	for (bi = 0; bi < MAX_BULLETS; ++ bi) {
+		rde = (bi + half_life) & 1;
+		if (by [bi]) {
+
+			_bx = bx [bi] + bmx [bi];
+			_by = by [bi] + bmy [bi];		
+
+			if (
+			#ifdef DOUBLE_WIDTH
+				_bx < scroll_x ||
+				_bx > scroll_x + 248
+			#else
+				_bx < PLAYER_BULLET_SPEED ||
+				_bx > 255 - PLAYER_BULLET_SPEED
+			#endif
+			#ifdef PLAYER_TOP_DOWN				
+				|| _by < PLAYER_BULLET_SPEED
+				|| _by > 207 - PLAYER_BULLET_SPEED
+			#endif
+			) {
+				bullets_destroy ();
+				continue;
+			}
 
 			#ifdef PLAYER_BULLET_FLICKERS
 			if (bst [bi] > PLAYER_BULLET_FLICKERS || half_life)
 			#endif
-			oam_index = oam_spr (
-				bx [bi], SPRITE_ADJUST + by [bi], 
-				BULLET_PATTERN, BULLET_PALETTE,
-				oam_index
-			);
+			{
+				oam_index = oam_spr (
+					#ifdef DOUBLE_WIDTH
+						_bx - scroll_x, 
+					#else
+						_bx, 
+					#endif
+					SPRITE_ADJUST + _by, 
+					BULLET_PATTERN, BULLET_PALETTE,
+					oam_index
+				);
+			}
 
-			cx1 = ((bx [bi] + 4) >> 4);
-			cy1 = ((by [bi] + 4 - 16) >> 4);
-			rdm = map_attr [COORDS (cx1, cy1)];
+			if (rde) {
 
-			#ifdef PLAYER_BULLET_LIFE
-				-- bst [bi]; 
-				if (bst [bi] == 0) bullets_destroy (); 
-				else
-			#endif
-			#ifdef ENABLE_BREAKABLE
-				if (rdm & 16) {
-					breakable_break (cx1, cy1);
-					bullets_destroy ();
-				} else
-			#endif
-			if (
-				bx [bi] < PLAYER_BULLET_SPEED ||
-				bx [bi] > 255 - PLAYER_BULLET_SPEED ||
-				by [bi] < PLAYER_BULLET_SPEED ||
-				by [bi] > 207 - PLAYER_BULLET_SPEED ||
-				(rdm & 8)
-			) bullets_destroy (); 
+				cx1 = ((_bx + 4) >> 4);
+				#if defined (DOUBLE_WIDTH) && !defined (PLAYER_TOP_DOWN) && !defined (PLAYER_CAN_FIRE_8_WAY)
+					cy1 = b_cy1 [bi];
+				#else
+					cy1 = ((_by + 4 - 16) >> 4);
+				#endif
+				rdm = map_attr [COORDS (cx1, cy1)];
+
+				#ifdef PLAYER_BULLET_LIFE
+					-- bst [bi]; 
+					if (bst [bi] == 0) bullets_destroy (); 
+					else
+				#endif
+				#ifdef ENABLE_BREAKABLE
+					if (rdm & 16) {
+						breakable_break (cx1, cy1);
+						bullets_destroy ();
+						continue;
+					} else
+				#endif
+				if (rdm & 8) {
+					bullets_destroy (); 
+					continue;
+				}
+			}
+
+			bx [bi] = _bx;
+			by [bi] = _by;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
@@ -19,6 +19,8 @@
 #define MAP_W 					3		//
 #define MAP_H					1		// Map dimensions in screens
 #define MAP_SIZE				MAP_W*MAP_H
+
+//#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
 
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
@@ -278,6 +280,8 @@
 
 //#define ENEMS_TREMBLE						// Make enemies tremble when hit
 
+//#define ENEMS_INVINCIBILITY			25	// If defined, make enemies invincible for N frames when hit.
+
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
@@ -413,6 +417,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES

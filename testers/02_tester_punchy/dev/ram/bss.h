@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // bss
@@ -199,6 +199,10 @@ unsigned char hact [MAP_SIZE];          // Hotspots active per screen (room)
         unsigned char just_interacted;  // True if the player just interacted. Used by the interpreter.
         unsigned char script_arg;       // Identifier of the interactive the used interacted with. Used by the interpreter.
     #endif
+
+    #if defined (DOUBLE_WIDTH)
+        unsigned char odd;
+    #endif
 #endif
 
 // Flags
@@ -216,7 +220,11 @@ unsigned char flags [MAX_FLAGS];        // Array of flags used by interactives, 
     unsigned char interactives_f [INTERACTIVES_MAX];
                                         // Flag bound to the interactive | 0x80 (if container) or sprite number (if sprite).
                                         // If this value & 0x80 => container. Sprite otherwise.
-    unsigned char interactives_yx [INTERACTIVES_MAX];
+    #ifdef DOUBLE_WIDTH
+        unsigned char interactives_x [INTERACTIVES_MAX], interactives_y [INTERACTIVES_MAX];
+    #else
+        unsigned char interactives_yx [INTERACTIVES_MAX];
+    #endif
     #ifdef INTERACTIVES_FROM_CODE
         const unsigned char *c_interactives;
                                         // Pointer to current level's interactive definitions array

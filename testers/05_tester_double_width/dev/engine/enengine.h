@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // enengine.h
@@ -177,14 +177,14 @@ void enems_load (void) {
 
 	#ifdef ENEMS_IN_CHRROM
 		bankswitch (l_enems_chr_rombank [level]);
-		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	 // * 12
+		vram_adr (c_enems + (n_pant << 2) + (n_pant << 3));	                  // * 12
 		rda = VRAM_READ; 	// Dummy read.
 	#else
 		gp_gen = (unsigned char *) (c_enems + (n_pant << 2) + (n_pant << 3)); // * 12
 	#endif
 
 	#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
-		en_offs = rdc = (n_pant << 1) + n_pant;        // * 3
+		en_offs = rdc = (n_pant << 1) + n_pant;                               // * 3
 	#endif
 
 	for (gpit = 0; gpit < NENEMS; gpit ++) {
@@ -400,6 +400,9 @@ void enems_load (void) {
 
 						_en_my = (rda << 4);	// IDLE_1
 						_en_x = _en_x1 >> 4;
+						#ifdef DOUBLE_WIDTH
+							if (gpit > 2) _en_x += 16;
+						#endif
 						_en_y = (_en_y1 >> 4) - 1;
 						_en_mx = _en_my;
 
@@ -872,6 +875,11 @@ void enems_move (void) {
 				}
 			#endif
 
+			// Is enemy interactuable?
+			#ifdef DOUBLE_WIDTH
+				if ((prx & 0x100) != (EN_X_ABSOLUTE & 0x100)) goto killdo;
+			#endif
+
 			// Is enemy collidable? If not, exit
 
 			if (
@@ -1037,6 +1045,10 @@ void enems_move (void) {
 				touched = 1; 
 			}
 
+#ifdef DOUBLE_WIDTH
+killdo:
+#endif
+
 			// Is enemy killable? If not, exit
 
 			if (
@@ -1087,12 +1099,17 @@ void enems_move (void) {
 
 			#ifdef PLAYER_CAN_FIRE
 				// Bullets
-				bi = MAX_BULLETS; while (bi --) if (bst [bi]) {
+				bi = MAX_BULLETS; while (bi --) if (by [bi]) {
 					#ifdef ENABLE_PURSUERS
 						if (_en_t != 7 || _en_state == 2)
 					#endif
 					
-					if (collide_in (bx [bi] + 3, by [bi] + 3, EN_X_ABSOLUTE, _en_y)) {
+					if (
+						bx [bi] + 3 >= EN_X_ABSOLUTE &&
+						bx [bi] <= EN_X_ABSOLUTE + 12 &&
+						by [bi] + 3 >= _en_y && 
+						by [bi] <= _en_y + 12
+					) {
 						sfx_play (SFX_ENHIT, 1);
 						
 						#ifdef BULLETS_DONT_KILL

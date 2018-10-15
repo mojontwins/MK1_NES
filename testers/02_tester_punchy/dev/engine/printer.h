@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // printer.h
@@ -73,13 +73,13 @@ void p_t (void) {
 		// A = number (0-99)
 		__asm__ ("lda %v", _n);
 
-	    __asm__ ("ldx #$ff");
-	    __asm__ ("sec");
+		__asm__ ("ldx #$ff");
+		__asm__ ("sec");
 	p_t_loop_0:
 		__asm__ ("inx");
-	    __asm__ ("sbc #10");
-	    __asm__ ("bcs %g", p_t_loop_0);
-	    __asm__ ("adc #10");
+		__asm__ ("sbc #10");
+		__asm__ ("bcs %g", p_t_loop_0);
+		__asm__ ("adc #10");
 
 		// A = lower digit (0-9), X=upper digit(0-9)
 		__asm__ ("sta %v", rda);
@@ -257,33 +257,34 @@ void draw_tile (void) {
 	
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + NAMETABLE_BASE);
-	vram_adr (gp_addr++);
+	vram_adr (gp_addr); ++ gp_addr;
 	/*
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap++);
 	*/
-	SET_FROM_PTR (rda, gp_tmap); gp_tmap ++; vram_put (rda);
-	SET_FROM_PTR (rda, gp_tmap); gp_tmap ++; vram_put (rda);
+	SET_FROM_PTR (rda, gp_tmap); ++ gp_tmap; vram_put (rda);
+	SET_FROM_PTR (rda, gp_tmap); ++ gp_tmap; vram_put (rda);
 	gp_addr += 31;
-	vram_adr (gp_addr++);
+	vram_adr (gp_addr); ++ gp_addr;
 	/*
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap);	
 	*/
-	SET_FROM_PTR (rda, gp_tmap); gp_tmap ++; vram_put (rda);
+	SET_FROM_PTR (rda, gp_tmap); ++ gp_tmap; vram_put (rda);
 	SET_FROM_PTR (rda, gp_tmap);             vram_put (rda);
 }
 
 // Needs _x, _y, _t set.
 void update_list_tile (void) {
 	#ifdef DOUBLE_WIDTH
+		caux = _x;
 		if (_x > 31) {
 			_x -= 32;
-			NAMETABLE_BASE = 0x2400;
 			attr_table_offset = 64;
+			NAMETABLE_BASE = 0x2400;
 		} else {
-			NAMETABLE_BASE = 0x2000;
 			attr_table_offset = 0;
+			NAMETABLE_BASE = 0x2000;			
 		}
 	#endif
 
@@ -295,30 +296,63 @@ void update_list_tile (void) {
 	_n = rda; ul_putc ();
 	
 	// tiles
-	//tl = (16 + tl) << 2;
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + NAMETABLE_BASE);
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap ++; ul_putc ();
-	*/
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+	
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
 	gp_addr += 30;
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap   ; ul_putc ();
-	*/
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+	
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
 	SET_FROM_PTR (_n, gp_tmap);             ul_putc ();
+
+	#ifdef DOUBLE_WIDTH
+		_x = caux;
+	#endif
 }
 
 // Needs _x, _y, _t set.
 // Destroys _x, _y!.
 void map_set (void) {
-	map_buff [COORDS (_x, _y)] = _t;
-	map_attr [COORDS (_x, _y)] = c_behs [_t];
-	_x = _x << 1; _y = TOP_ADJUST + (_y << 1);
+	#ifdef DOUBLE_WIDTH
+		map_buff [COORDS (_x, _y)] = _t;
+		map_attr [COORDS (_x, _y)] = c_behs [_t];
+		// _x = _x << 1; 
+		__asm__ ("asl %v", _x);
+		_y = TOP_ADJUST + (_y << 1);
+	#else
+		// In single screen mode all operations fit within a byte so I can use this
+		// code instead, which is smaller + faster
+
+		// map_buff [COORDS (_x, _y)] = _t;
+		// map_attr [COORDS (_x, _y)] = c_behs [_t];
+		__asm__ ("lda %v", _y);
+		__asm__ ("asl a");
+		__asm__ ("asl a");
+		__asm__ ("asl a");
+		__asm__ ("asl a");
+		__asm__ ("sta %v", ast1);
+		__asm__ ("lda %v", _x);
+		__asm__ ("ora %v", ast1);
+		__asm__ ("tax");				// X = COORDS (_x, _y)
+
+		__asm__ ("lda %v", _t);
+		__asm__ ("sta %v, x", map_buff);
+										// map_buff [COORDS (_x, _y)] = _t;
+		__asm__ ("lda %v", c_behs);
+		__asm__ ("sta ptr1");
+		__asm__ ("lda %v + 1", c_behs);
+		__asm__ ("sta ptr1 + 1");
+		__asm__ ("ldy %v", _t);
+		__asm__ ("lda (ptr1), y");		// A = c_behs [_t]
+		__asm__ ("sta %v, x", map_attr);
+										// map_attr [COORDS (_x, _y)] = c_behs [_t];
+
+		// _x = _x << 1; 
+		__asm__ ("asl %v", _x);
+		_y = TOP_ADJUST + (_y << 1);		
+	#endif	
+
 	update_list_tile (); 
 }
 

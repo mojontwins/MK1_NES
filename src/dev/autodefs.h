@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Inner workings. Don't touch.
@@ -74,7 +74,7 @@
 	#define INTERACTIVES_FROM_CODE
 #endif
 
-#if defined (MAP_FORMAT_RLE53_CHRROM)
+#if defined (MAP_FORMAT_RLE53_CHRROM) || defined (MAP_FORMAT_RLE44_CHRROM) || defined (DOUBLE_WIDTH)
 	#define MAP_RENDERER_COMPLEX
 #endif
 
@@ -111,3 +111,34 @@
 	#undef NO_HORIZONTAL_EVIL_TILE
 #endif
 
+#if defined (DOUBLE_WIDTH)
+	#define NAMETABLE_BASE	nametable_base
+	#define BUFF_SIZE		384
+	#define COORDS(x,y) 	(x > 15 ? (192 + (((x) & 0xf) | ((y) << 4))) : ((x) | ((y) << 4)))
+	#define MAX_PRX			500
+	#define MAX_ENX			496
+	#define NENEMS 			6
+	#define EN_X_ABSOLUTE	rdaa
+	#define PRXA			gpint
+	#define ENXA 			gpint
+	#define COCO_RDX		rds16
+	#define PUNCH_RDX		rds16
+	#define RECOIL_RDX		rds16
+	#define MAX_TILE_X 		31
+	#define HS_CUR_PANT		(n_pant + gpit)
+#else
+	#define NAMETABLE_BASE 	0x2000
+	#define BUFF_SIZE 		192
+	#define COORDS(x,y) 	((x) | ((y) << 4))
+	#define MAX_PRX			244
+	#define MAX_ENX			240
+	#define NENEMS 			3
+	#define EN_X_ABSOLUTE	_en_x
+	#define PRXA 			rda
+	#define ENXA 			rda
+	#define COCO_RDX		rdx
+	#define PUNCH_RDX		rdx
+	#define RECOIL_RDX 		rdx
+	#define MAX_TILE_X 		15
+	#define HS_CUR_PANT 	n_pant
+#endif

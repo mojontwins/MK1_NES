@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // LUTs
@@ -25,7 +25,7 @@ const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
 	const signed char endy [] = {0, 1, 1, 1, 0, -1, -1, -1};
 #endif
 
-#if defined (ENABLE_TILE_CHAC_CHAC) 
+#if defined (ENABLE_TILE_CHAC_CHAC) || defined (ENABLE_CHAC_CHAC)
 	const unsigned char chac_chacs_times [] = {
 		0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3
 	};

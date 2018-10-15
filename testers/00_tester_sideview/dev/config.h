@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 //#define GAME_AREA_TOP
@@ -280,6 +280,8 @@
 
 //#define ENEMS_TREMBLE						// Make enemies tremble when hit
 
+//#define ENEMS_INVINCIBILITY			25	// If defined, make enemies invincible for N frames when hit.
+
 //#define PERSISTENT_ENEMIES
 //#define PERSISTENT_DEATHS
 
@@ -415,6 +417,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						1
 #define COCO_V							192
 //#define COCO_COLLIDES

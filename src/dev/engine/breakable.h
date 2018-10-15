@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // breakable.h
@@ -23,10 +23,10 @@
 #endif
 
 void breakable_break (unsigned char x, unsigned char y) {
-	gpaux = COORDS (x, y);
+	gpit = COORDS (x, y);
 	#ifndef BREAKABLES_SOFT
-		if (brk_buff [gpaux] < BREAKABLE_LIFE) {
-			++ brk_buff [gpaux];
+		if (brk_buff [gpit] < BREAKABLE_LIFE) {
+			++ brk_buff [gpit];
 		} else 
 	#endif
 	{

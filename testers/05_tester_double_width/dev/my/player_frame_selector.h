@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // player_frame_selector.h
@@ -8,33 +8,49 @@
 // Use player variables p* and end up with a correct value
 // in psprid.
 
-rda = (ATTR((prx + 4) >> 4, pry >> 4) & 12);
-if (ponladder && !rda) {
-	if (pvy) ponladderctr ++;
-	psprid = CELL_CLIMB_CYCLE + ((ponladderctr >> 2) & 3);
-} else {
-	if (pfloating) {
-		psprid = CELL_DESCENDING;
-	} else if (ppunching) {
-		psprid = CELL_PUNCHING;
-	} else if (pkicking) {
-		psprid = CELL_KICKING;
-	} else if (rda || ppossee || pgotten) {
-		// On floor
-		if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
-			psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
-		} else if (pvx) {
-			psprid = CELL_WALK_INIT;
-		} else {
-			psprid = CELL_IDLE;
+#ifdef PLAYER_TOP_DOWN
+
+	// Frame selection for top-down view games
+
+	if (pvx != 0 || pvy != 0) {
+		++ pctfr;
+		if (pctfr == 4) {
+			pctfr = 0;
+			pfr = !pfr;
+			psprid = pfacing + pfr;
 		}
-	} else {
-		//psprid = CELL_AIRBORNE;
-		if (pvy < PLAYER_VY_FALLING_MIN)
-			psprid = CELL_ASCENDING;
-		else
-			psprid = CELL_DESCENDING;	
 	}
 
+#else
+
+	// Frame selection for side view games
+
+	#ifdef PLAYER_SWIMS
+		if (pad0 && (rdx != prx || rdy != pry)) {
+			if (pvx) {
+				psprid = CELL_SWIM_CYCLE + ((prx >> 3) & 3);
+			} else {
+				psprid = CELL_SWIM_CYCLE + ((pry >> 3) & 3);
+			}
+		} else psprid = CELL_SWIM_CYCLE + 1;
+	#else
+		if (ppossee || pgotten) {
+			// On floor
+			if (pvx > PLAYER_VX_MIN || pvx < -PLAYER_VX_MIN) {
+				psprid = CELL_WALK_CYCLE + ((prx >> 3) & 3);
+			} else {
+				psprid = CELL_IDLE;
+			}
+		} else {
+			psprid = CELL_AIRBORNE;
+			/*
+			if (pvy < PLAYER_VY_FALLING_MIN)
+				psprid = CELL_ASCENDING;
+			else
+				psprid = CELL_DESCENDING;
+			*/	
+		}
+	#endif
+
 	psprid += pfacing;
-}
+#endif

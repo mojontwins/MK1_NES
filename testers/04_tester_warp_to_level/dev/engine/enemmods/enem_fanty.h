@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 	// Fanties
@@ -21,8 +21,8 @@
 
 	_enf_x += _enf_vx; 
 	if (_enf_x < 0) _enf_x = 0;
-	if (_enf_x > 15360) _enf_x = 15360;
-	_en_x = _enf_x >> 6;
+	if (_enf_x > MAX_ENX<<FIXBITS) _enf_x = MAX_ENX<<FIXBITS;
+	EN_X_ABSOLUTE = _enf_x >> 6;
 
 	#ifdef FANTY_COLLIDES
 
@@ -31,17 +31,17 @@
 			cy2 = (_en_y + 11) >> 4;
 
 			if (_enf_vx > 0) {
-				cx1 = cx2 = (_en_x + 11) >> 4;
-				rda = ((cx2 - 1) << 4) + 4;
+				cx1 = cx2 = (EN_X_ABSOLUTE + 11) >> 4;
+				ENXA = ((cx2 - 1) << 4) + 4;
 			} else {
-				cx1 = cx2 = (_en_x + 4) >> 4;
-				rda = ((cx1 + 1) << 4) - 4;
+				cx1 = cx2 = (EN_X_ABSOLUTE + 4) >> 4;
+				ENXA = ((cx1 + 1) << 4) - 4;
 			}
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
 				_enf_vx = -_enf_vx;
-				_en_x = rda; 
-				_enf_x = rda << FIXBITS;
+				EN_X_ABSOLUTE = ENXA; 
+				_enf_x = ENXA << FIXBITS;
 			}
 		}
 
@@ -57,8 +57,8 @@
 	#ifdef FANTY_COLLIDES
 
 		if (_enf_vy) {
-			cx1 = (_en_x + 4) >> 4;
-			cx2 = (_en_x + 11) >> 4;
+			cx1 = (EN_X_ABSOLUTE + 4) >> 4;
+			cx2 = (EN_X_ABSOLUTE + 11) >> 4;
 
 			if (_enf_vy > 0) {
 				rdb = 12;
@@ -81,7 +81,7 @@
 	#endif
 
 	#ifdef FANTY_KILLED_BY_TILE
-		cx1 = (_en_x + 8) >> 4;
+		cx1 = (EN_X_ABSOLUTE + 8) >> 4;
 		cy1 = (_en_y + 8) >> 4;
 		cm_two_points ();
 		if (at1 & 1) {
@@ -93,12 +93,12 @@
 #ifdef FANTY_FAST_ANIM
 	en_fr = half_life;
 #else
-	en_fr = (_en_x >> 3) & 1;
+	en_fr = (EN_X_ABSOLUTE >> 3) & 1;
 #endif
 
 #ifdef FANTY_WITH_FACING
-	//_en_facing = ((_en_x < prx) ? 0 : 4);
-	rda = (prx < _en_x); enems_facing ();
+	//_en_facing = ((EN_X_ABSOLUTE < prx) ? 0 : 4);
+	rda = (prx < EN_X_ABSOLUTE); enems_facing ();
 	en_spr = _en_s + en_fr + _en_facing;
 #else
 	en_spr = _en_s + en_fr;

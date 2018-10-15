@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // player.h
@@ -27,7 +27,7 @@ void player_init (void) {
 		pfacing = 0;
 	#endif	
 
-	pfr = pctfr = 0;
+	pfr = 0;
 	pj = pctj = 0;
 	psprid = 0;
 
@@ -94,7 +94,12 @@ void player_init (void) {
 void player_render (void) {
 	if (0 == pflickering || half_life) 
 		oam_index = oam_meta_spr (
-			prx, pry + SPRITE_ADJUST, 
+			#ifdef DOUBLE_WIDTH
+				prx - scroll_x, 
+			#else
+				prx,
+			#endif
+			pry + SPRITE_ADJUST, 
 			oam_index, 
 			spr_player [psprid]
 		);
@@ -695,7 +700,7 @@ void player_move (void) {
 	#endif
 		
 	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
-	else if (px > (244<<FIXBITS)) { px = 244 << FIXBITS; prx = 244; }
+	else if (px > (MAX_PRX << FIXBITS)) { px = MAX_PRX << FIXBITS; prx = MAX_PRX; }
 	else player_to_pixels ();
 	
 	// Collision
@@ -709,17 +714,17 @@ void player_move (void) {
 	if (rds16) 	{
 		if (rds16 < 0) {
 			cx1 = cx2 = prx >> 4; 
-			rda = (cx1 + 1) << 4;
+			PRXA = (cx1 + 1) << 4;
 			rdm = cx1 - 1;
 		} else {
 			cx1 = cx2 = (prx + 8) >> 4;
-			rda = ((cx1 - 1) << 4) + 8;
+			PRXA = ((cx1 - 1) << 4) + 8;
 			rdm = cx1 + 1;
 		}
 		#if PLAYER_COLLISION_VSTRETCH_BG > 0
 			cm_three_points ();
 			if ((at1 & 8) || (at2 & 8) || (at3 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
@@ -732,7 +737,7 @@ void player_move (void) {
 		#else
 			cm_two_points ();
 			if ((at1 & 8) || (at2 & 8)) {
-				pvx = 0; prx = rda; px = prx << FIXBITS; pfiring = 1;
+				pvx = 0; prx = PRXA; px = prx << FIXBITS; pfiring = 1;
 
 				// Special obstacles
 				#if (defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS))
@@ -790,7 +795,7 @@ void player_move (void) {
 
 		#if defined (ENABLE_CHAC_CHAC) || defined (ENABLE_TILE_CHAC_CHAC)
 			cx1 = cx2 = (prx + 4) >> 4;
-			cy1 = pry >> 4; cy2 = (pry + 15) >> 4;
+			cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4; cy2 = (pry + 15) >> 4;
 			cm_two_points ();
 			if ((at1 & 1) || (at2 & 1)) phit = 1;
 		#endif

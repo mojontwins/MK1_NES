@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // player.h
@@ -27,7 +27,7 @@ void player_init (void) {
 		pfacing = 0;
 	#endif	
 
-	pfr = pctfr = 0;
+	pfr = 0;
 	pj = pctj = 0;
 	psprid = 0;
 

@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // Map renderer complex:
@@ -9,11 +9,24 @@
 // Between 1 and 2 you can stuff whatever modifications you like.
 
 void add_tile (void) {
-	map_buff [rdm] = rda;
+	#ifdef DOUBLE_WIDTH
+		buff_ptr [rdm] = rda;
+	#else
+		map_buff [rdm] = rda;
+	#endif
 	++ rdm;
 }
 
-void draw_scr (void) {
+#ifdef DOUBLE_WIDTH
+void draw_half_scr (void)
+#else
+void draw_scr (void)
+#endif
+{
+	#ifdef DOUBLE_WIDTH
+		buff_ptr = map_buff + buff_offset;
+		attr_ptr = map_attr + buff_offset;
+	#endif
 
 	// Draw Map
 
@@ -204,7 +217,12 @@ void draw_scr (void) {
 		rdd = 0;
 	#endif
 
-	_x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
+	_x = 0; _y = TOP_ADJUST; 
+	#ifdef DOUBLE_WIDTH
+		gp_ram = buff_ptr;
+	#else
+		gp_ram = map_buff;
+	#endif
 	for (rdm = 0; rdm < 192; rdm ++) {
 		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
 
@@ -213,7 +231,11 @@ void draw_scr (void) {
 			if ((rdm & 7) == 7) ++ rdd;
 		#endif
 
-		map_attr [rdm] = c_behs [rdt];
+		#ifdef DOUBLE_WIDTH
+			attr_ptr [rdm] = c_behs [rdt];
+		#else
+			map_attr [rdm] = c_behs [rdt];
+		#endif
 
 		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
 			brk_buff [rdm] = 1;
@@ -238,5 +260,9 @@ void draw_scr (void) {
 		}
 	#endif
 
-	vram_write (attr_table, 0x23c0, 64);
+	#ifdef DOUBLE_WIDTH
+		vram_write (attr_table + attr_table_offset, NAMETABLE_BASE + 0x3c0, 64);
+	#else
+		vram_write (attr_table, 0x23c0, 64);
+	#endif
 }

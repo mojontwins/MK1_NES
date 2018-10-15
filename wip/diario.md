@@ -4867,3 +4867,10 @@ Voy a probar todo este tester en modo scripting y me paso al modo injection.
 
 Esto parece funcionar todo. Creo que me pondré antes de cerrar a terminar de probar las nuevas adiciones al scripting y le daré carpetazo a este tester. Antes tengo que volverlo a la normalidad y comprobar que todo sigue siendo guay.
 
+20181015
+========
+
+Voy a propagar la última versión a todos los testers y luego ya empiezo a plantearme hacer un juego.
+
+~~
+

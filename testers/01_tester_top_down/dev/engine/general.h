@@ -1,4 +1,4 @@
-// NES MK1 v1.0
+// NES MK1 v2.0
 // Copyleft Mojon Twins 2013, 2015, 2017, 2018
 
 // general.h
@@ -73,7 +73,7 @@ void pad_read (void) {
 
 #if defined (ENABLE_HOMING_FANTY) || defined (ENABLE_COCOS)
 	// Lame but fast and tiny
-	// Before the call: copy fanty's coordinates into rdx, rdy
+	// Before the call: copy objects's coordinates into rdx, rdy
 	unsigned char distance (void) {
 		rda = DELTA (prx, rdx); // dx
 		rdb = DELTA (pry, rdy); // dy
@@ -123,6 +123,16 @@ void update_cycle (void) {
 }
 
 #ifdef DOUBLE_WIDTH
+	void scroll_to (void) {
+		// Fast scroll to rds16, assume multiple of 8
+		scroll_x &= 0xfff8;	// Make multiple of 8
+		while (scroll_x != rds16) {
+			if (scroll_x < rds16) scroll_x += 8;
+			else scroll_x -= 8;
+			update_cycle ();
+		}
+	}
+
 	void calc_scroll_pos (void) {
 		scroll_x = prx - 124;
 		if (scroll_x < 0) scroll_x = 0;
