@@ -23,7 +23,7 @@ void textbox_frame (void) {
 			((rdit ? 192 : 0) + map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
 	#else
 		_x = 0; 
-		gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
+	gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
 	#endif
 	
 	gpit = 64; while (gpit --) {
@@ -36,7 +36,7 @@ void textbox_frame (void) {
 		#ifdef DOUBLE_WIDTH
 			_x = _x + 2; if (_x == 32 || _x == 64) { _x = rdit ? 32 : 0; _y += 2; }
 		#else
-			_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
+		_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
 		#endif
 		++ rdct; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
 	}
@@ -78,13 +78,13 @@ void textbox_do (void) {
 
 	rdm = TEXT_BOX_FRAME_TILE_OFFSET; textbox_frame ();
 	#ifdef TEXT_BOX_WITH_PORTRAITS
-		if (rdd) {
-			oam_meta_spr (
-				44, 103,
-				256-32,
-				spr_hs [rdd]);
-			rdm = 8;
-		} else rdm = 6;
+	if (rdd) {
+		oam_meta_spr (
+			44, 103,
+			256-32,
+			spr_hs [rdd]);
+		rdm = 8;
+	} else rdm = 6;
 	#endif	
 
 	#ifdef DOUBLE_WIDTH
@@ -97,7 +97,7 @@ void textbox_do (void) {
 		pad_read (); if (pad_this_frame & (PAD_A|PAD_B)) break;
 	}
 	#ifdef TEXT_BOX_WITH_PORTRAITS
-		if (rdd) oam_hide_rest (256-32);
+	if (rdd) oam_hide_rest (256-32);
 	#endif
 	rdm = 0; textbox_frame ();
 	clear_update_list ();

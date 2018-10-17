@@ -71,7 +71,7 @@ void textbox_do (void) {
 	// In double width mode, scroll to the correct screen
 	#ifdef DOUBLE_WIDTH
 		player_to_pixels ();
-		rdit = !!(prx & 0x100);
+		rdit = (prx & 0x100);
 		rds16 = rdit ? 256 : 0;
 		scroll_to ();
 	#endif

@@ -4872,5 +4872,21 @@ Esto parece funcionar todo. Creo que me pondré antes de cerrar a terminar de pr
 
 Voy a propagar la última versión a todos los testers y luego ya empiezo a plantearme hacer un juego.
 
+20181017
+========
+
+Necesito pensar algo chulo y creo que la idea guay es esa mezcla de Piratas + Circo de Funambuleena que tuvimos los niños y yo hace algún tiempo. La idea sería mezclarlo con un gameplay rollo Monster Land:
+
+1.- El personaje puede ir sin armas o puede llevar una espada.
+2.- El personaje puede llevar un escudo.
+
+La idea es que proyectiles ( = cocos) colisionen con el escudo sin hacer daño al jugador. Esto se lograría muy fácilmente haciendo que el escudo fuera un ente independiente que se moviese con el jugador usando un offset con respecto al centro del bounding box. Este escudo recibiría los impactos de los proyectiles. También podría hacer que el escudo durase un cierto número de impactos, lo que permitiría tener varios escudos en el juego, que se pudiesen comprar con más o menos dinero, y que soportasen más o menos impactos. Digamos 3, 5, 10.
+
+El tema de la espada es muy parecido en realidad al tema de punching/kicking que ya soporta AGNES, y estaba pensando en reaprovecharlo o quizá expandirlo, porque lo suyo es que haya una animación (aunque sea un solo frame) y el golpe se haga activo sólo en el frame final.  No sé si quizá lo suyo sería implementar un hitter rollo ninjajar para esto, de forma que la espada aparezca al igual que el escudo como ente aparte cuando se oprima disparo, y que colisione en toda su extensión de 16x8.
+
+Otra cosa que habría que ir pensando sería la historia. Si empezamos esto con la historia definida y el levelset medio pensado luego habrá que ponerse a parchear mucho menos y todo será más mejor (y menos peor).
+
+Y quizá sería interesante plantearse presentar esto como entrada para la nesdev compo de este año, ya que concide en el tiempo y la idea original de hacer Ramiro como que se está enfriando, y eso que los gráficos que hice eran el puto copón.
+
 ~~
 

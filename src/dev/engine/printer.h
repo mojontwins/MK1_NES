@@ -73,13 +73,13 @@ void p_t (void) {
 		// A = number (0-99)
 		__asm__ ("lda %v", _n);
 
-		__asm__ ("ldx #$ff");
-		__asm__ ("sec");
+	    __asm__ ("ldx #$ff");
+	    __asm__ ("sec");
 	p_t_loop_0:
 		__asm__ ("inx");
-		__asm__ ("sbc #10");
-		__asm__ ("bcs %g", p_t_loop_0);
-		__asm__ ("adc #10");
+	    __asm__ ("sbc #10");
+	    __asm__ ("bcs %g", p_t_loop_0);
+	    __asm__ ("adc #10");
 
 		// A = lower digit (0-9), X=upper digit(0-9)
 		__asm__ ("sta %v", rda);
@@ -284,7 +284,7 @@ void update_list_tile (void) {
 			NAMETABLE_BASE = 0x2400;
 		} else {
 			attr_table_offset = 0;
-			NAMETABLE_BASE = 0x2000;			
+			NAMETABLE_BASE = 0x2000;
 		}
 	#endif
 
@@ -315,8 +315,8 @@ void update_list_tile (void) {
 // Destroys _x, _y!.
 void map_set (void) {
 	#ifdef DOUBLE_WIDTH
-		map_buff [COORDS (_x, _y)] = _t;
-		map_attr [COORDS (_x, _y)] = c_behs [_t];
+	map_buff [COORDS (_x, _y)] = _t;
+	map_attr [COORDS (_x, _y)] = c_behs [_t];
 		// _x = _x << 1; 
 		__asm__ ("asl %v", _x);
 		_y = TOP_ADJUST + (_y << 1);

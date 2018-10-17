@@ -417,7 +417,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
-//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
+#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						1
 #define COCO_V							192
 //#define COCO_COLLIDES

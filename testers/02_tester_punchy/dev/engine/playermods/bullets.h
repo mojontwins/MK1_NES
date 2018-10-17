@@ -19,32 +19,86 @@ void fire_bullet (void) {
 	#ifdef PLAYER_FIRE_RELOAD
 		pfirereload = PLAYER_FIRE_RELOAD;
 	#endif
-	
+
 	switch (pfacing) {
 		case CELL_FACING_LEFT:
 			bx [bi] = prx - 8;
+			/*
 			bmx [bi] = -PLAYER_BULLET_SPEED;
 			by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 			bmy [bi] = 0;
+			*/
+			__asm__ ("ldx %v", bi);
+			__asm__ ("lda #%b", -PLAYER_BULLET_SPEED);
+			__asm__ ("sta %v, x", bmx);
+			__asm__ ("lda %v", pry);
+			#if PLAYER_BULLET_Y_OFFSET != 0
+				__asm__ ("clc");
+				__asm__ ("adc #%b", PLAYER_BULLET_Y_OFFSET);
+			#endif
+			__asm__ ("sta %v, x", by);
+			#if defined (PLAYER_TOP_DOWN) || defined (PLAYER_CAN_FIRE_8_WAY)
+				__asm__ ("lda #0");
+				__asm__ ("sta %v, x", bmy);
+			#endif
+
 			break;	
 		case CELL_FACING_RIGHT:
 			bx [bi] = prx + 8;
+			/*
 			bmx [bi] = PLAYER_BULLET_SPEED;
 			by [bi] = pry + PLAYER_BULLET_Y_OFFSET;
 			bmy [bi] = 0;
+			*/
+			__asm__ ("ldx %v", bi);
+			__asm__ ("lda #%b", PLAYER_BULLET_SPEED);
+			__asm__ ("sta %v, x", bmx);
+			__asm__ ("lda %v", pry);
+			#if PLAYER_BULLET_Y_OFFSET != 0
+				__asm__ ("clc");
+				__asm__ ("adc #%b", PLAYER_BULLET_Y_OFFSET);
+			#endif
+			__asm__ ("sta %v, x", by);
+			#if defined (PLAYER_TOP_DOWN) || defined (PLAYER_CAN_FIRE_8_WAY)
+				__asm__ ("lda #0");
+				__asm__ ("sta %v, x", bmy);
+			#endif
 			break;
 		#ifdef PLAYER_TOP_DOWN
 			case CELL_FACING_DOWN:
 				bx [bi] = prx + PLAYER_BULLET_X_OFFSET;
+				/*
 				by [bi] = pry + 12;
 				bmy [bi] = PLAYER_BULLET_SPEED;
 				bmx [bi] = 0;
+				*/
+				__asm__ ("ldx %v", bi);
+				__asm__ ("lda %v", pry);
+				__asm__ ("clc");
+				__asm__ ("adc #%b", 12);
+				__asm__ ("sta %v, x", by);
+				__asm__ ("lda #%b", PLAYER_BULLET_SPEED);
+				__asm__ ("sta %v, x", bmy);
+				__asm__ ("lda #0");
+				__asm__ ("sta %v, x", bmx);
 				break;
 			case CELL_FACING_UP:
 				bx [bi] = prx - PLAYER_BULLET_X_OFFSET;
+				
+				/*
 				by [bi] = pry - 4;
 				bmy [bi] = -PLAYER_BULLET_SPEED;
 				bmx [bi] = 0;
+				*/
+				__asm__ ("ldx %v", bi);
+				__asm__ ("lda %v", pry);
+				__asm__ ("sec");
+				__asm__ ("sbc #%b", 4);
+				__asm__ ("sta %v, x", by);
+				__asm__ ("lda #%b", -PLAYER_BULLET_SPEED);
+				__asm__ ("sta %v, x", bmy);
+				__asm__ ("lda #0");
+				__asm__ ("sta %v, x", bmx);
 				break;	
 		#endif
 	}	
@@ -108,7 +162,11 @@ void bullets_move (void) {
 		if (by [bi]) {
 
 			_bx = bx [bi] + bmx [bi];
-			_by = by [bi] + bmy [bi];		
+			#if defined (PLAYER_TOP_DOWN) || defined (PLAYER_CAN_FIRE_8_WAY)
+				_by = by [bi] + bmy [bi];		
+			#else
+				_by = by [bi];
+			#endif
 
 			if (
 			#ifdef DOUBLE_WIDTH
@@ -118,7 +176,7 @@ void bullets_move (void) {
 				_bx < PLAYER_BULLET_SPEED ||
 				_bx > 255 - PLAYER_BULLET_SPEED
 			#endif
-			#ifdef PLAYER_TOP_DOWN				
+			#if defined (PLAYER_TOP_DOWN) || defined (PLAYER_CAN_FIRE_8_WAY)			
 				|| _by < PLAYER_BULLET_SPEED
 				|| _by > 207 - PLAYER_BULLET_SPEED
 			#endif
@@ -144,7 +202,6 @@ void bullets_move (void) {
 			}
 
 			if (rde) {
-
 				cx1 = ((_bx + 4) >> 4);
 				#if defined (DOUBLE_WIDTH) && !defined (PLAYER_TOP_DOWN) && !defined (PLAYER_CAN_FIRE_8_WAY)
 					cy1 = b_cy1 [bi];
@@ -172,7 +229,9 @@ void bullets_move (void) {
 			}
 
 			bx [bi] = _bx;
-			by [bi] = _by;
+			#if defined (PLAYER_TOP_DOWN) || defined (PLAYER_CAN_FIRE_8_WAY)
+				by [bi] = _by;
+			#endif
 		}
 	}
 }

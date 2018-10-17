@@ -15,11 +15,11 @@ void interactives_paint (void) {
 					spr_hs [rda & 0x80 ? flags [rda & 0x7f] : rda]
 				);
 		#else
-			oam_index = oam_meta_spr (
-				interactives_yx [gpit] << 4, (interactives_yx [gpit] & 0xf0) + SPRITE_ADJUST,
-				oam_index,
-				spr_hs [rda & 0x80 ? flags [rda & 0x7f] : rda]
-			);
+		oam_index = oam_meta_spr (
+			interactives_yx [gpit] << 4, (interactives_yx [gpit] & 0xf0) + SPRITE_ADJUST,
+			oam_index,
+			spr_hs [rda & 0x80 ? flags [rda & 0x7f] : rda]
+		);
 		#endif
 	}
 }
@@ -34,7 +34,7 @@ void interactives_paint (void) {
 					interactives_y [interactives_index] = (1 + *gp_gen ++) << 4;
 					interactives_x [interactives_index] = *gp_gen ++;
 				#else
-					interactives_yx [interactives_index] = 16 + *gp_gen ++;
+				interactives_yx [interactives_index] = 16 + *gp_gen ++;
 				#endif
 				interactives_f [interactives_index ++] = *gp_gen ++;
 			} else 
@@ -52,8 +52,8 @@ void interactives_paint (void) {
 			interactives_y [interactives_index] = (sc_y << 4);
 			interactives_f [interactives_index ++] = sc_n;
 		#else
-			interactives_yx [interactives_index] = sc_x;
-			interactives_f [interactives_index ++] = sc_y;
+		interactives_yx [interactives_index] = sc_x;
+		interactives_f [interactives_index ++] = sc_y;
 		#endif
 	}
 #endif

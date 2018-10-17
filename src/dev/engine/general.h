@@ -49,7 +49,7 @@ signed int add_sign (signed int sign, signed int value) {
 void run_fire_script (void) {
 	fire_script_success = 0;
 	run_script (2 * MAP_SIZE + 2);
-	run_script ((n_pant << 1) + 1);	
+	run_script ((n_pant << 1) + 1);
 	#ifdef ENABLE_PUSHED_SCRIPT
 		just_pushed = 0;
 	#endif
