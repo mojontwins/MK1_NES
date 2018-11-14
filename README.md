@@ -64,6 +64,6 @@ The **games included in the `examples` folder** are now free to produce, which m
 
 The **game assets** included in the testers and examples (graphics, music, etc.) are [donationware](https://en.wikipedia.org/wiki/Donationware). 
 
-If you like this, you can https://ko-fi.com/I2I0JUJ9.
+If you like this, you can [buy me a coffee](https://ko-fi.com/I2I0JUJ9).
 
 Have fun.
