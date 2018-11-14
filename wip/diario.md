@@ -4888,5 +4888,14 @@ Otra cosa que habría que ir pensando sería la historia. Si empezamos esto con 
 
 Y quizá sería interesante plantearse presentar esto como entrada para la nesdev compo de este año, ya que concide en el tiempo y la idea original de hacer Ramiro como que se está enfriando, y eso que los gráficos que hice eran el puto copón.
 
+20181114
+========
+
+Porté AGNES a SEGA 8 bit (por ahora SG1000), y con ello vino una evolución: una forma de personalizar muy fácilmente los chac chacs que se colocan desde el mapa que voy a intentar trasladar a esta rama sin cargarme muchas cosas (espero).
+
+Por lo pronto voy a mover precalcs.h desde assets hacia engine para que cambios ahí sean más fáciles de trasladar cuando se cambia de versión del motor.
+
 ~~
+
+
 

@@ -487,12 +487,13 @@ void main(void) {
 				game_over ();
 				break;
 			}
-
+			if (
 #ifdef ACTIVATE_SCRIPTING
-			if (script_result) {
+			script_result
 #else
-			if (pobjs == PLAYER_NUM_OBJETOS) {
+			(pobjs == PLAYER_NUM_OBJETOS)
 #endif
+			) {
 				game_ending ();
 				break;
 			}

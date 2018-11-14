@@ -10,16 +10,18 @@ if (interactives_index) {
 			&& use_ct == 0
 		#endif
 	) {
-		rdx = prx + 4; rdy = pry + 8;
+		PRXA = prx + 4;	rdy = pry + 8;
 
 		gpit = interactives_index; while (gpit --) {
+			#ifdef DOUBLE_WIDTH
+				rdaa = interactives_x [gpit] << 4; rdc = interactives_y [gpit];
+				// if ((rdaa & 0x100) != PRXA & 0x100) continue;
+				if (PRXA + 4 >= rdaa && PRXA <= rdaa + 19 && rdy >= rdc && rdy <= rdc + 15)
+			#else
 			rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
-			if (
-				(rdx >= rdb - 4 && rdx <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15)
-				#ifndef PLAYER_TOP_DOWN
-					/*&& ppossee*/
+				if (PRXA + 4 >= rdb && PRXA <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15) 
 				#endif
-			) {
+			{ 
 				#if defined (ENABLE_USE_ANIM) && !defined (INTERACTIVES_ONLY_SPRITES)
 					// Only if it is a genuine interactive				
 					if (interactives_f [gpit] & 0x80) {

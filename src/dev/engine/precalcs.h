@@ -26,21 +26,33 @@ const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
 #endif
 
 #if defined (ENABLE_TILE_CHAC_CHAC) || defined (ENABLE_CHAC_CHAC)
-	const unsigned char chac_chacs_times [] = {
-		0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3
-	};
+	#ifdef USE_CUSTOM_CHAC_CHAC
+		#include "my/chac_chacs_config.h"
+	#else	
+		#define CHAC_CHAC_MAX_STATES 6
+		#define CHAC_CHAC_BOUM_STATE 3
+		#define CHAC_CHAC_DETECT_TILES 3
 
-	const unsigned char chac_chacs_t1 [] = {
-		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE
-	};
+		const unsigned char chac_chacs_initial_times [] = {
+			50, 100, 150
+		};
 
-	const unsigned char chac_chacs_t2 [] = {
-		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6
-	};
+		const unsigned char chac_chacs_times [] = {
+			0, CHAC_CHAC_IDLE_2, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_4, CHAC_CHAC_IDLE_3, CHAC_CHAC_IDLE_3
+		};
 
-	const unsigned char chac_chacs_t3 [] = {
-		CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 1
-	};
+		const unsigned char chac_chacs_t1 [] = {
+			CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 2, CHAC_CHAC_BASE_TILE
+		};
+
+		const unsigned char chac_chacs_t2 [] = {
+			CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 4, CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 6
+		};
+
+		const unsigned char chac_chacs_t3 [] = {
+			CHAC_CHAC_BASE_TILE + 6, CHAC_CHAC_BASE_TILE + 1, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 5, CHAC_CHAC_BASE_TILE + 3, CHAC_CHAC_BASE_TILE + 1
+		};
+	#endif
 #endif
 
 const unsigned char bits [] = {

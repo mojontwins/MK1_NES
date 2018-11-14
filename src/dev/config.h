@@ -356,6 +356,8 @@
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
 
+//#define USE_CUSTOM_CHAC_CHAC			// Implement your own chac chac
+
 // Monococos
 
 //#define ENABLE_MONOCOCOS

@@ -140,15 +140,19 @@ Originally (still supported but deprecated!) chac-chacs were implemented as enem
     #define MAX_CHAC_CHACKS_QUEUED          16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
     #define CHAC_CHAC_DETECT_TILE           39
     #define CHAC_CHACS_CLEAR                // You are placing chac chacks from map but need the path to be clear
+
+    //#define USE_CUSTOM_CHAC_CHAC          // Implement your own chac chac
 ```
 
-Notice that as of v1.0 you have to `#define CHAC_CHAC_FROM_MAP`. On future versions this won't be necessary as enemy-based chac-chacs will be removed.
+**Notice that as of v1.0 you have to `#define CHAC_CHAC_FROM_MAP`. On future versions this won't be necessary as enemy-based chac-chacs will be removed.**
 
 Chac-Chacs need 7 metatiles in the metatileset (`check 00_tester_sideview` or `07_cheril_perils_classic` metatilesets) starting on # `CHAC_CHAC_BASE_TILE`.
 
 `MAX_CHAC_CHACS` refer to the maximum amount of chac-chacs on screen at the same time. Calculate `MAX_CHAC_CHACKS_QUEUED` accordingly using the formula.
 
 Chac-chacs can have three different speeds, close to 1, 2 or 3 seconds periods. To place a chac-chack of speed N, just place tile # `CHAC_CHAC_DETECT_TILE + N - 1` in the map. 
+
+You can implement your own chac-chac if you define `USE_CUSTOM_CHAC_CHAC`. In such case, you have to create several constants and arrays in `my/chac_chacs_config.h`. There's an example ready to use in that file. A proper doc explaining how to create your own step by step is on the way.
 
 Pushable
 --------

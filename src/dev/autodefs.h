@@ -94,7 +94,7 @@
 	#define NEEDS_LIFE_GAUGE_LOGIC
 #endif
 
-#if defined (CHAC_CHAC_FROM_MAP)
+#if defined (CHAC_CHAC_AS_ENEMS)
 	#undef ENABLE_CHAC_CHAC
 	#define ENABLE_TILE_CHAC_CHAC
 #endif

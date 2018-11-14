@@ -249,12 +249,14 @@ void draw_scr (void)
 
 	#if defined (ENABLE_TILE_CHAC_CHAC) && defined (CHAC_CHACS_CLEAR)
 		gpit = max_chac_chacs; while (gpit --) {
-			_t = CHAC_CHAC_BASE_TILE + 6;
 			_x = (chac_chacs_yx [gpit] & 0xf) << 1;
+			_t = chac_chacs_t1 [0];
 			_y = ((chac_chacs_yx [gpit] & 0xf0) >> 3) + TOP_ADJUST;
 			draw_tile ();
+			_t = chac_chacs_t2 [0];
 			_y += 2;
 			draw_tile ();
+			_t = chac_chacs_t3 [0];
 			_y += 2;
 			draw_tile ();
 		}
