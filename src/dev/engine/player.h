@@ -469,8 +469,14 @@ void player_move (void) {
 				#endif
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
-			} else if ((at1 & 1) || (at2 & 1)) {
-				if ((pry & 15) > 4) hitv = 1;
+			} else {
+				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
+					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
+					cm_two_points ();
+				#endif
+				if ((at1 & 1) || (at2 & 1)) {
+					if ((pry & 15) > 4) hitv = 1;
+				}
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
@@ -740,6 +746,10 @@ void player_move (void) {
 					if (cy1 != cy2) if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 				#endif				
 			} else {
+				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
+					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
+					cm_two_points ();
+				#endif
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		#endif

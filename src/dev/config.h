@@ -98,6 +98,9 @@
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
 #define PLAYER_COLLISION_VSTRETCH_BG	-4
 
+// Bottom collision. If set, player can bleed a bit into spikes when going down.
+//#define PLAYER_SPIKES_BOTTOM_ALLOW	2
+
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
 // this offset goes to the head. 
@@ -134,6 +137,7 @@
 	//#define DIE_AND_REINIT				//     ... or start the level over!
 #define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define NO_V_BOOST_WHEN_FLICK				// If defined, no -vy boost when moving to the room above
 
 // Extra special tiles
 // -------------------
