@@ -1,4 +1,4 @@
-' namgen v0.4 20181120 - Converts a .png into a nametable with attributes
+' namgen 0.3 - Converts a .png into a nametable with attributes
 ' Using a fixed palette and CHR files.
 ' Copyleft 2016, 2017 The Mojon Twins
 ' fbc namgen.bas cmdlineparser.bas mtparser.bas
@@ -24,31 +24,14 @@ Dim Shared As Integer bank
 Sub usage 
 	Puts "usage:"
 	Puts ""
-	Puts "$ namgen.exe in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B] [rle[=label]]"
+	Puts "$ namgen.exe in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B]"
 	Puts ""
 	Puts "in             a 256x240 input file. Not checked."
 	Puts "out            The output result you are aiming for!"
 	Puts "pals           a 16x1 png file with the palette."
 	Puts "chr            The charset."
 	Puts "bank           0 or 1. 0 is default"
-	Puts "rle            output is code in .h with rle'd screen using label"
-	Puts "               if no label is specified, sanitized 'in' will be used."
 End Sub
-
-Function mySubsts (stIn As String, sFind As String, sReplace As String) As String
-	Dim As Integer i, idx
-	Dim As String sOut, m
-
-	sOut = ""
-	For i = 1 To Len (stIn) 
-		m = Mid (stIn, i, 1)
-		idx = Instr (sFind, m)
-		If idx Then m = Mid (sReplace, idx, 1)
-		sOut = sOut & m
-	Next i
-
-	mySubsts = sOut
-End Function
 
 Sub readChr (fn As String) 
 	Dim As Integer i, j, fIn
@@ -246,103 +229,11 @@ Sub writeOutput (fn As String)
 	Close #fOut
 End Sub
 
-Sub writeRledOutput (fn As String)
-	Dim As Integer fOut, i, rleI
-	Dim As Integer runMode, namIdx, runLength, sizeT
-	Dim As uByte rleByte, runByte
-	Dim As uByte rle (2047) ' Should be enough
-	Dim As Integer marker
-	Dim As uByte marked (255)
-
-	' First of all, find marker
-	For i = 0 To 255
-		marked (i) = 0
-	Next i
-	For i = 0 To 1023
-		marked (nametable (i)) = 1
-	Next i
-
-	marker = -1
-	For i = 0 To 255
-		If marked (i) = 0 Then marker = i: Exit For
-	Next i
-
-	If marker = -1 Then Print "Image must be < 255 patterns to be compressable. Exiting doing nothing.": Exit Sub
-
-	fOut = FreeFile
-	rleI = 0
-	sizeT = 1024
-	rle (rleI) = marker: rleI = rleI + 1
-
-	namIdx = 0: rleByte = marker: runMode = 0
-	While namIdx < sizeT
-		If runMode Then
-			' Read byte
-			runByte = nametable (namIdx): namIdx = namIdx + 1
-			If runByte = rleByte And runLength < 254 Then
-				runLength = runLength + 1
-			Else
-				' Optimization: Runs of 1 are inefficient.
-				' If one happens, substitute for eq. string.
-				If runLength = 1 Then
-					' Overwrite run marker with actual value:
-					rle (rleI - 1) = rleByte
-				Else
-					' Write runLength
-					rle (rleI) = runLength: rleI = rleI + 1
-				End If
-				runMode = 0
-				' Output byte
-				rle (rleI) = runByte: rleI = rleI + 1
-				rleByte = runByte
-			End If
-		Else
-			' Read byte
-			runByte = nametable (namIdx): namIdx = namIdx + 1
-			If runByte <> rleByte Then
-				' Output byte
-				rle (rleI) = runByte: rleI = rleI + 1
-				rleByte = runByte
-			Else
-				' start run
-				rle (rleI) = marker: rleI = rleI + 1
-				runLength = 1
-				runMode = -1
-			End If
-		End If
-	Wend
-
-	If runMode Then rle (rleI) = runLength: rleI = rleI + 1
-
-	' Write end marker
-	rle (rleI) = marker: rleI = rleI + 1
-	rle (rleI) = 0: rleI = rleI + 1
-
-	Open fn For Output As #fOut
-	Print #fOut, "// RLE'd nametable by namgen v0.4 20181120"
-	Print #fOut, ""
-	If sclpGetValue ("rle") = "%%TRUE%%" Then
-		Print #fOut, "const unsigned char " & Lcase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_rle [] = {";
-	Else
-		Print #fOut, "const unsigned char " & sclpGetValue ("rle") & " [] = {";
-	End If
-
-	For i = 0 To rleI - 1
-		If i Mod 16 = 0 Then Print #fOut, "": Print #fOut, "    ";
-		Print #fOut, "0x" & lCase (Hex (rle (i), 2));
-		If i < rleI - 1 Then Print #fOut, ", ";
-	Next i
-	Print #fOut, "};"
-	Print #fOut, "#define " & Ucase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_RLE_SIZE " & rleI
-	Print #fOut, ""
-	Close #fOut
-End Sub
-
 Dim As String mandatory (3) = { "in", "out", "pals", "chr" }
 
-Puts "namgen v0.4 20181120"
+Puts "namgen v0.2 20160327"
 Puts "Converts a .png into a nametable with attributes."
-Puts "Copyleft 2016, 2018 The Mojon Twins"
+Puts "Copyleft 2016 The Mojon Twins"
 Puts ""
 
 sclpParseAttrs
@@ -372,10 +263,6 @@ processImage sclpGetValue ("in")
 
 '' Write output
 
-If sclpGetValue ("rle") <> "" Then
-	writeRledOutput sclpGetValue ("out")
-Else
-	writeOutput sclpGetValue ("out")
-End If
+writeOutput sclpGetValue ("out")
 
 Puts "DONE!"

@@ -38,6 +38,16 @@ copy /b tileset2.bin + enems.bin tileset2.chr
 del tileset2.bin > nul
 del enems.bin > nul
 
+echo Exporting RLE'd screens
+cd ..\gfx
+..\..\..\src\utils\namgen.exe in=hud.png out=..\dev\assets\hud_rle.h pals=palts0.png chr=..\dev\tileset0.chr bank=0 rle=hud_rle
+..\..\..\src\utils\namgen.exe in=cuts0.png out=..\dev\assets\cuts0_rle.h pals=palcuts0.png chr=..\dev\tileset2.chr bank=0 rle=cuts0_rle
+..\..\..\src\utils\namgen.exe in=cuts1.png out=..\dev\assets\cuts1_rle.h pals=palcuts0.png chr=..\dev\tileset2.chr bank=0 rle=cuts1_rle
+..\..\..\src\utils\namgen.exe in=cuts2.png out=..\dev\assets\cuts2_rle.h pals=palcuts0.png chr=..\dev\tileset2.chr bank=0 rle=cuts2_rle
+..\..\..\src\utils\namgen.exe in=cuts3.png out=..\dev\assets\cuts3_rle.h pals=palcuts0.png chr=..\dev\tileset2.chr bank=0 rle=cuts3_rle
+..\..\..\src\utils\namgen.exe in=title_sp.png out=..\dev\assets\title_sp_rle.h pals=paltitle.png chr=..\dev\tileset2.chr bank=1 rle=title_sp_rle
+..\..\..\src\utils\namgen.exe in=title_en.png out=..\dev\assets\title_en_rle.h pals=paltitle.png chr=..\dev\tileset2.chr bank=1 rle=title_en_rle
+
 echo Compiling enembehs
 cd ..\script
 ..\..\..\src\utils\pencompiler.exe enembehs.spt ..\dev\assets\compiled_enems.h

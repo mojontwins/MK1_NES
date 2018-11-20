@@ -520,75 +520,29 @@
 	"buffers":
 	[
 		{
-			"file": "wip/diario.md",
+			"contents": "As a foreword, my main goal here is writing proper documentation and specially tutorials so anybody can use AGNES to create their games. AGNES can scale quite good if you use GNROM type mappers and several independent instances tied together. That way you can have several different configurations (AGNES is modular as in you can turn features on or off) and you can jump from one to another to create a very interesting level sucession with diverse gameplay.\n\nThe main problem is that I need time for that, and a couple of simple projects would be enough to fund such work.\n\n1. What would be an ideal product that you would be interested in taking on in terms of scope and complexity? Based on your past projects, are there any genres that would be easier or faster than others? For example, a JRPG might be too big in scope.\n\nI don't have the need nor the will to commit to something really big, that's why I though CNROM is a good compromise for a medium sized game. Anything the size of Cheril the Writer, Bootèe, Sgt. Helmet's Training Day, Jet Paco or Yun. Definitely, a JRPG might be too big in scope. I can't afford to spend much time on this kind of commisions, that's why I chose to set a low price tag for creating something simple yet fun. Say 4-5 levels, if they fit. 64K is tight, so the more complex the engine is configured to be (more enemy types, gameplay features, etc), the less space for \"pure data\" is available.\n\nTo give you a wider picture, while designing AGNES, one of the main goals was providing a tool so more people could feel a bit creative and create something which could be easily submitted to the nesdev compo. \n\nGreeting cards, games to cellebrate events, etc. are also welcome. \n\n2. Is there a type of project in terms of time, subject matter, etc that you would like to avoid?\n\nAs mentioned, I would definitely avoid long projects. That's why the size restriction (well, INL makes CNROM boards which support 128K of CHR-ROM - and you can fit many level maps in such space!, but standard 32+32K CNROMs is the initial target). About subject matter, I'm pretty open but would oppose upfront to anything relating intolerance, discrimination, illegal subjects or harrasing.\n\n3. How much notice would you need in general before starting any work?\n\nNot much, as long as we can work out and agree on a deadline before anything else.\n\n4. What do you require for a quote? For example, do you need a design document with every variable defined in advance or can you work more loosely?\n\nInput is always appreciated and preferred, but I can work quite loosely. I don't need a comprehesive document. We can just chat about what the game should be about. I can work with somebody else's graphics or I can make my own. We can work out the game design together. When I've been hired in the past I've always given input and taken part in the game design. Most of the time your \"boss\" just has an idea of what he or she wants but needs guidance about how to make it work. It's always more fun if you can give input.\n\n5. Can you help with flashing ROMs to cartridge, or soldering, etc?\n\nSadly, no. I would be providing only the software. \n\n6. What are your payment terms? Do you require a percentage up front? (If you're not familiar with this process, I can provide typical terms and agreements).\n\nThe thing here is that I'm not really taking this that seriously - But I think I should. I'm really not familiar with this process at all. I was thinking about projects I could deliver in three or four weeks, which would cost a few hundred dollars, probably in the $300-$500 range. I don't think requiring a percentage up front is needed, or maybe I'm wrong. I don't even know if $500 for a simple CNROM AGNES game would be too much, to be sincere.\n\n7. Can you agree to a work-for-hire agreement (receive a one-time payment and waive any moral rights in the work)? This, too I can help with if you aren't familiar.\n\nI think I've done this in the past. I was hired to create a game for the ComputerSpiele Museum from Berlin (http://www.computerspielemuseum.de/ - it's the \"Museum Guide\" featured in the header). The agency which hired us chose to leave our name in the game, but I would have happily agreed to have it removed, if you mean that.\n\n8. What else would you like people to know before inquiring about contract work?\n\nI'm fast and creative if you the project keeps me interested. \n\n9. What is your preferred method of contact for the public?\n\nPeople can always fetch me in twitter and ask me for a mail recipient, just as you did :) Or they can write directly to the mojontwins. There's a contact form in the site.\n",
 			"settings":
 			{
-				"buffer_size": 200990,
-				"encoding": "UTF-8",
+				"buffer_size": 4641,
+				"line_ending": "Windows",
+				"name": "As a foreword, my main goal here is writing proper"
+			}
+		},
+		{
+			"file": "/D/git/MK3_sp/dev/definitions.h",
+			"settings":
+			{
+				"buffer_size": 26909,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/engine/precalcs.h",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 2070,
+				"buffer_size": 3854,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/my/chac_chacs_config.h",
-			"settings":
-			{
-				"buffer_size": 1351,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "docs/features.md",
-			"settings":
-			{
-				"buffer_size": 36475,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "docs/mscmk1.md",
-			"settings":
-			{
-				"buffer_size": 25246,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/autodefs.h",
-			"settings":
-			{
-				"buffer_size": 3756,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/config.h",
-			"settings":
-			{
-				"buffer_size": 23269,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/engine/tile_chac_chac.h",
-			"settings":
-			{
-				"buffer_size": 1703,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -673,6 +627,16 @@
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/README.md",
+		"/D/git/MK1_NES/examples/02_jet_paco/dev/config.h",
+		"/D/git/loves_the_sg1000/examples/03_jet_paco/dev/engine/enemmods/enem_linear.h",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/src/dev/engine/tile_chac_chac.h",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/src/dev/engine/precalcs.h",
+		"/D/git/MK1_NES/src/dev/my/chac_chacs_config.h",
+		"/D/git/MK1_NES/docs/features.md",
+		"/D/git/MK1_NES/src/dev/autodefs.h",
 		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_complex.h",
 		"/D/git/MK1_NES/src/dev/game.c",
 		"/D/git/MK1_NES/examples/02_jet_paco/dev/player.h",
@@ -684,7 +648,6 @@
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/cocos.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/textbox.h",
 		"/D/git/MK1_NES/src/dev/my/pres.h",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/my/pres.h",
@@ -791,20 +754,11 @@
 		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/hotspots.h",
 		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/map_renderer_customization.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns0.spt",
-		"/C/Users/na_th/Desktop/writer/presskit.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_entering_screen.h",
-		"/C/Users/na_th/Desktop/git/newspectrum/Ninjajar_M/dev-b/compile_cpc.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/map/maplist.txt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/effects.h",
-		"/C/Users/na_th/AppData/Local/Temp/Temp1_PRESZ134.ZIP/README.1ST",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/crt0.s"
+		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -1035,181 +989,54 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "wip/diario.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 200990,
+						"buffer_size": 4641,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								200988,
-								200988
+								4641,
+								0
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 443,
-								"count": 28925,
+								"changes": 5090,
+								"count": 841,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
+							"auto_name": "As a foreword, my main goal here is writing proper",
 							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 85252.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/dev/engine/precalcs.h",
+					"file": "/D/git/MK3_sp/dev/definitions.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2070,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1071,
-								1039
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 56,
-								"count": 184,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/dev/my/chac_chacs_config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1351,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								753,
-								753
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 401,
-								"count": 173,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "docs/features.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 36475,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2007,
-								2017
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 358,
-								"count": 4761,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 649.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "docs/mscmk1.md",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 25246,
+						"buffer_size": 26909,
 						"regions":
 						{
 						},
@@ -1224,66 +1051,23 @@
 						{
 							"WordCount":
 							{
-								"changes": 0,
-								"count": 3694,
+								"changes": 1,
+								"count": 2058,
 								"modified": false,
 								"selection": false,
 								"status": -1,
 								"syntax": "plain text"
 							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/dev/autodefs.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3756,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2471,
-								2476
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 24,
-								"count": 312,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 836.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1293,28 +1077,28 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
-					"file": "src/dev/config.h",
+					"buffer": 2,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 23269,
+						"buffer_size": 3854,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12209,
-								12273
+								2822,
+								2751
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 12,
-								"count": 2121,
+								"changes": 0,
+								"count": 449,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1323,55 +1107,13 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 22.0,
-						"translation.y": 4060.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/dev/engine/tile_chac_chac.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1703,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 10,
-								"count": 150,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 492.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1469,7 +1211,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 196.0,
+	"side_bar_width": 154.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

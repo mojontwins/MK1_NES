@@ -36,6 +36,12 @@ cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns0.spt out=..\dev\tileset0.chr silent
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns1.spt out=..\dev\work\tileset1p.bin silent
 
+echo Generating rle'd screens
+..\..\..\src\utils\namgen.exe in=cuts0.png out=..\dev\assets\cuts0_rle.h pals=palcuts0.png chr=..\dev\tileset1.chr rle=cuts0_rle
+..\..\..\src\utils\namgen.exe in=cuts1.png out=..\dev\assets\cuts1_rle.h pals=palcuts1.png chr=..\dev\tileset1.chr rle=cuts1_rle
+..\..\..\src\utils\namgen.exe in=cuts2.png out=..\dev\assets\cuts2_rle.h pals=palcuts2.png chr=..\dev\tileset1.chr rle=cuts2_rle
+..\..\..\src\utils\namgen.exe in=title.png out=..\dev\assets\title_rle.h pals=paltstitle.png chr=..\dev\tileset1.chr rle=title_rle
+
 echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level00.ene ..\dev\work\enems00.h 00 1 gencounter bin
