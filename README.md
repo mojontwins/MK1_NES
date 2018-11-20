@@ -11,7 +11,7 @@ The library was used in early 2014 and during 2015 to create several games, some
 
 I've decided to clean **MT Engine MK1 NES** up and make it useable - I've ended rewriting most of it, as always. A tutorial is coming, but I'm still undecided on how to release it.
 
-Update 20181010: **[v1.1 Stable](https://github.com/mojontwins/MK1_NES/releases/tag/v1.1) released**
+Update 20181120: **[v1.2 Stable](https://github.com/mojontwins/MK1_NES/releases/tag/v1.2) released**
 
 How to Build
 ============
