@@ -2,14 +2,14 @@
 ' Converts several kinds of tilesets
 ' Copyleft 2015 by The Mojon Twins
 
-' fbc mkts.bas cmdlineparser.bas
+' fbc mkts.bas cmdlineparser.bas pnginterface.bas
 
 #include "file.bi"
-#include "fbpng.bi"
 #include "fbgfx.bi"
 #include once "crt.bi"
 
 #include "cmdlineparser.bi"
+#include "pnginterface.bi"
 
 #define RGBA_R( c ) ( CUInt( c ) Shr 16 And 255 )
 #define RGBA_G( c ) ( CUInt( c ) Shr  8 And 255 )
@@ -1332,7 +1332,8 @@ screenres 640, 480, 32, , -1
 If platform <> PLATFORM_SG1000 Then
 	filteredPuts ("Reading palette")
 	filteredPuts ("+ Pal file is " & sclpGetValue ("pals"))
-	img = png_load (sclpGetValue ("pals"))
+	Puts ( "File to read: "	 & sclpGetValue ("pals"))
+	img = imageread_png (sclpGetValue ("pals"), 32)
 	findStraightPalette img, pal ()
 	showNesPal pal ()
 End If
@@ -1340,11 +1341,12 @@ End If
 ' load input
 
 filteredPuts ("Input file is " & sclpGetValue ("in"))
-img = png_load (sclpGetValue ("in"))
-If ImageInfo (img, w, h, , , , ) Then
-	' Error!
+If sclpGetValue ("in") <> "" Then
+	img = imageread_png (sclpGetValue ("in"), 32)
+	If ImageInfo (img, w, h, , , , ) Then
+		' Error!
+	End If
 End If
-
 ' Set xorg, yorg
 
 If sclpGetValue ("offset") <> "" Then

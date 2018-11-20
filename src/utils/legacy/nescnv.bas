@@ -1,9 +1,11 @@
 ' nescnv
 ' by na_th_an
+' fbc nescnv.bas pnginterface.bas'
 
-#include "fbpng.bi"
 #include "fbgfx.bi"
 #include once "crt.bi"
+
+#include "pnginterface.bi"
 
 #define RGBA_R( c ) ( CUInt( c ) Shr 16 And 255 )
 #define RGBA_G( c ) ( CUInt( c ) Shr  8 And 255 )
@@ -33,7 +35,7 @@ End If
 screenres 640, 480, 32, , -1
 
 filename1 = Command (1)
-img = png_load ( filename1 )
+img = imageread_png ( filename1,32 )
 
 if img then
 '
