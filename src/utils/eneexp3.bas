@@ -28,7 +28,7 @@ Dim As Integer typeCounters (255)
 Dim As Integer enemTypeCounters (255)
 Dim As Integer genCounter, genAllCounters
 
-Print "MK1 v1.0 eneexp3 ~ ";
+Print "MK1 v2.0 eneexp3 ~ ";
 
 If Command (3) = "" Then usage: End
 prefix = Command (3)

@@ -97,7 +97,7 @@ Dim As Integer scrBinOffs (127)
 Dim As uByte chrRom 
 Dim As uInteger lBase
 
-Print "MK1 v1.0 rle44mapchrrom v0.2 20180625 ~ "
+Print "MK1 v2.0 rle44mapchrrom v0.2 20180625 ~ "
 
 sclpParseAttrs
 If Not sclpCheck (mandatory ()) Then usage: End

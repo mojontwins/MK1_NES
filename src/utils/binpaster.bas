@@ -44,7 +44,7 @@ Dim As Integer i, j, fIn, fOut
 Dim As String mandatory (2) = { "index", "out", "files" }
 Dim As uByte d
 
-Print "MK1 1.0 binpaster v0.1 20180405 ~ ";
+Print "MK1 2.0 binpaster v0.1 20180405 ~ ";
 
 sclpParseAttrs
 If Not sclpCheck (mandatory ()) Then usage: End

@@ -1,3 +1,5 @@
+#define __LIBPNG_VERSION 12
+
 #include once "png.bi"
 #include once "crt.bi"
 #include once "fbgfx.bi"

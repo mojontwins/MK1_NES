@@ -48,6 +48,13 @@ cd ..\dev
 echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
+
+echo Exporting RLE'd screens
+..\..\..\src\utils\namgen.exe in=hud.png out=..\dev\assets\hud_rle.h pals=palts0.png chr=..\dev\tileset.chr bank=0 rle=hud_rle
+..\..\..\src\utils\namgen.exe in=cuts.png out=..\dev\assets\cuts0_rle.h pals=palcuts.png chr=..\dev\tileset.chr bank=0 rle=cuts0_rle
+..\..\..\src\utils\namgen.exe in=ending.png out=..\dev\assets\ending_rle.h pals=palcuts.png chr=..\dev\tileset.chr bank=1 rle=ending_rle
+..\..\..\src\utils\namgen.exe in=title.png out=..\dev\assets\title_rle.h pals=palts0.png chr=..\dev\tileset.chr bank=0 rle=title_rle
+
 cd ..\dev
 
 :noscript
@@ -59,6 +66,13 @@ ld65 -v -C nes.cfg -o cart-omv.nes crt0.o game.o runtime.lib -m labels.txt
 echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns-sfw.spt out=..\dev\tileset.chr silent
+
+echo Exporting RLE'd screens
+..\..\..\src\utils\namgen.exe in=hud.png out=..\dev\assets\hud_rle.h pals=palts0.png chr=..\dev\tileset.chr bank=0 rle=hud_rle
+..\..\..\src\utils\namgen.exe in=cuts-sfw.png out=..\dev\assets\cuts0_rle.h pals=palcuts.png chr=..\dev\tileset.chr bank=0 rle=cuts0_rle
+..\..\..\src\utils\namgen.exe in=ending-sfw.png out=..\dev\assets\ending_rle.h pals=palcuts.png chr=..\dev\tileset.chr bank=1 rle=ending_rle
+..\..\..\src\utils\namgen.exe in=title.png out=..\dev\assets\title_rle.h pals=palts0.png chr=..\dev\tileset.chr bank=0 rle=title_rle
+
 cd ..\dev
 
 :noscript

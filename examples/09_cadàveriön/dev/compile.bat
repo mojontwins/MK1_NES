@@ -12,6 +12,11 @@ echo Exporting chr
 cd ..\gfx
 ..\..\..\src\utils\mkts.exe mode=scripted in=import_patterns.spt out=..\dev\tileset.chr silent
 
+echo Exporting RLE'd screens
+..\..\..\src\utils\namgen.exe in=hud.png out=..\dev\assets\hud_rle.h pals=palts0.png chr=..\dev\tileset.chr bank=0 rle=hud_rle
+..\..\..\src\utils\namgen.exe in=title.png out=..\dev\assets\title_rle.h pals=paltscuts.png chr=..\dev\tileset.chr bank=0 rle=title_rle
+..\..\..\src\utils\namgen.exe in=ending.png out=..\dev\assets\ending_rle.h pals=paltscuts.png chr=..\dev\tileset.chr bank=0 rle=ending_rle
+
 echo Exporting enems
 cd ..\enems
 ..\..\..\src\utils\eneexp3.exe level0.ene ..\dev\assets\enems0.h 0 1 gencounter
@@ -38,7 +43,7 @@ if [%2]==[noscript] goto :noscript
 
 echo Building script
 cd ..\script
-..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 20 debug
+..\..\..\src\utils\mscmk1.exe script.spt ..\dev\assets\mscnes.h 20 
 cd ..\dev
 
 :noscript
