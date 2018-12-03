@@ -325,6 +325,7 @@
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
+//#define PURSUERS_MAY_FIRE				// If defined, attr = 1 make spawned pursuers shoot
 
 // Saws
 

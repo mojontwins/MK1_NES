@@ -520,27 +520,10 @@
 	"buffers":
 	[
 		{
-			"contents": "As a foreword, my main goal here is writing proper documentation and specially tutorials so anybody can use AGNES to create their games. AGNES can scale quite good if you use GNROM type mappers and several independent instances tied together. That way you can have several different configurations (AGNES is modular as in you can turn features on or off) and you can jump from one to another to create a very interesting level sucession with diverse gameplay.\n\nThe main problem is that I need time for that, and a couple of simple projects would be enough to fund such work.\n\n1. What would be an ideal product that you would be interested in taking on in terms of scope and complexity? Based on your past projects, are there any genres that would be easier or faster than others? For example, a JRPG might be too big in scope.\n\nI don't have the need nor the will to commit to something really big, that's why I though CNROM is a good compromise for a medium sized game. Anything the size of Cheril the Writer, Bootèe, Sgt. Helmet's Training Day, Jet Paco or Yun. Definitely, a JRPG might be too big in scope. I can't afford to spend much time on this kind of commisions, that's why I chose to set a low price tag for creating something simple yet fun. Say 4-5 levels, if they fit. 64K is tight, so the more complex the engine is configured to be (more enemy types, gameplay features, etc), the less space for \"pure data\" is available.\n\nTo give you a wider picture, while designing AGNES, one of the main goals was providing a tool so more people could feel a bit creative and create something which could be easily submitted to the nesdev compo. \n\nGreeting cards, games to cellebrate events, etc. are also welcome. \n\n2. Is there a type of project in terms of time, subject matter, etc that you would like to avoid?\n\nAs mentioned, I would definitely avoid long projects. That's why the size restriction (well, INL makes CNROM boards which support 128K of CHR-ROM - and you can fit many level maps in such space!, but standard 32+32K CNROMs is the initial target). About subject matter, I'm pretty open but would oppose upfront to anything relating intolerance, discrimination, illegal subjects or harrasing.\n\n3. How much notice would you need in general before starting any work?\n\nNot much, as long as we can work out and agree on a deadline before anything else.\n\n4. What do you require for a quote? For example, do you need a design document with every variable defined in advance or can you work more loosely?\n\nInput is always appreciated and preferred, but I can work quite loosely. I don't need a comprehesive document. We can just chat about what the game should be about. I can work with somebody else's graphics or I can make my own. We can work out the game design together. When I've been hired in the past I've always given input and taken part in the game design. Most of the time your \"boss\" just has an idea of what he or she wants but needs guidance about how to make it work. It's always more fun if you can give input.\n\n5. Can you help with flashing ROMs to cartridge, or soldering, etc?\n\nSadly, no. I would be providing only the software. \n\n6. What are your payment terms? Do you require a percentage up front? (If you're not familiar with this process, I can provide typical terms and agreements).\n\nThe thing here is that I'm not really taking this that seriously - But I think I should. I'm really not familiar with this process at all. I was thinking about projects I could deliver in three or four weeks, which would cost a few hundred dollars, probably in the $300-$500 range. I don't think requiring a percentage up front is needed, or maybe I'm wrong. I don't even know if $500 for a simple CNROM AGNES game would be too much, to be sincere.\n\n7. Can you agree to a work-for-hire agreement (receive a one-time payment and waive any moral rights in the work)? This, too I can help with if you aren't familiar.\n\nI think I've done this in the past. I was hired to create a game for the ComputerSpiele Museum from Berlin (http://www.computerspielemuseum.de/ - it's the \"Museum Guide\" featured in the header). The agency which hired us chose to leave our name in the game, but I would have happily agreed to have it removed, if you mean that.\n\n8. What else would you like people to know before inquiring about contract work?\n\nI'm fast and creative if you the project keeps me interested. \n\n9. What is your preferred method of contact for the public?\n\nPeople can always fetch me in twitter and ask me for a mail recipient, just as you did :) Or they can write directly to the mojontwins. There's a contact form in the site.\n",
+			"file": "examples/10_che_man/README.md",
 			"settings":
 			{
-				"buffer_size": 4641,
-				"line_ending": "Windows",
-				"name": "As a foreword, my main goal here is writing proper"
-			}
-		},
-		{
-			"file": "/D/git/MK3_sp/dev/definitions.h",
-			"settings":
-			{
-				"buffer_size": 26909,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 3854,
+				"buffer_size": 8686,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -623,11 +606,39 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/docs"
+		"/D/git/MK1_NES/examples"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/examples/10_che_man/dev/my/pres.h",
+		"/D/git/MK1_NES/examples/10_che_man/dev/my/extra_routines.h",
+		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/components/nsConsigna.js",
+		"/D/perfiles/jcastano/Desktop/tomcat_log_rotate.sh",
+		"/D/perfiles/jcastano/AppData/Local/Temp/LOG4J~1.PRO",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/title_rle.h",
+		"/D/git/MK1_NES/src/utils/legacy/pnginterface.bas",
 		"/D/git/MK1_NES/README.md",
+		"/C/Program Files (x86)/FreeBASIC/inc/png.bi",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/assets/ending_rle.h",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/compile.bat",
+		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
+		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/assets/title_sp_rle.h",
+		"/D/git/MK1_NES/examples/10_che_man/dev/compile.bat",
+		"/D/git/MK1_NES/examples/10_che_man/dev/assets/hud_rle.h",
+		"/D/git/MK1_NES/examples/10_che_man/dev/assets/ending_rle.h",
+		"/D/git/MK1_NES/examples/10_che_man/dev/assets/title_rle.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/ending_rle.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
+		"/D/git/MK1_NES/src/utils/namgen.bas",
+		"/D/git/MK1_NES/examples/12_espitene/dev/assets/title_rle.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/compile.bat",
+		"/D/git/MK1_NES/examples/12_espitene/dev/assets/cuts0_rle.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/assets/cuts2_rle.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/work/cuts0_rle.h",
+		"/D/git/MK1_NES/src/UTILS.md",
+		"/D/git/MK3_sp/dev/definitions.h",
 		"/D/git/MK1_NES/examples/02_jet_paco/dev/config.h",
 		"/D/git/loves_the_sg1000/examples/03_jet_paco/dev/engine/enemmods/enem_linear.h",
 		"/D/git/MK1_NES/src/dev/config.h",
@@ -726,35 +737,7 @@
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/my/extra_inits.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/player.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/process_tile.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/bolts.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/ram/bss.h",
-		"/C/Users/na_th/Desktop/git/nes_work/gokumal/poc/neslib-pantanow.s",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/process_tile.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/game.c",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/pres.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/custom_texts.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/config.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/ram/zp.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_inits.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/10_che_man/dev/engine/general.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/on_player_hit.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/engine/enengine.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/examples/08_cheril_the_writer/dev/mainloop.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/wip/luca/dev/engine/player.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_vars.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/gfx/import_patterns1.spt",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/metasprites.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/levelset.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/compile.bat",
-		"/C/Users/na_th/Desktop/git/MK1_NES/src/utils/namgen.bas",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/README.md",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/assets/behs.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/mainloop/hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_hotspots.h",
-		"/C/Users/na_th/Desktop/git/MK1_NES/testers/05_tester_tile_get/dev/my/extra_routines.h"
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/process_tile.h"
 	],
 	"find":
 	{
@@ -814,6 +797,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hud",
+			"tileset0",
+			"v0.3 20181107",
+			"0.3",
+			"rle",
 			"chac_chac_from_map",
 			"precalcs.h",
 			"fire_bullet",
@@ -936,12 +924,7 @@
 			"stuff",
 			"flipflop",
 			"pvalueR",
-			"processalias",
-			"pval",
-			"SWAP",
-			"msc",
-			"puts",
-			"37"
+			"processalias"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -949,6 +932,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"tileset",
+			"v0.4 20181120",
 			"2.0",
 			"rdit",
 			"sc_n",
@@ -989,54 +974,16 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"semi_transient": false,
+					"file": "examples/10_che_man/README.md",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 4641,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4641,
-								0
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 5090,
-								"count": 841,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"auto_name": "As a foreword, my main goal here is writing proper",
-							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/git/MK3_sp/dev/definitions.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 26909,
+						"buffer_size": 8686,
 						"regions":
 						{
 						},
@@ -1051,54 +998,8 @@
 						{
 							"WordCount":
 							{
-								"changes": 1,
-								"count": 2058,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3854,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2822,
-								2751
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
 								"changes": 0,
-								"count": 449,
+								"count": 1167,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1107,15 +1008,22 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 492.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -1211,7 +1119,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 154.0,
+	"side_bar_width": 187.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
