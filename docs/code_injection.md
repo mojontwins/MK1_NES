@@ -49,22 +49,6 @@ For example, [Cheril Perils Classic](https://github.com/mojontwins/MK1_NES/tree/
 
 If you need to call extra functions of perform tasks every frame, add your code to `my/extra_routines.h`. This code is included right after every actor has updated and changes made there will be output in the current frame.
 
-As it is run each game frame, you can use it for example to cycle a palette:
-
-```c
-if (level < 2 && (frame_counter & 7) == 0 ) {
-    
-    rda = pal_cycle [2];
-    pal_cycle [2] = pal_cycle [1];  
-    pal_cycle [1] = pal_cycle [0];  
-    pal_cycle [0] = rda;            
-    
-    pal_col (13, pal_cycle [2]);
-    pal_col (14, pal_cycle [1]);
-    pal_col (15, pal_cycle [0]);
-}
-```
-
 ### extra checks
 
 The file `my/extra_checks.h` is included in the main loop, so the code you add here will be run each game frame. This is the place, for example, to add the "win level" condition if you defined `WIN_LEVEL_CUSTOM` in `config.h`. Just set `win_level` to true if the win level condition is met. For example:
@@ -278,3 +262,19 @@ Note how if all enemies have been killed, `win_level` wont be set while there's 
 ### Raster & palette effects
 
 If you need a custom raster split or palette cycles, add your code to `my/effects.h`. The code in this module is executed every TV frame (which means 50 times per second in PAL and 60 in NTSC), while the game runs at 50 fps.
+
+For example to cycle a palette:
+
+```c
+if (level < 2 && (frame_counter & 7) == 0 ) {
+    
+    rda = pal_cycle [2];
+    pal_cycle [2] = pal_cycle [1];  
+    pal_cycle [1] = pal_cycle [0];  
+    pal_cycle [0] = rda;            
+    
+    pal_col (13, pal_cycle [2]);
+    pal_col (14, pal_cycle [1]);
+    pal_col (15, pal_cycle [0]);
+}
+```

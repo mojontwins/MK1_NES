@@ -520,10 +520,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/10_che_man/README.md",
+			"file": "examples/12_espitene/README.md",
 			"settings":
 			{
-				"buffer_size": 8686,
+				"buffer_size": 32786,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -606,10 +606,13 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/examples"
+		"/D/git/MK1_NES/docs",
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/12_espitene"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/docs/code_injection.md",
 		"/D/git/MK1_NES/examples/10_che_man/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/my/extra_routines.h",
 		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/components/nsConsigna.js",
@@ -736,8 +739,7 @@
 		"/D/git/MK1_NES/wip/luca/dev/engine/printer.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/tile_chac_chac.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/my/extra_inits.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/player.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/process_tile.h"
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/player.h"
 	],
 	"find":
 	{
@@ -979,27 +981,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/10_che_man/README.md",
-					"semi_transient": true,
+					"file": "examples/12_espitene/README.md",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8686,
+						"buffer_size": 32786,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								13290,
+								13290
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": 0,
-								"count": 1167,
+								"changes": 378,
+								"count": 4281,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -1013,7 +1015,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 5577.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

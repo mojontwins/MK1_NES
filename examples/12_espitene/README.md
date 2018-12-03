@@ -58,7 +58,7 @@ We also want to show how many rings the player collected in the HUD. To do so, j
     }
 ```
 
-The implementation of the ring is a fairly simple one, just a bouncing object which can collide with the background. It uses a couple of shortcuts (for example, it repurposes the `collide` function, which is used for enemies) and focus has been put on making the code compact and fast (so sorry, it's not very readable). On `my/ring.h` there are two functions:
+The implementation of the ring is fairly simple, just a bouncing object which can collide with the background. It uses a couple of shortcuts (for example, it repurposes the `collide` function, which is used for enemies) and focus has been put on making the code compact and fast (so sorry, it's not very readable). On `my/ring.h` there are two functions:
 
 ```c
     void ring_create (void) {
@@ -74,7 +74,7 @@ Now it's time to add hooks for those functions in the engine.
 
 ## Getting rings
 
-When `ENABLE_TILE_GET` is on, the player can *get* tiles of behaviour 34 from the screen. The engine only takes care of deleting the tile and granting persistence (if activated), but does nothing else. If we want the engine to react to the player collecting rings, we have to inject code via `my/on_tile_got.h`. We are going to simply increase the rings counter:
+When `ENABLE_TILE_GET` is on, the player can *get* tiles with behaviour 34 from the screen. The engine only takes care of deleting the tile and granting persistence (if activated), but does nothing else. If we want the engine to react to the player collecting rings, we have to inject code via `my/on_tile_got.h`. We are going to simply increase the rings counter:
 
 ```c
     prings ++;
@@ -119,7 +119,7 @@ Before checking `en_sg_*` and acting accordingly, the engine includes the code i
 
 Note how we are creating the animated ring here via `ring_create`, and setting `prings` to zero.
 
-In a similar way, when the player is hit by a spike (or killing tile), the code in `my/on_player_spike.h` is included before checking, on `en_sg_2`, if the player should receive damage. Here we don't have to check `en_sg_2` which is not set beforehand (as all collisions with spikes should result on the player getting hit, normally), so we only have to check for rings. Also, we don't have to explicitly make the player bounce this time, as the code which deals with spikes already takes care of doing so.
+In a similar way, when the player is hit by a spike (or killing tile), the code in `my/on_player_spike.h` is included before checking, on `en_sg_2`, if the player should receive damage. Here we don't have to check `en_sg_2` which is not set beforehand (as all collisions with spikes should result on the player getting hit, normally), so we only have to check for rings. Also, we don't have to explicitly make the player bounce this time, as the code which deals with spikes already takes care of doing so, but we'll play the "player hit" sound and set the state to "pbouncing" so the sprite cell changes for 16 game frames.
 
 ```c
 if (prings) {
@@ -293,7 +293,7 @@ The variable is to be given a value everytime time player enters a new screen, s
     }
 ```
 
-In `level_world` 3, in the whole act 2 or in screens >= 10 in acts 0 and 1, `underwater` is on. Also the timer, which we will use as an oxygen indicator. Also, the palette is changed if we are under water.
+In `level_world` 3, in the whole act 2 or in screens >= 10 in acts 0 and 1, `underwater` is on. In such cases, the timer, which we will use as an oxygen indicator, is on too. Besisdes, the palette is changed if we are under water.
 
 Speaking of the timer, this is the configuration in `config.h`:
 
