@@ -1440,158 +1440,158 @@ _map_00_scr_offsets:
 	.word	$0000
 	.word	$0000
 	.word	$000C
-	.word	$001D
+	.word	$001A
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0037
-	.word	$006C
+	.word	$0031
+	.word	$0066
 	.word	$0000
-	.word	$0091
-	.word	$00C8
+	.word	$008B
+	.word	$00B9
 	.word	$0000
-	.word	$0104
-	.word	$014A
-	.word	$0177
-	.word	$01B8
-	.word	$01E6
-	.word	$0225
-	.word	$0253
-	.word	$0282
-	.word	$02A4
-	.word	$02D9
+	.word	$00DA
+	.word	$0120
+	.word	$014D
+	.word	$018E
+	.word	$01BC
+	.word	$01FB
+	.word	$0229
+	.word	$0258
+	.word	$0277
+	.word	$02AC
 _map_32_scr_offsets:
-	.word	$0313
-	.word	$034D
+	.word	$02E6
+	.word	$0320
 _map_40_scr_offsets:
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0382
-	.word	$03BB
-	.word	$03EC
+	.word	$0355
+	.word	$038E
+	.word	$03BF
 	.word	$0000
 	.word	$0000
-	.word	$0423
-	.word	$045D
-	.word	$0478
-	.word	$048E
-	.word	$04AF
-	.word	$04C0
-	.word	$04D8
-	.word	$0507
-	.word	$0538
-	.word	$0564
-	.word	$0594
-	.word	$05BF
-	.word	$05F1
-	.word	$0605
-	.word	$0634
-	.word	$065F
+	.word	$03F6
+	.word	$0430
+	.word	$044B
+	.word	$0461
+	.word	$0482
+	.word	$0493
+	.word	$04AB
+	.word	$04DA
+	.word	$050B
+	.word	$0537
+	.word	$0567
+	.word	$0592
+	.word	$05C4
+	.word	$05D8
+	.word	$0607
+	.word	$0632
 	.word	$0000
-	.word	$069D
-	.word	$069D
+	.word	$0670
+	.word	$0670
 	.word	$0000
 	.word	$0000
 	.word	$0000
 _map_41_scr_offsets:
 	.word	$0000
-	.word	$06DE
-	.word	$0702
-	.word	$0729
-	.word	$0745
+	.word	$06B1
+	.word	$06D5
+	.word	$06FC
+	.word	$0718
 	.word	$0000
-	.word	$0760
-	.word	$0702
-	.word	$0792
-	.word	$07C5
+	.word	$0733
+	.word	$06D5
+	.word	$0765
+	.word	$0798
 	.word	$0000
-	.word	$06DE
-	.word	$0702
-	.word	$0792
-	.word	$07C5
+	.word	$06B1
+	.word	$06D5
+	.word	$0765
+	.word	$0798
 	.word	$0000
-	.word	$0760
-	.word	$0702
-	.word	$0792
-	.word	$07C5
-	.word	$0814
-	.word	$0832
-	.word	$0843
-	.word	$085C
-	.word	$087D
+	.word	$0733
+	.word	$06D5
+	.word	$0765
+	.word	$0798
+	.word	$07E7
+	.word	$0805
+	.word	$0816
+	.word	$082F
+	.word	$0850
 _map_42_scr_offsets:
-	.word	$08AB
-	.word	$08DF
-	.word	$0919
+	.word	$087E
+	.word	$08B2
+	.word	$08EC
 _map_50_scr_offsets:
 	.word	$0000
 	.word	$0000
-	.word	$0943
-	.word	$0960
-	.word	$0988
-	.word	$09E9
-	.word	$0A3B
-	.word	$0A8D
-	.word	$0AE7
-	.word	$0B4D
-	.word	$0BAF
-	.word	$0BE0
+	.word	$0916
+	.word	$0933
+	.word	$095B
+	.word	$09BC
+	.word	$0A0E
+	.word	$0A60
+	.word	$0ABA
+	.word	$0B20
+	.word	$0B82
+	.word	$0BB3
 	.word	$0000
-	.word	$0C07
-	.word	$0C3E
-	.word	$0C85
-	.word	$0CBB
-	.word	$0D10
-	.word	$0D6C
-	.word	$0D6C
+	.word	$0BDA
+	.word	$0C11
+	.word	$0C58
+	.word	$0C8E
+	.word	$0CE3
+	.word	$0D3F
+	.word	$0D3F
 	.word	$0000
-	.word	$0D6C
-	.word	$0D6C
-	.word	$0D6C
-	.word	$0D6C
-	.word	$0DA1
-	.word	$0DE3
-	.word	$0E1A
-	.word	$0E66
+	.word	$0D3F
+	.word	$0D3F
+	.word	$0D3F
+	.word	$0D3F
+	.word	$0D74
+	.word	$0DB6
+	.word	$0DED
+	.word	$0E39
 	.word	$0000
 _map_51_scr_offsets:
-	.word	$0EC4
-	.word	$0EE8
-	.word	$0EE8
-	.word	$0EE8
-	.word	$0EE8
-	.word	$0EFC
-	.word	$0F1A
+	.word	$0E97
+	.word	$0EBB
+	.word	$0EBB
+	.word	$0EBB
+	.word	$0EBB
+	.word	$0ECF
+	.word	$0EED
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0F5F
-	.word	$0F75
-	.word	$0FD8
+	.word	$0F32
+	.word	$0F48
+	.word	$0FAB
 	.word	$0000
-	.word	$103D
-	.word	$1077
+	.word	$1010
+	.word	$104A
 	.word	$0000
-	.word	$109A
-	.word	$10E9
+	.word	$106D
+	.word	$10BC
 	.word	$0000
-	.word	$113B
-	.word	$1162
+	.word	$110E
+	.word	$1135
 	.word	$0000
-	.word	$1177
-	.word	$1195
-	.word	$1195
-	.word	$11A3
+	.word	$114A
+	.word	$1168
+	.word	$1168
+	.word	$1176
 	.word	$0000
 _map_52_scr_offsets:
-	.word	$11BA
-	.word	$11D1
-	.word	$11EC
+	.word	$118D
+	.word	$11A4
+	.word	$11BF
 _sspl_00_a:
 	.byte	$FC
 	.byte	$F8
@@ -20066,28 +20066,10 @@ L2867:	jsr     _title
 	lda     #$05
 	sta     _plife
 ;
-; scroll (0, SCROLL_Y);
-;
-L286D:	jsr     push0
-	lda     #$0C
-	jsr     _scroll
-;
-; level_world = base_world [level];
-;
-	ldy     _level
-	lda     _base_world,y
-	sta     _level_world
-;
-; level_act = base_act [level];
-;
-	ldy     _level
-	lda     _base_act,y
-	sta     _level_act
-;
 ; if (level == 0) {
 ;
 	lda     _level
-	bne     L287B
+	bne     L286D
 ;
 ; music_play (MUSIC_CUTS);
 ;
@@ -20110,9 +20092,27 @@ L286D:	jsr     push0
 ;
 	jsr     _music_stop
 ;
+; scroll (0, SCROLL_Y);
+;
+L286D:	jsr     push0
+	lda     #$0C
+	jsr     _scroll
+;
+; level_world = base_world [level];
+;
+	ldy     _level
+	lda     _base_world,y
+	sta     _level_world
+;
+; level_act = base_act [level];
+;
+	ldy     _level
+	lda     _base_act,y
+	sta     _level_act
+;
 ; pres (paltstitle, scr_level);
 ;
-L287B:	jsr     decsp4
+	jsr     decsp4
 	lda     #<(_paltstitle)
 	ldy     #$02
 	sta     (sp),y
@@ -20159,7 +20159,7 @@ L287B:	jsr     decsp4
 ;
 ; break;
 ;
-	jmp     L286E
+	jmp     L2879
 ;
 ; else if (level_reset) {
 ;
@@ -20167,12 +20167,12 @@ L288B:	lda     _level_reset
 ;
 ; else {
 ;
-	jne     L286D
+	bne     L286D
 ;
 ; if (warp_to_level) continue;
 ;
 	lda     _warp_to_level
-	jne     L286D
+	bne     L286D
 ;
 ; level ++;
 ;
@@ -20184,7 +20184,7 @@ L288B:	lda     _level_reset
 ; if (level == MAX_LEVELS) 
 ;
 	cmp     #$12
-	jne     L286D
+	bne     L286D
 ;
 ; music_play (MUSIC_CUTS);
 ;
@@ -20239,7 +20239,7 @@ L28A7:	lda     #$01
 ;
 ; first_game = 0;
 ;
-L286E:	lda     #$00
+L2879:	lda     #$00
 	sta     _first_game
 ;
 ; }

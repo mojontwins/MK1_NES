@@ -124,6 +124,13 @@ void main(void) {
 		title ();	// level* vars are set there.
 		plife = PLAYER_LIFE;
 
+		if (level == 0) {
+			music_play (MUSIC_CUTS);
+			rdm = 0; cutscene ();
+			rdm = 1; cutscene ();
+			music_stop ();
+		}
+
 		// Game loop
 
 		while (1) {
@@ -131,13 +138,6 @@ void main(void) {
 
 			level_world = base_world [level];
 			level_act = base_act [level];
-
-			if (level == 0) {
-				music_play (MUSIC_CUTS);
-				rdm = 0; cutscene ();
-				rdm = 1; cutscene ();
-				music_stop ();
-			}
 
 			pres (paltstitle, scr_level);
 			game_init (); 
