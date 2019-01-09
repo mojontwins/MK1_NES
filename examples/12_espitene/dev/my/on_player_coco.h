@@ -14,12 +14,15 @@ if (prings) {
 
 	// Create animated ring:
 	ring_create ();
+	/*
+	// Moved these to ring_create
 	prings = 0;
+	pbouncing = 16;
+	pflickering = 100;
+	*/
 
 	// Simulate hit
 	sfx_play (SFX_PHIT, 0);
-	pbouncing = 16;
-	pflickering = 100;
 
 	// But don't hurt player!
 	en_sg_2 = 0;

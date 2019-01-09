@@ -11,6 +11,7 @@
 // Whenever you want to WIN the game just set win_level = 1
 // (Don't forget to define WIN_LEVEL_CUSTOM in config.h)
 
-if (l_player_max_objects [level] && pobjs == l_player_max_objects [level]) win_level = 1;
-if (level_act == 2 && en_flags [0] && en_cttouched [0] == 0) win_level = 1;
-if (level == 17 && somari_state == 3) win_level = 1;
+win_level = 
+	(l_player_max_objects [level] && pobjs == l_player_max_objects [level]) ||
+	(level_act == 2 && en_flags [0] && en_cttouched [0] == 0) ||
+	(level == 17 && somari_state == 3);

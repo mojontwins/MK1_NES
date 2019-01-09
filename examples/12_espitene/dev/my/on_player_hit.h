@@ -14,12 +14,14 @@
 
 if (en_sg_2) {
 	if (prings) {
-
-		// Create animated ring:
 		ring_create ();
+		/*
+		// Moved these to ring_create
 		prings = 0;
+		pbouncing = 16;
+		pflickering = 100;
+		*/
 
-		// Simulate hit
 		pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
 		if (_en_my) pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); else pvy = -(PLAYER_V_REBOUND >> 1);
 		if (_en_t != 20) {
@@ -29,8 +31,6 @@ if (en_sg_2) {
 
 		touched = 1; 
 		sfx_play (SFX_PHIT, 0);
-		pbouncing = 16;
-		pflickering = 100;
 
 		// But don't hurt player!
 		en_sg_2 = 0;

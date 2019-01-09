@@ -174,14 +174,14 @@ _pal_spr:
 ;void __fastcall__ pal_col(unsigned char index,unsigned char color);
 
 _pal_col:
-	sta <PTR
-	jsr popa
-	and #$1f
-	tax
-	lda <PTR
-	sta PAL_BUF,x
-	inc <PALUPDATE
-	rts
+;	sta <PTR
+;	jsr popa
+;	and #$1f
+;	tax
+;	lda <PTR
+;	sta PAL_BUF,x
+;	inc <PALUPDATE
+;	rts
 
 
 

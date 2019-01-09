@@ -110,6 +110,12 @@ extern const unsigned char m_ingame [];
 // Main function
 // *************
 
+void game_do (void) {
+	pres (paltstitle, scr_level);
+	game_init (); 
+	game_loop ();
+}
+
 void main(void) {
 	bank_spr (1);
 	bank_bg (0);
@@ -134,36 +140,44 @@ void main(void) {
 		// Game loop
 
 		while (1) {
+			if (select_level) {
+				zone_select ();
+				select_level = 0;
+			}
+
 			scroll (0, SCROLL_Y);
 
 			level_world = base_world [level];
 			level_act = base_act [level];
 
-			pres (paltstitle, scr_level);
-			game_init (); 
-			game_loop ();
+			game_do ();
 
 			if (game_over) {
+				level_reset = 0;
 				pres (palts0, scr_game_over);
 				break;
-			} 
-			#ifdef DIE_AND_REINIT
-				else if (level_reset) {
-					// 
-				} 
-			#endif
-			else {
-				#ifdef MULTI_LEVEL
-					if (warp_to_level) continue;
+			} else if (level_reset) {
+				// Do nothing
+			} else {
+				// Level was finished
+				if (!free_play || level_act < 2) {
 					level ++;
-					if (level == MAX_LEVELS) 
-				#endif
-				{
-					music_play (MUSIC_CUTS);
-					rdm = 2; cutscene ();
-					rdm = (pemmeralds == 0x3f) ? 4 : 3; cutscene ();
-					music_stop ();
-					if (pemmeralds == 0x3f) pres (palts0, scr_the_end);
+					if (level == MAX_LEVELS) {
+						music_play (MUSIC_CUTS);
+						rdm = 2; cutscene ();
+						if (pemmeralds != 0x3f) { 
+							rdm = 3; 
+							cutscene (); 
+							free_play = select_level = 1;
+							level = 0;
+						}
+					}
+				} 
+
+				if (free_play && level_act == 2) select_level = 1;
+
+				if (pemmeralds == 0x3f) {
+					rdm = 4; cutscene ();
 					first_game = 1;
 					break;
 				}

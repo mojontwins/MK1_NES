@@ -4895,7 +4895,18 @@ Porté AGNES a SEGA 8 bit (por ahora SG1000), y con ello vino una evolución: un
 
 Por lo pronto voy a mover precalcs.h desde assets hacia engine para que cambios ahí sean más fáciles de trasladar cuando se cambia de versión del motor.
 
+20190109
+========
+
+Tengo que apañar Espitene porque lo hemos metido a la compo de nesdev. Por el momento he arreglado un "bug" (o, mejor dicho, una "baratada") que hacía que los enemigos pudieran hacerte atravesar las plataformas de tipo 4 si te golpeaban desde arriba y la velocidad de rebote era lo suficientemente alta. He propagado este cambio a /src de la v2 aunque espitene sea v1. 
+
+Otra cosa que quiero hacer es que se pueda seleccionar nivel tras terminar el juego hasta que todas las esmeraldas estén en tu poder, pero me quedan pocos bytes de sobra en la ROM. De entrada podré ahorrar cuando sustituya la canción de barrio sésamo que no podemos usar por temas de copyright, pero quiero apañar al máximo esto.
+
+He modificado `scr_level` para imprimir los nombres de los niveles de otra forma, consiguiendo poder reaprovechar las cadenas con los nombres de los niveles (menos "ZONE") para el menú que tengo que apañar.
+
+Ahora viene una sesión de ahorro de bytes, aunque el tema está ya apretado de la hostia.
+
 ~~
 
-
+Tengo unos 320 bytes para esto (sin haber cambiado la canción). Vamos a ver qué tal se da.
 
