@@ -1273,164 +1273,164 @@ _map_10_scr_offsets:
 	.word	$03FE
 	.word	$03FE
 	.word	$03FE
-	.word	$03FE
 	.word	$04B8
-	.word	$04D2
-	.word	$04FC
-	.word	$0555
-	.word	$05B3
-	.word	$05E0
-	.word	$060E
-	.word	$0634
-	.word	$066C
-	.word	$069A
-	.word	$06B3
-	.word	$06E1
-	.word	$0711
-	.word	$0739
-	.word	$0761
+	.word	$04C8
+	.word	$04E2
+	.word	$050C
+	.word	$0565
+	.word	$05C3
+	.word	$05F0
+	.word	$061E
+	.word	$0644
+	.word	$067C
+	.word	$06AA
+	.word	$06C3
+	.word	$06F1
+	.word	$0721
+	.word	$0749
+	.word	$0771
 _map_11_scr_offsets:
-	.word	$0781
-	.word	$07AB
-	.word	$07CA
-	.word	$07EA
-	.word	$080B
-	.word	$084D
-	.word	$088E
-	.word	$08C6
-	.word	$08ED
-	.word	$0920
-	.word	$0951
-	.word	$0984
-	.word	$09B1
-	.word	$09EC
-	.word	$0A25
-	.word	$0A50
-	.word	$0A9C
-	.word	$0AB1
-	.word	$0AEC
-	.word	$0B20
-	.word	$0B4F
-	.word	$0B89
-	.word	$0BBD
-	.word	$0BCF
-	.word	$0BEE
+	.word	$0792
+	.word	$07BC
+	.word	$07DB
+	.word	$07FB
+	.word	$081C
+	.word	$085E
+	.word	$089F
+	.word	$08D7
+	.word	$08FE
+	.word	$0931
+	.word	$0962
+	.word	$0995
+	.word	$09C2
+	.word	$09FD
+	.word	$0A36
+	.word	$0A61
+	.word	$0AAD
+	.word	$0AC2
+	.word	$0AFD
+	.word	$0B31
+	.word	$0B60
+	.word	$0B9A
+	.word	$0BCE
+	.word	$0BE0
+	.word	$0BFF
 _map_20_scr_offsets:
-	.word	$0C25
-	.word	$0C6E
-	.word	$0CB7
-	.word	$0CF3
-	.word	$0D2F
-	.word	$0D63
-	.word	$0D97
-	.word	$0DFB
-	.word	$0E45
-	.word	$0E72
-	.word	$0EAA
-	.word	$0EEA
-	.word	$0F1F
-	.word	$0F61
-	.word	$0F9E
-	.word	$0FD3
-	.word	$1011
-	.word	$1053
-	.word	$1092
-	.word	$10CD
+	.word	$0C36
+	.word	$0C7F
+	.word	$0CC8
+	.word	$0D04
+	.word	$0D40
+	.word	$0D74
+	.word	$0DA8
+	.word	$0E0C
+	.word	$0E56
+	.word	$0E83
+	.word	$0EBB
+	.word	$0EFB
+	.word	$0F30
+	.word	$0F72
+	.word	$0FAF
+	.word	$0FE4
+	.word	$1022
+	.word	$1064
+	.word	$10A3
+	.word	$10DE
 _map_21_scr_offsets:
-	.word	$10FD
-	.word	$10FD
-	.word	$10FD
-	.word	$1109
-	.word	$1127
-	.word	$116C
-	.word	$1198
-	.word	$11BA
-	.word	$11D4
-	.word	$11F1
-	.word	$10FD
-	.word	$10FD
-	.word	$120B
-	.word	$10FD
-	.word	$10FD
-	.word	$1234
-	.word	$1293
-	.word	$12E0
-	.word	$130A
-	.word	$10FD
-	.word	$10FD
-	.word	$134F
-	.word	$1374
-	.word	$10FD
-	.word	$13AB
-	.word	$13C3
-	.word	$1410
-	.word	$1448
-	.word	$147A
-	.word	$1494
+	.word	$110E
+	.word	$110E
+	.word	$110E
+	.word	$111A
+	.word	$1138
+	.word	$117D
+	.word	$11A9
+	.word	$11CB
+	.word	$11E5
+	.word	$1202
+	.word	$110E
+	.word	$110E
+	.word	$121C
+	.word	$110E
+	.word	$110E
+	.word	$1245
+	.word	$129C
+	.word	$12E9
+	.word	$1313
+	.word	$110E
+	.word	$110E
+	.word	$1358
+	.word	$137D
+	.word	$13B4
+	.word	$13C0
+	.word	$13D8
+	.word	$1425
+	.word	$145D
+	.word	$148F
+	.word	$14A9
 _map_30_scr_offsets:
-	.word	$14B2
-	.word	$14E1
+	.word	$14C7
+	.word	$14F6
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$1515
-	.word	$154E
+	.word	$152A
+	.word	$1563
 	.word	$0000
-	.word	$159C
-	.word	$15DB
-	.word	$1605
-	.word	$1669
-	.word	$16A1
-	.word	$1702
+	.word	$15B1
+	.word	$15F0
+	.word	$161A
+	.word	$167E
+	.word	$16B6
+	.word	$1717
 	.word	$0000
-	.word	$1749
-	.word	$1791
-	.word	$17CD
-	.word	$1827
+	.word	$175E
+	.word	$17A6
+	.word	$17E2
+	.word	$183C
 	.word	$0000
 	.word	$0000
-	.word	$1860
-	.word	$189D
-	.word	$18E0
+	.word	$1875
+	.word	$18B2
+	.word	$18F5
 	.word	$0000
 _map_31_scr_offsets:
-	.word	$1926
-	.word	$195A
-	.word	$1975
-	.word	$19A9
-	.word	$19DF
-	.word	$1A04
-	.word	$1A30
-	.word	$1A5F
-	.word	$1AAA
-	.word	$1AF1
-	.word	$1B0C
-	.word	$1B3E
-	.word	$1B87
-	.word	$1BDC
-	.word	$1C1C
-	.word	$1C3E
-	.word	$1C7A
-	.word	$1CC7
-	.word	$1D16
+	.word	$193B
+	.word	$196F
+	.word	$198A
+	.word	$19BE
+	.word	$19F4
+	.word	$1A19
+	.word	$1A45
+	.word	$1A74
+	.word	$1ABF
+	.word	$1B06
+	.word	$1B21
+	.word	$1B53
+	.word	$1B9C
+	.word	$1BF1
+	.word	$1C31
+	.word	$1C53
+	.word	$1C8F
+	.word	$1CDC
+	.word	$1D2B
 	.word	$0000
-	.word	$1D5D
-	.word	$1D85
-	.word	$1DA6
-	.word	$1DD6
+	.word	$1D72
+	.word	$1D9A
+	.word	$1DBB
+	.word	$1DEB
 	.word	$0000
 _map_02_scr_offsets:
-	.word	$1E02
-	.word	$1E42
-	.word	$1E8F
+	.word	$1E17
+	.word	$1E57
+	.word	$1EA4
 _map_12_scr_offsets:
-	.word	$1EC2
-	.word	$1EE0
+	.word	$1ED7
 	.word	$1EF5
+	.word	$1F0A
 _map_22_scr_offsets:
-	.word	$1F1C
-	.word	$1F3C
-	.word	$1F6D
+	.word	$1F31
+	.word	$1F51
+	.word	$1F82
 _map_00_scr_offsets:
 	.word	$0000
 	.word	$0000
@@ -1570,28 +1570,28 @@ _map_51_scr_offsets:
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0F32
-	.word	$0F48
-	.word	$0FAB
+	.word	$0F3F
+	.word	$0F56
+	.word	$0FB9
 	.word	$0000
-	.word	$1010
-	.word	$104A
+	.word	$101E
+	.word	$1058
 	.word	$0000
-	.word	$106D
-	.word	$10BC
+	.word	$107B
+	.word	$10CA
 	.word	$0000
-	.word	$110E
-	.word	$1135
+	.word	$111C
+	.word	$1143
 	.word	$0000
-	.word	$114A
-	.word	$1168
-	.word	$1168
+	.word	$1158
 	.word	$1176
+	.word	$1176
+	.word	$1184
 	.word	$0000
 _map_52_scr_offsets:
-	.word	$118D
-	.word	$11A4
-	.word	$11BF
+	.word	$119B
+	.word	$11B2
+	.word	$11CD
 _sspl_00_a:
 	.byte	$FC
 	.byte	$F8
@@ -11710,9 +11710,9 @@ L1B65:	lda     #$00
 ;
 ; } else pvy += PLAYER_G_MK2_JUMPING;
 ;
-	jmp     L2974
+	jmp     L2975
 L1B79:	lda     #$04
-L2974:	clc
+L2975:	clc
 	adc     _pvy
 	sta     _pvy
 	bcc     L1B81
@@ -11874,14 +11874,14 @@ L1BAC:	jsr     shlax4
 	jmp     L1C2D
 L1BA3:	lda     _at1
 	and     #$01
-	jne     L296E
+	jne     L296F
 	lda     _at2
 	and     #$01
 	jeq     L1C2D
 ;
 ; } else if (rds16 > 0)
 ;
-	jmp     L296E
+	jmp     L296F
 L1B9C:	lda     _rds16
 	cmp     #$01
 	lda     _rds16+1
@@ -11906,7 +11906,7 @@ L1BC5:	jsr     shrax4
 ;
 	jsr     _cm_two_points
 ;
-; pry < ((cy1 - 1) << 4) + 4 && 
+; pry <= ((cy1 - 1) << 4) + (pvy >> 6) && 
 ;
 	lda     _pry
 	jsr     pusha0
@@ -11916,16 +11916,26 @@ L1BC5:	jsr     shrax4
 	bcs     L1BCB
 	ldx     #$FF
 L1BCB:	jsr     shlax4
+	sta     ptr1
+	stx     ptr1+1
+	lda     _pvy
+	ldx     _pvy+1
+	jsr     asrax4
+	jsr     asrax2
 	clc
-	adc     #$04
-	bcc     L1BCC
-	inx
-L1BCC:	jsr     tosicmp
+	adc     ptr1
+	pha
+	txa
+	adc     ptr1+1
+	tax
+	pla
+	jsr     tosicmp
+	beq     L2968
 	jcs     L1BC7
 ;
 ; (at1 & 12) || (at2 & 12)
 ;
-	lda     _at1
+L2968:	lda     _at1
 	and     #$0C
 	bne     L1BC8
 	lda     _at2
@@ -12004,10 +12014,10 @@ L1BE2:	lda     #$00
 	beq     L1BF1
 	ldx     #$00
 	lda     #$40
-	jmp     L296F
+	jmp     L2970
 L1BF1:	ldx     #$FF
 	lda     #$C0
-L296F:	sta     _pgtmx
+L2970:	sta     _pgtmx
 	stx     _pgtmx+1
 	sta     _cfx
 	lda     #$01
@@ -12027,10 +12037,10 @@ L1BED:	lda     _cx2
 	beq     L1C02
 	ldx     #$00
 	lda     #$40
-	jmp     L2970
+	jmp     L2971
 L1C02:	ldx     #$FF
 	lda     #$C0
-L2970:	sta     _pgtmx
+L2971:	sta     _pgtmx
 	stx     _pgtmx+1
 	sta     _cfx
 	lda     #$01
@@ -12102,7 +12112,7 @@ L1C29:	lda     _pry
 	and     #$0F
 	cmp     #$05
 	bcc     L1C2D
-L296E:	lda     #$01
+L296F:	lda     #$01
 	sta     _hitv
 ;
 ; if (vertical_engine_type == ENGINE_TYPE_JUMP) {
@@ -12307,7 +12317,7 @@ L1C81:	ldx     _pvx+1
 ;
 ; } else if (pvx < 0) {
 ;
-	jmp     L2971
+	jmp     L2972
 L1C7C:	ldx     _pvx+1
 	cpx     #$80
 	bcc     L1C8C
@@ -12330,7 +12340,7 @@ L1C8B:	lda     _pvx
 	bvs     L1C8E
 	eor     #$80
 L1C8E:	bpl     L1C8C
-L2971:	lda     #$00
+L2972:	lda     #$00
 	sta     _pvx
 	sta     _pvx+1
 ;
@@ -13215,10 +13225,10 @@ L2967:	sta     _psprid
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2979
+	bcc     L297A
 	inx
 	clc
-L2979:	adc     #<(_enf_x)
+L297A:	adc     #<(_enf_x)
 	sta     ptr1
 	txa
 	adc     #>(_enf_x)
@@ -13232,10 +13242,10 @@ L2979:	adc     #<(_enf_x)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L297A
+	bcc     L297B
 	inx
 	clc
-L297A:	adc     #<(_enf_vx)
+L297B:	adc     #<(_enf_vx)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vx)
@@ -13252,10 +13262,10 @@ L297A:	adc     #<(_enf_vx)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L297B
+	bcc     L297C
 	inx
 	clc
-L297B:	adc     #<(_enf_y)
+L297C:	adc     #<(_enf_y)
 	sta     ptr1
 	txa
 	adc     #>(_enf_y)
@@ -13269,10 +13279,10 @@ L297B:	adc     #<(_enf_y)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L297C
+	bcc     L297D
 	inx
 	clc
-L297C:	adc     #<(_enf_vy)
+L297D:	adc     #<(_enf_vy)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vy)
@@ -13453,9 +13463,9 @@ L1E16:	sta     __enf_vx
 ; for (gpit = 0; gpit < 3; gpit ++) {
 ;
 	lda     #$00
-L2987:	sta     _gpit
+L2988:	sta     _gpit
 	cmp     #$03
-	bcc     L2988
+	bcc     L2989
 ;
 ; }
 ;
@@ -13463,7 +13473,7 @@ L2987:	sta     _gpit
 ;
 ; _en_t = VRAM_READ;
 ;
-L2988:	lda     $2007
+L2989:	lda     $2007
 	sta     __en_t
 ;
 ; _en_state = 0;
@@ -13703,7 +13713,7 @@ L1EB5:	lda     __en_x2
 ;
 ; else if (_en_x2 < _en_x1) _en_my = 0;
 ;
-	jmp     L2984
+	jmp     L2985
 L1EB6:	lda     __en_x2
 	cmp     __en_x1
 	bcs     L1EBB
@@ -13711,7 +13721,7 @@ L1EB6:	lda     __en_x2
 ;
 ; else if (_en_y2 > _en_y1) _en_my = 3;
 ;
-	jmp     L2984
+	jmp     L2985
 L1EBB:	lda     __en_y2
 	sec
 	sbc     __en_y1
@@ -13721,9 +13731,9 @@ L1EBB:	lda     __en_y2
 ;
 ; else _en_my = 1;
 ;
-	jmp     L2984
+	jmp     L2985
 L1EC0:	lda     #$01
-L2984:	sta     __en_my
+L2985:	sta     __en_my
 ;
 ; _en_s = STEADY_SHOOTERS_BASE_SPRID + _en_my;
 ;
@@ -13872,10 +13882,10 @@ L1F03:	jsr     pushax
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L2985
+	bcc     L2986
 	inx
 	clc
-L2985:	adc     #<(_en_behptr)
+L2986:	adc     #<(_en_behptr)
 	tay
 	txa
 	adc     #>(_en_behptr)
@@ -13885,10 +13895,10 @@ L2985:	adc     #<(_en_behptr)
 	ldx     #$00
 	lda     _rda
 	asl     a
-	bcc     L2986
+	bcc     L2987
 	inx
 	clc
-L2986:	adc     #<(_en_behptrs)
+L2987:	adc     #<(_en_behptrs)
 	sta     ptr1
 	txa
 	adc     #>(_en_behptrs)
@@ -13945,7 +13955,7 @@ L1E5A:	ldy     _gpit
 	lda     _gpit
 	clc
 	adc     #$01
-	jmp     L2987
+	jmp     L2988
 
 .endproc
 
@@ -14098,7 +14108,7 @@ L1F4F:	lda     _gpjt
 	sta     _gpjt
 	pla
 	tax
-	bne     L29D5
+	bne     L29D6
 ;
 ; }
 ;
@@ -14106,7 +14116,7 @@ L1F4F:	lda     _gpjt
 ;
 ; gpit += 2; if (gpit > 2) gpit -=3;
 ;
-L29D5:	lda     #$02
+L29D6:	lda     #$02
 	clc
 	adc     _gpit
 	sta     _gpit
@@ -14230,10 +14240,10 @@ L1F54:	ldy     _gpit
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L29B8
+	bcc     L29B9
 	inx
 	clc
-L29B8:	adc     #<(_enf_x)
+L29B9:	adc     #<(_enf_x)
 	sta     ptr1
 	txa
 	adc     #>(_enf_x)
@@ -14247,10 +14257,10 @@ L29B8:	adc     #<(_enf_x)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L29B9
+	bcc     L29BA
 	inx
 	clc
-L29B9:	adc     #<(_enf_vx)
+L29BA:	adc     #<(_enf_vx)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vx)
@@ -14267,10 +14277,10 @@ L29B9:	adc     #<(_enf_vx)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L29BA
+	bcc     L29BB
 	inx
 	clc
-L29BA:	adc     #<(_enf_y)
+L29BB:	adc     #<(_enf_y)
 	sta     ptr1
 	txa
 	adc     #>(_enf_y)
@@ -14284,10 +14294,10 @@ L29BA:	adc     #<(_enf_y)
 	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L29BB
+	bcc     L29BC
 	inx
 	clc
-L29BB:	adc     #<(_enf_vy)
+L29BC:	adc     #<(_enf_vy)
 	sta     ptr1
 	txa
 	adc     #>(_enf_vy)
@@ -14380,17 +14390,17 @@ L1F90:	sta     ptr1
 	lda     (ptr1),y
 	clc
 	adc     __en_y
-	bcc     L29D3
+	bcc     L29D4
 	clc
-L29D3:	adc     #$30
+L29D4:	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L29BC
-	sec
-L29BC:	sbc     #$10
 	bcs     L29BD
 	sec
-L29BD:	sbc     #$01
+L29BD:	sbc     #$10
+	bcs     L29BE
+	sec
+L29BE:	sbc     #$01
 	ldy     #$01
 	sta     (sp),y
 ;
@@ -14493,9 +14503,9 @@ L1FC0:	sta     _pregotten
 	lda     __en_mx
 	beq     L1FC7
 	lda     __en_x
-	jmp     L29A8
+	jmp     L29A9
 L1FC7:	lda     __en_y
-L29A8:	ldx     #$00
+L29A9:	ldx     #$00
 	clc
 	adc     #$04
 	bcc     L1FCB
@@ -14594,9 +14604,9 @@ L1FED:	jsr     negax
 L1FE8:	lda     __en_mx
 	beq     L1FF0
 	lda     __en_mx
-	jmp     L29D1
+	jmp     L29D2
 L1FF0:	lda     __en_my
-L29D1:	asl     a
+L29D2:	asl     a
 	lda     #$00
 	rol     a
 	sta     _rda
@@ -14607,13 +14617,13 @@ L29D1:	asl     a
 	lda     __en_s
 	clc
 	adc     _en_fr
-	bcc     L29BE
+	bcc     L29BF
 	clc
-L29BE:	adc     __en_facing
+L29BF:	adc     __en_facing
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; if (ticker == 0) {
 ;
@@ -14661,7 +14671,7 @@ L2002:	lda     __en_s
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; if (_en_ct) _en_ct --; else {
 ;
@@ -14679,9 +14689,9 @@ L2012:	lda     _px
 	cmp     __enf_x
 	lda     _px+1
 	sbc     __enf_x+1
-	bvc     L299D
+	bvc     L299E
 	eor     #$80
-L299D:	bpl     L2016
+L299E:	bpl     L2016
 ;
 ; _enf_vx -= FANTY_A; if (_enf_vx < -FANTY_MAXV) _enf_vx = -FANTY_MAXV;
 ;
@@ -14703,7 +14713,7 @@ L201D:	bpl     L2024
 ;
 ; } else {
 ;
-	jmp     L29CD
+	jmp     L29CE
 ;
 ; _enf_vx += FANTY_A; if (_enf_vx > FANTY_MAXV) _enf_vx = FANTY_MAXV;
 ;
@@ -14722,7 +14732,7 @@ L2023:	lda     __enf_vx
 L2026:	bpl     L2024
 	ldx     #$00
 	lda     #$30
-L29CD:	sta     __enf_vx
+L29CE:	sta     __enf_vx
 	stx     __enf_vx+1
 ;
 ; if (py < _enf_y) {
@@ -14731,9 +14741,9 @@ L2024:	lda     _py
 	cmp     __enf_y
 	lda     _py+1
 	sbc     __enf_y+1
-	bvc     L299E
+	bvc     L299F
 	eor     #$80
-L299E:	bpl     L2029
+L299F:	bpl     L2029
 ;
 ; _enf_vy -= FANTY_A; if (_enf_vy < -FANTY_MAXV) _enf_vy = -FANTY_MAXV;
 ;
@@ -14755,7 +14765,7 @@ L2030:	bpl     L2037
 ;
 ; } else {
 ;
-	jmp     L29CE
+	jmp     L29CF
 ;
 ; _enf_vy += FANTY_A; if (_enf_vy > FANTY_MAXV) _enf_vy = FANTY_MAXV;
 ;
@@ -14774,7 +14784,7 @@ L2036:	lda     __enf_vy
 L2039:	bpl     L2037
 	ldx     #$00
 	lda     #$30
-L29CE:	sta     __enf_vy
+L29CF:	sta     __enf_vy
 	stx     __enf_vy+1
 ;
 ; _enf_x += _enf_vx; 
@@ -14882,7 +14892,7 @@ L205F:	jsr     shlax4
 ;
 ; } else {
 ;
-	jmp     L29AC
+	jmp     L29AD
 ;
 ; cx1 = cx2 = (_en_x + 4) >> 4;
 ;
@@ -14907,7 +14917,7 @@ L2066:	jsr     shrax4
 L206B:	jsr     shlax4
 	sec
 	sbc     #$04
-L29AC:	sta     _rda
+L29AD:	sta     _rda
 ;
 ; cm_two_points ();
 ;
@@ -15054,7 +15064,7 @@ L209E:	jsr     shlax4
 ;
 ; } else {
 ;
-	jmp     L29AD
+	jmp     L29AE
 ;
 ; rdb = 8;
 ;
@@ -15084,7 +15094,7 @@ L20A7:	jsr     shrax4
 L20AC:	jsr     shlax4
 	sec
 	sbc     #$04
-L29AD:	sta     _rda
+L29AE:	sta     _rda
 ;
 ; cm_two_points ();
 ;
@@ -15143,13 +15153,13 @@ L20AF:	lda     _half_life
 	lda     __en_s
 	clc
 	adc     _en_fr
-	bcc     L29BF
+	bcc     L29C0
 	clc
-L29BF:	adc     __en_facing
+L29C0:	adc     __en_facing
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; _en_x1, _en_y1 + SPRITE_ADJUST, 
 ;
@@ -15162,12 +15172,12 @@ L20C3:	jsr     decsp3
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L29C0
-	sec
-L29C0:	sbc     #$10
 	bcs     L29C1
 	sec
-L29C1:	sbc     #$01
+L29C1:	sbc     #$10
+	bcs     L29C2
+	sec
+L29C2:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -15399,13 +15409,13 @@ L210D:	lda     _prx
 	beq     L211F
 	lda     __en_state
 	cmp     #$03
-	bne     L29A1
+	bne     L29A2
 L211F:	lda     _half_life
 	bne     L211D
 ;
 ; _en_state == 2
 ;
-L29A1:	lda     __en_state
+L29A2:	lda     __en_state
 ;
 ; ) {
 ;
@@ -15428,7 +15438,7 @@ L211D:	lda     __en_facing
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; switch (_en_state) {
 ;
@@ -15532,7 +15542,7 @@ L213F:	lda     __enf_vy
 ;
 ; break;
 ;
-	jmp     L29AE
+	jmp     L29AF
 ;
 ; if (_en_ct) _en_ct --; else {
 ;
@@ -15556,7 +15566,7 @@ L2152:	sta     __en_state
 ; _en_y = _en_y1;
 ;
 	lda     __en_y1
-L29AE:	sta     __en_y
+L29AF:	sta     __en_y
 ;
 ; en_spr = _en_state + CATACROCK_BASE_SPRID;
 ;
@@ -15566,7 +15576,7 @@ L212D:	lda     __en_state
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; if (_en_ct) {
 ;
@@ -15693,7 +15703,7 @@ L218C:	jsr     shrax4
 ;
 ; } else if (_enf_vy < 0) {
 ;
-	jmp     L29AF
+	jmp     L29B0
 L2185:	ldx     __enf_vy+1
 	cpx     #$80
 	bcc     L2192
@@ -15711,7 +15721,7 @@ L2185:	ldx     __enf_vy+1
 	lda     #$09
 	sta     _rda
 	lda     #$10
-L29AF:	sta     _rds
+L29B0:	sta     _rds
 ;
 ; if (rda) {
 ;
@@ -15858,7 +15868,7 @@ L21CB:	jsr     shrax4
 ;
 ; } else {
 ;
-	jmp     L29B0
+	jmp     L29B1
 ;
 ; cx1 = cx2 = _en_x >> 4; rds = 16;
 ;
@@ -15868,7 +15878,7 @@ L21C4:	ldx     #$00
 	sta     _cx2
 	sta     _cx1
 	lda     #$10
-L29B0:	sta     _rds
+L29B1:	sta     _rds
 ;
 ; cm_two_points ();
 ;
@@ -15936,7 +15946,7 @@ L21E3:	ldx     #$00
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; en_spr = SIMPLE_WARPERS_BASE_SPRID;
 ;
@@ -15944,7 +15954,7 @@ L21EA:	lda     #$21
 ;
 ; break;
 ;
-	jmp     L29CC
+	jmp     L29CD
 ;
 ; if (_en_ct) {
 ;
@@ -15992,10 +16002,10 @@ L21F3:	dec     __en_ct
 L21EF:	tax
 	lda     _gpit
 	asl     a
-	bcc     L29C2
+	bcc     L29C3
 	inx
 	clc
-L29C2:	adc     #<(_en_behptr)
+L29C3:	adc     #<(_en_behptr)
 	tay
 	txa
 	adc     #>(_en_behptr)
@@ -16069,10 +16079,10 @@ L2213:	lda     _rdt
 	tax
 	lda     _gpit
 	asl     a
-	bcc     L29C3
+	bcc     L29C4
 	inx
 	clc
-L29C3:	adc     #<(_en_behptr)
+L29C4:	adc     #<(_en_behptr)
 	tay
 	txa
 	adc     #>(_en_behptr)
@@ -16109,7 +16119,7 @@ L2219:	sta     (sreg),y
 ; rdb = 0; while (rdt --) rdb += 25;
 ;
 L2214:	tya
-L29B1:	sta     _rdb
+L29B2:	sta     _rdb
 	lda     _rdt
 	pha
 	sec
@@ -16121,7 +16131,7 @@ L29B1:	sta     _rdb
 	lda     #$19
 	clc
 	adc     _rdb
-	jmp     L29B1
+	jmp     L29B2
 ;
 ; _en_ct = rdb;
 ;
@@ -16141,9 +16151,9 @@ L2226:	sta     ptr1
 	lda     __en_s
 	clc
 	adc     #$02
-	bcc     L29C4
+	bcc     L29C5
 	clc
-L29C4:	adc     __en_facing
+L29C5:	adc     __en_facing
 	ldy     #$00
 	sta     (ptr1),y
 ;
@@ -16186,7 +16196,7 @@ L2232:	ldy     #$00
 ;
 ; else if (_en_mx > 0) _en_facing = 0;
 ;
-	jmp     L29B2
+	jmp     L29B3
 L2233:	lda     __en_mx
 	sec
 	sbc     #$01
@@ -16194,7 +16204,7 @@ L2233:	lda     __en_mx
 	eor     #$80
 L223C:	bpl     L2238
 	lda     #$00
-L29B2:	sta     __en_facing
+L29B3:	sta     __en_facing
 ;
 ; en_rawv [gpit] = _en_s + _en_facing;
 ;
@@ -16271,10 +16281,10 @@ L224C:	lda     __en_x
 L2259:	ldx     #$00
 	lda     _gpit
 	asl     a
-	bcc     L29C5
+	bcc     L29C6
 	inx
 	clc
-L29C5:	adc     #<(_en_behptr)
+L29C6:	adc     #<(_en_behptr)
 	tay
 	txa
 	adc     #>(_en_behptr)
@@ -16326,14 +16336,14 @@ L2268:	tax
 ;
 ; break;
 ;
-	jmp     L29D4
+	jmp     L29D5
 ;
 ; en_spr += en_fr;
 ;
 L226E:	lda     _en_fr
-L29D4:	clc
+L29D5:	clc
 	adc     _en_spr
-L29CC:	sta     _en_spr
+L29CD:	sta     _en_spr
 ;
 ; en_spr_id [gpit] = en_spr;
 ;
@@ -16480,7 +16490,7 @@ L22A0:	jsr     shlax4
 ;
 L228F:	lda     __en_my
 	asl     a
-	bcc     L29A2
+	bcc     L29A3
 	ldx     #$00
 	lda     _pry
 	clc
@@ -16490,7 +16500,7 @@ L228F:	lda     __en_my
 L22A8:	cmp     __en_y
 	txa
 	sbc     #$00
-	bcc     L29A2
+	bcc     L29A3
 	ldx     #$00
 	lda     _pry
 	clc
@@ -16508,7 +16518,7 @@ L22A9:	sec
 ;
 ; (_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
 ;
-L29A2:	lda     __en_my
+L29A3:	lda     __en_my
 	sec
 	sbc     #$01
 	bvs     L22AD
@@ -16652,31 +16662,31 @@ L22CF:	lda     _en_is_alive
 	jeq     L23B1
 	lda     __en_t
 	cmp     #$09
-	bne     L29A4
+	bne     L29A5
 	lda     __en_state
 	jeq     L23B1
 ;
 ; || (_en_t == 11 && _en_mx != 2)
 ;
-L29A4:	lda     __en_t
+L29A5:	lda     __en_t
 	cmp     #$0B
-	bne     L29A5
+	bne     L29A6
 	lda     __en_mx
 	cmp     #$02
 	jne     L23B1
 ;
 ; || (_en_t == 12 && _en_state != 1)
 ;
-L29A5:	lda     __en_t
+L29A6:	lda     __en_t
 	cmp     #$0C
-	bne     L29A6
+	bne     L29A7
 	lda     __en_state
 	cmp     #$01
 	jne     L23B1
 ;
 ; || (_en_t == 13 && _en_ct == 0)
 ;
-L29A6:	lda     __en_t
+L29A7:	lda     __en_t
 	cmp     #$0D
 	bne     L22D3
 	lda     __en_ct
@@ -16783,11 +16793,11 @@ L22FB:	lda     _en_sg_2
 	eor     #$80
 L2312:	bpl     L2313
 	ldx     #$01
-	jmp     L29B3
+	jmp     L29B4
 L2313:	ldx     #$FF
-	jmp     L29B3
+	jmp     L29B4
 L230C:	tax
-L29B3:	lda     #$00
+L29B4:	lda     #$00
 	sta     _pvx
 	stx     _pvx+1
 ;
@@ -16804,15 +16814,15 @@ L29B3:	lda     #$00
 	eor     #$80
 L2329:	bpl     L232A
 	ldx     #$01
-	jmp     L29B4
+	jmp     L29B5
 L232A:	ldx     #$FF
-	jmp     L29B4
+	jmp     L29B5
 L2323:	tax
-L29B4:	lda     #$00
-	jmp     L29CF
+L29B5:	lda     #$00
+	jmp     L29D0
 L231D:	ldx     #$FF
 	lda     #$80
-L29CF:	sta     _pvy
+L29D0:	sta     _pvy
 	stx     _pvy+1
 ;
 ; if (_en_t != 20) {
@@ -16866,11 +16876,11 @@ L2361:	jsr     negax
 L2366:	ldx     #$00
 	cmp     #$80
 	bcc     L2367
-	jmp     L29B6
+	jmp     L29B7
 L235E:	lda     __en_my
 	cmp     #$80
 	bcc     L2366
-L29B6:	ldx     #$FF
+L29B7:	ldx     #$FF
 L2367:	jsr     negax
 L2368:	sta     __en_my
 ;
@@ -16917,11 +16927,11 @@ L238F:	jsr     negax
 L2394:	ldx     #$00
 	cmp     #$80
 	bcc     L2395
-	jmp     L29B7
+	jmp     L29B8
 L238C:	lda     __en_mx
 	cmp     #$80
 	bcc     L2394
-L29B7:	ldx     #$FF
+L29B8:	ldx     #$FF
 L2395:	jsr     negax
 L2396:	sta     __en_mx
 ;
@@ -17010,12 +17020,12 @@ L23B1:	lda     _en_spr
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L29C6
-	sec
-L29C6:	sbc     #$10
 	bcs     L29C7
 	sec
-L29C7:	sbc     #$01
+L29C7:	sbc     #$10
+	bcs     L29C8
+	sec
+L29C8:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -17030,10 +17040,10 @@ L29C7:	sbc     #$01
 	ldx     #$00
 	lda     _en_spr
 	asl     a
-	bcc     L29C8
+	bcc     L29C9
 	inx
 	clc
-L29C8:	adc     _spr_enems
+L29C9:	adc     _spr_enems
 ;
 ; );
 ;
@@ -17303,10 +17313,10 @@ L2456:	jsr     _pad_read
 	ldx     #$00
 	lda     _level_world
 	asl     a
-	bcc     L29D9
+	bcc     L29DA
 	inx
 	clc
-L29D9:	adc     #<(_level_names)
+L29DA:	adc     #<(_level_names)
 	sta     ptr1
 	txa
 	adc     #>(_level_names)
@@ -17344,7 +17354,7 @@ L29D9:	adc     #<(_level_names)
 	lda     #$88
 	sta     _rdy
 	lda     #$00
-L29DA:	sta     _gpit
+L29DB:	sta     _gpit
 	cmp     #$06
 	bcs     L247C
 ;
@@ -17398,7 +17408,7 @@ L248D:	jsr     _oam_meta_spr
 L247D:	lda     _gpit
 	clc
 	adc     #$01
-	jmp     L29DA
+	jmp     L29DB
 ;
 ; }
 ;
@@ -17453,7 +17463,7 @@ L247C:	rts
 ;
 ; } else {
 ;
-	jmp     L29DC
+	jmp     L29DD
 ;
 ; _x = 4; _y = 19; pr_str ("PRESS START  TO BEGIN%%PRESS SELECT TO CONTINUE");
 ;
@@ -17463,7 +17473,7 @@ L249F:	lda     #$04
 	sta     __y
 	lda     #<(L0001+43)
 	ldx     #>(L0001+43)
-L29DC:	jsr     pushax
+L29DD:	jsr     pushax
 	jsr     _pr_str
 ;
 ; _x = 5;  _y = 26; pr_str ("@ 2018 THE MOJON TWINS"); 
@@ -17602,10 +17612,10 @@ L24B8:	lda     #$00
 	ldx     #$00
 	lda     _rdm
 	asl     a
-	bcc     L29DF
+	bcc     L29E0
 	inx
 	clc
-L29DF:	adc     #<(_cuts_rle)
+L29E0:	adc     #<(_cuts_rle)
 	sta     ptr1
 	txa
 	adc     #>(_cuts_rle)
@@ -17629,10 +17639,10 @@ L29DF:	adc     #<(_cuts_rle)
 	ldx     #$00
 	lda     _rdm
 	asl     a
-	bcc     L29E0
+	bcc     L29E1
 	inx
 	clc
-L29E0:	adc     #<(_cutscenes)
+L29E1:	adc     #<(_cutscenes)
 	sta     ptr1
 	txa
 	adc     #>(_cutscenes)
@@ -17669,10 +17679,10 @@ L29E0:	adc     #<(_cutscenes)
 	ldx     #$00
 	lda     _rdm
 	asl     a
-	bcc     L29E2
+	bcc     L29E3
 	inx
 	clc
-L29E2:	adc     #<(_cuts_pal)
+L29E3:	adc     #<(_cuts_pal)
 	sta     ptr1
 	txa
 	adc     #>(_cuts_pal)
@@ -17746,7 +17756,7 @@ L24FF:	clc
 ;
 ; } else if (prx == 244 && 
 ;
-	jmp     L29E5
+	jmp     L29E6
 L24FB:	lda     _prx
 	cmp     #$F4
 	bne     L2507
@@ -17782,7 +17792,7 @@ L2506:	inc     _n_pant
 ; px = 4 << FIXBITS;
 ;
 	ldx     #$01
-L29E5:	lda     #$00
+L29E6:	lda     #$00
 	sta     _px
 	stx     _px+1
 ;
@@ -17906,10 +17916,10 @@ L251E:	rts
 	tax
 	lda     _level
 	asl     a
-	bcc     L29F0
+	bcc     L29F1
 	inx
 	clc
-L29F0:	adc     #<(_l_pal_bg)
+L29F1:	adc     #<(_l_pal_bg)
 	sta     ptr1
 	txa
 	adc     #>(_l_pal_bg)
@@ -17926,10 +17936,10 @@ L29F0:	adc     #<(_l_pal_bg)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F1
+	bcc     L29F2
 	inx
 	clc
-L29F1:	adc     #<(_l_pal_fg)
+L29F2:	adc     #<(_l_pal_fg)
 	sta     ptr1
 	txa
 	adc     #>(_l_pal_fg)
@@ -17946,10 +17956,10 @@ L29F1:	adc     #<(_l_pal_fg)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F2
+	bcc     L29F3
 	inx
 	clc
-L29F2:	adc     #<(_l_ts_tmaps)
+L29F3:	adc     #<(_l_ts_tmaps)
 	sta     ptr1
 	txa
 	adc     #>(_l_ts_tmaps)
@@ -17966,10 +17976,10 @@ L29F2:	adc     #<(_l_ts_tmaps)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F3
+	bcc     L29F4
 	inx
 	clc
-L29F3:	adc     #<(_l_ts_pals)
+L29F4:	adc     #<(_l_ts_pals)
 	sta     ptr1
 	txa
 	adc     #>(_l_ts_pals)
@@ -17986,10 +17996,10 @@ L29F3:	adc     #<(_l_ts_pals)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F4
+	bcc     L29F5
 	inx
 	clc
-L29F4:	adc     #<(_l_behs)
+L29F5:	adc     #<(_l_behs)
 	sta     ptr1
 	txa
 	adc     #>(_l_behs)
@@ -18006,10 +18016,10 @@ L29F4:	adc     #<(_l_behs)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F5
+	bcc     L29F6
 	inx
 	clc
-L29F5:	adc     #<(_l_spr_enems)
+L29F6:	adc     #<(_l_spr_enems)
 	sta     ptr1
 	txa
 	adc     #>(_l_spr_enems)
@@ -18026,10 +18036,10 @@ L29F5:	adc     #<(_l_spr_enems)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F6
+	bcc     L29F7
 	inx
 	clc
-L29F6:	adc     #<(_l_map)
+L29F7:	adc     #<(_l_map)
 	sta     ptr1
 	txa
 	adc     #>(_l_map)
@@ -18052,10 +18062,10 @@ L29F6:	adc     #<(_l_map)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F7
+	bcc     L29F8
 	inx
 	clc
-L29F7:	adc     #<(_l_enems)
+L29F8:	adc     #<(_l_enems)
 	sta     ptr1
 	txa
 	adc     #>(_l_enems)
@@ -18072,10 +18082,10 @@ L29F7:	adc     #<(_l_enems)
 	ldx     #$00
 	lda     _level
 	asl     a
-	bcc     L29F8
+	bcc     L29F9
 	inx
 	clc
-L29F8:	adc     #<(_l_hotspots)
+L29F9:	adc     #<(_l_hotspots)
 	sta     ptr1
 	txa
 	adc     #>(_l_hotspots)
@@ -18109,7 +18119,7 @@ L29F8:	adc     #<(_l_hotspots)
 ;
 	sta     _rda
 	lda     #$00
-L29EF:	sta     _c_map_size
+L29F0:	sta     _c_map_size
 	lda     _rda
 	pha
 	sec
@@ -18121,7 +18131,7 @@ L29EF:	sta     _c_map_size
 	lda     _c_map_w
 	clc
 	adc     _c_map_size
-	jmp     L29EF
+	jmp     L29F0
 ;
 ; pal_bg (c_pal_bg);
 ;
@@ -18379,10 +18389,10 @@ L2566:	jsr     _player_to_pixels
 	ldx     #$00
 	lda     _rda
 	asl     a
-	bcc     L29FD
+	bcc     L29FE
 	inx
 	clc
-L29FD:	adc     #$40
+L29FE:	adc     #$40
 	pha
 	txa
 	adc     #$2C
@@ -18390,9 +18400,9 @@ L29FD:	adc     #$40
 	pla
 	clc
 	adc     _rda
-	bcc     L29F9
+	bcc     L29FA
 	inx
-L29F9:	ldy     #$00
+L29FA:	ldy     #$00
 	sta     (sp),y
 	iny
 	txa
@@ -18450,10 +18460,10 @@ L25C4:	jsr     _clear_update_list
 	ldx     #$00
 	lda     _rda
 	asl     a
-	bcc     L29FE
+	bcc     L29FF
 	inx
 	clc
-L29FE:	adc     #$40
+L29FF:	adc     #$40
 	pha
 	txa
 	adc     #$2C
@@ -18461,9 +18471,9 @@ L29FE:	adc     #$40
 	pla
 	clc
 	adc     _rda
-	bcc     L29FA
+	bcc     L29FB
 	inx
-L29FA:	ldy     #$00
+L29FB:	ldy     #$00
 	sta     (sp),y
 	iny
 	txa
@@ -18818,14 +18828,14 @@ L2663:	lda     #$01
 ;
 	lda     _prx
 	cmp     #$04
-	bne     L2A01
+	bne     L2A02
 	ldx     _pvx+1
 	cpx     #$80
 	bcs     L2668
 ;
 ; (prx == 244 && pvx > 0) 
 ;
-L2A01:	lda     _prx
+L2A02:	lda     _prx
 	cmp     #$F4
 	bne     L2667
 	lda     _pvx
@@ -18850,14 +18860,14 @@ L2667:	jsr     _flickscreen_do_vertical
 ;
 L2662:	lda     _level
 	cmp     #$0F
-	bne     L2A03
+	bne     L2A04
 	lda     _n_pant
 	cmp     #$0F
 	bcs     L2675
 ;
 ; (level == 16 && n_pant >= 24)) {
 ;
-L2A03:	lda     _level
+L2A04:	lda     _level
 	cmp     #$10
 	bne     L267D
 	lda     _n_pant
@@ -19242,7 +19252,7 @@ L2717:	inc     _pobjs
 ;
 ; break;
 ;
-	jmp     L2A05
+	jmp     L2A06
 ;
 ; plife += PLAYER_REFILL;
 ;
@@ -19250,7 +19260,7 @@ L271C:	inc     _plife
 ;
 ; break;
 ;
-	jmp     L2A05
+	jmp     L2A06
 ;
 ; rda = SFX_OBJECT;
 ;
@@ -19308,7 +19318,7 @@ L2730:	lda     #$07
 ; rda = 0;       // Do not clear hotspot!
 ;
 L273B:	lda     #$00
-L2A05:	sta     _rda
+L2A06:	sta     _rda
 ;
 ; if (rda) {
 ;
@@ -19531,7 +19541,7 @@ L27A0:	bpl     L279E
 ;
 ; else if (pvx > 96) pvx = 96;
 ;
-	jmp     L2A0C
+	jmp     L2A0D
 L279E:	lda     _pvx
 	cmp     #$61
 	lda     _pvx+1
@@ -19541,7 +19551,7 @@ L279E:	lda     _pvx
 L27A6:	bpl     L27A4
 	ldx     #$00
 	lda     #$60
-L2A0C:	sta     _pvx
+L2A0D:	sta     _pvx
 	stx     _pvx+1
 ;
 ; if (pvy > 96) pvy = 96;
@@ -19612,12 +19622,12 @@ L27AE:	lda     _bubble_y
 	adc     #$30
 	sec
 	sbc     #$0C
-	bcs     L2A08
-	sec
-L2A08:	sbc     #$10
 	bcs     L2A09
 	sec
-L2A09:	sbc     #$01
+L2A09:	sbc     #$10
+	bcs     L2A0A
+	sec
+L2A0A:	sbc     #$01
 	dey
 	sta     (sp),y
 ;
@@ -19668,14 +19678,14 @@ L27D4:	clc
 	inx
 L27D5:	sec
 	sbc     #$0C
-	bcs     L2A0A
-	dex
-	sec
-L2A0A:	sbc     #$10
 	bcs     L2A0B
 	dex
 	sec
-L2A0B:	sbc     #$01
+L2A0B:	sbc     #$10
+	bcs     L2A0C
+	dex
+	sec
+L2A0C:	sbc     #$01
 	bcs     L27D8
 	dex
 L27D8:	jsr     pushax
@@ -19893,12 +19903,12 @@ L2816:	lda     _prx
 ;
 ; } else {
 ;
-	jmp     L2A07
+	jmp     L2A08
 ;
 ; somari_state = 2;
 ;
 L282D:	lda     #$02
-L2A07:	sta     _somari_state
+L2A08:	sta     _somari_state
 ;
 ; somari_ct = 120;
 ;

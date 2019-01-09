@@ -421,7 +421,7 @@ void player_move (void) {
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
 	 		if (
-				pry < ((cy1 - 1) << 4) + 4 && 
+				pry <= ((cy1 - 1) << 4) + (pvy >> 6) && 
 				(
 					(at1 & 12) || (at2 & 12)
 					#ifdef ENABLE_LADDERS
