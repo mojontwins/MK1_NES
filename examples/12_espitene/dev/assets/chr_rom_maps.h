@@ -149,23 +149,23 @@ const unsigned int map_21_scr_offsets [] = {
 	MAP_21_BASE + 0x0000, MAP_21_BASE + 0x0000, 
 	MAP_21_BASE + 0x010E, MAP_21_BASE + 0x0000, 
 	MAP_21_BASE + 0x0000, MAP_21_BASE + 0x0137, 
-	MAP_21_BASE + 0x018E, MAP_21_BASE + 0x01DB, 
-	MAP_21_BASE + 0x0205, MAP_21_BASE + 0x0000, 
-	MAP_21_BASE + 0x0000, MAP_21_BASE + 0x024A, 
-	MAP_21_BASE + 0x026F, MAP_21_BASE + 0x02A6, 
-	MAP_21_BASE + 0x02B2, MAP_21_BASE + 0x02CA, 
-	MAP_21_BASE + 0x0317, MAP_21_BASE + 0x034F, 
-	MAP_21_BASE + 0x0381, MAP_21_BASE + 0x039B
+	MAP_21_BASE + 0x0190, MAP_21_BASE + 0x01DE, 
+	MAP_21_BASE + 0x0209, MAP_21_BASE + 0x0251, 
+	MAP_21_BASE + 0x0251, MAP_21_BASE + 0x025D, 
+	MAP_21_BASE + 0x0282, MAP_21_BASE + 0x0251, 
+	MAP_21_BASE + 0x02B9, MAP_21_BASE + 0x02D1, 
+	MAP_21_BASE + 0x031E, MAP_21_BASE + 0x0356, 
+	MAP_21_BASE + 0x0388, MAP_21_BASE + 0x03A2
 };
 
-// Total screens size in bytes is 953
+// Total screens size in bytes is 960
 
 // Map # 5 read from level30.map (5x5)
 
 // Definitions
 
 #define MAP_30_CHRROM    2
-#define MAP_30_BASE      0x14C7
+#define MAP_30_BASE      0x14CE
 #define MAP_30_W         5
 #define MAP_30_H         5
 #define MAP_30_MAXPANTS  25
@@ -196,7 +196,7 @@ const unsigned int map_30_scr_offsets [] = {
 // Definitions
 
 #define MAP_31_CHRROM    2
-#define MAP_31_BASE      0x193B
+#define MAP_31_BASE      0x1942
 #define MAP_31_W         5
 #define MAP_31_H         5
 #define MAP_31_MAXPANTS  25
@@ -227,7 +227,7 @@ const unsigned int map_31_scr_offsets [] = {
 // Definitions
 
 #define MAP_02_CHRROM    2
-#define MAP_02_BASE      0x1E17
+#define MAP_02_BASE      0x1E1E
 #define MAP_02_W         3
 #define MAP_02_H         1
 #define MAP_02_MAXPANTS  3
@@ -247,7 +247,7 @@ const unsigned int map_02_scr_offsets [] = {
 // Definitions
 
 #define MAP_12_CHRROM    2
-#define MAP_12_BASE      0x1ED7
+#define MAP_12_BASE      0x1EDE
 #define MAP_12_W         3
 #define MAP_12_H         1
 #define MAP_12_MAXPANTS  3
@@ -267,7 +267,7 @@ const unsigned int map_12_scr_offsets [] = {
 // Definitions
 
 #define MAP_22_CHRROM    2
-#define MAP_22_BASE      0x1F31
+#define MAP_22_BASE      0x1F38
 #define MAP_22_W         1
 #define MAP_22_H         3
 #define MAP_22_MAXPANTS  3

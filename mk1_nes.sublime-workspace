@@ -520,11 +520,20 @@
 	"buffers":
 	[
 		{
-			"file": "examples/12_espitene/README.md",
+			"file": "wip/roadmap.md",
 			"settings":
 			{
-				"buffer_size": 32786,
+				"buffer_size": 1019,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/H/OneDrive/Examine these Backups/Hitachi/mp3/work/tapeNN/listing.txt",
+			"settings":
+			{
+				"buffer_size": 705,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		}
@@ -605,13 +614,12 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/docs",
-		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/12_espitene"
+		"/C/Users/na_th/Desktop/git/MK1_NES",
+		"/C/Users/na_th/Desktop/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/C/Users/na_th/Desktop/git/MK1_NES/examples/12_espitene/README.md",
 		"/D/git/MK1_NES/docs/code_injection.md",
 		"/D/git/MK1_NES/examples/10_che_man/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/my/extra_routines.h",
@@ -738,8 +746,7 @@
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/ram/zp.h",
 		"/D/git/MK1_NES/wip/luca/dev/engine/printer.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/tile_chac_chac.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/my/extra_inits.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/player.h"
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/my/extra_inits.h"
 	],
 	"find":
 	{
@@ -976,46 +983,61 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/12_espitene/README.md",
+					"file": "wip/roadmap.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 32786,
+						"buffer_size": 1019,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13290,
-								13290
+								1019,
+								1019
 							]
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": 378,
-								"count": 4281,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 5577.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/H/OneDrive/Examine these Backups/Hitachi/mp3/work/tapeNN/listing.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 705,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

@@ -90,6 +90,7 @@ void title (void) {
 			break;
 		}
 	}
+	music_stop ();
 	sfx_play (SFX_START, 0);
 	bat_out ();	
 	bankswitch (0);	
@@ -138,6 +139,7 @@ void zone_select (void) {
 	scroll (0, 0);
 
 	bat_in ();
+	music_play (MUSIC_CUTS);
 	while (1) {
 		oam_spr (72, 63 + (base_world [level] << 4), COCO_PATTERN, COCO_PALETTE, oam_index);
 		pad_read ();
