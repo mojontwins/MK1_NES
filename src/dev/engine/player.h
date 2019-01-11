@@ -110,7 +110,8 @@ void player_to_pixels (void) {
 	pry = py >> FIXBITS;
 }
 
-void player_kill (void) {
+#ifndef KILL_PLAYER_CUSTOM
+	void player_kill (void) {
 	oam_index = oam_index_player;
 	player_render ();
 	ppu_waitnmi ();
@@ -156,7 +157,8 @@ void player_kill (void) {
 	#ifdef DIE_AND_REENTER
 		on_pant = 0xff;
 	#endif
-}
+	}
+#endif
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	#include "engine/playermods/process_tile.h"

@@ -12,6 +12,7 @@ void bat_in (void) {
 }
 
 void bat_out (void) {	
+	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -92,7 +93,7 @@ void title (void) {
 	}
 	sfx_play (SFX_START, 0);
 	bat_out ();	
-	bankswitch (0);	
+	bankswitch (0);
 }
 
 void scr_game_over (void) {
@@ -138,6 +139,7 @@ void zone_select (void) {
 	scroll (0, 0);
 
 	bat_in ();
+	music_play (MUSIC_CUTS);
 	while (1) {
 		oam_spr (72, 63 + (base_world [level] << 4), COCO_PATTERN, COCO_PALETTE, oam_index);
 		pad_read ();
