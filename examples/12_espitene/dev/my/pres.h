@@ -12,6 +12,7 @@ void bat_in (void) {
 }
 
 void bat_out (void) {	
+	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -93,7 +94,7 @@ void title (void) {
 	music_stop ();
 	sfx_play (SFX_START, 0);
 	bat_out ();	
-	bankswitch (0);	
+	bankswitch (0);
 }
 
 void scr_game_over (void) {

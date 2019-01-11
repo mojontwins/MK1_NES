@@ -324,7 +324,14 @@ void game_loop (void) {
 
 		// Finish him
 
-		if (pkill) player_kill ();
+		if (pkill) {
+			#ifdef KILL_PLAYER_CUSTOM
+				#include "my/player_kill_custom.h"
+			#else
+				// standard way
+				player_kill ();	
+			#endif
+		} 
 		if (game_over || level_reset) break;			
 
 		// Flick the screen
@@ -409,7 +416,7 @@ void game_loop (void) {
 			
 			// Update player
 
-			if (!warp_to_level) {
+			if (!warp_to_level && !pkill) {
 				player_move ();
 			}
 

@@ -71,6 +71,8 @@
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
+//#define KILL_PLAYER_CUSTOM			// Advanced custom handling. Beware!
+
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 #define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.

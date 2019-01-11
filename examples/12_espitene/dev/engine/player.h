@@ -105,53 +105,55 @@ void player_to_pixels (void) {
 	pry = py >> FIXBITS;
 }
 
-void player_kill (void) {
-	oam_index = oam_index_player;
-	player_render ();
-	ppu_waitnmi ();
+#ifndef KILL_PLAYER_CUSTOM
+	void player_kill (void) {
+		oam_index = oam_index_player;
+		player_render ();
+		ppu_waitnmi ();
 
-	pkill = phit = 0;
-	sfx_play (SFX_PHIT, 0);
-	
-	if (plife) -- plife; else game_over = 1;
-
-	#ifdef PLAYER_FLICKERS
-		pflickering = PLAYER_FLICKERS;
-	#endif
-
-	#ifdef PLAYER_BOUNCES
-		pbouncing = PLAYER_BOUNCES;
-	#endif
-
-	#ifdef ENABLE_USE_ANIM
-		use_ct = 0;
-	#endif
-
-	#ifdef DIE_AND_RESPAWN
-		music_pause (1);
-		delay (60);
+		pkill = phit = 0;
+		sfx_play (SFX_PHIT, 0);
 		
-		#ifdef DIE_AND_REINIT
-			level_reset = 1;
-		#else
-			px = px_safe; 
-			py = py_safe; 
-			player_to_pixels ();
-			n_pant = n_pant_safe;		
-			player_stop ();
-			music_pause (0);
+		if (plife) -- plife; else game_over = 1;
+
+		#ifdef PLAYER_FLICKERS
+			pflickering = PLAYER_FLICKERS;
 		#endif
 
-		// May be necessary to find a proper cell later on
-		#if defined (ENABLE_BREAKABLE)
-			pmayneedrelocation = 1;
+		#ifdef PLAYER_BOUNCES
+			pbouncing = PLAYER_BOUNCES;
 		#endif
-	#endif	
 
-	#ifdef DIE_AND_REENTER
-		on_pant = 0xff;
-	#endif
-}
+		#ifdef ENABLE_USE_ANIM
+			use_ct = 0;
+		#endif
+
+		#ifdef DIE_AND_RESPAWN
+			music_pause (1);
+			delay (60);
+			
+			#ifdef DIE_AND_REINIT
+				level_reset = 1;
+			#else
+				px = px_safe; 
+				py = py_safe; 
+				player_to_pixels ();
+				n_pant = n_pant_safe;		
+				player_stop ();
+				music_pause (0);
+			#endif
+
+			// May be necessary to find a proper cell later on
+			#if defined (ENABLE_BREAKABLE)
+				pmayneedrelocation = 1;
+			#endif
+		#endif	
+
+		#ifdef DIE_AND_REENTER
+			on_pant = 0xff;
+		#endif
+	}
+#endif
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	#include "engine/playermods/process_tile.h"

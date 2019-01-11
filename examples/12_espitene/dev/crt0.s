@@ -170,7 +170,7 @@ clearRAM:
 
 	lda #4
 	jsr _pal_bright
-	jsr _pal_clear
+	;jsr _pal_clear
 	jsr _oam_clear
 
     jsr	zerobss

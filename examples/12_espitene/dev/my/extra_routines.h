@@ -16,6 +16,9 @@
 		if (pvy > 96) pvy = 96;
 		if (pvy < -160 && !ptrampoline) pvy = -160;
 
+		// spawn a bubble?
+		if (timer_frames == 25) { bubble_x = prx; bubble_y = pry - 8; }
+
 		// Update bubble
 		if (bubble_y) {
 			rda = rand8 ();
