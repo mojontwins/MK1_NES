@@ -61,7 +61,7 @@ void cocos_init (void) {
 
 void cocos_destroy (void) {
 	coco_on [coco_it] = 0;
-	coco_slots [coco_slots_i] = coco_it; coco_slots_i ++;
+	coco_slots [coco_slots_i] = coco_it; ++ coco_slots_i;
 	sfx_play (SFX_DUMMY1, 2);
 }
 

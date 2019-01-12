@@ -115,6 +115,7 @@ const unsigned char * const cuts_pal [] = {
 
 void scr_cutscene (void) {
 	// show cuts + text in rda;
+	scroll (0, 8);
 	unrle_vram (cuts_rle [rdm], 0x2000);
 	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [rdm]);
 	//music_play (MUSIC_CUTS);

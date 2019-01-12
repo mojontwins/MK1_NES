@@ -161,13 +161,12 @@ void main(void) {
 			} else {
 				// Level was finished
 				if (!free_play || level_act < 2) {
-					level ++;
+					++ level;
 					if (level == MAX_LEVELS) {
 						music_play (MUSIC_CUTS);
 						rdm = 2; cutscene ();
 						if (pemmeralds != 0x3f) { 
-							rdm = 3; 
-							cutscene (); 
+							rdm = 3; cutscene (); 
 							free_play = select_level = 1;
 							level = 0;
 						}
