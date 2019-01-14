@@ -6,10 +6,29 @@
 
 	// Do a palette cycle in the jungle
 	if ((level_world == 2 || level_world == 4 || level == 17) && (frame_counter & 7) == 0) {
+		/*
 		rda = pal_cycle [2];
 		pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
 		pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);
 		pal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);
+		*/
+
+		__asm__ ("lda %v+2", pal_cycle);
+		__asm__ ("sta %v", rda);
+
+		__asm__ ("lda %v+1", pal_cycle);
+		__asm__ ("sta %v+2", pal_cycle);
+		__asm__ ("sta PAL_BUF+15");
+
+		__asm__ ("lda %v", pal_cycle);
+		__asm__ ("sta %v+1", pal_cycle);
+		__asm__ ("sta PAL_BUF+14");
+
+		__asm__ ("lda %v", rda);
+		__asm__ ("sta %v", pal_cycle);
+		__asm__ ("sta PAL_BUF+13");
+
+		__asm__ ("inc %v", PALUPDATE);
 	}
 
 	// Do a split in the fridge

@@ -15,13 +15,15 @@ if (
 ) hrt = 0;
 
 // Make bosses more resistant
-// Boss is always enemy on screen
+// Boss is always enemy 0 on screen
 if (en_t [0] == 0x14) en_life [0] = 8;
 
 if (level_world == 3) {
 	// Set underwater screens
+	rda = underwater;
 	timer_on = underwater = (level_act == 2 || n_pant >= 10);
 	if (!underwater) timer = 20;
+	if (underwater != rda) sfx_play (SFX_FLOAT, 1);
 
 	pal_bg (underwater ? palts3a : palts3);
 	pal_spr (underwater ? palss0a : palss0);

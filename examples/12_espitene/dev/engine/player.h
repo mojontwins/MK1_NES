@@ -105,53 +105,55 @@ void player_to_pixels (void) {
 	pry = py >> FIXBITS;
 }
 
-void player_kill (void) {
-	oam_index = oam_index_player;
-	player_render ();
-	ppu_waitnmi ();
+#ifndef KILL_PLAYER_CUSTOM
+	void player_kill (void) {
+		oam_index = oam_index_player;
+		player_render ();
+		ppu_waitnmi ();
 
-	pkill = phit = 0;
-	sfx_play (SFX_PHIT, 0);
-	
-	if (plife) -- plife; else game_over = 1;
-
-	#ifdef PLAYER_FLICKERS
-		pflickering = PLAYER_FLICKERS;
-	#endif
-
-	#ifdef PLAYER_BOUNCES
-		pbouncing = PLAYER_BOUNCES;
-	#endif
-
-	#ifdef ENABLE_USE_ANIM
-		use_ct = 0;
-	#endif
-
-	#ifdef DIE_AND_RESPAWN
-		music_pause (1);
-		delay (60);
+		pkill = phit = 0;
+		sfx_play (SFX_PHIT, 0);
 		
-		#ifdef DIE_AND_REINIT
-			level_reset = 1;
-		#else
-			px = px_safe; 
-			py = py_safe; 
-			player_to_pixels ();
-			n_pant = n_pant_safe;		
-			player_stop ();
-			music_pause (0);
+		if (plife) -- plife; else game_over = 1;
+
+		#ifdef PLAYER_FLICKERS
+			pflickering = PLAYER_FLICKERS;
 		#endif
 
-		// May be necessary to find a proper cell later on
-		#if defined (ENABLE_BREAKABLE)
-			pmayneedrelocation = 1;
+		#ifdef PLAYER_BOUNCES
+			pbouncing = PLAYER_BOUNCES;
 		#endif
-	#endif	
 
-	#ifdef DIE_AND_REENTER
-		on_pant = 0xff;
-	#endif
-}
+		#ifdef ENABLE_USE_ANIM
+			use_ct = 0;
+		#endif
+
+		#ifdef DIE_AND_RESPAWN
+			music_pause (1);
+			delay (60);
+			
+			#ifdef DIE_AND_REINIT
+				level_reset = 1;
+			#else
+				px = px_safe; 
+				py = py_safe; 
+				player_to_pixels ();
+				n_pant = n_pant_safe;		
+				player_stop ();
+				music_pause (0);
+			#endif
+
+			// May be necessary to find a proper cell later on
+			#if defined (ENABLE_BREAKABLE)
+				pmayneedrelocation = 1;
+			#endif
+		#endif	
+
+		#ifdef DIE_AND_REENTER
+			on_pant = 0xff;
+		#endif
+	}
+#endif
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	#include "engine/playermods/process_tile.h"
@@ -421,7 +423,7 @@ void player_move (void) {
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
 	 		if (
-				pry < ((cy1 - 1) << 4) + 4 && 
+				pry <= ((cy1 - 1) << 4) + (pvy >> 6) && 
 				(
 					(at1 & 12) || (at2 & 12)
 					#ifdef ENABLE_LADDERS
@@ -469,8 +471,14 @@ void player_move (void) {
 				#endif
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
-			} else if ((at1 & 1) || (at2 & 1)) {
+			} else {
+				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
+					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
+					cm_two_points ();
+				#endif
+				if ((at1 & 1) || (at2 & 1)) {
 				if ((pry & 15) > 4) hitv = 1;
+			}
 			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
@@ -740,6 +748,10 @@ void player_move (void) {
 					if (cy1 != cy2) if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 				#endif				
 			} else {
+				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
+					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
+					cm_two_points ();
+				#endif
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		#endif

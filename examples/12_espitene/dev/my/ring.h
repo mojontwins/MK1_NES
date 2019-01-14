@@ -16,6 +16,11 @@ void ring_create (void) {
 		ring_vx = pvx >> 2;
 		ring_timer = RING_TIMER_CREATE;
 	}
+
+	// Moved here to save some bytes
+	prings = 0;
+	pbouncing = 16;
+	pflickering = 100;
 }
 
 void ring_do (void) {

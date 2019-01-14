@@ -24,7 +24,7 @@ if (!en_status [gpit] || half_life) {
 			cx1 = cx2 = (_en_x + 15) >> 4;
 		}
 		cm_two_points ();
-		en_collx = (at1 | at2) & 13;
+		en_collx = at1 | at2;
 	#endif
 
 	// Vertical
@@ -41,7 +41,7 @@ if (!en_status [gpit] || half_life) {
 			cy1 = cy2 = (_en_y + 15) >> 4;
 		}
 		cm_two_points ();
-		en_colly = (at1 | at2) & 13;
+		en_colly = at1 | at2;
 	#endif
 
 	// Change direction ?

@@ -5,12 +5,6 @@
 // timer_zero equals 1 if timer == 0.
 
 if (underwater) {
-	// spawn a bubble
-	bubble_x = prx; bubble_y = pry - 8;	
-
 	// Kill player.
-	if (timer_zero) {
-		psprid = CELL_HIT;
-		pkill = 1;
-	}
+	if (timer_zero) pkill = 1;
 }

@@ -16,11 +16,14 @@
 		if (pvy > 96) pvy = 96;
 		if (pvy < -160 && !ptrampoline) pvy = -160;
 
+		// spawn a bubble?
+		if (timer_frames == 25) { bubble_x = prx; bubble_y = pry - 8; }
+
 		// Update bubble
 		if (bubble_y) {
 			rda = rand8 ();
 
-			bubble_y --;			
+			-- bubble_y;
 			bubble_x += ((rda & 2) - 1);
 
 			oam_index = oam_spr (
@@ -48,7 +51,7 @@
 	
 	// toggle switch timer:
 	if (toggle_timer) {
-		toggle_timer --;
+		-- toggle_timer;
 		if (toggle_timer == 0) {
 			hrt = HOTSPOT_TYPE_TOGGLE_OFF;
 			sfx_play (SFX_STEPON, 0);
@@ -62,7 +65,12 @@
 				++ elec_state; if (elec_state == 3) elec_state = 0;
 				elec_state_ct = elec_state_max_ct [elec_state];
 				if (elec_state == 0) pal_bg (palts5);
-				else if (elec_state == 1) pal_col (11, 0x18);
+				else if (elec_state == 1) {
+					//pal_col (11, 0x18);
+					__asm__ ("lda #$18");
+					__asm__ ("sta PAL_BUF+11");
+					__asm__ ("inc %v", PALUPDATE);
+				}
 			}
 		}
 	}
@@ -81,7 +89,7 @@
 				pvx = -512;			
 				pflickering = 30;
 				if (somari_life) {
-					somari_life --;
+					-- somari_life;
 					somari_state = 1;	
 				} else {
 					somari_state = 2;

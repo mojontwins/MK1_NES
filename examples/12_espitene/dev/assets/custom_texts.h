@@ -30,8 +30,8 @@ const unsigned char cutscene_0 [] =
 	"WALKING AROUND THE JUNKYARD%%"
 	"CHERIL FOUND SOMETHING OF%%"
 	"INTEREST... A DIRTY, BROKEN%%"
-	"PUPPET SHE FOUND FAMILIAR...%%"
-	"'WHAT DID THE DO TO YOU?";
+	"PUPPET SHE FOUND FAMILIAR.%%"
+	"'WHAT DID THEY DO TO YOU?";
 	
 const unsigned char cutscene_1 [] =
 	"MOVED BY A STRANGE FORCE,%%"

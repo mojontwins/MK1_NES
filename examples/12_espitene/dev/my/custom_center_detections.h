@@ -12,12 +12,15 @@ if (!pflickering && !pbouncing) {
 			
 			if (prings) {
 				ring_create ();
+				/*
+				// Moved these to ring_create
 				prings = 0;
-
-				// Simulate hit
-				pvx = -pvx; pvy = -64; 
 				pbouncing = 16;
 				pflickering = 100;
+				*/
+				
+				pvx = -pvx; pvy = -64; 
+				
 			} else pkill = 1;
 		} 
 	}

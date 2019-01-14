@@ -92,7 +92,7 @@ void bullets_destroy (void) {
 }
 
 void bullets_move (void) {
-	for (bi = 0; bi < MAX_BULLETS; bi ++) {
+	for (bi = 0; bi < MAX_BULLETS; ++ bi) {
 		if (bst [bi]) {
 			bx [bi] += bmx [bi];
 			by [bi] += bmy [bi];

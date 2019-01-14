@@ -19,7 +19,7 @@
 			vram_adr (c_enems);
 			rda = VRAM_READ; 	// Dummy read.			
 
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				rdt = VRAM_READ;
 
@@ -42,26 +42,26 @@
 			}
 		#else		
 			gp_gen = (unsigned char *) (c_enems);
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				// rdt = *gp_gen ++; 
-				SET_FROM_PTR (rdt, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rdt, gp_gen); ++ gp_gen;
 
 				// YX1
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				ep_y [gpjt] = rda & 0xf0;
 				ep_x [gpjt] = rda << 4;
 
 				// YX2
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				rdc = rda & 0xf0;
 				rdb = rda << 4;
 
 				// P, here used for speed
 				//rda = (*gp_gen ++) & 0x0f;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++; rda &= 0x0f;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen; rda &= 0x0f;
 				if (rda > 1) rda >>= 1;	// Store converted!
 				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
@@ -72,7 +72,7 @@
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
 			gpjt = on_pant + on_pant + on_pant;
-			for (gpit = 0; gpit < 3; gpit ++) {
+			for (gpit = 0; gpit < 3; ++ gpit) {
 				__asm__ ("ldx %v", gpit);
 				__asm__ ("ldy %v", gpjt);
 
@@ -182,7 +182,7 @@ void enems_load (void) {
 		en_offs = rdc = (n_pant << 1) + n_pant;
 	#endif
 
-	for (gpit = 0; gpit < 3; gpit ++) {
+	for (gpit = 0; gpit < 3; ++ gpit) {
 		
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
