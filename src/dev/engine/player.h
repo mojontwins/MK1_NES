@@ -776,7 +776,7 @@ void player_move (void) {
 	#endif
 
 	#ifdef PLAYER_SPINS
-		if ((!pvx && (ppossee || pgotten) && !pj) || (ppossee && !oppossee)) pspin = 0;
+		if (pj == 0 && ((!pvx && (ppossee || pgotten)) || (ppossee && !oppossee))) pspin = 0;
 	#endif
 
 	// *************
