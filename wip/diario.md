@@ -4910,3 +4910,35 @@ Ahora viene una sesión de ahorro de bytes, aunque el tema está ya apretado de 
 
 Tengo unos 320 bytes para esto (sin haber cambiado la canción). Vamos a ver qué tal se da.
 
+~~
+
+20190114
+========
+
+He hecho toneladas de mejoras, pero aún hay un bug que se me escapa (y es un bug de motor): a veces espitene salta y no se activa el spin, con lo que salta tieso y le jorrupian. Es como si se detectase (erróneamente) que estamos en un *trampoline*. Realmente no sé qué puede ocurrir. Voy a echarle un ojal antes de desayunar a ver si se prende el foco. Luego tendré que aplicar el arreglo a los SRC de ambas ramas.
+
+Por un lado, en colisión hacia abajo, si se detecta `74` (el beh del *trampoline*) (usa `==`) en `at1` o `at2` se desactiva `pspin`.
+
+Por otro lado, en el salto (`PLAYER_JUMP_TYPE_MK2`), tras la llamada a `jump_start`, si `ptrampoline` es falso pone `pspin` a 1. Según veo, la única forma de iniciar un salto sin `pspin` es porque `ptrampoline` sea cierto. Luego miraré la evolución de ese flag.
+
+`pspin` también se activa al pulsar, obviamente, `PAD_DOWN`.
+
+Pero cuidado con esto que viene tras las comprobaciones del movimiento horizontal:
+
+```c
+    #ifdef PLAYER_SPINS
+        if ((!pvx && (ppossee || pgotten) && !pj) || (ppossee && !oppossee)) pspin = 0;
+    #endif
+```
+
+Veamos: por la primera rama no va a entrar porque `pj` será cierto. Veamos la otra, que viene a significar *ahora está sobre suelo y antes no*. Según me han reportado, ocurre cuando le das a saltar en el mismo momento de tocar el suelo. Vamos a intentar reproducirlo para ver si lo puedo hacer siempre, y que modificar esto lo arreglará: fíjense que es bien cierto que, aunque acabemos de saltar, si lo hacemos en el momento de tocar el suelo, `(ppossee && !oppossee))`. Tengo que mover el `!pj` para que afecte a ambas ramas. Pero antes voy a intentar reproducir todo lo que pueda.
+
+Se cambia por:
+
+```c
+    #ifdef PLAYER_SPINS
+        if (!pj && ((!pvx && (ppossee || pgotten)) || (ppossee && !oppossee))) pspin = 0;
+    #endif
+```
+
+¡Creo que lo he reparado!
