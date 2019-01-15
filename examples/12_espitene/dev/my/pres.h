@@ -6,7 +6,7 @@
 void bat_in (void) {
 	pal_bright (0);
 	ppu_on_all ();
-	while (pad_poll (0));
+	//while (pad_poll (0));
 	fade_delay = 4;
 	fade_in ();
 }
@@ -114,8 +114,7 @@ const unsigned char * const cuts_pal [] = {
 };
 
 void scr_cutscene (void) {
-	// show cuts + text in rda;
-	scroll (0, 8);
+	// show cuts + text in rda;	
 	unrle_vram (cuts_rle [rdm], 0x2000);
 	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [rdm]);
 	//music_play (MUSIC_CUTS);
@@ -123,6 +122,7 @@ void scr_cutscene (void) {
 
 void cutscene (void) {
 	bankswitch (1);
+	scroll (0, 16);
 	pres (cuts_pal [rdm], scr_cutscene);
 	bankswitch (0);
 }
