@@ -124,6 +124,10 @@ METASPRITESET 8, 14, 2, 2, 4, 1, 0, 0
 METASPRITESET 12, 12, 2, 2, 2, 1, 0, 0
 METASPRITESET 12, 16, 2, 2, 2, 1, 0, 0
 
+# Breakable sprite
+LABEL ssbrk
+METASPRITE 14, 11, 2, 1, 0, 0
+
 # Final boss elements
 SKIPEMPTY
 OPEN ss_boss.png

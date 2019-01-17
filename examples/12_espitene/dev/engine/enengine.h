@@ -769,290 +769,294 @@ void enems_move (void) {
 				en_spr_id [gpit] = en_spr;
 			}
 
-			// Warp player?
+			// If player is dead no interaction is possible
+			if (!pkill) {
 
-			#ifdef ENABLE_SIMPLE_WARPERS
-				if (_en_t == 0xff) {
-					if (collide ()
-					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
-						&& (pad_this_frame & PAD_B)
-					#endif
-					) {
-						n_pant = _en_mx; on_pant = 0xff;
-						prx = _en_x2; px = prx << FIXBITS;
-						pry = _en_y2; py = pry << FIXBITS;
-						player_stop ();
+				// Warp player?
 
-						#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
-							phitteract = 0;
-							#ifdef PLAYER_PUNCHES
-								ppunching = 0;
-							#endif
-							#ifdef PLAYER_KICKS
-								pkicking = 0;
-							#endif
+				#ifdef ENABLE_SIMPLE_WARPERS
+					if (_en_t == 0xff) {
+						if (collide ()
+						#ifdef SIMPLE_WARPERS_FIRE_BUTTON
+							&& (pad_this_frame & PAD_B)
 						#endif
+						) {
+							n_pant = _en_mx; on_pant = 0xff;
+							prx = _en_x2; px = prx << FIXBITS;
+							pry = _en_y2; py = pry << FIXBITS;
+							player_stop ();
 
-						b_button = 0;
-						break;
+							#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+								phitteract = 0;
+								#ifdef PLAYER_PUNCHES
+									ppunching = 0;
+								#endif
+								#ifdef PLAYER_KICKS
+									pkicking = 0;
+								#endif
+							#endif
+
+							b_button = 0;
+							break;
+						}
+						goto skipdo;
 					}
-					goto skipdo;
-				}
-			#endif
+				#endif
 
-			// Moving platforms
+				// Moving platforms
 
-			#ifndef PLAYER_TOP_DOWN
-				if (_en_t == 4 && pregotten && !pgotten && !pj) {
-					
-					// Horizontal moving platforms
-					
-					if (_en_mx) {
-						if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
+				#ifndef PLAYER_TOP_DOWN
+					if (_en_t == 4 && pregotten && !pgotten && !pj) {
+						
+						// Horizontal moving platforms
+						
+						if (_en_mx) {
+							if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
+								pgotten = 1;
+								pgtmx = _en_mx << (6 - en_status [gpit]);
+								py = (_en_y - 16) << 6; pry = py >> 6;
+							}
+						}
+						
+						// Vertical moving platforms
+						
+						if (
+							(_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
+							(_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
+						) {
 							pgotten = 1;
-							pgtmx = _en_mx << (6 - en_status [gpit]);
+							pgtmy = _en_my << (6 - en_status [gpit]);
 							py = (_en_y - 16) << 6; pry = py >> 6;
+							pvy = 0;
 						}
 					}
-					
-					// Vertical moving platforms
-					
-					if (
-						(_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
-						(_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
-					) {
-						pgotten = 1;
-						pgtmy = _en_my << (6 - en_status [gpit]);
-						py = (_en_y - 16) << 6; pry = py >> 6;
-						pvy = 0;
+
+					#ifdef PLAYER_SPINS
+						if (pgotten) pspin = 0;
+					#endif
+				#endif
+
+				// Invincible
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_invincible [gpit]) {
+						-- en_invincible [gpit];
+						if (half_life) en_spr = 0xff;
 					}
-				}
+				#endif
 
-				#ifdef PLAYER_SPINS
-					if (pgotten) pspin = 0;
-				#endif
-			#endif
-
-			// Invincible
-			#ifdef ENEMS_INVINCIBILITY
-				if (en_invincible [gpit]) {
-					-- en_invincible [gpit];
-					if (half_life) en_spr = 0xff;
-				}
-			#endif
-
-			// Is enemy collidable? If not, exit
-
-			if (
-					en_is_alive == 0	// General condition.
-				#ifdef ENEMS_MAY_DIE
-					|| en_cttouched [gpit]
-				#endif
-				#ifndef PLAYER_TOP_DOWN				
-					|| _en_t == 4
-				#endif
-				#ifdef ENABLE_PURSUERS
-					|| (_en_t == 7 && _en_state != 2)
-				#endif
-				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && _en_state != 2)
-				#endif
-				#ifdef ENABLE_PEZONS
-					|| (_en_t == 9 && _en_state == 0)
-				#endif
-				#ifdef ENABLE_CHAC_CHAC
-					|| _en_t == 10
-				#endif
-				#ifdef ENABLE_MONOCOCOS
-					|| (_en_t == 11 && _en_mx != 2)
-				#endif
-				#ifdef ENABLE_CATACROCKS
-					|| (_en_t == 12 && _en_state != 1)
-				#endif
-				#ifdef ENABLE_BOIOIONG
-					|| (_en_t == 13 && _en_ct == 0)
-				#endif
-			) goto skipdo;
-
-			// Collide with player (includes step over enemy)
-
-			// Step over enemy?
-			#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
+				// Is enemy collidable? If not, exit
 
 				if (
-					pregotten && 
-					pry < _en_y && 
-					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
-					pgotten == 0 &&	ppossee == 0
-					#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
-						&& pvy > 0
+						en_is_alive == 0	// General condition.
+					#ifdef ENEMS_MAY_DIE
+						|| en_cttouched [gpit]
 					#endif
-					#ifdef PLAYER_STEPS_STRICT
-						&& pvy > PLAYER_VY_FALLING_MIN
+					#ifndef PLAYER_TOP_DOWN				
+						|| _en_t == 4
 					#endif
-					#ifndef STEADY_SHOOTER_KILLABLE
-						&& _en_t != 5
-					#endif	
+					#ifdef ENABLE_PURSUERS
+						|| (_en_t == 7 && _en_state != 2)
+					#endif
 					#ifdef ENABLE_SAW
-						&& _en_t != 8
+						|| (_en_t == 8 && _en_state != 2)
 					#endif
-					#ifdef ENEMS_INVINCIBILITY
-						&& en_invincible [gpit] == 0
+					#ifdef ENABLE_PEZONS
+						|| (_en_t == 9 && _en_state == 0)
 					#endif
-				) {
-				
-					#ifdef ENABLE_RESONATORS
-						if (res_on || res_disable)
+					#ifdef ENABLE_CHAC_CHAC
+						|| _en_t == 10
 					#endif
-					#ifdef PLAYER_STEPS_MIN_KILLABLE
-						if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
+					#ifdef ENABLE_MONOCOCOS
+						|| (_en_t == 11 && _en_mx != 2)
 					#endif
-					enems_hit ();
-				
-					#ifdef PLAYER_SAFE_LANDING
-						if (_en_my < 0) _en_my = -_en_my;
+					#ifdef ENABLE_CATACROCKS
+						|| (_en_t == 12 && _en_state != 1)
 					#endif
-
-					#ifdef PLAYER_HAS_JUMP
-						if (pad0 & PAD_A) {
-							jump_start ();
-						} else 
-					#endif						
-					{
-						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-					}
-					sfx_play (SFX_STEPON, 1);
-
-					#ifdef PLAYER_AUTO_JUMP
-						jump_start ();
+					#ifdef ENABLE_BOIOIONG
+						|| (_en_t == 13 && _en_ct == 0)
 					#endif
+				) goto skipdo;
 
-					if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
+				// Collide with player (includes step over enemy)
 
-					touched = 1;
-				} else
-			#endif
+				// Step over enemy?
+				#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
 
-			if (
-				#if defined (ENABLE_STEADY_SHOOTERS) && defined (STEADY_SHOOTERS_HARMLESS)
-					_en_t != 5 &&
-				#endif
-				touched == 0 &&
-				collide ()
-			) {
-				// en_sg_1 => kill enemy
-				#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
-					en_sg_1 = 1;
-				#else
-					en_sg_1 = 0;
-				#endif
-				
-				// en_sg_2 => kill player.
-				en_sg_2 = (pflickering == 0);
-
-				#ifdef ENABLE_RESONATORS
-					// If resonators are on and not a saw, don't kill player
 					if (
-						res_on == 1
-						#ifdef ENABLE_SAW
-						&& _en_t != 8
+						pregotten && 
+						pry < _en_y && 
+						pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+						pgotten == 0 &&	ppossee == 0
+						#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
+							&& pvy > 0
 						#endif
-					) en_sg_2 = 0;
-				#endif
-
-				#ifdef PLAYER_SPINS
-					// If spinning and not a saw or a steady shooter 
-					// kill enemy, don't kill player
-					if (pspin
+						#ifdef PLAYER_STEPS_STRICT
+							&& pvy > PLAYER_VY_FALLING_MIN
+						#endif
 						#ifndef STEADY_SHOOTER_KILLABLE
 							&& _en_t != 5
 						#endif	
 						#ifdef ENABLE_SAW
 							&& _en_t != 8
 						#endif
-					) {
-						en_sg_1 = 1;
-						en_sg_2 = 0;
-						pvy = -pvy;
-						sfx_play (SFX_STEPON, 1);
-					}
-				#endif				
-
-				#ifdef ENEMS_INVINCIBILITY
-					if (en_invincible [gpit]) en_sg_1 = 0;
-				#endif
-
-				#include "my/on_player_hit.h"
-
-				#ifdef ENEMS_MAY_DIE
-					if (en_sg_1) enems_hit ();
-				#endif
-				if (en_sg_2) { 
-					pkill = 1; 
-					#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
-						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
-						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
-						
-						#ifdef ENABLE_COMPILED_ENEMS
-						if (_en_t != 20)
+						#ifdef ENEMS_INVINCIBILITY
+							&& en_invincible [gpit] == 0
 						#endif
-						{
-							if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
-							_en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
-						}
-
-					#endif	
-				}
-				touched = 1; 
-			}
-
-			// Is enemy killable? If not, exit
-
-			if (
-				touched
-				#ifndef STEADY_SHOOTER_KILLABLE
-					|| _en_t == 5
-				#endif					
-				#ifdef ENABLE_SAW
-					|| _en_t == 8
-				#endif
-				#ifdef ENEMS_INVINCIBILITY
-					|| en_invincible [gpit]
-				#endif
-			) goto skipdo;
-
-			// Hit enemy
-
-			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
-				if (phitteract) {
-					if (
-						phitterx + 6 >= _en_x &&
-						phitterx <= _en_x + 14 &&
-						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
-						phittery <= _en_y + 12
 					) {
+					
+						#ifdef ENABLE_RESONATORS
+							if (res_on || res_disable)
+						#endif
+						#ifdef PLAYER_STEPS_MIN_KILLABLE
+							if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
+						#endif
 						enems_hit ();
-						sfx_play (SFX_STEPON, 1);
-						phitteract = 0;
-						pfrozen = PLAYER_FROZEN_FRAMES;
-						#ifdef ENEMS_RECOIL_ON_HIT
-							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
-								#ifdef PLAYER_TOP_DOWN
-									if (bmx [bi]) {
-										en_rmy [gpit] = 0;
-								#endif
-									en_rmx [gpit] = ENEMS_RECOIL_X;
-								#ifdef PLAYER_TOP_DOWN
-									} else {
-										en_rmx [gpit] = 0;
-										en_rmy [gpit] = ENEMS_RECOIL_Y;
-									}
-								#endif
-							}
+					
+						#ifdef PLAYER_SAFE_LANDING
+							if (_en_my < 0) _en_my = -_en_my;
 						#endif
+
+						#ifdef PLAYER_HAS_JUMP
+							if (pad0 & PAD_A) {
+								jump_start ();
+							} else 
+						#endif						
+						{
+							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+						}
+						sfx_play (SFX_STEPON, 1);
+
+						#ifdef PLAYER_AUTO_JUMP
+							jump_start ();
+						#endif
+
+						if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
+
+						touched = 1;
+					} else
+				#endif
+
+				if (
+					#if defined (ENABLE_STEADY_SHOOTERS) && defined (STEADY_SHOOTERS_HARMLESS)
+						_en_t != 5 &&
+					#endif
+					touched == 0 &&
+					collide ()
+				) {
+					// en_sg_1 => kill enemy
+					#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
+						en_sg_1 = 1;
+					#else
+						en_sg_1 = 0;
+					#endif
+					
+					// en_sg_2 => kill player.
+					en_sg_2 = (pflickering == 0);
+
+					#ifdef ENABLE_RESONATORS
+						// If resonators are on and not a saw, don't kill player
+						if (
+							res_on == 1
+							#ifdef ENABLE_SAW
+							&& _en_t != 8
+							#endif
+						) en_sg_2 = 0;
+					#endif
+
+					#ifdef PLAYER_SPINS
+						// If spinning and not a saw or a steady shooter 
+						// kill enemy, don't kill player
+						if (pspin
+							#ifndef STEADY_SHOOTER_KILLABLE
+								&& _en_t != 5
+							#endif	
+							#ifdef ENABLE_SAW
+								&& _en_t != 8
+							#endif
+						) {
+							en_sg_1 = 1;
+							en_sg_2 = 0;
+							pvy = -pvy;
+							sfx_play (SFX_STEPON, 1);
+						}
+					#endif				
+
+					#ifdef ENEMS_INVINCIBILITY
+						if (en_invincible [gpit]) en_sg_1 = 0;
+					#endif
+
+					#include "my/on_player_hit.h"
+
+					#ifdef ENEMS_MAY_DIE
+						if (en_sg_1) enems_hit ();
+					#endif
+					if (en_sg_2) { 
+						pkill = 1; 
+						#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
+							pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
+							pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
+							
+							#ifdef ENABLE_COMPILED_ENEMS
+							if (_en_t != 20)
+							#endif
+							{
+								if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+								_en_mx = ADD_SIGN (_en_x - prx, ABS (_en_mx));
+							}
+
+						#endif	
 					}
-				} 
-			#endif
+					touched = 1; 
+				}
+
+				// Is enemy killable? If not, exit
+
+				if (
+					touched
+					#ifndef STEADY_SHOOTER_KILLABLE
+						|| _en_t == 5
+					#endif					
+					#ifdef ENABLE_SAW
+						|| _en_t == 8
+					#endif
+					#ifdef ENEMS_INVINCIBILITY
+						|| en_invincible [gpit]
+					#endif
+				) goto skipdo;
+
+				// Hit enemy
+
+				#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+					if (phitteract) {
+						if (
+							phitterx + 6 >= _en_x &&
+							phitterx <= _en_x + 14 &&
+							phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+							phittery <= _en_y + 12
+						) {
+							enems_hit ();
+							sfx_play (SFX_STEPON, 1);
+							phitteract = 0;
+							pfrozen = PLAYER_FROZEN_FRAMES;
+							#ifdef ENEMS_RECOIL_ON_HIT
+								if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+									#ifdef PLAYER_TOP_DOWN
+										if (bmx [bi]) {
+											en_rmy [gpit] = 0;
+									#endif
+										en_rmx [gpit] = ENEMS_RECOIL_X;
+									#ifdef PLAYER_TOP_DOWN
+										} else {
+											en_rmx [gpit] = 0;
+											en_rmy [gpit] = ENEMS_RECOIL_Y;
+										}
+									#endif
+								}
+							#endif
+						}
+					} 
+				#endif
+			}
 
 			#ifdef PLAYER_CAN_FIRE
 				// Bullets

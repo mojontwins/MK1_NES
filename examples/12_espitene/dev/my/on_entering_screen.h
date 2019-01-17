@@ -35,3 +35,6 @@ oam_spr (128, water_strip ? 211 : 240, 1, 2, 0);
 
 // Reset toggle timer
 toggle_timer = 0;
+
+// Clear bridge bits
+memfill (bridge_y, 0, 4);

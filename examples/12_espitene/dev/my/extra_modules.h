@@ -6,3 +6,4 @@
 // Ring implementation, Sonic SMS style:
 #include "my/ring.h"
 #include "my/somari.h"
+#include "my/bridge.h"

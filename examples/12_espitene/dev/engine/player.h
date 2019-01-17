@@ -466,8 +466,8 @@ void player_move (void) {
 				#endif
 
 				#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_WALKABLE)
-					if (at1 & 16) { breakable_break (cx1, cy1 - 1); pnotsafe = 1; }
-					if (cx1 != cx2 && (at2 & 16)) { breakable_break (cx2, cy1 - 1); pnotsafe = 1; }
+					if (at1 & 16) { _x = cx1; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
+					if (cx1 != cx2 && (at2 & 16)) { _x = cx2; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
 				#endif
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
@@ -911,7 +911,7 @@ void player_move (void) {
 			cx1 = (phitterx + 4) >> 4;
 			cy1 = (phittery + 4 - 16) >> 4;
 			if (ATTR(cx1, cy1) & 16) {
-				breakable_break (cx1, cy1);
+				_x = cx1; _y = cy1; breakable_break ();
 				pfrozen = PLAYER_FROZEN_FRAMES;
 				phitteract = 0;
 			}

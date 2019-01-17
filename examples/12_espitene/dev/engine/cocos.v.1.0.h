@@ -66,58 +66,41 @@ void cocos_destroy (void) {
 }
 
 void cocos_do (void) {
-	coco_it = COCOS_MAX; while (coco_it) {
-		-- coco_it;
-		if (coco_on [coco_it]) {
+	coco_it = COCOS_MAX; while (coco_it --) if (coco_on [coco_it]) {
+		// Move
+		coco_x [coco_it] += coco_vx [coco_it];
+		coco_y [coco_it] += coco_vy [coco_it];
 
-			// Move
-			coco_x [coco_it] += coco_vx [coco_it];
-			coco_y [coco_it] += coco_vy [coco_it];
+		// Out of bounds
+		if (coco_x [coco_it] < 0 || coco_x [coco_it] > 248<<FIXBITS || coco_y [coco_it] < 16<<FIXBITS || coco_y [coco_it] > 200<<FIXBITS) {
+			cocos_destroy ();
+			continue;
+		}
 
-			rdx = coco_x [coco_it] >> FIXBITS;
-			rdy = coco_y [coco_it] >> FIXBITS;
-			
-			// Out of bounds?
-			if (
-				// Optimization: if rdx < 0, it will wrap around,
-				/*COCO_RDX < 0 ||*/
-				rdx > 248 ||
-				
-				// Optimization: if rdy < 0, it will wrap around,
-				// so this is more or less the same as doing
-				// coco_y [coco_it] < 0 || coco_y [coco_it] > (200<<FIXBITS)
-				rdy > 208
-			) {
+		rdx = coco_x [coco_it] >> 6;
+		rdy = coco_y [coco_it] >> 6;
+
+		// Render
+		oam_index = oam_spr (rdx, rdy + SPRITE_ADJUST, COCO_PATTERN, COCO_PALETTE, oam_index);
+
+		#ifdef COCO_COLLIDES
+			rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+			if (rdm & 8) {
 				cocos_destroy (); continue;
 			}
+		#endif
 
-			// Render
-			oam_index = oam_spr (
-				rdx, rdy + SPRITE_ADJUST, 
-				COCO_PATTERN, 
-				COCO_PALETTE, 
-				oam_index
-			);
-
-			#ifdef COCO_COLLIDES
-				rdm = map_attr [((rdx + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
-				if (rdm & 8) {
-					cocos_destroy (); continue;
-				}
-			#endif
-
-			// Collide w/player
-			if (pflickering == 0 && 
-				rdx + 7 >= prx && 
-				rdx <= prx + 7 && 
-				rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
-				rdy <= pry + 12
-			) {
-				en_sg_2 = 1;
-				#include "my/on_player_coco.h"
-				pkill = en_sg_2;
-				cocos_destroy ();
-			}
-		}
+		// Collide w/player
+		if (pflickering == 0 && 
+			rdx + 7 >= prx && 
+			rdx <= prx + 7 && 
+			rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
+			rdy <= pry + 12
+		) {
+			en_sg_2 = 1;
+			#include "my/on_player_coco.h"
+			pkill = !!en_sg_2;
+			cocos_destroy ();
+		}		
 	}
 }

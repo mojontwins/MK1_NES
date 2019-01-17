@@ -217,7 +217,7 @@ void bullets_move (void) {
 				#endif
 				#ifdef ENABLE_BREAKABLE
 					if (rdm & 16) {
-						_x = cx1; _y = cy1; breakable_break ();
+						breakable_break (cx1, cy1);
 						bullets_destroy ();
 						continue;
 					} else

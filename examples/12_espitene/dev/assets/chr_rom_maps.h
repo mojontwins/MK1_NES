@@ -471,25 +471,25 @@ const unsigned int map_51_scr_offsets [] = {
 	MAP_51_BASE + 0x0056, 0                   , 
 	0                   , 0                   , 
 	0                   , 0                   , 
-	MAP_51_BASE + 0x00A8, MAP_51_BASE + 0x00BF, 
-	MAP_51_BASE + 0x0122, 0                   , 
-	MAP_51_BASE + 0x0187, MAP_51_BASE + 0x01C1, 
-	0                   , MAP_51_BASE + 0x01E4, 
-	MAP_51_BASE + 0x0233, 0                   , 
-	MAP_51_BASE + 0x0285, MAP_51_BASE + 0x02AC, 
-	0                   , MAP_51_BASE + 0x02C1, 
-	MAP_51_BASE + 0x02DF, MAP_51_BASE + 0x02DF, 
-	MAP_51_BASE + 0x02ED, 0                   
+	MAP_51_BASE + 0x00AC, MAP_51_BASE + 0x00C6, 
+	MAP_51_BASE + 0x0129, 0                   , 
+	MAP_51_BASE + 0x018E, MAP_51_BASE + 0x01C8, 
+	0                   , MAP_51_BASE + 0x01EB, 
+	MAP_51_BASE + 0x023A, 0                   , 
+	MAP_51_BASE + 0x028C, MAP_51_BASE + 0x02B3, 
+	0                   , MAP_51_BASE + 0x02C8, 
+	MAP_51_BASE + 0x02E6, MAP_51_BASE + 0x02E6, 
+	MAP_51_BASE + 0x02F4, 0                   
 };
 
-// Total screens size in bytes is 772
+// Total screens size in bytes is 779
 
 // Map # 17 read from level52.map (3x1)
 
 // Definitions
 
 #define MAP_52_CHRROM    3
-#define MAP_52_BASE      0x119D
+#define MAP_52_BASE      0x11A4
 #define MAP_52_W         3
 #define MAP_52_H         1
 #define MAP_52_MAXPANTS  3

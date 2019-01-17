@@ -7,6 +7,9 @@
 	// Animate ring if active
 	ring_do ();
 
+	// Animate bridges 
+	bridge_do ();
+
 	// Underwater
 	if (underwater) {
 		// slower movements. Cheesy but kinda works!

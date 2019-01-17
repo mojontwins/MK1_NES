@@ -30,6 +30,11 @@ unsigned char free_play;
 unsigned char select_level;
 unsigned char pdying;			// Dying animation is active
 
+unsigned char bridge_idx;		// Breakable bridges
+unsigned char bridge_x [4];
+unsigned char bridge_y [4];
+unsigned char bridge_f [4];
+
 // Continue from act 0 always
 
 const unsigned char base_level [] = {
