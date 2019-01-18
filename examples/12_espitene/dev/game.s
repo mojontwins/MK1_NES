@@ -19431,9 +19431,10 @@ L276E:	jsr     _pal_bg
 	lda     #$1E
 	jsr     _ppu_mask
 ;
-; if (half_life) sfx_play (1, 2);
+; if (real_frame_counter & 1) sfx_play (1, 2);
 ;
-	lda     _half_life
+	lda     _real_frame_counter
+	and     #$01
 	beq     L2777
 	lda     #$01
 	jsr     pusha

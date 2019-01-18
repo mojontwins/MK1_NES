@@ -40,7 +40,7 @@
 		if (elec_state == 2) {
 			pal_bg (half_life ? palts5 : palts5a);
 			ppu_mask (0x1e);
-			if (half_life) sfx_play (1, 2);
+			if (real_frame_counter & 1) sfx_play (1, 2);
 		} else {
 			ppu_mask (0xfe); 
 		}
