@@ -18,10 +18,10 @@ void bat_out (void) {
 	ppu_off ();
 }
 
-void pres (const unsigned char *p, void (*func) (void)) {
+void pres (void) {
 	cls ();
-	pal_bg (p);
-	(*func) ();
+	pal_bg (gp_gen);
+	(*gp_func) ();
 	bat_in ();
 	while (1) {
 		pad_read ();
@@ -86,8 +86,7 @@ void title (void) {
 			break;
 		}
 		if (!first_game && (pad_this_frame & PAD_SELECT)) {
-			level = base_level [level];
-			if (free_play) select_level = 1;
+			select_level = free_play;
 			break;
 		}
 	}
@@ -123,7 +122,9 @@ void scr_cutscene (void) {
 void cutscene (void) {
 	bankswitch (1);
 	scroll (0, 16);
-	pres (cuts_pal [rdm], scr_cutscene);
+	gp_gen = cuts_pal [rdm]; gp_func = scr_cutscene; pres ();	
+	//pres (cuts_pal [rdm], scr_cutscene);
+	//pres (cuts_pal [rdm], scr_the_end);
 	bankswitch (0);
 }
 

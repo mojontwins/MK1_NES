@@ -111,9 +111,16 @@ extern const unsigned char m_ingame [];
 // *************
 
 void game_do (void) {
-	pres (paltstitle, scr_level);
+	//pres (paltstitle, scr_level);
+	gp_gen = paltstitle; gp_func = scr_level; pres ();
 	game_init (); 
 	game_loop ();
+}
+
+void game_ending (void) {
+	rdm = 4; cutscene ();
+	gp_gen = cuts_pal [rdm]; gp_func = scr_the_end; pres ();
+	free_play = 1;
 }
 
 void main(void) {
@@ -121,20 +128,23 @@ void main(void) {
 	bank_bg (0);
 
 	ppu_off ();
-	first_game = 1;
 	ntsc = ppu_system ();
 
 	// Main loop
 
+	first_game = 1;
+	
 	while (1) {	
 		title ();	// level* vars are set there.
 		plife = PLAYER_LIFE;
 
-		if (level == 0) {
-			music_play (MUSIC_CUTS);
-			rdm = 0; cutscene ();
-			rdm = 1; cutscene ();
-			music_stop ();
+		if (free_play == 0) {
+			if (level == 0) {
+				music_play (MUSIC_CUTS);
+				rdm = 0; cutscene ();
+				rdm = 1; cutscene ();
+				music_stop ();
+			} else level = base_level [level];
 		}
 
 		// Game loop
@@ -154,7 +164,8 @@ void main(void) {
 
 			if (game_over) {
 				level_reset = 0;
-				pres (palts0, scr_game_over);
+				//pres (palts0, scr_game_over);
+				gp_gen = palts0; gp_func = scr_game_over;
 				break;
 			} else if (level_reset) {
 				// Do nothing
@@ -169,17 +180,15 @@ void main(void) {
 							rdm = 3; cutscene (); 
 							free_play = select_level = 1;
 							level = 0;
+						} else {
+							game_ending ();
 						}
 					}
-				} 
+				} else if (pemmeralds == 0x3f) {
+					game_ending ();
+				}
 
 				if (free_play && level_act == 2) select_level = 1;
-
-				if (pemmeralds == 0x3f) {
-					rdm = 4; cutscene ();
-					first_game = 1;
-					break;
-				}
 			}
 		}
 

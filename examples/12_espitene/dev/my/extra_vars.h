@@ -29,6 +29,7 @@ unsigned char somari_life;		// Somari life
 unsigned char free_play;
 unsigned char select_level;
 unsigned char pdying;			// Dying animation is active
+void (*gp_func) (void);			// Used in fixed screens
 
 unsigned char bridge_idx;		// Breakable bridges
 unsigned char bridge_x [4];

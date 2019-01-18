@@ -5,7 +5,7 @@
 // Add here palette cycles/etc, splits...
 
 	// Do a palette cycle in the jungle
-	if ((level_world == 2 || level_world == 4 || level == 17) && (frame_counter & 7) == 0) {
+	if ((level_world == 2 || level_world == 4 || level == 17) && (real_frame_counter & 7) == 0) {
 		/*
 		rda = pal_cycle [2];
 		pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
@@ -32,7 +32,7 @@
 	}
 
 	// Do a split in the fridge
-	if (water_strip) split (frame_counter, 0);
+	if (water_strip) split (real_frame_counter, 0);
 
 	// Level 5 flashing should be 50Hz in PAL and 60Hz in NTSC
 	// So we put it here.
