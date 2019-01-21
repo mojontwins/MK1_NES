@@ -374,7 +374,7 @@ _cocos_shoot_linear       00A035  LA    _collide                  00972B  LA
 _collide_in               0096AE  LA    _cuts0_rle                00FBEE  LA    
 _cuts1_rle                00FC7E  LA    _cuts2_rle                00FD11  LA    
 _cuts_pal                 00FF44  LA    _cuts_rle                 00FF3A  LA    
-_cutscene                 00C0B3  LA    _cutscene_0               00F6F4  LA    
+_cutscene                 00C0B0  LA    _cutscene_0               00F6F4  LA    
 _cutscene_1               00F77F  LA    _cutscene_2               00F803  LA    
 _cutscene_3               00F849  LA    _cutscene_4               00F8C6  LA    
 _cutscenes                00F956  LA    _cx1                      00004F  LZ    
@@ -508,7 +508,7 @@ _ppu_off                  008246 RLA    _ppu_on_all               00825C RLA
 _ppu_on_bg                008276  LA    _ppu_on_spr               00827C  LA    
 _ppu_system               008259 RLA    _ppu_waitnmi              008327 RLA    
 _pr_str                   0095FC  LA    _pregotten                00005D  LZ    
-_prepare_scr              00C4F3  LA    _pres                     00BED0  LA    
+_prepare_scr              00C4F3  LA    _pres                     00BECD  LA    
 _prings                   0006D9  LA    _prx                      000096  LZ    
 _prx_old                  0000B0  LZ    _pry                      000097  LZ    
 _pry_old                  0000B1  LZ    _pspin                    0000AD  LZ    
@@ -527,12 +527,12 @@ _real_frame_counter       0004EC  LA    _ring_create              0098DA  LA
 _ring_do                  00991D  LA    _ring_timer               0006D8  LA    
 _ring_vx                  0006D4  LA    _ring_vy                  0006D6  LA    
 _ring_x                   0006D0  LA    _ring_y                   0006D2  LA    
-_saturate                 0097BD  LA    _scr_cutscene             00C067  LA    
-_scr_game_over            00C043  LA    _scr_level                00BF51  LA    
-_scr_the_end              00C055  LA    _scroll                   008380 RLA    
+_saturate                 0097BD  LA    _scr_cutscene             00C064  LA    
+_scr_game_over            00C040  LA    _scr_level                00BF4E  LA    
+_scr_the_end              00C052  LA    _scroll                   008380 RLA    
 _select_level             0006EA  LA    _set_rand                 0084E4 RLA    
 _set_vram_update          0084E9 RLA    _sfx_play                 008463 RLA    
-_show_emeralds            00BEF2  LA    _somari_ct                0006E7  LA    
+_show_emeralds            00BEEF  LA    _somari_ct                0006E7  LA    
 _somari_do                009BA7  LA    _somari_life              0006E8  LA    
 _somari_state             0006E6  LA    _split                    0083B3 RLA    
 _spr_enems                0000CF  LZ    _spr_enems1               00F4BE  LA    
@@ -586,7 +586,7 @@ _sstrunk_01               00EC0F  LA    _sstrunk_02               00EC20  LA
 _ticker                   00004C  LZ    _tile_got                 0006B8  LA    
 _timer                    0006B3  LA    _timer_frames             0006B5  LA    
 _timer_on                 0006B7  LA    _timer_zero               0006B6  LA    
-_title                    00BFAE  LA    _title_rle                00FD70  LA    
+_title                    00BFAB  LA    _title_rle                00FD70  LA    
 _toggle_switch            0006E2  LA    _toggle_timer             0006E3  LA    
 _touched                  00005B  LZ    _ts0_pals                 00F04A  LA    
 _ts0_tmaps                00F05C  LA    _ts1_pals                 00F0A4  LA    
@@ -605,7 +605,7 @@ _vram_adr                 0084F3 RLA    _vram_fill                0084FE RLA
 _vram_inc                 008520  LA    _vram_put                 0084FA RLA    
 _vram_read                008400 RLA    _vram_write               008433 RLA    
 _warp_to_level            0004F0  LA    _water_strip              0006DE  LA    
-_win_level                0004EE  LA    _zone_select              00C0EF  LA    
+_win_level                0004EE  LA    _zone_select              00C0EC  LA    
 addysp                    00CF87 RLA    addysp1                   00CF86 RLA    
 aslax2                    00CF94 RLA    aslax3                    00CF9F RLA    
 aslax4                    00CFAD RLA    asrax1                    00CFE9 RLA    
@@ -1329,7 +1329,7 @@ aslax4 (aslax4.o):
     game.o                    game.s(13428)
     game.o                    game.s(13867)
     game.o                    game.s(14982)
-    game.o                    game.s(17860)
+    game.o                    game.s(17856)
     game.o                    game.s(18425)
     game.o                    game.s(19329)
 asrax1 (asrax1.o):
@@ -1382,7 +1382,7 @@ boolule (makebool.o):
 boolult (makebool.o):
     game.o                    game.s(15177)
 callax (call.o):
-    game.o                    game.s(17273)
+    game.o                    game.s(17269)
 decsp3 (decsp3.o):
     game.o                    game.s(6928)
     game.o                    game.s(7310)
@@ -1391,12 +1391,12 @@ decsp3 (decsp3.o):
     game.o                    game.s(10248)
     game.o                    game.s(10593)
     game.o                    game.s(14395)
-    game.o                    game.s(17317)
+    game.o                    game.s(17313)
     game.o                    game.s(18910)
 decsp4 (decsp4.o):
     game.o                    game.s(8809)
     game.o                    game.s(11381)
-    game.o                    game.s(17853)
+    game.o                    game.s(17849)
     game.o                    game.s(18629)
     game.o                    game.s(20016)
 decsp8 (decsp8.o):
@@ -1451,8 +1451,8 @@ ptr4 (zeropage.o):
     udiv.o                    udiv.s(9)
     mul8.o                    mul8.s(10)
 push0 (pushax.o):
-    game.o                    game.s(17717)
-    game.o                    game.s(17839)
+    game.o                    game.s(17713)
+    game.o                    game.s(17835)
     game.o                    game.s(20621)
 pusha (pusha.o):
     game.o                    game.s(7352)
@@ -1465,8 +1465,8 @@ pusha (pusha.o):
     game.o                    game.s(11500)
     game.o                    game.s(12327)
     game.o                    game.s(15293)
-    game.o                    game.s(17576)
-    game.o                    game.s(17923)
+    game.o                    game.s(17572)
+    game.o                    game.s(17919)
     game.o                    game.s(18493)
     game.o                    game.s(18839)
     game.o                    game.s(19034)
@@ -1496,12 +1496,12 @@ pushax (pushax.o):
     game.o                    game.s(13906)
     game.o                    game.s(16201)
     game.o                    game.s(17115)
-    game.o                    game.s(17396)
-    game.o                    game.s(17469)
-    game.o                    game.s(17609)
-    game.o                    game.s(17633)
-    game.o                    game.s(17667)
-    game.o                    game.s(17788)
+    game.o                    game.s(17392)
+    game.o                    game.s(17465)
+    game.o                    game.s(17605)
+    game.o                    game.s(17629)
+    game.o                    game.s(17663)
+    game.o                    game.s(17784)
     game.o                    game.s(20091)
 pushaysp (pusha.o):
 regbank (zeropage.o):

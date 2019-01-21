@@ -1466,147 +1466,147 @@ _map_00_scr_offsets:
 	.word	$0000
 	.word	$008B
 	.word	$00B9
-	.word	$0000
 	.word	$00DA
-	.word	$0120
-	.word	$014D
-	.word	$018E
-	.word	$01BC
-	.word	$01FB
-	.word	$0229
-	.word	$0258
-	.word	$0277
-	.word	$02AC
+	.word	$00F2
+	.word	$0138
+	.word	$0165
+	.word	$01A6
+	.word	$01D4
+	.word	$0213
+	.word	$0241
+	.word	$0270
+	.word	$028F
+	.word	$02C4
 _map_32_scr_offsets:
-	.word	$02E6
-	.word	$0320
+	.word	$02FE
+	.word	$0338
 _map_40_scr_offsets:
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0357
-	.word	$0390
-	.word	$03C1
+	.word	$036F
+	.word	$03A8
+	.word	$03D9
 	.word	$0000
 	.word	$0000
-	.word	$03F8
-	.word	$0432
-	.word	$044D
-	.word	$0463
-	.word	$0484
-	.word	$0495
+	.word	$0410
+	.word	$044A
+	.word	$0465
+	.word	$047B
+	.word	$049C
 	.word	$04AD
-	.word	$04DC
-	.word	$050D
-	.word	$0539
-	.word	$0569
-	.word	$0594
-	.word	$05C6
-	.word	$05DA
-	.word	$0609
-	.word	$0634
+	.word	$04C5
+	.word	$04F4
+	.word	$0525
+	.word	$0551
+	.word	$0581
+	.word	$05AC
+	.word	$05DE
+	.word	$05F2
+	.word	$0621
+	.word	$064C
 	.word	$0000
-	.word	$0672
-	.word	$0672
+	.word	$068A
+	.word	$068A
 	.word	$0000
 	.word	$0000
 	.word	$0000
 _map_41_scr_offsets:
 	.word	$0000
-	.word	$06B3
-	.word	$06D7
-	.word	$06FE
-	.word	$071A
+	.word	$06CB
+	.word	$06EF
+	.word	$0716
+	.word	$0732
 	.word	$0000
-	.word	$0735
-	.word	$06D7
-	.word	$0767
-	.word	$079A
+	.word	$074D
+	.word	$06EF
+	.word	$077F
+	.word	$07B2
 	.word	$0000
-	.word	$06B3
-	.word	$06D7
-	.word	$0767
-	.word	$079A
+	.word	$06CB
+	.word	$06EF
+	.word	$077F
+	.word	$07B2
 	.word	$0000
-	.word	$0735
-	.word	$06D7
-	.word	$0767
-	.word	$079A
-	.word	$07E9
-	.word	$0807
-	.word	$0818
-	.word	$0831
-	.word	$0852
+	.word	$074D
+	.word	$06EF
+	.word	$077F
+	.word	$07B2
+	.word	$0801
+	.word	$081F
+	.word	$0830
+	.word	$0849
+	.word	$086A
 _map_42_scr_offsets:
-	.word	$0880
-	.word	$08B4
-	.word	$08EE
+	.word	$0898
+	.word	$08CC
+	.word	$0906
 _map_50_scr_offsets:
 	.word	$0000
 	.word	$0000
-	.word	$0918
-	.word	$0935
-	.word	$095D
-	.word	$09BE
-	.word	$0A10
-	.word	$0A62
-	.word	$0ABC
-	.word	$0B22
-	.word	$0B84
-	.word	$0BB5
+	.word	$0930
+	.word	$094D
+	.word	$0975
+	.word	$09D6
+	.word	$0A28
+	.word	$0A7A
+	.word	$0AD4
+	.word	$0B3A
+	.word	$0B9C
+	.word	$0BCD
 	.word	$0000
-	.word	$0BDC
-	.word	$0C13
-	.word	$0C5A
-	.word	$0C90
-	.word	$0CE5
-	.word	$0D41
-	.word	$0D41
+	.word	$0BF4
+	.word	$0C2B
+	.word	$0C72
+	.word	$0CA8
+	.word	$0CFD
+	.word	$0D59
+	.word	$0D59
 	.word	$0000
-	.word	$0D41
-	.word	$0D41
-	.word	$0D41
-	.word	$0D41
-	.word	$0D76
-	.word	$0DB8
-	.word	$0DEF
-	.word	$0E3B
+	.word	$0D59
+	.word	$0D59
+	.word	$0D59
+	.word	$0D59
+	.word	$0D8E
+	.word	$0DD0
+	.word	$0E07
+	.word	$0E53
 	.word	$0000
 _map_51_scr_offsets:
-	.word	$0E99
-	.word	$0EBD
-	.word	$0EBD
-	.word	$0EBD
-	.word	$0EBD
-	.word	$0ED1
-	.word	$0EEF
+	.word	$0EB1
+	.word	$0ED5
+	.word	$0ED5
+	.word	$0ED5
+	.word	$0ED5
+	.word	$0EE9
+	.word	$0F07
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
 	.word	$0000
-	.word	$0F45
-	.word	$0F5F
-	.word	$0FC2
+	.word	$0F5D
+	.word	$0F77
+	.word	$0FDA
 	.word	$0000
-	.word	$1027
-	.word	$1061
+	.word	$103F
+	.word	$1079
 	.word	$0000
-	.word	$1084
-	.word	$10D3
+	.word	$109C
+	.word	$10EB
 	.word	$0000
-	.word	$1125
-	.word	$114C
+	.word	$113D
+	.word	$1164
 	.word	$0000
-	.word	$1161
-	.word	$117F
-	.word	$117F
-	.word	$118D
+	.word	$1179
+	.word	$1197
+	.word	$1197
+	.word	$11A5
 	.word	$0000
 _map_52_scr_offsets:
-	.word	$11A4
-	.word	$11BB
-	.word	$11D6
+	.word	$11BC
+	.word	$11D3
+	.word	$11EE
 _sspl_00_a:
 	.byte	$FC
 	.byte	$F8
@@ -17227,10 +17227,6 @@ L2451:	rts
 .segment	"CODE"
 
 ;
-; music_stop ();
-;
-	jsr     _music_stop
-;
 ; fade_out ();
 ;
 	jsr     _fade_out
@@ -17278,13 +17274,13 @@ L2451:	rts
 ;
 ; pad_read ();
 ;
-L246F:	jsr     _pad_read
+L246E:	jsr     _pad_read
 ;
 ; if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;
 ;
 	lda     _pad_this_frame
 	and     #$0B
-	beq     L246F
+	beq     L246E
 	jmp     _bat_out
 
 .endproc
@@ -17308,9 +17304,9 @@ L246F:	jsr     _pad_read
 	sta     _rdx
 	lda     #$00
 	sta     _gpit
-L2482:	lda     _gpit
+L2481:	lda     _gpit
 	cmp     #$06
-	bcs     L2483
+	bcs     L2482
 ;
 ; rdx, rdy, oam_index, pemmeralds & bits [gpit] ? ssit_07 : ssit_03
 ;
@@ -17329,16 +17325,16 @@ L2482:	lda     _gpit
 	and     _pemmeralds
 	pha
 	pla
-	beq     L2492
+	beq     L2491
 	lda     #<(_ssit_07)
 	ldx     #>(_ssit_07)
-	jmp     L2494
+	jmp     L2493
 ;
 ; );
 ;
-L2492:	lda     #<(_ssit_03)
+L2491:	lda     #<(_ssit_03)
 	ldx     #>(_ssit_03)
-L2494:	jsr     _oam_meta_spr
+L2493:	jsr     _oam_meta_spr
 	sta     _oam_index
 ;
 ; rdx += 24; if (gpit == 2) { rdx = 128-32; rdy += 24; }
@@ -17349,7 +17345,7 @@ L2494:	jsr     _oam_meta_spr
 	sta     _rdx
 	lda     _gpit
 	cmp     #$02
-	bne     L2484
+	bne     L2483
 	lda     #$60
 	sta     _rdx
 	lda     #$18
@@ -17359,12 +17355,12 @@ L2494:	jsr     _oam_meta_spr
 ;
 ; oam_index = 0; rdx = 128-32; for (gpit = 0; gpit < 6; ++ gpit) {
 ;
-L2484:	inc     _gpit
-	jmp     L2482
+L2483:	inc     _gpit
+	jmp     L2481
 ;
 ; }
 ;
-L2483:	rts
+L2482:	rts
 
 .endproc
 
@@ -17480,7 +17476,7 @@ L2A9D:	adc     #<(_level_names)
 ; if (first_game) {
 ;
 	lda     _first_game
-	beq     L24BE
+	beq     L24BD
 ;
 ; _x = 10; _y = 20; pr_str ("PRESS START!");
 ;
@@ -17497,7 +17493,7 @@ L2A9D:	adc     #<(_level_names)
 ;
 ; _x = 4; _y = 19; pr_str ("PRESS START  TO BEGIN%%PRESS SELECT TO CONTINUE");
 ;
-L24BE:	lda     #$04
+L24BD:	lda     #$04
 	sta     __x
 	lda     #$13
 	sta     __y
@@ -17528,13 +17524,13 @@ L2A9F:	jsr     pushax
 ;
 ; pad_read ();
 ;
-L24D6:	jsr     _pad_read
+L24D5:	jsr     _pad_read
 ;
 ; if (pad_this_frame & PAD_START) {
 ;
 	lda     _pad_this_frame
 	and     #$08
-	beq     L24DA
+	beq     L24D9
 ;
 ; level = 0;
 ;
@@ -17551,15 +17547,15 @@ L24D6:	jsr     _pad_read
 ;
 ; break;
 ;
-	jmp     L24D7
+	jmp     L24D6
 ;
 ; if (!first_game && (pad_this_frame & PAD_SELECT)) {
 ;
-L24DA:	lda     _first_game
-	bne     L24D6
+L24D9:	lda     _first_game
+	bne     L24D5
 	lda     _pad_this_frame
 	and     #$04
-	beq     L24D6
+	beq     L24D5
 ;
 ; select_level = free_play;
 ;
@@ -17568,7 +17564,7 @@ L24DA:	lda     _first_game
 ;
 ; music_stop ();
 ;
-L24D7:	jsr     _music_stop
+L24D6:	jsr     _music_stop
 ;
 ; sfx_play (SFX_START, 0);
 ;
@@ -17792,9 +17788,9 @@ L2AA5:	adc     #<(_cuts_pal)
 ;
 	lda     #$00
 	sta     _gpjt
-L252E:	lda     _gpjt
+L252D:	lda     _gpjt
 	cmp     #$06
-	bcs     L252F
+	bcs     L252E
 ;
 ; _y = 8 + (gpjt << 1); pr_str ((unsigned char *) level_names [gpjt]);
 ;
@@ -17826,11 +17822,11 @@ L2AAB:	adc     #<(_level_names)
 ; for (gpjt = 0; gpjt < 6; ++ gpjt) {
 ;
 	inc     _gpjt
-	jmp     L252E
+	jmp     L252D
 ;
 ; rdy = 21 * 8; show_emeralds ();
 ;
-L252F:	lda     #$A8
+L252E:	lda     #$A8
 	sta     _rdy
 	jsr     _show_emeralds
 ;
@@ -17850,7 +17846,7 @@ L252F:	lda     #$A8
 ;
 ; oam_spr (72, 63 + (base_world [level] << 4), COCO_PATTERN, COCO_PALETTE, oam_index);
 ;
-L2546:	jsr     decsp4
+L2545:	jsr     decsp4
 	lda     #$48
 	ldy     #$03
 	sta     (sp),y
@@ -17883,7 +17879,7 @@ L2546:	jsr     decsp4
 ;
 	lda     _pad_this_frame
 	and     #$20
-	beq     L255A
+	beq     L2559
 ;
 ; level += 3; if (level >= 18) level = 0;
 ;
@@ -17892,33 +17888,33 @@ L2546:	jsr     decsp4
 	adc     _level
 	sta     _level
 	cmp     #$12
-	bcc     L255A
+	bcc     L2559
 	lda     #$00
 	sta     _level
 ;
 ; if (pad_this_frame & PAD_UP) {
 ;
-L255A:	lda     _pad_this_frame
+L2559:	lda     _pad_this_frame
 	and     #$10
-	beq     L2564
+	beq     L2563
 ;
 ; if (level > 2) level -= 3; else level = 15;
 ;
 	lda     _level
 	cmp     #$03
-	bcc     L2560
+	bcc     L255F
 	lda     _level
 	sec
 	sbc     #$03
 	jmp     L2AA9
-L2560:	lda     #$0F
+L255F:	lda     #$0F
 L2AA9:	sta     _level
 ;
 ; if (rda != level) sfx_play (SFX_HITTER, 1);
 ;
-L2564:	lda     _level
+L2563:	lda     _level
 	cmp     _rda
-	beq     L2567
+	beq     L2566
 	lda     #$0E
 	jsr     pusha
 	lda     #$01
@@ -17926,9 +17922,9 @@ L2564:	lda     _level
 ;
 ; if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;  
 ;
-L2567:	lda     _pad_this_frame
+L2566:	lda     _pad_this_frame
 	and     #$0B
-	bne     L2547
+	bne     L2546
 ;
 ; ppu_waitnmi ();
 ;
@@ -17936,11 +17932,15 @@ L2567:	lda     _pad_this_frame
 ;
 ; }
 ;
-	jmp     L2546
+	jmp     L2545
+;
+; music_stop ();
+;
+L2546:	jsr     _music_stop
 ;
 ; sfx_play (SFX_START, 1);
 ;
-L2547:	lda     #$00
+	lda     #$00
 	jsr     pusha
 	lda     #$01
 	jsr     _sfx_play

@@ -12,7 +12,6 @@ void bat_in (void) {
 }
 
 void bat_out (void) {	
-	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
@@ -157,6 +156,7 @@ void zone_select (void) {
 		if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;		
 		ppu_waitnmi ();
 	}
+	music_stop ();
 	sfx_play (SFX_START, 1);
 	bat_out ();
 
