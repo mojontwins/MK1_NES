@@ -13,6 +13,9 @@ unsigned char ntsc, ntsc_frame;
 unsigned char update_index;
 unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
+// Attribute table
+unsigned char attr_table [64];
+
 // Fader (neslib)
 
 signed char fader;                      // Brightness level

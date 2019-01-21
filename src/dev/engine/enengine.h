@@ -344,6 +344,8 @@ void enems_load (void) {
 							gen_was_hit [gpit] = 0;
 						#endif	
 						_en_s = ((TYPE_7_FIXED_SPRITE - 1) << 3);
+						_en_x2 = rdm;     // != 0 means "spawned enemy fires"
+						_en_y2 = rdd|0xf; // Frequency
 						break;
 				#endif	
 

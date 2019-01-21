@@ -101,8 +101,6 @@ void game_init (void) {
 		vram_fill (0, MAP_SIZE*24);
 	#endif
 
-	half_life = 0;
-	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
@@ -184,7 +182,7 @@ void prepare_scr (void) {
 	#endif
 
 	#ifdef PLAYER_CAN_FIRE
-		for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
+		for (gpit = 0; gpit < MAX_BULLETS; ++ gpit) {
 			b_slots [gpit] = gpit; bst [gpit] = 0;
 		}
 		b_slots_i = MAX_BULLETS;
@@ -282,6 +280,7 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
+	half_life = frame_counter = real_frame_counter = 0;
 	ntsc_frame = level_reset = warp_to_level = 0; 
 	oam_index = 4; ticker = 50;
 	
@@ -296,16 +295,28 @@ void game_loop (void) {
 
 		// Finish him
 
-		if (pkill) player_kill ();
+		if (pkill) {
+			#ifdef KILL_PLAYER_CUSTOM
+				#include "my/player_kill_custom.h"
+			#else
+				// standard way
+				player_kill ();	
+			#endif
+		} 
 		if (game_over || level_reset) break;			
 
 		// Flick the screen
 
+		#ifdef KILL_PLAYER_CUSTOM
+		if (!pkill) 
+		#endif
+		{
 		flick_override = 0;
 		#include "my/custom_flickscreen.h"
 		if (flick_override == 0) {
 			flickscreen_do_horizontal ();
 			flickscreen_do_vertical ();
+		}
 		}
 		
 		// Change screen ?
@@ -341,7 +352,8 @@ void game_loop (void) {
 
 		// Update actors if not paused...
 
-		ntsc_frame ++; if (ntsc_frame == 6) ntsc_frame = 0;
+		++ real_frame_counter;
+		++ ntsc_frame; if (ntsc_frame == 6) ntsc_frame = 0;
 
 		if (paused == 0 && (ntsc == 0 || ntsc_frame)) {
 			// Count frames		
@@ -367,9 +379,10 @@ void game_loop (void) {
 			
 			// Update player
 
-			if (!warp_to_level) {
+			if (!warp_to_level && !pkill) {
 				player_move ();
 			}
+			#include "my/player_move_custom.h"
 
 			// Timer
 

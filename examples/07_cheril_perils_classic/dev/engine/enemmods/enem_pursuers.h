@@ -83,6 +83,17 @@ switch (_en_state) {
 			}
 #endif
 
+#ifdef PURSUERS_MAY_FIRE
+			// Shoot
+			if (_en_x2) {
+				if ((rand8() & _en_y2) == 1) {
+					rdx = _en_x + 4;
+					rdy = _en_y + 4;
+					cocos_shoot_aimed ();
+				}
+			}
+#endif
+
 		}
 		
 		en_spr = ((TYPE_7_FIXED_SPRITE - 1) << 3) + en_fr;

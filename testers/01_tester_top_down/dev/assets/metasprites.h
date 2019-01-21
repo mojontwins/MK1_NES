@@ -18,8 +18,9 @@ const unsigned char * const spr_enems0 [] = {
 	ssen_02, ssen_03, 0, 0, ssen_02, ssen_03, 0, 0, // 2
 	ssen_04, ssen_05, 0, 0, ssen_04, ssen_05, 0, 0, // 3
 	ssen_06, ssen_07, 0, 0, ssen_06, ssen_07, 0, 0,	// 4
+	ssen_08, ssen_09, 0, 0, ssen_08, ssen_09, 0, 0,	// 5
 
-	// Explosion (offset 32)
+	// Explosion (offset 40)
 	ssexpl
 };
 

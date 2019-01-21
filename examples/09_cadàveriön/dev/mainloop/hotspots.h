@@ -26,7 +26,7 @@ if (hrt) {
 			} else
 		#endif
 		{
-			#ifdef ENABLE_USE_ANIM			
+			#ifdef ENABLE_USE_ANIM
 				if (
 					use_ct == 0 && b_button 
 					#ifndef PLAYER_TOP_DOWN

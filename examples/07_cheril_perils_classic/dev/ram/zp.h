@@ -16,13 +16,14 @@ unsigned char gpitu, gpaux;             // Auxiliary iterators.
 signed int rds16;                       // General purpose 16 bit signed variable.
 
 const unsigned char *gp_gen;            // General purpose pointer to read data in ROM.
-const unsigned char *gp_tmap, *gp_tma2; // Pointers used to read map data in ROM.
+const unsigned char *gp_tmap;           // Pointers used to read map data in ROM.
 unsigned char *gp_ram, *gp_ram_aux;     // General purpose pointers to read / write data in RAM.
 unsigned int gp_addr;                   // General purpose address, used for PPU addresses.
 unsigned char rdx, rdy;                 // General purpose coordinates
 unsigned char rdt;                      // General purpose "type"
 unsigned char rdit;                     // General purpose iterator
 unsigned char rda, rdb, rdc, rdd, rdm;  // General purpose temporal value holders.
+unsigned char ast1;                     // General purpose temporal variable
 signed char rds;                        // General purpose temporal value holder, signed.
 unsigned char rdct;                     // General purpose counter
 unsigned char ticker;                   // Ticker. 0 for a frame every second.

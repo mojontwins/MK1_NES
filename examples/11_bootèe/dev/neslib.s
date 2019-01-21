@@ -188,14 +188,14 @@ _pal_col:
 ;void __fastcall__ pal_clear(void);
 
 _pal_clear:
-	lda #$0f
-	ldx #0
-@1:
-	sta PAL_BUF,x
-	inx
-	cpx #$20
-	bne @1
-	stx <PALUPDATE
+;	lda #$0f
+;	ldx #0
+;@1:
+;	sta PAL_BUF,x
+;	inx
+;	cpx #$20
+;	bne @1
+;	stx <PALUPDATE
 	rts
 
 

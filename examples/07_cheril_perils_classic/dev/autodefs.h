@@ -5,7 +5,7 @@
 
 #define CATACROCK_WAIT			_en_mx
 
-#if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
+#if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT)) || (defined (ENABLE_PURSUERS) && defined (PURSUERS_MAY_FIRE))
 #define ENABLE_COCOS
 #define COCOS_ENABLE_AIMED
 #endif

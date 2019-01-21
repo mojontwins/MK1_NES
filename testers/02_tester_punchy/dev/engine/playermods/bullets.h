@@ -92,7 +92,7 @@ void bullets_destroy (void) {
 }
 
 void bullets_move (void) {
-	for (bi = 0; bi < MAX_BULLETS; bi ++) {
+	for (bi = 0; bi < MAX_BULLETS; ++ bi) {
 		if (bst [bi]) {
 			bx [bi] += bmx [bi];
 			by [bi] += bmy [bi];
@@ -117,7 +117,7 @@ void bullets_move (void) {
 			#endif
 			#ifdef ENABLE_BREAKABLE
 				if (rdm & 16) {
-					breakable_break (cx1, cy1);
+					_x = cx1; _y = cy1; breakable_break ();
 					bullets_destroy ();
 				} else
 			#endif

@@ -56,7 +56,8 @@ if (_en_ct) {
 		}
 
 		cm_two_points ();
-		if ((at1 & 9) || (at2 & 9)) {
+		//if ((at1 & 9) || (at2 & 9)) {
+		if ((at1 | at2) & 9) {
 			_en_x = rds + (cx1 << 4);
 			_enf_vx = -_enf_vx;
 		}

@@ -13,6 +13,9 @@ unsigned char ntsc, ntsc_frame;
 unsigned char update_index;
 unsigned char update_list [UPDATE_LIST_SIZE * 3];
 
+// Attribute table
+unsigned char attr_table [64];
+
 // Fader (neslib)
 
 signed char fader;                      // Brightness level
@@ -36,6 +39,7 @@ unsigned char on_pant;                  // Current screen (room) numberm last fr
 
 unsigned char half_life;                // 1-0 flip flop (each game frame)
 unsigned char frame_counter;            // Game grame counter, wraps 255->0
+unsigned char real_frame_counter;       // Real HW frame counter, same as frame_counter in PAL
 
 unsigned char paused;                   // True if the game is paused.
 unsigned char win_level;                // If WIN_LEVEL_CUSTOM is defined, set to true to win the level.
@@ -246,6 +250,12 @@ unsigned char en_spr_x_mod;             // Modifier to X position of sprite (for
 #endif
 
 unsigned char en_spr_id [3];
+
+// Temporal invincibility
+
+#ifdef ENEMS_INVINCIBILITY
+    unsigned char en_invincible [3];
+#endif
 
 // Persistent enemies (position / movement is remembered)
 

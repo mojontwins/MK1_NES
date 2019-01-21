@@ -23,7 +23,8 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 .define SPEED_FIX		0	;zero if you want to handle PAL/NTSC speed difference by yourself
 
     .export _exit,__STARTUP__:absolute=1
-	.import push0,popa,popax,_main,zerobss,copydata
+    .export PAL_BUF, _PALUPDATE
+	.import push0,popa,popax,_main;,zerobss;,copydata
 
 ; Linker generated symbols
 	.import __RAM_START__   ,__RAM_SIZE__
@@ -69,6 +70,7 @@ NAME_UPD_LEN=$17
 PAL_PTR		=$18	;word
 RAND_SEED	=$1a	;word
 PALUPDATE	=$1c
+_PALUPDATE  =$1c
 
 TEMP		=$1d
 SCROLL_X1   =$1e	;Added by mojon twins
@@ -168,11 +170,11 @@ clearRAM:
 
 	lda #4
 	jsr _pal_bright
-	jsr _pal_clear
+	;jsr _pal_clear
 	jsr _oam_clear
 
-    jsr	zerobss
-	jsr	copydata
+    ;jsr zerobss
+	;jsr copydata
 
     lda #<(__RAM_START__+__RAM_SIZE__)
     sta	sp

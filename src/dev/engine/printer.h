@@ -32,9 +32,30 @@ void cls (void) {
 
 // Needs gp_addr, _n set.
 void ul_putc (void) {
+	/*
 	update_list [update_index++] = MSB (gp_addr);
 	update_list [update_index++] = LSB (gp_addr++);
 	update_list [update_index++] = _n;
+	*/
+
+	// Manually rewrote this
+
+		__asm__ ("ldx %v", update_index);
+		__asm__ ("lda %v + 1", gp_addr);
+		__asm__ ("sta %v, x", update_list);
+		__asm__ ("inx");
+		__asm__ ("lda %v", gp_addr);
+		__asm__ ("sta %v, x", update_list);
+		__asm__ ("inx");
+		__asm__ ("lda %v", _n);
+		__asm__ ("sta %v, x", update_list);
+		__asm__ ("inc %v", gp_addr);
+		__asm__ ("bne %g", ul_putc_inc16_0);
+		__asm__ ("inc %v + 1", gp_addr);
+	ul_putc_inc16_0:
+		__asm__ ("inc %v", update_index);
+		__asm__ ("inc %v", update_index);
+		__asm__ ("inc %v", update_index);
 }
 
 // Needs _x, _y, _n set.
@@ -62,16 +83,82 @@ void p_t (void) {
 		_n = rda + 16; ul_putc ();
 }
 
-const unsigned char bitmasks [] = {0xfc, 0xf3, 0xcf, 0x3f};
-unsigned char attr_table [64];
-
 // Needs _x, _y, _t set.
 void upd_attr_table (void) {
-	rdc = (_x >> 2) + ((_y >> 2) << 3);
-	rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
-	rda = attr_table [rdc];
-	rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));
-	attr_table [rdc] = rda;
+		// rdc = (_x >> 2) + ((_y >> 2) << 3);
+		// ((_y >> 2) << 3) is the same as (_y << 1) & 0xf8;
+		
+		__asm__ ("lda %v", _x);
+		__asm__ ("lsr a");
+		__asm__ ("lsr a");
+		__asm__ ("sta %v", rdc);	// rdc = (_x >> 2)
+
+		__asm__ ("lda %v", _y);
+		__asm__ ("asl a");
+		__asm__ ("and #$f8");		// A = (_y << 1) & 0xf8
+
+		__asm__ ("clc");
+		__asm__ ("adc %v", rdc);
+		__asm__ ("sta %v", rdc);	// Result
+
+		// rda = attr_table [rdc];
+		// rdc is on A
+		__asm__ ("tax");
+		__asm__ ("lda %v, x", attr_table);
+		__asm__ ("sta %v", rda);
+
+		// rdb = ((_x >> 1) & 1) + (((_y >> 1) & 1) << 1);
+		
+		__asm__ ("lda %v", _x);
+		__asm__ ("lsr a");
+		__asm__ ("and #1");
+		__asm__ ("sta %v", rdb);	// rdb = ((_x >> 1) & 1)
+
+		__asm__ ("lda %v", _y);
+		__asm__ ("lsr a");
+		__asm__ ("and #1");
+		__asm__ ("asl a");			// A = (((_y >> 1) & 1) << 1)
+
+		__asm__ ("clc");
+		__asm__ ("adc %v", rdb);
+		__asm__ ("sta %v", rdb);	// Result
+		
+		//rda = (rda & bitmasks [rdb]) | (c_ts_pals [_t] << (rdb << 1));		
+		
+		__asm__ ("lda %v", c_ts_pals);
+		__asm__ ("ldx %v + 1", c_ts_pals);
+		__asm__ ("ldy %v", _t);
+		__asm__ ("sta ptr1");
+		__asm__ ("stx ptr1+1");
+		__asm__ ("lda (ptr1), y");
+									// A = c_ts_pals [_t];
+
+		// Shift left (rdb << 1) times
+
+		__asm__ ("ldx %v", rdb);	
+		__asm__ ("beq %g", upd_attr_table_loop_0_skip);
+
+	upd_attr_table_loop_0:
+		__asm__ ("asl a");
+		__asm__ ("asl a");
+		__asm__ ("dex");
+		__asm__ ("bne %g", upd_attr_table_loop_0);
+
+	upd_attr_table_loop_0_skip:
+		__asm__ ("sta %v", ast1);	// ast1 = (c_ts_pals [_t] << (rdb << 1));
+
+		__asm__ ("lda %v", rda);
+		__asm__ ("ldx %v", rdb);
+		__asm__ ("and %v, x", bitmasks);
+									// A = (rda & bitmasks [rdb]);
+
+		__asm__ ("ora %v", ast1);
+		__asm__ ("sta %v", rda);	// Result
+
+		// attr_table [rdc] = rda;
+		// rda is already on A
+		__asm__ ("ldx %v", rdc);
+		__asm__ ("sta %v, x", attr_table);
 }
 
 // Needs _x, _y, _t set.
@@ -86,15 +173,15 @@ void draw_tile (void) {
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap++);
 	*/
-	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
-	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
+	SET_FROM_PTR (_z, gp_tmap); ++ gp_tmap; vram_put (_z);
+	SET_FROM_PTR (_z, gp_tmap); ++ gp_tmap; vram_put (_z);
 	gp_addr += 31;
 	vram_adr (gp_addr++);
 	/*
 	vram_put (*gp_tmap++);
 	vram_put (*gp_tmap);	
 	*/
-	SET_FROM_PTR (_z, gp_tmap); gp_tmap ++; vram_put (_z);
+	SET_FROM_PTR (_z, gp_tmap); ++ gp_tmap; vram_put (_z);
 	SET_FROM_PTR (_z, gp_tmap);             vram_put (_z);
 }
 
@@ -112,27 +199,48 @@ void update_list_tile (void) {
 	//tl = (16 + tl) << 2;
 	gp_tmap = c_ts_tmaps + (_t << 2);
 	gp_addr = ((_y << 5) + _x + 0x2000);
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap ++; ul_putc ();
-	*/
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
 	gp_addr += 30;
-	/*
-	_n = *gp_tmap ++; ul_putc ();
-	_n = *gp_tmap   ; ul_putc ();
-	*/
-	SET_FROM_PTR (_n, gp_tmap); gp_tmap ++; ul_putc ();
+
+	SET_FROM_PTR (_n, gp_tmap); ++ gp_tmap; ul_putc ();
 	SET_FROM_PTR (_n, gp_tmap);             ul_putc ();
 }
 
 // Needs _x, _y, _t set.
 // Destroys _x, _y!.
 void map_set (void) {
-	map_buff [COORDS (_x, _y)] = _t;
-	map_attr [COORDS (_x, _y)] = c_behs [_t];
-	_x = _x << 1; _y = TOP_ADJUST + (_y << 1);
+	// In single screen mode all operations fit within a byte so I can use this
+	// code instead, which is smaller + faster
+
+	// map_buff [COORDS (_x, _y)] = _t;
+	// map_attr [COORDS (_x, _y)] = c_behs [_t];
+	__asm__ ("lda %v", _y);
+	__asm__ ("asl a");
+	__asm__ ("asl a");
+	__asm__ ("asl a");
+	__asm__ ("asl a");
+	__asm__ ("sta %v", ast1);
+	__asm__ ("lda %v", _x);
+	__asm__ ("ora %v", ast1);
+	__asm__ ("tax");				// X = COORDS (_x, _y)
+
+	__asm__ ("lda %v", _t);
+	__asm__ ("sta %v, x", map_buff);
+									// map_buff [COORDS (_x, _y)] = _t;
+	__asm__ ("lda %v", c_behs);
+	__asm__ ("sta ptr1");
+	__asm__ ("lda %v + 1", c_behs);
+	__asm__ ("sta ptr1 + 1");
+	__asm__ ("ldy %v", _t);
+	__asm__ ("lda (ptr1), y");		// A = c_behs [_t]
+	__asm__ ("sta %v, x", map_attr);
+									// map_attr [COORDS (_x, _y)] = c_behs [_t];
+
+	// _x = _x << 1; 
+	__asm__ ("asl %v", _x);
+	_y = TOP_ADJUST + (_y << 1);
 	update_list_tile (); 
 }
 

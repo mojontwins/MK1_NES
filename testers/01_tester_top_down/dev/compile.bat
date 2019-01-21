@@ -19,8 +19,8 @@ cd ..\enems
 
 echo Making map
 cd ..\map
-..\..\..\src\utils\mapcnvnes2.exe level0.map ..\dev\assets\map0.h 1 24 15 0 packed
-..\..\..\src\utils\mapcnvnes2.exe level1.map ..\dev\assets\map1.h 1 24 15 1 packed
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level0.map ..\dev\assets\map0.h 1 24 15 0 1 scrsizes nodecos cwithheader
+..\..\..\src\utils\rle44mapMK1.exe ..\map\level1.map ..\dev\assets\map1.h 1 24 15 1 1 scrsizes nodecos cwithheader
 
 echo Exporting music and sound
 cd ..\dev

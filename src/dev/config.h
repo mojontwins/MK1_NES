@@ -69,7 +69,7 @@
 //#define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
-#define KILL_PLAYER_CUSTOM				// Advanced custom handling. Beware!
+//#define KILL_PLAYER_CUSTOM			// Advanced custom handling. Beware!
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
@@ -99,9 +99,6 @@
 
 // Player is 8x16 for collision with BG but can be made taller by this amount. Negative values=shorter
 #define PLAYER_COLLISION_VSTRETCH_BG	-4
-
-// Bottom collision. If set, player can bleed a bit into spikes when going down.
-//#define PLAYER_SPIKES_BOTTOM_ALLOW	2
 
 // This defines how the player will collide with enemies. 
 // Player is always 8 pixels wide and 16 pixel tall PLUS the value of this variable.
@@ -329,6 +326,7 @@
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
+//#define PURSUERS_MAY_FIRE				// If defined, attr = 1 make spawned pursuers shoot
 
 // Saws
 
@@ -359,6 +357,8 @@
 #define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
+
+//#define USE_CUSTOM_CHAC_CHAC			// Implement your own chac chac
 
 // Monococos
 
@@ -421,6 +421,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES

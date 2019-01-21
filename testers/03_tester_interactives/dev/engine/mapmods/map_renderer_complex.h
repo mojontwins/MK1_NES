@@ -169,12 +169,12 @@ void draw_scr (void) {
 						} else {
 							// rdct = *gp_gen ++;
 							SET_FROM_PTR (rdct, gp_gen); 
-							gp_gen ++;
+							++ gp_gen;
 						}
 						while (rdct --) {
 							// rdm = *gp_gen ++;
 							SET_FROM_PTR (rdm, gp_gen); 
-							gp_gen ++;
+							++ gp_gen;
 							add_tile ();
 						}
 					}
@@ -189,9 +189,9 @@ void draw_scr (void) {
 		gp_gen = c_locks; rda = 0;
 		gpit = c_max_bolts; while (gpit --) {
 			// rdb = *gp_gen ++;
-			SET_FROM_PTR (rdb, gp_gen); gp_gen ++;
+			SET_FROM_PTR (rdb, gp_gen); ++ gp_gen;
 			// rdm = *gp_gen ++;
-			SET_FROM_PTR (rdm, gp_gen); gp_gen ++;
+			SET_FROM_PTR (rdm, gp_gen); ++ gp_gen;
 			if (n_pant == rdb) {
 				if (!lkact [gpit]) add_tile ();
 			}
@@ -205,8 +205,8 @@ void draw_scr (void) {
 	#endif
 
 	_x = 0; _y = TOP_ADJUST; gp_ram = map_buff;
-	for (rdm = 0; rdm < 192; rdm ++) {
-		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
+	for (rdm = 0; rdm < 192; ++ rdm) {
+		SET_FROM_PTR (rdt, gp_ram); ++ gp_ram;
 
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)			
 			if (tile_got [rdd] & bits [rdm & 7]) rdt = 0;

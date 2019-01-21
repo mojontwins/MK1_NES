@@ -69,6 +69,7 @@ METASPRITESET 0, 0, 2, 2, 8, 1, -4, 0
 # (enems rectangle is 16x16, centered bottom).
 LABEL ssen
 METASPRITESET 0, 2, 2, 2, 8, 1, 0, 0
+METASPRITESET 12, 4, 2, 2, 2, 1, 0, 0
 
 # Explosion, 1 frame, 2x2 patterns. No need for flipped versions
 # hot point (where oam_meta_spr places its origin) is (0, 0).
