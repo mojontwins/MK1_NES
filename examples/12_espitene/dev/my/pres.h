@@ -6,22 +6,21 @@
 void bat_in (void) {
 	pal_bright (0);
 	ppu_on_all ();
-	while (pad_poll (0));
+	//while (pad_poll (0));
 	fade_delay = 4;
 	fade_in ();
 }
 
 void bat_out (void) {	
-	music_stop ();
 	fade_out ();
 	oam_clear ();
 	ppu_off ();
 }
 
-void pres (const unsigned char *p, void (*func) (void)) {
+void pres (void) {
 	cls ();
-	pal_bg (p);
-	(*func) ();
+	pal_bg (gp_gen);
+	(*gp_func) ();
 	bat_in ();
 	while (1) {
 		pad_read ();
@@ -86,8 +85,7 @@ void title (void) {
 			break;
 		}
 		if (!first_game && (pad_this_frame & PAD_SELECT)) {
-			level = base_level [level];
-			if (free_play) select_level = 1;
+			select_level = free_play;
 			break;
 		}
 	}
@@ -114,8 +112,7 @@ const unsigned char * const cuts_pal [] = {
 };
 
 void scr_cutscene (void) {
-	// show cuts + text in rda;
-	scroll (0, 8);
+	// show cuts + text in rda;	
 	unrle_vram (cuts_rle [rdm], 0x2000);
 	_x = 2; _y = 18; pr_str ((unsigned char *) cutscenes [rdm]);
 	//music_play (MUSIC_CUTS);
@@ -123,7 +120,10 @@ void scr_cutscene (void) {
 
 void cutscene (void) {
 	bankswitch (1);
-	pres (cuts_pal [rdm], scr_cutscene);
+	scroll (0, 16);
+	gp_gen = cuts_pal [rdm]; gp_func = scr_cutscene; pres ();	
+	//pres (cuts_pal [rdm], scr_cutscene);
+	//pres (cuts_pal [rdm], scr_the_end);
 	bankswitch (0);
 }
 
@@ -156,6 +156,7 @@ void zone_select (void) {
 		if (pad_this_frame & (PAD_A|PAD_B|PAD_START)) break;		
 		ppu_waitnmi ();
 	}
+	music_stop ();
 	sfx_play (SFX_START, 1);
 	bat_out ();
 

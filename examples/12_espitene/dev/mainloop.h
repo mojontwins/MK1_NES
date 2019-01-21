@@ -101,8 +101,6 @@ void game_init (void) {
 		vram_fill (0, MAP_SIZE*24);
 	#endif
 
-	half_life = 0;
-	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
@@ -282,6 +280,7 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
+	half_life = frame_counter = real_frame_counter = 0;
 	ntsc_frame = level_reset = warp_to_level = 0; 
 	oam_index = 4; ticker = 50;
 	
@@ -353,6 +352,7 @@ void game_loop (void) {
 
 		// Update actors if not paused...
 
+		++ real_frame_counter;
 		++ ntsc_frame; if (ntsc_frame == 6) ntsc_frame = 0;
 
 		if (paused == 0 && (ntsc == 0 || ntsc_frame)) {

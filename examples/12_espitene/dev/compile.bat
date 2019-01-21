@@ -116,7 +116,7 @@ cd ..\dev
 cc65 -Oi game.c --add-source -D CNROM
 ca65 crt0.s -o crt0.o -D CNROM=1
 ca65 game.s
-ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt
+ld65 -v -C nes-CNROM.cfg -o cart.nes crt0.o game.o runtime.lib -m labels.txt -vm
 
 del *.o > nul
 rem del game.s > nul

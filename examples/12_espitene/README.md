@@ -238,6 +238,42 @@ What we will do is add a simple check to `my/on_entering_screen.h`. If the hotsp
 
 There's also code to show which emmeralds have been collected in the "level title" screens, you can check it out at `my/pres.h`.
 
+## Falling bridge bits
+
+I've used the `my/on_tile_break.h` code injection point. This code is executed whenever a breakable tile is broken *and disappears*. What I do is spawn a simple moving object I've coded in the custom module `bridge.h`. The first thing to do is `#include` the code in `my/extra_modules.h`:
+
+```c
+    #include "my/bridge.h"
+```
+
+`bridge.h` contains a rather simple *falling object* implementation using integer math and dully simulating gravity acceleration.  The objects are stored in a circular buffer with just 4 slots (no need for more). Active bridge bits are overwritten with new instances if necessary. The implementation needs some variables:
+
+```c
+    unsigned char bridge_idx;       // Breakable bridges
+    unsigned char bridge_x [4];
+    unsigned char bridge_y [4];
+    unsigned char bridge_f [4];
+```
+
+`bridge.h` contains just two functions: `bridge_create` creates a new falling bit at _x, _y. This is the function we have to call from `my/on_tile_break.h`:
+
+```c
+    // NES MK1 v1.0
+    // Copyleft Mojon Twins 2013, 2015, 2017, 2018
+
+    // Add here your code. A tile has just broken.
+    // Tile is at _x, _y. DO NOT MODIFY!
+
+    bridge_create ();
+```
+
+`bridge_do` is the other function. This just checks if bridge bits are active and animates them. This needs to be called every game frame so we add the function call to `extra_routines.h`:
+
+```c 
+    // Animate bridges 
+    bridge_do ();
+```
+
 ## Bosses
 
 Bosses are implemented as simple compiled enemies. Dull, but it works and you don't have to modify the engine or add your own enemy types.
@@ -481,10 +517,11 @@ When `elec_state` equals 2, the electric barriers are "active" - harmful. There'
 ```c
     // Level 5 flashing should be 50Hz in PAL and 60Hz in NTSC
     // So we put it here.
-    if (level_world == 5) {
+    if (level == 15) {
         if (elec_state == 2) {
             pal_bg (half_life ? palts5 : palts5a);
             ppu_mask (0x1e);
+            if (real_frame_counter & 1) sfx_play (1, 2);
         } else {
             ppu_mask (0xfe); 
         }
@@ -799,7 +836,7 @@ The actual split is performed at `my/effects.h`, which gets included right befor
 
 ```c
     // Do a split in the fridge
-    if (water_strip) split (frame_counter, 0);   
+    if (water_strip) split (real_frame_counter, 0);   
 ```
 
 Of course you need to define `water_strip` in `my/extra_vars.h`:
@@ -828,7 +865,7 @@ The actual palette cycling is performed in `my/effects.h`. This ensure the effec
 
 ```c
     // Do a palette cycle in the jungle
-    if (level_world == 2 && (frame_counter & 7) == 0) {
+    if (level_world == 2 && (real_frame_counter & 7) == 0) {
         rda = pal_cycle [2];
         pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);
         pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);

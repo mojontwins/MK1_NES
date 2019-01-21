@@ -4,6 +4,7 @@
 # Boss 0: roam and not much else.
 BEGIN beh0
 	:START
+	SPEED 1
 	LEFT 7
 	LEFT 6
 	RIGHT 7
@@ -23,6 +24,7 @@ END
 # Boss 1: hide under bridges and shoot!
 BEGIN beh1
 	:START
+	SPEED 1
 	IDLE 2
 	UP 4
 	FIRE
@@ -111,6 +113,7 @@ END
 # Boss 4: Like 0 but more firey
 BEGIN beh4
 	:START
+	SPEED 1
 	LEFT 3
 	FIRE 
 	LEFT 3
