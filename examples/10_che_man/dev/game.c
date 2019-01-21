@@ -23,7 +23,7 @@
 // * const data *
 // **************
 
-#include "assets/precalcs.h"
+#include "engine/precalcs.h"
 #include "assets/palettes.h"
 #include "assets/behs.h"
 #include "assets/map0.h"

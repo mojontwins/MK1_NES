@@ -19,7 +19,7 @@
 			vram_adr (c_enems);
 			rda = VRAM_READ; 	// Dummy read.			
 
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				rdt = VRAM_READ;
 
@@ -42,26 +42,26 @@
 			}
 		#else		
 			gp_gen = (unsigned char *) (c_enems);
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				// rdt = *gp_gen ++; 
-				SET_FROM_PTR (rdt, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rdt, gp_gen); ++ gp_gen;
 
 				// YX1
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				ep_y [gpjt] = rda & 0xf0;
 				ep_x [gpjt] = rda << 4;
 
 				// YX2
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				rdc = rda & 0xf0;
 				rdb = rda << 4;
 
 				// P, here used for speed
 				//rda = (*gp_gen ++) & 0x0f;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++; rda &= 0x0f;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen; rda &= 0x0f;
 				if (rda > 1) rda >>= 1;	// Store converted!
 				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
@@ -72,7 +72,7 @@
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
 			gpjt = on_pant + on_pant + on_pant;
-			for (gpit = 0; gpit < 3; gpit ++) {
+			for (gpit = 0; gpit < 3; ++ gpit) {
 				__asm__ ("ldx %v", gpit);
 				__asm__ ("ldy %v", gpjt);
 
@@ -182,7 +182,7 @@ void enems_load (void) {
 		en_offs = rdc = (n_pant << 1) + n_pant;
 	#endif
 
-	for (gpit = 0; gpit < 3; gpit ++) {
+	for (gpit = 0; gpit < 3; ++ gpit) {
 		
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
@@ -344,6 +344,8 @@ void enems_load (void) {
 							gen_was_hit [gpit] = 0;
 						#endif	
 						_en_s = ((TYPE_7_FIXED_SPRITE - 1) << 3);
+						_en_x2 = rdm;     // != 0 means "spawned enemy fires"
+						_en_y2 = rdd|0xf; // Frequency
 						break;
 				#endif	
 
@@ -463,6 +465,10 @@ void enems_load (void) {
 			
 			en_cttouched [gpit] = 0;
 			en_flags [gpit] = 0;
+
+			#ifdef ENEMS_INVINCIBILITY
+				en_invincible [gpit] = 0;
+			#endif
 		}
 		#if defined (PERSISTENT_DEATHS) || defined (PERSISTENT_ENEMIES)
 			++ rdc;
@@ -629,6 +635,11 @@ void enems_move (void) {
 				#ifdef ENEMS_RECOIL_ON_HIT
 					#include "engine/enemmods/enems_recoiling.h"
 				#endif
+
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_cttouched [gpit] == 0 && en_life [gpit])
+						en_invincible [gpit] = ENEMS_INVINCIBILITY;
+				#endif
 			} else
 		#endif
 		
@@ -760,6 +771,9 @@ void enems_move (void) {
 				en_spr_id [gpit] = en_spr;
 			}
 
+			// If player is dead no interaction is possible
+			if (!pkill) {
+
 			// Warp player?
 
 			#ifdef ENABLE_SIMPLE_WARPERS
@@ -824,6 +838,14 @@ void enems_move (void) {
 				#endif
 			#endif
 
+			// Invincible
+			#ifdef ENEMS_INVINCIBILITY
+				if (en_invincible [gpit]) {
+					-- en_invincible [gpit];
+					if (half_life) en_spr = 0xff;
+				}
+			#endif
+
 			// Is enemy collidable? If not, exit
 
 			if (
@@ -878,6 +900,9 @@ void enems_move (void) {
 					#endif	
 					#ifdef ENABLE_SAW
 						&& _en_t != 8
+					#endif
+					#ifdef ENEMS_INVINCIBILITY
+						&& en_invincible [gpit] == 0
 					#endif
 				) {
 				
@@ -951,12 +976,16 @@ void enems_move (void) {
 							&& _en_t != 8
 						#endif
 					) {
-						en_sg_2 = 0;
 						en_sg_1 = 1;
+						en_sg_2 = 0;
 						pvy = -pvy;
 						sfx_play (SFX_STEPON, 1);
 					}
 				#endif				
+
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_invincible [gpit]) en_sg_1 = 0;
+				#endif
 
 				#include "my/on_player_hit.h"
 
@@ -992,6 +1021,9 @@ void enems_move (void) {
 				#ifdef ENABLE_SAW
 					|| _en_t == 8
 				#endif
+				#ifdef ENEMS_INVINCIBILITY
+					|| en_invincible [gpit]
+				#endif
 			) goto skipdo;
 
 			// Hit enemy
@@ -1026,6 +1058,7 @@ void enems_move (void) {
 					}
 				} 
 			#endif
+			}
 
 			#ifdef PLAYER_CAN_FIRE
 				// Bullets

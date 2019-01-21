@@ -69,6 +69,8 @@
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
+//#define KILL_PLAYER_CUSTOM			// Advanced custom handling. Beware!
+
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 #define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
@@ -134,6 +136,7 @@
 	//#define DIE_AND_REINIT				//     ... or start the level over!
 #define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define NO_V_BOOST_WHEN_FLICK				// If defined, no -vy boost when moving to the room above
 
 // Extra special tiles
 // -------------------
@@ -278,6 +281,8 @@
 
 //#define ENEMS_TREMBLE						// Make enemies tremble when hit
 
+//#define ENEMS_INVINCIBILITY			25	// If defined, make enemies invincible for N frames when hit.
+
 //#define PERSISTENT_ENEMIES
 #define PERSISTENT_DEATHS
 
@@ -321,6 +326,7 @@
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
+//#define PURSUERS_MAY_FIRE				// If defined, attr = 1 make spawned pursuers shoot
 
 // Saws
 
@@ -351,6 +357,8 @@
 #define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
+
+//#define USE_CUSTOM_CHAC_CHAC			// Implement your own chac chac
 
 // Monococos
 
@@ -413,6 +421,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES

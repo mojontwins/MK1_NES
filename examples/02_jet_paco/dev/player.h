@@ -220,9 +220,6 @@ const unsigned char player_frames [] = {
 
 void __fastcall__ player_move (void) {
 	i = pad_poll (0);
-	// Cheat
-	if ((i & (PAD_B|PAD_SELECT)) == (PAD_B|PAD_SELECT)) pobjs = PLAYER_NUM_OBJETOS;
-
 	wall = 0;
 	hitv = hith = 0;
 	pushed_any = 0;

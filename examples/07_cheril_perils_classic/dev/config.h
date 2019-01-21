@@ -69,6 +69,8 @@
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
 
+//#define KILL_PLAYER_CUSTOM			// Advanced custom handling. Beware!
+
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
 //#define MAP_FORMAT_RLE53				// RLE'd by rle53mapMK1. 32 tiles max.
@@ -134,6 +136,7 @@
 	//#define DIE_AND_REINIT				//     ... or start the level over!
 #define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define NO_V_BOOST_WHEN_FLICK				// If defined, no -vy boost when moving to the room above
 
 // Extra special tiles
 // -------------------
@@ -278,6 +281,8 @@
 
 //#define ENEMS_TREMBLE						// Make enemies tremble when hit
 
+//#define ENEMS_INVINCIBILITY			25	// If defined, make enemies invincible for N frames when hit.
+
 #define PERSISTENT_ENEMIES
 #define PERSISTENT_DEATHS
 
@@ -321,6 +326,7 @@
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
+//#define PURSUERS_MAY_FIRE				// If defined, attr = 1 make spawned pursuers shoot
 
 // Saws
 
@@ -351,6 +357,8 @@
 #define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
+
+//#define USE_CUSTOM_CHAC_CHAC			// Implement your own chac chac
 
 // Monococos
 
@@ -413,6 +421,7 @@
 // Cocos will get enabled automaticly on choosing monococos or shooties.
 
 //#define ENABLE_COCOS
+//#define COCOS_ROUGH_AIM						// Faster, less precise. Also longer code
 #define COCOS_MAX						4
 #define COCO_V							128
 //#define COCO_COLLIDES
@@ -515,7 +524,7 @@
 
 // Extra configuration for side view:
 
-//#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
+#define PLAYER_JUMP_TYPE_MK2			// Use MK2 method for jump / gravity / release
 #define PLAYER_STEPS_ON_ENEMS			// If defined, stepping on enemies kills them
 #define PLAYER_STEPS_STRICT				// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN
 #define PLAYER_SAFE_LANDING				// Step over vertical inverts direction
@@ -569,7 +578,7 @@
 #define PLAYER_VY_FALLING_MAX	256		// Max. velocity when falling
 #define PLAYER_VY_FALLING_MIN	32		// Use for animating if you need
 #define PLAYER_VY_SINKING		2
-#define PLAYER_G				8		// Gravity
+#define PLAYER_G				12		// Gravity
 
 #define PLAYER_VY_JUMP_INITIAL	64
 #define PLAYER_VY_JUMP_INITIAL_TRAMPOLINE 128
@@ -592,9 +601,9 @@
 // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)
 // (Used if PLAYER_JUMP_TYPE_MK2 is defined)
 #define PLAYER_G_MK2_JUMPING		2
-#define PLAYER_VY_MK2_JUMP_INITIAL	160
+#define PLAYER_VY_MK2_JUMP_INITIAL	192
 #define PLAYER_VY_MK2_JUMP_RELEASE	80
-#define PLAYER_VY_MK2_JUMP_A_STEPS 	16
+#define PLAYER_VY_MK2_JUMP_A_STEPS 	12
 #define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296
 #define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32	// For trampolines
 
