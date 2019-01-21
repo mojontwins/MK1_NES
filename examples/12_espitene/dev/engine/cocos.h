@@ -80,7 +80,7 @@ void cocos_do (void) {
 			// Out of bounds?
 			if (
 				// Optimization: if rdx < 0, it will wrap around,
-				/*COCO_RDX < 0 ||*/
+				// rdx < 0 ||
 				rdx > 248 ||
 				
 				// Optimization: if rdy < 0, it will wrap around,

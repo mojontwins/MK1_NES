@@ -466,20 +466,14 @@ void player_move (void) {
 				#endif
 
 				#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_WALKABLE)
-					if (at1 & 16) { breakable_break (cx1, cy1 - 1); pnotsafe = 1; }
-					if (cx1 != cx2 && (at2 & 16)) { breakable_break (cx2, cy1 - 1); pnotsafe = 1; }
+					if (at1 & 16) { _x = cx1; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
+					if (cx1 != cx2 && (at2 & 16)) { _x = cx2; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
 				#endif
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
-			} else {
-				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
-					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
-					cm_two_points ();
-				#endif
-				if ((at1 & 1) || (at2 & 1)) {
+			} else if ((at1 & 1) || (at2 & 1)) {
 					if ((pry & 15) > 4) hitv = 1;
 				}
-			}
 			#ifdef ENABLE_QUICKSANDS		
 				else {
 					if ((at1 == 2) || (at2 == 2)) {
@@ -748,10 +742,6 @@ void player_move (void) {
 					if (cy1 != cy2) if (at2 & 2) player_process_tile (at2, cx1, cy2, rdm, cy2);
 				#endif				
 			} else {
-				#ifdef PLAYER_SPIKES_BOTTOM_ALLOW
-					cy2 = pry + 15 - PLAYER_SPIKES_BOTTOM_ALLOW;
-					cm_two_points ();
-				#endif
 				hith = ((at1 & 1) || (at2 & 1));
 			}
 		#endif
@@ -921,7 +911,7 @@ void player_move (void) {
 			cx1 = (phitterx + 4) >> 4;
 			cy1 = (phittery + 4 - 16) >> 4;
 			if (ATTR(cx1, cy1) & 16) {
-				breakable_break (cx1, cy1);
+				_x = cx1; _y = cy1; breakable_break ();
 				pfrozen = PLAYER_FROZEN_FRAMES;
 				phitteract = 0;
 			}

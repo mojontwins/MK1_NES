@@ -769,6 +769,9 @@ void enems_move (void) {
 				en_spr_id [gpit] = en_spr;
 			}
 
+			// If player is dead no interaction is possible
+			if (!pkill) {
+
 			// Warp player?
 
 			#ifdef ENABLE_SIMPLE_WARPERS
@@ -1053,6 +1056,7 @@ void enems_move (void) {
 					}
 				} 
 			#endif
+			}
 
 			#ifdef PLAYER_CAN_FIRE
 				// Bullets
