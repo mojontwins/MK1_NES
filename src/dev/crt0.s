@@ -24,7 +24,7 @@ FT_SFX_STREAMS			=4	;number of sound effects played at once, can be 4 or less (f
 
     .export _exit,__STARTUP__:absolute=1
     .export PAL_BUF, _PALUPDATE
-	.import push0,popa,popax,_main,zerobss,copydata
+	.import push0,popa,popax,_main;,zerobss;,copydata
 
 ; Linker generated symbols
 	.import __RAM_START__   ,__RAM_SIZE__
@@ -170,11 +170,11 @@ clearRAM:
 
 	lda #4
 	jsr _pal_bright
-	jsr _pal_clear
+	;jsr _pal_clear
 	jsr _oam_clear
 
-    jsr	zerobss
-	jsr	copydata
+    ;jsr zerobss
+	;jsr copydata
 
     lda #<(__RAM_START__+__RAM_SIZE__)
     sta	sp

@@ -223,8 +223,8 @@ void draw_scr (void)
 	#else
 		gp_ram = map_buff;
 	#endif
-	for (rdm = 0; rdm < 192; rdm ++) {
-		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
+	for (rdm = 0; rdm < 192; ++ rdm) {
+		SET_FROM_PTR (rdt, gp_ram); ++ gp_ram;
 
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)			
 			if (tile_got [rdd] & bits [rdm & 7]) rdt = 0;

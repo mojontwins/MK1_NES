@@ -252,7 +252,7 @@ void prepare_scr (void) {
 
 
 	#ifdef DOUBLE_WIDTH
-		for (gpit = 0; gpit < 2; gpit ++)  {
+		for (gpit = 0; gpit < 2; ++ gpit)  {
 			hrx = d_hrx [gpit];
 			hrt = d_hrt [gpit];
 			if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
@@ -398,7 +398,7 @@ void game_loop (void) {
 			// Update / collide hotspots
 
 			#ifdef DOUBLE_WIDTH
-				for (gpit = 0; gpit < 2; gpit ++)  {
+				for (gpit = 0; gpit < 2; ++ gpit)  {
 					hrx = d_hrx [gpit];
 					hrt = d_hrt [gpit];
 					if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
@@ -424,6 +424,7 @@ void game_loop (void) {
 			if (!warp_to_level && !pkill) {
 				player_move ();
 			}
+			#include "my/player_move_custom.h"
 
 			// Scroll position
 

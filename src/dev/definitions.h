@@ -4,6 +4,9 @@
 // definitions.h
 // Main definitions
 
+extern unsigned char PALUPDATE;
+#pragma zpsym ("PALUPDATE");
+
 #define FIXBITS					6
 
 // Player states

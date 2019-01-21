@@ -7,7 +7,7 @@ void draw_scr (void) {
 	nametable_base = 0x2000;
 	buff_offset = attr_table_offset = 0;
 	draw_half_scr ();
-	n_pant ++;
+	++ n_pant;
 	nametable_base = 0x2400;
 	buff_offset = 192;
 	attr_table_offset = 64;

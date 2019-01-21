@@ -6,7 +6,7 @@
 
 // fade out
 void fade_out (void) {
-	for (fader = 4; fader > -1; fader --) {
+	for (fader = 4; fader > -1; -- fader) {
 		pal_bright (fader);
 		delay (fade_delay);
 	}	
@@ -14,7 +14,7 @@ void fade_out (void) {
 
 // fade in
 void fade_in (void) {
-	for (fader = 0; fader < 5; fader ++) {
+	for (fader = 0; fader < 5; ++ fader) {
 		pal_bright (fader);
 		delay (fade_delay);
 	}	

@@ -14,7 +14,7 @@ void hotspots_load (void) {
 	gp_gen = (unsigned char *) c_hotspots;
 #endif
 
-	for (gpit = 0; gpit < MAP_SIZE; gpit ++) {
+	for (gpit = 0; gpit < MAP_SIZE; ++ gpit) {
 #ifdef ENEMS_IN_CHRROM
 		ht [gpit] = VRAM_READ;
 		hyx [gpit] = VRAM_READ;
@@ -63,7 +63,7 @@ void hotspots_create (void) {
 	#else
 		gp_gen = (unsigned char *) (c_hotspots + (HS_CUR_PANT << 1));
 		//hrt = *gp_gen ++; rda = *gp_gen; 
-		SET_FROM_PTR (hrt, gp_gen); gp_gen ++;
+		SET_FROM_PTR (hrt, gp_gen); ++ gp_gen;
 		SET_FROM_PTR (rda, gp_gen);
 		if (hrt && hact [HS_CUR_PANT]) {
 			hry = rda & 0xf0; hrx = rda << 4;
