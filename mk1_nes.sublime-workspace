@@ -520,10 +520,18 @@
 	"buffers":
 	[
 		{
-			"file": "examples/09_cadàveriön/dev/engine/printer.h",
+			"file": "examples/10_che_man/dev/engine/printer.h",
 			"settings":
 			{
 				"buffer_size": 7006,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "examples/10_che_man/dev/ram/bss.h",
+			"settings":
+			{
+				"buffer_size": 14656,
 				"line_ending": "Unix"
 			}
 		}
@@ -605,15 +613,19 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/docs",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/09_cadàveriön",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/engine",
-		"/D/git/MK1_NES/src",
-		"/D/git/MK1_NES/src/dev"
+		"/D/git/MK1_NES/examples/10_che_man",
+		"/D/git/MK1_NES/examples/10_che_man/dev",
+		"/D/git/MK1_NES/examples/10_che_man/dev/assets",
+		"/D/git/MK1_NES/examples/10_che_man/dev/engine",
+		"/D/git/MK1_NES/examples/10_che_man/dev/my",
+		"/D/git/MK1_NES/examples/10_che_man/dev/ram"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
+		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/printer.h",
 		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/compile.bat",
@@ -736,22 +748,22 @@
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/game.s",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/cocos.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/bullets.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/textbox.h",
 		"/D/git/MK1_NES/testers/05_tester_double_width/dev/my/pres.h",
-		"/D/git/MK1_NES/testers/05_tester_double_width/dev/my/player_frame_selector.h",
-		"/D/git/MK1_NES/src/utils/binpaster"
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/my/player_frame_selector.h"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
 		"height": 135.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\testers\\00_tester_sideview",
+			"D:\\git\\MK1_NES\\src\\dev",
 			"D:\\git\\MK1_NES\\testers\\01_tester_top_down\\dev\\engine",
 			"D:\\git\\MK1_NES\\testers\\01_tester_top_down",
 			"D:\\git\\MK1_NES\\examples",
@@ -815,6 +827,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pgtmx",
+			"cfx",
+			"conveyors",
+			"punches",
+			"punching",
+			"kick",
+			"hits",
+			"SET_FROM_PTR",
 			"COCOS",
 			"TYPE_7_FIXED_SPRITE",
 			"gp_tma2",
@@ -934,15 +954,7 @@
 			"upd_attr_table",
 			"ul_putc",
 			"scroll",
-			"clear_cerrojo",
-			"rdc",
-			"CHAC",
-			"hitv",
-			"player_process_tile",
-			"ATTR",
-			"15",
-			"rawv",
-			"persistent"
+			"clear_cerrojo"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -993,8 +1005,41 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/10_che_man/dev/engine/printer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7006,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2742,
+								2742
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 936.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -1002,12 +1047,12 @@
 			"sheets":
 			[
 				{
-					"buffer": 0,
-					"file": "examples/09_cadàveriön/dev/engine/printer.h",
+					"buffer": 1,
+					"file": "examples/10_che_man/dev/ram/bss.h",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 7006,
+						"buffer_size": 14656,
 						"regions":
 						{
 						},
@@ -1020,34 +1065,31 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 746,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2769.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 30.0
 	},
 	"input":
 	{
@@ -1068,12 +1110,19 @@
 				0,
 				2,
 				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.333333333333,
+			0.66,
 			1.0
 		],
 		"rows":
@@ -1095,7 +1144,7 @@
 	"project": "mk1_nes.sublime-project",
 	"replace":
 	{
-		"height": 74.0
+		"height": 56.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1129,7 +1178,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1137,7 +1186,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 187.0,
+	"side_bar_width": 300.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
