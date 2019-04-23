@@ -528,11 +528,62 @@
 			}
 		},
 		{
-			"file": "examples/10_che_man/dev/ram/bss.h",
+			"contents": "Searching 115 files for \"mk2\"\n\nD:\\git\\MK1_NES\\src\\dev\\config.h:\n  527  // Extra configuration for side view:\n  528  \n  529: //#define PLAYER_JUMP_TYPE_MK2\t\t\t// Use MK2 method for jump / gravity / release\n  530  //#define PLAYER_STEPS_ON_ENEMS\t\t\t// If defined, stepping on enemies kills them\n  531  //#define PLAYER_STEPS_STRICT\t\t\t// Only registers advantage hit when pvy > PLAYER_VY_FALLING_MIN\n  ...\n  601  #define PLAYER_AY_UNTHRUST \t\t8 \t\t// Used in the Autojump engine.\n  602  \n  603: // IV.1.b MK2 style jump (overrides PLAYER_?Y_JUMP_* defined before!)\n  604: // (Used if PLAYER_JUMP_TYPE_MK2 is defined)\n  605: #define PLAYER_G_MK2_JUMPING\t\t4\n  606: #define PLAYER_VY_MK2_JUMP_INITIAL\t208\n  607: #define PLAYER_VY_MK2_JUMP_RELEASE\t96\n  608: #define PLAYER_VY_MK2_JUMP_A_STEPS \t16\n  609: #define PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE 296\n  610: #define PLAYER_VY_MK2_TRAMPOLINE_A_STEPS 32\t// For trampolines\n  611  \n  612  // IV.2. Horizontal (side view) or general (top view) movement.\n\nD:\\git\\MK1_NES\\src\\dev\\engine\\general.h:\n   89  \t\tif (ptrampoline) {\n   90  \t\t\tsfx_play (SFX_TRAMPOLINE, 0);\n   91: \t\t\t#ifdef PLAYER_JUMP_TYPE_MK2\n   92: \t\t\t\tpvy = -PLAYER_VY_MK2_JUMP_INITIAL_TRAMPOLINE;\n   93  \t\t\t#else\n   94  \t\t\t\tpvy = -PLAYER_VY_JUMP_INITIAL_TRAMPOLINE;\n   ..\n   98  \t\t{\n   99  \t\t\tsfx_play (SFX_JUMP, 0);\n  100: \t\t\t#ifdef PLAYER_JUMP_TYPE_MK2\n  101: \t\t\t\tpvy = -PLAYER_VY_MK2_JUMP_INITIAL;\n  102  \t\t\t#else\n  103  \t\t\t\tpvy = -PLAYER_VY_JUMP_INITIAL;\n\nD:\\git\\MK1_NES\\src\\dev\\engine\\player.h:\n  323  \n  324  \t\tif (vertical_engine_type != ENGINE_TYPE_SWIM) {\n  325: \t\t\t#ifdef PLAYER_JUMP_TYPE_MK2\n  326  \t\t\t\tif (\n  327  \t\t\t\t\t!pgotten\n  ...\n  329  \t\t\t\t\tif (!pj) {\n  330  \t\t\t\t\t\tpvy += PLAYER_G;\n  331: \t\t\t\t\t} else pvy += PLAYER_G_MK2_JUMPING;\n  332  \t\t\t\t\tif (pvy > PLAYER_VY_FALLING_MAX) pvy = PLAYER_VY_FALLING_MAX; \n  333  \t\t\t\t}\n  ...\n  496  \n  497  \t\tif (vertical_engine_type == ENGINE_TYPE_JUMP) {\n  498: \t\t\t#ifdef PLAYER_JUMP_TYPE_MK2\n  499  \n  500  \t\t\t\tif (\n  ...\n  527  \t\t\t\t\t#ifdef ENABLE_TRAMPOLINES\n  528  \t\t\t\t\t\tif (ptrampoline) {\n  529: \t\t\t\t\t\t\t++ pctj; if (pctj == PLAYER_VY_MK2_TRAMPOLINE_A_STEPS)\n  530  \t\t\t\t\t\t\t{ pj = 0; ptrampoline = 0; }\n  531  \t\t\t\t\t\t} else \n  532  \t\t\t\t\t#endif\n  533  \t\t\t\t\tif (pad0 & PAD_A) {\n  534: \t\t\t\t\t\t++ pctj; if (pctj == PLAYER_VY_MK2_JUMP_A_STEPS) pj = 0;\n  535  \t\t\t\t\t} else {\n  536: \t\t\t\t\t\tpj = 0; if (pvy < -PLAYER_VY_MK2_JUMP_RELEASE) pvy = -PLAYER_VY_MK2_JUMP_RELEASE;\n  537  \t\t\t\t\t}\n  538  \t\t\t\t}\n\n21 matches across 3 files\n\n\nSearching 301 files for \"pal_col\"\n\nD:\\git\\MK1_NES\\examples\\12_espitene\\dev\\labels.txt:\n  476  _pad_trigger              0084B2  LA    _pal_all                  00820A  LA    \n  477  _pal_bg                   008224 RLA    _pal_bright               008238 RLA    \n  478: _pal_clear                008237  LA    _pal_col                  008237  LA    \n  479  _pal_cycle                0006FB  LA    _pal_spr                  00822E RLA    \n  480  _palcuts0                 00E3CD  LA    _palcuts1                 00E3DD  LA    \n  ...\n 1011      game.o                    game.s(15)\n 1012  _pal_clear (crt0.o):\n 1013: _pal_col (crt0.o):\n 1014  _pal_cycle (game.o):\n 1015  _pal_spr (crt0.o):\n\nD:\\git\\MK1_NES\\examples\\12_espitene\\dev\\my\\effects.h:\n    9  \t\t/*\n   10  \t\trda = pal_cycle [2];\n   11: \t\tpal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);\n   12: \t\tpal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);\n   13: \t\tpal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);\n   14  \t\t*/\n   15  \n\nD:\\git\\MK1_NES\\examples\\12_espitene\\dev\\my\\extra_routines.h:\n   70  \t\t\t\tif (elec_state == 0) pal_bg (palts5);\n   71  \t\t\t\telse if (elec_state == 1) {\n   72: \t\t\t\t\t//pal_col (11, 0x18);\n   73  \t\t\t\t\t__asm__ (\"lda #$18\");\n   74  \t\t\t\t\t__asm__ (\"sta PAL_BUF+11\");\n\nD:\\git\\MK1_NES\\examples\\12_espitene\\dev\\neslib.h:\n   19  //set a palette entry, index is 0..31\n   20  \n   21: void __fastcall__ pal_col(unsigned char index,unsigned char color);\n   22  \n   23  //reset palette to $0f\n\nD:\\git\\MK1_NES\\examples\\12_espitene\\dev\\neslib.s:\n    4  \n    5  \n    6: \t.export _pal_all,_pal_bg,_pal_spr,_pal_col,_pal_clear,_pal_bright\n    7  \t.export _ppu_off,_ppu_on_all,_ppu_on_bg,_ppu_on_spr,_ppu_mask, _ppu_system\n    8  \t.export _oam_clear,_oam_size,_oam_spr,_oam_meta_spr,_oam_hide_rest\n    .\n  172  \n  173  \n  174: ;void __fastcall__ pal_col(unsigned char index,unsigned char color);\n  175  \n  176: _pal_col:\n  177  ;\tsta <PTR\n  178  ;\tjsr popa\n\nD:\\git\\MK1_NES\\examples\\12_espitene\\README.md:\n  507                  elec_state_ct = elec_state_max_ct [elec_state];\n  508                  if (elec_state == 0) pal_bg (palts5);\n  509:                 else if (elec_state == 1) pal_col (11, 0x18);\n  510              }\n  511          }\n  ...\n  868      if (level_world == 2 && (real_frame_counter & 7) == 0) {\n  869          rda = pal_cycle [2];\n  870:         pal_cycle [2] = pal_cycle [1]; pal_col (15, pal_cycle [2]);\n  871:         pal_cycle [1] = pal_cycle [0]; pal_col (14, pal_cycle [1]);\n  872:         pal_cycle [0] = rda;           pal_col (13, pal_cycle [0]);\n  873      }\n  874  ```\n\n14 matches across 6 files\n",
 			"settings":
 			{
-				"buffer_size": 14656,
-				"line_ending": "Unix"
+				"buffer_size": 5089,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "examples/12_espitene/dev/my/effects.h",
+			"settings":
+			{
+				"buffer_size": 1277,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/12_espitene/dev/crt0.s",
+			"settings":
+			{
+				"buffer_size": 4585,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/12_espitene/dev/my/extra_routines.h",
+			"settings":
+			{
+				"buffer_size": 2330,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 19868,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/12_espitene/dev/definitions.h",
+			"settings":
+			{
+				"buffer_size": 1814,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine/general.h",
+			"settings":
+			{
+				"buffer_size": 3866,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -613,17 +664,13 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
-		"/D/git/MK1_NES/docs",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/10_che_man",
-		"/D/git/MK1_NES/examples/10_che_man/dev",
-		"/D/git/MK1_NES/examples/10_che_man/dev/assets",
-		"/D/git/MK1_NES/examples/10_che_man/dev/engine",
-		"/D/git/MK1_NES/examples/10_che_man/dev/my",
-		"/D/git/MK1_NES/examples/10_che_man/dev/ram"
+		"/D/git/MK1_NES/examples/12_espitene",
+		"/D/git/MK1_NES/examples/12_espitene/dev"
 	],
 	"file_history":
 	[
+		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/printer.h",
 		"/D/git/MK1_NES/README.md",
@@ -643,7 +690,6 @@
 		"/D/git/MK1_NES/src/dev/definitions.h",
 		"/D/git/MK1_NES/src/dev/engine/cocos.h",
 		"/D/git/MK1_NES/src/dev/engine/printer.h",
-		"/D/git/MK1_NES/src/dev/config.h",
 		"/D/git/MK1_NES/src/dev/compile.bat",
 		"/D/git/MK1_NES/src/dev/ram/zp.h",
 		"/D/git/MK1_NES/src/dev/ram/bss.h",
@@ -755,13 +801,15 @@
 	],
 	"find":
 	{
-		"height": 30.0
+		"height": 48.0
 	},
 	"find_in_files":
 	{
 		"height": 135.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\12_espitene",
+			"D:\\git\\MK1_NES\\src\\dev",
 			"D:\\git\\MK1_NES\\testers\\00_tester_sideview",
 			"D:\\git\\MK1_NES\\src\\dev",
 			"D:\\git\\MK1_NES\\testers\\01_tester_top_down\\dev\\engine",
@@ -827,6 +875,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pal_col",
+			"PLAYER_JUMP_TYPE_MK2",
+			"mk2",
 			"pgtmx",
 			"cfx",
 			"conveyors",
@@ -951,10 +1002,7 @@
 			"collide (",
 			"collide",
 			"ast1",
-			"upd_attr_table",
-			"ul_putc",
-			"scroll",
-			"clear_cerrojo"
+			"upd_attr_table"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1005,7 +1053,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1037,7 +1085,319 @@
 						"translation.y": 936.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5089,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										151,
+										154
+									],
+									[
+										164,
+										167
+									],
+									[
+										498,
+										501
+									],
+									[
+										594,
+										597
+									],
+									[
+										634,
+										637
+									],
+									[
+										674,
+										677
+									],
+									[
+										720,
+										723
+									],
+									[
+										765,
+										768
+									],
+									[
+										811,
+										814
+									],
+									[
+										868,
+										871
+									],
+									[
+										1136,
+										1139
+									],
+									[
+										1168,
+										1171
+									],
+									[
+										1351,
+										1354
+									],
+									[
+										1383,
+										1386
+									],
+									[
+										1599,
+										1602
+									],
+									[
+										1734,
+										1737
+									],
+									[
+										1940,
+										1943
+									],
+									[
+										2089,
+										2092
+									],
+									[
+										2272,
+										2275
+									],
+									[
+										2361,
+										2364
+									],
+									[
+										2396,
+										2399
+									],
+									[
+										2781,
+										2788
+									],
+									[
+										3087,
+										3094
+									],
+									[
+										3296,
+										3303
+									],
+									[
+										3365,
+										3372
+									],
+									[
+										3434,
+										3441
+									],
+									[
+										3647,
+										3654
+									],
+									[
+										3870,
+										3877
+									],
+									[
+										4068,
+										4075
+									],
+									[
+										4305,
+										4312
+									],
+									[
+										4371,
+										4378
+									],
+									[
+										4645,
+										4652
+									],
+									[
+										4859,
+										4866
+									],
+									[
+										4934,
+										4941
+									],
+									[
+										5009,
+										5016
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								3300,
+								3300
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 2,
+							"remote_loading": false,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"synced": false,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1041.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/12_espitene/dev/my/effects.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1277,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								686,
+								679
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "examples/12_espitene/dev/crt0.s",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 4585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1005,
+								1005
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/R/R.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 273.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "examples/12_espitene/dev/my/extra_routines.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1590,
+								1590
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 664.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10381,
+								10390
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6343.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1047,12 +1407,12 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "examples/10_che_man/dev/ram/bss.h",
+					"buffer": 6,
+					"file": "examples/12_espitene/dev/definitions.h",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 14656,
+						"buffer_size": 1814,
 						"regions":
 						{
 						},
@@ -1068,22 +1428,53 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 7,
+					"file": "src/dev/engine/general.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2351,
+								2369
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 950.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1186,7 +1577,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 300.0,
+	"side_bar_width": 159.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

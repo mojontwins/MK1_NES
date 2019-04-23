@@ -1,6 +1,6 @@
-' namgen v0.4 20181120 - Converts a .png into a nametable with attributes
+' namgen v0.5 20190226 - Converts a .png into a nametable with attributes
 ' Using a fixed palette and CHR files.
-' Copyleft 2016, 2017 The Mojon Twins
+' Copyleft 2016, 2017, 2019 The Mojon Twins
 ' fbc namgen.bas cmdlineparser.bas mtparser.bas
 
 #include "file.bi"
@@ -20,11 +20,12 @@ Dim Shared As String patternTable (255)
 Dim Shared As Integer pal (15)
 Dim Shared As uByte nametable (1023)
 Dim Shared As Integer bank
+Dim Shared As Integer binMode
 
 Sub usage 
 	Puts "usage:"
 	Puts ""
-	Puts "$ namgen.exe in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B] [rle[=label]]"
+	Puts "$ namgen.exe in=screen.png out=file.nam pals=pals.png chr=tileset.chr [bank=B] [rle[=label]|bin]"
 	Puts ""
 	Puts "in             a 256x240 input file. Not checked."
 	Puts "out            The output result you are aiming for!"
@@ -33,6 +34,7 @@ Sub usage
 	Puts "bank           0 or 1. 0 is default"
 	Puts "rle            output is code in .h with rle'd screen using label"
 	Puts "               if no label is specified, sanitized 'in' will be used."
+	Puts "               if bin is specified, binary output will be produced."
 End Sub
 
 Function mySubsts (stIn As String, sFind As String, sReplace As String) As String
@@ -318,29 +320,37 @@ Sub writeRledOutput (fn As String)
 	rle (rleI) = marker: rleI = rleI + 1
 	rle (rleI) = 0: rleI = rleI + 1
 
-	Open fn For Output As #fOut
-	Print #fOut, "// RLE'd nametable by namgen v0.4 20181120"
-	Print #fOut, ""
-	If sclpGetValue ("rle") = "%%TRUE%%" Then
-		Print #fOut, "const unsigned char " & Lcase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_rle [] = {";
+	If binMode Then
+		Open fn For Binary As #fOut
+		For i = 0 To rleI - 1
+			Put #fOut, , rle (i)
+		Next i
+		Close #fOut
 	Else
-		Print #fOut, "const unsigned char " & sclpGetValue ("rle") & " [] = {";
-	End If
+		Open fn For Output As #fOut
+		Print #fOut, "// RLE'd nametable by namgen v0.5 20190226"
+		Print #fOut, ""
+		If sclpGetValue ("rle") = "%%TRUE%%" Then
+			Print #fOut, "const unsigned char " & Lcase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_rle [] = {";
+		Else
+			Print #fOut, "const unsigned char " & sclpGetValue ("rle") & " [] = {";
+		End If
 
-	For i = 0 To rleI - 1
-		If i Mod 16 = 0 Then Print #fOut, "": Print #fOut, "    ";
-		Print #fOut, "0x" & lCase (Hex (rle (i), 2));
-		If i < rleI - 1 Then Print #fOut, ", ";
-	Next i
-	Print #fOut, "};"
-	Print #fOut, "#define " & Ucase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_RLE_SIZE " & rleI
-	Print #fOut, ""
-	Close #fOut
+		For i = 0 To rleI - 1
+			If i Mod 16 = 0 Then Print #fOut, "": Print #fOut, "    ";
+			Print #fOut, "0x" & lCase (Hex (rle (i), 2));
+			If i < rleI - 1 Then Print #fOut, ", ";
+		Next i
+		Print #fOut, "};"
+		Print #fOut, "#define " & Ucase (mySubsts (sclpGetValue ("in"), "\/. ", "____")) & "_RLE_SIZE " & rleI
+		Print #fOut, ""
+		Close #fOut
+	End If
 End Sub
 
 Dim As String mandatory (3) = { "in", "out", "pals", "chr" }
 
-Puts "namgen v0.4 20181120"
+Puts "namgen v0.5 20190226"
 Puts "Converts a .png into a nametable with attributes."
 Puts "Copyleft 2016, 2018 The Mojon Twins"
 Puts ""
@@ -348,6 +358,7 @@ Puts ""
 sclpParseAttrs
 If Not sclpCheck (mandatory ()) Then usage: End
 If sclpGetValue ("bank") <> "" Then bank = Val (sclpGetValue ("bank")) Else bank = 0
+binMode = (sclpGetValue ("bin") <> "")
 
 '' First of all I'm going to read the chr file and create a nice string array
 '' So pattern comparison can be done by means of string comparing making my life 
