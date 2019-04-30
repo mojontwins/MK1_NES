@@ -4942,3 +4942,17 @@ Se cambia por:
 ```
 
 ¡Creo que lo he reparado!
+
+~~ 
+
+20190430
+========
+
+Mucho tiempo después, había pensado hacer un Goku Mal para un tutorial de montar cosas en CHR-ROM. Luego me flipé y pensé que el juego en double-width podría quedar mortal.
+
+Claro, no recordaba el pifostio del double width, sobre todo que NO LO TENGO TERMINADO.
+
+Hay que resolver el tema del split. Tengo que pensar como hacerlo para que sea configurable, como el resto.
+
+Lo que está claro es que con el modo double-width el motor se empieza a complicar... Creo que llevaré las dos ramas hasta el fin de los tiempos, intentando trasladar el mayór número de características siemple que aplique (como tipos de enemigos, features, etc).
+
