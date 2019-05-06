@@ -4956,3 +4956,13 @@ Hay que resolver el tema del split. Tengo que pensar como hacerlo para que sea c
 
 Lo que está claro es que con el modo double-width el motor se empieza a complicar... Creo que llevaré las dos ramas hasta el fin de los tiempos, intentando trasladar el mayór número de características siemple que aplique (como tipos de enemigos, features, etc).
 
+20190506
+========
+
+He solucionado lo de poner tener pantallas normales en juegos double-width de una forma sencillísima que, además, me permite hacerlo automáticamente cuando la pantalla de la derecha se saldría del mapa "o" forzadamente vía código custom en un inyectable (aprovechando `my/on_entering_screen.h`).
+
+Ahora tengo que ver como pinchar para hacer splits y poder tener un marcador. Seguramente pondré un inyectable tras el scroll.
+
+Lo más fácil es meter el el punto de inyección en el update_cycle. Así estoy efectivamente perdiendo tiempo, pero al menos lo tengo disponible en todos los tejemanejes que haya que hacer.
+
+Bueno, sigo dándole vueltas. No es moco de paver. Por un lado debería haber cierto preparativo: es necesario poner el hud con el tile de bg y el sprite para hacer el split de forma manual. Esto es algo que podemos hacer en `draw_game_frame`.
