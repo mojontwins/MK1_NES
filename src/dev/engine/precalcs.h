@@ -63,3 +63,27 @@ const unsigned char bits [] = {
 	const unsigned char jitter [] = { 0,1,1,0,0,1,0,1,1,0,0,0,1,0,1,1 };
 #endif
 
+#if defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)
+	#define FANTY_INCS_MAX 16
+	const signed char fanty_incs [] = {
+		#ifdef FANTY_SLOW
+			// Slower fanty
+			0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1
+		#endif
+		#ifdef FANTY_NORMAL
+			// Faster fanty
+			0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1
+		#endif
+		#ifdef FANTY_FAST
+			// Much faster fanty
+			0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2
+		#endif
+	};
+#endif
+
+#ifdef ENABLE_PRECALC_HOMING_FANTY
+	#define FANTY_RETREAT_INCS_MAX 4
+	const signed char fanty_retreat_incs [] = {
+		1, 0, 0, 0
+	};
+#endif

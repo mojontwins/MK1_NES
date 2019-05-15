@@ -112,9 +112,8 @@ void player_to_pixels (void) {
 
 #ifndef KILL_PLAYER_CUSTOM
 	void player_kill (void) {
-	oam_index = oam_index_player;
-	player_render ();
-	ppu_waitnmi ();
+	//oam_index = oam_index_player;
+	//player_render ();
 
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
@@ -135,7 +134,11 @@ void player_to_pixels (void) {
 
 	#ifdef DIE_AND_RESPAWN
 		music_pause (1);
-		delay (60);
+		#if !defined (DOUBLE_WIDTH) || defined (NO_SPLIT)
+			delay (60);
+		#else
+			rda = 60; delay_with_split ();
+		#endif
 		
 		#ifdef DIE_AND_REINIT
 			level_reset = 1;
@@ -171,6 +174,10 @@ void player_to_pixels (void) {
 void player_move (void) {
 	if (pflickering) -- pflickering;
 	if (pbouncing) -- pbouncing;
+
+	#ifdef PLAYER_JUST_FIRED_COUNTER
+		if (pjustfiredcounter) -- pjustfiredcounter;
+	#endif
 
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
@@ -702,6 +709,9 @@ void player_move (void) {
 	#endif
 		
 	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
+	#ifdef SINGLE_SCREEN_SUPPORT
+		else if (scr_single && px > 244 << FIXBITS) { px = 244 << FIXBITS; prx = 244; }
+	#endif
 	else if (px > (MAX_PRX << FIXBITS)) { px = MAX_PRX << FIXBITS; prx = MAX_PRX; }
 	else player_to_pixels ();
 	
@@ -849,6 +859,10 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do interactives)
 
+	#ifdef ENABLE_LADDERS
+		ponplatform = ((ATTR((prx + 4) >> 4, pry >> 4) & 12) && pry < 192);
+	#endif
+
 	#ifdef PLAYER_CHARGE_AND_FIRE
 		#ifdef PLAYER_FIRE_RELOAD
 			if (pfirereload) -- pfirereload; 
@@ -868,7 +882,7 @@ void player_move (void) {
 		if (
 			b_button
 			#ifdef ENABLE_LADDERS
-				&& !ponladder
+				&& (!ponladder || ponplatform)
 			#endif
 		) {
 			#ifdef ACTIVATE_SCRIPTING

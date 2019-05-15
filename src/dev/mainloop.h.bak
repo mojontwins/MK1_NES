@@ -127,13 +127,6 @@ void prepare_scr (void) {
 
 	clear_update_list ();
 
-	#ifdef SINGLE_SCREEN_SUPPORT
-		// Calculate if this screen is single:
-		scr_single = ((n_pant + 1) == ((n_pant - (n_pant % c_map_w)) + c_map_w));
-
-		// Of course you can FORCE this in my/on_entering_screen.h!
-	#endif
-
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
 		prp_idx = 0;
@@ -290,10 +283,6 @@ void prepare_scr (void) {
 }
 
 void game_loop (void) {
-	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
-		split_on = 1;
-	#endif
-
 	#ifdef MULTI_LEVEL
 		music_play (l_music [level]);
 	#else
@@ -409,83 +398,19 @@ void game_loop (void) {
 			// Update / collide hotspots
 
 			#ifdef DOUBLE_WIDTH
-				__asm__ ("ldy #0");
-				__asm__ ("sty %v", gpit);
+				for (gpit = 0; gpit < 2; ++ gpit)  {
+					hrx = d_hrx [gpit];
+					hrt = d_hrt [gpit];
+					if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
+					hry = d_hry [gpit];
 
-			dw_hotspots:
-				__asm__ ("lda %v", gpit);
-				__asm__ ("cmp #2");
-				__asm__ ("jeq %g", dw_hotspots_done);
-				
-				__asm__ ("ldy %v", gpit);
-
-				__asm__ ("lda %v, y", d_hrt);
-				__asm__ ("sta %v", hrt);
-				__asm__ ("lda %v, y", d_hry);
-				__asm__ ("sta %v", hry);
-
-				// 16 bits
-				__asm__ ("lda %v", gpit);
-				__asm__ ("asl a");
-				__asm__ ("tay");
-				__asm__ ("lda %v, y", d_hrx);
-				__asm__ ("sta %v", hrx);
-				__asm__ ("lda %v+1, y", d_hrx);
-				__asm__ ("sta %v+1", hrx);
-
-				// Check
-				// if (hrt == 0
-				__asm__ ("lda %v", hrt);
-				__asm__ ("jeq %g", dw_hotspots_continue);	// DO
-
-				// || hrx < scroll_x 
-				__asm__ ("lda %v", hrx);
-				__asm__ ("cmp %v", scroll_x);
-				__asm__ ("lda %v+1", hrx);
-				__asm__ ("sbc %v+1", scroll_x);
-				__asm__ ("bcs %g", dw_hotspots_check_1);	// SKIP
-				__asm__ ("jmp %g", dw_hotspots_continue);	// DO
-
-			dw_hotspots_check_1:
-				// rds16 = scroll_x + 240
-				__asm__ ("clc");
-				__asm__ ("lda %v", scroll_x);
-				__asm__ ("adc #240");
-				__asm__ ("sta %v", rds16);
-				__asm__ ("lda %v+1", scroll_x);
-				__asm__ ("adc #0");
-				__asm__ ("sta %v+1", rds16);
-
-				// || hrx > rds16
-				__asm__ ("lda %v", hrx);
-				__asm__ ("sec");
-				__asm__ ("sbc %v", rds16);
-				__asm__ ("sta tmp1");
-				__asm__ ("lda %v+1", hrx);
-				__asm__ ("sbc %v+1", rds16);
-				__asm__ ("ora tmp1");
-				__asm__ ("bcc %g", dw_hotspots_check_done);	// SKIP
-				__asm__ ("beq %g", dw_hotspots_check_done);	// SKIP
-
-				__asm__ ("jmp %g", dw_hotspots_continue);	// DO
-
-			dw_hotspots_check_done:
-
-				hotspots_do ();
+					#include "mainloop/hotspots.h"
 					hotspots_paint ();
 
-				__asm__ ("lda %v", hrt);
-				__asm__ ("ldy %v", gpit);
-				__asm__ ("sta %v, y", d_hrt);
-
-			dw_hotspots_continue:
-				__asm__ ("inc %v", gpit);
-				__asm__ ("jmp %g", dw_hotspots);
-
-			dw_hotspots_done:
-
+					d_hrt [gpit] = hrt;
+				}
 			#else
-				hotspots_do ();
+				#include "mainloop/hotspots.h"
 			#endif
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
@@ -535,7 +460,7 @@ void game_loop (void) {
 
 			// Paint player
 
-			//oam_index_player = oam_index; 
+			oam_index_player = oam_index; 
 			if (!warp_to_level)	player_render ();
 
 			// Update enemies
@@ -614,8 +539,4 @@ void game_loop (void) {
 	set_vram_update (0, 0);
 	ppu_off ();
 	oam_clear ();
-
-	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
-		split_on = 0;
-	#endif
 }

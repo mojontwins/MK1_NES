@@ -25,7 +25,9 @@ void draw_scr (void)
 {
 	#ifdef DOUBLE_WIDTH
 		buff_ptr = map_buff + buff_offset;
-		attr_ptr = map_attr + buff_offset;
+		#ifndef REAL_TIME_MAP_ATTR
+			attr_ptr = map_attr + buff_offset;
+		#endif
 	#endif
 
 	// Draw Map
@@ -231,10 +233,12 @@ void draw_scr (void)
 			if ((rdm & 7) == 7) ++ rdd;
 		#endif
 
-		#ifdef DOUBLE_WIDTH
-			attr_ptr [rdm] = c_behs [rdt];
-		#else
-			map_attr [rdm] = c_behs [rdt];
+		#ifndef REAL_TIME_MAP_ATTR
+			#ifdef DOUBLE_WIDTH
+				attr_ptr [rdm] = c_behs [rdt];
+			#else
+				map_attr [rdm] = c_behs [rdt];
+			#endif
 		#endif
 
 		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)

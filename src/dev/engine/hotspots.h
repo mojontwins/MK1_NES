@@ -34,13 +34,22 @@ void hotspots_paint (void) {
 			rda = HS_OBJ_EMPTY;
 		else
 	#endif
+	{
+		//rda = hrt;
+		__asm__ ("lda %v", hrt);	
+		__asm__ ("sta %v", rda);
+	}
 
-	rda = hrt;
+		__asm__ ("lda %v", rda);
+		__asm__ ("bne %g", hotspots_paint_do);
+		__asm__ ("rts");
+	hotspots_paint_do:
 
 	#ifdef ENABLE_RESONATORS
 		if (hrt == HOTSPOT_TYPE_RESONATOR && res_on) rda = HOTSPOT_TYPE_RESONATOR_ON;
 	#endif
 
+	/*
 	oam_index = oam_meta_spr (
 		#ifdef DOUBLE_WIDTH
 			hrx - scroll_x,
@@ -51,6 +60,58 @@ void hotspots_paint (void) {
 		oam_index, 
 		spr_hs [rda]
 	);
+	*/
+
+	// Three byte parameters x, y, oam_index
+	// One word parameter X:A
+
+		__asm__ ("jsr decsp3");		// Make room
+		__asm__ ("ldy #2");			// Y will index SP
+
+		// hrx - scroll_x : If we are here, this fits in a BYTE
+		__asm__ ("lda %v", hrx);
+		__asm__ ("sec");
+		__asm__ ("sbc %v", scroll_x);
+
+		// Store in the stack.
+		__asm__ ("sta (sp), y");
+		__asm__ ("dey");
+
+		// hry + SPRITE_ADJUST
+		__asm__ ("lda %v", hry);
+		__asm__ ("clc");
+		__asm__ ("adc #%b", SPRITE_ADJUST);
+
+		// Store in the stack.
+		__asm__ ("sta (sp), y");
+		__asm__ ("dey");
+
+		// oam_index
+		__asm__ ("lda %v", oam_index);
+
+		// Store in the stack.
+		__asm__ ("sta (sp), y");
+
+		// Store the address pointed at by 
+		// the pointer in spr_hs [rda] into X:A
+		// rda is small.
+		__asm__ ("lda %v", rda);
+		__asm__ ("asl a");
+		__asm__ ("adc #<(%v)", spr_hs);	// LSB
+		__asm__ ("sta ptr1");			// temporally save
+		__asm__ ("lda #0");
+		__asm__ ("adc #>(%v)", spr_hs);	// MSB
+		__asm__ ("sta ptr1+1");			// MSB
+		
+		// Read the 16 bits value pointed to by ptr
+		__asm__ ("ldy #1");
+		__asm__ ("lda (ptr1), y");
+		__asm__ ("tax");
+		__asm__ ("dey");
+		__asm__ ("lda (ptr1), y");
+
+		__asm__ ("jsr %v", oam_meta_spr);
+		__asm__ ("sta %v", oam_index);
 }
 
 void hotspots_create (void) {	

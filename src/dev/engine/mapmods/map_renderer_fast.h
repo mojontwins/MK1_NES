@@ -5,7 +5,9 @@
 
 void draw_map_tile (void) {
 	map_buff [rdm] = rdt;		
-	map_attr [rdm] = c_behs [rdt];
+	#ifndef REAL_TIME_MAP_ATTR
+		map_attr [rdm] = c_behs [rdt];
+	#endif
 	#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
 		brk_buff [rdm] = 1;
 	#endif

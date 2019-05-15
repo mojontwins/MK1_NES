@@ -4,19 +4,39 @@
 // printer.h
 // Draw map, print text, etcetera.
 
+#ifdef DOUBLE_WIDTH
+	#ifndef NO_SPLIT
+	void delay_with_split (void) {
+		if (split_on) {
+			while (rda --) {
+				ppu_waitnmi ();
+				split (scroll_x, SCROLL_Y);
+			}
+		} else delay (rda);
+	}
+	#endif
+#endif
+
+void fade_body (void) {
+	pal_bright (fader);
+	#if !defined (DOUBLE_WIDTH) || defined (NO_SPLIT)
+		delay (fade_delay);
+	#else
+		rda = fade_delay; delay_with_split ();
+	#endif
+}
+
 // fade out
 void fade_out (void) {
 	for (fader = 4; fader > -1; -- fader) {
-		pal_bright (fader);
-		delay (fade_delay);
+		fade_body ();
 	}	
 }
 
 // fade in
 void fade_in (void) {
 	for (fader = 0; fader < 5; ++ fader) {
-		pal_bright (fader);
-		delay (fade_delay);
+		fade_body ();
 	}	
 }
 
@@ -316,7 +336,9 @@ void update_list_tile (void) {
 void map_set (void) {
 	#ifdef DOUBLE_WIDTH
 	map_buff [COORDS (_x, _y)] = _t;
-	map_attr [COORDS (_x, _y)] = c_behs [_t];
+	#ifndef REAL_TIME_MAP_ATTR
+		map_attr [COORDS (_x, _y)] = c_behs [_t];
+	#endif
 		// _x = _x << 1; 
 		__asm__ ("asl %v", _x);
 		_y = TOP_ADJUST + (_y << 1);
@@ -339,6 +361,7 @@ void map_set (void) {
 		__asm__ ("lda %v", _t);
 		__asm__ ("sta %v, x", map_buff);
 										// map_buff [COORDS (_x, _y)] = _t;
+		#ifndef REAL_TIME_MAP_ATTR
 		__asm__ ("lda %v", c_behs);
 		__asm__ ("sta ptr1");
 		__asm__ ("lda %v + 1", c_behs);
@@ -347,6 +370,7 @@ void map_set (void) {
 		__asm__ ("lda (ptr1), y");		// A = c_behs [_t]
 		__asm__ ("sta %v, x", map_attr);
 										// map_attr [COORDS (_x, _y)] = c_behs [_t];
+		#endif
 
 		// _x = _x << 1; 
 		__asm__ ("asl %v", _x);

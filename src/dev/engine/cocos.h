@@ -162,9 +162,9 @@ void cocos_do (void) {
 			#ifdef COCO_COLLIDES
 				#ifdef DOUBLE_WIDTH
 					gpint = COCO_RDX + 4;
-					rdm = map_attr [(gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+					rdm = MAP_ATTR ((gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0));
 				#else
-					rdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
+					rdm = MAP_ATTR (((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0));
 				#endif
 				if (rdm & 8) {
 					cocos_destroy (); continue;

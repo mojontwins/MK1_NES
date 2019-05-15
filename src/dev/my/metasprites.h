@@ -39,4 +39,3 @@ const unsigned char * const spr_enems0 [] = {
 const unsigned char * const spr_hs [] = {
 	0, ssit_00, ssit_01, ssit_02
 };
-

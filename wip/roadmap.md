@@ -15,3 +15,10 @@ Apunto cosas que se me van ocurriendo y quiero añadir, y las voy tachando segú
 [ ] Recorridos de plataformas rectangulares.
 
 [ ] Portar desde MK2 los enemigos tipo lineal para ahorrar ciclos (aunque sean menos precisos)
+
+> Más cosas que tengo que documentar:
+
+- Todo el tema del double width:
+[ ] Explicar el split y cómo montarlo. Explicar el `NO_SPLIT` que está pensado para probar al principio o por si quieren usar sprites para el _hud_.
+[ ] Usar el modo `REAL_TIME_MAP_ATTR` para ahorrar RAM
+[ ] `SINGLE_SCREEN_SUPPORT` y qué significa. Pantallas sencillas forzadas.

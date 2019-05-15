@@ -488,7 +488,7 @@
 #define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
 //#define PLAYER_BULLETS_MIN_KILLABLE 	3	// If defined, only enemies >= N can be killed.
 //#define BULLETS_DONT_KILL					// Bullets don't kill, but affect enemies otherwise
-//#define PLAYER_JUST_FIRED_COUNTER		16  // If defined, a counter is ran each time the player fires
+#define PLAYER_JUST_FIRED_COUNTER		16  // If defined, a counter is ran each time the player fires
 
 // Special shooting
 //#define PLAYER_FIRE_RELOAD			16	// If defined # of frames until next shoot

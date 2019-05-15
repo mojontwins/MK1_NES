@@ -7,19 +7,19 @@
 void cm_two_points (void) {
 	// Calculates at1 & at2 from cx1, cy1 & cx2, cy2
 	if (cy1 > 12 || cy2 > 12) { at1 = at2 = 0; return; }
-	at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
-	at2 = map_attr [COORDS (cx2, cy2 ? cy2 - 1 : 0)];
+	at1 = MAP_ATTR (COORDS (cx1, cy1 ? cy1 - 1 : 0));
+	at2 = MAP_ATTR (COORDS (cx2, cy2 ? cy2 - 1 : 0));
 }
 
 #if PLAYER_COLLISION_VSTRETCH_BG > 0
 void cm_three_points (void) {
 	// Always vertical, upon pry and pre-calculated cx1.
 	cy1 = (pry - PLAYER_COLLISION_VSTRETCH_BG) >> 4;
-	if (cy1 <= 12) at1 = map_attr [COORDS (cx1, cy1 ? cy1 - 1 : 0)];
+	if (cy1 <= 12) at1 = MAP_ATTR (COORDS (cx1, cy1 ? cy1 - 1 : 0));
 	cy2 = pry >> 4;
-	if (cy2 <= 12) at2 = map_attr [COORDS (cx1, cy2 ? cy2 - 1 : 0)];
+	if (cy2 <= 12) at2 = MAP_ATTR (COORDS (cx1, cy2 ? cy2 - 1 : 0));
 	cy3 = (pry + 15) >> 4;
-	if (cy3 <= 12) at3 = map_attr [COORDS (cx1, cy3 ? cy3 - 1 : 0)];
+	if (cy3 <= 12) at3 = MAP_ATTR (COORDS (cx1, cy3 ? cy3 - 1 : 0));
 }
 #endif
 
@@ -107,7 +107,7 @@ void pad_read (void) {
 #endif
 
 void update_cycle (void) {
-	#ifdef DOUBLE_WIDTH
+	#if defined (DOUBLE_WIDTH) && defined (NO_SPLIT)
 		scroll (scroll_x, SCROLL_Y);
 	#endif
 	oam_hide_rest (oam_index);
@@ -115,11 +115,16 @@ void update_cycle (void) {
 		ppu_mask (0x1e);
 	#endif
 	ppu_waitnmi ();
-	#ifdef DEBUG
-		ppu_mask (0x1f);
-	#endif
+	
 	clear_update_list ();
 	oam_index = 4;
+	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
+		split (scroll_x, SCROLL_Y);
+	#endif
+
+	#ifdef DEBUG
+		//ppu_mask (0x1f);
+	#endif
 }
 
 #ifdef DOUBLE_WIDTH
@@ -134,20 +139,29 @@ void update_cycle (void) {
 	}
 
 	void calc_scroll_pos (void) {
+		#ifdef SINGLE_SCREEN_SUPPORT
+			if (scr_single) { scroll_x = 0; return; } 
+		#endif
+			
 		scroll_x = prx - 124;
 		if (scroll_x < 0) scroll_x = 0;
 		else if (scroll_x > 256) scroll_x = 256;	
 	}
 
 	void calc_en_x_absolute (void) {
-		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY)
+		#if defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_BOIOIONG)
 			if (_en_t == 6 || _en_t == 13) {
 				// Fanties and boioiongs are absolute
 				EN_X_ABSOLUTE = _enf_x >> FIXBITS;
 			} else 
 		#endif
+		#if defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)
+			if (_en_t == 6) {
+				EN_X_ABSOLUTE = FANTY_ENX;
+			} else
+		#endif
 		{
-			// Other types are absolute
+			// Other types are relative
 			EN_X_ABSOLUTE = en_x_offs + _en_x;
 		}
 		on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);

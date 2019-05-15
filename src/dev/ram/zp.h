@@ -30,6 +30,10 @@ unsigned char ticker;                   // Ticker. 0 for a frame every second.
 #ifdef DOUBLE_WIDTH
     signed int rdaa;                    // General purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
+    #ifdef SINGLE_SCREEN_SUPPORT
+        unsigned char scr_single;           // Current screen is not double-width.
+    #endif
+    unsigned char split_on;             // Split screen is on
 #endif
 unsigned char ast1;                     // Temporal
 
@@ -128,6 +132,7 @@ signed int pgtmx, pgtmy;                // X, Y components of velocity in "playe
 #ifdef ENABLE_LADDERS
     unsigned char ponladder;            // True if player is on a ladder.
     unsigned char phalfladder;          // True if player's feet are on a ladder.
+    unsigned char ponplatform;          // True if player is on a platform.
     unsigned char ponladderctr;         // Counter used for animation when player is on ladders in my/player_frame_selector.h
 #endif
 

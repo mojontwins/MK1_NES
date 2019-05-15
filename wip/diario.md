@@ -4966,3 +4966,38 @@ Ahora tengo que ver como pinchar para hacer splits y poder tener un marcador. Se
 Lo más fácil es meter el el punto de inyección en el update_cycle. Así estoy efectivamente perdiendo tiempo, pero al menos lo tengo disponible en todos los tejemanejes que haya que hacer.
 
 Bueno, sigo dándole vueltas. No es moco de paver. Por un lado debería haber cierto preparativo: es necesario poner el hud con el tile de bg y el sprite para hacer el split de forma manual. Esto es algo que podemos hacer en `draw_game_frame`.
+
+20190507
+========
+
+Tengo medio listo el tema del split, pero para verlo tendré que cambiar al level 1 que es horizontal.
+
+Pasan cosas glitcheras aquí y allá. Por un lado va siendo hora de empezar a pasar algunas cosas a ASM, como en Leovigildo. Por otro lado, cuando me matan aparecen sprites en pantalla que no deberían salir! Wtf?
+
+TODO: Portar el precalc fanty desde MK2.
+
+Glitch: Cuando te matan aparecen TODOS los enemigos! ¿!?!!! Esto sí que es raro, pare.
+
+A ver, hay una especie de pruna, que dice que si no estás en la pantalla (después de mover) no hace ninguna comprobación y supuestamente tampoco dibuja.
+
+Si está dibujando es que no está funcionando la pruna en el momento de matarte.
+
+Se tiene que `on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);`. `EN_X_ABSOLUTE` parece bien calculado. `scroll_x` debería estar bien puesto, ya que tenemos en mainloop:
+
+```c
+    player_move ();
+    calc_scroll_pos ();
+    enems_move ();
+```
+
+(no es así 100%, es ese orden). en `calc_scroll_pos` se establece `scroll_x` en base a `prx`. Ese `scroll_x` debería estar bien porque el split lo está haciendo bien durante la pausa.
+
+Estoy usando el fceux para comprobar cosas. `prx` y `scroll_x` tienen bien el valor durante la pausa donde están todos los bichos en la pantalla. Pero es que es quizá en el momento en el que pasa y luego se corrige.
+
+Voy a detectar al final de los enemigos si pkill está puesto y por tanto va a morirse el nota justo después.
+
+Mierda, podría haber mirado primero lo que acabo de ver. Esta pruna está dentro de un `if (!pkill)` justo con el resto de las cosas :-/ Me cago en mi puta calavera verde.
+
+Lo que tengo que hacer es un precalc fanty y definirle un radio de acción. No es tan complejo como el homing pero parecido. Te persigue sólo si te acercas. Voy a ver qué aspecto tiene un homing fanty para adaptar.
+
+También voy a ver de adaptar las balas a asm primero a ver.

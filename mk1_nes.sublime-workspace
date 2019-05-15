@@ -520,10 +520,27 @@
 	"buffers":
 	[
 		{
+			"file": "examples/12_espitene/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 6809,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine/playermods/bullets.h",
+			"settings":
+			{
+				"buffer_size": 5346,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "wip/diario.md",
 			"settings":
 			{
-				"buffer_size": 204635,
+				"buffer_size": 207439,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -606,10 +623,17 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/src",
+		"/D/git/MK1_NES/src/dev",
+		"/D/git/MK1_NES/src/dev/engine",
+		"/D/git/MK1_NES/src/dev/engine/playermods",
 		"/D/git/MK1_NES/wip"
 	],
 	"file_history":
 	[
+		"/D/Proyectos/entregas/Entrega_FicherosJunta_1.3.0.0/instrucciones.txt",
+		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/wip/roadmap.md",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/config.h",
 		"/D/git/MK1_NES/src/dev/engine/general.h",
 		"/D/git/MK1_NES/src/dev/engine/player.h",
@@ -734,10 +758,7 @@
 		"/D/git/MK1_NES/src/dev/game.c",
 		"/D/git/MK1_NES/examples/02_jet_paco/dev/player.h",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/game.s",
-		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/game.s",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/cocos.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/playermods/bullets.h"
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h"
 	],
 	"find":
 	{
@@ -993,8 +1014,72 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/12_espitene/dev/compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6653,
+								6670
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 182.0,
+						"translation.y": 390.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dev/engine/playermods/bullets.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5346,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4251,
+								4184
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1877.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -1002,20 +1087,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 0,
+					"buffer": 2,
 					"file": "wip/diario.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 204635,
+						"buffer_size": 207439,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								204635,
-								204635
+								143545,
+								143545
 							]
 						],
 						"settings":
@@ -1028,7 +1113,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 86861.0,
+						"translation.y": 63292.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
