@@ -68,7 +68,7 @@ const unsigned char bits [] = {
 	const signed char fanty_incs [] = {
 		#ifdef FANTY_SLOW
 			// Slower fanty
-			0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1
+			0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1
 		#endif
 		#ifdef FANTY_NORMAL
 			// Faster fanty

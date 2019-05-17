@@ -114,17 +114,20 @@ void update_cycle (void) {
 	#ifdef DEBUG
 		ppu_mask (0x1e);
 	#endif
+
+	update_list [update_index] = 0xff;
 	ppu_waitnmi ();
-	
-	clear_update_list ();
+	update_index = 0;
+
 	oam_index = 4;
+	
+	#ifdef DEBUG
+		ppu_mask (0x1f);
+	#endif	
 	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
 		split (scroll_x, SCROLL_Y);
 	#endif
 
-	#ifdef DEBUG
-		//ppu_mask (0x1f);
-	#endif
 }
 
 #ifdef DOUBLE_WIDTH
@@ -145,7 +148,9 @@ void update_cycle (void) {
 			
 		scroll_x = prx - 124;
 		if (scroll_x < 0) scroll_x = 0;
-		else if (scroll_x > 256) scroll_x = 256;	
+		else if (scroll_x > 256) scroll_x = 256;
+
+		scroll_x_r = scroll_x + 240;
 	}
 
 	void calc_en_x_absolute (void) {
@@ -164,6 +169,33 @@ void update_cycle (void) {
 			// Other types are relative
 			EN_X_ABSOLUTE = en_x_offs + _en_x;
 		}
-		on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);
+
+		//on_screen = (EN_X_ABSOLUTE >= scroll_x && EN_X_ABSOLUTE < scroll_x + 240);
+			
+			on_screen = 0;
+			
+		// if (EN_X_ABSOLUTE < scroll_x) -> on_screen = 0;
+
+			__asm__ ("lda %v", EN_X_ABSOLUTE);
+			__asm__ ("cmp %v", scroll_x);
+			__asm__ ("lda %v+1", EN_X_ABSOLUTE);
+			__asm__ ("sbc %v+1", scroll_x);
+			__asm__ ("bcs %g", calc_en_x_absolute_skip1);
+			
+			__asm__ ("rts");
+	
+		calc_en_x_absolute_skip1:
+		// if (scroll_x + 240 < EN_X_ABSOLUTE) -> on_screen = 0
+			__asm__ ("lda %v", scroll_x_r);
+			__asm__ ("cmp %v", EN_X_ABSOLUTE);
+			__asm__ ("lda %v+1", scroll_x_r);
+			__asm__ ("sbc %v+1", EN_X_ABSOLUTE);
+			__asm__ ("bcs %g", calc_en_x_absolute_do);
+
+			__asm__ ("rts");
+
+		calc_en_x_absolute_do:
+
+			on_screen = 1;
 	}
 #endif

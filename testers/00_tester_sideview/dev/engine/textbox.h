@@ -23,12 +23,12 @@ void textbox_frame (void) {
 			((rdit ? 192 : 0) + map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
 	#else
 		_x = 0; 
-		gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
+	gp_ram = rdm ? ((unsigned char *) box_buff) : (map_buff + (((_y - TOP_ADJUST) >> 1) << 4));
 	#endif
 	
 	gpit = 64; while (gpit --) {
 		rdt = *gp_ram ++; 
-		if (rdct == 0) clear_update_list ();
+		//if (rdct == 0) clear_update_list ();
 		if (rdt != 0xff) { 
 			_t = rdt + rdm;
 			update_list_tile (); 
@@ -36,9 +36,9 @@ void textbox_frame (void) {
 		#ifdef DOUBLE_WIDTH
 			_x = _x + 2; if (_x == 32 || _x == 64) { _x = rdit ? 32 : 0; _y += 2; }
 		#else
-			_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
+		_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
 		#endif
-		++ rdct; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
+		++ rdct; if (rdct == 4) { update_cycle (); rdct = 0; }
 	}
 }
 
@@ -53,12 +53,12 @@ void textbox_draw_text (void) {
 	rdy = 13;
 	while (rdt = *gp_gen ++) {
 		#ifdef TEXT_BOX_WITH_PORTRAITS
-			if (rda) { clear_update_list (); rda = 0; gp_addr = NAMETABLE_BASE + rdm + (rdy << 5); }
+			if (rda) { update_index = 0; rda = 0; gp_addr = NAMETABLE_BASE + rdm + (rdy << 5); }
 		#else
-			if (rda) { clear_update_list (); rda = 0; gp_addr = NAMETABLE_BASE + 6 + (rdy << 5); }
+			if (rda) { update_index = 0; rda = 0; gp_addr = NAMETABLE_BASE + 6 + (rdy << 5); }
 		#endif
 		if (rdt == '%') rda = 1; else { _n = rdt - 32; ul_putc (); }
-		if (rda) { ppu_waitnmi (); ++ rdy; }
+		if (rda) { update_cycle (); ++ rdy; }
 	}	
 }
 
@@ -71,20 +71,20 @@ void textbox_do (void) {
 	// In double width mode, scroll to the correct screen
 	#ifdef DOUBLE_WIDTH
 		player_to_pixels ();
-		rdit = (prx & 0x100);
+		rdit = !!(prx & 0x100);
 		rds16 = rdit ? 256 : 0;
 		scroll_to ();
 	#endif
 
 	rdm = TEXT_BOX_FRAME_TILE_OFFSET; textbox_frame ();
 	#ifdef TEXT_BOX_WITH_PORTRAITS
-		if (rdd) {
-			oam_meta_spr (
-				44, 103,
-				256-32,
-				spr_hs [rdd]);
-			rdm = 8;
-		} else rdm = 6;
+	if (rdd) {
+		oam_meta_spr (
+			44, 103,
+			256-32,
+			spr_hs [rdd]);
+		rdm = 8;
+	} else rdm = 6;
 	#endif	
 
 	#ifdef DOUBLE_WIDTH
@@ -93,11 +93,11 @@ void textbox_do (void) {
 
 	textbox_draw_text ();
 	while (1) {
-		ppu_waitnmi ();
+		update_cycle ();
 		pad_read (); if (pad_this_frame & (PAD_A|PAD_B)) break;
 	}
 	#ifdef TEXT_BOX_WITH_PORTRAITS
-		if (rdd) oam_hide_rest (256-32);
+	if (rdd) oam_hide_rest (256-32);
 	#endif
 	rdm = 0; textbox_frame ();
 	clear_update_list ();

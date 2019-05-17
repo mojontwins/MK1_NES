@@ -69,10 +69,10 @@ void hotspots_paint (void) {
 		__asm__ ("ldy #2");			// Y will index SP
 
 		#ifdef DOUBLE_WIDTH
-			// hrx - scroll_x : If we are here, this fits in a BYTE
-			__asm__ ("lda %v", hrx);
-			__asm__ ("sec");
-			__asm__ ("sbc %v", scroll_x);
+		// hrx - scroll_x : If we are here, this fits in a BYTE
+		__asm__ ("lda %v", hrx);
+		__asm__ ("sec");
+		__asm__ ("sbc %v", scroll_x);
 		#else
 			__asm__ ("lda %v", hrx);
 		#endif

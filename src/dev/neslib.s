@@ -78,6 +78,11 @@ nmi:
 	ldy #0
 @updName:
 	lda (NAME_UPD_ADR),y
+	
+	; Mojon Twins modification: END MARKER
+	cmp #$FF
+	beq @skipUpd
+
 	iny
 	sta PPU_ADDR
 	lda (NAME_UPD_ADR),y

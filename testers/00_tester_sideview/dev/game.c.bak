@@ -5,10 +5,7 @@
 
 // Comment this when you are done
 //#define DEBUG
-#define DEBUG_LEVEL		0
-#define DEBUG_SCR_INI	20
-#define DEBUG_INI_X		14
-#define DEBUG_INI_Y		5
+
 //
 
 #define MAX_BOLTS 16 // max 32, make it as small as possible.
@@ -23,14 +20,14 @@
 // * const data *
 // **************
 
-#include "engine/precalcs.h"
+#include "assets/precalcs.h"
 #include "assets/palettes.h"
-#include "my/behs.h"
+#include "assets/behs.h"
 #include "assets/map0.h"
 #include "assets/enems0.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
-#include "my/metasprites.h"
+#include "assets/metasprites.h"
 #include "assets/custom_texts.h"
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
@@ -39,7 +36,7 @@
 	#include "assets/interactives.h"
 #endif
 #ifdef MULTI_LEVEL
-	#include "my/levelset.h"
+	#include "assets/levelset.h"
 #endif
 
 // Music
@@ -115,7 +112,7 @@ void main(void) {
 	// Main loop
 
 	while (1) {	
-		pres (palts0, scr_title);
+		//title ();
 
 		#ifdef MULTI_LEVEL		
 			level = 0;
@@ -130,7 +127,7 @@ void main(void) {
 			game_loop ();
 
 			if (game_over) {
-				pres (palts0, scr_game_over);
+				// game_over ();
 				break;
 			} 
 			#ifdef DIE_AND_REINIT
@@ -145,7 +142,7 @@ void main(void) {
 					if (level == MAX_LEVELS) 
 				#endif
 				{
-					pres (palts0, scr_the_end);
+					// game_ending ();
 					break;
 				}
 			}

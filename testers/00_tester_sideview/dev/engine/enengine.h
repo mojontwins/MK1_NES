@@ -19,7 +19,7 @@
 			vram_adr (c_enems);
 			rda = VRAM_READ; 	// Dummy read.			
 
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				rdt = VRAM_READ;
 
@@ -42,26 +42,26 @@
 			}
 		#else		
 			gp_gen = (unsigned char *) (c_enems);
-			for (gpjt = 0; gpjt < 3 * MAP_SIZE; gpjt ++) {
+			for (gpjt = 0; gpjt < 3 * MAP_SIZE; ++ gpjt) {
 				// Skip t
 				// rdt = *gp_gen ++; 
-				SET_FROM_PTR (rdt, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rdt, gp_gen); ++ gp_gen;
 
 				// YX1
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				ep_y [gpjt] = rda & 0xf0;
 				ep_x [gpjt] = rda << 4;
 
 				// YX2
 				//rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				rdc = rda & 0xf0;
 				rdb = rda << 4;
 
 				// P, here used for speed
 				//rda = (*gp_gen ++) & 0x0f;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++; rda &= 0x0f;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen; rda &= 0x0f;
 				if (rda > 1) rda >>= 1;	// Store converted!
 				ep_mx [gpjt] = ADD_SIGN2 (rdb, ep_x [gpjt], rda);
 				ep_my [gpjt] = ADD_SIGN2 (rdc, ep_y [gpjt], rda);		
@@ -72,7 +72,7 @@
 	void enems_persistent_update (void) {
 		if (on_pant != 99) {
 			gpjt = on_pant + on_pant + on_pant;
-			for (gpit = 0; gpit < NENEMS; gpit ++) {
+			for (gpit = 0; gpit < NENEMS; ++ gpit) {
 				__asm__ ("ldx %v", gpit);
 				__asm__ ("ldy %v", gpjt);
 
@@ -146,6 +146,10 @@ void enems_update_unsigned_char_arrays (void) {
 		enf_x [gpit] = _enf_x; enf_vx [gpit] = _enf_vx;
 		enf_y [gpit] = _enf_y; enf_vy [gpit] = _enf_vy;
 	#endif
+
+	#if defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)
+		enf_x [gpit] = FANTY_ENX; 
+	#endif
 }
 
 void enems_facing (void) {
@@ -187,8 +191,13 @@ void enems_load (void) {
 		en_offs = rdc = (n_pant << 1) + n_pant;                               // * 3
 	#endif
 
-	for (gpit = 0; gpit < NENEMS; gpit ++) {
-		
+	for (gpit = 0; gpit < NENEMS; ++ gpit) {
+		#if defined (DOUBLE_WIDTH) && defined (SINGLE_SCREEN_SUPPORT)
+			if (scr_single && gpit > 2) {
+				en_t [gpit] = 0; continue;
+			}
+		#endif
+
 		#ifdef PERSISTENT_DEATHS	
 			// Fast hack. If enemy is dead, change for type 0 and skip data.
 			if (ep_dead [rdc]) {
@@ -226,26 +235,26 @@ void enems_load (void) {
 			#else
 				// First get T, then do whatever I need
 				// _en_t = *gp_gen ++;
-				SET_FROM_PTR (_en_t, gp_gen); gp_gen ++;
+				SET_FROM_PTR (_en_t, gp_gen); ++ gp_gen;
 
 				// General...
 				_en_state = 0;
 
 				// YX1
 				// rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				_en_y1 = rda & 0xf0;
 				_en_x1 = rda << 4;
 
 				// YX2
 				// rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 				_en_y2 = rda & 0xf0;
 				_en_x2 = rda << 4;
 			
 				// P, here used for speed
 				// rda = *gp_gen ++;
-				SET_FROM_PTR (rda, gp_gen); gp_gen ++;
+				SET_FROM_PTR (rda, gp_gen); ++ gp_gen;
 			#endif
 
 			// clean nibbles
@@ -340,6 +349,18 @@ void enems_load (void) {
 						break;
 				#endif
 
+				#if defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)
+					case 6:
+						// Precalculated fanties
+						_en_mx = _en_my = 0;
+						#ifdef DOUBLE_WIDTH
+							FANTY_ENX = _en_x + (gpit > 2 ? 256 : 0);
+						#endif
+
+						_en_s = FANTY_BASE_SPRID;
+						break;
+				#endif
+
 				#ifdef ENABLE_PURSUERS
 					case 7:
 						// Pursuers
@@ -349,6 +370,8 @@ void enems_load (void) {
 							gen_was_hit [gpit] = 0;
 						#endif	
 						_en_s = ((TYPE_7_FIXED_SPRITE - 1) << 3);
+						_en_x2 = rdm;     // != 0 means "spawned enemy fires"
+						_en_y2 = rdd|0xf; // Frequency
 						break;
 				#endif	
 
@@ -462,7 +485,7 @@ void enems_load (void) {
 			}
 
 			#ifdef NEEDS_LIFE_GAUGE_LOGIC
-				#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY)) && defined (FANTY_LIFE_GAUGE)
+				#if (defined (ENABLE_FANTY) || defined (ENABLE_HOMING_FANTY) || defined (ENABLE_TIMED_FANTY) || defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)) && defined (FANTY_LIFE_GAUGE)
 					en_life [gpit] = _en_t == 6 ? FANTY_LIFE_GAUGE : ENEMS_LIFE_GAUGE;
 				#else
 					en_life [gpit] = ENEMS_LIFE_GAUGE;
@@ -545,7 +568,11 @@ void enems_move (void) {
 	gpit = en_initial;
 	gpjt = NENEMS; while (gpjt --) {
 		gpit += NENEMS-1; if (gpit > NENEMS-1) gpit -=NENEMS;
+
 		#ifdef DOUBLE_WIDTH
+			#ifdef SINGLE_SCREEN_SUPPORT
+				if (scr_single && gpit > 2) continue;
+			#endif
 			en_x_offs = (gpit < 3 ? 0 : 256);
 		#endif
 		
@@ -595,7 +622,11 @@ void enems_move (void) {
 		#ifdef ENEMS_NEED_FP
 			_enf_x = enf_x [gpit]; _enf_vx = enf_vx [gpit];
 			_enf_y = enf_y [gpit]; _enf_vy = enf_vy [gpit];
-		#endif		
+		#endif
+
+		#if defined (ENABLE_PRECALC_FANTY) || defined (ENABLE_PRECALC_HOMING_FANTY) || defined (ENABLE_PRECALC_TIMED_FANTY)
+			_enf_x = enf_x [gpit];
+		#endif
 
 		if (_en_t == 0) continue;
 		en_is_alive = !(en_flags [gpit] & EN_STATE_DEAD);
@@ -670,8 +701,13 @@ void enems_move (void) {
 		// Enemy is considered active if...
 
 		if (en_is_alive) {
+			rdt = _en_t & 63;
 
 			// Gotten preliminary:
+
+			#ifdef DOUBLE_WIDTH
+				calc_en_x_absolute ();
+			#endif
 			pregotten = (prx + 7 >= EN_X_ABSOLUTE && prx <= EN_X_ABSOLUTE + 15);
 			
 			// Select frame upon screen position:
@@ -680,29 +716,29 @@ void enems_move (void) {
 			#ifdef ENABLE_RESONATORS
 				if (res_on 
 					#ifndef PLAYER_TOP_DOWN
-						&& _en_t != 4
+						&& rdt != 4
 					#endif
 					#ifdef ENABLE_STEADY_SHOOTERS
-						&& _en_t != 5
+						&& rdt != 5
 					#endif
 					#ifdef ENABLE_SAW
-						&& _en_t != 8 
+						&& rdt != 8 
 					#endif
 					#ifdef ENABLE_CHAC_CHAC
-						&& _en_t != 10
+						&& rdt != 10
 					#endif
 				) {
 					en_spr = en_spr_id [gpit];
 				} else
 			#endif
 			{
-				switch (_en_t & 63) {
+				switch (rdt) {
 					case 1:
 					case 2:
 					case 3:
 					case 4:
 					
-						#include "engine/enemmods/enem_linear.h"
+						#include "engine/enemmods/enem_linear_assembly.h"
 						#ifdef ENABLE_SHOOTIES
 							#include "engine/enemmods/enem_shooty.h"
 						#endif				
@@ -732,6 +768,12 @@ void enems_move (void) {
 					#ifdef ENABLE_TIMED_FANTY
 						case 6:
 							#include "engine/enemmods/enem_timed_fanty.h"
+							break;
+					#endif
+
+					#ifdef ENABLE_PRECALC_FANTY
+						case 6:
+							#include "engine/enemmods/enem_precalc_fanty_assembly.h"
 							break;
 					#endif
 
@@ -802,300 +844,308 @@ void enems_move (void) {
 				if (!on_screen) goto skipall;
 			#endif
 
-			// Warp player?
+			// If player is dead no interaction is possible
+			if (!pkill) {
 
-			#ifdef ENABLE_SIMPLE_WARPERS
-				if (_en_t == 0xff) {
-					if (collide ()
-					#ifdef SIMPLE_WARPERS_FIRE_BUTTON
-						&& (pad_this_frame & PAD_B)
-					#endif
-					) {
-						n_pant = _en_mx; on_pant = 0xff;
-						prx = _en_x2; px = prx << FIXBITS;
-						pry = _en_y2; py = pry << FIXBITS;
-						player_stop ();
-
-						#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
-							phitteract = 0;
-							#ifdef PLAYER_PUNCHES
-								ppunching = 0;
-							#endif
-							#ifdef PLAYER_KICKS
-								pkicking = 0;
-							#endif
+				// Warp player?
+	
+				#ifdef ENABLE_SIMPLE_WARPERS
+					if (_en_t == 0xff) {
+						if (collide ()
+						#ifdef SIMPLE_WARPERS_FIRE_BUTTON
+							&& (pad_this_frame & PAD_B)
 						#endif
-
-						b_button = 0;
-						break;
+						) {
+							n_pant = _en_mx; on_pant = 0xff;
+							prx = _en_x2; px = prx << FIXBITS;
+							pry = _en_y2; py = pry << FIXBITS;
+							player_stop ();
+	
+							#if defined (SIMPLE_WARPERS_FIRE_BUTTON) && (defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS))
+								phitteract = 0;
+								#ifdef PLAYER_PUNCHES
+									ppunching = 0;
+								#endif
+								#ifdef PLAYER_KICKS
+									pkicking = 0;
+								#endif
+							#endif
+	
+							b_button = 0;
+							break;
+						}
+						goto skipdo;
 					}
-					goto skipdo;
-				}
-			#endif
-
-			// Moving platforms
-
-			#ifndef PLAYER_TOP_DOWN
-				if (_en_t == 4 && pregotten && !pgotten && !pj) {
-					
-					// Horizontal moving platforms
-					
-					if (_en_mx) {
-						if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
+				#endif
+	
+				// Moving platforms
+	
+				#ifndef PLAYER_TOP_DOWN
+					if (_en_t == 4 && pregotten && !pgotten && !pj) {
+						
+						// Horizontal moving platforms
+						
+						if (_en_mx) {
+							if (pry + 16 >= _en_y && pry + 12 <= _en_y) {
+								pgotten = 1;
+								pgtmx = _en_mx << (6 - en_status [gpit]);
+								py = (_en_y - 16) << 6; pry = py >> 6;
+	
+							}
+						}
+						
+						// Vertical moving platforms
+						
+						if (
+							(_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
+							(_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
+						) {
 							pgotten = 1;
-							pgtmx = _en_mx << (6 - en_status [gpit]);
+							pgtmy = _en_my << (6 - en_status [gpit]);
 							py = (_en_y - 16) << 6; pry = py >> 6;
+							pvy = 0;
 						}
 					}
-					
-					// Vertical moving platforms
-					
-					if (
-						(_en_my < 0 && pry + 17 >= _en_y && pry + 12 <= _en_y) ||
-						(_en_my > 0 && pry + 16 + _en_my >= _en_y && pry + 12 <= _en_y)
-					) {
-						pgotten = 1;
-						pgtmy = _en_my << (6 - en_status [gpit]);
-						py = (_en_y - 16) << 6; pry = py >> 6;
-						pvy = 0;
+	
+					#ifdef PLAYER_SPINS
+						if (pgotten) pspin = 0;
+	
+					#endif
+				#endif
+	
+				// Invincible
+	
+				#ifdef ENEMS_INVINCIBILITY
+					if (en_invincible [gpit]) {
+						-- en_invincible [gpit];
+						if (half_life) en_spr = 0xff;
 					}
-				}
-
-				#ifdef PLAYER_SPINS
-					if (pgotten) pspin = 0;
 				#endif
-			#endif
-
-			// Invincible
-
-			#ifdef ENEMS_INVINCIBILITY
-				if (en_invincible [gpit]) {
-					-- en_invincible [gpit];
-					if (half_life) en_spr = 0xff;
-				}
-			#endif
-
-			// Is enemy interactuable?
-			#ifdef DOUBLE_WIDTH
-				if ((prx & 0x100) != (EN_X_ABSOLUTE & 0x100)) goto killdo;
-			#endif
-
-			// Is enemy collidable? If not, exit
-
-			if (
-					en_is_alive == 0	// General condition.
-				#ifdef ENEMS_MAY_DIE
-					|| en_cttouched [gpit]
+	
+				// Is enemy interactuable?
+				#ifdef DOUBLE_WIDTH
+					if ((prx & 0x100) != (EN_X_ABSOLUTE & 0x100)) goto killdo;
 				#endif
-				#ifndef PLAYER_TOP_DOWN				
-					|| _en_t == 4
-				#endif
-				#ifdef ENABLE_PURSUERS
-					|| (_en_t == 7 && _en_state != 2)
-				#endif
-				#ifdef ENABLE_SAW
-					|| (_en_t == 8 && _en_state != 2)
-				#endif
-				#ifdef ENABLE_PEZONS
-					|| (_en_t == 9 && _en_state == 0)
-				#endif
-				#ifdef ENABLE_CHAC_CHAC
-					|| _en_t == 10
-				#endif
-				#ifdef ENABLE_MONOCOCOS
-					|| (_en_t == 11 && _en_mx != 2)
-				#endif
-				#ifdef ENABLE_CATACROCKS
-					|| (_en_t == 12 && _en_state != 1)
-				#endif
-				#ifdef ENABLE_BOIOIONG
-					|| (_en_t == 13 && _en_ct == 0)
-				#endif
-			) goto skipdo;
-
-			// Collide with player (includes step over enemy)
-
-			// Step over enemy?
-			#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
-
+	
+				// Is enemy collidable? If not, exit
+	
 				if (
-					pregotten && 
-					pry < _en_y && 
-					pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
-					pgotten == 0 &&	ppossee == 0
-					#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
-						&& pvy > 0
+						en_is_alive == 0	// General condition.
+					#ifdef ENEMS_MAY_DIE
+						|| en_cttouched [gpit]
 					#endif
-					#ifdef PLAYER_STEPS_STRICT
-						&& pvy > PLAYER_VY_FALLING_MIN
+					#ifndef PLAYER_TOP_DOWN				
+						|| _en_t == 4
 					#endif
-					#ifndef STEADY_SHOOTER_KILLABLE
-						&& _en_t != 5
-					#endif	
+					#ifdef ENABLE_PURSUERS
+						|| (_en_t == 7 && _en_state != 2)
+					#endif
 					#ifdef ENABLE_SAW
-						&& _en_t != 8
+						|| (_en_t == 8 && _en_state != 2)
 					#endif
-					#ifdef ENEMS_INVINCIBILITY
-						&& en_invincible [gpit] == 0
+					#ifdef ENABLE_PEZONS
+						|| (_en_t == 9 && _en_state == 0)
 					#endif
-				) {
-				
-					#ifdef ENABLE_RESONATORS
-						if (res_on || res_disable)
+					#ifdef ENABLE_CHAC_CHAC
+						|| _en_t == 10
 					#endif
-					#ifdef PLAYER_STEPS_MIN_KILLABLE
-						if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
+					#ifdef ENABLE_MONOCOCOS
+						|| (_en_t == 11 && _en_state != 2)
 					#endif
-					enems_hit ();
-				
-					#ifdef PLAYER_SAFE_LANDING
-						if (_en_my < 0) _en_my = -_en_my;
+					#ifdef ENABLE_CATACROCKS
+						|| (_en_t == 12 && _en_state != 1)
 					#endif
-
-					#ifdef PLAYER_HAS_JUMP
-						if (pad0 & PAD_A) {
-							jump_start ();
-						} else 
-					#endif						
-					{
-						pvy = -PLAYER_VY_JUMP_INITIAL << 1;
-					}
-					sfx_play (SFX_STEPON, 1);
-
-					#ifdef PLAYER_AUTO_JUMP
-						jump_start ();
+					#ifdef ENABLE_BOIOIONG
+						|| (_en_t == 13 && _en_ct == 0)
 					#endif
-
-					if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
-
-					touched = 1;
-				} else
-			#endif
-
-			if (
-				#if defined (ENABLE_STEADY_SHOOTERS) && defined (STEADY_SHOOTERS_HARMLESS)
-					_en_t != 5 &&
-				#endif
-				touched == 0 &&
-				collide ()
-			) {
-				// en_sg_1 => kill enemy
-				#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
-					en_sg_1 = 1;
-				#else
-					en_sg_1 = 0;
-				#endif
-				
-				// en_sg_2 => kill player.
-				en_sg_2 = (pflickering == 0);
-
-				#ifdef ENABLE_RESONATORS
-					// If resonators are on and not a saw, don't kill player
+				) goto skipdo;
+	
+				// Collide with player (includes step over enemy)
+	
+				// Step over enemy?
+				#if (defined (PLAYER_HAS_JUMP) || defined (PLAYER_AUTO_JUMP)) && defined (PLAYER_STEPS_ON_ENEMS)
+	
 					if (
-						res_on == 1
-						#ifdef ENABLE_SAW
-						&& _en_t != 8
+						pregotten && 
+						pry < _en_y && 
+						pry + 15 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+						pgotten == 0 &&	ppossee == 0
+						#if defined (ENABLE_RESONATORS) && !defined (PLAYER_STEPS_STRICT)
+							&& pvy > 0
 						#endif
-					) en_sg_2 = 0;
-				#endif
-
-				#ifdef PLAYER_SPINS
-					// If spinning and not a saw or a steady shooter 
-					// kill enemy, don't kill player
-					if (pspin
+						#ifdef PLAYER_STEPS_STRICT
+							&& pvy > PLAYER_VY_FALLING_MIN
+						#endif
 						#ifndef STEADY_SHOOTER_KILLABLE
 							&& _en_t != 5
 						#endif	
 						#ifdef ENABLE_SAW
 							&& _en_t != 8
 						#endif
-					) {
-						en_sg_1 = 1;
-						en_sg_2 = 0;
-						pvy = -pvy;
-						sfx_play (SFX_STEPON, 1);
-					}
-				#endif				
-
-				#ifdef ENEMS_INVINCIBILITY
-					if (en_invincible [gpit]) en_sg_1 = 0;
-				#endif
-
-				#include "my/on_player_hit.h"
-
-				#ifdef ENEMS_MAY_DIE
-					if (en_sg_1) enems_hit ();
-				#endif
-				if (en_sg_2) { 
-					pkill = 1; 
-					#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
-						pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
-						pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
-						
-						#ifdef ENABLE_COMPILED_ENEMS
-						if (_en_t != 20)
+						#ifdef ENEMS_INVINCIBILITY
+							&& en_invincible [gpit] == 0
 						#endif
-						{
-							if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
-							_en_mx = ADD_SIGN (EN_X_ABSOLUTE - prx, ABS (_en_mx));
-						}
-
-					#endif	
-				}
-				touched = 1; 
-			}
-
-#ifdef DOUBLE_WIDTH
-killdo:
-#endif
-
-			// Is enemy killable? If not, exit
-
-			if (
-				touched
-				#ifndef STEADY_SHOOTER_KILLABLE
-					|| _en_t == 5
-				#endif					
-				#ifdef ENABLE_SAW
-					|| _en_t == 8
-				#endif
-				#ifdef ENEMS_INVINCIBILITY
-					|| en_invincible [gpit]
-				#endif
-			) goto skipdo;
-
-			// Hit enemy
-
-			#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
-				if (phitteract) {
-					if (
-						phitterx + 6 >= EN_X_ABSOLUTE &&
-						phitterx <= EN_X_ABSOLUTE + 14 &&
-						phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
-						phittery <= _en_y + 12
 					) {
+					
+	
+						#ifdef ENABLE_RESONATORS
+							if (res_on || res_disable)
+						#endif
+						#ifdef PLAYER_STEPS_MIN_KILLABLE
+							if (_en_t >= PLAYER_STEPS_MIN_KILLABLE)
+						#endif
 						enems_hit ();
-						sfx_play (SFX_STEPON, 1);
-						phitteract = 0;
-						pfrozen = PLAYER_FROZEN_FRAMES;
-						#ifdef ENEMS_RECOIL_ON_HIT
-							if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
-								#ifdef PLAYER_TOP_DOWN
-									if (bmx [bi]) {
-										en_rmy [gpit] = 0;
-								#endif
-									en_rmx [gpit] = ENEMS_RECOIL_X;
-								#ifdef PLAYER_TOP_DOWN
-									} else {
-										en_rmx [gpit] = 0;
-										en_rmy [gpit] = ENEMS_RECOIL_Y;
-									}
-								#endif
-							}
+					
+						#ifdef PLAYER_SAFE_LANDING
+							if (_en_my < 0) _en_my = -_en_my;
 						#endif
+	
+						#ifdef PLAYER_HAS_JUMP
+							if (pad0 & PAD_A) {
+								jump_start ();
+							} else 
+						#endif						
+						{
+							pvy = -PLAYER_VY_JUMP_INITIAL << 1;
+						}
+						sfx_play (SFX_STEPON, 1);
+	
+						#ifdef PLAYER_AUTO_JUMP
+							jump_start ();
+						#endif
+		
+						if (pry > _en_y - ENEMS_UPPER_COLLISION_BOUND) { pry = _en_y - ENEMS_UPPER_COLLISION_BOUND; py = pry << FIXBITS; }
+	
+						touched = 1;
+					} else
+				#endif
+	
+				if (
+					#if defined (ENABLE_STEADY_SHOOTERS) && defined (STEADY_SHOOTERS_HARMLESS)
+						_en_t != 5 &&
+					#endif
+					touched == 0 &&
+					collide ()
+				) {
+					// en_sg_1 => kill enemy
+					#ifdef ENEMIES_SUFFER_ON_PLAYER_COLLISION
+						en_sg_1 = 1;
+					#else
+						en_sg_1 = 0;
+					#endif
+					
+					// en_sg_2 => kill player.
+					en_sg_2 = (pflickering == 0);
+	
+					#ifdef ENABLE_RESONATORS
+						// If resonators are on and not a saw, don't kill player
+						if (
+							res_on == 1
+							#ifdef ENABLE_SAW
+							&& _en_t != 8
+							#endif
+						) en_sg_2 = 0;
+					#endif
+	
+					#ifdef PLAYER_SPINS
+						// If spinning and not a saw or a steady shooter 
+						// kill enemy, don't kill player
+						if (pspin
+							#ifndef STEADY_SHOOTER_KILLABLE
+								&& _en_t != 5
+							#endif	
+							#ifdef ENABLE_SAW
+								&& _en_t != 8
+							#endif
+						) {
+							en_sg_1 = 1;
+							en_sg_2 = 0;
+							pvy = -pvy;
+							sfx_play (SFX_STEPON, 1);
+						}
+					#endif				
+	
+					#ifdef ENEMS_INVINCIBILITY
+						if (en_invincible [gpit]) en_sg_1 = 0;
+					#endif
+		
+					#include "my/on_player_hit.h"
+	
+					#ifdef ENEMS_MAY_DIE
+						if (en_sg_1) enems_hit ();
+					#endif
+					if (en_sg_2) { 
+						pkill = 1; 
+						#if defined (PLAYER_BOUNCES) && !defined (DIE_AND_RESPAWN)
+							pvx = ADD_SIGN (_en_mx, PLAYER_V_REBOUND); 
+							pvy = ADD_SIGN (_en_my, PLAYER_V_REBOUND); 
+							
+							#ifdef ENABLE_COMPILED_ENEMS
+							if (_en_t != 20)
+							#endif
+							{
+								if (!_en_mx) _en_my = ADD_SIGN (_en_y - pry, ABS (_en_my));
+								_en_mx = ADD_SIGN (EN_X_ABSOLUTE - prx, ABS (_en_mx));
+							}
+	
+						#endif	
 					}
-				} 
-			#endif
+					touched = 1; 
+				}
+
+	#ifdef DOUBLE_WIDTH
+	killdo:
+	#endif
+
+				// Is enemy killable? If not, exit
+	
+				if (
+					touched
+					#ifndef STEADY_SHOOTER_KILLABLE
+						|| _en_t == 5
+					#endif					
+					#ifdef ENABLE_SAW
+						|| _en_t == 8
+					#endif
+					#ifdef ENEMS_INVINCIBILITY
+						|| en_invincible [gpit]
+					#endif
+				) goto skipdo;
+	
+				// Hit enemy
+	
+				#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
+					if (phitteract) {
+						if (
+							phitterx + 6 >= EN_X_ABSOLUTE &&
+							phitterx <= EN_X_ABSOLUTE + 14 &&
+							phittery + 7 + ENEMS_COLLISION_VSTRETCH_FG >= _en_y &&
+							phittery <= _en_y + 12
+						) {
+							enems_hit ();
+							sfx_play (SFX_STEPON, 1);
+							phitteract = 0;
+							pfrozen = PLAYER_FROZEN_FRAMES;
+							#ifdef ENEMS_RECOIL_ON_HIT
+								if (_en_t != 5 && _en_t != 9 && _en_t != 11) {
+									#ifdef PLAYER_TOP_DOWN
+										if (bmx [bi]) {
+											en_rmy [gpit] = 0;
+									#endif
+										en_rmx [gpit] = ENEMS_RECOIL_X;
+									#ifdef PLAYER_TOP_DOWN
+										} else {
+											en_rmx [gpit] = 0;
+											en_rmy [gpit] = ENEMS_RECOIL_Y;
+										}
+									#endif
+								}
+							#endif
+	
+						}
+					} 
+				#endif
+		}
 
 			#ifdef PLAYER_CAN_FIRE
 				// Bullets
@@ -1191,6 +1241,7 @@ skipdo:
 #ifdef DOUBLE_WIDTH
 skipall:
 #endif
+
 		// Update arrays
 
 		enems_update_unsigned_char_arrays ();

@@ -295,9 +295,9 @@ void bullets_move (void) {
 	__asm__ ("lda #0");
 	__asm__ ("sta %v", bullets_disable);
 	__asm__ ("rts");
-	bullets_move_do:
 	#endif
 
+bullets_move_do:
 	__asm__ ("lda #0");
 	__asm__ ("sta %v", bi);
 

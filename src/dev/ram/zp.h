@@ -305,5 +305,6 @@ unsigned char c_max_bolts;              // Number of locks in current level
     unsigned char *buff_ptr;            // Points to parts of the buffer
     unsigned char *attr_ptr;            // Points to parts of the buffer
     signed int scroll_x;                // Scroller position
+    signed int scroll_x_r;              // Scroller position + 240
     unsigned char on_screen;            // Flag used in enengine.h
 #endif

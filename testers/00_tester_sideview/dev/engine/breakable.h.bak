@@ -25,10 +25,10 @@
 
 // Break _x, _y
 void breakable_break (void) {
-	gpint = COORDS (_x, _y);
+	gpaux = COORDS (_x, _y);
 	#ifndef BREAKABLES_SOFT
-		if (brk_buff [gpint] < BREAKABLE_LIFE) {
-			++ brk_buff [gpint];
+		if (brk_buff [gpaux] < BREAKABLE_LIFE) {
+			++ brk_buff [gpaux];
 		} else 
 	#endif
 	{

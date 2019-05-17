@@ -705,9 +705,7 @@ void enems_move (void) {
 
 			// Gotten preliminary:
 
-			#ifdef DOUBLE_WIDTH
-				calc_en_x_absolute ();
-			#endif
+			calc_en_x_absolute ();
 			pregotten = (prx + 7 >= EN_X_ABSOLUTE && prx <= EN_X_ABSOLUTE + 15);
 			
 			// Select frame upon screen position:

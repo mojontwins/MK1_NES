@@ -125,7 +125,7 @@ void prepare_scr (void) {
 		ppu_off ();
 	}
 
-	clear_update_list ();
+	update_index = 0;
 
 	#ifdef SINGLE_SCREEN_SUPPORT
 		// Calculate if this screen is single:
@@ -300,7 +300,7 @@ void game_loop (void) {
 		music_play (MUSIC_INGAME);
 	#endif
 
-	clear_update_list ();
+	update_index = 0;
 	set_vram_update (UPDATE_LIST_SIZE, update_list);
 
 	on_pant = 99; ft = 1; fade_delay = 1;
@@ -447,22 +447,14 @@ void game_loop (void) {
 				__asm__ ("jmp %g", dw_hotspots_continue);	// DO
 
 			dw_hotspots_check_1:
-				// rds16 = scroll_x + 240
-				__asm__ ("clc");
-				__asm__ ("lda %v", scroll_x);
-				__asm__ ("adc #240");
-				__asm__ ("sta %v", rds16);
-				__asm__ ("lda %v+1", scroll_x);
-				__asm__ ("adc #0");
-				__asm__ ("sta %v+1", rds16);
 
-				// || hrx > rds16
+				// || hrx > scroll_x_r
 				__asm__ ("lda %v", hrx);
 				__asm__ ("sec");
-				__asm__ ("sbc %v", rds16);
+				__asm__ ("sbc %v", scroll_x_r);
 				__asm__ ("sta tmp1");
 				__asm__ ("lda %v+1", hrx);
-				__asm__ ("sbc %v+1", rds16);
+				__asm__ ("sbc %v+1", scroll_x_r);
 				__asm__ ("ora tmp1");
 				__asm__ ("bcc %g", dw_hotspots_check_done);	// SKIP
 				__asm__ ("beq %g", dw_hotspots_check_done);	// SKIP

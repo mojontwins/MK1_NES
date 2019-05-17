@@ -41,10 +41,12 @@ void fade_in (void) {
 }
 
 // Clear update list
+/*
 void clear_update_list (void) {
 	memfill (update_list, 0, UPDATE_LIST_SIZE*3);
 	update_index = 0;
 }
+*/
 
 void cls (void) {
 	vram_adr (0x2000); vram_fill(0x00, 
@@ -408,21 +410,23 @@ void pr_str (unsigned char *s) {
 #ifdef ENABLE_UL_PRINTER
 	// Needs _x, _y set and gp_gen pointing to the string
 	void pr_ul_str () {
-		ppu_waitnmi (); clear_update_list ();
+		update_cycle ();
 		gp_addr = 0x2000 + ((_y << 5) | _x);
 		while (_n = *gp_gen ++) { _n -= 32; ul_putc (); }
-		ppu_waitnmi (); clear_update_list ();
+		update_cycle ();
 	}
 #endif
 
 #ifdef DEBUG
+void update_cycle ();
+
 unsigned char get_hex_digit (unsigned char n) {
 	if (n < 10) return n + 16;
 	return n + 23;
 }
 
 void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
-	clear_update_list ();
+	update_index = 0;
 
 	gp_addr = (y << 5) + x + 0x2000;
 	_n = get_hex_digit (n >> 12); 			ul_putc ();
@@ -430,7 +434,7 @@ void debug_print_hex_16_dl (unsigned char x, unsigned char y, unsigned int n) {
 	_n = get_hex_digit ((n >> 4) & 0xf); 	ul_putc ();
 	_n = get_hex_digit ((n & 0xf)); 		ul_putc ();
 
-	ppu_waitnmi ();
+	update_cycle ();
 }
 #endif
 
