@@ -3,16 +3,16 @@
 
 // Interactives interaction
 
-if (interactives_index) {
+if (interactives_index) {	
 	if (
 		b_button
 		#ifdef ENABLE_USE_ANIM
 			&& use_ct == 0
 		#endif
-	) {
+	) {		
 		PRXA = prx + 4;	rdy = pry + 8;
 
-		gpit = interactives_index; while (gpit --) {
+		gpit = interactives_index; while (gpit --) {			
 			#ifdef DOUBLE_WIDTH
 				rdaa = interactives_x [gpit] << 4; rdc = interactives_y [gpit];
 				// if ((rdaa & 0x100) != PRXA & 0x100) continue;
@@ -21,7 +21,7 @@ if (interactives_index) {
 				rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
 				if (PRXA + 4 >= rdb && PRXA <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15) 
 			#endif				
-			{ 
+			{ 				
 				#if defined (ENABLE_USE_ANIM) && !defined (INTERACTIVES_ONLY_SPRITES)
 					// Only if it is a genuine interactive				
 					if (interactives_f [gpit] & 0x80) {

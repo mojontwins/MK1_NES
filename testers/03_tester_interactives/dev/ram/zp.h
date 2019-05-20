@@ -30,6 +30,10 @@ unsigned char ticker;                   // Ticker. 0 for a frame every second.
 #ifdef DOUBLE_WIDTH
     signed int rdaa;                    // General purpose integer
     signed int en_x_offs;               // Precalculated pixel offset
+    #ifdef SINGLE_SCREEN_SUPPORT
+        unsigned char scr_single;           // Current screen is not double-width.
+    #endif
+    unsigned char split_on;             // Split screen is on
 #endif
 unsigned char ast1;                     // Temporal
 
@@ -80,13 +84,6 @@ signed char _en_mx, _en_my;
 unsigned char _en_ct, _en_facing, _en_state;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
-// Signals, all purpose, for enemies
-
-unsigned char en_sg_1, en_sg_2;
-
-// Main player
-
-unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
 unsigned int px;
 signed int py;                          // Player X, Y coordinates, fixed point 10.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
@@ -128,6 +125,7 @@ signed int pgtmx, pgtmy;                // X, Y components of velocity in "playe
 #ifdef ENABLE_LADDERS
     unsigned char ponladder;            // True if player is on a ladder.
     unsigned char phalfladder;          // True if player's feet are on a ladder.
+    unsigned char ponplatform;          // True if player is on a platform.
     unsigned char ponladderctr;         // Counter used for animation when player is on ladders in my/player_frame_selector.h
 #endif
 
@@ -148,8 +146,6 @@ unsigned char hitv, hith;               // True if the player collided with a ki
 #ifdef PLAYER_CAN_FLOAT
     unsigned char pfloating;            // Player is floating (for example, when on a propeller)
 #endif
-
-unsigned char prx_old, pry_old;
 
 unsigned char pkill;                    // Set to 1 to kill player
 unsigned char pice;                     // Player is walking on ice
@@ -300,5 +296,6 @@ unsigned char c_max_bolts;              // Number of locks in current level
     unsigned char *buff_ptr;            // Points to parts of the buffer
     unsigned char *attr_ptr;            // Points to parts of the buffer
     signed int scroll_x;                // Scroller position
+    signed int scroll_x_r;              // Scroller position + 240
     unsigned char on_screen;            // Flag used in enengine.h
 #endif

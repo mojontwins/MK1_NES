@@ -111,74 +111,78 @@ void cocos_init (void) {
 
 void cocos_destroy (void) {
 	coco_on [coco_it] = 0;
-	coco_slots [coco_slots_i] = coco_it; coco_slots_i ++;
+	coco_slots [coco_slots_i] = coco_it; ++ coco_slots_i;
 	sfx_play (SFX_DUMMY1, 2);
 }
 
 void cocos_do (void) {
-	coco_it = COCOS_MAX; while (coco_it --) if (coco_on [coco_it]) {
-		#ifdef DOUBLE_WIDTH
+	coco_it = COCOS_MAX; while (coco_it) {
+		-- coco_it;
+		if (coco_on [coco_it]) {
+
+			// Move
+			coco_x [coco_it] += coco_vx [coco_it];
+			coco_y [coco_it] += coco_vy [coco_it];
+
 			COCO_RDX = coco_x [coco_it] >> FIXBITS;
-		#endif
-		if (
-			#ifdef DOUBLE_WIDTH
-				COCO_RDX < scroll_x + 8 ||
-				COCO_RDX > scroll_x + 248 ||
-			#else
-				coco_x [coco_it] < coco_vx [coco_it] ||
-				coco_x [coco_it] > (248<<FIXBITS) - coco_vx [coco_it] ||
-			#endif
+			rdy      = coco_y [coco_it] >> FIXBITS;
+			
+			// Out of bounds?
+			if (
+				#ifdef DOUBLE_WIDTH
+					COCO_RDX < scroll_x ||
+					COCO_RDX > scroll_x + 248 ||
+				#else
+					// Optimization: if rdx < 0, it will wrap around,
+					/*COCO_RDX < 0 ||*/
+					COCO_RDX > 248 ||
+				#endif
 
-			coco_y [coco_it] < coco_vy [coco_it] ||
-			coco_y [coco_it] > (200<<FIXBITS) - coco_vy [coco_it]
-		) {
-			cocos_destroy ();
-			continue;
-		}
-
-		// Move
-		coco_x [coco_it] += coco_vx [coco_it];
-		coco_y [coco_it] += coco_vy [coco_it];
-
-		COCO_RDX = coco_x [coco_it] >> FIXBITS;
-		rdy      = coco_y [coco_it] >> FIXBITS;
-
-		// Render
-		oam_index = oam_spr (
-			#ifdef DOUBLE_WIDTH
-				COCO_RDX - scroll_x,
-			#else
-				COCO_RDX, 
-			#endif
-			rdy + SPRITE_ADJUST, 
-			COCO_PATTERN, 
-			COCO_PALETTE, 
-			oam_index
-		);
-
-		#ifdef COCO_COLLIDES
-			#ifdef DOUBLE_WIDTH
-				gpint = COCO_RDX + 4;
-				rdm = map_attr [(gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0)];
-			#else
-				rdm = map_attr [((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0)];
-			#endif
-			if (rdm & 8) {
+				// Optimization: if rdy < 0, it will wrap around,
+				// so this is more or less the same as doing
+				// coco_y [coco_it] < 0 || coco_y [coco_it] > (200<<FIXBITS)
+				rdy > 208
+			) {
 				cocos_destroy (); continue;
 			}
-		#endif
 
-		// Collide w/player
-		if (pflickering == 0 && 
-			COCO_RDX + 7 >= prx && 
-			COCO_RDX <= prx + 7 && 
-			rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
-			rdy <= pry + 12
-		) {
-			en_sg_2 = 1;
-			#include "my/on_player_coco.h"
-			pkill = !!en_sg_2;
-			cocos_destroy ();
-		}		
+			// Render
+			oam_index = oam_spr (
+				#ifdef DOUBLE_WIDTH
+					COCO_RDX - scroll_x,
+				#else
+					COCO_RDX, 
+				#endif
+				rdy + SPRITE_ADJUST, 
+				COCO_PATTERN, 
+				COCO_PALETTE, 
+				oam_index
+			);
+
+			#ifdef COCO_COLLIDES
+				#ifdef DOUBLE_WIDTH
+					gpint = COCO_RDX + 4;
+					rdm = MAP_ATTR ((gpint & 0x100 ? 192 : 0) + ((gpint & 0xff) >> 4) | ((rdy + 4 - 16) & 0xf0));
+				#else
+					rdm = MAP_ATTR (((COCO_RDX + 4) >> 4) | ((rdy + 4 - 16) & 0xf0));
+				#endif
+				if (rdm & 8) {
+					cocos_destroy (); continue;
+				}
+			#endif
+
+			// Collide w/player
+			if (pflickering == 0 && 
+				COCO_RDX + 7 >= prx && 
+				COCO_RDX <= prx + 7 && 
+				rdy + 7 + PLAYER_COLLISION_VSTRETCH_FG >= pry && 
+				rdy <= pry + 12
+			) {
+				en_sg_2 = 1;
+				#include "my/on_player_coco.h"
+				pkill = en_sg_2;
+				cocos_destroy ();
+			}
+		}
 	}
 }

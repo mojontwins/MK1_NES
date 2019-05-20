@@ -219,9 +219,9 @@ void fire_bullet (void) {
 			// if (pfacing == CELL_FACING_LEFT || pfacing == CELL_FACING_RIGHT)
 			__asm__ ("lda %v", pfacing);
 			__asm__ ("cmp %b", CELL_FACING_LEFT);
-			__asm__ ("beq %g", fire_bullet_diagonal_if1_do)
+			__asm__ ("beq %g", fire_bullet_diagonal_if1_do);
 			__asm__ ("cmp %b", CELL_FACING_RIGHT);
-			__asm__ ("bne %g", fire_bullet_diagonal_else2)
+			__asm__ ("bne %g", fire_bullet_diagonal_else2);
 		fire_bullet_diagonal_if1_do:
 		#endif
 
@@ -255,12 +255,12 @@ void fire_bullet (void) {
 		fire_bullet_diagonal_else2:
 			__asm__ ("lda %v", pad0);
 			__asm__ ("and #%b", PAD_LEFT);
-			__asm__ ("beq %g", fire_bullet_diagonal_else2);
+			__asm__ ("beq %g", fire_bullet_diagonal_else3);
 			__asm__ ("lda #%b", -PLAYER_BULLET_SPEED);
 			__asm__ ("jmp %g", fire_bullet_diagonal_endif2);
-		fire_bullet_diagonal_else2:	
+		fire_bullet_diagonal_else3:	
 			__asm__ ("lda %v", pad0);
-			__asm__ ("and #%b", PAD_RIGHT);
+			__asm__ ("and #%w", PAD_RIGHT);
 			__asm__ ("beq %g", fire_bullet_diagonal_skip2);
 			__asm__ ("lda #%b", PLAYER_BULLET_SPEED);
 		fire_bullet_diagonal_endif2:

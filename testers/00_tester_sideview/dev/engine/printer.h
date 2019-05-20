@@ -408,6 +408,8 @@ void pr_str (unsigned char *s) {
 }
 
 #ifdef ENABLE_UL_PRINTER
+	void update_cycle ();
+
 	// Needs _x, _y set and gp_gen pointing to the string
 	void pr_ul_str () {
 		update_cycle ();

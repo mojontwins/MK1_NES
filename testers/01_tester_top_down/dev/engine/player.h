@@ -110,10 +110,10 @@ void player_to_pixels (void) {
 	pry = py >> FIXBITS;
 }
 
-void player_kill (void) {
-	oam_index = oam_index_player;
-	player_render ();
-	ppu_waitnmi ();
+#ifndef KILL_PLAYER_CUSTOM
+	void player_kill (void) {
+	//oam_index = oam_index_player;
+	//player_render ();
 
 	pkill = phit = 0;
 	sfx_play (SFX_PHIT, 0);
@@ -134,7 +134,11 @@ void player_kill (void) {
 
 	#ifdef DIE_AND_RESPAWN
 		music_pause (1);
-		delay (60);
+		#if !defined (DOUBLE_WIDTH) || defined (NO_SPLIT)
+			delay (60);
+		#else
+			rda = 60; delay_with_split ();
+		#endif
 		
 		#ifdef DIE_AND_REINIT
 			level_reset = 1;
@@ -156,7 +160,8 @@ void player_kill (void) {
 	#ifdef DIE_AND_REENTER
 		on_pant = 0xff;
 	#endif
-}
+	}
+#endif
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	#include "engine/playermods/process_tile.h"
@@ -169,6 +174,10 @@ void player_kill (void) {
 void player_move (void) {
 	if (pflickering) -- pflickering;
 	if (pbouncing) -- pbouncing;
+
+	#ifdef PLAYER_JUST_FIRED_COUNTER
+		if (pjustfiredcounter) -- pjustfiredcounter;
+	#endif
 
 	#if defined (PLAYER_PUNCHES) || defined (PLAYER_KICKS)
 		if (pfrozen) {
@@ -426,7 +435,7 @@ void player_move (void) {
 			if ((at1 & 8) || (at2 & 8)) 
 			#else
 	 		if (
-				pry < ((cy1 - 1) << 4) + 4 && 
+				pry <= ((cy1 - 1) << 4) + (pvy >> 6) && 
 				(
 					(at1 & 12) || (at2 & 12)
 					#ifdef ENABLE_LADDERS
@@ -469,8 +478,8 @@ void player_move (void) {
 				#endif
 
 				#if defined (ENABLE_BREAKABLE) && defined (BREAKABLE_WALKABLE)
-					if (at1 & 16) { breakable_break (cx1, cy1 - 1); pnotsafe = 1; }
-					if (cx1 != cx2 && (at2 & 16)) { breakable_break (cx2, cy1 - 1); pnotsafe = 1; }
+					if (at1 & 16) { _x = cx1; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
+					if (cx1 != cx2 && (at2 & 16)) { _x = cx2; _y = cy1 - 1; breakable_break (); pnotsafe = 1; }
 				#endif
 
 				if ((at1 & 1) || (at2 & 1)) pnotsafe = 1; 
@@ -700,6 +709,9 @@ void player_move (void) {
 	#endif
 		
 	if (px < (4<<FIXBITS)) { px = 4 << FIXBITS; prx = 4;}
+	#ifdef SINGLE_SCREEN_SUPPORT
+		else if (scr_single && px > 244 << FIXBITS) { px = 244 << FIXBITS; prx = 244; }
+	#endif
 	else if (px > (MAX_PRX << FIXBITS)) { px = MAX_PRX << FIXBITS; prx = MAX_PRX; }
 	else player_to_pixels ();
 	
@@ -769,7 +781,7 @@ void player_move (void) {
 	#endif
 
 	#ifdef PLAYER_SPINS
-		if ((!pvx && (ppossee || pgotten) && !pj) || (ppossee && !oppossee)) pspin = 0;
+		if (pj == 0 && ((!pvx && (ppossee || pgotten)) || (ppossee && !oppossee))) pspin = 0;
 	#endif
 
 	// *************
@@ -847,6 +859,10 @@ void player_move (void) {
 
 	// (fire bullets, run scripting w/animation, do interactives)
 
+	#ifdef ENABLE_LADDERS
+		ponplatform = ((ATTR((prx + 4) >> 4, pry >> 4) & 12) && pry < 192);
+	#endif
+
 	#ifdef PLAYER_CHARGE_AND_FIRE
 		#ifdef PLAYER_FIRE_RELOAD
 			if (pfirereload) -- pfirereload; 
@@ -866,7 +882,7 @@ void player_move (void) {
 		if (
 			b_button
 			#ifdef ENABLE_LADDERS
-				&& !ponladder
+				&& (!ponladder || ponplatform)
 			#endif
 		) {
 			#ifdef ACTIVATE_SCRIPTING
@@ -914,7 +930,7 @@ void player_move (void) {
 			cx1 = (phitterx + 4) >> 4;
 			cy1 = (phittery + 4 - 16) >> 4;
 			if (ATTR(cx1, cy1) & 16) {
-				breakable_break (cx1, cy1);
+				_x = cx1; _y = cy1; breakable_break ();
 				pfrozen = PLAYER_FROZEN_FRAMES;
 				phitteract = 0;
 			}

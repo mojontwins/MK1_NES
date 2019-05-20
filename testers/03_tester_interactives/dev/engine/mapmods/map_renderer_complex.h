@@ -25,7 +25,9 @@ void draw_scr (void)
 {
 	#ifdef DOUBLE_WIDTH
 		buff_ptr = map_buff + buff_offset;
-		attr_ptr = map_attr + buff_offset;
+		#ifndef REAL_TIME_MAP_ATTR
+			attr_ptr = map_attr + buff_offset;
+		#endif
 	#endif
 
 	// Draw Map
@@ -223,18 +225,20 @@ void draw_scr (void)
 	#else
 		gp_ram = map_buff;
 	#endif
-	for (rdm = 0; rdm < 192; rdm ++) {
-		SET_FROM_PTR (rdt, gp_ram); gp_ram ++;
+	for (rdm = 0; rdm < 192; ++ rdm) {
+		SET_FROM_PTR (rdt, gp_ram); ++ gp_ram;
 
 		#if defined (ENABLE_TILE_GET) && defined (PERSISTENT_TILE_GET)			
 			if (tile_got [rdd] & bits [rdm & 7]) rdt = 0;
 			if ((rdm & 7) == 7) ++ rdd;
 		#endif
 
-		#ifdef DOUBLE_WIDTH
-			attr_ptr [rdm] = c_behs [rdt];
-		#else
-			map_attr [rdm] = c_behs [rdt];
+		#ifndef REAL_TIME_MAP_ATTR
+			#ifdef DOUBLE_WIDTH
+				attr_ptr [rdm] = c_behs [rdt];
+			#else
+				map_attr [rdm] = c_behs [rdt];
+			#endif
 		#endif
 
 		#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
@@ -249,12 +253,14 @@ void draw_scr (void)
 
 	#if defined (ENABLE_TILE_CHAC_CHAC) && defined (CHAC_CHACS_CLEAR)
 		gpit = max_chac_chacs; while (gpit --) {
-			_t = CHAC_CHAC_BASE_TILE + 6;
 			_x = (chac_chacs_yx [gpit] & 0xf) << 1;
+			_t = chac_chacs_t1 [0];
 			_y = ((chac_chacs_yx [gpit] & 0xf0) >> 3) + TOP_ADJUST;
 			draw_tile ();
+			_t = chac_chacs_t2 [0];
 			_y += 2;
 			draw_tile ();
+			_t = chac_chacs_t3 [0];
 			_y += 2;
 			draw_tile ();
 		}

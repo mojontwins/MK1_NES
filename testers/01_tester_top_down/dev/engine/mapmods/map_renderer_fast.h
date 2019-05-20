@@ -5,7 +5,9 @@
 
 void draw_map_tile (void) {
 	map_buff [rdm] = rdt;		
-	map_attr [rdm] = c_behs [rdt];
+	#ifndef REAL_TIME_MAP_ATTR
+		map_attr [rdm] = c_behs [rdt];
+	#endif
 	#if defined (ENABLE_BREAKABLE) && !defined (BREAKABLES_SOFT)
 		brk_buff [rdm] = 1;
 	#endif
@@ -15,7 +17,7 @@ void draw_map_tile (void) {
 	++ rdm;
 	_x = rdx << 1; _y = (rdy << 1) + TOP_ADJUST; _t = rdt;
 	draw_tile ();
-	rdx = (rdx + 1) & 15; if (!rdx) rdy ++;
+	rdx = (rdx + 1) & 15; if (!rdx) ++ rdy;
 }
 
 void draw_scr (void) {

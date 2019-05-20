@@ -4,6 +4,9 @@
 // definitions.h
 // Main definitions
 
+extern unsigned char PALUPDATE;
+#pragma zpsym ("PALUPDATE");
+
 #define FIXBITS					6
 
 // Player states
@@ -24,7 +27,7 @@
 #define ADD_SIGN2(a,b,v)		((a)==(b))?(0):(((a)>(b))?(v):(-(v)))
 #define ADD_SIGN(a,v) 			((a)?(((a)>0)?(v):(-(v))):(0))
 #define DELTA(a,b)				((a) < (b) ? (b) - (a) : (a) - (b))
-#define ATTR(x,y)				(map_attr [COORDS((x),(y))])
+#define ATTR(x,y)				(MAP_ATTR(COORDS((x),(y))))
 #define QTILE(x,y)				(map_buff [COORDS((x),(y))])
 #define ENEMS_RECOIL_X 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (EN_X_ABSOLUTE, prx, ENEMS_RECOIL_ON_HIT))
 #define ENEMS_RECOIL_Y 			((_en_t == 5 || _en_t == 9 || _en_t == 11) ? 0 : ADD_SIGN2 (_en_y, pry, ENEMS_RECOIL_ON_HIT))

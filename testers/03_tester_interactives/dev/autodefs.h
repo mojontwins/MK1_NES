@@ -5,7 +5,7 @@
 
 #define CATACROCK_WAIT			_en_mx
 
-#if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT))
+#if defined (ENABLE_MONOCOCOS) || (defined (ENABLE_COMPILED_ENEMS) && defined (COMPILED_ENEMS_SHOOT)) || (defined (ENABLE_PURSUERS) && defined (PURSUERS_MAY_FIRE))
 #define ENABLE_COCOS
 #define COCOS_ENABLE_AIMED
 #endif
@@ -94,7 +94,7 @@
 	#define NEEDS_LIFE_GAUGE_LOGIC
 #endif
 
-#if defined (CHAC_CHAC_FROM_MAP)
+#if defined (CHAC_CHAC_AS_ENEMS)
 	#undef ENABLE_CHAC_CHAC
 	#define ENABLE_TILE_CHAC_CHAC
 #endif
@@ -124,6 +124,9 @@
 	#define COCO_RDX		rds16
 	#define PUNCH_RDX		rds16
 	#define RECOIL_RDX		rds16
+	#define FANTY_RDX		rds16
+	#define FANTY_ENX		_enf_x
+	#define SAW_RDX			rds16
 	#define MAX_TILE_X 		31
 	#define HS_CUR_PANT		(n_pant + gpit)
 #else
@@ -134,11 +137,14 @@
 	#define MAX_ENX			240
 	#define NENEMS 			3
 	#define EN_X_ABSOLUTE	_en_x
-	#define PRXA 			rda
+	#define PRXA 			rdx
 	#define ENXA 			rda
 	#define COCO_RDX		rdx
 	#define PUNCH_RDX		rdx
 	#define RECOIL_RDX 		rdx
+	#define FANTY_RDX 		rdx
+	#define FANTY_ENX		_en_x
+	#define SAW_RDX			rdx
 	#define MAX_TILE_X 		15
 	#define HS_CUR_PANT 	n_pant
 #endif

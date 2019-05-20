@@ -28,7 +28,7 @@ void textbox_frame (void) {
 	
 	gpit = 64; while (gpit --) {
 		rdt = *gp_ram ++; 
-		if (rdct == 0) clear_update_list ();
+		//if (rdct == 0) clear_update_list ();
 		if (rdt != 0xff) { 
 			_t = rdt + rdm;
 			update_list_tile (); 
@@ -38,7 +38,7 @@ void textbox_frame (void) {
 		#else
 		_x = (_x + 2) & 0x1f; if (_x == 0) _y += 2;
 		#endif
-		++ rdct; if (rdct == 4) { ppu_waitnmi (); rdct = 0; }
+		++ rdct; if (rdct == 4) { update_cycle (); rdct = 0; }
 	}
 }
 
@@ -53,12 +53,12 @@ void textbox_draw_text (void) {
 	rdy = 13;
 	while (rdt = *gp_gen ++) {
 		#ifdef TEXT_BOX_WITH_PORTRAITS
-			if (rda) { clear_update_list (); rda = 0; gp_addr = NAMETABLE_BASE + rdm + (rdy << 5); }
+			if (rda) { update_index = 0; rda = 0; gp_addr = NAMETABLE_BASE + rdm + (rdy << 5); }
 		#else
-			if (rda) { clear_update_list (); rda = 0; gp_addr = NAMETABLE_BASE + 6 + (rdy << 5); }
+			if (rda) { update_index = 0; rda = 0; gp_addr = NAMETABLE_BASE + 6 + (rdy << 5); }
 		#endif
 		if (rdt == '%') rda = 1; else { _n = rdt - 32; ul_putc (); }
-		if (rda) { ppu_waitnmi (); ++ rdy; }
+		if (rda) { update_cycle (); ++ rdy; }
 	}	
 }
 
@@ -93,7 +93,7 @@ void textbox_do (void) {
 
 	textbox_draw_text ();
 	while (1) {
-		ppu_waitnmi ();
+		update_cycle ();
 		pad_read (); if (pad_this_frame & (PAD_A|PAD_B)) break;
 	}
 	#ifdef TEXT_BOX_WITH_PORTRAITS

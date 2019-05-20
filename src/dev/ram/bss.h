@@ -67,6 +67,9 @@ unsigned char okilled;                  // Player # of killed enems., last frame
 
 unsigned char oam_index_player;         // Index copy
 
+unsigned char prx_old, pry_old;
+unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
+
 // Custom hotspot type star (used as an extra collectible).
 
 #ifdef HOTSPOT_TYPE_STAR
@@ -134,6 +137,10 @@ unsigned char oam_index_player;         // Index copy
 		unsigned char pjustfiredcounter;
 	#endif
 #endif
+
+// Signals, all purpose, for enemies
+
+unsigned char en_sg_1, en_sg_2;
 
 // Cocos (projectiles shot by enemies)
 

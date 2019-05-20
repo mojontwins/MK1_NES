@@ -13,6 +13,7 @@
 				if (brkf [gpit] == BREAKABLE_MAX_FRAMES) {
 					brkf [gpit] = 0;
 					_x = brkx [gpit]; _y = brky [gpit]; _t = BREAKABLE_ERASE;
+					#include "my/on_tile_break.h"
 					map_set ();
 				} else {
 					do_process_breakable = 1;
@@ -22,11 +23,12 @@
 	}
 #endif
 
-void breakable_break (unsigned char x, unsigned char y) {
-	gpit = COORDS (x, y);
+// Break _x, _y
+void breakable_break (void) {
+	gpint = COORDS (_x, _y);
 	#ifndef BREAKABLES_SOFT
-		if (brk_buff [gpit] < BREAKABLE_LIFE) {
-			++ brk_buff [gpit];
+		if (brk_buff [gpint] < BREAKABLE_LIFE) {
+			++ brk_buff [gpint];
 		} else 
 	#endif
 	{
@@ -37,8 +39,8 @@ void breakable_break (unsigned char x, unsigned char y) {
 			if (!brkf [gpit]) {
 				do_process_breakable = 1;
 				brkf [gpit] = 1;
-				_x = brkx [gpit] = x;
-				_y = brky [gpit] = y;
+				brkx [gpit] = _x;
+				brky [gpit] = _y;
 				_t = BREAKABLE_BREAKING;
 				map_set ();					// Break tile!
 				sfx_play (SFX_BREAKB, 1);
@@ -46,8 +48,9 @@ void breakable_break (unsigned char x, unsigned char y) {
 			}
 		}
 #else
-		_x = x; _y = y; _t = BREAKABLE_ERASE;
-		map_set ();
+		_t = BREAKABLE_ERASE;
+		#include "my/on_tile_break.h"
+		map_set ();		
 #endif		
 	}
 }

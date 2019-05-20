@@ -84,13 +84,6 @@ signed char _en_mx, _en_my;
 unsigned char _en_ct, _en_facing, _en_state;
 signed int _enf_x, _enf_y, _enf_vx, _enf_vy;
 
-// Signals, all purpose, for enemies
-
-unsigned char en_sg_1, en_sg_2;
-
-// Main player
-
-unsigned char vertical_engine_type;     // Player engine type. Se ENGINE_TYPE_* constants in definitions.h
 unsigned int px;
 signed int py;                          // Player X, Y coordinates, fixed point 10.6
 signed int pvx, pvy;                    // Player VX, VY velocities, fixed point 10.6
@@ -153,8 +146,6 @@ unsigned char hitv, hith;               // True if the player collided with a ki
 #ifdef PLAYER_CAN_FLOAT
     unsigned char pfloating;            // Player is floating (for example, when on a propeller)
 #endif
-
-unsigned char prx_old, pry_old;
 
 unsigned char pkill;                    // Set to 1 to kill player
 unsigned char pice;                     // Player is walking on ice

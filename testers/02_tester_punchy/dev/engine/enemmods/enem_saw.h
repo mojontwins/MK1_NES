@@ -70,17 +70,77 @@ switch (_en_state) {
 }
 
 // Occlusion
+#ifdef DOUBLE_WIDTH
+		__asm__ ("lda %v", rda);
+		__asm__ ("beq %g", es_occ_horz);
+
+		// SAW_RDX = _en_x1; rdy = _en_y;
+		__asm__ ("lda %v", _en_x1);
+		__asm__ ("sta %v", SAW_RDX);
+		__asm__ ("lda #0");
+		__asm__ ("sta %v+1", SAW_RDX);
+		__asm__ ("lda %v", _en_y);
+
+		// } else {
+		__asm__ ("jmp %g", es_occ_endif);
+
+	es_occ_horz:	
+		// SAW_RDX = _en_x; rdy = _en_y1;
+		__asm__ ("lda %v", _en_x);
+		__asm__ ("sta %v", SAW_RDX);
+		__asm__ ("lda #0");
+		__asm__ ("sta %v+1", SAW_RDX);
+		__asm__ ("lda %v", _en_y1);		
+
+	es_occ_endif:
+		__asm__ ("sta %v", rdy);
+	
+		// SAW_RDX += en_x_offs;
+		__asm__ ("lda %v", en_x_offs);
+		__asm__ ("clc");
+		__asm__ ("adc %v", SAW_RDX);
+		__asm__ ("sta %v", SAW_RDX);
+		__asm__ ("lda %v+1", en_x_offs);
+		__asm__ ("adc %v+1", SAW_RDX);
+		__asm__ ("sta %v+1", SAW_RDX);
+
+		// if (SAW_RDX < scroll_x) goto es_out_of_screen;
+		__asm__ ("lda %v", SAW_RDX);
+		__asm__ ("cmp %v", scroll_x);
+		__asm__ ("lda %v+1", SAW_RDX);
+		__asm__ ("sbc %v+1", scroll_x);
+		__asm__ ("bcs %g", es_occ_if2);
+		__asm__ ("jmp %g", es_out_of_screen);
+
+	es_occ_if2:
+		// if (scroll_x_r < SAW_RDX) goto es_out_of_screen;
+		__asm__ ("lda %v", scroll_x_r);
+		__asm__ ("cmp %v", SAW_RDX);
+		__asm__ ("lda %v+1", scroll_x_r);
+		__asm__ ("sbc %v+1", SAW_RDX);
+		__asm__ ("bcs %g", es_occ_do);
+		__asm__ ("jmp %g", es_out_of_screen);
+
+	es_occ_do:
+		oam_index = oam_meta_spr (
+			SAW_RDX - scroll_x, rdy + SPRITE_ADJUST,
+			oam_index,
+			spr_enems [ENEMS_OCCLUDING_CELL]
+		);
+es_out_of_screen:
+#else
 if (rda) {
-	rdx = _en_x1; rdy = _en_y;
+		SAW_RDX = _en_x1; rdy = _en_y;
 } else {
-	rdx = _en_x; rdy = _en_y1;
+		SAW_RDX = _en_x; rdy = _en_y1;
 }
 
 oam_index = oam_meta_spr (
-	rdx, rdy + SPRITE_ADJUST,
+		SAW_RDX, rdy + SPRITE_ADJUST,
 	oam_index,
 	spr_enems [ENEMS_OCCLUDING_CELL]
 );
+#endif
 
 // Frame selection
 

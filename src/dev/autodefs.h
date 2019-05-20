@@ -126,6 +126,7 @@
 	#define RECOIL_RDX		rds16
 	#define FANTY_RDX		rds16
 	#define FANTY_ENX		_enf_x
+	#define SAW_RDX			rds16
 	#define MAX_TILE_X 		31
 	#define HS_CUR_PANT		(n_pant + gpit)
 #else
@@ -136,13 +137,14 @@
 	#define MAX_ENX			240
 	#define NENEMS 			3
 	#define EN_X_ABSOLUTE	_en_x
-	#define PRXA 			rda
+	#define PRXA 			rdx
 	#define ENXA 			rda
 	#define COCO_RDX		rdx
 	#define PUNCH_RDX		rdx
 	#define RECOIL_RDX 		rdx
 	#define FANTY_RDX 		rdx
 	#define FANTY_ENX		_en_x
+	#define SAW_RDX			rdx
 	#define MAX_TILE_X 		15
 	#define HS_CUR_PANT 	n_pant
 #endif

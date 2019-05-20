@@ -18,9 +18,9 @@ if (interactives_index) {
 				// if ((rdaa & 0x100) != PRXA & 0x100) continue;
 				if (PRXA + 4 >= rdaa && PRXA <= rdaa + 19 && rdy >= rdc && rdy <= rdc + 15)
 			#else
-			rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
+				rda = interactives_yx [gpit]; rdb = rda << 4; rdc = rda & 0xf0;
 				if (PRXA + 4 >= rdb && PRXA <= rdb + 19 && rdy >= rdc && rdy <= rdc + 15) 
-				#endif
+			#endif				
 			{ 
 				#if defined (ENABLE_USE_ANIM) && !defined (INTERACTIVES_ONLY_SPRITES)
 					// Only if it is a genuine interactive				

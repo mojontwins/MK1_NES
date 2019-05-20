@@ -23,16 +23,16 @@
 // * const data *
 // **************
 
-#include "assets/precalcs.h"
+#include "engine/precalcs.h"
 #include "assets/palettes.h"
-#include "assets/behs.h"
+#include "my/behs.h"
 #include "assets/map0.h"
 #include "assets/map1.h"
 #include "assets/enems0.h"
 #include "assets/enems1.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
-#include "assets/metasprites.h"
+#include "my/metasprites.h"
 #include "assets/custom_texts.h"
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
@@ -41,7 +41,7 @@
 	#include "assets/interactives.h"
 #endif
 #ifdef MULTI_LEVEL
-	#include "assets/levelset.h"
+	#include "my/levelset.h"
 #endif
 
 #include "assets/frame_rle.h"
@@ -106,6 +106,7 @@ extern const unsigned char m_gameover [];
 	#include "assets/mscnes.h"
 #endif
 #include "mainloop/flickscreen.h"
+#include "mainloop/hotspots_assembly.h"
 #include "mainloop.h"
 
 // *************

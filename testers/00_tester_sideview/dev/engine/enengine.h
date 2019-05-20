@@ -950,7 +950,7 @@ void enems_move (void) {
 						|| _en_t == 10
 					#endif
 					#ifdef ENABLE_MONOCOCOS
-						|| (_en_t == 11 && _en_state != 2)
+						|| (_en_t == 11 && _en_mx != 2)
 					#endif
 					#ifdef ENABLE_CATACROCKS
 						|| (_en_t == 12 && _en_state != 1)

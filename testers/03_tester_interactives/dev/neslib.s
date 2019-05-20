@@ -78,6 +78,11 @@ nmi:
 	ldy #0
 @updName:
 	lda (NAME_UPD_ADR),y
+	
+	; Mojon Twins modification: END MARKER
+	cmp #$FF
+	beq @skipUpd
+
 	iny
 	sta PPU_ADDR
 	lda (NAME_UPD_ADR),y
@@ -188,14 +193,14 @@ _pal_col:
 ;void __fastcall__ pal_clear(void);
 
 _pal_clear:
-	lda #$0f
-	ldx #0
-@1:
-	sta PAL_BUF,x
-	inx
-	cpx #$20
-	bne @1
-	stx <PALUPDATE
+;	lda #$0f
+;	ldx #0
+;@1:
+;	sta PAL_BUF,x
+;	inx
+;	cpx #$20
+;	bne @1
+;	stx <PALUPDATE
 	rts
 
 

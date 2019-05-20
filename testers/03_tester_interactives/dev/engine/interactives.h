@@ -52,8 +52,8 @@ void interactives_paint (void) {
 			interactives_y [interactives_index] = (sc_y << 4);
 			interactives_f [interactives_index ++] = sc_n;
 		#else
-			interactives_yx [interactives_index] = sc_x;
-			interactives_f [interactives_index ++] = sc_y;
+		interactives_yx [interactives_index] = sc_x;
+		interactives_f [interactives_index ++] = sc_y;
 		#endif
 	}
 #endif
