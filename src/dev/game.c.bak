@@ -39,7 +39,7 @@
 	#include "assets/interactives.h"
 #endif
 #ifdef MULTI_LEVEL
-	#include "my/levelset.h"
+	#include "assets/levelset.h"
 #endif
 
 // Music
