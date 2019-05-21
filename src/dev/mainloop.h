@@ -356,6 +356,9 @@ void game_loop (void) {
 				flickscreen_do_horizontal ();
 				flickscreen_do_vertical ();
 			}
+			if (warp_to_level) {
+				update_cycle (); music_stop (); break;
+			}
 		}
 		
 		// Change screen ?
@@ -403,7 +406,7 @@ void game_loop (void) {
 			// Detect interactions
 
 			#ifdef ENABLE_INTERACTIVES
-				#include "mainloop/interactives.h"
+				#include "mainloop/interactives_assembly.h"
 			#endif	
 
 			// Update / collide hotspots

@@ -17,8 +17,8 @@
 	#endif
 #endif
 
-#ifdef ENABLE_FIRE_ZONE
-	if (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2)) {
+#ifdef ENABLE_FIRE_ZONE			
+	if (f_zone_ac && (prx >= fzx1 && prx <= fzx2 && pry >= fzy1 && pry <= fzy2)) {		
 		run_fire_script ();
 	} 
 #endif

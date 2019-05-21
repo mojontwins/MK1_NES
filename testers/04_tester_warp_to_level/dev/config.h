@@ -21,6 +21,9 @@
 #define MAP_SIZE				MAP_W*MAP_H
 
 //#define DOUBLE_WIDTH					// Experimental 2x mode w/scroll
+//#define SINGLE_SCREEN_SUPPORT			// In 2x mode levels may have odd map_w
+//#define REAL_TIME_MAP_ATTR			// Maybe you need this if you run out of RAM in 2x mode
+#define NO_SPLIT						// No sprite-0 based scroll split
 
 #define PLAYER_LIFE				5		// Max / Initial life
 #define PLAYER_REFILL			1		// Life refill
@@ -70,6 +73,8 @@
 
 #define WIN_LEVEL_CUSTOM				// A level ends when win_level == 1
 										// And such a thing has to be setup by YOU
+
+//#define KILL_PLAYER_CUSTOM			// Advanced custom handling. Beware!
 
 //#define MAP_FORMAT_PACKED				// Each byte in map data = 2 tiles, 16 tiles max.
 //#define MAP_FORMAT_RLE16				// RLE'd by rlemap2. 16 tiles max.
@@ -136,6 +141,7 @@
 	//#define DIE_AND_REINIT				//     ... or start the level over!
 #define PLAYER_FLICKERS 				100	// If defined, collisions make player flicker for N frames
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+//#define NO_V_BOOST_WHEN_FLICK				// If defined, no -vy boost when moving to the room above
 
 // Extra special tiles
 // -------------------
@@ -305,26 +311,37 @@
 //#define ENABLE_HOMING_FANTY
 //#define ENABLE_TIMED_FANTY
 
-#define FANTY_BASE_SPRID				32
+// New & experimental
+//#define ENABLE_PRECALC_FANTY
+
+#define FANTY_BASE_SPRID				16
 #define FANTY_WITH_FACING
 #define FANTY_COLLIDES
 //#define FANTY_KILLED_BY_TILE
 //#define FANTY_LIFE_GAUGE				5	// Define if you need these to be tougher
-
-#define FANTY_A 						4
-#define FANTY_MAXV 						48
-//#define FANTY_FAST_ANIM						// If defined, cells A/B are changed every frame (for transparency effects)
 
 #define FANTY_DISTANCE					80
 #define FANTY_V_RETREAT					16
 
 #define FANTY_BASE_TIMER				120	// Timed fanties use this
 
+//#define FANTY_FAST_ANIM					// If defined, cells A/B are changed every frame (for transparency effects)
+
+// For real time fanties (not precalc)
+#define FANTY_A 						8
+#define FANTY_MAXV 						64
+
+// For precalc fanties
+//#define FANTY_SLOW
+#define FANTY_NORMAL
+//#define FANTY_FAST
+
 // Pursuers (for top-down)
 
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 #define DEATH_COUNT_EXPRESSION			50+(rand8()&63)
 #define TYPE_7_FIXED_SPRITE 			4	// If defined, type 7 enemies are always #
+//#define PURSUERS_MAY_FIRE				// If defined, attr = 1 make spawned pursuers shoot
 
 // Saws
 
@@ -355,6 +372,8 @@
 #define MAX_CHAC_CHACKS_QUEUED			16 // Make the closest power of 2 >= (MAX_CHAC_CHACS*4)
 #define CHAC_CHAC_DETECT_TILE			39
 #define CHAC_CHACS_CLEAR				// You are placing chac chacks from map but need the path to be clear
+
+//#define USE_CUSTOM_CHAC_CHAC			// Implement your own chac chac
 
 // Monococos
 
@@ -462,12 +481,14 @@
 // ------------------
 //#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 //#define PLAYER_CAN_FIRE_8_WAY				// If defined, use diagonals
+//#define PLAYER_SHOOT_DOWN_ONLY_JUMPING		// Restrict 8_WAY a bit for platformers
 #define PLAYER_BULLET_SPEED 			4	// Pixels/frame. 
 #define MAX_BULLETS 					4	// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET			6	// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET			-4	// vertical offset from the player's left/right.
 //#define PLAYER_BULLETS_MIN_KILLABLE 	3	// If defined, only enemies >= N can be killed.
 //#define BULLETS_DONT_KILL					// Bullets don't kill, but affect enemies otherwise
+//#define PLAYER_JUST_FIRED_COUNTER		16  // If defined, a counter is ran each time the player fires
 
 // Special shooting
 //#define PLAYER_FIRE_RELOAD			16	// If defined # of frames until next shoot
@@ -487,7 +508,7 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define CLEAR_FLAGS					// Zero all flags when entering a level
 
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n

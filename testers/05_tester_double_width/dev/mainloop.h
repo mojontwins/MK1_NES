@@ -101,8 +101,6 @@ void game_init (void) {
 		vram_fill (0, MAP_SIZE*24);
 	#endif
 
-	half_life = 0;
-	frame_counter = 0;
 	olife = oammo = oobjs = okeys = 0xff;
 	okilled = 0xff;
 
@@ -127,7 +125,14 @@ void prepare_scr (void) {
 		ppu_off ();
 	}
 
-	clear_update_list ();
+	update_index = 0;
+
+	#ifdef SINGLE_SCREEN_SUPPORT
+		// Calculate if this screen is single:
+		scr_single = ((n_pant + 1) == ((n_pant - (n_pant % c_map_w)) + c_map_w));
+
+		// Of course you can FORCE this in my/on_entering_screen.h!
+	#endif
 
 	#ifdef ENABLE_PROPELLERS
 		// Clear propellers
@@ -200,7 +205,7 @@ void prepare_scr (void) {
 	#endif
 
 	#ifdef PLAYER_CAN_FIRE
-		for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
+		for (gpit = 0; gpit < MAX_BULLETS; ++ gpit) {
 			b_slots [gpit] = gpit; by [gpit] = 0;
 		}
 		b_slots_i = MAX_BULLETS;
@@ -254,7 +259,7 @@ void prepare_scr (void) {
 
 
 	#ifdef DOUBLE_WIDTH
-		for (gpit = 0; gpit < 2; gpit ++)  {
+		for (gpit = 0; gpit < 2; ++ gpit)  {
 			hrx = d_hrx [gpit];
 			hrt = d_hrt [gpit];
 			if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
@@ -285,13 +290,17 @@ void prepare_scr (void) {
 }
 
 void game_loop (void) {
+	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
+		split_on = 1;
+	#endif
+
 	#ifdef MULTI_LEVEL
 		music_play (l_music [level]);
 	#else
 		music_play (MUSIC_INGAME);
 	#endif
 
-	clear_update_list ();
+	update_index = 0;
 	set_vram_update (UPDATE_LIST_SIZE, update_list);
 
 	on_pant = 99; ft = 1; fade_delay = 1;
@@ -310,6 +319,7 @@ void game_loop (void) {
 		run_script (2 * MAP_SIZE);
 	#endif
 
+	half_life = frame_counter = real_frame_counter = 0;
 	ntsc_frame = level_reset = warp_to_level = 0; 
 	oam_index = 4; ticker = 50;
 	
@@ -324,16 +334,31 @@ void game_loop (void) {
 
 		// Finish him
 
-		if (pkill) player_kill ();
+		if (pkill) {
+			#ifdef KILL_PLAYER_CUSTOM
+				#include "my/player_kill_custom.h"
+			#else
+				// standard way
+				player_kill ();	
+			#endif
+		} 
 		if (game_over || level_reset) break;			
 
 		// Flick the screen
 
-		flick_override = 0;
-		#include "my/custom_flickscreen.h"
-		if (flick_override == 0) {
-			flickscreen_do_horizontal ();
-			flickscreen_do_vertical ();
+		#ifdef KILL_PLAYER_CUSTOM
+		if (!pkill) 
+		#endif
+		{
+			flick_override = 0;
+			#include "my/custom_flickscreen.h"
+			if (flick_override == 0) {
+				flickscreen_do_horizontal ();
+				flickscreen_do_vertical ();
+			}
+			if (warp_to_level) {
+				update_cycle (); music_stop (); break;
+			}
 		}
 		
 		// Change screen ?
@@ -369,7 +394,8 @@ void game_loop (void) {
 
 		// Update actors if not paused...
 
-		ntsc_frame ++; if (ntsc_frame == 6) ntsc_frame = 0;
+		++ real_frame_counter;
+		++ ntsc_frame; if (ntsc_frame == 6) ntsc_frame = 0;
 
 		if (paused == 0 && (ntsc == 0 || ntsc_frame)) {
 			// Count frames		
@@ -380,25 +406,81 @@ void game_loop (void) {
 			// Detect interactions
 
 			#ifdef ENABLE_INTERACTIVES
-				#include "mainloop/interactives.h"
+				#include "mainloop/interactives_assembly.h"
 			#endif	
 
 			// Update / collide hotspots
 
 			#ifdef DOUBLE_WIDTH
-				for (gpit = 0; gpit < 2; gpit ++)  {
-					hrx = d_hrx [gpit];
-					hrt = d_hrt [gpit];
-					if (hrx < scroll_x || hrx > scroll_x + 240 || hrt == 0) continue;
-					hry = d_hry [gpit];
+				__asm__ ("ldy #0");
+				__asm__ ("sty %v", gpit);
 
-					#include "mainloop/hotspots.h"
+			dw_hotspots:
+				__asm__ ("lda %v", gpit);
+				__asm__ ("cmp #2");
+				__asm__ ("jeq %g", dw_hotspots_done);
+				
+				__asm__ ("ldy %v", gpit);
+
+				__asm__ ("lda %v, y", d_hrt);
+				__asm__ ("sta %v", hrt);
+				__asm__ ("lda %v, y", d_hry);
+				__asm__ ("sta %v", hry);
+
+				// 16 bits
+				__asm__ ("lda %v", gpit);
+				__asm__ ("asl a");
+				__asm__ ("tay");
+				__asm__ ("lda %v, y", d_hrx);
+				__asm__ ("sta %v", hrx);
+				__asm__ ("lda %v+1, y", d_hrx);
+				__asm__ ("sta %v+1", hrx);
+
+				// Check
+				// if (hrt == 0
+				__asm__ ("lda %v", hrt);
+				__asm__ ("jeq %g", dw_hotspots_continue);	// DO
+
+				// || hrx < scroll_x 
+				__asm__ ("lda %v", hrx);
+				__asm__ ("cmp %v", scroll_x);
+				__asm__ ("lda %v+1", hrx);
+				__asm__ ("sbc %v+1", scroll_x);
+				__asm__ ("bcs %g", dw_hotspots_check_1);	// SKIP
+				__asm__ ("jmp %g", dw_hotspots_continue);	// DO
+
+			dw_hotspots_check_1:
+
+				// || hrx > scroll_x_r
+				__asm__ ("lda %v", hrx);
+				__asm__ ("sec");
+				__asm__ ("sbc %v", scroll_x_r);
+				__asm__ ("sta tmp1");
+				__asm__ ("lda %v+1", hrx);
+				__asm__ ("sbc %v+1", scroll_x_r);
+				__asm__ ("ora tmp1");
+				__asm__ ("bcc %g", dw_hotspots_check_done);	// SKIP
+				__asm__ ("beq %g", dw_hotspots_check_done);	// SKIP
+
+				__asm__ ("jmp %g", dw_hotspots_continue);	// DO
+
+			dw_hotspots_check_done:
+
+				hotspots_do ();
 					hotspots_paint ();
 
-					d_hrt [gpit] = hrt;
-				}
+				__asm__ ("lda %v", hrt);
+				__asm__ ("ldy %v", gpit);
+				__asm__ ("sta %v, y", d_hrt);
+
+			dw_hotspots_continue:
+				__asm__ ("inc %v", gpit);
+				__asm__ ("jmp %g", dw_hotspots);
+
+			dw_hotspots_done:
+
 			#else
-				#include "mainloop/hotspots.h"
+				hotspots_do ();
 			#endif
 
 			// Automatic scripting calls (USE_ANIM & fire zone)
@@ -409,9 +491,10 @@ void game_loop (void) {
 			
 			// Update player
 
-			if (!warp_to_level) {
+			if (!warp_to_level && !pkill) {
 				player_move ();
 			}
+			#include "my/player_move_custom.h"
 
 			// Scroll position
 
@@ -447,7 +530,7 @@ void game_loop (void) {
 
 			// Paint player
 
-			oam_index_player = oam_index; 
+			//oam_index_player = oam_index; 
 			if (!warp_to_level)	player_render ();
 
 			// Update enemies
@@ -526,4 +609,8 @@ void game_loop (void) {
 	set_vram_update (0, 0);
 	ppu_off ();
 	oam_clear ();
+
+	#if defined (DOUBLE_WIDTH) && !defined (NO_SPLIT)
+		split_on = 0;
+	#endif
 }

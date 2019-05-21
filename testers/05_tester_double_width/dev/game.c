@@ -23,14 +23,14 @@
 // * const data *
 // **************
 
-#include "assets/precalcs.h"
+#include "engine/precalcs.h"
 #include "assets/palettes.h"
-#include "assets/behs.h"
+#include "my/behs.h"
 #include "assets/map0.h"
 #include "assets/enems0.h"
 #include "assets/spritedata.h"
 #include "assets/tiledata.h"
-#include "assets/metasprites.h"
+#include "my/metasprites.h"
 #include "assets/custom_texts.h"
 #ifdef ENABLE_COMPILED_ENEMS
 	#include "assets/compiled_enems.h"
@@ -41,6 +41,9 @@
 #ifdef MULTI_LEVEL
 	#include "assets/levelset.h"
 #endif
+
+// RLE'd screens
+#include "assets/hud_rle.h"
 
 // Music
 extern const unsigned char m_ingame [];
@@ -98,6 +101,7 @@ extern const unsigned char m_ingame [];
 	#include "assets/mscnes.h"
 #endif
 #include "mainloop/flickscreen.h"
+#include "mainloop/hotspots_assembly.h"
 #include "mainloop.h"
 
 // *************

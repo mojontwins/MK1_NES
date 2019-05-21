@@ -5,6 +5,6 @@
 // Custom code to draw the frame around your HUD
 
 void draw_game_frame (void) {
-	_x = 2; _y = 3;	 pr_str ("LIFE:00   ITEM:      KEYS:00");
-	        _y = 28; pr_str ("SUPPATESTR - THE MOJON TWINS");
+	unrle_vram (hud_rle, 0x2000);
+	oam_spr (213, 30, 0, 0x20, 0);
 }

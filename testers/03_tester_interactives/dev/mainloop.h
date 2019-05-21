@@ -403,7 +403,7 @@ void game_loop (void) {
 			// Detect interactions
 
 			#ifdef ENABLE_INTERACTIVES
-				#include "mainloop/interactives.h"
+				#include "mainloop/interactives_assembly.h"
 			#endif	
 
 			// Update / collide hotspots

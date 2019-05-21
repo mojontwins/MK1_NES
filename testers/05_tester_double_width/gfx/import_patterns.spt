@@ -7,6 +7,12 @@ OPEN font.png
 PALS palts0.png
 CHARSET 0, 0, 32, 2
 
+MAPFILE ..\dev\assets\dummy.h
+OPEN hud.png
+PALS palts0.png
+LABEL hud
+MAPPED 0, 0, 2, 2, 16, 15
+
 MAPFILE ..\dev\assets\tiledata.h
 
 # Tileset 0
@@ -22,6 +28,10 @@ RESETPOOL
 
 OPEN ss.png
 PALS palss0.png
+
+# BITS
+CHARSET 15, 0, 1, 1
+
 MAPFILE ..\dev\assets\spritedata.h
 
 # Player sprites
