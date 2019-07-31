@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"interact",
+				"interactives_f"
+			],
+			[
+				"intear",
+				"interactives_f\t(interactives.h)"
+			],
+			[
 				"selet",
 				"select_level"
 			],
@@ -506,42 +514,24 @@
 			[
 				"FAN",
 				"FANTY_MAXV"
-			],
-			[
-				"show_",
-				"show_coins_vs"
-			],
-			[
-				"GP_",
-				"GM_2P_VS"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "examples/12_espitene/dev/compile.bat",
+			"file": "examples/12_espitene/dev/neslib.s",
 			"settings":
 			{
-				"buffer_size": 6809,
-				"encoding": "UTF-8",
+				"buffer_size": 12538,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/engine/playermods/bullets.h",
+			"file": "examples/12_espitene/dev/game.c",
 			"settings":
 			{
-				"buffer_size": 5346,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "wip/diario.md",
-			"settings":
-			{
-				"buffer_size": 207439,
-				"encoding": "UTF-8",
+				"buffer_size": 3998,
 				"line_ending": "Windows"
 			}
 		}
@@ -623,25 +613,91 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1_NES",
+		"/D/git/MK1_NES/examples",
+		"/D/git/MK1_NES/examples/12_espitene",
+		"/D/git/MK1_NES/examples/12_espitene/dev",
+		"/D/git/MK1_NES/examples/12_espitene/dev/engine",
 		"/D/git/MK1_NES/src",
 		"/D/git/MK1_NES/src/dev",
-		"/D/git/MK1_NES/src/dev/engine",
-		"/D/git/MK1_NES/src/dev/engine/playermods",
-		"/D/git/MK1_NES/wip"
+		"/D/git/MK1_NES/src/dev/ram"
 	],
 	"file_history":
 	[
-		"/D/Proyectos/entregas/Entrega_FicherosJunta_1.3.0.0/instrucciones.txt",
+		"/C/Users/jcastano/Desktop/Alt/frmPrincipal.log",
+		"/C/Users/jcastano/Desktop/Alt/ALT_IAM.vbp",
+		"/C/Users/jcastano/Desktop/Version 2.0.4_ALT/frmPrincipal.log",
+		"/D/git/MK1_NES/examples/12_espitene/dev/mainloop.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/config.h",
+		"/D/git/MK1_NES/examples/12_espitene/dev/engine/mapmods/map_renderer_complex.h",
+		"/D/git/MK1_NES/src/dev/config.h",
+		"/D/git/MK1_NES/src/dev/engine/player.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/playermods/process_tile.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/player.h",
+		"/D/git/MK1_NES/src/dev/ram/zp.h",
+		"/D/git/MK1_NES/examples/10_che_man/README.md",
+		"/D/git/MK1_NES/docs/double_width.md",
+		"/D/git/MK1_NES/testers/05_tester_double_width/README.md",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/assets/hud_rle.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/gfx/import_patterns.spt",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/my/game_frame.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/config.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/compile.bat",
+		"/D/git/MK1_NES/src/dev/neslib.h",
+		"/D/git/MK1_NES/testers/05_tester_double_width/dev/game.c",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/config.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/README.md",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/my/custom_flickscreen.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/mainloop/scripting.h",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/compile.bat",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/script/script.spt",
+		"/D/git/MK1_NES/testers/04_tester_warp_to_level/dev/assets/mscnes.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/config.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/game.s",
+		"/D/git/nes_work/gokumal_mk1/6502.md",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/engine/interactives.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/mainloop/interactives_assembly.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/assets/interactives.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/mainloop.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/mainloop/interactives.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/compile.bat",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/autodefs.h",
+		"/D/git/MK1_NES/src/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/03_tester_interactives/dev/engine/textbox.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/ram/zp.h",
+		"/D/git/MK1_NES/testers/02_tester_punchy/dev/ram/bss.h",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h",
+		"/D/git/MK1_NES/src/utils/mscmk1.bas",
+		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/printer.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/engine/general.h",
+		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/game.s",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/enemmods/enem_precalc_fanty_assembly.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/enemmods/enem_saw.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/autodefs.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/mainloop/hotspots_assembly.h",
+		"/D/Proyectos/2014/20140812a - RFC 228 Anexo 2 - P3S Fase 2/p3s-fase-2--20140812a/p3s/fuentes/sadesi/sms/ws/SmsWS.java",
+		"/D/Proyectos/2014/20140304 - Cambios ciclado de mensajes P3S Push/act-p3s-20140303/fuentes/sadesi/sms/ws/SmsWS.java",
+		"/D/Proyectos/2014/20140220 - Mejoras P3S Push/act-p3s-20140220/fuentes/sadesi/sms/ws/SmsWS.java",
+		"/D/Proyectos/2014/20140122a - P3S Push (fase 2)/wip.txt",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/engine/enengine.h",
 		"/D/git/MK1_NES/src/dev/engine/playermods/bullets.h",
+		"/D/Proyectos/2018/20181128a--Cabecera-reensamblado-P3S/instrucciones.txt",
+		"/D/Proyectos/2018/20181016a--Actualización total p3s/instrucciones.txt",
+		"/D/git/MK1_NES/src/dev/engine/enengine.h",
+		"/D/git/MK1_NES/src/dev/engine/breakable.h",
+		"/D/git/MK1_NES/src/dev/engine/hotspots.h",
+		"/D/git/MK1_NES/testers/00_tester_sideview/dev/my/metasprites.h",
+		"/D/git/MK1_NES/wip/diario.md",
+		"/D/git/MK1_NES/examples/12_espitene/dev/compile.bat",
+		"/D/Proyectos/entregas/Entrega_FicherosJunta_1.3.0.0/instrucciones.txt",
 		"/D/git/MK1_NES/wip/roadmap.md",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/config.h",
 		"/D/git/MK1_NES/src/dev/engine/general.h",
-		"/D/git/MK1_NES/src/dev/engine/player.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/extra_routines.h",
 		"/D/git/MK1_NES/examples/10_che_man/dev/engine/printer.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/effects.h",
-		"/D/git/MK1_NES/src/dev/config.h",
-		"/D/git/MK1_NES/testers/00_tester_sideview/dev/config.h",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/engine/printer.h",
 		"/D/git/MK1_NES/README.md",
 		"/D/git/MK1_NES/testers/01_tester_top_down/dev/config.h",
@@ -661,20 +717,16 @@
 		"/D/git/MK1_NES/src/dev/engine/cocos.h",
 		"/D/git/MK1_NES/src/dev/engine/printer.h",
 		"/D/git/MK1_NES/src/dev/compile.bat",
-		"/D/git/MK1_NES/src/dev/ram/zp.h",
 		"/D/git/MK1_NES/src/dev/ram/bss.h",
 		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/game.c",
 		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_fast.h",
 		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_double.h",
 		"/D/git/MK1_NES/src/dev/engine/mapmods/map_renderer_complex.h",
-		"/D/git/MK1_NES/src/dev/engine/enengine.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/pres.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/assets/chr_rom_maps.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/bridge.h",
 		"/D/git/MK1_NES/examples/12_espitene/README.md",
-		"/D/git/MK1_NES/examples/12_espitene/dev/config.h",
 		"/D/git/MK1_NES/examples/11_bootèe/dev/mainloop.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/mainloop.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/game.c",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/map_renderer_customization.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/ram/zp.h",
@@ -687,7 +739,6 @@
 		"/D/Proyectos/2018/20181221a--Aceptar Condiciones CAND/Altas/instrucciones.txt",
 		"/D/Proyectos/2017/20171107a--Reparación comprobaciones incorrectas usuarios CCAA en WSDP/instrucciones.txt",
 		"/D/git/MK1_NES/examples/12_espitene/dev/game.s",
-		"/D/git/MK1_NES/wip/diario.md",
 		"/D/git/MK1_NES/examples/12_espitene/dev/engine/general.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/player_kill_custom.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/player_move_custom.h",
@@ -699,76 +750,20 @@
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_timer_tick.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/mainloop/timer.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/kill_player_custom.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_entering_screen.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/engine/printer.h",
-		"/D/git/MK1_NES/src/dev/my/pres.h",
-		"/D/git/MK1_NES/src/dev/crt0.s",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/somari.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_player_coco.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/definitions.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/engine/enengine.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/extra_checks.h",
-		"/D/git/nes_work/espinete/dev/crt0-pantanow-CNROM.s",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_player_hit.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_player_spike.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/custom_center_detections.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/ring.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_object_got.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/assets/custom_texts.h",
-		"/D/git/MK1_NES/examples/01_sgt_helmet_training_day/dev/printer.h",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zOC7A4E6DD/Makefile",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zOC7A3870E/ZGBMain.h",
-		"/D/perfiles/jcastano/AppData/Local/Temp/7zOC7A7988D/build.bat",
-		"/D/git/MK1_NES/docs/code_injection.md",
-		"/D/git/MK1_NES/examples/10_che_man/dev/my/pres.h",
-		"/D/git/MK1_NES/examples/10_che_man/dev/my/extra_routines.h",
-		"/D/svn-correo/CorreoCorporativo/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/components/nsConsigna.js",
-		"/D/perfiles/jcastano/Desktop/tomcat_log_rotate.sh",
-		"/D/perfiles/jcastano/AppData/Local/Temp/LOG4J~1.PRO",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/gfx/import_patterns.spt",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/compile.bat",
-		"/D/git/MK1_NES/examples/07_cheril_perils_classic/dev/assets/title_rle.h",
-		"/D/git/MK1_NES/src/utils/legacy/pnginterface.bas",
-		"/C/Program Files (x86)/FreeBASIC/inc/png.bi",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/assets/ending_rle.h",
-		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/compile.bat",
-		"/D/git/MK1_NES/examples/09_cadàveriön/dev/compile.bat",
-		"/D/git/MK1_NES/examples/08_cheril_the_writer/dev/assets/title_sp_rle.h",
-		"/D/git/MK1_NES/examples/10_che_man/dev/compile.bat",
-		"/D/git/MK1_NES/examples/10_che_man/dev/assets/hud_rle.h",
-		"/D/git/MK1_NES/examples/10_che_man/dev/assets/ending_rle.h",
-		"/D/git/MK1_NES/examples/10_che_man/dev/assets/title_rle.h",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/assets/ending_rle.h",
-		"/D/git/MK1_NES/examples/11_bootèe/dev/compile.bat",
-		"/D/git/MK1_NES/src/utils/namgen.bas",
-		"/D/git/MK1_NES/examples/12_espitene/dev/assets/title_rle.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/compile.bat",
-		"/D/git/MK1_NES/examples/12_espitene/dev/assets/cuts0_rle.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/assets/cuts2_rle.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/work/cuts0_rle.h",
-		"/D/git/MK1_NES/src/UTILS.md",
-		"/D/git/MK3_sp/dev/definitions.h",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/config.h",
-		"/D/git/loves_the_sg1000/examples/03_jet_paco/dev/engine/enemmods/enem_linear.h",
-		"/D/git/MK1_NES/src/dev/engine/tile_chac_chac.h",
-		"/D/git/MK1_NES/src/dev/engine/precalcs.h",
-		"/D/git/MK1_NES/src/dev/my/chac_chacs_config.h",
-		"/D/git/MK1_NES/docs/features.md",
-		"/D/git/MK1_NES/src/dev/autodefs.h",
-		"/D/git/MK1_NES/src/dev/game.c",
-		"/D/git/MK1_NES/examples/02_jet_paco/dev/player.h",
-		"/D/git/MK1_NES/testers/01_tester_top_down/dev/game.s",
-		"/D/git/MK1_NES/testers/01_tester_top_down/dev/engine/playermods/bullets.h"
+		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_entering_screen.h"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 48.0
 	},
 	"find_in_files":
 	{
 		"height": 135.0,
 		"where_history":
 		[
+			"D:\\git\\MK1_NES\\examples\\12_espitene",
+			"D:\\git\\MK1_NES\\src\\dev",
+			"D:\\git\\MK1_NES\\testers\\04_tester_warp_to_level\\dev",
 			"D:\\git\\MK1_NES\\examples\\12_espitene",
 			"D:\\git\\MK1_NES\\src\\dev",
 			"D:\\git\\MK1_NES\\testers\\00_tester_sideview",
@@ -836,6 +831,34 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ppu_system",
+			"engine_type_swim",
+			"vertical_engine_type",
+			"engine_type_swim",
+			"PERSISTENT_TILE_GET",
+			"p_t",
+			"tileset_pals",
+			"safe",
+			"pad_this_frame",
+			"cocos",
+			"warp_to_level",
+			"room",
+			"script",
+			"warp",
+			"ENABLE_FIRE_ZONE",
+			"fire_zzone",
+			"interactives",
+			"b_button",
+			"SCRIPTING",
+			"clear_update",
+			"mscmk1 1.1",
+			"clear_update_list",
+			"fire_bullet_diagonal_else2",
+			"fire_bullet_diagonal_else",
+			"rdx",
+			"valida",
+			"%b",
+			"gpaux",
 			"pal_col",
 			"PLAYER_JUMP_TYPE_MK2",
 			"mk2",
@@ -935,35 +958,7 @@
 			"rdbb",
 			"PUNCH_RDX",
 			"RECOIL_RDX",
-			"rdbb",
-			"rds16",
-			"_n",
-			"_z",
-			"draw_tile",
-			"_z",
-			"w_pant",
-			"c_max_bolts",
-			"c_map_size",
-			"c_map_h",
-			"c_map_",
-			"pfiring",
-			"pctfr",
-			"rdit",
-			"gp_ram_aux",
-			"gp_ram",
-			"gpint",
-			"rds16",
-			"gpaux",
-			"gpit",
-			"breakable_break",
-			"gpaux",
-			"gpitu",
-			"gp_tma2",
-			"collide_in",
-			"collide (",
-			"collide",
-			"ast1",
-			"upd_attr_table"
+			"rdbb"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -971,6 +966,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"screen",
+			"mscmk1 1.2",
+			"SAW_RDX",
+			"gpint",
 			"gp_gen",
 			"tileset",
 			"v0.4 20181120",
@@ -1014,93 +1013,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "examples/12_espitene/dev/compile.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6809,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6653,
-								6670
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 182.0,
-						"translation.y": 390.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/dev/engine/playermods/bullets.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 5346,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4251,
-								4184
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1877.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
-			]
-		},
-		{
 			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 2,
-					"file": "wip/diario.md",
-					"semi_transient": false,
+					"buffer": 0,
+					"file": "examples/12_espitene/dev/neslib.s",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 207439,
+						"buffer_size": 12538,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								143545,
-								143545
+								3105,
+								3026
 							]
 						],
 						"settings":
@@ -1108,12 +1038,11 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/R/R.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 63292.0,
+						"translation.y": 2501.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1124,6 +1053,44 @@
 		{
 			"sheets":
 			[
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "examples/12_espitene/dev/game.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2778,
+								2788
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1218,7 +1185,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
