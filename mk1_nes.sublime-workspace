@@ -520,18 +520,19 @@
 	"buffers":
 	[
 		{
-			"file": "examples/12_espitene/dev/neslib.s",
+			"file": "examples/10_che_man/dev/engine/player.h",
 			"settings":
 			{
-				"buffer_size": 12538,
+				"buffer_size": 19868,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/12_espitene/dev/game.c",
+			"file": "examples/10_che_man/dev/engine/cocos.h",
 			"settings":
 			{
-				"buffer_size": 3998,
+				"buffer_size": 3656,
 				"line_ending": "Windows"
 			}
 		}
@@ -614,15 +615,19 @@
 	[
 		"/D/git/MK1_NES",
 		"/D/git/MK1_NES/examples",
-		"/D/git/MK1_NES/examples/12_espitene",
-		"/D/git/MK1_NES/examples/12_espitene/dev",
-		"/D/git/MK1_NES/examples/12_espitene/dev/engine",
+		"/D/git/MK1_NES/examples/10_che_man",
+		"/D/git/MK1_NES/examples/10_che_man/dev",
+		"/D/git/MK1_NES/examples/10_che_man/dev/engine",
+		"/D/git/MK1_NES/examples/10_che_man/dev/my",
+		"/D/git/MK1_NES/examples/10_che_man/gfx",
+		"/D/git/MK1_NES/examples/10_che_man/script",
 		"/D/git/MK1_NES/src",
 		"/D/git/MK1_NES/src/dev",
 		"/D/git/MK1_NES/src/dev/ram"
 	],
 	"file_history":
 	[
+		"/D/git/newspectrum/MK3_OM/cheman/dev/tilemap_conf.asm",
 		"/C/Users/jcastano/Desktop/Alt/frmPrincipal.log",
 		"/C/Users/jcastano/Desktop/Alt/ALT_IAM.vbp",
 		"/C/Users/jcastano/Desktop/Version 2.0.4_ALT/frmPrincipal.log",
@@ -749,8 +754,7 @@
 		"/D/git/MK1_NES/examples/12_espitene/dev/crt0.s",
 		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_timer_tick.h",
 		"/D/git/MK1_NES/examples/12_espitene/dev/mainloop/timer.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/kill_player_custom.h",
-		"/D/git/MK1_NES/examples/12_espitene/dev/my/on_entering_screen.h"
+		"/D/git/MK1_NES/examples/12_espitene/dev/my/kill_player_custom.h"
 	],
 	"find":
 	{
@@ -831,6 +835,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"org",
+			"safe_sp",
 			"ppu_system",
 			"engine_type_swim",
 			"vertical_engine_type",
@@ -956,9 +962,7 @@
 			"while",
 			"SCRIPTING",
 			"rdbb",
-			"PUNCH_RDX",
-			"RECOIL_RDX",
-			"rdbb"
+			"PUNCH_RDX"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1018,19 +1022,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/12_espitene/dev/neslib.s",
-					"semi_transient": true,
+					"file": "examples/10_che_man/dev/engine/player.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12538,
+						"buffer_size": 19868,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3105,
-								3026
+								4716,
+								4716
 							]
 						],
 						"settings":
@@ -1038,11 +1042,11 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/R/R.sublime-syntax",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 2501.0,
+						"translation.x": 617.0,
+						"translation.y": 2694.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1051,29 +1055,24 @@
 			]
 		},
 		{
-			"sheets":
-			[
-			]
-		},
-		{
 			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 1,
-					"file": "examples/12_espitene/dev/game.c",
+					"file": "examples/10_che_man/dev/engine/cocos.h",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3998,
+						"buffer_size": 3656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2778,
-								2788
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1081,16 +1080,21 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1326.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
